@@ -113,6 +113,12 @@
     --golge-lg:0 24px 44px -14px rgba(0,0,0,.55);
     --golge-xl:0 32px 64px -16px rgba(0,0,0,.65);
   }
+  /* ===== Renk temaları — marka vurgu renklerini (mavi/navy/turkuaz/açık)
+     değiştirir; semantik renkler (yeşil=başarı, kırmızı=uyarı, sarı=rozet)
+     anlam karışıklığı olmasın diye kasıtlı olarak sabit kalır. ===== */
+  :root[data-renk="yesil"]{ --mavi:#0f766e; --navy:#065f46; --turkuaz:#10b981; --acik:#a7f3d0; }
+  :root[data-renk="mor"]{ --mavi:#6d28d9; --navy:#4c1d95; --turkuaz:#a78bfa; --acik:#ddd6fe; }
+  :root[data-renk="bordo"]{ --mavi:#be123c; --navy:#7f1d1d; --turkuaz:#fb7185; --acik:#fecdd3; }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -243,13 +249,29 @@
 
   .hero-ic{ position:relative; max-width:var(--genislik); margin:0 auto; }
   .hero-ust{ display:flex; justify-content:center; position:relative; }
+  .hero-kontrol-satiri{ position:absolute; top:0; right:0; display:flex; align-items:center; gap:10px; }
   .tema-dugme{
-    position:absolute; top:0; right:0; display:inline-flex; align-items:center; gap:6px;
+    display:inline-flex; align-items:center; gap:6px;
     background:rgba(255,255,255,.14); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
     border:1px solid rgba(255,255,255,.35); color:#fff; padding:9px 16px; border-radius:var(--r-pill);
     cursor:pointer; font-weight:800; font-size:.85em; transition:background var(--dur-fast), transform var(--dur-fast);
   }
   .tema-dugme:hover{ background:rgba(255,255,255,.26); transform:translateY(-2px); }
+  .renk-secici{
+    display:flex; align-items:center; gap:6px; background:rgba(255,255,255,.14);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.35); padding:0 10px; height:38px; border-radius:var(--r-pill);
+  }
+  .renk-nokta{
+    width:16px; height:16px; border-radius:50%; border:2px solid rgba(255,255,255,.55); padding:0;
+    cursor:pointer; transition:transform var(--dur-fast), border-color var(--dur-fast); flex-shrink:0;
+  }
+  .renk-nokta:hover{ transform:scale(1.2); }
+  .renk-nokta[aria-pressed="true"]{ border-color:#fff; box-shadow:0 0 0 2px rgba(255,255,255,.45); }
+  .renk-nokta-mavi{ background:#1E3A8A; }
+  .renk-nokta-yesil{ background:#065f46; }
+  .renk-nokta-mor{ background:#4c1d95; }
+  .renk-nokta-bordo{ background:#7f1d1d; }
 
   /* Kişisel marka bloğu: isim en baskın unsur, ardından unvan ve kısa slogan.
      İlk ekranda dikkat dağıtacak uzun metin yok — sadece kimlik + 2 eylem. */
@@ -685,8 +707,8 @@
   /* ===== Mobil optimizasyon ===== */
   @media(max-width:640px){
     .hero{ padding:var(--sp-8) var(--sp-3) var(--sp-4); }
-    .tema-dugme{ position:static; margin:0 auto var(--sp-3); }
-    .hero-ust{ justify-content:flex-end; }
+    .hero-kontrol-satiri{ position:static; justify-content:center; flex-wrap:wrap; margin:0 auto var(--sp-3); }
+    .hero-ust{ justify-content:center; }
     .hero-isim{ font-size:2.9em; }
     .hero-cta-satir{ flex-direction:column; }
     .hero-cta{ width:100%; justify-content:center; min-height:50px; }
@@ -735,10 +757,18 @@
   <span class="hero-blob hero-blob-3" aria-hidden="true"></span>
   <div class="hero-ic">
     <div class="hero-ust">
-      <button class="tema-dugme" id="temaDugme" type="button" aria-pressed="false">
-        <span class="msi" id="temaIkon" aria-hidden="true">dark_mode</span>
-        <span id="temaMetin">Koyu Tema</span>
-      </button>
+      <div class="hero-kontrol-satiri">
+        <div class="renk-secici" id="renkSecici" role="group" aria-label="Renk teması seç">
+          <button type="button" class="renk-nokta renk-nokta-mavi" data-renk="mavi" aria-pressed="true" title="Mavi (varsayılan)" aria-label="Mavi tema"></button>
+          <button type="button" class="renk-nokta renk-nokta-yesil" data-renk="yesil" aria-pressed="false" title="Yeşil" aria-label="Yeşil tema"></button>
+          <button type="button" class="renk-nokta renk-nokta-mor" data-renk="mor" aria-pressed="false" title="Mor" aria-label="Mor tema"></button>
+          <button type="button" class="renk-nokta renk-nokta-bordo" data-renk="bordo" aria-pressed="false" title="Bordo" aria-label="Bordo tema"></button>
+        </div>
+        <button class="tema-dugme" id="temaDugme" type="button" aria-pressed="false">
+          <span class="msi" id="temaIkon" aria-hidden="true">dark_mode</span>
+          <span id="temaMetin">Koyu Tema</span>
+        </button>
+      </div>
     </div>
 
     <div class="hero-marka-alani">
@@ -1050,6 +1080,7 @@ function kucult(s){ return s.toLocaleLowerCase('tr-TR'); }
 const LS_TAMAMLANAN = 'dkab_tamamlanan';
 const LS_FAVORI = 'dkab_favoriler';
 const LS_TEMA = 'dkab_tema';
+const LS_RENK = 'dkab_renk';
 const LS_SON_KONU = 'dkab_son_konu';
 const LS_SON_YAZILI = 'dkab_son_yazili';
 
@@ -1501,6 +1532,19 @@ function temaUygula(tema, bildirimGoster){
   if(bildirimGoster) toastGoster(tema==='dark' ? 'Koyu temaya geçildi.' : 'Açık temaya geçildi.', tema==='dark'?'🌙':'☀️');
 }
 
+/* Renk teması: hero/marka vurgu renklerini değiştirir, ışık/karanlık
+   temadan bağımsız çalışır (aynı anda ikisi de uygulanabilir). */
+const RENK_ADLARI = { mavi:'Mavi', yesil:'Yeşil', mor:'Mor', bordo:'Bordo' };
+function renkUygula(renk, bildirimGoster){
+  if(renk === 'mavi'){ document.documentElement.removeAttribute('data-renk'); }
+  else{ document.documentElement.setAttribute('data-renk', renk); }
+  document.querySelectorAll('.renk-nokta').forEach(function(n){
+    n.setAttribute('aria-pressed', n.dataset.renk===renk ? 'true':'false');
+  });
+  guvenliYaz(LS_RENK, renk);
+  if(bildirimGoster) toastGoster((RENK_ADLARI[renk]||renk)+' tema uygulandı.', '🎨');
+}
+
 /* ======================================================================
    BÖLÜM 10.5 — Üst şerit bilgi paneli (Hakkımızda / İletişim / Yorum)
    Sayfayı kaydırmaz; içerik tıklanan düğmenin hemen altında açılır.
@@ -1768,6 +1812,14 @@ document.addEventListener('DOMContentLoaded', function(){
   });
   const kayitliTema = guvenliOku(LS_TEMA);
   temaUygula(kayitliTema || (tercihUyumluMu('(prefers-color-scheme: dark)') ? 'dark':'light'), false);
+
+  /* Renk teması seçimi */
+  document.getElementById('renkSecici').addEventListener('click', function(e){
+    const nokta = e.target.closest('.renk-nokta');
+    if(nokta) renkUygula(nokta.dataset.renk, true);
+  });
+  const kayitliRenk = guvenliOku(LS_RENK);
+  renkUygula(kayitliRenk || 'mavi', false);
 
   /* Yukarı çık butonu + kaydırınca küçülen üst şerit (sticky shrinking header) */
   const yukariBtn = document.getElementById('yukariBtn');
