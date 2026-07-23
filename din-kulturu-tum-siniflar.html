@@ -66,24 +66,49 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block">
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,700;1,700&display=swap">
 <style>
-  /* ===== 1. Marka renk paleti (değiştirilmedi) + tema/tasarım değişkenleri ===== */
+  /* ======================================================================
+     TASARIM SİSTEMİ (Design Tokens)
+     Renk paleti değişmedi. Boşluk, köşe yuvarlaklığı, gölge, tipografi ve
+     hareket (motion) değerleri merkezi değişkenlerden yönetiliyor; yeni
+     eklenen tüm bileşenler bu ölçekten besleniyor. Eski --r-kart/--r-btn
+     isimleri geriye dönük uyumluluk için korunuyor.
+  ====================================================================== */
   :root{
+    /* Marka renk paleti (değiştirilmedi) */
     --mavi:#2a6f97; --acik:#a9d6e5; --yesil:#40916c; --kirmizi:#d62828;
     --sari:#f4a261; --bg:#f7f4ec; --navy:#1E3A8A; --turkuaz:#06B6D4; --acikgri:#f1f5f9;
     --metin:#22333b; --yuzey:#ffffff; --yuzey2:#ffffff; --kenar:#e2e8f0;
+
+    /* Boşluk ölçeği */
+    --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-7:32px; --sp-8:40px; --sp-9:56px;
+
+    /* Köşe yuvarlaklığı ölçeği */
+    --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:24px; --r-pill:999px;
+    --r-kart:var(--r-lg); --r-btn:var(--r-md);
+
+    /* Gölge ölçeği */
     --golge-sm:0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.08);
     --golge:0 4px 14px rgba(15,23,42,.08), 0 1px 3px rgba(15,23,42,.06);
     --golge-lg:0 20px 40px -12px rgba(15,23,42,.18), 0 4px 12px rgba(15,23,42,.06);
+    --golge-xl:0 30px 60px -16px rgba(15,23,42,.28), 0 8px 18px rgba(15,23,42,.08);
+
+    /* Tipografi ölçeği */
+    --fs-xs:.74em; --fs-sm:.85em; --fs-md:1.05em; --fs-lg:1.3em; --fs-xl:1.7em; --fs-2xl:clamp(1.9em,4.2vw,2.8em);
+
+    /* Hareket (motion) dili — tüm kart/buton hover'ları aynı eğriyi paylaşır */
+    --ease-out:cubic-bezier(.16,1,.3,1); --ease-spring:cubic-bezier(.2,.8,.3,1.25);
+    --dur-fast:.15s; --dur:.25s; --dur-slow:.4s;
+
     --genislik:1440px;
-    --r-kart:18px; --r-btn:14px; --r-pill:999px;
   }
   :root[data-tema="dark"]{
     --bg:#0b1526; --acikgri:#1c293e; --acik:#3a6a86;
     --metin:#e6edf5; --yuzey:#131f34; --yuzey2:#0f1a2c; --kenar:#25344c;
     --golge:0 4px 16px rgba(0,0,0,.4), 0 1px 3px rgba(0,0,0,.3);
     --golge-lg:0 24px 44px -14px rgba(0,0,0,.55);
+    --golge-xl:0 32px 64px -16px rgba(0,0,0,.65);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -99,8 +124,9 @@
     line-height:1; letter-spacing:normal; text-transform:none; display:inline-block; white-space:nowrap;
     word-wrap:normal; direction:ltr; vertical-align:middle; -webkit-font-feature-settings:'liga'; font-feature-settings:'liga';
   }
+  .icerik-sarmal{ max-width:var(--genislik); margin:0 auto; padding:0 18px; }
 
-  /* ===== 2. Erişilebilirlik yardımcıları ===== */
+  /* ===== Erişilebilirlik yardımcıları ===== */
   .gorsel-gizli{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   .atla-baglanti{
     position:absolute; left:-999px; top:auto; background:var(--navy); color:#fff;
@@ -111,7 +137,7 @@
     outline:3px solid var(--sari); outline-offset:2px; border-radius:6px;
   }
 
-  /* ===== 3. Yükleniyor ekranı ===== */
+  /* ===== Yükleniyor ekranı ===== */
   .yukleniyor{
     position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center;
     background:linear-gradient(135deg,var(--navy),var(--turkuaz)); transition:opacity .4s ease, visibility .4s ease;
@@ -121,25 +147,31 @@
   .yukleniyor-ikon{ font-size:3em; display:inline-block; animation:yuklenimNabze 1.2s ease-in-out infinite; }
   @keyframes yuklenimNabze{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.15); } }
 
-  /* ===== 4. Ortak bileşenler: buton dili, dalga (ripple), fade-up ===== */
+  /* ===== Ortak bileşenler: buton dili, dalga (ripple), fade-up ===== */
   button{ font-family:inherit; }
   .dalga-kapsayici{ position:relative; overflow:hidden; }
   .dalga{ position:absolute; border-radius:50%; background:rgba(0,0,0,.15); transform:scale(0); animation:dalgaGenislet .6s ease-out; pointer-events:none; }
   @keyframes dalgaGenislet{ to{ transform:scale(2.3); opacity:0; } }
 
   .belirir{ opacity:0; transform:translateY(18px); }
-  .belirir.belirdi{ opacity:1; transform:translateY(0); transition:opacity .5s ease, transform .5s ease; transition-delay:calc(var(--i,0) * 45ms); }
+  .belirir.belirdi{ opacity:1; transform:translateY(0); transition:opacity .5s var(--ease-out), transform .5s var(--ease-out); transition-delay:calc(var(--i,0) * 55ms); }
 
-  /* ===== Üst gezinme şeridi (Hakkımızda / İletişim / Yorum) =====
+  /* ===== Üst gezinme şeridi — kaydırınca küçülen (sticky shrinking) header =====
      Bu düğmeler sayfayı kaydırmaz; içerik tıklanan yerin hemen altında
      bir panelde açılır. */
-  .ust-serit{ background:var(--yuzey2); border-bottom:1px solid var(--kenar); position:relative; z-index:50; }
+  .ust-serit{
+    background:var(--yuzey2); border-bottom:1px solid var(--kenar); position:sticky; top:0; z-index:50;
+    transition:box-shadow var(--dur) var(--ease-out);
+  }
+  .ust-serit.kucultulmus{ box-shadow:var(--golge); }
   .ust-serit-ic{
     max-width:var(--genislik); margin:0 auto; padding:9px 18px; display:flex; justify-content:space-between;
-    align-items:center; flex-wrap:wrap; gap:8px; position:relative;
+    align-items:center; flex-wrap:wrap; gap:8px; position:relative; transition:padding var(--dur) var(--ease-out);
   }
+  .ust-serit.kucultulmus .ust-serit-ic{ padding:5px 18px; }
   .ust-serit-marka{ display:inline-flex; align-items:center; gap:6px; font-weight:800; color:var(--navy); font-size:.88em; }
-  .ust-serit-marka .msi{ font-size:18px; }
+  .ust-serit-marka .msi{ font-size:18px; transition:font-size var(--dur); }
+  .ust-serit.kucultulmus .ust-serit-marka .msi{ font-size:15px; }
   .ust-serit-baglantilar{ display:flex; gap:8px; flex-wrap:wrap; }
   .ust-serit-btn{
     background:none; border:none; color:var(--metin); font-family:inherit; cursor:pointer;
@@ -152,7 +184,7 @@
     position:absolute; top:calc(100% + 14px); right:18px; width:min(360px, calc(100vw - 36px));
     background:var(--yuzey); border:1px solid var(--kenar); border-radius:18px; box-shadow:var(--golge-lg);
     padding:22px 24px; z-index:60; color:var(--metin); font-size:.92em; line-height:1.65;
-    transform-origin:top right; animation:ustPanelAcilis .28s cubic-bezier(.2,.9,.3,1.3);
+    transform-origin:top right; animation:ustPanelAcilis .28s var(--ease-spring);
     border-top:3px solid var(--turkuaz);
   }
   @keyframes ustPanelAcilis{
@@ -171,41 +203,74 @@
   .ust-panel a{ color:var(--mavi); font-weight:800; text-decoration:none; }
   .ust-panel a:hover{ text-decoration:underline; }
 
-  /* ===== 5. HERO (başlık + açıklama + arama + istatistik) ===== */
+  /* ===== HERO — hareketli gradient + dekoratif blob'lar ===== */
   .hero{
     position:relative; overflow:hidden; color:#fff;
     background:
       radial-gradient(circle at 1px 1px, rgba(255,255,255,.16) 1px, transparent 0) 0 0/26px 26px,
-      linear-gradient(135deg,var(--navy),var(--turkuaz));
+      linear-gradient(135deg,var(--navy),var(--turkuaz),var(--navy));
+    background-size:26px 26px, 220% 220%;
+    animation:heroGradientKay 18s ease infinite;
     padding:38px 18px 34px;
+  }
+  @keyframes heroGradientKay{
+    0%{ background-position:0 0, 0% 50%; } 50%{ background-position:0 0, 100% 50%; } 100%{ background-position:0 0, 0% 50%; }
   }
   .hero::after{
     content:''; position:absolute; inset:0; pointer-events:none;
     background:radial-gradient(60% 55% at 85% 0%, rgba(255,255,255,.16), transparent 70%);
   }
+  .hero-blob{ position:absolute; border-radius:60% 40% 30% 70%/60% 30% 70% 40%; filter:blur(2px); opacity:.16; pointer-events:none; background:#fff; }
+  .hero-blob-1{ width:280px; height:280px; top:-90px; left:-70px; animation:blobYuzme1 22s ease-in-out infinite; }
+  .hero-blob-2{ width:200px; height:200px; bottom:-80px; right:8%; animation:blobYuzme2 26s ease-in-out infinite; background:var(--sari); opacity:.14; }
+  .hero-blob-3{ width:140px; height:140px; top:20%; right:-40px; animation:blobYuzme1 19s ease-in-out infinite reverse; }
+  @keyframes blobYuzme1{ 0%,100%{ transform:translate(0,0) rotate(0deg) scale(1); } 50%{ transform:translate(18px,-22px) rotate(20deg) scale(1.08); } }
+  @keyframes blobYuzme2{ 0%,100%{ transform:translate(0,0) rotate(0deg) scale(1); } 50%{ transform:translate(-20px,16px) rotate(-16deg) scale(1.05); } }
+
   .hero-ic{ position:relative; max-width:var(--genislik); margin:0 auto; }
   .hero-ust{ display:flex; justify-content:center; position:relative; }
   .tema-dugme{
     position:absolute; top:0; right:0; display:inline-flex; align-items:center; gap:6px;
     background:rgba(255,255,255,.14); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
     border:1px solid rgba(255,255,255,.35); color:#fff; padding:9px 16px; border-radius:var(--r-pill);
-    cursor:pointer; font-weight:800; font-size:.85em; transition:background .15s, transform .15s;
+    cursor:pointer; font-weight:800; font-size:.85em; transition:background var(--dur-fast), transform var(--dur-fast);
   }
   .tema-dugme:hover{ background:rgba(255,255,255,.26); transform:translateY(-2px); }
 
-  .hero-baslik-alani{ text-align:center; max-width:720px; margin:0 auto; padding-top:8px; }
-  .hero-rozet{
-    display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.16);
-    border:1px solid rgba(255,255,255,.3); padding:6px 16px; border-radius:var(--r-pill);
-    font-weight:800; font-size:.78em; letter-spacing:1.5px; text-transform:uppercase;
+  /* Kişisel marka bloğu: isim en baskın unsur, ardından unvan ve kısa slogan.
+     İlk ekranda dikkat dağıtacak uzun metin yok — sadece kimlik + 2 eylem. */
+  .hero-marka-alani{ text-align:center; max-width:760px; margin:0 auto; padding-top:10px; }
+  .hero-isim{
+    margin:0 0 22px; font-family:'Great Vibes',cursive; font-weight:400; font-size:clamp(3.6em,10vw,6.4em);
+    line-height:1; letter-spacing:.01em; text-shadow:0 4px 30px rgba(0,0,0,.28);
+    position:relative; display:inline-flex; align-items:center; gap:.18em; white-space:nowrap;
   }
-  .hero-h1{ margin:16px 0 10px; font-size:clamp(1.7em,4vw,2.5em); font-weight:800; line-height:1.15; }
-  .hero-aciklama{ margin:0; font-size:1.05em; opacity:.94; line-height:1.5; }
-  .hero-yazar{ margin:14px 0 0; font-size:.9em; opacity:.85; }
+  .hero-isim::after{
+    content:''; display:block; position:absolute; left:50%; bottom:-14px; transform:translateX(-50%);
+    width:150px; height:3px; border-radius:4px;
+    background:linear-gradient(90deg,transparent,var(--sari),transparent);
+  }
+  @media(max-width:520px){ .hero-isim{ white-space:normal; } }
+  .hero-unvan{ margin:0 0 8px; font-size:1.15em; font-weight:800; opacity:.96; letter-spacing:.2px; }
+  .hero-slogan{ margin:0; font-size:.96em; opacity:.85; line-height:1.5; max-width:460px; margin-inline:auto; }
+
+  .hero-cta-satir{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:28px; }
+  .hero-cta{
+    display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:var(--r-btn);
+    font-weight:800; font-size:.94em; cursor:pointer; border:none; font-family:inherit;
+    transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur), background var(--dur-fast);
+  }
+  .hero-cta-birincil{ background:#fff; color:var(--navy); box-shadow:var(--golge-lg); }
+  .hero-cta-birincil:hover{ transform:translateY(-3px); box-shadow:var(--golge-xl); }
+  .hero-cta-ikincil{
+    background:rgba(255,255,255,.14); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.4); color:#fff;
+  }
+  .hero-cta-ikincil:hover{ background:rgba(255,255,255,.24); transform:translateY(-3px); }
 
   /* Arama, hero içinde "cam" (glassmorphism) kart */
   .hero-arama-kart{
-    max-width:680px; margin:28px auto 0; background:rgba(255,255,255,.14);
+    max-width:680px; margin:30px auto 0; background:rgba(255,255,255,.14);
     backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
     border:1px solid rgba(255,255,255,.3); border-radius:20px; padding:16px; box-shadow:var(--golge-lg);
   }
@@ -240,35 +305,18 @@
   .filtre-satir button:hover{ background:rgba(255,255,255,.24); }
   .filtre-satir button[aria-pressed="true"]{ background:#fff; color:var(--navy); border-color:#fff; }
 
-  /* Hero istatistik kartları — cam efektli, dört büyük bilgi kartı */
-  .istatistik-izgara{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:14px; max-width:1000px; margin:30px auto 0;
-  }
-  @media(max-width:820px){ .istatistik-izgara{ grid-template-columns:1fr 1fr; } }
-  @media(max-width:420px){ .istatistik-izgara{ grid-template-columns:1fr; } }
-  .istatistik-kart{
-    background:rgba(255,255,255,.13); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,.28); border-radius:var(--r-kart); padding:18px 16px; text-align:center;
-    color:#fff; transition:transform .25s, background .25s; box-shadow:var(--golge-sm);
-  }
-  .istatistik-kart:hover{ transform:translateY(-4px); background:rgba(255,255,255,.2); }
-  .ik-ikon-daire{
-    width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.2); display:flex;
-    align-items:center; justify-content:center; margin:0 auto 8px;
-  }
-  .ik-sayi{ font-size:1.9em; font-weight:800; display:block; margin:2px 0; }
-  .ik-etiket{ font-size:.8em; opacity:.9; }
-
   main#ana-icerik{ max-width:var(--genislik); margin:0 auto; padding:26px 18px 40px; }
-  .icerik-sarmal{ max-width:var(--genislik); margin:0 auto; padding:0 18px; }
 
-  /* ===== 6. Hızlı Erişim şeridi ===== */
-  .hizli-erisim{ max-width:var(--genislik); margin:-30px auto 0; padding:0 18px; position:relative; z-index:2; }
+  /* ===== Hızlı Erişim — "Bugün Çalışmaya Devam Et" ===== */
+  .hizli-erisim{ max-width:var(--genislik); margin:34px auto 0; padding:0 18px; position:relative; }
+  .hizli-baslik{ color:#fff; font-size:1.1em; margin:0 0 12px 4px; display:flex; align-items:center; gap:8px; text-shadow:0 2px 10px rgba(0,0,0,.25); }
   .hizli-izgara{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) auto; gap:14px; align-items:stretch; }
   .hizli-kart{
     background:var(--yuzey); border-radius:var(--r-kart); padding:14px 18px; box-shadow:var(--golge);
     display:flex; gap:12px; align-items:center; border:1px solid var(--kenar);
+    transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur);
   }
+  .hizli-kart:hover{ transform:translateY(-4px); box-shadow:var(--golge-lg); }
   .hizli-ikon-daire{
     width:42px; height:42px; border-radius:12px; background:var(--acikgri); color:var(--mavi);
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
@@ -279,12 +327,49 @@
   .hizli-devam-btn{
     display:inline-flex; align-items:center; justify-content:center; gap:6px;
     background:var(--sari); color:#5a3400; border:none; padding:0 26px; border-radius:var(--r-btn); font-weight:800;
-    cursor:pointer; font-size:.95em; transition:transform .15s, background .15s, box-shadow .15s; min-height:56px; box-shadow:var(--golge);
+    cursor:pointer; font-size:.95em; transition:transform var(--dur) var(--ease-spring), background var(--dur-fast), box-shadow var(--dur); min-height:56px; box-shadow:var(--golge);
   }
   .hizli-devam-btn:hover{ background:#e8934a; transform:translateY(-3px); box-shadow:var(--golge-lg); }
 
-  /* ===== 7. İlerleme dashboard (dairesel grafik + rozetler + motivasyon) ===== */
-  .ilerleme-panel{ max-width:var(--genislik); margin:22px auto 0; padding:0 18px; }
+  /* ===== İstatistik Kartları — kendi bölümü (heronun dışında, açık zeminde) ===== */
+  .istatistik-bolum{ margin-top:var(--sp-8); }
+  .istatistik-bolum-izgara{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; max-width:1000px; margin:0 auto; }
+  @media(max-width:820px){ .istatistik-bolum-izgara{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:420px){ .istatistik-bolum-izgara{ grid-template-columns:1fr; } }
+  .ib-kart{
+    background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-kart); padding:18px 16px; text-align:center;
+    box-shadow:var(--golge-sm); transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur);
+  }
+  .ib-kart:hover{ transform:translateY(-5px); box-shadow:var(--golge-lg); }
+  .ib-ikon-daire{
+    width:44px; height:44px; border-radius:50%; background:var(--acikgri); color:var(--mavi); display:flex;
+    align-items:center; justify-content:center; margin:0 auto 8px;
+  }
+  .ib-sayi{ font-size:1.9em; font-weight:800; display:block; margin:2px 0; color:var(--navy); }
+  .ib-etiket{ font-size:.8em; color:#888; }
+  .ib-sparkline{ width:100%; height:14px; margin-top:8px; opacity:.5; }
+  .ib-sparkline path{ fill:none; stroke:var(--mavi); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* ===== Sana Özel Öneriler ===== */
+  .onerilen-bolum{ max-width:var(--genislik); margin:var(--sp-8) auto 0; padding:0 18px; }
+  .onerilen-bolum[hidden]{ display:none; }
+  .onerilen-baslik-satir{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .onerilen-baslik-satir h2{ margin:0; color:var(--navy); font-size:1.3em; display:flex; align-items:center; gap:8px; }
+  .onerilen-baslik-satir h2 .msi{ background:var(--acikgri); color:#7c3aed; border-radius:10px; padding:6px; }
+  .onerilen-alt{ margin:0; font-size:.85em; color:#888; }
+  .onerilen-izgara{ display:flex; gap:14px; overflow-x:auto; padding:4px 4px 10px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
+  .oneri-kart{
+    flex:0 0 auto; width:230px; scroll-snap-align:start; background:var(--yuzey); border:1px solid var(--kenar);
+    border-radius:var(--r-lg); padding:16px; text-decoration:none; color:var(--metin);
+    transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur); display:flex; flex-direction:column; gap:10px;
+  }
+  .oneri-kart:hover{ transform:translateY(-6px); box-shadow:var(--golge-lg); border-color:transparent; }
+  .oneri-ikon{ width:44px; height:44px; border-radius:12px; background:var(--acikgri); font-size:1.4em; display:flex; align-items:center; justify-content:center; }
+  .oneri-sinif{ font-size:.72em; font-weight:800; color:var(--mavi); text-transform:uppercase; letter-spacing:.5px; }
+  .oneri-baslik{ font-size:.95em; font-weight:800; line-height:1.35; }
+
+  /* ===== İlerleme dashboard (dairesel grafik + rozetler + motivasyon) ===== */
+  .ilerleme-panel{ max-width:var(--genislik); margin:var(--sp-8) auto 0; padding:0 18px; }
   .ilerleme-kutu{
     background:var(--yuzey); border-radius:22px; padding:26px 28px; box-shadow:var(--golge); border:1px solid var(--kenar);
   }
@@ -292,7 +377,7 @@
   .ilerleme-bar-dis{ position:relative; width:132px; height:132px; flex-shrink:0; }
   .daire-ilerleme{ width:100%; height:100%; }
   .daire-arka{ fill:none; stroke:var(--acikgri); stroke-width:10; }
-  .daire-on{ fill:none; stroke:var(--yesil); stroke-width:10; stroke-linecap:round; transform:rotate(-90deg); transform-origin:60px 60px; transition:stroke-dashoffset .6s ease; }
+  .daire-on{ fill:none; stroke:var(--yesil); stroke-width:10; stroke-linecap:round; transform:rotate(-90deg); transform-origin:60px 60px; transition:stroke-dashoffset .6s var(--ease-out); }
   .daire-yuzde-metin{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.4em; color:var(--navy); }
   .ilerleme-detay{ flex:1; min-width:240px; }
   .ilerleme-ust-satir{ display:flex; align-items:center; gap:10px; margin:0 0 6px; }
@@ -303,7 +388,7 @@
   .rozet-satir{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; padding-top:16px; border-top:1px dashed var(--kenar); }
   .rozet{
     display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:var(--r-pill); font-size:.82em;
-    font-weight:800; background:var(--acikgri); color:#94a3b8; cursor:default; transition:transform .15s, box-shadow .15s;
+    font-weight:800; background:var(--acikgri); color:#94a3b8; cursor:default; transition:transform var(--dur-fast), box-shadow var(--dur-fast);
   }
   .rozet:hover{ transform:scale(1.06); }
   .rozet.kazanildi{ background:#fff4e0; color:#c9740b; box-shadow:0 4px 12px rgba(244,162,97,.25); }
@@ -311,8 +396,8 @@
   .rozet-yeni{ animation:rozetPop .6s ease; }
   @keyframes rozetPop{ 0%{ transform:scale(.5) rotate(-8deg); } 60%{ transform:scale(1.2) rotate(4deg); } 100%{ transform:scale(1) rotate(0); } }
 
-  /* ===== 8. Alt paneller: Günün Sorusu (featured) / Yeni Eklenenler (yatay) / Favorilerim ===== */
-  .kucuk-panel-alani{ max-width:var(--genislik); margin:18px auto 0; padding:0 18px; display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:18px; }
+  /* ===== Alt paneller: Günün Sorusu (accordion) / Yeni Eklenenler (yatay) / Favorilerim (yatay) ===== */
+  .kucuk-panel-alani{ max-width:var(--genislik); margin:var(--sp-8) auto 0; padding:0 18px; display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:18px; }
   @media(max-width:980px){ .kucuk-panel-alani{ grid-template-columns:1fr 1fr; } }
   @media(max-width:640px){ .kucuk-panel-alani{ grid-template-columns:1fr; } }
   .kucuk-panel{ background:var(--yuzey); border-radius:var(--r-kart); padding:20px; box-shadow:var(--golge); border:1px solid var(--kenar); }
@@ -326,12 +411,17 @@
   .soru-ust-etiket{ position:relative; letter-spacing:1.5px; font-size:.72em; font-weight:800; text-transform:uppercase; opacity:.8; margin:-6px 0 10px; }
   .soru-metin{ position:relative; font-size:1.02em; line-height:1.55; margin:0 0 14px; }
   .soru-cevap-btn{
-    position:relative; background:var(--sari); color:#5a3400; border:none; padding:10px 18px; border-radius:var(--r-btn);
-    font-weight:800; cursor:pointer; font-size:.85em; min-height:44px; transition:transform .15s;
+    position:relative; display:inline-flex; align-items:center; gap:6px; background:var(--sari); color:#5a3400; border:none;
+    padding:10px 18px; border-radius:var(--r-btn); font-weight:800; cursor:pointer; font-size:.85em; min-height:44px;
+    transition:transform var(--dur-fast);
   }
   .soru-cevap-btn:hover{ transform:translateY(-2px); }
-  .soru-cevap{ position:relative; margin:12px 0 0; padding:12px 14px; background:rgba(255,255,255,.12); border-left:4px solid var(--sari); border-radius:8px; font-size:.9em; }
-  .soru-cevap[hidden]{ display:none; }
+  .soru-sevron{ font-size:18px; transition:transform var(--dur) var(--ease-out); }
+  #soruCevapBtn[aria-expanded="true"] .soru-sevron{ transform:rotate(180deg); }
+  .soru-cevap-sarmal{ position:relative; display:grid; grid-template-rows:0fr; transition:grid-template-rows var(--dur-slow) var(--ease-out); }
+  .soru-cevap-sarmal.acik{ grid-template-rows:1fr; }
+  .soru-cevap-ic{ overflow:hidden; }
+  .soru-cevap{ margin:12px 0 0; padding:12px 14px; background:rgba(255,255,255,.12); border-left:4px solid var(--sari); border-radius:8px; font-size:.9em; }
 
   .yeni-liste{ display:flex; flex-direction:column; gap:8px; max-height:230px; overflow-y:auto; }
   .yeni-liste-yatay{
@@ -341,7 +431,7 @@
   .yeni-liste-yatay .yeni-kart{ flex:0 0 auto; width:200px; flex-direction:column; align-items:flex-start; scroll-snap-align:start; }
   .yeni-kart{
     display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--metin); background:var(--acikgri);
-    border-radius:12px; padding:12px 14px; transition:transform .2s, box-shadow .2s;
+    border-radius:12px; padding:12px 14px; transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur);
   }
   .yeni-kart:hover{ background:var(--acik); transform:translateY(-3px); box-shadow:var(--golge); }
   .yeni-etiket{ background:var(--kirmizi); color:#fff; font-size:.64em; font-weight:800; padding:3px 9px; border-radius:var(--r-pill); letter-spacing:.5px; flex-shrink:0; }
@@ -349,30 +439,38 @@
   .yeni-kart .yk-tarih{ font-size:.72em; color:#888; flex-shrink:0; }
   .bos-mesaj{ font-size:.86em; color:#888; line-height:1.5; margin:0; }
 
-  /* ===== 9. Sınıf sekmeleri — modern pill ===== */
-  nav.sinif-sekme{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; padding:28px 18px 18px; max-width:var(--genislik); margin:0 auto; }
+  /* ===== Sınıf sekmeleri — modern pill + kayan gösterge (sliding indicator) ===== */
+  nav.sinif-sekme{
+    position:relative; display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+    padding:var(--sp-7) 18px 26px; max-width:var(--genislik); margin:0 auto;
+  }
   nav.sinif-sekme button{
     display:inline-flex; align-items:center; gap:8px; padding:12px 26px; border:1px solid var(--kenar); border-radius:var(--r-pill);
     cursor:pointer; background:var(--yuzey); box-shadow:var(--golge-sm); font-weight:800; font-size:1em; color:var(--metin);
-    transition:transform .2s, box-shadow .2s, background .2s, color .2s; min-height:48px;
+    transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur), background var(--dur), color var(--dur); min-height:48px;
   }
-  nav.sinif-sekme button .sekme-ikon{ font-size:1.15em; transition:transform .25s; }
+  nav.sinif-sekme button .sekme-ikon{ font-size:1.15em; transition:transform var(--dur) var(--ease-spring); }
   nav.sinif-sekme button:hover{ transform:translateY(-2px); box-shadow:var(--golge); }
   nav.sinif-sekme button:hover .sekme-ikon{ transform:scale(1.2) rotate(-6deg); }
   nav.sinif-sekme button[aria-selected="true"]{
     background:linear-gradient(135deg,var(--navy),var(--turkuaz)); color:#fff; border-color:transparent;
     box-shadow:0 10px 24px -8px color-mix(in srgb, var(--navy) 55%, transparent);
   }
+  .sekme-gosterge{
+    position:absolute; bottom:14px; height:3px; border-radius:3px; opacity:0;
+    background:linear-gradient(90deg,var(--navy),var(--turkuaz));
+    transition:left var(--dur-slow) var(--ease-spring), width var(--dur-slow) var(--ease-spring), opacity var(--dur);
+  }
 
   section.sinif-panel{ display:none; }
-  section.sinif-panel.aktif{ display:block; animation:fadeScale .35s; }
+  section.sinif-panel.aktif{ display:block; animation:fadeScale .35s var(--ease-out); }
   @keyframes fadeScale{ from{ opacity:0; transform:scale(.98) translateY(6px); } to{ opacity:1; transform:scale(1) translateY(0); } }
 
   .sinif-baslik{ display:flex; align-items:center; gap:14px; margin:6px 0 20px; }
   .sinif-baslik h2{ margin:0; color:var(--navy); font-size:1.5em; }
   .sinif-baslik .sayac{ background:var(--acikgri); color:#777; font-size:.8em; font-weight:800; padding:6px 14px; border-radius:var(--r-pill); }
 
-  /* ===== 10. İçerik alt-sekmeleri (Üniteler / Yazılı Sınavlar) ===== */
+  /* ===== İçerik alt-sekmeleri (Üniteler / Yazılı Sınavlar) ===== */
   .icerik-sekme{ display:flex; gap:8px; margin:4px 0 24px; flex-wrap:wrap; }
   .icerik-sekme button{
     display:inline-flex; align-items:center; gap:6px; padding:10px 20px; border:none; border-radius:var(--r-pill); cursor:pointer;
@@ -381,21 +479,32 @@
   .icerik-sekme button:hover{ background:var(--acik); }
   .icerik-sekme button[aria-selected="true"]{ background:var(--yesil); color:#fff; }
   .icerik-panel{ display:none; }
-  .icerik-panel.aktif{ display:block; animation:fadeScale .3s; }
+  .icerik-panel.aktif{ display:block; animation:fadeScale .3s var(--ease-out); }
 
-  /* ===== 11. Ünite kartları — premium ===== */
-  .unite-izgara{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:22px; }
+  /* ===== Ünite kartları — premium: üst bant, durum rozeti, 3D hover, ışık yansıması ===== */
+  .unite-izgara{ display:grid; grid-template-columns:repeat(auto-fill,minmax(255px,1fr)); gap:24px; }
   .unite-kart{
-    --vurgu:var(--mavi);
+    --vurgu:var(--mavi); position:relative;
     background:var(--yuzey); border-radius:var(--r-kart); overflow:hidden; box-shadow:var(--golge);
-    border:1px solid var(--kenar);
-    transition:transform .3s cubic-bezier(.2,.8,.3,1.2), box-shadow .3s; display:flex; flex-direction:column;
+    border:1px solid var(--kenar); perspective:800px;
+    transition:transform var(--dur-slow) var(--ease-spring), box-shadow var(--dur-slow); display:flex; flex-direction:column;
   }
+  .unite-kart::after{
+    content:''; position:absolute; top:0; left:-150%; width:55%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
+    transform:skewX(-20deg); transition:left .75s ease; pointer-events:none; z-index:3;
+  }
+  .unite-kart:hover::after{ left:150%; }
   .unite-kart:hover{
-    transform:translateY(-8px); border-color:transparent;
-    box-shadow:0 22px 40px -14px color-mix(in srgb, var(--vurgu) 45%, transparent), var(--golge);
+    transform:translateY(-10px) rotateX(2deg); border-color:transparent;
+    box-shadow:0 26px 44px -14px color-mix(in srgb, var(--vurgu) 48%, transparent), var(--golge-xl);
   }
   .unite-kart.tamamlandi-durum{ box-shadow:0 0 0 3px var(--yesil), var(--golge); }
+  .unite-kart.tamamlandi-durum .uk-gorsel::before{
+    content:'✓ Tamamlandı'; position:absolute; top:8px; left:8px; background:var(--yesil); color:#fff;
+    font-size:.64em; font-weight:800; padding:4px 10px; border-radius:var(--r-pill); letter-spacing:.3px;
+    box-shadow:0 2px 6px rgba(0,0,0,.2); z-index:2;
+  }
   .uk-link{ display:block; text-decoration:none; color:inherit; }
   .uk-gorsel{
     position:relative; height:64px;
@@ -404,9 +513,10 @@
   .uk-ikon-rozet{
     position:absolute; left:20px; bottom:-28px; width:64px; height:64px; border-radius:20px;
     background:var(--yuzey); box-shadow:var(--golge); display:flex; align-items:center; justify-content:center;
-    font-size:1.9em; border:3px solid var(--yuzey); transition:transform .3s;
+    color:var(--vurgu); border:3px solid var(--yuzey); transition:transform var(--dur-slow) var(--ease-spring); z-index:2;
   }
-  .unite-kart:hover .uk-ikon-rozet{ transform:scale(1.08) rotate(-4deg); }
+  .uk-ikon-rozet .msi{ font-size:28px; }
+  .unite-kart:hover .uk-ikon-rozet{ transform:scale(1.1) rotate(-6deg); }
   .unite-kart.favori-durum .uk-ikon-rozet::after{
     content:'★'; position:absolute; top:-8px; right:-8px; width:22px; height:22px; border-radius:50%;
     background:var(--sari); color:#5a3400; font-size:.55em; display:flex; align-items:center; justify-content:center;
@@ -415,11 +525,17 @@
   .uk-govde{ padding:38px 18px 8px; }
   .uk-etiket{ font-size:.72em; font-weight:800; color:var(--vurgu); letter-spacing:.6px; text-transform:uppercase; margin:0 0 6px; }
   .uk-baslik{ margin:0 0 8px; font-size:1.08em; line-height:1.32; min-height:2.7em; }
-  .uk-meta{ margin:0 0 14px; font-size:.78em; color:#888; }
+  .uk-meta{ margin:0 0 8px; font-size:.78em; color:#888; }
+  .uk-etiketler{ display:flex; flex-wrap:wrap; gap:6px; margin:0 0 14px; }
+  .uk-mini-etiket{
+    display:inline-flex; align-items:center; gap:3px; background:var(--acikgri); color:#667;
+    font-size:.68em; font-weight:800; padding:4px 9px 4px 6px; border-radius:var(--r-pill);
+  }
+  .uk-mini-etiket .msi{ font-size:13px; }
   .uk-btn{
     display:inline-flex; align-items:center; justify-content:center; gap:6px; width:100%; text-align:center;
     padding:11px 0; border-radius:var(--r-btn); background:var(--vurgu); color:#fff; font-weight:800;
-    font-size:.88em; transition:background .2s, transform .15s; min-height:44px;
+    font-size:.88em; transition:background var(--dur), transform var(--dur-fast); min-height:44px;
   }
   .unite-kart:hover .uk-btn{ transform:translateY(-2px); }
   .uk-aksiyon{ display:flex; gap:8px; padding:12px 16px 16px; margin-top:auto; }
@@ -432,19 +548,19 @@
   .uk-fav[aria-pressed="true"]{ background:#fff4e0; border-color:var(--sari); color:#c9740b; }
   .uk-tamam[aria-pressed="true"]{ background:#e6f7ee; border-color:var(--yesil); color:var(--yesil); }
 
-  /* ===== 12. Yazılı kartları — üniteden görsel olarak ayrık palet ===== */
+  /* ===== Yazılı kartları — üniteden görsel olarak ayrık palet + tek tip premium ikon ===== */
   .yazili-izgara{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
   .yazili-kart{
     display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--metin);
     background:linear-gradient(180deg,#fff8ec,#fff);
     border:1px solid #f3dfc0; border-left:5px solid var(--sari);
-    border-radius:16px; padding:14px 16px; transition:transform .25s, box-shadow .25s;
+    border-radius:16px; padding:14px 16px; transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur);
   }
   :root[data-tema="dark"] .yazili-kart{ background:linear-gradient(180deg,#241d10,var(--yuzey)); border-color:#4a3a1c; }
-  .yazili-kart:hover{ transform:translateY(-5px); box-shadow:0 18px 32px -14px rgba(244,162,97,.5); }
+  .yazili-kart:hover{ transform:translateY(-6px); box-shadow:0 20px 36px -14px rgba(244,162,97,.55); }
   .yk-ikon-kutu{
     width:46px; height:46px; border-radius:14px; background:#fdecd3; color:#b3620c; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center; font-size:1.3em;
+    display:flex; align-items:center; justify-content:center;
   }
   :root[data-tema="dark"] .yk-ikon-kutu{ background:#3a2a10; color:var(--sari); }
   .yk-metin b{ display:block; font-size:.9em; }
@@ -458,38 +574,65 @@
   .sinif-bos-durum p{ margin:10px 0 0; font-size:1.05em; font-weight:800; }
   .sinif-bos-durum[hidden]{ display:none; }
 
-  /* ===== Hakkımızda ===== */
-  .hakkimizda{ max-width:var(--genislik); margin:44px auto 0; padding:0 18px; }
-  .hakkimizda-ic{
-    background:linear-gradient(160deg,var(--acikgri),var(--yuzey)); border:1px solid var(--kenar); border-radius:24px;
-    padding:44px 28px; text-align:center; max-width:760px; margin:0 auto;
+  /* ===== Kısa Tanıtım Kartı (Hakkımızda özeti) — glassmorphism, ~260px yükseklik =====
+     Uzun Hakkımızda içeriği tekrarını önlemek için burada sadece kısa bir özet var;
+     "Daha Fazla Bilgi" butonu üst şeritteki mevcut Hakkımızda panelini açar. */
+  .tanitim-karti-bolum{ max-width:var(--genislik); margin:var(--sp-9) auto 0; padding:0 18px; }
+  .tanitim-karti{
+    position:relative; overflow:hidden; display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+    background:linear-gradient(135deg,var(--navy),var(--turkuaz)); border-radius:26px;
+    padding:30px 32px; box-shadow:var(--golge-lg);
   }
-  .hakkimizda-ikon-daire{
-    width:60px; height:60px; border-radius:18px; background:linear-gradient(135deg,var(--navy),var(--turkuaz));
-    color:#fff; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; box-shadow:var(--golge);
+  .tanitim-karti::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(circle at 1px 1px, rgba(255,255,255,.14) 1px, transparent 0) 0 0/24px 24px,
+      radial-gradient(55% 65% at 90% 10%, rgba(255,255,255,.16), transparent 70%);
   }
-  .hakkimizda-ic h2{ margin:0 0 14px; font-size:1.4em; color:var(--navy); }
-  .hakkimizda-ic p{ margin:0 0 14px; font-size:1em; line-height:1.7; color:#556; text-align:left; }
-  .hakkimizda-ic p:last-child{ margin-bottom:0; }
+  .tanitim-ikon-daire{
+    position:relative; width:60px; height:60px; border-radius:18px; background:rgba(255,255,255,.16);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.32);
+    color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .tanitim-metin{ position:relative; flex:1; min-width:240px; color:#fff; }
+  .tanitim-metin h2{ margin:0 0 6px; font-size:1.3em; }
+  .tanitim-metin p{ margin:0; font-size:.92em; line-height:1.5; opacity:.94; max-width:540px; }
+  .tanitim-etiketler{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .tanitim-etiket{
+    background:rgba(255,255,255,.16); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.3); color:#fff; font-size:.72em; font-weight:800;
+    padding:5px 12px; border-radius:var(--r-pill);
+  }
+  .tanitim-buton{
+    position:relative; display:inline-flex; align-items:center; gap:6px; background:#fff; color:var(--navy); border:none;
+    padding:13px 24px; border-radius:var(--r-btn); font-weight:800; cursor:pointer; font-size:.92em; flex-shrink:0;
+    transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur);
+  }
+  .tanitim-buton:hover{ transform:translateY(-3px); box-shadow:var(--golge-lg); }
+  @media(max-width:640px){ .tanitim-karti{ padding:24px; } .tanitim-buton{ width:100%; justify-content:center; } }
 
-  /* ===== 13. Toast bildirimleri ===== */
-  .toast-alani{ position:fixed; right:18px; bottom:78px; display:flex; flex-direction:column; gap:8px; z-index:60; max-width:280px; }
+  /* ===== Toast bildirimleri ===== */
+  .toast-alani{ position:fixed; right:18px; bottom:78px; display:flex; flex-direction:column; gap:8px; z-index:65; max-width:280px; }
   .toast{
     background:var(--yuzey); color:var(--metin); border-left:5px solid var(--yesil); padding:10px 14px;
-    border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,.2); font-size:.86em; display:flex; gap:8px; align-items:center;
-    opacity:0; transform:translateY(10px); transition:opacity .25s, transform .25s;
+    border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,.22); font-size:.86em; display:flex; gap:8px; align-items:center;
+    opacity:0; transform:translateY(14px) scale(.95); transition:opacity var(--dur) var(--ease-spring), transform var(--dur) var(--ease-spring);
   }
-  .toast.goster{ opacity:1; transform:translateY(0); }
+  .toast.goster{ opacity:1; transform:translateY(0) scale(1); }
 
-  /* ===== 14. Footer — üç sütun ===== */
-  footer{ background:var(--yuzey2); margin-top:40px; border-top:1px solid var(--kenar); }
-  .footer-ic{ max-width:var(--genislik); margin:0 auto; padding:40px 18px 20px; display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px; }
+  /* ===== Footer — kurumsal, marka satırlı üç sütun ===== */
+  footer{ background:var(--yuzey2); margin-top:var(--sp-9); border-top:1px solid var(--kenar); }
+  .footer-marka{
+    max-width:var(--genislik); margin:0 auto; padding:24px 18px 0; display:flex; align-items:center; gap:10px;
+    font-weight:800; color:var(--navy); font-size:1.05em;
+  }
+  .footer-marka .msi{ background:var(--acikgri); border-radius:12px; padding:8px; color:var(--mavi); }
+  .footer-ic{ max-width:var(--genislik); margin:0 auto; padding:24px 18px 20px; display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px; }
   @media(max-width:760px){ .footer-ic{ grid-template-columns:1fr; gap:26px; } }
   .footer-sutun h3{ margin:0 0 14px; font-size:.95em; color:var(--navy); display:flex; align-items:center; gap:8px; }
   .footer-sutun p{ margin:0 0 8px; font-size:.86em; color:#777; line-height:1.6; }
   .footer-baglanti-liste{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
   .footer-baglanti-liste a{
-    color:#667; text-decoration:none; font-size:.88em; display:inline-flex; align-items:center; gap:7px; transition:color .15s, transform .15s;
+    color:#667; text-decoration:none; font-size:.88em; display:inline-flex; align-items:center; gap:7px; transition:color var(--dur-fast), transform var(--dur-fast);
   }
   .footer-baglanti-liste a:hover{ color:var(--mavi); transform:translateX(3px); }
   .footer-baglanti-liste .msi{ font-size:18px; opacity:.75; }
@@ -508,21 +651,24 @@
   .yukari-buton{
     position:fixed; right:18px; bottom:18px; width:48px; height:48px; border-radius:50%;
     background:var(--navy); color:#fff; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;
-    box-shadow:var(--golge-lg); opacity:0; pointer-events:none; transition:opacity .25s, transform .2s, background .2s;
+    box-shadow:var(--golge-lg); opacity:0; pointer-events:none; transition:opacity var(--dur) var(--ease-out), transform var(--dur-fast), background var(--dur-fast);
     z-index:30;
   }
   .yukari-buton.gorunur{ opacity:1; pointer-events:auto; }
   .yukari-buton:hover{ background:var(--yesil); transform:translateY(-3px); }
 
-  /* ===== 15. Mobil optimizasyon ===== */
+  /* ===== Mobil optimizasyon ===== */
   @media(max-width:640px){
     .hero{ padding:60px 14px 30px; }
     .tema-dugme{ position:static; margin:0 auto 16px; }
     .hero-ust{ justify-content:flex-end; }
-    .hero-h1{ font-size:1.5em; }
-    .hizli-erisim{ margin-top:-22px; }
+    .hero-isim{ font-size:2.9em; }
+    .hero-cta-satir{ flex-direction:column; }
+    .hero-cta{ width:100%; justify-content:center; }
+    .hizli-erisim{ margin-top:22px; }
     .hizli-izgara{ grid-template-columns:1fr; }
     .hizli-devam-btn{ width:100%; }
+    .oneri-kart{ width:200px; }
     nav.sinif-sekme button{ padding:11px 18px; font-size:.92em; min-height:46px; }
     .ilerleme-govde{ justify-content:center; text-align:center; }
     .uk-aksiyon{ flex-direction:column; }
@@ -543,7 +689,7 @@
 
 <a class="atla-baglanti" href="#ana-icerik">İçeriğe geç</a>
 
-<nav class="ust-serit" aria-label="Üst gezinme">
+<nav class="ust-serit" id="ustSerit" aria-label="Üst gezinme">
   <div class="ust-serit-ic">
     <span class="ust-serit-marka"><span class="msi" aria-hidden="true">school</span> DKAB Portal</span>
     <div class="ust-serit-baglantilar">
@@ -556,6 +702,9 @@
 </nav>
 
 <section class="hero">
+  <span class="hero-blob hero-blob-1" aria-hidden="true"></span>
+  <span class="hero-blob hero-blob-2" aria-hidden="true"></span>
+  <span class="hero-blob hero-blob-3" aria-hidden="true"></span>
   <div class="hero-ic">
     <div class="hero-ust">
       <button class="tema-dugme" id="temaDugme" type="button" aria-pressed="false">
@@ -564,11 +713,14 @@
       </button>
     </div>
 
-    <div class="hero-baslik-alani">
-      <span class="hero-rozet">Din Kültürü ve Ahlak Bilgisi</span>
-      <h1 class="hero-h1">Konu Özetleri ve Etkinlikler</h1>
-      <p class="hero-aciklama">4, 5, 6 ve 7. Sınıflar — Ünite konu özetleri, interaktif oyunlar, sunumlar ve yazılı sınavlar tek platformda</p>
-      <p class="hero-yazar">Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+    <div class="hero-marka-alani">
+      <h1 class="hero-isim">Ayşe Yazıcı</h1>
+      <p class="hero-unvan">Din Kültürü ve Ahlak Bilgisi Öğretmeni</p>
+      <p class="hero-slogan">Konu özetleri, interaktif oyunlar ve yazılı sınavlarla dijital öğrenme deneyimi</p>
+      <div class="hero-cta-satir">
+        <button type="button" class="hero-cta hero-cta-birincil" id="heroCalismaBtn"><span class="msi" aria-hidden="true">rocket_launch</span> Çalışmaya Başla</button>
+        <button type="button" class="hero-cta hero-cta-ikincil" id="heroSiniflarBtn"><span class="msi" aria-hidden="true">explore</span> Sınıfları Keşfet</button>
+      </div>
     </div>
 
     <div class="hero-arama-kart">
@@ -587,18 +739,11 @@
       </div>
       <p class="arama-sonuc-bilgi" id="aramaBilgi" aria-live="polite"></p>
     </div>
-
-    <div class="istatistik-izgara">
-      <div class="istatistik-kart belirir"><div class="ik-ikon-daire"><span class="msi" aria-hidden="true">menu_book</span></div><span class="ik-sayi" id="istToplamUnite">0</span><span class="ik-etiket">Toplam Ünite</span></div>
-      <div class="istatistik-kart belirir" style="--i:1"><div class="ik-ikon-daire"><span class="msi" aria-hidden="true">edit_document</span></div><span class="ik-sayi" id="istToplamYazili">0</span><span class="ik-etiket">Toplam Yazılı</span></div>
-      <div class="istatistik-kart belirir" style="--i:2"><div class="ik-ikon-daire"><span class="msi" aria-hidden="true">task_alt</span></div><span class="ik-sayi" id="istTamamlanan">0</span><span class="ik-etiket">Tamamlananlar</span></div>
-      <div class="istatistik-kart belirir" style="--i:3"><div class="ik-ikon-daire"><span class="msi" aria-hidden="true">star</span></div><span class="ik-sayi" id="istFavoriler">0</span><span class="ik-etiket">Favoriler</span></div>
-    </div>
   </div>
 </section>
 
 <section class="hizli-erisim" aria-labelledby="hizliBaslik">
-  <h2 id="hizliBaslik" class="gorsel-gizli">Hızlı Erişim</h2>
+  <h2 id="hizliBaslik" class="hizli-baslik"><span class="msi" aria-hidden="true">bolt</span> Bugün Çalışmaya Devam Et</h2>
   <div class="hizli-izgara">
     <div class="hizli-kart belirir">
       <span class="hizli-ikon-daire" aria-hidden="true"><span class="msi">history_edu</span></span>
@@ -613,6 +758,31 @@
       <div class="hizli-metin"><b>Favorilerim</b><span id="favoriSayisiMetin">0 konu favoride</span></div>
     </div>
     <button type="button" class="hizli-devam-btn" id="devamEtBtn"><span class="msi" aria-hidden="true">play_arrow</span> Devam Et</button>
+  </div>
+</section>
+
+<section class="istatistik-bolum icerik-sarmal" aria-label="Site istatistikleri">
+  <div class="istatistik-bolum-izgara">
+    <div class="ib-kart belirir">
+      <div class="ib-ikon-daire"><span class="msi" aria-hidden="true">menu_book</span></div>
+      <span class="ib-sayi" id="istToplamUnite">0</span><span class="ib-etiket">Toplam Ünite</span>
+      <svg class="ib-sparkline" viewBox="0 0 60 20" preserveAspectRatio="none" aria-hidden="true"><path d="M0,15 L10,13 L20,14 L30,9 L40,10 L50,5 L60,7"></path></svg>
+    </div>
+    <div class="ib-kart belirir" style="--i:1">
+      <div class="ib-ikon-daire"><span class="msi" aria-hidden="true">edit_document</span></div>
+      <span class="ib-sayi" id="istToplamYazili">0</span><span class="ib-etiket">Toplam Yazılı</span>
+      <svg class="ib-sparkline" viewBox="0 0 60 20" preserveAspectRatio="none" aria-hidden="true"><path d="M0,12 L10,14 L20,10 L30,11 L40,7 L50,9 L60,4"></path></svg>
+    </div>
+    <div class="ib-kart belirir" style="--i:2">
+      <div class="ib-ikon-daire"><span class="msi" aria-hidden="true">task_alt</span></div>
+      <span class="ib-sayi" id="istTamamlanan">0</span><span class="ib-etiket">Tamamlananlar</span>
+      <svg class="ib-sparkline" viewBox="0 0 60 20" preserveAspectRatio="none" aria-hidden="true"><path d="M0,17 L10,15 L20,16 L30,11 L40,8 L50,6 L60,3"></path></svg>
+    </div>
+    <div class="ib-kart belirir" style="--i:3">
+      <div class="ib-ikon-daire"><span class="msi" aria-hidden="true">star</span></div>
+      <span class="ib-sayi" id="istFavoriler">0</span><span class="ib-etiket">Favoriler</span>
+      <svg class="ib-sparkline" viewBox="0 0 60 20" preserveAspectRatio="none" aria-hidden="true"><path d="M0,14 L10,16 L20,12 L30,13 L40,9 L50,11 L60,6"></path></svg>
+    </div>
   </div>
 </section>
 
@@ -636,27 +806,9 @@
   </div>
 </section>
 
-<div class="kucuk-panel-alani">
-  <section class="kucuk-panel soru-panel belirir" aria-labelledby="soruBaslik">
-    <p class="soru-ust-etiket">Öne Çıkan</p>
-    <h2 id="soruBaslik"><span class="msi" aria-hidden="true">quiz</span> Günün Sorusu</h2>
-    <p class="soru-metin" id="soruMetin"></p>
-    <button class="soru-cevap-btn" id="soruCevapBtn" type="button" aria-expanded="false">Cevabı Göster</button>
-    <p class="soru-cevap" id="soruCevap" hidden></p>
-  </section>
-
-  <section class="kucuk-panel belirir" style="--i:1" aria-labelledby="yeniBaslik">
-    <h2 id="yeniBaslik"><span class="msi" aria-hidden="true">fiber_new</span> Yeni Eklenenler</h2>
-    <div class="yeni-liste yeni-liste-yatay" id="yeniListe"></div>
-  </section>
-
-  <section class="kucuk-panel belirir" style="--i:2" aria-labelledby="favorilerimBaslik" id="favorilerimPanel">
-    <h2 id="favorilerimBaslik"><span class="msi" aria-hidden="true">star</span> Favorilerim</h2>
-    <div class="yeni-liste" id="favorilerimListe"></div>
-  </section>
-</div>
-
-<nav class="sinif-sekme" id="sinifSekme" role="tablist" aria-label="Sınıf seçimi"></nav>
+<nav class="sinif-sekme" id="sinifSekme" role="tablist" aria-label="Sınıf seçimi">
+  <span class="sekme-gosterge" id="sekmeGosterge" aria-hidden="true"></span>
+</nav>
 
 <main id="ana-icerik">
   <div class="sinif-bos-durum" id="sinifBosDurum">
@@ -666,19 +818,59 @@
   <div id="sinifAlani"></div>
 </main>
 
-<section class="hakkimizda" id="hakkimizda" aria-labelledby="hakkimizdaBaslik">
-  <div class="hakkimizda-ic belirir">
-    <span class="hakkimizda-ikon-daire" aria-hidden="true"><span class="msi">school</span></span>
-    <h2 id="hakkimizdaBaslik">Hakkımızda</h2>
-    <p>Din eğitimi, bir çocuğun karakter gelişiminde ve değerler dünyasının şekillenmesinde tüm öğrenim kademelerinde artan bir sorumlulukla ilerler. Küçük yaşlarda dini kavramlar somut, günlük hayattan örneklerle sevdirilerek tanıtılırken; ilerleyen kademelerde inanç esasları, ibadet bilinci ve ahlaki muhakeme derinleşir. Öğrenci büyüdükçe "neden" sorusunu daha sık sorar; soyut düşünme becerisi geliştikçe inanç ve ahlak konularını sorgulayarak kendi değerler sistemini inşa etmeye başlar.</p>
-    <p>Bu platform, tam da bu kademeli gelişimi gözeterek hazırlanmıştır. Amacımız, din eğitimini ezbere dayalı bir bilgi aktarımından çıkarıp; düşündüren, sorgulayan, günlük hayatla bağ kuran ve her yaş grubunun gelişim düzeyine uygun bir öğrenme deneyimine dönüştürmektir. DKAB Öğretmeni Ayşe Yazıcı tarafından hazırlanan bu içerikler, tüm öğrenim kademelerinde öğrencilere doğru bilgiyi, hoşgörülü bir bakış açısını ve kalıcı öğrenmeyi bir arada sunmayı hedefler.</p>
+<section class="onerilen-bolum" id="onerilenBolum" aria-labelledby="onerilenBaslik" hidden>
+  <div class="onerilen-baslik-satir">
+    <h2 id="onerilenBaslik"><span class="msi" aria-hidden="true">auto_awesome</span> Senin İçin Önerilen Konular</h2>
+    <p class="onerilen-alt">Henüz tamamlamadığın konulardan seçtiklerimiz</p>
+  </div>
+  <div class="onerilen-izgara" id="onerilenIzgara"></div>
+</section>
+
+<div class="kucuk-panel-alani">
+  <section class="kucuk-panel soru-panel belirir" aria-labelledby="soruBaslik">
+    <p class="soru-ust-etiket">Öne Çıkan</p>
+    <h2 id="soruBaslik"><span class="msi" aria-hidden="true">quiz</span> Günün Sorusu</h2>
+    <p class="soru-metin" id="soruMetin"></p>
+    <button class="soru-cevap-btn" id="soruCevapBtn" type="button" aria-expanded="false">
+      <span>Cevabı Göster</span><span class="msi soru-sevron" aria-hidden="true">expand_more</span>
+    </button>
+    <div class="soru-cevap-sarmal" id="soruCevapSarmal">
+      <div class="soru-cevap-ic"><p class="soru-cevap" id="soruCevap"></p></div>
+    </div>
+  </section>
+
+  <section class="kucuk-panel belirir" style="--i:1" aria-labelledby="yeniBaslik">
+    <h2 id="yeniBaslik"><span class="msi" aria-hidden="true">fiber_new</span> Yeni Eklenenler</h2>
+    <div class="yeni-liste yeni-liste-yatay" id="yeniListe"></div>
+  </section>
+
+  <section class="kucuk-panel belirir" style="--i:2" aria-labelledby="favorilerimBaslik" id="favorilerimPanel">
+    <h2 id="favorilerimBaslik"><span class="msi" aria-hidden="true">star</span> Favorilerim</h2>
+    <div class="yeni-liste yeni-liste-yatay" id="favorilerimListe"></div>
+  </section>
+</div>
+
+<section class="tanitim-karti-bolum" id="hakkimizda" aria-labelledby="tanitimBaslik">
+  <div class="tanitim-karti belirir">
+    <span class="tanitim-ikon-daire" aria-hidden="true"><span class="msi">school</span></span>
+    <div class="tanitim-metin">
+      <h2 id="tanitimBaslik">Hakkımızda</h2>
+      <p>Türkiye Yüzyılı Maarif Modeli doğrultusunda hazırlanan, öğrenci ve öğretmen odaklı modern bir dijital eğitim platformu.</p>
+      <div class="tanitim-etiketler">
+        <span class="tanitim-etiket">Maarif Modeli Uyumlu</span>
+        <span class="tanitim-etiket">Öğrenci Odaklı</span>
+        <span class="tanitim-etiket">Öğretmen Dostu</span>
+      </div>
+    </div>
+    <button type="button" class="tanitim-buton" id="tanitimDahaFazlaBtn">Daha Fazla Bilgi <span class="msi" aria-hidden="true">arrow_forward</span></button>
   </div>
 </section>
 
 <footer>
+  <div class="footer-marka"><span class="msi" aria-hidden="true">school</span> DKAB Portal</div>
   <div class="footer-ic">
     <div class="footer-sutun">
-      <h3><span class="msi" aria-hidden="true">school</span> Site Hakkında</h3>
+      <h3><span class="msi" aria-hidden="true">info</span> Site Hakkında</h3>
       <p>Din Kültürü ve Ahlak Bilgisi — 4, 5, 6 ve 7. Sınıflar için hazırlanmış ünite konu özetleri, interaktif oyunlar, sunumlar ve yazılı sınavları tek platformda buluşturan dijital ders materyalleri portalı.</p>
       <p class="footer-satir" id="footerIstatistik"></p>
       <div class="sosyal-satir" aria-label="Sosyal medya (yakında)">
@@ -701,7 +893,7 @@
 
     <div class="footer-sutun" id="iletisim">
       <h3><span class="msi" aria-hidden="true">contact_mail</span> İletişim ve Son Güncelleme</h3>
-      <p class="footer-satir"><span class="msi" aria-hidden="true">person</span> Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+      <p class="footer-satir"><span class="msi" aria-hidden="true">person</span> Ayşe Yazıcı</p>
       <p class="footer-satir"><span class="msi" aria-hidden="true">mail</span> <a href="mailto:aishasurayzc@gmail.com" style="color:inherit;text-decoration:none;">aishasurayzc@gmail.com</a></p>
       <p class="footer-satir"><span class="msi" aria-hidden="true">update</span> Son güncelleme: 23 Temmuz 2026</p>
       <p class="footer-satir"><span class="msi" aria-hidden="true">copyright</span> 2026 Ayşe Yazıcı. Tüm hakları saklıdır.</p>
@@ -719,34 +911,36 @@
    Tüm sınıf/ünite/yazılı bağlantıları burada tek yerde. Kartlar bu
    veriden üretilir; aynı HTML'in 4 sınıf için tekrar yazılmasını önler.
    Hiçbir href elle değiştirilmedi, mevcut dosya yapısıyla birebir eşleşir.
+   "msi": kart üzerindeki büyük ikon rozeti için Material Symbols adı
+   (emoji "ikon" alanı aramada/hızlı erişimde/vb. küçük yerlerde kullanılmaya devam eder).
 ====================================================================== */
 const SINIFLAR = [
   { id:'s4', ad:'4. Sınıf', ikon:'🕌', vurgu:'--mavi', klasor:'din-kulturu-4sinif-1unite', uniteler:[
-    {dosya:'index.html', ikon:'🕌', baslik:"Günlük Hayattaki Dinî İfadeler"},
-    {dosya:'unite2.html', ikon:'🕋', baslik:"İnancım ve Kur'an-ı Kerim"},
-    {dosya:'unite3.html', ikon:'💞', baslik:"Din Güzel Ahlaktır"},
-    {dosya:'unite4.html', ikon:'🕌', baslik:"Hz. Muhammed'i Tanıyalım"},
-    {dosya:'unite5.html', ikon:'🧼', baslik:"İslam Dini ve Temizlik"}
+    {dosya:'index.html', ikon:'🕌', msi:'forum', baslik:"Günlük Hayattaki Dinî İfadeler"},
+    {dosya:'unite2.html', ikon:'🕋', msi:'auto_stories', baslik:"İnancım ve Kur'an-ı Kerim"},
+    {dosya:'unite3.html', ikon:'💞', msi:'favorite', baslik:"Din Güzel Ahlaktır"},
+    {dosya:'unite4.html', ikon:'🕌', msi:'person', baslik:"Hz. Muhammed'i Tanıyalım"},
+    {dosya:'unite5.html', ikon:'🧼', msi:'clean_hands', baslik:"İslam Dini ve Temizlik"}
   ]},
   { id:'s5', ad:'5. Sınıf', ikon:'🌌', vurgu:'--turkuaz', klasor:'din-kulturu-5sinif-1unite', uniteler:[
-    {dosya:'index.html', ikon:'🌌', baslik:"Allah İnancı"},
-    {dosya:'unite2.html', ikon:'🕌', baslik:"Allah'ın Huzurunda Olmak: Namaz İbadeti"},
-    {dosya:'unite3.html', ikon:'📖', baslik:"Kur'an-ı Kerim"},
-    {dosya:'unite4.html', ikon:'🕊️', baslik:"Peygamber Kıssaları"}
+    {dosya:'index.html', ikon:'🌌', msi:'auto_awesome', baslik:"Allah İnancı"},
+    {dosya:'unite2.html', ikon:'🕌', msi:'self_improvement', baslik:"Allah'ın Huzurunda Olmak: Namaz İbadeti"},
+    {dosya:'unite3.html', ikon:'📖', msi:'auto_stories', baslik:"Kur'an-ı Kerim"},
+    {dosya:'unite4.html', ikon:'🕊️', msi:'history_edu', baslik:"Peygamber Kıssaları"}
   ]},
   { id:'s6', ad:'6. Sınıf', ikon:'📯', vurgu:'--yesil', klasor:'din-kulturu-6sinif-1unite', uniteler:[
-    {dosya:'index.html', ikon:'📯', baslik:"Peygamber ve İlahi Kitap İnancı"},
-    {dosya:'unite2.html', ikon:'🌙', baslik:"Ramazan ve Oruç"},
-    {dosya:'unite3.html', ikon:'🤝', baslik:"Ahlaki Davranışlar"},
-    {dosya:'unite4.html', ikon:'🕋', baslik:"Peygamberliğinden Önce Hz. Muhammed"},
-    {dosya:'unite5.html', ikon:'🎼', baslik:"Kültürümüzdeki Dinî Motifler"}
+    {dosya:'index.html', ikon:'📯', msi:'auto_stories', baslik:"Peygamber ve İlahi Kitap İnancı"},
+    {dosya:'unite2.html', ikon:'🌙', msi:'nightlight', baslik:"Ramazan ve Oruç"},
+    {dosya:'unite3.html', ikon:'🤝', msi:'favorite', baslik:"Ahlaki Davranışlar"},
+    {dosya:'unite4.html', ikon:'🕋', msi:'history_edu', baslik:"Peygamberliğinden Önce Hz. Muhammed"},
+    {dosya:'unite5.html', ikon:'🎼', msi:'palette', baslik:"Kültürümüzdeki Dinî Motifler"}
   ]},
   { id:'s7', ad:'7. Sınıf', ikon:'👼', vurgu:'--sari', klasor:'din-kulturu-7sinif-1unite', uniteler:[
-    {dosya:'index.html', ikon:'👼', baslik:"Melek ve Ahiret İnancı"},
-    {dosya:'unite2.html', ikon:'🕋', baslik:"Hac ve Kurban"},
-    {dosya:'unite3.html', ikon:'🤝', baslik:"Ahlaki Davranışlar"},
-    {dosya:'unite4.html', ikon:'📯', baslik:"Allah'ın Kulu ve Elçisi: Hz. Muhammed"},
-    {dosya:'unite5.html', ikon:'📿', baslik:"İslam Düşüncesinde Yorumlar"}
+    {dosya:'index.html', ikon:'👼', msi:'nights_stay', baslik:"Melek ve Ahiret İnancı"},
+    {dosya:'unite2.html', ikon:'🕋', msi:'place', baslik:"Hac ve Kurban"},
+    {dosya:'unite3.html', ikon:'🤝', msi:'favorite', baslik:"Ahlaki Davranışlar"},
+    {dosya:'unite4.html', ikon:'📯', msi:'history_edu', baslik:"Allah'ın Kulu ve Elçisi: Hz. Muhammed"},
+    {dosya:'unite5.html', ikon:'📿', msi:'psychology', baslik:"İslam Düşüncesinde Yorumlar"}
   ]}
 ];
 
@@ -755,10 +949,14 @@ const YAZILI_DESEN = [1,2,3,4].flatMap(function(no){
   const donem = no<=2 ? '1. Dönem' : '2. Dönem';
   const sinavNo = ((no-1)%2)+1;
   return [
-    {dosya:'yazili'+no+'.html', ikon:'📝', baslik:donem+' '+sinavNo+'. Yazılı', tur:'Test formatı'},
-    {dosya:'yazili'+no+'_klasik.html', ikon:'✍️', baslik:donem+' '+sinavNo+'. Yazılı', tur:'Klasik (açık uçlu)'}
+    {dosya:'yazili'+no+'.html', ikon:'📝', msi:'fact_check', baslik:donem+' '+sinavNo+'. Yazılı', tur:'Test formatı'},
+    {dosya:'yazili'+no+'_klasik.html', ikon:'✍️', msi:'edit_note', baslik:donem+' '+sinavNo+'. Yazılı', tur:'Klasik (açık uçlu)'}
   ];
 });
+
+/* Kartlardaki "son güncelleme" etiketi bu portalın gerçekten GitHub'a
+   gönderildiği tarihi yansıtır (uydurma bir tarih değildir). */
+const SON_GUNCELLEME = '23 Tem 2026';
 
 /* Arama/filtre için düz (flat) indeksler — SINIFLAR ile YAZILI_DESEN'den
    bir kez üretilir, sayfa çalışırken tekrar hesaplanmaz. Arama bu
@@ -849,14 +1047,19 @@ function nesneOku(anahtar){
 function uniteKartHtml(sinif, unite, index){
   const id = sinif.id+'-u'+(index+1);
   const href = sinif.klasor+'/'+unite.dosya;
+  const sureTahmini = 15 + (index % 3)*5; /* ~15-25 dk arası tahmini süre */
   return (
     '<div class="unite-kart belirir" style="--vurgu:var('+sinif.vurgu+');--i:'+(index%6)+'">'+
       '<a class="uk-link" href="'+href+'">'+
-        '<div class="uk-gorsel"><span class="uk-ikon-rozet">'+unite.ikon+'</span></div>'+
+        '<div class="uk-gorsel"><span class="uk-ikon-rozet"><span class="msi" aria-hidden="true">'+unite.msi+'</span></span></div>'+
         '<div class="uk-govde">'+
           '<p class="uk-etiket">'+(index+1)+'. Ünite</p>'+
           '<h3 class="uk-baslik">'+unite.baslik+'</h3>'+
           '<p class="uk-meta">Konu özeti · oyunlar · sunum</p>'+
+          '<div class="uk-etiketler">'+
+            '<span class="uk-mini-etiket"><span class="msi" aria-hidden="true">schedule</span>~'+sureTahmini+' dk</span>'+
+            '<span class="uk-mini-etiket"><span class="msi" aria-hidden="true">update</span>'+SON_GUNCELLEME+'</span>'+
+          '</div>'+
           '<span class="uk-btn">İNCELE <span class="msi" aria-hidden="true">arrow_forward</span></span>'+
         '</div>'+
       '</a>'+
@@ -872,7 +1075,7 @@ function yaziliKartHtml(sinif, yazili, index){
   const href = sinif.klasor+'/'+yazili.dosya;
   return (
     '<a class="yazili-kart belirir" style="--i:'+(index%8)+'" href="'+href+'">'+
-      '<span class="yk-ikon-kutu" aria-hidden="true">'+yazili.ikon+'</span>'+
+      '<span class="yk-ikon-kutu" aria-hidden="true"><span class="msi" aria-hidden="true">'+yazili.msi+'</span></span>'+
       '<span class="yk-metin"><b>'+yazili.baslik+'</b><span>'+yazili.tur+'</span></span>'+
     '</a>'
   );
@@ -912,7 +1115,7 @@ function konuBulById(id){
 
 function sayfayiOlustur(){
   const sekmeNav = document.getElementById('sinifSekme');
-  sekmeNav.innerHTML = SINIFLAR.map(function(s,i){
+  sekmeNav.innerHTML += SINIFLAR.map(function(s,i){
     return '<button type="button" role="tab" id="btn-'+s.id+'" aria-selected="false" aria-controls="'+s.id+'" tabindex="'+(i===0?'0':'-1')+'"><span class="sekme-ikon" aria-hidden="true">'+s.ikon+'</span>'+s.ad+'</button>';
   }).join('');
 
@@ -940,8 +1143,21 @@ function sayfayiOlustur(){
 }
 
 /* ======================================================================
-   BÖLÜM 4 — Sekme davranışı (sınıf + içerik alt-sekmesi) ve klavye desteği
+   BÖLÜM 4 — Sekme davranışı (sınıf + içerik alt-sekmesi), kayan gösterge
+   ve klavye desteği
 ====================================================================== */
+function gostergeGuncelle(){
+  const nav = document.getElementById('sinifSekme');
+  const gosterge = document.getElementById('sekmeGosterge');
+  const aktifBtn = nav.querySelector('button[aria-selected="true"]');
+  if(!aktifBtn){ gosterge.style.opacity = '0'; return; }
+  const navRect = nav.getBoundingClientRect();
+  const btnRect = aktifBtn.getBoundingClientRect();
+  gosterge.style.opacity = '1';
+  gosterge.style.left = (btnRect.left - navRect.left) + 'px';
+  gosterge.style.width = btnRect.width + 'px';
+}
+
 function sinifGoster(id){
   document.getElementById('sinifBosDurum').hidden = true;
   document.querySelectorAll('.sinif-panel').forEach(function(p){ p.classList.remove('aktif'); });
@@ -949,6 +1165,7 @@ function sinifGoster(id){
   document.getElementById(id).classList.add('aktif');
   const btn = document.getElementById('btn-'+id);
   btn.setAttribute('aria-selected','true'); btn.tabIndex=0;
+  gostergeGuncelle();
 }
 
 function icerikGoster(sinifId, tur){
@@ -1003,6 +1220,7 @@ function tamamToggle(id, baslik){
   kayitliDurumlariUygula();
   ilerlemeGuncelle();
   sonuclariGoster();
+  onerilerRender();
   toastGoster(eklendiMi ? (baslik+' tamamlandı olarak işaretlendi.') : (baslik+' işareti kaldırıldı.'), eklendiMi?'✅':'↩️');
 }
 
@@ -1030,6 +1248,27 @@ function favorilerimRender(){
     const bul = konuBulById(id);
     if(!bul) return '';
     return '<a class="yeni-kart" href="'+bul.href+'"><span class="yk-baslik">'+bul.sinif.ikon+' '+bul.unite.baslik+'</span><span class="yk-tarih">'+bul.sinif.ad+'</span></a>';
+  }).join('');
+}
+
+/* ======================================================================
+   BÖLÜM 5.5 — Sana Özel Öneriler
+   Uydurma "en çok çalışılan" istatistiği yerine, bu cihazdaki gerçek
+   tamamlanma verisine dayanır: henüz tamamlanmamış konulardan seçilir.
+====================================================================== */
+function onerilerRender(){
+  const tamam = listeOku(LS_TAMAMLANAN);
+  const bolum = document.getElementById('onerilenBolum');
+  const kapsayici = document.getElementById('onerilenIzgara');
+  const adaylar = TUM_KONULAR.filter(function(k){ return !tamam.includes(k.id); });
+  if(adaylar.length===0){ bolum.hidden = true; return; }
+  bolum.hidden = false;
+  kapsayici.innerHTML = adaylar.slice(0,8).map(function(k){
+    return '<a class="oneri-kart" href="'+k.href+'">'+
+      '<span class="oneri-ikon" aria-hidden="true">'+k.ikon+'</span>'+
+      '<span class="oneri-sinif">'+k.altBilgi+'</span>'+
+      '<span class="oneri-baslik">'+k.baslik+'</span>'+
+    '</a>';
   }).join('');
 }
 
@@ -1232,11 +1471,17 @@ function temaUygula(tema, bildirimGoster){
 const UST_PANEL_ICERIK = {
   hakkimizda: {
     baslik:'<span class="msi" aria-hidden="true">school</span> Hakkımızda',
-    html:'<p>Din eğitimi, öğrencinin gelişim düzeyine göre tüm öğrenim kademelerinde derinleşerek ilerler: küçük yaşlarda somut ve sevdirici bir dille başlar, ilerleyen kademelerde öğrenci inanç ve ahlak konularını sorgulayarak değerlendirebilir hale gelir.</p><p>Bu platform, DKAB Öğretmeni Ayşe Yazıcı tarafından bu kademeli gelişimi gözeten konu özetleri, oyunlar ve sınavlarla hazırlanmıştır.</p>'
+    html:'<p>Türkiye Yüzyılı Maarif Modeli doğrultusunda hazırlanan, öğrenci ve öğretmen odaklı modern bir dijital eğitim platformu. Din eğitimini ezbere dayalı bir bilgi aktarımından çıkarıp; düşündüren, sorgulayan ve günlük hayatla bağ kuran bir öğrenme deneyimine dönüştürmeyi hedefler.</p>'+
+      '<ul style="margin:0 0 10px;padding-left:20px;font-size:.92em;line-height:1.7;">'+
+        '<li>Beceri temelli, kavramsal öğrenmeyi destekleyen kaynaklar</li>'+
+        '<li>Güncel yazılı sınavlar ve çalışma materyalleri</li>'+
+        '<li>Sürekli güncellenen, mobil uyumlu içerikler</li>'+
+      '</ul>'+
+      '<p>Ayşe Yazıcı tarafından hazırlanmıştır.</p>'
   },
   iletisim: {
     baslik:'<span class="msi" aria-hidden="true">contact_mail</span> İletişim',
-    html:'<p>Görüş, öneri ve yorumlarınız için bize e-posta ile ulaşabilirsiniz:</p><p><span class="msi" aria-hidden="true" style="font-size:16px">mail</span> <a href="mailto:aishasurayzc@gmail.com">aishasurayzc@gmail.com</a></p><p>👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>'
+    html:'<p>Görüş, öneri ve yorumlarınız için bize e-posta ile ulaşabilirsiniz:</p><p><span class="msi" aria-hidden="true" style="font-size:16px">mail</span> <a href="mailto:aishasurayzc@gmail.com">aishasurayzc@gmail.com</a></p><p>👩‍🏫 Ayşe Yazıcı</p>'
   }
 };
 
@@ -1336,6 +1581,7 @@ document.addEventListener('DOMContentLoaded', function(){
     if(btn) sinifGoster(btn.getAttribute('aria-controls'));
   });
   oklaGezinmeEkle(document.getElementById('sinifSekme'), 'button[role="tab"]');
+  window.addEventListener('resize', gostergeGuncelle);
 
   /* Sınıf alanı: içerik alt-sekmesi, favori/tamamlandı butonları, konu/yazılı bağlantı tıklamaları
      tek bir delege edilmiş dinleyiciyle yönetilir (gereksiz DOM dinleyicisi eklenmez). */
@@ -1370,6 +1616,14 @@ document.addEventListener('DOMContentLoaded', function(){
   });
   document.querySelectorAll('.icerik-sekme').forEach(function(nav){ oklaGezinmeEkle(nav, 'button[role="tab"]'); });
 
+  /* Önerilen konular: tıklanan kart normal bağlantı gibi davranır, sadece
+     "son ziyaret edilen konu" bilgisini de kaydeder. */
+  document.getElementById('onerilenIzgara').addEventListener('click', function(e){
+    const kart = e.target.closest('.oneri-kart');
+    if(!kart) return;
+    kaydetSonKonu({ href: kart.getAttribute('href'), baslik: kart.querySelector('.oneri-baslik').textContent });
+  });
+
   /* Arama + filtre: sonuçlar açılır panelde, kutunun hemen altında */
   const aramaGirdiEl = document.getElementById('aramaGirdi');
   aramaGirdiEl.addEventListener('input', sonuclariGoster);
@@ -1402,13 +1656,24 @@ document.addEventListener('DOMContentLoaded', function(){
     if(!e.target.closest('.hero-arama-kart')) aramaSonuclariniKapat();
   });
 
-  /* Günün sorusu cevabı */
+  /* Günün sorusu — accordion: yükseklik grid-template-rows ile yumuşak animasyon,
+     ok simgesi aria-expanded'a göre CSS ile döner. */
   document.getElementById('soruCevapBtn').addEventListener('click', function(){
-    const cevap = document.getElementById('soruCevap');
-    const gizliMi = cevap.hidden;
-    cevap.hidden = !gizliMi;
-    this.setAttribute('aria-expanded', String(gizliMi));
-    this.textContent = gizliMi ? 'Cevabı Gizle' : 'Cevabı Göster';
+    const sarmal = document.getElementById('soruCevapSarmal');
+    const acikMi = sarmal.classList.toggle('acik');
+    this.setAttribute('aria-expanded', String(acikMi));
+    this.querySelector('span:first-child').textContent = acikMi ? 'Cevabı Gizle' : 'Cevabı Göster';
+  });
+
+  /* Hero'daki kişisel marka bloğunun eylem düğmeleri: "Çalışmaya Başla" arama
+     kutusuna odaklanır, "Sınıfları Keşfet" sınıf sekmelerine kaydırır. */
+  document.getElementById('heroCalismaBtn').addEventListener('click', function(){
+    const girdi = document.getElementById('aramaGirdi');
+    girdi.focus();
+    girdi.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  document.getElementById('heroSiniflarBtn').addEventListener('click', function(){
+    document.getElementById('sinifSekme').scrollIntoView({behavior:'smooth', block:'start'});
   });
 
   /* Devam Et */
@@ -1432,10 +1697,21 @@ document.addEventListener('DOMContentLoaded', function(){
     if(zatenAcikMi){ ustPanelKapat(); } else { ustPanelAc(tur, btn); }
   });
   document.addEventListener('click', function(e){
-    if(!e.target.closest('.ust-serit')) ustPanelKapat();
+    /* "Daha Fazla Bilgi" butonu .ust-serit dışında olduğu için ayrıca hariç
+       tutulur — yoksa panel açılır açılmaz bu dinleyici tarafından hemen
+       kapatılırdı (filtre satırındaki ile aynı sınıf hata). */
+    if(!e.target.closest('.ust-serit') && !e.target.closest('#tanitimDahaFazlaBtn')) ustPanelKapat();
   });
   document.addEventListener('keydown', function(e){
     if(e.key==='Escape') ustPanelKapat();
+  });
+
+  /* Kısa tanıtım kartındaki "Daha Fazla Bilgi" — üst şeritteki mevcut
+     Hakkımızda panelini açar; ayrı/tekrar eden bir sayfa oluşturmaz. */
+  document.getElementById('tanitimDahaFazlaBtn').addEventListener('click', function(){
+    const ustBtn = document.querySelector('.ust-serit-btn[data-panel="hakkimizda"]');
+    ustPanelAc('hakkimizda', ustBtn);
+    document.getElementById('ustPanel').scrollIntoView({behavior:'smooth', block:'center'});
   });
 
   /* Tema değiştirme (ilk uygulama sessiz, kullanıcı tıklaması bildirimli) */
@@ -1446,9 +1722,13 @@ document.addEventListener('DOMContentLoaded', function(){
   const kayitliTema = guvenliOku(LS_TEMA);
   temaUygula(kayitliTema || (tercihUyumluMu('(prefers-color-scheme: dark)') ? 'dark':'light'), false);
 
-  /* Yukarı çık butonu */
+  /* Yukarı çık butonu + kaydırınca küçülen üst şerit (sticky shrinking header) */
   const yukariBtn = document.getElementById('yukariBtn');
-  window.addEventListener('scroll', function(){ yukariBtn.classList.toggle('gorunur', window.scrollY>400); });
+  const ustSerit = document.getElementById('ustSerit');
+  window.addEventListener('scroll', function(){
+    yukariBtn.classList.toggle('gorunur', window.scrollY>400);
+    ustSerit.classList.toggle('kucultulmus', window.scrollY>60);
+  });
   yukariBtn.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
   /* Durum bağımlı bölümlerin ilk render'ı */
@@ -1456,6 +1736,7 @@ document.addEventListener('DOMContentLoaded', function(){
   ilerlemeGuncelle();
   favorilerimRender();
   hizliErisimGuncelle();
+  onerilerRender();
   }catch(hata){
     /* Geliştirme/teşhis için konsola yaz; kullanıcıyı boş bir hata kutusuyla
        rahatsız etmeden, aşağıdaki finally sayesinde sayfa yine de kullanılabilir kalır. */
