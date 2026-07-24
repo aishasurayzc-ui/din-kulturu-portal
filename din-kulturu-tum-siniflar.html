@@ -829,6 +829,38 @@
     .uk-fav, .uk-tamam{ min-height:44px; }
     .yukari-buton{ width:52px; height:52px; }
   }
+
+  /* ===================== İÇERİK ÜRETİM REHBERİ (öğretmen için) ===================== */
+  .icerik-rehberi-bolum{ max-width:var(--genislik); margin:var(--sp-8) auto 0; padding:0 var(--gutter); }
+  .icerik-rehberi{ background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-kart); box-shadow:var(--golge); overflow:hidden; }
+  .icerik-rehberi summary{
+    list-style:none; cursor:pointer; padding:var(--sp-4); display:flex; align-items:center; gap:10px;
+    font-weight:800; color:var(--navy); font-size:var(--fs-md); user-select:none;
+  }
+  .icerik-rehberi summary::-webkit-details-marker{ display:none; }
+  .icerik-rehberi summary small{ font-weight:600; color:var(--metin); opacity:.6; font-size:.7em; margin-left:2px; }
+  .icerik-rehberi summary .msi:first-child{ background:var(--acikgri); color:var(--mavi); border-radius:10px; padding:6px; }
+  .icerik-rehberi-ok{ margin-left:auto; transition:transform .25s ease; }
+  .icerik-rehberi[open] .icerik-rehberi-ok{ transform:rotate(180deg); }
+  .icerik-rehberi-ic{ padding:0 var(--sp-4) var(--sp-4); }
+  .icerik-rehberi-aciklama{ margin:0 0 var(--sp-4); color:var(--metin); opacity:.82; font-size:var(--fs-sm); line-height:1.6; }
+  .icerik-rehberi-izgara{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--sp-3); }
+  .icerik-sablon-kart{ background:var(--yuzey2); border:1px solid var(--kenar); border-radius:var(--r-md); padding:var(--sp-3); display:flex; flex-direction:column; gap:10px; }
+  .icerik-sablon-kart h3{ margin:0; font-size:.98em; font-weight:800; color:var(--navy); display:flex; align-items:center; gap:8px; }
+  .icerik-sablon-kart h3 .msi{ font-size:19px; }
+  .icerik-sablon-metin{
+    margin:0; font-family:ui-monospace,'SFMono-Regular',Consolas,monospace; font-size:.78em; line-height:1.65;
+    white-space:pre-wrap; word-break:break-word; color:var(--metin); background:var(--bg); border:1px solid var(--kenar);
+    border-radius:8px; padding:12px; max-height:220px; overflow-y:auto;
+  }
+  .icerik-kopyala-btn{
+    align-self:flex-start; display:inline-flex; align-items:center; gap:6px; background:var(--mavi); color:#fff;
+    border:none; border-radius:var(--r-btn); padding:8px 14px; font-weight:700; font-size:.82em; cursor:pointer;
+    font-family:inherit; transition:background .15s ease;
+  }
+  .icerik-kopyala-btn:hover{ background:var(--navy); }
+  .icerik-kopyala-btn .msi{ font-size:16px; }
+  .icerik-kopyala-btn.kopyalandi{ background:var(--yesil); }
 </style>
 </head>
 <body>
@@ -1042,6 +1074,83 @@
     </div>
     <button type="button" class="tanitim-buton" id="tanitimDahaFazlaBtn">Daha Fazla Bilgi <span class="msi" aria-hidden="true">arrow_forward</span></button>
   </div>
+</section>
+
+<section class="icerik-rehberi-bolum" aria-labelledby="icerikRehberiBaslik">
+  <details class="icerik-rehberi">
+    <summary>
+      <span class="msi" aria-hidden="true">auto_fix_high</span>
+      <span id="icerikRehberiBaslik">İçerik Üretim Rehberi <small>(Öğretmen İçin)</small></span>
+      <span class="msi icerik-rehberi-ok" aria-hidden="true">expand_more</span>
+    </summary>
+    <div class="icerik-rehberi-ic">
+      <p class="icerik-rehberi-aciklama">Yeni bir ünite veya etkinlik hazırlarken kullanılabilecek hazır yapay zeka prompt şablonları. Köşeli parantez içindeki alanları ([Ders Adı], [Sınıf Seviyesi], [Konu Adı] vb.) doldurup bir yapay zeka aracına yapıştırman yeterli.</p>
+      <div class="icerik-rehberi-izgara">
+
+        <article class="icerik-sablon-kart">
+          <h3><span class="msi" aria-hidden="true">description</span> Ünite Özet Metni</h3>
+          <pre class="icerik-sablon-metin" id="sablonOzet">Aşağıda belirtilen ders ve konu için Türkiye Yüzyılı Maarif Modeli'ne ve sınıf seviyesine uygun bir ünite özet metni hazırla.
+
+* Ders: [Ders Adı, örn: Din Kültürü ve Ahlak Bilgisi]
+* Sınıf Seviyesi: [Sınıf, örn: 7. Sınıf]
+* Konu / Ünite: [Konu Adı]
+
+İçerik Gereksinimleri:
+1. Öğrencilerin kolayca anlayabileceği sade ve akıcı bir dil kullan.
+2. Önemli kavramları koyu (bold) belirterek maddeler halinde sırala.
+3. Konu sonunda öğrencilerin kendilerini test edebileceği 3 adet 'Düşün-Paylaş' sorusu ekle.
+4. Sayfa tasarımında kullanılmak üzere 1 adet vurgulu özet/spot cümle oluştur.</pre>
+          <button class="icerik-kopyala-btn" type="button" data-hedef="sablonOzet"><span class="msi" aria-hidden="true">content_copy</span> Kopyala</button>
+        </article>
+
+        <article class="icerik-sablon-kart">
+          <h3><span class="msi" aria-hidden="true">quiz</span> İnteraktif Soru ve Etkinlik</h3>
+          <pre class="icerik-sablon-metin" id="sablonSoru">Belirtilen ders konusu için web portalında kullanılmak üzere interaktif soru ve etkinlik içeriği üret.
+
+* Ders &amp; Sınıf: [Örn: 6. Sınıf Din Kültürü]
+* Konu: [Konu Adı]
+
+İçerik Formatı:
+1. Çoktan Seçmeli: 5 adet 4 şıklı soru (doğru cevabı ve kısa açıklamasını belirt).
+2. Doğru / Yanlış: Konunun önemli noktalarını ölçen 5 adet Doğru/Yanlış ifadesi.
+3. Eşleştirme: 5 adet kavram ve karşılığındaki tanım/açıklama.
+4. Tüm soruların cevabını sayfanın en altına 'Cevap Anahtarı' olarak ekle.</pre>
+          <button class="icerik-kopyala-btn" type="button" data-hedef="sablonSoru"><span class="msi" aria-hidden="true">content_copy</span> Kopyala</button>
+        </article>
+
+        <article class="icerik-sablon-kart">
+          <h3><span class="msi" aria-hidden="true">style</span> Özet Kart İçeriği</h3>
+          <pre class="icerik-sablon-metin" id="sablonKart">Ders materyali portalındaki özet kartlarında (Card UI) gösterilmek üzere kısa ve vurucu içerikler hazırla.
+
+* Konu: [Konu Adı]
+
+Çıktı Formatı:
+1. Kart Başlığı: Maksimum 5 kelimelik dikkat çekici başlık.
+2. Kısa Açıklama: Maksimum 20-25 kelimelik, konunun özünü anlatan spot metin.
+3. Anahtar Kelimeler / Etiketler: Konuyla ilgili 3 adet etiket (örn: #Kavram1, #Kavram2).
+4. Görsel Önerisi: Kartın üst kısmında kullanılmak üzere konuyu simgeleyen ikon veya görsel fikri.</pre>
+          <button class="icerik-kopyala-btn" type="button" data-hedef="sablonKart"><span class="msi" aria-hidden="true">content_copy</span> Kopyala</button>
+        </article>
+
+        <article class="icerik-sablon-kart">
+          <h3><span class="msi" aria-hidden="true">edit_document</span> Yazılıya Hazırlık Çalışma Kağıdı</h3>
+          <pre class="icerik-sablon-metin" id="sablonYazili">Sınıf seviyesine ve müfredata uygun bir 'Yazılıya Hazırlık Çalışma Kağıdı' oluştur.
+
+* Ders: [Ders Adı]
+* Sınıf Seviyesi: [Sınıf]
+* Dönem/Yazılı: [Örn: 1. Dönem 2. Yazılı]
+
+İçerik Yapısı:
+1. Bölüm A: 5 adet Boşluk Doldurma sorusu.
+2. Bölüm B: 5 adet Tanım/Kavram açıklama sorusu.
+3. Bölüm C: 3 adet Açık Uçlu (yorum ve çıkarım) sorusu.
+4. En alta öğretmen değerlendirmesi ve puan anahtarı şablonu ekle.</pre>
+          <button class="icerik-kopyala-btn" type="button" data-hedef="sablonYazili"><span class="msi" aria-hidden="true">content_copy</span> Kopyala</button>
+        </article>
+
+      </div>
+    </div>
+  </details>
 </section>
 
 <footer>
@@ -2005,6 +2114,33 @@ document.addEventListener('DOMContentLoaded', function(){
   favorilerimRender();
   hizliErisimGuncelle();
   onerilerRender();
+
+  /* İçerik Üretim Rehberi — şablon kopyalama düğmeleri */
+  document.querySelectorAll('.icerik-kopyala-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const hedef = document.getElementById(btn.dataset.hedef);
+      if(!hedef) return;
+      const metin = hedef.textContent;
+      const basariGoster = function(){
+        const eskiIcerik = btn.innerHTML;
+        btn.innerHTML = '<span class="msi" aria-hidden="true">check</span> Kopyalandı';
+        btn.classList.add('kopyalandi');
+        setTimeout(function(){ btn.innerHTML = eskiIcerik; btn.classList.remove('kopyalandi'); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(metin).then(basariGoster).catch(function(){});
+      } else {
+        const gecici = document.createElement('textarea');
+        gecici.value = metin;
+        gecici.style.position = 'fixed';
+        gecici.style.opacity = '0';
+        document.body.appendChild(gecici);
+        gecici.select();
+        try{ document.execCommand('copy'); basariGoster(); }catch(e){}
+        document.body.removeChild(gecici);
+      }
+    });
+  });
 
   /* Görünürlük gözlemcisi en son kurulur — bu noktada sınıf kartları,
      öneriler ve tüm dinamik içerik zaten DOM'da olduğu için hiçbir
