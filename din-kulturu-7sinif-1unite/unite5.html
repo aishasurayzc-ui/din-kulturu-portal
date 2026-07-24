@@ -526,6 +526,24 @@
 .yazili-kart p{ margin:0; font-size:.85em; color:#666; }
 .yazili-kart.yk-klasik{ border-style:dashed; }
 
+
+/* ===================== EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) ===================== */
+.ez-iki-sutun{ display:flex; gap:22px; justify-content:center; flex-wrap:wrap; margin:14px 0; }
+.ez-sutun{ display:flex; flex-direction:column; gap:8px; min-width:230px; max-width:340px; flex:1; }
+.ez-sutun h4{ text-align:center; margin:0 0 4px; color:var(--mavi); font-size:.95em; }
+.merdiven-secenek.secili{ background:#fff3cd; border-color:#f4a261; }
+.merdiven-secenek.eslesti{ background:#d8f3dc; border-color:var(--yesil); cursor:default; opacity:.85; }
+.merdiven-secenek.ez-oge{ font-size:.85em; text-align:left; padding:9px 12px; }
+.ez-zamanlayici{ text-align:center; font-size:1.6em; font-weight:800; color:var(--kirmizi); margin:8px 0; }
+.ez-ogrenilen-liste{ max-width:560px; margin:10px auto; padding:10px 16px; background:#f4f0ff; border-radius:8px; font-size:.88em; line-height:1.7; min-height:20px; }
+.ez-ogrenilen-liste b{ color:#4c1d95; }
+.ez-metin-goster{ text-align:center; font-size:1.1em; font-weight:700; color:var(--navy); background:#eef6ff; border-radius:8px; padding:16px 20px; margin:14px auto; max-width:640px; min-height:1.4em; }
+.ez-hafiza-izgara{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; max-width:640px; margin:16px auto; }
+.ez-hafiza-izgara .hafiza-kart{ height:88px; }
+.ez-hafiza-izgara .hafiza-on{ font-size:1.3em; }
+.ez-hafiza-izgara .hafiza-arka{ font-size:.62em; padding:4px; text-align:center; line-height:1.25; }
+@media(max-width:640px){ .ez-hafiza-izgara{ grid-template-columns:repeat(4,1fr); } .ez-hafiza-izgara .hafiza-kart{ height:74px; } }
+
 </style>
 <style id="ogrKatmaniStil">
 /* ===================== OGRENME DENEYIMI KATMANI (hedefler, ogrenme yolu, ilerleme) =====================
@@ -619,6 +637,7 @@
   <button onclick="kategoriGoster('kat-yarisma75', event)">🎮 Yarışma Oyunları</button>
   <button onclick="kategoriGoster('kat-mantik75', event)">🕵️ Mantık &amp; Dedektiflik</button>
   <button onclick="kategoriGoster('kat-macera75', event)">🌀 Macera</button>
+  <button onclick="kategoriGoster('kat-ezber75', event)">🕌 Ezber Etkinlikleri</button>
 </nav>
 
 <div class="oyun-grubu aktif" id="kat-unite75">
@@ -658,6 +677,17 @@
 
 <div class="oyun-grubu" id="kat-macera75">
   <button onclick="goster('labirent75', event)">🌀 Labirent</button>
+</div>
+
+<div class="oyun-grubu" id="kat-ezber75">
+  <button onclick="goster('ezsira75', event)">1️⃣ Sırala Bakalım</button>
+  <button onclick="goster('ezbosluk75', event)">2️⃣ Boşluk Doldur</button>
+  <button onclick="goster('ezeslestir75', event)">3️⃣ Anlam Eşleştir</button>
+  <button onclick="goster('ezhafiza75', event)">4️⃣ Hafıza Kartları</button>
+  <button onclick="goster('ezadimadim75', event)">5️⃣ Adım Adım Ezber</button>
+  <button onclick="goster('ezgizli75', event)">6️⃣ Gizli Harfler</button>
+  <button onclick="goster('ezkaybolan75', event)">7️⃣ Kaybolan Kelimeler</button>
+  <button onclick="goster('ezhiz75', event)">8️⃣ Hız Testi</button>
 </div>
 
 <main>
@@ -1335,6 +1365,101 @@
   <button class="eylem" onclick="labirent75Baslat()">🔄 Yeni Labirent</button>
 </section>
 
+
+<!-- ================= EZBER ETKİNLİKLERİ (8 ADET) — İSLAM DÜŞÜNCESINDE YORUMLAR ================= -->
+
+<section id="ezsira75">
+  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İslam Düşüncesinde Yorumlar'nın cümlelerini doğru sırayla dizebileceksin.</div>
+  <div class="aciklama">Karışık sırada verilen cümleleri, İslam Düşüncesinde Yorumlar'ndaki doğru sıraya göre tıklayarak diz.</div>
+  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez175Dizilen">0</b>/<b>8</b></span></div>
+  <div class="kelime-cevap" id="ez175Cevap"></div>
+  <div class="kelime-banka" id="ez175Banka"></div>
+  <div class="sonuc-kutusu" id="ez175Sonuc"></div>
+  <button class="eylem" onclick="ez175Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezbosluk75">
+  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İslam Düşüncesinde Yorumlar cümlelerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
+  <div class="aciklama">Cümledeki boşluğa gelen doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez275Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez275Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez275Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez275Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez275Sonuc"></div>
+  <button class="eylem" onclick="ez275Baslat()">📝 Başla</button>
+</section>
+
+<section id="ezeslestir75">
+  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İslam Düşüncesinde Yorumlar'nın her cümlesini anlamıyla eşleştirebileceksin.</div>
+  <div class="aciklama">Soldan bir cümle, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
+  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez375Eslesen">0</b>/<b>8</b></span></div>
+  <div class="ez-iki-sutun">
+    <div class="ez-sutun"><h4>Cümle</h4><div id="ez375Sol"></div></div>
+    <div class="ez-sutun"><h4>Anlam</h4><div id="ez375Sag"></div></div>
+  </div>
+  <div class="sonuc-kutusu" id="ez375Sonuc"></div>
+  <button class="eylem" onclick="ez375Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezhafiza75">
+  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: cümle-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
+  <div class="aciklama">İki kartı çevir. Bir cümle ile doğru anlamı eşleşirse kartlar açık kalır.</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez475Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="ez475Hamle">0</b></span></div>
+  <div class="ez-hafiza-izgara" id="ez475Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
+  <div class="sonuc-kutusu" id="ez475Sonuc"></div>
+  <button class="eylem" onclick="ez475Baslat()">🔄 Yeni Oyun</button>
+</section>
+
+<section id="ezadimadim75">
+  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İslam Düşüncesinde Yorumlar'nı baştan sona, cümle sırasını bularak ezberleyeceksin.</div>
+  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi cümlenin geldiğini seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez575Adim">1</b>/<b>8</b></span></div>
+  <div class="ez-ogrenilen-liste" id="ez575Liste"></div>
+  <div class="balon-durum">Sırada hangi cümle geliyor?</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez575Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez575Sonuc"></div>
+  <button class="eylem" onclick="ez575Baslat()">▶️ Başla</button>
+</section>
+
+<section id="ezgizli75">
+  <h2>6️⃣ Ezber: Gizli Harfler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İslam Düşüncesinde Yorumlar'nın anahtar kelimelerini harf harf hatırlayacaksın.</div>
+  <div class="aciklama">Cümledeki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez675Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez675Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez675Metin"></div>
+  <div class="kelime-cevap" id="ez675Cevap"></div>
+  <div class="kelime-banka" id="ez675Banka"></div>
+  <div class="sonuc-kutusu" id="ez675Sonuc"></div>
+  <button class="eylem" onclick="ez675Baslat()">🔐 Başla</button>
+</section>
+
+<section id="ezkaybolan75">
+  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun cümleyi hafızandan tanıyabileceksin.</div>
+  <div class="aciklama">Cümleyi 3 saniye izle, sonra kaybolacak. Az önce gördüğün cümlenin BİREBİR aynısını seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez775Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez775Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez775Metin">👁️ Başlamak için düğmeye bas</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez775Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez775Sonuc"></div>
+  <button class="eylem" onclick="ez775Baslat()">👁️ Başla</button>
+</section>
+
+<section id="ezhiz75">
+  <h2>8️⃣ Ezber: Hız Testi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İslam Düşüncesinde Yorumlar cümle-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
+  <div class="aciklama">Süre dolmadan verilen anlama ait doğru cümleyi seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
+  <div class="ez-zamanlayici" id="ez875Sayac">60</div>
+  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez875Dogru">0</b></span><span>❌ Yanlış: <b id="ez875Yanlis">0</b></span></div>
+  <div class="ez-metin-goster" id="ez875Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez875Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez875Sonuc"></div>
+  <button class="eylem" onclick="ez875Baslat()">⏱️ Başla</button>
+</section>
+
 </main>
 </div>
 
@@ -1435,6 +1560,7 @@ function siraOlustur(cfg){
         kopya.textContent = obj.t;
         cevap.appendChild(kopya);
         beklenen++;
+        if(cfg.ilerleme) cfg.ilerleme(beklenen);
         if(beklenen === cfg.tokens.length && cfg.tamamlandi) cfg.tamamlandi();
       } else {
         tas.classList.add('yanlis');
@@ -3292,6 +3418,372 @@ ks75Olustur();
 nonogram75Olustur();
 istatistikleriGuncelleGoster();
 sonucIzlemeBaslat();
+
+// =====================================================================
+// EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — İSLAM DÜŞÜNCESINDE YORUMLAR
+// =====================================================================
+const ezberVeri75 = [
+  {
+    "parca": "Mezhep, dinin ayrıntılarına ilişkin konularda oluşturulan görüşlerin bütünüdür.",
+    "anlam": "Mezhep",
+    "gizli": "bütünüdür"
+  },
+  {
+    "parca": "İtikat, Allah'ın gönderdiği kuralları kesin bir şekilde kabullenmektir.",
+    "anlam": "İtikat",
+    "gizli": "kabullenmektir"
+  },
+  {
+    "parca": "Matüridilik, Ebû Mansur Matüridi'nin görüşleri çerçevesinde oluşan itikadi mezheptir.",
+    "anlam": "Matüridilik",
+    "gizli": "Matüridilik"
+  },
+  {
+    "parca": "Eşarilik, Ebülhasan Eşâri'nin görüş ve düşünceleri etrafında oluşan itikadi mezheptir.",
+    "anlam": "Eşarilik",
+    "gizli": "Eşarilik"
+  },
+  {
+    "parca": "Fıkıh, dinin ibadetler ve hükümlerle ilgili kurallarını inceleyen ilimdir.",
+    "anlam": "Fıkıh",
+    "gizli": "ilimdir"
+  },
+  {
+    "parca": "Hanefilik, Ebu Hanife'nin görüşleri etrafında oluşan fıkıh ekolüdür.",
+    "anlam": "Hanefilik",
+    "gizli": "Hanefilik"
+  },
+  {
+    "parca": "Tasavvuf, İslam'ın ruhi ve manevi yönünü öne çıkaran bir düşünce biçimidir.",
+    "anlam": "Tasavvuf",
+    "gizli": "manevi"
+  },
+  {
+    "parca": "Yesevilik, Hoca Ahmet Yesevi'nin görüşleri etrafında oluşan tasavvufi bir yorumdur.",
+    "anlam": "Yesevilik",
+    "gizli": "Yesevilik"
+  }
+];
+
+// --- 1) SIRALA BAKALIM ---
+function ez175Baslat(){
+  document.getElementById('ez175Sonuc').textContent='';
+  document.getElementById('ez175Dizilen').textContent='0';
+  siraOlustur({
+    tokens: ezberVeri75.map(x=>x.parca),
+    bankaId:'ez175Banka', cevapId:'ez175Cevap',
+    ilerleme:(n)=>{ document.getElementById('ez175Dizilen').textContent=n; },
+    tamamlandi:()=>{ document.getElementById('ez175Sonuc').innerHTML = "🎉 Tebrikler! İslam Düşüncesinde Yorumlar'nı doğru sırayla dizdin!"; }
+  });
+}
+
+// --- 2) BOŞLUK DOLDUR ---
+let ez275Tur=0, ez275Dogru=0, ez275Sira=[];
+function ez275Baslat(){
+  ez275Tur=0; ez275Dogru=0;
+  ez275Sira = karistir(ezberVeri75.map((x,i)=>i));
+  document.getElementById('ez275Dogru').textContent='0';
+  document.getElementById('ez275Sonuc').textContent='';
+  ez275SoruGoster();
+}
+function ez275SoruGoster(){
+  if(ez275Tur>=ez275Sira.length){
+    document.getElementById('ez275Metin').textContent='';
+    document.getElementById('ez275Secenekler').innerHTML='';
+    document.getElementById('ez275Sonuc').innerHTML = `🎉 Bitti! ${ez275Dogru}/${ez275Sira.length} doğru.`;
+    return;
+  }
+  document.getElementById('ez275Tur').textContent = ez275Tur+1;
+  const i = ez275Sira[ez275Tur];
+  const oge = ezberVeri75[i];
+  document.getElementById('ez275Metin').textContent = oge.parca.replace(oge.gizli, '______');
+  const digerleri = ezberVeri75.filter((_,j)=>j!==i).map(x=>x.gizli);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.gizli, ...yanlislar]);
+  const kutu = document.getElementById('ez275Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez275Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.gizli){ btn.classList.add('dogru'); ez275Dogru++; document.getElementById('ez275Dogru').textContent=ez275Dogru; }
+      else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.gizli).classList.add('dogru');
+      }
+      setTimeout(()=>{ ez275Tur++; ez275SoruGoster(); }, 1100);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 3) ANLAM EŞLEŞTİR ---
+let ez375Secili=null, ez375Eslesen=0;
+function ez375Baslat(){
+  ez375Secili=null; ez375Eslesen=0;
+  document.getElementById('ez375Eslesen').textContent='0';
+  document.getElementById('ez375Sonuc').textContent='';
+  const solSira = karistir(ezberVeri75.map((x,i)=>i));
+  const sagSira = karistir(ezberVeri75.map((x,i)=>i));
+  const sol = document.getElementById('ez375Sol'); sol.innerHTML='';
+  const sag = document.getElementById('ez375Sag'); sag.innerHTML='';
+  solSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri75[i].parca;
+    b.dataset.i=i; b.dataset.taraf='sol';
+    b.onclick=()=>ez375Tikla(b);
+    sol.appendChild(b);
+  });
+  sagSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri75[i].anlam;
+    b.dataset.i=i; b.dataset.taraf='sag';
+    b.onclick=()=>ez375Tikla(b);
+    sag.appendChild(b);
+  });
+}
+function ez375Tikla(b){
+  if(b.classList.contains('eslesti')) return;
+  if(ez375Secili && ez375Secili.dataset.taraf===b.dataset.taraf){
+    ez375Secili.classList.remove('secili');
+    ez375Secili = b; b.classList.add('secili');
+    return;
+  }
+  if(!ez375Secili){ ez375Secili=b; b.classList.add('secili'); return; }
+  if(ez375Secili.dataset.i===b.dataset.i){
+    ez375Secili.classList.remove('secili'); ez375Secili.classList.add('eslesti');
+    b.classList.add('eslesti');
+    ez375Secili=null;
+    ez375Eslesen++;
+    document.getElementById('ez375Eslesen').textContent=ez375Eslesen;
+    if(ez375Eslesen===ezberVeri75.length){
+      document.getElementById('ez375Sonuc').innerHTML = "🎉 Tebrikler! Tüm cümleleri anlamlarıyla eşleştirdin!";
+    }
+  } else {
+    const digeri = ez375Secili;
+    digeri.classList.add('yanlis'); b.classList.add('yanlis');
+    setTimeout(()=>{ digeri.classList.remove('yanlis','secili'); b.classList.remove('yanlis'); },400);
+    ez375Secili=null;
+  }
+}
+
+// --- 4) HAFIZA KARTLARI ---
+let ez475Acik=[], ez475Bulunan=0, ez475Hamle=0, ez475Kilit=false;
+function ez475Baslat(){
+  ez475Acik=[]; ez475Bulunan=0; ez475Hamle=0; ez475Kilit=false;
+  document.getElementById('ez475Bulunan').textContent='0';
+  document.getElementById('ez475Hamle').textContent='0';
+  document.getElementById('ez475Sonuc').textContent='';
+  const kartlar=[];
+  ezberVeri75.forEach((x,i)=>{
+    kartlar.push({i, tip:'parca', metin:x.parca});
+    kartlar.push({i, tip:'anlam', metin:x.anlam});
+  });
+  const karisik = karistir(kartlar);
+  const izgara = document.getElementById('ez475Izgara');
+  izgara.innerHTML='';
+  karisik.forEach(k=>{
+    const kart=document.createElement('div');
+    kart.className='hafiza-kart';
+    kart.dataset.i=k.i; kart.dataset.tip=k.tip;
+    kart.innerHTML = `<div class="hafiza-on">🕌</div><div class="hafiza-arka">${k.metin}</div>`;
+    kart.onclick=()=>ez475KartTikla(kart);
+    izgara.appendChild(kart);
+  });
+}
+function ez475KartTikla(kart){
+  if(ez475Kilit || kart.classList.contains('acik') || kart.classList.contains('bulundu')) return;
+  kart.classList.add('acik');
+  ez475Acik.push(kart);
+  if(ez475Acik.length===2){
+    ez475Hamle++; document.getElementById('ez475Hamle').textContent=ez475Hamle;
+    ez475Kilit=true;
+    const [a,b]=ez475Acik;
+    if(a.dataset.i===b.dataset.i && a.dataset.tip!==b.dataset.tip){
+      a.classList.add('bulundu'); b.classList.add('bulundu');
+      ez475Bulunan++; document.getElementById('ez475Bulunan').textContent=ez475Bulunan;
+      ez475Acik=[]; ez475Kilit=false;
+      if(ez475Bulunan===ezberVeri75.length){
+        document.getElementById('ez475Sonuc').innerHTML = `🎉 Tebrikler! ${ez475Hamle} hamlede tüm çiftleri buldun!`;
+      }
+    } else {
+      setTimeout(()=>{
+        a.classList.remove('acik'); b.classList.remove('acik');
+        ez475Acik=[]; ez475Kilit=false;
+      }, 900);
+    }
+  }
+}
+
+// --- 5) ADIM ADIM EZBER ---
+let ez575Adim=0;
+function ez575Baslat(){
+  ez575Adim=0;
+  document.getElementById('ez575Liste').innerHTML='';
+  document.getElementById('ez575Sonuc').textContent='';
+  ez575SoruGoster();
+}
+function ez575SoruGoster(){
+  if(ez575Adim>=ezberVeri75.length){
+    document.getElementById('ez575Secenekler').innerHTML='';
+    document.getElementById('ez575Sonuc').innerHTML = "🎉 Tebrikler! İslam Düşüncesinde Yorumlar'nı baştan sona tamamladın!";
+    return;
+  }
+  document.getElementById('ez575Adim').textContent = ez575Adim+1;
+  const oge = ezberVeri75[ez575Adim];
+  const digerleri = ezberVeri75.filter((_,j)=>j!==ez575Adim).map(x=>x.parca);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.parca, ...yanlislar]);
+  const kutu = document.getElementById('ez575Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez575Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.parca){
+        btn.classList.add('dogru');
+        const liste=document.getElementById('ez575Liste');
+        liste.innerHTML += `<div><b>${ez575Adim+1}.</b> ${oge.parca}</div>`;
+        setTimeout(()=>{ ez575Adim++; ez575SoruGoster(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        setTimeout(()=>{ ez575SoruGoster(); }, 1100);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 6) GİZLİ HARFLER ---
+let ez675Tur=0, ez675Dogru=0, ez675Sira=[];
+function ez675Baslat(){
+  ez675Tur=0; ez675Dogru=0; ez675Sira = karistir(ezberVeri75.map((x,i)=>i));
+  document.getElementById('ez675Dogru').textContent='0';
+  document.getElementById('ez675Sonuc').textContent='';
+  ez675Round();
+}
+function ez675Round(){
+  if(ez675Tur>=ez675Sira.length){
+    document.getElementById('ez675Metin').textContent='';
+    document.getElementById('ez675Cevap').innerHTML=''; document.getElementById('ez675Banka').innerHTML='';
+    document.getElementById('ez675Sonuc').innerHTML = `🎉 Bitti! ${ez675Dogru}/${ez675Sira.length} kelimeyi doğru tamamladın.`;
+    return;
+  }
+  document.getElementById('ez675Tur').textContent = ez675Tur+1;
+  const i = ez675Sira[ez675Tur];
+  const oge = ezberVeri75[i];
+  document.getElementById('ez675Metin').innerHTML = oge.parca.replace(oge.gizli, '<u>______</u>') + `<br><small>💡 ${oge.anlam}</small>`;
+  const harfler = oge.gizli.split('').filter(c=>c!==' ');
+  siraOlustur({
+    tokens: harfler,
+    bankaId:'ez675Banka', cevapId:'ez675Cevap',
+    tamamlandi:()=>{
+      ez675Dogru++; document.getElementById('ez675Dogru').textContent=ez675Dogru;
+      setTimeout(()=>{ ez675Tur++; ez675Round(); }, 900);
+    }
+  });
+}
+
+// --- 7) KAYBOLAN KELİMELER ---
+let ez775Tur=0, ez775Dogru=0, ez775Sira=[];
+function ez775Baslat(){
+  ez775Tur=0; ez775Dogru=0; ez775Sira = karistir(ezberVeri75.map((x,i)=>i));
+  document.getElementById('ez775Dogru').textContent='0';
+  document.getElementById('ez775Sonuc').textContent='';
+  ez775Round();
+}
+function ez775Round(){
+  if(ez775Tur>=ez775Sira.length){
+    document.getElementById('ez775Metin').textContent='';
+    document.getElementById('ez775Secenekler').innerHTML='';
+    document.getElementById('ez775Sonuc').innerHTML = `🎉 Bitti! ${ez775Dogru}/${ez775Sira.length} doğru hatırladın.`;
+    return;
+  }
+  document.getElementById('ez775Tur').textContent = ez775Tur+1;
+  const i = ez775Sira[ez775Tur];
+  const oge = ezberVeri75[i];
+  document.getElementById('ez775Metin').textContent = oge.parca;
+  document.getElementById('ez775Secenekler').innerHTML='';
+  setTimeout(()=>{
+    document.getElementById('ez775Metin').textContent = '🙈 ...';
+    const digerIdx = karistir(ezberVeri75.map((_,j)=>j).filter(j=>j!==i)).slice(0,2);
+    const varyantlar = digerIdx.map(j=>oge.parca.replace(oge.gizli, ezberVeri75[j].gizli));
+    const secenekler = karistir([oge.parca, ...varyantlar]);
+    const kutu = document.getElementById('ez775Secenekler');
+    kutu.innerHTML='';
+    secenekler.forEach(sec=>{
+      const btn=document.createElement('div');
+      btn.className='merdiven-secenek';
+      btn.textContent=sec;
+      btn.onclick=()=>{
+        document.querySelectorAll('#ez775Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+        document.getElementById('ez775Metin').textContent = oge.parca;
+        if(sec===oge.parca){ btn.classList.add('dogru'); ez775Dogru++; document.getElementById('ez775Dogru').textContent=ez775Dogru; }
+        else {
+          btn.classList.add('yanlis');
+          [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        }
+        setTimeout(()=>{ ez775Tur++; ez775Round(); }, 1300);
+      };
+      kutu.appendChild(btn);
+    });
+  }, 3000);
+}
+
+// --- 8) HIZ TESTİ ---
+let ez875Zamanlayici=null, ez875Kalan=60, ez875Dogru=0, ez875Yanlis=0, ez875Aktif=false;
+function ez875Baslat(){
+  clearInterval(ez875Zamanlayici);
+  ez875Kalan=60; ez875Dogru=0; ez875Yanlis=0; ez875Aktif=true;
+  document.getElementById('ez875Sayac').textContent=ez875Kalan;
+  document.getElementById('ez875Dogru').textContent='0';
+  document.getElementById('ez875Yanlis').textContent='0';
+  document.getElementById('ez875Sonuc').textContent='';
+  ez875Zamanlayici = setInterval(()=>{
+    ez875Kalan--;
+    document.getElementById('ez875Sayac').textContent=ez875Kalan;
+    if(ez875Kalan<=0){ ez875Bitir(); }
+  }, 1000);
+  ez875SoruGoster();
+}
+function ez875SoruGoster(){
+  if(!ez875Aktif) return;
+  const i = Math.floor(Math.random()*ezberVeri75.length);
+  const oge = ezberVeri75[i];
+  document.getElementById('ez875Metin').textContent = oge.anlam;
+  const digerleri = ezberVeri75.filter((_,j)=>j!==i).map(x=>x.parca);
+  const secenekler = karistir([oge.parca, ...karistir(digerleri).slice(0,3)]);
+  const kutu = document.getElementById('ez875Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      if(!ez875Aktif) return;
+      if(sec===oge.parca){ ez875Dogru++; document.getElementById('ez875Dogru').textContent=ez875Dogru; }
+      else { ez875Yanlis++; document.getElementById('ez875Yanlis').textContent=ez875Yanlis; }
+      ez875SoruGoster();
+    };
+    kutu.appendChild(btn);
+  });
+}
+function ez875Bitir(){
+  ez875Aktif=false;
+  clearInterval(ez875Zamanlayici);
+  document.getElementById('ez875Secenekler').innerHTML='';
+  document.getElementById('ez875Metin').textContent='';
+  const basari = ez875Dogru>=8 ? '🏆 Efsane Hız!' : ez875Dogru>=5 ? '🥇 Çok İyi!' : '📚 Biraz Daha Pratik!';
+  document.getElementById('ez875Sonuc').innerHTML = `🎉 Süre bitti! ${basari}<br>${ez875Dogru} doğru, ${ez875Yanlis} yanlış.`;
+}
+
 
 // ===================== SUNUM (SLAYT) GORUNUMU JS =====================
 window.sunumDurumu = window.sunumDurumu || {};

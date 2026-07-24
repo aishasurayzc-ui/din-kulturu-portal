@@ -526,6 +526,24 @@
 .yazili-kart p{ margin:0; font-size:.85em; color:#666; }
 .yazili-kart.yk-klasik{ border-style:dashed; }
 
+
+/* ===================== EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) ===================== */
+.ez-iki-sutun{ display:flex; gap:22px; justify-content:center; flex-wrap:wrap; margin:14px 0; }
+.ez-sutun{ display:flex; flex-direction:column; gap:8px; min-width:230px; max-width:340px; flex:1; }
+.ez-sutun h4{ text-align:center; margin:0 0 4px; color:var(--mavi); font-size:.95em; }
+.merdiven-secenek.secili{ background:#fff3cd; border-color:#f4a261; }
+.merdiven-secenek.eslesti{ background:#d8f3dc; border-color:var(--yesil); cursor:default; opacity:.85; }
+.merdiven-secenek.ez-oge{ font-size:.85em; text-align:left; padding:9px 12px; }
+.ez-zamanlayici{ text-align:center; font-size:1.6em; font-weight:800; color:var(--kirmizi); margin:8px 0; }
+.ez-ogrenilen-liste{ max-width:560px; margin:10px auto; padding:10px 16px; background:#f4f0ff; border-radius:8px; font-size:.88em; line-height:1.7; min-height:20px; }
+.ez-ogrenilen-liste b{ color:#4c1d95; }
+.ez-metin-goster{ text-align:center; font-size:1.1em; font-weight:700; color:var(--navy); background:#eef6ff; border-radius:8px; padding:16px 20px; margin:14px auto; max-width:640px; min-height:1.4em; }
+.ez-hafiza-izgara{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; max-width:640px; margin:16px auto; }
+.ez-hafiza-izgara .hafiza-kart{ height:88px; }
+.ez-hafiza-izgara .hafiza-on{ font-size:1.3em; }
+.ez-hafiza-izgara .hafiza-arka{ font-size:.62em; padding:4px; text-align:center; line-height:1.25; }
+@media(max-width:640px){ .ez-hafiza-izgara{ grid-template-columns:repeat(4,1fr); } .ez-hafiza-izgara .hafiza-kart{ height:74px; } }
+
 </style>
 <style id="ogrKatmaniStil">
 /* ===================== OGRENME DENEYIMI KATMANI (hedefler, ogrenme yolu, ilerleme) =====================
@@ -619,6 +637,7 @@
   <button onclick="kategoriGoster('kat-yarisma65', event)">🎮 Yarışma Oyunları</button>
   <button onclick="kategoriGoster('kat-mantik65', event)">🕵️ Mantık &amp; Dedektiflik</button>
   <button onclick="kategoriGoster('kat-macera65', event)">🌀 Macera</button>
+  <button onclick="kategoriGoster('kat-ezber65', event)">🕌 Ezber Etkinlikleri</button>
 </nav>
 
 <div class="oyun-grubu aktif" id="kat-unite65">
@@ -658,6 +677,17 @@
 
 <div class="oyun-grubu" id="kat-macera65">
   <button onclick="goster('labirent65', event)">🌀 Labirent</button>
+</div>
+
+<div class="oyun-grubu" id="kat-ezber65">
+  <button onclick="goster('ezsira65', event)">1️⃣ Sırala Bakalım</button>
+  <button onclick="goster('ezbosluk65', event)">2️⃣ Boşluk Doldur</button>
+  <button onclick="goster('ezeslestir65', event)">3️⃣ Anlam Eşleştir</button>
+  <button onclick="goster('ezhafiza65', event)">4️⃣ Hafıza Kartları</button>
+  <button onclick="goster('ezadimadim65', event)">5️⃣ Adım Adım Ezber</button>
+  <button onclick="goster('ezgizli65', event)">6️⃣ Gizli Harfler</button>
+  <button onclick="goster('ezkaybolan65', event)">7️⃣ Kaybolan Kelimeler</button>
+  <button onclick="goster('ezhiz65', event)">8️⃣ Hız Testi</button>
 </div>
 
 <main>
@@ -1349,6 +1379,101 @@
   <button class="eylem" onclick="labirent65Baslat()">🔄 Yeni Labirent</button>
 </section>
 
+
+<!-- ================= EZBER ETKİNLİKLERİ (8 ADET) — KÜLTÜRÜMÜZDEKI DINÎ MOTIFLER ================= -->
+
+<section id="ezsira65">
+  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kültürümüzdeki Dinî Motifler'nin cümlelerini doğru sırayla dizebileceksin.</div>
+  <div class="aciklama">Karışık sırada verilen cümleleri, Kültürümüzdeki Dinî Motifler'ndeki doğru sıraya göre tıklayarak diz.</div>
+  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez165Dizilen">0</b>/<b>8</b></span></div>
+  <div class="kelime-cevap" id="ez165Cevap"></div>
+  <div class="kelime-banka" id="ez165Banka"></div>
+  <div class="sonuc-kutusu" id="ez165Sonuc"></div>
+  <button class="eylem" onclick="ez165Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezbosluk65">
+  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kültürümüzdeki Dinî Motifler cümlelerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
+  <div class="aciklama">Cümledeki boşluğa gelen doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez265Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez265Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez265Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez265Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez265Sonuc"></div>
+  <button class="eylem" onclick="ez265Baslat()">📝 Başla</button>
+</section>
+
+<section id="ezeslestir65">
+  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kültürümüzdeki Dinî Motifler'nin her cümlesini anlamıyla eşleştirebileceksin.</div>
+  <div class="aciklama">Soldan bir cümle, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
+  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez365Eslesen">0</b>/<b>8</b></span></div>
+  <div class="ez-iki-sutun">
+    <div class="ez-sutun"><h4>Cümle</h4><div id="ez365Sol"></div></div>
+    <div class="ez-sutun"><h4>Anlam</h4><div id="ez365Sag"></div></div>
+  </div>
+  <div class="sonuc-kutusu" id="ez365Sonuc"></div>
+  <button class="eylem" onclick="ez365Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezhafiza65">
+  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: cümle-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
+  <div class="aciklama">İki kartı çevir. Bir cümle ile doğru anlamı eşleşirse kartlar açık kalır.</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez465Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="ez465Hamle">0</b></span></div>
+  <div class="ez-hafiza-izgara" id="ez465Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
+  <div class="sonuc-kutusu" id="ez465Sonuc"></div>
+  <button class="eylem" onclick="ez465Baslat()">🔄 Yeni Oyun</button>
+</section>
+
+<section id="ezadimadim65">
+  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kültürümüzdeki Dinî Motifler'ni baştan sona, cümle sırasını bularak ezberleyeceksin.</div>
+  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi cümlenin geldiğini seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez565Adim">1</b>/<b>8</b></span></div>
+  <div class="ez-ogrenilen-liste" id="ez565Liste"></div>
+  <div class="balon-durum">Sırada hangi cümle geliyor?</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez565Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez565Sonuc"></div>
+  <button class="eylem" onclick="ez565Baslat()">▶️ Başla</button>
+</section>
+
+<section id="ezgizli65">
+  <h2>6️⃣ Ezber: Gizli Harfler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kültürümüzdeki Dinî Motifler'nin anahtar kelimelerini harf harf hatırlayacaksın.</div>
+  <div class="aciklama">Cümledeki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez665Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez665Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez665Metin"></div>
+  <div class="kelime-cevap" id="ez665Cevap"></div>
+  <div class="kelime-banka" id="ez665Banka"></div>
+  <div class="sonuc-kutusu" id="ez665Sonuc"></div>
+  <button class="eylem" onclick="ez665Baslat()">🔐 Başla</button>
+</section>
+
+<section id="ezkaybolan65">
+  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun cümleyi hafızandan tanıyabileceksin.</div>
+  <div class="aciklama">Cümleyi 3 saniye izle, sonra kaybolacak. Az önce gördüğün cümlenin BİREBİR aynısını seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez765Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez765Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez765Metin">👁️ Başlamak için düğmeye bas</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez765Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez765Sonuc"></div>
+  <button class="eylem" onclick="ez765Baslat()">👁️ Başla</button>
+</section>
+
+<section id="ezhiz65">
+  <h2>8️⃣ Ezber: Hız Testi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kültürümüzdeki Dinî Motifler cümle-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
+  <div class="aciklama">Süre dolmadan verilen anlama ait doğru cümleyi seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
+  <div class="ez-zamanlayici" id="ez865Sayac">60</div>
+  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez865Dogru">0</b></span><span>❌ Yanlış: <b id="ez865Yanlis">0</b></span></div>
+  <div class="ez-metin-goster" id="ez865Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez865Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez865Sonuc"></div>
+  <button class="eylem" onclick="ez865Baslat()">⏱️ Başla</button>
+</section>
+
 </main>
 </div>
 
@@ -1449,6 +1574,7 @@ function siraOlustur(cfg){
         kopya.textContent = obj.t;
         cevap.appendChild(kopya);
         beklenen++;
+        if(cfg.ilerleme) cfg.ilerleme(beklenen);
         if(beklenen === cfg.tokens.length && cfg.tamamlandi) cfg.tamamlandi();
       } else {
         tas.classList.add('yanlis');
@@ -3305,6 +3431,372 @@ ks65Olustur();
 nonogram65Olustur();
 istatistikleriGuncelleGoster();
 sonucIzlemeBaslat();
+
+// =====================================================================
+// EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — KÜLTÜRÜMÜZDEKI DINÎ MOTIFLER
+// =====================================================================
+const ezberVeri65 = [
+  {
+    "parca": "Kültür, bir toplumun maddi ve manevi değerlerinin bütünüdür.",
+    "anlam": "Kültür",
+    "gizli": "bütünüdür"
+  },
+  {
+    "parca": "Örf, toplumun uzun sürede oluşturup benimsediği, yazılı olmayan kurallardır.",
+    "anlam": "Örf",
+    "gizli": "Örf"
+  },
+  {
+    "parca": "Mevlit, Hz. Peygamber'in doğumunu ve hayatından kesitleri anlatan bir eserdir.",
+    "anlam": "Mevlit",
+    "gizli": "Mevlit"
+  },
+  {
+    "parca": "Kandil, Mevlit, Regaip, Miraç ve Berat gecelerinin genel adıdır.",
+    "anlam": "Kandil",
+    "gizli": "Kandil"
+  },
+  {
+    "parca": "Vakıf, bir maldan yararlanma hakkını Allah rızası için topluma özgüleyen bir uygulamadır.",
+    "anlam": "Vakıf",
+    "gizli": "özgüleyen"
+  },
+  {
+    "parca": "Aşure, Muharrem ayının onuncu gününde yapılıp dağıtılan bir tatlıdır.",
+    "anlam": "Aşure",
+    "gizli": "Aşure"
+  },
+  {
+    "parca": "Ezan, namaz vakitlerinin geldiğini duyurmak için okunan çağrı sözleridir.",
+    "anlam": "Ezan",
+    "gizli": "Ezan"
+  },
+  {
+    "parca": "Salavat, Hz. Peygamber'e selam ve dua etmek anlamına gelen sözlerdir.",
+    "anlam": "Salavat",
+    "gizli": "Salavat"
+  }
+];
+
+// --- 1) SIRALA BAKALIM ---
+function ez165Baslat(){
+  document.getElementById('ez165Sonuc').textContent='';
+  document.getElementById('ez165Dizilen').textContent='0';
+  siraOlustur({
+    tokens: ezberVeri65.map(x=>x.parca),
+    bankaId:'ez165Banka', cevapId:'ez165Cevap',
+    ilerleme:(n)=>{ document.getElementById('ez165Dizilen').textContent=n; },
+    tamamlandi:()=>{ document.getElementById('ez165Sonuc').innerHTML = "🎉 Tebrikler! Kültürümüzdeki Dinî Motifler'ni doğru sırayla dizdin!"; }
+  });
+}
+
+// --- 2) BOŞLUK DOLDUR ---
+let ez265Tur=0, ez265Dogru=0, ez265Sira=[];
+function ez265Baslat(){
+  ez265Tur=0; ez265Dogru=0;
+  ez265Sira = karistir(ezberVeri65.map((x,i)=>i));
+  document.getElementById('ez265Dogru').textContent='0';
+  document.getElementById('ez265Sonuc').textContent='';
+  ez265SoruGoster();
+}
+function ez265SoruGoster(){
+  if(ez265Tur>=ez265Sira.length){
+    document.getElementById('ez265Metin').textContent='';
+    document.getElementById('ez265Secenekler').innerHTML='';
+    document.getElementById('ez265Sonuc').innerHTML = `🎉 Bitti! ${ez265Dogru}/${ez265Sira.length} doğru.`;
+    return;
+  }
+  document.getElementById('ez265Tur').textContent = ez265Tur+1;
+  const i = ez265Sira[ez265Tur];
+  const oge = ezberVeri65[i];
+  document.getElementById('ez265Metin').textContent = oge.parca.replace(oge.gizli, '______');
+  const digerleri = ezberVeri65.filter((_,j)=>j!==i).map(x=>x.gizli);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.gizli, ...yanlislar]);
+  const kutu = document.getElementById('ez265Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez265Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.gizli){ btn.classList.add('dogru'); ez265Dogru++; document.getElementById('ez265Dogru').textContent=ez265Dogru; }
+      else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.gizli).classList.add('dogru');
+      }
+      setTimeout(()=>{ ez265Tur++; ez265SoruGoster(); }, 1100);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 3) ANLAM EŞLEŞTİR ---
+let ez365Secili=null, ez365Eslesen=0;
+function ez365Baslat(){
+  ez365Secili=null; ez365Eslesen=0;
+  document.getElementById('ez365Eslesen').textContent='0';
+  document.getElementById('ez365Sonuc').textContent='';
+  const solSira = karistir(ezberVeri65.map((x,i)=>i));
+  const sagSira = karistir(ezberVeri65.map((x,i)=>i));
+  const sol = document.getElementById('ez365Sol'); sol.innerHTML='';
+  const sag = document.getElementById('ez365Sag'); sag.innerHTML='';
+  solSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri65[i].parca;
+    b.dataset.i=i; b.dataset.taraf='sol';
+    b.onclick=()=>ez365Tikla(b);
+    sol.appendChild(b);
+  });
+  sagSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri65[i].anlam;
+    b.dataset.i=i; b.dataset.taraf='sag';
+    b.onclick=()=>ez365Tikla(b);
+    sag.appendChild(b);
+  });
+}
+function ez365Tikla(b){
+  if(b.classList.contains('eslesti')) return;
+  if(ez365Secili && ez365Secili.dataset.taraf===b.dataset.taraf){
+    ez365Secili.classList.remove('secili');
+    ez365Secili = b; b.classList.add('secili');
+    return;
+  }
+  if(!ez365Secili){ ez365Secili=b; b.classList.add('secili'); return; }
+  if(ez365Secili.dataset.i===b.dataset.i){
+    ez365Secili.classList.remove('secili'); ez365Secili.classList.add('eslesti');
+    b.classList.add('eslesti');
+    ez365Secili=null;
+    ez365Eslesen++;
+    document.getElementById('ez365Eslesen').textContent=ez365Eslesen;
+    if(ez365Eslesen===ezberVeri65.length){
+      document.getElementById('ez365Sonuc').innerHTML = "🎉 Tebrikler! Tüm cümleleri anlamlarıyla eşleştirdin!";
+    }
+  } else {
+    const digeri = ez365Secili;
+    digeri.classList.add('yanlis'); b.classList.add('yanlis');
+    setTimeout(()=>{ digeri.classList.remove('yanlis','secili'); b.classList.remove('yanlis'); },400);
+    ez365Secili=null;
+  }
+}
+
+// --- 4) HAFIZA KARTLARI ---
+let ez465Acik=[], ez465Bulunan=0, ez465Hamle=0, ez465Kilit=false;
+function ez465Baslat(){
+  ez465Acik=[]; ez465Bulunan=0; ez465Hamle=0; ez465Kilit=false;
+  document.getElementById('ez465Bulunan').textContent='0';
+  document.getElementById('ez465Hamle').textContent='0';
+  document.getElementById('ez465Sonuc').textContent='';
+  const kartlar=[];
+  ezberVeri65.forEach((x,i)=>{
+    kartlar.push({i, tip:'parca', metin:x.parca});
+    kartlar.push({i, tip:'anlam', metin:x.anlam});
+  });
+  const karisik = karistir(kartlar);
+  const izgara = document.getElementById('ez465Izgara');
+  izgara.innerHTML='';
+  karisik.forEach(k=>{
+    const kart=document.createElement('div');
+    kart.className='hafiza-kart';
+    kart.dataset.i=k.i; kart.dataset.tip=k.tip;
+    kart.innerHTML = `<div class="hafiza-on">🕌</div><div class="hafiza-arka">${k.metin}</div>`;
+    kart.onclick=()=>ez465KartTikla(kart);
+    izgara.appendChild(kart);
+  });
+}
+function ez465KartTikla(kart){
+  if(ez465Kilit || kart.classList.contains('acik') || kart.classList.contains('bulundu')) return;
+  kart.classList.add('acik');
+  ez465Acik.push(kart);
+  if(ez465Acik.length===2){
+    ez465Hamle++; document.getElementById('ez465Hamle').textContent=ez465Hamle;
+    ez465Kilit=true;
+    const [a,b]=ez465Acik;
+    if(a.dataset.i===b.dataset.i && a.dataset.tip!==b.dataset.tip){
+      a.classList.add('bulundu'); b.classList.add('bulundu');
+      ez465Bulunan++; document.getElementById('ez465Bulunan').textContent=ez465Bulunan;
+      ez465Acik=[]; ez465Kilit=false;
+      if(ez465Bulunan===ezberVeri65.length){
+        document.getElementById('ez465Sonuc').innerHTML = `🎉 Tebrikler! ${ez465Hamle} hamlede tüm çiftleri buldun!`;
+      }
+    } else {
+      setTimeout(()=>{
+        a.classList.remove('acik'); b.classList.remove('acik');
+        ez465Acik=[]; ez465Kilit=false;
+      }, 900);
+    }
+  }
+}
+
+// --- 5) ADIM ADIM EZBER ---
+let ez565Adim=0;
+function ez565Baslat(){
+  ez565Adim=0;
+  document.getElementById('ez565Liste').innerHTML='';
+  document.getElementById('ez565Sonuc').textContent='';
+  ez565SoruGoster();
+}
+function ez565SoruGoster(){
+  if(ez565Adim>=ezberVeri65.length){
+    document.getElementById('ez565Secenekler').innerHTML='';
+    document.getElementById('ez565Sonuc').innerHTML = "🎉 Tebrikler! Kültürümüzdeki Dinî Motifler'ni baştan sona tamamladın!";
+    return;
+  }
+  document.getElementById('ez565Adim').textContent = ez565Adim+1;
+  const oge = ezberVeri65[ez565Adim];
+  const digerleri = ezberVeri65.filter((_,j)=>j!==ez565Adim).map(x=>x.parca);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.parca, ...yanlislar]);
+  const kutu = document.getElementById('ez565Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez565Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.parca){
+        btn.classList.add('dogru');
+        const liste=document.getElementById('ez565Liste');
+        liste.innerHTML += `<div><b>${ez565Adim+1}.</b> ${oge.parca}</div>`;
+        setTimeout(()=>{ ez565Adim++; ez565SoruGoster(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        setTimeout(()=>{ ez565SoruGoster(); }, 1100);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 6) GİZLİ HARFLER ---
+let ez665Tur=0, ez665Dogru=0, ez665Sira=[];
+function ez665Baslat(){
+  ez665Tur=0; ez665Dogru=0; ez665Sira = karistir(ezberVeri65.map((x,i)=>i));
+  document.getElementById('ez665Dogru').textContent='0';
+  document.getElementById('ez665Sonuc').textContent='';
+  ez665Round();
+}
+function ez665Round(){
+  if(ez665Tur>=ez665Sira.length){
+    document.getElementById('ez665Metin').textContent='';
+    document.getElementById('ez665Cevap').innerHTML=''; document.getElementById('ez665Banka').innerHTML='';
+    document.getElementById('ez665Sonuc').innerHTML = `🎉 Bitti! ${ez665Dogru}/${ez665Sira.length} kelimeyi doğru tamamladın.`;
+    return;
+  }
+  document.getElementById('ez665Tur').textContent = ez665Tur+1;
+  const i = ez665Sira[ez665Tur];
+  const oge = ezberVeri65[i];
+  document.getElementById('ez665Metin').innerHTML = oge.parca.replace(oge.gizli, '<u>______</u>') + `<br><small>💡 ${oge.anlam}</small>`;
+  const harfler = oge.gizli.split('').filter(c=>c!==' ');
+  siraOlustur({
+    tokens: harfler,
+    bankaId:'ez665Banka', cevapId:'ez665Cevap',
+    tamamlandi:()=>{
+      ez665Dogru++; document.getElementById('ez665Dogru').textContent=ez665Dogru;
+      setTimeout(()=>{ ez665Tur++; ez665Round(); }, 900);
+    }
+  });
+}
+
+// --- 7) KAYBOLAN KELİMELER ---
+let ez765Tur=0, ez765Dogru=0, ez765Sira=[];
+function ez765Baslat(){
+  ez765Tur=0; ez765Dogru=0; ez765Sira = karistir(ezberVeri65.map((x,i)=>i));
+  document.getElementById('ez765Dogru').textContent='0';
+  document.getElementById('ez765Sonuc').textContent='';
+  ez765Round();
+}
+function ez765Round(){
+  if(ez765Tur>=ez765Sira.length){
+    document.getElementById('ez765Metin').textContent='';
+    document.getElementById('ez765Secenekler').innerHTML='';
+    document.getElementById('ez765Sonuc').innerHTML = `🎉 Bitti! ${ez765Dogru}/${ez765Sira.length} doğru hatırladın.`;
+    return;
+  }
+  document.getElementById('ez765Tur').textContent = ez765Tur+1;
+  const i = ez765Sira[ez765Tur];
+  const oge = ezberVeri65[i];
+  document.getElementById('ez765Metin').textContent = oge.parca;
+  document.getElementById('ez765Secenekler').innerHTML='';
+  setTimeout(()=>{
+    document.getElementById('ez765Metin').textContent = '🙈 ...';
+    const digerIdx = karistir(ezberVeri65.map((_,j)=>j).filter(j=>j!==i)).slice(0,2);
+    const varyantlar = digerIdx.map(j=>oge.parca.replace(oge.gizli, ezberVeri65[j].gizli));
+    const secenekler = karistir([oge.parca, ...varyantlar]);
+    const kutu = document.getElementById('ez765Secenekler');
+    kutu.innerHTML='';
+    secenekler.forEach(sec=>{
+      const btn=document.createElement('div');
+      btn.className='merdiven-secenek';
+      btn.textContent=sec;
+      btn.onclick=()=>{
+        document.querySelectorAll('#ez765Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+        document.getElementById('ez765Metin').textContent = oge.parca;
+        if(sec===oge.parca){ btn.classList.add('dogru'); ez765Dogru++; document.getElementById('ez765Dogru').textContent=ez765Dogru; }
+        else {
+          btn.classList.add('yanlis');
+          [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        }
+        setTimeout(()=>{ ez765Tur++; ez765Round(); }, 1300);
+      };
+      kutu.appendChild(btn);
+    });
+  }, 3000);
+}
+
+// --- 8) HIZ TESTİ ---
+let ez865Zamanlayici=null, ez865Kalan=60, ez865Dogru=0, ez865Yanlis=0, ez865Aktif=false;
+function ez865Baslat(){
+  clearInterval(ez865Zamanlayici);
+  ez865Kalan=60; ez865Dogru=0; ez865Yanlis=0; ez865Aktif=true;
+  document.getElementById('ez865Sayac').textContent=ez865Kalan;
+  document.getElementById('ez865Dogru').textContent='0';
+  document.getElementById('ez865Yanlis').textContent='0';
+  document.getElementById('ez865Sonuc').textContent='';
+  ez865Zamanlayici = setInterval(()=>{
+    ez865Kalan--;
+    document.getElementById('ez865Sayac').textContent=ez865Kalan;
+    if(ez865Kalan<=0){ ez865Bitir(); }
+  }, 1000);
+  ez865SoruGoster();
+}
+function ez865SoruGoster(){
+  if(!ez865Aktif) return;
+  const i = Math.floor(Math.random()*ezberVeri65.length);
+  const oge = ezberVeri65[i];
+  document.getElementById('ez865Metin').textContent = oge.anlam;
+  const digerleri = ezberVeri65.filter((_,j)=>j!==i).map(x=>x.parca);
+  const secenekler = karistir([oge.parca, ...karistir(digerleri).slice(0,3)]);
+  const kutu = document.getElementById('ez865Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      if(!ez865Aktif) return;
+      if(sec===oge.parca){ ez865Dogru++; document.getElementById('ez865Dogru').textContent=ez865Dogru; }
+      else { ez865Yanlis++; document.getElementById('ez865Yanlis').textContent=ez865Yanlis; }
+      ez865SoruGoster();
+    };
+    kutu.appendChild(btn);
+  });
+}
+function ez865Bitir(){
+  ez865Aktif=false;
+  clearInterval(ez865Zamanlayici);
+  document.getElementById('ez865Secenekler').innerHTML='';
+  document.getElementById('ez865Metin').textContent='';
+  const basari = ez865Dogru>=8 ? '🏆 Efsane Hız!' : ez865Dogru>=5 ? '🥇 Çok İyi!' : '📚 Biraz Daha Pratik!';
+  document.getElementById('ez865Sonuc').innerHTML = `🎉 Süre bitti! ${basari}<br>${ez865Dogru} doğru, ${ez865Yanlis} yanlış.`;
+}
+
 
 // ===================== SUNUM (SLAYT) GORUNUMU JS =====================
 window.sunumDurumu = window.sunumDurumu || {};
