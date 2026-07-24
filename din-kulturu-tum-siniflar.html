@@ -158,6 +158,23 @@
     outline:3px solid var(--sari); outline-offset:2px; border-radius:6px;
   }
 
+  /* ===== Basılma (active) durumu — MD3 "state layer" mantığıyla, hover'da
+     yukarı kalkan her bileşen basılınca hafifçe küçülüp geri "basar";
+     tek bir kural, tüm kart/buton ailesinde tutarlı dokunsal geri bildirim verir. ===== */
+  .hero-cta:active, .tanitim-buton:active, .hizli-devam-btn:active, .soru-cevap-btn:active,
+  .icerik-kopyala-btn:active, .tema-dugme:active, .ust-serit-btn:active,
+  .hizli-kart:active, .ib-kart:active, .oneri-kart:active, .yeni-kart:active,
+  .sinif-sekme-pill:active, .icerik-sekme button:active, .unite-kart .uk-btn:active,
+  .uk-fav:active, .uk-tamam:active, .yazili-kart:active, .filtre-satir button:active,
+  .renk-nokta:active, .yukari-buton:active{
+    transform:scale(.96); transition-duration:.08s;
+  }
+  /* translateY tabanlı hover'lı bileşenlerde scale, mevcut kalkış hareketiyle çakışmasın diye 0 noktasına döner */
+  .hizli-kart:active, .ib-kart:active, .oneri-kart:active, .yeni-kart:active, .yazili-kart:active,
+  .unite-kart:active, .tanitim-buton:active, .hizli-devam-btn:active{
+    transform:translateY(0) scale(.98);
+  }
+
   /* ===== Yükleniyor ekranı ===== */
   .yukleniyor{
     position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center;
@@ -362,7 +379,7 @@
   /* ===== Hızlı Erişim — "Bugün Çalışmaya Devam Et" =====
      Kartlar hero'nun alt kenarına hafifçe taşarak (negatif boşluk) iki
      bölüm arasında doğal, köprü hissi veren bir görsel bağ kurar. */
-  .hizli-erisim{ max-width:var(--genislik); margin:-24px auto 0; padding:0 var(--gutter); position:relative; z-index:2; }
+  .hizli-erisim{ max-width:var(--genislik); margin:var(--sp-8) auto 0; padding:0 var(--gutter); position:relative; z-index:2; }
   .hizli-baslik{ color:#fff; font-size:1.1em; margin:0 0 var(--sp-2) 4px; display:flex; align-items:center; gap:8px; text-shadow:0 2px 10px rgba(0,0,0,.25); }
   .hizli-izgara{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) auto; gap:var(--sp-3); align-items:stretch; }
   .hizli-kart{
@@ -504,6 +521,11 @@
       var(--bg);
     padding:var(--sp-9) 0 var(--sp-7); margin-top:var(--sp-9);
   }
+  /* Hero'nun hemen ardından gelen giriş konumu: hafif negatif üst boşlukla
+     hero'nun dalga kesimine "biner", iki bölüm arasında sert bir kesim
+     yerine tek nefeslik doğal bir geçiş kurar. */
+  .sinif-odak-bolum--giris{ margin-top:-32px; padding-top:calc(var(--sp-9) + 32px); position:relative; z-index:2; }
+  @media(max-width:640px){ .sinif-odak-bolum--giris{ margin-top:-18px; padding-top:calc(var(--sp-7) + 18px); } }
   :root[data-tema="dark"] .sinif-odak-bolum{
     background:
       radial-gradient(60% 100% at 15% 0%, color-mix(in srgb, var(--navy) 32%, transparent), transparent 70%),
@@ -712,40 +734,37 @@
   .sinif-bos-durum p{ margin:10px 0 0; font-size:1.05em; font-weight:800; }
   .sinif-bos-durum[hidden]{ display:none; }
 
-  /* ===== Kısa Tanıtım Kartı (Hakkımızda özeti) — glassmorphism, ~260px yükseklik =====
-     Uzun Hakkımızda içeriği tekrarını önlemek için burada sadece kısa bir özet var;
+  /* ===== Kısa Tanıtım Kartı (Hakkımızda özeti) =====
+     Bilinçli olarak hero'nun canlı gradyanını TEKRARLAMAZ — sayfada tek bir
+     "vurgu anı" (hero) kalsın diye bu blok tonal/nötr bir yüzey kullanır;
+     rengi yalnızca ikon dairesinden ve sol şerit vurgusundan alır.
      "Daha Fazla Bilgi" butonu üst şeritteki mevcut Hakkımızda panelini açar. */
   .tanitim-karti-bolum{ max-width:var(--genislik); margin:var(--sp-8) auto 0; padding:0 var(--gutter); }
   .tanitim-karti{
     position:relative; overflow:hidden; display:flex; align-items:center; gap:24px; flex-wrap:wrap;
-    background:linear-gradient(135deg,var(--navy),var(--turkuaz)); border-radius:26px;
-    padding:var(--sp-5); box-shadow:var(--golge-lg);
+    background:var(--yuzey); border:1px solid var(--kenar); border-left:4px solid var(--navy);
+    border-radius:var(--r-xl); padding:var(--sp-5); box-shadow:var(--golge);
+    transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur);
   }
-  .tanitim-karti::after{
-    content:''; position:absolute; inset:0; pointer-events:none;
-    background:radial-gradient(circle at 1px 1px, rgba(255,255,255,.14) 1px, transparent 0) 0 0/24px 24px,
-      radial-gradient(55% 65% at 90% 10%, rgba(255,255,255,.16), transparent 70%);
-  }
+  .tanitim-karti:hover{ transform:translateY(-3px); box-shadow:var(--golge-lg); }
   .tanitim-ikon-daire{
-    position:relative; width:60px; height:60px; border-radius:18px; background:rgba(255,255,255,.16);
-    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.32);
-    color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    position:relative; width:56px; height:56px; border-radius:16px; background:var(--navy);
+    color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:var(--golge-sm);
   }
-  .tanitim-metin{ position:relative; flex:1; min-width:240px; color:#fff; }
-  .tanitim-metin h2{ margin:0 0 6px; font-size:1.3em; }
-  .tanitim-metin p{ margin:0; font-size:.92em; line-height:1.5; opacity:.94; max-width:540px; }
+  .tanitim-metin{ position:relative; flex:1; min-width:240px; color:var(--metin); }
+  .tanitim-metin h2{ margin:0 0 6px; font-size:1.3em; color:var(--navy); }
+  .tanitim-metin p{ margin:0; font-size:.92em; line-height:1.5; opacity:.82; max-width:540px; }
   .tanitim-etiketler{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
   .tanitim-etiket{
-    background:rgba(255,255,255,.16); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-    border:1px solid rgba(255,255,255,.3); color:#fff; font-size:.72em; font-weight:800;
+    background:var(--acikgri); color:var(--mavi); font-size:.72em; font-weight:800;
     padding:5px 12px; border-radius:var(--r-pill);
   }
   .tanitim-buton{
-    position:relative; display:inline-flex; align-items:center; gap:6px; background:#fff; color:var(--navy); border:none;
+    position:relative; display:inline-flex; align-items:center; gap:6px; background:var(--navy); color:#fff; border:none;
     padding:13px 24px; border-radius:var(--r-btn); font-weight:800; cursor:pointer; font-size:.92em; flex-shrink:0;
-    transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur);
+    transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur), background var(--dur-fast);
   }
-  .tanitim-buton:hover{ transform:translateY(-3px); box-shadow:var(--golge-lg); }
+  .tanitim-buton:hover{ background:var(--mavi); transform:translateY(-3px); box-shadow:var(--golge-lg); }
   @media(max-width:640px){ .tanitim-karti{ padding:24px; } .tanitim-buton{ width:100%; justify-content:center; } }
 
   /* ===== Toast bildirimleri ===== */
@@ -813,15 +832,21 @@
     .hero-cta{ width:100%; justify-content:center; min-height:50px; }
     .hero-arama-kart{ margin-top:var(--sp-4); padding:var(--sp-3); }
     .arama-kutu input{ min-height:48px; }
-    .filtre-satir{ justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; padding-bottom:2px; }
+    .filtre-satir{
+      justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; padding-bottom:2px;
+      mask-image:linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+      -webkit-mask-image:linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+    }
     .filtre-satir button{ min-height:44px; padding:9px 16px; flex-shrink:0; }
-    .hizli-erisim{ margin-top:var(--sp-3); }
+    .hizli-erisim{ margin-top:var(--sp-6); }
     .hizli-izgara{ grid-template-columns:1fr; }
     .hizli-devam-btn{ width:100%; }
     .oneri-kart{ width:200px; }
     nav.sinif-sekme{
       flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; -webkit-overflow-scrolling:touch;
       scroll-snap-type:x proximity; padding-bottom:2px;
+      mask-image:linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+      -webkit-mask-image:linear-gradient(to right, black calc(100% - 28px), transparent 100%);
     }
     .sinif-sekme-pill{ flex-shrink:0; scroll-snap-align:start; }
     .ilerleme-govde{ justify-content:center; text-align:center; }
@@ -938,6 +963,40 @@
   </svg>
 </section>
 
+<!-- Sınıf seçimi, hero'nun hemen ardından geliyor: portalın asıl giriş
+     noktası bu olduğu için ziyaretçi hero'dan sonra doğrudan buraya
+     yönlendiriliyor (istatistik/ilerleme gibi ikincil bilgi blokları
+     daha aşağıda, seçimden sonra geliyor). -->
+<section class="sinif-odak-bolum sinif-odak-bolum--giris" aria-labelledby="sinifOdakBaslik">
+  <div class="sinif-sekme-sarmal">
+    <p class="bolum-on-etiket">4 Farklı Sınıf Seviyesi</p>
+    <h2 class="sinif-odak-baslik" id="sinifOdakBaslik">Sınıfını Seç</h2>
+    <p class="sinif-sekme-onsoz">Sınıf seviyenizi seçerek Türkiye Yüzyılı Maarif Modeli'ne uygun içeriklere ulaşabilirsiniz.</p>
+    <p class="sinif-sekme-bilgi" id="sinifSekmeBilgi" aria-live="polite"></p>
+    <nav class="sinif-sekme" id="sinifSekme" role="tablist" aria-label="Sınıf seçimi">
+    </nav>
+  </div>
+</section>
+
+<main id="ana-icerik">
+  <div class="sinif-bos-durum" id="sinifBosDurum">
+    <span class="msi" aria-hidden="true">touch_app</span>
+    <p>Başlamak için yukarıdan bir sınıf seçin</p>
+  </div>
+  <div id="sinifAlani"></div>
+</main>
+
+<section class="onerilen-bolum" id="onerilenBolum" aria-labelledby="onerilenBaslik" hidden>
+  <div class="onerilen-baslik-satir">
+    <div>
+      <p class="bolum-on-etiket">Kişiye Özel</p>
+      <h2 id="onerilenBaslik"><span class="msi" aria-hidden="true">auto_awesome</span> Senin İçin Önerilen Konular</h2>
+      <p class="onerilen-alt">Henüz tamamlamadığın konulardan seçtiklerimiz</p>
+    </div>
+  </div>
+  <div class="onerilen-izgara" id="onerilenIzgara"></div>
+</section>
+
 <section class="hizli-erisim" aria-labelledby="hizliBaslik">
   <h2 id="hizliBaslik" class="hizli-baslik"><span class="msi" aria-hidden="true">bolt</span> Bugün Çalışmaya Devam Et</h2>
   <div class="hizli-izgara">
@@ -1004,36 +1063,6 @@
       </div>
     </div>
   </div>
-</section>
-
-<section class="sinif-odak-bolum" aria-labelledby="sinifOdakBaslik">
-  <div class="sinif-sekme-sarmal">
-    <p class="bolum-on-etiket">4 Farklı Sınıf Seviyesi</p>
-    <h2 class="sinif-odak-baslik" id="sinifOdakBaslik">Sınıfını Seç</h2>
-    <p class="sinif-sekme-onsoz">Sınıf seviyenizi seçerek Türkiye Yüzyılı Maarif Modeli'ne uygun içeriklere ulaşabilirsiniz.</p>
-    <p class="sinif-sekme-bilgi" id="sinifSekmeBilgi" aria-live="polite"></p>
-    <nav class="sinif-sekme" id="sinifSekme" role="tablist" aria-label="Sınıf seçimi">
-    </nav>
-  </div>
-</section>
-
-<main id="ana-icerik">
-  <div class="sinif-bos-durum" id="sinifBosDurum">
-    <span class="msi" aria-hidden="true">touch_app</span>
-    <p>Başlamak için yukarıdan bir sınıf seçin</p>
-  </div>
-  <div id="sinifAlani"></div>
-</main>
-
-<section class="onerilen-bolum" id="onerilenBolum" aria-labelledby="onerilenBaslik" hidden>
-  <div class="onerilen-baslik-satir">
-    <div>
-      <p class="bolum-on-etiket">Kişiye Özel</p>
-      <h2 id="onerilenBaslik"><span class="msi" aria-hidden="true">auto_awesome</span> Senin İçin Önerilen Konular</h2>
-      <p class="onerilen-alt">Henüz tamamlamadığın konulardan seçtiklerimiz</p>
-    </div>
-  </div>
-  <div class="onerilen-izgara" id="onerilenIzgara"></div>
 </section>
 
 <div class="kucuk-panel-alani">
