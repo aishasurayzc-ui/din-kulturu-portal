@@ -82,6 +82,23 @@
     --sari:#f4a261; --bg:#f7f4ec; --navy:#1E3A8A; --turkuaz:#06B6D4; --acikgri:#f1f5f9;
     --metin:#22333b; --yuzey:#ffffff; --yuzey2:#ffffff; --kenar:#e2e8f0;
 
+    /* --baslik/--vurgu-metin: --navy/--mavi'nin METİN/İKON rolü için ayrı
+       takma adları. --navy ve --mavi aynı zamanda hero, "Günün Sorusu",
+       "Daha Fazla Bilgi" gibi ÜZERİNDE BEYAZ YAZI olan ARKA PLANLARDA da
+       kullanıldığından, koyu temada bu ikisini doğrudan açıklaştırmak o
+       arka planları soluklaştırıp beyaz yazının kontrastını düşürürdü.
+       Bu yüzden metin/ikon kullanım yerleri --baslik/--vurgu-metin'e
+       taşındı; ışık temada --navy/--mavi ile birebir aynıdır (görsel fark
+       yok), koyu temada ise SADECE bu ikisi açık bir varyanta döner. */
+    --baslik:var(--navy); --vurgu-metin:var(--mavi);
+
+    /* İkincil/muted metin rengi (etiket, tarih, açıklama vb.) — daha önce
+       aynı rol için #777/#888/#667/#999 gibi tutarsız, tek tek yazılmış gri
+       tonları kullanılıyordu; bunların hiçbiri koyu temada ayarlanmamıştı.
+       Artık tek bir token'dan besleniyor, ışık temada görsel fark yok
+       (~5.5:1 kontrast), koyu temada kendi güvenli varyantına döner. */
+    --metin-ikincil:#5d6b7a;
+
     /* Boşluk ölçeği — 8px tabanlı (yalnızca --sp-1 ince ayar için 4px'lik
        yarım adımdır; sayfa genelindeki tüm bölüm/kart boşlukları bu
        ölçekten türetilir). --gutter, tüm bölümlerin ortak kenar boşluğudur. */
@@ -113,6 +130,16 @@
     --golge:0 4px 16px rgba(0,0,0,.4), 0 1px 3px rgba(0,0,0,.3);
     --golge-lg:0 24px 44px -14px rgba(0,0,0,.55);
     --golge-xl:0 32px 64px -16px rgba(0,0,0,.65);
+    /* --baslik/--vurgu-metin, --navy/--mavi'nin ışık temaya göre ayarlanmış
+       (kontrast 5.5–10:1) değerlerini KOYU KARTLARDA (--yuzey/--acikgri artık
+       koyu) doğrudan devralınca kontrast 1.6–3:1'e düşüp başlıklar/sayılar
+       neredeyse görünmez oluyordu (WCAG AA'nın altı). Bu genel dark override
+       sadece bu iki METİN/İKON takma adını açıklaştırır; --navy/--mavi'nin
+       kendisi (hero, "Günün Sorusu", butonlar gibi arka plan kullanımları
+       için) değişmeden kalır. Aşağıdaki 3 "renk" varyantı bu kuraldan DAHA
+       YÜKSEK özgüllüğe sahip olduğu için (2 nitelik seçicisi > 1) dosyadaki
+       sıralamadan bağımsız olarak doğru şekilde üzerine yazar. */
+    --baslik:#8191bd; --vurgu-metin:#6697b4; --metin-ikincil:#9aa7b8;
   }
   /* ===== Renk temaları — marka vurgu renklerini (mavi/navy/turkuaz/açık)
      değiştirir; semantik renkler (yeşil=başarı, kırmızı=uyarı, sarı=rozet)
@@ -120,6 +147,14 @@
   :root[data-renk="yesil"]{ --mavi:#0f766e; --navy:#065f46; --turkuaz:#10b981; --acik:#a7f3d0; }
   :root[data-renk="mor"]{ --mavi:#6d28d9; --navy:#4c1d95; --turkuaz:#a78bfa; --acik:#ddd6fe; }
   :root[data-renk="bordo"]{ --mavi:#be123c; --navy:#7f1d1d; --turkuaz:#fb7185; --acik:#fecdd3; }
+  /* Koyu tema + renk teması birlikte seçildiğinde de aynı WCAG AA kontrast
+     tabanı korunsun diye her rengin kendi koyu-güvenli --baslik/--vurgu-metin
+     varyantı — bu kurallar ([data-tema][data-renk], 2 nitelik seçicisi)
+     yukarıdaki tekli kurallardan (1 nitelik seçicisi) daha özgül olduğu için
+     dosyadaki sıralamadan bağımsız her zaman doğru şekilde kazanır. */
+  :root[data-tema="dark"][data-renk="yesil"]{ --baslik:#659c8c; --vurgu-metin:#579f9a; }
+  :root[data-tema="dark"][data-renk="mor"]{ --baslik:#9e85c6; --vurgu-metin:#a77ee8; }
+  :root[data-tema="dark"][data-renk="bordo"]{ --baslik:#ba8585; --vurgu-metin:#d8718a; }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -140,12 +175,12 @@
      görsel hiyerarşi ritmi kurmak için tüm ana bölümlerde tekrar kullanılır. ===== */
   .bolum-on-etiket{
     display:inline-flex; align-items:center; gap:8px; font-size:.76em; font-weight:800;
-    letter-spacing:1.4px; text-transform:uppercase; color:var(--mavi); margin:0 0 8px;
+    letter-spacing:1.4px; text-transform:uppercase; color:var(--vurgu-metin); margin:0 0 8px;
   }
   .bolum-on-etiket::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--sari); flex-shrink:0; }
   .bolum-baslik-orta{ text-align:center; max-width:620px; margin:0 auto var(--sp-5); }
   .bolum-baslik-orta .bolum-on-etiket{ justify-content:center; }
-  .bolum-baslik-orta h2{ margin:0; font-size:clamp(1.35em,2.6vw,1.7em); color:var(--navy); font-weight:900; letter-spacing:-.015em; }
+  .bolum-baslik-orta h2{ margin:0; font-size:clamp(1.35em,2.6vw,1.7em); color:var(--baslik); font-weight:900; letter-spacing:-.015em; }
 
   /* ===== Erişilebilirlik yardımcıları ===== */
   .gorsel-gizli{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
@@ -212,7 +247,7 @@
     transition:padding var(--dur-slow) var(--ease-out);
   }
   .ust-serit.kucultulmus .ust-serit-ic{ padding:6px var(--gutter); }
-  .ust-serit-marka{ display:inline-flex; align-items:center; gap:6px; font-weight:800; color:var(--navy); font-size:.88em; transition:transform var(--dur-slow) var(--ease-out); }
+  .ust-serit-marka{ display:inline-flex; align-items:center; gap:6px; font-weight:800; color:var(--baslik); font-size:.88em; transition:transform var(--dur-slow) var(--ease-out); }
   .ust-serit-marka .msi{ font-size:18px; transition:font-size var(--dur-slow) var(--ease-out); }
   .ust-serit.kucultulmus .ust-serit-marka{ transform:scale(.94); }
   .ust-serit.kucultulmus .ust-serit-marka .msi{ font-size:15px; }
@@ -221,8 +256,8 @@
     background:none; border:none; color:var(--metin); font-family:inherit; cursor:pointer;
     font-weight:800; font-size:.85em; padding:8px 12px; border-radius:var(--r-btn); transition:.15s;
   }
-  .ust-serit-btn:hover{ color:var(--mavi); background:var(--acikgri); }
-  .ust-serit-btn[aria-expanded="true"]{ color:var(--mavi); background:var(--acikgri); }
+  .ust-serit-btn:hover{ color:var(--vurgu-metin); background:var(--acikgri); }
+  .ust-serit-btn[aria-expanded="true"]{ color:var(--vurgu-metin); background:var(--acikgri); }
 
   .ust-panel{
     position:absolute; top:calc(100% + var(--sp-3)); right:var(--gutter); width:min(360px, calc(100vw - 32px));
@@ -241,10 +276,10 @@
     transform:rotate(45deg); border-radius:3px 0 0 0;
   }
   .ust-panel[hidden]{ display:none; }
-  .ust-panel h3{ margin:0 0 10px; color:var(--navy); font-size:1.05em; display:flex; align-items:center; gap:8px; }
+  .ust-panel h3{ margin:0 0 10px; color:var(--baslik); font-size:1.05em; display:flex; align-items:center; gap:8px; }
   .ust-panel p{ margin:0 0 8px; }
   .ust-panel p:last-child{ margin-bottom:0; }
-  .ust-panel a{ color:var(--mavi); font-weight:800; text-decoration:none; }
+  .ust-panel a{ color:var(--vurgu-metin); font-weight:800; text-decoration:none; }
   .ust-panel a:hover{ text-decoration:underline; }
 
   /* ===== HERO — hareketli gradient + dekoratif blob'lar ===== */
@@ -358,8 +393,8 @@
   .as-ikon{ font-size:1.3em; flex-shrink:0; }
   .as-metin{ display:flex; flex-direction:column; min-width:0; }
   .as-baslik{ font-weight:800; font-size:.9em; }
-  .as-alt{ font-size:.76em; color:#888; }
-  .as-bos{ padding:16px; text-align:center; color:#888; font-size:.88em; margin:0; }
+  .as-alt{ font-size:.76em; color:var(--metin-ikincil); }
+  .as-bos{ padding:16px; text-align:center; color:var(--metin-ikincil); font-size:.88em; margin:0; }
   .arama-sonuc-bilgi{ margin:8px 4px 0; font-size:.8em; color:rgba(255,255,255,.85); text-align:center; min-height:1.2em; }
 
   .filtre-satir{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 4px 0; justify-content:center; }
@@ -389,11 +424,11 @@
   }
   .hizli-kart:hover{ transform:translateY(-4px); box-shadow:var(--golge-lg); }
   .hizli-ikon-daire{
-    width:44px; height:44px; border-radius:var(--r-md); background:var(--acikgri); color:var(--mavi);
+    width:44px; height:44px; border-radius:var(--r-md); background:var(--acikgri); color:var(--vurgu-metin);
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
   .hizli-metin{ display:flex; flex-direction:column; min-width:0; }
-  .hizli-metin b{ font-size:.76em; text-transform:uppercase; letter-spacing:.5px; color:var(--mavi); }
+  .hizli-metin b{ font-size:.76em; text-transform:uppercase; letter-spacing:.5px; color:var(--vurgu-metin); }
   .hizli-metin span{ font-size:.9em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .hizli-devam-btn{
     display:inline-flex; align-items:center; justify-content:center; gap:6px;
@@ -413,11 +448,11 @@
   }
   .ib-kart:hover{ transform:translateY(-4px); box-shadow:var(--golge-lg); }
   .ib-ikon-daire{
-    width:44px; height:44px; border-radius:var(--r-md); background:var(--acikgri); color:var(--mavi); display:flex;
+    width:44px; height:44px; border-radius:var(--r-md); background:var(--acikgri); color:var(--vurgu-metin); display:flex;
     align-items:center; justify-content:center; margin:0 auto 8px;
   }
-  .ib-sayi{ font-size:1.9em; font-weight:800; display:block; margin:2px 0; color:var(--navy); }
-  .ib-etiket{ font-size:.8em; color:#888; }
+  .ib-sayi{ font-size:1.9em; font-weight:800; display:block; margin:2px 0; color:var(--baslik); }
+  .ib-etiket{ font-size:.8em; color:var(--metin-ikincil); }
   .ib-sparkline{ width:100%; height:14px; margin-top:8px; opacity:.5; }
   .ib-sparkline path{ fill:none; stroke:var(--mavi); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
 
@@ -425,9 +460,9 @@
   .onerilen-bolum{ max-width:var(--genislik); margin:var(--sp-8) auto 0; padding:0 var(--gutter); }
   .onerilen-bolum[hidden]{ display:none; }
   .onerilen-baslik-satir{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
-  .onerilen-baslik-satir h2{ margin:0; color:var(--navy); font-size:1.3em; display:flex; align-items:center; gap:8px; }
-  .onerilen-baslik-satir h2 .msi{ background:var(--acikgri); color:var(--mavi); border-radius:10px; padding:6px; }
-  .onerilen-alt{ margin:0; font-size:.85em; color:#888; }
+  .onerilen-baslik-satir h2{ margin:0; color:var(--baslik); font-size:1.3em; display:flex; align-items:center; gap:8px; }
+  .onerilen-baslik-satir h2 .msi{ background:var(--acikgri); color:var(--vurgu-metin); border-radius:10px; padding:6px; }
+  .onerilen-alt{ margin:0; font-size:.85em; color:var(--metin-ikincil); }
   .onerilen-izgara{ display:flex; align-items:stretch; gap:14px; overflow-x:auto; padding:4px 4px 10px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
   .oneri-kart{
     flex:0 0 auto; width:230px; scroll-snap-align:start; background:var(--yuzey); border:1px solid var(--kenar);
@@ -436,7 +471,7 @@
   }
   .oneri-kart:hover{ transform:translateY(-6px); box-shadow:var(--golge-lg); border-color:transparent; }
   .oneri-ikon{ width:44px; height:44px; border-radius:12px; background:var(--acikgri); font-size:1.4em; display:flex; align-items:center; justify-content:center; }
-  .oneri-sinif{ font-size:.72em; font-weight:800; color:var(--mavi); text-transform:uppercase; letter-spacing:.5px; }
+  .oneri-sinif{ font-size:.72em; font-weight:800; color:var(--vurgu-metin); text-transform:uppercase; letter-spacing:.5px; }
   .oneri-baslik{ font-size:.95em; font-weight:800; line-height:1.35; }
 
   /* ===== İlerleme dashboard (dairesel grafik + rozetler + motivasyon) ===== */
@@ -449,13 +484,18 @@
   .daire-ilerleme{ width:100%; height:100%; }
   .daire-arka{ fill:none; stroke:var(--acikgri); stroke-width:10; }
   .daire-on{ fill:none; stroke:var(--yesil); stroke-width:10; stroke-linecap:round; transform:rotate(-90deg); transform-origin:60px 60px; transition:stroke-dashoffset .6s var(--ease-out); }
-  .daire-yuzde-metin{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.4em; color:var(--navy); }
+  .daire-yuzde-metin{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.4em; color:var(--baslik); }
   .ilerleme-detay{ flex:1; min-width:240px; }
   .ilerleme-ust-satir{ display:flex; align-items:center; gap:10px; margin:0 0 6px; }
-  .ilerleme-ust-satir .msi{ color:var(--mavi); background:var(--acikgri); border-radius:10px; padding:6px; }
-  .ilerleme-detay h2{ margin:0; font-size:1.1em; color:var(--navy); }
-  .ilerleme-metin{ margin:0; font-size:.9em; color:#777; }
+  .ilerleme-ust-satir .msi{ color:var(--vurgu-metin); background:var(--acikgri); border-radius:10px; padding:6px; }
+  .ilerleme-detay h2{ margin:0; font-size:1.1em; color:var(--baslik); }
+  .ilerleme-metin{ margin:0; font-size:.9em; color:var(--metin-ikincil); }
   .motivasyon-mesaji{ margin:10px 0 0; font-size:.94em; font-weight:800; color:var(--yesil); min-height:1.3em; }
+  /* --yesil rozetler/onay ikonları gibi pek çok yerde sabit kullanıldığı için
+     token'ın kendisine dokunulmadı; sadece bu metin, ışık temada zaten
+     sınırda olan kontrastı (4.3:1) koyu temada WCAG AA eşiğinin (4.5:1)
+     üstüne taşımak için hafifçe açık bir yeşile döner. */
+  :root[data-tema="dark"] .motivasyon-mesaji{ color:#5da282; }
   .rozet-satir{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; padding-top:16px; border-top:1px dashed var(--kenar); }
   .rozet{
     display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:var(--r-pill); font-size:.82em;
@@ -472,8 +512,8 @@
   @media(max-width:980px){ .kucuk-panel-alani{ grid-template-columns:1fr 1fr; } }
   @media(max-width:640px){ .kucuk-panel-alani{ grid-template-columns:1fr; } }
   .kucuk-panel{ background:var(--yuzey); border-radius:var(--r-kart); padding:var(--sp-4); box-shadow:var(--golge); border:1px solid var(--kenar); display:flex; flex-direction:column; }
-  .kucuk-panel h2{ margin:0 0 var(--sp-3); font-size:var(--fs-md); font-weight:800; color:var(--navy); display:flex; align-items:center; gap:8px; letter-spacing:-.01em; }
-  .kucuk-panel h2 .msi{ background:var(--acikgri); color:var(--mavi); border-radius:10px; padding:6px; }
+  .kucuk-panel h2{ margin:0 0 var(--sp-3); font-size:var(--fs-md); font-weight:800; color:var(--baslik); display:flex; align-items:center; gap:8px; letter-spacing:-.01em; }
+  .kucuk-panel h2 .msi{ background:var(--acikgri); color:var(--vurgu-metin); border-radius:10px; padding:6px; }
 
   .soru-panel{ background:linear-gradient(160deg,var(--navy),#12295f); color:#fff; border:none; position:relative; overflow:hidden; }
   .soru-panel::before{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 90% 0%, rgba(255,255,255,.18), transparent 60%); }
@@ -507,8 +547,8 @@
   .yeni-kart:hover{ background:var(--acik); transform:translateY(-4px); box-shadow:var(--golge); }
   .yeni-etiket{ background:var(--kirmizi); color:#fff; font-size:.64em; font-weight:800; padding:3px 9px; border-radius:var(--r-pill); letter-spacing:.5px; flex-shrink:0; }
   .yeni-kart .yk-baslik{ font-size:.87em; font-weight:800; flex:1; }
-  .yeni-kart .yk-tarih{ font-size:.72em; color:#888; flex-shrink:0; }
-  .bos-mesaj{ font-size:.86em; color:#888; line-height:1.5; margin:0; }
+  .yeni-kart .yk-tarih{ font-size:.72em; color:var(--metin-ikincil); flex-shrink:0; }
+  .bos-mesaj{ font-size:.86em; color:var(--metin-ikincil); line-height:1.5; margin:0; }
 
   /* ===== Sınıf başlıkları — sayfanın en güçlü odak noktası. Kendi renkli
      arka plan bandı, büyük başlık ve Material Design 3 "seçili dolgu
@@ -533,7 +573,7 @@
       var(--bg);
   }
   .sinif-odak-baslik{
-    text-align:center; font-size:clamp(1.9em, 4vw, 2.7em); font-weight:900; color:var(--navy);
+    text-align:center; font-size:clamp(1.9em, 4vw, 2.7em); font-weight:900; color:var(--baslik);
     margin:0 0 var(--sp-2); letter-spacing:-.02em;
   }
   .sinif-sekme-sarmal{
@@ -600,6 +640,15 @@
   .sinif-sekme-pill:focus-visible{
     outline:3px solid color-mix(in srgb, var(--vurgu) 65%, transparent); outline-offset:2px;
   }
+  /* --vurgu-koyu, ışık temada beyaz kart üstünde okunsun diye vurgu rengini
+     siyaha doğru KOYULAŞTIRIYORDU (color-mix ...black); koyu temada sidebar
+     zaten koyu bir yüzeyde olduğundan bu koyulaştırma metni/ikonu neredeyse
+     görünmez kılıyordu (bazı sınıflarda kontrast 1.3:1'e kadar düşüyordu).
+     Koyu temada tam tersi yönde, beyaza doğru açıklaştırıyoruz — 5 olası
+     vurgu renginin hepsinde WCAG AA'yı (4.5:1) rahatça karşılar. */
+  :root[data-tema="dark"] .sinif-sekme-pill{
+    --vurgu-koyu:color-mix(in srgb, var(--vurgu) 55%, white);
+  }
 
   section.sinif-panel{ display:none; }
   section.sinif-panel.aktif{ display:block; animation:fadeSlide .35s var(--ease-out); }
@@ -607,7 +656,7 @@
 
   .sinif-baslik{ display:flex; align-items:center; gap:14px; margin:var(--sp-2) 0 var(--sp-4); }
   .sinif-baslik h2{ margin:0; color:color-mix(in srgb, var(--vurgu, var(--navy)) 72%, black); font-size:1.5em; }
-  .sinif-baslik .sayac{ background:var(--acikgri); color:#777; font-size:.8em; font-weight:800; padding:6px 14px; border-radius:var(--r-pill); }
+  .sinif-baslik .sayac{ background:var(--acikgri); color:var(--metin-ikincil); font-size:.8em; font-weight:800; padding:6px 14px; border-radius:var(--r-pill); }
 
   /* ===== İçerik alt-sekmeleri (Üniteler / Yazılı Sınavlar) ===== */
   .icerik-sekme{ display:flex; gap:8px; margin:4px 0 24px; flex-wrap:wrap; }
@@ -673,11 +722,18 @@
   }
   .uk-govde{ padding:var(--sp-6) var(--gutter) var(--sp-2); }
   .uk-etiket{ font-size:.72em; font-weight:800; color:var(--vurgu); letter-spacing:.6px; text-transform:uppercase; margin:0 0 6px; }
+  /* Ünite kartının rengi (--vurgu) kartın koyu üst bandında ikon rengi olarak
+     da kullanıldığından her zaman yeterince canlıdır — ama ışık temaya göre
+     ayarlanmış ham hâli, koyu temanın (--yuzey artık koyu) kart gövdesinde
+     metin/ikon olarak kullanılınca WCAG AA'nın altına düşüyordu. */
+  :root[data-tema="dark"] .uk-etiket, :root[data-tema="dark"] .uk-ikon-rozet, :root[data-tema="dark"] .uk-derin-link:hover{
+    color:color-mix(in srgb, var(--vurgu) 55%, white);
+  }
   .uk-baslik{ margin:0 0 8px; font-size:1.14em; font-weight:800; line-height:1.3; letter-spacing:-.01em; min-height:2.65em; }
-  .uk-meta{ margin:0 0 8px; font-size:.78em; color:#888; font-weight:600; }
+  .uk-meta{ margin:0 0 8px; font-size:.78em; color:var(--metin-ikincil); font-weight:600; }
   .uk-etiketler{ display:flex; flex-wrap:wrap; gap:6px; margin:0 0 14px; }
   .uk-mini-etiket{
-    display:inline-flex; align-items:center; gap:3px; background:var(--acikgri); color:#667;
+    display:inline-flex; align-items:center; gap:3px; background:var(--acikgri); color:var(--metin-ikincil);
     font-size:.68em; font-weight:800; padding:4px 9px 4px 6px; border-radius:var(--r-pill);
   }
   .uk-mini-etiket .msi{ font-size:13px; }
@@ -754,11 +810,11 @@
     color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:var(--golge-sm);
   }
   .tanitim-metin{ position:relative; flex:1; min-width:240px; color:var(--metin); }
-  .tanitim-metin h2{ margin:0 0 6px; font-size:1.3em; color:var(--navy); }
+  .tanitim-metin h2{ margin:0 0 6px; font-size:1.3em; color:var(--baslik); }
   .tanitim-metin p{ margin:0; font-size:.92em; line-height:1.5; opacity:.82; max-width:540px; }
   .tanitim-etiketler{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
   .tanitim-etiket{
-    background:var(--acikgri); color:var(--mavi); font-size:.72em; font-weight:800;
+    background:var(--acikgri); color:var(--vurgu-metin); font-size:.72em; font-weight:800;
     padding:5px 12px; border-radius:var(--r-pill);
   }
   .tanitim-buton{
@@ -786,24 +842,24 @@
   }
   .footer-marka{
     max-width:var(--genislik); margin:0 auto; padding:var(--sp-5) var(--gutter) 0; display:flex; align-items:center; gap:var(--sp-2);
-    font-weight:800; color:var(--navy); font-size:1.1em;
+    font-weight:800; color:var(--baslik); font-size:1.1em;
   }
-  .footer-marka .msi{ background:var(--acikgri); border-radius:var(--r-md); padding:8px; color:var(--mavi); }
+  .footer-marka .msi{ background:var(--acikgri); border-radius:var(--r-md); padding:8px; color:var(--vurgu-metin); }
   .footer-ic{ max-width:var(--genislik); margin:0 auto; padding:var(--sp-4) var(--gutter) var(--sp-5); display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:var(--sp-5); }
   @media(max-width:760px){ .footer-ic{ grid-template-columns:1fr; gap:var(--sp-4); padding:var(--sp-4) var(--gutter); } }
-  .footer-sutun h3{ margin:0 0 var(--sp-3); font-size:1em; font-weight:800; color:var(--navy); display:flex; align-items:center; gap:8px; letter-spacing:-.01em; }
+  .footer-sutun h3{ margin:0 0 var(--sp-3); font-size:1em; font-weight:800; color:var(--baslik); display:flex; align-items:center; gap:8px; letter-spacing:-.01em; }
   .footer-sutun h3 .msi{ font-size:19px; }
-  .footer-sutun p{ margin:0 0 var(--sp-2); font-size:.87em; color:#777; line-height:1.7; }
+  .footer-sutun p{ margin:0 0 var(--sp-2); font-size:.87em; color:var(--metin-ikincil); line-height:1.7; }
   .footer-baglanti-liste{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--sp-2); }
   .footer-baglanti-liste a{
-    color:#667; text-decoration:none; font-size:.88em; display:inline-flex; align-items:center; gap:7px; transition:color var(--dur-fast), transform var(--dur-fast);
+    color:var(--metin-ikincil); text-decoration:none; font-size:.88em; display:inline-flex; align-items:center; gap:7px; transition:color var(--dur-fast), transform var(--dur-fast);
   }
-  .footer-baglanti-liste a:hover{ color:var(--mavi); transform:translateX(3px); }
+  .footer-baglanti-liste a:hover{ color:var(--vurgu-metin); transform:translateX(3px); }
   .footer-baglanti-liste .msi{ font-size:18px; opacity:.75; }
-  .footer-satir{ display:flex; align-items:center; gap:8px; font-size:.87em; color:#777; margin:0 0 10px; }
-  .footer-satir .msi{ font-size:18px; color:var(--mavi); flex-shrink:0; }
+  .footer-satir{ display:flex; align-items:center; gap:8px; font-size:.87em; color:var(--metin-ikincil); margin:0 0 10px; }
+  .footer-satir .msi{ font-size:18px; color:var(--vurgu-metin); flex-shrink:0; }
   .footer-alt{
-    background:var(--acikgri); padding:var(--sp-3) var(--gutter); font-size:.82em; color:#888; text-align:center;
+    background:var(--acikgri); padding:var(--sp-3) var(--gutter); font-size:.82em; color:var(--metin-ikincil); text-align:center;
   }
   .footer-alt-ic{
     max-width:var(--genislik); margin:0 auto; display:flex; justify-content:center; align-items:center; gap:var(--sp-2); flex-wrap:wrap;
@@ -873,18 +929,18 @@
   .icerik-rehberi{ background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-kart); box-shadow:var(--golge); overflow:hidden; }
   .icerik-rehberi summary{
     list-style:none; cursor:pointer; padding:var(--sp-4); display:flex; align-items:center; gap:10px;
-    font-weight:800; color:var(--navy); font-size:var(--fs-md); user-select:none;
+    font-weight:800; color:var(--baslik); font-size:var(--fs-md); user-select:none;
   }
   .icerik-rehberi summary::-webkit-details-marker{ display:none; }
   .icerik-rehberi summary small{ font-weight:600; color:var(--metin); opacity:.6; font-size:.7em; margin-left:2px; }
-  .icerik-rehberi summary .msi:first-child{ background:var(--acikgri); color:var(--mavi); border-radius:10px; padding:6px; }
+  .icerik-rehberi summary .msi:first-child{ background:var(--acikgri); color:var(--vurgu-metin); border-radius:10px; padding:6px; }
   .icerik-rehberi-ok{ margin-left:auto; transition:transform .25s ease; }
   .icerik-rehberi[open] .icerik-rehberi-ok{ transform:rotate(180deg); }
   .icerik-rehberi-ic{ padding:0 var(--sp-4) var(--sp-4); }
   .icerik-rehberi-aciklama{ margin:0 0 var(--sp-4); color:var(--metin); opacity:.82; font-size:var(--fs-sm); line-height:1.6; }
   .icerik-rehberi-izgara{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--sp-3); }
   .icerik-sablon-kart{ background:var(--yuzey2); border:1px solid var(--kenar); border-radius:var(--r-md); padding:var(--sp-3); display:flex; flex-direction:column; gap:10px; }
-  .icerik-sablon-kart h3{ margin:0; font-size:.98em; font-weight:800; color:var(--navy); display:flex; align-items:center; gap:8px; }
+  .icerik-sablon-kart h3{ margin:0; font-size:.98em; font-weight:800; color:var(--baslik); display:flex; align-items:center; gap:8px; }
   .icerik-sablon-kart h3 .msi{ font-size:19px; }
   .icerik-sablon-metin{
     margin:0; font-family:ui-monospace,'SFMono-Regular',Consolas,monospace; font-size:.78em; line-height:1.65;
