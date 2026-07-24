@@ -40,7 +40,7 @@
     0%,100%{ transform:translateY(0) rotate(0deg); }
     50%{ transform:translateY(-18px) rotate(8deg); }
   }
-  .hero-baslik{ font-size:2.1em; margin:10px 0 6px; text-shadow:0 2px 6px rgba(0,0,0,.2); }
+  .hero-baslik{ font-size:2.1em; margin:10px 0 6px; text-shadow:0 2px 14px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.35); }
   .hero-alt{ max-width:520px; margin:0 auto; opacity:.95; font-size:1.05em; }
   .hero-butonlar{ display:flex; gap:14px; justify-content:center; margin-top:22px; flex-wrap:wrap; }
   .hero-btn{
@@ -88,7 +88,7 @@
   }
   .oyun-grubu.aktif{ display:flex; }
   main{ max-width:900px; margin:0 auto; padding:20px; }
-  section{ display:none; animation: fade .3s; }
+  main section{ display:none; animation: fade .3s; }
   section.aktif{ display:block; }
   @keyframes fade{ from{opacity:0;} to{opacity:1;} }
   h2{ color:var(--mavi); border-bottom:3px solid var(--acik); padding-bottom:8px;}
@@ -527,6 +527,56 @@
 .yazili-kart.yk-klasik{ border-style:dashed; }
 
 </style>
+<style id="ogrKatmaniStil">
+/* ===================== OGRENME DENEYIMI KATMANI (hedefler, ogrenme yolu, ilerleme) =====================
+   Bu blok, mevcut CSS/HTML/JS'e dokunmadan sadece EKLEME yapar: hiçbir id/onclick/veri yapısı
+   degistirilmez. Amac: statik "konu ozeti"ni Coursera/Khan Academy tarzi bir ogrenme yoluna,
+   hero'yu ise hedef+ilerleme gosteren bir tanitim alanina donusturmek. */
+.ogr-hero-ek{ max-width:640px; margin:22px auto 0; display:flex; flex-direction:column; align-items:center; gap:12px; position:relative; z-index:1; }
+.ogr-hedef-satir{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.ogr-hedef-cip{ display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.16); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.35); color:#fff; padding:7px 14px; border-radius:999px; font-size:.8em; font-weight:700; }
+.ogr-hedef-cip .ogr-hedef-no{ background:rgba(255,255,255,.9); color:var(--navy); width:17px; height:17px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:.82em; font-weight:800; flex-shrink:0; }
+.ogr-ilerleme-rozet{ display:inline-flex; align-items:center; gap:10px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.32); border-radius:999px; padding:7px 16px 7px 7px; color:#fff; font-size:.84em; font-weight:700; }
+.ogr-ring{ width:32px; height:32px; flex-shrink:0; }
+.ogr-ring circle{ fill:none; stroke-width:4; }
+.ogr-ring-arka{ stroke:rgba(255,255,255,.28); }
+.ogr-ring-on{ stroke:#fff; stroke-linecap:round; transform:rotate(-90deg); transform-origin:16px 16px; transition:stroke-dashoffset .6s ease; }
+
+.ogr-ozet-ust{ background:linear-gradient(160deg,#fff,var(--acikgri)); border:1px solid var(--acik); border-radius:16px; padding:18px 20px; margin:14px 0 26px; box-shadow:0 2px 10px rgba(0,0,0,.05); }
+.ogr-ozet-ust-satir{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.ogr-ozet-baslik{ font-weight:800; color:var(--navy); font-size:1.02em; display:flex; align-items:center; gap:8px; margin:0; }
+.ogr-ozet-meta{ display:flex; gap:14px; flex-wrap:wrap; font-size:.82em; color:#667; font-weight:700; }
+.ogr-ozet-meta span{ display:inline-flex; align-items:center; gap:5px; }
+.ogr-yol-liste{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+.ogr-yol-adim{ display:inline-flex; align-items:center; gap:7px; background:#fff; border:1.5px solid var(--acik); border-radius:999px; padding:5px 13px 5px 5px; font-size:.8em; font-weight:700; color:#22333b; cursor:pointer; transition:.15s; text-decoration:none; }
+.ogr-yol-adim:hover{ border-color:var(--mavi); transform:translateY(-1px); box-shadow:0 3px 8px rgba(0,0,0,.08); }
+.ogr-yol-adim .ogr-yol-no{ width:21px; height:21px; border-radius:50%; background:var(--acikgri); color:#8892a0; display:flex; align-items:center; justify-content:center; font-size:.85em; font-weight:800; flex-shrink:0; }
+.ogr-yol-adim.ogr-gorulen{ border-color:var(--yesil); }
+.ogr-yol-adim.ogr-gorulen .ogr-yol-no{ background:var(--yesil); color:#fff; font-size:0; }
+.ogr-yol-adim.ogr-gorulen .ogr-yol-no::after{ content:'✓'; font-size:11px; }
+.ogr-ilerleme-cubuk-dis{ height:7px; background:var(--acikgri); border-radius:999px; overflow:hidden; margin-top:12px; }
+.ogr-ilerleme-cubuk-ic{ height:100%; background:linear-gradient(90deg,var(--mavi),var(--yesil)); width:0%; transition:width .5s ease; border-radius:999px; }
+
+.ogr-modul{ position:relative; margin:0 0 8px; padding:0 0 0 52px; }
+.ogr-modul::before{ content:''; position:absolute; left:19px; top:42px; bottom:-8px; width:2px; background:var(--acik); }
+.ogr-modul:last-child::before{ display:none; }
+.ogr-modul-no{ position:absolute; left:0; top:0; width:40px; height:40px; border-radius:50%; background:var(--mavi); color:#fff; font-weight:800; font-size:1.05em; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,.18); z-index:1; transition:background .25s; }
+.ogr-modul.ogr-tamamlandi .ogr-modul-no{ background:var(--yesil); font-size:0; }
+.ogr-modul.ogr-tamamlandi .ogr-modul-no::after{ content:'✓'; font-size:17px; }
+.ogr-modul-sure{ position:absolute; left:52px; top:47px; font-size:.7em; font-weight:700; color:#8892a0; display:flex; align-items:center; gap:4px; }
+.ogr-modul-govde{ padding-top:26px; }
+
+.ogr-giris-karti{ display:flex; gap:14px; align-items:center; background:linear-gradient(160deg,#fff,var(--acikgri)); border:1px solid var(--acik); border-radius:16px; padding:16px 20px; margin:6px 0 22px; }
+.ogr-giris-ikon{ width:46px; height:46px; border-radius:12px; background:var(--mavi); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.4em; flex-shrink:0; }
+.ogr-giris-metin{ flex:1; min-width:0; }
+.ogr-giris-metin b{ display:block; font-size:.95em; color:var(--navy); margin-bottom:2px; }
+.ogr-giris-metin span{ font-size:.82em; color:#778; }
+@media(max-width:640px){
+  .ogr-ozet-ust-satir{ flex-direction:column; align-items:flex-start; }
+  .ogr-giris-karti{ flex-direction:column; text-align:center; }
+}
+</style>
+
 </head>
 <body>
 
@@ -544,8 +594,8 @@
     <span style="top:65%; left:10%; animation-delay:1.2s;">✨</span>
     <span style="top:20%; left:85%; animation-delay:.6s;">📜</span>
     <span style="top:75%; left:88%; animation-delay:1.8s;">🕯️</span>
-    <span style="top:45%; left:48%; animation-delay:2.4s;">📖</span>
-    <span style="top:12%; left:45%; animation-delay:.9s;">💫</span>
+    <span style="top:50%; left:16%; animation-delay:2.4s;">📖</span>
+    <span style="top:6%; left:78%; animation-delay:.9s;">💫</span>
   </div>
   <h2 class="hero-baslik">Peygamberleri ve İlahi Kitapları Keşfet!</h2>
   <p class="hero-alt">Peygamberlik, vahiy, ilahi kitaplar ve Felak suresi hakkında oyunlarla öğren!</p>
@@ -871,7 +921,7 @@
     <h3 style="color:var(--mavi)">1️⃣ İnsanlara Rehber: Peygamber</h3>
     <p><b>Peygamber</b> kelimesi Farsça kökenlidir ve "haber getiren" anlamına gelir. Terim olarak "Allah'ın emir, yasak ve öğütlerini insanlara bildirmekle görevli kişiler"dir. Peygamberlerin en önemli özelliği Allah'tan <b>vahiy</b> almalarıdır. Kur'an'da peygamberler için <b>resul</b> (elçi) ve <b>nebi</b> (haberci) kavramları kullanılır; bunlardan türeyen <b>risalet</b> ve <b>nübüvvet</b> kavramları da peygamberlik görevini ifade eder.</p>
     <p>Kur'an'da ismi geçen <b>25 peygamber</b> vardır. İlk peygamber Hz. Âdem, son peygamber Hz. Muhammed'dir (sav). Peygamberler Kur'an'da ismi geçenlerle sınırlı değildir.</p>
-    <div class="aciklama"><b>Peygamberlerin Özellikleri:</b> Sıdk (dürüstlük), Emanet (güvenilirlik), Fetanet (akıllılık/zekâ), İsmet (günahtan korunmuşluk), Tebliğ (vahyi eksiksiz iletme).<br><b>Peygamberlerin Görevleri:</b> Tebliğ (bildirme), İnzar (uyarma), Tebşir (müjdeleme), Tezkiye (kötü huylardan arındırma), Tebyin (açıklama), Temsil (örneklik).</p>
+    <div class="aciklama"><p><b>Peygamberlerin Özellikleri:</b> Sıdk (dürüstlük), Emanet (güvenilirlik), Fetanet (akıllılık/zekâ), İsmet (günahtan korunmuşluk), Tebliğ (vahyi eksiksiz iletme).<br><b>Peygamberlerin Görevleri:</b> Tebliğ (bildirme), İnzar (uyarma), Tebşir (müjdeleme), Tezkiye (kötü huylardan arındırma), Tebyin (açıklama), Temsil (örneklik).</p></div>
     <p>Peygamberlerin kendilerine inanmayanlara peygamberliklerini ispat etmek amacıyla Allah'ın (cc) izniyle gösterdikleri olağanüstü olaylara <b>mucize</b> denir. Hz. Peygamber'in en büyük mucizesi Kur'an-ı Kerim'dir.</p>
   </div>
 
@@ -3530,6 +3580,218 @@ function zbTekrarHatirlatmaKontrol(){
 }
 document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
+</script>
+
+<script id="ogrKatmaniScript">
+/* ===================== OGRENME DENEYIMI KATMANI (JS) =====================
+   Sadece EKLEME yapar: mevcut id/onclick/veri yapisina dokunmaz, hicbir
+   fonksiyonu yeniden tanimlamaz. Amac: hero'ya hedef+ilerleme, konu ozetine
+   "ogrenme yolu" (modul kartlari + ilerleme cubugu), sunum/test bolumlerine
+   kisa tanitim kartlari eklemek. Tum yeni fonksiyon/degiskenler "ogr" onekiyle
+   isimlendirildi ki mevcut kodla asla çakismasin. */
+(function(){
+  function ogrUniteKimlik(){ return (typeof UNITE_KIMLIK !== 'undefined') ? UNITE_KIMLIK : location.pathname; }
+  function ogrEmojiTemizle(t){
+    return (t||'')
+      .replace(/^\s*\d+️?⃣\s*/,'') /* baştaki "1️⃣" gibi sayı+tuş takımı simgesi */
+      .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2000}-\u{206F}️⃣]/gu,'')
+      .trim();
+  }
+  function ogrSureTahmini(karakterSayisi){
+    return Math.max(1, Math.round(karakterSayisi/700));
+  }
+  function ogrGorulenOku(anahtar){
+    try{ return JSON.parse(localStorage.getItem(anahtar)) || []; }catch(e){ return []; }
+  }
+  function ogrGorulenYaz(anahtar, dizi){
+    try{ localStorage.setItem(anahtar, JSON.stringify(dizi)); }catch(e){}
+  }
+
+  /* ---------- 1) KONU OZETI: ogrenme yolu + ilerleme ---------- */
+  function ogrOzetGelistir(){
+    const ozet = document.querySelector('main section[id^="ozet"]');
+    if(!ozet || ozet.dataset.ogrHazir) return;
+
+    const cocuklar = Array.from(ozet.children);
+    const modulBaslar = [];
+    cocuklar.forEach(function(c, i){
+      if(c.classList && c.classList.contains('kutu-panel') && c.querySelector(':scope > h3')) modulBaslar.push(i);
+    });
+    if(modulBaslar.length < 2) return; /* tek modullu ünitede ekstra karmasaya gerek yok */
+    ozet.dataset.ogrHazir = '1';
+
+    const moduller = modulBaslar.map(function(baslangic, idx){
+      const bitis = idx+1 < modulBaslar.length ? modulBaslar[idx+1] : cocuklar.length;
+      const nodes = cocuklar.slice(baslangic, bitis);
+      const h3 = nodes[0].querySelector(':scope > h3');
+      const baslikMetni = ogrEmojiTemizle(h3 ? h3.textContent : ('Bölüm ' + (idx+1)));
+      const karakterSayisi = nodes.reduce(function(t,n){ return t + (n.textContent||'').length; }, 0);
+      return { nodes:nodes, baslik:baslikMetni, sure: ogrSureTahmini(karakterSayisi) };
+    });
+    const toplamSure = moduller.reduce(function(t,m){ return t+m.sure; }, 0);
+
+    const gorulenAnahtar = 'dkabOzetGorulen_' + ogrUniteKimlik();
+    let gorulenler = ogrGorulenOku(gorulenAnahtar);
+
+    /* Üst özet paneli */
+    const ustPanel = document.createElement('div');
+    ustPanel.className = 'ogr-ozet-ust';
+    const yolLi = moduller.map(function(m,i){
+      return '<a href="#ogrModul'+i+'" class="ogr-yol-adim" data-ogr-index="'+i+'">'+
+        '<span class="ogr-yol-no">'+(i+1)+'</span><span class="ogr-yol-baslik">'+m.baslik+'</span></a>';
+    }).join('');
+    ustPanel.innerHTML =
+      '<div class="ogr-ozet-ust-satir">'+
+        '<p class="ogr-ozet-baslik">🗺️ Öğrenme Yolu</p>'+
+        '<div class="ogr-ozet-meta">'+
+          '<span>📚 '+moduller.length+' bölüm</span>'+
+          '<span>⏱️ ~'+toplamSure+' dk okuma</span>'+
+        '</div>'+
+      '</div>'+
+      '<ul class="ogr-yol-liste">'+yolLi+'</ul>'+
+      '<div class="ogr-ilerleme-cubuk-dis"><div class="ogr-ilerleme-cubuk-ic" id="ogrIlerlemeCubuk"></div></div>';
+    const ozetH2 = ozet.querySelector(':scope > h2');
+    if(ozetH2 && ozetH2.nextSibling) ozet.insertBefore(ustPanel, ozetH2.nextSibling);
+    else ozet.insertBefore(ustPanel, ozet.firstChild);
+
+    ustPanel.querySelectorAll('.ogr-yol-adim').forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        const hedef = document.getElementById('ogrModul'+a.dataset.ogrIndex);
+        if(hedef) hedef.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    /* Modülleri sar (mevcut node'lar tasinir, KOPYALANMAZ; id/onclick/veri korunur) */
+    moduller.forEach(function(m, i){
+      const sarmalayici = document.createElement('div');
+      sarmalayici.className = 'ogr-modul';
+      sarmalayici.id = 'ogrModul' + i;
+      if(gorulenler.indexOf(i) !== -1) sarmalayici.classList.add('ogr-tamamlandi');
+      const no = document.createElement('div'); no.className='ogr-modul-no'; no.textContent = String(i+1);
+      const sure = document.createElement('div'); sure.className='ogr-modul-sure'; sure.textContent = '⏱️ ~'+m.sure+' dk';
+      const govde = document.createElement('div'); govde.className='ogr-modul-govde';
+      m.nodes.forEach(function(n){ govde.appendChild(n); }); /* appendChild = tasima, kopyalama degil */
+      sarmalayici.appendChild(no);
+      sarmalayici.appendChild(sure);
+      sarmalayici.appendChild(govde);
+      ozet.appendChild(sarmalayici);
+    });
+
+    function ogrIlerlemeGuncelle(){
+      const oran = moduller.length ? gorulenler.length/moduller.length : 0;
+      const cubuk = document.getElementById('ogrIlerlemeCubuk');
+      if(cubuk) cubuk.style.width = Math.round(oran*100)+'%';
+      ustPanel.querySelectorAll('.ogr-yol-adim').forEach(function(a){
+        a.classList.toggle('ogr-gorulen', gorulenler.indexOf(+a.dataset.ogrIndex) !== -1);
+      });
+    }
+    ogrIlerlemeGuncelle();
+
+    if('IntersectionObserver' in window){
+      const gozlemci = new IntersectionObserver(function(kayitlar){
+        let degisti = false;
+        kayitlar.forEach(function(kayit){
+          if(kayit.isIntersecting){
+            const idx = +kayit.target.id.replace('ogrModul','');
+            if(gorulenler.indexOf(idx) === -1){
+              gorulenler.push(idx);
+              kayit.target.classList.add('ogr-tamamlandi');
+              degisti = true;
+            }
+          }
+        });
+        if(degisti){ ogrGorulenYaz(gorulenAnahtar, gorulenler); ogrIlerlemeGuncelle(); }
+      }, {threshold:0.55});
+      moduller.forEach(function(m,i){ gozlemci.observe(document.getElementById('ogrModul'+i)); });
+    }
+  }
+
+  /* ---------- 2) HERO: ogrenme hedefleri + ilerleme rozeti ---------- */
+  function ogrHeroGelistir(){
+    const hero = document.querySelector('.hero');
+    const butonlar = hero ? hero.querySelector('.hero-butonlar') : null;
+    if(!hero || !butonlar || hero.dataset.ogrHazir) return;
+    hero.dataset.ogrHazir = '1';
+
+    const basliklar = Array.from(document.querySelectorAll('main section[id^="ozet"] .kutu-panel > h3')).map(function(h){
+      return ogrEmojiTemizle(h.textContent);
+    });
+    const ek = document.createElement('div');
+    ek.className = 'ogr-hero-ek';
+    let ic = '';
+    if(basliklar.length){
+      ic += '<div class="ogr-hedef-satir">' + basliklar.map(function(b,i){
+        return '<span class="ogr-hedef-cip"><span class="ogr-hedef-no">'+(i+1)+'</span>'+b+'</span>';
+      }).join('') + '</div>';
+    }
+    ic += '<span class="ogr-ilerleme-rozet"><svg class="ogr-ring" viewBox="0 0 32 32" aria-hidden="true">'+
+      '<circle class="ogr-ring-arka" cx="16" cy="16" r="13"></circle>'+
+      '<circle class="ogr-ring-on" id="ogrHeroRing" cx="16" cy="16" r="13" stroke-dasharray="81.68" stroke-dashoffset="81.68"></circle>'+
+      '</svg><span id="ogrHeroRozetMetin">Bu üniteye yeni başlıyorsun</span></span>';
+    ek.innerHTML = ic;
+    butonlar.insertAdjacentElement('afterend', ek);
+
+    const toplamEtkinlik = document.querySelectorAll('.oyun-grubu button').length || 1;
+    function ogrHeroIlerlemeGuncelle(){
+      const tamamlananEl = document.getElementById('istTamamlanan');
+      const tamamlanan = tamamlananEl ? (parseInt(tamamlananEl.textContent,10) || 0) : 0;
+      const oran = Math.min(1, tamamlanan/toplamEtkinlik);
+      const ring = document.getElementById('ogrHeroRing');
+      if(ring) ring.setAttribute('stroke-dashoffset', String(81.68*(1-oran)));
+      const metin = document.getElementById('ogrHeroRozetMetin');
+      if(metin){
+        metin.textContent = tamamlanan===0
+          ? 'Bu üniteye yeni başlıyorsun'
+          : (tamamlanan+'/'+toplamEtkinlik+' etkinlik tamamlandı (%'+Math.round(oran*100)+')');
+      }
+    }
+    ogrHeroIlerlemeGuncelle();
+    const istTamamlananEl = document.getElementById('istTamamlanan');
+    if(istTamamlananEl && 'MutationObserver' in window){
+      new MutationObserver(ogrHeroIlerlemeGuncelle).observe(istTamamlananEl, {childList:true, characterData:true, subtree:true});
+    }
+  }
+
+  /* ---------- 3) SUNUM / TEST: kisa tanitim kartlari ---------- */
+  function ogrGirisKartiEkle(sectionEl, ikon, baslik, metin){
+    if(!sectionEl || sectionEl.dataset.ogrGirisHazir) return;
+    sectionEl.dataset.ogrGirisHazir = '1';
+    const h2 = sectionEl.querySelector(':scope > h2');
+    if(!h2) return;
+    const kart = document.createElement('div');
+    kart.className = 'ogr-giris-karti';
+    kart.innerHTML = '<div class="ogr-giris-ikon">'+ikon+'</div><div class="ogr-giris-metin"><b>'+baslik+'</b><span>'+metin+'</span></div>';
+    h2.insertAdjacentElement('afterend', kart);
+  }
+  function ogrSunumTanitimEkle(){
+    const slaytBolumu = document.getElementById('slayt');
+    if(!slaytBolumu) return;
+    const sayac = slaytBolumu.querySelector('#sunumSayac');
+    const eslesme = sayac ? sayac.textContent.match(/\/\s*(\d+)/) : null;
+    const toplamSlayt = eslesme ? eslesme[1] : '?';
+    ogrGirisKartiEkle(slaytBolumu, '🖥️', 'Ünitenin tamamını 5-10 dakikada gözden geçir',
+      toplamSlayt+' slaytlık kısa bir sunum — okuduğun konuları toparlamak için ideal.');
+  }
+  function ogrTestTanitimEkle(){
+    const testBolumu = document.querySelector('main section[id^="konutekrari"]');
+    if(!testBolumu) return;
+    const h2Metin = testBolumu.querySelector(':scope > h2') ? testBolumu.querySelector(':scope > h2').textContent : '';
+    const eslesme = h2Metin.match(/\((\d+)\s*Soru\)/i);
+    const soruSayisi = eslesme ? eslesme[1] : '?';
+    ogrGirisKartiEkle(testBolumu, '📝', 'Ne kadar hazır olduğunu ölç',
+      soruSayisi+' soruluk karma bir test — her yanlışta açıklamasıyla birlikte anında geri bildirim alırsın.');
+  }
+
+  function ogrBaslat(){
+    ogrOzetGelistir();
+    ogrHeroGelistir();
+    ogrSunumTanitimEkle();
+    ogrTestTanitimEkle();
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ogrBaslat);
+  else ogrBaslat();
+})();
 </script>
 </body>
 </html>
