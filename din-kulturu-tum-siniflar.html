@@ -372,7 +372,7 @@
   .filtre-satir button[aria-pressed="true"]{ background:#fff; color:var(--navy); border-color:#fff; }
 
   main#ana-icerik{
-    max-width:var(--genislik); margin:var(--sp-6) auto 0; padding:var(--sp-6) var(--gutter);
+    min-width:0; padding:var(--sp-5) var(--sp-5);
     background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-xl); box-shadow:var(--golge-sm);
   }
 
@@ -543,76 +543,67 @@
   .sinif-sekme-onsoz{
     text-align:center; max-width:560px; margin:0 auto var(--sp-5); font-size:.96em; color:#8a94a3; font-weight:600; line-height:1.55;
   }
+
+  /* ===== İki sütunlu LMS yerleşimi: solda sabit (sticky) sınıf navigasyonu,
+     sağda seçilen sınıfın tüm içeriği. Sidebar masaüstünde sticky kalır;
+     tablet/mobilde (bkz. mobil medya sorgusu) yatay kaydırılan bir şeride
+     dönüşür — nav.sinif-sekme'nin display yönü orada değişir. ===== */
+  .sinif-layout{ display:grid; grid-template-columns:272px minmax(0,1fr); gap:var(--sp-5); align-items:start; }
+  .sinif-sekme-sutunu{ position:sticky; top:calc(var(--sp-7) + 20px); display:flex; flex-direction:column; gap:var(--sp-2); }
   .sinif-sekme-bilgi{
-    text-align:center; margin:0 0 var(--sp-3); font-size:.86em; font-weight:700; color:#8a94a3; min-height:1.3em;
-  }
-  .sinif-sekme-sarmal > nav.sinif-sekme{
-    background:color-mix(in srgb, var(--yuzey) 90%, transparent); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-    border:1px solid var(--kenar); border-radius:var(--r-xl); box-shadow:var(--golge-lg); padding:var(--sp-4);
+    text-align:left; margin:0 4px; font-size:.8em; font-weight:700; color:#8a94a3; min-height:1.3em;
   }
   nav.sinif-sekme{
-    position:relative; display:flex; flex-wrap:wrap; justify-content:center; gap:var(--sp-4);
+    position:relative; display:flex; flex-direction:column; gap:6px;
+    background:color-mix(in srgb, var(--yuzey) 92%, transparent); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--kenar); border-radius:var(--r-xl); box-shadow:var(--golge-lg); padding:var(--sp-2);
   }
   .sinif-sekme-pill{
     --vurgu-koyu:color-mix(in srgb, var(--vurgu) 72%, black);
-    position:relative; display:flex; flex-direction:column; gap:var(--sp-3); text-align:left;
-    padding:var(--sp-5) var(--sp-5) var(--sp-4); width:230px;
-    border:1.5px solid color-mix(in srgb, var(--vurgu) 26%, var(--kenar));
-    border-left:4px solid var(--vurgu-koyu);
-    border-radius:var(--r-lg); cursor:pointer; color:var(--metin); box-shadow:var(--golge-sm);
-    background:linear-gradient(165deg, color-mix(in srgb, var(--vurgu) 10%, var(--yuzey)) 0%, var(--yuzey) 65%);
-    transition:transform var(--dur) var(--ease-spring), background var(--dur), color var(--dur), box-shadow var(--dur), border-color var(--dur);
+    position:relative; display:flex; flex-direction:row; align-items:center; gap:12px; text-align:left;
+    padding:10px 12px; width:100%;
+    border:1.5px solid transparent; border-left:4px solid color-mix(in srgb, var(--vurgu) 30%, transparent);
+    border-radius:var(--r-md); cursor:pointer; color:var(--metin); box-shadow:none; background:transparent;
+    transition:transform var(--dur-fast) var(--ease-spring), background var(--dur), color var(--dur), box-shadow var(--dur), border-color var(--dur);
   }
-  .ssp-ust{ display:flex; align-items:center; gap:12px; }
-  .ssp-ikon-sarmal{ position:relative; width:44px; height:44px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .ssp-ust{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
+  .ssp-ikon-sarmal{ position:relative; width:38px; height:38px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
   .ssp-ring{ position:absolute; inset:0; transform:rotate(-90deg); }
   .ssp-ring circle{ fill:none; stroke-width:2.5; }
   .ssp-ring-arka{ stroke:color-mix(in srgb, var(--vurgu) 18%, transparent); }
   .ssp-ring-on{ stroke:var(--vurgu-koyu); stroke-linecap:round; transition:stroke-dashoffset var(--dur-slow) var(--ease-spring), stroke var(--dur); }
-  .ssp-ikon{ position:relative; z-index:1; font-size:1.2em; color:var(--vurgu-koyu); transition:transform var(--dur) var(--ease-spring); }
-  .ssp-numara-blok{ display:flex; flex-direction:column; line-height:1; }
-  .ssp-numara{ font-size:2.6em; font-weight:900; color:var(--vurgu-koyu); letter-spacing:-.03em; transition:color var(--dur); }
-  .ssp-ad{ font-size:.7em; font-weight:700; color:#8a94a3; text-transform:uppercase; letter-spacing:.4px; margin-top:2px; transition:color var(--dur); }
+  .ssp-ikon{ position:relative; z-index:1; font-size:1.05em; color:var(--vurgu-koyu); transition:transform var(--dur) var(--ease-spring); }
+  .ssp-numara-blok{ display:flex; flex-direction:row; align-items:baseline; gap:4px; line-height:1.2; white-space:nowrap; }
+  .ssp-numara{ font-size:1em; font-weight:900; color:var(--metin); letter-spacing:-.01em; transition:color var(--dur); }
+  .ssp-numara::after{ content:'. Sınıf'; font-size:.85em; font-weight:700; color:#8a94a3; }
+  .ssp-ad{ display:none; }
   .ssp-slogan{
-    font-size:.86em; font-weight:800; color:color-mix(in srgb, var(--vurgu-koyu) 88%, var(--metin));
-    line-height:1.3; margin:-2px 0 0; transition:color var(--dur);
+    flex:1; min-width:0; font-size:.78em; font-weight:600; color:#8a94a3;
+    line-height:1.3; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:color var(--dur);
   }
-  .ssp-meta{ display:flex; flex-direction:column; gap:4px; padding-top:var(--sp-2); border-top:1px dashed color-mix(in srgb, var(--vurgu) 22%, var(--kenar)); transition:border-color var(--dur); }
-  .ssp-meta-satir{ display:flex; align-items:center; gap:6px; font-size:.7em; font-weight:700; color:#8a94a3; transition:color var(--dur); }
-  .ssp-meta-satir .msi{ font-size:13px; color:var(--vurgu-koyu); transition:color var(--dur); }
+  .ssp-meta{ display:none; }
   .sinif-sekme-pill:hover{
-    transform:translateY(-6px) scale(1.015); box-shadow:var(--golge-lg);
-    border-color:color-mix(in srgb, var(--vurgu) 55%, var(--kenar));
+    background:color-mix(in srgb, var(--vurgu) 8%, transparent);
+    border-color:transparent; border-left-color:color-mix(in srgb, var(--vurgu) 55%, transparent);
   }
   .sinif-sekme-pill:hover .ssp-ikon{ transform:scale(1.15) rotate(-6deg); }
   .sinif-sekme-pill[aria-selected="true"]{
-    background:linear-gradient(150deg, var(--vurgu), color-mix(in srgb, var(--vurgu) 65%, black));
-    color:#fff; border-color:transparent; border-left-color:color-mix(in srgb, var(--vurgu-koyu) 60%, #fff);
-    transform:translateY(-4px) scale(1.045);
-    box-shadow:0 20px 36px -14px color-mix(in srgb, var(--vurgu) 55%, transparent), var(--golge);
+    background:var(--vurgu); color:#fff; border-color:transparent; border-left-color:var(--vurgu-koyu);
+    box-shadow:var(--golge-sm);
   }
-  .sinif-sekme-pill[aria-selected="true"]:hover{ transform:translateY(-8px) scale(1.045); }
-  .sinif-sekme-pill[aria-selected="true"] .ssp-numara,
+  .sinif-sekme-pill[aria-selected="true"] .ssp-numara{ color:#fff; }
+  .sinif-sekme-pill[aria-selected="true"] .ssp-numara::after{ color:rgba(255,255,255,.75); }
   .sinif-sekme-pill[aria-selected="true"] .ssp-ikon{ color:#fff; }
-  .sinif-sekme-pill[aria-selected="true"] .ssp-ad{ color:rgba(255,255,255,.75); }
-  .sinif-sekme-pill[aria-selected="true"] .ssp-slogan{ color:rgba(255,255,255,.94); }
-  .sinif-sekme-pill[aria-selected="true"] .ssp-meta{ border-color:rgba(255,255,255,.3); }
-  .sinif-sekme-pill[aria-selected="true"] .ssp-meta-satir,
-  .sinif-sekme-pill[aria-selected="true"] .ssp-meta-satir .msi{ color:rgba(255,255,255,.9); }
+  .sinif-sekme-pill[aria-selected="true"] .ssp-slogan{ color:rgba(255,255,255,.9); }
   .sinif-sekme-pill[aria-selected="true"] .ssp-ring-arka{ stroke:rgba(255,255,255,.3); }
   .sinif-sekme-pill[aria-selected="true"] .ssp-ring-on{ stroke:#fff; }
   .sinif-sekme-pill:focus-visible{
-    outline:3px solid color-mix(in srgb, var(--vurgu) 65%, transparent); outline-offset:3px;
-  }
-  /* Tablet: 4 kart tek satıra dar gelirse dengeli 2x2'ye sarar (justify-content:center
-     zaten ortalar); kart biraz daralarak satıra daha rahat sığar. */
-  @media(min-width:641px) and (max-width:1024px){
-    .sinif-sekme-pill{ width:210px; }
+    outline:3px solid color-mix(in srgb, var(--vurgu) 65%, transparent); outline-offset:2px;
   }
 
   section.sinif-panel{ display:none; }
-  section.sinif-panel.aktif{ display:block; animation:fadeScale .3s var(--ease-out); }
-  @keyframes fadeScale{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+  section.sinif-panel.aktif{ display:block; animation:fadeSlide .35s var(--ease-out); }
+  @keyframes fadeSlide{ from{ opacity:0; transform:translate(10px,6px); } to{ opacity:1; transform:translate(0,0); } }
 
   .sinif-baslik{ display:flex; align-items:center; gap:14px; margin:var(--sp-2) 0 var(--sp-4); }
   .sinif-baslik h2{ margin:0; color:color-mix(in srgb, var(--vurgu, var(--navy)) 72%, black); font-size:1.5em; }
@@ -696,6 +687,17 @@
     font-size:.88em; transition:background var(--dur), transform var(--dur-fast); min-height:44px;
   }
   .unite-kart:hover .uk-btn{ transform:translateY(-2px); }
+  /* Ünite sayfasının kendi bölümlerine (Konu Özeti/Sunum/Oyunlar/Yazılı)
+     doğrudan atlayan kısayol satırı — ana "İNCELE" bağlantısından ayrı,
+     küçük ikon+etiket linkleri olarak. */
+  .uk-derin-baglantilar{ display:flex; flex-wrap:wrap; gap:4px; padding:0 16px; margin:2px 0 10px; }
+  .uk-derin-link{
+    display:inline-flex; align-items:center; gap:4px; text-decoration:none; color:#8a94a3;
+    font-size:.7em; font-weight:700; background:var(--acikgri); padding:5px 9px 5px 7px; border-radius:var(--r-pill);
+    transition:background var(--dur-fast), color var(--dur-fast);
+  }
+  .uk-derin-link .msi{ font-size:14px; }
+  .uk-derin-link:hover{ background:color-mix(in srgb, var(--vurgu) 18%, var(--acikgri)); color:var(--vurgu); }
   .uk-aksiyon{ display:flex; gap:8px; padding:12px 16px 16px; margin-top:auto; }
   .uk-fav, .uk-tamam{
     flex:1; border:1.5px solid var(--kenar); background:var(--yuzey); color:var(--metin);
@@ -842,17 +844,28 @@
     .hizli-izgara{ grid-template-columns:1fr; }
     .hizli-devam-btn{ width:100%; }
     .oneri-kart{ width:200px; }
-    nav.sinif-sekme{
-      flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x proximity; padding-bottom:2px;
-      mask-image:linear-gradient(to right, black calc(100% - 28px), transparent 100%);
-      -webkit-mask-image:linear-gradient(to right, black calc(100% - 28px), transparent 100%);
-    }
-    .sinif-sekme-pill{ flex-shrink:0; scroll-snap-align:start; }
     .ilerleme-govde{ justify-content:center; text-align:center; }
     .uk-aksiyon{ flex-direction:column; }
     .uk-fav, .uk-tamam{ min-height:44px; }
     .yukari-buton{ width:52px; height:52px; }
+  }
+
+  /* ===== Sınıf seçici: dar ekranlarda sticky sidebar'dan yatay kaydırılan
+     bir şeride dönüşür (sidebar + geniş içerik sütunu için yeterli genişlik
+     olmadığı eşik). Tek sütuna inen .sinif-layout, ana içeriği doğal olarak
+     nav'ın altına taşır. ===== */
+  @media(max-width:900px){
+    .sinif-layout{ grid-template-columns:1fr; gap:var(--sp-3); }
+    .sinif-sekme-sutunu{ position:static; }
+    nav.sinif-sekme{
+      flex-direction:row; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity; padding:var(--sp-2); gap:8px;
+      mask-image:linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+      -webkit-mask-image:linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+    }
+    .sinif-sekme-pill{ flex-shrink:0; width:212px; scroll-snap-align:start; border-left-width:3px; }
+    .ssp-slogan{ white-space:normal; }
+    main#ana-icerik{ padding:var(--sp-4) var(--sp-3); }
   }
 
   /* ===================== İÇERİK ÜRETİM REHBERİ (öğretmen için) ===================== */
@@ -972,19 +985,24 @@
     <p class="bolum-on-etiket">4 Farklı Sınıf Seviyesi</p>
     <h2 class="sinif-odak-baslik" id="sinifOdakBaslik">Sınıfını Seç</h2>
     <p class="sinif-sekme-onsoz">Sınıf seviyenizi seçerek Türkiye Yüzyılı Maarif Modeli'ne uygun içeriklere ulaşabilirsiniz.</p>
-    <p class="sinif-sekme-bilgi" id="sinifSekmeBilgi" aria-live="polite"></p>
-    <nav class="sinif-sekme" id="sinifSekme" role="tablist" aria-label="Sınıf seçimi">
-    </nav>
+
+    <div class="sinif-layout">
+      <div class="sinif-sekme-sutunu">
+        <nav class="sinif-sekme" id="sinifSekme" role="tablist" aria-label="Sınıf seçimi">
+        </nav>
+        <p class="sinif-sekme-bilgi" id="sinifSekmeBilgi" aria-live="polite"></p>
+      </div>
+
+      <main id="ana-icerik">
+        <div class="sinif-bos-durum" id="sinifBosDurum">
+          <span class="msi" aria-hidden="true">touch_app</span>
+          <p>Başlamak için bir sınıf seçin</p>
+        </div>
+        <div id="sinifAlani"></div>
+      </main>
+    </div>
   </div>
 </section>
-
-<main id="ana-icerik">
-  <div class="sinif-bos-durum" id="sinifBosDurum">
-    <span class="msi" aria-hidden="true">touch_app</span>
-    <p>Başlamak için yukarıdan bir sınıf seçin</p>
-  </div>
-  <div id="sinifAlani"></div>
-</main>
 
 <section class="onerilen-bolum" id="onerilenBolum" aria-labelledby="onerilenBaslik" hidden>
   <div class="onerilen-baslik-satir">
@@ -1236,34 +1254,34 @@
    (emoji "ikon" alanı aramada/hızlı erişimde/vb. küçük yerlerde kullanılmaya devam eder).
 ====================================================================== */
 const SINIFLAR = [
-  { id:'s4', ad:'4. Sınıf', ikon:'🕌', msi:'menu_book', vurgu:'--mavi', slogan:'Temel Kavramlar', klasor:'din-kulturu-4sinif-1unite', uniteler:[
+  { id:'s4', ad:'4. Sınıf', ikon:'🕌', msi:'menu_book', vurgu:'--mavi', slogan:'Temel Kavramlar', klasor:'din-kulturu-4sinif-1unite', sonekler:['','2','3','4','5'], uniteler:[
     {dosya:'index.html', ikon:'🤲', msi:'volunteer_activism', baslik:"Günlük Hayattaki Dinî İfadeler"},
     {dosya:'unite2.html', ikon:'📖', msi:'auto_stories', baslik:"İnancım ve Kur'an-ı Kerim"},
     {dosya:'unite3.html', ikon:'💞', msi:'favorite', baslik:"Din Güzel Ahlaktır"},
     {dosya:'unite4.html', ikon:'🕌', msi:'account_balance', baslik:"Hz. Muhammed'i Tanıyalım"},
     {dosya:'unite5.html', ikon:'🧼', msi:'clean_hands', baslik:"İslam Dini ve Temizlik"}
   ]},
-  { id:'s5', ad:'5. Sınıf', ikon:'🌌', msi:'mosque', vurgu:'--turkuaz', slogan:'İnanç ve İbadet', klasor:'din-kulturu-5sinif-1unite', uniteler:[
+  { id:'s5', ad:'5. Sınıf', ikon:'🌌', msi:'mosque', vurgu:'--turkuaz', slogan:'İnanç ve İbadet', klasor:'din-kulturu-5sinif-1unite', sonekler:['1','2','3','4'], uniteler:[
     {dosya:'index.html', ikon:'🌌', msi:'auto_awesome', baslik:"Allah İnancı"},
     {dosya:'unite2.html', ikon:'🕌', msi:'mosque', baslik:"Allah'ın Huzurunda Olmak: Namaz İbadeti"},
     {dosya:'unite3.html', ikon:'📖', msi:'auto_stories', baslik:"Kur'an-ı Kerim"},
     {dosya:'unite4.html', ikon:'🕊️', msi:'menu_book', baslik:"Peygamber Kıssaları"}
   ]},
-  { id:'s6', ad:'6. Sınıf', ikon:'🌙', msi:'favorite', vurgu:'--yesil', slogan:'Ahlak ve Değerler', klasor:'din-kulturu-6sinif-1unite', uniteler:[
+  { id:'s6', ad:'6. Sınıf', ikon:'🌙', msi:'favorite', vurgu:'--yesil', slogan:'Ahlak ve Değerler', klasor:'din-kulturu-6sinif-1unite', sonekler:['6','62','63','64','65'], uniteler:[
     {dosya:'index.html', ikon:'📚', msi:'library_books', baslik:"Peygamber ve İlahi Kitap İnancı"},
     {dosya:'unite2.html', ikon:'🌙', msi:'bedtime', baslik:"Ramazan ve Oruç"},
     {dosya:'unite3.html', ikon:'🤝', msi:'handshake', baslik:"Ahlaki Davranışlar"},
     {dosya:'unite4.html', ikon:'🕌', msi:'history_edu', baslik:"Peygamberliğinden Önce Hz. Muhammed"},
     {dosya:'unite5.html', ikon:'🎨', msi:'museum', baslik:"Kültürümüzdeki Dinî Motifler"}
   ]},
-  { id:'s7', ad:'7. Sınıf', ikon:'👼', msi:'psychology', vurgu:'--sari', slogan:'İnanç ve Düşünce', klasor:'din-kulturu-7sinif-1unite', uniteler:[
+  { id:'s7', ad:'7. Sınıf', ikon:'👼', msi:'psychology', vurgu:'--sari', slogan:'İnanç ve Düşünce', klasor:'din-kulturu-7sinif-1unite', sonekler:['7','72','73','74','75'], uniteler:[
     {dosya:'index.html', ikon:'👼', msi:'nights_stay', baslik:"Melek ve Ahiret İnancı"},
     {dosya:'unite2.html', ikon:'🕋', msi:'travel_explore', baslik:"Hac ve Kurban"},
     {dosya:'unite3.html', ikon:'🤝', msi:'handshake', baslik:"Ahlaki Davranışlar"},
     {dosya:'unite4.html', ikon:'🕌', msi:'history_edu', baslik:"Allah'ın Kulu ve Elçisi: Hz. Muhammed"},
     {dosya:'unite5.html', ikon:'💭', msi:'psychology', baslik:"İslam Düşüncesinde Yorumlar"}
   ]},
-  { id:'s8', ad:'8. Sınıf', ikon:'⚖️', msi:'balance', vurgu:'--navy', slogan:'Kader ve Sorumluluk', klasor:'din-kulturu-8sinif-1unite', yaziliSiniri:2, uniteler:[
+  { id:'s8', ad:'8. Sınıf', ikon:'⚖️', msi:'balance', vurgu:'--navy', slogan:'Kader ve Sorumluluk', klasor:'din-kulturu-8sinif-1unite', yaziliSiniri:2, sonekler:['8','82'], uniteler:[
     {dosya:'index.html', ikon:'⚖️', msi:'balance', baslik:"Kaza ve Kader İnancı"},
     {dosya:'unite2.html', ikon:'🤲', msi:'volunteer_activism', baslik:"Zekât ve Sadaka"}
   ]}
@@ -1380,6 +1398,23 @@ function nesneOku(anahtar){
 /* ======================================================================
    BÖLÜM 3 — Kart / bölüm üretimi (HTML string üretimi)
 ====================================================================== */
+/* Ünitenin kendi sayfası içindeki bölümlere doğrudan atlayan kısayol
+   bağlantıları üretir (Konu Özeti/Sunum/Oyunlar/Yazılı). "ozet" bölümünün
+   id'si sınıfa göre değişen bir sonek taşıdığı için sinif.sonekler'den
+   okunur; slayt/oyun-gruplari/yazili id'leri tüm ünite sayfalarında sabittir. */
+function uniteDerinBaglantilarHtml(sinif, href, index){
+  const sonek = (sinif.sonekler && sinif.sonekler[index] != null) ? sinif.sonekler[index] : '';
+  const baglantilar = [
+    {anchor:'ozet'+sonek, ikon:'menu_book', etiket:'Özet'},
+    {anchor:'slayt', ikon:'co_present', etiket:'Sunum'},
+    {anchor:'oyun-gruplari', ikon:'sports_esports', etiket:'Oyunlar'},
+    {anchor:'yazili', ikon:'edit_document', etiket:'Yazılı'}
+  ];
+  return '<div class="uk-derin-baglantilar">'+baglantilar.map(function(b){
+    return '<a class="uk-derin-link" href="'+href+'#'+b.anchor+'"><span class="msi" aria-hidden="true">'+b.ikon+'</span>'+b.etiket+'</a>';
+  }).join('')+'</div>';
+}
+
 function uniteKartHtml(sinif, unite, index){
   const id = sinif.id+'-u'+(index+1);
   const href = sinif.klasor+'/'+unite.dosya;
@@ -1399,6 +1434,7 @@ function uniteKartHtml(sinif, unite, index){
           '<span class="uk-btn">İNCELE <span class="msi" aria-hidden="true">arrow_forward</span></span>'+
         '</div>'+
       '</a>'+
+      uniteDerinBaglantilarHtml(sinif, href, index)+
       '<div class="uk-aksiyon">'+
         '<button type="button" class="uk-fav" data-id="'+id+'" aria-pressed="false" aria-label="'+unite.baslik+' konusunu favorilere ekle">☆ Favori</button>'+
         '<button type="button" class="uk-tamam" data-id="'+id+'" aria-pressed="false" aria-label="'+unite.baslik+' konusunu tamamlandı işaretle">✓ Tamamlandı</button>'+
