@@ -121,6 +121,11 @@
     --ease-out:cubic-bezier(.16,1,.3,1); --ease-spring:cubic-bezier(.2,.8,.3,1.25);
     --dur-fast:.15s; --dur:.25s; --dur-slow:.4s;
 
+    /* Lise (9-12. sınıf) sekmeleri için ayrı, sabit vurgu renkleri — renk
+       temasından (data-renk) etkilenmez, ortaokul sınıflarıyla karışmasın
+       diye özellikle yeni tanımlandı. */
+    --lise9:#7c3aed; --lise10:#ea580c; --lise11:#0f766e; --lise12:#be123c;
+
     --genislik:1440px;
   }
   :root[data-tema="dark"]{
@@ -795,6 +800,40 @@
   .sinif-bos-durum p{ margin:10px 0 0; font-size:1.05em; font-weight:800; }
   .sinif-bos-durum[hidden]{ display:none; }
 
+  /* ===== Yol Seçimi — "Sınıf Müfredatım" / "Sınav Merkezi" =====
+     Hero'dan hemen sonra, sınıf sekmelerinden ÖNCE gelen, iki büyük kartlı
+     bir "yol ayrımı" bölümü. Sınıf odaklı yapı ile sınav odaklı yapıyı eşit
+     görsel ağırlıkla sunmak için eklendi; mevcut sınıf-sekme bileşenine
+     dokunmaz, sadece ona giden bir kısayol sunar. */
+  .yol-secim-bolum{ max-width:var(--genislik); margin:var(--sp-7) auto 0; padding:0 var(--gutter); }
+  .yol-secim-imza{ text-align:center; margin:0 0 var(--sp-5); font-size:.92em; color:var(--metin-ikincil); }
+  .yol-secim-izgara{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-4); }
+  @media(max-width:760px){ .yol-secim-izgara{ grid-template-columns:1fr; } }
+  .yol-secim-kart{
+    position:relative; overflow:hidden; display:block; text-decoration:none; color:var(--metin);
+    background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-xl);
+    padding:var(--sp-5) var(--sp-4); box-shadow:var(--golge);
+    transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur);
+  }
+  .yol-secim-kart::before{ content:''; position:absolute; top:0; left:0; right:0; height:6px; background:linear-gradient(90deg,var(--vurgu-1),var(--vurgu-2)); }
+  .yol-secim-kart::after{
+    content:''; position:absolute; top:0; left:-150%; width:55%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.5), transparent);
+    transform:skewX(-20deg); transition:left .75s ease; pointer-events:none;
+  }
+  .yol-secim-kart:hover{ transform:translateY(-6px); box-shadow:var(--golge-xl); border-color:transparent; }
+  .yol-secim-kart:hover::after{ left:150%; }
+  .yol-secim-ikon{
+    width:56px; height:56px; border-radius:16px; color:#fff; display:flex; align-items:center; justify-content:center;
+    font-size:1.6em; margin-bottom:14px; background:linear-gradient(135deg,var(--vurgu-1),var(--vurgu-2));
+    box-shadow:0 12px 24px -8px color-mix(in srgb, var(--vurgu-1) 55%, transparent);
+  }
+  .yol-secim-kart h3{ margin:0 0 6px; font-size:1.25em; color:var(--baslik); }
+  .yol-secim-kart p{ margin:0 0 16px; font-size:.9em; color:var(--metin-ikincil); line-height:1.55; }
+  .yol-secim-btn{ display:inline-flex; align-items:center; gap:6px; font-weight:800; font-size:.88em; color:var(--vurgu-1); }
+  .yol-secim-kart--sinif{ --vurgu-1:var(--navy); --vurgu-2:var(--turkuaz); }
+  .yol-secim-kart--sinav{ --vurgu-1:var(--sari); --vurgu-2:var(--kirmizi); }
+
   /* ===== Kısa Tanıtım Kartı (Hakkımızda özeti) =====
      Bilinçli olarak hero'nun canlı gradyanını TEKRARLAMAZ — sayfada tek bir
      "vurgu anı" (hero) kalsın diye bu blok tonal/nötr bir yüzey kullanır;
@@ -1037,6 +1076,32 @@
   <svg class="hero-dalga" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true" focusable="false">
     <path d="M0,28 C240,56 480,0 720,28 C960,56 1200,0 1440,28 L1440,56 L0,56 Z"></path>
   </svg>
+</section>
+
+<!-- Yol seçimi: sınıf müfredatı ile sınav hazırlığı arasında hero'dan hemen
+     sonra, sınıf sekmelerinden önce sunulan, eşit ağırlıklı bir "ikili giriş"
+     bölümü. Sınıf sekme bileşenine dokunmaz, sadece ona ve Sınav Merkezi'ne
+     giden birer kısayoldur. -->
+<section class="yol-secim-bolum" aria-labelledby="yolSecimBaslik">
+  <div class="bolum-baslik-orta">
+    <p class="bolum-on-etiket">Nasıl Çalışmak İstersin?</p>
+    <h2 id="yolSecimBaslik">İki Güçlü Hazırlık Yolu</h2>
+  </div>
+  <p class="yol-secim-imza">Ayşe Yazıcı'nın hazırladığı içeriklerle — hem sınıf müfredatı hem sınav hazırlığı</p>
+  <div class="yol-secim-izgara">
+    <a class="yol-secim-kart yol-secim-kart--sinif belirir" href="#sinifOdakBaslik">
+      <span class="yol-secim-ikon" aria-hidden="true"><span class="msi">menu_book</span></span>
+      <h3>📖 Sınıf Müfredatım</h3>
+      <p>4-12. sınıf konu anlatımı, konu özetleri, sunumlar, oyunlar ve yazılı sınavlar.</p>
+      <span class="yol-secim-btn">Sınıfları Gör <span class="msi" aria-hidden="true">arrow_downward</span></span>
+    </a>
+    <a class="yol-secim-kart yol-secim-kart--sinav belirir" style="--i:1" href="sinav-merkezi/index.html">
+      <span class="yol-secim-ikon" aria-hidden="true"><span class="msi">target</span></span>
+      <h3>🎯 Sınav Merkezi</h3>
+      <p>LGS ve YKS (TYT/AYT) için konu anlatımı, denemeler, çalışma planı ve performans takibi.</p>
+      <span class="yol-secim-btn">İncele <span class="msi" aria-hidden="true">arrow_forward</span></span>
+    </a>
+  </div>
 </section>
 
 <!-- Sınıf seçimi, hero'nun hemen ardından geliyor: portalın asıl giriş
@@ -1284,6 +1349,11 @@
         <li><a href="din-kulturu-5sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 5. Sınıf</a></li>
         <li><a href="din-kulturu-6sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 6. Sınıf</a></li>
         <li><a href="din-kulturu-7sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 7. Sınıf</a></li>
+        <li><a href="din-kulturu-9sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 9. Sınıf (Yakında)</a></li>
+        <li><a href="din-kulturu-10sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 10. Sınıf (Yakında)</a></li>
+        <li><a href="din-kulturu-11sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 11. Sınıf (Yakında)</a></li>
+        <li><a href="din-kulturu-12sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 12. Sınıf (Yakında)</a></li>
+        <li><a href="sinav-merkezi/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> Sınav Merkezi (LGS · TYT · AYT)</a></li>
         <li><a href="#favorilerimPanel"><span class="msi" aria-hidden="true">arrow_right_alt</span> Favorilerim</a></li>
       </ul>
     </div>
@@ -1319,10 +1389,10 @@
 const SINIFLAR = [
   { id:'s4', ad:'4. Sınıf', ikon:'🕌', msi:'menu_book', vurgu:'--mavi', slogan:'Temel Kavramlar', klasor:'din-kulturu-4sinif-1unite', sonekler:['','2','3','4','5'], uniteler:[
     {dosya:'index.html', ikon:'🤲', msi:'volunteer_activism', baslik:"Günlük Hayattaki Dinî İfadeler"},
-    {dosya:'unite2.html', ikon:'📖', msi:'auto_stories', baslik:"İnancım ve Kur'an-ı Kerim"},
-    {dosya:'unite3.html', ikon:'💞', msi:'favorite', baslik:"Din Güzel Ahlaktır"},
+    {dosya:'unite2.html', ikon:'📖', msi:'auto_stories', baslik:"İslam'ı Tanıyalım"},
+    {dosya:'unite3.html', ikon:'💞', msi:'favorite', baslik:"Güzel Ahlak"},
     {dosya:'unite4.html', ikon:'🕌', msi:'account_balance', baslik:"Hz. Muhammed'i Tanıyalım"},
-    {dosya:'unite5.html', ikon:'🧼', msi:'clean_hands', baslik:"İslam Dini ve Temizlik"}
+    {dosya:'unite5.html', ikon:'🧼', msi:'clean_hands', baslik:"Din ve Temizlik"}
   ]},
   { id:'s5', ad:'5. Sınıf', ikon:'🌌', msi:'mosque', vurgu:'--turkuaz', slogan:'İnanç ve İbadet', klasor:'din-kulturu-5sinif-1unite', sonekler:['1','2','3','4','5'], uniteler:[
     {dosya:'index.html', ikon:'🌌', msi:'auto_awesome', baslik:"Allah İnancı"},
@@ -1346,12 +1416,19 @@ const SINIFLAR = [
     {dosya:'unite5.html', ikon:'💭', msi:'psychology', baslik:"İslam Düşüncesinde Yorumlar"}
   ]},
   { id:'s8', ad:'8. Sınıf', ikon:'⚖️', msi:'balance', vurgu:'--navy', slogan:'Kader ve Sorumluluk', klasor:'din-kulturu-8sinif-1unite', yaziliSiniri:2, sonekler:['8','82','83','84','85'], uniteler:[
-    {dosya:'index.html', ikon:'⚖️', msi:'balance', baslik:"Kaza ve Kader İnancı"},
+    {dosya:'index.html', ikon:'⚖️', msi:'balance', baslik:"Kader İnancı"},
     {dosya:'unite2.html', ikon:'🤲', msi:'volunteer_activism', baslik:"Zekât ve Sadaka"},
     {dosya:'unite3.html', ikon:'⏳', msi:'diversity_3', baslik:"Din ve Hayat"},
     {dosya:'unite4.html', ikon:'🌙', msi:'star', baslik:"Hz. Muhammed'in Örnekliği"},
     {dosya:'unite5.html', ikon:'📖', msi:'auto_stories', baslik:"Kur'an-ı Kerim ve Özellikleri"}
-  ]}
+  ]},
+  /* Lise (9-12. sınıf): içerikler hazırlanana kadar uniteler:[] olarak kalır —
+     TOPLAM_UNITE/istatistiklere sahte bir sayı eklenmez, sinifPaneliHtml() bu
+     durumda otomatik olarak "hazırlanıyor" mesajı gösterir. */
+  { id:'s9', ad:'9. Sınıf', ikon:'🚧', msi:'construction', vurgu:'--lise9', slogan:'Yapım Aşamasında', klasor:'din-kulturu-9sinif-1unite', yaziliSiniri:0, uniteler:[] },
+  { id:'s10', ad:'10. Sınıf', ikon:'🚧', msi:'construction', vurgu:'--lise10', slogan:'Yapım Aşamasında', klasor:'din-kulturu-10sinif-1unite', yaziliSiniri:0, uniteler:[] },
+  { id:'s11', ad:'11. Sınıf', ikon:'🚧', msi:'construction', vurgu:'--lise11', slogan:'Yapım Aşamasında', klasor:'din-kulturu-11sinif-1unite', yaziliSiniri:0, uniteler:[] },
+  { id:'s12', ad:'12. Sınıf', ikon:'🚧', msi:'construction', vurgu:'--lise12', slogan:'Yapım Aşamasında', klasor:'din-kulturu-12sinif-1unite', yaziliSiniri:0, uniteler:[] }
 ];
 
 /* Her yazılı klasöründe aynı 4 dönem x (test+klasik) deseni var. */
@@ -1521,7 +1598,9 @@ function yaziliKartHtml(sinif, yazili, index){
 }
 
 function sinifPaneliHtml(sinif){
-  const uniteKartlari = sinif.uniteler.map(function(u,i){ return uniteKartHtml(sinif,u,i); }).join('');
+  const uniteKartlari = sinif.uniteler.length
+    ? sinif.uniteler.map(function(u,i){ return uniteKartHtml(sinif,u,i); }).join('')
+    : '<p class="bos-mesaj">Bu sınıf için içerikler (üniteler, konu anlatımı, slaytlar, etkinlikler, oyunlar, testler) hazırlanıyor. Yayınlandığında burada görünecektir.</p>';
   const mevcutYazililar = yaziliMevcutListesi(sinif);
   let yaziliKartlari = mevcutYazililar.map(function(y,i){ return yaziliKartHtml(sinif,y,i); }).join('');
   if(mevcutYazililar.length < YAZILI_DESEN.length){
@@ -1582,6 +1661,25 @@ function sayfayiOlustur(){
       '</span>'+
     '</button>';
   }).join('');
+  /* "Sınav Merkezi", diğer sınıf sekmelerinin aksine sayfa içinde panel
+     açmaz; ayrı ve bağımsız bir modüle (sinav-merkezi/) giden gerçek bir
+     bağlantıdır. Bu yüzden <button role="tab"> değil, aynı görsel dili
+     (.sinif-sekme-pill) kullanan sade bir <a> olarak eklenir — mevcut
+     sınıf sekmelerinin render/tıklama/ok-tuşu mantığına dokunmadan. */
+  sekmeNav.innerHTML +=
+    '<a class="sinif-sekme-pill" href="sinav-merkezi/index.html" style="--vurgu:var(--navy)">'+
+      '<span class="yeni-etiket" style="position:absolute;top:-7px;right:10px;z-index:2">YENİ</span>'+
+      '<span class="ssp-ust">'+
+        '<span class="ssp-ikon-sarmal">'+
+          '<svg class="ssp-ring" viewBox="0 0 32 32" aria-hidden="true">'+
+            '<circle class="ssp-ring-arka" cx="16" cy="16" r="13"></circle>'+
+            '<circle class="ssp-ring-on" cx="16" cy="16" r="13" stroke-dasharray="81.68" stroke-dashoffset="0"></circle>'+
+          '</svg>'+
+          '<span class="msi ssp-ikon" aria-hidden="true">quiz</span>'+
+        '</span>'+
+      '</span>'+
+      '<span class="ssp-slogan"><b style="color:inherit;font-weight:900">📚 Sınav Merkezi</b><br>LGS · TYT · AYT</span>'+
+    '</a>';
 
   const alan = document.getElementById('sinifAlani');
   alan.innerHTML = SINIFLAR.map(sinifPaneliHtml).join('');
