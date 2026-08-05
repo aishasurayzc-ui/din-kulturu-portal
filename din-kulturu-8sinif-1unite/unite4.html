@@ -625,6 +625,125 @@
   .ogr-giris-karti{ flex-direction:column; text-align:center; }
 }
 </style>
+<style id="anaMenuStil">
+.hero{ padding:26px 20px 20px; }
+.hero-sekiller{ display:none; }
+.hero-baslik{ font-size:1.35em; margin:2px 0 8px; }
+.hero-alt{ font-size:.95em; max-width:440px; }
+.hero-butonlar{ margin-top:12px; }
+#oyun-gruplari{ scroll-margin-top:10px; max-width:900px; margin:0 auto; }
+.mega-menu{ max-width:900px; margin:0 auto; padding:26px 16px 34px; flex-wrap:wrap; gap:18px; justify-content:center; position:static !important; }
+.mega-kart{
+  flex:1 1 230px; max-width:280px; background:#fff; border:2px solid var(--acik); border-radius:20px;
+  padding:26px 20px; text-align:center; cursor:pointer; transition:.18s; box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+.mega-kart:hover{ transform:translateY(-4px); border-color:var(--mavi); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+.mega-kart-ikon{ font-size:2.2em; margin-bottom:8px; }
+.mega-kart h3{ margin:0 0 6px; color:var(--navy); font-size:1.15em; }
+.mega-kart p{ margin:0; font-size:.85em; color:#667; }
+#ogrHedefKonteyner:empty{ display:none; }
+#ogrHedefKonteyner .ogr-hero-ek{ margin:14px auto 0; }
+.oyun-grubu.mega-menu.aktif, #oyun-gruplari > .oyun-grubu:not(.mega-menu){ position:static !important; top:auto !important; }
+.geri-btn{
+  display:block; width:100%; margin:0 0 12px; background:none; border:none; color:var(--mavi); font-weight:800;
+  cursor:pointer; font-size:.9em; padding:4px; text-align:center;
+}
+.geri-btn:hover{ text-decoration:underline; }
+.oyunmerkezi-nav{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; width:100%; margin-bottom:4px; }
+.oyunmerkezi-nav button{
+  padding:9px 16px; border:none; border-radius:18px; cursor:pointer; background:#22333b; color:#fff;
+  font-weight:bold; font-size:.9em; transition:.15s;
+}
+.oyunmerkezi-nav button:hover, .oyunmerkezi-nav button.kat-aktif{ background:var(--yesil); }
+</style>
+<style id="omgKart2Stil">
+.omg-2kolon{ align-items:flex-start; gap:32px; }
+.omg-yan-menu{
+  display:flex; flex-direction:column; gap:10px;
+  flex:0 0 280px; max-width:280px;
+  position:sticky; top:16px;
+}
+.omg-yan-menu .geri-btn{ margin-bottom:0; }
+.omg-yan-baslik{ font-weight:800; color:var(--navy); font-size:1.05em; width:100%; margin:4px 0 0; text-align:left; padding:0 4px; }
+.omg-yan-oge{
+  text-align:left; width:100%; min-height:62px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 18px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-yan-oge:hover{ border-color:var(--mavi); }
+.omg-yan-ikon{ font-size:1.5em; flex-shrink:0; }
+.omg-yan-oge.kat-aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18);
+  border-left-color:var(--mavi) !important;
+}
+.omg-yan-oge.kat-aktif .omg-yan-ikon{ font-size:1.9em; }
+.omg-kart-alan{
+  flex:1 1 420px; min-width:0; width:100%;
+  max-height:660px; overflow-y:auto; padding:4px 4px 4px 0;
+  animation: omgKartGiris .3s ease;
+}
+@keyframes omgKartGiris{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+.omg-kart-izgara{
+  display:grid; grid-template-columns:repeat(2, 1fr);
+  gap:22px; width:100%; align-content:start;
+}
+.omg-oyun-kart{
+  position:relative; cursor:pointer;
+  background:#fff; border-radius:18px; padding:30px 24px 26px;
+  text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.06);
+  transition:.18s; display:flex; flex-direction:column; gap:8px;
+  min-height:180px; border:1px solid transparent;
+}
+.omg-oyun-kart:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(0,0,0,.12); border-color:var(--acik); }
+.omg-oyun-kart-ikon{ font-size:1.8em; }
+.omg-oyun-kart h4{ margin:2px 0 0; font-size:1.08em; color:#22333b; line-height:1.35; }
+.omg-oyun-kart p{ margin:0; font-size:.86em; color:#8892a0; line-height:1.5; flex:1; }
+.omg-oyun-kart-alt{ display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+.omg-zorluk{ font-size:.72em; font-weight:800; letter-spacing:.3px; padding:4px 11px; border-radius:999px; background:var(--acikgri); color:#667; }
+.omg-oyna-ok{ font-size:.85em; font-weight:800; color:var(--mavi); }
+@media(max-width:640px){
+  .omg-2kolon{ flex-direction:column; gap:16px; }
+  .omg-yan-menu{
+    flex-direction:row; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    max-width:100%; position:static; gap:8px; padding-bottom:4px;
+  }
+  .omg-yan-baslik{ display:none; }
+  .omg-yan-menu .geri-btn{ flex:0 0 auto; width:auto; white-space:nowrap; }
+  .omg-yan-oge{ min-height:44px; width:auto; flex:0 0 auto; white-space:nowrap; }
+  .omg-kart-izgara{ grid-template-columns:1fr; }
+  .omg-kart-alan{ max-height:none; overflow-y:visible; }
+}
+</style>
+<style id="omgTekliMenuStil">
+.omg-tekli-menu{ display:flex; flex-direction:column; gap:10px; max-width:440px; }
+.omg-tekli-menu > button:not(.geri-btn){
+  text-align:left; width:100%; min-height:58px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 20px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-tekli-menu > button:not(.geri-btn):hover{ border-color:var(--mavi); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
+.omg-tekli-menu > button.aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18) !important;
+  border-left-color:var(--mavi) !important;
+}
+</style>
+<style id="omgEgitimIzoleStil">
+#oyun-gruplari:not(:has(#kat-unite84-ogren.aktif)):not(:has(#kat-unite84-degerlendir.aktif)) ~ main .egitim-icerik{
+  display:none !important;
+}
+</style>
 </head>
 <body>
 
@@ -635,89 +754,31 @@
   <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
 </header>
 <div class="op-baglanti-satiri"><a onclick="goster('ogretmenpaneli', event)" role="button" aria-label="Öğretmen paneline git">🔒 Öğretmen Paneli</a></div>
-
 <section class="hero">
-  <div class="hero-sekiller">
-    <span style="top:8%; left:6%; animation-delay:0s;">🌙</span>
-    <span style="top:65%; left:10%; animation-delay:1.2s;">🤝</span>
-    <span style="top:20%; left:85%; animation-delay:.6s;">💚</span>
-    <span style="top:75%; left:88%; animation-delay:1.8s;">⭐</span>
-    <span style="top:50%; left:16%; animation-delay:2.4s;">🕊️</span>
-    <span style="top:6%; left:78%; animation-delay:.9s;">📜</span>
-  </div>
   <h2 class="hero-baslik">En Güzel Örneği Tanı!</h2>
   <p class="hero-alt">El-Emin'in doğruluğunu, merhametini, istişaresini, cesaretini, Veda Hutbesi'ni ve Kureyş suresini oyunlarla öğren!</p>
   <div class="hero-butonlar">
-    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">🚀 Oyuna Başla</button>
-    <button class="hero-btn hero-btn-ikincil" onclick="kategoriGosterVeKaydir('kat-unite84')">📚 Konuları Keşfet</button>
+    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">▶ Üniteye Başla</button>
   </div>
 </section>
 
-<div class="istatistik-cubugu">
-  <div class="istatistik-kutu"><span class="ist-ikon">⭐</span><b id="istToplamPuan">0</b><span class="ist-etiket">Toplam Puan</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🏅</span><b id="istRozet">0</b><span class="ist-etiket">Rozet</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🔥</span><b id="istSeri">0</b><span class="ist-etiket">Günlük Seri</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">📈</span><b id="istTamamlanan">0</b><span class="ist-etiket">Tamamlanan Etkinlik</span></div>
-</div>
-
 <div id="oyun-gruplari" role="navigation" aria-label="Ünite bölümleri menüsü">
-<nav class="kategori-nav" role="navigation" aria-label="Ana kategori menüsü">
-  <button onclick="kategoriGoster('kat-unite84', event)" class="kat-aktif">🌙 Ünite Konuları</button>
-  <button onclick="kategoriGoster('kat-bulmaca84', event)">🧩 Kelime Bulmacaları</button>
-  <button onclick="kategoriGoster('kat-yarisma84', event)">🎮 Yarışma Oyunları</button>
-  <button onclick="kategoriGoster('kat-mantik84', event)">🕵️ Mantık &amp; Dedektiflik</button>
-  <button onclick="kategoriGoster('kat-macera84', event)">🌀 Macera</button>
-  <button onclick="kategoriGoster('kat-ezber84', event)">📿 Ezber Etkinlikleri</button>
-</nav>
 
-<div class="oyun-grubu aktif" id="kat-unite84">
-  <button onclick="goster('ozet84', event)" class="aktif">📖 Konu Özeti</button>
-  <button onclick="goster('konutekrari84', event)">📝 Konu Tekrarı Testi</button>
-  <button onclick="goster('slayt', event)">🖥️ Ünite Sunumu</button>
-  <button onclick="goster('yazili', event)">📝 Yazılı Sınavlar</button>
+<div class="oyun-grubu mega-menu aktif" id="kat-anamenu">
+  <div class="mega-kart" onclick="window.location.href='unite4-konuyu-ogren.html'">
+    <div class="mega-kart-ikon">📖</div><h3>Konuyu Öğren</h3>
+    <p>Konu anlatımları, sunular ve kavramlar.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='unite4-oyun-merkezi.html'">
+    <div class="mega-kart-ikon">🎮</div><h3>Oyunlar</h3>
+    <p>Konuyu eğlenerek pekiştir.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='unite4-degerlendirme.html'">
+    <div class="mega-kart-ikon">📝</div><h3>Değerlendirme</h3>
+    <p>Testler ve değerlendirme soruları.</p>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-bulmaca84">
-  <button onclick="goster('kelimeavi84', event)">🔎 Kelime Avı</button>
-  <button onclick="goster('cengel84', event)">🧩 Çengel Bulmaca</button>
-  <button onclick="goster('merdiven84', event)">🪜 Sözcük Merdiveni</button>
-  <button onclick="goster('sifre84', event)">🔐 Şifreli Sözcük</button>
-  <button onclick="goster('sifretanim84', event)">🔐 Şifreli Tanım</button>
-  <button onclick="goster('kelimekodlama84', event)">💻 Kelime Kodlama</button>
-  <button onclick="goster('nonogram84', event)">🖼️ Nonogram</button>
-  <button onclick="goster('satranc84', event)">♞ Kelime Satrancı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-yarisma84">
-  <button onclick="goster('kelimeuret84', event)">⚡ Hızlı Kelime</button>
-  <button onclick="goster('tuzak84', event)">🚫 Tuzak Harf</button>
-  <button onclick="goster('fabrika84', event)">🏭 Kelime Fabrikası</button>
-  <button onclick="goster('muhendis84', event)">🛠️ Kelime Mühendisi</button>
-  <button onclick="goster('kavramturnuvasi84', event)">🏆 Kavram Turnuvası</button>
-  <button onclick="goster('bonus84', event)">🎮 Bonus Oyun</button>
-</div>
-
-<div class="oyun-grubu" id="kat-mantik84">
-  <button onclick="goster('dedektif84', event)">🕵️ Kelime Dedektifi</button>
-  <button onclick="goster('dildedektifi84', event)">🕵️‍♀️ Dil Dedektifi</button>
-  <button onclick="goster('mantikzinciri84', event)">🔗 Mantık Zinciri</button>
-  <button onclick="goster('semantiklabirent84', event)">🧠 Semantik Labirent</button>
-  <button onclick="goster('celiskiavi84', event)">🕵️‍♂️ Çelişki Avı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-macera84">
-  <button onclick="goster('labirent84', event)">🌀 Labirent</button>
-</div>
-
-<div class="oyun-grubu" id="kat-ezber84">
-  <button onclick="goster('ezsira84', event)">1️⃣ Sırala Bakalım</button>
-  <button onclick="goster('ezbosluk84', event)">2️⃣ Boşluk Doldur</button>
-  <button onclick="goster('ezeslestir84', event)">3️⃣ Anlam Eşleştir</button>
-  <button onclick="goster('ezhafiza84', event)">4️⃣ Hafıza Kartları</button>
-  <button onclick="goster('ezadimadim84', event)">5️⃣ Adım Adım Ezber</button>
-  <button onclick="goster('ezgizli84', event)">6️⃣ Gizli Harfler</button>
-  <button onclick="goster('ezkaybolan84', event)">7️⃣ Kaybolan Kelimeler</button>
-  <button onclick="goster('ezhiz84', event)">8️⃣ Hız Testi</button>
 </div>
 
 <main>
@@ -740,981 +801,7 @@
   </div>
 </div>
 </section>
-
-<section id="slayt">
-<h2>🖥️ Ünite Sunumu</h2>
-
-  <div class="sunum-sarmal">
-    <div class="sunum-ust">
-      <span class="sunum-sayac" id="sunumSayac">1 / 28</span>
-      <button class="sunum-tamekran-btn" onclick="sunumTamEkran('')" aria-label="Sunumu tam ekran aç">⛶ Tam Ekran</button>
-    </div>
-    <div class="sunum-alan" id="sunumAlan">
-
-  <div class="sunum-slayt aktif s-baslik" data-tip="baslik">
-    <div class="sb-daire">🌙</div>
-    <p class="sb-ust">8. SINIF — 4. ÜNİTE</p>
-    <h2 class="sb-baslik">Hz. Muhammed'in Örnekliği</h2>
-    <p class="sb-ders">Din Kültürü ve Ahlak Bilgisi</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı</p>
-  </div>
-
-  <div class="sunum-slayt s-liste" data-tip="hedef">
-    <h3>🎯 Bu Ünitede Neler Öğreneceğiz?</h3>
-    <ul class="sl-liste">
-      <li>Doğruluğu ve Güvenilirliği: "El-Emin"</li><li>Merhameti ve Affediciliği</li><li>İstişareye Verdiği Önem</li><li>Cesareti ve Kararlılığı</li><li>İnsanlara Verdiği Değer ve Hakkı Gözetmesi</li><li>Bir Sure Tanıyorum: Kureyş Suresi ve Anlamı</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Doğruluğu ve Güvenilirliği: "El-Emin" (1/2)</h3>
-    <ul class="si-liste">
-      <li>Hz. Muhammed (sav), daha peygamber olmadan önce bile Mekkeliler arasında <b>"el-Emin"</b> (güvenilir kişi) lakabıyla tanınırdı.</li><li>Hiç yalan söylemez, verdiği sözü mutlaka tutar, kendisine bırakılan <b>emanete</b> asla ihanet etmezdi.</li><li>Kendisine düşman olanlar bile değerli eşyalarını ona emanet ederdi; hicret gecesi bu emanetleri sahiplerine teslim etmesi için Hz. Ali'yi (ra) görevlendirmişti.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Doğruluğu ve Güvenilirliği: "El-Emin" (2/2)</h3>
-    <ul class="si-liste">
-      <li>Doğru sözlü olmak (<b>sıdk</b>) ve güvenilir olmak (<b>emanet</b>), bütün peygamberlerin ortak sıfatlarındandır.</li><li><b>Hacerülesved olayı:</b> Kâbe onarılırken Kutsal Taş'ı yerine kimin koyacağı tartışması kabileleri savaşın eşiğine getirmişti.</li><li>Hakem seçilen Hz. Muhammed, taşı bir örtünün üzerine koydu; her kabile reisi örtünün bir ucundan tuttu ve taş birlikte taşındı. Böylece kan dökülmeden, herkesi memnun eden âdil bir çözüm bulundu.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-merak" data-tip="zb">
-    <p class="zb-slayt-ust">🤔 MERAK ETTİN Mİ?</p>
-    <p class="zb-slayt-metin">"Emin" kelimesi ile "emanet", "iman" ve "güven" kelimeleri aynı kökten gelir. Yani güvenilir olmak, imanın doğrudan bir sonucudur: inanan insan, kendisine güvenilen insandır.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Merhameti ve Affediciliği (1/2)</h3>
-    <ul class="si-liste">
-      <li>Kur'an-ı Kerim onu <b>"âlemlere rahmet"</b> olarak niteler; merhamet onun bütün davranışlarına sinmiştir.</li><li><b>Taif yolculuğu:</b> Kendisini taşlayan halka beddua etmesi teklif edildiğinde, "Belki onların soyundan Allah'a kulluk edecek nesiller gelir." diyerek af yolunu seçti.</li><li>Çocukları sever, hayvanlara eziyeti yasaklar, yaşlıya ve kimsesize şefkat gösterirdi.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-yanlis" data-tip="zb">
-    <p class="zb-slayt-ust">❌ YANLIŞ BİLİNENLER</p>
-    <p class="zb-slayt-yanlis">❌ Bazıları affetmeyi güçsüzlük, intikam almayı ise güçlülük sanır.</p>
-    <p class="zb-slayt-dogru">✅ Hz. Peygamber, Mekke'yi fethettiği yani en güçlü olduğu anda affetmiştir; asıl güç, gücü elindeyken bağışlayabilmektir.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Merhameti ve Affediciliği (2/2)</h3>
-    <ul class="si-liste">
-      <li><b>Mekke'nin Fethi:</b> Yıllarca kendisine ve inananlara zulmeden Kureyşlilere, "Bugün size kınama yok, gidiniz, hepiniz serbestsiniz!" diyerek genel af ilan etti.</li><li>Hadis: <b>"Merhamet etmeyene merhamet olunmaz."</b> ve <b>"Yerdekilere merhamet edin ki gökteki de size merhamet etsin."</b></li><li>Merhamet ve affedicilik, kırılan bağları onaran; kin ve düşmanlık zincirini kıran erdemlerdir.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-ornek" data-tip="zb">
-    <p class="zb-slayt-ust">🌍 GERÇEK HAYATTAN BİR ÖRNEK</p>
-    <p class="zb-slayt-metin">Sınıfta seninle alay eden bir arkadaşın bir gün senden yardım istese... "Bugün size kınama yok." diyebilen bir insanın büyüklüğünü hatırla. Affetmek, kaybetmek değil; kazanmaktır.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 İstişareye Verdiği Önem (1/2)</h3>
-    <ul class="si-liste">
-      <li><b>İstişare (şûrâ)</b>, bir konuda karar vermeden önce bilgi ve tecrübe sahiplerine danışmaktır.</li><li>Kur'an-ı Kerim bunu emreder: <b>"...İş hakkında onlara danış..."</b> (Âl-i İmrân suresi, 159. ayet)</li><li><b>Bedir Savaşı:</b> Ordugâhın kurulacağı yer konusunda bir sahabinin daha isabetli görüşünü dinleyip kendi tercihini değiştirdi.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-dusun" data-tip="zb">
-    <p class="zb-slayt-ust">💭 DÜŞÜN VE CEVAPLA</p>
-    <p class="zb-slayt-metin">Kendi fikrin doğru görünse bile başkalarına danışmak sana ne kazandırır? Danışmadan verilen kararların sonuçları neden daha risklidir?</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 İstişareye Verdiği Önem (2/2)</h3>
-    <ul class="si-liste">
-      <li><b>Hendek Savaşı:</b> İranlı sahabi Selman-ı Farisi'nin önerdiği "şehrin çevresine hendek kazma" taktiğini benimsedi. Arapların bilmediği bu yöntem sayesinde Medine kuşatmadan korundu.</li><li><b>Uhud Savaşı:</b> Kendi görüşü şehir içinde savunma yapmaktı; ancak çoğunluk şehir dışında savaşmayı isteyince onların görüşüne uydu.</li><li>İstişare; kararı güçlendirir, hataları azaltır, insanları sürece ortak eder ve onlara değer verildiğini hissettirir.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-aile" data-tip="zb">
-    <p class="zb-slayt-ust">👨‍👩‍👧 AİLEMLE YAPIYORUM</p>
-    <p class="zb-slayt-metin">Ailenizde son zamanlarda birlikte karar verdiğiniz bir konuyu konuşun. Herkesin fikri alınsaydı/alınmasaydı sonuç nasıl değişirdi? Kısaca not edin.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Cesareti ve Kararlılığı (1/2)</h3>
-    <ul class="si-liste">
-      <li>Kureyşliler amcası Ebu Talib'e baskı yapıp tebliğden vazgeçmesini istediğinde şu cevabı verdi: <b>"Amcacığım! Bir elime güneşi, bir elime ayı verseler ben yine bu davadan vazgeçmem."</b></li><li>Bu söz, hakkı savunmaktaki kararlılığın en güçlü örneklerinden biridir.</li><li>Cesaret, korkusuzluk değil; korkuya rağmen doğru bildiğini yapabilmektir.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-derin" data-tip="zb">
-    <p class="zb-slayt-ust">🔍 DERİNLEMESİNE DÜŞÜNELİM</p>
-    <ul class="zb-slayt-liste">
-      <li>Cesaret ile dikkatsizce tehlikeye atılmak arasındaki fark nedir?</li>
-      <li>Bir haksızlığa şahit olduğunda susmak, hangi duygunun sonucudur?</li>
-    </ul>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Cesareti ve Kararlılığı (2/2)</h3>
-    <ul class="si-liste">
-      <li><b>Sevr Mağarası:</b> Hicret sırasında düşmanlar mağaranın ağzına kadar geldiğinde endişelenen Hz. Ebu Bekir'e (ra) sükûnetle şöyle dedi: <b>"Üzülme, Allah bizimle beraberdir."</b> (Tevbe suresi, 40. ayet)</li><li>Savaşın en zorlu anlarında sahabe ona sığınır, o ise saf tutmaktan geri durmazdı.</li><li>Yıllarca süren boykot, alay, tehdit ve göçe rağmen davetinden bir an bile vazgeçmedi.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-ikilem" data-tip="zb">
-    <p class="zb-slayt-ust">⚖️ AHLAKİ İKİLEM — SEN OLSAYDIN NE YAPARDIN?</p>
-    <p class="zb-slayt-metin">Arkadaş grubun, sınıftaki bir arkadaşınıza haksızlık ediyor. Karşı çıkarsan dışlanma riskin var. Cesaret ve hakkaniyet kavramlarını düşünerek ne yapardın?</p>
-  </div>
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--sari)">
-    <h3>📌 İnsanlara Verdiği Değer ve Hakkı Gözetmesi (1/2)</h3>
-    <ul class="si-liste">
-      <li><b>Hılfü'l-fudûl (Erdemliler İttifakı):</b> Peygamberlikten önce, haksızlığa uğrayanları özellikle de yabancı tüccarları korumak için kurulan bu ittifaka katıldı.</li><li>Yıllar sonra bile şöyle demiştir: "Böyle bir anlaşmaya bugün de çağrılsam yine katılırım."</li><li>Hadis: <b>"Komşusu açken tok yatan bizden değildir."</b> ve <b>"Sizin en hayırlınız, ailesine karşı en hayırlı olanınızdır."</b></li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--sari)">
-    <h3>📌 İnsanlara Verdiği Değer ve Hakkı Gözetmesi (2/2)</h3>
-    <ul class="si-liste">
-      <li><b>Veda Hutbesi</b>, insan haklarının evrensel bir bildirisi gibidir: canın, malın ve namusun dokunulmaz olduğu ilan edilmiştir.</li><li><b>"Arabın Arap olmayana, beyazın siyaha üstünlüğü yoktur; üstünlük ancak takva iledir."</b></li><li>Kadın hakları vurgulanmış, faiz ve kan davaları kaldırılmış, emanetlerin sahiplerine verilmesi emredilmiştir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Bir Sure Tanıyorum: Kureyş Suresi ve Anlamı</h3>
-    <ul class="si-liste">
-      <li><b>Kureyş suresi</b>, Kur'an-ı Kerim'in 106. suresidir; Mekke'de inmiştir ve <b>4 ayettir</b>. Adını, Hz. Peygamber'in de mensubu olduğu Kureyş kabilesinden alır.</li><li>Sure, Kureyş'in kışın Yemen'e, yazın Şam'a yaptığı güvenli <b>ticaret yolculuklarını</b> hatırlatır.</li><li>Verilen mesaj nettir: Kendilerini açlıktan doyuran ve korkudan emin kılan Allah'a (cc) <b>şükür</b> olarak yalnız O'na kulluk etsinler.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (1/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">El-Emin</span><span class="sk-etiket" style="background:var(--mavi)">Sıdk</span><span class="sk-etiket" style="background:var(--kirmizi)">Emanet</span><span class="sk-etiket" style="background:var(--turkuaz)">Merhamet</span><span class="sk-etiket" style="background:#7c3aed">Af</span><span class="sk-etiket" style="background:var(--yesil)">İstişare (şûrâ)</span><span class="sk-etiket" style="background:var(--mavi)">Cesaret</span><span class="sk-etiket" style="background:var(--kirmizi)">Kararlılık</span><span class="sk-etiket" style="background:var(--turkuaz)">Hakkaniyet</span><span class="sk-etiket" style="background:#7c3aed">Hikmet</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (2/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">Hılfü'l-fudûl</span><span class="sk-etiket" style="background:var(--mavi)">Veda Hutbesi</span><span class="sk-etiket" style="background:var(--kirmizi)">Hacerülesved</span><span class="sk-etiket" style="background:var(--turkuaz)">Hendek</span><span class="sk-etiket" style="background:#7c3aed">Sevr</span><span class="sk-etiket" style="background:var(--yesil)">Hicret</span><span class="sk-etiket" style="background:var(--mavi)">Kureyş</span><span class="sk-etiket" style="background:var(--kirmizi)">Takva</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"Andolsun, Allah'ın Resulü'nde sizin için; Allah'a ve ahiret gününe kavuşmayı uman, Allah'ı çok zikreden kimseler için güzel bir örnek vardır."</p>
-    <p class="sa-kaynak">— Ahzab suresi, 21. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"...Onları affet, onlar için Allah'tan bağışlanma dile, iş hakkında onlara danış. Karar verince de artık Allah'a tevekkül et..."</p>
-    <p class="sa-kaynak">— Âl-i İmrân suresi, 159. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-video" data-tip="video">
-    <p class="sv-ust">🎬 KONUYLA İLGİLİ VİDEO</p>
-    <div class="sv-cerceve">
-      <p class="sv-yer-tutucu">🎥 Buraya "Hz. Muhammed'in Örnekliği" ile ilgili seçtiğiniz bir eğitim videosunun YouTube bağlantısını ekleyebilirsiniz. (iframe src alanını doldurun)</p>
-    </div>
-    <p class="sv-baslik">Hz. Muhammed'in Örnekliği</p>
-  </div>
-
-  <div class="sunum-slayt s-zb s-zb-degerlendir" data-tip="zb">
-    <p class="zb-slayt-ust">✅ KENDİMİ DEĞERLENDİRİYORUM</p>
-    <ul class="zb-slayt-liste">
-      <li>☐ Hz. Muhammed'in doğruluğunu ve güvenilirliğini örneklerle açıklayabilirim.</li>
-      <li>☐ Merhamet ve affediciliğini örnek olaylarla anlatabilirim.</li>
-      <li>☐ İstişareye verdiği önemi örneklerle açıklayabilirim.</li>
-      <li>☐ Cesaret ve kararlılığını örnek olaylarla açıklayabilirim.</li>
-      <li>☐ İnsanlara verdiği değeri ve hakkı gözetmedeki hassasiyetini örneklendirebilirim.</li>
-      <li>☐ Kureyş suresini okur, verdiği mesajı yorumlayabilirim.</li>
-    </ul>
-  </div>
-
-
-  <div class="sunum-slayt s-liste s-ozet" data-tip="ozet">
-    <h3>📝 Ünite Özeti</h3>
-    <ul class="sl-liste">
-      <li>Doğruluğu ve Güvenilirliği: "El-Emin"</li><li>Merhameti ve Affediciliği</li><li>İstişareye Verdiği Önem</li><li>Cesareti ve Kararlılığı</li><li>İnsanlara Verdiği Değer ve Hakkı Gözetmesi</li><li>Bir Sure Tanıyorum: Kureyş Suresi ve Anlamı</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-kapanis" data-tip="kapanis">
-    <div class="sb-daire">🌟</div>
-    <h2 class="sb-baslik">Dinlediğiniz İçin Teşekkürler</h2>
-    <p class="sb-ders">Başarılar dilerim.</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı — Din Kültürü ve Ahlak Bilgisi Öğretmeni</p>
-  </div>
-    </div>
-    <div class="sunum-nav">
-      <button onclick="sunumGit('',-1)" aria-label="Önceki slayt">⬅ Önceki</button>
-      <div class="sunum-noktalar" id="sunumNoktalar"></div>
-      <button onclick="sunumGit('',1)" aria-label="Sonraki slayt">Sonraki ➡</button>
-    </div>
-  </div>
-</section>
-
-<section id="yazili">
-  <h2>📝 Yazılı Sınavlar</h2>
-  <div class="aciklama">8. sınıf Din Kültürü ve Ahlak Bilgisi dersine ait, resmî MEB sınav formatında hazırlanmış, yazdırılabilir yazılı yoklama sınavları. Hem <b>karma</b> (boşluk doldurma, eşleştirme, doğru-yanlış, kısa cevap) hem de tamamen açık uçlu <b>klasik</b> format seçeneği bulunur. Kartlara tıklayınca sınav yeni sekmede açılır ve doğrudan yazdırılabilir. Diğer dönem yazılıları, sonraki üniteler eklendikçe bu bölüme eklenecektir.</div>
-  <div class="yazili-izgara">
-    <a class="yazili-kart" href="yazili1.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili1_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili2.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili2_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-  </div>
-</section>
-
-<!-- KONU ÖZETİ -->
-<section id="ozet84" class="aktif">
-  <h2>📖 4. Ünite Konu Özeti: Hz. Muhammed'in Örnekliği</h2>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ Doğruluğu ve Güvenilirliği: "El-Emin"</h3>
-    <p class="ko-giris">Sınıfta bir sır saklaman gerekse, arkadaşların bu işi kime emanet ederdi? Peki neden ona?</p>
-    <p class="ko-amac">🎯 Bu bölümde: Hz. Muhammed'in doğruluğunu ve güvenilirliğini, peygamberlerin ortak özellikleriyle birlikte öğreneceğiz.</p>
-    <p>Hz. Muhammed (sav) henüz peygamber olmadan önce bile Mekke'de herkesin tanıdığı bir özelliğe sahipti: <b>güvenilirlik</b>. Öyle ki Mekkeliler ona <b>"el-Emin"</b>, yani "güvenilir kişi" diyorlardı. Hiç yalan söylemez, verdiği sözü mutlaka tutar, kendisine bırakılan <b>emanete</b> asla ihanet etmezdi.</p>
-    <p>Bu güven öyle güçlüydü ki, kendisine düşman olanlar bile değerli eşyalarını ona emanet ediyordu. Hicret gecesi Mekke'den ayrılırken bile bu emanetleri sahiplerine eksiksiz teslim etmesi için Hz. Ali'yi (ra) geride bırakmıştır.</p>
-    <p>Doğru sözlü olmak (<b>sıdk</b>) ve güvenilir olmak (<b>emanet</b>), yalnızca Hz. Muhammed'e ait değildir; bunlar <b>bütün peygamberlerin ortak sıfatlarıdır</b>. Bir peygamberin asla yalan söylememesi ve emanete ihanet etmemesi, getirdiği mesajın da güvenilir olduğunun teminatıdır.</p>
-    <p>Onun doğruluğunun ve bilgeliğinin en güzel örneklerinden biri <b>Hacerülesved (Kutsal Taş) olayı</b>dır. Kâbe onarılırken taşın yerine kimin koyacağı konusunda kabileler anlaşamamış, iş neredeyse savaşa varmıştı. Hakem seçilen Hz. Muhammed, taşı bir örtünün üzerine koydu ve her kabile reisinin örtünün bir ucundan tutmasını istedi. Taş, hep birlikte taşınarak yerine yerleştirildi. Böylece kan dökülmeden, herkesi memnun eden <b>âdil</b> bir çözüm bulunmuş oldu.</p>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">📖 Ayetle Düşünelim</p>
-    <p class="zb-ayet-metin">"Andolsun, Allah'ın Resulü'nde sizin için; Allah'a ve ahiret gününe kavuşmayı uman, Allah'ı çok zikreden kimseler için güzel bir örnek vardır."</p>
-    <p class="zb-ayet-kaynak">— Ahzab suresi, 21. ayet</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Hz. Muhammed sadece bir haberci değil, yaşayışıyla bize yol gösteren <b>en güzel örnektir (üsve-i hasene)</b>.</p>
-  </div>
-  <div class="zb-kutu zb-merak">
-    <p class="zb-baslik">🤔 Merak Ettin mi?</p>
-    <p class="zb-metin">"Emin", "emanet", "iman" ve Arapçadaki "güven" kelimeleri hep aynı kökten gelir. Yani güvenilir olmak, imanın doğal bir sonucudur: gerçekten inanan insan, kendisine güvenilebilen insandır.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li><b>El-Emin</b>: Hz. Muhammed'e peygamberlikten önce verilen "güvenilir" lakabı.</li>
-      <li><b>Sıdk</b> (doğruluk) ve <b>emanet</b> (güvenilirlik), bütün peygamberlerin ortak sıfatlarındandır.</li>
-      <li><b>Hacerülesved olayı</b>: Kabileler arasındaki anlaşmazlığı örtü çözümüyle âdilce sonuçlandırması.</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşünelim</p>
-    <p class="zb-metin">Bir insanın "güvenilir" olarak tanınması için hangi davranışları düzenli olarak yapması gerekir? Sen bugün hangisini yaptın?</p>
-    <textarea id="zbAlan_dusun_4_1" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun_4_1', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-    <p class="zb-cevap-not" id="zbNot_dusun_4_1"></p>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Hz. Muhammed, peygamberlikten önce bile "el-Emin" diye anılırdı. Doğruluk (sıdk) ve güvenilirlik (emanet) bütün peygamberlerin ortak sıfatıdır; Hacerülesved olayı bu özelliklerin en güzel örneğidir.</p>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Merhameti ve Affediciliği</h3>
-    <p class="ko-giris">Sana yıllarca kötülük yapan biri, bir gün senin merhametine muhtaç kalsa ne yapardın?</p>
-    <p class="ko-amac">🎯 Bu bölümde: Hz. Muhammed'in merhametini ve affediciliğini örnek olaylarla öğreneceğiz.</p>
-    <p>Kur'an-ı Kerim, Hz. Muhammed'i <b>"âlemlere rahmet"</b> olarak niteler. Onun hayatına baktığımızda merhametin sadece bir duygu değil, sürekli bir davranış biçimi olduğunu görürüz. Çocukları sever ve okşardı; namazda bile bir çocuğun ağladığını duyunca annesini üzmemek için namazı kısaltırdı. Hayvanlara eziyet edilmesini yasaklamış, yaşlıya, kimsesize ve yolcuya şefkatle davranmayı öğretmiştir.</p>
-    <p>Merhametinin en çarpıcı örneği <b>Taif yolculuğu</b>dur. İslam'ı anlatmak için gittiği Taif'te halk onu dinlemedikleri gibi taşlayarak yaraladılar. O sırada kendisine, dilerse bu şehrin dağlar arasında helak edilebileceği bildirildiğinde Hz. Peygamber bunu kabul etmedi ve şöyle dedi: <b>"Belki onların soyundan yalnız Allah'a kulluk edecek nesiller gelir."</b> Beddua etmek yerine dua etti.</p>
-    <p>Affediciliğinin zirvesi ise <b>Mekke'nin Fethi</b>dir. Yıllarca kendisine ve inananlara işkence eden, yurdundan çıkaran Kureyşliler artık onun elindeydi. Herkes bir cezayı beklerken o şunu söyledi: <b>"Bugün size kınama yok, gidiniz, hepiniz serbestsiniz!"</b> Bu genel af, Mekke'nin kansız bir şekilde fethedilmesini sağladı ve pek çok kişinin gönülden Müslüman olmasına vesile oldu.</p>
-    <p>Onun öğrettiği ölçü nettir: <b>"Merhamet etmeyene merhamet olunmaz."</b> ve <b>"Yerdekilere merhamet edin ki gökteki de size merhamet etsin."</b> Merhamet ve af; kin zincirini kıran, kırılan bağları onaran erdemlerdir.</p>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">📖 Ayetle Düşünelim</p>
-    <p class="zb-ayet-metin">"(Ey Muhammed!) Biz seni ancak âlemlere rahmet olarak gönderdik."</p>
-    <p class="zb-ayet-kaynak">— Enbiya suresi, 107. ayet</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Onun getirdiği mesajın özü rahmettir; merhametsiz bir dindarlık, bu mesajın ruhuna aykırıdır.</p>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">🕋 Hadisle Düşünelim</p>
-    <p class="zb-ayet-metin">"Merhamet edenlere Rahman olan Allah da merhamet eder. Siz yerdekilere merhamet edin ki göktekiler de size merhamet etsin."</p>
-    <p class="zb-ayet-kaynak">— Hz. Peygamber (sav) (Tirmizi, Birr, 16 — anlamı özetlenmiştir)</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Merhamet karşılıklıdır; başkalarına gösterdiğimiz şefkat, bize dönen bir iyiliktir.</p>
-  </div>
-  <div class="zb-kutu zb-yanlis">
-    <p class="zb-baslik">❌ Yanlış Bilinenler</p>
-    <p class="zb-metin zb-yanlis-satir">❌ Bazıları affetmeyi güçsüzlük, intikam almayı ise güçlülük sanır.</p>
-    <p class="zb-metin zb-dogru-satir">✅ Hz. Peygamber Mekke'yi fethettiği, yani en güçlü olduğu anda affetmiştir. Asıl güç, güç elindeyken bağışlayabilmektir.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li><b>Taif</b>: Kendisini taşlayanlara beddua etmedi, hidayetleri için dua etti.</li>
-      <li><b>Mekke'nin Fethi</b>: "Bugün size kınama yok, hepiniz serbestsiniz!" → genel af.</li>
-      <li>Hadis: "Merhamet etmeyene merhamet olunmaz."</li>
-      <li>Merhamet çocuğa, yaşlıya, kimsesize ve hayvanlara kadar uzanır.</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-ornek">
-    <p class="zb-baslik">🏠 Hayatımızdan</p>
-    <p class="zb-metin">Sınıfta seninle alay eden bir arkadaşın bir gün senden yardım istese ne yapardın? "Bugün size kınama yok." diyebilen bir insanın büyüklüğünü hatırla: affetmek kaybetmek değil, kazanmaktır.</p>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşünelim</p>
-    <p class="zb-metin">Affetmek her zaman kolay değildir. Affettiğinde kendini nasıl hissettin? Affedemediğinde ne oldu?</p>
-    <textarea id="zbAlan_dusun_4_2" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun_4_2', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-    <p class="zb-cevap-not" id="zbNot_dusun_4_2"></p>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Hz. Muhammed âlemlere rahmet olarak gönderilmiştir. Taif'te kendisini taşlayanlara beddua etmemiş, Mekke'nin Fethi'nde ise yıllarca zulmeden Kureyşlileri affetmiştir.</p>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ İstişareye Verdiği Önem</h3>
-    <p class="ko-giris">Bir grup çalışmasında sadece bir kişinin fikri uygulansa ne olur? Peki herkes fikrini söylerse?</p>
-    <p class="ko-amac">🎯 Bu bölümde: İstişarenin ne olduğunu ve Hz. Muhammed'in ona verdiği önemi örnek olaylarla öğreneceğiz.</p>
-    <p><b>İstişare (şûrâ)</b>, bir konuda karar vermeden önce bilgi ve tecrübe sahibi kişilere danışmak, fikir alışverişinde bulunmaktır. Hz. Muhammed, kendisine vahiy geldiği hâlde, vahiyle bildirilmeyen konularda arkadaşlarına (sahabeye) danışmayı hiç ihmal etmemiştir. Çünkü Kur'an-ı Kerim bunu emretmiştir: <b>"...İş hakkında onlara danış..."</b> (Âl-i İmrân suresi, 159. ayet)</p>
-    <p><b>Bedir Savaşı</b> öncesinde ordunun konaklayacağı yeri belirlemişti. Ancak sahabeden biri, "Ey Allah'ın Resulü! Burası vahiyle mi belirlendi, yoksa bir görüş müdür?" diye sordu. "Bir görüştür." cevabını alınca, suyun kontrolünü sağlayacak daha uygun bir yer önerdi. Hz. Peygamber bu öneriyi beğendi ve kendi tercihini değiştirdi.</p>
-    <p><b>Hendek Savaşı</b>nda Medine kuşatma altındaydı. İranlı sahabi <b>Selman-ı Farisi</b>, kendi memleketinde uygulanan bir savunma yöntemini önerdi: şehrin açık tarafına derin bir <b>hendek</b> kazmak. Arapların o güne kadar bilmediği bu taktik benimsendi ve Medine düşman ordusunun kuşatmasından korunmuş oldu.</p>
-    <p><b>Uhud Savaşı</b> öncesinde ise Hz. Peygamber'in kendi görüşü şehir içinde kalıp savunma yapmaktı. Fakat özellikle gençlerden oluşan çoğunluk şehir dışına çıkıp savaşmak istedi. O, kendi görüşünde ısrar etmedi ve çoğunluğun kararına uydu. Bu davranış, istişarenin sadece "sormak" değil, alınan ortak karara <b>uymak</b> olduğunu da gösterir.</p>
-    <p>İstişare; kararı güçlendirir, hata ihtimalini azaltır, insanları sürece ortak eder ve onlara değer verildiğini hissettirir. Bugün de ailede, sınıfta ve iş hayatında en sağlıklı kararlar danışılarak alınanlardır.</p>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">📖 Ayetle Düşünelim</p>
-    <p class="zb-ayet-metin">"...Onları affet, onlar için Allah'tan bağışlanma dile, iş hakkında onlara danış. Karar verince de artık Allah'a tevekkül et. Şüphesiz Allah kendisine tevekkül edenleri sever."</p>
-    <p class="zb-ayet-kaynak">— Âl-i İmrân suresi, 159. ayet</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Danışmak bir zayıflık değil, ilahi bir emirdir. Karar verdikten sonra ise Allah'a güvenip işe koyulmak gerekir.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li><b>İstişare (şûrâ)</b>: Karar öncesi bilenlere danışmak.</li>
-      <li><b>Bedir</b>: Ordugâh yeri konusunda sahabenin önerisini kabul etti.</li>
-      <li><b>Hendek</b>: <b>Selman-ı Farisi'nin</b> hendek kazma önerisiyle Medine korundu.</li>
-      <li><b>Uhud</b>: Kendi görüşüne rağmen çoğunluğun kararına uydu.</li>
-      <li>Kur'an emri: "...İş hakkında onlara danış..." (Âl-i İmrân, 159)</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşünelim</p>
-    <p class="zb-metin">Kendi fikrin doğru görünse bile başkalarına danışmak sana ne kazandırır? Danışmadan verilen kararlar neden daha risklidir?</p>
-    <textarea id="zbAlan_dusun_4_3" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun_4_3', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-    <p class="zb-cevap-not" id="zbNot_dusun_4_3"></p>
-  </div>
-  <div class="zb-kutu zb-aile">
-    <p class="zb-baslik">👨‍👩‍👧 Hayatımızdan</p>
-    <p class="zb-metin">Ailenizde son zamanlarda birlikte karar verdiğiniz bir konuyu konuşun. Herkesin fikri alınsaydı ya da alınmasaydı sonuç nasıl değişirdi? Kısaca not edin.</p>
-    <textarea id="zbAlan_aile" class="zb-cevap-alani" placeholder="Ailenle yaptığın etkinliği kısaca anlat..." onchange="zbCevapKaydet('aile', this)" aria-label="Ailenle yaptığın etkinliği kısaca anlat..."></textarea>
-    <p class="zb-cevap-not" id="zbNot_aile"></p>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Hz. Muhammed, vahiyle bildirilmeyen konularda daima istişare etti. Bedir'de ordugâh yerini, Hendek'te Selman-ı Farisi'nin hendek önerisini, Uhud'da ise çoğunluğun görüşünü benimsedi.</p>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Cesareti ve Kararlılığı</h3>
-    <p class="ko-giris">Herkesin karşı çıktığı bir konuda tek başına doğruyu savunmak zorunda kalsan, dayanabilir miydin?</p>
-    <p class="ko-amac">🎯 Bu bölümde: Hz. Muhammed'in cesaretini ve kararlılığını örnek olaylarla açıklamayı öğreneceğiz.</p>
-    <p>Cesaret, hiç korkmamak değildir; korkuya ve zorluğa rağmen doğru bildiğini yapabilmektir. <b>Kararlılık</b> ise bu duruşu bir anlık değil, yıllarca sürdürebilmektir. Hz. Muhammed'in hayatı bu iki erdemin en güzel örnekleriyle doludur.</p>
-    <p>İslam'ı anlatmaya başladığında Kureyşliler önce alay ettiler, sonra tehdit ve işkenceye başladılar. Onu durduramayınca amcası <b>Ebu Talib</b>'e giderek yeğenini vazgeçirmesini istediler. Amcası durumu kendisine aktardığında Hz. Muhammed'in verdiği cevap, kararlılığın sembolü olmuştur: <b>"Amcacığım! Bir elime güneşi, bir elime ayı verseler ben yine bu davadan vazgeçmem."</b></p>
-    <p><b>Hicret</b> sırasında yaşananlar da cesaretinin göstergesidir. Kendisini öldürmek için yola çıkan düşmanlar, saklandıkları <b>Sevr Mağarası</b>nın ağzına kadar gelmişti. Yanındaki Hz. Ebu Bekir (ra) endişelenince ona sükûnetle şöyle dedi: <b>"Üzülme, Allah bizimle beraberdir."</b> Bu söz Kur'an-ı Kerim'de de anlatılır (Tevbe suresi, 40. ayet).</p>
-    <p>Savaşların en zorlu anlarında sahabe ona sığınır, o ise saftan geri durmazdı. Yıllar süren <b>boykot</b>, alay, tehdit ve yurdundan ayrılmak zorunda kalma... Bunların hiçbiri onu davasından döndüremedi. Cesaret ve kararlılık, bir davanın haklılığına duyulan inancın en açık kanıtıdır.</p>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">📖 Ayetle Düşünelim</p>
-    <p class="zb-ayet-metin">"...Hani onlar mağarada bulunuyorlardı. Hani arkadaşına, 'Üzülme, çünkü Allah bizimle beraberdir.' diyordu..."</p>
-    <p class="zb-ayet-kaynak">— Tevbe suresi, 40. ayet</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Gerçek cesaretin kaynağı, Allah'a duyulan güvendir (tevekkül). En dar anda bile sükûnetini koruyabilmek bu güvenle mümkündür.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li>Ebu Talib'e verdiği cevap: <b>"Bir elime güneşi, bir elime ayı verseler..."</b> → kararlılık.</li>
-      <li><b>Sevr Mağarası</b>: "Üzülme, Allah bizimle beraberdir." → cesaret ve tevekkül.</li>
-      <li>Cesaret = korkusuzluk değil, korkuya rağmen doğruyu yapabilmektir.</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-derin">
-    <p class="zb-baslik">🔍 Derinlemesine Düşünelim</p>
-    <p class="zb-metin">Bu ünitede öğrendiklerini derinlemesine değerlendirmek için kendine şu soruları sor:</p>
-    <ul class="zb-derin-liste">
-      <li>Cesaret ile dikkatsizce tehlikeye atılmak arasındaki fark nedir?</li>
-      <li>Bir haksızlığa şahit olduğumda susmam hangi duygunun sonucudur?</li>
-      <li>Hz. Peygamber'in kararlılığı bugün benim hangi kararımda bana örnek olabilir?</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-ikilem">
-    <p class="zb-baslik">⚖️ Ahlaki İkilem — Sen Olsaydın Ne Yapardın?</p>
-    <p class="zb-metin">Arkadaş grubun, sınıftaki bir arkadaşınıza haksızlık ediyor. Karşı çıkarsan dışlanma riskin var. Cesaret ve hakkaniyet kavramlarını düşünerek ne yapardın?</p>
-    <textarea id="zbAlan_ikilem" class="zb-cevap-alani" placeholder="Ne yapardın ve neden? Düşünceni buraya yazabilirsin..." onchange="zbCevapKaydet('ikilem', this)" aria-label="Ahlaki ikilem cevabın"></textarea>
-    <p class="zb-cevap-not" id="zbNot_ikilem"></p>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Hz. Muhammed, "Bir elime güneşi bir elime ayı verseler vazgeçmem." diyecek kadar kararlı, Sevr Mağarası'nda "Üzülme, Allah bizimle beraberdir." diyecek kadar cesurdu.</p>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">5️⃣ İnsanlara Verdiği Değer ve Hakkı Gözetmesi</h3>
-    <p class="ko-giris">Bir insanın değerini onun parası, mesleği ya da rengi mi belirler? Peki neyi belirler?</p>
-    <p class="ko-amac">🎯 Bu bölümde: Hz. Muhammed'in insana verdiği değeri ve hakkı gözetmedeki hassasiyetini öğreneceğiz.</p>
-    <p>Hz. Muhammed, insanları makamına, servetine ya da kabilesine göre değil, <b>takva</b>sına yani Allah'a karşı sorumluluk bilincine göre değerlendirirdi. Bir meclise girdiğinde nerede yer bulursa oraya oturur, köleyle özgür insanı ayırmaz, hasta ziyaret eder, cenazeye katılır, davete icabet ederdi.</p>
-    <p>Hakkı gözetmedeki hassasiyeti daha peygamberlikten önce başlamıştı. Mekke'de haksızlığa uğrayanları özellikle de şehri tanımayan yabancı tüccarları korumak için bir grup genç <b>Hılfü'l-fudûl (Erdemliler İttifakı)</b> adıyla bir anlaşma kurmuş, Hz. Muhammed de bu ittifaka katılmıştı. Yıllar sonra peygamber olduğunda bile o günü şöyle anmıştır: <b>"Böyle bir anlaşmaya bugün de çağrılsam yine katılırım."</b></p>
-    <p>İnsana verdiği değerin en kapsamlı bildirisi <b>Veda Hutbesi</b>dir. Vefatından kısa bir süre önce, yüz binden fazla Müslümana hitaben okuduğu bu hutbede şunları ilan etmiştir: Herkesin <b>canı, malı ve namusu dokunulmazdır</b>; <b>faiz</b> ve <b>kan davaları</b> kaldırılmıştır; emanetler sahiplerine verilmelidir; kadınların hakları gözetilmelidir.</p>
-    <p>Hutbenin en çok bilinen cümlesi ise eşitliğin evrensel ilanıdır: <b>"Arabın Arap olmayana, Arap olmayanın Araba, beyazın siyaha, siyahın beyaza üstünlüğü yoktur. Üstünlük ancak takva iledir."</b></p>
-    <p>Bu duyarlılık günlük hayata da yansır. O şöyle buyurmuştur: <b>"Komşusu açken tok yatan bizden değildir."</b> ve <b>"Sizin en hayırlınız, ailesine karşı en hayırlı olanınızdır."</b> Yani insana verilen değer, en yakınımızdaki insanla kurduğumuz ilişkide sınanır.</p>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">📖 Ayetle Düşünelim</p>
-    <p class="zb-ayet-metin">"Ey insanlar! Şüphe yok ki biz sizi bir erkek ve bir dişiden yarattık ve birbirinizi tanımanız için sizi boylara ve kabilelere ayırdık. Allah katında en değerliniz, O'na karşı gelmekten en çok sakınanınızdır..."</p>
-    <p class="zb-ayet-kaynak">— Hucurat suresi, 13. ayet</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Veda Hutbesi'ndeki eşitlik ilkesinin kaynağı bu ayettir: üstünlük ırkta, renkte veya soyda değil, <b>takva</b>dadır.</p>
-  </div>
-  <div class="zb-kutu zb-yanlis">
-    <p class="zb-baslik">❌ Yanlış Bilinenler</p>
-    <p class="zb-metin zb-yanlis-satir">❌ "İnsan hakları çok yeni bir fikirdir, geçmişte böyle şeyler konuşulmazdı."</p>
-    <p class="zb-metin zb-dogru-satir">✅ Veda Hutbesi, yaklaşık 1400 yıl önce canın, malın ve namusun dokunulmazlığını, ırk ayrımının geçersizliğini açıkça ilan etmiştir.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li><b>Hılfü'l-fudûl</b>: Haksızlığa uğrayanı korumak için kurulan erdemliler ittifakı.</li>
-      <li><b>Veda Hutbesi</b>: Can, mal ve namus dokunulmazlığı; faizin ve kan davalarının kaldırılması; kadın hakları.</li>
-      <li>"Üstünlük ancak <b>takva</b> iledir." → ırk ve renk üstünlük sebebi değildir.</li>
-      <li>"Komşusu açken tok yatan bizden değildir."</li>
-    </ul>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Hz. Muhammed insanı takvasıyla değerlendirdi; Hılfü'l-fudûl ile haksızlığa uğrayanı korudu, Veda Hutbesi'nde ise can, mal ve namus dokunulmazlığını evrensel biçimde ilan etti.</p>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">6️⃣ Bir Sure Tanıyorum: Kureyş Suresi ve Anlamı</h3>
-    <p class="ko-giris">Her gün yediğin yemek ve güvenle uyuduğun ev... Bunlar için son kez ne zaman şükrettin?</p>
-    <p class="ko-amac">🎯 Bu bölümde: Kureyş suresini ve verdiği şükür mesajını öğreneceğiz.</p>
-    <p><b>Kureyş suresi</b>, Kur'an-ı Kerim'in 106. suresidir; Mekke'de inmiştir ve yalnızca <b>dört ayettir</b>. Adını, Hz. Peygamber'in de mensubu olduğu <b>Kureyş</b> kabilesinden alır.</p>
-    <p>Kureyşliler, çölün ortasındaki Mekke'de tarım yapamadıkları için geçimlerini ticaretle sağlıyorlardı. Kışın <b>Yemen'e</b>, yazın <b>Şam'a</b> düzenli ticaret kervanları düzenlerlerdi. Kâbe'nin bakıcıları oldukları için bu yolculuklarda kimse onlara saldırmaz, kervanları güvenle yol alırdı. Yani hem karınları doyuyor hem de korku içinde yaşamıyorlardı.</p>
-    <p>İşte sure tam da bunu hatırlatır: Bütün bu güvenlik ve bolluk kendiliğinden olmamıştır. Onları <b>açlıktan doyuran</b> ve <b>korkudan emin kılan</b> Allah'tır (cc). Öyleyse yapılması gereken bellidir: bu nimetlere <b>şükür</b> olarak, Kâbe'nin Rabbi olan Allah'a kulluk etmek.</p>
-    <p>Surenin bize öğrettiği ders çok nettir: Sahip olduğumuz her nimet bize verilmiş bir emanettir ve şükrü, o nimeti vereni tanıyıp O'nun istediği gibi yaşamaktır.</p>
-  </div>
-  <div class="zb-kutu zb-okunus">
-    <p class="zb-baslik">📿 Kureyş Suresi — Okunuşu ve Anlamı</p>
-    <table class="okunus-tablo">
-      <tr><td class="okunus-sutun">Bismillâhirrahmânirrahîm.</td><td class="anlam-sutun">Rahman ve Rahîm olan Allah'ın adıyla.</td></tr>
-      <tr><td class="okunus-sutun">1. Li îlâfi Kureyş</td><td class="anlam-sutun">Kureyş'i ısındırıp alıştırdığı için,</td></tr>
-      <tr><td class="okunus-sutun">2. Îlâfihim rihleteş şitâi ves sayf</td><td class="anlam-sutun">onları kış ve yaz yolculuğuna ısındırıp alıştırdığı için,</td></tr>
-      <tr><td class="okunus-sutun">3. Felya'budû Rabbe hâzel beyt</td><td class="anlam-sutun">öyleyse şu evin (Kâbe'nin) Rabbine kulluk etsinler;</td></tr>
-      <tr><td class="okunus-sutun">4. Ellezî at'amehum min cûin ve âmenehum min havf</td><td class="anlam-sutun">O ki, onları açlıktan doyurdu ve her türlü korkudan emin kıldı.</td></tr>
-    </table>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">📖 Ayetle Düşünelim</p>
-    <p class="zb-ayet-metin">"Öyleyse şu evin (Kâbe'nin) Rabbine kulluk etsinler. O ki, kendilerini açlıktan doyurmuş ve her türlü korkudan emin kılmıştır."</p>
-    <p class="zb-ayet-kaynak">— Kureyş suresi, 3-4. ayetler</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Nimetin farkına varmak, şükrün ilk adımıdır; şükrün gerçek karşılığı ise nimeti verene kulluk etmektir.</p>
-  </div>
-  <div class="zb-kutu zb-merak">
-    <p class="zb-baslik">🤔 Merak Ettin mi?</p>
-    <p class="zb-metin">Suredeki <b>"şitâ"</b> kelimesi "kış", <b>"sayf"</b> kelimesi ise "yaz" demektir. Kureyşliler kışın sıcak olan Yemen'e, yazın ise serin olan Şam'a giderlerdi. Yani yolculuk takvimleri bile Allah'ın (cc) onlara verdiği bir kolaylıktı.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li>Kureyş suresi <b>106. sure</b>, Mekke'de inmiştir, <b>4 ayettir</b>.</li>
-      <li><b>Şitâ</b>: kış (Yemen yolculuğu). <b>Sayf</b>: yaz (Şam yolculuğu).</li>
-      <li>İki büyük nimet: <b>açlıktan doyurulmak</b> ve <b>korkudan emin kılınmak</b>.</li>
-      <li>Surenin ana mesajı: nimetlere <b>şükür</b> olarak yalnız Allah'a kulluk etmek.</li>
-    </ul>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Kureyş suresi, Kureyşlilere verilen güvenli ticaret yolculuklarını, açlıktan doyurulmayı ve korkudan emin kılınmayı hatırlatır; karşılığında yalnız Kâbe'nin Rabbine kulluk edilmesini ister.</p>
-
-
-
-  <div class="zb-kutu zb-degerlendir">
-    <p class="zb-baslik">✅ Kendimi Değerlendiriyorum</p>
-    <ul>
-      <li><input type="checkbox" id="deg_8-4_0" onchange="degKaydet('8-4')"><label for="deg_8-4_0">Hz. Muhammed'in doğruluğunu ve güvenilirliğini ("el-Emin") örneklerle açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_8-4_1" onchange="degKaydet('8-4')"><label for="deg_8-4_1">Merhamet ve affediciliğini Taif ile Mekke'nin Fethi örnekleriyle anlatabilirim.</label></li>
-      <li><input type="checkbox" id="deg_8-4_2" onchange="degKaydet('8-4')"><label for="deg_8-4_2">İstişareye verdiği önemi Bedir, Hendek ve Uhud örnekleriyle açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_8-4_3" onchange="degKaydet('8-4')"><label for="deg_8-4_3">Cesaret ve kararlılığını örnek olaylarla açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_8-4_4" onchange="degKaydet('8-4')"><label for="deg_8-4_4">Hılfü'l-fudûl ve Veda Hutbesi'nden hareketle insana verdiği değeri örneklendirebilirim.</label></li>
-      <li><input type="checkbox" id="deg_8-4_5" onchange="degKaydet('8-4')"><label for="deg_8-4_5">Kureyş suresini okur, verdiği mesajı yorumlayabilirim.</label></li>
-    </ul>
-  </div>
-
-
-</section>
-
-<!-- KONU TEKRARI TESTİ -->
-<section id="konutekrari84">
-  <h2>📝 Konu Tekrarı Testi (50 Soru)</h2>
-  <div class="oyun-amaci">🎯 Bu bölümün amacı: Ünitenin tamamını kapsamlı bir testle tekrar edip pekiştirmek.</div>
-  <div class="aciklama">4 şıklı, 50 sorudan oluşan kapsamlı bir tekrar testi! Kolay, orta ve zor sorular karışık geliyor. Cevabı seçince doğru/yanlış hemen görünüyor, altında da açıklaması çıkıyor.</div>
-
-  <div class="kutu-panel kutu-kazanim">
-    <h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
-    <p class="kazanim-kaynak">Kaynak: 2018 DKAB Öğretim Programı (MEB Talim ve Terbiye Kurulu) — 8.4. Hz. Muhammed'in Örnekliği</p>
-    <ul>
-      <li><b>8.4.1</b> — Hz. Muhammed'in doğruluğu ve güvenilir kişiliği ile peygamberlerin özellikleri arasında ilişki kurar.</li>
-      <li><b>8.4.2</b> — Hz. Muhammed'in merhametli ve affedici oluşunu davranışlarında yansıtmaya özen gösterir.</li>
-      <li><b>8.4.3</b> — Hz. Muhammed'in istişareye verdiği önemi ortaya koyan örnek olaylardan hareketle gündelik hayatla ilgili çıkarımlarda bulunur.</li>
-      <li><b>8.4.4</b> — Hz. Muhammed'in cesaret ve kararlılığını örnek olaylarla açıklar.</li>
-      <li><b>8.4.5</b> — Hz. Muhammed'in hakkı gözetmedeki hassasiyetine örnekler verir.</li>
-      <li><b>8.4.6</b> — Hz. Muhammed'in insanlara verdiği değeri örneklerle açıklar.</li>
-      <li><b>8.4.7</b> — Hz. Muhammed'in örnek davranışlarının toplumsal hayattaki önemini değerlendirir.</li>
-      <li><b>8.4.8</b> — Hz. Muhammed'in hikmetli söz ve davranışlarıyla insanları iyiye ve güzele yönlendirdiğini fark eder.</li>
-    </ul>
-  </div>
-
-  <div class="kutu-panel kavram-harita-panel">
-    <h3 style="color:#5b21b6">🗺️ Kavram Haritası</h3>
-    <p class="kavram-harita-aciklama">Bu ünitenin MEB öğretim programında belirlenen anahtar kavramları, ünite temasıyla bağlantılı olarak aşağıda gösterilmiştir.</p>
-    <div class="kavram-harita">
-      <div class="kh-merkez">Hz. Muhammed'in Örnekliği</div>
-      <div class="kh-dallar">
-      <div class="kh-kavram">El-Emin</div>
-      <div class="kh-kavram">Emanet</div>
-      <div class="kh-kavram">Merhamet</div>
-      <div class="kh-kavram">İstişare</div>
-      <div class="kh-kavram">Cesaret</div>
-      <div class="kh-kavram">Hikmet</div>
-      </div>
-    </div>
-  </div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Soru: <b id="kt84rTur">1</b>/<b id="kt84rToplam">50</b></span>
-    <span>⭐ Puan: <b id="kt84rPuan">0</b></span>
-    <span id="kt84rZorluk"></span>
-  </div>
-  <div id="kt84rSoru" class="balon-durum"></div>
-  <div id="kt84rSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:560px;margin:0 auto;"></div>
-  <div class="aciklama" id="kt84rAciklama" style="display:none;"></div>
-  <div class="sonuc-kutusu" id="kt84rSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" id="kt84rSonrakiBtn" style="display:none;" onclick="kt84rSonrakiSoru()">➡️ Sonraki Soru</button>
-    <button class="eylem" style="background:var(--sari)" onclick="kt84rBaslat()">📝 Teste Başla</button>
-  </div>
-</section>
-
-<!-- HIZLI KELİME ÜRETME -->
-<section id="kelimeuret84">
-  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
-  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
-  <div class="oyun-bilgi">
-    <span>🔤 Harf: <b id="ku84Harf">-</b></span>
-    <span>⭐ Puan: <b id="ku84Puan">0</b></span>
-    <span>⏱️ Süre: <b id="ku84Sure">60</b>sn</span>
-  </div>
-  <input type="text" id="ku84Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ku84Ekle();}">
-  <p class="balon-durum" id="ku84Uyari"></p>
-  <ul class="ku-liste" id="ku84Liste"></ul>
-  <div class="sonuc-kutusu" id="ku84Sonuc"></div>
-  <div id="ku84Kacirilan"></div>
-  <button class="eylem" onclick="ku84Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- TUZAK HARF -->
-<section id="tuzak84">
-  <h2>🚫 Tuzak Harf Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
-  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen kavramları süre bitmeden art arda yaz!</div>
-  <div class="oyun-bilgi">
-    <span>🚫 Tuzak Harf: <b id="tuzak84Harf">-</b></span>
-    <span>⭐ Puan: <b id="tuzak84Puan">0</b></span>
-    <span>⏱️ Süre: <b id="tuzak84Sure">40</b>sn</span>
-  </div>
-  <input type="text" id="tuzak84Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzak84Ekle();}">
-  <p class="balon-durum" id="tuzak84Uyari"></p>
-  <ul class="ku-liste" id="tuzak84Liste"></ul>
-  <div class="sonuc-kutusu" id="tuzak84Sonuc"></div>
-  <button class="eylem" onclick="tuzak84Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME FABRİKASI -->
-<section id="fabrika84">
-  <h2>🏭 Kelime Fabrikası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
-  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!</div>
-  <div class="oyun-bilgi">
-    <span>🏭 Üretilen: <b id="kf84Uretilen">0</b>/<b id="kf84Toplam">28</b></span>
-    <span>❌ Hata: <b id="kf84Hata">0</b></span>
-  </div>
-  <div id="kf84Siparis" class="balon-durum"></div>
-  <div class="kf-bant" id="kf84BantAlani"></div>
-  <input type="text" id="kf84Girdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kf84Uret();}">
-  <button class="eylem" onclick="kf84Uret()">🏭 Üret!</button>
-  <div class="kf-urunler" id="kf84Urunler"></div>
-  <div class="sonuc-kutusu" id="kf84Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="kf84Baslat()">🔄 Fabrikayı Başlat/Yenile</button>
-</section>
-
-<!-- KELİME MÜHENDİSİ -->
-<section id="muhendis84">
-  <h2>🛠️ Kelime Mühendisi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
-  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
-  <div class="oyun-bilgi">
-    <span>🏗️ Tur: <b id="km84Tur">1</b>/<b id="km84Toplam">28</b></span>
-    <span>✅ İnşa Edilen: <b id="km84Dogru">0</b></span>
-  </div>
-  <div id="km84Ipucu" class="balon-durum"></div>
-  <div class="kelime-cevap" id="km84Cevap"></div>
-  <div class="kelime-banka" id="km84Banka"></div>
-  <div class="sonuc-kutusu" id="km84Sonuc"></div>
-  <button class="eylem" onclick="km84Baslat()">🛠️ Mühendisliğe Başla</button>
-</section>
-
-<!-- KAVRAM TURNUVASI -->
-<section id="kavramturnuvasi84">
-  <h2>🏆 Kavram Turnuvası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
-  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap.</div>
-  <div class="oyun-bilgi">
-    <span>🥊 Maç: <b id="kt84Tur">1</b>/<b id="kt84Toplam">7</b></span>
-    <span>✅ Doğru Hakemlik: <b id="kt84Puan">0</b></span>
-  </div>
-  <div id="kt84Asama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
-  <div id="kt84Eslesme" class="balon-durum"></div>
-  <div id="kt84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kt84Sonuc"></div>
-  <button class="eylem" onclick="kt84Baslat()">🏆 Turnuvayı Başlat</button>
-</section>
-
-<!-- BONUS OYUN: HAFIZA ZİNCİRİ -->
-<section id="bonus84">
-  <h2>🎮 Bonus Oyun: Kavramlar Hafıza Zinciri</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
-  <div class="aciklama">Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir kavram daha uzuyor.</div>
-  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bz84Seviye">0</b></span></div>
-  <div class="bz-izgara" id="bz84Izgara"></div>
-  <div class="sonuc-kutusu" id="bz84Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" style="background:var(--sari)" onclick="bz84OrnekOyna()">🎬 Önce Örnek Gör</button>
-    <button class="eylem" onclick="bz84Baslat()">🎮 Oyunu Başlat</button>
-  </div>
-</section>
-
-<!-- KELİME AVI -->
-<section id="kelimeavi84">
-  <h2>🔎 Kelime Avı Bulmacası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
-  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka84Bulunan">0</b>/<b id="ka84Toplam">14</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ka-izgara" id="ka84Izgara"></div>
-    <ul class="ka-liste" id="ka84Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ka84Sonuc"></div>
-  <button class="eylem" onclick="kelimeAvi84Olustur()">🔄 Yeni Bulmaca</button>
-</section>
-
-<!-- ÇENGEL BULMACA -->
-<section id="cengel84">
-  <h2>🧩 Çengel Bulmaca</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
-  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
-  <div class="cengel-izgara" id="cengel84Izgara"></div>
-  <ul class="cengel-liste" id="cengel84Liste"></ul>
-  <div class="sonuc-kutusu" id="cengel84Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="cengel84KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="cengel84Olustur()">🔄 Baştan Başla</button>
-  </div>
-</section>
-
-<!-- SÖZCÜK MERDİVENİ -->
-<section id="merdiven84">
-  <h2>🪜 Sözcük Merdiveni</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
-  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdiven84Basamak">1</b>/<b id="merdiven84Toplam">4</b></span></div>
-  <div id="merdiven84Ipucu" class="balon-durum"></div>
-  <div id="merdiven84Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="merdiven84Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="merdiven84Sonuc"></div>
-  <button class="eylem" onclick="merdiven84Baslat()">🔄 Yeniden Başlat</button>
-</section>
-
-<!-- ŞİFRELİ SÖZCÜK -->
-<section id="sifre84">
-  <h2>🔐 Şifreli Sözcük Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
-  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
-  <div class="sifre-anahtar" id="sifre84Anahtar"></div>
-  <div id="sifre84Kelimeler"></div>
-  <div class="sonuc-kutusu" id="sifre84Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="sifre84KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="sifre84Olustur()">🔄 Yeni Şifre</button>
-  </div>
-</section>
-
-<!-- ŞİFRELİ TANIM -->
-<section id="sifretanim84">
-  <h2>🔐 Şifreli Tanım Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
-  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="st84Tur">1</b>/<b id="st84Toplam">28</b></span>
-    <span>⭐ Puan: <b id="st84Puan">0</b></span>
-  </div>
-  <div id="st84Tanim" class="dua-satir"></div>
-  <div id="st84Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="st84Sonuc"></div>
-  <button class="eylem" onclick="st84Baslat()">🔐 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME KODLAMA -->
-<section id="kelimekodlama84">
-  <h2>💻 Kelime Kodlama Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
-  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz.</div>
-  <div class="sifre-anahtar" id="kk84Anahtar"></div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="kk84Tur">1</b>/<b id="kk84Toplam">28</b></span>
-    <span>⭐ Puan: <b id="kk84Puan">0</b></span>
-  </div>
-  <div id="kk84Ipucu" class="balon-durum"></div>
-  <div id="kk84Kod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
-  <div id="kk84Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kk84Sonuc"></div>
-  <button class="eylem" onclick="kk84Baslat()">💻 Kodlamayı Başlat</button>
-</section>
-
-<!-- NONOGRAM -->
-<section id="nonogram84">
-  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
-  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak gizli resmi ortaya çıkar!</div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
-    <button class="eylem" onclick="nonogram84Sec('yildiz')">⭐ Yıldız (Örneklik)</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram84Sec('kitap')">📜 Açık Kitap (Veda Hutbesi)</button>
-  </div>
-  <div style="overflow-x:auto;">
-    <table class="nono-tablo" id="nono84Tablo"></table>
-  </div>
-  <div class="sonuc-kutusu" id="nono84Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="nonogram84KontrolEt(true)">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram84Temizle()">🧹 Temizle</button>
-  </div>
-</section>
-
-<!-- KELİME SATRANCI -->
-<section id="satranc84">
-  <h2>♞ Kelime Satrancı</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
-  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ks84Bulunan">0</b>/<b id="ks84Toplam">8</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ks-izgara" id="ks84Izgara"></div>
-    <ul class="ka-liste" id="ks84Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ks84Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="ks84SecimiTemizle()">🧹 Seçimi Temizle</button>
-    <button class="eylem" style="background:var(--sari)" onclick="ks84Olustur()">🔄 Yeni Tahta</button>
-  </div>
-</section>
-
-<!-- KELİME DEDEKTİFİ -->
-<section id="dedektif84">
-  <h2>🕵️ Kelime Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
-  <div class="aciklama">Gizli kelimeyi (bir kavram) 5 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Vaka: <b id="dd84Vaka">1</b>/<b id="dd84ToplamVaka">1</b></span>
-    <span>✅ Çözülen: <b id="dd84Cozulen">0</b></span>
-    <span>🔍 Deneme: <b id="dd84Deneme">0</b>/<b id="dd84MaxDeneme">5</b></span>
-  </div>
-  <div id="dd84Ipucu" class="balon-durum"></div>
-  <div id="dd84Izgara"></div>
-  <input type="text" id="dd84Girdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){dd84TahminEt();}">
-  <p class="balon-durum" id="dd84Uyari"></p>
-  <div class="sonuc-kutusu" id="dd84Sonuc"></div>
-  <button class="eylem" onclick="dd84Baslat()">🕵️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- DİL DEDEKTİFİ -->
-<section id="dildedektifi84">
-  <h2>🕵️‍♀️ Dil Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ddl84Tur">1</b>/<b id="ddl84Toplam">10</b></span>
-    <span>⭐ Puan: <b id="ddl84Puan">0</b></span>
-  </div>
-  <div id="ddl84Baslik" class="balon-durum"></div>
-  <div id="ddl84Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="ddl84Sonuc"></div>
-  <button class="eylem" onclick="ddl84Baslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- MANTIK ZİNCİRİ -->
-<section id="mantikzinciri84">
-  <h2>🔗 Mantık Zinciri Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
-  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
-  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mz84Halka">1</b>/<b id="mz84Toplam">5</b></span></div>
-  <div id="mz84Soru" class="balon-durum"></div>
-  <div id="mz84Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="mz84Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="mz84Sonuc"></div>
-  <button class="eylem" onclick="mz84Baslat()">🔗 Zinciri Başlat</button>
-</section>
-
-<!-- SEMANTİK LABİRENT -->
-<section id="semantiklabirent84">
-  <h2>🧠 Semantik Labirent</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
-  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin.</div>
-  <div class="oyun-bilgi">
-    <span>🚪 Oda: <b id="sz84Oda">1</b>/<b id="sz84ToplamOda">6</b></span>
-    <span id="sz84Can">❤️❤️❤️</span>
-  </div>
-  <div id="sz84Kategori" class="balon-durum"></div>
-  <div id="sz84Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="sz84Sonuc"></div>
-  <button class="eylem" onclick="sz84Baslat()">🌀 Labirente Gir</button>
-</section>
-
-<!-- ÇELİŞKİ AVI -->
-<section id="celiskiavi84">
-  <h2>🕵️‍♂️ Çelişki Avı</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu?</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ca84Tur">1</b>/<b id="ca84Toplam">12</b></span>
-    <span>⭐ Puan: <b id="ca84Puan">0</b></span>
-  </div>
-  <div id="ca84Cumle" class="dua-satir"></div>
-  <div id="ca84Butonlar" style="display:flex;gap:14px;justify-content:center;">
-    <button class="eylem" style="background:var(--kirmizi)" onclick="ca84Cevapla(true)">⚡ Çelişki VAR</button>
-    <button class="eylem" style="background:var(--yesil)" onclick="ca84Cevapla(false)">✅ Çelişki YOK</button>
-  </div>
-  <p style="text-align:center;font-weight:bold;" id="ca84GeriBildirim"></p>
-  <div class="sonuc-kutusu" id="ca84Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="ca84Baslat()">🕵️‍♂️ Ava Başla</button>
-</section>
-
-<!-- LABİRENT -->
-<section id="labirent84">
-  <h2>🌀 Labirent Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
-  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 🕌'ye ulaştır! Yolda parıldayan yıldızlara basarsan bir kavram toplarsın.</div>
-  <div class="oyun-bilgi">
-    <span>🔁 Hamle: <b id="lab84Hamle">0</b></span>
-    <span>⭐ Toplanan: <b id="lab84Toplanan">0</b>/<b id="lab84ToplamYildiz">20</b></span>
-    <span>⏱️ Süre: <b id="lab84Sure">0</b>sn</span>
-  </div>
-  <div class="balon-durum" id="lab84Durum"></div>
-  <div class="labirent-izgara" id="lab84Izgara"></div>
-  <div class="labirent-kontroller">
-    <button class="labirent-tus" onclick="labirent84Hareket(-1,0)">▲</button>
-    <div>
-      <button class="labirent-tus" onclick="labirent84Hareket(0,-1)">◀</button>
-      <button class="labirent-tus" onclick="labirent84Hareket(1,0)">▼</button>
-      <button class="labirent-tus" onclick="labirent84Hareket(0,1)">▶</button>
-    </div>
-  </div>
-  <div class="sonuc-kutusu" id="lab84Sonuc"></div>
-  <button class="eylem" onclick="labirent84Baslat()">🔄 Yeni Labirent</button>
-</section>
-
-<!-- ================= EZBER ETKİNLİKLERİ (8 ADET) — KUREYŞ SURESİ ================= -->
-
-<section id="ezsira84">
-  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresinin bölümlerini doğru sırayla dizebileceksin.</div>
-  <div class="aciklama">Karışık sırada verilen bölümleri, Kureyş suresindeki doğru sıraya göre tıklayarak diz.</div>
-  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez184Dizilen">0</b>/<b>8</b></span></div>
-  <div class="kelime-cevap" id="ez184Cevap"></div>
-  <div class="kelime-banka" id="ez184Banka"></div>
-  <div class="sonuc-kutusu" id="ez184Sonuc"></div>
-  <button class="eylem" onclick="ez184Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezbosluk84">
-  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresindeki kelimeleri tam olarak hatırlayabileceksin.</div>
-  <div class="aciklama">Bölümdeki boşluğa gelen doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez284Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez284Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez284Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez284Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez284Sonuc"></div>
-  <button class="eylem" onclick="ez284Baslat()">📝 Başla</button>
-</section>
-
-<section id="ezeslestir84">
-  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresinin her bölümünü anlamıyla eşleştirebileceksin.</div>
-  <div class="aciklama">Soldan bir bölüm, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
-  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez384Eslesen">0</b>/<b>8</b></span></div>
-  <div class="ez-iki-sutun">
-    <div class="ez-sutun"><h4>Bölüm</h4><div id="ez384Sol"></div></div>
-    <div class="ez-sutun"><h4>Anlam</h4><div id="ez384Sag"></div></div>
-  </div>
-  <div class="sonuc-kutusu" id="ez384Sonuc"></div>
-  <button class="eylem" onclick="ez384Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezhafiza84">
-  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Bölüm-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
-  <div class="aciklama">İki kartı çevir. Bir bölüm ile doğru anlamı eşleşirse kartlar açık kalır.</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez484Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="ez484Hamle">0</b></span></div>
-  <div class="ez-hafiza-izgara" id="ez484Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
-  <div class="sonuc-kutusu" id="ez484Sonuc"></div>
-  <button class="eylem" onclick="ez484Baslat()">🔄 Yeni Oyun</button>
-</section>
-
-<section id="ezadimadim84">
-  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresini baştan sona, bölüm sırasını bularak ezberleyeceksin.</div>
-  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi bölümün geldiğini seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez584Adim">1</b>/<b>8</b></span></div>
-  <div class="ez-ogrenilen-liste" id="ez584Liste"></div>
-  <div class="balon-durum">Sırada hangi bölüm geliyor?</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez584Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez584Sonuc"></div>
-  <button class="eylem" onclick="ez584Baslat()">▶️ Başla</button>
-</section>
-
-<section id="ezgizli84">
-  <h2>6️⃣ Ezber: Gizli Harfler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresinin anahtar kelimelerini harf harf hatırlayacaksın.</div>
-  <div class="aciklama">Bölümdeki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez684Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez684Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez684Metin"></div>
-  <div class="kelime-cevap" id="ez684Cevap"></div>
-  <div class="kelime-banka" id="ez684Banka"></div>
-  <div class="sonuc-kutusu" id="ez684Sonuc"></div>
-  <button class="eylem" onclick="ez684Baslat()">🔐 Başla</button>
-</section>
-
-<section id="ezkaybolan84">
-  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun bölümü hafızandan tanıyabileceksin.</div>
-  <div class="aciklama">Bölümü 3 saniye izle, sonra kaybolacak. Az önce gördüğün bölümün BİREBİR aynısını seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez784Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez784Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez784Metin">👁️ Başlamak için düğmeye bas</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez784Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez784Sonuc"></div>
-  <button class="eylem" onclick="ez784Baslat()">👁️ Başla</button>
-</section>
-
-<section id="ezhiz84">
-  <h2>8️⃣ Ezber: Hız Testi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresi bölüm-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
-  <div class="aciklama">Süre dolmadan verilen anlama ait doğru bölümü seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
-  <div class="ez-zamanlayici" id="ez884Sayac">60</div>
-  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez884Dogru">0</b></span><span>❌ Yanlış: <b id="ez884Yanlis">0</b></span></div>
-  <div class="ez-metin-goster" id="ez884Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez884Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez884Sonuc"></div>
-  <button class="eylem" onclick="ez884Baslat()">⏱️ Başla</button>
-</section>
-
 </main>
-</div>
-
-<footer>8. Sınıf Din Kültürü ve Ahlak Bilgisi — 4. Ünite İnteraktif Oyun Seti</footer>
 
 <script>
 function goster(id, ev){
@@ -4242,7 +3329,6 @@ function zbTekrarHatirlatmaKontrol(){
 document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
 </script>
-
 <script id="ogrKatmaniScript">
 /* ===================== OGRENME DENEYIMI KATMANI (JS) =====================
    Sadece EKLEME yapar: mevcut id/onclick/veri yapisina dokunmaz, hicbir
@@ -4370,10 +3456,9 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
   /* ---------- 2) HERO: ogrenme hedefleri + ilerleme rozeti ---------- */
   function ogrHeroGelistir(){
-    const hero = document.querySelector('.hero');
-    const butonlar = hero ? hero.querySelector('.hero-butonlar') : null;
-    if(!hero || !butonlar || hero.dataset.ogrHazir) return;
-    hero.dataset.ogrHazir = '1';
+    const hedefKonteyner = document.getElementById('ogrHedefKonteyner');
+    if(!hedefKonteyner || hedefKonteyner.dataset.ogrHazir) return;
+    hedefKonteyner.dataset.ogrHazir = '1';
 
     const basliklar = Array.from(document.querySelectorAll('main section[id^="ozet"] .kutu-panel > h3')).map(function(h){
       return ogrEmojiTemizle(h.textContent);
@@ -4391,7 +3476,7 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
       '<circle class="ogr-ring-on" id="ogrHeroRing" cx="16" cy="16" r="13" stroke-dasharray="81.68" stroke-dashoffset="81.68"></circle>'+
       '</svg><span id="ogrHeroRozetMetin">Bu üniteye yeni başlıyorsun</span></span>';
     ek.innerHTML = ic;
-    butonlar.insertAdjacentElement('afterend', ek);
+    hedefKonteyner.appendChild(ek);
 
     const toplamEtkinlik = document.querySelectorAll('.oyun-grubu button').length || 1;
     function ogrHeroIlerlemeGuncelle(){
@@ -4456,4 +3541,3 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 </script>
 </body>
 </html>
-

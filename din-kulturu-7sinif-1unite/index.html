@@ -594,6 +594,125 @@
   .ogr-giris-karti{ flex-direction:column; text-align:center; }
 }
 </style>
+<style id="anaMenuStil">
+.hero{ padding:26px 20px 20px; }
+.hero-sekiller{ display:none; }
+.hero-baslik{ font-size:1.35em; margin:2px 0 8px; }
+.hero-alt{ font-size:.95em; max-width:440px; }
+.hero-butonlar{ margin-top:12px; }
+#oyun-gruplari{ scroll-margin-top:10px; max-width:900px; margin:0 auto; }
+.mega-menu{ max-width:900px; margin:0 auto; padding:26px 16px 34px; flex-wrap:wrap; gap:18px; justify-content:center; position:static !important; }
+.mega-kart{
+  flex:1 1 230px; max-width:280px; background:#fff; border:2px solid var(--acik); border-radius:20px;
+  padding:26px 20px; text-align:center; cursor:pointer; transition:.18s; box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+.mega-kart:hover{ transform:translateY(-4px); border-color:var(--mavi); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+.mega-kart-ikon{ font-size:2.2em; margin-bottom:8px; }
+.mega-kart h3{ margin:0 0 6px; color:var(--navy); font-size:1.15em; }
+.mega-kart p{ margin:0; font-size:.85em; color:#667; }
+#ogrHedefKonteyner:empty{ display:none; }
+#ogrHedefKonteyner .ogr-hero-ek{ margin:14px auto 0; }
+.oyun-grubu.mega-menu.aktif, #oyun-gruplari > .oyun-grubu:not(.mega-menu){ position:static !important; top:auto !important; }
+.geri-btn{
+  display:block; width:100%; margin:0 0 12px; background:none; border:none; color:var(--mavi); font-weight:800;
+  cursor:pointer; font-size:.9em; padding:4px; text-align:center;
+}
+.geri-btn:hover{ text-decoration:underline; }
+.oyunmerkezi-nav{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; width:100%; margin-bottom:4px; }
+.oyunmerkezi-nav button{
+  padding:9px 16px; border:none; border-radius:18px; cursor:pointer; background:#22333b; color:#fff;
+  font-weight:bold; font-size:.9em; transition:.15s;
+}
+.oyunmerkezi-nav button:hover, .oyunmerkezi-nav button.kat-aktif{ background:var(--yesil); }
+</style>
+<style id="omgKart2Stil">
+.omg-2kolon{ align-items:flex-start; gap:32px; }
+.omg-yan-menu{
+  display:flex; flex-direction:column; gap:10px;
+  flex:0 0 280px; max-width:280px;
+  position:sticky; top:16px;
+}
+.omg-yan-menu .geri-btn{ margin-bottom:0; }
+.omg-yan-baslik{ font-weight:800; color:var(--navy); font-size:1.05em; width:100%; margin:4px 0 0; text-align:left; padding:0 4px; }
+.omg-yan-oge{
+  text-align:left; width:100%; min-height:62px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 18px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-yan-oge:hover{ border-color:var(--mavi); }
+.omg-yan-ikon{ font-size:1.5em; flex-shrink:0; }
+.omg-yan-oge.kat-aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18);
+  border-left-color:var(--mavi) !important;
+}
+.omg-yan-oge.kat-aktif .omg-yan-ikon{ font-size:1.9em; }
+.omg-kart-alan{
+  flex:1 1 420px; min-width:0; width:100%;
+  max-height:660px; overflow-y:auto; padding:4px 4px 4px 0;
+  animation: omgKartGiris .3s ease;
+}
+@keyframes omgKartGiris{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+.omg-kart-izgara{
+  display:grid; grid-template-columns:repeat(2, 1fr);
+  gap:22px; width:100%; align-content:start;
+}
+.omg-oyun-kart{
+  position:relative; cursor:pointer;
+  background:#fff; border-radius:18px; padding:30px 24px 26px;
+  text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.06);
+  transition:.18s; display:flex; flex-direction:column; gap:8px;
+  min-height:180px; border:1px solid transparent;
+}
+.omg-oyun-kart:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(0,0,0,.12); border-color:var(--acik); }
+.omg-oyun-kart-ikon{ font-size:1.8em; }
+.omg-oyun-kart h4{ margin:2px 0 0; font-size:1.08em; color:#22333b; line-height:1.35; }
+.omg-oyun-kart p{ margin:0; font-size:.86em; color:#8892a0; line-height:1.5; flex:1; }
+.omg-oyun-kart-alt{ display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+.omg-zorluk{ font-size:.72em; font-weight:800; letter-spacing:.3px; padding:4px 11px; border-radius:999px; background:var(--acikgri); color:#667; }
+.omg-oyna-ok{ font-size:.85em; font-weight:800; color:var(--mavi); }
+@media(max-width:640px){
+  .omg-2kolon{ flex-direction:column; gap:16px; }
+  .omg-yan-menu{
+    flex-direction:row; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    max-width:100%; position:static; gap:8px; padding-bottom:4px;
+  }
+  .omg-yan-baslik{ display:none; }
+  .omg-yan-menu .geri-btn{ flex:0 0 auto; width:auto; white-space:nowrap; }
+  .omg-yan-oge{ min-height:44px; width:auto; flex:0 0 auto; white-space:nowrap; }
+  .omg-kart-izgara{ grid-template-columns:1fr; }
+  .omg-kart-alan{ max-height:none; overflow-y:visible; }
+}
+</style>
+<style id="omgTekliMenuStil">
+.omg-tekli-menu{ display:flex; flex-direction:column; gap:10px; max-width:440px; }
+.omg-tekli-menu > button:not(.geri-btn){
+  text-align:left; width:100%; min-height:58px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 20px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-tekli-menu > button:not(.geri-btn):hover{ border-color:var(--mavi); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
+.omg-tekli-menu > button.aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18) !important;
+  border-left-color:var(--mavi) !important;
+}
+</style>
+<style id="omgEgitimIzoleStil">
+#oyun-gruplari:not(:has(#kat-unite-ogren.aktif)):not(:has(#kat-unite-degerlendir.aktif)) ~ main .egitim-icerik{
+  display:none !important;
+}
+</style>
 
 </head>
 <body>
@@ -605,90 +724,31 @@
   <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
 </header>
 <div class="op-baglanti-satiri"><a onclick="goster('ogretmenpaneli', event)" role="button" aria-label="Öğretmen paneline git">🔒 Öğretmen Paneli</a></div>
-<div class="op-baglanti-satiri"><a href="../en/din-kulturu-7sinif-1unite/index.html">🌐 English</a></div>
-
 <section class="hero">
-  <div class="hero-sekiller">
-    <span style="top:8%; left:6%; animation-delay:0s;">👼</span>
-    <span style="top:65%; left:10%; animation-delay:1.2s;">🌌</span>
-    <span style="top:20%; left:85%; animation-delay:.6s;">⚖️</span>
-    <span style="top:75%; left:88%; animation-delay:1.8s;">🌙</span>
-    <span style="top:50%; left:16%; animation-delay:2.4s;">✨</span>
-    <span style="top:6%; left:78%; animation-delay:.9s;">📖</span>
-  </div>
   <h2 class="hero-baslik">Görünmeyen Âlemi Keşfet!</h2>
   <p class="hero-alt">Melekleri, ahiret hayatının aşamalarını ve Hz. İsa'yı oyunlarla öğren!</p>
   <div class="hero-butonlar">
-    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">🚀 Oyuna Başla</button>
-    <button class="hero-btn hero-btn-ikincil" onclick="kategoriGosterVeKaydir('kat-unite7')">📚 Konuları Keşfet</button>
+    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">▶ Üniteye Başla</button>
   </div>
 </section>
 
-<div class="istatistik-cubugu">
-  <div class="istatistik-kutu"><span class="ist-ikon">⭐</span><b id="istToplamPuan">0</b><span class="ist-etiket">Toplam Puan</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🏅</span><b id="istRozet">0</b><span class="ist-etiket">Rozet</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🔥</span><b id="istSeri">0</b><span class="ist-etiket">Günlük Seri</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">📈</span><b id="istTamamlanan">0</b><span class="ist-etiket">Tamamlanan Etkinlik</span></div>
-</div>
-
 <div id="oyun-gruplari" role="navigation" aria-label="Ünite bölümleri menüsü">
-<nav class="kategori-nav" role="navigation" aria-label="Ana kategori menüsü">
-  <button onclick="kategoriGoster('kat-unite7', event)" class="kat-aktif">👼 Ünite Konuları</button>
-  <button onclick="kategoriGoster('kat-bulmaca7', event)">🧩 Kelime Bulmacaları</button>
-  <button onclick="kategoriGoster('kat-yarisma7', event)">🎮 Yarışma Oyunları</button>
-  <button onclick="kategoriGoster('kat-mantik7', event)">🕵️ Mantık &amp; Dedektiflik</button>
-  <button onclick="kategoriGoster('kat-macera7', event)">🌀 Macera</button>
-  <button onclick="kategoriGoster('kat-ezber7', event)">🕌 Ezber Etkinlikleri</button>
-</nav>
 
-<div class="oyun-grubu aktif" id="kat-unite7">
-  <button onclick="goster('ozet7', event)" class="aktif">📖 Konu Özeti</button>
-  <button onclick="goster('konutekrari7', event)">📝 Konu Tekrarı Testi</button>
-  <button onclick="goster('slayt', event)">🖥️ Ünite Sunumu</button>
-  <button onclick="goster('yazili', event)">📝 Yazılı Sınavlar</button>
+<div class="oyun-grubu mega-menu aktif" id="kat-anamenu">
+  <div class="mega-kart" onclick="window.location.href='konuyu-ogren.html'">
+    <div class="mega-kart-ikon">📖</div><h3>Konuyu Öğren</h3>
+    <p>Konu anlatımları, sunular ve kavramlar.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='oyun-merkezi.html'">
+    <div class="mega-kart-ikon">🎮</div><h3>Oyunlar</h3>
+    <p>Konuyu eğlenerek pekiştir.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='degerlendirme.html'">
+    <div class="mega-kart-ikon">📝</div><h3>Değerlendirme</h3>
+    <p>Testler ve değerlendirme soruları.</p>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-bulmaca7">
-  <button onclick="goster('kelimeavi7', event)">🔎 Kelime Avı</button>
-  <button onclick="goster('cengel7', event)">🧩 Çengel Bulmaca</button>
-  <button onclick="goster('merdiven7', event)">🪜 Sözcük Merdiveni</button>
-  <button onclick="goster('sifre7', event)">🔐 Şifreli Sözcük</button>
-  <button onclick="goster('sifretanim7', event)">🔐 Şifreli Tanım</button>
-  <button onclick="goster('kelimekodlama7', event)">💻 Kelime Kodlama</button>
-  <button onclick="goster('nonogram7', event)">🖼️ Nonogram</button>
-  <button onclick="goster('satranc7', event)">♞ Kelime Satrancı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-yarisma7">
-  <button onclick="goster('kelimeuret7', event)">⚡ Hızlı Kelime</button>
-  <button onclick="goster('tuzak7', event)">🚫 Tuzak Harf</button>
-  <button onclick="goster('fabrika7', event)">🏭 Kelime Fabrikası</button>
-  <button onclick="goster('muhendis7', event)">🛠️ Kelime Mühendisi</button>
-  <button onclick="goster('kavramturnuvasi7', event)">🏆 Kavram Turnuvası</button>
-  <button onclick="goster('bonus7', event)">🎮 Bonus Oyun</button>
-</div>
-
-<div class="oyun-grubu" id="kat-mantik7">
-  <button onclick="goster('dedektif7', event)">🕵️ Kelime Dedektifi</button>
-  <button onclick="goster('dildedektifi7', event)">🕵️‍♀️ Dil Dedektifi</button>
-  <button onclick="goster('mantikzinciri7', event)">🔗 Mantık Zinciri</button>
-  <button onclick="goster('semantiklabirent7', event)">🧠 Semantik Labirent</button>
-  <button onclick="goster('celiskiavi7', event)">🕵️‍♂️ Çelişki Avı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-macera7">
-  <button onclick="goster('labirent7', event)">🌀 Labirent</button>
-</div>
-
-<div class="oyun-grubu" id="kat-ezber7">
-  <button onclick="goster('ezsira7', event)">1️⃣ Sırala Bakalım</button>
-  <button onclick="goster('ezbosluk7', event)">2️⃣ Boşluk Doldur</button>
-  <button onclick="goster('ezeslestir7', event)">3️⃣ Anlam Eşleştir</button>
-  <button onclick="goster('ezhafiza7', event)">4️⃣ Hafıza Kartları</button>
-  <button onclick="goster('ezadimadim7', event)">5️⃣ Adım Adım Ezber</button>
-  <button onclick="goster('ezgizli7', event)">6️⃣ Gizli Harfler</button>
-  <button onclick="goster('ezkaybolan7', event)">7️⃣ Kaybolan Kelimeler</button>
-  <button onclick="goster('ezhiz7', event)">8️⃣ Hız Testi</button>
 </div>
 
 <main>
@@ -711,784 +771,7 @@
   </div>
 </div>
 </section>
-
-<section id="slayt">
-<h2>🖥️ Ünite Sunumu</h2>
-
-  <div class="sunum-sarmal">
-    <div class="sunum-ust">
-      <span class="sunum-sayac" id="sunumSayac">1 / 16</span>
-      <button class="sunum-tamekran-btn" onclick="sunumTamEkran('')" aria-label="Sunumu tam ekran aç">⛶ Tam Ekran</button>
-    </div>
-    <div class="sunum-alan" id="sunumAlan">
-      
-  <div class="sunum-slayt aktif s-baslik" data-tip="baslik">
-    <div class="sb-daire">👼</div>
-    <p class="sb-ust">7. SINIF — 1. ÜNİTE</p>
-    <h2 class="sb-baslik">Melek ve Ahiret İnancı</h2>
-    <p class="sb-ders">Din Kültürü ve Ahlak Bilgisi</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı</p>
-  </div>
-
-  <div class="sunum-slayt s-liste" data-tip="hedef">
-    <h3>🎯 Bu Ünitede Neler Öğreneceğiz?</h3>
-    <ul class="sl-liste">
-      <li>Görülen ve Görülemeyen Varlıklar</li><li>Melekler ve Özellikleri</li><li>Dünya ve Ahiret Hayatı, Ahiretin Aşamaları</li><li>Ahiret İnancının Etkisi ve Hz. İsa (as)</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Görülen ve Görülemeyen Varlıklar (1/2)</h3>
-    <ul class="si-liste">
-      <li>Âlem, akıl ve duyu organlarıyla bilinebilen veya varlığı düşünülebilen, Allah'ın dışındaki tüm varlıklara verilen isimdir.</li><li>Gayb, gözle görülemeyen, duyularımızla bilgi edinemeyeceğimiz varlıklar âlemidir; bunu ancak Allah'ın bildirmesiyle biliriz.</li><li>Gayb âleminde cin (irade sahibi, ateşten yaratılan varlık), şeytan (Âdem'e secde emrine isyan edip kovulan varlık) ve melekler bulunur.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Görülen ve Görülemeyen Varlıklar (2/2)</h3>
-    <ul class="si-liste">
-      <li>Hurafe ve batıl inanç, akla aykırı, din adına öne sürülen uydurma sözlerdir.</li><li>Sihir, hile yapıp insanları aldatmadır; fal, geleceği öğrenmek amacıyla nesnelere bakarak anlam çıkarmadır.</li><li>Bunlar genelde cahillikten ve dinî bilgi eksikliğinden kaynaklanır, kişisel ve toplumsal zararları vardır.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-merak" data-tip="zb">
-    <p class="zb-slayt-ust">🤔 MERAK ETTİN Mİ?</p>
-    <p class="zb-slayt-metin">Kiramen Kâtibin melekleri, insanların sağında ve solunda bulunup yaptıkları her iyilik ve kötülüğü kaydeder.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Melekler ve Özellikleri (1/2)</h3>
-    <ul class="si-liste">
-      <li>Melek, nurdan yaratılmış, cinsiyeti olmayan, Allah'ın emirlerine tam itaat eden, görülemeyen varlıktır.</li><li>Meleklere iman, imanın altı şartından biridir.</li><li>Dört büyük melek: Cebrail (vahiy meleği, Allah'ın emirlerini peygamberlere iletir), Azrail (ölüm meleği, canları alır), Mikâil (tabiat olaylarını düzenler, rızkı dağıtır), İsrafil (sûra üfleyen melek).</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-yanlis" data-tip="zb">
-    <p class="zb-slayt-ust">❌ YANLIŞ BİLİNENLER</p>
-    <p class="zb-slayt-yanlis">❌ Bazıları meleklerin insan gibi cinsiyeti ve iradesi olan varlıklar olduğunu düşünür.</p>
-    <p class="zb-slayt-dogru">✅ Melekler nurdan yaratılmış, cinsiyeti olmayan, Allah'ın emirlerine tam itaat eden, günah işlemeyen varlıklardır.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Melekler ve Özellikleri (2/2)</h3>
-    <ul class="si-liste">
-      <li>Diğer melekler: Kiramen Kâtibin (yazıcı melekler, iyilik-kötülükleri kaydeder), Hafaza (koruyucu melekler), Rahmet melekleri (müminler için dua eder), Münker ve Nekir (sorgu melekleri, kabirde sorgular).</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-ornek" data-tip="zb">
-    <p class="zb-slayt-ust">🌍 GERÇEK HAYATTAN BİR ÖRNEK</p>
-    <p class="zb-slayt-metin">Bir öğrencinin, kimse görmese bile doğru davranması, "her an kaydedildiğimiz" bilincinin günlük hayattaki güzel bir yansımasıdır.</p>
-  </div>
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 Dünya ve Ahiret Hayatı, Ahiretin Aşamaları</h3>
-    <ul class="si-liste">
-      <li>Ahiret, dünya yaşamından sonraki hayattır; imanın şartlarından biridir.</li><li>Aşamaları sırasıyla: Ölüm (ecel: belirlenen zaman) → Berzah (kabir hayatı, sadece insanlar için geçerlidir) → Kıyamet (evrenin yok olması, İsrafil'in ilk üflemesi) → Diriliş/Baas (İsrafil'in ikinci üflemesi) →…</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-dusun" data-tip="zb">
-    <p class="zb-slayt-ust">💭 DÜŞÜN VE CEVAPLA</p>
-    <p class="zb-slayt-metin">Ahirete inanmak, bugünkü davranışlarını nasıl etkiliyor?</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Ahiret İnancının Etkisi ve Hz. İsa (as) (1/2)</h3>
-    <ul class="si-liste">
-      <li>Ahiret inancı olan insan iyilik yapmaya gayret eder, hesap vereceğinin bilinciyle hareket eder, sabreder ve Allah'ın affediciliğine güvenir.</li><li>Hz. İsa, Nasıra'da babasız doğdu; annesi Hz. Meryem'dir (Kur'an'da adı geçen tek kadın).</li><li>İsrailoğullarına gönderildi, kendisine İncil verildi. Ona inanan 12 kişiye havari denir.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-aile" data-tip="zb">
-    <p class="zb-slayt-ust">👨‍👩‍👧 AİLEMLE YAPIYORUM</p>
-    <p class="zb-slayt-metin">Ailenle birlikte dört büyük meleğin (Cebrail, Mikâil, İsrafil, Azrail) görevlerini konuşup küçük bir kart oyunu hazırlayın.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Ahiret İnancının Etkisi ve Hz. İsa (as) (2/2)</h3>
-    <ul class="si-liste">
-      <li>Yahudiler onu öldürmek istedi ama Allah onu kurtardı, benzeri öldürüldü. Sonradan Hristiyanlar teslis inancını ortaya attı.</li><li>Nâs suresi, Kur'an'ın 114. ve son suresidir, Mekke'de inmiştir, 6 ayettir. Felak suresiyle birlikte "Muavvizeteyn" denir.</li><li>Şeytanın ve insanların kalbine vesvese veren varlıkların şerrinden Allah'a sığınmayı öğütler.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-degerlendir" data-tip="zb">
-    <p class="zb-slayt-ust">✅ KENDİMİ DEĞERLENDİRİYORUM</p>
-    <ul class="zb-slayt-liste">
-      <li>☐ Dört büyük meleği ve görevlerini sayabilirim.</li>
-      <li>☐ Ahiret inancının insan davranışlarına etkisini açıklayabilirim.</li>
-      <li>☐ Kıyamet ve ahiret kavramlarını biliyorum.</li>
-      <li>☐ Her davranışımın önemli olduğu bilinciyle hareket ediyorum.</li>
-    </ul>
-  </div>
-
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (1/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">Âlem</span><span class="sk-etiket" style="background:var(--mavi)">Gayb</span><span class="sk-etiket" style="background:var(--kirmizi)">cin</span><span class="sk-etiket" style="background:var(--turkuaz)">şeytan</span><span class="sk-etiket" style="background:#7c3aed">melek</span><span class="sk-etiket" style="background:var(--yesil)">Hurafe</span><span class="sk-etiket" style="background:var(--mavi)">Sihir</span><span class="sk-etiket" style="background:var(--kirmizi)">fal</span><span class="sk-etiket" style="background:var(--turkuaz)">Melek</span><span class="sk-etiket" style="background:#7c3aed">Cebrail</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (2/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">Azrail</span><span class="sk-etiket" style="background:var(--mavi)">Mikâil</span><span class="sk-etiket" style="background:var(--kirmizi)">İsrafil</span><span class="sk-etiket" style="background:var(--turkuaz)">Kiramen Kâtibin</span><span class="sk-etiket" style="background:#7c3aed">Hafaza</span><span class="sk-etiket" style="background:var(--yesil)">Münker ve Nekir</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"O gün insanlar, amellerini görmeleri için darmadağınık bir hâlde çıkarlar."</p>
-    <p class="sa-kaynak">— Zilzal suresi, 6. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"Her nefis ölümü tadacaktır. Sonunda bize döndürüleceksiniz."</p>
-    <p class="sa-kaynak">— Ankebut suresi, 57. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-video" data-tip="video">
-    <p class="sv-ust">🎬 KONUYLA İLGİLİ VİDEO</p>
-    <div class="sv-cerceve">
-      <iframe src="https://www.youtube.com/embed/h3lls7RvVeE" title="Melekler Ne İş Yapar?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
-    <p class="sv-baslik">Melekler Ne İş Yapar?</p>
-  </div>
-
-    <div class="sunum-slayt s-zb s-zb-derin" data-tip="zb">
-    <p class="zb-slayt-ust">🔍 DERİNLEMESİNE DÜŞÜNELİM</p>
-    <ul class="zb-slayt-liste">
-      <li>Bu bilgi benim hayatımı nasıl etkiler?</li>
-      <li>Bu kavram neden önemlidir?</li>
-      <li>Günlük yaşamda bunun karşılığı nedir?</li>
-    </ul>
-  </div>
-
-
-  <div class="sunum-slayt s-liste s-ozet" data-tip="ozet">
-    <h3>📝 Ünite Özeti</h3>
-    <ul class="sl-liste">
-      <li>Görülen ve Görülemeyen Varlıklar</li><li>Melekler ve Özellikleri</li><li>Dünya ve Ahiret Hayatı, Ahiretin Aşamaları</li><li>Ahiret İnancının Etkisi ve Hz. İsa (as)</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-kapanis" data-tip="kapanis">
-    <div class="sb-daire">🌟</div>
-    <h2 class="sb-baslik">Dinlediğiniz İçin Teşekkürler</h2>
-    <p class="sb-ders">Başarılar dilerim.</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı — Din Kültürü ve Ahlak Bilgisi Öğretmeni</p>
-  </div>
-    </div>
-    <div class="sunum-nav">
-      <button onclick="sunumGit('',-1)" aria-label="Önceki slayt">⬅ Önceki</button>
-      <div class="sunum-noktalar" id="sunumNoktalar"></div>
-      <button onclick="sunumGit('',1)" aria-label="Sonraki slayt">Sonraki ➡</button>
-    </div>
-  </div>
-</section>
-
-<section id="yazili">
-  <h2>📝 Yazılı Sınavlar</h2>
-  <div class="aciklama">7. sınıf Din Kültürü ve Ahlak Bilgisi dersine ait, resmî MEB sınav formatında hazırlanmış, yazdırılabilir yazılı yoklama sınavları. Her dönem için hem <b>karma</b> (boşluk doldurma, eşleştirme, doğru-yanlış, kısa cevap) hem de tamamen açık uçlu <b>klasik</b> format seçeneği bulunur. Kartlara tıklayınca sınav yeni sekmede açılır ve doğrudan yazdırılabilir.</div>
-  <div class="yazili-izgara">
-    <a class="yazili-kart" href="yazili1.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili1_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili2.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili2_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili3.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>2. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili3_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>2. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili4.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>2. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili4_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>2. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-  </div>
-</section>
-
-
-<!-- KONU ÖZETİ -->
-<section id="ozet7" class="aktif">
-  <h2>📖 1. Ünite Konu Özeti: Melek ve Ahiret İnancı</h2>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ Görülen ve Görülemeyen Varlıklar</h3>
-    <p><b>Âlem</b>, akıl ve duyu organlarıyla bilinebilen veya varlığı düşünülebilen, Allah'ın dışındaki tüm varlıklara verilen isimdir. <b>Gayb</b>, gözle görülemeyen, duyularımızla bilgi edinemeyeceğimiz varlıklar âlemidir; bunu ancak Allah'ın bildirmesiyle biliriz. Gayb âleminde <b>cin</b> (irade sahibi, ateşten yaratılan varlık), <b>şeytan</b> (Âdem'e secde emrine isyan edip kovulan varlık) ve <b>melek</b>ler bulunur.</p>
-    <p><b>Hurafe</b> ve batıl inanç, akla aykırı, din adına öne sürülen uydurma sözlerdir. <b>Sihir</b>, hile yapıp insanları aldatmadır; <b>fal</b>, geleceği öğrenmek amacıyla nesnelere bakarak anlam çıkarmadır. Bunlar genelde cahillikten ve dinî bilgi eksikliğinden kaynaklanır, kişisel ve toplumsal zararları vardır.</p>
-  </div>
-  <div class="zb-kutu zb-merak">
-    <p class="zb-baslik">🤔 Merak Ettin mi?</p>
-    <p class="zb-metin">Kiramen Kâtibin melekleri, insanların sağında ve solunda bulunup yaptıkları her iyilik ve kötülüğü kaydeder.</p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Melekler ve Özellikleri</h3>
-    <p><b>Melek</b>, nurdan yaratılmış, cinsiyeti olmayan, Allah'ın emirlerine tam itaat eden, görülemeyen varlıktır. Meleklere iman, imanın altı şartından biridir. Dört büyük melek: <b>Cebrail</b> (vahiy meleği, Allah'ın emirlerini peygamberlere iletir), <b>Azrail</b> (ölüm meleği, canları alır), <b>Mikâil</b> (tabiat olaylarını düzenler, rızkı dağıtır), <b>İsrafil</b> (sûra üfleyen melek).</p>
-    <p>Diğer melekler: <b>Kiramen Kâtibin</b> (yazıcı melekler, iyilik-kötülükleri kaydeder), <b>Hafaza</b> (koruyucu melekler), Rahmet melekleri (müminler için dua eder), <b>Münker ve Nekir</b> (sorgu melekleri, kabirde sorgular).</p>
-  </div>
-  <div class="zb-kutu zb-yanlis">
-    <p class="zb-baslik">❌ Yanlış Bilinenler</p>
-    <p class="zb-metin zb-yanlis-satir">❌ Bazıları meleklerin insan gibi cinsiyeti ve iradesi olan varlıklar olduğunu düşünür.</p>
-    <p class="zb-metin zb-dogru-satir">✅ Melekler nurdan yaratılmış, cinsiyeti olmayan, Allah'ın emirlerine tam itaat eden, günah işlemeyen varlıklardır.</p>
-  </div>
-  <div class="zb-kutu zb-ornek">
-    <p class="zb-baslik">🌍 Gerçek Hayattan Bir Örnek</p>
-    <p class="zb-metin">Bir öğrencinin, kimse görmese bile doğru davranması, "her an kaydedildiğimiz" bilincinin günlük hayattaki güzel bir yansımasıdır.</p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Dünya ve Ahiret Hayatı, Ahiretin Aşamaları</h3>
-    <p><b>Ömür</b>, Allah'ın her insana bahşettiği yaşama süresidir; bu sürenin sona erdiği an ise <b>ecel</b> olarak adlandırılır ve her canlı için kesin bir sondur. <b>Ahiret</b>, dünya yaşamından sonraki hayattır; imanın şartlarından biridir. Aşamaları sırasıyla: Ölüm → <b>Berzah</b> (kabir hayatı, sadece insanlar için geçerlidir) → <b>Kıyamet</b> (evrenin yok olması, İsrafil'in ilk üflemesi) → Diriliş/<b>Baas</b> (İsrafil'in ikinci üflemesi) → <b>Haşir</b>/<b>Mahşer</b> (toplanma) → Hesap günü, kişinin dünyada yaptığı her şeyin kaydedildiği <b>amel defteri</b> kendisine verilir ve <b>Mizan</b>'da iyilikler ile kötülükler tartılır → <b>Sırat</b> (cennetle cehennem arasında uzanan, herkesin geçmek zorunda olduğu köprü) → <b>Cennet</b> veya <b>Cehennem</b>.</p>
-  </div>
-  <div class="zb-kutu zb-merak">
-    <p class="zb-baslik">🤔 Merak Ettin mi?</p>
-    <p class="zb-metin">Kur'an-ı Kerim'de birden fazla surede, her canlının mutlaka öleceği ve bunun değiştirilemez bir gerçek olduğu bildirilir (örneğin Âl-i İmrân suresi, 185. ayet). Peygamberimiz de insanları gaflete kapılmamaları için ölümü sık sık hatırlamaya teşvik etmiştir. Bu hatırlatmanın amacı korkutmak değil, hayatı daha bilinçli ve sorumlu yaşamamızı sağlamaktır.</p>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşün ve Cevapla</p>
-    <p class="zb-metin">Ahirete inanmak, bugünkü davranışlarını nasıl etkiliyor?</p>
-  <textarea id="zbAlan_dusun" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-  <p class="zb-cevap-not" id="zbNot_dusun"></p>
-  </div>
-  <div class="zb-kutu zb-aile">
-    <p class="zb-baslik">👨‍👩‍👧 Ailemle Yapıyorum</p>
-    <p class="zb-metin">Ailenle birlikte dört büyük meleğin (Cebrail, Mikâil, İsrafil, Azrail) görevlerini konuşup küçük bir kart oyunu hazırlayın.</p>
-  <textarea id="zbAlan_aile" class="zb-cevap-alani" placeholder="Ailenle yaptığın etkinliği kısaca anlat..." onchange="zbCevapKaydet('aile', this)" aria-label="Ailenle yaptığın etkinliği kısaca anlat..."></textarea>
-  <p class="zb-cevap-not" id="zbNot_aile"></p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Ahiret İnancının Etkisi ve Hz. İsa (as)</h3>
-    <p>Ahiret inancı olan insan iyilik yapmaya gayret eder, hesap vereceğinin bilinciyle hareket eder, sabreder ve Allah'ın affediciliğine güvenir. <b>Hz. İsa</b>, Nasıra'da babasız doğdu; annesi Hz. Meryem'dir (Kur'an'da adı geçen tek kadın). İsrailoğullarına gönderildi, kendisine <b>İncil</b> verildi. Ona inanan 12 kişiye <b>havari</b> denir. Yahudiler onu öldürmek istedi ama Allah onu kurtardı, benzeri öldürüldü. Sonradan Hristiyanlar <b>teslis</b> inancını ortaya attı.</p>
-    <p><b>Nâs suresi</b>, Kur'an'ın 114. ve son suresidir, Mekke'de inmiştir, 6 ayettir. Felak suresiyle birlikte "Muavvizeteyn" denir. Şeytanın ve insanların kalbine <b>vesvese</b> veren varlıkların şerrinden Allah'a sığınmayı öğütler. Surede Allah'a sırasıyla "Rab" (yetiştirip terbiye eden), "Melik" (mutlak hükümdar) ve "İlâh" (kendisine ibadet edilen tek varlık) isimleriyle seslenilir; bu üçlü sıralama, kötü düşüncelerden korunmak isteyen bir kişinin Allah'a duyduğu güvenin giderek derinleştiğini gösterir.</p>
-  </div>
-  <div class="zb-kutu zb-derin">
-    <p class="zb-baslik">🔍 Derinlemesine Düşünelim</p>
-    <p class="zb-metin">Bu ünitede öğrendiklerini derinlemesine değerlendirmek için kendine şu soruları sor:</p>
-    <ul class="zb-derin-liste">
-      <li>Bu bilgi benim hayatımı nasıl etkiler?</li>
-      <li>Bu kavram neden önemlidir?</li>
-      <li>Günlük yaşamda bunun karşılığı nedir?</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-ikilem">
-    <p class="zb-baslik">⚖️ Ahlaki İkilem — Sen Olsaydın Ne Yapardın?</p>
-    <p class="zb-metin">Bir arkadaşın "Kimse ahiretten geri gelip anlatmadı, nereden biliyoruz gerçek olduğunu?" diyor. Ahiret inancının insan davranışlarına etkisini düşünerek ona ne söylerdin?</p>
-    <textarea id="zbAlan_ikilem" class="zb-cevap-alani" placeholder="Ne yapardın ve neden? Düşünceni buraya yazabilirsin..." onchange="zbCevapKaydet('ikilem', this)" aria-label="Ahlaki ikilem cevabın"></textarea>
-    <p class="zb-cevap-not" id="zbNot_ikilem"></p>
-  </div>
-
-  <div class="zb-kutu zb-degerlendir">
-    <p class="zb-baslik">✅ Kendimi Değerlendiriyorum</p>
-    <ul>
-      <li><input type="checkbox" id="deg_7-1_0" onchange="degKaydet('7-1')"><label for="deg_7-1_0">Dört büyük meleği ve görevlerini sayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_7-1_1" onchange="degKaydet('7-1')"><label for="deg_7-1_1">Ahiret inancının insan davranışlarına etkisini açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_7-1_2" onchange="degKaydet('7-1')"><label for="deg_7-1_2">Kıyamet ve ahiret kavramlarını biliyorum.</label></li>
-      <li><input type="checkbox" id="deg_7-1_3" onchange="degKaydet('7-1')"><label for="deg_7-1_3">Her davranışımın önemli olduğu bilinciyle hareket ediyorum.</label></li>
-      <li><input type="checkbox" id="deg_7-1_4" onchange="degKaydet('7-1')"><label for="deg_7-1_4">Nâs suresini ve verdiği öğüdü açıklayabilirim.</label></li>
-    </ul>
-  </div>
-
-
-</section>
-
-<!-- KONU TEKRARI TESTİ -->
-<section id="konutekrari7">
-  <h2>📝 Konu Tekrarı Testi (50 Soru)</h2>
-  <div class="oyun-amaci">🎯 Bu bölümün amacı: Ünitenin tamamını kapsamlı bir testle tekrar edip pekiştirmek.</div>
-  <div class="aciklama">4 şıklı, 50 sorudan oluşan kapsamlı bir tekrar testi! Kolay, orta ve zor sorular karışık geliyor. Cevabı seçince doğru/yanlış hemen görünüyor, altında da açıklaması çıkıyor.</div>
-
-  <div class="kutu-panel kutu-kazanim">
-    <h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
-    <p class="kazanim-kaynak">Kaynak: 2018 DKAB Öğretim Programı (MEB Talim ve Terbiye Kurulu) — 7.1. Melek ve Ahiret İnancı</p>
-    <ul>
-      <li><b>7.1.1</b> — Varlıklar âlemini özelliklerine göre ayırt eder.</li>
-      <li><b>7.1.2</b> — Melekleri özellikleri ve görevlerine göre sınıflandırır.</li>
-      <li><b>7.1.3</b> — Dünya hayatı ile ahiret hayatı arasındaki ilişkiyi yorumlar.</li>
-      <li><b>7.1.4</b> — Ahiret hayatının aşamalarını açıklar.</li>
-      <li><b>7.1.5</b> — Allah'ın (c.c.) adil, merhametli ve affedici olması ile ahiret inancı arasında ilişki kurar.</li>
-      <li><b>7.1.6</b> — Hz. İsa'nın (a.s.) hayatını ana hatlarıyla tanır.</li>
-      <li><b>7.1.7</b> — Nâs suresini okur, anlamını söyler.</li>
-    </ul>
-  </div>
-
-  <div class="kutu-panel kavram-harita-panel">
-    <h3 style="color:#5b21b6">🗺️ Kavram Haritası</h3>
-    <p class="kavram-harita-aciklama">Bu ünitenin MEB öğretim programında belirlenen anahtar kavramları, ünite temasıyla bağlantılı olarak aşağıda gösterilmiştir.</p>
-    <div class="kavram-harita">
-      <div class="kh-merkez">Melek ve Ahiret İnancı</div>
-      <div class="kh-dallar">
-      <div class="kh-kavram">Âlem</div>
-      <div class="kh-kavram">Gayb</div>
-      <div class="kh-kavram">Melek</div>
-      <div class="kh-kavram">Cin</div>
-      <div class="kh-kavram">Şeytan</div>
-      <div class="kh-kavram">Ahiret</div>
-      </div>
-    </div>
-  </div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Soru: <b id="kt7rTur">1</b>/<b id="kt7rToplam">50</b></span>
-    <span>⭐ Puan: <b id="kt7rPuan">0</b></span>
-    <span id="kt7rZorluk"></span>
-  </div>
-  <div id="kt7rSoru" class="balon-durum"></div>
-  <div id="kt7rSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:560px;margin:0 auto;"></div>
-  <div class="aciklama" id="kt7rAciklama" style="display:none;"></div>
-  <div class="sonuc-kutusu" id="kt7rSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" id="kt7rSonrakiBtn" style="display:none;" onclick="kt7rSonrakiSoru()">➡️ Sonraki Soru</button>
-    <button class="eylem" style="background:var(--sari)" onclick="kt7rBaslat()">📝 Teste Başla</button>
-  </div>
-</section>
-
-<!-- HIZLI KELİME ÜRETME -->
-<section id="kelimeuret7">
-  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
-  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
-  <div class="oyun-bilgi">
-    <span>🔤 Harf: <b id="ku7Harf">-</b></span>
-    <span>⭐ Puan: <b id="ku7Puan">0</b></span>
-    <span>⏱️ Süre: <b id="ku7Sure">60</b>sn</span>
-  </div>
-  <input type="text" id="ku7Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ku7Ekle();}">
-  <p class="balon-durum" id="ku7Uyari"></p>
-  <ul class="ku-liste" id="ku7Liste"></ul>
-  <div class="sonuc-kutusu" id="ku7Sonuc"></div>
-  <div id="ku7Kacirilan"></div>
-  <button class="eylem" onclick="ku7Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- TUZAK HARF -->
-<section id="tuzak7">
-  <h2>🚫 Tuzak Harf Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
-  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen kavramları süre bitmeden art arda yaz!</div>
-  <div class="oyun-bilgi">
-    <span>🚫 Tuzak Harf: <b id="tuzak7Harf">-</b></span>
-    <span>⭐ Puan: <b id="tuzak7Puan">0</b></span>
-    <span>⏱️ Süre: <b id="tuzak7Sure">40</b>sn</span>
-  </div>
-  <input type="text" id="tuzak7Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzak7Ekle();}">
-  <p class="balon-durum" id="tuzak7Uyari"></p>
-  <ul class="ku-liste" id="tuzak7Liste"></ul>
-  <div class="sonuc-kutusu" id="tuzak7Sonuc"></div>
-  <button class="eylem" onclick="tuzak7Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME FABRİKASI -->
-<section id="fabrika7">
-  <h2>🏭 Kelime Fabrikası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
-  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!</div>
-  <div class="oyun-bilgi">
-    <span>🏭 Üretilen: <b id="kf7Uretilen">0</b>/<b id="kf7Toplam">28</b></span>
-    <span>❌ Hata: <b id="kf7Hata">0</b></span>
-  </div>
-  <div id="kf7Siparis" class="balon-durum"></div>
-  <div class="kf-bant" id="kf7BantAlani"></div>
-  <input type="text" id="kf7Girdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kf7Uret();}">
-  <button class="eylem" onclick="kf7Uret()">🏭 Üret!</button>
-  <div class="kf-urunler" id="kf7Urunler"></div>
-  <div class="sonuc-kutusu" id="kf7Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="kf7Baslat()">🔄 Fabrikayı Başlat/Yenile</button>
-</section>
-
-<!-- KELİME MÜHENDİSİ -->
-<section id="muhendis7">
-  <h2>🛠️ Kelime Mühendisi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
-  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
-  <div class="oyun-bilgi">
-    <span>🏗️ Tur: <b id="km7Tur">1</b>/<b id="km7Toplam">28</b></span>
-    <span>✅ İnşa Edilen: <b id="km7Dogru">0</b></span>
-  </div>
-  <div id="km7Ipucu" class="balon-durum"></div>
-  <div class="kelime-cevap" id="km7Cevap"></div>
-  <div class="kelime-banka" id="km7Banka"></div>
-  <div class="sonuc-kutusu" id="km7Sonuc"></div>
-  <button class="eylem" onclick="km7Baslat()">🛠️ Mühendisliğe Başla</button>
-</section>
-
-<!-- KAVRAM TURNUVASI -->
-<section id="kavramturnuvasi7">
-  <h2>🏆 Kavram Turnuvası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
-  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap.</div>
-  <div class="oyun-bilgi">
-    <span>🥊 Maç: <b id="kt7Tur">1</b>/<b id="kt7Toplam">7</b></span>
-    <span>✅ Doğru Hakemlik: <b id="kt7Puan">0</b></span>
-  </div>
-  <div id="kt7Asama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
-  <div id="kt7Eslesme" class="balon-durum"></div>
-  <div id="kt7Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kt7Sonuc"></div>
-  <button class="eylem" onclick="kt7Baslat()">🏆 Turnuvayı Başlat</button>
-</section>
-
-<!-- BONUS OYUN: HAFIZA ZİNCİRİ -->
-<section id="bonus7">
-  <h2>🎮 Bonus Oyun: Kavramlar Hafıza Zinciri</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
-  <div class="aciklama">Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir kavram daha uzuyor.</div>
-  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bz7Seviye">0</b></span></div>
-  <div class="bz-izgara" id="bz7Izgara"></div>
-  <div class="sonuc-kutusu" id="bz7Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" style="background:var(--sari)" onclick="bz7OrnekOyna()">🎬 Önce Örnek Gör</button>
-    <button class="eylem" onclick="bz7Baslat()">🎮 Oyunu Başlat</button>
-  </div>
-</section>
-
-<!-- KELİME AVI -->
-<section id="kelimeavi7">
-  <h2>🔎 Kelime Avı Bulmacası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
-  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka7Bulunan">0</b>/<b id="ka7Toplam">14</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ka-izgara" id="ka7Izgara"></div>
-    <ul class="ka-liste" id="ka7Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ka7Sonuc"></div>
-  <button class="eylem" onclick="kelimeAvi7Olustur()">🔄 Yeni Bulmaca</button>
-</section>
-
-<!-- ÇENGEL BULMACA -->
-<section id="cengel7">
-  <h2>🧩 Çengel Bulmaca</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
-  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
-  <div class="cengel-izgara" id="cengel7Izgara"></div>
-  <ul class="cengel-liste" id="cengel7Liste"></ul>
-  <div class="sonuc-kutusu" id="cengel7Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="cengel7KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="cengel7Olustur()">🔄 Baştan Başla</button>
-  </div>
-</section>
-
-<!-- SÖZCÜK MERDİVENİ -->
-<section id="merdiven7">
-  <h2>🪜 Sözcük Merdiveni</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
-  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdiven7Basamak">1</b>/<b id="merdiven7Toplam">4</b></span></div>
-  <div id="merdiven7Ipucu" class="balon-durum"></div>
-  <div id="merdiven7Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="merdiven7Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="merdiven7Sonuc"></div>
-  <button class="eylem" onclick="merdiven7Baslat()">🔄 Yeniden Başlat</button>
-</section>
-
-<!-- ŞİFRELİ SÖZCÜK -->
-<section id="sifre7">
-  <h2>🔐 Şifreli Sözcük Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
-  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
-  <div class="sifre-anahtar" id="sifre7Anahtar"></div>
-  <div id="sifre7Kelimeler"></div>
-  <div class="sonuc-kutusu" id="sifre7Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="sifre7KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="sifre7Olustur()">🔄 Yeni Şifre</button>
-  </div>
-</section>
-
-<!-- ŞİFRELİ TANIM -->
-<section id="sifretanim7">
-  <h2>🔐 Şifreli Tanım Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
-  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="st7Tur">1</b>/<b id="st7Toplam">28</b></span>
-    <span>⭐ Puan: <b id="st7Puan">0</b></span>
-  </div>
-  <div id="st7Tanim" class="dua-satir"></div>
-  <div id="st7Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="st7Sonuc"></div>
-  <button class="eylem" onclick="st7Baslat()">🔐 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME KODLAMA -->
-<section id="kelimekodlama7">
-  <h2>💻 Kelime Kodlama Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
-  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz.</div>
-  <div class="sifre-anahtar" id="kk7Anahtar"></div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="kk7Tur">1</b>/<b id="kk7Toplam">28</b></span>
-    <span>⭐ Puan: <b id="kk7Puan">0</b></span>
-  </div>
-  <div id="kk7Ipucu" class="balon-durum"></div>
-  <div id="kk7Kod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
-  <div id="kk7Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kk7Sonuc"></div>
-  <button class="eylem" onclick="kk7Baslat()">💻 Kodlamayı Başlat</button>
-</section>
-
-<!-- NONOGRAM -->
-<section id="nonogram7">
-  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
-  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak gizli resmi ortaya çıkar!</div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
-    <button class="eylem" onclick="nonogram7Sec('camii')">🕌 Cami (İbadet Yeri)</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram7Sec('hilal')">🌙⭐ Hilal ve Yıldız</button>
-  </div>
-  <div style="overflow-x:auto;">
-    <table class="nono-tablo" id="nono7Tablo"></table>
-  </div>
-  <div class="sonuc-kutusu" id="nono7Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="nonogram7KontrolEt(true)">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram7Temizle()">🧹 Temizle</button>
-  </div>
-</section>
-
-<!-- KELİME SATRANCI -->
-<section id="satranc7">
-  <h2>♞ Kelime Satrancı</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
-  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ks7Bulunan">0</b>/<b id="ks7Toplam">8</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ks-izgara" id="ks7Izgara"></div>
-    <ul class="ka-liste" id="ks7Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ks7Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="ks7SecimiTemizle()">🧹 Seçimi Temizle</button>
-    <button class="eylem" style="background:var(--sari)" onclick="ks7Olustur()">🔄 Yeni Tahta</button>
-  </div>
-</section>
-
-<!-- KELİME DEDEKTİFİ -->
-<section id="dedektif7">
-  <h2>🕵️ Kelime Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
-  <div class="aciklama">Gizli kelimeyi (bir kavram) 5 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Vaka: <b id="dd7Vaka">1</b>/<b id="dd7ToplamVaka">1</b></span>
-    <span>✅ Çözülen: <b id="dd7Cozulen">0</b></span>
-    <span>🔍 Deneme: <b id="dd7Deneme">0</b>/<b id="dd7MaxDeneme">5</b></span>
-  </div>
-  <div id="dd7Ipucu" class="balon-durum"></div>
-  <div id="dd7Izgara"></div>
-  <input type="text" id="dd7Girdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){dd7TahminEt();}">
-  <p class="balon-durum" id="dd7Uyari"></p>
-  <div class="sonuc-kutusu" id="dd7Sonuc"></div>
-  <button class="eylem" onclick="dd7Baslat()">🕵️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- DİL DEDEKTİFİ -->
-<section id="dildedektifi7">
-  <h2>🕵️‍♀️ Dil Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ddl7Tur">1</b>/<b id="ddl7Toplam">10</b></span>
-    <span>⭐ Puan: <b id="ddl7Puan">0</b></span>
-  </div>
-  <div id="ddl7Baslik" class="balon-durum"></div>
-  <div id="ddl7Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="ddl7Sonuc"></div>
-  <button class="eylem" onclick="ddl7Baslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- MANTIK ZİNCİRİ -->
-<section id="mantikzinciri7">
-  <h2>🔗 Mantık Zinciri Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
-  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
-  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mz7Halka">1</b>/<b id="mz7Toplam">5</b></span></div>
-  <div id="mz7Soru" class="balon-durum"></div>
-  <div id="mz7Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="mz7Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="mz7Sonuc"></div>
-  <button class="eylem" onclick="mz7Baslat()">🔗 Zinciri Başlat</button>
-</section>
-
-<!-- SEMANTİK LABİRENT -->
-<section id="semantiklabirent7">
-  <h2>🧠 Semantik Labirent</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
-  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin.</div>
-  <div class="oyun-bilgi">
-    <span>🚪 Oda: <b id="sz7Oda">1</b>/<b id="sz7ToplamOda">6</b></span>
-    <span id="sz7Can">❤️❤️❤️</span>
-  </div>
-  <div id="sz7Kategori" class="balon-durum"></div>
-  <div id="sz7Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="sz7Sonuc"></div>
-  <button class="eylem" onclick="sz7Baslat()">🌀 Labirente Gir</button>
-</section>
-
-<!-- ÇELİŞKİ AVI -->
-<section id="celiskiavi7">
-  <h2>🕵️‍♂️ Çelişki Avı</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu?</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ca7Tur">1</b>/<b id="ca7Toplam">12</b></span>
-    <span>⭐ Puan: <b id="ca7Puan">0</b></span>
-  </div>
-  <div id="ca7Cumle" class="dua-satir"></div>
-  <div id="ca7Butonlar" style="display:flex;gap:14px;justify-content:center;">
-    <button class="eylem" style="background:var(--kirmizi)" onclick="ca7Cevapla(true)">⚡ Çelişki VAR</button>
-    <button class="eylem" style="background:var(--yesil)" onclick="ca7Cevapla(false)">✅ Çelişki YOK</button>
-  </div>
-  <p style="text-align:center;font-weight:bold;" id="ca7GeriBildirim"></p>
-  <div class="sonuc-kutusu" id="ca7Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="ca7Baslat()">🕵️‍♂️ Ava Başla</button>
-</section>
-
-<!-- LABİRENT -->
-<section id="labirent7">
-  <h2>🌀 Labirent Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
-  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 👼'ye ulaştır! Yolda parıldayan yıldızlara basarsan bir kavram toplarsın.</div>
-  <div class="oyun-bilgi">
-    <span>🔁 Hamle: <b id="lab7Hamle">0</b></span>
-    <span>⭐ Toplanan: <b id="lab7Toplanan">0</b>/<b id="lab7ToplamYildiz">20</b></span>
-    <span>⏱️ Süre: <b id="lab7Sure">0</b>sn</span>
-  </div>
-  <div class="balon-durum" id="lab7Durum"></div>
-  <div class="labirent-izgara" id="lab7Izgara"></div>
-  <div class="labirent-kontroller">
-    <button class="labirent-tus" onclick="labirent7Hareket(-1,0)">▲</button>
-    <div>
-      <button class="labirent-tus" onclick="labirent7Hareket(0,-1)">◀</button>
-      <button class="labirent-tus" onclick="labirent7Hareket(1,0)">▼</button>
-      <button class="labirent-tus" onclick="labirent7Hareket(0,1)">▶</button>
-    </div>
-  </div>
-  <div class="sonuc-kutusu" id="lab7Sonuc"></div>
-  <button class="eylem" onclick="labirent7Baslat()">🔄 Yeni Labirent</button>
-</section>
-
-
-<!-- ================= EZBER ETKİNLİKLERİ (8 ADET) — MELEK VE AHIRET İNANCI ================= -->
-
-<section id="ezsira7">
-  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Melek ve Ahiret İnancı'nın cümlelerini doğru sırayla dizebileceksin.</div>
-  <div class="aciklama">Karışık sırada verilen cümleleri, Melek ve Ahiret İnancı'ndaki doğru sıraya göre tıklayarak diz.</div>
-  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez17Dizilen">0</b>/<b>8</b></span></div>
-  <div class="kelime-cevap" id="ez17Cevap"></div>
-  <div class="kelime-banka" id="ez17Banka"></div>
-  <div class="sonuc-kutusu" id="ez17Sonuc"></div>
-  <button class="eylem" onclick="ez17Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezbosluk7">
-  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Melek ve Ahiret İnancı cümlelerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
-  <div class="aciklama">Cümledeki boşluğa gelen doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez27Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez27Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez27Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez27Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez27Sonuc"></div>
-  <button class="eylem" onclick="ez27Baslat()">📝 Başla</button>
-</section>
-
-<section id="ezeslestir7">
-  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Melek ve Ahiret İnancı'nın her cümlesini anlamıyla eşleştirebileceksin.</div>
-  <div class="aciklama">Soldan bir cümle, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
-  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez37Eslesen">0</b>/<b>8</b></span></div>
-  <div class="ez-iki-sutun">
-    <div class="ez-sutun"><h4>Cümle</h4><div id="ez37Sol"></div></div>
-    <div class="ez-sutun"><h4>Anlam</h4><div id="ez37Sag"></div></div>
-  </div>
-  <div class="sonuc-kutusu" id="ez37Sonuc"></div>
-  <button class="eylem" onclick="ez37Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezhafiza7">
-  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: cümle-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
-  <div class="aciklama">İki kartı çevir. Bir cümle ile doğru anlamı eşleşirse kartlar açık kalır.</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez47Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="ez47Hamle">0</b></span></div>
-  <div class="ez-hafiza-izgara" id="ez47Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
-  <div class="sonuc-kutusu" id="ez47Sonuc"></div>
-  <button class="eylem" onclick="ez47Baslat()">🔄 Yeni Oyun</button>
-</section>
-
-<section id="ezadimadim7">
-  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Melek ve Ahiret İnancı'nı baştan sona, cümle sırasını bularak ezberleyeceksin.</div>
-  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi cümlenin geldiğini seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez57Adim">1</b>/<b>8</b></span></div>
-  <div class="ez-ogrenilen-liste" id="ez57Liste"></div>
-  <div class="balon-durum">Sırada hangi cümle geliyor?</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez57Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez57Sonuc"></div>
-  <button class="eylem" onclick="ez57Baslat()">▶️ Başla</button>
-</section>
-
-<section id="ezgizli7">
-  <h2>6️⃣ Ezber: Gizli Harfler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Melek ve Ahiret İnancı'nın anahtar kelimelerini harf harf hatırlayacaksın.</div>
-  <div class="aciklama">Cümledeki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez67Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez67Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez67Metin"></div>
-  <div class="kelime-cevap" id="ez67Cevap"></div>
-  <div class="kelime-banka" id="ez67Banka"></div>
-  <div class="sonuc-kutusu" id="ez67Sonuc"></div>
-  <button class="eylem" onclick="ez67Baslat()">🔐 Başla</button>
-</section>
-
-<section id="ezkaybolan7">
-  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun cümleyi hafızandan tanıyabileceksin.</div>
-  <div class="aciklama">Cümleyi 3 saniye izle, sonra kaybolacak. Az önce gördüğün cümlenin BİREBİR aynısını seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez77Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez77Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez77Metin">👁️ Başlamak için düğmeye bas</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez77Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez77Sonuc"></div>
-  <button class="eylem" onclick="ez77Baslat()">👁️ Başla</button>
-</section>
-
-<section id="ezhiz7">
-  <h2>8️⃣ Ezber: Hız Testi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Melek ve Ahiret İnancı cümle-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
-  <div class="aciklama">Süre dolmadan verilen anlama ait doğru cümleyi seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
-  <div class="ez-zamanlayici" id="ez87Sayac">60</div>
-  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez87Dogru">0</b></span><span>❌ Yanlış: <b id="ez87Yanlis">0</b></span></div>
-  <div class="ez-metin-goster" id="ez87Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez87Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez87Sonuc"></div>
-  <button class="eylem" onclick="ez87Baslat()">⏱️ Başla</button>
-</section>
-
 </main>
-</div>
-
-<footer>7. Sınıf Din Kültürü ve Ahlak Bilgisi — 1. Ünite İnteraktif Oyun Seti</footer>
 
 <script>
 function goster(id, ev){
@@ -3433,15 +2716,7 @@ document.addEventListener('keydown', (e)=>{
 // =====================================================================
 // BAŞLANGIÇ
 // =====================================================================
-bz7IzgaraOlustur();
-kelimeAvi7Olustur();
-cengel7Olustur();
-merdiven7Baslat();
-sifre7Olustur();
-ks7Olustur();
-nonogram7Olustur();
-istatistikleriGuncelleGoster();
-sonucIzlemeBaslat();
+[bz7IzgaraOlustur, kelimeAvi7Olustur, cengel7Olustur, merdiven7Baslat, sifre7Olustur, ks7Olustur, nonogram7Olustur, istatistikleriGuncelleGoster, sonucIzlemeBaslat].forEach(function(fn){ try{ fn(); }catch(e){} });
 
 // =====================================================================
 // EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — MELEK VE AHIRET İNANCI
@@ -4050,7 +3325,6 @@ function zbTekrarHatirlatmaKontrol(){
 document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
 </script>
-
 <script id="ogrKatmaniScript">
 /* ===================== OGRENME DENEYIMI KATMANI (JS) =====================
    Sadece EKLEME yapar: mevcut id/onclick/veri yapisina dokunmaz, hicbir
@@ -4262,6 +3536,5 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
   else ogrBaslat();
 })();
 </script>
-
 </body>
 </html>

@@ -1,0 +1,3447 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6. Sınıf Din Kültürü - 4. Ünite: Peygamberliğinden Önce Hz. Muhammed — Oyun Merkezi</title>
+<meta name="description" content="6. Sınıf Din Kültürü - 4. Ünite: Peygamberliğinden Önce Hz. Muhammed — İnteraktif oyunlar, konu özeti, test ve sunum içeren dijital ders materyali.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../ortak/oyun-merkezi.css">
+
+<body>
+
+
+
+
+<header>
+  <p style="margin:0 0 6px;font-size:1.1em;font-weight:bold;letter-spacing:.5px;opacity:.95;">6. SINIF — 4. ÜNİTE</p>
+  <h1>🌟 Peygamberliğinden Önce Hz. Muhammed</h1>
+  <p>Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
+  <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+  <div class="gb-kontrol-satiri" style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;">
+    <a href="../en/din-kulturu-6sinif-1unite/unite4.html" lang="en" style="display:inline-block;padding:6px 16px;border-radius:16px;background:rgba(255,255,255,.22);color:white;text-decoration:none;font-weight:bold;font-size:.85em;border:1px solid rgba(255,255,255,.55);">English</a>
+    <button type="button" id="temaDegistirBtn" class="tema-degistir-btn" onclick="temaDegistir()" aria-label="Koyu/açık tema değiştir">🌙 Koyu Tema</button>
+  </div>
+</header>
+<section class="hero">
+  <h2 class="hero-baslik">🎮 Oyun Merkezi</h2>
+  <p class="hero-alt">Bu ünitedeki oyunlarla konuyu pekiştir.</p>
+  <div class="hero-butonlar">
+    <button class="hero-btn hero-btn-birincil" onclick="window.location.href='unite4.html'">◀ Ana Sayfaya Dön</button>
+  </div>
+</section>
+
+
+<div id="oyun-gruplari" role="navigation" aria-label="Oyun merkezi menüsü"></div>
+
+<main>
+<section id="kelimeuret64">
+  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
+  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
+  <div class="oyun-bilgi">
+    <span>🔤 Harf: <b id="ku64Harf">-</b></span>
+    <span>⭐ Puan: <b id="ku64Puan">0</b></span>
+    <span>⏱️ Süre: <b id="ku64Sure">60</b>sn</span>
+  </div>
+  <input type="text" id="ku64Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ku64Ekle();}">
+  <p class="balon-durum" id="ku64Uyari"></p>
+  <ul class="ku-liste" id="ku64Liste"></ul>
+  <div class="sonuc-kutusu" id="ku64Sonuc"></div>
+  <div id="ku64Kacirilan"></div>
+  <button class="eylem" onclick="ku64Baslat()">🎮 Oyunu Başlat</button>
+</section>
+
+<!-- TUZAK HARF -->
+<section id="tuzak64">
+  <h2>🚫 Tuzak Harf Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
+  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen kavramları süre bitmeden art arda yaz!</div>
+  <div class="oyun-bilgi">
+    <span>🚫 Tuzak Harf: <b id="tuzak64Harf">-</b></span>
+    <span>⭐ Puan: <b id="tuzak64Puan">0</b></span>
+    <span>⏱️ Süre: <b id="tuzak64Sure">40</b>sn</span>
+  </div>
+  <input type="text" id="tuzak64Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzak64Ekle();}">
+  <p class="balon-durum" id="tuzak64Uyari"></p>
+  <ul class="ku-liste" id="tuzak64Liste"></ul>
+  <div class="sonuc-kutusu" id="tuzak64Sonuc"></div>
+  <button class="eylem" onclick="tuzak64Baslat()">🎮 Oyunu Başlat</button>
+</section>
+
+<!-- KELİME FABRİKASI -->
+<section id="fabrika64">
+  <h2>🏭 Kelime Fabrikası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
+  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!</div>
+  <div class="oyun-bilgi">
+    <span>🏭 Üretilen: <b id="kf64Uretilen">0</b>/<b id="kf64Toplam">28</b></span>
+    <span>❌ Hata: <b id="kf64Hata">0</b></span>
+  </div>
+  <div id="kf64Siparis" class="balon-durum"></div>
+  <div class="kf-bant" id="kf64BantAlani"></div>
+  <input type="text" id="kf64Girdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kf64Uret();}">
+  <button class="eylem" onclick="kf64Uret()">🏭 Üret!</button>
+  <div class="kf-urunler" id="kf64Urunler"></div>
+  <div class="sonuc-kutusu" id="kf64Sonuc"></div>
+  <button class="eylem" style="background:var(--sari)" onclick="kf64Baslat()">🔄 Fabrikayı Başlat/Yenile</button>
+</section>
+
+<!-- KELİME MÜHENDİSİ -->
+<section id="muhendis64">
+  <h2>🛠️ Kelime Mühendisi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
+  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
+  <div class="oyun-bilgi">
+    <span>🏗️ Tur: <b id="km64Tur">1</b>/<b id="km64Toplam">28</b></span>
+    <span>✅ İnşa Edilen: <b id="km64Dogru">0</b></span>
+  </div>
+  <div id="km64Ipucu" class="balon-durum"></div>
+  <div class="kelime-cevap" id="km64Cevap"></div>
+  <div class="kelime-banka" id="km64Banka"></div>
+  <div class="sonuc-kutusu" id="km64Sonuc"></div>
+  <button class="eylem" onclick="km64Baslat()">🛠️ Mühendisliğe Başla</button>
+</section>
+
+<!-- KAVRAM TURNUVASI -->
+<section id="kavramturnuvasi64">
+  <h2>🏆 Kavram Turnuvası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
+  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap.</div>
+  <div class="oyun-bilgi">
+    <span>🥊 Maç: <b id="kt64Tur">1</b>/<b id="kt64Toplam">7</b></span>
+    <span>✅ Doğru Hakemlik: <b id="kt64Puan">0</b></span>
+  </div>
+  <div id="kt64Asama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="kt64Eslesme" class="balon-durum"></div>
+  <div id="kt64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kt64Sonuc"></div>
+  <button class="eylem" onclick="kt64Baslat()">🏆 Turnuvayı Başlat</button>
+</section>
+
+<!-- BONUS OYUN: HAFIZA ZİNCİRİ -->
+<section id="bonus64">
+  <h2>🎮 Bonus Oyun: Kavramlar Hafıza Zinciri</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
+  <div class="aciklama">Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir kavram daha uzuyor.</div>
+  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bz64Seviye">0</b></span></div>
+  <div class="bz-izgara" id="bz64Izgara"></div>
+  <div class="sonuc-kutusu" id="bz64Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" style="background:var(--sari)" onclick="bz64OrnekOyna()">🎬 Önce Örnek Gör</button>
+    <button class="eylem" onclick="bz64Baslat()">🎮 Oyunu Başlat</button>
+  </div>
+</section>
+
+<!-- KELİME AVI -->
+<section id="kelimeavi64">
+  <h2>🔎 Kelime Avı Bulmacası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
+  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka64Bulunan">0</b>/<b id="ka64Toplam">14</b></span></div>
+  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+    <div class="ka-izgara" id="ka64Izgara"></div>
+    <ul class="ka-liste" id="ka64Liste"></ul>
+  </div>
+  <div class="sonuc-kutusu" id="ka64Sonuc"></div>
+  <button class="eylem" onclick="kelimeAvi64Olustur()">🔄 Yeni Bulmaca</button>
+</section>
+
+<!-- ÇENGEL BULMACA -->
+<section id="cengel64">
+  <h2>🧩 Çengel Bulmaca</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
+  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
+  <div class="cengel-izgara" id="cengel64Izgara"></div>
+  <ul class="cengel-liste" id="cengel64Liste"></ul>
+  <div class="sonuc-kutusu" id="cengel64Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="cengel64KontrolEt()">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="cengel64Olustur()">🔄 Baştan Başla</button>
+  </div>
+</section>
+
+<!-- SÖZCÜK MERDİVENİ -->
+<section id="merdiven64">
+  <h2>🪜 Sözcük Merdiveni</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
+  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdiven64Basamak">1</b>/<b id="merdiven64Toplam">4</b></span></div>
+  <div id="merdiven64Ipucu" class="balon-durum"></div>
+  <div id="merdiven64Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="kutu-panel" id="merdiven64Gorsel" style="max-width:460px;margin:20px auto;"></div>
+  <div class="sonuc-kutusu" id="merdiven64Sonuc"></div>
+  <button class="eylem" onclick="merdiven64Baslat()">🔄 Yeniden Başlat</button>
+</section>
+
+<!-- ŞİFRELİ SÖZCÜK -->
+<section id="sifre64">
+  <h2>🔐 Şifreli Sözcük Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
+  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
+  <div class="sifre-anahtar" id="sifre64Anahtar"></div>
+  <div id="sifre64Kelimeler"></div>
+  <div class="sonuc-kutusu" id="sifre64Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="sifre64KontrolEt()">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="sifre64Olustur()">🔄 Yeni Şifre</button>
+  </div>
+</section>
+
+<!-- ŞİFRELİ TANIM -->
+<section id="sifretanim64">
+  <h2>🔐 Şifreli Tanım Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
+  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="st64Tur">1</b>/<b id="st64Toplam">28</b></span>
+    <span>⭐ Puan: <b id="st64Puan">0</b></span>
+  </div>
+  <div id="st64Tanim" class="dua-satir"></div>
+  <div id="st64Secenekler" style="max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="st64Sonuc"></div>
+  <button class="eylem" onclick="st64Baslat()">🔐 Oyunu Başlat</button>
+</section>
+
+<!-- KELİME KODLAMA -->
+<section id="kelimekodlama64">
+  <h2>💻 Kelime Kodlama Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
+  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz.</div>
+  <div class="sifre-anahtar" id="kk64Anahtar"></div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="kk64Tur">1</b>/<b id="kk64Toplam">28</b></span>
+    <span>⭐ Puan: <b id="kk64Puan">0</b></span>
+  </div>
+  <div id="kk64Ipucu" class="balon-durum"></div>
+  <div id="kk64Kod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
+  <div id="kk64Secenekler" style="max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kk64Sonuc"></div>
+  <button class="eylem" onclick="kk64Baslat()">💻 Kodlamayı Başlat</button>
+</section>
+
+<!-- NONOGRAM -->
+<section id="nonogram64">
+  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
+  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak gizli resmi ortaya çıkar!</div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
+    <button class="eylem" onclick="nonogram64Sec('camii')">🕌 Cami (İbadet Yeri)</button>
+    <button class="eylem" style="background:var(--sari)" onclick="nonogram64Sec('hilal')">🌙⭐ Hilal ve Yıldız</button>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="nono-tablo" id="nono64Tablo"></table>
+  </div>
+  <div class="sonuc-kutusu" id="nono64Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="nonogram64KontrolEt(true)">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="nonogram64Temizle()">🧹 Temizle</button>
+  </div>
+</section>
+
+<!-- KELİME SATRANCI -->
+<section id="satranc64">
+  <h2>♞ Kelime Satrancı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
+  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ks64Bulunan">0</b>/<b id="ks64Toplam">8</b></span></div>
+  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+    <div class="ks-izgara" id="ks64Izgara"></div>
+    <ul class="ka-liste" id="ks64Liste"></ul>
+  </div>
+  <div class="sonuc-kutusu" id="ks64Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="ks64SecimiTemizle()">🧹 Seçimi Temizle</button>
+    <button class="eylem" style="background:var(--sari)" onclick="ks64Olustur()">🔄 Yeni Tahta</button>
+  </div>
+</section>
+
+<!-- KELİME DEDEKTİFİ -->
+<section id="dedektif64">
+  <h2>🕵️ Kelime Dedektifi</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
+  <div class="aciklama">Gizli kelimeyi (bir kavram) 5 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Vaka: <b id="dd64Vaka">1</b>/<b id="dd64ToplamVaka">1</b></span>
+    <span>✅ Çözülen: <b id="dd64Cozulen">0</b></span>
+    <span>🔍 Deneme: <b id="dd64Deneme">0</b>/<b id="dd64MaxDeneme">5</b></span>
+  </div>
+  <div id="dd64Ipucu" class="balon-durum"></div>
+  <div id="dd64Izgara"></div>
+  <input type="text" id="dd64Girdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){dd64TahminEt();}">
+  <p class="balon-durum" id="dd64Uyari"></p>
+  <div class="sonuc-kutusu" id="dd64Sonuc"></div>
+  <button class="eylem" onclick="dd64Baslat()">🕵️ Soruşturmayı Başlat</button>
+</section>
+
+<!-- DİL DEDEKTİFİ -->
+<section id="dildedektifi64">
+  <h2>🕵️‍♀️ Dil Dedektifi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
+  <div class="aciklama">Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="ddl64Tur">1</b>/<b id="ddl64Toplam">10</b></span>
+    <span>⭐ Puan: <b id="ddl64Puan">0</b></span>
+  </div>
+  <div id="ddl64Baslik" class="balon-durum"></div>
+  <div id="ddl64Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="ddl64Sonuc"></div>
+  <button class="eylem" onclick="ddl64Baslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
+</section>
+
+<!-- MANTIK ZİNCİRİ -->
+<section id="mantikzinciri64">
+  <h2>🔗 Mantık Zinciri Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
+  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
+  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mz64Halka">1</b>/<b id="mz64Toplam">5</b></span></div>
+  <div id="mz64Soru" class="balon-durum"></div>
+  <div id="mz64Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="kutu-panel" id="mz64Gorsel" style="max-width:460px;margin:20px auto;"></div>
+  <div class="sonuc-kutusu" id="mz64Sonuc"></div>
+  <button class="eylem" onclick="mz64Baslat()">🔗 Zinciri Başlat</button>
+</section>
+
+<!-- SEMANTİK LABİRENT -->
+<section id="semantiklabirent64">
+  <h2>🧠 Semantik Labirent</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
+  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin.</div>
+  <div class="oyun-bilgi">
+    <span>🚪 Oda: <b id="sz64Oda">1</b>/<b id="sz64ToplamOda">6</b></span>
+    <span id="sz64Can">❤️❤️❤️</span>
+  </div>
+  <div id="sz64Kategori" class="balon-durum"></div>
+  <div id="sz64Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sz64Sonuc"></div>
+  <button class="eylem" onclick="sz64Baslat()">🌀 Labirente Gir</button>
+</section>
+
+<!-- ÇELİŞKİ AVI -->
+<section id="celiskiavi64">
+  <h2>🕵️‍♂️ Çelişki Avı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
+  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu?</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="ca64Tur">1</b>/<b id="ca64Toplam">12</b></span>
+    <span>⭐ Puan: <b id="ca64Puan">0</b></span>
+  </div>
+  <div id="ca64Cumle" class="dua-satir"></div>
+  <div id="ca64Butonlar" style="display:flex;gap:14px;justify-content:center;">
+    <button class="eylem" style="background:var(--kirmizi)" onclick="ca64Cevapla(true)">⚡ Çelişki VAR</button>
+    <button class="eylem" style="background:var(--yesil)" onclick="ca64Cevapla(false)">✅ Çelişki YOK</button>
+  </div>
+  <p style="text-align:center;font-weight:bold;" id="ca64GeriBildirim"></p>
+  <div class="sonuc-kutusu" id="ca64Sonuc"></div>
+  <button class="eylem" style="background:var(--sari)" onclick="ca64Baslat()">🕵️‍♂️ Ava Başla</button>
+</section>
+
+<!-- LABİRENT -->
+<section id="labirent64">
+  <h2>🌀 Labirent Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
+  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 🕋'ye ulaştır! Yolda parıldayan yıldızlara basarsan bir kavram toplarsın.</div>
+  <div class="oyun-bilgi">
+    <span>🔁 Hamle: <b id="lab64Hamle">0</b></span>
+    <span>⭐ Toplanan: <b id="lab64Toplanan">0</b>/<b id="lab64ToplamYildiz">20</b></span>
+    <span>⏱️ Süre: <b id="lab64Sure">0</b>sn</span>
+  </div>
+  <div class="balon-durum" id="lab64Durum"></div>
+  <div class="labirent-izgara" id="lab64Izgara"></div>
+  <div class="labirent-kontroller">
+    <button class="labirent-tus" onclick="labirent64Hareket(-1,0)">▲</button>
+    <div>
+      <button class="labirent-tus" onclick="labirent64Hareket(0,-1)">◀</button>
+      <button class="labirent-tus" onclick="labirent64Hareket(1,0)">▼</button>
+      <button class="labirent-tus" onclick="labirent64Hareket(0,1)">▶</button>
+    </div>
+  </div>
+  <div class="sonuc-kutusu" id="lab64Sonuc"></div>
+  <button class="eylem" onclick="labirent64Baslat()">🔄 Yeni Labirent</button>
+</section>
+
+
+<!-- ================= EZBER ETKİNLİKLERİ (8 ADET) — FIL SURESI ================= -->
+
+<section id="ezsira64">
+  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Fil Suresi'nin ayetlerini doğru sırayla dizebileceksin.</div>
+  <div class="aciklama">Karışık sırada verilen ayetleri, Fil Suresi'ndeki doğru sıraya göre tıklayarak diz.</div>
+  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez164Dizilen">0</b>/<b>5</b></span></div>
+  <div class="kelime-cevap" id="ez164Cevap"></div>
+  <div class="kelime-banka" id="ez164Banka"></div>
+  <div class="sonuc-kutusu" id="ez164Sonuc"></div>
+  <button class="eylem" onclick="ez164Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezbosluk64">
+  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Fil Suresi ayetlerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
+  <div class="aciklama">Ayetteki boşluğa gelen doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez264Tur">1</b>/<b>5</b></span><span>✅ Doğru: <b id="ez264Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez264Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez264Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez264Sonuc"></div>
+  <button class="eylem" onclick="ez264Baslat()">📝 Başla</button>
+</section>
+
+<section id="ezeslestir64">
+  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Fil Suresi'nin her ayetini anlamıyla eşleştirebileceksin.</div>
+  <div class="aciklama">Soldan bir ayet, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
+  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez364Eslesen">0</b>/<b>5</b></span></div>
+  <div class="ez-iki-sutun">
+    <div class="ez-sutun"><h4>Ayet</h4><div id="ez364Sol"></div></div>
+    <div class="ez-sutun"><h4>Anlam</h4><div id="ez364Sag"></div></div>
+  </div>
+  <div class="sonuc-kutusu" id="ez364Sonuc"></div>
+  <button class="eylem" onclick="ez364Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezhafiza64">
+  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: ayet-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
+  <div class="aciklama">İki kartı çevir. Bir ayet ile doğru anlamı eşleşirse kartlar açık kalır.</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez464Bulunan">0</b>/<b>5</b></span><span>🔁 Hamle: <b id="ez464Hamle">0</b></span></div>
+  <div class="ez-hafiza-izgara" id="ez464Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
+  <div class="sonuc-kutusu" id="ez464Sonuc"></div>
+  <button class="eylem" onclick="ez464Baslat()">🔄 Yeni Oyun</button>
+</section>
+
+<section id="ezadimadim64">
+  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Fil Suresi'ni baştan sona, ayet sırasını bularak ezberleyeceksin.</div>
+  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi ayetin geldiğini seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez564Adim">1</b>/<b>5</b></span></div>
+  <div class="ez-ogrenilen-liste" id="ez564Liste"></div>
+  <div class="balon-durum">Sırada hangi ayet geliyor?</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez564Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez564Sonuc"></div>
+  <button class="eylem" onclick="ez564Baslat()">▶️ Başla</button>
+</section>
+
+<section id="ezgizli64">
+  <h2>6️⃣ Ezber: Gizli Harfler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Fil Suresi'nin anahtar kelimelerini harf harf hatırlayacaksın.</div>
+  <div class="aciklama">Ayetteki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez664Tur">1</b>/<b>5</b></span><span>✅ Doğru: <b id="ez664Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez664Metin"></div>
+  <div class="kelime-cevap" id="ez664Cevap"></div>
+  <div class="kelime-banka" id="ez664Banka"></div>
+  <div class="sonuc-kutusu" id="ez664Sonuc"></div>
+  <button class="eylem" onclick="ez664Baslat()">🔐 Başla</button>
+</section>
+
+<section id="ezkaybolan64">
+  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun ayeti hafızandan tanıyabileceksin.</div>
+  <div class="aciklama">Ayeti 3 saniye izle, sonra kaybolacak. Az önce gördüğün ayetin BİREBİR aynısını seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez764Tur">1</b>/<b>5</b></span><span>✅ Doğru: <b id="ez764Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez764Metin">👁️ Başlamak için düğmeye bas</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez764Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez764Sonuc"></div>
+  <button class="eylem" onclick="ez764Baslat()">👁️ Başla</button>
+</section>
+
+<section id="ezhiz64">
+  <h2>8️⃣ Ezber: Hız Testi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Fil Suresi ayet-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
+  <div class="aciklama">Süre dolmadan verilen anlama ait doğru ayeti seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
+  <div class="ez-zamanlayici" id="ez864Sayac">60</div>
+  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez864Dogru">0</b></span><span>❌ Yanlış: <b id="ez864Yanlis">0</b></span></div>
+  <div class="ez-metin-goster" id="ez864Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez864Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez864Sonuc"></div>
+  <button class="eylem" onclick="ez864Baslat()">⏱️ Başla</button>
+</section>
+
+<!-- ===================== İKİ KİŞİLİK OYUNLAR (20 yeni oyun) ===================== -->
+<section id="quizbattle64">
+  <h2>⚔️ Quiz Battle</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in peygamberlik öncesi hayatıyla ilgili bilgileri pekiştirmek.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Sorular sırayla gelir, doğru cevaplayan puan alır.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="qb64SoruNo">1</b>/<b id="qb64Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="qb64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="qb64Puan2">0</b></span></div>
+  <div id="qb64ElDegistir" style="text-align:center;"></div>
+  <div id="qb64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="qb64SoruMetin" class="balon-durum"></div>
+  <div id="qb64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="qb64Sonuc"></div>
+  <div id="qb64YenidenBaslat"></div>
+  <button class="eylem" onclick="qb64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="memorymatchduel64">
+  <h2>🧠 Memory Match Duel</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in hayatındaki kavramları hafızada güçlendirmek.</div>
+  <div class="aciklama">Sırayla iki kart aç. Kavram ile anlamı eşleşirse puan kazanır ve tekrar oynarsın.</div>
+  <div class="oyun-bilgi"><span>🔵 1. Oyuncu: <b id="mm64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="mm64Puan2">0</b></span></div>
+  <div id="mm64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div class="hafiza-izgara" id="mm64Izgara"></div>
+  <div class="sonuc-kutusu" id="mm64Sonuc"></div>
+  <div id="mm64YenidenBaslat"></div>
+  <button class="eylem" onclick="mm64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="timelinechallenge64">
+  <h2>📜 Timeline Challenge</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in hayatındaki olayları doğru sırayla kavramak.</div>
+  <div class="aciklama">Cihazı sırayla arkadaşına ver, öğeleri doğru sıraya diz.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="tl64TurNo">1</b>/<b id="tl64TurToplam">3</b></span><span>🔵 1. Oyuncu: <b id="tl64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="tl64Puan2">0</b></span></div>
+  <div id="tl64ElDegistir" style="text-align:center;"></div>
+  <div id="tl64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <p style="text-align:center;font-style:italic;" id="tl64Baslik"></p>
+  <div class="kelime-cevap" id="tl64Cevap"></div>
+  <div class="kelime-banka" id="tl64Banka"></div>
+  <div class="sonuc-kutusu" id="tl64Sonuc"></div>
+  <div id="tl64YenidenBaslat"></div>
+  <button class="eylem" onclick="tl64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="speedquiz64">
+  <h2>⚡ Speed Quiz</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in ailesiyle ilgili bilgileri hızlı hatırlamak.</div>
+  <div class="aciklama">Süre kısa, hızlı düşün: doğru cevabı süre dolmadan seç.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="sq64SoruNo">1</b>/<b id="sq64Toplam">6</b></span><span>⏱️ Süre: <b id="sq64Sure">-</b> sn</span><span>🔵 1. Oyuncu: <b id="sq64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="sq64Puan2">0</b></span></div>
+  <div id="sq64ElDegistir" style="text-align:center;"></div>
+  <div id="sq64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="sq64SoruMetin" class="balon-durum"></div>
+  <div id="sq64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sq64Sonuc"></div>
+  <div id="sq64YenidenBaslat"></div>
+  <button class="eylem" onclick="sq64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="mysterybox64">
+  <h2>🎁 Mystery Box</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bazı sorularda sürpriz bonus puanlar kazanmak.</div>
+  <div class="aciklama">Bazı kutular ⭐ bonuslu sorulardır — doğru cevaplarsan çift puan kazanırsın!</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="myb64SoruNo">1</b>/<b id="myb64Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="myb64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="myb64Puan2">0</b></span></div>
+  <div id="myb64ElDegistir" style="text-align:center;"></div>
+  <div id="myb64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="myb64SoruMetin" class="balon-durum"></div>
+  <div id="myb64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="myb64Sonuc"></div>
+  <div id="myb64YenidenBaslat"></div>
+  <button class="eylem" onclick="myb64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="conceptconnect64">
+  <h2>🔗 Concept Connect</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları doğru açıklamalarıyla eşleştirmek.</div>
+  <div class="aciklama">Sırayla iki kart aç, kavram ile açıklaması eşleşirse puan kazanırsın.</div>
+  <div class="oyun-bilgi"><span>🔵 1. Oyuncu: <b id="cc64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="cc64Puan2">0</b></span></div>
+  <div id="cc64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div class="hafiza-izgara" id="cc64Izgara"></div>
+  <div class="sonuc-kutusu" id="cc64Sonuc"></div>
+  <div id="cc64YenidenBaslat"></div>
+  <button class="eylem" onclick="cc64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="escapemission64">
+  <h2>🚪 Escape Mission</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru cevaplarla kapılardan geçip görevi tamamlamak.</div>
+  <div class="aciklama">Her kapıyı geçmek için soruyu doğru cevapla.</div>
+  <div class="oyun-bilgi"><span>🚪 Kapı: <b id="esc64SoruNo">1</b>/<b id="esc64Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="esc64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="esc64Puan2">0</b></span></div>
+  <div id="esc64ElDegistir" style="text-align:center;"></div>
+  <div id="esc64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="esc64SoruMetin" class="balon-durum"></div>
+  <div id="esc64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="esc64Sonuc"></div>
+  <div id="esc64YenidenBaslat"></div>
+  <button class="eylem" onclick="esc64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="knowledgerace64">
+  <h2>🏁 Knowledge Race</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru bildikçe parkurda ilerlemek.</div>
+  <div class="aciklama">Her doğru cevap seni parkurda bir adım ileri taşır.</div>
+  <div class="oyun-bilgi"><span>🏁 Adım: <b id="kr64SoruNo">1</b>/<b id="kr64Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="kr64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="kr64Puan2">0</b></span></div>
+  <div id="kr64ElDegistir" style="text-align:center;"></div>
+  <div id="kr64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="kr64SoruMetin" class="balon-durum"></div>
+  <div id="kr64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kr64Sonuc"></div>
+  <div id="kr64YenidenBaslat"></div>
+  <button class="eylem" onclick="kr64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="logicgrid64">
+  <h2>🧩 Logic Grid</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak mantık yürütmeyi geliştirmek.</div>
+  <div class="aciklama">Verilen ipuçlarını oku ve hangi kavramın anlatıldığını bul.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="lg64SoruNo">1</b>/<b id="lg64Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="lg64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="lg64Puan2">0</b></span></div>
+  <div id="lg64ElDegistir" style="text-align:center;"></div>
+  <div id="lg64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="lg64SoruMetin" class="balon-durum"></div>
+  <div id="lg64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="lg64Sonuc"></div>
+  <div id="lg64YenidenBaslat"></div>
+  <button class="eylem" onclick="lg64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="missioncards64">
+  <h2>🃏 Mission Cards</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in gençlik yıllarıyla ilgili doğru bilgileri pekiştirmek.</div>
+  <div class="aciklama">Her görev kartı bir durum anlatır, doğru cevabı seç.</div>
+  <div class="oyun-bilgi"><span>🃏 Kart: <b id="mc64SoruNo">1</b>/<b id="mc64Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="mc64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="mc64Puan2">0</b></span></div>
+  <div id="mc64ElDegistir" style="text-align:center;"></div>
+  <div id="mc64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="mc64SoruMetin" class="balon-durum"></div>
+  <div id="mc64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="mc64Sonuc"></div>
+  <div id="mc64YenidenBaslat"></div>
+  <button class="eylem" onclick="mc64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="debatechallenge64">
+  <h2>💬 Debate Challenge</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru gerekçeyle düşünmeyi öğrenmek.</div>
+  <div class="aciklama">Verilen görüşün doğru olup olmadığına karar ver.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="dc64SoruNo">1</b>/<b id="dc64Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="dc64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="dc64Puan2">0</b></span></div>
+  <div id="dc64ElDegistir" style="text-align:center;"></div>
+  <div id="dc64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="dc64SoruMetin" class="balon-durum"></div>
+  <div id="dc64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="dc64Sonuc"></div>
+  <div id="dc64YenidenBaslat"></div>
+  <button class="eylem" onclick="dc64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="factormyth64">
+  <h2>❓ Fact or Myth</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru ve yanlış bilgileri ayırt edebilmek.</div>
+  <div class="aciklama">Ekrandaki ifadenin doğru mu yanlış mı olduğuna karar ver.</div>
+  <div class="oyun-bilgi"><span>❓ İfade: <b id="fm64SoruNo">1</b>/<b id="fm64Toplam">8</b></span><span>🔵 1. Oyuncu: <b id="fm64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="fm64Puan2">0</b></span></div>
+  <div id="fm64ElDegistir" style="text-align:center;"></div>
+  <div id="fm64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="fm64SoruMetin" class="balon-durum"></div>
+  <div id="fm64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="fm64Sonuc"></div>
+  <div id="fm64YenidenBaslat"></div>
+  <button class="eylem" onclick="fm64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="codebreaker64">
+  <h2>🔓 Code Breaker</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından kelime çözmede ustalaşmak.</div>
+  <div class="aciklama">İpuçlarını oku, gizli kelimeyi tahmin et. Az ipuçla bilirsen daha çok puan kazanırsın!</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="cb64SoruNo">1</b>/<b id="cb64Toplam">4</b></span><span>🔵 1. Oyuncu: <b id="cb64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="cb64Puan2">0</b></span></div>
+  <div id="cb64ElDegistir" style="text-align:center;"></div>
+  <div id="cb64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <p style="text-align:center;font-size:1.05em;" id="cb64Ipucu"></p>
+  <input type="text" id="cb64Girdi" placeholder="Cevabını yaz">
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;"><button class="eylem" onclick="ikiliIpucuYeni('cb64')">💡 Yeni İpucu</button><button class="eylem" onclick="ikiliIpucuGonder('cb64')">📤 Cevabı Gönder</button></div>
+  <div class="sonuc-kutusu" id="cb64Sonuc"></div>
+  <div id="cb64YenidenBaslat"></div>
+  <button class="eylem" onclick="cb64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="puzzleduel64">
+  <h2>🧩 Puzzle Duel</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Tanımlardan kavrama ulaşmada hızlanmak.</div>
+  <div class="aciklama">İpuçlarını sırayla oku, kavramı tahmin et. İlk ipucuyla bilirsen en yüksek puanı alırsın!</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="pz64SoruNo">1</b>/<b id="pz64Toplam">4</b></span><span>🔵 1. Oyuncu: <b id="pz64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="pz64Puan2">0</b></span></div>
+  <div id="pz64ElDegistir" style="text-align:center;"></div>
+  <div id="pz64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <p style="text-align:center;font-size:1.05em;" id="pz64Ipucu"></p>
+  <input type="text" id="pz64Girdi" placeholder="Cevabını yaz">
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;"><button class="eylem" onclick="ikiliIpucuYeni('pz64')">💡 Yeni İpucu</button><button class="eylem" onclick="ikiliIpucuGonder('pz64')">📤 Cevabı Gönder</button></div>
+  <div class="sonuc-kutusu" id="pz64Sonuc"></div>
+  <div id="pz64YenidenBaslat"></div>
+  <button class="eylem" onclick="pz64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="treasurehunt64">
+  <h2>🗺️ Treasure Hunt</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarını takip ederek bilgi hazinesine ulaşmak.</div>
+  <div class="aciklama">Her doğru cevap seni hazineye bir adım yaklaştırır.</div>
+  <div class="oyun-bilgi"><span>🗺️ İpucu: <b id="th64SoruNo">1</b>/<b id="th64Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="th64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="th64Puan2">0</b></span></div>
+  <div id="th64ElDegistir" style="text-align:center;"></div>
+  <div id="th64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="th64SoruMetin" class="balon-durum"></div>
+  <div id="th64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="th64Sonuc"></div>
+  <div id="th64YenidenBaslat"></div>
+  <button class="eylem" onclick="th64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="strategyboard64">
+  <h2>♟️ Strategy Board</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in peygamberlik öncesi hayatıyla ilgili bilgileri pekiştirmek.</div>
+  <div class="aciklama">Her doğru cevap seni tahtada bir kare ileri taşır.</div>
+  <div class="oyun-bilgi"><span>♟️ Kare: <b id="sb64SoruNo">1</b>/<b id="sb64Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="sb64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="sb64Puan2">0</b></span></div>
+  <div id="sb64ElDegistir" style="text-align:center;"></div>
+  <div id="sb64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="sb64SoruMetin" class="balon-durum"></div>
+  <div id="sb64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sb64Sonuc"></div>
+  <div id="sb64YenidenBaslat"></div>
+  <button class="eylem" onclick="sb64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="flashchallenge64">
+  <h2>⚡ Flash Challenge</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in hayatını anında hatırlayabilmek.</div>
+  <div class="aciklama">Sadece 5 saniyen var! Süre dolarsa soru yanlış sayılır.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="fc64SoruNo">1</b>/<b id="fc64Toplam">8</b></span><span>⏱️ Süre: <b id="fc64Sure">-</b> sn</span><span>🔵 1. Oyuncu: <b id="fc64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="fc64Puan2">0</b></span></div>
+  <div id="fc64ElDegistir" style="text-align:center;"></div>
+  <div id="fc64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="fc64SoruMetin" class="balon-durum"></div>
+  <div id="fc64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="fc64Sonuc"></div>
+  <div id="fc64YenidenBaslat"></div>
+  <button class="eylem" onclick="fc64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="survivalmode64">
+  <h2>💔 Survival Mode</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkatli ve doğru cevap vermenin önemini kavramak.</div>
+  <div class="aciklama">Her oyuncunun 3 canı var. Yanlış cevap can kaybettirir.</div>
+  <div class="oyun-bilgi"><span>🔵 1. Oyuncu: <b id="sv64Can1">❤️❤️❤️</b></span><span>🔴 2. Oyuncu: <b id="sv64Can2">❤️❤️❤️</b></span></div>
+  <div id="sv64ElDegistir" style="text-align:center;"></div>
+  <div id="sv64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="sv64SoruMetin" class="balon-durum"></div>
+  <div id="sv64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sv64Sonuc"></div>
+  <div id="sv64YenidenBaslat"></div>
+  <button class="eylem" onclick="sv64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="decisionmaker64">
+  <h2>🤔 Decision Maker</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in örnek davranışlarını günlük hayata uyarlamayı öğrenmek.</div>
+  <div class="aciklama">Verilen senaryoda en doğru davranışı seç.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="dm64SoruNo">1</b>/<b id="dm64Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="dm64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="dm64Puan2">0</b></span></div>
+  <div id="dm64ElDegistir" style="text-align:center;"></div>
+  <div id="dm64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="dm64SoruMetin" class="balon-durum"></div>
+  <div id="dm64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="dm64Sonuc"></div>
+  <div id="dm64YenidenBaslat"></div>
+  <button class="eylem" onclick="dm64Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="championarena64">
+  <h2>🏆 Champion Arena</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bu ünitede öğrendiğin her şeyi büyük bir final turnuvasında göstermek.</div>
+  <div class="aciklama">20 soruluk final turnuvası! En yüksek puanı alan şampiyon olur.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="ca64SoruNo">1</b>/<b id="ca64Toplam">20</b></span><span>🔵 1. Oyuncu: <b id="ca64Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="ca64Puan2">0</b></span></div>
+  <div id="ca64ElDegistir" style="text-align:center;"></div>
+  <div id="ca64SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="ca64SoruMetin" class="balon-durum"></div>
+  <div id="ca64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="ca64Sonuc"></div>
+  <div id="ca64YenidenBaslat"></div>
+  <button class="eylem" onclick="ca64Baslat()">🎮 Oyuna Başla</button>
+</section>
+</main>
+
+<script src="../ortak/oyun-merkezi.js"></script>
+<script>
+const LS_PUAN_ANAHTARI = 'dkabPuanDurumu6sinif';
+const OYUN_LISTESI = [
+  {id:'kelimeavi', kategori:'bulmaca', ikon:'🔎', baslik:'Kelime Avı', aciklama:'Ünitede geçen kavramları harf tablosunda bul!'},
+  {id:'cengel', kategori:'bulmaca', ikon:'🧩', baslik:'Çengel Bulmaca', aciklama:'Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir!'},
+  {id:'merdiven', kategori:'bulmaca', ikon:'🪜', baslik:'Sözcük Merdiveni', aciklama:'Merdivenin ilk basamağında bir kelime var.'},
+  {id:'sifre', kategori:'bulmaca', ikon:'🔐', baslik:'Şifreli Sözcük', aciklama:'Her harfin bir sayı karşılığı var!'},
+  {id:'sifretanim', kategori:'bulmaca', ikon:'🔐', baslik:'Şifreli Tanım', aciklama:'Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0).'},
+  {id:'kelimekodlama', kategori:'bulmaca', ikon:'💻', baslik:'Kelime Kodlama', aciklama:'Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var!'},
+  {id:'nonogram', kategori:'bulmaca', ikon:'🖼️', baslik:'Nonogram', aciklama:'Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir.'},
+  {id:'satranc', kategori:'bulmaca', ikon:'♞', baslik:'Kelime Satrancı', aciklama:'Satranç tahtasında at (♞) hamlesiyle (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!'},
+  {id:'kelimeuret', kategori:'yarisma', ikon:'⚡', baslik:'Hızlı Kelime', aciklama:'Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz!'},
+  {id:'tuzak', kategori:'yarisma', ikon:'🚫', baslik:'Tuzak Harf', aciklama:'Bir "tuzak harf" belirlenecek.'},
+  {id:'fabrika', kategori:'yarisma', ikon:'🏭', baslik:'Kelime Fabrikası', aciklama:'Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!'},
+  {id:'muhendis', kategori:'yarisma', ikon:'🛠️', baslik:'Kelime Mühendisi', aciklama:'Her kelime küçük parçalara ayrıldı.'},
+  {id:'kavramturnuvasi', kategori:'yarisma', ikon:'🏆', baslik:'Kavram Turnuvası', aciklama:'8 kavram tek eleme usulü yarışıyor!'},
+  {id:'bonus', kategori:'yarisma', ikon:'🎮', baslik:'Bonus Oyun', aciklama:'Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla!'},
+  {id:'dedektif', kategori:'mantik', ikon:'🕵️', baslik:'Kelime Dedektifi', aciklama:'Gizli kelimeyi (bir kavram) 5 denemede bul!'},
+  {id:'dildedektifi', kategori:'mantik', ikon:'🕵️‍♀️', baslik:'Dil Dedektifi', aciklama:'Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!'},
+  {id:'mantikzinciri', kategori:'mantik', ikon:'🔗', baslik:'Mantık Zinciri', aciklama:'Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!'},
+  {id:'semantiklabirent', kategori:'mantik', ikon:'🧠', baslik:'Semantik Labirent', aciklama:'Her odada bir kategori var.'},
+  {id:'celiskiavi', kategori:'mantik', ikon:'🕵️‍♂️', baslik:'Çelişki Avı', aciklama:'Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor.'},
+  {id:'labirent', kategori:'macera', ikon:'🌀', baslik:'Labirent', aciklama:'🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 🕋\'ye ulaştır!'},
+  {id:'ezsira', kategori:'ezber', ikon:'1️⃣', baslik:'Sırala Bakalım', aciklama:'Karışık sırada verilen ayetleri, Fil Suresi\'ndeki doğru sıraya göre tıklayarak diz.'},
+  {id:'ezbosluk', kategori:'ezber', ikon:'2️⃣', baslik:'Boşluk Doldur', aciklama:'Ayetteki boşluğa gelen doğru kelimeyi seç.'},
+  {id:'ezeslestir', kategori:'ezber', ikon:'3️⃣', baslik:'Anlam Eşleştir', aciklama:'Soldan bir ayet, sağdan onun anlamını seç.'},
+  {id:'ezhafiza', kategori:'ezber', ikon:'4️⃣', baslik:'Hafıza Kartları', aciklama:'İki kartı çevir.'},
+  {id:'ezadimadim', kategori:'ezber', ikon:'5️⃣', baslik:'Adım Adım Ezber', aciklama:'Şimdiye kadar öğrendiklerin aşağıda listelenir.'},
+  {id:'ezgizli', kategori:'ezber', ikon:'6️⃣', baslik:'Gizli Harfler', aciklama:'Ayetteki gizli kelimenin harfleri karıştırıldı.'},
+  {id:'ezkaybolan', kategori:'ezber', ikon:'7️⃣', baslik:'Kaybolan Kelimeler', aciklama:'Ayeti 3 saniye izle, sonra kaybolacak.'},
+  {id:'ezhiz', kategori:'ezber', ikon:'8️⃣', baslik:'Hız Testi', aciklama:'Süre dolmadan verilen anlama ait doğru ayeti seç.'},
+  {id:'quizbattle', kategori:'ikikisilik', ikon:'⚔️', baslik:'Quiz Battle', aciklama:'İki oyuncu sırayla soru cevaplar, en çok puanı toplayan kazanır.'},
+  {id:'memorymatchduel', kategori:'ikikisilik', ikon:'🧠', baslik:'Memory Match Duel', aciklama:'Kart eşleştirme düellosunda hafızanı rakibine karşı test et.'},
+  {id:'timelinechallenge', kategori:'ikikisilik', ikon:'📜', baslik:'Timeline Challenge', aciklama:'Olayları ve kavramları doğru sıraya diz.'},
+  {id:'speedquiz', kategori:'ikikisilik', ikon:'⚡', baslik:'Speed Quiz', aciklama:'Süre dolmadan hızlı cevap ver.'},
+  {id:'mysterybox', kategori:'ikikisilik', ikon:'🎁', baslik:'Mystery Box', aciklama:'Bazı sorular bonuslu, doğru cevapla çift puan kazan.'},
+  {id:'conceptconnect', kategori:'ikikisilik', ikon:'🔗', baslik:'Concept Connect', aciklama:'Kavramları doğru açıklamalarıyla eşleştir.'},
+  {id:'escapemission', kategori:'ikikisilik', ikon:'🚪', baslik:'Escape Mission', aciklama:'Doğru cevaplarla kapılardan geçip görevi tamamla.'},
+  {id:'knowledgerace', kategori:'ikikisilik', ikon:'🏁', baslik:'Knowledge Race', aciklama:'Doğru bildikçe parkurda ilerle.'},
+  {id:'logicgrid', kategori:'ikikisilik', ikon:'🧩', baslik:'Logic Grid', aciklama:'İpuçlarından yola çıkarak mantık yürüt.'},
+  {id:'missioncards', kategori:'ikikisilik', ikon:'🃏', baslik:'Mission Cards', aciklama:'Görev kartlarındaki durumlara doğru cevabı ver.'},
+  {id:'debatechallenge', kategori:'ikikisilik', ikon:'💬', baslik:'Debate Challenge', aciklama:'Verilen görüşün doğru olup olmadığına karar ver.'},
+  {id:'factormyth', kategori:'ikikisilik', ikon:'❓', baslik:'Fact or Myth', aciklama:'İfadenin doğru mu yanlış mı olduğuna karar ver.'},
+  {id:'codebreaker', kategori:'ikikisilik', ikon:'🔓', baslik:'Code Breaker', aciklama:'İpuçlarından gizli kelimeyi çöz.'},
+  {id:'puzzleduel', kategori:'ikikisilik', ikon:'🧩', baslik:'Puzzle Duel', aciklama:'Tanımlardan kavrama ulaş, ne kadar erken bilirsen o kadar çok puan kazan.'},
+  {id:'treasurehunt', kategori:'ikikisilik', ikon:'🗺️', baslik:'Treasure Hunt', aciklama:'İpuçlarını takip ederek bilgi hazinesine ulaş.'},
+  {id:'strategyboard', kategori:'ikikisilik', ikon:'♟️', baslik:'Strategy Board', aciklama:'Doğru cevaplarla tahtada ilerle.'},
+  {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece birkaç saniyen var, hızlı düşün!'},
+  {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
+  {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'}
+];
+oyunMerkeziOlustur(OYUN_LISTESI, '64', 'index.html');
+
+// =====================================================================
+// İKİ KİŞİLİK OYUNLAR — Ünite 4: Peygamberliğinden Önce Hz. Muhammed (20 oyun)
+// =====================================================================
+const QB64_SORULAR = [
+  {soru:'Hz. Muhammed (sav) nerede doğmuştur?', secenekler:['Mekke','Medine','Taif','Şam'], dogru:'Mekke'},
+  {soru:'Kur\'an-ı Kerim\'e göre yeryüzündeki ilk mabet hangisidir?', secenekler:['Kâbe','Mescid-i Aksa','Mescid-i Nebevi','Süleyman Mabedi'], dogru:'Kâbe'},
+  {soru:'Kâbe\'yi kim yapmıştır?', secenekler:['Hz. Âdem','Hz. Nuh','Hz. Musa','Hz. İsa'], dogru:'Hz. Âdem'},
+  {soru:'Kâbe\'yi Hz. Âdem\'den sonra kimler yeniden inşa etmiştir?', secenekler:['Hz. İbrahim ve Hz. İsmail','Hz. Musa ve Hz. Harun','Hz. Nuh ve oğulları','Hz. Yakub ve Hz. Yusuf'], dogru:'Hz. İbrahim ve Hz. İsmail'},
+  {soru:'Putlara tapma ve adaletsizliğin yaygın olduğu döneme ne denir?', secenekler:['Cahiliye Dönemi','Asr-ı Saadet','Hicret Dönemi','Fetret Dönemi'], dogru:'Cahiliye Dönemi'},
+  {soru:'Hz. Muhammed\'e dürüstlüğü sebebiyle verilen lakap nedir?', secenekler:['el-Emin','el-Kerim','es-Sıddık','el-Fatih'], dogru:'el-Emin'}
+];
+function qb64Baslat(){ ikiliOyunBaslat({onek:'qb64', sorular:QB64_SORULAR}); }
+
+const SQ64_SORULAR = [
+  {soru:'Hz. Muhammed\'in ilk sütannesi kimdir?', secenekler:['Süveybe','Halime','Ümmü Eymen','Fatıma'], dogru:'Süveybe'},
+  {soru:'Hz. Muhammed dört yaşına kadar kimin yanında kalmıştır?', secenekler:['Sütannesi Halime','Annesi Amine','Dedesi Abdülmuttalib','Amcası Ebu Talib'], dogru:'Sütannesi Halime'},
+  {soru:'Hz. Muhammed\'in annesi kimdir?', secenekler:['Amine','Halime','Hatice','Fatıma'], dogru:'Amine'},
+  {soru:'Hz. Muhammed\'in dedesi kimdir?', secenekler:['Abdülmuttalib','Ebu Talib','Abdullah','Zübeyr'], dogru:'Abdülmuttalib'},
+  {soru:'Hz. Muhammed\'in babası kimdir?', secenekler:['Abdullah','Abdülmuttalib','Ebu Talib','Zübeyr'], dogru:'Abdullah'},
+  {soru:'Fil suresi hangi olayı anlatır?', secenekler:['Fil Vakası','Kadir Gecesi','Hicret','Bedir Savaşı'], dogru:'Fil Vakası'}
+];
+function sq64Baslat(){ ikiliOyunBaslat({onek:'sq64', sorular:SQ64_SORULAR, sureSN:8}); }
+
+const MYB64_SORULAR = [
+  {soru:'Allah\'a duyulan saygıyı başka varlıklara da gösterenlere ne denir?', secenekler:['Müşrik','Hanif','Mümin','Muvahhid'], dogru:'Müşrik', bonus:true},
+  {soru:'Cahiliye Dönemi\'nde tevhit anlayışını benimseyenlere ne denir?', secenekler:['Hanif','Müşrik','Putperest','Kâhin'], dogru:'Hanif'},
+  {soru:'Göçebe yaşayan Mekke halkına ne denirdi?', secenekler:['Bedevi','Hadari','Kâhin','Şair'], dogru:'Bedevi', bonus:true},
+  {soru:'Yerleşik hayat yaşayan Mekke halkına ne denirdi?', secenekler:['Hadari','Bedevi','Kâhin','Şair'], dogru:'Hadari'},
+  {soru:'Kabile ne demektir?', secenekler:['Aynı atadan gelen kan bağıyla bağlı topluluk','Sadece bir aile','Bir şehir','Bir ticaret merkezi'], dogru:'Aynı atadan gelen kan bağıyla bağlı topluluk', bonus:true},
+  {soru:'Haksızlığa uğrayanlara yardım için kurulan topluluğun adı nedir?', secenekler:['Hilfülfudul','Darünnedve','Ficar','Meşveret Meclisi'], dogru:'Hilfülfudul'}
+];
+function myb64Baslat(){ ikiliOyunBaslat({onek:'myb64', sorular:MYB64_SORULAR}); }
+
+const ESC64_SORULAR = [
+  {soru:'Mekke\'de yılın belli zamanlarında kurulan pazara ne denir?', secenekler:['Panayır','Kervansaray','Çarşı','Pazar yeri'], dogru:'Panayır'},
+  {soru:'Hilfülfudul kelimesi ne anlama gelir?', secenekler:['Erdemli insanların sözleşmesi','Ticaret anlaşması','Kabile birliği','Savaş ittifakı'], dogru:'Erdemli insanların sözleşmesi'},
+  {soru:'Kâbe\'nin köşesindeki "siyah taş" anlamına gelen taşa ne denir?', secenekler:['Hacerülesved','Zemzem','Makam-ı İbrahim','Hatim'], dogru:'Hacerülesved'},
+  {soru:'Hz. Muhammed\'in annesi Amine nerede vefat etmiştir?', secenekler:['Ebva köyünde','Mekke\'de','Medine\'de','Taif\'te'], dogru:'Ebva köyünde'},
+  {soru:'Hz. Muhammed dedesi vefat edince kimin yanında yaşamaya başlamıştır?', secenekler:['Amcası Ebu Talib','Annesi Amine','Sütannesi Halime','Eşi Hatice'], dogru:'Amcası Ebu Talib'}
+];
+function esc64Baslat(){ ikiliOyunBaslat({onek:'esc64', sorular:ESC64_SORULAR}); }
+
+const KR64_SORULAR = [
+  {soru:'Hz. Hatice, Hz. Muhammed\'e hangi teklifi yapmıştır?', secenekler:['Ticaret kervanını Suriye\'ye götürmesini','Onunla evlenmesini','Mekke\'yi terk etmesini','Kâbe\'yi onarmasını'], dogru:'Ticaret kervanını Suriye\'ye götürmesini'},
+  {soru:'Hz. Muhammed\'in Hz. Hatice ile evliliğinden kaç çocuğu olmuştur?', secenekler:['Altı','Dört','Sekiz','İki'], dogru:'Altı'},
+  {soru:'"Muhammed" ismi ne anlama gelir?', secenekler:['Övgüye değer, güzellikleri toplayan kişi','Seçilmiş kişi','Allah\'ın kulu','Peygamberlerin sonuncusu'], dogru:'Övgüye değer, güzellikleri toplayan kişi'},
+  {soru:'"Mustafa" ismi ne anlama gelir?', secenekler:['Seçilmiş','Övülen','Güvenilir','Doğru sözlü'], dogru:'Seçilmiş'},
+  {soru:'Fil suresi adını nereden almıştır?', secenekler:['Ebrehe\'nin fillerle donatılmış ordusundan','Bir peygamber isminden','Bir şehir isminden','Bir hayvan kıssasından'], dogru:'Ebrehe\'nin fillerle donatılmış ordusundan'},
+  {soru:'Mekke, Arap Yarımadası\'nın hangi bölgesindedir?', secenekler:['Hicaz','Necid','Yemen','Umman'], dogru:'Hicaz'}
+];
+function kr64Baslat(){ ikiliOyunBaslat({onek:'kr64', sorular:KR64_SORULAR}); }
+
+const LG64_SORULAR = [
+  {soru:'Bu, Hz. Muhammed\'e dürüstlüğü sebebiyle verilen lakaptır.', secenekler:['el-Emin','es-Sıddık','el-Fatih','el-Kerim'], dogru:'el-Emin'},
+  {soru:'Bu, haksızlığa uğrayanlara yardım için kurulmuş topluluktur.', secenekler:['Hilfülfudul','Darünnedve','Ficar','Meşveret Meclisi'], dogru:'Hilfülfudul'},
+  {soru:'Bu, Kâbe\'nin köşesindeki kutsal siyah taştır.', secenekler:['Hacerülesved','Zemzem','Makam-ı İbrahim','Hatim'], dogru:'Hacerülesved'},
+  {soru:'Bu, aynı atadan gelen kan bağıyla bağlı büyük topluluktur.', secenekler:['Kabile','Millet','Devlet','Ümmet'], dogru:'Kabile'},
+  {soru:'Bu, putlara tapma ve adaletsizliğin yaygın olduğu dönemdir.', secenekler:['Cahiliye Dönemi','Asr-ı Saadet','Hicret Dönemi','Fetret Dönemi'], dogru:'Cahiliye Dönemi'}
+];
+function lg64Baslat(){ ikiliOyunBaslat({onek:'lg64', sorular:LG64_SORULAR}); }
+
+const MC64_SORULAR = [
+  {soru:'Hz. Muhammed, amcasının yanındayken hangi işleri yapmıştır?', secenekler:['Ticaret ve çobanlık','Sadece çiftçilik','Sadece askerlik','Sadece öğretmenlik'], dogru:'Ticaret ve çobanlık'},
+  {soru:'Hz. Muhammed Hilfülfudul\'e kaç yaşında katılmıştır?', secenekler:['Yirmili yaşlarında','Onlu yaşlarında','Otuzlu yaşlarında','Kırklı yaşlarında'], dogru:'Yirmili yaşlarında'},
+  {soru:'Hacerülesved\'i yerine yerleştirmek için hakem kim seçilmiştir?', secenekler:['Hz. Muhammed','Ebu Talib','Abdülmuttalib','Zübeyr'], dogru:'Hz. Muhammed'},
+  {soru:'Hz. Muhammed\'in ilk çocuğunun ismi nedir?', secenekler:['Kasım','Abdullah','Zeyneb','Rukiye'], dogru:'Kasım'},
+  {soru:'Hz. Muhammed\'in künyesi neden "Ebülkasım" olmuştur?', secenekler:['İlk çocuğu Kasım\'ın isminden','Babasının isminden','Dedesinin isminden','Kabilesinin isminden'], dogru:'İlk çocuğu Kasım\'ın isminden'},
+  {soru:'Hz. Muhammed\'in çocukları arasında hayattayken vefat etmeyen tek çocuğu kimdir?', secenekler:['Hz. Fatıma','Hz. Kasım','Hz. Zeyneb','Hz. Abdullah'], dogru:'Hz. Fatıma'}
+];
+function mc64Baslat(){ ikiliOyunBaslat({onek:'mc64', sorular:MC64_SORULAR}); }
+
+const DC64_SORULAR = [
+  {soru:'"Hz. Muhammed gençliğinde hiç çalışmamıştır." Doğru mudur?', secenekler:['Yanlış, ticaret ve çobanlık yapmıştır','Doğru','Kısmen doğru','Bilinmiyor'], dogru:'Yanlış, ticaret ve çobanlık yapmıştır'},
+  {soru:'"Hilfülfudul bir savaş ittifakıdır." Doğru mudur?', secenekler:['Yanlış, erdemliler sözleşmesidir','Doğru','Ticaret anlaşmasıdır','Bilinmiyor'], dogru:'Yanlış, erdemliler sözleşmesidir'},
+  {soru:'"Kâbe\'yi ilk kez Hz. İbrahim inşa etmiştir." Doğru mudur?', secenekler:['Yanlış, Hz. Âdem yapmış, Hz. İbrahim yeniden inşa etmiştir','Doğru','Hz. Nuh yapmıştır','Bilinmiyor'], dogru:'Yanlış, Hz. Âdem yapmış, Hz. İbrahim yeniden inşa etmiştir'},
+  {soru:'"el-Emin lakabı Hz. Muhammed\'e peygamberlikten sonra verilmiştir." Doğru mudur?', secenekler:['Yanlış, peygamberlikten önce verilmiştir','Doğru','Fark etmez','Bilinmiyor'], dogru:'Yanlış, peygamberlikten önce verilmiştir'},
+  {soru:'"Fil Vakası Hz. Muhammed\'in doğumundan sonra gerçekleşmiştir." Doğru mudur?', secenekler:['Yanlış, doğumundan önce gerçekleşmiştir','Doğru','Aynı gün olmuştur','Bilinmiyor'], dogru:'Yanlış, doğumundan önce gerçekleşmiştir'}
+];
+function dc64Baslat(){ ikiliOyunBaslat({onek:'dc64', sorular:DC64_SORULAR}); }
+
+const FM64_SORULAR = [
+  {soru:'Hz. Muhammed Mekke\'de doğmuştur.', secenekler:['Doğru','Yanlış'], dogru:'Doğru'},
+  {soru:'Kâbe, Hz. Âdem tarafından yapılmıştır.', secenekler:['Doğru','Yanlış'], dogru:'Doğru'},
+  {soru:'Hz. Muhammed\'in annesi Hatice\'dir.', secenekler:['Doğru','Yanlış'], dogru:'Yanlış'},
+  {soru:'Hz. Muhammed\'in dedesi Abdülmuttalib\'dir.', secenekler:['Doğru','Yanlış'], dogru:'Doğru'},
+  {soru:'Hz. Muhammed\'e "el-Emin" lakabı verilmiştir.', secenekler:['Doğru','Yanlış'], dogru:'Doğru'},
+  {soru:'Fil Vakası, Hz. Muhammed\'in doğumundan sonra olmuştur.', secenekler:['Doğru','Yanlış'], dogru:'Yanlış'},
+  {soru:'Hz. Muhammed, Hz. Hatice ile evlenmeden önce onun ticaret kervanını yönetmiştir.', secenekler:['Doğru','Yanlış'], dogru:'Doğru'},
+  {soru:'Hilfülfudul bir ticaret şirketidir.', secenekler:['Doğru','Yanlış'], dogru:'Yanlış'}
+];
+function fm64Baslat(){ ikiliOyunBaslat({onek:'fm64', sorular:FM64_SORULAR}); }
+
+const TH64_SORULAR = [
+  {soru:'Hz. Muhammed hangi tarihte Mekke\'de dünyaya gelmiştir?', secenekler:['Miladi 571','Miladi 610','Miladi 622','Miladi 632'], dogru:'Miladi 571'},
+  {soru:'Hz. Muhammed altı yaşındayken annesiyle nereye gitmiştir?', secenekler:['Medine\'ye','Şam\'a','Taif\'e','Yemen\'e'], dogru:'Medine\'ye'},
+  {soru:'Hz. Muhammed\'in babası Abdullah nerede vefat etmiştir?', secenekler:['Medine\'de','Mekke\'de','Şam\'da','Taif\'te'], dogru:'Medine\'de'},
+  {soru:'Yemenli tüccarın malına el konması hangi topluluğun kurulmasına sebep olmuştur?', secenekler:['Hilfülfudul','Darünnedve','Meşveret Meclisi','Ficar Savaşı'], dogru:'Hilfülfudul'},
+  {soru:'Hz. Muhammed\'in yengesi Fatıma için kullandığı ifade nedir?', secenekler:['Annemden sonra annem','Kız kardeşim','En yakın dostum','Hayatımın ışığı'], dogru:'Annemden sonra annem'}
+];
+function th64Baslat(){ ikiliOyunBaslat({onek:'th64', sorular:TH64_SORULAR}); }
+
+const SB64_SORULAR = [
+  {soru:'Hz. Muhammed nerede doğmuştur?', secenekler:['Mekke','Medine','Taif','Şam'], dogru:'Mekke'},
+  {soru:'Yeryüzündeki ilk mabet hangisidir?', secenekler:['Kâbe','Mescid-i Aksa','Mescid-i Nebevi','Süleyman Mabedi'], dogru:'Kâbe'},
+  {soru:'Hz. Muhammed\'in babası kimdir?', secenekler:['Abdullah','Abdülmuttalib','Ebu Talib','Zübeyr'], dogru:'Abdullah'},
+  {soru:'Hz. Muhammed\'in eşi kimdir?', secenekler:['Hz. Hatice','Hz. Amine','Hz. Halime','Hz. Fatıma'], dogru:'Hz. Hatice'},
+  {soru:'"Muhammed" adı ne anlama gelir?', secenekler:['Övgüye değer kişi','Seçilmiş','Güvenilir','Doğru sözlü'], dogru:'Övgüye değer kişi'},
+  {soru:'Fil suresi hangi olayı anlatır?', secenekler:['Fil Vakası','Kadir Gecesi','Hicret','Bedir Savaşı'], dogru:'Fil Vakası'}
+];
+function sb64Baslat(){ ikiliOyunBaslat({onek:'sb64', sorular:SB64_SORULAR}); }
+
+const FC64_SORULAR = [
+  {soru:'Hz. Muhammed nerede doğdu?', secenekler:['Mekke','Medine','Taif','Şam'], dogru:'Mekke'},
+  {soru:'İlk mabet neresidir?', secenekler:['Kâbe','Mescid-i Aksa','Mescid-i Nebevi','Süleyman Mabedi'], dogru:'Kâbe'},
+  {soru:'Hz. Muhammed\'in babası?', secenekler:['Abdullah','Abdülmuttalib','Ebu Talib','Zübeyr'], dogru:'Abdullah'},
+  {soru:'Hz. Muhammed\'in annesi?', secenekler:['Amine','Halime','Hatice','Fatıma'], dogru:'Amine'},
+  {soru:'Hz. Muhammed\'in dedesi?', secenekler:['Abdülmuttalib','Ebu Talib','Abdullah','Zübeyr'], dogru:'Abdülmuttalib'},
+  {soru:'Dürüstlük lakabı?', secenekler:['el-Emin','es-Sıddık','el-Fatih','el-Kerim'], dogru:'el-Emin'},
+  {soru:'Hz. Muhammed\'in eşi?', secenekler:['Hatice','Amine','Halime','Fatıma'], dogru:'Hatice'},
+  {soru:'Fil suresi neyi anlatır?', secenekler:['Fil Vakası','Hicret','Bedir Savaşı','Kadir Gecesi'], dogru:'Fil Vakası'}
+];
+function fc64Baslat(){ ikiliOyunBaslat({onek:'fc64', sorular:FC64_SORULAR, sureSN:5}); }
+
+const DM64_SORULAR = [
+  {soru:'Bir arkadaşın senden bir emanet almak istiyor. Hz. Muhammed\'in "el-Emin" özelliğinden ne öğrenebilirsin?', secenekler:['Emanete her zaman özen göstermeliyim','Emanetleri önemsememeliyim','Kabul etmemeliyim','Fark etmez'], dogru:'Emanete her zaman özen göstermeliyim'},
+  {soru:'Haksızlığa uğrayan birini görüyorsun. Hilfülfudul\'den ne öğrenebilirsin?', secenekler:['Haksızlığa uğrayana yardım etmeliyim','Karışmamalıyım','Umursamamalıyım','Kaçmalıyım'], dogru:'Haksızlığa uğrayana yardım etmeliyim'},
+  {soru:'Ticarette dürüst olmanın önemini nereden öğrenebilirsin?', secenekler:['Hz. Muhammed\'in ticaret hayatından','Önemli değildir','Herkes yalan söyler','Fark etmez'], dogru:'Hz. Muhammed\'in ticaret hayatından'},
+  {soru:'Ailene karşı nasıl davranmalısın?', secenekler:['Hz. Muhammed gibi saygılı ve şefkatli olmalıyım','Umursamamalıyım','Kaba davranmalıyım','Fark etmez'], dogru:'Hz. Muhammed gibi saygılı ve şefkatli olmalıyım'},
+  {soru:'Zor bir kararda taraflar arasında hakemlik yapman gerekiyor. Ne yapmalısın?', secenekler:['Adaletli ve tarafsız davranmalıyım','Bir tarafı tutmalıyım','Karışmamalıyım','Kaçmalıyım'], dogru:'Adaletli ve tarafsız davranmalıyım'}
+];
+function dm64Baslat(){ ikiliOyunBaslat({onek:'dm64', sorular:DM64_SORULAR}); }
+
+const CA64_SORULAR = [
+  {soru:'Hz. Muhammed (sav) nerede doğmuştur?', secenekler:['Mekke','Medine','Taif','Şam'], dogru:'Mekke'},
+  {soru:'Kur\'an-ı Kerim\'e göre yeryüzündeki ilk mabet hangisidir?', secenekler:['Kâbe','Mescid-i Aksa','Mescid-i Nebevi','Süleyman Mabedi'], dogru:'Kâbe'},
+  {soru:'Kâbe\'yi kim yapmıştır?', secenekler:['Hz. Âdem','Hz. Nuh','Hz. Musa','Hz. İsa'], dogru:'Hz. Âdem'},
+  {soru:'Putlara tapma ve adaletsizliğin yaygın olduğu döneme ne denir?', secenekler:['Cahiliye Dönemi','Asr-ı Saadet','Hicret Dönemi','Fetret Dönemi'], dogru:'Cahiliye Dönemi'},
+  {soru:'Hz. Muhammed\'e dürüstlüğü sebebiyle verilen lakap nedir?', secenekler:['el-Emin','el-Kerim','es-Sıddık','el-Fatih'], dogru:'el-Emin'},
+  {soru:'Hz. Muhammed\'in ilk sütannesi kimdir?', secenekler:['Süveybe','Halime','Ümmü Eymen','Fatıma'], dogru:'Süveybe'},
+  {soru:'Hz. Muhammed dört yaşına kadar kimin yanında kalmıştır?', secenekler:['Sütannesi Halime','Annesi Amine','Dedesi Abdülmuttalib','Amcası Ebu Talib'], dogru:'Sütannesi Halime'},
+  {soru:'Hz. Muhammed\'in annesi kimdir?', secenekler:['Amine','Halime','Hatice','Fatıma'], dogru:'Amine'},
+  {soru:'Hz. Muhammed\'in dedesi kimdir?', secenekler:['Abdülmuttalib','Ebu Talib','Abdullah','Zübeyr'], dogru:'Abdülmuttalib'},
+  {soru:'Hz. Muhammed\'in babası kimdir?', secenekler:['Abdullah','Abdülmuttalib','Ebu Talib','Zübeyr'], dogru:'Abdullah'},
+  {soru:'Fil suresi hangi olayı anlatır?', secenekler:['Fil Vakası','Kadir Gecesi','Hicret','Bedir Savaşı'], dogru:'Fil Vakası'},
+  {soru:'Haksızlığa uğrayanlara yardım için kurulan topluluğun adı nedir?', secenekler:['Hilfülfudul','Darünnedve','Ficar','Meşveret Meclisi'], dogru:'Hilfülfudul'},
+  {soru:'Kâbe\'nin köşesindeki "siyah taş" anlamına gelen taşa ne denir?', secenekler:['Hacerülesved','Zemzem','Makam-ı İbrahim','Hatim'], dogru:'Hacerülesved'},
+  {soru:'Hz. Hatice, Hz. Muhammed\'e hangi teklifi yapmıştır?', secenekler:['Ticaret kervanını Suriye\'ye götürmesini','Onunla evlenmesini','Mekke\'yi terk etmesini','Kâbe\'yi onarmasını'], dogru:'Ticaret kervanını Suriye\'ye götürmesini'},
+  {soru:'Hz. Muhammed\'in Hz. Hatice ile evliliğinden kaç çocuğu olmuştur?', secenekler:['Altı','Dört','Sekiz','İki'], dogru:'Altı'},
+  {soru:'"Muhammed" ismi ne anlama gelir?', secenekler:['Övgüye değer, güzellikleri toplayan kişi','Seçilmiş kişi','Allah\'ın kulu','Peygamberlerin sonuncusu'], dogru:'Övgüye değer, güzellikleri toplayan kişi'},
+  {soru:'"Mustafa" ismi ne anlama gelir?', secenekler:['Seçilmiş','Övülen','Güvenilir','Doğru sözlü'], dogru:'Seçilmiş'},
+  {soru:'Hz. Muhammed\'in ilk çocuğunun ismi nedir?', secenekler:['Kasım','Abdullah','Zeyneb','Rukiye'], dogru:'Kasım'},
+  {soru:'Hz. Muhammed Hilfülfudul\'e kaç yaşında katılmıştır?', secenekler:['Yirmili yaşlarında','Onlu yaşlarında','Otuzlu yaşlarında','Kırklı yaşlarında'], dogru:'Yirmili yaşlarında'},
+  {soru:'Hacerülesved\'i yerine yerleştirmek için hakem kim seçilmiştir?', secenekler:['Hz. Muhammed','Ebu Talib','Abdülmuttalib','Zübeyr'], dogru:'Hz. Muhammed'}
+];
+function ca64Baslat(){ ikiliOyunBaslat({onek:'ca64', sorular:CA64_SORULAR}); }
+
+const MM64_CIFTLER = [
+  {metin1:'el-Emin', metin2:'Güvenilir kişi'},
+  {metin1:'Hilfülfudul', metin2:'Erdemliler sözleşmesi'},
+  {metin1:'Hacerülesved', metin2:'Kâbe\'deki kutsal siyah taş'},
+  {metin1:'Kabile', metin2:'Kan bağıyla bağlı topluluk'},
+  {metin1:'Bedevi', metin2:'Göçebe yaşayan kişi'},
+  {metin1:'Hadari', metin2:'Yerleşik yaşayan kişi'}
+];
+function mm64Baslat(){ ikiliHafizaBaslat({onek:'mm64', ciftler:MM64_CIFTLER}); }
+
+const CC64_CIFTLER = [
+  {metin1:'Amine', metin2:'Hz. Muhammed\'in annesi'},
+  {metin1:'Abdullah', metin2:'Hz. Muhammed\'in babası'},
+  {metin1:'Abdülmuttalib', metin2:'Hz. Muhammed\'in dedesi'},
+  {metin1:'Halime', metin2:'Hz. Muhammed\'in sütannesi'},
+  {metin1:'Hatice', metin2:'Hz. Muhammed\'in eşi'},
+  {metin1:'Ebu Talib', metin2:'Hz. Muhammed\'in amcası'}
+];
+function cc64Baslat(){ ikiliHafizaBaslat({onek:'cc64', ciftler:CC64_CIFTLER}); }
+
+const TL64_TURLAR = [
+  {baslik:'Hz. Muhammed\'in çocukluğunu sırala', ogeler:['Mekke\'de doğması','Sütannesi Halime\'nin yanına verilmesi','Annesi Amine\'nin vefatı','Dedesi Abdülmuttalib\'in yanında kalması','Amcası Ebu Talib\'in yanına geçmesi']},
+  {baslik:'Hz. Muhammed\'in gençliğini sırala', ogeler:['Amcasıyla ticarete başlaması','Hilfülfudul\'e katılması','Hz. Hatice\'nin kervanını yönetmesi','Hz. Hatice ile evlenmesi']},
+  {baslik:'Fil Vakası\'nı sırala', ogeler:['Ebrehe\'nin Kâbe\'yi yıkmak istemesi','Abdülmuttalib\'in Ebrehe\'yle görüşmesi','Filin yerinden kımıldamaması','Kuşların taş atarak orduyu dağıtması']}
+];
+function tl64Baslat(){ ikiliSiralaBaslat({onek:'tl64', turlar:TL64_TURLAR}); }
+
+const CB64_SORULAR = [
+  {cevap:'Hacerülesved', ipuclari:['Kâbe\'nin köşesindedir','Siyah bir taştır','Kutsal kabul edilir','Hz. Muhammed hakemlik etmiştir']},
+  {cevap:'Hilfülfudul', ipuclari:['Bir topluluktur','Erdemli insanlardan oluşur','Haksızlığa uğrayanlara yardım eder','Hz. Muhammed de katılmıştır']},
+  {cevap:'Ebrehe', ipuclari:['Yemen valisidir','Kâbe\'yi yıkmak istemiştir','Fillerle ordu kurmuştur','Fil suresinde anlatılır']},
+  {cevap:'Hatice', ipuclari:['Bir tüccardır','Hz. Muhammed\'in eşidir','Ona ticaret teklifi yapmıştır','Mekke\'nin saygın kadınlarındandır']}
+];
+function cb64Baslat(){ ikiliIpucuBaslat({onek:'cb64', sorular:CB64_SORULAR}); }
+
+const PZ64_SORULAR = [
+  {cevap:'el-Emin', ipuclari:['Bir lakaptır','Dürüstlükle ilgilidir','Mekke halkı vermiştir','Peygamberlikten önce kazanılmıştır']},
+  {cevap:'Kâbe', ipuclari:['Bir mabettir','Mekke\'dedir','Hz. İbrahim yeniden inşa etmiştir','Yeryüzündeki ilk mabettir']},
+  {cevap:'Cahiliye', ipuclari:['Bir dönemdir','İslam öncesine aittir','Putperestlik yaygındır','Adaletsizlikle bilinir']},
+  {cevap:'Kasım', ipuclari:['Bir çocuk ismidir','Hz. Muhammed\'in ilk çocuğudur','Künyeye kaynaklık etmiştir','Küçük yaşta vefat etmiştir']}
+];
+function pz64Baslat(){ ikiliIpucuBaslat({onek:'pz64', sorular:PZ64_SORULAR}); }
+
+const SV64_SORULAR = [
+  {soru:'Hz. Muhammed nerede doğmuştur?', secenekler:['Mekke','Medine','Taif','Şam'], dogru:'Mekke'},
+  {soru:'Yeryüzündeki ilk mabet hangisidir?', secenekler:['Kâbe','Mescid-i Aksa','Mescid-i Nebevi','Süleyman Mabedi'], dogru:'Kâbe'},
+  {soru:'Hz. Muhammed\'in babası kimdir?', secenekler:['Abdullah','Abdülmuttalib','Ebu Talib','Zübeyr'], dogru:'Abdullah'},
+  {soru:'Hz. Muhammed\'in eşi kimdir?', secenekler:['Hz. Hatice','Hz. Amine','Hz. Halime','Hz. Fatıma'], dogru:'Hz. Hatice'},
+  {soru:'Dürüstlük lakabı nedir?', secenekler:['el-Emin','es-Sıddık','el-Fatih','el-Kerim'], dogru:'el-Emin'},
+  {soru:'Fil suresi hangi olayı anlatır?', secenekler:['Fil Vakası','Kadir Gecesi','Hicret','Bedir Savaşı'], dogru:'Fil Vakası'}
+];
+function sv64Baslat(){ ikiliHayattaBaslat({onek:'sv64', sorular:SV64_SORULAR, can:3}); }
+
+
+// =====================================================================
+// KONU TEKRARI TESTİ (50 Soru)
+// =====================================================================
+const konuTekrariSorulari64 = [
+  {zorluk:"kolay", soru:"Hz. Muhammed (sav) nerede doğmuştur?", secenekler:["Medine","Mekke","Taif","Şam"], dogru:1, aciklama:"Hz. Peygamber Mekke'de doğmuştur."},
+  {zorluk:"kolay", soru:"Mekke, Arap Yarımadası'nın hangi bölgesinde bulunur?", secenekler:["Necid","Hicaz","Yemen","Umman"], dogru:1, aciklama:"Mekke, Hicaz bölgesinde bulunur."},
+  {zorluk:"kolay", soru:"Kur'an-ı Kerim'e göre yeryüzündeki ilk mabet hangisidir?", secenekler:["Mescid-i Aksa","Kâbe","Mescid-i Nebevi","Süleyman Mabedi"], dogru:1, aciklama:"Kur'an'a göre yeryüzündeki ilk mabet Kâbe'dir."},
+  {zorluk:"kolay", soru:"Kâbe'yi kim yapmıştır?", secenekler:["Hz. Âdem","Hz. Nuh","Hz. Musa","Hz. İsa"], dogru:0, aciklama:"Kâbe'nin Hz. Âdem tarafından yapıldığı rivayet edilir."},
+  {zorluk:"kolay", soru:"Kâbe'yi Hz. Âdem'den sonra kimler yeniden inşa etmiştir?", secenekler:["Hz. İbrahim ve Hz. İsmail","Hz. Musa ve Hz. Harun","Hz. Nuh ve oğulları","Hz. Yakub ve Hz. Yusuf"], dogru:0, aciklama:"Kâbe, aynı temeller üzerine Hz. İbrahim ile oğlu Hz. İsmail tarafından yeniden inşa edilmiştir."},
+  {zorluk:"kolay", soru:"Putlara tapma, adaletsizlik, kibir gibi davranışların yaygın olduğu döneme ne denir?", secenekler:["Cahiliye Dönemi","Asr-ı Saadet","Hicret Dönemi","Fetret Dönemi"], dogru:0, aciklama:"Bu döneme Cahiliye Dönemi denir."},
+  {zorluk:"kolay", soru:"Allah'a duyulan saygı ve sevgiyi başka varlıklara da gösterenlere ne denir?", secenekler:["Müşrik","Hanif","Mümin","Muvahhid"], dogru:0, aciklama:"Bu kimselere müşrik denir."},
+  {zorluk:"kolay", soru:"Cahiliye Dönemi'nde tevhit anlayışını benimseyen kimselere ne denir?", secenekler:["Müşrik","Hanif","Putperest","Kâhin"], dogru:1, aciklama:"Bu kimselere hanif denir."},
+  {zorluk:"kolay", soru:"Göçebe yaşayan Mekke halkına ne denirdi?", secenekler:["Hadari","Bedevi","Kâhin","Şair"], dogru:1, aciklama:"Göçebe yaşayanlara bedevi denirdi."},
+  {zorluk:"kolay", soru:"Yerleşik hayat yaşayan Mekke halkına ne denirdi?", secenekler:["Bedevi","Hadari","Kâhin","Şair"], dogru:1, aciklama:"Yerleşik yaşayanlara hadari denirdi."},
+  {zorluk:"kolay", soru:"Hz. Muhammed'e dürüstlüğü ve güvenilirliği sebebiyle verilen lakap nedir?", secenekler:["el-Emin","el-Kerim","es-Sıddık","el-Fatih"], dogru:0, aciklama:"Mekke halkı ona el-Emin lakabını vermiştir."},
+  {zorluk:"kolay", soru:"Hz. Muhammed'in ilk sütannesi kimdir?", secenekler:["Halime","Süveybe","Ümmü Eymen","Fatıma"], dogru:1, aciklama:"Hz. Muhammed'in ilk sütannesi Süveybe'dir."},
+  {zorluk:"kolay", soru:"Hz. Muhammed dört yaşına kadar kimin yanında kalmıştır?", secenekler:["Annesi Amine","Sütannesi Halime","Dedesi Abdülmuttalib","Amcası Ebu Talib"], dogru:1, aciklama:"Hz. Muhammed dört yaşına kadar sütannesi Halime'nin yanında kalmıştır."},
+  {zorluk:"kolay", soru:"Hz. Muhammed'in annesi kimdir?", secenekler:["Amine","Halime","Hatice","Fatıma"], dogru:0, aciklama:"Hz. Muhammed'in annesi Amine'dir."},
+  {zorluk:"kolay", soru:"Hz. Muhammed'in dedesi kimdir?", secenekler:["Ebu Talib","Abdülmuttalib","Abdullah","Zübeyr"], dogru:1, aciklama:"Hz. Muhammed'in dedesi Abdülmuttalib'dir."},
+  {zorluk:"kolay", soru:"Hz. Muhammed'in babası kimdir?", secenekler:["Abdülmuttalib","Abdullah","Ebu Talib","Zübeyr"], dogru:1, aciklama:"Hz. Muhammed'in babası Abdullah'tır."},
+  {zorluk:"kolay", soru:"Fil suresi hangi olayı anlatır?", secenekler:["Fil Vakası","Kadir Gecesi","Hicret","Bedir Savaşı"], dogru:0, aciklama:"Fil suresi, Fil Vakası'nı anlatır."},
+
+  {zorluk:"orta", soru:"Kabile ne demektir?", secenekler:["Aynı atadan gelen ve kan bağıyla bağlı büyük insan topluluğu","Sadece bir aile","Bir şehir","Bir ticaret merkezi"], dogru:0, aciklama:"Kabile, aynı atadan gelen ve birbirine kan bağıyla bağlı büyük insan topluluğudur."},
+  {zorluk:"orta", soru:"Mekke'de kabileleri kim yönetirdi?", secenekler:["Kabile reisi","Kral","Vali","Halife"], dogru:0, aciklama:"Her kabile ayrı bir reis tarafından yönetilirdi."},
+  {zorluk:"orta", soru:"Mekke'de yılın belli zamanlarında kurulan, sosyal ve ticari etkinliklerin yapıldığı pazara ne denir?", secenekler:["Panayır","Kervansaray","Çarşı","Pazar yeri"], dogru:0, aciklama:"Bu pazarlara panayır denir."},
+  {zorluk:"orta", soru:"Haksızlığa uğrayanlara yardım etmek için Mekke'de kurulan topluluğun adı nedir?", secenekler:["Hilfülfudul","Darünnedve","Ficar","Meşveret Meclisi"], dogru:0, aciklama:"Bu topluluğun adı Hilfülfudul'dür."},
+  {zorluk:"orta", soru:"Hilfülfudul kelimesi ne anlama gelir?", secenekler:["Erdemli ve faziletli insanların sözleşmesi","Ticaret anlaşması","Kabile birliği","Savaş ittifakı"], dogru:0, aciklama:"Hilfülfudul, erdemli ve faziletli insanların sözleşmesi anlamına gelir."},
+  {zorluk:"orta", soru:"Hz. Muhammed Hilfülfudul'e kaç yaşında katılmıştır?", secenekler:["Onlu yaşlarında","Yirmili yaşlarında","Otuzlu yaşlarında","Kırklı yaşlarında"], dogru:1, aciklama:"Hz. Muhammed Hilfülfudul'e yirmili yaşlarında amcalarıyla katılmıştır."},
+  {zorluk:"orta", soru:"Kâbe'nin güneydoğu köşesine yerleştirilen, \"siyah taş\" anlamına gelen taşa ne denir?", secenekler:["Hacerülesved","Zemzem","Makam-ı İbrahim","Hatim"], dogru:0, aciklama:"Bu taşa Hacerülesved denir."},
+  {zorluk:"orta", soru:"Hacerülesved'i yerine yerleştirmek için hakem kim seçilmiştir?", secenekler:["Ebu Talib","Hz. Muhammed","Abdülmuttalib","Zübeyr"], dogru:1, aciklama:"Kabileler arasındaki anlaşmazlığı çözmek için Hz. Muhammed hakem seçilmiştir."},
+  {zorluk:"orta", soru:"Hz. Muhammed'in annesi Amine nerede vefat etmiştir?", secenekler:["Mekke'de","Ebva köyünde","Medine'de","Taif'te"], dogru:1, aciklama:"Amine, Mekke'ye dönüş yolunda Ebva köyünde vefat etmiştir."},
+  {zorluk:"orta", soru:"Hz. Muhammed dedesi vefat edince kimin yanında yaşamaya başlamıştır?", secenekler:["Amcası Ebu Talib","Annesi Amine","Sütannesi Halime","Eşi Hatice"], dogru:0, aciklama:"Dedesi vefat edince amcası Ebu Talib'in yanında yaşamaya başlamıştır."},
+  {zorluk:"orta", soru:"Hz. Muhammed, amcasının yanındayken hangi işleri yapmıştır?", secenekler:["Ticaret ve çobanlık","Sadece çiftçilik","Sadece askerlik","Sadece öğretmenlik"], dogru:0, aciklama:"Amcasına yardımcı olmak için ticaret öğrenmiş ve çobanlık yapmıştır."},
+  {zorluk:"orta", soru:"Hz. Hatice, Hz. Muhammed'e hangi teklifi yapmıştır?", secenekler:["Ticaret kervanını Suriye'ye götürmesini","Onunla evlenmesini","Mekke'yi terk etmesini","Kâbe'yi onarmasını"], dogru:0, aciklama:"Hz. Hatice, ona ticaret kervanını Suriye'ye götürmesini teklif etmiştir."},
+  {zorluk:"orta", soru:"Hz. Muhammed'in Hz. Hatice ile evliliğinden kaç çocuğu olmuştur?", secenekler:["Dört","Altı","Sekiz","İki"], dogru:1, aciklama:"Bu evlilikten dört kız ve iki erkek olmak üzere altı çocuğu olmuştur."},
+  {zorluk:"orta", soru:"Hz. Muhammed'in çocukları arasında Hz. Peygamber hayattayken vefat etmeyen tek çocuğu kimdir?", secenekler:["Hz. Fatıma","Hz. Kasım","Hz. Zeyneb","Hz. Abdullah"], dogru:0, aciklama:"Hz. Fatıma hariç diğer bütün çocukları Hz. Peygamber hayattayken vefat etmiştir."},
+  {zorluk:"orta", soru:"\"Muhammed\" ismi ne anlama gelir?", secenekler:["Övgüye değer, bütün güzellikleri kendinde toplayan kişi","Seçilmiş kişi","Allah'ın kulu","Peygamberlerin sonuncusu"], dogru:0, aciklama:"Muhammed, övgüye değer, bütün güzellikleri ve iyilikleri kendinde toplayan kişi anlamına gelir."},
+  {zorluk:"orta", soru:"\"Mustafa\" ismi ne anlama gelir?", secenekler:["Seçilmiş","Övülen","Güvenilir","Doğru sözlü"], dogru:0, aciklama:"Mustafa, seçilmiş anlamına gelir."},
+  {zorluk:"orta", soru:"Fil suresi adını nereden almıştır?", secenekler:["Ebrehe'nin fillerle donatılmış ordusundan","Bir peygamber isminden","Bir şehir isminden","Bir hayvan kıssasından"], dogru:0, aciklama:"Fil suresi, Ebrehe'nin fillerle donatılmış ordusundan adını almıştır."},
+
+  {zorluk:"zor", soru:"Hz. Muhammed'in babası Abdullah nerede vefat etmiştir?", secenekler:["Mekke'de","Medine'de","Şam'da","Taif'te"], dogru:1, aciklama:"Abdullah, ticaret dönüşü hastalanarak Medine'de vefat etmiş ve oraya defnedilmiştir."},
+  {zorluk:"zor", soru:"Hz. Muhammed hangi tarihte Mekke'de dünyaya gelmiştir?", secenekler:["Miladi 571","Miladi 610","Miladi 622","Miladi 632"], dogru:0, aciklama:"Hz. Muhammed, miladi takvime göre 20 Nisan 571'de Mekke'de dünyaya gelmiştir."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in doğduğu gün hicri takvime göre hangi aydır?", secenekler:["Rebiyülevvel","Ramazan","Muharrem","Şevval"], dogru:0, aciklama:"Hz. Peygamber, hicri takvime göre Rebiyülevvel ayının on ikinci gününde doğmuştur."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in annesi Amine, onu kimin torunu olduğunu müjdelemiştir?", secenekler:["Abdülmuttalib'e","Ebu Talib'e","Vehb'e","Zübeyr'e"], dogru:0, aciklama:"Annesi Amine, Abdülmuttalib'e torununun dünyaya geldiğini müjdelemiştir."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in babası Haşimoğulları, annesi ise hangi koldandır?", secenekler:["Zühreoğulları","Emevioğulları","Abbasoğulları","Ümeyyeoğulları"], dogru:0, aciklama:"Annesi Kureyş kabilesinin Zühreoğulları kolundandır."},
+  {zorluk:"zor", soru:"Hz. Muhammed altı yaşındayken annesiyle nereye gitmiştir?", secenekler:["Medine'ye","Şam'a","Taif'e","Yemen'e"], dogru:0, aciklama:"Hz. Muhammed altı yaşındayken annesiyle Medine'ye gitmiştir."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in dedesi Abdülmuttalib, torununu kime emanet ederek vefat etmiştir?", secenekler:["Ebu Talib'e","Zübeyr'e","Hz. Hamza'ya","Hz. Abbas'a"], dogru:0, aciklama:"Abdülmuttalib, vefat etmeden önce torununu oğlu Ebu Talib'e emanet etmiştir."},
+  {zorluk:"zor", soru:"Yemenli tüccarın malına el konması hangi topluluğun kurulmasına sebep olmuştur?", secenekler:["Hilfülfudul","Darünnedve","Meşveret Meclisi","Ficar Savaşı"], dogru:0, aciklama:"Bu olay üzerine Hilfülfudul kurulmuştur."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in yengesi Fatıma için kullandığı ifade nedir?", secenekler:["Annemden sonra annem","Kız kardeşim","En yakın dostum","Hayatımın ışığı"], dogru:0, aciklama:"Hz. Muhammed, yengesi Fatıma'yı \"Annemden sonra annem.\" diyerek hayırla anmıştır."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in Hz. Hatice ile evliliğinden olan ilk çocuğunun ismi nedir?", secenekler:["Kasım","Abdullah","Zeyneb","Rukiye"], dogru:0, aciklama:"İlk çocuklarının ismi Kasım'dı."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in künyesi neden \"Ebülkasım\" olmuştur?", secenekler:["İlk çocuğu Kasım'ın ismini almasından","Babasının isminden","Dedesinin isminden","Kabilesinin isminden"], dogru:0, aciklama:"O dönemde babalar ilk çocuğun ismiyle künye aldığından, Hz. Peygamber'in künyesi Ebülkasım olmuştur."},
+  {zorluk:"zor", soru:"Yemen Valisi Ebrehe, Sana şehrinde neden gösterişli bir kilise inşa etmiştir?", secenekler:["Mekke'nin ticari faaliyetlerine engel olmak ve Sana'yı merkez yapmak için","Sadece ibadet etmek için","Sadece güzel görünmesi için","Hiçbir sebep yok"], dogru:0, aciklama:"Ebrehe, Mekke'nin gelişen ticari faaliyetlerine engel olmak ve Sana'yı dinî ve ticari merkez yapmak istiyordu."},
+  {zorluk:"zor", soru:"Ebrehe'nin askerleri Mekke'ye yürürken filler ne yapmıştır?", secenekler:["Yerinden kımıldamamıştır","Hızla ilerlemiştir","Kaçmıştır","Savaşmıştır"], dogru:0, aciklama:"Filler Mekke'ye doğru hareket ettirilmek istendiğinde yerinden kımıldamamıştır."},
+  {zorluk:"zor", soru:"Ebrehe'nin ordusunu bozguna uğratan kuşlar neyle taş atmıştır?", secenekler:["Balçıktan pişirilmiş taşlarla","Sıradan taşlarla","Ateşle","Okla"], dogru:0, aciklama:"Kuşlar, balçıktan pişirilmiş taşlar atarak orduyu darmadağın etmiştir."},
+  {zorluk:"zor", soru:"Fil Vakası hangi olayla aynı döneme denk gelir?", secenekler:["Hz. Muhammed'in doğumundan bir süre önce","Hz. Muhammed'in vefatından sonra","Hicretten sonra","Bedir Savaşı'ndan sonra"], dogru:0, aciklama:"Fil Vakası, Hz. Muhammed'in doğumundan bir süre önce gerçekleşmiştir."},
+  {zorluk:"zor", soru:"Abdülmuttalib, Ebrehe'ye develeri istediğinde ne demiştir?", secenekler:["\"Ben develerin sahibiyim, Kâbe'yi kendi sahibi koruyacaktır\"","\"Kâbe'yi de develeri de istiyorum\"","\"Kâbe önemli değildir\"","Hiçbir şey dememiştir"], dogru:0, aciklama:"Abdülmuttalib, \"Ben develerin sahibiyim, Kâbe'yi kendi sahibi koruyacaktır.\" demiştir."},
+];
+let kt64rIndex = 0, kt64rPuan = 0, kt64rSiraliSorular = [], kt64rKilit = false;
+
+function kt64rZayifAnahtari(){ return 'dkabZayifSorular_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname); }
+function kt64rZayifOku(){
+  try{ return JSON.parse(localStorage.getItem(kt64rZayifAnahtari())) || {}; }catch(e){ return {}; }
+}
+function kt64rZayifKaydet(soruMetni){
+  const v = kt64rZayifOku();
+  v[soruMetni] = (v[soruMetni]||0) + 1;
+  try{ localStorage.setItem(kt64rZayifAnahtari(), JSON.stringify(v)); }catch(e){}
+}
+function kt64rAgirlikliKaristir(sorular){
+  const zayif = kt64rZayifOku();
+  return sorular
+    .map(s => ({s, r: Math.random() - (zayif[s.soru]||0) * 0.15}))
+    .sort((a,b)=>a.r-b.r)
+    .map(x=>x.s);
+}
+
+function kt64rBaslat(){
+  kt64rSiraliSorular = kt64rAgirlikliKaristir(konuTekrariSorulari64.slice());
+  kt64rIndex = 0; kt64rPuan = 0;
+  document.getElementById('kt64rPuan').textContent = 0;
+  document.getElementById('kt64rToplam').textContent = kt64rSiraliSorular.length;
+  document.getElementById('kt64rSonuc').textContent = '';
+  document.getElementById('kt64rSonrakiBtn').style.display = 'none';
+  kt64rSoruGoster();
+}
+
+function kt64rSoruGoster(){
+  if(kt64rIndex >= kt64rSiraliSorular.length){
+    document.getElementById('kt64rSoru').textContent = '';
+    document.getElementById('kt64rSecenekler').innerHTML = '';
+    document.getElementById('kt64rAciklama').style.display = 'none';
+    document.getElementById('kt64rZorluk').textContent = '';
+    document.getElementById('kt64rSonrakiBtn').style.display = 'none';
+    const yuzde = Math.round((kt64rPuan/kt64rSiraliSorular.length)*100);
+    let kt64rSeviye;
+    if(yuzde>=90) kt64rSeviye = '🏆 Din Bilgisi Ustası';
+    else if(yuzde>=70) kt64rSeviye = '🥇 Çok Başarılı';
+    else if(yuzde>=50) kt64rSeviye = '🥈 Biraz Daha Çalış';
+    else kt64rSeviye = '📚 Konuyu Tekrar Et';
+    document.getElementById('kt64rSonuc').innerHTML = `🎉 Test bitti!<br><span style="font-size:1.25em;font-weight:bold;">${kt64rSeviye}</span><br>${kt64rPuan}/${kt64rSiraliSorular.length} doğru (%${yuzde})`;
+    return;
+  }
+  kt64rKilit = false;
+  document.getElementById('kt64rTur').textContent = kt64rIndex+1;
+  const oge = kt64rSiraliSorular[kt64rIndex];
+  const zorlukEtiket = oge.zorluk==='kolay' ? '🟢 Kolay' : oge.zorluk==='orta' ? '🟡 Orta' : '🔴 Zor';
+  document.getElementById('kt64rZorluk').textContent = zorlukEtiket;
+  document.getElementById('kt64rSoru').textContent = oge.soru;
+  document.getElementById('kt64rAciklama').style.display = 'none';
+  document.getElementById('kt64rAciklama').textContent = '';
+  document.getElementById('kt64rSonrakiBtn').style.display = 'none';
+  document.getElementById('kt64rSonuc').textContent = '';
+  const kutu = document.getElementById('kt64rSecenekler');
+  kutu.innerHTML = '';
+  oge.secenekler.forEach((sec,i)=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = sec;
+    btn.onclick = ()=>{
+      if(kt64rKilit) return;
+      kt64rKilit = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(i===oge.dogru){
+        btn.classList.add('dogru');
+        kt64rPuan++;
+        document.getElementById('kt64rPuan').textContent = kt64rPuan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn[oge.dogru].classList.add('dogru');
+        kt64rZayifKaydet(oge.soru);
+      }
+      const aciklamaKutu = document.getElementById('kt64rAciklama');
+      aciklamaKutu.style.display = 'block';
+      aciklamaKutu.innerHTML = `💡 <b>Açıklama:</b> ${oge.aciklama}`;
+      document.getElementById('kt64rSonrakiBtn').style.display = 'block';
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+function kt64rSonrakiSoru(){
+  kt64rIndex++;
+  kt64rSoruGoster();
+}
+
+// =====================================================================
+// 4. ÜNİTE KELİME HAVUZU (28 kavram) — 6. Sınıf
+// =====================================================================
+const kelimeHavuzu64 = [
+  {kelime:"CAHİLİYE", anlam:"Hz. Muhammed'in doğduğu dönemde putlara tapma, adaletsizlik gibi olumsuz davranışların yaygın olduğu döneme verilen ad"},
+  {kelime:"KÂBE", anlam:"Kur'an'a göre yeryüzündeki ilk mabet, Hz. Âdem'in yapıp Hz. İbrahim ve Hz. İsmail'in yeniden inşa ettiği kutsal mekân"},
+  {kelime:"HİCAZ", anlam:"Mekke'nin bulunduğu, Arap Yarımadası'ndaki bölge"},
+  {kelime:"PUTPEREST", anlam:"Allah'a duyulan saygı ve sevgiyi başka varlıklara da gösteren kimse"},
+  {kelime:"ŞİRK", anlam:"Allah'tan başka ilah olduğuna inanmak ve ona tapmak"},
+  {kelime:"MÜŞRİK", anlam:"Allah'a ortak koşan, birden fazla tanrı olduğuna inanan kimse"},
+  {kelime:"HANİF", anlam:"Doğruya ve hakka bağlanan, Allah'ın birliğine iman eden kimse"},
+  {kelime:"BEDEVİ", anlam:"Göçebe yaşayan, hayvancılık ve ticaretle uğraşan Mekke halkı"},
+  {kelime:"HADARİ", anlam:"Yerleşik hayat yaşayan, ticaret ve el sanatlarıyla uğraşan Mekke halkı"},
+  {kelime:"KABİLE", anlam:"Aynı atadan gelen ve birbirine kan bağıyla bağlı bulunan büyük insan topluluğu"},
+  {kelime:"PANAYIR", anlam:"Mekke'de yılın belli zamanlarında kurulan, sosyal ve ticari etkinliklerin yapıldığı pazar"},
+  {kelime:"EMİN", anlam:"Hz. Muhammed'e dürüstlüğü ve güvenilirliği sebebiyle Mekke halkı tarafından verilen lakap"},
+  {kelime:"HİLFÜLFUDUL", anlam:"Erdemli ve faziletli insanların, haksızlığa uğrayanlara yardım etmek için kurdukları sözleşme/topluluk"},
+  {kelime:"HACERÜLESVED", anlam:"Kâbe'nin güneydoğu köşesine yerleştirilen, \"siyah taş\" anlamına gelen kutsal taş"},
+  {kelime:"ABDÜLMUTTALİB", anlam:"Hz. Muhammed'in dedesi, Kureyş kabilesinin reisi"},
+  {kelime:"ABDULLAH", anlam:"Hz. Muhammed'in babası"},
+  {kelime:"AMİNE", anlam:"Hz. Muhammed'in annesi"},
+  {kelime:"HALİME", anlam:"Hz. Muhammed'in sütannesi"},
+  {kelime:"EBUTALİB", anlam:"Hz. Muhammed'in amcası, dedesinin vefatından sonra onu himayesine alan kişi"},
+  {kelime:"HATİCE", anlam:"Hz. Muhammed'in ilk eşi, üstün ahlakıyla tanınan zengin tüccar kadın"},
+  {kelime:"KASIM", anlam:"Hz. Muhammed'in ilk çocuğu, künyesinin kaynağı"},
+  {kelime:"KÜNYE", anlam:"Arap toplumlarında kişiler için kullanılan, genelde \"ebû\" kelimesiyle yapılan tanıtıcı ibare"},
+  {kelime:"MUSTAFA", anlam:"\"Seçilmiş\" anlamına gelen, Hz. Muhammed'in bilinen adlarından biri"},
+  {kelime:"AHMED", anlam:"\"Allah'ı herkesten daha çok öven\" anlamına gelen, Hz. Muhammed'in bir diğer ismi"},
+  {kelime:"FİL", anlam:"Ebrehe'nin Kâbe'yi yıkmak için kullandığı orduda bulunan, Fil suresine adını veren hayvan"},
+  {kelime:"EBREHE", anlam:"Kâbe'yi yıkmak isteyen Habeş Krallığı'na bağlı Yemen Valisi"},
+  {kelime:"SANA", anlam:"Ebrehe'nin dinî ve ticari merkez yapmak istediği Yemen şehri"},
+  {kelime:"VEBA", anlam:"Mekke'de yaşanan, Hz. Peygamber'in dört yaşına kadar sütannesinin yanında kalmasına sebep olan salgın hastalık"},
+];
+function ku64AnlamBul(kelime){
+  const bulunan = kelimeHavuzu64.find(x=>x.kelime===kelime);
+  return bulunan ? bulunan.anlam : '';
+}
+
+// =====================================================================
+// HIZLI KELİME ÜRETME
+// =====================================================================
+const ku64GecerliHarfler = ["K","H","P","M","E","A"];
+let ku64AktifHarf = '', ku64Bulunanlar = [], ku64Sure = 60, ku64Zamanlayici = null, ku64Puan = 0, ku64Bitti = true;
+
+function ku64Baslat(){
+  clearInterval(ku64Zamanlayici);
+  ku64AktifHarf = ku64GecerliHarfler[Math.floor(Math.random()*ku64GecerliHarfler.length)];
+  ku64Bulunanlar = []; ku64Puan = 0; ku64Sure = 60; ku64Bitti = false;
+  document.getElementById('ku64Harf').textContent = ku64AktifHarf;
+  document.getElementById('ku64Sure').textContent = ku64Sure;
+  document.getElementById('ku64Puan').textContent = 0;
+  document.getElementById('ku64Liste').innerHTML = '';
+  document.getElementById('ku64Sonuc').textContent = '';
+  document.getElementById('ku64Uyari').textContent = '';
+  document.getElementById('ku64Kacirilan').innerHTML = '';
+  const girdi = document.getElementById('ku64Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  ku64Zamanlayici = setInterval(()=>{
+    ku64Sure--;
+    document.getElementById('ku64Sure').textContent = ku64Sure;
+    if(ku64Sure<=0) ku64Bitir();
+  }, 1000);
+}
+
+function ku64Ekle(){
+  if(ku64Bitti) return;
+  const girdi = document.getElementById('ku64Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('ku64Uyari');
+  if(!kelime.startsWith(ku64AktifHarf)){ uyari.textContent = `❌ "${ku64AktifHarf}" harfiyle başlamalı!`; return; }
+  if(!kelimeHavuzu64.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(ku64Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  ku64Bulunanlar.push(kelime);
+  ku64Puan++;
+  document.getElementById('ku64Puan').textContent = ku64Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('ku64Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function ku64Bitir(){
+  clearInterval(ku64Zamanlayici);
+  ku64Bitti = true;
+  document.getElementById('ku64Girdi').disabled = true;
+  document.querySelectorAll('#ku64Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku64AnlamBul(kelime)}`;
+  });
+  const kacirilanKutu = document.getElementById('ku64Kacirilan');
+  kacirilanKutu.innerHTML = '';
+  const kacirilanlar = kelimeHavuzu64.filter(x=>x.kelime.startsWith(ku64AktifHarf) && !ku64Bulunanlar.includes(x.kelime));
+  if(kacirilanlar.length){
+    const baslik = document.createElement('p');
+    baslik.style.textAlign='center'; baslik.style.fontWeight='bold'; baslik.style.color='var(--kirmizi)';
+    baslik.textContent = 'Kaçırdıkların:';
+    kacirilanKutu.appendChild(baslik);
+    const ul = document.createElement('ul'); ul.className='ku-liste';
+    kacirilanlar.forEach(item=>{
+      const li = document.createElement('li');
+      li.style.background='#ffe8d6'; li.style.borderColor='var(--sari)';
+      li.textContent = `${item.kelime} — ${item.anlam}`;
+      ul.appendChild(li);
+    });
+    kacirilanKutu.appendChild(ul);
+  }
+  document.getElementById('ku64Sonuc').textContent = `⏰ Süre bitti! "${ku64AktifHarf}" harfiyle ${ku64Puan} doğru kelime yazdın!`;
+}
+
+// =====================================================================
+// TUZAK HARF
+// =====================================================================
+const tuzak64GecerliHarfler = ["A","E","İ","H","M"];
+let tuzak64Harf = '', tuzak64Bulunanlar = [], tuzak64Sure = 40, tuzak64Zamanlayici = null, tuzak64Puan = 0, tuzak64Bitti = true;
+
+function tuzak64Baslat(){
+  clearInterval(tuzak64Zamanlayici);
+  tuzak64Harf = tuzak64GecerliHarfler[Math.floor(Math.random()*tuzak64GecerliHarfler.length)];
+  tuzak64Bulunanlar = []; tuzak64Puan = 0; tuzak64Sure = 40; tuzak64Bitti = false;
+  document.getElementById('tuzak64Harf').textContent = tuzak64Harf;
+  document.getElementById('tuzak64Sure').textContent = tuzak64Sure;
+  document.getElementById('tuzak64Puan').textContent = 0;
+  document.getElementById('tuzak64Liste').innerHTML = '';
+  document.getElementById('tuzak64Sonuc').textContent = '';
+  document.getElementById('tuzak64Uyari').textContent = '';
+  const girdi = document.getElementById('tuzak64Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  tuzak64Zamanlayici = setInterval(()=>{
+    tuzak64Sure--;
+    document.getElementById('tuzak64Sure').textContent = tuzak64Sure;
+    if(tuzak64Sure<=0) tuzak64Bitir();
+  }, 1000);
+}
+
+function tuzak64Ekle(){
+  if(tuzak64Bitti) return;
+  const girdi = document.getElementById('tuzak64Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('tuzak64Uyari');
+  if(kelime.includes(tuzak64Harf)){ uyari.textContent = `🚫 Bu kelimede tuzak harf "${tuzak64Harf}" var, geçersiz!`; return; }
+  if(!kelimeHavuzu64.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(tuzak64Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  tuzak64Bulunanlar.push(kelime);
+  tuzak64Puan++;
+  document.getElementById('tuzak64Puan').textContent = tuzak64Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('tuzak64Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function tuzak64Bitir(){
+  clearInterval(tuzak64Zamanlayici);
+  tuzak64Bitti = true;
+  document.getElementById('tuzak64Girdi').disabled = true;
+  document.querySelectorAll('#tuzak64Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku64AnlamBul(kelime)}`;
+  });
+  document.getElementById('tuzak64Sonuc').textContent = `⏰ Süre bitti! "${tuzak64Harf}" harfini kullanmadan ${tuzak64Puan} kelime yazdın!`;
+}
+
+// =====================================================================
+// KELİME FABRİKASI
+// =====================================================================
+let kf64Sira = [], kf64Index = 0, kf64Uretilen = 0, kf64Hata = 0;
+
+function kf64Baslat(){
+  kf64Sira = karistir(kelimeHavuzu64.slice());
+  kf64Index = 0; kf64Uretilen = 0; kf64Hata = 0;
+  document.getElementById('kf64Uretilen').textContent = 0;
+  document.getElementById('kf64Toplam').textContent = kf64Sira.length;
+  document.getElementById('kf64Hata').textContent = 0;
+  document.getElementById('kf64Urunler').innerHTML = '';
+  document.getElementById('kf64Sonuc').textContent = '';
+  kf64Tur();
+}
+
+function kf64Tur(){
+  if(kf64Index >= kf64Sira.length){
+    document.getElementById('kf64BantAlani').innerHTML = '';
+    document.getElementById('kf64Siparis').textContent = '';
+    document.getElementById('kf64Girdi').disabled = true;
+    document.getElementById('kf64Sonuc').textContent = `🏭 Fabrika kapandı! ${kf64Uretilen}/${kf64Sira.length} kelime ürettin, ${kf64Hata} hata yaptın.`;
+    return;
+  }
+  const oge = kf64Sira[kf64Index];
+  document.getElementById('kf64Siparis').textContent = `📋 Sipariş: ${oge.anlam}`;
+  const harfler = karistir(oge.kelime.split(''));
+  const bant = document.getElementById('kf64BantAlani');
+  bant.innerHTML = '';
+  harfler.forEach(h=>{
+    const kutu = document.createElement('div');
+    kutu.className = 'kf-kutu';
+    kutu.textContent = h;
+    bant.appendChild(kutu);
+  });
+  const girdi = document.getElementById('kf64Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+}
+
+function kf64Uret(){
+  if(kf64Index >= kf64Sira.length) return;
+  const oge = kf64Sira[kf64Index];
+  const girdi = document.getElementById('kf64Girdi');
+  const tahmin = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  if(!tahmin) return;
+  if(tahmin === oge.kelime){
+    kf64Uretilen++;
+    document.getElementById('kf64Uretilen').textContent = kf64Uretilen;
+    const cip = document.createElement('div');
+    cip.className = 'dua-cip';
+    cip.textContent = `✅ ${oge.kelime}`;
+    document.getElementById('kf64Urunler').appendChild(cip);
+    kf64Index++;
+    setTimeout(()=>kf64Tur(), 400);
+  } else {
+    kf64Hata++;
+    document.getElementById('kf64Hata').textContent = kf64Hata;
+    girdi.classList.add('yanlis-girdi');
+    setTimeout(()=>girdi.classList.remove('yanlis-girdi'), 400);
+    girdi.value = '';
+  }
+}
+
+// =====================================================================
+// KELİME MÜHENDİSİ
+// =====================================================================
+function parcalaraBol(kelime){
+  const uzunluk = kelime.length;
+  let parcaSayisi = uzunluk<=4 ? 2 : uzunluk<=7 ? 3 : 4;
+  parcaSayisi = Math.min(parcaSayisi, uzunluk);
+  const parcalar = [];
+  let index = 0;
+  for(let i=0;i<parcaSayisi;i++){
+    const kalan = parcaSayisi - i;
+    const buBoyut = i===parcaSayisi-1 ? uzunluk-index : Math.ceil((uzunluk-index)/kalan);
+    parcalar.push(kelime.slice(index, index+buBoyut));
+    index += buBoyut;
+  }
+  return parcalar;
+}
+
+let km64Sira = [], km64Index = 0, km64DogruSayisi = 0;
+
+function km64Baslat(){
+  km64Sira = karistir(kelimeHavuzu64.slice());
+  km64Index = 0; km64DogruSayisi = 0;
+  document.getElementById('km64Dogru').textContent = 0;
+  document.getElementById('km64Toplam').textContent = km64Sira.length;
+  document.getElementById('km64Sonuc').textContent = '';
+  km64Tur();
+}
+
+function km64Tur(){
+  if(km64Index >= km64Sira.length){
+    document.getElementById('km64Ipucu').textContent = '';
+    document.getElementById('km64Banka').innerHTML = '';
+    document.getElementById('km64Cevap').innerHTML = '';
+    document.getElementById('km64Sonuc').textContent = `🏆 Tebrikler! Kelime mühendisliğini tamamladın! ${km64DogruSayisi}/${km64Sira.length} kelime inşa ettin.`;
+    return;
+  }
+  document.getElementById('km64Tur').textContent = km64Index+1;
+  const oge = km64Sira[km64Index];
+  document.getElementById('km64Ipucu').innerHTML = `📐 Plan: <b>${oge.anlam}</b>`;
+  const parcalar = parcalaraBol(oge.kelime);
+  siraOlustur({tokens:parcalar, bankaId:'km64Banka', cevapId:'km64Cevap', tamamlandi:()=>{
+    km64DogruSayisi++;
+    document.getElementById('km64Dogru').textContent = km64DogruSayisi;
+    document.getElementById('km64Sonuc').textContent = `✅ İnşa edildi: ${oge.kelime}`;
+    km64Index++;
+    setTimeout(()=>{ document.getElementById('km64Sonuc').textContent=''; km64Tur(); }, 1000);
+  }});
+}
+
+// =====================================================================
+// KAVRAM TURNUVASI
+// =====================================================================
+const turnuvaEslesmeler64 = [
+  {tur:"Çeyrek Final 1", a:"KÂBE", b:"HACERÜLESVED", soru:"Hangisi yeryüzündeki ilk mabettir?", dogruCevap:"KÂBE"},
+  {tur:"Çeyrek Final 2", a:"EMİN", b:"MUSTAFA", soru:"Hangisi Hz. Muhammed'e dürüstlüğünden dolayı verilen lakaptır?", dogruCevap:"EMİN"},
+  {tur:"Çeyrek Final 3", a:"HİLFÜLFUDUL", b:"KABİLE", soru:"Hangisi haksızlığa uğrayanlara yardım için kurulan erdemliler topluluğudur?", dogruCevap:"HİLFÜLFUDUL"},
+  {tur:"Çeyrek Final 4", a:"HATİCE", b:"AMİNE", soru:"Hangisi Hz. Muhammed'in eşidir?", dogruCevap:"HATİCE"},
+  {tur:"Yarı Final 1", a:"KÂBE", b:"EMİN", soru:"Hangisi bir yapı/mekândır, kişi özelliği değildir?", dogruCevap:"KÂBE"},
+  {tur:"Yarı Final 2", a:"HİLFÜLFUDUL", b:"HATİCE", soru:"Hangisi bir topluluk adıdır, kişi adı değildir?", dogruCevap:"HİLFÜLFUDUL"},
+  {tur:"FİNAL", a:"KÂBE", b:"HİLFÜLFUDUL", soru:"Hangisi Mekke'deki kutsal mabettir?", dogruCevap:"KÂBE"},
+];
+let kt64Index = 0, kt64DogruHakemlik = 0;
+
+function kt64Baslat(){
+  kt64Index = 0; kt64DogruHakemlik = 0;
+  document.getElementById('kt64Puan').textContent = 0;
+  document.getElementById('kt64Toplam').textContent = turnuvaEslesmeler64.length;
+  document.getElementById('kt64Sonuc').textContent = '';
+  kt64Tur();
+}
+
+function kt64Tur(){
+  if(kt64Index >= turnuvaEslesmeler64.length){
+    document.getElementById('kt64Asama').textContent = '';
+    document.getElementById('kt64Eslesme').textContent = '';
+    document.getElementById('kt64Secenekler').innerHTML = '';
+    const sampiyon = turnuvaEslesmeler64[turnuvaEslesmeler64.length-1].dogruCevap;
+    document.getElementById('kt64Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt64DogruHakemlik}/${turnuvaEslesmeler64.length}`;
+    return;
+  }
+  const mac = turnuvaEslesmeler64[kt64Index];
+  document.getElementById('kt64Tur').textContent = kt64Index+1;
+  document.getElementById('kt64Asama').textContent = mac.tur;
+  document.getElementById('kt64Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
+  const kutu = document.getElementById('kt64Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  [mac.a, mac.b].forEach(aday=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = aday;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(aday === mac.dogruCevap){
+        btn.classList.add('dogru');
+        kt64DogruHakemlik++;
+        document.getElementById('kt64Puan').textContent = kt64DogruHakemlik;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===mac.dogruCevap) b.classList.add('dogru'); });
+      }
+      kt64Index++;
+      setTimeout(()=>kt64Tur(), 1300);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// BONUS OYUN — Hafıza Zinciri
+// =====================================================================
+const bz64Tuslar = [
+  {simge:"CAHİLİYE", renk:"#2a6f97"}, {simge:"KÂBE", renk:"#40916c"}, {simge:"HİCAZ", renk:"#f4a261"},
+  {simge:"EMİN", renk:"#d62828"}, {simge:"HİLFÜLFUDUL", renk:"#7b2cbf"}, {simge:"ABDÜLMUTTALİB", renk:"#0077b6"},
+  {simge:"AMİNE", renk:"#e76f51"}, {simge:"HALİME", renk:"#2d6a4f"}, {simge:"EBUTALİB", renk:"#9d4edd"},
+  {simge:"HATİCE", renk:"#457b9d"}, {simge:"KASIM", renk:"#c9184a"}, {simge:"FİL", renk:"#e09f3e"},
+];
+let bz64Sira = [], bz64KullaniciIndex = 0, bz64Seviye = 0, bz64Oynatiliyor = false;
+
+function bz64IzgaraOlustur(){
+  const izgara = document.getElementById('bz64Izgara');
+  izgara.innerHTML = '';
+  bz64Tuslar.forEach((t,i)=>{
+    const tus = document.createElement('div');
+    tus.className = 'bz-tus';
+    tus.style.background = t.renk;
+    tus.textContent = t.simge;
+    tus.onclick = ()=>bz64TusaTikla(i);
+    izgara.appendChild(tus);
+  });
+}
+function bz64Baslat(){
+  bz64Sira = []; bz64Seviye = 0; bz64KullaniciIndex = 0;
+  document.getElementById('bz64Seviye').textContent = 0;
+  document.getElementById('bz64Sonuc').textContent = '';
+  bz64IzgaraOlustur();
+  bz64SonrakiTur();
+}
+function bz64SonrakiTur(){
+  bz64Seviye++;
+  document.getElementById('bz64Seviye').textContent = bz64Seviye;
+  bz64Sira.push(Math.floor(Math.random()*bz64Tuslar.length));
+  bz64KullaniciIndex = 0;
+  bz64Oynat();
+}
+function bz64Oynat(){
+  bz64Oynatiliyor = true;
+  const dugmeler = document.querySelectorAll('#bz64Izgara .bz-tus');
+  dugmeler.forEach(d=>d.classList.add('bz-devre-disi'));
+  let i = 0;
+  const aralik = setInterval(()=>{
+    if(i>0) dugmeler[bz64Sira[i-1]].classList.remove('bz-yanik');
+    if(i>=bz64Sira.length){
+      clearInterval(aralik);
+      bz64Oynatiliyor = false;
+      dugmeler.forEach(d=>d.classList.remove('bz-devre-disi'));
+      return;
+    }
+    dugmeler[bz64Sira[i]].classList.add('bz-yanik');
+    i++;
+  }, 700);
+}
+function bz64TusaTikla(i){
+  if(bz64Oynatiliyor) return;
+  const dugmeler = document.querySelectorAll('#bz64Izgara .bz-tus');
+  dugmeler[i].classList.add('bz-yanik');
+  setTimeout(()=>dugmeler[i].classList.remove('bz-yanik'), 250);
+  if(bz64Sira[bz64KullaniciIndex] === i){
+    bz64KullaniciIndex++;
+    if(bz64KullaniciIndex === bz64Sira.length){
+      setTimeout(()=>bz64SonrakiTur(), 900);
+    }
+  } else {
+    document.getElementById('bz64Sonuc').textContent = `💥 Yanlış sıra! En uzun hatırladığın zincir: ${bz64Seviye-1}`;
+  }
+}
+function bz64OrnekOyna(){
+  document.getElementById('bz64Sonuc').textContent = '🎬 Örnek gösteriliyor: önce sıra yanacak, sonra otomatik olarak aynı sırayla tıklanacak...';
+  document.getElementById('bz64Seviye').textContent = 'Örnek';
+  bz64IzgaraOlustur();
+  const demoSira = [0, 2, 1];
+  const dugmeler = document.querySelectorAll('#bz64Izgara .bz-tus');
+  dugmeler.forEach(d=>d.classList.add('bz-devre-disi'));
+  let i = 0;
+  const gosterAralik = setInterval(()=>{
+    if(i>0) dugmeler[demoSira[i-1]].classList.remove('bz-yanik');
+    if(i >= demoSira.length){
+      clearInterval(gosterAralik);
+      let j = 0;
+      const tiklaAralik = setInterval(()=>{
+        if(j>0) dugmeler[demoSira[j-1]].classList.remove('bz-yanik');
+        if(j >= demoSira.length){
+          clearInterval(tiklaAralik);
+          dugmeler.forEach(d=>d.classList.remove('bz-devre-disi'));
+          document.getElementById('bz64Seviye').textContent = 0;
+          document.getElementById('bz64Sonuc').textContent = '👆 Gördüğün gibi: önce kavramlar sırayla yandı, sonra aynı sırayla tıklandı. Şimdi sıra sende — "Oyunu Başlat"a bas!';
+          return;
+        }
+        dugmeler[demoSira[j]].classList.add('bz-yanik');
+        j++;
+      }, 700);
+      return;
+    }
+    dugmeler[demoSira[i]].classList.add('bz-yanik');
+    i++;
+  }, 700);
+}
+
+// =====================================================================
+// KELİME AVI BULMACASI
+// =====================================================================
+const kelimeAvi64Listesi = [
+  {kelime:"CAHİLİYE", anlam:"Hz. Muhammed'in doğduğu dönemde putlara tapma, adaletsizlik gibi olumsuz davranışların yaygın olduğu döneme verilen ad"},
+  {kelime:"KÂBE", anlam:"Kur'an'a göre yeryüzündeki ilk mabet, Hz. Âdem'in yapıp Hz. İbrahim ve Hz. İsmail'in yeniden inşa ettiği kutsal mekân"},
+  {kelime:"HİCAZ", anlam:"Mekke'nin bulunduğu, Arap Yarımadası'ndaki bölge"},
+  {kelime:"ŞİRK", anlam:"Allah'tan başka ilah olduğuna inanmak ve ona tapmak"},
+  {kelime:"HANİF", anlam:"Doğruya ve hakka bağlanan, Allah'ın birliğine iman eden kimse"},
+  {kelime:"BEDEVİ", anlam:"Göçebe yaşayan, hayvancılık ve ticaretle uğraşan Mekke halkı"},
+  {kelime:"HADARİ", anlam:"Yerleşik hayat yaşayan, ticaret ve el sanatlarıyla uğraşan Mekke halkı"},
+  {kelime:"KABİLE", anlam:"Aynı atadan gelen ve birbirine kan bağıyla bağlı bulunan büyük insan topluluğu"},
+  {kelime:"EMİN", anlam:"Hz. Muhammed'e dürüstlüğü ve güvenilirliği sebebiyle Mekke halkı tarafından verilen lakap"},
+  {kelime:"AMİNE", anlam:"Hz. Muhammed'in annesi"},
+  {kelime:"HALİME", anlam:"Hz. Muhammed'in sütannesi"},
+  {kelime:"HATİCE", anlam:"Hz. Muhammed'in ilk eşi, üstün ahlakıyla tanınan zengin tüccar kadın"},
+  {kelime:"KASIM", anlam:"Hz. Muhammed'in ilk çocuğu, künyesinin kaynağı"},
+  {kelime:"FİL", anlam:"Ebrehe'nin Kâbe'yi yıkmak için kullandığı orduda bulunan, Fil suresine adını veren hayvan"},
+];
+const ka64SatirSayisi = 14, ka64SutunSayisi = 14;
+const ka64AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+
+function ka64KelimeYerlestir(izgara, kelime){
+  const yonler = karistir([{dr:0,dc:1},{dr:0,dc:-1},{dr:1,dc:0},{dr:-1,dc:0}]);
+  for(let deneme=0; deneme<200; deneme++){
+    const yon = yonler[deneme % yonler.length];
+    const satir = Math.floor(Math.random()*ka64SatirSayisi);
+    const sutun = Math.floor(Math.random()*ka64SutunSayisi);
+    const bitSatir = satir + yon.dr*(kelime.length-1);
+    const bitSutun = sutun + yon.dc*(kelime.length-1);
+    if(bitSatir<0 || bitSatir>=ka64SatirSayisi || bitSutun<0 || bitSutun>=ka64SutunSayisi) continue;
+    let uygun = true;
+    for(let i=0;i<kelime.length;i++){
+      const r = satir + yon.dr*i, c = sutun + yon.dc*i;
+      if(izgara[r][c] !== null && izgara[r][c] !== kelime[i]){ uygun=false; break; }
+    }
+    if(!uygun) continue;
+    const hucreler=[];
+    for(let i=0;i<kelime.length;i++){
+      const r = satir + yon.dr*i, c = sutun + yon.dc*i;
+      izgara[r][c] = kelime[i];
+      hucreler.push({r,c});
+    }
+    return hucreler;
+  }
+  return null;
+}
+
+function kelimeAvi64Olustur(){
+  let izgara, basarili=false;
+  for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
+    izgara = Array.from({length:ka64SatirSayisi}, ()=>Array(ka64SutunSayisi).fill(null));
+    basarili = true;
+    const siraliKelimeler = kelimeAvi64Listesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    for(const item of siraliKelimeler){
+      const hucreler = ka64KelimeYerlestir(izgara, item.kelime);
+      if(!hucreler){ basarili=false; break; }
+    }
+  }
+  for(let r=0;r<ka64SatirSayisi;r++){
+    for(let c=0;c<ka64SutunSayisi;c++){
+      if(izgara[r][c]===null) izgara[r][c] = ka64AsciiHarfler[Math.floor(Math.random()*ka64AsciiHarfler.length)];
+    }
+  }
+
+  const kutu = document.getElementById('ka64Izgara');
+  kutu.innerHTML = '';
+  kutu.style.gridTemplateColumns = `repeat(${ka64SutunSayisi}, 1fr)`;
+  const hucreElemanlari = [];
+  for(let r=0;r<ka64SatirSayisi;r++){
+    hucreElemanlari.push([]);
+    for(let c=0;c<ka64SutunSayisi;c++){
+      const h = document.createElement('div');
+      h.className = 'ka-hucre';
+      h.textContent = izgara[r][c];
+      h.dataset.r = r; h.dataset.c = c;
+      kutu.appendChild(h);
+      hucreElemanlari[r].push(h);
+    }
+  }
+
+  const liste = document.getElementById('ka64Liste');
+  liste.innerHTML = '';
+  kelimeAvi64Listesi.forEach(item=>{
+    const li = document.createElement('li');
+    li.id = 'ka64-kelime-' + item.kelime;
+    li.textContent = `${item.kelime} — ${item.anlam}`;
+    liste.appendChild(li);
+  });
+  document.getElementById('ka64Bulunan').textContent = 0;
+  document.getElementById('ka64Toplam').textContent = kelimeAvi64Listesi.length;
+  document.getElementById('ka64Sonuc').textContent = '';
+
+  let ilkHucre = null;
+  hucreElemanlari.flat().forEach(h=>{
+    h.onclick = ()=>{
+      if(h.classList.contains('ka-bulundu')) return;
+      if(!ilkHucre){ ilkHucre = h; h.classList.add('ka-secili'); return; }
+      if(ilkHucre === h){ ilkHucre.classList.remove('ka-secili'); ilkHucre=null; return; }
+      const r1=+ilkHucre.dataset.r, c1=+ilkHucre.dataset.c;
+      const r2=+h.dataset.r, c2=+h.dataset.c;
+      let yol = [];
+      if(r1===r2){
+        const adim = c2>c1?1:-1;
+        for(let c=c1;;c+=adim){ yol.push({r:r1,c}); if(c===c2) break; }
+      } else if(c1===c2){
+        const adim = r2>r1?1:-1;
+        for(let r=r1;;r+=adim){ yol.push({r,c:c1}); if(r===r2) break; }
+      } else {
+        ilkHucre.classList.remove('ka-secili');
+        h.classList.add('ka-secili');
+        ilkHucre = h;
+        return;
+      }
+      const secilenKelime = yol.map(p=>izgara[p.r][p.c]).join('');
+      const tersKelime = secilenKelime.split('').reverse().join('');
+      const eslesen = kelimeAvi64Listesi.find(item =>
+        (item.kelime===secilenKelime || item.kelime===tersKelime) &&
+        !document.getElementById('ka64-kelime-'+item.kelime).classList.contains('bulundu-satir')
+      );
+      if(eslesen){
+        yol.forEach(p=>{
+          hucreElemanlari[p.r][p.c].classList.remove('ka-secili');
+          hucreElemanlari[p.r][p.c].classList.add('ka-bulundu');
+        });
+        document.getElementById('ka64-kelime-'+eslesen.kelime).classList.add('bulundu-satir');
+        const bulunanSayisi = document.querySelectorAll('#ka64Liste .bulundu-satir').length;
+        document.getElementById('ka64Bulunan').textContent = bulunanSayisi;
+        if(bulunanSayisi === kelimeAvi64Listesi.length){
+          document.getElementById('ka64Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri buldun!';
+        }
+      } else {
+        ilkHucre.classList.remove('ka-secili');
+      }
+      ilkHucre = null;
+    };
+  });
+}
+
+// =====================================================================
+// ÇENGEL BULMACA
+// =====================================================================
+const cengel64Zinciri = [
+  {kelime:"KASIM", anlam:"Hz. Muhammed'in ilk çocuğu, künyesinin kaynağı"},
+  {kelime:"MUSTAFA", anlam:"\"Seçilmiş\" anlamına gelen, Hz. Muhammed'in bilinen adlarından biri"},
+  {kelime:"AMİNE", anlam:"Hz. Muhammed'in annesi"},
+  {kelime:"EBUTALİB", anlam:"Hz. Muhammed'in amcası, dedesinin vefatından sonra onu himayesine alan kişi"},
+  {kelime:"BEDEVİ", anlam:"Göçebe yaşayan, hayvancılık ve ticaretle uğraşan Mekke halkı"},
+];
+let cengel64HucreHarita = {}, cengel64InputMap = {};
+
+function cengel64Olustur(){
+  let r=0, c=0, dir='right';
+  const yerlesimler = [];
+  cengel64Zinciri.forEach(item=>{
+    const kelime = item.kelime;
+    const hucreler = [];
+    for(let j=0;j<kelime.length;j++){
+      hucreler.push(dir==='right' ? {r, c:c+j} : {r:r+j, c});
+    }
+    yerlesimler.push({...item, hucreler, dir});
+    const son = hucreler[hucreler.length-1];
+    r = son.r; c = son.c;
+    dir = dir==='right' ? 'down' : 'right';
+  });
+
+  let minR=Infinity,maxR=-Infinity,minC=Infinity,maxC=-Infinity;
+  yerlesimler.forEach(p=>p.hucreler.forEach(h=>{
+    minR=Math.min(minR,h.r); maxR=Math.max(maxR,h.r);
+    minC=Math.min(minC,h.c); maxC=Math.max(maxC,h.c);
+  }));
+  const satirSayisi = maxR-minR+1, sutunSayisi = maxC-minC+1;
+
+  cengel64HucreHarita = {};
+  yerlesimler.forEach(p=>{
+    p.hucreler.forEach((h,i)=>{
+      const key = (h.r-minR)+','+(h.c-minC);
+      cengel64HucreHarita[key] = p.kelime[i];
+    });
+  });
+
+  const siraliHucreler = [];
+  const gorulen = new Set();
+  yerlesimler.forEach((p, idx)=>{
+    const baslangic = idx===0 ? 0 : 1;
+    for(let i=baslangic;i<p.hucreler.length;i++){
+      const h = p.hucreler[i];
+      const key = (h.r-minR)+','+(h.c-minC);
+      if(!gorulen.has(key)){ gorulen.add(key); siraliHucreler.push(key); }
+    }
+  });
+
+  const izgara = document.getElementById('cengel64Izgara');
+  izgara.innerHTML = '';
+  izgara.style.gridTemplateColumns = `repeat(${sutunSayisi}, 34px)`;
+  izgara.style.gridTemplateRows = `repeat(${satirSayisi}, 34px)`;
+  cengel64InputMap = {};
+  for(let rr=0; rr<satirSayisi; rr++){
+    for(let cc=0; cc<sutunSayisi; cc++){
+      const key = rr+','+cc;
+      const hucreDiv = document.createElement('div');
+      hucreDiv.style.gridColumn = (cc+1);
+      hucreDiv.style.gridRow = (rr+1);
+      if(cengel64HucreHarita[key] !== undefined){
+        hucreDiv.className = 'cengel-hucre';
+        const girdi = document.createElement('input');
+        girdi.maxLength = 1;
+        girdi.className = 'cengel-girdi';
+        girdi.dataset.key = key;
+        girdi.oninput = (e)=>{
+          e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
+          e.target.classList.remove('dogru','yanlis');
+          const idx = siraliHucreler.indexOf(key);
+          if(idx>=0 && idx<siraliHucreler.length-1){
+            const sonrakiKey = siraliHucreler[idx+1];
+            if(cengel64InputMap[sonrakiKey]) cengel64InputMap[sonrakiKey].focus();
+          }
+        };
+        hucreDiv.appendChild(girdi);
+        cengel64InputMap[key] = girdi;
+      } else {
+        hucreDiv.className = 'cengel-bos';
+      }
+      izgara.appendChild(hucreDiv);
+    }
+  }
+
+  const liste = document.getElementById('cengel64Liste');
+  liste.innerHTML = '';
+  yerlesimler.forEach((p, idx)=>{
+    const li = document.createElement('li');
+    li.textContent = `${idx+1}. ${p.dir==='right'?'➡️':'⬇️'} (${p.kelime.length} harf) ${p.anlam}`;
+    liste.appendChild(li);
+  });
+
+  document.getElementById('cengel64Sonuc').textContent = '';
+}
+
+function cengel64KontrolEt(){
+  let dogruSayisi=0, toplam=0;
+  Object.keys(cengel64HucreHarita).forEach(key=>{
+    toplam++;
+    const girdi = cengel64InputMap[key];
+    const beklenen = cengel64HucreHarita[key];
+    if(girdi.value && girdi.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
+      girdi.classList.add('dogru'); girdi.classList.remove('yanlis');
+      dogruSayisi++;
+    } else {
+      girdi.classList.add('yanlis'); girdi.classList.remove('dogru');
+    }
+  });
+  document.getElementById('cengel64Sonuc').textContent = dogruSayisi===toplam
+    ? `🎉 Tebrikler! Çengel bulmacayı tamamen doğru çözdün! (${dogruSayisi}/${toplam})`
+    : `Sonuç: ${dogruSayisi}/${toplam} doğru harf. Devam et!`;
+}
+
+// =====================================================================
+// SÖZCÜK MERDİVENİ
+// =====================================================================
+const merdiven64Zinciri = [
+  {kelime:"VEBA", anlam:"Mekke'de yaşanan, Hz. Peygamber'in dört yaşına kadar sütannesinin yanında kalmasına sebep olan salgın hastalık"},
+  {kelime:"ABDULLAH", anlam:"Hz. Muhammed'in babası"},
+  {kelime:"HANİF", anlam:"Doğruya ve hakka bağlanan, Allah'ın birliğine iman eden kimse"},
+  {kelime:"FİL", anlam:"Ebrehe'nin Kâbe'yi yıkmak için kullandığı orduda bulunan, Fil suresine adını veren hayvan"},
+];
+const merdiven64Havuz = ["CAHİLİYE","KÂBE","HİCAZ","PUTPEREST","ŞİRK","MÜŞRİK","HADARİ","KABİLE","PANAYIR","EMİN","HİLFÜLFUDUL","HACERÜLESVED","ABDÜLMUTTALİB","HALİME","HATİCE","KÜNYE","AHMED","EBREHE","SANA"];
+let merdiven64Index = 0;
+
+function merdiven64Baslat(){
+  merdiven64Index = 0;
+  document.getElementById('merdiven64Toplam').textContent = merdiven64Zinciri.length;
+  document.getElementById('merdiven64Sonuc').textContent = '';
+  document.getElementById('merdiven64Gorsel').innerHTML = '';
+  merdiven64BasamakEkle(merdiven64Zinciri[0].kelime, 0);
+  merdiven64Tur();
+}
+function merdiven64BasamakEkle(kelime, index){
+  const basamak = document.createElement('div');
+  basamak.style.background='white'; basamak.style.border='2px solid var(--yesil)'; basamak.style.borderRadius='10px';
+  basamak.style.padding='8px 14px'; basamak.style.margin='6px 0'; basamak.style.fontWeight='bold';
+  basamak.style.marginLeft = (index*24) + 'px';
+  basamak.textContent = `${index+1}. ${kelime}`;
+  document.getElementById('merdiven64Gorsel').appendChild(basamak);
+}
+function merdiven64Tur(){
+  document.getElementById('merdiven64Basamak').textContent = merdiven64Index+1;
+  if(merdiven64Index+1 >= merdiven64Zinciri.length){
+    document.getElementById('merdiven64Ipucu').textContent = '';
+    document.getElementById('merdiven64Secenekler').innerHTML = '';
+    document.getElementById('merdiven64Sonuc').textContent = '🎉 Tebrikler! Sözcük merdivenini tamamen tırmandın!';
+    return;
+  }
+  const oncekiKelime = merdiven64Zinciri[merdiven64Index].kelime;
+  const hedef = merdiven64Zinciri[merdiven64Index+1];
+  const gerekliHarf = oncekiKelime[oncekiKelime.length-1];
+  document.getElementById('merdiven64Ipucu').innerHTML = `🗨️ İpucu: <b>${hedef.anlam}</b><br>Bu kelime "<b>${gerekliHarf}</b>" harfiyle başlamalı!`;
+  const yanlisHavuz = karistir(merdiven64Havuz.filter(k=>k!==hedef.kelime)).slice(0,3);
+  const secenekler = karistir([hedef.kelime, ...yanlisHavuz]);
+  const kutu = document.getElementById('merdiven64Secenekler');
+  kutu.innerHTML = '';
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek;
+    btn.onclick = ()=>{
+      if(secenek === hedef.kelime){
+        btn.classList.add('dogru');
+        merdiven64Index++;
+        setTimeout(()=>{ merdiven64BasamakEkle(hedef.kelime, merdiven64Index); merdiven64Tur(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        setTimeout(()=>btn.classList.remove('yanlis'), 400);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// ŞİFRELİ SÖZCÜK
+// =====================================================================
+const turkAlfabesi64 = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split('');
+let sifre64Anahtari = {};
+
+function sifre64Olustur(){
+  const sayilar = karistir(turkAlfabesi64.map((_,i)=>i+1));
+  sifre64Anahtari = {};
+  turkAlfabesi64.forEach((harf,i)=>{ sifre64Anahtari[harf] = sayilar[i]; });
+
+  const anahtarKutu = document.getElementById('sifre64Anahtar');
+  anahtarKutu.innerHTML = '';
+  turkAlfabesi64.forEach(harf=>{
+    const hucre = document.createElement('div');
+    hucre.className = 'sifre-anahtar-hucre';
+    hucre.innerHTML = `<b>${harf}</b><br>${sifre64Anahtari[harf]}`;
+    anahtarKutu.appendChild(hucre);
+  });
+
+  const kutu = document.getElementById('sifre64Kelimeler');
+  kutu.innerHTML = '';
+  document.getElementById('sifre64Sonuc').textContent = '';
+
+  kelimeHavuzu64.slice(0,20).forEach(item=>{
+    const satir = document.createElement('div');
+    satir.className = 'sifre-satir';
+    const anlamP = document.createElement('p');
+    anlamP.className = 'sifre-ipucu';
+    anlamP.textContent = `💡 ${item.anlam}`;
+    satir.appendChild(anlamP);
+
+    const kutucuklar = document.createElement('div');
+    kutucuklar.className = 'sifre-kutucuklar';
+    const harfler = item.kelime.split('');
+    const girdiler = [];
+    harfler.forEach((harf)=>{
+      const grup = document.createElement('div');
+      grup.className = 'sifre-grup';
+      const sayiEtiket = document.createElement('div');
+      sayiEtiket.className = 'sifre-sayi';
+      sayiEtiket.textContent = sifre64Anahtari[harf];
+      const girdi = document.createElement('input');
+      girdi.maxLength = 1;
+      girdi.className = 'sifre-girdi';
+      girdi.dataset.beklenen = harf;
+      grup.appendChild(sayiEtiket);
+      grup.appendChild(girdi);
+      kutucuklar.appendChild(grup);
+      girdiler.push(girdi);
+    });
+    girdiler.forEach((girdi, hIdx)=>{
+      girdi.oninput = (e)=>{
+        e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
+        e.target.classList.remove('dogru','yanlis');
+        if(girdiler[hIdx+1]) girdiler[hIdx+1].focus();
+      };
+    });
+    satir.appendChild(kutucuklar);
+    kutu.appendChild(satir);
+  });
+}
+
+function sifre64KontrolEt(){
+  const girdiler = document.querySelectorAll('#sifre64Kelimeler .sifre-girdi');
+  let dogruSayisi=0;
+  girdiler.forEach(g=>{
+    const beklenen = g.dataset.beklenen;
+    if(g.value && g.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
+      g.classList.add('dogru'); g.classList.remove('yanlis');
+      dogruSayisi++;
+    } else {
+      g.classList.add('yanlis'); g.classList.remove('dogru');
+    }
+  });
+  document.getElementById('sifre64Sonuc').textContent = dogruSayisi===girdiler.length
+    ? `🎉 Tebrikler! Tüm şifreleri doğru çözdün! (${dogruSayisi}/${girdiler.length})`
+    : `Sonuç: ${dogruSayisi}/${girdiler.length} doğru harf. Anahtar tablosuna bakarak devam et!`;
+}
+
+// =====================================================================
+// ŞİFRELİ TANIM
+// =====================================================================
+const st64LeetHarita = {'a':'4','A':'4','e':'3','E':'3','i':'1','I':'1','İ':'1','ı':'1','o':'0','O':'0'};
+function st64TanimSifrele(metin){
+  return metin.split('').map(ch => st64LeetHarita[ch] !== undefined ? st64LeetHarita[ch] : ch).join('');
+}
+let st64Index = 0, st64Puan = 0, st64Sira = [];
+
+function st64Baslat(){
+  st64Sira = karistir(kelimeHavuzu64.slice());
+  st64Index = 0; st64Puan = 0;
+  document.getElementById('st64Puan').textContent = 0;
+  document.getElementById('st64Toplam').textContent = st64Sira.length;
+  document.getElementById('st64Sonuc').textContent = '';
+  st64Tur();
+}
+function st64Tur(){
+  if(st64Index >= st64Sira.length){
+    document.getElementById('st64Tanim').textContent = '';
+    document.getElementById('st64Secenekler').innerHTML = '';
+    document.getElementById('st64Sonuc').textContent = `🏆 Tebrikler! ${st64Puan}/${st64Sira.length} şifreli tanımı doğru çözdün!`;
+    return;
+  }
+  document.getElementById('st64Tur').textContent = st64Index+1;
+  const oge = st64Sira[st64Index];
+  document.getElementById('st64Tanim').textContent = st64TanimSifrele(oge.anlam);
+  const digerler = karistir(kelimeHavuzu64.filter(x=>x.kelime!==oge.kelime)).slice(0,3);
+  const secenekler = karistir([oge, ...digerler]);
+  const kutu = document.getElementById('st64Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.style.display='block'; btn.style.width='100%'; btn.style.marginBottom='6px';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.kelime === oge.kelime){
+        btn.classList.add('dogru');
+        st64Puan++;
+        document.getElementById('st64Puan').textContent = st64Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===oge.kelime) b.classList.add('dogru'); });
+      }
+      st64Index++;
+      setTimeout(()=>st64Tur(), 900);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// KELİME KODLAMA
+// =====================================================================
+const kk64Alfabe = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split('');
+const kk64KodTablosu = {};
+kk64Alfabe.forEach((harf,i)=>{ kk64KodTablosu[harf] = (i+1).toString(2).padStart(5,'0'); });
+function kk64KelimeyiKodla(kelime){
+  return kelime.split('').map(h => kk64KodTablosu[h] || '?????').join(' ');
+}
+let kk64Index = 0, kk64Puan = 0, kk64Sira = [];
+
+function kk64AnahtarOlustur(){
+  const kutu = document.getElementById('kk64Anahtar');
+  kutu.innerHTML = '';
+  kk64Alfabe.forEach(harf=>{
+    const hucre = document.createElement('div');
+    hucre.className = 'sifre-anahtar-hucre';
+    hucre.innerHTML = `<b>${harf}</b><br>${kk64KodTablosu[harf]}`;
+    kutu.appendChild(hucre);
+  });
+}
+function kk64Baslat(){
+  kk64AnahtarOlustur();
+  kk64Sira = karistir(kelimeHavuzu64.slice());
+  kk64Index = 0; kk64Puan = 0;
+  document.getElementById('kk64Puan').textContent = 0;
+  document.getElementById('kk64Toplam').textContent = kk64Sira.length;
+  document.getElementById('kk64Sonuc').textContent = '';
+  kk64Tur();
+}
+function kk64Tur(){
+  if(kk64Index >= kk64Sira.length){
+    document.getElementById('kk64Kod').textContent = '';
+    document.getElementById('kk64Ipucu').textContent = '';
+    document.getElementById('kk64Secenekler').innerHTML = '';
+    document.getElementById('kk64Sonuc').textContent = `🏆 Tebrikler! ${kk64Puan}/${kk64Sira.length} kodu doğru çözdün!`;
+    return;
+  }
+  document.getElementById('kk64Tur').textContent = kk64Index+1;
+  const oge = kk64Sira[kk64Index];
+  document.getElementById('kk64Ipucu').innerHTML = `💡 İpucu: <b>${oge.anlam}</b>`;
+  document.getElementById('kk64Kod').textContent = kk64KelimeyiKodla(oge.kelime);
+  const digerler = karistir(kelimeHavuzu64.filter(x=>x.kelime!==oge.kelime)).slice(0,3);
+  const secenekler = karistir([oge, ...digerler]);
+  const kutu = document.getElementById('kk64Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.style.display='block'; btn.style.width='100%'; btn.style.marginBottom='6px';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.kelime === oge.kelime){
+        btn.classList.add('dogru');
+        kk64Puan++;
+        document.getElementById('kk64Puan').textContent = kk64Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===oge.kelime) b.classList.add('dogru'); });
+      }
+      kk64Index++;
+      setTimeout(()=>kk64Tur(), 1000);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// NONOGRAM
+// =====================================================================
+const nonogram64Resimleri = {
+  camii: {
+    etiket: "🕌 Cami (İbadet Yeri)",
+    veri: [
+      "0000000000000000","0000000000000000","0000000000001000","0000000000001100",
+      "0000001000001100","0000111110001100","0001111111001100","0001111111001100",
+      "0011111111101100","0011111111101100","0011111111101100","0011100111101100",
+      "0011100111101100","0011100111111110","0000000000011110","0000000000000000",
+    ],
+  },
+  hilal: {
+    etiket: "🌙⭐ Hilal ve Yıldız",
+    veri: [
+      "0000000000000000","0000011111000000","0001111000001000","0011110000011100",
+      "0011100000111110","0111100000011100","0111100000001000","0111000000000000",
+      "0111100000000000","0111100000000000","0011100000000000","0011110000000000",
+      "0001111000000000","0000011111000000","0000000000000000","0000000000000000",
+    ],
+  },
+};
+let nonogram64AktifResim = 'camii';
+const nono64Boyut = nonogram64Resimleri.camii.veri.length;
+let nono64KullaniciIzgara = [];
+let nono64HucreElemanlari = [];
+
+function ipucu64Hesapla(diziStr){
+  const gruplar = diziStr.split('0').filter(s=>s.length>0).map(s=>s.length);
+  return gruplar.length ? gruplar : [0];
+}
+function nonogram64Sec(resimAdi){ nonogram64AktifResim = resimAdi; nonogram64Olustur(); }
+function nonogram64Olustur(){
+  const cozum = nonogram64Resimleri[nonogram64AktifResim].veri;
+  nono64KullaniciIzgara = Array.from({length:nono64Boyut}, ()=>Array(nono64Boyut).fill(false));
+  document.getElementById('nono64Sonuc').textContent = '';
+  const satirIpuclari = cozum.map(r=>ipucu64Hesapla(r));
+  const sutunDizeleri = [];
+  for(let c=0;c<nono64Boyut;c++){
+    let s='';
+    for(let r=0;r<nono64Boyut;r++) s += cozum[r][c];
+    sutunDizeleri.push(s);
+  }
+  const sutunIpuclari = sutunDizeleri.map(s=>ipucu64Hesapla(s));
+  const tablo = document.getElementById('nono64Tablo');
+  tablo.innerHTML = '';
+  const basSatir = document.createElement('tr');
+  const koseTd = document.createElement('td');
+  basSatir.appendChild(koseTd);
+  for(let c=0;c<nono64Boyut;c++){
+    const td = document.createElement('td');
+    td.className = 'nono-sutun-ipucu';
+    sutunIpuclari[c].forEach((sayi,i)=>{
+      if(i>0) td.appendChild(document.createElement('br'));
+      td.appendChild(document.createTextNode(sayi));
+    });
+    if((c+1)%5===0 && c<nono64Boyut-1) td.style.borderRight = '2px solid #333';
+    basSatir.appendChild(td);
+  }
+  tablo.appendChild(basSatir);
+  nono64HucreElemanlari = [];
+  for(let r=0;r<nono64Boyut;r++){
+    const tr = document.createElement('tr');
+    const satirTd = document.createElement('td');
+    satirTd.className = 'nono-satir-ipucu';
+    satirTd.textContent = satirIpuclari[r].join(' ');
+    if((r+1)%5===0 && r<nono64Boyut-1) satirTd.style.borderBottom = '2px solid #333';
+    tr.appendChild(satirTd);
+    nono64HucreElemanlari.push([]);
+    for(let c=0;c<nono64Boyut;c++){
+      const td = document.createElement('td');
+      td.className = 'nono-hucre';
+      if((c+1)%5===0 && c<nono64Boyut-1) td.style.borderRight = '2px solid #333';
+      if((r+1)%5===0 && r<nono64Boyut-1) td.style.borderBottom = '2px solid #333';
+      td.onclick = ((rr,cc)=>()=>{
+        nono64KullaniciIzgara[rr][cc] = !nono64KullaniciIzgara[rr][cc];
+        td.classList.toggle('dolu', nono64KullaniciIzgara[rr][cc]);
+        nonogram64KontrolEt(false);
+      })(r,c);
+      tr.appendChild(td);
+      nono64HucreElemanlari[r].push(td);
+    }
+    tablo.appendChild(tr);
+  }
+}
+function nonogram64KontrolEt(manuel){
+  const cozum = nonogram64Resimleri[nonogram64AktifResim].veri;
+  let tamMi = true;
+  for(let r=0;r<nono64Boyut;r++){
+    for(let c=0;c<nono64Boyut;c++){
+      const beklenen = cozum[r][c] === '1';
+      if(nono64KullaniciIzgara[r][c] !== beklenen) tamMi = false;
+    }
+  }
+  if(tamMi){
+    document.getElementById('nono64Sonuc').textContent = `🎉 Tebrikler! Gizli resmi (${nonogram64Resimleri[nonogram64AktifResim].etiket}) doğru tamamladın!`;
+  } else if(manuel){
+    document.getElementById('nono64Sonuc').textContent = 'Henüz tam değil, ipuçlarına bakarak devam et!';
+  }
+}
+function nonogram64Temizle(){
+  nono64KullaniciIzgara = Array.from({length:nono64Boyut}, ()=>Array(nono64Boyut).fill(false));
+  nono64HucreElemanlari.forEach(satir=>satir.forEach(td=>td.classList.remove('dolu')));
+  document.getElementById('nono64Sonuc').textContent = '';
+}
+
+// =====================================================================
+// KELİME SATRANCI
+// =====================================================================
+const ks64Boyut = 8;
+const ks64AtHamleleri = [[1,2],[1,-2],[-1,2],[-1,-2],[2,1],[2,-1],[-2,1],[-2,-1]];
+const ks64KelimeListesi = [
+  {kelime:"KÂBE", anlam:"Kur'an'a göre yeryüzündeki ilk mabet, Hz. Âdem'in yapıp Hz. İbrahim ve Hz. İsmail'in yeniden inşa ettiği kutsal mekân"},
+  {kelime:"ŞİRK", anlam:"Allah'tan başka ilah olduğuna inanmak ve ona tapmak"},
+  {kelime:"FİL", anlam:"Ebrehe'nin Kâbe'yi yıkmak için kullandığı orduda bulunan, Fil suresine adını veren hayvan"},
+  {kelime:"EMİN", anlam:"Hz. Muhammed'e dürüstlüğü ve güvenilirliği sebebiyle Mekke halkı tarafından verilen lakap"},
+  {kelime:"SANA", anlam:"Ebrehe'nin dinî ve ticari merkez yapmak istediği Yemen şehri"},
+  {kelime:"VEBA", anlam:"Mekke'de yaşanan, Hz. Peygamber'in dört yaşına kadar sütannesinin yanında kalmasına sebep olan salgın hastalık"},
+  {kelime:"AMİNE", anlam:"Hz. Muhammed'in annesi"},
+  {kelime:"KASIM", anlam:"Hz. Muhammed'in ilk çocuğu, künyesinin kaynağı"},
+];
+const ks64AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+let ks64IzgaraVeri = [];
+let ks64HucreElemanlari = [];
+let ks64BulunanKelimeler = new Set();
+let ks64Yol = [];
+
+function ks64KelimeYerlestir(izgara, kelime){
+  for(let deneme=0; deneme<300; deneme++){
+    const gecici = izgara.map(satir=>satir.slice());
+    const r0 = Math.floor(Math.random()*ks64Boyut);
+    const c0 = Math.floor(Math.random()*ks64Boyut);
+    if(gecici[r0][c0] !== null && gecici[r0][c0] !== kelime[0]) continue;
+    gecici[r0][c0] = kelime[0];
+    const hucreler = [{r:r0,c:c0}];
+    const kullanilan = new Set([r0+','+c0]);
+    let r=r0, c=c0, basarili=true;
+    for(let i=1;i<kelime.length;i++){
+      const olasilar = karistir(ks64AtHamleleri.slice()).filter(([dr,dc])=>{
+        const nr=r+dr, nc=c+dc;
+        if(nr<0 || nr>=ks64Boyut || nc<0 || nc>=ks64Boyut) return false;
+        if(kullanilan.has(nr+','+nc)) return false;
+        return gecici[nr][nc]===null || gecici[nr][nc]===kelime[i];
+      });
+      if(olasilar.length===0){ basarili=false; break; }
+      const [dr,dc] = olasilar[0];
+      r+=dr; c+=dc;
+      gecici[r][c] = kelime[i];
+      hucreler.push({r,c});
+      kullanilan.add(r+','+c);
+    }
+    if(basarili){
+      hucreler.forEach((h,i)=>{ izgara[h.r][h.c] = kelime[i]; });
+      return hucreler;
+    }
+  }
+  return null;
+}
+function ks64Olustur(){
+  let izgara, basarili=false;
+  for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
+    izgara = Array.from({length:ks64Boyut}, ()=>Array(ks64Boyut).fill(null));
+    basarili = true;
+    const siraliKelimeler = ks64KelimeListesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    for(const item of siraliKelimeler){
+      const hucreler = ks64KelimeYerlestir(izgara, item.kelime);
+      if(!hucreler){ basarili=false; break; }
+    }
+  }
+  for(let r=0;r<ks64Boyut;r++){
+    for(let c=0;c<ks64Boyut;c++){
+      if(izgara[r][c]===null) izgara[r][c] = ks64AsciiHarfler[Math.floor(Math.random()*ks64AsciiHarfler.length)];
+    }
+  }
+  ks64IzgaraVeri = izgara;
+  ks64BulunanKelimeler = new Set();
+  ks64Yol = [];
+  const kutu = document.getElementById('ks64Izgara');
+  kutu.innerHTML = '';
+  ks64HucreElemanlari = [];
+  for(let r=0;r<ks64Boyut;r++){
+    ks64HucreElemanlari.push([]);
+    for(let c=0;c<ks64Boyut;c++){
+      const h = document.createElement('div');
+      h.className = 'ks-hucre ' + ((r+c)%2===0 ? 'acik' : 'koyu');
+      h.textContent = izgara[r][c];
+      h.onclick = ()=>ks64Tikla(r,c);
+      kutu.appendChild(h);
+      ks64HucreElemanlari[r].push(h);
+    }
+  }
+  const liste = document.getElementById('ks64Liste');
+  liste.innerHTML = '';
+  ks64KelimeListesi.forEach(item=>{
+    const li = document.createElement('li');
+    li.id = 'ks64-kelime-' + item.kelime;
+    li.textContent = `${item.kelime} — ${item.anlam}`;
+    liste.appendChild(li);
+  });
+  document.getElementById('ks64Bulunan').textContent = 0;
+  document.getElementById('ks64Toplam').textContent = ks64KelimeListesi.length;
+  document.getElementById('ks64Sonuc').textContent = '';
+}
+function ks64SecimiTemizle(){
+  ks64Yol.forEach(p=>ks64HucreElemanlari[p.r][p.c].classList.remove('ks-secili'));
+  ks64Yol = [];
+}
+function ks64Tikla(r,c){
+  const hucreEl = ks64HucreElemanlari[r][c];
+  if(hucreEl.classList.contains('ks-bulundu')) return;
+  let yeniYol;
+  if(ks64Yol.length===0){ yeniYol = [{r,c}]; }
+  else {
+    const son = ks64Yol[ks64Yol.length-1];
+    const gecerliHamle = ks64AtHamleleri.some(([hr,hc]) => son.r+hr===r && son.c+hc===c);
+    yeniYol = gecerliHamle ? [...ks64Yol, {r,c}] : [{r,c}];
+  }
+  const dizi = yeniYol.map(p=>ks64IzgaraVeri[p.r][p.c]).join('');
+  const tamEslesen = ks64KelimeListesi.find(item => item.kelime===dizi && !ks64BulunanKelimeler.has(item.kelime));
+  const onEkMi = ks64KelimeListesi.some(item => !ks64BulunanKelimeler.has(item.kelime) && item.kelime.startsWith(dizi));
+  ks64Yol.forEach(p=>ks64HucreElemanlari[p.r][p.c].classList.remove('ks-secili'));
+  if(tamEslesen){
+    yeniYol.forEach(p=>ks64HucreElemanlari[p.r][p.c].classList.add('ks-bulundu'));
+    ks64BulunanKelimeler.add(tamEslesen.kelime);
+    document.getElementById('ks64Bulunan').textContent = ks64BulunanKelimeler.size;
+    document.getElementById('ks64-kelime-'+tamEslesen.kelime).classList.add('bulundu-satir');
+    ks64Yol = [];
+    if(ks64BulunanKelimeler.size === ks64KelimeListesi.length){
+      document.getElementById('ks64Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri at hamlesiyle buldun!';
+    }
+  } else if(onEkMi){
+    yeniYol.forEach(p=>ks64HucreElemanlari[p.r][p.c].classList.add('ks-secili'));
+    ks64Yol = yeniYol;
+  } else {
+    const tekBaslangicUygun = ks64KelimeListesi.some(item => !ks64BulunanKelimeler.has(item.kelime) && item.kelime[0]===ks64IzgaraVeri[r][c]);
+    if(tekBaslangicUygun){ ks64Yol = [{r,c}]; hucreEl.classList.add('ks-secili'); }
+    else { ks64Yol = []; }
+  }
+}
+
+// =====================================================================
+// KELİME DEDEKTİFİ
+// =====================================================================
+const dd64KelimeHavuzu = kelimeHavuzu64.filter(x => x.kelime.length>=5 && x.kelime.length<=8);
+let dd64Hedef = null, dd64Deneme = 0;
+const dd64MaxDeneme = 5, dd64IpucuAcilmaSiniri = 2;
+let dd64Bitti = true, dd64SiraliVakalar = [], dd64VakaIndex = 0, dd64CozulenSayisi = 0;
+
+function dd64Baslat(){
+  dd64SiraliVakalar = karistir(dd64KelimeHavuzu.slice());
+  dd64VakaIndex = 0; dd64CozulenSayisi = 0;
+  document.getElementById('dd64Cozulen').textContent = 0;
+  document.getElementById('dd64ToplamVaka').textContent = dd64SiraliVakalar.length;
+  document.getElementById('dd64MaxDeneme').textContent = dd64MaxDeneme;
+  dd64VakaBaslat();
+}
+function dd64VakaBaslat(){
+  if(dd64VakaIndex >= dd64SiraliVakalar.length){
+    document.getElementById('dd64Ipucu').textContent = '';
+    document.getElementById('dd64Izgara').innerHTML = '';
+    document.getElementById('dd64Girdi').disabled = true;
+    document.getElementById('dd64Sonuc').textContent = `🏆 Tüm vakalar bitti! ${dd64CozulenSayisi}/${dd64SiraliVakalar.length} vakayı çözdün!`;
+    return;
+  }
+  document.getElementById('dd64Vaka').textContent = dd64VakaIndex+1;
+  dd64Hedef = dd64SiraliVakalar[dd64VakaIndex];
+  dd64Deneme = 0; dd64Bitti = false;
+  document.getElementById('dd64Ipucu').innerHTML = `🔍 Vaka: <b>${dd64Hedef.kelime.length} harfli</b> bir kavram (anlamı ${dd64IpucuAcilmaSiniri} yanlış tahminden sonra açılacak!)`;
+  document.getElementById('dd64Deneme').textContent = 0;
+  document.getElementById('dd64Izgara').innerHTML = '';
+  document.getElementById('dd64Sonuc').textContent = '';
+  document.getElementById('dd64Uyari').textContent = '';
+  const girdi = document.getElementById('dd64Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.maxLength = dd64Hedef.kelime.length; girdi.focus();
+}
+function dd64TahminEt(){
+  if(dd64Bitti) return;
+  const girdi = document.getElementById('dd64Girdi');
+  const tahmin = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  if(tahmin.length !== dd64Hedef.kelime.length){
+    document.getElementById('dd64Uyari').textContent = `Tahminin ${dd64Hedef.kelime.length} harfli olmalı!`;
+    return;
+  }
+  document.getElementById('dd64Uyari').textContent = '';
+  const hedefHarfler = dd64Hedef.kelime.split('');
+  const tahminHarfler = tahmin.split('');
+  const durumlar = new Array(tahminHarfler.length).fill('yok');
+  const kullanilan = new Array(hedefHarfler.length).fill(false);
+  tahminHarfler.forEach((h,i)=>{ if(h === hedefHarfler[i]){ durumlar[i]='dogru-yer'; kullanilan[i]=true; } });
+  tahminHarfler.forEach((h,i)=>{
+    if(durumlar[i]==='dogru-yer') return;
+    const idx = hedefHarfler.findIndex((hh,j)=> hh===h && !kullanilan[j]);
+    if(idx!==-1){ durumlar[i]='yanlis-yer'; kullanilan[idx]=true; }
+  });
+  const satir = document.createElement('div');
+  satir.className = 'dd-satir';
+  tahminHarfler.forEach((h,i)=>{
+    const kutu = document.createElement('div');
+    kutu.className = 'dd-kutu ' + durumlar[i];
+    kutu.textContent = h;
+    satir.appendChild(kutu);
+  });
+  document.getElementById('dd64Izgara').appendChild(satir);
+  dd64Deneme++;
+  document.getElementById('dd64Deneme').textContent = dd64Deneme;
+  girdi.value = '';
+  if(tahmin === dd64Hedef.kelime){
+    dd64Bitti = true; girdi.disabled = true;
+    dd64CozulenSayisi++;
+    document.getElementById('dd64Cozulen').textContent = dd64CozulenSayisi;
+    document.getElementById('dd64Ipucu').innerHTML = `🔍 İpucu: <b>${dd64Hedef.anlam}</b> (${dd64Hedef.kelime.length} harfli)`;
+    document.getElementById('dd64Sonuc').textContent = `🎉 Vaka çözüldü! Kelime: ${dd64Hedef.kelime} (${dd64Deneme} denemede)`;
+    dd64VakaIndex++;
+    setTimeout(()=>dd64VakaBaslat(), 1500);
+  } else if(dd64Deneme >= dd64MaxDeneme){
+    dd64Bitti = true; girdi.disabled = true;
+    document.getElementById('dd64Ipucu').innerHTML = `🔍 İpucu: <b>${dd64Hedef.anlam}</b> (${dd64Hedef.kelime.length} harfli)`;
+    document.getElementById('dd64Sonuc').textContent = `🔍 Vaka çözülemedi! Doğru kelime: ${dd64Hedef.kelime} — ${dd64Hedef.anlam}`;
+    dd64VakaIndex++;
+    setTimeout(()=>dd64VakaBaslat(), 2200);
+  } else if(dd64Deneme >= dd64IpucuAcilmaSiniri){
+    document.getElementById('dd64Ipucu').innerHTML = `🔍 İpucu açıldı: <b>${dd64Hedef.anlam}</b> (${dd64Hedef.kelime.length} harfli)`;
+  }
+}
+
+// =====================================================================
+// DİL DEDEKTİFİ
+// =====================================================================
+const dilDedektifi64Listesi = [
+  {dogru:"Hz. Muhammed, Arap Yarımadası'nın Hicaz bölgesinde Mekke'de doğmuştur.", yanlislar:["Hz. Muhammed, Yemen bölgesinde doğmuştur.","Hz. Muhammed, Medine'de doğmuştur.","Hz. Muhammed'in doğduğu yer bilinmemektedir."]},
+  {dogru:"Kâbe, Hz. Âdem tarafından yapılmış, Hz. İbrahim ve Hz. İsmail tarafından yeniden inşa edilmiştir.", yanlislar:["Kâbe, Hz. Musa tarafından yapılmıştır.","Kâbe'yi kimin yaptığı bilinmemektedir.","Kâbe, Hz. Muhammed tarafından yapılmıştır."]},
+  {dogru:"Mekke halkı yaşam tarzlarına göre bedevi ve hadari olarak ikiye ayrılırdı.", yanlislar:["Mekke halkı sadece bedevilerden oluşurdu.","Mekke halkı sadece hadarilerden oluşurdu.","Mekke halkında böyle bir ayrım yoktu."]},
+  {dogru:"Hz. Muhammed'in dedesi Abdülmuttalib, Kureyş kabilesinin reisiydi.", yanlislar:["Hz. Muhammed'in dedesi bir çobandı.","Hz. Muhammed'in dedesi bir tüccardı.","Hz. Muhammed'in dedesinin kabileyle ilgisi yoktu."]},
+  {dogru:"Hz. Muhammed, dört yaşına kadar sütannesi Halime'nin yanında kalmıştır.", yanlislar:["Hz. Muhammed hiç sütanneye verilmemiştir.","Hz. Muhammed on yaşına kadar sütannesinin yanında kalmıştır.","Hz. Muhammed'in sütannesi yoktu."]},
+  {dogru:"Hz. Muhammed altı yaşındayken annesi Amine, Ebva köyünde vefat etmiştir.", yanlislar:["Hz. Muhammed'in annesi Mekke'de vefat etmiştir.","Hz. Muhammed'in annesi çok uzun yaşamıştır.","Hz. Muhammed'in annesi hiç vefat etmemiştir."]},
+  {dogru:"Mekke halkı, Hz. Muhammed'e dürüstlüğünden dolayı 'el-emin' lakabını vermiştir.", yanlislar:["Mekke halkı Hz. Muhammed'e kötü bir lakap vermiştir.","Hz. Muhammed'in hiç lakabı yoktu.","el-Emin lakabı başka bir kişiye verilmiştir."]},
+  {dogru:"Hilfülfudul, haksızlığa uğrayanlara yardım etmek amacıyla kurulmuş bir topluluktur.", yanlislar:["Hilfülfudul bir ticaret şirketidir.","Hilfülfudul bir savaş ittifakıdır.","Hilfülfudul'ün amacı bilinmemektedir."]},
+  {dogru:"Hz. Muhammed, Hacerülesved'in yerine konulması sırasında hakem seçilmiştir.", yanlislar:["Hz. Muhammed bu olaya hiç katılmamıştır.","Hakem olarak Ebu Talib seçilmiştir.","Bu konuda hiçbir anlaşmazlık yaşanmamıştır."]},
+  {dogru:"Fil suresi, Ebrehe'nin Kâbe'yi yıkmaya gelişinin engellenmesini anlatır.", yanlislar:["Fil suresi bir savaş kazanımını anlatır.","Fil suresi bir hac yolculuğunu anlatır.","Fil suresinin konusu bilinmemektedir."]},
+];
+let ddl64Index = 0, ddl64Puan = 0, ddl64Sira = [];
+
+function ddl64Baslat(){
+  ddl64Sira = karistir(dilDedektifi64Listesi.slice());
+  ddl64Index = 0; ddl64Puan = 0;
+  document.getElementById('ddl64Puan').textContent = 0;
+  document.getElementById('ddl64Toplam').textContent = ddl64Sira.length;
+  document.getElementById('ddl64Sonuc').textContent = '';
+  ddl64Tur();
+}
+function ddl64Tur(){
+  if(ddl64Index >= ddl64Sira.length){
+    document.getElementById('ddl64Secenekler').innerHTML = '';
+    document.getElementById('ddl64Baslik').textContent = '';
+    document.getElementById('ddl64Sonuc').textContent = `🕵️ Soruşturma bitti! ${ddl64Puan}/${ddl64Sira.length} doğru bilgiyi tespit ettin!`;
+    return;
+  }
+  document.getElementById('ddl64Tur').textContent = ddl64Index+1;
+  const oge = ddl64Sira[ddl64Index];
+  document.getElementById('ddl64Baslik').textContent = '🔎 Hangi cümle DOĞRU bilgi veriyor?';
+  const secenekler = karistir([{metin:oge.dogru, dogruMu:true}, ...oge.yanlislar.map(y=>({metin:y, dogruMu:false}))]);
+  const kutu = document.getElementById('ddl64Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek.metin;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.dogruMu){
+        btn.classList.add('dogru');
+        ddl64Puan++;
+        document.getElementById('ddl64Puan').textContent = ddl64Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent === oge.dogru) b.classList.add('dogru'); });
+      }
+      ddl64Index++;
+      setTimeout(()=>ddl64Tur(), 1200);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// MANTIK ZİNCİRİ
+// =====================================================================
+const mantikZinciri64 = [
+  {kavram:"HALİME", tanim:"Hz. Muhammed'in sütannesi (0-4 yaş)", mantik:"Sütannesinin yanından ayrılınca 4-6 yaş arasında kiminle yaşamıştır?"},
+  {kavram:"AMİNE", tanim:"Hz. Muhammed'in annesi (4-6 yaş)", mantik:"Annesi vefat edince 6-8 yaş arasında kimin himayesine girmiştir?"},
+  {kavram:"ABDÜLMUTTALİB", tanim:"Hz. Muhammed'in dedesi (6-8 yaş)", mantik:"Dedesi vefat edince 8-25 yaş arasında kimin yanında yaşamıştır?"},
+  {kavram:"EBUTALİB", tanim:"Hz. Muhammed'in amcası (8-25 yaş)", mantik:"Ticaret kervanını yönettiği, sonra evlendiği zengin kadın kimdir?"},
+  {kavram:"HATİCE", tanim:"Hz. Muhammed'in eşi", mantik:""},
+];
+let mz64Index = 0;
+
+function mz64Baslat(){
+  mz64Index = 0;
+  document.getElementById('mz64Toplam').textContent = mantikZinciri64.length;
+  document.getElementById('mz64Sonuc').textContent = '';
+  document.getElementById('mz64Gorsel').innerHTML = '';
+  mz64HalkaEkle(mantikZinciri64[0].kavram, 0);
+  mz64Tur();
+}
+function mz64HalkaEkle(kavram, index){
+  const halka = document.createElement('div');
+  halka.style.background='white'; halka.style.border='2px solid var(--yesil)'; halka.style.borderRadius='10px';
+  halka.style.padding='8px 14px'; halka.style.margin='6px 0'; halka.style.fontWeight='bold';
+  halka.style.marginLeft = (index*24) + 'px';
+  halka.textContent = `${index+1}. ${kavram}`;
+  document.getElementById('mz64Gorsel').appendChild(halka);
+}
+function mz64Tur(){
+  document.getElementById('mz64Halka').textContent = mz64Index+1;
+  if(mz64Index+1 >= mantikZinciri64.length){
+    document.getElementById('mz64Soru').textContent = '';
+    document.getElementById('mz64Secenekler').innerHTML = '';
+    document.getElementById('mz64Sonuc').textContent = '🎉 Tebrikler! Mantık zincirini tamamen çözdün!';
+    return;
+  }
+  const mevcut = mantikZinciri64[mz64Index];
+  const hedef = mantikZinciri64[mz64Index+1];
+  document.getElementById('mz64Soru').innerHTML = `🔗 <b>${mevcut.kavram}</b>: ${mevcut.tanim}<br>❓ ${mevcut.mantik}`;
+  const havuzDistractor = karistir(kelimeHavuzu64.filter(x => x.kelime!==hedef.kavram && !mantikZinciri64.some(z=>z.kavram===x.kelime))).slice(0,3);
+  const secenekler = karistir([{kelime:hedef.kavram}, ...havuzDistractor]);
+  const kutu = document.getElementById('mz64Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      if(secenek.kelime === hedef.kavram){
+        tiklandiMi = true;
+        btn.classList.add('dogru');
+        mz64Index++;
+        setTimeout(()=>{ mz64HalkaEkle(hedef.kavram, mz64Index); mz64Tur(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        setTimeout(()=>btn.classList.remove('yanlis'), 400);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// SEMANTİK LABİRENT
+// =====================================================================
+const semantikOdalar64 = [
+  {kategori:"CAHİLİYE DÖNEMİ İNANÇLARI (Putperest, Şirk, Müşrik gibi)", kelimeler:["PUTPEREST","ŞİRK","MÜŞRİK","KABİLE"], oddKelime:"KABİLE"},
+  {kategori:"MEKKE TOPLUMU KAVRAMLARI (Bedevi, Hadari, Kabile gibi)", kelimeler:["BEDEVİ","HADARİ","KABİLE","HANİF"], oddKelime:"HANİF"},
+  {kategori:"HZ. MUHAMMED'İN AİLE BÜYÜKLERİ (Abdülmuttalib, Amine, Halime gibi)", kelimeler:["ABDÜLMUTTALİB","AMİNE","HALİME","HATİCE"], oddKelime:"HATİCE"},
+  {kategori:"HZ. MUHAMMED'İN GENÇLİK YILLARI KAVRAMLARI (Emin, Hilfülfudul, Hacerülesved gibi)", kelimeler:["EMİN","HİLFÜLFUDUL","HACERÜLESVED","KÂBE"], oddKelime:"KÂBE"},
+  {kategori:"HZ. MUHAMMED'İN İSİMLERİ (Ahmed, Mustafa gibi)", kelimeler:["AHMED","MUSTAFA","KASIM","PANAYIR"], oddKelime:"PANAYIR"},
+  {kategori:"FİL VAKASI KAVRAMLARI (Fil, Ebrehe, Sana gibi)", kelimeler:["FİL","EBREHE","SANA","VEBA"], oddKelime:"VEBA"},
+];
+let sz64OdaIndex = 0, sz64Can = 3;
+
+function sz64CanGoster(){ document.getElementById('sz64Can').textContent = '❤️'.repeat(Math.max(sz64Can,0)) + '🖤'.repeat(Math.max(3-sz64Can,0)); }
+function sz64Baslat(){
+  sz64OdaIndex = 0; sz64Can = 3;
+  document.getElementById('sz64ToplamOda').textContent = semantikOdalar64.length;
+  sz64CanGoster();
+  document.getElementById('sz64Sonuc').textContent = '';
+  sz64OdaGoster();
+}
+function sz64OdaGoster(){
+  document.getElementById('sz64Oda').textContent = sz64OdaIndex+1;
+  const oda = semantikOdalar64[sz64OdaIndex];
+  document.getElementById('sz64Kategori').innerHTML = `🚪 Oda ${sz64OdaIndex+1}: Bu kategoriye AİT OLMAYAN kelimeyi bul, kapıyı aç!<br>📂 Kategori: <b>${oda.kategori}</b>`;
+  const kutu = document.getElementById('sz64Secenekler');
+  kutu.innerHTML = '';
+  const karisikKelimeler = karistir(oda.kelimeler.slice());
+  karisikKelimeler.forEach(kelime=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = kelime;
+    btn.onclick = ()=>{
+      if(kelime === oda.oddKelime){
+        btn.classList.add('dogru');
+        sz64OdaIndex++;
+        setTimeout(()=>{
+          if(sz64OdaIndex >= semantikOdalar64.length){
+            document.getElementById('sz64Kategori').textContent = '';
+            document.getElementById('sz64Secenekler').innerHTML = '';
+            document.getElementById('sz64Sonuc').textContent = '🎉 Tebrikler! Semantik labirentten çıktın!';
+          } else { sz64OdaGoster(); }
+        }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        sz64Can--;
+        sz64CanGoster();
+        if(sz64Can<=0){
+          setTimeout(()=>{
+            sz64OdaIndex = 0; sz64Can = 3;
+            sz64CanGoster();
+            document.getElementById('sz64Sonuc').textContent = '💥 Canların bitti, labirentte kayboldun! Baştan başlıyorsun...';
+            setTimeout(()=>{ document.getElementById('sz64Sonuc').textContent=''; sz64OdaGoster(); }, 1500);
+          }, 500);
+        } else {
+          setTimeout(()=>btn.classList.remove('yanlis'), 400);
+        }
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// ÇELİŞKİ AVI
+// =====================================================================
+const celiskiListesi64 = [
+  {kelime:"Kâbe", anlam1:"yeryüzündeki ilk mabet", anlam2:"Kâbe'nin güneydoğu köşesine yerleştirilen siyah taş", celiskiVarMi:true},
+  {kelime:"Emin", anlam1:"Hz. Muhammed'e dürüstlüğü sebebiyle verilen lakap", anlam2:"erdemli insanların haksızlığa karşı kurduğu topluluk", celiskiVarMi:true},
+  {kelime:"Amine", anlam1:"Hz. Muhammed'in annesi", anlam2:"Hz. Muhammed'in sütannesi", celiskiVarMi:true},
+  {kelime:"Abdülmuttalib", anlam1:"Hz. Muhammed'in dedesi", anlam2:"Hz. Muhammed'in amcası", celiskiVarMi:true},
+  {kelime:"Hatice", anlam1:"Hz. Muhammed'in eşi", anlam2:"Hz. Muhammed'in ilk çocuğu", celiskiVarMi:true},
+  {kelime:"Fil", anlam1:"Ebrehe'nin Kâbe'yi yıkmak için kullandığı ordudaki hayvan", anlam2:"Kâbe'yi yıkmak isteyen Yemen Valisi", celiskiVarMi:true},
+  {kelime:"Cahiliye", anlam1:"putlara tapma, adaletsizlik gibi davranışların yaygın olduğu dönem", anlam2:"İslamiyet öncesi Arapların inanç ve davranışlarını ifade eden dönem", celiskiVarMi:false},
+  {kelime:"Kabile", anlam1:"aynı atadan gelen, kan bağıyla bağlı insan topluluğu", anlam2:"büyük bir insan topluluğu", celiskiVarMi:false},
+  {kelime:"Bedevi", anlam1:"göçebe yaşayan Mekke halkı", anlam2:"hayvancılık ve ticaretle uğraşan kimse", celiskiVarMi:false},
+  {kelime:"Künye", anlam1:"kişiler için kullanılan tanıtıcı ibare", anlam2:"genelde 'ebû' kelimesiyle yapılan isim", celiskiVarMi:false},
+  {kelime:"Hanif", anlam1:"Allah'ın birliğine iman eden kimse", anlam2:"tevhit anlayışını benimseyen kimse", celiskiVarMi:false},
+  {kelime:"Panayır", anlam1:"Mekke'de yılın belli zamanlarında kurulan pazar", anlam2:"sosyal ve ticari etkinliklerin yapıldığı yer", celiskiVarMi:false},
+];
+let ca64Index = 0, ca64Puan = 0, ca64Sira = [], ca64Kilit = false;
+
+function ca64Baslat(){
+  ca64Sira = karistir(celiskiListesi64.slice());
+  ca64Index = 0; ca64Puan = 0;
+  document.getElementById('ca64Puan').textContent = 0;
+  document.getElementById('ca64Toplam').textContent = ca64Sira.length;
+  document.getElementById('ca64Sonuc').textContent = '';
+  document.getElementById('ca64Butonlar').style.display = 'flex';
+  ca64Tur();
+}
+function ca64Tur(){
+  if(ca64Index >= ca64Sira.length){
+    document.getElementById('ca64Cumle').textContent = '';
+    document.getElementById('ca64Butonlar').style.display = 'none';
+    document.getElementById('ca64GeriBildirim').textContent = '';
+    document.getElementById('ca64Sonuc').textContent = `🕵️ Avın bitti! ${ca64Puan}/${ca64Sira.length} çelişkiyi doğru tespit ettin!`;
+    return;
+  }
+  document.getElementById('ca64Tur').textContent = ca64Index+1;
+  const oge = ca64Sira[ca64Index];
+  document.getElementById('ca64Cumle').innerHTML = `"<b>${oge.kelime}</b>" hem "${oge.anlam1}" hem de "${oge.anlam2}" demektir.`;
+  document.getElementById('ca64GeriBildirim').textContent = '';
+  ca64Kilit = false;
+}
+function ca64Cevapla(cevapVarMi){
+  if(ca64Kilit) return;
+  ca64Kilit = true;
+  const oge = ca64Sira[ca64Index];
+  const dogruMu = (cevapVarMi === oge.celiskiVarMi);
+  if(dogruMu){
+    ca64Puan++;
+    document.getElementById('ca64Puan').textContent = ca64Puan;
+    document.getElementById('ca64GeriBildirim').textContent = '✅ Doğru!';
+  } else {
+    document.getElementById('ca64GeriBildirim').textContent = `❌ Yanlış! Doğrusu: ${oge.celiskiVarMi ? 'Çelişki VAR' : 'Çelişki YOK'}`;
+  }
+  ca64Index++;
+  setTimeout(()=>ca64Tur(), 1300);
+}
+
+// =====================================================================
+// LABİRENT
+// =====================================================================
+const lab64Satir = 12, lab64Sutun = 15;
+const lab64IfadeHavuzu = [
+  {kelime:"Cahiliye", anlam:"Putlara tapma, adaletsizlik gibi davranışların yaygın olduğu dönem"},
+  {kelime:"Kâbe", anlam:"Yeryüzündeki ilk mabet"},
+  {kelime:"Hicaz", anlam:"Mekke'nin bulunduğu Arap Yarımadası bölgesi"},
+  {kelime:"Şirk", anlam:"Allah'tan başka ilah olduğuna inanmak ve ona tapmak"},
+  {kelime:"Hanif", anlam:"Allah'ın birliğine iman eden kimse"},
+  {kelime:"Bedevi", anlam:"Göçebe yaşayan Mekke halkı"},
+  {kelime:"Hadari", anlam:"Yerleşik hayat yaşayan Mekke halkı"},
+  {kelime:"Kabile", anlam:"Aynı atadan gelen, kan bağıyla bağlı insan topluluğu"},
+  {kelime:"Emin", anlam:"Hz. Muhammed'e dürüstlüğünden dolayı verilen lakap"},
+  {kelime:"Hilfülfudul", anlam:"Erdemli insanların haksızlığa uğrayanlara yardım için kurduğu topluluk"},
+  {kelime:"Amine", anlam:"Hz. Muhammed'in annesi"},
+  {kelime:"Halime", anlam:"Hz. Muhammed'in sütannesi"},
+  {kelime:"Ebutalib", anlam:"Hz. Muhammed'in amcası"},
+  {kelime:"Hatice", anlam:"Hz. Muhammed'in ilk eşi"},
+  {kelime:"Kasım", anlam:"Hz. Muhammed'in ilk çocuğu"},
+  {kelime:"Künye", anlam:"Kişiler için kullanılan tanıtıcı ibare"},
+  {kelime:"Mustafa", anlam:"Seçilmiş anlamına gelen, Hz. Muhammed'in isimlerinden biri"},
+  {kelime:"Fil", anlam:"Ebrehe'nin ordusundaki, Fil suresine adını veren hayvan"},
+  {kelime:"Ebrehe", anlam:"Kâbe'yi yıkmak isteyen Yemen Valisi"},
+  {kelime:"Sana", anlam:"Ebrehe'nin merkez yapmak istediği Yemen şehri"},
+];
+let lab64Hucreler = [], lab64HucreElemanlari = [], lab64OyuncuKonum = {r:0,c:0}, lab64Toplananlar = {};
+let lab64HamleSayisi = 0, lab64ToplananSayisi = 0, lab64Saniye = 0, lab64Zamanlayici = null, lab64Bitti = false;
+
+function lab64Uret(){
+  const hucreler = [];
+  for(let r=0;r<lab64Satir;r++){
+    hucreler.push([]);
+    for(let c=0;c<lab64Sutun;c++){ hucreler[r].push({top:true,right:true,bottom:true,left:true,ziyaretEdildi:false}); }
+  }
+  const yigin = [{r:0,c:0}];
+  hucreler[0][0].ziyaretEdildi = true;
+  while(yigin.length>0){
+    const mevcut = yigin[yigin.length-1];
+    const {r,c} = mevcut;
+    const komsular = [];
+    if(r>0 && !hucreler[r-1][c].ziyaretEdildi) komsular.push({r:r-1,c,yon:'top'});
+    if(c<lab64Sutun-1 && !hucreler[r][c+1].ziyaretEdildi) komsular.push({r,c:c+1,yon:'right'});
+    if(r<lab64Satir-1 && !hucreler[r+1][c].ziyaretEdildi) komsular.push({r:r+1,c,yon:'bottom'});
+    if(c>0 && !hucreler[r][c-1].ziyaretEdildi) komsular.push({r,c:c-1,yon:'left'});
+    if(komsular.length===0){ yigin.pop(); }
+    else {
+      const secilen = komsular[Math.floor(Math.random()*komsular.length)];
+      if(secilen.yon==='top'){ hucreler[r][c].top=false; hucreler[secilen.r][secilen.c].bottom=false; }
+      if(secilen.yon==='right'){ hucreler[r][c].right=false; hucreler[secilen.r][secilen.c].left=false; }
+      if(secilen.yon==='bottom'){ hucreler[r][c].bottom=false; hucreler[secilen.r][secilen.c].top=false; }
+      if(secilen.yon==='left'){ hucreler[r][c].left=false; hucreler[secilen.r][secilen.c].right=false; }
+      hucreler[secilen.r][secilen.c].ziyaretEdildi = true;
+      yigin.push({r:secilen.r,c:secilen.c});
+    }
+  }
+  return hucreler;
+}
+function labirent64Baslat(){
+  clearInterval(lab64Zamanlayici);
+  lab64Hucreler = lab64Uret();
+  lab64OyuncuKonum = {r:0,c:0};
+  lab64HamleSayisi = 0; lab64ToplananSayisi = 0; lab64Saniye = 0; lab64Bitti = false;
+  document.getElementById('lab64Hamle').textContent = 0;
+  document.getElementById('lab64Toplanan').textContent = 0;
+  document.getElementById('lab64Sure').textContent = 0;
+  document.getElementById('lab64Durum').textContent = '';
+  document.getElementById('lab64Sonuc').textContent = '';
+  const tumHucreler = [];
+  for(let r=0;r<lab64Satir;r++) for(let c=0;c<lab64Sutun;c++){
+    if(!(r===0&&c===0) && !(r===lab64Satir-1&&c===lab64Sutun-1)) tumHucreler.push({r,c});
+  }
+  const secilenler = karistir(tumHucreler).slice(0, lab64IfadeHavuzu.length);
+  lab64Toplananlar = {};
+  secilenler.forEach((konum, i)=>{
+    lab64Toplananlar[konum.r+','+konum.c] = {kelime: lab64IfadeHavuzu[i].kelime, anlam: lab64IfadeHavuzu[i].anlam, toplandi:false};
+  });
+  document.getElementById('lab64ToplamYildiz').textContent = secilenler.length;
+  const izgara = document.getElementById('lab64Izgara');
+  izgara.innerHTML = '';
+  izgara.style.gridTemplateColumns = `repeat(${lab64Sutun}, 30px)`;
+  izgara.style.gridTemplateRows = `repeat(${lab64Satir}, 30px)`;
+  lab64HucreElemanlari = [];
+  for(let r=0;r<lab64Satir;r++){
+    lab64HucreElemanlari.push([]);
+    for(let c=0;c<lab64Sutun;c++){
+      const h = lab64Hucreler[r][c];
+      const div = document.createElement('div');
+      div.className = 'labirent-hucre';
+      div.style.gridColumn = c+1;
+      div.style.gridRow = r+1;
+      div.style.borderTop = h.top ? '2px solid #333' : '2px solid transparent';
+      div.style.borderRight = h.right ? '2px solid #333' : '2px solid transparent';
+      div.style.borderBottom = h.bottom ? '2px solid #333' : '2px solid transparent';
+      div.style.borderLeft = h.left ? '2px solid #333' : '2px solid transparent';
+      const key = r+','+c;
+      if(r===0 && c===0) div.textContent = '🚶';
+      else if(r===lab64Satir-1 && c===lab64Sutun-1) div.textContent = '🕋';
+      else if(lab64Toplananlar[key]) div.textContent = '⭐';
+      izgara.appendChild(div);
+      lab64HucreElemanlari[r].push(div);
+    }
+  }
+  lab64Zamanlayici = setInterval(()=>{
+    lab64Saniye++;
+    document.getElementById('lab64Sure').textContent = lab64Saniye;
+  }, 1000);
+}
+function labirent64Hareket(dr, dc){
+  if(lab64Bitti) return;
+  const {r,c} = lab64OyuncuKonum;
+  const hucre = lab64Hucreler[r][c];
+  let yeniR=r, yeniC=c;
+  if(dr===-1 && !hucre.top) yeniR = r-1;
+  else if(dr===1 && !hucre.bottom) yeniR = r+1;
+  else if(dc===-1 && !hucre.left) yeniC = c-1;
+  else if(dc===1 && !hucre.right) yeniC = c+1;
+  else return;
+  lab64HucreElemanlari[r][c].textContent = '';
+  lab64OyuncuKonum = {r:yeniR, c:yeniC};
+  lab64HamleSayisi++;
+  document.getElementById('lab64Hamle').textContent = lab64HamleSayisi;
+  const key = yeniR+','+yeniC;
+  if(lab64Toplananlar[key] && !lab64Toplananlar[key].toplandi){
+    lab64Toplananlar[key].toplandi = true;
+    lab64ToplananSayisi++;
+    document.getElementById('lab64Toplanan').textContent = lab64ToplananSayisi;
+    document.getElementById('lab64Durum').textContent = `✨ Topladın: ${lab64Toplananlar[key].kelime} — ${lab64Toplananlar[key].anlam}`;
+  }
+  if(yeniR===lab64Satir-1 && yeniC===lab64Sutun-1){
+    lab64HucreElemanlari[yeniR][yeniC].textContent = '🏁';
+    lab64Bitti = true;
+    clearInterval(lab64Zamanlayici);
+    const toplamYildiz = document.getElementById('lab64ToplamYildiz').textContent;
+    document.getElementById('lab64Sonuc').textContent =
+      `🎉 Tebrikler! Labirenti ${lab64HamleSayisi} hamlede ve ${lab64Saniye} saniyede tamamladın! (${lab64ToplananSayisi}/${toplamYildiz} yıldız topladın)`;
+    return;
+  }
+  lab64HucreElemanlari[yeniR][yeniC].textContent = '🚶';
+}
+document.addEventListener('keydown', (e)=>{
+  const aktifBolum = document.getElementById('labirent64');
+  if(!aktifBolum.classList.contains('aktif')) return;
+  const etiket = document.activeElement ? document.activeElement.tagName : '';
+  if(etiket==='INPUT' || etiket==='TEXTAREA') return;
+  if(e.key==='ArrowUp'){ e.preventDefault(); labirent64Hareket(-1,0); }
+  else if(e.key==='ArrowDown'){ e.preventDefault(); labirent64Hareket(1,0); }
+  else if(e.key==='ArrowLeft'){ e.preventDefault(); labirent64Hareket(0,-1); }
+  else if(e.key==='ArrowRight'){ e.preventDefault(); labirent64Hareket(0,1); }
+});
+
+// =====================================================================
+// BAŞLANGIÇ
+// =====================================================================
+bz64IzgaraOlustur();
+kelimeAvi64Olustur();
+cengel64Olustur();
+merdiven64Baslat();
+sifre64Olustur();
+ks64Olustur();
+nonogram64Olustur();
+istatistikleriGuncelleGoster();
+sonucIzlemeBaslat();
+
+// =====================================================================
+// EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — FIL SURESI
+// =====================================================================
+const ezberVeri64 = [
+  {
+    "parca": "Elem terâ keyfe feale rabbüke biesḥâbilfîl",
+    "anlam": "Rabbinin, fil sahiplerine ne yaptığını görmedin mi?",
+    "gizli": "biesḥâbilfîl"
+  },
+  {
+    "parca": "Elem yec'al keydehüm fîtadlîl",
+    "anlam": "Onların tuzaklarını boşa çıkarmadı mı?",
+    "gizli": "fîtadlîl"
+  },
+  {
+    "parca": "Ve ersele aleyhim tayran ebâbîl",
+    "anlam": "Üzerlerine sürü sürü kuşlar gönderdi.",
+    "gizli": "ebâbîl"
+  },
+  {
+    "parca": "Termîhim bihicâratim min siccîl",
+    "anlam": "Balçıktan pişirilmiş taşlar atan,",
+    "gizli": "siccîl"
+  },
+  {
+    "parca": "Fecealehüm keasfim me'kûl",
+    "anlam": "Nihayet onları yenilmiş ekin yaprakları hâline getirdi.",
+    "gizli": "me'kûl"
+  }
+];
+
+// --- 1) SIRALA BAKALIM ---
+function ez164Baslat(){
+  document.getElementById('ez164Sonuc').textContent='';
+  document.getElementById('ez164Dizilen').textContent='0';
+  siraOlustur({
+    tokens: ezberVeri64.map(x=>x.parca),
+    bankaId:'ez164Banka', cevapId:'ez164Cevap',
+    ilerleme:(n)=>{ document.getElementById('ez164Dizilen').textContent=n; },
+    tamamlandi:()=>{ document.getElementById('ez164Sonuc').innerHTML = "🎉 Tebrikler! Fil Suresi'ni doğru sırayla dizdin!"; }
+  });
+}
+
+// --- 2) BOŞLUK DOLDUR ---
+let ez264Tur=0, ez264Dogru=0, ez264Sira=[];
+function ez264Baslat(){
+  ez264Tur=0; ez264Dogru=0;
+  ez264Sira = karistir(ezberVeri64.map((x,i)=>i));
+  document.getElementById('ez264Dogru').textContent='0';
+  document.getElementById('ez264Sonuc').textContent='';
+  ez264SoruGoster();
+}
+function ez264SoruGoster(){
+  if(ez264Tur>=ez264Sira.length){
+    document.getElementById('ez264Metin').textContent='';
+    document.getElementById('ez264Secenekler').innerHTML='';
+    document.getElementById('ez264Sonuc').innerHTML = `🎉 Bitti! ${ez264Dogru}/${ez264Sira.length} doğru.`;
+    return;
+  }
+  document.getElementById('ez264Tur').textContent = ez264Tur+1;
+  const i = ez264Sira[ez264Tur];
+  const oge = ezberVeri64[i];
+  document.getElementById('ez264Metin').textContent = oge.parca.replace(oge.gizli, '______');
+  const digerleri = ezberVeri64.filter((_,j)=>j!==i).map(x=>x.gizli);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.gizli, ...yanlislar]);
+  const kutu = document.getElementById('ez264Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez264Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.gizli){ btn.classList.add('dogru'); ez264Dogru++; document.getElementById('ez264Dogru').textContent=ez264Dogru; }
+      else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.gizli).classList.add('dogru');
+      }
+      setTimeout(()=>{ ez264Tur++; ez264SoruGoster(); }, 1100);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 3) ANLAM EŞLEŞTİR ---
+let ez364Secili=null, ez364Eslesen=0;
+function ez364Baslat(){
+  ez364Secili=null; ez364Eslesen=0;
+  document.getElementById('ez364Eslesen').textContent='0';
+  document.getElementById('ez364Sonuc').textContent='';
+  const solSira = karistir(ezberVeri64.map((x,i)=>i));
+  const sagSira = karistir(ezberVeri64.map((x,i)=>i));
+  const sol = document.getElementById('ez364Sol'); sol.innerHTML='';
+  const sag = document.getElementById('ez364Sag'); sag.innerHTML='';
+  solSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri64[i].parca;
+    b.dataset.i=i; b.dataset.taraf='sol';
+    b.onclick=()=>ez364Tikla(b);
+    sol.appendChild(b);
+  });
+  sagSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri64[i].anlam;
+    b.dataset.i=i; b.dataset.taraf='sag';
+    b.onclick=()=>ez364Tikla(b);
+    sag.appendChild(b);
+  });
+}
+function ez364Tikla(b){
+  if(b.classList.contains('eslesti')) return;
+  if(ez364Secili && ez364Secili.dataset.taraf===b.dataset.taraf){
+    ez364Secili.classList.remove('secili');
+    ez364Secili = b; b.classList.add('secili');
+    return;
+  }
+  if(!ez364Secili){ ez364Secili=b; b.classList.add('secili'); return; }
+  if(ez364Secili.dataset.i===b.dataset.i){
+    ez364Secili.classList.remove('secili'); ez364Secili.classList.add('eslesti');
+    b.classList.add('eslesti');
+    ez364Secili=null;
+    ez364Eslesen++;
+    document.getElementById('ez364Eslesen').textContent=ez364Eslesen;
+    if(ez364Eslesen===ezberVeri64.length){
+      document.getElementById('ez364Sonuc').innerHTML = "🎉 Tebrikler! Tüm ayetleri anlamlarıyla eşleştirdin!";
+    }
+  } else {
+    const digeri = ez364Secili;
+    digeri.classList.add('yanlis'); b.classList.add('yanlis');
+    setTimeout(()=>{ digeri.classList.remove('yanlis','secili'); b.classList.remove('yanlis'); },400);
+    ez364Secili=null;
+  }
+}
+
+// --- 4) HAFIZA KARTLARI ---
+let ez464Acik=[], ez464Bulunan=0, ez464Hamle=0, ez464Kilit=false;
+function ez464Baslat(){
+  ez464Acik=[]; ez464Bulunan=0; ez464Hamle=0; ez464Kilit=false;
+  document.getElementById('ez464Bulunan').textContent='0';
+  document.getElementById('ez464Hamle').textContent='0';
+  document.getElementById('ez464Sonuc').textContent='';
+  const kartlar=[];
+  ezberVeri64.forEach((x,i)=>{
+    kartlar.push({i, tip:'parca', metin:x.parca});
+    kartlar.push({i, tip:'anlam', metin:x.anlam});
+  });
+  const karisik = karistir(kartlar);
+  const izgara = document.getElementById('ez464Izgara');
+  izgara.innerHTML='';
+  karisik.forEach(k=>{
+    const kart=document.createElement('div');
+    kart.className='hafiza-kart';
+    kart.dataset.i=k.i; kart.dataset.tip=k.tip;
+    kart.innerHTML = `<div class="hafiza-on">🕌</div><div class="hafiza-arka">${k.metin}</div>`;
+    kart.onclick=()=>ez464KartTikla(kart);
+    izgara.appendChild(kart);
+  });
+}
+function ez464KartTikla(kart){
+  if(ez464Kilit || kart.classList.contains('acik') || kart.classList.contains('bulundu')) return;
+  kart.classList.add('acik');
+  ez464Acik.push(kart);
+  if(ez464Acik.length===2){
+    ez464Hamle++; document.getElementById('ez464Hamle').textContent=ez464Hamle;
+    ez464Kilit=true;
+    const [a,b]=ez464Acik;
+    if(a.dataset.i===b.dataset.i && a.dataset.tip!==b.dataset.tip){
+      a.classList.add('bulundu'); b.classList.add('bulundu');
+      ez464Bulunan++; document.getElementById('ez464Bulunan').textContent=ez464Bulunan;
+      ez464Acik=[]; ez464Kilit=false;
+      if(ez464Bulunan===ezberVeri64.length){
+        document.getElementById('ez464Sonuc').innerHTML = `🎉 Tebrikler! ${ez464Hamle} hamlede tüm çiftleri buldun!`;
+      }
+    } else {
+      setTimeout(()=>{
+        a.classList.remove('acik'); b.classList.remove('acik');
+        ez464Acik=[]; ez464Kilit=false;
+      }, 900);
+    }
+  }
+}
+
+// --- 5) ADIM ADIM EZBER ---
+let ez564Adim=0;
+function ez564Baslat(){
+  ez564Adim=0;
+  document.getElementById('ez564Liste').innerHTML='';
+  document.getElementById('ez564Sonuc').textContent='';
+  ez564SoruGoster();
+}
+function ez564SoruGoster(){
+  if(ez564Adim>=ezberVeri64.length){
+    document.getElementById('ez564Secenekler').innerHTML='';
+    document.getElementById('ez564Sonuc').innerHTML = "🎉 Tebrikler! Fil Suresi'ni baştan sona tamamladın!";
+    return;
+  }
+  document.getElementById('ez564Adim').textContent = ez564Adim+1;
+  const oge = ezberVeri64[ez564Adim];
+  const digerleri = ezberVeri64.filter((_,j)=>j!==ez564Adim).map(x=>x.parca);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.parca, ...yanlislar]);
+  const kutu = document.getElementById('ez564Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez564Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.parca){
+        btn.classList.add('dogru');
+        const liste=document.getElementById('ez564Liste');
+        liste.innerHTML += `<div><b>${ez564Adim+1}.</b> ${oge.parca}</div>`;
+        setTimeout(()=>{ ez564Adim++; ez564SoruGoster(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        setTimeout(()=>{ ez564SoruGoster(); }, 1100);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 6) GİZLİ HARFLER ---
+let ez664Tur=0, ez664Dogru=0, ez664Sira=[];
+function ez664Baslat(){
+  ez664Tur=0; ez664Dogru=0; ez664Sira = karistir(ezberVeri64.map((x,i)=>i));
+  document.getElementById('ez664Dogru').textContent='0';
+  document.getElementById('ez664Sonuc').textContent='';
+  ez664Round();
+}
+function ez664Round(){
+  if(ez664Tur>=ez664Sira.length){
+    document.getElementById('ez664Metin').textContent='';
+    document.getElementById('ez664Cevap').innerHTML=''; document.getElementById('ez664Banka').innerHTML='';
+    document.getElementById('ez664Sonuc').innerHTML = `🎉 Bitti! ${ez664Dogru}/${ez664Sira.length} kelimeyi doğru tamamladın.`;
+    return;
+  }
+  document.getElementById('ez664Tur').textContent = ez664Tur+1;
+  const i = ez664Sira[ez664Tur];
+  const oge = ezberVeri64[i];
+  document.getElementById('ez664Metin').innerHTML = oge.parca.replace(oge.gizli, '<u>______</u>') + `<br><small>💡 ${oge.anlam}</small>`;
+  const harfler = oge.gizli.split('').filter(c=>c!==' ');
+  siraOlustur({
+    tokens: harfler,
+    bankaId:'ez664Banka', cevapId:'ez664Cevap',
+    tamamlandi:()=>{
+      ez664Dogru++; document.getElementById('ez664Dogru').textContent=ez664Dogru;
+      setTimeout(()=>{ ez664Tur++; ez664Round(); }, 900);
+    }
+  });
+}
+
+// --- 7) KAYBOLAN KELİMELER ---
+let ez764Tur=0, ez764Dogru=0, ez764Sira=[];
+function ez764Baslat(){
+  ez764Tur=0; ez764Dogru=0; ez764Sira = karistir(ezberVeri64.map((x,i)=>i));
+  document.getElementById('ez764Dogru').textContent='0';
+  document.getElementById('ez764Sonuc').textContent='';
+  ez764Round();
+}
+function ez764Round(){
+  if(ez764Tur>=ez764Sira.length){
+    document.getElementById('ez764Metin').textContent='';
+    document.getElementById('ez764Secenekler').innerHTML='';
+    document.getElementById('ez764Sonuc').innerHTML = `🎉 Bitti! ${ez764Dogru}/${ez764Sira.length} doğru hatırladın.`;
+    return;
+  }
+  document.getElementById('ez764Tur').textContent = ez764Tur+1;
+  const i = ez764Sira[ez764Tur];
+  const oge = ezberVeri64[i];
+  document.getElementById('ez764Metin').textContent = oge.parca;
+  document.getElementById('ez764Secenekler').innerHTML='';
+  setTimeout(()=>{
+    document.getElementById('ez764Metin').textContent = '🙈 ...';
+    const digerIdx = karistir(ezberVeri64.map((_,j)=>j).filter(j=>j!==i)).slice(0,2);
+    const varyantlar = digerIdx.map(j=>oge.parca.replace(oge.gizli, ezberVeri64[j].gizli));
+    const secenekler = karistir([oge.parca, ...varyantlar]);
+    const kutu = document.getElementById('ez764Secenekler');
+    kutu.innerHTML='';
+    secenekler.forEach(sec=>{
+      const btn=document.createElement('div');
+      btn.className='merdiven-secenek';
+      btn.textContent=sec;
+      btn.onclick=()=>{
+        document.querySelectorAll('#ez764Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+        document.getElementById('ez764Metin').textContent = oge.parca;
+        if(sec===oge.parca){ btn.classList.add('dogru'); ez764Dogru++; document.getElementById('ez764Dogru').textContent=ez764Dogru; }
+        else {
+          btn.classList.add('yanlis');
+          [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        }
+        setTimeout(()=>{ ez764Tur++; ez764Round(); }, 1300);
+      };
+      kutu.appendChild(btn);
+    });
+  }, 3000);
+}
+
+// --- 8) HIZ TESTİ ---
+let ez864Zamanlayici=null, ez864Kalan=60, ez864Dogru=0, ez864Yanlis=0, ez864Aktif=false;
+function ez864Baslat(){
+  clearInterval(ez864Zamanlayici);
+  ez864Kalan=60; ez864Dogru=0; ez864Yanlis=0; ez864Aktif=true;
+  document.getElementById('ez864Sayac').textContent=ez864Kalan;
+  document.getElementById('ez864Dogru').textContent='0';
+  document.getElementById('ez864Yanlis').textContent='0';
+  document.getElementById('ez864Sonuc').textContent='';
+  ez864Zamanlayici = setInterval(()=>{
+    ez864Kalan--;
+    document.getElementById('ez864Sayac').textContent=ez864Kalan;
+    if(ez864Kalan<=0){ ez864Bitir(); }
+  }, 1000);
+  ez864SoruGoster();
+}
+function ez864SoruGoster(){
+  if(!ez864Aktif) return;
+  const i = Math.floor(Math.random()*ezberVeri64.length);
+  const oge = ezberVeri64[i];
+  document.getElementById('ez864Metin').textContent = oge.anlam;
+  const digerleri = ezberVeri64.filter((_,j)=>j!==i).map(x=>x.parca);
+  const secenekler = karistir([oge.parca, ...karistir(digerleri).slice(0,3)]);
+  const kutu = document.getElementById('ez864Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      if(!ez864Aktif) return;
+      if(sec===oge.parca){ ez864Dogru++; document.getElementById('ez864Dogru').textContent=ez864Dogru; }
+      else { ez864Yanlis++; document.getElementById('ez864Yanlis').textContent=ez864Yanlis; }
+      ez864SoruGoster();
+    };
+    kutu.appendChild(btn);
+  });
+}
+function ez864Bitir(){
+  ez864Aktif=false;
+  clearInterval(ez864Zamanlayici);
+  document.getElementById('ez864Secenekler').innerHTML='';
+  document.getElementById('ez864Metin').textContent='';
+  const basari = ez864Dogru>=8 ? '🏆 Efsane Hız!' : ez864Dogru>=5 ? '🥇 Çok İyi!' : '📚 Biraz Daha Pratik!';
+  document.getElementById('ez864Sonuc').innerHTML = `🎉 Süre bitti! ${basari}<br>${ez864Dogru} doğru, ${ez864Yanlis} yanlış.`;
+}
+
+
+// ===================== SUNUM (SLAYT) GORUNUMU JS =====================
+window.sunumDurumu = window.sunumDurumu || {};
+function sunumNoktalariOlustur(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  const nokta = document.getElementById('sunumNoktalar'+suf);
+  if(!alan || !nokta) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  nokta.innerHTML = '';
+  for(let i=0;i<toplam;i++){
+    const d = document.createElement('span');
+    d.className = 'sunum-nokta' + (i===0?' aktif':'');
+    d.onclick = function(){ sunumIndexeGit(suf, i); };
+    nokta.appendChild(d);
+  }
+}
+function sunumGuncelle(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const slaytlar = alan.querySelectorAll('.sunum-slayt');
+  const idx = sunumDurumu[suf] || 0;
+  slaytlar.forEach(function(s,i){ s.classList.toggle('aktif', i===idx); });
+  const sayac = document.getElementById('sunumSayac'+suf);
+  if(sayac) sayac.textContent = (idx+1)+' / '+slaytlar.length;
+  document.querySelectorAll('#sunumNoktalar'+suf+' .sunum-nokta').forEach(function(n,i){ n.classList.toggle('aktif', i===idx); });
+}
+function sunumIndexeGit(suf, i){
+  sunumDurumu[suf] = i;
+  sunumGuncelle(suf);
+}
+function sunumGit(suf, yon){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  let idx = (sunumDurumu[suf]||0) + yon;
+  if(idx<0) idx=0;
+  if(idx>=toplam) idx=toplam-1;
+  sunumIndexeGit(suf, idx);
+}
+function sunumTamEkran(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  if(alan.requestFullscreen) alan.requestFullscreen();
+  else if(alan.webkitRequestFullscreen) alan.webkitRequestFullscreen();
+}
+document.addEventListener('keydown', function(e){
+  const slaytBolumu = document.getElementById('slayt');
+  if(!slaytBolumu || !slaytBolumu.classList.contains('aktif')) return;
+  if(e.key === 'ArrowRight') sunumGit('', 1);
+  if(e.key === 'ArrowLeft') sunumGit('', -1);
+});
+document.addEventListener('DOMContentLoaded', function(){ sunumNoktalariOlustur(''); sunumGuncelle(''); });
+
+
+const UNITE_KIMLIK = '6-4';
+
+// ===================== OGRENCI KIMLIGI VE OGRETMEN PANELI =====================
+const OP_ANAHTAR = 'dkabOgretmenPaneli_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname);
+
+function opOgrenciAdi(){
+  let ad = sessionStorage.getItem('dkabAktifOgrenci');
+  if(!ad){
+    ad = prompt('Merhaba! Öğretmenin ilerlemeni takip edebilmesi için adını ve soyadını yazar mısın?');
+    if(!ad || !ad.trim()) ad = 'İsimsiz Öğrenci';
+    ad = ad.trim().slice(0,40);
+    sessionStorage.setItem('dkabAktifOgrenci', ad);
+  }
+  return ad;
+}
+function opOgrenciDegistir(){
+  sessionStorage.removeItem('dkabAktifOgrenci');
+  ozelBildirim('Öğrenci bilgisi sıfırlandı. Bir sonraki oyun tamamlandığında yeni isim sorulacak.');
+}
+function opVerileriOku(){
+  try{ return JSON.parse(localStorage.getItem(OP_ANAHTAR)) || {}; }catch(e){ return {}; }
+}
+function opVerileriYaz(v){
+  try{ localStorage.setItem(OP_ANAHTAR, JSON.stringify(v)); }catch(e){}
+}
+function opOgrenciKaydiGetir(v, ad){
+  if(!v[ad]) v[ad] = {oyunlar:[], sonPuan:0, sonRozetler:[], ilkTarih:new Date().toLocaleString('tr-TR')};
+  return v[ad];
+}
+function opOyunTamamlandiKaydet(bolumId, toplamPuan, rozetler){
+  const ad = opOgrenciAdi();
+  const v = opVerileriOku();
+  const kayit = opOgrenciKaydiGetir(v, ad);
+  kayit.oyunlar.push({bolum: bolumId || 'bilinmiyor', tarih: new Date().toLocaleString('tr-TR')});
+  kayit.sonPuan = toplamPuan;
+  kayit.sonRozetler = rozetler || [];
+  opVerileriYaz(v);
+}
+
+const OP_SIFRE = 'ogretmen2026';
+let opGirisYapildi = false;
+
+function opGirisKontrol(){
+  if(opGirisYapildi){ opPaneliGoster(); return; }
+  const girilen = prompt('Öğretmen paneline erişim için şifreyi girin:');
+  if(girilen === OP_SIFRE){
+    opGirisYapildi = true;
+    opPaneliGoster();
+  } else if(girilen !== null){
+    ozelBildirim('Şifre yanlış.');
+    document.getElementById('opGirisEkrani').style.display = 'block';
+    document.getElementById('opPanelEkrani').style.display = 'none';
+  }
+}
+
+function opPaneliGoster(){
+  document.getElementById('opGirisEkrani').style.display = 'none';
+  document.getElementById('opPanelEkrani').style.display = 'block';
+  const v = opVerileriOku();
+  const isimler = Object.keys(v);
+  const govde = document.getElementById('opTabloGovde');
+  const bosMesaj = document.getElementById('opBosMesaj');
+  govde.innerHTML = '';
+  if(isimler.length === 0){
+    bosMesaj.style.display = 'block';
+    return;
+  }
+  bosMesaj.style.display = 'none';
+  isimler.sort((a,b)=> (v[b].oyunlar.length - v[a].oyunlar.length)).forEach(ad=>{
+    const kayit = v[ad];
+    const tr = document.createElement('tr');
+    const sonAktivite = kayit.oyunlar.length ? kayit.oyunlar[kayit.oyunlar.length-1].tarih : '-';
+    const oyunListesi = kayit.oyunlar.map(o=>o.bolum).join(', ');
+    tr.innerHTML = `
+      <td>${ad}</td>
+      <td>${kayit.sonPuan}</td>
+      <td>${kayit.oyunlar.length}</td>
+      <td>${(kayit.sonRozetler||[]).join(' ') || '-'}</td>
+      <td>${sonAktivite}</td>
+      <td><button class="op-detay-btn" onclick="opDetayGoster(this, '${ad.replace(/'/g,"\\'")}')">Detay</button></td>
+    `;
+    govde.appendChild(tr);
+    const detayTr = document.createElement('tr');
+    detayTr.className = 'op-detay-satir';
+    detayTr.style.display = 'none';
+    detayTr.innerHTML = `<td colspan="6"><b>Tamamlanan bölümler:</b> ${esc(oyunListesi) || 'Henüz yok'}</td>`;
+    govde.appendChild(detayTr);
+  });
+}
+function esc(s){ return String(s).replace(/</g,'&lt;'); }
+function opDetayGoster(btn, ad){
+  const tr = btn.closest('tr').nextElementSibling;
+  tr.style.display = tr.style.display === 'none' ? 'table-row' : 'none';
+}
+function opVerileriTemizle(){
+  ozelOnay('Bu ünitedeki tüm öğrenci verileri silinecek. Emin misiniz?', function(onaylandi){
+    if(onaylandi){
+      localStorage.removeItem(OP_ANAHTAR);
+      opPaneliGoster();
+    }
+  });
+}
+
+
+// ===================== OZEL MODAL / BILDIRIM (alert-confirm yerine) =====================
+function ozelBildirim(mesaj){
+  const eski = document.querySelector('.ozel-toast');
+  if(eski) eski.remove();
+  const toast = document.createElement('div');
+  toast.className = 'ozel-toast';
+  toast.textContent = mesaj;
+  document.body.appendChild(toast);
+  setTimeout(()=>toast.remove(), 3200);
+}
+function ozelOnay(mesaj, callback){
+  const arka = document.createElement('div');
+  arka.className = 'ozel-modal-arka';
+  arka.innerHTML = '<div class="ozel-modal-kutu"><p class="ozel-modal-mesaj"></p>' +
+    '<button class="ozel-modal-btn" style="background:var(--kirmizi);color:#fff;">Evet</button>' +
+    '<button class="ozel-modal-btn" style="background:#e2e8f0;">Vazgeç</button></div>';
+  arka.querySelector('.ozel-modal-mesaj').textContent = mesaj;
+  document.body.appendChild(arka);
+  const btnler = arka.querySelectorAll('.ozel-modal-btn');
+  btnler[0].onclick = ()=>{ arka.remove(); callback(true); };
+  btnler[1].onclick = ()=>{ arka.remove(); callback(false); };
+}
+
+
+// ===================== KENDIMI DEGERLENDIRIYORUM - CHECKBOX KAYDI =====================
+function degOku(uniteKimlik){
+  try{ return JSON.parse(localStorage.getItem('dkabDegerlendirme_'+uniteKimlik)) || {}; }catch(e){ return {}; }
+}
+function degKaydet(uniteKimlik){
+  const durum = {};
+  document.querySelectorAll('[id^="deg_'+uniteKimlik+'_"]').forEach(cb=>{ durum[cb.id] = cb.checked; });
+  try{ localStorage.setItem('dkabDegerlendirme_'+uniteKimlik, JSON.stringify(durum)); }catch(e){}
+}
+function degYukle(uniteKimlik){
+  const durum = degOku(uniteKimlik);
+  Object.keys(durum).forEach(id=>{
+    const cb = document.getElementById(id);
+    if(cb) cb.checked = durum[id];
+  });
+}
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof UNITE_KIMLIK !== 'undefined') degYukle(UNITE_KIMLIK);
+});
+
+
+// ===================== DUSUN VE CEVAPLA / AILEMLE YAPIYORUM - CEVAP KAYDI =====================
+function zbCevapAnahtari(tur){ return 'dkabZbCevap_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname) + '_' + tur; }
+function zbCevapKaydet(tur, el){
+  try{ localStorage.setItem(zbCevapAnahtari(tur), el.value); }catch(e){}
+  const not = document.getElementById('zbNot_'+tur);
+  if(not){
+    not.textContent = '✓ Cevabın kaydedildi';
+    clearTimeout(not._zbT);
+    not._zbT = setTimeout(()=>{ not.textContent=''; }, 2500);
+  }
+}
+function zbCevapYukle(){
+  ['dusun','aile','ikilem'].forEach(tur=>{
+    const el = document.getElementById('zbAlan_'+tur);
+    if(!el) return;
+    try{ const v = localStorage.getItem(zbCevapAnahtari(tur)); if(v) el.value = v; }catch(e){}
+  });
+}
+document.addEventListener('DOMContentLoaded', zbCevapYukle);
+
+
+// ===================== TEKRAR ZAMANI HATIRLATMASI =====================
+function zbTekrarHatirlatmaKontrol(){
+  const uniteKimlik = (typeof UNITE_KIMLIK !== 'undefined') ? UNITE_KIMLIK : location.pathname;
+  const anahtar = 'dkabSonZiyaret_' + uniteKimlik;
+  let son = null;
+  try{ son = localStorage.getItem(anahtar); }catch(e){}
+  const bugun = new Date();
+  if(son){
+    const gecenGun = Math.floor((bugun - new Date(son)) / 86400000);
+    if(gecenGun >= 3 && typeof ozelBildirim === 'function'){
+      setTimeout(()=>{ ozelBildirim('👋 Bu üniteyi ' + gecenGun + ' gündür tekrar etmedin. Hafızanı tazelemek ister misin?'); }, 1500);
+    }
+  }
+  try{ localStorage.setItem(anahtar, bugun.toISOString()); }catch(e){}
+}
+document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
+
+
+</script>
+
+</body>
+</html>

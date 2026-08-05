@@ -1,0 +1,3429 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8. Sınıf Din Kültürü - 4. Ünite: Hz. Muhammed'in Örnekliği — Oyun Merkezi</title>
+<meta name="description" content="8. Sınıf Din Kültürü - 4. Ünite: Hz. Muhammed'in Örnekliği — İnteraktif oyunlar, konu özeti, test ve sunum içeren dijital ders materyali.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../ortak/oyun-merkezi.css">
+
+<body>
+
+
+
+<header>
+  <p style="margin:0 0 6px;font-size:1.1em;font-weight:bold;letter-spacing:.5px;opacity:.95;">8. SINIF — 4. ÜNİTE</p>
+  <h1>🌙 Hz. Muhammed'in Örnekliği</h1>
+  <p>Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
+  <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+  <div class="gb-kontrol-satiri" style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;">
+    <a href="../en/din-kulturu-8sinif-1unite/index.html" lang="en" style="display:inline-block;padding:6px 16px;border-radius:16px;background:rgba(255,255,255,.22);color:white;text-decoration:none;font-weight:bold;font-size:.85em;border:1px solid rgba(255,255,255,.55);">English</a>
+    <button type="button" id="temaDegistirBtn" class="tema-degistir-btn" onclick="temaDegistir()" aria-label="Koyu/açık tema değiştir">🌙 Koyu Tema</button>
+  </div>
+</header>
+<section class="hero">
+  <h2 class="hero-baslik">🎮 Oyun Merkezi</h2>
+  <p class="hero-alt">Bu ünitedeki oyunlarla konuyu pekiştir.</p>
+  <div class="hero-butonlar">
+    <button class="hero-btn hero-btn-birincil" onclick="window.location.href='unite4.html'">◀ Ana Sayfaya Dön</button>
+  </div>
+</section>
+
+<div id="oyun-gruplari" role="navigation" aria-label="Oyun merkezi menüsü"></div>
+
+<main>
+<section id="kelimeavi84">
+  <h2>🔎 Kelime Avı Bulmacası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
+  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka84Bulunan">0</b>/<b id="ka84Toplam">14</b></span></div>
+  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+    <div class="ka-izgara" id="ka84Izgara"></div>
+    <ul class="ka-liste" id="ka84Liste"></ul>
+  </div>
+  <div class="sonuc-kutusu" id="ka84Sonuc"></div>
+  <button class="eylem" onclick="kelimeAvi84Olustur()">🔄 Yeni Bulmaca</button>
+</section>
+
+<section id="cengel84">
+  <h2>🧩 Çengel Bulmaca</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
+  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
+  <div class="cengel-izgara" id="cengel84Izgara"></div>
+  <ul class="cengel-liste" id="cengel84Liste"></ul>
+  <div class="sonuc-kutusu" id="cengel84Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="cengel84KontrolEt()">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="cengel84Olustur()">🔄 Baştan Başla</button>
+  </div>
+</section>
+
+<section id="merdiven84">
+  <h2>🪜 Sözcük Merdiveni</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
+  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdiven84Basamak">1</b>/<b id="merdiven84Toplam">4</b></span></div>
+  <div id="merdiven84Ipucu" class="balon-durum"></div>
+  <div id="merdiven84Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="kutu-panel" id="merdiven84Gorsel" style="max-width:460px;margin:20px auto;"></div>
+  <div class="sonuc-kutusu" id="merdiven84Sonuc"></div>
+  <button class="eylem" onclick="merdiven84Baslat()">🔄 Yeniden Başlat</button>
+</section>
+
+<section id="sifre84">
+  <h2>🔐 Şifreli Sözcük Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
+  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
+  <div class="sifre-anahtar" id="sifre84Anahtar"></div>
+  <div id="sifre84Kelimeler"></div>
+  <div class="sonuc-kutusu" id="sifre84Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="sifre84KontrolEt()">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="sifre84Olustur()">🔄 Yeni Şifre</button>
+  </div>
+</section>
+
+<section id="sifretanim84">
+  <h2>🔐 Şifreli Tanım Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
+  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="st84Tur">1</b>/<b id="st84Toplam">28</b></span>
+    <span>⭐ Puan: <b id="st84Puan">0</b></span>
+  </div>
+  <div id="st84Tanim" class="dua-satir"></div>
+  <div id="st84Secenekler" style="max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="st84Sonuc"></div>
+  <button class="eylem" onclick="st84Baslat()">🔐 Oyunu Başlat</button>
+</section>
+
+<section id="kelimekodlama84">
+  <h2>💻 Kelime Kodlama Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
+  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz.</div>
+  <div class="sifre-anahtar" id="kk84Anahtar"></div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="kk84Tur">1</b>/<b id="kk84Toplam">28</b></span>
+    <span>⭐ Puan: <b id="kk84Puan">0</b></span>
+  </div>
+  <div id="kk84Ipucu" class="balon-durum"></div>
+  <div id="kk84Kod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
+  <div id="kk84Secenekler" style="max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kk84Sonuc"></div>
+  <button class="eylem" onclick="kk84Baslat()">💻 Kodlamayı Başlat</button>
+</section>
+
+<section id="nonogram84">
+  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
+  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak gizli resmi ortaya çıkar!</div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
+    <button class="eylem" onclick="nonogram84Sec('yildiz')">⭐ Yıldız (Örneklik)</button>
+    <button class="eylem" style="background:var(--sari)" onclick="nonogram84Sec('kitap')">📜 Açık Kitap (Veda Hutbesi)</button>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="nono-tablo" id="nono84Tablo"></table>
+  </div>
+  <div class="sonuc-kutusu" id="nono84Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="nonogram84KontrolEt(true)">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="nonogram84Temizle()">🧹 Temizle</button>
+  </div>
+</section>
+
+<section id="satranc84">
+  <h2>♞ Kelime Satrancı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
+  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ks84Bulunan">0</b>/<b id="ks84Toplam">8</b></span></div>
+  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+    <div class="ks-izgara" id="ks84Izgara"></div>
+    <ul class="ka-liste" id="ks84Liste"></ul>
+  </div>
+  <div class="sonuc-kutusu" id="ks84Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="ks84SecimiTemizle()">🧹 Seçimi Temizle</button>
+    <button class="eylem" style="background:var(--sari)" onclick="ks84Olustur()">🔄 Yeni Tahta</button>
+  </div>
+</section>
+
+<section id="kelimeuret84">
+  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
+  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
+  <div class="oyun-bilgi">
+    <span>🔤 Harf: <b id="ku84Harf">-</b></span>
+    <span>⭐ Puan: <b id="ku84Puan">0</b></span>
+    <span>⏱️ Süre: <b id="ku84Sure">60</b>sn</span>
+  </div>
+  <input type="text" id="ku84Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ku84Ekle();}">
+  <p class="balon-durum" id="ku84Uyari"></p>
+  <ul class="ku-liste" id="ku84Liste"></ul>
+  <div class="sonuc-kutusu" id="ku84Sonuc"></div>
+  <div id="ku84Kacirilan"></div>
+  <button class="eylem" onclick="ku84Baslat()">🎮 Oyunu Başlat</button>
+</section>
+
+<section id="tuzak84">
+  <h2>🚫 Tuzak Harf Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
+  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen kavramları süre bitmeden art arda yaz!</div>
+  <div class="oyun-bilgi">
+    <span>🚫 Tuzak Harf: <b id="tuzak84Harf">-</b></span>
+    <span>⭐ Puan: <b id="tuzak84Puan">0</b></span>
+    <span>⏱️ Süre: <b id="tuzak84Sure">40</b>sn</span>
+  </div>
+  <input type="text" id="tuzak84Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzak84Ekle();}">
+  <p class="balon-durum" id="tuzak84Uyari"></p>
+  <ul class="ku-liste" id="tuzak84Liste"></ul>
+  <div class="sonuc-kutusu" id="tuzak84Sonuc"></div>
+  <button class="eylem" onclick="tuzak84Baslat()">🎮 Oyunu Başlat</button>
+</section>
+
+<section id="fabrika84">
+  <h2>🏭 Kelime Fabrikası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
+  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!</div>
+  <div class="oyun-bilgi">
+    <span>🏭 Üretilen: <b id="kf84Uretilen">0</b>/<b id="kf84Toplam">28</b></span>
+    <span>❌ Hata: <b id="kf84Hata">0</b></span>
+  </div>
+  <div id="kf84Siparis" class="balon-durum"></div>
+  <div class="kf-bant" id="kf84BantAlani"></div>
+  <input type="text" id="kf84Girdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kf84Uret();}">
+  <button class="eylem" onclick="kf84Uret()">🏭 Üret!</button>
+  <div class="kf-urunler" id="kf84Urunler"></div>
+  <div class="sonuc-kutusu" id="kf84Sonuc"></div>
+  <button class="eylem" style="background:var(--sari)" onclick="kf84Baslat()">🔄 Fabrikayı Başlat/Yenile</button>
+</section>
+
+<section id="muhendis84">
+  <h2>🛠️ Kelime Mühendisi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
+  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
+  <div class="oyun-bilgi">
+    <span>🏗️ Tur: <b id="km84Tur">1</b>/<b id="km84Toplam">28</b></span>
+    <span>✅ İnşa Edilen: <b id="km84Dogru">0</b></span>
+  </div>
+  <div id="km84Ipucu" class="balon-durum"></div>
+  <div class="kelime-cevap" id="km84Cevap"></div>
+  <div class="kelime-banka" id="km84Banka"></div>
+  <div class="sonuc-kutusu" id="km84Sonuc"></div>
+  <button class="eylem" onclick="km84Baslat()">🛠️ Mühendisliğe Başla</button>
+</section>
+
+<section id="kavramturnuvasi84">
+  <h2>🏆 Kavram Turnuvası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
+  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap.</div>
+  <div class="oyun-bilgi">
+    <span>🥊 Maç: <b id="kt84Tur">1</b>/<b id="kt84Toplam">7</b></span>
+    <span>✅ Doğru Hakemlik: <b id="kt84Puan">0</b></span>
+  </div>
+  <div id="kt84Asama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="kt84Eslesme" class="balon-durum"></div>
+  <div id="kt84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kt84Sonuc"></div>
+  <button class="eylem" onclick="kt84Baslat()">🏆 Turnuvayı Başlat</button>
+</section>
+
+<section id="bonus84">
+  <h2>🎮 Bonus Oyun: Kavramlar Hafıza Zinciri</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
+  <div class="aciklama">Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir kavram daha uzuyor.</div>
+  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bz84Seviye">0</b></span></div>
+  <div class="bz-izgara" id="bz84Izgara"></div>
+  <div class="sonuc-kutusu" id="bz84Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" style="background:var(--sari)" onclick="bz84OrnekOyna()">🎬 Önce Örnek Gör</button>
+    <button class="eylem" onclick="bz84Baslat()">🎮 Oyunu Başlat</button>
+  </div>
+</section>
+
+<section id="dedektif84">
+  <h2>🕵️ Kelime Dedektifi</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
+  <div class="aciklama">Gizli kelimeyi (bir kavram) 5 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Vaka: <b id="dd84Vaka">1</b>/<b id="dd84ToplamVaka">1</b></span>
+    <span>✅ Çözülen: <b id="dd84Cozulen">0</b></span>
+    <span>🔍 Deneme: <b id="dd84Deneme">0</b>/<b id="dd84MaxDeneme">5</b></span>
+  </div>
+  <div id="dd84Ipucu" class="balon-durum"></div>
+  <div id="dd84Izgara"></div>
+  <input type="text" id="dd84Girdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){dd84TahminEt();}">
+  <p class="balon-durum" id="dd84Uyari"></p>
+  <div class="sonuc-kutusu" id="dd84Sonuc"></div>
+  <button class="eylem" onclick="dd84Baslat()">🕵️ Soruşturmayı Başlat</button>
+</section>
+
+<section id="dildedektifi84">
+  <h2>🕵️‍♀️ Dil Dedektifi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
+  <div class="aciklama">Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="ddl84Tur">1</b>/<b id="ddl84Toplam">10</b></span>
+    <span>⭐ Puan: <b id="ddl84Puan">0</b></span>
+  </div>
+  <div id="ddl84Baslik" class="balon-durum"></div>
+  <div id="ddl84Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="ddl84Sonuc"></div>
+  <button class="eylem" onclick="ddl84Baslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
+</section>
+
+<section id="mantikzinciri84">
+  <h2>🔗 Mantık Zinciri Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
+  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
+  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mz84Halka">1</b>/<b id="mz84Toplam">5</b></span></div>
+  <div id="mz84Soru" class="balon-durum"></div>
+  <div id="mz84Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="kutu-panel" id="mz84Gorsel" style="max-width:460px;margin:20px auto;"></div>
+  <div class="sonuc-kutusu" id="mz84Sonuc"></div>
+  <button class="eylem" onclick="mz84Baslat()">🔗 Zinciri Başlat</button>
+</section>
+
+<section id="semantiklabirent84">
+  <h2>🧠 Semantik Labirent</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
+  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin.</div>
+  <div class="oyun-bilgi">
+    <span>🚪 Oda: <b id="sz84Oda">1</b>/<b id="sz84ToplamOda">6</b></span>
+    <span id="sz84Can">❤️❤️❤️</span>
+  </div>
+  <div id="sz84Kategori" class="balon-durum"></div>
+  <div id="sz84Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sz84Sonuc"></div>
+  <button class="eylem" onclick="sz84Baslat()">🌀 Labirente Gir</button>
+</section>
+
+<section id="celiskiavi84">
+  <h2>🕵️‍♂️ Çelişki Avı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
+  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu?</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="ca84Tur">1</b>/<b id="ca84Toplam">12</b></span>
+    <span>⭐ Puan: <b id="ca84Puan">0</b></span>
+  </div>
+  <div id="ca84Cumle" class="dua-satir"></div>
+  <div id="ca84Butonlar" style="display:flex;gap:14px;justify-content:center;">
+    <button class="eylem" style="background:var(--kirmizi)" onclick="ca84Cevapla(true)">⚡ Çelişki VAR</button>
+    <button class="eylem" style="background:var(--yesil)" onclick="ca84Cevapla(false)">✅ Çelişki YOK</button>
+  </div>
+  <p style="text-align:center;font-weight:bold;" id="ca84GeriBildirim"></p>
+  <div class="sonuc-kutusu" id="ca84Sonuc"></div>
+  <button class="eylem" style="background:var(--sari)" onclick="ca84Baslat()">🕵️‍♂️ Ava Başla</button>
+</section>
+
+<section id="labirent84">
+  <h2>🌀 Labirent Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
+  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 🕌'ye ulaştır! Yolda parıldayan yıldızlara basarsan bir kavram toplarsın.</div>
+  <div class="oyun-bilgi">
+    <span>🔁 Hamle: <b id="lab84Hamle">0</b></span>
+    <span>⭐ Toplanan: <b id="lab84Toplanan">0</b>/<b id="lab84ToplamYildiz">20</b></span>
+    <span>⏱️ Süre: <b id="lab84Sure">0</b>sn</span>
+  </div>
+  <div class="balon-durum" id="lab84Durum"></div>
+  <div class="labirent-izgara" id="lab84Izgara"></div>
+  <div class="labirent-kontroller">
+    <button class="labirent-tus" onclick="labirent84Hareket(-1,0)">▲</button>
+    <div>
+      <button class="labirent-tus" onclick="labirent84Hareket(0,-1)">◀</button>
+      <button class="labirent-tus" onclick="labirent84Hareket(1,0)">▼</button>
+      <button class="labirent-tus" onclick="labirent84Hareket(0,1)">▶</button>
+    </div>
+  </div>
+  <div class="sonuc-kutusu" id="lab84Sonuc"></div>
+  <button class="eylem" onclick="labirent84Baslat()">🔄 Yeni Labirent</button>
+</section>
+
+<section id="ezsira84">
+  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresinin bölümlerini doğru sırayla dizebileceksin.</div>
+  <div class="aciklama">Karışık sırada verilen bölümleri, Kureyş suresindeki doğru sıraya göre tıklayarak diz.</div>
+  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez184Dizilen">0</b>/<b>8</b></span></div>
+  <div class="kelime-cevap" id="ez184Cevap"></div>
+  <div class="kelime-banka" id="ez184Banka"></div>
+  <div class="sonuc-kutusu" id="ez184Sonuc"></div>
+  <button class="eylem" onclick="ez184Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezbosluk84">
+  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresindeki kelimeleri tam olarak hatırlayabileceksin.</div>
+  <div class="aciklama">Bölümdeki boşluğa gelen doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez284Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez284Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez284Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez284Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez284Sonuc"></div>
+  <button class="eylem" onclick="ez284Baslat()">📝 Başla</button>
+</section>
+
+<section id="ezeslestir84">
+  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresinin her bölümünü anlamıyla eşleştirebileceksin.</div>
+  <div class="aciklama">Soldan bir bölüm, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
+  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez384Eslesen">0</b>/<b>8</b></span></div>
+  <div class="ez-iki-sutun">
+    <div class="ez-sutun"><h4>Bölüm</h4><div id="ez384Sol"></div></div>
+    <div class="ez-sutun"><h4>Anlam</h4><div id="ez384Sag"></div></div>
+  </div>
+  <div class="sonuc-kutusu" id="ez384Sonuc"></div>
+  <button class="eylem" onclick="ez384Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezhafiza84">
+  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Bölüm-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
+  <div class="aciklama">İki kartı çevir. Bir bölüm ile doğru anlamı eşleşirse kartlar açık kalır.</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez484Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="ez484Hamle">0</b></span></div>
+  <div class="ez-hafiza-izgara" id="ez484Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
+  <div class="sonuc-kutusu" id="ez484Sonuc"></div>
+  <button class="eylem" onclick="ez484Baslat()">🔄 Yeni Oyun</button>
+</section>
+
+<section id="ezadimadim84">
+  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresini baştan sona, bölüm sırasını bularak ezberleyeceksin.</div>
+  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi bölümün geldiğini seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez584Adim">1</b>/<b>8</b></span></div>
+  <div class="ez-ogrenilen-liste" id="ez584Liste"></div>
+  <div class="balon-durum">Sırada hangi bölüm geliyor?</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez584Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez584Sonuc"></div>
+  <button class="eylem" onclick="ez584Baslat()">▶️ Başla</button>
+</section>
+
+<section id="ezgizli84">
+  <h2>6️⃣ Ezber: Gizli Harfler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresinin anahtar kelimelerini harf harf hatırlayacaksın.</div>
+  <div class="aciklama">Bölümdeki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez684Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez684Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez684Metin"></div>
+  <div class="kelime-cevap" id="ez684Cevap"></div>
+  <div class="kelime-banka" id="ez684Banka"></div>
+  <div class="sonuc-kutusu" id="ez684Sonuc"></div>
+  <button class="eylem" onclick="ez684Baslat()">🔐 Başla</button>
+</section>
+
+<section id="ezkaybolan84">
+  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun bölümü hafızandan tanıyabileceksin.</div>
+  <div class="aciklama">Bölümü 3 saniye izle, sonra kaybolacak. Az önce gördüğün bölümün BİREBİR aynısını seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez784Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez784Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez784Metin">👁️ Başlamak için düğmeye bas</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez784Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez784Sonuc"></div>
+  <button class="eylem" onclick="ez784Baslat()">👁️ Başla</button>
+</section>
+
+<section id="ezhiz84">
+  <h2>8️⃣ Ezber: Hız Testi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kureyş suresi bölüm-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
+  <div class="aciklama">Süre dolmadan verilen anlama ait doğru bölümü seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
+  <div class="ez-zamanlayici" id="ez884Sayac">60</div>
+  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez884Dogru">0</b></span><span>❌ Yanlış: <b id="ez884Yanlis">0</b></span></div>
+  <div class="ez-metin-goster" id="ez884Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez884Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez884Sonuc"></div>
+  <button class="eylem" onclick="ez884Baslat()">⏱️ Başla</button>
+</section>
+
+<!-- ===================== İKİ KİŞİLİK OYUNLAR (20 yeni oyun) ===================== -->
+<section id="quizbattle84">
+  <h2>⚔️ Quiz Battle</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in örnek ahlakını ve hayatını pekiştirmek.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Sorular sırayla gelir, doğru cevaplayan puan alır.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="qb84SoruNo">1</b>/<b id="qb84Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="qb84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="qb84Puan2">0</b></span></div>
+  <div id="qb84ElDegistir" style="text-align:center;"></div>
+  <div id="qb84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="qb84SoruMetin" class="balon-durum"></div>
+  <div id="qb84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="qb84Sonuc"></div>
+  <div id="qb84YenidenBaslat"></div>
+  <button class="eylem" onclick="qb84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="memorymatchduel84">
+  <h2>🧠 Memory Match Duel</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları anlamlarıyla eşleştirerek hafızayı güçlendirmek.</div>
+  <div class="aciklama">Sırayla iki kart aç. Kavram ile anlamı eşleşirse puan kazanır ve tekrar oynarsın.</div>
+  <div class="oyun-bilgi"><span>🔵 1. Oyuncu: <b id="mm84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="mm84Puan2">0</b></span></div>
+  <div id="mm84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div class="hafiza-izgara" id="mm84Izgara"></div>
+  <div class="sonuc-kutusu" id="mm84Sonuc"></div>
+  <div id="mm84YenidenBaslat"></div>
+  <button class="eylem" onclick="mm84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="timelinechallenge84">
+  <h2>📜 Timeline Challenge</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in hayatındaki olayları doğru sırayla kavramak.</div>
+  <div class="aciklama">Cihazı sırayla arkadaşına ver, öğeleri doğru sıraya diz.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="tl84TurNo">1</b>/<b id="tl84TurToplam">3</b></span><span>🔵 1. Oyuncu: <b id="tl84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="tl84Puan2">0</b></span></div>
+  <div id="tl84ElDegistir" style="text-align:center;"></div>
+  <div id="tl84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <p style="text-align:center;font-style:italic;" id="tl84Baslik"></p>
+  <div class="kelime-cevap" id="tl84Cevap"></div>
+  <div class="kelime-banka" id="tl84Banka"></div>
+  <div class="sonuc-kutusu" id="tl84Sonuc"></div>
+  <div id="tl84YenidenBaslat"></div>
+  <button class="eylem" onclick="tl84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="speedquiz84">
+  <h2>⚡ Speed Quiz</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in örnek olaylarını hızlı hatırlamak.</div>
+  <div class="aciklama">Süre kısa, hızlı düşün: doğru cevabı süre dolmadan seç.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="sq84SoruNo">1</b>/<b id="sq84Toplam">6</b></span><span>⏱️ Süre: <b id="sq84Sure">-</b> sn</span><span>🔵 1. Oyuncu: <b id="sq84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="sq84Puan2">0</b></span></div>
+  <div id="sq84ElDegistir" style="text-align:center;"></div>
+  <div id="sq84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="sq84SoruMetin" class="balon-durum"></div>
+  <div id="sq84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sq84Sonuc"></div>
+  <div id="sq84YenidenBaslat"></div>
+  <button class="eylem" onclick="sq84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="mysterybox84">
+  <h2>🎁 Mystery Box</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bazı sorularda sürpriz bonus puanlar kazanmak.</div>
+  <div class="aciklama">Bazı kutular ⭐ bonuslu sorulardır — doğru cevaplarsan çift puan kazanırsın!</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="myb84SoruNo">1</b>/<b id="myb84Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="myb84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="myb84Puan2">0</b></span></div>
+  <div id="myb84ElDegistir" style="text-align:center;"></div>
+  <div id="myb84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="myb84SoruMetin" class="balon-durum"></div>
+  <div id="myb84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="myb84Sonuc"></div>
+  <div id="myb84YenidenBaslat"></div>
+  <button class="eylem" onclick="myb84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="conceptconnect84">
+  <h2>🔗 Concept Connect</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları doğru açıklamalarıyla eşleştirmek.</div>
+  <div class="aciklama">Sırayla iki kart aç, kavram ile açıklaması eşleşirse puan kazanırsın.</div>
+  <div class="oyun-bilgi"><span>🔵 1. Oyuncu: <b id="cc84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="cc84Puan2">0</b></span></div>
+  <div id="cc84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div class="hafiza-izgara" id="cc84Izgara"></div>
+  <div class="sonuc-kutusu" id="cc84Sonuc"></div>
+  <div id="cc84YenidenBaslat"></div>
+  <button class="eylem" onclick="cc84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="escapemission84">
+  <h2>🚪 Escape Mission</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru cevaplarla kapılardan geçip görevi tamamlamak.</div>
+  <div class="aciklama">Her kapıyı geçmek için soruyu doğru cevapla.</div>
+  <div class="oyun-bilgi"><span>🚪 Kapı: <b id="esc84SoruNo">1</b>/<b id="esc84Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="esc84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="esc84Puan2">0</b></span></div>
+  <div id="esc84ElDegistir" style="text-align:center;"></div>
+  <div id="esc84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="esc84SoruMetin" class="balon-durum"></div>
+  <div id="esc84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="esc84Sonuc"></div>
+  <div id="esc84YenidenBaslat"></div>
+  <button class="eylem" onclick="esc84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="knowledgerace84">
+  <h2>🏁 Knowledge Race</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru bildikçe parkurda ilerlemek.</div>
+  <div class="aciklama">Her doğru cevap seni parkurda bir adım ileri taşır.</div>
+  <div class="oyun-bilgi"><span>🏁 Adım: <b id="kr84SoruNo">1</b>/<b id="kr84Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="kr84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="kr84Puan2">0</b></span></div>
+  <div id="kr84ElDegistir" style="text-align:center;"></div>
+  <div id="kr84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="kr84SoruMetin" class="balon-durum"></div>
+  <div id="kr84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kr84Sonuc"></div>
+  <div id="kr84YenidenBaslat"></div>
+  <button class="eylem" onclick="kr84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="logicgrid84">
+  <h2>🧩 Logic Grid</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak mantık yürütmeyi geliştirmek.</div>
+  <div class="aciklama">Verilen ipuçlarını oku ve hangi kavramın anlatıldığını bul.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="lg84SoruNo">1</b>/<b id="lg84Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="lg84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="lg84Puan2">0</b></span></div>
+  <div id="lg84ElDegistir" style="text-align:center;"></div>
+  <div id="lg84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="lg84SoruMetin" class="balon-durum"></div>
+  <div id="lg84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="lg84Sonuc"></div>
+  <div id="lg84YenidenBaslat"></div>
+  <button class="eylem" onclick="lg84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="missioncards84">
+  <h2>🃏 Mission Cards</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in örnekliğiyle ilgili doğru bilgileri pekiştirmek.</div>
+  <div class="aciklama">Her görev kartı bir durum anlatır, doğru cevabı seç.</div>
+  <div class="oyun-bilgi"><span>🃏 Kart: <b id="mc84SoruNo">1</b>/<b id="mc84Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="mc84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="mc84Puan2">0</b></span></div>
+  <div id="mc84ElDegistir" style="text-align:center;"></div>
+  <div id="mc84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="mc84SoruMetin" class="balon-durum"></div>
+  <div id="mc84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="mc84Sonuc"></div>
+  <div id="mc84YenidenBaslat"></div>
+  <button class="eylem" onclick="mc84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="debatechallenge84">
+  <h2>💬 Debate Challenge</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru gerekçeyle düşünmeyi öğrenmek.</div>
+  <div class="aciklama">Verilen görüşün doğru olup olmadığına karar ver.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="dc84SoruNo">1</b>/<b id="dc84Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="dc84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="dc84Puan2">0</b></span></div>
+  <div id="dc84ElDegistir" style="text-align:center;"></div>
+  <div id="dc84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="dc84SoruMetin" class="balon-durum"></div>
+  <div id="dc84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="dc84Sonuc"></div>
+  <div id="dc84YenidenBaslat"></div>
+  <button class="eylem" onclick="dc84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="factormyth84">
+  <h2>❓ Fact or Myth</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru ve yanlış bilgileri ayırt edebilmek.</div>
+  <div class="aciklama">Ekrandaki ifadenin doğru mu yanlış mı olduğuna karar ver.</div>
+  <div class="oyun-bilgi"><span>❓ İfade: <b id="fm84SoruNo">1</b>/<b id="fm84Toplam">8</b></span><span>🔵 1. Oyuncu: <b id="fm84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="fm84Puan2">0</b></span></div>
+  <div id="fm84ElDegistir" style="text-align:center;"></div>
+  <div id="fm84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="fm84SoruMetin" class="balon-durum"></div>
+  <div id="fm84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="fm84Sonuc"></div>
+  <div id="fm84YenidenBaslat"></div>
+  <button class="eylem" onclick="fm84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="codebreaker84">
+  <h2>🔓 Code Breaker</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından kelime çözmede ustalaşmak.</div>
+  <div class="aciklama">İpuçlarını oku, gizli kelimeyi tahmin et. Az ipuçla bilirsen daha çok puan kazanırsın!</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="cb84SoruNo">1</b>/<b id="cb84Toplam">4</b></span><span>🔵 1. Oyuncu: <b id="cb84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="cb84Puan2">0</b></span></div>
+  <div id="cb84ElDegistir" style="text-align:center;"></div>
+  <div id="cb84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <p style="text-align:center;font-size:1.05em;" id="cb84Ipucu"></p>
+  <input type="text" id="cb84Girdi" placeholder="Cevabını yaz">
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;"><button class="eylem" onclick="ikiliIpucuYeni('cb84')">💡 Yeni İpucu</button><button class="eylem" onclick="ikiliIpucuGonder('cb84')">📤 Cevabı Gönder</button></div>
+  <div class="sonuc-kutusu" id="cb84Sonuc"></div>
+  <div id="cb84YenidenBaslat"></div>
+  <button class="eylem" onclick="cb84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="puzzleduel84">
+  <h2>🧩 Puzzle Duel</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Tanımlardan kavrama ulaşmada hızlanmak.</div>
+  <div class="aciklama">İpuçlarını sırayla oku, kavramı tahmin et. İlk ipucuyla bilirsen en yüksek puanı alırsın!</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="pz84SoruNo">1</b>/<b id="pz84Toplam">4</b></span><span>🔵 1. Oyuncu: <b id="pz84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="pz84Puan2">0</b></span></div>
+  <div id="pz84ElDegistir" style="text-align:center;"></div>
+  <div id="pz84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <p style="text-align:center;font-size:1.05em;" id="pz84Ipucu"></p>
+  <input type="text" id="pz84Girdi" placeholder="Cevabını yaz">
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;"><button class="eylem" onclick="ikiliIpucuYeni('pz84')">💡 Yeni İpucu</button><button class="eylem" onclick="ikiliIpucuGonder('pz84')">📤 Cevabı Gönder</button></div>
+  <div class="sonuc-kutusu" id="pz84Sonuc"></div>
+  <div id="pz84YenidenBaslat"></div>
+  <button class="eylem" onclick="pz84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="treasurehunt84">
+  <h2>🗺️ Treasure Hunt</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarını takip ederek bilgi hazinesine ulaşmak.</div>
+  <div class="aciklama">Her doğru cevap seni hazineye bir adım yaklaştırır.</div>
+  <div class="oyun-bilgi"><span>🗺️ İpucu: <b id="th84SoruNo">1</b>/<b id="th84Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="th84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="th84Puan2">0</b></span></div>
+  <div id="th84ElDegistir" style="text-align:center;"></div>
+  <div id="th84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="th84SoruMetin" class="balon-durum"></div>
+  <div id="th84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="th84Sonuc"></div>
+  <div id="th84YenidenBaslat"></div>
+  <button class="eylem" onclick="th84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="strategyboard84">
+  <h2>♟️ Strategy Board</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in örnekliğiyle ilgili bilgileri pekiştirmek.</div>
+  <div class="aciklama">Her doğru cevap seni tahtada bir kare ileri taşır.</div>
+  <div class="oyun-bilgi"><span>♟️ Kare: <b id="sb84SoruNo">1</b>/<b id="sb84Toplam">6</b></span><span>🔵 1. Oyuncu: <b id="sb84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="sb84Puan2">0</b></span></div>
+  <div id="sb84ElDegistir" style="text-align:center;"></div>
+  <div id="sb84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="sb84SoruMetin" class="balon-durum"></div>
+  <div id="sb84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sb84Sonuc"></div>
+  <div id="sb84YenidenBaslat"></div>
+  <button class="eylem" onclick="sb84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="flashchallenge84">
+  <h2>⚡ Flash Challenge</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'le ilgili bilgileri anında hatırlayabilmek.</div>
+  <div class="aciklama">Sadece 5 saniyen var! Süre dolarsa soru yanlış sayılır.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="fc84SoruNo">1</b>/<b id="fc84Toplam">8</b></span><span>⏱️ Süre: <b id="fc84Sure">-</b> sn</span><span>🔵 1. Oyuncu: <b id="fc84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="fc84Puan2">0</b></span></div>
+  <div id="fc84ElDegistir" style="text-align:center;"></div>
+  <div id="fc84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="fc84SoruMetin" class="balon-durum"></div>
+  <div id="fc84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="fc84Sonuc"></div>
+  <div id="fc84YenidenBaslat"></div>
+  <button class="eylem" onclick="fc84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="survivalmode84">
+  <h2>💔 Survival Mode</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkatli ve doğru cevap vermenin önemini kavramak.</div>
+  <div class="aciklama">Her oyuncunun 3 canı var. Yanlış cevap can kaybettirir.</div>
+  <div class="oyun-bilgi"><span>🔵 1. Oyuncu: <b id="sv84Can1">❤️❤️❤️</b></span><span>🔴 2. Oyuncu: <b id="sv84Can2">❤️❤️❤️</b></span></div>
+  <div id="sv84ElDegistir" style="text-align:center;"></div>
+  <div id="sv84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="sv84SoruMetin" class="balon-durum"></div>
+  <div id="sv84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sv84Sonuc"></div>
+  <div id="sv84YenidenBaslat"></div>
+  <button class="eylem" onclick="sv84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="decisionmaker84">
+  <h2>🤔 Decision Maker</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Hz. Muhammed'in örnekliğinin günlük hayata yansımalarını kavramak.</div>
+  <div class="aciklama">Verilen senaryoda en doğru davranışı seç.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="dm84SoruNo">1</b>/<b id="dm84Toplam">5</b></span><span>🔵 1. Oyuncu: <b id="dm84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="dm84Puan2">0</b></span></div>
+  <div id="dm84ElDegistir" style="text-align:center;"></div>
+  <div id="dm84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="dm84SoruMetin" class="balon-durum"></div>
+  <div id="dm84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="dm84Sonuc"></div>
+  <div id="dm84YenidenBaslat"></div>
+  <button class="eylem" onclick="dm84Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="championarena84">
+  <h2>🏆 Champion Arena</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bu ünitede öğrendiğin her şeyi büyük bir final turnuvasında göstermek.</div>
+  <div class="aciklama">20 soruluk final turnuvası! En yüksek puanı alan şampiyon olur.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="ca84SoruNo">1</b>/<b id="ca84Toplam">20</b></span><span>🔵 1. Oyuncu: <b id="ca84Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="ca84Puan2">0</b></span></div>
+  <div id="ca84ElDegistir" style="text-align:center;"></div>
+  <div id="ca84SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="ca84SoruMetin" class="balon-durum"></div>
+  <div id="ca84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="ca84Sonuc"></div>
+  <div id="ca84YenidenBaslat"></div>
+  <button class="eylem" onclick="ca84Baslat()">🎮 Oyuna Başla</button>
+</section>
+</main>
+
+<script src="../ortak/oyun-merkezi.js"></script>
+<script>
+const LS_PUAN_ANAHTARI = 'dkabPuanDurumu8sinif';
+const OYUN_LISTESI = [
+  {id:'kelimeavi', kategori:'bulmaca', ikon:'🔎', baslik:'Kelime Avı', aciklama:'Harf tablosunda gizlenmiş kelimeleri bul.'},
+  {id:'cengel', kategori:'bulmaca', ikon:'🧩', baslik:'Çengel Bulmaca', aciklama:'İpuçlarından yola çıkarak bulmacayı tamamla.'},
+  {id:'merdiven', kategori:'bulmaca', ikon:'🪜', baslik:'Sözcük Merdiveni', aciklama:'Basamak basamak doğru kelimeye ulaş.'},
+  {id:'sifre', kategori:'bulmaca', ikon:'🔐', baslik:'Şifreli Sözcük', aciklama:'Şifreyi çöz, gizli kelimeyi ortaya çıkar.'},
+  {id:'sifretanim', kategori:'bulmaca', ikon:'🔐', baslik:'Şifreli Tanım', aciklama:'Tanımdan yola çıkarak şifreyi çöz.'},
+  {id:'kelimekodlama', kategori:'bulmaca', ikon:'💻', baslik:'Kelime Kodlama', aciklama:'Harfleri kodla, kelimeyi tamamla.'},
+  {id:'nonogram', kategori:'bulmaca', ikon:'🖼️', baslik:'Nonogram', aciklama:'Sayı ipuçlarıyla gizli resmi ortaya çıkar.'},
+  {id:'satranc', kategori:'bulmaca', ikon:'♞', baslik:'Kelime Satrancı', aciklama:'Doğru hamleyle kelimeyi tamamla.'},
+  {id:'kelimeuret', kategori:'yarisma', ikon:'⚡', baslik:'Hızlı Kelime', aciklama:'Süre bitmeden doğru kelimeyi bul.'},
+  {id:'tuzak', kategori:'yarisma', ikon:'🚫', baslik:'Tuzak Harf', aciklama:'Yanıltıcı harflere dikkat et, doğruyu seç.'},
+  {id:'fabrika', kategori:'yarisma', ikon:'🏭', baslik:'Kelime Fabrikası', aciklama:'Harflerden yeni kelimeler üret.'},
+  {id:'muhendis', kategori:'yarisma', ikon:'🛠️', baslik:'Kelime Mühendisi', aciklama:'Parçaları birleştirip kelimeyi inşa et.'},
+  {id:'kavramturnuvasi', kategori:'yarisma', ikon:'🏆', baslik:'Kavram Turnuvası', aciklama:'Bilgini turnuva formatında test et.'},
+  {id:'bonus', kategori:'yarisma', ikon:'🎮', baslik:'Bonus Oyun', aciklama:'Ekstra puan için bonus turu oyna.'},
+  {id:'dedektif', kategori:'mantik', ikon:'🕵️', baslik:'Kelime Dedektifi', aciklama:'İpuçlarını takip et, kelimeyi çöz.'},
+  {id:'dildedektifi', kategori:'mantik', ikon:'🕵️‍♀️', baslik:'Dil Dedektifi', aciklama:'Dilsel ipuçlarıyla doğru cevaba ulaş.'},
+  {id:'mantikzinciri', kategori:'mantik', ikon:'🔗', baslik:'Mantık Zinciri', aciklama:'Mantık bağlantılarını sırayla kur.'},
+  {id:'semantiklabirent', kategori:'mantik', ikon:'🧠', baslik:'Semantik Labirent', aciklama:'Anlam ilişkilerini takip ederek ilerle.'},
+  {id:'celiskiavi', kategori:'mantik', ikon:'🕵️‍♂️', baslik:'Çelişki Avı', aciklama:'Metindeki çelişkiyi bul.'},
+  {id:'labirent', kategori:'macera', ikon:'🌀', baslik:'Labirent', aciklama:'Doğru yolu bulup labirentten çık.'},
+  {id:'ezsira', kategori:'ezber', ikon:'1️⃣', baslik:'Sırala Bakalım', aciklama:'Parçaları doğru sıraya diz.'},
+  {id:'ezbosluk', kategori:'ezber', ikon:'2️⃣', baslik:'Boşluk Doldur', aciklama:'Cümledeki boşlukları doğru doldur.'},
+  {id:'ezeslestir', kategori:'ezber', ikon:'3️⃣', baslik:'Anlam Eşleştir', aciklama:'Kavramları doğru anlamlarıyla eşleştir.'},
+  {id:'ezhafiza', kategori:'ezber', ikon:'4️⃣', baslik:'Hafıza Kartları', aciklama:'Eşleri bul, hafızanı güçlendir.'},
+  {id:'ezadimadim', kategori:'ezber', ikon:'5️⃣', baslik:'Adım Adım Ezber', aciklama:'Metni adım adım ezberle.'},
+  {id:'ezgizli', kategori:'ezber', ikon:'6️⃣', baslik:'Gizli Harfler', aciklama:'Gizlenmiş harfleri bulup kelimeyi tamamla.'},
+  {id:'ezkaybolan', kategori:'ezber', ikon:'7️⃣', baslik:'Kaybolan Kelimeler', aciklama:'Kaybolan kelimeleri hafızandan bul.'},
+  {id:'ezhiz', kategori:'ezber', ikon:'8️⃣', baslik:'Hız Testi', aciklama:'Süre dolmadan hızlıca cevapla.'},
+  {id:'quizbattle', kategori:'ikikisilik', ikon:'⚔️', baslik:'Quiz Battle', aciklama:'İki oyuncu sırayla yarışır, doğru cevaplayan puan alır.'},
+  {id:'memorymatchduel', kategori:'ikikisilik', ikon:'🧠', baslik:'Memory Match Duel', aciklama:'Kartları çevir, kavramları eşleştir, puan topla.'},
+  {id:'timelinechallenge', kategori:'ikikisilik', ikon:'📜', baslik:'Timeline Challenge', aciklama:'Olayları doğru sıraya diz, arkadaşınla yarış.'},
+  {id:'speedquiz', kategori:'ikikisilik', ikon:'⚡', baslik:'Speed Quiz', aciklama:'Süre kısa, hızlı düşün, doğru cevabı yakala.'},
+  {id:'mysterybox', kategori:'ikikisilik', ikon:'🎁', baslik:'Mystery Box', aciklama:'Bazı kutular bonus puanlı, şansını dene.'},
+  {id:'conceptconnect', kategori:'ikikisilik', ikon:'🔗', baslik:'Concept Connect', aciklama:'Kavramları doğru açıklamalarıyla eşleştir.'},
+  {id:'escapemission', kategori:'ikikisilik', ikon:'🚪', baslik:'Escape Mission', aciklama:'Doğru cevaplarla kapılardan geç, görevi tamamla.'},
+  {id:'knowledgerace', kategori:'ikikisilik', ikon:'🏁', baslik:'Knowledge Race', aciklama:'Doğru bildikçe parkurda ilerle.'},
+  {id:'logicgrid', kategori:'ikikisilik', ikon:'🧩', baslik:'Logic Grid', aciklama:'İpuçlarından yola çıkarak mantık yürüt.'},
+  {id:'missioncards', kategori:'ikikisilik', ikon:'🃏', baslik:'Mission Cards', aciklama:'Görev kartlarındaki soruları doğru cevapla.'},
+  {id:'debatechallenge', kategori:'ikikisilik', ikon:'💬', baslik:'Debate Challenge', aciklama:'Görüşün doğru mu yanlış mı olduğuna karar ver.'},
+  {id:'factormyth', kategori:'ikikisilik', ikon:'❓', baslik:'Fact or Myth', aciklama:'İfadenin doğru mu yanlış mı olduğunu bul.'},
+  {id:'codebreaker', kategori:'ikikisilik', ikon:'🔓', baslik:'Code Breaker', aciklama:'İpuçlarından gizli kelimeyi çöz.'},
+  {id:'puzzleduel', kategori:'ikikisilik', ikon:'🧩', baslik:'Puzzle Duel', aciklama:'Tanımlardan yola çıkarak kavramı bil.'},
+  {id:'treasurehunt', kategori:'ikikisilik', ikon:'🗺️', baslik:'Treasure Hunt', aciklama:'İpuçlarını takip ederek hazineye ulaş.'},
+  {id:'strategyboard', kategori:'ikikisilik', ikon:'♟️', baslik:'Strategy Board', aciklama:'Her doğru cevap seni tahtada ileri taşır.'},
+  {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece 5 saniyen var, hızlı cevapla!'},
+  {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
+  {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'}
+];
+oyunMerkeziOlustur(OYUN_LISTESI, '84', 'unite4.html');
+
+// =====================================================================
+// İKİ KİŞİLİK OYUNLAR - VERİ VE BAŞLATMA FONKSİYONLARI (20 oyun)
+// =====================================================================
+
+// --- Quiz Battle ---
+const QB84_SORULAR = [
+  {soru:"Hz. Muhammed'e Mekkeliler tarafından verilen lakap nedir?", secenekler:["El-Emin","El-Faruk","Es-Sıddîk","Ez-Zâhid"], dogru:0},
+  {soru:"'El-Emin' lakabı hangi anlama gelir?", secenekler:["Güvenilir kişi","Cömert kişi","Cesur kişi","Bilgin kişi"], dogru:0},
+  {soru:"Peygamberlerin 'sıdk' sıfatı ne demektir?", secenekler:["Doğru sözlü olmak","Zengin olmak","Güçlü olmak","Sabırlı olmak"], dogru:0},
+  {soru:"Bilgi ve tecrübe sahiplerine danışmaya ne denir?", secenekler:["İstişare","İbadet","İnfak","İhlas"], dogru:0},
+  {soru:"Hicrette saklandıkları mağaranın adı nedir?", secenekler:["Sevr Mağarası","Hira Mağarası","Uhud Mağarası","Bedir Mağarası"], dogru:0},
+  {soru:"Mekke'de kurulan erdemliler ittifakının adı nedir?", secenekler:["Hılfü'l-fudûl","Dârü'n-Nedve","Dârü'l-Erkam","Akabe Biatı"], dogru:0}
+];
+function qb84Baslat(){ ikiliOyunBaslat({onek:'qb84', sorular:QB84_SORULAR}); }
+
+// --- Memory Match Duel ---
+const MM84_CIFTLER = [
+  {metin1:"El-Emin", metin2:"Güvenilir kişi lakabı"},
+  {metin1:"Sıdk", metin2:"Doğru sözlü olmak"},
+  {metin1:"Emanet", metin2:"Güvenilir olmak, ihanet etmemek"},
+  {metin1:"İstişare", metin2:"Bilenlere danışmak"},
+  {metin1:"Hılfü'l-fudûl", metin2:"Haksızlığa uğrayanları koruma ittifakı"},
+  {metin1:"Veda Hutbesi", metin2:"İnsan haklarını ilan eden hutbe"},
+  {metin1:"Sevr Mağarası", metin2:"Hicrette saklanılan mağara"},
+  {metin1:"Hacerülesved", metin2:"Kâbe'deki kutsal taş"}
+];
+function mm84Baslat(){ ikiliHafizaBaslat({onek:'mm84', ciftler:MM84_CIFTLER}); }
+
+// --- Timeline Challenge ---
+const TL84_TURLAR = [
+  {baslik:"Hicret gecesi olaylarını doğru sırayla diz:", ogeler:["Hz. Ali'nin yatağa yatırılması","Sevr Mağarası'na sığınma","Üç gün mağarada kalma","Medine'ye yolculuk"]},
+  {baslik:"Hacerülesved anlaşmazlığı çözümünü doğru sırayla diz:", ogeler:["Kabileler arası tartışma çıkması","Hz. Muhammed'in hakemliğe çağrılması","Taşın örtüye konulması","Her kabile reisinin örtüyü taşıması"]},
+  {baslik:"Mekke'nin Fethi sürecini doğru sırayla diz:", ogeler:["Ordunun Mekke'ye yürümesi","Şehrin fethedilmesi","Genel af ilan edilmesi","Kâbe'nin putlardan temizlenmesi"]}
+];
+function tl84Baslat(){ ikiliSiralaBaslat({onek:'tl84', turlar:TL84_TURLAR}); }
+
+// --- Speed Quiz ---
+const SQ84_SORULAR = [
+  {soru:"Taif'te taşlanmasına rağmen ne yapmamıştır?", secenekler:["Beddua etmemiştir","Ağlamamıştır","Konuşmamıştır","Geri dönmemiştir"], dogru:0},
+  {soru:"Mekke'nin Fethi'nde söylediği meşhur söz nedir?", secenekler:["Bugün size kınama yok","Hepiniz cezalandırılacaksınız","Şehri terk edin","Mallarınız alınacak"], dogru:0},
+  {soru:"Hendek kazma fikrini kim önermiştir?", secenekler:["Selman-ı Farisi","Hz. Ömer","Hz. Osman","Hz. Bilal"], dogru:0},
+  {soru:"Kureyş suresi kaç ayettir?", secenekler:["Dört","Üç","Yedi","Beş"], dogru:0},
+  {soru:"Kureyş suresinde 'şitâ' kelimesi ne demektir?", secenekler:["Kış","Yaz","Gece","Yolculuk"], dogru:0},
+  {soru:"Hz. Muhammed'in vefatından önce okuduğu hutbe hangisidir?", secenekler:["Veda Hutbesi","Cuma Hutbesi","Bayram Hutbesi","Nikâh Hutbesi"], dogru:0}
+];
+function sq84Baslat(){ ikiliOyunBaslat({onek:'sq84', sorular:SQ84_SORULAR, sureSN:8}); }
+
+// --- Mystery Box ---
+const MYB84_SORULAR = [
+  {soru:"Hz. Muhammed'in emanetleri teslim etmesi için görevlendirdiği kişi kimdir?", secenekler:["Hz. Ali","Hz. Ömer","Hz. Osman","Hz. Hamza"], dogru:0, bonus:true},
+  {soru:"'Merhamet etmeyene merhamet olunmaz' sözü kime aittir?", secenekler:["Hz. Muhammed'e","Hz. Ebu Bekir'e","Hz. Ömer'e","Selman-ı Farisi'ye"], dogru:0},
+  {soru:"Bedir Savaşı'nda istişareyle değişen karar neydi?", secenekler:["Ordugâhın seçimi","Savaşın tarihi","Sancaktarın kim olacağı","Esirlerin sayısı"], dogru:0, bonus:true},
+  {soru:"Uhud öncesi Hz. Muhammed'in kendi görüşü neydi?", secenekler:["Şehir içinde kalıp savunma","Şehir dışına çıkmak","Hiç savaşmamak","Göç etmek"], dogru:0},
+  {soru:"Kureyşliler kışın nereye ticaret yapardı?", secenekler:["Yemen'e","Şam'a","Mısır'a","Habeşistan'a"], dogru:0, bonus:true},
+  {soru:"Veda Hutbesi'nde dokunulmaz ilan edilenler nedir?", secenekler:["Can, mal ve namus","Sadece mal","Sadece can","Sadece toprak"], dogru:0}
+];
+function myb84Baslat(){ ikiliOyunBaslat({onek:'myb84', sorular:MYB84_SORULAR}); }
+
+// --- Concept Connect ---
+const CC84_CIFTLER = [
+  {metin1:"Üsve-i hasene", metin2:"Güzel örnek (Ahzab 21)"},
+  {metin1:"Takva", metin2:"Veda Hutbesi'ndeki üstünlük ölçüsü"},
+  {metin1:"Hikmet", metin2:"Doğru ve etkili söz-davranış"},
+  {metin1:"Cesaret", metin2:"Korkuya rağmen doğruyu yapabilmek"},
+  {metin1:"Şûrâ", metin2:"İstişarenin diğer adı"},
+  {metin1:"Rahmeten li'l-âlemin", metin2:"Âlemlere rahmet olarak gönderilme"},
+  {metin1:"Adalet", metin2:"Herkese hakkını vermek"},
+  {metin1:"Kureyş suresi", metin2:"106. sure, güven ve bolluk nimetini anlatır"}
+];
+function cc84Baslat(){ ikiliHafizaBaslat({onek:'cc84', ciftler:CC84_CIFTLER}); }
+
+// --- Escape Mission ---
+const ESC84_SORULAR = [
+  {soru:"'İş hakkında onlara danış' emri hangi surededir?", secenekler:["Âl-i İmrân suresi, 159. ayet","Nisa suresi, 29. ayet","Maide suresi, 2. ayet","İsra suresi, 36. ayet"], dogru:0},
+  {soru:"'Âlemlere rahmet' ayeti hangi surededir?", secenekler:["Enbiya suresi, 107. ayet","Kevser suresi, 1. ayet","Duha suresi, 5. ayet","Asr suresi, 3. ayet"], dogru:0},
+  {soru:"'Üzülme, Allah bizimle beraberdir' sözü hangi ayette anlatılır?", secenekler:["Tevbe suresi, 40. ayet","Bakara suresi, 286. ayet","Nur suresi, 35. ayet","Hucurat suresi, 13. ayet"], dogru:0},
+  {soru:"Veda Hutbesi'ndeki eşitlik ilkesinin dayanağı hangi ayettir?", secenekler:["Hucurat suresi, 13. ayet","Fil suresi, 1. ayet","Kureyş suresi, 4. ayet","Maun suresi, 7. ayet"], dogru:0},
+  {soru:"Güzel örnek olduğunu bildiren ayet hangi suredendir?", secenekler:["Ahzab suresi, 21. ayet","Bakara suresi, 255. ayet","Fatiha suresi, 5. ayet","Nas suresi, 1. ayet"], dogru:0}
+];
+function esc84Baslat(){ ikiliOyunBaslat({onek:'esc84', sorular:ESC84_SORULAR}); }
+
+// --- Knowledge Race ---
+const KR84_SORULAR = [
+  {soru:"Hacerülesved olayı hangi iki özelliği gösterir?", secenekler:["Hikmet ve adalet","Zenginlik ve cömertlik","Savaşçılık ve güç","Şairlik ve hitabet"], dogru:0},
+  {soru:"Düşmanlarının bile eşya emanet etmesi neyi kanıtlar?", secenekler:["Güvenilirliğinin bilinmesini","Zengin olduğunu","Yönetici olduğunu","Ticaret yapmadığını"], dogru:0},
+  {soru:"İstişarenin en önemli faydası nedir?", secenekler:["Hata ihtimalini azaltması","Kararı geciktirmesi","Sorumluluğu artırması","Tartışmaları çoğaltması"], dogru:0},
+  {soru:"Mekke'nin Fethi'ndeki genel affın sonucu nedir?", secenekler:["Kansız fetih ve gönülden İslam'a giriş","Kureyşlilerin sürgünü","Mekke'nin terki","Ticaretin durması"], dogru:0},
+  {soru:"Cesaret kavramı nasıl tanımlanır?", secenekler:["Korkuya rağmen doğruyu yapabilmek","Hiçbir şeyden korkmamak","Düşünmeden atılmak","Her zaman kavga etmek"], dogru:0},
+  {soru:"Veda Hutbesi'nde kaldırılan uygulamalar nelerdir?", secenekler:["Faiz ve kan davaları","Ticaret ve yolculuk","Namaz ve oruç","Zekât ve sadaka"], dogru:0}
+];
+function kr84Baslat(){ ikiliOyunBaslat({onek:'kr84', sorular:KR84_SORULAR}); }
+
+// --- Logic Grid ---
+const LG84_SORULAR = [
+  {soru:"İpucu 1: Bir lakaptır. İpucu 2: Mekkeliler vermiştir. İpucu 3: Güvenilirlik anlamına gelir. Bu nedir?", secenekler:["El-Emin","El-Faruk","Es-Sıddîk","Ez-Zâhid"], dogru:0},
+  {soru:"İpucu 1: Bir ittifaktır. İpucu 2: Mekke'de kurulmuştur. İpucu 3: Haksızlığa uğrayanları korur. Bu nedir?", secenekler:["Hılfü'l-fudûl","Dârü'n-Nedve","Dârü'l-Erkam","Akabe Biatı"], dogru:0},
+  {soru:"İpucu 1: Bir hutbedir. İpucu 2: Vefattan önce okunmuştur. İpucu 3: İnsan haklarını ilan eder. Bu nedir?", secenekler:["Veda Hutbesi","Cuma Hutbesi","Bayram Hutbesi","Nikâh Hutbesi"], dogru:0},
+  {soru:"İpucu 1: Bir savaş taktiğidir. İpucu 2: Selman-ı Farisi önermiştir. İpucu 3: Medine'yi korumuştur. Bu nedir?", secenekler:["Hendek kazmak","Kale kurmak","Sur çekmek","Ordugâh değiştirmek"], dogru:0},
+  {soru:"İpucu 1: Bir suredir. İpucu 2: 106. suredir. İpucu 3: Güven ve bolluk nimetini anlatır. Bu hangi suredir?", secenekler:["Kureyş suresi","Fil suresi","Maun suresi","Kevser suresi"], dogru:0}
+];
+function lg84Baslat(){ ikiliOyunBaslat({onek:'lg84', sorular:LG84_SORULAR}); }
+
+// --- Mission Cards ---
+const MC84_SORULAR = [
+  {soru:"Görev: Hz. Muhammed'in insanlarla ilişkisinde ölçü aldığı şey neydi?", secenekler:["Takva","Kabile üstünlüğü","Servet","Yaşadığı şehir"], dogru:0},
+  {soru:"Görev: 'Komşusu açken tok yatan bizden değildir' hadisi neyi vurgular?", secenekler:["Komşuluk hakkını","Çok yemeyi","Erken uyumayı","Ticareti"], dogru:0},
+  {soru:"Görev: Uhud öncesi çoğunluğa uyması hangi özelliği gösterir?", secenekler:["İstişareye verdiği önemi","Kararsızlığını","Korkusunu","Görüşsüzlüğünü"], dogru:0},
+  {soru:"Görev: Ebu Talib'e söylediği 'Bir elime güneşi...' sözü hangi değeri anlatır?", secenekler:["Kararlılık","Cömertlik","Sabır","Tevazu"], dogru:0},
+  {soru:"Görev: Kureyş suresine göre nimetlerin karşılığı nedir?", secenekler:["Kâbe'nin Rabbine kulluk","Daha çok ticaret","Yeni yollar açmak","Kervanları çoğaltmak"], dogru:0},
+  {soru:"Görev: 'Sizin en hayırlınız ailesine en hayırlı olanınızdır' hadisi neyi vurgular?", secenekler:["Değerin en yakın çevrede sınandığını","Ailenin dışlanmasını","Sadece misafirperverliği","Yalnız yaşamayı"], dogru:0}
+];
+function mc84Baslat(){ ikiliOyunBaslat({onek:'mc84', sorular:MC84_SORULAR}); }
+
+// --- Debate Challenge ---
+const DC84_SORULAR = [
+  {soru:"'İstişare sadece fikir sormaktır, sonucu bağlayıcı değildir.' Bu görüş her zaman doğru mudur?", secenekler:["Yanlış, ortak karara uymayı da içerir","Doğru","Kısmen doğru","Önemsizdir"], dogru:0},
+  {soru:"'Hz. Muhammed düşmanlarına bile güvenilir bulunurdu.' Bu görüş doğru mudur?", secenekler:["Doğru","Yanlış"], dogru:0},
+  {soru:"'Cesaret hiçbir şeyden korkmamaktır.' Bu görüş doğru mudur?", secenekler:["Yanlış","Doğru"], dogru:0},
+  {soru:"'Veda Hutbesi'nde ırk üstünlüğü vurgulanmıştır.' Bu görüş doğru mudur?", secenekler:["Yanlış","Doğru"], dogru:0},
+  {soru:"'Mekke'nin Fethi'nde genel af ilan edilmiştir.' Bu görüş doğru mudur?", secenekler:["Doğru","Yanlış"], dogru:0}
+];
+function dc84Baslat(){ ikiliOyunBaslat({onek:'dc84', sorular:DC84_SORULAR}); }
+
+// --- Fact or Myth ---
+const FM84_SORULAR = [
+  {soru:"Hz. Muhammed'e 'El-Emin' lakabı Mekkeliler tarafından verilmiştir.", secenekler:["Doğru","Yanlış"], dogru:0},
+  {soru:"İstişare, bilenlere danışmak demektir.", secenekler:["Doğru","Yanlış"], dogru:0},
+  {soru:"Hicrette Hira Mağarası'na sığınılmıştır.", secenekler:["Yanlış","Doğru"], dogru:0},
+  {soru:"Veda Hutbesi'nde üstünlük ölçüsü takvadır.", secenekler:["Doğru","Yanlış"], dogru:0},
+  {soru:"Kureyş suresi Medine'de inmiştir.", secenekler:["Yanlış","Doğru"], dogru:0},
+  {soru:"Hendek kazma fikri Selman-ı Farisi'ye aittir.", secenekler:["Doğru","Yanlış"], dogru:0},
+  {soru:"Hılfü'l-fudûl zenginleri korumak için kurulmuştur.", secenekler:["Yanlış","Doğru"], dogru:0},
+  {soru:"Mekke'nin Fethi'nde genel af ilan edilmiştir.", secenekler:["Doğru","Yanlış"], dogru:0}
+];
+function fm84Baslat(){ ikiliOyunBaslat({onek:'fm84', sorular:FM84_SORULAR}); }
+
+// --- Code Breaker ---
+const CB84_SORULAR = [
+  {cevap:"EMIN", ipuclari:["Bir lakaptır.","Mekkeliler vermiştir.","Güvenilirlik anlamına gelir.","Peygamberlikten önceki döneme aittir."]},
+  {cevap:"ISTISARE", ipuclari:["Bir kavramdır.","Danışma anlamına gelir.","Karar öncesi yapılır.","Âl-i İmrân 159'da emredilir."]},
+  {cevap:"HENDEK", ipuclari:["Bir savaş taktiğidir.","Medine'yi korumuştur.","Selman-ı Farisi önermiştir.","Bir savaşa adını vermiştir."]},
+  {cevap:"KUREYS", ipuclari:["Bir suredir.","106. suredir.","Dört ayettir.","Kış-yaz ticaretinden bahseder."]}
+];
+function cb84Baslat(){ ikiliIpucuBaslat({onek:'cb84', sorular:CB84_SORULAR}); }
+
+// --- Puzzle Duel ---
+const PZ84_SORULAR = [
+  {cevap:"EMANET", ipuclari:["Bir sıfattır.","Bütün peygamberlerde vardır.","Güvenilirlikle ilgilidir.","Kendisine bırakılanı korumaktır."]},
+  {cevap:"TAKVA", ipuclari:["Bir kavramdır.","Veda Hutbesi'nde geçer.","Üstünlük ölçüsüdür.","Allah'a karşı sorumluluk bilincidir."]},
+  {cevap:"HIKMET", ipuclari:["Bir kavramdır.","Doğru söz ve davranıştır.","İnsanı iyiye yöneltir.","Hz. Muhammed'de örneklenir."]},
+  {cevap:"CESARET", ipuclari:["Bir erdemdir.","Korkusuzluk değildir.","Doğruyu yapabilmektir.","Taif yolculuğunda görülür."]}
+];
+function pz84Baslat(){ ikiliIpucuBaslat({onek:'pz84', sorular:PZ84_SORULAR}); }
+
+// --- Treasure Hunt ---
+const TH84_SORULAR = [
+  {soru:"Hz. Muhammed'in Taif'te taşlanan halk için söylediği söz nedir?", secenekler:["Soylarından iman edecek nesiller gelmesini ummuştur","Hepsi cezalandırılsın demiştir","Bir daha gelmem demiştir","Savaşacağız demiştir"], dogru:0},
+  {soru:"Sevr Mağarası'nda Hz. Ebu Bekir'e ne söylemiştir?", secenekler:["Üzülme, Allah bizimle beraberdir","Geri dönelim","Sessiz ol ve kaç","Yardım çağıralım"], dogru:0},
+  {soru:"'Bir elime güneşi, bir elime ayı verseler' sözü hangi değeri anlatır?", secenekler:["Kararlılık","Cömertlik","Sabır","Tevazu"], dogru:0},
+  {soru:"Veda Hutbesi'nde insanlar arası üstünlük ölçüsü nedir?", secenekler:["Takva","Irk","Renk","Servet"], dogru:0},
+  {soru:"Hz. Muhammed'in hikmetli davranışlarının amacı nedir?", secenekler:["İnsanları iyiye yöneltmek","Tartışma kazanmak","Kendini göstermek","Bilgi aktarmak"], dogru:0}
+];
+function th84Baslat(){ ikiliOyunBaslat({onek:'th84', sorular:TH84_SORULAR}); }
+
+// --- Strategy Board ---
+const SB84_SORULAR = [
+  {soru:"Hz. Muhammed'in örnekliğinin toplumsal katkısı nedir?", secenekler:["Güven, adalet ve kardeşlik", "Bireyleri uzaklaştırması","Sadece ibadetleri düzenlemesi","Ticareti yasaklaması"], dogru:0},
+  {soru:"İstişarenin toplumsal önemi nedir?", secenekler:["İnsanlara değer verildiğini hissettirmesi","Kararı geciktirmesi","Sorumluluğu tek kişiye yüklemesi","Tartışmaları artırması"], dogru:0},
+  {soru:"Emanet sıfatının günümüzdeki karşılığı nedir?", secenekler:["Güvenilirlik ve sözünde durma","Zenginlik","Güç","Şöhret"], dogru:0},
+  {soru:"Hz. Muhammed'in affediciliğinin en önemli örneği nedir?", secenekler:["Mekke'nin Fethi'ndeki genel af","Bedir Savaşı","Hendek Savaşı","Veda Haccı"], dogru:0},
+  {soru:"Adalet kavramının Hz. Muhammed'in hayatındaki en açık örneği nedir?", secenekler:["Hacerülesved anlaşmazlığının çözümü","Ticaret yapması","Çobanlık yapması","Şiir söylemesi"], dogru:0},
+  {soru:"Kureyş suresinin verdiği temel mesaj nedir?", secenekler:["Nimetlere şükür olarak kulluk","Ticareti artırmak","Yeni yollar aramak","Kervanları çoğaltmak"], dogru:0}
+];
+function sb84Baslat(){ ikiliOyunBaslat({onek:'sb84', sorular:SB84_SORULAR}); }
+
+// --- Flash Challenge ---
+const FC84_SORULAR = [
+  {soru:"Hz. Muhammed'in lakabı nedir?", secenekler:["El-Emin","El-Faruk","Es-Sıddîk","Ez-Zâhid"], dogru:0},
+  {soru:"Doğru sözlü olmaya ne denir?", secenekler:["Sıdk","Emanet","Fetanet","İsmet"], dogru:0},
+  {soru:"Bilenlere danışmaya ne denir?", secenekler:["İstişare","İbadet","İnfak","İhlas"], dogru:0},
+  {soru:"Hicrette sığınılan mağara neresidir?", secenekler:["Sevr Mağarası","Hira Mağarası","Uhud Mağarası","Bedir Mağarası"], dogru:0},
+  {soru:"Hendek fikrini kim önermiştir?", secenekler:["Selman-ı Farisi","Hz. Ömer","Hz. Osman","Hz. Bilal"], dogru:0},
+  {soru:"Kureyş suresi kaç ayettir?", secenekler:["Dört","Üç","Yedi","Beş"], dogru:0},
+  {soru:"Veda Hutbesi'nde üstünlük ölçüsü nedir?", secenekler:["Takva","Irk","Renk","Servet"], dogru:0},
+  {soru:"Mekke'nin Fethi'nde ilan edilen nedir?", secenekler:["Genel af","Ceza","Sürgün","Savaş"], dogru:0}
+];
+function fc84Baslat(){ ikiliOyunBaslat({onek:'fc84', sorular:FC84_SORULAR, sureSN:5}); }
+
+// --- Survival Mode ---
+const SV84_SORULAR = [
+  {soru:"Hz. Muhammed'in lakabı nedir?", secenekler:["El-Emin","El-Faruk","Es-Sıddîk","Ez-Zâhid"], dogru:0},
+  {soru:"Bilenlere danışmaya ne denir?", secenekler:["İstişare","İbadet","İnfak","İhlas"], dogru:0},
+  {soru:"Hicrette sığınılan mağara neresidir?", secenekler:["Sevr Mağarası","Hira Mağarası","Uhud Mağarası","Bedir Mağarası"], dogru:0},
+  {soru:"Veda Hutbesi'nde üstünlük ölçüsü nedir?", secenekler:["Takva","Irk","Renk","Servet"], dogru:0},
+  {soru:"Kureyş suresi kaç ayettir?", secenekler:["Dört","Üç","Yedi","Beş"], dogru:0},
+  {soru:"Hendek fikrini kim önermiştir?", secenekler:["Selman-ı Farisi","Hz. Ömer","Hz. Osman","Hz. Bilal"], dogru:0}
+];
+function sv84Baslat(){ ikiliHayattaBaslat({onek:'sv84', sorular:SV84_SORULAR, can:3}); }
+
+// --- Decision Maker ---
+const DM84_SORULAR = [
+  {soru:"Bir konuda karar veremiyorsun. Hz. Muhammed'in örneğine göre ne yapmalısın?", secenekler:["Bilenlere danışmalıyım (istişare)","Tek başıma karar vermeliyim","Kimseye sormamalıyım","Kararı ertelemeliyim"], dogru:0},
+  {soru:"Sana kötülük yapan birini affetme fırsatın var. Ne yapmalısın?", secenekler:["Hz. Muhammed gibi affetmeyi düşünmeliyim","İntikam almalıyım","Kin tutmalıyım","Görmezden gelmeliyim"], dogru:0},
+  {soru:"Bir arkadaşın sana emanet bıraktı. Ne yapmalısın?", secenekler:["Emanete riayet edip korumalıyım","Kullanabilirim","Unutabilirim","Başkasına verebilirim"], dogru:0},
+  {soru:"Zor bir durumda korkuyorsun ama doğru olanı yapman gerekiyor. Ne yapmalısın?", secenekler:["Cesaretle doğru olanı yapmalıyım","Kaçmalıyım","Görmezden gelmeliyim","Başkasına bırakmalıyım"], dogru:0},
+  {soru:"Bir grup kararı senin görüşünle çelişiyor. Ne yapmalısın?", secenekler:["Uhud örneğinde olduğu gibi ortak karara saygı göstermeliyim","Israrla kendi görüşümü savunmalıyım","Gruptan ayrılmalıyım","Kararı sabote etmeliyim"], dogru:0}
+];
+function dm84Baslat(){ ikiliOyunBaslat({onek:'dm84', sorular:DM84_SORULAR}); }
+
+// --- Champion Arena ---
+const CA84_SORULAR = [
+  {soru:"Hz. Muhammed'e Mekkeliler tarafından verilen lakap nedir?", secenekler:["El-Emin","El-Faruk","Es-Sıddîk","Ez-Zâhid"], dogru:0},
+  {soru:"'El-Emin' ne anlama gelir?", secenekler:["Güvenilir kişi","Cömert kişi","Cesur kişi","Bilgin kişi"], dogru:0},
+  {soru:"Sıdk sıfatı ne demektir?", secenekler:["Doğru sözlü olmak","Zengin olmak","Güçlü olmak","Sabırlı olmak"], dogru:0},
+  {soru:"Bilenlere danışmaya ne denir?", secenekler:["İstişare","İbadet","İnfak","İhlas"], dogru:0},
+  {soru:"Hicrette sığınılan mağara neresidir?", secenekler:["Sevr Mağarası","Hira Mağarası","Uhud Mağarası","Bedir Mağarası"], dogru:0},
+  {soru:"Mekke'deki erdemliler ittifakının adı nedir?", secenekler:["Hılfü'l-fudûl","Dârü'n-Nedve","Dârü'l-Erkam","Akabe Biatı"], dogru:0},
+  {soru:"Vefatından önce okuduğu hutbe hangisidir?", secenekler:["Veda Hutbesi","Cuma Hutbesi","Bayram Hutbesi","Nikâh Hutbesi"], dogru:0},
+  {soru:"Kureyş suresi kaç ayettir?", secenekler:["Dört","Üç","Yedi","Beş"], dogru:0},
+  {soru:"Hendek fikrini kim önermiştir?", secenekler:["Selman-ı Farisi","Hz. Ömer","Hz. Osman","Hz. Bilal"], dogru:0},
+  {soru:"Mekke'nin Fethi'nde ilan edilen nedir?", secenekler:["Genel af","Ceza","Sürgün","Savaş"], dogru:0},
+  {soru:"Veda Hutbesi'nde üstünlük ölçüsü nedir?", secenekler:["Takva","Irk","Renk","Servet"], dogru:0},
+  {soru:"Veda Hutbesi'nde dokunulmaz ilan edilen nedir?", secenekler:["Can, mal ve namus","Sadece mal","Sadece can","Sadece toprak"], dogru:0},
+  {soru:"Veda Hutbesi'nde kaldırılan uygulamalar nelerdir?", secenekler:["Faiz ve kan davaları","Ticaret ve yolculuk","Namaz ve oruç","Zekât ve sadaka"], dogru:0},
+  {soru:"'Âlemlere rahmet' ayeti hangi surededir?", secenekler:["Enbiya suresi, 107. ayet","Kevser suresi, 1. ayet","Duha suresi, 5. ayet","Asr suresi, 3. ayet"], dogru:0},
+  {soru:"Güzel örnek olduğunu bildiren ayet hangi suredendir?", secenekler:["Ahzab suresi, 21. ayet","Bakara suresi, 255. ayet","Fatiha suresi, 5. ayet","Nas suresi, 1. ayet"], dogru:0},
+  {soru:"'İş hakkında onlara danış' emri hangi surededir?", secenekler:["Âl-i İmrân suresi, 159. ayet","Nisa suresi, 29. ayet","Maide suresi, 2. ayet","İsra suresi, 36. ayet"], dogru:0},
+  {soru:"Bedir Savaşı'nda istişareyle değişen karar neydi?", secenekler:["Ordugâhın seçimi","Savaşın tarihi","Sancaktarın kim olacağı","Esirlerin sayısı"], dogru:0},
+  {soru:"Hacerülesved olayı hangi iki özelliği gösterir?", secenekler:["Hikmet ve adalet","Zenginlik ve cömertlik","Savaşçılık ve güç","Şairlik ve hitabet"], dogru:0},
+  {soru:"Cesaret kavramı nasıl tanımlanır?", secenekler:["Korkuya rağmen doğruyu yapabilmek","Hiçbir şeyden korkmamak","Düşünmeden atılmak","Her zaman kavga etmek"], dogru:0},
+  {soru:"Kureyş suresinde geçen 'şitâ' kelimesi ne demektir?", secenekler:["Kış","Yaz","Gece","Yolculuk"], dogru:0}
+];
+function ca84Baslat(){ ikiliOyunBaslat({onek:'ca84', sorular:CA84_SORULAR}); }
+
+
+// =====================================================================
+// KONU TEKRARI TESTİ (50 Soru)
+// =====================================================================
+const konuTekrariSorulari84 = [
+  {zorluk:"kolay", soru:"Hz. Muhammed'e peygamberlikten önce Mekkeliler tarafından verilen lakap nedir?", secenekler:["El-Emin","El-Faruk","Es-Sıddîk","Ez-Zâhid"], dogru:0, aciklama:"'El-Emin' güvenilir kişi demektir; Mekkeliler ona bu lakabı vermişti."},
+  {zorluk:"kolay", soru:"\"El-Emin\" lakabı hangi anlama gelir?", secenekler:["Güvenilir kişi","Cömert kişi","Cesur kişi","Bilgin kişi"], dogru:0, aciklama:"Emin, güvenilir anlamına gelir."},
+  {zorluk:"kolay", soru:"Peygamberlerin ortak sıfatlarından \"sıdk\" ne demektir?", secenekler:["Doğru sözlü olmak","Zengin olmak","Güçlü olmak","Sabırlı olmak"], dogru:0, aciklama:"Sıdk, doğruluk ve doğru sözlülüktür."},
+  {zorluk:"kolay", soru:"Peygamberlerin ortak sıfatlarından \"emanet\" ne demektir?", secenekler:["Güvenilir olmak, emanete ihanet etmemek","Çok konuşmamak","Az yemek","Uzun yaşamak"], dogru:0, aciklama:"Emanet, güvenilir olmak ve kendisine bırakılanı korumaktır."},
+  {zorluk:"kolay", soru:"Kâbe onarılırken yerine konulması tartışma çıkaran kutsal taşın adı nedir?", secenekler:["Hacerülesved","Makam-ı İbrahim","Hatîm","Zemzem"], dogru:0, aciklama:"Bu taş Hacerülesved (Kutsal Taş) olarak bilinir."},
+  {zorluk:"kolay", soru:"Hz. Muhammed, Hacerülesved anlaşmazlığını nasıl çözmüştür?", secenekler:["Taşı bir örtü üzerine koyup her kabile reisinin bir ucundan tutmasını sağlayarak","Taşı kendi başına yerine koyarak","Kura çekerek","Tartışmayı görmezden gelerek"], dogru:0, aciklama:"Örtü çözümüyle bütün kabileler taşımaya ortak edilmiş, kavga önlenmiştir."},
+  {zorluk:"kolay", soru:"Hz. Muhammed'in kendisini taşlayan halka beddua etmediği şehir hangisidir?", secenekler:["Taif","Medine","Şam","Yemen"], dogru:0, aciklama:"Taif yolculuğunda taşlanmasına rağmen beddua etmemiştir."},
+  {zorluk:"kolay", soru:"Mekke'nin Fethi'nde Kureyşlilere söylediği meşhur söz hangisidir?", secenekler:["\"Bugün size kınama yok, gidiniz, hepiniz serbestsiniz!\"","\"Hepiniz cezalandırılacaksınız.\"","\"Şehri terk edin.\"","\"Mallarınız alınacak.\""], dogru:0, aciklama:"Mekke'nin Fethi'nde genel af ilan etmiştir."},
+  {zorluk:"kolay", soru:"Bir konuda karar vermeden önce bilgi ve tecrübe sahiplerine danışmaya ne denir?", secenekler:["İstişare","İbadet","İnfak","İhlas"], dogru:0, aciklama:"Bu, istişare (şûrâ) kavramının tanımıdır."},
+  {zorluk:"kolay", soru:"Hendek Savaşı'nda hendek kazma fikrini kim önermiştir?", secenekler:["Selman-ı Farisi","Hz. Ömer","Hz. Osman","Hz. Bilal"], dogru:0, aciklama:"İranlı sahabi Selman-ı Farisi bu taktiği önermiştir."},
+  {zorluk:"kolay", soru:"Hicret sırasında Hz. Muhammed'in Hz. Ebu Bekir ile saklandığı mağaranın adı nedir?", secenekler:["Sevr Mağarası","Hira Mağarası","Uhud Mağarası","Bedir Mağarası"], dogru:0, aciklama:"Hicrette Sevr Mağarası'na sığınmışlardır."},
+  {zorluk:"kolay", soru:"Sevr Mağarası'nda Hz. Ebu Bekir'e söylediği söz hangisidir?", secenekler:["\"Üzülme, Allah bizimle beraberdir.\"","\"Geri dönelim.\"","\"Sessiz ol ve kaç.\"","\"Yardım çağıralım.\""], dogru:0, aciklama:"Bu söz Tevbe suresi 40. ayette de geçer."},
+  {zorluk:"kolay", soru:"Mekke'de haksızlığa uğrayanları korumak için kurulan ittifakın adı nedir?", secenekler:["Hılfü'l-fudûl","Dârü'n-Nedve","Dârü'l-Erkam","Akabe Biatı"], dogru:0, aciklama:"Hılfü'l-fudûl, erdemliler ittifakı demektir."},
+  {zorluk:"kolay", soru:"Hz. Muhammed'in vefatından kısa süre önce okuduğu, insan haklarını ilan eden hutbe hangisidir?", secenekler:["Veda Hutbesi","Cuma Hutbesi","Bayram Hutbesi","Nikâh Hutbesi"], dogru:0, aciklama:"Bu hutbe Veda Hutbesi olarak bilinir."},
+  {zorluk:"kolay", soru:"Kur'an-ı Kerim'in 106. suresi hangisidir?", secenekler:["Kureyş suresi","Fil suresi","Maun suresi","Kevser suresi"], dogru:0, aciklama:"106. sure Kureyş suresidir."},
+  {zorluk:"kolay", soru:"Kureyş suresi kaç ayettir?", secenekler:["Dört","Üç","Yedi","Beş"], dogru:0, aciklama:"Kureyş suresi dört ayettir."},
+  {zorluk:"kolay", soru:"Kureyş suresinde geçen \"şitâ\" kelimesi ne anlama gelir?", secenekler:["Kış","Yaz","Gece","Yolculuk"], dogru:0, aciklama:"Şitâ kış, sayf ise yaz demektir."},
+
+  {zorluk:"orta", soru:"Hz. Muhammed'in \"el-Emin\" olarak tanınması, peygamberlerin hangi ortak özelliğiyle doğrudan ilgilidir?", secenekler:["Emanet (güvenilirlik)","Zenginlik","Savaşçılık","Şairlik"], dogru:0, aciklama:"Emanet, bütün peygamberlerde bulunan güvenilirlik sıfatıdır."},
+  {zorluk:"orta", soru:"Hicret gecesi Hz. Muhammed'in kendisine bırakılan emanetleri sahiplerine teslim etmesi için görevlendirdiği kişi kimdir?", secenekler:["Hz. Ali","Hz. Ömer","Hz. Osman","Hz. Hamza"], dogru:0, aciklama:"Emanetleri teslim etmesi için Hz. Ali'yi görevlendirmiştir."},
+  {zorluk:"orta", soru:"Taif'te kendisini taşlayan halk için Hz. Muhammed ne demiştir?", secenekler:["\"Belki onların soyundan yalnız Allah'a kulluk edecek nesiller gelir.\"","\"Hepsi cezalandırılsın.\"","\"Bir daha buraya gelmem.\"","\"Onlarla savaşacağız.\""], dogru:0, aciklama:"Beddua etmek yerine onların soyundan iman edecek nesiller gelmesini ummuştur."},
+  {zorluk:"orta", soru:"\"Merhamet etmeyene merhamet olunmaz.\" sözü kime aittir?", secenekler:["Hz. Muhammed'e (sav)","Hz. Ebu Bekir'e","Hz. Ömer'e","Selman-ı Farisi'ye"], dogru:0, aciklama:"Bu bir hadistir; Hz. Peygamber'e aittir."},
+  {zorluk:"orta", soru:"Bedir Savaşı'nda Hz. Muhammed'in istişare sonucu değiştirdiği karar hangisidir?", secenekler:["Ordugâhın (konaklama yerinin) seçimi","Savaşın tarihi","Sancaktarın kim olacağı","Esirlerin sayısı"], dogru:0, aciklama:"Bir sahabinin önerisiyle daha uygun bir ordugâh yeri seçilmiştir."},
+  {zorluk:"orta", soru:"Uhud Savaşı öncesinde Hz. Muhammed'in kendi görüşü neydi?", secenekler:["Şehir içinde kalıp savunma yapmak","Şehir dışına çıkıp savaşmak","Hiç savaşmamak","Medine'den göç etmek"], dogru:0, aciklama:"Kendi görüşü şehir içinde savunmaydı; ancak çoğunluğun kararına uydu."},
+  {zorluk:"orta", soru:"Uhud öncesi çoğunluğun görüşüne uyması, Hz. Muhammed'in hangi özelliğini gösterir?", secenekler:["İstişareye verdiği önemi ve ortak karara saygısını","Kararsızlığını","Savaştan korktuğunu","Görüşünün olmadığını"], dogru:0, aciklama:"İstişare, sadece sormak değil ortak karara uymayı da içerir."},
+  {zorluk:"orta", soru:"Hendek kazma taktiği Medine'ye ne sağlamıştır?", secenekler:["Şehrin düşman kuşatmasından korunmasını","Ticaretin artmasını","Su sıkıntısının bitmesini","Yeni bir cami yapılmasını"], dogru:0, aciklama:"Arapların bilmediği bu savunma yöntemi Medine'yi kuşatmadan korumuştur."},
+  {zorluk:"orta", soru:"Ebu Talib'e söylediği \"Bir elime güneşi, bir elime ayı verseler...\" sözü hangi değeri anlatır?", secenekler:["Kararlılık","Cömertlik","Sabır","Tevazu"], dogru:0, aciklama:"Bu söz, tebliğdeki kararlılığın simgesidir."},
+  {zorluk:"orta", soru:"Hılfü'l-fudûl ittifakı öncelikle kimleri korumak için kurulmuştur?", secenekler:["Haksızlığa uğrayanları, özellikle yabancı tüccarları","Sadece Kureyş kabilesini","Sadece zenginleri","Sadece savaşçıları"], dogru:0, aciklama:"İttifak, Mekke'de haksızlığa uğrayanları korumak için kurulmuştur."},
+  {zorluk:"orta", soru:"Veda Hutbesi'nde \"dokunulmaz\" ilan edilenler hangileridir?", secenekler:["Can, mal ve namus","Sadece mal","Sadece can","Sadece toprak"], dogru:0, aciklama:"Veda Hutbesi'nde can, mal ve namusun dokunulmazlığı ilan edilmiştir."},
+  {zorluk:"orta", soru:"Veda Hutbesi'ne göre insanlar arasında üstünlük ölçüsü nedir?", secenekler:["Takva","Irk","Renk","Servet"], dogru:0, aciklama:"\"Üstünlük ancak takva iledir.\" buyrulmuştur."},
+  {zorluk:"orta", soru:"\"Komşusu açken tok yatan bizden değildir.\" hadisi neyi vurgular?", secenekler:["Komşuluk hakkını ve sosyal sorumluluğu","Çok yemek yemeyi","Erken uyumayı","Ticaret yapmayı"], dogru:0, aciklama:"Hadis, komşu hakkını ve toplumsal duyarlılığı vurgular."},
+  {zorluk:"orta", soru:"Kureyşliler kışın ve yazın hangi bölgelere ticaret yolculuğu yaparlardı?", secenekler:["Kışın Yemen'e, yazın Şam'a","Kışın Şam'a, yazın Mısır'a","Kışın Mısır'a, yazın Yemen'e","Kışın Habeşistan'a, yazın İran'a"], dogru:0, aciklama:"Kışın Yemen'e, yazın Şam'a kervanlar düzenlerlerdi."},
+  {zorluk:"orta", soru:"Kureyş suresinde belirtilen iki büyük nimet hangileridir?", secenekler:["Açlıktan doyurulmak ve korkudan emin kılınmak","Zenginlik ve şöhret","Uzun ömür ve sağlık","Güç ve iktidar"], dogru:0, aciklama:"Sure bu iki nimeti sayarak şükre çağırır."},
+  {zorluk:"orta", soru:"Kureyş suresine göre bu nimetlerin karşılığında ne yapılmalıdır?", secenekler:["Kâbe'nin Rabbine kulluk edilmelidir","Daha çok ticaret yapılmalıdır","Yeni yollar açılmalıdır","Kervanlar çoğaltılmalıdır"], dogru:0, aciklama:"Sure, nimetlere şükür olarak yalnız Allah'a kulluğu emreder."},
+  {zorluk:"orta", soru:"Hz. Muhammed'in insanlarla ilişkisinde ölçü aldığı temel şey neydi?", secenekler:["Takva (Allah'a karşı sorumluluk bilinci)","Kabile üstünlüğü","Servet miktarı","Yaşadığı şehir"], dogru:0, aciklama:"O, insanı soyuna ya da malına göre değil takvasına göre değerlendirmiştir."},
+
+  {zorluk:"zor", soru:"Kur'an-ı Kerim'de Hz. Muhammed'in \"güzel örnek\" olduğunu bildiren ayet hangi suredendir?", secenekler:["Ahzab suresi, 21. ayet","Bakara suresi, 255. ayet","Fatiha suresi, 5. ayet","Nas suresi, 1. ayet"], dogru:0, aciklama:"Ahzab suresi 21. ayette 'üsve-i hasene' (güzel örnek) ifadesi geçer."},
+  {zorluk:"zor", soru:"\"...İş hakkında onlara danış...\" emri hangi surede yer alır?", secenekler:["Âl-i İmrân suresi, 159. ayet","Nisa suresi, 29. ayet","Maide suresi, 2. ayet","İsra suresi, 36. ayet"], dogru:0, aciklama:"İstişare emri Âl-i İmrân suresi 159. ayette geçer."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in \"âlemlere rahmet\" olarak gönderildiğini bildiren ayet hangi suredendir?", secenekler:["Enbiya suresi, 107. ayet","Kevser suresi, 1. ayet","Duha suresi, 5. ayet","Asr suresi, 3. ayet"], dogru:0, aciklama:"Enbiya suresi 107. ayette bu ifade yer alır."},
+  {zorluk:"zor", soru:"Sevr Mağarası'nda söylenen \"Üzülme, Allah bizimle beraberdir.\" sözü hangi ayette anlatılır?", secenekler:["Tevbe suresi, 40. ayet","Bakara suresi, 286. ayet","Nur suresi, 35. ayet","Hucurat suresi, 13. ayet"], dogru:0, aciklama:"Bu olay Tevbe suresi 40. ayette anlatılır."},
+  {zorluk:"zor", soru:"Veda Hutbesi'ndeki eşitlik ilkesinin Kur'an'daki dayanağı hangi ayettir?", secenekler:["Hucurat suresi, 13. ayet","Fil suresi, 1. ayet","Kureyş suresi, 4. ayet","Maun suresi, 7. ayet"], dogru:0, aciklama:"Hucurat 13'te üstünlüğün takvada olduğu bildirilir."},
+  {zorluk:"zor", soru:"Hacerülesved olayı Hz. Muhammed'in hangi iki özelliğini birlikte gösterir?", secenekler:["Hikmetli çözüm üretmesi ve adaleti gözetmesi","Zenginliği ve cömertliği","Savaşçılığı ve gücü","Şairliği ve hitabeti"], dogru:0, aciklama:"Çözüm hem hikmetli hem de bütün tarafları memnun eden âdil bir çözümdür."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in düşmanlarının bile ona eşya emanet etmesi neyi kanıtlar?", secenekler:["Güvenilirliğinin inanç farkını aşacak kadar bilinmesini","Zengin olduğunu","Mekke'de yönetici olduğunu","Ticaretle uğraşmadığını"], dogru:0, aciklama:"Ona düşman olanlar bile güvenilirliğinden şüphe etmiyordu."},
+  {zorluk:"zor", soru:"İstişarenin bireysel ve toplumsal en önemli faydası hangisidir?", secenekler:["Hata ihtimalini azaltıp insanları karara ortak etmesi","Kararı geciktirmesi","Tek kişinin sorumluluğunu artırması","Tartışmaları çoğaltması"], dogru:0, aciklama:"İstişare kararı güçlendirir ve insanlara değer verildiğini hissettirir."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in \"Böyle bir anlaşmaya bugün de çağrılsam katılırım.\" dediği ittifak hangisidir?", secenekler:["Hılfü'l-fudûl","Hudeybiye Antlaşması","Medine Sözleşmesi","Akabe Biatı"], dogru:0, aciklama:"Bu söz, Hılfü'l-fudûl için söylenmiştir."},
+  {zorluk:"zor", soru:"Mekke'nin Fethi'ndeki genel affın en önemli sonucu ne olmuştur?", secenekler:["Şehrin kansız fethedilmesi ve pek çok kişinin gönülden Müslüman olması","Kureyşlilerin sürgün edilmesi","Mekke'nin terk edilmesi","Ticaretin durması"], dogru:0, aciklama:"Af sayesinde fetih kansız gerçekleşmiş, birçok kişi İslam'ı seçmiştir."},
+  {zorluk:"zor", soru:"Cesaret kavramı en doğru biçimde nasıl tanımlanır?", secenekler:["Korkuya rağmen doğru bildiğini yapabilmek","Hiçbir şeyden korkmamak","Düşünmeden tehlikeye atılmak","Her zaman kavga etmek"], dogru:0, aciklama:"Cesaret, korkusuzluk değil; korkuya rağmen doğruyu yapabilmektir."},
+  {zorluk:"zor", soru:"Veda Hutbesi'nde kaldırıldığı ilan edilen uygulamalar hangileridir?", secenekler:["Faiz ve kan davaları","Ticaret ve yolculuk","Namaz ve oruç","Zekât ve sadaka"], dogru:0, aciklama:"Veda Hutbesi'nde faiz ve kan davaları kaldırılmıştır."},
+  {zorluk:"zor", soru:"\"Sizin en hayırlınız, ailesine karşı en hayırlı olanınızdır.\" hadisi hangi ilkeyi vurgular?", secenekler:["İnsana verilen değerin en yakın çevrede sınandığını","Ailenin dışarıda tutulması gerektiğini","Sadece misafirlere iyi davranmayı","Yalnız yaşamanın faziletini"], dogru:0, aciklama:"Güzel ahlak önce en yakınlarımıza karşı gösterilir."},
+  {zorluk:"zor", soru:"Kureyş suresinin Mekkelilere verdiği asıl mesaj nedir?", secenekler:["Sahip oldukları güven ve bolluğun Allah'tan olduğunu bilip yalnız O'na kulluk etmeleri","Daha çok kervan düzenlemeleri","Yeni ticaret yolları aramaları","Kâbe'yi genişletmeleri"], dogru:0, aciklama:"Sure nimeti hatırlatıp şükür olarak kulluğa çağırır."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in hikmetli söz ve davranışlarının temel amacı nedir?", secenekler:["İnsanları iyiye ve güzele yönlendirmek","Tartışmaları kazanmak","Kendini üstün göstermek","Sadece bilgi aktarmak"], dogru:0, aciklama:"Onun hikmetli davranışları insanları iyiye ve güzele yöneltmeyi amaçlar."},
+  {zorluk:"zor", soru:"Hz. Muhammed'in örnek davranışlarının toplumsal hayattaki en önemli katkısı nedir?", secenekler:["Güven, adalet ve kardeşlik duygusunu güçlendirmesi","Bireyleri birbirinden uzaklaştırması","Sadece ibadetleri düzenlemesi","Ticareti yasaklaması"], dogru:0, aciklama:"Onun örnekliği toplumda güven, adalet ve kardeşliği besler."},
+];
+let kt84rIndex = 0, kt84rPuan = 0, kt84rSiraliSorular = [], kt84rKilit = false;
+
+function kt84rZayifAnahtari(){ return 'dkabZayifSorular_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname); }
+function kt84rZayifOku(){
+  try{ return JSON.parse(localStorage.getItem(kt84rZayifAnahtari())) || {}; }catch(e){ return {}; }
+}
+function kt84rZayifKaydet(soruMetni){
+  const v = kt84rZayifOku();
+  v[soruMetni] = (v[soruMetni]||0) + 1;
+  try{ localStorage.setItem(kt84rZayifAnahtari(), JSON.stringify(v)); }catch(e){}
+}
+function kt84rAgirlikliKaristir(sorular){
+  const zayif = kt84rZayifOku();
+  return sorular
+    .map(s => ({s, r: Math.random() - (zayif[s.soru]||0) * 0.15}))
+    .sort((a,b)=>a.r-b.r)
+    .map(x=>x.s);
+}
+
+function kt84rBaslat(){
+  kt84rSiraliSorular = kt84rAgirlikliKaristir(konuTekrariSorulari84.slice());
+  kt84rIndex = 0; kt84rPuan = 0;
+  document.getElementById('kt84rPuan').textContent = 0;
+  document.getElementById('kt84rToplam').textContent = kt84rSiraliSorular.length;
+  document.getElementById('kt84rSonuc').textContent = '';
+  document.getElementById('kt84rSonrakiBtn').style.display = 'none';
+  kt84rSoruGoster();
+}
+
+function kt84rSoruGoster(){
+  if(kt84rIndex >= kt84rSiraliSorular.length){
+    document.getElementById('kt84rSoru').textContent = '';
+    document.getElementById('kt84rSecenekler').innerHTML = '';
+    document.getElementById('kt84rAciklama').style.display = 'none';
+    document.getElementById('kt84rZorluk').textContent = '';
+    document.getElementById('kt84rSonrakiBtn').style.display = 'none';
+    const yuzde = Math.round((kt84rPuan/kt84rSiraliSorular.length)*100);
+    let kt84rSeviye;
+    if(yuzde>=90) kt84rSeviye = '🏆 Din Bilgisi Ustası';
+    else if(yuzde>=70) kt84rSeviye = '🥇 Çok Başarılı';
+    else if(yuzde>=50) kt84rSeviye = '🥈 Biraz Daha Çalış';
+    else kt84rSeviye = '📚 Konuyu Tekrar Et';
+    document.getElementById('kt84rSonuc').innerHTML = `🎉 Test bitti!<br><span style="font-size:1.25em;font-weight:bold;">${kt84rSeviye}</span><br>${kt84rPuan}/${kt84rSiraliSorular.length} doğru (%${yuzde})`;
+    return;
+  }
+  kt84rKilit = false;
+  document.getElementById('kt84rTur').textContent = kt84rIndex+1;
+  const oge = kt84rSiraliSorular[kt84rIndex];
+  const zorlukEtiket = oge.zorluk==='kolay' ? '🟢 Kolay' : oge.zorluk==='orta' ? '🟡 Orta' : '🔴 Zor';
+  document.getElementById('kt84rZorluk').textContent = zorlukEtiket;
+  document.getElementById('kt84rSoru').textContent = oge.soru;
+  document.getElementById('kt84rAciklama').style.display = 'none';
+  document.getElementById('kt84rAciklama').textContent = '';
+  document.getElementById('kt84rSonrakiBtn').style.display = 'none';
+  document.getElementById('kt84rSonuc').textContent = '';
+  const kutu = document.getElementById('kt84rSecenekler');
+  kutu.innerHTML = '';
+  oge.secenekler.forEach((sec,i)=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = sec;
+    btn.onclick = ()=>{
+      if(kt84rKilit) return;
+      kt84rKilit = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(i===oge.dogru){
+        btn.classList.add('dogru');
+        kt84rPuan++;
+        document.getElementById('kt84rPuan').textContent = kt84rPuan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn[oge.dogru].classList.add('dogru');
+        kt84rZayifKaydet(oge.soru);
+      }
+      const aciklamaKutu = document.getElementById('kt84rAciklama');
+      aciklamaKutu.style.display = 'block';
+      aciklamaKutu.innerHTML = `💡 <b>Açıklama:</b> ${oge.aciklama}`;
+      document.getElementById('kt84rSonrakiBtn').style.display = 'block';
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+function kt84rSonrakiSoru(){
+  kt84rIndex++;
+  kt84rSoruGoster();
+}
+
+// =====================================================================
+// 1. ÜNİTE KELİME HAVUZU (28 kavram) — 8. Sınıf
+// =====================================================================
+const kelimeHavuzu84 = [
+  {kelime:"EMİN", anlam:"Hz. Muhammed'e daha peygamber olmadan önce Mekkeliler tarafından verilen, 'güvenilir kişi' anlamındaki lakap"},
+  {kelime:"SIDK", anlam:"Bütün peygamberlerin ortak sıfatlarından biri; doğruluk, hiç yalan söylememe"},
+  {kelime:"EMANET", anlam:"Bütün peygamberlerin ortak sıfatlarından biri; kendisine bırakılan şeyi koruyup sahibine eksiksiz teslim etme, güvenilir olma"},
+  {kelime:"MERHAMET", anlam:"Hz. Muhammed'in 'âlemlere rahmet' oluşunu gösteren, insana ve hayvana şefkatle davranma duygusu"},
+  {kelime:"AFFEDİCİLİK", anlam:"Mekke'nin Fethi'nde 'Bugün size kınama yok.' diyerek düşmanlarını bağışlamasında görülen erdem"},
+  {kelime:"İSTİŞARE", anlam:"Bir konuda karar vermeden önce bilgi ve tecrübe sahiplerine danışma, fikir alışverişinde bulunma"},
+  {kelime:"CESARET", anlam:"Korkuya ve tehlikeye rağmen doğru bildiğini söyleyip yapabilme erdemi"},
+  {kelime:"KARARLILIK", anlam:"'Bir elime güneşi bir elime ayı verseler vazgeçmem.' sözünde ifadesini bulan, davasından dönmeme özelliği"},
+  {kelime:"ADALET", anlam:"Herkese hakkını vermek; Hacerülesved olayında kabileleri memnun eden çözümde görülen değer"},
+  {kelime:"HAKKANİYET", anlam:"Hakkı gözetme, haksızlığa karşı durup her işte doğruluktan ayrılmama hassasiyeti"},
+  {kelime:"HILFULFUDUL", anlam:"Mekke'de haksızlığa uğrayanları, özellikle yabancı tüccarları korumak için kurulan ve Hz. Muhammed'in de katıldığı erdemliler ittifakı"},
+  {kelime:"VEDA", anlam:"Hz. Muhammed'in vefatından kısa süre önce okuduğu, insan haklarını ilan eden hutbenin adındaki kelime"},
+  {kelime:"HUTBE", anlam:"Topluluğa hitaben yapılan konuşma; Hz. Peygamber'in Veda konuşmasının türü"},
+  {kelime:"HACERÜLESVED", anlam:"Kâbe onarılırken yerine kimin koyacağı tartışılan, Hz. Muhammed'in örtü çözümüyle kavgayı önlediği kutsal taş"},
+  {kelime:"KABE", anlam:"Kureyş suresinde 'bu ev' diye anılan, Mekke'deki ilk mabet"},
+  {kelime:"TAİF", anlam:"Hz. Muhammed'in İslam'ı anlatmaya gittiği, taşlanmasına rağmen halkına beddua etmediği şehir"},
+  {kelime:"BEDİR", anlam:"Hz. Peygamber'in ordugâh yeri konusunda bir sahabinin görüşünü benimseyerek istişare örneği verdiği savaş"},
+  {kelime:"HENDEK", anlam:"Selman-ı Farisi'nin önerisiyle Medine'nin çevresine kazılan ve şehri kuşatmadan koruyan savunma çukuru"},
+  {kelime:"UHUD", anlam:"Hz. Peygamber'in kendi görüşüne rağmen çoğunluğun kararına uyduğu savaş"},
+  {kelime:"SELMAN", anlam:"Hendek kazma taktiğini öneren İranlı sahabi (Selman-ı Farisi)"},
+  {kelime:"SEVR", anlam:"Hicret sırasında Hz. Muhammed ile Hz. Ebu Bekir'in saklandığı mağara"},
+  {kelime:"HİCRET", anlam:"Müslümanların Mekke'den Medine'ye göç etmesi"},
+  {kelime:"EBUBEKİR", anlam:"Sevr Mağarası'nda Hz. Peygamber'in 'Üzülme, Allah bizimle beraberdir.' diyerek teselli ettiği yol arkadaşı"},
+  {kelime:"KUREYŞ", anlam:"Hz. Muhammed'in de mensubu olduğu Mekkeli kabile; Kur'an'ın 106. suresinin adı"},
+  {kelime:"TAKVA", anlam:"Allah'a karşı sorumluluk bilinci; Veda Hutbesi'ne göre insanlar arasındaki tek üstünlük ölçüsü"},
+  {kelime:"HİKMET", anlam:"Derin kavrayışla en doğru ve en yararlı olanı yapabilme; Hz. Peygamber'in söz ve davranışlarının özelliği"},
+  {kelime:"TEBLİĞ", anlam:"Peygamberlerin ortak sıfatlarından biri; Allah'tan aldığı vahyi eksiksiz olarak insanlara ulaştırma"},
+  {kelime:"GÜVEN", anlam:"Hz. Muhammed'in 'el-Emin' lakabını kazanmasını sağlayan, insanların ona duyduğu itimat"},
+];
+function ku84AnlamBul(kelime){
+  const bulunan = kelimeHavuzu84.find(x=>x.kelime===kelime);
+  return bulunan ? bulunan.anlam : '';
+}
+
+// =====================================================================
+// HIZLI KELİME ÜRETME
+// =====================================================================
+const ku84GecerliHarfler = ["H","E","S","T","K"];
+let ku84AktifHarf = '', ku84Bulunanlar = [], ku84Sure = 60, ku84Zamanlayici = null, ku84Puan = 0, ku84Bitti = true;
+
+function ku84Baslat(){
+  clearInterval(ku84Zamanlayici);
+  ku84AktifHarf = ku84GecerliHarfler[Math.floor(Math.random()*ku84GecerliHarfler.length)];
+  ku84Bulunanlar = []; ku84Puan = 0; ku84Sure = 60; ku84Bitti = false;
+  document.getElementById('ku84Harf').textContent = ku84AktifHarf;
+  document.getElementById('ku84Sure').textContent = ku84Sure;
+  document.getElementById('ku84Puan').textContent = 0;
+  document.getElementById('ku84Liste').innerHTML = '';
+  document.getElementById('ku84Sonuc').textContent = '';
+  document.getElementById('ku84Uyari').textContent = '';
+  document.getElementById('ku84Kacirilan').innerHTML = '';
+  const girdi = document.getElementById('ku84Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  ku84Zamanlayici = setInterval(()=>{
+    ku84Sure--;
+    document.getElementById('ku84Sure').textContent = ku84Sure;
+    if(ku84Sure<=0) ku84Bitir();
+  }, 1000);
+}
+
+function ku84Ekle(){
+  if(ku84Bitti) return;
+  const girdi = document.getElementById('ku84Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('ku84Uyari');
+  if(!kelime.startsWith(ku84AktifHarf)){ uyari.textContent = `❌ "${ku84AktifHarf}" harfiyle başlamalı!`; return; }
+  if(!kelimeHavuzu84.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(ku84Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  ku84Bulunanlar.push(kelime);
+  ku84Puan++;
+  document.getElementById('ku84Puan').textContent = ku84Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('ku84Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function ku84Bitir(){
+  clearInterval(ku84Zamanlayici);
+  ku84Bitti = true;
+  document.getElementById('ku84Girdi').disabled = true;
+  document.querySelectorAll('#ku84Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku84AnlamBul(kelime)}`;
+  });
+  const kacirilanKutu = document.getElementById('ku84Kacirilan');
+  kacirilanKutu.innerHTML = '';
+  const kacirilanlar = kelimeHavuzu84.filter(x=>x.kelime.startsWith(ku84AktifHarf) && !ku84Bulunanlar.includes(x.kelime));
+  if(kacirilanlar.length){
+    const baslik = document.createElement('p');
+    baslik.style.textAlign='center'; baslik.style.fontWeight='bold'; baslik.style.color='var(--kirmizi)';
+    baslik.textContent = 'Kaçırdıkların:';
+    kacirilanKutu.appendChild(baslik);
+    const ul = document.createElement('ul'); ul.className='ku-liste';
+    kacirilanlar.forEach(item=>{
+      const li = document.createElement('li');
+      li.style.background='#ffe8d6'; li.style.borderColor='var(--sari)';
+      li.textContent = `${item.kelime} — ${item.anlam}`;
+      ul.appendChild(li);
+    });
+    kacirilanKutu.appendChild(ul);
+  }
+  document.getElementById('ku84Sonuc').textContent = `⏰ Süre bitti! "${ku84AktifHarf}" harfiyle ${ku84Puan} doğru kelime yazdın!`;
+}
+
+// =====================================================================
+// TUZAK HARF
+// =====================================================================
+const tuzak84GecerliHarfler = ["A","E","İ","K","T"];
+let tuzak84Harf = '', tuzak84Bulunanlar = [], tuzak84Sure = 40, tuzak84Zamanlayici = null, tuzak84Puan = 0, tuzak84Bitti = true;
+
+function tuzak84Baslat(){
+  clearInterval(tuzak84Zamanlayici);
+  tuzak84Harf = tuzak84GecerliHarfler[Math.floor(Math.random()*tuzak84GecerliHarfler.length)];
+  tuzak84Bulunanlar = []; tuzak84Puan = 0; tuzak84Sure = 40; tuzak84Bitti = false;
+  document.getElementById('tuzak84Harf').textContent = tuzak84Harf;
+  document.getElementById('tuzak84Sure').textContent = tuzak84Sure;
+  document.getElementById('tuzak84Puan').textContent = 0;
+  document.getElementById('tuzak84Liste').innerHTML = '';
+  document.getElementById('tuzak84Sonuc').textContent = '';
+  document.getElementById('tuzak84Uyari').textContent = '';
+  const girdi = document.getElementById('tuzak84Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  tuzak84Zamanlayici = setInterval(()=>{
+    tuzak84Sure--;
+    document.getElementById('tuzak84Sure').textContent = tuzak84Sure;
+    if(tuzak84Sure<=0) tuzak84Bitir();
+  }, 1000);
+}
+
+function tuzak84Ekle(){
+  if(tuzak84Bitti) return;
+  const girdi = document.getElementById('tuzak84Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('tuzak84Uyari');
+  if(kelime.includes(tuzak84Harf)){ uyari.textContent = `🚫 Bu kelimede tuzak harf "${tuzak84Harf}" var, geçersiz!`; return; }
+  if(!kelimeHavuzu84.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(tuzak84Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  tuzak84Bulunanlar.push(kelime);
+  tuzak84Puan++;
+  document.getElementById('tuzak84Puan').textContent = tuzak84Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('tuzak84Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function tuzak84Bitir(){
+  clearInterval(tuzak84Zamanlayici);
+  tuzak84Bitti = true;
+  document.getElementById('tuzak84Girdi').disabled = true;
+  document.querySelectorAll('#tuzak84Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku84AnlamBul(kelime)}`;
+  });
+  document.getElementById('tuzak84Sonuc').textContent = `⏰ Süre bitti! "${tuzak84Harf}" harfini kullanmadan ${tuzak84Puan} kelime yazdın!`;
+}
+
+// =====================================================================
+// KELİME FABRİKASI
+// =====================================================================
+let kf84Sira = [], kf84Index = 0, kf84Uretilen = 0, kf84Hata = 0;
+
+function kf84Baslat(){
+  kf84Sira = karistir(kelimeHavuzu84.slice());
+  kf84Index = 0; kf84Uretilen = 0; kf84Hata = 0;
+  document.getElementById('kf84Uretilen').textContent = 0;
+  document.getElementById('kf84Toplam').textContent = kf84Sira.length;
+  document.getElementById('kf84Hata').textContent = 0;
+  document.getElementById('kf84Urunler').innerHTML = '';
+  document.getElementById('kf84Sonuc').textContent = '';
+  kf84Tur();
+}
+
+function kf84Tur(){
+  if(kf84Index >= kf84Sira.length){
+    document.getElementById('kf84BantAlani').innerHTML = '';
+    document.getElementById('kf84Siparis').textContent = '';
+    document.getElementById('kf84Girdi').disabled = true;
+    document.getElementById('kf84Sonuc').textContent = `🏭 Fabrika kapandı! ${kf84Uretilen}/${kf84Sira.length} kelime ürettin, ${kf84Hata} hata yaptın.`;
+    return;
+  }
+  const oge = kf84Sira[kf84Index];
+  document.getElementById('kf84Siparis').textContent = `📋 Sipariş: ${oge.anlam}`;
+  const harfler = karistir(oge.kelime.split(''));
+  const bant = document.getElementById('kf84BantAlani');
+  bant.innerHTML = '';
+  harfler.forEach(h=>{
+    const kutu = document.createElement('div');
+    kutu.className = 'kf-kutu';
+    kutu.textContent = h;
+    bant.appendChild(kutu);
+  });
+  const girdi = document.getElementById('kf84Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+}
+
+function kf84Uret(){
+  if(kf84Index >= kf84Sira.length) return;
+  const oge = kf84Sira[kf84Index];
+  const girdi = document.getElementById('kf84Girdi');
+  const tahmin = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  if(!tahmin) return;
+  if(tahmin === oge.kelime){
+    kf84Uretilen++;
+    document.getElementById('kf84Uretilen').textContent = kf84Uretilen;
+    const cip = document.createElement('div');
+    cip.className = 'dua-cip';
+    cip.textContent = `✅ ${oge.kelime}`;
+    document.getElementById('kf84Urunler').appendChild(cip);
+    kf84Index++;
+    setTimeout(()=>kf84Tur(), 400);
+  } else {
+    kf84Hata++;
+    document.getElementById('kf84Hata').textContent = kf84Hata;
+    girdi.classList.add('yanlis-girdi');
+    setTimeout(()=>girdi.classList.remove('yanlis-girdi'), 400);
+    girdi.value = '';
+  }
+}
+
+// =====================================================================
+// KELİME MÜHENDİSİ
+// =====================================================================
+function parcalaraBol(kelime){
+  const uzunluk = kelime.length;
+  let parcaSayisi = uzunluk<=4 ? 2 : uzunluk<=7 ? 3 : 4;
+  parcaSayisi = Math.min(parcaSayisi, uzunluk);
+  const parcalar = [];
+  let index = 0;
+  for(let i=0;i<parcaSayisi;i++){
+    const kalan = parcaSayisi - i;
+    const buBoyut = i===parcaSayisi-1 ? uzunluk-index : Math.ceil((uzunluk-index)/kalan);
+    parcalar.push(kelime.slice(index, index+buBoyut));
+    index += buBoyut;
+  }
+  return parcalar;
+}
+
+let km84Sira = [], km84Index = 0, km84DogruSayisi = 0;
+
+function km84Baslat(){
+  km84Sira = karistir(kelimeHavuzu84.slice());
+  km84Index = 0; km84DogruSayisi = 0;
+  document.getElementById('km84Dogru').textContent = 0;
+  document.getElementById('km84Toplam').textContent = km84Sira.length;
+  document.getElementById('km84Sonuc').textContent = '';
+  km84Tur();
+}
+
+function km84Tur(){
+  if(km84Index >= km84Sira.length){
+    document.getElementById('km84Ipucu').textContent = '';
+    document.getElementById('km84Banka').innerHTML = '';
+    document.getElementById('km84Cevap').innerHTML = '';
+    document.getElementById('km84Sonuc').textContent = `🏆 Tebrikler! Kelime mühendisliğini tamamladın! ${km84DogruSayisi}/${km84Sira.length} kelime inşa ettin.`;
+    return;
+  }
+  document.getElementById('km84Tur').textContent = km84Index+1;
+  const oge = km84Sira[km84Index];
+  document.getElementById('km84Ipucu').innerHTML = `📐 Plan: <b>${oge.anlam}</b>`;
+  const parcalar = parcalaraBol(oge.kelime);
+  siraOlustur({tokens:parcalar, bankaId:'km84Banka', cevapId:'km84Cevap', tamamlandi:()=>{
+    km84DogruSayisi++;
+    document.getElementById('km84Dogru').textContent = km84DogruSayisi;
+    document.getElementById('km84Sonuc').textContent = `✅ İnşa edildi: ${oge.kelime}`;
+    km84Index++;
+    setTimeout(()=>{ document.getElementById('km84Sonuc').textContent=''; km84Tur(); }, 1000);
+  }});
+}
+
+// =====================================================================
+// KAVRAM TURNUVASI
+// =====================================================================
+const turnuvaEslesmeler84 = [
+  {tur:"Çeyrek Final 1", a:"EMİN", b:"SIDK", soru:"Hangisi Hz. Muhammed'e Mekkeliler tarafından verilen lakaptır?", dogruCevap:"EMİN"},
+  {tur:"Çeyrek Final 2", a:"EMANET", b:"MERHAMET", soru:"Hangisi kendisine bırakılanı koruyup sahibine teslim etmeyi ifade eder?", dogruCevap:"EMANET"},
+  {tur:"Çeyrek Final 3", a:"İSTİŞARE", b:"CESARET", soru:"Hangisi karar vermeden önce bilenlere danışmaktır?", dogruCevap:"İSTİŞARE"},
+  {tur:"Çeyrek Final 4", a:"ADALET", b:"HİKMET", soru:"Hangisi herkese hakkını vermek anlamına gelir?", dogruCevap:"ADALET"},
+  {tur:"Yarı Final 1", a:"EMİN", b:"EMANET", soru:"Hangisi bir lakap değil, bütün peygamberlerde bulunan bir sıfattır?", dogruCevap:"EMANET"},
+  {tur:"Yarı Final 2", a:"İSTİŞARE", b:"ADALET", soru:"Hangisi doğrudan 'danışma' anlamına gelir?", dogruCevap:"İSTİŞARE"},
+  {tur:"FİNAL", a:"EMANET", b:"İSTİŞARE", soru:"Hangisi peygamberlerin ortak sıfatlarından biridir?", dogruCevap:"EMANET"},
+];
+let kt84Index = 0, kt84DogruHakemlik = 0;
+
+function kt84Baslat(){
+  kt84Index = 0; kt84DogruHakemlik = 0;
+  document.getElementById('kt84Puan').textContent = 0;
+  document.getElementById('kt84Toplam').textContent = turnuvaEslesmeler84.length;
+  document.getElementById('kt84Sonuc').textContent = '';
+  kt84Tur();
+}
+
+function kt84Tur(){
+  if(kt84Index >= turnuvaEslesmeler84.length){
+    document.getElementById('kt84Asama').textContent = '';
+    document.getElementById('kt84Eslesme').textContent = '';
+    document.getElementById('kt84Secenekler').innerHTML = '';
+    const sampiyon = turnuvaEslesmeler84[turnuvaEslesmeler84.length-1].dogruCevap;
+    document.getElementById('kt84Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt84DogruHakemlik}/${turnuvaEslesmeler84.length}`;
+    return;
+  }
+  const mac = turnuvaEslesmeler84[kt84Index];
+  document.getElementById('kt84Tur').textContent = kt84Index+1;
+  document.getElementById('kt84Asama').textContent = mac.tur;
+  document.getElementById('kt84Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
+  const kutu = document.getElementById('kt84Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  [mac.a, mac.b].forEach(aday=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = aday;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(aday === mac.dogruCevap){
+        btn.classList.add('dogru');
+        kt84DogruHakemlik++;
+        document.getElementById('kt84Puan').textContent = kt84DogruHakemlik;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===mac.dogruCevap) b.classList.add('dogru'); });
+      }
+      kt84Index++;
+      setTimeout(()=>kt84Tur(), 1300);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// BONUS OYUN — Hafıza Zinciri
+// =====================================================================
+const bz84Tuslar = [
+  {simge:"EMİN", renk:"#2a6f97"}, {simge:"SIDK", renk:"#40916c"}, {simge:"EMANET", renk:"#f4a261"},
+  {simge:"MERHAMET", renk:"#d62828"}, {simge:"İSTİŞARE", renk:"#7b2cbf"}, {simge:"CESARET", renk:"#0077b6"},
+  {simge:"ADALET", renk:"#e76f51"}, {simge:"HİKMET", renk:"#2d6a4f"}, {simge:"HİCRET", renk:"#9d4edd"},
+  {simge:"KUREYŞ", renk:"#457b9d"}, {simge:"VEDA", renk:"#c9184a"}, {simge:"TEBLİĞ", renk:"#e09f3e"},
+];
+let bz84Sira = [], bz84KullaniciIndex = 0, bz84Seviye = 0, bz84Oynatiliyor = false;
+
+function bz84IzgaraOlustur(){
+  const izgara = document.getElementById('bz84Izgara');
+  izgara.innerHTML = '';
+  bz84Tuslar.forEach((t,i)=>{
+    const tus = document.createElement('div');
+    tus.className = 'bz-tus';
+    tus.style.background = t.renk;
+    tus.textContent = t.simge;
+    tus.onclick = ()=>bz84TusaTikla(i);
+    izgara.appendChild(tus);
+  });
+}
+function bz84Baslat(){
+  bz84Sira = []; bz84Seviye = 0; bz84KullaniciIndex = 0;
+  document.getElementById('bz84Seviye').textContent = 0;
+  document.getElementById('bz84Sonuc').textContent = '';
+  bz84IzgaraOlustur();
+  bz84SonrakiTur();
+}
+function bz84SonrakiTur(){
+  bz84Seviye++;
+  document.getElementById('bz84Seviye').textContent = bz84Seviye;
+  bz84Sira.push(Math.floor(Math.random()*bz84Tuslar.length));
+  bz84KullaniciIndex = 0;
+  bz84Oynat();
+}
+function bz84Oynat(){
+  bz84Oynatiliyor = true;
+  const dugmeler = document.querySelectorAll('#bz84Izgara .bz-tus');
+  dugmeler.forEach(d=>d.classList.add('bz-devre-disi'));
+  let i = 0;
+  const aralik = setInterval(()=>{
+    if(i>0) dugmeler[bz84Sira[i-1]].classList.remove('bz-yanik');
+    if(i>=bz84Sira.length){
+      clearInterval(aralik);
+      bz84Oynatiliyor = false;
+      dugmeler.forEach(d=>d.classList.remove('bz-devre-disi'));
+      return;
+    }
+    dugmeler[bz84Sira[i]].classList.add('bz-yanik');
+    i++;
+  }, 700);
+}
+function bz84TusaTikla(i){
+  if(bz84Oynatiliyor) return;
+  const dugmeler = document.querySelectorAll('#bz84Izgara .bz-tus');
+  dugmeler[i].classList.add('bz-yanik');
+  setTimeout(()=>dugmeler[i].classList.remove('bz-yanik'), 250);
+  if(bz84Sira[bz84KullaniciIndex] === i){
+    bz84KullaniciIndex++;
+    if(bz84KullaniciIndex === bz84Sira.length){
+      setTimeout(()=>bz84SonrakiTur(), 900);
+    }
+  } else {
+    document.getElementById('bz84Sonuc').textContent = `💥 Yanlış sıra! En uzun hatırladığın zincir: ${bz84Seviye-1}`;
+  }
+}
+function bz84OrnekOyna(){
+  document.getElementById('bz84Sonuc').textContent = '🎬 Örnek gösteriliyor: önce sıra yanacak, sonra otomatik olarak aynı sırayla tıklanacak...';
+  document.getElementById('bz84Seviye').textContent = 'Örnek';
+  bz84IzgaraOlustur();
+  const demoSira = [0, 2, 1];
+  const dugmeler = document.querySelectorAll('#bz84Izgara .bz-tus');
+  dugmeler.forEach(d=>d.classList.add('bz-devre-disi'));
+  let i = 0;
+  const gosterAralik = setInterval(()=>{
+    if(i>0) dugmeler[demoSira[i-1]].classList.remove('bz-yanik');
+    if(i >= demoSira.length){
+      clearInterval(gosterAralik);
+      let j = 0;
+      const tiklaAralik = setInterval(()=>{
+        if(j>0) dugmeler[demoSira[j-1]].classList.remove('bz-yanik');
+        if(j >= demoSira.length){
+          clearInterval(tiklaAralik);
+          dugmeler.forEach(d=>d.classList.remove('bz-devre-disi'));
+          document.getElementById('bz84Seviye').textContent = 0;
+          document.getElementById('bz84Sonuc').textContent = '👆 Gördüğün gibi: önce kavramlar sırayla yandı, sonra aynı sırayla tıklandı. Şimdi sıra sende — "Oyunu Başlat"a bas!';
+          return;
+        }
+        dugmeler[demoSira[j]].classList.add('bz-yanik');
+        j++;
+      }, 700);
+      return;
+    }
+    dugmeler[demoSira[i]].classList.add('bz-yanik');
+    i++;
+  }, 700);
+}
+
+// =====================================================================
+// KELİME AVI BULMACASI
+// =====================================================================
+const kelimeAvi84Listesi = [
+  {kelime:"EMİN", anlam:"Hz. Muhammed'e peygamberlikten önce verilen 'güvenilir kişi' anlamındaki lakap"},
+  {kelime:"SIDK", anlam:"Peygamberlerin ortak sıfatlarından biri; doğruluk"},
+  {kelime:"EMANET", anlam:"Kendisine bırakılanı koruyup sahibine teslim etme; güvenilir olma"},
+  {kelime:"MERHAMET", anlam:"İnsana ve hayvana şefkatle davranma duygusu"},
+  {kelime:"İSTİŞARE", anlam:"Karar vermeden önce bilgi ve tecrübe sahiplerine danışma"},
+  {kelime:"CESARET", anlam:"Korkuya rağmen doğru bildiğini yapabilme erdemi"},
+  {kelime:"KARARLILIK", anlam:"Zorluklara rağmen davasından vazgeçmeme özelliği"},
+  {kelime:"ADALET", anlam:"Herkese hakkını verme değeri"},
+  {kelime:"HİKMET", anlam:"En doğru ve en yararlı olanı yapabilme derinliği"},
+  {kelime:"HİCRET", anlam:"Müslümanların Mekke'den Medine'ye göç etmesi"},
+  {kelime:"BEDİR", anlam:"Ordugâh yerinin istişareyle belirlendiği savaş"},
+  {kelime:"HENDEK", anlam:"Selman-ı Farisi'nin önerisiyle Medine'yi koruyan savunma çukuru"},
+  {kelime:"KUREYŞ", anlam:"Hz. Muhammed'in mensubu olduğu kabile; 106. surenin adı"},
+  {kelime:"TEBLİĞ", anlam:"Vahyi eksiksiz olarak insanlara ulaştırma"},
+];
+const ka84SatirSayisi = 14, ka84SutunSayisi = 14;
+const ka84AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+
+function ka84KelimeYerlestir(izgara, kelime){
+  const yonler = karistir([{dr:0,dc:1},{dr:0,dc:-1},{dr:1,dc:0},{dr:-1,dc:0}]);
+  for(let deneme=0; deneme<200; deneme++){
+    const yon = yonler[deneme % yonler.length];
+    const satir = Math.floor(Math.random()*ka84SatirSayisi);
+    const sutun = Math.floor(Math.random()*ka84SutunSayisi);
+    const bitSatir = satir + yon.dr*(kelime.length-1);
+    const bitSutun = sutun + yon.dc*(kelime.length-1);
+    if(bitSatir<0 || bitSatir>=ka84SatirSayisi || bitSutun<0 || bitSutun>=ka84SutunSayisi) continue;
+    let uygun = true;
+    for(let i=0;i<kelime.length;i++){
+      const r = satir + yon.dr*i, c = sutun + yon.dc*i;
+      if(izgara[r][c] !== null && izgara[r][c] !== kelime[i]){ uygun=false; break; }
+    }
+    if(!uygun) continue;
+    const hucreler=[];
+    for(let i=0;i<kelime.length;i++){
+      const r = satir + yon.dr*i, c = sutun + yon.dc*i;
+      izgara[r][c] = kelime[i];
+      hucreler.push({r,c});
+    }
+    return hucreler;
+  }
+  return null;
+}
+
+function kelimeAvi84Olustur(){
+  let izgara, basarili=false;
+  for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
+    izgara = Array.from({length:ka84SatirSayisi}, ()=>Array(ka84SutunSayisi).fill(null));
+    basarili = true;
+    const siraliKelimeler = kelimeAvi84Listesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    for(const item of siraliKelimeler){
+      const hucreler = ka84KelimeYerlestir(izgara, item.kelime);
+      if(!hucreler){ basarili=false; break; }
+    }
+  }
+  for(let r=0;r<ka84SatirSayisi;r++){
+    for(let c=0;c<ka84SutunSayisi;c++){
+      if(izgara[r][c]===null) izgara[r][c] = ka84AsciiHarfler[Math.floor(Math.random()*ka84AsciiHarfler.length)];
+    }
+  }
+
+  const kutu = document.getElementById('ka84Izgara');
+  kutu.innerHTML = '';
+  kutu.style.gridTemplateColumns = `repeat(${ka84SutunSayisi}, 1fr)`;
+  const hucreElemanlari = [];
+  for(let r=0;r<ka84SatirSayisi;r++){
+    hucreElemanlari.push([]);
+    for(let c=0;c<ka84SutunSayisi;c++){
+      const h = document.createElement('div');
+      h.className = 'ka-hucre';
+      h.textContent = izgara[r][c];
+      h.dataset.r = r; h.dataset.c = c;
+      kutu.appendChild(h);
+      hucreElemanlari[r].push(h);
+    }
+  }
+
+  const liste = document.getElementById('ka84Liste');
+  liste.innerHTML = '';
+  kelimeAvi84Listesi.forEach(item=>{
+    const li = document.createElement('li');
+    li.id = 'ka84-kelime-' + item.kelime;
+    li.textContent = `${item.kelime} — ${item.anlam}`;
+    liste.appendChild(li);
+  });
+  document.getElementById('ka84Bulunan').textContent = 0;
+  document.getElementById('ka84Toplam').textContent = kelimeAvi84Listesi.length;
+  document.getElementById('ka84Sonuc').textContent = '';
+
+  let ilkHucre = null;
+  hucreElemanlari.flat().forEach(h=>{
+    h.onclick = ()=>{
+      if(h.classList.contains('ka-bulundu')) return;
+      if(!ilkHucre){ ilkHucre = h; h.classList.add('ka-secili'); return; }
+      if(ilkHucre === h){ ilkHucre.classList.remove('ka-secili'); ilkHucre=null; return; }
+      const r1=+ilkHucre.dataset.r, c1=+ilkHucre.dataset.c;
+      const r2=+h.dataset.r, c2=+h.dataset.c;
+      let yol = [];
+      if(r1===r2){
+        const adim = c2>c1?1:-1;
+        for(let c=c1;;c+=adim){ yol.push({r:r1,c}); if(c===c2) break; }
+      } else if(c1===c2){
+        const adim = r2>r1?1:-1;
+        for(let r=r1;;r+=adim){ yol.push({r,c:c1}); if(r===r2) break; }
+      } else {
+        ilkHucre.classList.remove('ka-secili');
+        h.classList.add('ka-secili');
+        ilkHucre = h;
+        return;
+      }
+      const secilenKelime = yol.map(p=>izgara[p.r][p.c]).join('');
+      const tersKelime = secilenKelime.split('').reverse().join('');
+      const eslesen = kelimeAvi84Listesi.find(item =>
+        (item.kelime===secilenKelime || item.kelime===tersKelime) &&
+        !document.getElementById('ka84-kelime-'+item.kelime).classList.contains('bulundu-satir')
+      );
+      if(eslesen){
+        yol.forEach(p=>{
+          hucreElemanlari[p.r][p.c].classList.remove('ka-secili');
+          hucreElemanlari[p.r][p.c].classList.add('ka-bulundu');
+        });
+        document.getElementById('ka84-kelime-'+eslesen.kelime).classList.add('bulundu-satir');
+        const bulunanSayisi = document.querySelectorAll('#ka84Liste .bulundu-satir').length;
+        document.getElementById('ka84Bulunan').textContent = bulunanSayisi;
+        if(bulunanSayisi === kelimeAvi84Listesi.length){
+          document.getElementById('ka84Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri buldun!';
+        }
+      } else {
+        ilkHucre.classList.remove('ka-secili');
+      }
+      ilkHucre = null;
+    };
+  });
+}
+
+// =====================================================================
+// ÇENGEL BULMACA
+// =====================================================================
+const cengel84Zinciri = [
+  {kelime:"HUTBE", anlam:"Topluluğa hitaben yapılan konuşma; Veda konuşmasının türü"},
+  {kelime:"EMANET", anlam:"Kendisine bırakılanı koruyup sahibine teslim etme; peygamberlerin ortak sıfatı"},
+  {kelime:"TAKVA", anlam:"Veda Hutbesi'ne göre insanlar arasındaki tek üstünlük ölçüsü"},
+  {kelime:"ADALET", anlam:"Herkese hakkını verme; Hacerülesved olayındaki çözümün temel değeri"},
+  {kelime:"TAİF", anlam:"Hz. Muhammed'in taşlanmasına rağmen beddua etmediği şehir"},
+];
+let cengel84HucreHarita = {}, cengel84InputMap = {};
+
+function cengel84Olustur(){
+  let r=0, c=0, dir='right';
+  const yerlesimler = [];
+  cengel84Zinciri.forEach(item=>{
+    const kelime = item.kelime;
+    const hucreler = [];
+    for(let j=0;j<kelime.length;j++){
+      hucreler.push(dir==='right' ? {r, c:c+j} : {r:r+j, c});
+    }
+    yerlesimler.push({...item, hucreler, dir});
+    const son = hucreler[hucreler.length-1];
+    r = son.r; c = son.c;
+    dir = dir==='right' ? 'down' : 'right';
+  });
+
+  let minR=Infinity,maxR=-Infinity,minC=Infinity,maxC=-Infinity;
+  yerlesimler.forEach(p=>p.hucreler.forEach(h=>{
+    minR=Math.min(minR,h.r); maxR=Math.max(maxR,h.r);
+    minC=Math.min(minC,h.c); maxC=Math.max(maxC,h.c);
+  }));
+  const satirSayisi = maxR-minR+1, sutunSayisi = maxC-minC+1;
+
+  cengel84HucreHarita = {};
+  yerlesimler.forEach(p=>{
+    p.hucreler.forEach((h,i)=>{
+      const key = (h.r-minR)+','+(h.c-minC);
+      cengel84HucreHarita[key] = p.kelime[i];
+    });
+  });
+
+  const siraliHucreler = [];
+  const gorulen = new Set();
+  yerlesimler.forEach((p, idx)=>{
+    const baslangic = idx===0 ? 0 : 1;
+    for(let i=baslangic;i<p.hucreler.length;i++){
+      const h = p.hucreler[i];
+      const key = (h.r-minR)+','+(h.c-minC);
+      if(!gorulen.has(key)){ gorulen.add(key); siraliHucreler.push(key); }
+    }
+  });
+
+  const izgara = document.getElementById('cengel84Izgara');
+  izgara.innerHTML = '';
+  izgara.style.gridTemplateColumns = `repeat(${sutunSayisi}, 34px)`;
+  izgara.style.gridTemplateRows = `repeat(${satirSayisi}, 34px)`;
+  cengel84InputMap = {};
+  for(let rr=0; rr<satirSayisi; rr++){
+    for(let cc=0; cc<sutunSayisi; cc++){
+      const key = rr+','+cc;
+      const hucreDiv = document.createElement('div');
+      hucreDiv.style.gridColumn = (cc+1);
+      hucreDiv.style.gridRow = (rr+1);
+      if(cengel84HucreHarita[key] !== undefined){
+        hucreDiv.className = 'cengel-hucre';
+        const girdi = document.createElement('input');
+        girdi.maxLength = 1;
+        girdi.className = 'cengel-girdi';
+        girdi.dataset.key = key;
+        girdi.oninput = (e)=>{
+          e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
+          e.target.classList.remove('dogru','yanlis');
+          const idx = siraliHucreler.indexOf(key);
+          if(idx>=0 && idx<siraliHucreler.length-1){
+            const sonrakiKey = siraliHucreler[idx+1];
+            if(cengel84InputMap[sonrakiKey]) cengel84InputMap[sonrakiKey].focus();
+          }
+        };
+        hucreDiv.appendChild(girdi);
+        cengel84InputMap[key] = girdi;
+      } else {
+        hucreDiv.className = 'cengel-bos';
+      }
+      izgara.appendChild(hucreDiv);
+    }
+  }
+
+  const liste = document.getElementById('cengel84Liste');
+  liste.innerHTML = '';
+  yerlesimler.forEach((p, idx)=>{
+    const li = document.createElement('li');
+    li.textContent = `${idx+1}. ${p.dir==='right'?'➡️':'⬇️'} (${p.kelime.length} harf) ${p.anlam}`;
+    liste.appendChild(li);
+  });
+
+  document.getElementById('cengel84Sonuc').textContent = '';
+}
+
+function cengel84KontrolEt(){
+  let dogruSayisi=0, toplam=0;
+  Object.keys(cengel84HucreHarita).forEach(key=>{
+    toplam++;
+    const girdi = cengel84InputMap[key];
+    const beklenen = cengel84HucreHarita[key];
+    if(girdi.value && girdi.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
+      girdi.classList.add('dogru'); girdi.classList.remove('yanlis');
+      dogruSayisi++;
+    } else {
+      girdi.classList.add('yanlis'); girdi.classList.remove('dogru');
+    }
+  });
+  document.getElementById('cengel84Sonuc').textContent = dogruSayisi===toplam
+    ? `🎉 Tebrikler! Çengel bulmacayı tamamen doğru çözdün! (${dogruSayisi}/${toplam})`
+    : `Sonuç: ${dogruSayisi}/${toplam} doğru harf. Devam et!`;
+}
+
+// =====================================================================
+// SÖZCÜK MERDİVENİ
+// =====================================================================
+const merdiven84Zinciri = [
+  {kelime:"SIDK", anlam:"Peygamberlerin ortak sıfatlarından biri; doğruluk ve doğru sözlülük"},
+  {kelime:"KABE", anlam:"Kureyş suresinde 'bu ev' diye anılan, Mekke'deki ilk mabet"},
+  {kelime:"EMANET", anlam:"Kendisine bırakılanı koruyup sahibine eksiksiz teslim etme"},
+  {kelime:"TAKVA", anlam:"Allah'a karşı sorumluluk bilinci; Veda Hutbesi'ndeki üstünlük ölçüsü"},
+];
+const merdiven84Havuz = ["EMİN","MERHAMET","AFFEDİCİLİK","İSTİŞARE","CESARET","KARARLILIK","ADALET","HAKKANİYET","HILFULFUDUL","VEDA","HUTBE","HACERÜLESVED","TAİF","BEDİR","HENDEK","UHUD","SELMAN","SEVR","HİCRET","EBUBEKİR","KUREYŞ","HİKMET","TEBLİĞ","GÜVEN"];
+let merdiven84Index = 0;
+
+function merdiven84Baslat(){
+  merdiven84Index = 0;
+  document.getElementById('merdiven84Toplam').textContent = merdiven84Zinciri.length;
+  document.getElementById('merdiven84Sonuc').textContent = '';
+  document.getElementById('merdiven84Gorsel').innerHTML = '';
+  merdiven84BasamakEkle(merdiven84Zinciri[0].kelime, 0);
+  merdiven84Tur();
+}
+function merdiven84BasamakEkle(kelime, index){
+  const basamak = document.createElement('div');
+  basamak.style.background='white'; basamak.style.border='2px solid var(--yesil)'; basamak.style.borderRadius='10px';
+  basamak.style.padding='8px 14px'; basamak.style.margin='6px 0'; basamak.style.fontWeight='bold';
+  basamak.style.marginLeft = (index*24) + 'px';
+  basamak.textContent = `${index+1}. ${kelime}`;
+  document.getElementById('merdiven84Gorsel').appendChild(basamak);
+}
+function merdiven84Tur(){
+  document.getElementById('merdiven84Basamak').textContent = merdiven84Index+1;
+  if(merdiven84Index+1 >= merdiven84Zinciri.length){
+    document.getElementById('merdiven84Ipucu').textContent = '';
+    document.getElementById('merdiven84Secenekler').innerHTML = '';
+    document.getElementById('merdiven84Sonuc').textContent = '🎉 Tebrikler! Sözcük merdivenini tamamen tırmandın!';
+    return;
+  }
+  const oncekiKelime = merdiven84Zinciri[merdiven84Index].kelime;
+  const hedef = merdiven84Zinciri[merdiven84Index+1];
+  const gerekliHarf = oncekiKelime[oncekiKelime.length-1];
+  document.getElementById('merdiven84Ipucu').innerHTML = `🗨️ İpucu: <b>${hedef.anlam}</b><br>Bu kelime "<b>${gerekliHarf}</b>" harfiyle başlamalı!`;
+  const yanlisHavuz = karistir(merdiven84Havuz.filter(k=>k!==hedef.kelime)).slice(0,3);
+  const secenekler = karistir([hedef.kelime, ...yanlisHavuz]);
+  const kutu = document.getElementById('merdiven84Secenekler');
+  kutu.innerHTML = '';
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek;
+    btn.onclick = ()=>{
+      if(secenek === hedef.kelime){
+        btn.classList.add('dogru');
+        merdiven84Index++;
+        setTimeout(()=>{ merdiven84BasamakEkle(hedef.kelime, merdiven84Index); merdiven84Tur(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        setTimeout(()=>btn.classList.remove('yanlis'), 400);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// ŞİFRELİ SÖZCÜK
+// =====================================================================
+const turkAlfabesi84 = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split('');
+let sifre84Anahtari = {};
+
+function sifre84Olustur(){
+  const sayilar = karistir(turkAlfabesi84.map((_,i)=>i+1));
+  sifre84Anahtari = {};
+  turkAlfabesi84.forEach((harf,i)=>{ sifre84Anahtari[harf] = sayilar[i]; });
+
+  const anahtarKutu = document.getElementById('sifre84Anahtar');
+  anahtarKutu.innerHTML = '';
+  turkAlfabesi84.forEach(harf=>{
+    const hucre = document.createElement('div');
+    hucre.className = 'sifre-anahtar-hucre';
+    hucre.innerHTML = `<b>${harf}</b><br>${sifre84Anahtari[harf]}`;
+    anahtarKutu.appendChild(hucre);
+  });
+
+  const kutu = document.getElementById('sifre84Kelimeler');
+  kutu.innerHTML = '';
+  document.getElementById('sifre84Sonuc').textContent = '';
+
+  kelimeHavuzu84.slice(0,20).forEach(item=>{
+    const satir = document.createElement('div');
+    satir.className = 'sifre-satir';
+    const anlamP = document.createElement('p');
+    anlamP.className = 'sifre-ipucu';
+    anlamP.textContent = `💡 ${item.anlam}`;
+    satir.appendChild(anlamP);
+
+    const kutucuklar = document.createElement('div');
+    kutucuklar.className = 'sifre-kutucuklar';
+    const harfler = item.kelime.split('');
+    const girdiler = [];
+    harfler.forEach((harf)=>{
+      const grup = document.createElement('div');
+      grup.className = 'sifre-grup';
+      const sayiEtiket = document.createElement('div');
+      sayiEtiket.className = 'sifre-sayi';
+      sayiEtiket.textContent = sifre84Anahtari[harf];
+      const girdi = document.createElement('input');
+      girdi.maxLength = 1;
+      girdi.className = 'sifre-girdi';
+      girdi.dataset.beklenen = harf;
+      grup.appendChild(sayiEtiket);
+      grup.appendChild(girdi);
+      kutucuklar.appendChild(grup);
+      girdiler.push(girdi);
+    });
+    girdiler.forEach((girdi, hIdx)=>{
+      girdi.oninput = (e)=>{
+        e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
+        e.target.classList.remove('dogru','yanlis');
+        if(girdiler[hIdx+1]) girdiler[hIdx+1].focus();
+      };
+    });
+    satir.appendChild(kutucuklar);
+    kutu.appendChild(satir);
+  });
+}
+
+function sifre84KontrolEt(){
+  const girdiler = document.querySelectorAll('#sifre84Kelimeler .sifre-girdi');
+  let dogruSayisi=0;
+  girdiler.forEach(g=>{
+    const beklenen = g.dataset.beklenen;
+    if(g.value && g.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
+      g.classList.add('dogru'); g.classList.remove('yanlis');
+      dogruSayisi++;
+    } else {
+      g.classList.add('yanlis'); g.classList.remove('dogru');
+    }
+  });
+  document.getElementById('sifre84Sonuc').textContent = dogruSayisi===girdiler.length
+    ? `🎉 Tebrikler! Tüm şifreleri doğru çözdün! (${dogruSayisi}/${girdiler.length})`
+    : `Sonuç: ${dogruSayisi}/${girdiler.length} doğru harf. Anahtar tablosuna bakarak devam et!`;
+}
+
+// =====================================================================
+// ŞİFRELİ TANIM
+// =====================================================================
+const st84LeetHarita = {'a':'4','A':'4','e':'3','E':'3','i':'1','I':'1','İ':'1','ı':'1','o':'0','O':'0'};
+function st84TanimSifrele(metin){
+  return metin.split('').map(ch => st84LeetHarita[ch] !== undefined ? st84LeetHarita[ch] : ch).join('');
+}
+let st84Index = 0, st84Puan = 0, st84Sira = [];
+
+function st84Baslat(){
+  st84Sira = karistir(kelimeHavuzu84.slice());
+  st84Index = 0; st84Puan = 0;
+  document.getElementById('st84Puan').textContent = 0;
+  document.getElementById('st84Toplam').textContent = st84Sira.length;
+  document.getElementById('st84Sonuc').textContent = '';
+  st84Tur();
+}
+function st84Tur(){
+  if(st84Index >= st84Sira.length){
+    document.getElementById('st84Tanim').textContent = '';
+    document.getElementById('st84Secenekler').innerHTML = '';
+    document.getElementById('st84Sonuc').textContent = `🏆 Tebrikler! ${st84Puan}/${st84Sira.length} şifreli tanımı doğru çözdün!`;
+    return;
+  }
+  document.getElementById('st84Tur').textContent = st84Index+1;
+  const oge = st84Sira[st84Index];
+  document.getElementById('st84Tanim').textContent = st84TanimSifrele(oge.anlam);
+  const digerler = karistir(kelimeHavuzu84.filter(x=>x.kelime!==oge.kelime)).slice(0,3);
+  const secenekler = karistir([oge, ...digerler]);
+  const kutu = document.getElementById('st84Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.style.display='block'; btn.style.width='100%'; btn.style.marginBottom='6px';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.kelime === oge.kelime){
+        btn.classList.add('dogru');
+        st84Puan++;
+        document.getElementById('st84Puan').textContent = st84Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===oge.kelime) b.classList.add('dogru'); });
+      }
+      st84Index++;
+      setTimeout(()=>st84Tur(), 900);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// KELİME KODLAMA
+// =====================================================================
+const kk84Alfabe = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split('');
+const kk84KodTablosu = {};
+kk84Alfabe.forEach((harf,i)=>{ kk84KodTablosu[harf] = (i+1).toString(2).padStart(5,'0'); });
+function kk84KelimeyiKodla(kelime){
+  return kelime.split('').map(h => kk84KodTablosu[h] || '?????').join(' ');
+}
+let kk84Index = 0, kk84Puan = 0, kk84Sira = [];
+
+function kk84AnahtarOlustur(){
+  const kutu = document.getElementById('kk84Anahtar');
+  kutu.innerHTML = '';
+  kk84Alfabe.forEach(harf=>{
+    const hucre = document.createElement('div');
+    hucre.className = 'sifre-anahtar-hucre';
+    hucre.innerHTML = `<b>${harf}</b><br>${kk84KodTablosu[harf]}`;
+    kutu.appendChild(hucre);
+  });
+}
+function kk84Baslat(){
+  kk84AnahtarOlustur();
+  kk84Sira = karistir(kelimeHavuzu84.slice());
+  kk84Index = 0; kk84Puan = 0;
+  document.getElementById('kk84Puan').textContent = 0;
+  document.getElementById('kk84Toplam').textContent = kk84Sira.length;
+  document.getElementById('kk84Sonuc').textContent = '';
+  kk84Tur();
+}
+function kk84Tur(){
+  if(kk84Index >= kk84Sira.length){
+    document.getElementById('kk84Kod').textContent = '';
+    document.getElementById('kk84Ipucu').textContent = '';
+    document.getElementById('kk84Secenekler').innerHTML = '';
+    document.getElementById('kk84Sonuc').textContent = `🏆 Tebrikler! ${kk84Puan}/${kk84Sira.length} kodu doğru çözdün!`;
+    return;
+  }
+  document.getElementById('kk84Tur').textContent = kk84Index+1;
+  const oge = kk84Sira[kk84Index];
+  document.getElementById('kk84Ipucu').innerHTML = `💡 İpucu: <b>${oge.anlam}</b>`;
+  document.getElementById('kk84Kod').textContent = kk84KelimeyiKodla(oge.kelime);
+  const digerler = karistir(kelimeHavuzu84.filter(x=>x.kelime!==oge.kelime)).slice(0,3);
+  const secenekler = karistir([oge, ...digerler]);
+  const kutu = document.getElementById('kk84Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.style.display='block'; btn.style.width='100%'; btn.style.marginBottom='6px';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.kelime === oge.kelime){
+        btn.classList.add('dogru');
+        kk84Puan++;
+        document.getElementById('kk84Puan').textContent = kk84Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===oge.kelime) b.classList.add('dogru'); });
+      }
+      kk84Index++;
+      setTimeout(()=>kk84Tur(), 1000);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// NONOGRAM
+// =====================================================================
+const nonogram84Resimleri = {
+  yildiz: {
+    etiket: "⭐ Yıldız (Örneklik)",
+    veri: [
+      "0000000000000000","0000000110000000","0000000110000000","0000001111000000",
+      "0000001111000000","1111111111111111","0111111111111110","0011111111111100",
+      "0001111111111000","0011111111111100","0011110000111100","0011100000011100",
+      "0111000000001110","0110000000000110","0000000000000000","0000000000000000",
+    ],
+  },
+  kitap: {
+    etiket: "📜 Açık Kitap (Veda Hutbesi)",
+    veri: [
+      "0000000000000000","0000000000000000","0001111001111000","0011111001111100",
+      "0111111001111110","0111111001111110","0111111001111110","0111111001111110",
+      "0111111001111110","0111111001111110","0111111001111110","0111111001111110",
+      "0111111001111110","0011111001111100","0000000000000000","0000000000000000",
+    ],
+  },
+};
+let nonogram84AktifResim = 'yildiz';
+const nono84Boyut = nonogram84Resimleri.yildiz.veri.length;
+let nono84KullaniciIzgara = [];
+let nono84HucreElemanlari = [];
+
+function ipucu84Hesapla(diziStr){
+  const gruplar = diziStr.split('0').filter(s=>s.length>0).map(s=>s.length);
+  return gruplar.length ? gruplar : [0];
+}
+function nonogram84Sec(resimAdi){ nonogram84AktifResim = resimAdi; nonogram84Olustur(); }
+function nonogram84Olustur(){
+  const cozum = nonogram84Resimleri[nonogram84AktifResim].veri;
+  nono84KullaniciIzgara = Array.from({length:nono84Boyut}, ()=>Array(nono84Boyut).fill(false));
+  document.getElementById('nono84Sonuc').textContent = '';
+  const satirIpuclari = cozum.map(r=>ipucu84Hesapla(r));
+  const sutunDizeleri = [];
+  for(let c=0;c<nono84Boyut;c++){
+    let s='';
+    for(let r=0;r<nono84Boyut;r++) s += cozum[r][c];
+    sutunDizeleri.push(s);
+  }
+  const sutunIpuclari = sutunDizeleri.map(s=>ipucu84Hesapla(s));
+  const tablo = document.getElementById('nono84Tablo');
+  tablo.innerHTML = '';
+  const basSatir = document.createElement('tr');
+  const koseTd = document.createElement('td');
+  basSatir.appendChild(koseTd);
+  for(let c=0;c<nono84Boyut;c++){
+    const td = document.createElement('td');
+    td.className = 'nono-sutun-ipucu';
+    sutunIpuclari[c].forEach((sayi,i)=>{
+      if(i>0) td.appendChild(document.createElement('br'));
+      td.appendChild(document.createTextNode(sayi));
+    });
+    if((c+1)%5===0 && c<nono84Boyut-1) td.style.borderRight = '2px solid #333';
+    basSatir.appendChild(td);
+  }
+  tablo.appendChild(basSatir);
+  nono84HucreElemanlari = [];
+  for(let r=0;r<nono84Boyut;r++){
+    const tr = document.createElement('tr');
+    const satirTd = document.createElement('td');
+    satirTd.className = 'nono-satir-ipucu';
+    satirTd.textContent = satirIpuclari[r].join(' ');
+    if((r+1)%5===0 && r<nono84Boyut-1) satirTd.style.borderBottom = '2px solid #333';
+    tr.appendChild(satirTd);
+    nono84HucreElemanlari.push([]);
+    for(let c=0;c<nono84Boyut;c++){
+      const td = document.createElement('td');
+      td.className = 'nono-hucre';
+      if((c+1)%5===0 && c<nono84Boyut-1) td.style.borderRight = '2px solid #333';
+      if((r+1)%5===0 && r<nono84Boyut-1) td.style.borderBottom = '2px solid #333';
+      td.onclick = ((rr,cc)=>()=>{
+        nono84KullaniciIzgara[rr][cc] = !nono84KullaniciIzgara[rr][cc];
+        td.classList.toggle('dolu', nono84KullaniciIzgara[rr][cc]);
+        nonogram84KontrolEt(false);
+      })(r,c);
+      tr.appendChild(td);
+      nono84HucreElemanlari[r].push(td);
+    }
+    tablo.appendChild(tr);
+  }
+}
+function nonogram84KontrolEt(manuel){
+  const cozum = nonogram84Resimleri[nonogram84AktifResim].veri;
+  let tamMi = true;
+  for(let r=0;r<nono84Boyut;r++){
+    for(let c=0;c<nono84Boyut;c++){
+      const beklenen = cozum[r][c] === '1';
+      if(nono84KullaniciIzgara[r][c] !== beklenen) tamMi = false;
+    }
+  }
+  if(tamMi){
+    document.getElementById('nono84Sonuc').textContent = `🎉 Tebrikler! Gizli resmi (${nonogram84Resimleri[nonogram84AktifResim].etiket}) doğru tamamladın!`;
+  } else if(manuel){
+    document.getElementById('nono84Sonuc').textContent = 'Henüz tam değil, ipuçlarına bakarak devam et!';
+  }
+}
+function nonogram84Temizle(){
+  nono84KullaniciIzgara = Array.from({length:nono84Boyut}, ()=>Array(nono84Boyut).fill(false));
+  nono84HucreElemanlari.forEach(satir=>satir.forEach(td=>td.classList.remove('dolu')));
+  document.getElementById('nono84Sonuc').textContent = '';
+}
+
+// =====================================================================
+// KELİME SATRANCI
+// =====================================================================
+const ks84Boyut = 8;
+const ks84AtHamleleri = [[1,2],[1,-2],[-1,2],[-1,-2],[2,1],[2,-1],[-2,1],[-2,-1]];
+const ks84KelimeListesi = [
+  {kelime:"EMİN", anlam:"Hz. Muhammed'e verilen 'güvenilir kişi' lakabı"},
+  {kelime:"SIDK", anlam:"Peygamberlerin ortak sıfatı olan doğruluk"},
+  {kelime:"VEDA", anlam:"Hz. Peygamber'in insan haklarını ilan ettiği hutbenin adı"},
+  {kelime:"HUTBE", anlam:"Topluluğa hitaben yapılan konuşma"},
+  {kelime:"BEDİR", anlam:"Ordugâh yerinin istişareyle seçildiği savaş"},
+  {kelime:"SEVR", anlam:"Hicrette sığınılan mağaranın adı"},
+  {kelime:"TAKVA", anlam:"Veda Hutbesi'ne göre tek üstünlük ölçüsü"},
+  {kelime:"GÜVEN", anlam:"'El-Emin' lakabının kazanılmasını sağlayan itimat"},
+];
+const ks84AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+let ks84IzgaraVeri = [];
+let ks84HucreElemanlari = [];
+let ks84BulunanKelimeler = new Set();
+let ks84Yol = [];
+
+function ks84KelimeYerlestir(izgara, kelime){
+  for(let deneme=0; deneme<300; deneme++){
+    const gecici = izgara.map(satir=>satir.slice());
+    const r0 = Math.floor(Math.random()*ks84Boyut);
+    const c0 = Math.floor(Math.random()*ks84Boyut);
+    if(gecici[r0][c0] !== null && gecici[r0][c0] !== kelime[0]) continue;
+    gecici[r0][c0] = kelime[0];
+    const hucreler = [{r:r0,c:c0}];
+    const kullanilan = new Set([r0+','+c0]);
+    let r=r0, c=c0, basarili=true;
+    for(let i=1;i<kelime.length;i++){
+      const olasilar = karistir(ks84AtHamleleri.slice()).filter(([dr,dc])=>{
+        const nr=r+dr, nc=c+dc;
+        if(nr<0 || nr>=ks84Boyut || nc<0 || nc>=ks84Boyut) return false;
+        if(kullanilan.has(nr+','+nc)) return false;
+        return gecici[nr][nc]===null || gecici[nr][nc]===kelime[i];
+      });
+      if(olasilar.length===0){ basarili=false; break; }
+      const [dr,dc] = olasilar[0];
+      r+=dr; c+=dc;
+      gecici[r][c] = kelime[i];
+      hucreler.push({r,c});
+      kullanilan.add(r+','+c);
+    }
+    if(basarili){
+      hucreler.forEach((h,i)=>{ izgara[h.r][h.c] = kelime[i]; });
+      return hucreler;
+    }
+  }
+  return null;
+}
+function ks84Olustur(){
+  let izgara, basarili=false;
+  for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
+    izgara = Array.from({length:ks84Boyut}, ()=>Array(ks84Boyut).fill(null));
+    basarili = true;
+    const siraliKelimeler = ks84KelimeListesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    for(const item of siraliKelimeler){
+      const hucreler = ks84KelimeYerlestir(izgara, item.kelime);
+      if(!hucreler){ basarili=false; break; }
+    }
+  }
+  for(let r=0;r<ks84Boyut;r++){
+    for(let c=0;c<ks84Boyut;c++){
+      if(izgara[r][c]===null) izgara[r][c] = ks84AsciiHarfler[Math.floor(Math.random()*ks84AsciiHarfler.length)];
+    }
+  }
+  ks84IzgaraVeri = izgara;
+  ks84BulunanKelimeler = new Set();
+  ks84Yol = [];
+  const kutu = document.getElementById('ks84Izgara');
+  kutu.innerHTML = '';
+  ks84HucreElemanlari = [];
+  for(let r=0;r<ks84Boyut;r++){
+    ks84HucreElemanlari.push([]);
+    for(let c=0;c<ks84Boyut;c++){
+      const h = document.createElement('div');
+      h.className = 'ks-hucre ' + ((r+c)%2===0 ? 'acik' : 'koyu');
+      h.textContent = izgara[r][c];
+      h.onclick = ()=>ks84Tikla(r,c);
+      kutu.appendChild(h);
+      ks84HucreElemanlari[r].push(h);
+    }
+  }
+  const liste = document.getElementById('ks84Liste');
+  liste.innerHTML = '';
+  ks84KelimeListesi.forEach(item=>{
+    const li = document.createElement('li');
+    li.id = 'ks84-kelime-' + item.kelime;
+    li.textContent = `${item.kelime} — ${item.anlam}`;
+    liste.appendChild(li);
+  });
+  document.getElementById('ks84Bulunan').textContent = 0;
+  document.getElementById('ks84Toplam').textContent = ks84KelimeListesi.length;
+  document.getElementById('ks84Sonuc').textContent = '';
+}
+function ks84SecimiTemizle(){
+  ks84Yol.forEach(p=>ks84HucreElemanlari[p.r][p.c].classList.remove('ks-secili'));
+  ks84Yol = [];
+}
+function ks84Tikla(r,c){
+  const hucreEl = ks84HucreElemanlari[r][c];
+  if(hucreEl.classList.contains('ks-bulundu')) return;
+  let yeniYol;
+  if(ks84Yol.length===0){ yeniYol = [{r,c}]; }
+  else {
+    const son = ks84Yol[ks84Yol.length-1];
+    const gecerliHamle = ks84AtHamleleri.some(([hr,hc]) => son.r+hr===r && son.c+hc===c);
+    yeniYol = gecerliHamle ? [...ks84Yol, {r,c}] : [{r,c}];
+  }
+  const dizi = yeniYol.map(p=>ks84IzgaraVeri[p.r][p.c]).join('');
+  const tamEslesen = ks84KelimeListesi.find(item => item.kelime===dizi && !ks84BulunanKelimeler.has(item.kelime));
+  const onEkMi = ks84KelimeListesi.some(item => !ks84BulunanKelimeler.has(item.kelime) && item.kelime.startsWith(dizi));
+  ks84Yol.forEach(p=>ks84HucreElemanlari[p.r][p.c].classList.remove('ks-secili'));
+  if(tamEslesen){
+    yeniYol.forEach(p=>ks84HucreElemanlari[p.r][p.c].classList.add('ks-bulundu'));
+    ks84BulunanKelimeler.add(tamEslesen.kelime);
+    document.getElementById('ks84Bulunan').textContent = ks84BulunanKelimeler.size;
+    document.getElementById('ks84-kelime-'+tamEslesen.kelime).classList.add('bulundu-satir');
+    ks84Yol = [];
+    if(ks84BulunanKelimeler.size === ks84KelimeListesi.length){
+      document.getElementById('ks84Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri at hamlesiyle buldun!';
+    }
+  } else if(onEkMi){
+    yeniYol.forEach(p=>ks84HucreElemanlari[p.r][p.c].classList.add('ks-secili'));
+    ks84Yol = yeniYol;
+  } else {
+    const tekBaslangicUygun = ks84KelimeListesi.some(item => !ks84BulunanKelimeler.has(item.kelime) && item.kelime[0]===ks84IzgaraVeri[r][c]);
+    if(tekBaslangicUygun){ ks84Yol = [{r,c}]; hucreEl.classList.add('ks-secili'); }
+    else { ks84Yol = []; }
+  }
+}
+
+// =====================================================================
+// KELİME DEDEKTİFİ
+// =====================================================================
+const dd84KelimeHavuzu = kelimeHavuzu84.filter(x => x.kelime.length>=5 && x.kelime.length<=8);
+let dd84Hedef = null, dd84Deneme = 0;
+const dd84MaxDeneme = 5, dd84IpucuAcilmaSiniri = 2;
+let dd84Bitti = true, dd84SiraliVakalar = [], dd84VakaIndex = 0, dd84CozulenSayisi = 0;
+
+function dd84Baslat(){
+  dd84SiraliVakalar = karistir(dd84KelimeHavuzu.slice());
+  dd84VakaIndex = 0; dd84CozulenSayisi = 0;
+  document.getElementById('dd84Cozulen').textContent = 0;
+  document.getElementById('dd84ToplamVaka').textContent = dd84SiraliVakalar.length;
+  document.getElementById('dd84MaxDeneme').textContent = dd84MaxDeneme;
+  dd84VakaBaslat();
+}
+function dd84VakaBaslat(){
+  if(dd84VakaIndex >= dd84SiraliVakalar.length){
+    document.getElementById('dd84Ipucu').textContent = '';
+    document.getElementById('dd84Izgara').innerHTML = '';
+    document.getElementById('dd84Girdi').disabled = true;
+    document.getElementById('dd84Sonuc').textContent = `🏆 Tüm vakalar bitti! ${dd84CozulenSayisi}/${dd84SiraliVakalar.length} vakayı çözdün!`;
+    return;
+  }
+  document.getElementById('dd84Vaka').textContent = dd84VakaIndex+1;
+  dd84Hedef = dd84SiraliVakalar[dd84VakaIndex];
+  dd84Deneme = 0; dd84Bitti = false;
+  document.getElementById('dd84Ipucu').innerHTML = `🔍 Vaka: <b>${dd84Hedef.kelime.length} harfli</b> bir kavram (anlamı ${dd84IpucuAcilmaSiniri} yanlış tahminden sonra açılacak!)`;
+  document.getElementById('dd84Deneme').textContent = 0;
+  document.getElementById('dd84Izgara').innerHTML = '';
+  document.getElementById('dd84Sonuc').textContent = '';
+  document.getElementById('dd84Uyari').textContent = '';
+  const girdi = document.getElementById('dd84Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.maxLength = dd84Hedef.kelime.length; girdi.focus();
+}
+function dd84TahminEt(){
+  if(dd84Bitti) return;
+  const girdi = document.getElementById('dd84Girdi');
+  const tahmin = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  if(tahmin.length !== dd84Hedef.kelime.length){
+    document.getElementById('dd84Uyari').textContent = `Tahminin ${dd84Hedef.kelime.length} harfli olmalı!`;
+    return;
+  }
+  document.getElementById('dd84Uyari').textContent = '';
+  const hedefHarfler = dd84Hedef.kelime.split('');
+  const tahminHarfler = tahmin.split('');
+  const durumlar = new Array(tahminHarfler.length).fill('yok');
+  const kullanilan = new Array(hedefHarfler.length).fill(false);
+  tahminHarfler.forEach((h,i)=>{ if(h === hedefHarfler[i]){ durumlar[i]='dogru-yer'; kullanilan[i]=true; } });
+  tahminHarfler.forEach((h,i)=>{
+    if(durumlar[i]==='dogru-yer') return;
+    const idx = hedefHarfler.findIndex((hh,j)=> hh===h && !kullanilan[j]);
+    if(idx!==-1){ durumlar[i]='yanlis-yer'; kullanilan[idx]=true; }
+  });
+  const satir = document.createElement('div');
+  satir.className = 'dd-satir';
+  tahminHarfler.forEach((h,i)=>{
+    const kutu = document.createElement('div');
+    kutu.className = 'dd-kutu ' + durumlar[i];
+    kutu.textContent = h;
+    satir.appendChild(kutu);
+  });
+  document.getElementById('dd84Izgara').appendChild(satir);
+  dd84Deneme++;
+  document.getElementById('dd84Deneme').textContent = dd84Deneme;
+  girdi.value = '';
+  if(tahmin === dd84Hedef.kelime){
+    dd84Bitti = true; girdi.disabled = true;
+    dd84CozulenSayisi++;
+    document.getElementById('dd84Cozulen').textContent = dd84CozulenSayisi;
+    document.getElementById('dd84Ipucu').innerHTML = `🔍 İpucu: <b>${dd84Hedef.anlam}</b> (${dd84Hedef.kelime.length} harfli)`;
+    document.getElementById('dd84Sonuc').textContent = `🎉 Vaka çözüldü! Kelime: ${dd84Hedef.kelime} (${dd84Deneme} denemede)`;
+    dd84VakaIndex++;
+    setTimeout(()=>dd84VakaBaslat(), 1500);
+  } else if(dd84Deneme >= dd84MaxDeneme){
+    dd84Bitti = true; girdi.disabled = true;
+    document.getElementById('dd84Ipucu').innerHTML = `🔍 İpucu: <b>${dd84Hedef.anlam}</b> (${dd84Hedef.kelime.length} harfli)`;
+    document.getElementById('dd84Sonuc').textContent = `🔍 Vaka çözülemedi! Doğru kelime: ${dd84Hedef.kelime} — ${dd84Hedef.anlam}`;
+    dd84VakaIndex++;
+    setTimeout(()=>dd84VakaBaslat(), 2200);
+  } else if(dd84Deneme >= dd84IpucuAcilmaSiniri){
+    document.getElementById('dd84Ipucu').innerHTML = `🔍 İpucu açıldı: <b>${dd84Hedef.anlam}</b> (${dd84Hedef.kelime.length} harfli)`;
+  }
+}
+
+// =====================================================================
+// DİL DEDEKTİFİ
+// =====================================================================
+const dilDedektifi84Listesi = [
+  {dogru:"Hz. Muhammed, peygamberlikten önce bile Mekkeliler arasında 'el-Emin' lakabıyla tanınırdı.", yanlislar:["'El-Emin' lakabı Hz. Muhammed'e vefatından sonra verilmiştir.","'El-Emin' lakabı 'cömert kişi' anlamına gelir.","Mekkeliler Hz. Muhammed'e hiçbir zaman güvenmemiştir."]},
+  {dogru:"Sıdk (doğruluk) ve emanet (güvenilirlik), bütün peygamberlerin ortak sıfatlarındandır.", yanlislar:["Sıdk ve emanet yalnızca Hz. Muhammed'e ait özelliklerdir.","Sıdk, 'zengin olmak' anlamına gelir.","Emanet, peygamberlerin değil yalnızca yöneticilerin özelliğidir."]},
+  {dogru:"Hz. Muhammed, Hacerülesved anlaşmazlığını taşı bir örtü üzerinde birlikte taşıtarak çözmüştür.", yanlislar:["Hz. Muhammed taşı tek başına yerine koyarak kabileleri kızdırmıştır.","Hacerülesved anlaşmazlığı savaşla sonuçlanmıştır.","Hacerülesved, Medine'de bulunan bir taştır."]},
+  {dogru:"Hz. Muhammed, Taif'te kendisini taşlayan halka beddua etmemiş, onlar için hayır dilemiştir.", yanlislar:["Hz. Muhammed Taif halkının helak edilmesini istemiştir.","Taif halkı Hz. Muhammed'i sevinçle karşılamıştır.","Taif olayı Mekke'nin Fethi'nden sonra yaşanmıştır."]},
+  {dogru:"Mekke'nin Fethi'nde Hz. Muhammed, kendisine yıllarca zulmeden Kureyşlileri affetmiştir.", yanlislar:["Mekke'nin Fethi'nde bütün Kureyşliler cezalandırılmıştır.","Mekke'nin Fethi büyük bir katliamla sonuçlanmıştır.","Hz. Muhammed Mekke'yi fethettikten sonra şehri terk etmiştir."]},
+  {dogru:"İstişare, bir konuda karar vermeden önce bilgi ve tecrübe sahiplerine danışmaktır.", yanlislar:["İstişare, kararı tek başına almak demektir.","İstişare yalnızca savaş zamanlarında yapılabilir.","İstişare Kur'an'da yasaklanmıştır."]},
+  {dogru:"Hendek Savaşı'nda hendek kazma fikri Selman-ı Farisi tarafından önerilmiştir.", yanlislar:["Hendek kazma fikrini düşman ordusu önermiştir.","Hendek Savaşı'nda hiç savunma tedbiri alınmamıştır.","Hendek kazma taktiği Bedir Savaşı'nda kullanılmıştır."]},
+  {dogru:"Uhud Savaşı öncesinde Hz. Muhammed, kendi görüşüne rağmen çoğunluğun kararına uymuştur.", yanlislar:["Uhud öncesi Hz. Muhammed kimseye danışmamıştır.","Uhud öncesi herkes Hz. Muhammed'in görüşünü kabul etmiştir.","Uhud Savaşı istişare edilmeden başlatılmıştır."]},
+  {dogru:"Hılfü'l-fudûl, Mekke'de haksızlığa uğrayanları korumak için kurulmuş bir ittifaktır.", yanlislar:["Hılfü'l-fudûl, ticareti engellemek için kurulmuştur.","Hılfü'l-fudûl'a Hz. Muhammed hiç katılmamıştır.","Hılfü'l-fudûl, Medine'de kurulan bir ordudur."]},
+  {dogru:"Veda Hutbesi'nde canın, malın ve namusun dokunulmaz olduğu ilan edilmiştir.", yanlislar:["Veda Hutbesi yalnızca ticaret kurallarını anlatır.","Veda Hutbesi'nde ırk üstünlüğü savunulmuştur.","Veda Hutbesi Hz. Muhammed'in ilk konuşmasıdır."]},
+];
+let ddl84Index = 0, ddl84Puan = 0, ddl84Sira = [];
+
+function ddl84Baslat(){
+  ddl84Sira = karistir(dilDedektifi84Listesi.slice());
+  ddl84Index = 0; ddl84Puan = 0;
+  document.getElementById('ddl84Puan').textContent = 0;
+  document.getElementById('ddl84Toplam').textContent = ddl84Sira.length;
+  document.getElementById('ddl84Sonuc').textContent = '';
+  ddl84Tur();
+}
+function ddl84Tur(){
+  if(ddl84Index >= ddl84Sira.length){
+    document.getElementById('ddl84Secenekler').innerHTML = '';
+    document.getElementById('ddl84Baslik').textContent = '';
+    document.getElementById('ddl84Sonuc').textContent = `🕵️ Soruşturma bitti! ${ddl84Puan}/${ddl84Sira.length} doğru bilgiyi tespit ettin!`;
+    return;
+  }
+  document.getElementById('ddl84Tur').textContent = ddl84Index+1;
+  const oge = ddl84Sira[ddl84Index];
+  document.getElementById('ddl84Baslik').textContent = '🔎 Hangi cümle DOĞRU bilgi veriyor?';
+  const secenekler = karistir([{metin:oge.dogru, dogruMu:true}, ...oge.yanlislar.map(y=>({metin:y, dogruMu:false}))]);
+  const kutu = document.getElementById('ddl84Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek.metin;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.dogruMu){
+        btn.classList.add('dogru');
+        ddl84Puan++;
+        document.getElementById('ddl84Puan').textContent = ddl84Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent === oge.dogru) b.classList.add('dogru'); });
+      }
+      ddl84Index++;
+      setTimeout(()=>ddl84Tur(), 1200);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// MANTIK ZİNCİRİ
+// =====================================================================
+const mantikZinciri84 = [
+  {kavram:"SIDK", tanim:"Peygamberlerin ortak sıfatlarından biri; hiç yalan söylememe, doğruluk", mantik:"Bu doğruluğu sebebiyle Mekkelilerin Hz. Muhammed'e verdiği lakap hangisidir?"},
+  {kavram:"EMİN", tanim:"Hz. Muhammed'e peygamberlikten önce verilen 'güvenilir kişi' lakabı", mantik:"Bu güvenilirliğin, kendisine bırakılanı koruyup teslim etmeyi ifade eden peygamber sıfatı hangisidir?"},
+  {kavram:"EMANET", tanim:"Kendisine bırakılan şeyi koruyup sahibine eksiksiz teslim etme sıfatı", mantik:"Hz. Peygamber'in karar vermeden önce arkadaşlarına danışmasına ne denir?"},
+  {kavram:"İSTİŞARE", tanim:"Karar vermeden önce bilgi ve tecrübe sahiplerine danışma", mantik:"Zorluk ve tehlikeler karşısında yılmadan doğru bildiğini yapabilmeye ne denir?"},
+  {kavram:"CESARET", tanim:"Korkuya rağmen doğru bildiğini söyleyip yapabilme erdemi", mantik:""},
+];
+let mz84Index = 0;
+
+function mz84Baslat(){
+  mz84Index = 0;
+  document.getElementById('mz84Toplam').textContent = mantikZinciri84.length;
+  document.getElementById('mz84Sonuc').textContent = '';
+  document.getElementById('mz84Gorsel').innerHTML = '';
+  mz84HalkaEkle(mantikZinciri84[0].kavram, 0);
+  mz84Tur();
+}
+function mz84HalkaEkle(kavram, index){
+  const halka = document.createElement('div');
+  halka.style.background='white'; halka.style.border='2px solid var(--yesil)'; halka.style.borderRadius='10px';
+  halka.style.padding='8px 14px'; halka.style.margin='6px 0'; halka.style.fontWeight='bold';
+  halka.style.marginLeft = (index*24) + 'px';
+  halka.textContent = `${index+1}. ${kavram}`;
+  document.getElementById('mz84Gorsel').appendChild(halka);
+}
+function mz84Tur(){
+  document.getElementById('mz84Halka').textContent = mz84Index+1;
+  if(mz84Index+1 >= mantikZinciri84.length){
+    document.getElementById('mz84Soru').textContent = '';
+    document.getElementById('mz84Secenekler').innerHTML = '';
+    document.getElementById('mz84Sonuc').textContent = '🎉 Tebrikler! Mantık zincirini tamamen çözdün!';
+    return;
+  }
+  const mevcut = mantikZinciri84[mz84Index];
+  const hedef = mantikZinciri84[mz84Index+1];
+  document.getElementById('mz84Soru').innerHTML = `🔗 <b>${mevcut.kavram}</b>: ${mevcut.tanim}<br>❓ ${mevcut.mantik}`;
+  const havuzDistractor = karistir(kelimeHavuzu84.filter(x => x.kelime!==hedef.kavram && !mantikZinciri84.some(z=>z.kavram===x.kelime))).slice(0,3);
+  const secenekler = karistir([{kelime:hedef.kavram}, ...havuzDistractor]);
+  const kutu = document.getElementById('mz84Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      if(secenek.kelime === hedef.kavram){
+        tiklandiMi = true;
+        btn.classList.add('dogru');
+        mz84Index++;
+        setTimeout(()=>{ mz84HalkaEkle(hedef.kavram, mz84Index); mz84Tur(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        setTimeout(()=>btn.classList.remove('yanlis'), 400);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// SEMANTİK LABİRENT
+// =====================================================================
+const semantikOdalar84 = [
+  {kategori:"PEYGAMBERLERİN ORTAK SIFATLARI (Sıdk, Emanet, Tebliğ gibi)", kelimeler:["SIDK","EMANET","TEBLİĞ","HENDEK"], oddKelime:"HENDEK"},
+  {kategori:"İSTİŞARE ÖRNEĞİ OLAN SAVAŞLAR (Bedir, Uhud, Hendek)", kelimeler:["BEDİR","UHUD","HENDEK","TAKVA"], oddKelime:"TAKVA"},
+  {kategori:"HİCRET YOLCULUĞUYLA İLGİLİ KAVRAMLAR (Sevr, Hicret, Ebubekir gibi)", kelimeler:["SEVR","HİCRET","EBUBEKİR","MERHAMET"], oddKelime:"MERHAMET"},
+  {kategori:"PEYGAMBERLİKTEN ÖNCEKİ ÖRNEK DAVRANIŞLAR (Hılfü'l-fudûl, Hacerülesved, El-Emin)", kelimeler:["HILFULFUDUL","HACERÜLESVED","EMİN","BEDİR"], oddKelime:"BEDİR"},
+  {kategori:"GÜZEL AHLAK DEĞERLERİ (Merhamet, Adalet, Cesaret gibi)", kelimeler:["MERHAMET","ADALET","CESARET","KUREYŞ"], oddKelime:"KUREYŞ"},
+  {kategori:"VEDA HUTBESİ'NİN VURGULADIĞI İLKELER (Hakkaniyet, Adalet, Takva gibi)", kelimeler:["HAKKANİYET","ADALET","TAKVA","SEVR"], oddKelime:"SEVR"},
+];
+let sz84OdaIndex = 0, sz84Can = 3;
+
+function sz84CanGoster(){ document.getElementById('sz84Can').textContent = '❤️'.repeat(Math.max(sz84Can,0)) + '🖤'.repeat(Math.max(3-sz84Can,0)); }
+function sz84Baslat(){
+  sz84OdaIndex = 0; sz84Can = 3;
+  document.getElementById('sz84ToplamOda').textContent = semantikOdalar84.length;
+  sz84CanGoster();
+  document.getElementById('sz84Sonuc').textContent = '';
+  sz84OdaGoster();
+}
+function sz84OdaGoster(){
+  document.getElementById('sz84Oda').textContent = sz84OdaIndex+1;
+  const oda = semantikOdalar84[sz84OdaIndex];
+  document.getElementById('sz84Kategori').innerHTML = `🚪 Oda ${sz84OdaIndex+1}: Bu kategoriye AİT OLMAYAN kelimeyi bul, kapıyı aç!<br>📂 Kategori: <b>${oda.kategori}</b>`;
+  const kutu = document.getElementById('sz84Secenekler');
+  kutu.innerHTML = '';
+  const karisikKelimeler = karistir(oda.kelimeler.slice());
+  karisikKelimeler.forEach(kelime=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = kelime;
+    btn.onclick = ()=>{
+      if(kelime === oda.oddKelime){
+        btn.classList.add('dogru');
+        sz84OdaIndex++;
+        setTimeout(()=>{
+          if(sz84OdaIndex >= semantikOdalar84.length){
+            document.getElementById('sz84Kategori').textContent = '';
+            document.getElementById('sz84Secenekler').innerHTML = '';
+            document.getElementById('sz84Sonuc').textContent = '🎉 Tebrikler! Semantik labirentten çıktın!';
+          } else { sz84OdaGoster(); }
+        }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        sz84Can--;
+        sz84CanGoster();
+        if(sz84Can<=0){
+          setTimeout(()=>{
+            sz84OdaIndex = 0; sz84Can = 3;
+            sz84CanGoster();
+            document.getElementById('sz84Sonuc').textContent = '💥 Canların bitti, labirentte kayboldun! Baştan başlıyorsun...';
+            setTimeout(()=>{ document.getElementById('sz84Sonuc').textContent=''; sz84OdaGoster(); }, 1500);
+          }, 500);
+        } else {
+          setTimeout(()=>btn.classList.remove('yanlis'), 400);
+        }
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// ÇELİŞKİ AVI
+// =====================================================================
+const celiskiListesi84 = [
+  {kelime:"El-Emin", anlam1:"Hz. Muhammed'e verilen 'güvenilir kişi' lakabı", anlam2:"Sözünde durmayan, emanete ihanet eden kimse", celiskiVarMi:true},
+  {kelime:"Sıdk", anlam1:"Doğruluk ve doğru sözlülük", anlam2:"Duruma göre yalan söyleyebilme becerisi", celiskiVarMi:true},
+  {kelime:"İstişare", anlam1:"Karar vermeden önce bilenlere danışmak", anlam2:"Kimseye sormadan tek başına karar vermek", celiskiVarMi:true},
+  {kelime:"Cesaret", anlam1:"Korkuya rağmen doğru bildiğini yapabilmek", anlam2:"Haksızlığı görünce susup geri çekilmek", celiskiVarMi:true},
+  {kelime:"Affedicilik", anlam1:"Gücü elindeyken bağışlayabilmek", anlam2:"Fırsatı bulunca mutlaka intikam almak", celiskiVarMi:true},
+  {kelime:"Hılfü'l-fudûl", anlam1:"Haksızlığa uğrayanı korumak için kurulan ittifak", anlam2:"Güçlünün zayıfı ezmesini kolaylaştıran bir anlaşma", celiskiVarMi:true},
+  {kelime:"Emanet", anlam1:"Peygamberlerin ortak sıfatlarından biridir", anlam2:"Kendisine bırakılanı koruyup sahibine teslim etmektir", celiskiVarMi:false},
+  {kelime:"Veda Hutbesi", anlam1:"Can, mal ve namusun dokunulmazlığını ilan eder", anlam2:"Üstünlüğün ırkta değil takvada olduğunu bildirir", celiskiVarMi:false},
+  {kelime:"Hendek", anlam1:"Selman-ı Farisi'nin önerdiği bir savunma yöntemidir", anlam2:"Medine'yi düşman kuşatmasından korumuştur", celiskiVarMi:false},
+  {kelime:"Merhamet", anlam1:"Hz. Peygamber'in 'âlemlere rahmet' oluşunun yansımasıdır", anlam2:"Çocuğa, yaşlıya ve hayvana şefkati de kapsar", celiskiVarMi:false},
+  {kelime:"Kureyş suresi", anlam1:"Kur'an'ın 106. suresidir ve dört ayettir", anlam2:"Açlıktan doyuran ve korkudan emin kılan Allah'a şükre çağırır", celiskiVarMi:false},
+  {kelime:"Hacerülesved olayı", anlam1:"Kabileler arasındaki anlaşmazlığın çözüldüğü olaydır", anlam2:"Hz. Muhammed'in hikmetli ve âdil davranışını gösterir", celiskiVarMi:false},
+];
+let ca84Index = 0, ca84Puan = 0, ca84Sira = [], ca84Kilit = false;
+
+function ca84Baslat(){
+  ca84Sira = karistir(celiskiListesi84.slice());
+  ca84Index = 0; ca84Puan = 0;
+  document.getElementById('ca84Puan').textContent = 0;
+  document.getElementById('ca84Toplam').textContent = ca84Sira.length;
+  document.getElementById('ca84Sonuc').textContent = '';
+  document.getElementById('ca84Butonlar').style.display = 'flex';
+  ca84Tur();
+}
+function ca84Tur(){
+  if(ca84Index >= ca84Sira.length){
+    document.getElementById('ca84Cumle').textContent = '';
+    document.getElementById('ca84Butonlar').style.display = 'none';
+    document.getElementById('ca84GeriBildirim').textContent = '';
+    document.getElementById('ca84Sonuc').textContent = `🕵️ Avın bitti! ${ca84Puan}/${ca84Sira.length} çelişkiyi doğru tespit ettin!`;
+    return;
+  }
+  document.getElementById('ca84Tur').textContent = ca84Index+1;
+  const oge = ca84Sira[ca84Index];
+  document.getElementById('ca84Cumle').innerHTML = `"<b>${oge.kelime}</b>" hem "${oge.anlam1}" hem de "${oge.anlam2}" demektir.`;
+  document.getElementById('ca84GeriBildirim').textContent = '';
+  ca84Kilit = false;
+}
+function ca84Cevapla(cevapVarMi){
+  if(ca84Kilit) return;
+  ca84Kilit = true;
+  const oge = ca84Sira[ca84Index];
+  const dogruMu = (cevapVarMi === oge.celiskiVarMi);
+  if(dogruMu){
+    ca84Puan++;
+    document.getElementById('ca84Puan').textContent = ca84Puan;
+    document.getElementById('ca84GeriBildirim').textContent = '✅ Doğru!';
+  } else {
+    document.getElementById('ca84GeriBildirim').textContent = `❌ Yanlış! Doğrusu: ${oge.celiskiVarMi ? 'Çelişki VAR' : 'Çelişki YOK'}`;
+  }
+  ca84Index++;
+  setTimeout(()=>ca84Tur(), 1300);
+}
+
+// =====================================================================
+// LABİRENT
+// =====================================================================
+const lab84Satir = 12, lab84Sutun = 15;
+const lab84IfadeHavuzu = [
+  {kelime:"El-Emin", anlam:"Hz. Muhammed'e verilen 'güvenilir kişi' lakabı"},
+  {kelime:"Sıdk", anlam:"Peygamberlerin ortak sıfatı olan doğruluk"},
+  {kelime:"Emanet", anlam:"Kendisine bırakılanı koruyup teslim etme sıfatı"},
+  {kelime:"Tebliğ", anlam:"Vahyi eksiksiz olarak insanlara ulaştırma"},
+  {kelime:"Merhamet", anlam:"İnsana ve hayvana şefkatle davranma duygusu"},
+  {kelime:"Af", anlam:"Mekke'nin Fethi'nde Kureyşlilere gösterilen bağışlayıcılık"},
+  {kelime:"Taif", anlam:"Taşlanmasına rağmen beddua etmediği şehir"},
+  {kelime:"İstişare", anlam:"Karar öncesi bilenlere danışma"},
+  {kelime:"Bedir", anlam:"Ordugâh yerinin istişareyle seçildiği savaş"},
+  {kelime:"Hendek", anlam:"Selman-ı Farisi'nin önerdiği savunma çukuru"},
+  {kelime:"Uhud", anlam:"Çoğunluğun görüşüne uyduğu savaş"},
+  {kelime:"Cesaret", anlam:"Korkuya rağmen doğruyu yapabilme erdemi"},
+  {kelime:"Kararlılık", anlam:"Davasından hiçbir zorlukta vazgeçmeme"},
+  {kelime:"Sevr", anlam:"Hicrette sığınılan mağara"},
+  {kelime:"Hicret", anlam:"Mekke'den Medine'ye göç"},
+  {kelime:"Hılfü'l-fudûl", anlam:"Haksızlığa uğrayanı koruyan erdemliler ittifakı"},
+  {kelime:"Veda Hutbesi", anlam:"Can, mal ve namus dokunulmazlığını ilan eden konuşma"},
+  {kelime:"Takva", anlam:"Veda Hutbesi'ne göre tek üstünlük ölçüsü"},
+  {kelime:"Hikmet", anlam:"En doğru ve yararlı olanı yapabilme derinliği"},
+  {kelime:"Kureyş", anlam:"Hz. Peygamber'in kabilesi; 106. surenin adı"},
+];
+let lab84Hucreler = [], lab84HucreElemanlari = [], lab84OyuncuKonum = {r:0,c:0}, lab84Toplananlar = {};
+let lab84HamleSayisi = 0, lab84ToplananSayisi = 0, lab84Saniye = 0, lab84Zamanlayici = null, lab84Bitti = false;
+
+function lab84Uret(){
+  const hucreler = [];
+  for(let r=0;r<lab84Satir;r++){
+    hucreler.push([]);
+    for(let c=0;c<lab84Sutun;c++){ hucreler[r].push({top:true,right:true,bottom:true,left:true,ziyaretEdildi:false}); }
+  }
+  const yigin = [{r:0,c:0}];
+  hucreler[0][0].ziyaretEdildi = true;
+  while(yigin.length>0){
+    const mevcut = yigin[yigin.length-1];
+    const {r,c} = mevcut;
+    const komsular = [];
+    if(r>0 && !hucreler[r-1][c].ziyaretEdildi) komsular.push({r:r-1,c,yon:'top'});
+    if(c<lab84Sutun-1 && !hucreler[r][c+1].ziyaretEdildi) komsular.push({r,c:c+1,yon:'right'});
+    if(r<lab84Satir-1 && !hucreler[r+1][c].ziyaretEdildi) komsular.push({r:r+1,c,yon:'bottom'});
+    if(c>0 && !hucreler[r][c-1].ziyaretEdildi) komsular.push({r,c:c-1,yon:'left'});
+    if(komsular.length===0){ yigin.pop(); }
+    else {
+      const secilen = komsular[Math.floor(Math.random()*komsular.length)];
+      if(secilen.yon==='top'){ hucreler[r][c].top=false; hucreler[secilen.r][secilen.c].bottom=false; }
+      if(secilen.yon==='right'){ hucreler[r][c].right=false; hucreler[secilen.r][secilen.c].left=false; }
+      if(secilen.yon==='bottom'){ hucreler[r][c].bottom=false; hucreler[secilen.r][secilen.c].top=false; }
+      if(secilen.yon==='left'){ hucreler[r][c].left=false; hucreler[secilen.r][secilen.c].right=false; }
+      hucreler[secilen.r][secilen.c].ziyaretEdildi = true;
+      yigin.push({r:secilen.r,c:secilen.c});
+    }
+  }
+  return hucreler;
+}
+function labirent84Baslat(){
+  clearInterval(lab84Zamanlayici);
+  lab84Hucreler = lab84Uret();
+  lab84OyuncuKonum = {r:0,c:0};
+  lab84HamleSayisi = 0; lab84ToplananSayisi = 0; lab84Saniye = 0; lab84Bitti = false;
+  document.getElementById('lab84Hamle').textContent = 0;
+  document.getElementById('lab84Toplanan').textContent = 0;
+  document.getElementById('lab84Sure').textContent = 0;
+  document.getElementById('lab84Durum').textContent = '';
+  document.getElementById('lab84Sonuc').textContent = '';
+  const tumHucreler = [];
+  for(let r=0;r<lab84Satir;r++) for(let c=0;c<lab84Sutun;c++){
+    if(!(r===0&&c===0) && !(r===lab84Satir-1&&c===lab84Sutun-1)) tumHucreler.push({r,c});
+  }
+  const secilenler = karistir(tumHucreler).slice(0, lab84IfadeHavuzu.length);
+  lab84Toplananlar = {};
+  secilenler.forEach((konum, i)=>{
+    lab84Toplananlar[konum.r+','+konum.c] = {kelime: lab84IfadeHavuzu[i].kelime, anlam: lab84IfadeHavuzu[i].anlam, toplandi:false};
+  });
+  document.getElementById('lab84ToplamYildiz').textContent = secilenler.length;
+  const izgara = document.getElementById('lab84Izgara');
+  izgara.innerHTML = '';
+  izgara.style.gridTemplateColumns = `repeat(${lab84Sutun}, 30px)`;
+  izgara.style.gridTemplateRows = `repeat(${lab84Satir}, 30px)`;
+  lab84HucreElemanlari = [];
+  for(let r=0;r<lab84Satir;r++){
+    lab84HucreElemanlari.push([]);
+    for(let c=0;c<lab84Sutun;c++){
+      const h = lab84Hucreler[r][c];
+      const div = document.createElement('div');
+      div.className = 'labirent-hucre';
+      div.style.gridColumn = c+1;
+      div.style.gridRow = r+1;
+      div.style.borderTop = h.top ? '2px solid #333' : '2px solid transparent';
+      div.style.borderRight = h.right ? '2px solid #333' : '2px solid transparent';
+      div.style.borderBottom = h.bottom ? '2px solid #333' : '2px solid transparent';
+      div.style.borderLeft = h.left ? '2px solid #333' : '2px solid transparent';
+      const key = r+','+c;
+      if(r===0 && c===0) div.textContent = '🚶';
+      else if(r===lab84Satir-1 && c===lab84Sutun-1) div.textContent = '🕌';
+      else if(lab84Toplananlar[key]) div.textContent = '⭐';
+      izgara.appendChild(div);
+      lab84HucreElemanlari[r].push(div);
+    }
+  }
+  lab84Zamanlayici = setInterval(()=>{
+    lab84Saniye++;
+    document.getElementById('lab84Sure').textContent = lab84Saniye;
+  }, 1000);
+}
+function labirent84Hareket(dr, dc){
+  if(lab84Bitti) return;
+  const {r,c} = lab84OyuncuKonum;
+  const hucre = lab84Hucreler[r][c];
+  let yeniR=r, yeniC=c;
+  if(dr===-1 && !hucre.top) yeniR = r-1;
+  else if(dr===1 && !hucre.bottom) yeniR = r+1;
+  else if(dc===-1 && !hucre.left) yeniC = c-1;
+  else if(dc===1 && !hucre.right) yeniC = c+1;
+  else return;
+  lab84HucreElemanlari[r][c].textContent = '';
+  lab84OyuncuKonum = {r:yeniR, c:yeniC};
+  lab84HamleSayisi++;
+  document.getElementById('lab84Hamle').textContent = lab84HamleSayisi;
+  const key = yeniR+','+yeniC;
+  if(lab84Toplananlar[key] && !lab84Toplananlar[key].toplandi){
+    lab84Toplananlar[key].toplandi = true;
+    lab84ToplananSayisi++;
+    document.getElementById('lab84Toplanan').textContent = lab84ToplananSayisi;
+    document.getElementById('lab84Durum').textContent = `✨ Topladın: ${lab84Toplananlar[key].kelime} — ${lab84Toplananlar[key].anlam}`;
+  }
+  if(yeniR===lab84Satir-1 && yeniC===lab84Sutun-1){
+    lab84HucreElemanlari[yeniR][yeniC].textContent = '🏁';
+    lab84Bitti = true;
+    clearInterval(lab84Zamanlayici);
+    const toplamYildiz = document.getElementById('lab84ToplamYildiz').textContent;
+    document.getElementById('lab84Sonuc').textContent =
+      `🎉 Tebrikler! Labirenti ${lab84HamleSayisi} hamlede ve ${lab84Saniye} saniyede tamamladın! (${lab84ToplananSayisi}/${toplamYildiz} yıldız topladın)`;
+    return;
+  }
+  lab84HucreElemanlari[yeniR][yeniC].textContent = '🚶';
+}
+document.addEventListener('keydown', (e)=>{
+  const aktifBolum = document.getElementById('labirent84');
+  if(!aktifBolum.classList.contains('aktif')) return;
+  const etiket = document.activeElement ? document.activeElement.tagName : '';
+  if(etiket==='INPUT' || etiket==='TEXTAREA') return;
+  if(e.key==='ArrowUp'){ e.preventDefault(); labirent84Hareket(-1,0); }
+  else if(e.key==='ArrowDown'){ e.preventDefault(); labirent84Hareket(1,0); }
+  else if(e.key==='ArrowLeft'){ e.preventDefault(); labirent84Hareket(0,-1); }
+  else if(e.key==='ArrowRight'){ e.preventDefault(); labirent84Hareket(0,1); }
+});
+
+// =====================================================================
+// BAŞLANGIÇ
+// =====================================================================
+bz84IzgaraOlustur();
+kelimeAvi84Olustur();
+cengel84Olustur();
+merdiven84Baslat();
+sifre84Olustur();
+ks84Olustur();
+nonogram84Olustur();
+istatistikleriGuncelleGoster();
+sonucIzlemeBaslat();
+
+// =====================================================================
+// EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — MAUN SURESİ
+// =====================================================================
+const ezberVeri84 = [
+  {parca:"Bismillâhirrahmânirrahîm.", anlam:"Rahman ve Rahîm olan Allah'ın adıyla.", gizli:"rahmânirrahîm"},
+  {parca:"Li îlâfi Kureyş", anlam:"Kureyş'i ısındırıp alıştırdığı için,", gizli:"Kureyş"},
+  {parca:"îlâfihim rihleteş", anlam:"onları yolculuğa ısındırıp alıştırdığı için;", gizli:"rihleteş"},
+  {parca:"şitâi ves sayf", anlam:"kış ve yaz yolculuğuna.", gizli:"sayf"},
+  {parca:"Felya'budû", anlam:"Öyleyse kulluk etsinler", gizli:"ya'budû"},
+  {parca:"Rabbe hâzel beyt", anlam:"şu evin (Kâbe'nin) Rabbine.", gizli:"beyt"},
+  {parca:"Ellezî at'amehum min cû'", anlam:"O ki, onları açlıktan doyurdu", gizli:"at'amehum"},
+  {parca:"ve âmenehum min havf", anlam:"ve onları her türlü korkudan emin kıldı.", gizli:"havf"}
+];
+
+// --- 1) SIRALA BAKALIM ---
+function ez184Baslat(){
+  document.getElementById('ez184Sonuc').textContent='';
+  document.getElementById('ez184Dizilen').textContent='0';
+  siraOlustur({
+    tokens: ezberVeri84.map(x=>x.parca),
+    bankaId:'ez184Banka', cevapId:'ez184Cevap',
+    ilerleme:(n)=>{ document.getElementById('ez184Dizilen').textContent=n; },
+    tamamlandi:()=>{ document.getElementById('ez184Sonuc').innerHTML = "🎉 Tebrikler! Kureyş suresini doğru sırayla dizdin!"; }
+  });
+}
+
+// --- 2) BOŞLUK DOLDUR ---
+let ez284Tur=0, ez284Dogru=0, ez284Sira=[];
+function ez284Baslat(){
+  ez284Tur=0; ez284Dogru=0;
+  ez284Sira = karistir(ezberVeri84.map((x,i)=>i));
+  document.getElementById('ez284Dogru').textContent='0';
+  document.getElementById('ez284Sonuc').textContent='';
+  ez284SoruGoster();
+}
+function ez284SoruGoster(){
+  if(ez284Tur>=ez284Sira.length){
+    document.getElementById('ez284Metin').textContent='';
+    document.getElementById('ez284Secenekler').innerHTML='';
+    document.getElementById('ez284Sonuc').innerHTML = `🎉 Bitti! ${ez284Dogru}/${ez284Sira.length} doğru.`;
+    return;
+  }
+  document.getElementById('ez284Tur').textContent = ez284Tur+1;
+  const i = ez284Sira[ez284Tur];
+  const oge = ezberVeri84[i];
+  document.getElementById('ez284Metin').textContent = oge.parca.replace(oge.gizli, '______');
+  const digerleri = ezberVeri84.filter((_,j)=>j!==i).map(x=>x.gizli);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.gizli, ...yanlislar]);
+  const kutu = document.getElementById('ez284Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez284Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.gizli){ btn.classList.add('dogru'); ez284Dogru++; document.getElementById('ez284Dogru').textContent=ez284Dogru; }
+      else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.gizli).classList.add('dogru');
+      }
+      setTimeout(()=>{ ez284Tur++; ez284SoruGoster(); }, 1100);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 3) ANLAM EŞLEŞTİR ---
+let ez384Secili=null, ez384Eslesen=0;
+function ez384Baslat(){
+  ez384Secili=null; ez384Eslesen=0;
+  document.getElementById('ez384Eslesen').textContent='0';
+  document.getElementById('ez384Sonuc').textContent='';
+  const solSira = karistir(ezberVeri84.map((x,i)=>i));
+  const sagSira = karistir(ezberVeri84.map((x,i)=>i));
+  const sol = document.getElementById('ez384Sol'); sol.innerHTML='';
+  const sag = document.getElementById('ez384Sag'); sag.innerHTML='';
+  solSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri84[i].parca;
+    b.dataset.i=i; b.dataset.taraf='sol';
+    b.onclick=()=>ez384Tikla(b);
+    sol.appendChild(b);
+  });
+  sagSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri84[i].anlam;
+    b.dataset.i=i; b.dataset.taraf='sag';
+    b.onclick=()=>ez384Tikla(b);
+    sag.appendChild(b);
+  });
+}
+function ez384Tikla(b){
+  if(b.classList.contains('eslesti')) return;
+  if(ez384Secili && ez384Secili.dataset.taraf===b.dataset.taraf){
+    ez384Secili.classList.remove('secili');
+    ez384Secili = b; b.classList.add('secili');
+    return;
+  }
+  if(!ez384Secili){ ez384Secili=b; b.classList.add('secili'); return; }
+  if(ez384Secili.dataset.i===b.dataset.i){
+    ez384Secili.classList.remove('secili'); ez384Secili.classList.add('eslesti');
+    b.classList.add('eslesti');
+    ez384Secili=null;
+    ez384Eslesen++;
+    document.getElementById('ez384Eslesen').textContent=ez384Eslesen;
+    if(ez384Eslesen===ezberVeri84.length){
+      document.getElementById('ez384Sonuc').innerHTML = "🎉 Tebrikler! Tüm ayetleri anlamlarıyla eşleştirdin!";
+    }
+  } else {
+    const digeri = ez384Secili;
+    digeri.classList.add('yanlis'); b.classList.add('yanlis');
+    setTimeout(()=>{ digeri.classList.remove('yanlis','secili'); b.classList.remove('yanlis'); },400);
+    ez384Secili=null;
+  }
+}
+
+// --- 4) HAFIZA KARTLARI ---
+let ez484Acik=[], ez484Bulunan=0, ez484Hamle=0, ez484Kilit=false;
+function ez484Baslat(){
+  ez484Acik=[]; ez484Bulunan=0; ez484Hamle=0; ez484Kilit=false;
+  document.getElementById('ez484Bulunan').textContent='0';
+  document.getElementById('ez484Hamle').textContent='0';
+  document.getElementById('ez484Sonuc').textContent='';
+  const kartlar=[];
+  ezberVeri84.forEach((x,i)=>{
+    kartlar.push({i, tip:'parca', metin:x.parca});
+    kartlar.push({i, tip:'anlam', metin:x.anlam});
+  });
+  const karisik = karistir(kartlar);
+  const izgara = document.getElementById('ez484Izgara');
+  izgara.innerHTML='';
+  karisik.forEach(k=>{
+    const kart=document.createElement('div');
+    kart.className='hafiza-kart';
+    kart.dataset.i=k.i; kart.dataset.tip=k.tip;
+    kart.innerHTML = `<div class="hafiza-on">🕌</div><div class="hafiza-arka">${k.metin}</div>`;
+    kart.onclick=()=>ez484KartTikla(kart);
+    izgara.appendChild(kart);
+  });
+}
+function ez484KartTikla(kart){
+  if(ez484Kilit || kart.classList.contains('acik') || kart.classList.contains('bulundu')) return;
+  kart.classList.add('acik');
+  ez484Acik.push(kart);
+  if(ez484Acik.length===2){
+    ez484Hamle++; document.getElementById('ez484Hamle').textContent=ez484Hamle;
+    ez484Kilit=true;
+    const [a,b]=ez484Acik;
+    if(a.dataset.i===b.dataset.i && a.dataset.tip!==b.dataset.tip){
+      a.classList.add('bulundu'); b.classList.add('bulundu');
+      ez484Bulunan++; document.getElementById('ez484Bulunan').textContent=ez484Bulunan;
+      ez484Acik=[]; ez484Kilit=false;
+      if(ez484Bulunan===ezberVeri84.length){
+        document.getElementById('ez484Sonuc').innerHTML = `🎉 Tebrikler! ${ez484Hamle} hamlede tüm çiftleri buldun!`;
+      }
+    } else {
+      setTimeout(()=>{
+        a.classList.remove('acik'); b.classList.remove('acik');
+        ez484Acik=[]; ez484Kilit=false;
+      }, 900);
+    }
+  }
+}
+
+// --- 5) ADIM ADIM EZBER ---
+let ez584Adim=0;
+function ez584Baslat(){
+  ez584Adim=0;
+  document.getElementById('ez584Liste').innerHTML='';
+  document.getElementById('ez584Sonuc').textContent='';
+  ez584SoruGoster();
+}
+function ez584SoruGoster(){
+  if(ez584Adim>=ezberVeri84.length){
+    document.getElementById('ez584Secenekler').innerHTML='';
+    document.getElementById('ez584Sonuc').innerHTML = "🎉 Tebrikler! Kureyş suresini baştan sona tamamladın!";
+    return;
+  }
+  document.getElementById('ez584Adim').textContent = ez584Adim+1;
+  const oge = ezberVeri84[ez584Adim];
+  const digerleri = ezberVeri84.filter((_,j)=>j!==ez584Adim).map(x=>x.parca);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.parca, ...yanlislar]);
+  const kutu = document.getElementById('ez584Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez584Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.parca){
+        btn.classList.add('dogru');
+        const liste=document.getElementById('ez584Liste');
+        liste.innerHTML += `<div><b>${ez584Adim+1}.</b> ${oge.parca}</div>`;
+        setTimeout(()=>{ ez584Adim++; ez584SoruGoster(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        setTimeout(()=>{ ez584SoruGoster(); }, 1100);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 6) GİZLİ HARFLER ---
+let ez684Tur=0, ez684Dogru=0, ez684Sira=[];
+function ez684Baslat(){
+  ez684Tur=0; ez684Dogru=0; ez684Sira = karistir(ezberVeri84.map((x,i)=>i));
+  document.getElementById('ez684Dogru').textContent='0';
+  document.getElementById('ez684Sonuc').textContent='';
+  ez684Round();
+}
+function ez684Round(){
+  if(ez684Tur>=ez684Sira.length){
+    document.getElementById('ez684Metin').textContent='';
+    document.getElementById('ez684Cevap').innerHTML=''; document.getElementById('ez684Banka').innerHTML='';
+    document.getElementById('ez684Sonuc').innerHTML = `🎉 Bitti! ${ez684Dogru}/${ez684Sira.length} kelimeyi doğru tamamladın.`;
+    return;
+  }
+  document.getElementById('ez684Tur').textContent = ez684Tur+1;
+  const i = ez684Sira[ez684Tur];
+  const oge = ezberVeri84[i];
+  document.getElementById('ez684Metin').innerHTML = oge.parca.replace(oge.gizli, '<u>______</u>') + `<br><small>💡 ${oge.anlam}</small>`;
+  const harfler = oge.gizli.split('').filter(c=>c!==' ');
+  siraOlustur({
+    tokens: harfler,
+    bankaId:'ez684Banka', cevapId:'ez684Cevap',
+    tamamlandi:()=>{
+      ez684Dogru++; document.getElementById('ez684Dogru').textContent=ez684Dogru;
+      setTimeout(()=>{ ez684Tur++; ez684Round(); }, 900);
+    }
+  });
+}
+
+// --- 7) KAYBOLAN KELİMELER ---
+let ez784Tur=0, ez784Dogru=0, ez784Sira=[];
+function ez784Baslat(){
+  ez784Tur=0; ez784Dogru=0; ez784Sira = karistir(ezberVeri84.map((x,i)=>i));
+  document.getElementById('ez784Dogru').textContent='0';
+  document.getElementById('ez784Sonuc').textContent='';
+  ez784Round();
+}
+function ez784Round(){
+  if(ez784Tur>=ez784Sira.length){
+    document.getElementById('ez784Metin').textContent='';
+    document.getElementById('ez784Secenekler').innerHTML='';
+    document.getElementById('ez784Sonuc').innerHTML = `🎉 Bitti! ${ez784Dogru}/${ez784Sira.length} doğru hatırladın.`;
+    return;
+  }
+  document.getElementById('ez784Tur').textContent = ez784Tur+1;
+  const i = ez784Sira[ez784Tur];
+  const oge = ezberVeri84[i];
+  document.getElementById('ez784Metin').textContent = oge.parca;
+  document.getElementById('ez784Secenekler').innerHTML='';
+  setTimeout(()=>{
+    document.getElementById('ez784Metin').textContent = '🙈 ...';
+    const digerIdx = karistir(ezberVeri84.map((_,j)=>j).filter(j=>j!==i)).slice(0,2);
+    const varyantlar = digerIdx.map(j=>oge.parca.replace(oge.gizli, ezberVeri84[j].gizli));
+    const secenekler = karistir([oge.parca, ...varyantlar]);
+    const kutu = document.getElementById('ez784Secenekler');
+    kutu.innerHTML='';
+    secenekler.forEach(sec=>{
+      const btn=document.createElement('div');
+      btn.className='merdiven-secenek';
+      btn.textContent=sec;
+      btn.onclick=()=>{
+        document.querySelectorAll('#ez784Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+        document.getElementById('ez784Metin').textContent = oge.parca;
+        if(sec===oge.parca){ btn.classList.add('dogru'); ez784Dogru++; document.getElementById('ez784Dogru').textContent=ez784Dogru; }
+        else {
+          btn.classList.add('yanlis');
+          [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        }
+        setTimeout(()=>{ ez784Tur++; ez784Round(); }, 1300);
+      };
+      kutu.appendChild(btn);
+    });
+  }, 3000);
+}
+
+// --- 8) HIZ TESTİ ---
+let ez884Zamanlayici=null, ez884Kalan=60, ez884Dogru=0, ez884Yanlis=0, ez884Aktif=false;
+function ez884Baslat(){
+  clearInterval(ez884Zamanlayici);
+  ez884Kalan=60; ez884Dogru=0; ez884Yanlis=0; ez884Aktif=true;
+  document.getElementById('ez884Sayac').textContent=ez884Kalan;
+  document.getElementById('ez884Dogru').textContent='0';
+  document.getElementById('ez884Yanlis').textContent='0';
+  document.getElementById('ez884Sonuc').textContent='';
+  ez884Zamanlayici = setInterval(()=>{
+    ez884Kalan--;
+    document.getElementById('ez884Sayac').textContent=ez884Kalan;
+    if(ez884Kalan<=0){ ez884Bitir(); }
+  }, 1000);
+  ez884SoruGoster();
+}
+function ez884SoruGoster(){
+  if(!ez884Aktif) return;
+  const i = Math.floor(Math.random()*ezberVeri84.length);
+  const oge = ezberVeri84[i];
+  document.getElementById('ez884Metin').textContent = oge.anlam;
+  const digerleri = ezberVeri84.filter((_,j)=>j!==i).map(x=>x.parca);
+  const secenekler = karistir([oge.parca, ...karistir(digerleri).slice(0,3)]);
+  const kutu = document.getElementById('ez884Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      if(!ez884Aktif) return;
+      if(sec===oge.parca){ ez884Dogru++; document.getElementById('ez884Dogru').textContent=ez884Dogru; }
+      else { ez884Yanlis++; document.getElementById('ez884Yanlis').textContent=ez884Yanlis; }
+      ez884SoruGoster();
+    };
+    kutu.appendChild(btn);
+  });
+}
+function ez884Bitir(){
+  ez884Aktif=false;
+  clearInterval(ez884Zamanlayici);
+  document.getElementById('ez884Secenekler').innerHTML='';
+  document.getElementById('ez884Metin').textContent='';
+  const basari = ez884Dogru>=8 ? '🏆 Efsane Hız!' : ez884Dogru>=5 ? '🥇 Çok İyi!' : '📚 Biraz Daha Pratik!';
+  document.getElementById('ez884Sonuc').innerHTML = `🎉 Süre bitti! ${basari}<br>${ez884Dogru} doğru, ${ez884Yanlis} yanlış.`;
+}
+
+// ===================== SUNUM (SLAYT) GORUNUMU JS =====================
+window.sunumDurumu = window.sunumDurumu || {};
+function sunumNoktalariOlustur(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  const nokta = document.getElementById('sunumNoktalar'+suf);
+  if(!alan || !nokta) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  nokta.innerHTML = '';
+  for(let i=0;i<toplam;i++){
+    const d = document.createElement('span');
+    d.className = 'sunum-nokta' + (i===0?' aktif':'');
+    d.onclick = function(){ sunumIndexeGit(suf, i); };
+    nokta.appendChild(d);
+  }
+}
+function sunumGuncelle(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const slaytlar = alan.querySelectorAll('.sunum-slayt');
+  const idx = sunumDurumu[suf] || 0;
+  slaytlar.forEach(function(s,i){ s.classList.toggle('aktif', i===idx); });
+  const sayac = document.getElementById('sunumSayac'+suf);
+  if(sayac) sayac.textContent = (idx+1)+' / '+slaytlar.length;
+  document.querySelectorAll('#sunumNoktalar'+suf+' .sunum-nokta').forEach(function(n,i){ n.classList.toggle('aktif', i===idx); });
+}
+function sunumIndexeGit(suf, i){
+  sunumDurumu[suf] = i;
+  sunumGuncelle(suf);
+}
+function sunumGit(suf, yon){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  let idx = (sunumDurumu[suf]||0) + yon;
+  if(idx<0) idx=0;
+  if(idx>=toplam) idx=toplam-1;
+  sunumIndexeGit(suf, idx);
+}
+function sunumTamEkran(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  if(alan.requestFullscreen) alan.requestFullscreen();
+  else if(alan.webkitRequestFullscreen) alan.webkitRequestFullscreen();
+}
+document.addEventListener('keydown', function(e){
+  const slaytBolumu = document.getElementById('slayt');
+  if(!slaytBolumu || !slaytBolumu.classList.contains('aktif')) return;
+  if(e.key === 'ArrowRight') sunumGit('', 1);
+  if(e.key === 'ArrowLeft') sunumGit('', -1);
+});
+document.addEventListener('DOMContentLoaded', function(){ sunumNoktalariOlustur(''); sunumGuncelle(''); });
+
+
+const UNITE_KIMLIK = '8-4';
+
+// ===================== OGRENCI KIMLIGI VE OGRETMEN PANELI =====================
+const OP_ANAHTAR = 'dkabOgretmenPaneli_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname);
+
+function opOgrenciAdi(){
+  let ad = sessionStorage.getItem('dkabAktifOgrenci');
+  if(!ad){
+    ad = prompt('Merhaba! Öğretmenin ilerlemeni takip edebilmesi için adını ve soyadını yazar mısın?');
+    if(!ad || !ad.trim()) ad = 'İsimsiz Öğrenci';
+    ad = ad.trim().slice(0,40);
+    sessionStorage.setItem('dkabAktifOgrenci', ad);
+  }
+  return ad;
+}
+function opOgrenciDegistir(){
+  sessionStorage.removeItem('dkabAktifOgrenci');
+  ozelBildirim('Öğrenci bilgisi sıfırlandı. Bir sonraki oyun tamamlandığında yeni isim sorulacak.');
+}
+function opVerileriOku(){
+  try{ return JSON.parse(localStorage.getItem(OP_ANAHTAR)) || {}; }catch(e){ return {}; }
+}
+function opVerileriYaz(v){
+  try{ localStorage.setItem(OP_ANAHTAR, JSON.stringify(v)); }catch(e){}
+}
+function opOgrenciKaydiGetir(v, ad){
+  if(!v[ad]) v[ad] = {oyunlar:[], sonPuan:0, sonRozetler:[], ilkTarih:new Date().toLocaleString('tr-TR')};
+  return v[ad];
+}
+function opOyunTamamlandiKaydet(bolumId, toplamPuan, rozetler){
+  const ad = opOgrenciAdi();
+  const v = opVerileriOku();
+  const kayit = opOgrenciKaydiGetir(v, ad);
+  kayit.oyunlar.push({bolum: bolumId || 'bilinmiyor', tarih: new Date().toLocaleString('tr-TR')});
+  kayit.sonPuan = toplamPuan;
+  kayit.sonRozetler = rozetler || [];
+  opVerileriYaz(v);
+}
+
+const OP_SIFRE = 'ogretmen2026';
+let opGirisYapildi = false;
+
+function opGirisKontrol(){
+  if(opGirisYapildi){ opPaneliGoster(); return; }
+  const girilen = prompt('Öğretmen paneline erişim için şifreyi girin:');
+  if(girilen === OP_SIFRE){
+    opGirisYapildi = true;
+    opPaneliGoster();
+  } else if(girilen !== null){
+    ozelBildirim('Şifre yanlış.');
+    document.getElementById('opGirisEkrani').style.display = 'block';
+    document.getElementById('opPanelEkrani').style.display = 'none';
+  }
+}
+
+function opPaneliGoster(){
+  document.getElementById('opGirisEkrani').style.display = 'none';
+  document.getElementById('opPanelEkrani').style.display = 'block';
+  const v = opVerileriOku();
+  const isimler = Object.keys(v);
+  const govde = document.getElementById('opTabloGovde');
+  const bosMesaj = document.getElementById('opBosMesaj');
+  govde.innerHTML = '';
+  if(isimler.length === 0){
+    bosMesaj.style.display = 'block';
+    return;
+  }
+  bosMesaj.style.display = 'none';
+  isimler.sort((a,b)=> (v[b].oyunlar.length - v[a].oyunlar.length)).forEach(ad=>{
+    const kayit = v[ad];
+    const tr = document.createElement('tr');
+    const sonAktivite = kayit.oyunlar.length ? kayit.oyunlar[kayit.oyunlar.length-1].tarih : '-';
+    const oyunListesi = kayit.oyunlar.map(o=>o.bolum).join(', ');
+    tr.innerHTML = `
+      <td>${ad}</td>
+      <td>${kayit.sonPuan}</td>
+      <td>${kayit.oyunlar.length}</td>
+      <td>${(kayit.sonRozetler||[]).join(' ') || '-'}</td>
+      <td>${sonAktivite}</td>
+      <td><button class="op-detay-btn" onclick="opDetayGoster(this, '${ad.replace(/'/g,"\\'")}')">Detay</button></td>
+    `;
+    govde.appendChild(tr);
+    const detayTr = document.createElement('tr');
+    detayTr.className = 'op-detay-satir';
+    detayTr.style.display = 'none';
+    detayTr.innerHTML = `<td colspan="6"><b>Tamamlanan bölümler:</b> ${esc(oyunListesi) || 'Henüz yok'}</td>`;
+    govde.appendChild(detayTr);
+  });
+}
+function esc(s){ return String(s).replace(/</g,'&lt;'); }
+function opDetayGoster(btn, ad){
+  const tr = btn.closest('tr').nextElementSibling;
+  tr.style.display = tr.style.display === 'none' ? 'table-row' : 'none';
+}
+function opVerileriTemizle(){
+  ozelOnay('Bu ünitedeki tüm öğrenci verileri silinecek. Emin misiniz?', function(onaylandi){
+    if(onaylandi){
+      localStorage.removeItem(OP_ANAHTAR);
+      opPaneliGoster();
+    }
+  });
+}
+
+
+// ===================== OZEL MODAL / BILDIRIM (alert-confirm yerine) =====================
+function ozelBildirim(mesaj){
+  const eski = document.querySelector('.ozel-toast');
+  if(eski) eski.remove();
+  const toast = document.createElement('div');
+  toast.className = 'ozel-toast';
+  toast.textContent = mesaj;
+  document.body.appendChild(toast);
+  setTimeout(()=>toast.remove(), 3200);
+}
+function ozelOnay(mesaj, callback){
+  const arka = document.createElement('div');
+  arka.className = 'ozel-modal-arka';
+  arka.innerHTML = '<div class="ozel-modal-kutu"><p class="ozel-modal-mesaj"></p>' +
+    '<button class="ozel-modal-btn" style="background:var(--kirmizi);color:#fff;">Evet</button>' +
+    '<button class="ozel-modal-btn" style="background:#e2e8f0;">Vazgeç</button></div>';
+  arka.querySelector('.ozel-modal-mesaj').textContent = mesaj;
+  document.body.appendChild(arka);
+  const btnler = arka.querySelectorAll('.ozel-modal-btn');
+  btnler[0].onclick = ()=>{ arka.remove(); callback(true); };
+  btnler[1].onclick = ()=>{ arka.remove(); callback(false); };
+}
+
+
+// ===================== KENDIMI DEGERLENDIRIYORUM - CHECKBOX KAYDI =====================
+function degOku(uniteKimlik){
+  try{ return JSON.parse(localStorage.getItem('dkabDegerlendirme_'+uniteKimlik)) || {}; }catch(e){ return {}; }
+}
+function degKaydet(uniteKimlik){
+  const durum = {};
+  document.querySelectorAll('[id^="deg_'+uniteKimlik+'_"]').forEach(cb=>{ durum[cb.id] = cb.checked; });
+  try{ localStorage.setItem('dkabDegerlendirme_'+uniteKimlik, JSON.stringify(durum)); }catch(e){}
+}
+function degYukle(uniteKimlik){
+  const durum = degOku(uniteKimlik);
+  Object.keys(durum).forEach(id=>{
+    const cb = document.getElementById(id);
+    if(cb) cb.checked = durum[id];
+  });
+}
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof UNITE_KIMLIK !== 'undefined') degYukle(UNITE_KIMLIK);
+});
+
+
+// ===================== DUSUN VE CEVAPLA / AILEMLE YAPIYORUM - CEVAP KAYDI =====================
+function zbCevapAnahtari(tur){ return 'dkabZbCevap_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname) + '_' + tur; }
+function zbCevapKaydet(tur, el){
+  try{ localStorage.setItem(zbCevapAnahtari(tur), el.value); }catch(e){}
+  const not = document.getElementById('zbNot_'+tur);
+  if(not){
+    not.textContent = '✓ Cevabın kaydedildi';
+    clearTimeout(not._zbT);
+    not._zbT = setTimeout(()=>{ not.textContent=''; }, 2500);
+  }
+}
+function zbCevapYukle(){
+  document.querySelectorAll('[id^="zbAlan_"]').forEach(el=>{
+    const tur = el.id.slice('zbAlan_'.length);
+    try{ const v = localStorage.getItem(zbCevapAnahtari(tur)); if(v) el.value = v; }catch(e){}
+  });
+}
+document.addEventListener('DOMContentLoaded', zbCevapYukle);
+
+
+// ===================== TEKRAR ZAMANI HATIRLATMASI =====================
+function zbTekrarHatirlatmaKontrol(){
+  const uniteKimlik = (typeof UNITE_KIMLIK !== 'undefined') ? UNITE_KIMLIK : location.pathname;
+  const anahtar = 'dkabSonZiyaret_' + uniteKimlik;
+  let son = null;
+  try{ son = localStorage.getItem(anahtar); }catch(e){}
+  const bugun = new Date();
+  if(son){
+    const gecenGun = Math.floor((bugun - new Date(son)) / 86400000);
+    if(gecenGun >= 3 && typeof ozelBildirim === 'function'){
+      setTimeout(()=>{ ozelBildirim('👋 Bu üniteyi ' + gecenGun + ' gündür tekrar etmedin. Hafızanı tazelemek ister misin?'); }, 1500);
+    }
+  }
+  try{ localStorage.setItem(anahtar, bugun.toISOString()); }catch(e){}
+}
+document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
+
+
+</script>
+
+</body>
+</html>

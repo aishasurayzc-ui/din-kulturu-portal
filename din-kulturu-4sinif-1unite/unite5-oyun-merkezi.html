@@ -1,0 +1,3528 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4. Sınıf Din Kültürü - 5. Ünite: Din ve Temizlik — Oyun Merkezi</title>
+<meta name="description" content="4. Sınıf Din Kültürü - 5. Ünite: Din ve Temizlik — İnteraktif oyunlar, konu özeti, test ve sunum içeren dijital ders materyali.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../ortak/oyun-merkezi.css">
+
+<body>
+
+<header>
+  <p class="gb-eyebrow">4. SINIF — 5. ÜNİTE</p>
+  <h1>🧼 Din ve Temizlik</h1>
+  <p class="gb-ders-adi">Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
+  <p class="gb-yazar">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+  <div class="gb-kontrol-satiri">
+    <a href="../en/din-kulturu-4sinif-1unite/unite5.html" lang="en" style="display:inline-block;padding:6px 16px;border-radius:16px;background:rgba(255,255,255,.22);color:white;text-decoration:none;font-weight:bold;font-size:.85em;border:1px solid rgba(255,255,255,.55);">English</a>
+    <button type="button" id="temaDegistirBtn" class="tema-degistir-btn" onclick="temaDegistir()" aria-label="Koyu/açık tema değiştir">🌙 Koyu Tema</button>
+  </div>
+</header>
+<section class="hero">
+  <h2 class="hero-baslik">🎮 Oyun Merkezi</h2>
+  <p class="hero-alt">Bu ünitedeki oyunlarla konuyu pekiştir.</p>
+  <div class="hero-butonlar">
+    <button class="hero-btn hero-btn-birincil" onclick="window.location.href='unite5.html'">◀ Ana Sayfaya Dön</button>
+  </div>
+</section>
+
+<div id="oyun-gruplari" role="navigation" aria-label="Oyun merkezi menüsü"></div>
+
+<main>
+<section id="kelimeavi5">
+  <h2>🔎 Kelime Avı Bulmacası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
+  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka5Bulunan">0</b>/<b id="ka5Toplam">14</b></span></div>
+  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+    <div class="ka-izgara" id="ka5Izgara"></div>
+    <ul class="ka-liste" id="ka5Liste"></ul>
+  </div>
+  <div class="sonuc-kutusu" id="ka5Sonuc"></div>
+  <button class="eylem" onclick="kelimeAvi5Olustur()">🔄 Yeni Bulmaca</button>
+</section>
+
+<section id="cengel5">
+  <h2>🧩 Çengel Bulmaca</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
+  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
+  <div class="cengel-izgara" id="cengel5Izgara"></div>
+  <ul class="cengel-liste" id="cengel5Liste"></ul>
+  <div class="sonuc-kutusu" id="cengel5Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="cengel5KontrolEt()">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="cengel5Olustur()">🔄 Baştan Başla</button>
+  </div>
+</section>
+
+<section id="merdiven5">
+  <h2>🪜 Sözcük Merdiveni</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
+  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdiven5Basamak">1</b>/<b id="merdiven5Toplam">4</b></span></div>
+  <div id="merdiven5Ipucu" class="balon-durum"></div>
+  <div id="merdiven5Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="kutu-panel" id="merdiven5Gorsel" style="max-width:460px;margin:20px auto;"></div>
+  <div class="sonuc-kutusu" id="merdiven5Sonuc"></div>
+  <button class="eylem" onclick="merdiven5Baslat()">🔄 Yeniden Başlat</button>
+</section>
+
+<section id="sifre5">
+  <h2>🔐 Şifreli Sözcük Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
+  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
+  <div class="sifre-anahtar" id="sifre5Anahtar"></div>
+  <div id="sifre5Kelimeler"></div>
+  <div class="sonuc-kutusu" id="sifre5Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="sifre5KontrolEt()">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="sifre5Olustur()">🔄 Yeni Şifre</button>
+  </div>
+</section>
+
+<section id="sifretanim5">
+  <h2>🔐 Şifreli Tanım Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
+  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="st5Tur">1</b>/<b id="st5Toplam">28</b></span>
+    <span>⭐ Puan: <b id="st5Puan">0</b></span>
+  </div>
+  <div id="st5Tanim" class="dua-satir"></div>
+  <div id="st5Secenekler" style="max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="st5Sonuc"></div>
+  <button class="eylem" onclick="st5Baslat()">🔐 Oyunu Başlat</button>
+</section>
+
+<section id="kelimekodlama5">
+  <h2>💻 Kelime Kodlama Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
+  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz.</div>
+  <div class="sifre-anahtar" id="kk5Anahtar"></div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="kk5Tur">1</b>/<b id="kk5Toplam">28</b></span>
+    <span>⭐ Puan: <b id="kk5Puan">0</b></span>
+  </div>
+  <div id="kk5Ipucu" class="balon-durum"></div>
+  <div id="kk5Kod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
+  <div id="kk5Secenekler" style="max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kk5Sonuc"></div>
+  <button class="eylem" onclick="kk5Baslat()">💻 Kodlamayı Başlat</button>
+</section>
+
+<section id="nonogram5">
+  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
+  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak gizli resmi ortaya çıkar!</div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
+    <button class="eylem" onclick="nonogram5Sec('camii')">🕌 Cami (İbadet Yeri)</button>
+    <button class="eylem" style="background:var(--sari)" onclick="nonogram5Sec('hilal')">🌙⭐ Hilal ve Yıldız</button>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="nono-tablo" id="nono5Tablo"></table>
+  </div>
+  <div class="sonuc-kutusu" id="nono5Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="nonogram5KontrolEt(true)">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="nonogram5Temizle()">🧹 Temizle</button>
+  </div>
+</section>
+
+<section id="satranc5">
+  <h2>♞ Kelime Satrancı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
+  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ks5Bulunan">0</b>/<b id="ks5Toplam">8</b></span></div>
+  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+    <div class="ks-izgara" id="ks5Izgara"></div>
+    <ul class="ka-liste" id="ks5Liste"></ul>
+  </div>
+  <div class="sonuc-kutusu" id="ks5Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="ks5SecimiTemizle()">🧹 Seçimi Temizle</button>
+    <button class="eylem" style="background:var(--sari)" onclick="ks5Olustur()">🔄 Yeni Tahta</button>
+  </div>
+</section>
+
+<section id="kelimeuret5">
+  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
+  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
+  <div class="oyun-bilgi">
+    <span>🔤 Harf: <b id="ku5Harf">-</b></span>
+    <span>⭐ Puan: <b id="ku5Puan">0</b></span>
+    <span>⏱️ Süre: <b id="ku5Sure">60</b>sn</span>
+  </div>
+  <input type="text" id="ku5Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ku5Ekle();}">
+  <p class="balon-durum" id="ku5Uyari"></p>
+  <ul class="ku-liste" id="ku5Liste"></ul>
+  <div class="sonuc-kutusu" id="ku5Sonuc"></div>
+  <div id="ku5Kacirilan"></div>
+  <button class="eylem" onclick="ku5Baslat()">🎮 Oyunu Başlat</button>
+</section>
+
+<section id="tuzak5">
+  <h2>🚫 Tuzak Harf Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
+  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen kavramları süre bitmeden art arda yaz!</div>
+  <div class="oyun-bilgi">
+    <span>🚫 Tuzak Harf: <b id="tuzak5Harf">-</b></span>
+    <span>⭐ Puan: <b id="tuzak5Puan">0</b></span>
+    <span>⏱️ Süre: <b id="tuzak5Sure">40</b>sn</span>
+  </div>
+  <input type="text" id="tuzak5Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzak5Ekle();}">
+  <p class="balon-durum" id="tuzak5Uyari"></p>
+  <ul class="ku-liste" id="tuzak5Liste"></ul>
+  <div class="sonuc-kutusu" id="tuzak5Sonuc"></div>
+  <button class="eylem" onclick="tuzak5Baslat()">🎮 Oyunu Başlat</button>
+</section>
+
+<section id="fabrika5">
+  <h2>🏭 Kelime Fabrikası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
+  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!</div>
+  <div class="oyun-bilgi">
+    <span>🏭 Üretilen: <b id="kf5Uretilen">0</b>/<b id="kf5Toplam">28</b></span>
+    <span>❌ Hata: <b id="kf5Hata">0</b></span>
+  </div>
+  <div id="kf5Siparis" class="balon-durum"></div>
+  <div class="kf-bant" id="kf5BantAlani"></div>
+  <input type="text" id="kf5Girdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kf5Uret();}">
+  <button class="eylem" onclick="kf5Uret()">🏭 Üret!</button>
+  <div class="kf-urunler" id="kf5Urunler"></div>
+  <div class="sonuc-kutusu" id="kf5Sonuc"></div>
+  <button class="eylem" style="background:var(--sari)" onclick="kf5Baslat()">🔄 Fabrikayı Başlat/Yenile</button>
+</section>
+
+<section id="muhendis5">
+  <h2>🛠️ Kelime Mühendisi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
+  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
+  <div class="oyun-bilgi">
+    <span>🏗️ Tur: <b id="km5Tur">1</b>/<b id="km5Toplam">28</b></span>
+    <span>✅ İnşa Edilen: <b id="km5Dogru">0</b></span>
+  </div>
+  <div id="km5Ipucu" class="balon-durum"></div>
+  <div class="kelime-cevap" id="km5Cevap"></div>
+  <div class="kelime-banka" id="km5Banka"></div>
+  <div class="sonuc-kutusu" id="km5Sonuc"></div>
+  <button class="eylem" onclick="km5Baslat()">🛠️ Mühendisliğe Başla</button>
+</section>
+
+<section id="kavramturnuvasi5">
+  <h2>🏆 Kavram Turnuvası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
+  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap.</div>
+  <div class="oyun-bilgi">
+    <span>🥊 Maç: <b id="kt5Tur">1</b>/<b id="kt5Toplam">7</b></span>
+    <span>✅ Doğru Hakemlik: <b id="kt5Puan">0</b></span>
+  </div>
+  <div id="kt5Asama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="kt5Eslesme" class="balon-durum"></div>
+  <div id="kt5Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kt5Sonuc"></div>
+  <button class="eylem" onclick="kt5Baslat()">🏆 Turnuvayı Başlat</button>
+</section>
+
+<section id="bonus5">
+  <h2>🎮 Bonus Oyun: Kavramlar Hafıza Zinciri</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
+  <div class="aciklama">Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir kavram daha uzuyor.</div>
+  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bz5Seviye">0</b></span></div>
+  <div class="bz-izgara" id="bz5Izgara"></div>
+  <div class="sonuc-kutusu" id="bz5Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" style="background:var(--sari)" onclick="bz5OrnekOyna()">🎬 Önce Örnek Gör</button>
+    <button class="eylem" onclick="bz5Baslat()">🎮 Oyunu Başlat</button>
+  </div>
+</section>
+
+<section id="dedektif5">
+  <h2>🕵️ Kelime Dedektifi</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
+  <div class="aciklama">Gizli kelimeyi (bir kavram) 5 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Vaka: <b id="dd5Vaka">1</b>/<b id="dd5ToplamVaka">1</b></span>
+    <span>✅ Çözülen: <b id="dd5Cozulen">0</b></span>
+    <span>🔍 Deneme: <b id="dd5Deneme">0</b>/<b id="dd5MaxDeneme">5</b></span>
+  </div>
+  <div id="dd5Ipucu" class="balon-durum"></div>
+  <div id="dd5Izgara"></div>
+  <input type="text" id="dd5Girdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){dd5TahminEt();}">
+  <p class="balon-durum" id="dd5Uyari"></p>
+  <div class="sonuc-kutusu" id="dd5Sonuc"></div>
+  <button class="eylem" onclick="dd5Baslat()">🕵️ Soruşturmayı Başlat</button>
+</section>
+
+<section id="dildedektifi5">
+  <h2>🕵️‍♀️ Dil Dedektifi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
+  <div class="aciklama">Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="ddl5Tur">1</b>/<b id="ddl5Toplam">10</b></span>
+    <span>⭐ Puan: <b id="ddl5Puan">0</b></span>
+  </div>
+  <div id="ddl5Baslik" class="balon-durum"></div>
+  <div id="ddl5Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="ddl5Sonuc"></div>
+  <button class="eylem" onclick="ddl5Baslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
+</section>
+
+<section id="mantikzinciri5">
+  <h2>🔗 Mantık Zinciri Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
+  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
+  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mz5Halka">1</b>/<b id="mz5Toplam">5</b></span></div>
+  <div id="mz5Soru" class="balon-durum"></div>
+  <div id="mz5Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="kutu-panel" id="mz5Gorsel" style="max-width:460px;margin:20px auto;"></div>
+  <div class="sonuc-kutusu" id="mz5Sonuc"></div>
+  <button class="eylem" onclick="mz5Baslat()">🔗 Zinciri Başlat</button>
+</section>
+
+<section id="semantiklabirent5">
+  <h2>🧠 Semantik Labirent</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
+  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin.</div>
+  <div class="oyun-bilgi">
+    <span>🚪 Oda: <b id="sz5Oda">1</b>/<b id="sz5ToplamOda">6</b></span>
+    <span id="sz5Can">❤️❤️❤️</span>
+  </div>
+  <div id="sz5Kategori" class="balon-durum"></div>
+  <div id="sz5Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sz5Sonuc"></div>
+  <button class="eylem" onclick="sz5Baslat()">🌀 Labirente Gir</button>
+</section>
+
+<section id="celiskiavi5">
+  <h2>🕵️‍♂️ Çelişki Avı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
+  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu?</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="ca5Tur">1</b>/<b id="ca5Toplam">12</b></span>
+    <span>⭐ Puan: <b id="ca5Puan">0</b></span>
+  </div>
+  <div id="ca5Cumle" class="dua-satir"></div>
+  <div id="ca5Butonlar" style="display:flex;gap:14px;justify-content:center;">
+    <button class="eylem" style="background:var(--kirmizi)" onclick="ca5Cevapla(true)">⚡ Çelişki VAR</button>
+    <button class="eylem" style="background:var(--yesil)" onclick="ca5Cevapla(false)">✅ Çelişki YOK</button>
+  </div>
+  <p style="text-align:center;font-weight:bold;" id="ca5GeriBildirim"></p>
+  <div class="sonuc-kutusu" id="ca5Sonuc"></div>
+  <button class="eylem" style="background:var(--sari)" onclick="ca5Baslat()">🕵️‍♂️ Ava Başla</button>
+</section>
+
+<section id="labirent5">
+  <h2>🌀 Labirent Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
+  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 🏡'ye ulaştır! Yolda parıldayan yıldızlara basarsan bir kavram toplarsın.</div>
+  <div class="oyun-bilgi">
+    <span>🔁 Hamle: <b id="lab5Hamle">0</b></span>
+    <span>⭐ Toplanan: <b id="lab5Toplanan">0</b>/<b id="lab5ToplamYildiz">20</b></span>
+    <span>⏱️ Süre: <b id="lab5Sure">0</b>sn</span>
+  </div>
+  <div class="balon-durum" id="lab5Durum"></div>
+  <div class="labirent-izgara" id="lab5Izgara"></div>
+  <div class="labirent-kontroller">
+    <button class="labirent-tus" onclick="labirent5Hareket(-1,0)">▲</button>
+    <div>
+      <button class="labirent-tus" onclick="labirent5Hareket(0,-1)">◀</button>
+      <button class="labirent-tus" onclick="labirent5Hareket(1,0)">▼</button>
+      <button class="labirent-tus" onclick="labirent5Hareket(0,1)">▶</button>
+    </div>
+  </div>
+  <div class="sonuc-kutusu" id="lab5Sonuc"></div>
+  <button class="eylem" onclick="labirent5Baslat()">🔄 Yeni Labirent</button>
+</section>
+
+<section id="ezsira5">
+  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları'nın cümlelerini doğru sırayla dizebileceksin.</div>
+  <div class="aciklama">Karışık sırada verilen cümleleri, Temizlik Kavramları'ndaki doğru sıraya göre tıklayarak diz.</div>
+  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez15Dizilen">0</b>/<b>8</b></span></div>
+  <div class="kelime-cevap" id="ez15Cevap"></div>
+  <div class="kelime-banka" id="ez15Banka"></div>
+  <div class="sonuc-kutusu" id="ez15Sonuc"></div>
+  <button class="eylem" onclick="ez15Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezbosluk5">
+  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları cümlelerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
+  <div class="aciklama">Cümledeki boşluğa gelen doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez25Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez25Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez25Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez25Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez25Sonuc"></div>
+  <button class="eylem" onclick="ez25Baslat()">📝 Başla</button>
+</section>
+
+<section id="ezeslestir5">
+  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları'nın her cümlesini anlamıyla eşleştirebileceksin.</div>
+  <div class="aciklama">Soldan bir cümle, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
+  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez35Eslesen">0</b>/<b>8</b></span></div>
+  <div class="ez-iki-sutun">
+    <div class="ez-sutun"><h4>Cümle</h4><div id="ez35Sol"></div></div>
+    <div class="ez-sutun"><h4>Anlam</h4><div id="ez35Sag"></div></div>
+  </div>
+  <div class="sonuc-kutusu" id="ez35Sonuc"></div>
+  <button class="eylem" onclick="ez35Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezhafiza5">
+  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: cümle-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
+  <div class="aciklama">İki kartı çevir. Bir cümle ile doğru anlamı eşleşirse kartlar açık kalır.</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez45Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="ez45Hamle">0</b></span></div>
+  <div class="ez-hafiza-izgara" id="ez45Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
+  <div class="sonuc-kutusu" id="ez45Sonuc"></div>
+  <button class="eylem" onclick="ez45Baslat()">🔄 Yeni Oyun</button>
+</section>
+
+<section id="ezadimadim5">
+  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları'nı baştan sona, cümle sırasını bularak ezberleyeceksin.</div>
+  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi cümlenin geldiğini seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez55Adim">1</b>/<b>8</b></span></div>
+  <div class="ez-ogrenilen-liste" id="ez55Liste"></div>
+  <div class="balon-durum">Sırada hangi cümle geliyor?</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez55Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez55Sonuc"></div>
+  <button class="eylem" onclick="ez55Baslat()">▶️ Başla</button>
+</section>
+
+<section id="ezgizli5">
+  <h2>6️⃣ Ezber: Gizli Harfler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları'nın anahtar kelimelerini harf harf hatırlayacaksın.</div>
+  <div class="aciklama">Cümledeki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez65Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez65Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez65Metin"></div>
+  <div class="kelime-cevap" id="ez65Cevap"></div>
+  <div class="kelime-banka" id="ez65Banka"></div>
+  <div class="sonuc-kutusu" id="ez65Sonuc"></div>
+  <button class="eylem" onclick="ez65Baslat()">🔐 Başla</button>
+</section>
+
+<section id="ezkaybolan5">
+  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun cümleyi hafızandan tanıyabileceksin.</div>
+  <div class="aciklama">Cümleyi 3 saniye izle, sonra kaybolacak. Az önce gördüğün cümlenin BİREBİR aynısını seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez75Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez75Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez75Metin">👁️ Başlamak için düğmeye bas</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez75Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez75Sonuc"></div>
+  <button class="eylem" onclick="ez75Baslat()">👁️ Başla</button>
+</section>
+
+<section id="ezhiz5">
+  <h2>8️⃣ Ezber: Hız Testi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları cümle-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
+  <div class="aciklama">Süre dolmadan verilen anlama ait doğru cümleyi seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
+  <div class="ez-zamanlayici" id="ez85Sayac">60</div>
+  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez85Dogru">0</b></span><span>❌ Yanlış: <b id="ez85Yanlis">0</b></span></div>
+  <div class="ez-metin-goster" id="ez85Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez85Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez85Sonuc"></div>
+  <button class="eylem" onclick="ez85Baslat()">⏱️ Başla</button>
+</section>
+
+<!-- ===================== İKİ KİŞİLİK OYUNLAR (20 yeni oyun) ===================== -->
+
+<section id="qb5">
+  <h2>⚔️ Bilgi Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Din ve temizlikle ilgili bilgilerini pekiştireceksin.</div>
+  <div class="aciklama">İki oyuncu aynı cihazdan sırayla oynar. Cihazı arkadaşına ver, sorulan soruya doğru cevabı seç, puan topla!</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="qb5SoruNo">1</b>/<b id="qb5Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="qb5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="qb5Puan2">0</b></span>
+  </div>
+  <div id="qb5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="qb5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="qb5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="qb5Secenekler"></div>
+  <div class="sonuc-kutusu" id="qb5Sonuc"></div>
+  <div id="qb5YenidenBaslat"></div>
+  <button class="eylem" onclick="qb5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="mm5">
+  <h2>🧠 Hafıza Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik kavramlarının anlamlarını hafızanda güçlendireceksin.</div>
+  <div class="aciklama">Sırayla iki kart aç. Kavram ile anlamı eşleşirse puan kazanır ve tekrar oynarsın; eşleşmezse sıra rakibine geçer.</div>
+  <div class="oyun-bilgi">
+    <span>🔵 1. Oyuncu: <b id="mm5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="mm5Puan2">0</b></span>
+  </div>
+  <p style="text-align:center;font-weight:bold;" id="mm5SiraKimde"></p>
+  <div class="hafiza-izgara" id="mm5Izgara"></div>
+  <div class="sonuc-kutusu" id="mm5Sonuc"></div>
+  <div id="mm5YenidenBaslat"></div>
+  <button class="eylem" onclick="mm5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="tl5">
+  <h2>📜 Zaman Çizelgesi Yarışı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik adımlarının doğru sırasını öğreneceksin.</div>
+  <div class="aciklama">Cihazı sırayla arkadaşına ver. Verilen öğeleri tıklayarak doğru sıraya diz, ne kadar hızlı ve doğru dizersen o kadar puan kazanırsın.</div>
+  <div class="oyun-bilgi">
+    <span>🔁 Tur: <b id="tl5TurNo">1</b>/<b id="tl5TurToplam">3</b></span>
+    <span>🔵 1. Oyuncu: <b id="tl5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="tl5Puan2">0</b></span>
+  </div>
+  <div id="tl5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="tl5SiraKimde"></p>
+  <p style="text-align:center;font-style:italic;" id="tl5Baslik"></p>
+  <div class="kelime-cevap" id="tl5Cevap"></div>
+  <div class="kelime-banka" id="tl5Banka"></div>
+  <div class="sonuc-kutusu" id="tl5Sonuc"></div>
+  <div id="tl5YenidenBaslat"></div>
+  <button class="eylem" onclick="tl5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="sq5">
+  <h2>⏩ Hızlı Bilgi Yarışı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlikle ilgili bilgileri hızlı hatırlayacaksın.</div>
+  <div class="aciklama">Her soru için 15 saniyen var! Süre dolarsa soru yanlış sayılır ve sıra rakibine geçer.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="sq5SoruNo">1</b>/<b id="sq5Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="sq5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="sq5Puan2">0</b></span>
+    <span>⏱️ <b id="sq5Sure">-</b>sn</span>
+  </div>
+  <div id="sq5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="sq5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="sq5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="sq5Secenekler"></div>
+  <div class="sonuc-kutusu" id="sq5Sonuc"></div>
+  <div id="sq5YenidenBaslat"></div>
+  <button class="eylem" onclick="sq5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="myb5">
+  <h2>🎁 Gizem Kutusu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Bazı sorularda sürpriz bonus puanlar kazanabileceksin.</div>
+  <div class="aciklama">Her kutu bir soru gizler. Bazı kutular ⭐ bonuslu sorulardır — doğru cevaplarsan çift puan kazanırsın!</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="myb5SoruNo">1</b>/<b id="myb5Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="myb5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="myb5Puan2">0</b></span>
+  </div>
+  <div id="myb5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="myb5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="myb5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="myb5Secenekler"></div>
+  <div class="sonuc-kutusu" id="myb5Sonuc"></div>
+  <div id="myb5YenidenBaslat"></div>
+  <button class="eylem" onclick="myb5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="cc5">
+  <h2>🔗 Kavram Bağlantısı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik kavramlarını doğru açıklamalarıyla bileceksin.</div>
+  <div class="aciklama">Sırayla iki kart aç. Kavram ile açıklaması eşleşirse puan kazanırsın.</div>
+  <div class="oyun-bilgi">
+    <span>🔵 1. Oyuncu: <b id="cc5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="cc5Puan2">0</b></span>
+  </div>
+  <p style="text-align:center;font-weight:bold;" id="cc5SiraKimde"></p>
+  <div class="hafiza-izgara" id="cc5Izgara"></div>
+  <div class="sonuc-kutusu" id="cc5Sonuc"></div>
+  <div id="cc5YenidenBaslat"></div>
+  <button class="eylem" onclick="cc5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="esc5">
+  <h2>🚪 Kaçış Görevi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Tüm kapılardan doğru cevaplarla geçerek görevi tamamlayacaksın.</div>
+  <div class="aciklama">Her kapıyı geçmek için soruyu doğru cevapla. Son kapıdan çıkan kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>🚪 Kapı: <b id="esc5SoruNo">1</b>/<b id="esc5Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="esc5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="esc5Puan2">0</b></span>
+  </div>
+  <div id="esc5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="esc5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="esc5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="esc5Secenekler"></div>
+  <div class="sonuc-kutusu" id="esc5Sonuc"></div>
+  <div id="esc5YenidenBaslat"></div>
+  <button class="eylem" onclick="esc5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="kr5">
+  <h2>🏁 Bilgi Yarışı Parkuru</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bildikçe parkurda ilerleyeceksin.</div>
+  <div class="aciklama">Her doğru cevap seni parkurda bir adım ileri taşır. Önce bitiren kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>🏁 Adım: <b id="kr5SoruNo">1</b>/<b id="kr5Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="kr5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="kr5Puan2">0</b></span>
+  </div>
+  <div id="kr5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="kr5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="kr5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="kr5Secenekler"></div>
+  <div class="sonuc-kutusu" id="kr5Sonuc"></div>
+  <div id="kr5YenidenBaslat"></div>
+  <button class="eylem" onclick="kr5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="lg5">
+  <h2>🧩 Mantık Bulmacası</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İpuçlarından yola çıkarak mantık yürütmeyi öğreneceksin.</div>
+  <div class="aciklama">Verilen ipuçlarını oku ve hangi kavramın anlatıldığını bul.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="lg5SoruNo">1</b>/<b id="lg5Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="lg5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="lg5Puan2">0</b></span>
+  </div>
+  <div id="lg5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="lg5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="lg5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="lg5Secenekler"></div>
+  <div class="sonuc-kutusu" id="lg5Sonuc"></div>
+  <div id="lg5YenidenBaslat"></div>
+  <button class="eylem" onclick="lg5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="mc5">
+  <h2>🃏 Görev Kartları</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Günlük hayatta temizlikle ilgili doğru davranışları bileceksin.</div>
+  <div class="aciklama">Her görev kartı bir durum anlatır. Doğru cevabı seçip kartı tamamla!</div>
+  <div class="oyun-bilgi">
+    <span>🃏 Kart: <b id="mc5SoruNo">1</b>/<b id="mc5Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="mc5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="mc5Puan2">0</b></span>
+  </div>
+  <div id="mc5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="mc5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="mc5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="mc5Secenekler"></div>
+  <div class="sonuc-kutusu" id="mc5Sonuc"></div>
+  <div id="mc5YenidenBaslat"></div>
+  <button class="eylem" onclick="mc5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="dc5">
+  <h2>💬 Fikir Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru gerekçeyle düşünmeyi öğreneceksin.</div>
+  <div class="aciklama">Verilen durumda hangi görüşün daha doğru ve güçlü olduğuna karar ver.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="dc5SoruNo">1</b>/<b id="dc5Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="dc5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="dc5Puan2">0</b></span>
+  </div>
+  <div id="dc5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="dc5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.05em;" id="dc5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="dc5Secenekler"></div>
+  <div class="sonuc-kutusu" id="dc5Sonuc"></div>
+  <div id="dc5YenidenBaslat"></div>
+  <button class="eylem" onclick="dc5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="fm5">
+  <h2>✅ Doğru mu Efsane mi?</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru ve yanlış bilgileri ayırt edebileceksin.</div>
+  <div class="aciklama">Verilen ifadenin doğru mu yanlış mı olduğuna hızlıca karar ver.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="fm5SoruNo">1</b>/<b id="fm5Toplam">8</b></span>
+    <span>🔵 1. Oyuncu: <b id="fm5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="fm5Puan2">0</b></span>
+  </div>
+  <div id="fm5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="fm5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="fm5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="fm5Secenekler"></div>
+  <div class="sonuc-kutusu" id="fm5Sonuc"></div>
+  <div id="fm5YenidenBaslat"></div>
+  <button class="eylem" onclick="fm5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="cb5">
+  <h2>🔓 Şifre Kırıcı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İpuçlarından kelime çözmede ustalaşacaksın.</div>
+  <div class="aciklama">İpuçlarını oku, gizli kelimeyi tahmin et. Az ipuçla bilirsen daha çok puan kazanırsın! Ekstra ipucu için butona bas.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="cb5SoruNo">1</b>/<b id="cb5Toplam">4</b></span>
+    <span>🔵 1. Oyuncu: <b id="cb5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="cb5Puan2">0</b></span>
+  </div>
+  <div id="cb5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="cb5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.05em;" id="cb5Ipucu"></p>
+  <input type="text" id="cb5Girdi" placeholder="Cevabını yaz">
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
+    <button class="eylem" onclick="ikiliIpucuYeni('cb5')">💡 Yeni İpucu</button>
+    <button class="eylem" onclick="ikiliIpucuGonder('cb5')">📤 Cevabı Gönder</button>
+  </div>
+  <div class="sonuc-kutusu" id="cb5Sonuc"></div>
+  <div id="cb5YenidenBaslat"></div>
+  <button class="eylem" onclick="cb5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="pz5">
+  <h2>🧩 Bulmaca Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Tanımlardan kavrama ulaşmada hızlanacaksın.</div>
+  <div class="aciklama">İpuçlarını sırayla oku, kavramı tahmin et. İlk ipucuyla bilirsen en yüksek puanı alırsın!</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="pz5SoruNo">1</b>/<b id="pz5Toplam">4</b></span>
+    <span>🔵 1. Oyuncu: <b id="pz5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="pz5Puan2">0</b></span>
+  </div>
+  <div id="pz5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="pz5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.05em;" id="pz5Ipucu"></p>
+  <input type="text" id="pz5Girdi" placeholder="Cevabını yaz">
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
+    <button class="eylem" onclick="ikiliIpucuYeni('pz5')">💡 Yeni İpucu</button>
+    <button class="eylem" onclick="ikiliIpucuGonder('pz5')">📤 Cevabı Gönder</button>
+  </div>
+  <div class="sonuc-kutusu" id="pz5Sonuc"></div>
+  <div id="pz5YenidenBaslat"></div>
+  <button class="eylem" onclick="pz5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="th5">
+  <h2>🗺️ Hazine Avı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İpuçlarını takip ederek bilgi hazinesine ulaşacaksın.</div>
+  <div class="aciklama">Her doğru cevap seni hazineye bir adım yaklaştırır. İlk ulaşan kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>🗺️ İpucu: <b id="th5SoruNo">1</b>/<b id="th5Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="th5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="th5Puan2">0</b></span>
+  </div>
+  <div id="th5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="th5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="th5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="th5Secenekler"></div>
+  <div class="sonuc-kutusu" id="th5Sonuc"></div>
+  <div id="th5YenidenBaslat"></div>
+  <button class="eylem" onclick="th5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="sb5">
+  <h2>♟️ Strateji Tahtası</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlikle ilgili ayet ve hadisleri pekiştireceksin.</div>
+  <div class="aciklama">Her doğru cevap seni tahtada bir kare ileri taşır. Önce bitiren kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>♟️ Kare: <b id="sb5SoruNo">1</b>/<b id="sb5Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="sb5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="sb5Puan2">0</b></span>
+  </div>
+  <div id="sb5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="sb5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="sb5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="sb5Secenekler"></div>
+  <div class="sonuc-kutusu" id="sb5Sonuc"></div>
+  <div id="sb5YenidenBaslat"></div>
+  <button class="eylem" onclick="sb5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="fc5">
+  <h2>⚡ Şimşek Yarışması</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik bilgilerini anında hatırlayabileceksin.</div>
+  <div class="aciklama">Sadece 6 saniyen var! Süre dolarsa soru yanlış sayılır.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="fc5SoruNo">1</b>/<b id="fc5Toplam">8</b></span>
+    <span>🔵 1. Oyuncu: <b id="fc5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="fc5Puan2">0</b></span>
+    <span>⏱️ <b id="fc5Sure">-</b>sn</span>
+  </div>
+  <div id="fc5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="fc5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="fc5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="fc5Secenekler"></div>
+  <div class="sonuc-kutusu" id="fc5Sonuc"></div>
+  <div id="fc5YenidenBaslat"></div>
+  <button class="eylem" onclick="fc5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="sv5">
+  <h2>💔 Hayatta Kalma Modu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Dikkatli ve doğru cevap vermenin önemini öğreneceksin.</div>
+  <div class="aciklama">Her oyuncunun 3 canı var. Yanlış cevap can kaybettirir. Son ayakta kalan kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>🔵 1. Oyuncu: <b id="sv5Can1">❤️❤️❤️</b></span>
+    <span>🔴 2. Oyuncu: <b id="sv5Can2">❤️❤️❤️</b></span>
+  </div>
+  <div id="sv5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="sv5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="sv5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="sv5Secenekler"></div>
+  <div class="sonuc-kutusu" id="sv5Sonuc"></div>
+  <div id="sv5YenidenBaslat"></div>
+  <button class="eylem" onclick="sv5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="dm5">
+  <h2>🤔 Doğru Kararı Ver</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Günlük hayatta doğru kararlar vermeyi öğreneceksin.</div>
+  <div class="aciklama">Verilen senaryoda en doğru davranışı seç.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="dm5SoruNo">1</b>/<b id="dm5Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="dm5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="dm5Puan2">0</b></span>
+  </div>
+  <div id="dm5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="dm5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.05em;" id="dm5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="dm5Secenekler"></div>
+  <div class="sonuc-kutusu" id="dm5Sonuc"></div>
+  <div id="dm5YenidenBaslat"></div>
+  <button class="eylem" onclick="dm5Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="ca5">
+  <h2>🏆 Şampiyonlar Arenası</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Bu ünitede öğrendiğin her şeyi büyük bir final turnuvasında göstereceksin.</div>
+  <div class="aciklama">20 soruluk final turnuvası! En yüksek puanı alan şampiyon olur.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="ca5SoruNo">1</b>/<b id="ca5Toplam">20</b></span>
+    <span>🔵 1. Oyuncu: <b id="ca5Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="ca5Puan2">0</b></span>
+  </div>
+  <div id="ca5ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="ca5SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="ca5SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="ca5Secenekler"></div>
+  <div class="sonuc-kutusu" id="ca5Sonuc"></div>
+  <div id="ca5YenidenBaslat"></div>
+  <button class="eylem" onclick="ca5Baslat()">🎮 Oyuna Başla</button>
+</section>
+</main>
+
+<script src="../ortak/oyun-merkezi.js"></script>
+<script>
+const LS_PUAN_ANAHTARI = 'dkabPuanDurumu';
+const OYUN_LISTESI = [
+  {id:'kelimeavi', kategori:'bulmaca', ikon:'🔎', baslik:'Kelime Avı', aciklama:'Harf tablosunda gizlenmiş kelimeleri bul.'},
+  {id:'cengel', kategori:'bulmaca', ikon:'🧩', baslik:'Çengel Bulmaca', aciklama:'İpuçlarından yola çıkarak bulmacayı tamamla.'},
+  {id:'merdiven', kategori:'bulmaca', ikon:'🪜', baslik:'Sözcük Merdiveni', aciklama:'Basamak basamak doğru kelimeye ulaş.'},
+  {id:'sifre', kategori:'bulmaca', ikon:'🔐', baslik:'Şifreli Sözcük', aciklama:'Şifreyi çöz, gizli kelimeyi ortaya çıkar.'},
+  {id:'sifretanim', kategori:'bulmaca', ikon:'🔐', baslik:'Şifreli Tanım', aciklama:'Tanımdan yola çıkarak şifreyi çöz.'},
+  {id:'kelimekodlama', kategori:'bulmaca', ikon:'💻', baslik:'Kelime Kodlama', aciklama:'Harfleri kodla, kelimeyi tamamla.'},
+  {id:'nonogram', kategori:'bulmaca', ikon:'🖼️', baslik:'Nonogram', aciklama:'Sayı ipuçlarıyla gizli resmi ortaya çıkar.'},
+  {id:'satranc', kategori:'bulmaca', ikon:'♞', baslik:'Kelime Satrancı', aciklama:'Doğru hamleyle kelimeyi tamamla.'},
+  {id:'kelimeuret', kategori:'yarisma', ikon:'⚡', baslik:'Hızlı Kelime', aciklama:'Süre bitmeden doğru kelimeyi bul.'},
+  {id:'tuzak', kategori:'yarisma', ikon:'🚫', baslik:'Tuzak Harf', aciklama:'Yanıltıcı harflere dikkat et, doğruyu seç.'},
+  {id:'fabrika', kategori:'yarisma', ikon:'🏭', baslik:'Kelime Fabrikası', aciklama:'Harflerden yeni kelimeler üret.'},
+  {id:'muhendis', kategori:'yarisma', ikon:'🛠️', baslik:'Kelime Mühendisi', aciklama:'Parçaları birleştirip kelimeyi inşa et.'},
+  {id:'kavramturnuvasi', kategori:'yarisma', ikon:'🏆', baslik:'Kavram Turnuvası', aciklama:'Bilgini turnuva formatında test et.'},
+  {id:'bonus', kategori:'yarisma', ikon:'🎮', baslik:'Bonus Oyun', aciklama:'Ekstra puan için bonus turu oyna.'},
+  {id:'dedektif', kategori:'mantik', ikon:'🕵️', baslik:'Kelime Dedektifi', aciklama:'İpuçlarını takip et, kelimeyi çöz.'},
+  {id:'dildedektifi', kategori:'mantik', ikon:'🕵️‍♀️', baslik:'Dil Dedektifi', aciklama:'Dilsel ipuçlarıyla doğru cevaba ulaş.'},
+  {id:'mantikzinciri', kategori:'mantik', ikon:'🔗', baslik:'Mantık Zinciri', aciklama:'Mantık bağlantılarını sırayla kur.'},
+  {id:'semantiklabirent', kategori:'mantik', ikon:'🧠', baslik:'Semantik Labirent', aciklama:'Anlam ilişkilerini takip ederek ilerle.'},
+  {id:'celiskiavi', kategori:'mantik', ikon:'🕵️‍♂️', baslik:'Çelişki Avı', aciklama:'Metindeki çelişkiyi bul.'},
+  {id:'labirent', kategori:'macera', ikon:'🌀', baslik:'Labirent', aciklama:'Doğru yolu bulup labirentten çık.'},
+  {id:'ezsira', kategori:'ezber', ikon:'1️⃣', baslik:'Sırala Bakalım', aciklama:'Parçaları doğru sıraya diz.'},
+  {id:'ezbosluk', kategori:'ezber', ikon:'2️⃣', baslik:'Boşluk Doldur', aciklama:'Cümledeki boşlukları doğru doldur.'},
+  {id:'ezeslestir', kategori:'ezber', ikon:'3️⃣', baslik:'Anlam Eşleştir', aciklama:'Kavramları doğru anlamlarıyla eşleştir.'},
+  {id:'ezhafiza', kategori:'ezber', ikon:'4️⃣', baslik:'Hafıza Kartları', aciklama:'Eşleri bul, hafızanı güçlendir.'},
+  {id:'ezadimadim', kategori:'ezber', ikon:'5️⃣', baslik:'Adım Adım Ezber', aciklama:'Metni adım adım ezberle.'},
+  {id:'ezgizli', kategori:'ezber', ikon:'6️⃣', baslik:'Gizli Harfler', aciklama:'Gizlenmiş harfleri bulup kelimeyi tamamla.'},
+  {id:'ezkaybolan', kategori:'ezber', ikon:'7️⃣', baslik:'Kaybolan Kelimeler', aciklama:'Kaybolan kelimeleri hafızandan bul.'},
+  {id:'ezhiz', kategori:'ezber', ikon:'8️⃣', baslik:'Hız Testi', aciklama:'Süre dolmadan hızlıca cevapla.'},
+  {id:'qb', kategori:'ikikisilik', ikon:'⚔️', baslik:'Bilgi Düellosu', aciklama:'İki oyuncu aynı sorulara sırayla cevap verir, en çok doğru bilen kazanır.'},
+  {id:'mm', kategori:'ikikisilik', ikon:'🧠', baslik:'Hafıza Düellosu', aciklama:'Temizlik kavramlarını ve anlamlarını hafıza kartlarıyla eşleştir.'},
+  {id:'tl', kategori:'ikikisilik', ikon:'📜', baslik:'Zaman Çizelgesi Yarışı', aciklama:'Temizlikle ilgili adımları doğru sıraya dizerek rakibini geç.'},
+  {id:'sq', kategori:'ikikisilik', ikon:'⏩', baslik:'Hızlı Bilgi Yarışı', aciklama:'Süre dolmadan en hızlı doğru cevabı ver, puanı kap.'},
+  {id:'myb', kategori:'ikikisilik', ikon:'🎁', baslik:'Gizem Kutusu', aciklama:'Her turda rastgele bir soru veya bonus ödül çıkar.'},
+  {id:'cc', kategori:'ikikisilik', ikon:'🔗', baslik:'Kavram Bağlantısı', aciklama:'Temizlik kavramlarını doğru açıklamalarıyla eşleştir.'},
+  {id:'esc', kategori:'ikikisilik', ikon:'🚪', baslik:'Kaçış Görevi', aciklama:'Doğru cevaplarla kapılardan geçip görevi tamamla.'},
+  {id:'kr', kategori:'ikikisilik', ikon:'🏁', baslik:'Bilgi Yarışı Parkuru', aciklama:'Doğru cevaplarla parkurda ilerle, önce bitiren kazanır.'},
+  {id:'lg', kategori:'ikikisilik', ikon:'🧩', baslik:'Mantık Bulmacası', aciklama:'İpuçlarını kullanarak doğru cevaba mantıkla ulaş.'},
+  {id:'mc', kategori:'ikikisilik', ikon:'🃏', baslik:'Görev Kartları', aciklama:'Görev kartlarını sırayla aç, doğru cevapla puan topla.'},
+  {id:'dc', kategori:'ikikisilik', ikon:'💬', baslik:'Fikir Düellosu', aciklama:'Verilen durumda en doğru ve güçlü gerekçeyi seç.'},
+  {id:'fm', kategori:'ikikisilik', ikon:'✅', baslik:'Doğru mu Efsane mi?', aciklama:'İfadenin doğru mu yanlış mı olduğuna hızlıca karar ver.'},
+  {id:'cb', kategori:'ikikisilik', ikon:'🔓', baslik:'Şifre Kırıcı', aciklama:'Bilgi ipuçlarını kullanarak gizli kelimenin şifresini çöz.'},
+  {id:'pz', kategori:'ikikisilik', ikon:'🧩', baslik:'Bulmaca Düellosu', aciklama:'İpucu ipucu gelen tanımlardan kavramı ilk sen bul.'},
+  {id:'th', kategori:'ikikisilik', ikon:'🗺️', baslik:'Hazine Avı', aciklama:'İpuçlarını takip ederek bilgi hazinesine ilk sen ulaş.'},
+  {id:'sb', kategori:'ikikisilik', ikon:'♟️', baslik:'Strateji Tahtası', aciklama:'Doğru cevaplarla tahtada ilerleyerek rakibini geç.'},
+  {id:'fc', kategori:'ikikisilik', ikon:'⚡', baslik:'Şimşek Yarışması', aciklama:'Sadece birkaç saniyen var — hızlı düşün, hızlı cevapla!'},
+  {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
+  {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
+  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'}
+];
+oyunMerkeziOlustur(OYUN_LISTESI, '5', 'unite5.html');
+
+/* ===================== İKİ KİŞİLİK OYUNLAR - VERİ VE BAŞLATMA (20 oyun) ===================== */
+const QB5_SORULAR = [
+  {soru:"Temizlik kaça ayrılır?", secenekler:["2","3"], dogru:"2"},
+  {soru:"Bedenin ve elbiselerin temiz tutulmasına ne denir?", secenekler:["Maddi temizlik","Manevi temizlik"], dogru:"Maddi temizlik"},
+  {soru:"Kalbin ve iç dünyanın temiz olmasına ne denir?", secenekler:["Manevi temizlik","Maddi temizlik"], dogru:"Manevi temizlik"},
+  {soru:"İslam kültüründe temizlik yerine hangi kavram da kullanılır?", secenekler:["Taharet","İbadet"], dogru:"Taharet"},
+  {soru:"Namazdan önce yapılması gereken dinî temizliğe ne denir?", secenekler:["Abdest","Gusül"], dogru:"Abdest"},
+  {soru:"'Temizlik imanın yarısıdır' sözü nedir?", secenekler:["Hadis","Ayet"], dogru:"Hadis"}
+];
+function qb5Baslat(){ ikiliOyunBaslat({onek:'qb5', sorular:QB5_SORULAR}); }
+
+const MM5_CIFTLER = [
+  {metin1:"Maddi temizlik", metin2:"Bedenin ve çevrenin temiz tutulması"},
+  {metin1:"Manevi temizlik", metin2:"Kalbin ve iç dünyanın temiz olması"},
+  {metin1:"Taharet", metin2:"Temizlik anlamına gelen İslami kavram"},
+  {metin1:"Abdest", metin2:"Namazdan önce yapılan dinî temizlik"},
+  {metin1:"Misvak", metin2:"Peygamberimizin diş temizliğinde kullandığı ağaç parçası"},
+  {metin1:"Erozyon", metin2:"Verimli toprağın aşınıp kaybolması"}
+];
+function mm5Baslat(){ ikiliHafizaBaslat({onek:'mm5', ciftler:MM5_CIFTLER}); }
+
+const TL5_TURLAR = [
+  {baslik:"Abdest alma sırasını diz", ogeler:["Niyet edilir","Eller yıkanır","Yüz yıkanır","Kollar yıkanır","Ayaklar yıkanır"]},
+  {baslik:"Günlük temizlik alışkanlıklarını sırala", ogeler:["Sabah kalkınca yüz yıkanır","Yemekten önce eller yıkanır","Yemekten sonra eller yıkanır","Yatmadan önce dişler fırçalanır"]},
+  {baslik:"Çevre temizliği adımlarını sırala", ogeler:["Çöpü ayır","Çöp kutusuna at","Geri dönüştürülebileni ayır","Geri dönüşüm kutusuna koy"]}
+];
+function tl5Baslat(){ ikiliSiralaBaslat({onek:'tl5', turlar:TL5_TURLAR}); }
+
+const SQ5_SORULAR = [
+  {soru:"Peygamberimize göre kaç günde bir banyo yapmak Allah'ın hakkıdır?", secenekler:["7","3"], dogru:"7"},
+  {soru:"'Allah tertemiz olanları sever' ayeti hangi surededir?", secenekler:["Tevbe","Bakara"], dogru:"Tevbe"},
+  {soru:"'Cennetin anahtarı namaz, namazın anahtarı da ...'", secenekler:["Abdesttir","Zekâttır"], dogru:"Abdesttir"},
+  {soru:"Ellerimizi en çok ne zaman yıkamalıyız?", secenekler:["Yemeklerden önce ve sonra","Sadece sabah"], dogru:"Yemeklerden önce ve sonra"},
+  {soru:"Çevre nedir?", secenekler:["İçinde yaşadığımız ortam","Sadece ev"], dogru:"İçinde yaşadığımız ortam"},
+  {soru:"Bir ağaç dikip kuşun yararlanması ne sayılır?", secenekler:["Sadaka","Günah"], dogru:"Sadaka"}
+];
+function sq5Baslat(){ ikiliOyunBaslat({onek:'sq5', sorular:SQ5_SORULAR, sureSN:15}); }
+
+const MYB5_SORULAR = [
+  {soru:"Temizlik nasıl tanımlanır?", secenekler:["Görünen/görünmeyen kirden arınma","Sadece bedenin temiz olması"], dogru:"Görünen/görünmeyen kirden arınma", bonus:true},
+  {soru:"Çöpleri nereye atmalıyız?", secenekler:["Çöp kutusuna","Yere"], dogru:"Çöp kutusuna"},
+  {soru:"Kullanılmış maddelerin yeniden değerlendirilmesine ne denir?", secenekler:["Geri dönüşüm","İsraf"], dogru:"Geri dönüşüm", bonus:true},
+  {soru:"Manevi yönden temiz insanlar nasıl davranır?", secenekler:["Doğru sözlü ve dürüst","Yalancı"], dogru:"Doğru sözlü ve dürüst"},
+  {soru:"'Mümin, kendisiyle hoş geçinilen kimsedir' hadisi ne anlatır?", secenekler:["İyi geçinmeliyiz","Yalnız yaşamalı"], dogru:"İyi geçinmeliyiz"},
+  {soru:"Evin temiz olması bize ne verir?", secenekler:["Huzur","Sıkıntı"], dogru:"Huzur"}
+];
+function myb5Baslat(){ ikiliOyunBaslat({onek:'myb5', sorular:MYB5_SORULAR}); }
+
+const CC5_CIFTLER = [
+  {metin1:"Abdest", metin2:"Namaz öncesi yapılan temizlik"},
+  {metin1:"Gusül", metin2:"Büyük dinî temizlik (boy abdesti)"},
+  {metin1:"Misvak", metin2:"Diş temizliği aracı"},
+  {metin1:"Sadaka", metin2:"Ağaç dikmenin bir sevabı"},
+  {metin1:"Geri dönüşüm", metin2:"Atıkların yeniden değerlendirilmesi"},
+  {metin1:"Erozyon", metin2:"Toprağın aşınması"}
+];
+function cc5Baslat(){ ikiliHafizaBaslat({onek:'cc5', ciftler:CC5_CIFTLER}); }
+
+const ESC5_SORULAR = [
+  {soru:"Kapı 1: Temizlik kaça ayrılır?", secenekler:["2","3"], dogru:"2"},
+  {soru:"Kapı 2: Namazdan önce yapılan temizlik nedir?", secenekler:["Abdest","Gusül"], dogru:"Abdest"},
+  {soru:"Kapı 3: 'Temizlik imanın yarısıdır' sözü nedir?", secenekler:["Hadis","Ayet"], dogru:"Hadis"},
+  {soru:"Kapı 4: Çöpleri nereye atmalıyız?", secenekler:["Çöp kutusuna","Yere"], dogru:"Çöp kutusuna"},
+  {soru:"Kapı 5 (Çıkış): Kaç günde bir banyo yapmak Allah'ın hakkıdır?", secenekler:["7 günde bir","3 günde bir"], dogru:"7 günde bir"}
+];
+function esc5Baslat(){ ikiliOyunBaslat({onek:'esc5', sorular:ESC5_SORULAR}); }
+
+const KR5_SORULAR = [
+  {soru:"Maddi temizlik nedir?", secenekler:["Bedenin/çevrenin temizliği","Kalbin temizliği"], dogru:"Bedenin/çevrenin temizliği"},
+  {soru:"Manevi temizlik nedir?", secenekler:["Kalbin temizliği","Bedenin temizliği"], dogru:"Kalbin temizliği"},
+  {soru:"Taharet ne demektir?", secenekler:["Temizlik","Kirlilik"], dogru:"Temizlik"},
+  {soru:"Misvak neye yarar?", secenekler:["Diş temizliğine","Saç temizliğine"], dogru:"Diş temizliğine"},
+  {soru:"Çevre nedir?", secenekler:["Yaşadığımız ortam","Sadece ev"], dogru:"Yaşadığımız ortam"},
+  {soru:"Geri dönüşüm nedir?", secenekler:["Atıkların yeniden değerlendirilmesi","Atıkları yakmak"], dogru:"Atıkların yeniden değerlendirilmesi"}
+];
+function kr5Baslat(){ ikiliOyunBaslat({onek:'kr5', sorular:KR5_SORULAR}); }
+
+const LG5_SORULAR = [
+  {soru:"Bu, namazdan önce yapılan dinî temizliktir. Nedir?", secenekler:["Abdest","Gusül"], dogru:"Abdest"},
+  {soru:"Bu, kalbin ve iç dünyanın temiz olmasıdır. Nedir?", secenekler:["Manevi temizlik","Maddi temizlik"], dogru:"Manevi temizlik"},
+  {soru:"Bu, Peygamberimizin diş temizliğinde kullandığı araçtır. Nedir?", secenekler:["Misvak","Fırça"], dogru:"Misvak"},
+  {soru:"Bu, verimli toprağın aşınıp kaybolmasıdır. Nedir?", secenekler:["Erozyon","Geri dönüşüm"], dogru:"Erozyon"},
+  {soru:"Bu, atıkların yeniden değerlendirilmesidir. Nedir?", secenekler:["Geri dönüşüm","Erozyon"], dogru:"Geri dönüşüm"}
+];
+function lg5Baslat(){ ikiliOyunBaslat({onek:'lg5', sorular:LG5_SORULAR}); }
+
+const MC5_SORULAR = [
+  {soru:"Görev Kartı 1: Yemekten önce ne yaparsın?", secenekler:["Ellerimi yıkarım","Hiçbir şey yapmam"], dogru:"Ellerimi yıkarım"},
+  {soru:"Görev Kartı 2: Namaz kılmadan önce ne yaparsın?", secenekler:["Abdest alırım","Sadece niyet ederim"], dogru:"Abdest alırım"},
+  {soru:"Görev Kartı 3: Çöpünü nereye atarsın?", secenekler:["Çöp kutusuna","Yere"], dogru:"Çöp kutusuna"},
+  {soru:"Görev Kartı 4: Dişlerini nasıl temizlersin?", secenekler:["Fırçalayarak","Temizlemem"], dogru:"Fırçalayarak"},
+  {soru:"Görev Kartı 5: Bir ağaç dikersen bundan ne kazanırsın?", secenekler:["Sadaka sevabı","Hiçbir şey"], dogru:"Sadaka sevabı"},
+  {soru:"Görev Kartı 6: Manevi temiz olmak için nasıl davranırsın?", secenekler:["Doğru sözlü ve dürüst olurum","Kayıtsız kalırım"], dogru:"Doğru sözlü ve dürüst olurum"}
+];
+function mc5Baslat(){ ikiliOyunBaslat({onek:'mc5', sorular:MC5_SORULAR}); }
+
+const DC5_SORULAR = [
+  {soru:"'Elleri yıkamak önemli değil' diyen arkadaşına ne dersin?", secenekler:["Temizlik imanın yarısıdır, elleri yıkamak önemlidir","Haklısın, önemli değil"], dogru:"Temizlik imanın yarısıdır, elleri yıkamak önemlidir"},
+  {soru:"'Çevreyi kirletmek sorun değil' diyen arkadaşına ne dersin?", secenekler:["Çevremizi temiz tutmak dinimizin bir emridir","Haklısın, sorun değil"], dogru:"Çevremizi temiz tutmak dinimizin bir emridir"},
+  {soru:"'Sadece beden temiz olsun yeter, kalp önemli değil' diyen arkadaşına ne dersin?", secenekler:["Manevi temizlik de en az maddi temizlik kadar önemlidir","Haklısın, kalp önemli değil"], dogru:"Manevi temizlik de en az maddi temizlik kadar önemlidir"},
+  {soru:"'Geri dönüşüm gereksiz' diyen arkadaşına ne dersin?", secenekler:["Geri dönüşüm doğayı ve kaynakları korumamıza yardımcı olur","Haklısın, gereksiz"], dogru:"Geri dönüşüm doğayı ve kaynakları korumamıza yardımcı olur"},
+  {soru:"'Ağaç dikmenin bir faydası yok' diyen arkadaşına ne dersin?", secenekler:["Peygamberimize göre bir ağaç dikmek sadaka sayılır","Haklısın, faydası yok"], dogru:"Peygamberimize göre bir ağaç dikmek sadaka sayılır"}
+];
+function dc5Baslat(){ ikiliOyunBaslat({onek:'dc5', sorular:DC5_SORULAR}); }
+
+const FM5_SORULAR = [
+  {soru:"Temizlik ikiye ayrılır: maddi ve manevi.", secenekler:["Doğru","Yanlış"], dogru:"Doğru"},
+  {soru:"Taharet, kirlilik anlamına gelir.", secenekler:["Doğru","Yanlış"], dogru:"Yanlış"},
+  {soru:"Abdest namazdan önce alınır.", secenekler:["Doğru","Yanlış"], dogru:"Doğru"},
+  {soru:"'Temizlik imanın yarısıdır' bir ayettir.", secenekler:["Doğru","Yanlış"], dogru:"Yanlış"},
+  {soru:"Misvak diş temizliğinde kullanılır.", secenekler:["Doğru","Yanlış"], dogru:"Doğru"},
+  {soru:"Çöpleri yere atmak doğrudur.", secenekler:["Doğru","Yanlış"], dogru:"Yanlış"},
+  {soru:"Geri dönüşüm, atıkların yeniden değerlendirilmesidir.", secenekler:["Doğru","Yanlış"], dogru:"Doğru"},
+  {soru:"Erozyon, toprağın verimlenmesidir.", secenekler:["Doğru","Yanlış"], dogru:"Yanlış"}
+];
+function fm5Baslat(){ ikiliOyunBaslat({onek:'fm5', sorular:FM5_SORULAR}); }
+
+const CB5_SORULAR = [
+  {cevap:"ABDEST", ipuclari:["Namazdan önce alınır","Yüz, kol, ayak yıkanır","Cennetin anahtarının anahtarıdır"]},
+  {cevap:"MİSVAK", ipuclari:["Diş temizliği aracıdır","Ağaçtan yapılır","Peygamberimiz kullanmıştır"]},
+  {cevap:"TAHARET", ipuclari:["Temizlik anlamına gelir","İslami bir kavramdır","Maddi ve manevi olabilir"]},
+  {cevap:"EROZYON", ipuclari:["Toprağın aşınmasıdır","Çevre sorunudur","Ağaçlar bunu önler"]}
+];
+function cb5Baslat(){ ikiliIpucuBaslat({onek:'cb5', sorular:CB5_SORULAR}); }
+
+const PZ5_SORULAR = [
+  {cevap:"TEMİZLİK", ipuclari:["İmanın yarısıdır (hadis)","Maddi ve manevi olarak ikiye ayrılır","Dinimizde çok önemlidir"]},
+  {cevap:"GERİDÖNÜŞÜM", ipuclari:["Atıkları yeniden değerlendirmektir","Doğayı korur","Ayrı kutulara atılır"]},
+  {cevap:"ÇEVRE", ipuclari:["Yaşadığımız ortamdır","Temiz tutulmalıdır","Bizi etkiler"]},
+  {cevap:"SADAKA", ipuclari:["Ağaç dikmek buna örnektir","Sevap kazandırır","Yardımlaşmadır"]}
+];
+function pz5Baslat(){ ikiliIpucuBaslat({onek:'pz5', sorular:PZ5_SORULAR}); }
+
+const TH5_SORULAR = [
+  {soru:"İpucu 1: Temizlik kaça ayrılır?", secenekler:["2","3"], dogru:"2"},
+  {soru:"İpucu 2: Namazdan önce yapılan temizlik nedir?", secenekler:["Abdest","Gusül"], dogru:"Abdest"},
+  {soru:"İpucu 3: Diş temizliğinde kullanılan araç nedir?", secenekler:["Misvak","Havlu"], dogru:"Misvak"},
+  {soru:"İpucu 4: Çöpleri nereye atmalıyız?", secenekler:["Çöp kutusuna","Yere"], dogru:"Çöp kutusuna"},
+  {soru:"Son ipucu: Hazineyi bulmak için kaç günde bir banyo yapmalısın?", secenekler:["7 günde bir","3 günde bir"], dogru:"7 günde bir"}
+];
+function th5Baslat(){ ikiliOyunBaslat({onek:'th5', sorular:TH5_SORULAR}); }
+
+const SB5_SORULAR = [
+  {soru:"'Allah tertemiz olanları sever' ayeti hangi surededir?", secenekler:["Tevbe","Bakara"], dogru:"Tevbe"},
+  {soru:"'Cennetin anahtarı namaz, namazın anahtarı da ...'", secenekler:["Abdesttir","Zekâttır"], dogru:"Abdesttir"},
+  {soru:"Manevi yönden temiz insanlar nasıl davranır?", secenekler:["Doğru sözlü ve dürüst","Yalancı"], dogru:"Doğru sözlü ve dürüst"},
+  {soru:"'Mümin, kendisiyle hoş geçinilen kimsedir' hadisi neyi anlatır?", secenekler:["İyi geçinmeliyiz","Yalnız yaşamalıyız"], dogru:"İyi geçinmeliyiz"},
+  {soru:"Evin temiz olması bize ne verir?", secenekler:["Huzur","Sıkıntı"], dogru:"Huzur"},
+  {soru:"Çevre nedir?", secenekler:["Yaşadığımız ortam","Sadece ev"], dogru:"Yaşadığımız ortam"}
+];
+function sb5Baslat(){ ikiliOyunBaslat({onek:'sb5', sorular:SB5_SORULAR}); }
+
+const FC5_SORULAR = [
+  {soru:"Temizlik kaça ayrılır?", secenekler:["2","3"], dogru:"2"},
+  {soru:"Namaz öncesi temizlik nedir?", secenekler:["Abdest","Gusül"], dogru:"Abdest"},
+  {soru:"Diş temizliği aracı nedir?", secenekler:["Misvak","Havlu"], dogru:"Misvak"},
+  {soru:"Çöpü nereye atarız?", secenekler:["Çöp kutusuna","Yere"], dogru:"Çöp kutusuna"},
+  {soru:"Kaç günde bir banyo?", secenekler:["7 günde bir","3 günde bir"], dogru:"7 günde bir"},
+  {soru:"Toprağın aşınmasına ne denir?", secenekler:["Erozyon","Geri dönüşüm"], dogru:"Erozyon"},
+  {soru:"Atıkları değerlendirmeye ne denir?", secenekler:["Geri dönüşüm","Erozyon"], dogru:"Geri dönüşüm"},
+  {soru:"Kalbin temiz olmasına ne denir?", secenekler:["Manevi temizlik","Maddi temizlik"], dogru:"Manevi temizlik"}
+];
+function fc5Baslat(){ ikiliOyunBaslat({onek:'fc5', sorular:FC5_SORULAR, sureSN:6}); }
+
+const SV5_SORULAR = [
+  {soru:"Temizlik kaça ayrılır?", secenekler:["2","3"], dogru:"2"},
+  {soru:"Namazdan önce yapılan temizlik nedir?", secenekler:["Abdest","Gusül"], dogru:"Abdest"},
+  {soru:"Diş temizliği aracı nedir?", secenekler:["Misvak","Havlu"], dogru:"Misvak"},
+  {soru:"Çöpü nereye atmalıyız?", secenekler:["Çöp kutusuna","Yere"], dogru:"Çöp kutusuna"},
+  {soru:"Kaç günde bir banyo yapmak Allah'ın hakkıdır?", secenekler:["7","3"], dogru:"7"},
+  {soru:"Manevi temizlik nedir?", secenekler:["Kalbin temizliği","Bedenin temizliği"], dogru:"Kalbin temizliği"}
+];
+function sv5Baslat(){ ikiliHayattaBaslat({onek:'sv5', sorular:SV5_SORULAR, can:3}); }
+
+const DM5_SORULAR = [
+  {soru:"Arkadaşın elini yıkamadan yemek yiyor, ne dersin?", secenekler:["Elini yıkamasını öneririm, temizlik önemlidir","Fark etmez, öneride bulunmam"], dogru:"Elini yıkamasını öneririm, temizlik önemlidir"},
+  {soru:"Sokakta çöp gördün, ne yaparsın?", secenekler:["Alıp çöp kutusuna atarım","Görmezden gelirim"], dogru:"Alıp çöp kutusuna atarım"},
+  {soru:"Arkadaşın çevreye çöp atıyor, ne dersin?", secenekler:["Çevreyi kirletmemesini nazikçe hatırlatırım","Hiçbir şey söylemem"], dogru:"Çevreyi kirletmemesini nazikçe hatırlatırım"},
+  {soru:"Bir arkadaşın kalp temizliğini önemsemiyor, ne dersin?", secenekler:["Manevi temizliğin de maddi temizlik kadar önemli olduğunu anlatırım","Önemli değil derim"], dogru:"Manevi temizliğin de maddi temizlik kadar önemli olduğunu anlatırım"},
+  {soru:"Okulda geri dönüşüm kutusu var, ne yaparsın?", secenekler:["Atıklarımı doğru kutuya ayırırım","Hepsini karışık atarım"], dogru:"Atıklarımı doğru kutuya ayırırım"}
+];
+function dm5Baslat(){ ikiliOyunBaslat({onek:'dm5', sorular:DM5_SORULAR}); }
+
+const CA5_SORULAR = [
+  {soru:"Temizlik kaça ayrılır?", secenekler:["2","3"], dogru:"2"},
+  {soru:"Bedenin ve elbiselerin temiz tutulmasına ne denir?", secenekler:["Maddi temizlik","Manevi temizlik"], dogru:"Maddi temizlik"},
+  {soru:"Kalbin temiz olmasına ne denir?", secenekler:["Manevi temizlik","Maddi temizlik"], dogru:"Manevi temizlik"},
+  {soru:"İslam kültüründe temizlik yerine hangi kavram kullanılır?", secenekler:["Taharet","İbadet"], dogru:"Taharet"},
+  {soru:"Namazdan önce yapılan dinî temizliğe ne denir?", secenekler:["Abdest","Gusül"], dogru:"Abdest"},
+  {soru:"'Temizlik imanın yarısıdır' sözü nedir?", secenekler:["Hadis","Ayet"], dogru:"Hadis"},
+  {soru:"Kaç günde bir banyo yapmak Allah'ın hakkıdır?", secenekler:["7","3"], dogru:"7"},
+  {soru:"'Allah tertemiz olanları sever' ayeti hangi surededir?", secenekler:["Tevbe","Bakara"], dogru:"Tevbe"},
+  {soru:"'Cennetin anahtarı namaz, namazın anahtarı da ...'", secenekler:["Abdesttir","Zekâttır"], dogru:"Abdesttir"},
+  {soru:"Ellerimizi en çok ne zaman yıkamalıyız?", secenekler:["Yemeklerden önce ve sonra","Sadece sabah"], dogru:"Yemeklerden önce ve sonra"},
+  {soru:"Çevre nedir?", secenekler:["İçinde yaşadığımız ortam","Sadece ev"], dogru:"İçinde yaşadığımız ortam"},
+  {soru:"Bir ağaç dikip kuşun yararlanması ne sayılır?", secenekler:["Sadaka","Günah"], dogru:"Sadaka"},
+  {soru:"Çöpleri nereye atmalıyız?", secenekler:["Çöp kutusuna","Yere"], dogru:"Çöp kutusuna"},
+  {soru:"Kullanılmış maddelerin yeniden değerlendirilmesine ne denir?", secenekler:["Geri dönüşüm","İsraf"], dogru:"Geri dönüşüm"},
+  {soru:"Verimli toprağın aşınıp kaybolmasına ne denir?", secenekler:["Erozyon","Dönüşüm"], dogru:"Erozyon"},
+  {soru:"Manevi yönden temiz insanlar nasıl davranır?", secenekler:["Doğru sözlü ve dürüst","Yalancı"], dogru:"Doğru sözlü ve dürüst"},
+  {soru:"Peygamberimizin diş temizliğinde kullandığı araç nedir?", secenekler:["Misvak","Fırça"], dogru:"Misvak"},
+  {soru:"Evin temiz olması bize ne verir?", secenekler:["Huzur","Sıkıntı"], dogru:"Huzur"},
+  {soru:"'Mümin, kendisiyle hoş geçinilen kimsedir' hadisi ne anlatır?", secenekler:["İyi geçinmeliyiz","Yalnız yaşamalıyız"], dogru:"İyi geçinmeliyiz"},
+  {soru:"Gusül nedir?", secenekler:["Büyük dinî temizlik","Küçük bir dua"], dogru:"Büyük dinî temizlik"}
+];
+function ca5Baslat(){ ikiliOyunBaslat({onek:'ca5', sorular:CA5_SORULAR}); }
+
+
+
+
+
+
+
+
+
+
+// =====================================================================
+// KONU TEKRARI TESTİ (50 Soru)
+// =====================================================================
+const konuTekrariSorulari5 = [
+  {zorluk:"kolay", soru:"Genel anlamıyla temizlik nasıl tanımlanır?", secenekler:["Sadece bedenin temiz olması","İnsanın görünen ve görünmeyen kirden arınması","Sadece evin temiz olması","Sadece giysilerin temiz olması"], dogru:1, aciklama:"Temizlik, insanın görünen ve görünmeyen her türlü kirden arınmasıdır."},
+  {zorluk:"kolay", soru:"Temizlik kaça ayrılır?", secenekler:["1","2","3","4"], dogru:1, aciklama:"Temizlik ikiye ayrılır: maddi temizlik ve manevi temizlik."},
+  {zorluk:"kolay", soru:"Bedenin, elbiselerin ve çevrenin temiz tutulmasına ne denir?", secenekler:["Manevi temizlik","Maddi temizlik","Kalp temizliği","İç temizlik"], dogru:1, aciklama:"Görünen kirlerden arınmak maddi temizlik kapsamındadır."},
+  {zorluk:"kolay", soru:"İnsanın iç dünyasının, kalbinin temiz olmasına ne denir?", secenekler:["Maddi temizlik","Manevi temizlik","Beden temizliği","Giysi temizliği"], dogru:1, aciklama:"Manevi temizlik, insanın iç dünyasının ve kalbinin temiz olmasıdır."},
+  {zorluk:"kolay", soru:"İslam kültüründe temizlik yerine hangi kavram da kullanılır?", secenekler:["İbadet","Taharet","Niyet","Sünnet"], dogru:1, aciklama:"İslam kültüründe temizlik yerine zaman zaman taharet kavramı kullanılır."},
+  {zorluk:"kolay", soru:"Namazdan önce yapılması gereken dinî temizliğe ne denir?", secenekler:["Gusül","Abdest","Teyemmüm","Niyet"], dogru:1, aciklama:"Namaz kılacak Müslüman öncelikle abdest almalıdır."},
+  {zorluk:"kolay", soru:"\"Temizlik imanın yarısıdır.\" sözü nedir?", secenekler:["Ayet","Hadis","Atasözü","Şiir"], dogru:1, aciklama:"Bu söz Peygamberimizin (sav) bir hadisidir. (Tirmizi, Daavat, 86.)"},
+  {zorluk:"kolay", soru:"Peygamberimizin (sav) diş temizliğinde kullandığı ağaç parçasına ne denir?", secenekler:["Fırça","Misvak","Sabun","Havlu"], dogru:1, aciklama:"Hz. Peygamber (sav), dişlerini misvak denilen bir tür ağaç fırçasıyla temizlemiştir."},
+  {zorluk:"kolay", soru:"Abdest alırken en başta ne yapılır?", secenekler:["Yüz yıkanır","Niyet edilir","Kollar yıkanır","Ayaklar yıkanır"], dogru:1, aciklama:"Önce abdest almaya niyet edilir ve Eûzü-besmele çekilir."},
+  {zorluk:"kolay", soru:"Ellerimizi en çok ne zaman yıkamalıyız?", secenekler:["Sadece sabah","Yemeklerden önce ve sonra","Sadece akşam","Hiç yıkamaya gerek yok"], dogru:1, aciklama:"Özellikle yemeklerden önce ve sonra, tuvaletten çıkınca ellerimizi yıkamaya özen göstermeliyiz."},
+  {zorluk:"kolay", soru:"Peygamberimize göre kaç günde bir banyo yapmak Allah'ın Müslümanlar üzerindeki bir hakkıdır?", secenekler:["3","5","7","10"], dogru:2, aciklama:"\"Her yedi günde bir saçını ve bedenini yıkayarak banyo yapması, Allah'ın bütün Müslümanlar üzerindeki bir hakkıdır.\""},
+  {zorluk:"kolay", soru:"Evimizin temiz ve düzenli olması bize ne verir?", secenekler:["Huzur","Yorgunluk","Sıkıntı","Hiçbir şey"], dogru:0, aciklama:"Temiz ve düzenli bir evde yaşamak insana huzur verir."},
+  {zorluk:"kolay", soru:"İçinde yaşadığımız, bizi her an etkisi altında bulunduran ortama ne denir?", secenekler:["Ev","Çevre","Okul","Doğa"], dogru:1, aciklama:"Çevre, içinde yaşadığımız, bizi her an etkisi altında bulunduran ortamdır."},
+  {zorluk:"kolay", soru:"Bir ağaç dikip ondan bir kuşun yararlanması Peygamberimize göre ne sayılır?", secenekler:["Günah","Sadaka","İsraf","Boşuna emek"], dogru:1, aciklama:"\"Bir Müslüman bir ağaç diker... ondan bir kuş, insan veya herhangi bir hayvan yerse bu, onun için sadaka sayılır.\""},
+  {zorluk:"kolay", soru:"Çöpleri nereye atmalıyız?", secenekler:["Yere","Çöp kutusuna","Sokağa","Denize"], dogru:1, aciklama:"Çöpleri yerlere değil, çöp kutularına atmalıyız."},
+  {zorluk:"kolay", soru:"Kullanılmış maddelerin yeniden değerlendirilmesine ne denir?", secenekler:["Erozyon","Geri dönüşüm","İsraf","Kirlenme"], dogru:1, aciklama:"Geri dönüştürülebilir atıkları geri dönüşüm kutularına ayırmalıyız."},
+  {zorluk:"kolay", soru:"Verimli toprağın aşınıp kaybolmasına ne denir?", secenekler:["Erozyon","Dönüşüm","Taharet","Mizan"], dogru:0, aciklama:"Her yıl 743 milyon ton verimli üst toprağımızı erozyonla kaybediyoruz."},
+
+  {zorluk:"orta", soru:"Manevi yönden temiz olan insanlar nasıl davranır?", secenekler:["Doğru sözlü ve dürüst","Yalancı ve kindar","Kıskanç ve bencil","Umursamaz"], dogru:0, aciklama:"Manevi yönden temiz olan insanlar doğru sözlü, dürüst ve güvenilirdir."},
+  {zorluk:"orta", soru:"\"Mümin, kendisiyle hoş geçinilen kimsedir.\" hadisinin anlattığı temel mesaj nedir?", secenekler:["Müslüman insanlarla iyi geçinmelidir","Müslüman yalnız yaşamalıdır","Müslüman kimseyle konuşmamalıdır","Hiçbiri"], dogru:0, aciklama:"Bu hadis, Müslüman'ın başkalarıyla iyi geçinmesi gerektiğini ifade eder."},
+  {zorluk:"orta", soru:"\"Allah tertemiz olanları sever.\" ayeti hangi surededir?", secenekler:["Bakara","Tevbe","Fatiha","Nâs"], dogru:1, aciklama:"Bu ayet Tevbe suresi 108. ayettedir."},
+  {zorluk:"orta", soru:"\"Cennetin anahtarı namaz, namazın anahtarı da ...\" Boşluğa ne gelir?", secenekler:["zekâttır","abdesttir","oruçtur","haccdır"], dogru:1, aciklama:"\"Cennetin anahtarı namaz, namazın anahtarı da abdesttir.\" (Tirmizi, Taharet, 1.)"},
+  {zorluk:"orta", soru:"Abdestte önce hangi organ yıkanır?", secenekler:["Kollar","Ayaklar","Eller","Baş"], dogru:2, aciklama:"Abdeste eller bileklere kadar güzelce yıkanarak başlanır."},
+  {zorluk:"orta", soru:"Abdestte başın üzeri nasıl temizlenir?", secenekler:["Yıkanarak","Islak elle mesh edilerek","Kurulanarak","Fırçalanarak"], dogru:1, aciklama:"Sağ el ıslatılıp başın üzeri ıslak elle mesh edilir."},
+  {zorluk:"orta", soru:"Abdestte en son hangi organ yıkanır?", secenekler:["Yüz","Eller","Kollar","Ayaklar"], dogru:3, aciklama:"Önce sağ, sonra sol ayak topuklarla birlikte yıkanır ve abdest tamamlanır."},
+  {zorluk:"orta", soru:"\"Elbiseni tertemiz tut.\" ayeti hangi surededir?", secenekler:["Fatiha","Müddessir","Kevser","Nâs"], dogru:1, aciklama:"Bu ayet Müddessir suresi 4. ayettedir."},
+  {zorluk:"orta", soru:"Maide suresi 6. ayette hangi ibadetin nasıl yapılacağı anlatılır?", secenekler:["Namazın kılınışı","Abdestin alınışı","Orucun tutuluşu","Haccın yapılışı"], dogru:1, aciklama:"Maide suresi 6. ayet abdestin alınışını anlatır."},
+  {zorluk:"orta", soru:"Peygamberimiz (sav) saçı sakalı dağınık bir kişiye ne öğütlemiştir?", secenekler:["Saçını kesmesini","Saçını sakalını düzeltmesini","Hiçbir şey söylememiştir","Onu azarlamıştır"], dogru:1, aciklama:"Adama saçını sakalını düzeltip gelmesini istemiştir."},
+  {zorluk:"orta", soru:"Ellerimiz gün içinde en çok neden kirlenir?", secenekler:["Yüzme yapmaktan","Çeşitli eşyalara dokunmaktan","Uyumaktan","Kitap okumaktan"], dogru:1, aciklama:"Ellerimizle kapı kollarına, sıra ve masalara, kitaplara vb. sık sık dokunuruz."},
+  {zorluk:"orta", soru:"Okulun kirletilmesi hangi kavramla ilişkilendirilir?", secenekler:["Sevap kazanmak","Kul hakkı yemek","Zekât vermek","Sadaka vermek"], dogru:1, aciklama:"Okulda kirliliğe neden olmak, başkalarının hakkını çiğnemek yani kul hakkı yemek anlamına gelir."},
+  {zorluk:"orta", soru:"\"Göğü Allah yükseltti ve mizanı (dengeyi) O koydu.\" ayeti hangi surededir?", secenekler:["Rahman","Rum","Kamer","Hicr"], dogru:0, aciklama:"Bu ayet Rahman suresi 7-8. ayetlerdedir."},
+  {zorluk:"orta", soru:"\"İnsanların bizzat kendi işledikleri yüzünden karada ve denizde düzen bozuldu...\" ayeti hangi surededir?", secenekler:["Rahman","Rum","Kamer","Hicr"], dogru:1, aciklama:"Bu ayet Rum suresi 41. ayettedir."},
+  {zorluk:"orta", soru:"Peygamberimiz (sav) hangi üç yere abdest bozmaktan sakınmamızı öğütlemiştir?", secenekler:["Su kaynakları, yol ortası, gölgelik yerler","Ev, okul, cami","Orman, deniz, dağ","Bahçe, park, sokak"], dogru:0, aciklama:"\"Su kaynaklarına, yol ortasına ve gölgelik yerlere abdest bozmaktan sakının.\""},
+  {zorluk:"orta", soru:"Çevredeki varlıklar İslam anlayışına göre insana ne olarak verilmiştir?", secenekler:["Mülk","Emanet","Ödül","Ceza"], dogru:1, aciklama:"Çevreyi oluşturan unsurlar insana Allah'ın emanetidir."},
+  {zorluk:"orta", soru:"\"Her şeyi bir ölçü ve dengede yarattık.\" ayeti hangi surededir?", secenekler:["Kamer","Hicr","Rahman","Rum"], dogru:0, aciklama:"Bu ayet Kamer suresi 49. ayettedir."},
+
+  {zorluk:"zor", soru:"Namazın geçerli olmasının şartlarından biri olarak beden, elbise ve namaz kılınacak yerin nasıl olması gerekir?", secenekler:["Geniş","Temiz","Süslü","Pahalı"], dogru:1, aciklama:"Namaz kılacak kişinin bedeninin, elbiselerinin ve namaz kılacağı yerin temiz olması namazın geçerlilik şartlarından biridir."},
+  {zorluk:"zor", soru:"Kâbe'yi ziyaret etmek isteyenlerin de sahip olması gereken hâl nedir?", secenekler:["Abdestli olmak","Aç olmak","Yorgun olmak","Hiçbiri"], dogru:0, aciklama:"Kâbe'yi ziyaret etmek isteyen kişilerin de abdestli olması gerekir."},
+  {zorluk:"zor", soru:"\"Yemeğin bereketi, yemekten önce ve sonra elleri yıkamaktadır.\" sözü nedir?", secenekler:["Ayet","Hadis","Atasözü","Deyim"], dogru:1, aciklama:"Bu söz bir hadistir. (Ebu Davud, Et'ime, 11.)"},
+  {zorluk:"zor", soru:"Peygamberimizin misvak hakkındaki hadisinde kim ona diş temizliğini çok tavsiye etmiştir?", secenekler:["Cebrail (as)","Mikâil (as)","İsrafil (as)","Azrail (as)"], dogru:0, aciklama:"\"Cebrail bana diş temizliğini o kadar çok tavsiye etti ki bana ve ümmetime bunun farz olacağından korktum.\""},
+  {zorluk:"zor", soru:"\"Birinizin elinde bir hurma fidanı varsa, kıyamet kopuyor olsa bile hemen onu diksin!\" hadisi neyi vurgular?", secenekler:["Ağaç dikmenin her koşulda önemini","Kıyametin yakın olduğunu","Hurmanın değerli olduğunu","Hiçbirini"], dogru:0, aciklama:"Bu hadis, ağaç dikmenin ne kadar önemli olduğunu, her şart altında sürdürülmesi gereken bir davranış olduğunu vurgular."},
+  {zorluk:"zor", soru:"Dünya genelinde her yıl İsviçre'nin kaç katı büyüklüğünde alan çölleşmeyle yok oluyor?", secenekler:["1","2","3","4"], dogru:2, aciklama:"Dünya genelinde her yıl İsviçre'nin 3 katı büyüklüğünde, 12 milyon m2 alan çölleşmeyle yok oluyor."},
+  {zorluk:"zor", soru:"Metne göre erozyon ve çölleşme tehdidi altındaki arazileri kurtarmak için mevcut hızla yaklaşık kaç yıla ihtiyaç vardır?", secenekler:["200","500","700","1000"], dogru:2, aciklama:"Metne göre bu arazileri kurtarmak için yaklaşık 700 yıla ihtiyaç var."},
+  {zorluk:"zor", soru:"\"İnsanlar kıyafetlerine göre karşılanır, düşüncelerine göre uğurlanır.\" sözü neyi anlatır?", secenekler:["Giysinin hiç önemli olmadığını","İlk izlenimde kıyafetin, sonrasında düşüncenin etkili olduğunu","Sadece düşüncenin önemli olduğunu","Hiçbirini"], dogru:1, aciklama:"Bu söz, ilk izlenimde kıyafetin, ilişki sürdükçe ise kişiliğin/düşüncenin daha etkili olduğunu anlatır."},
+  {zorluk:"zor", soru:"Peygamberimiz (sav) elbiseleri kirli bir adamı görünce ne buyurmuştur?", secenekler:["Onu azarlamıştır","\"Bu adam elbiselerini yıkayacak bir şey bulamamış mı?\" demiştir","Hiçbir şey dememiştir","Onu ödüllendirmiştir"], dogru:1, aciklama:"Peygamberimiz (sav), \"Bu adam elbiselerini yıkayacak bir şey bulamamış mı?\" buyurmuştur. (Ebu Davud, Libas, 14.)"},
+  {zorluk:"zor", soru:"\"Lanete sebep olan şu üç şeyi yapmaktan sakının...\" hadisinde bahsedilmeyen yer hangisidir?", secenekler:["Su kaynakları","Yol ortası","Gölgelik yerler","Çarşı pazar"], dogru:3, aciklama:"Hadiste su kaynakları, yol ortası ve gölgelik yerler sayılır; çarşı pazar bahsedilmemiştir."},
+  {zorluk:"zor", soru:"Metne göre bir pet şişenin doğada yok olma süresi yaklaşık kaç yıldır?", secenekler:["40","100","400","1000"], dogru:2, aciklama:"Metindeki tabloya göre pet şişenin doğada yok olma süresi 400 yıldır."},
+  {zorluk:"zor", soru:"Metne göre bir cam şişenin doğada yok olma süresi yaklaşık kaç yıldır?", secenekler:["100","1000","4000","400"], dogru:2, aciklama:"Metindeki tabloya göre cam şişenin doğada yok olma süresi 4000 yıldır."},
+  {zorluk:"zor", soru:"Abdestte kulakların içi hangi parmakla mesh edilir?", secenekler:["Baş parmak","Şehadet veya serçe parmak","Orta parmak","Yüzük parmağı"], dogru:1, aciklama:"Eller ıslatılarak şehadet veya serçe parmaklarla kulakların içi mesh edilir."},
+  {zorluk:"zor", soru:"Abdestte kulakların arkası hangi parmakla mesh edilir?", secenekler:["Baş parmak","Şehadet parmağı","Serçe parmak","Orta parmak"], dogru:0, aciklama:"Başparmakla kulakların arkası mesh edilir."},
+  {zorluk:"zor", soru:"Manevi temizlikte kaçınılması gereken kötü duygu ve davranışlar arasında hangisi SAYILMAZ?", secenekler:["Kin","Yalan","Sabır","İftira"], dogru:2, aciklama:"Kin, nefret, düşmanlık, yalan, hile, iftira, dedikodu kaçınılması gereken kötü davranışlardır; sabır ise iyi bir özelliktir."},
+  {zorluk:"zor", soru:"\"Müminlerin iman bakımından en mükemmeli, ahlakı en güzel olandır.\" sözü nedir?", secenekler:["Ayet","Hadis","Atasözü","Kanun"], dogru:1, aciklama:"Bu söz bir hadistir. (Ebu Davud, Sünnet, 15.)"},
+];
+let kt5rIndex = 0, kt5rPuan = 0, kt5rSiraliSorular = [], kt5rKilit = false;
+
+function kt5rZayifAnahtari(){ return 'dkabZayifSorular_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname); }
+function kt5rZayifOku(){
+  try{ return JSON.parse(localStorage.getItem(kt5rZayifAnahtari())) || {}; }catch(e){ return {}; }
+}
+function kt5rZayifKaydet(soruMetni){
+  const v = kt5rZayifOku();
+  v[soruMetni] = (v[soruMetni]||0) + 1;
+  try{ localStorage.setItem(kt5rZayifAnahtari(), JSON.stringify(v)); }catch(e){}
+}
+function kt5rAgirlikliKaristir(sorular){
+  const zayif = kt5rZayifOku();
+  return sorular
+    .map(s => ({s, r: Math.random() - (zayif[s.soru]||0) * 0.15}))
+    .sort((a,b)=>a.r-b.r)
+    .map(x=>x.s);
+}
+
+function kt5rBaslat(){
+  kt5rSiraliSorular = kt5rAgirlikliKaristir(konuTekrariSorulari5.slice());
+  kt5rIndex = 0; kt5rPuan = 0;
+  document.getElementById('kt5rPuan').textContent = 0;
+  document.getElementById('kt5rToplam').textContent = kt5rSiraliSorular.length;
+  document.getElementById('kt5rSonuc').textContent = '';
+  document.getElementById('kt5rSonrakiBtn').style.display = 'none';
+  kt5rSoruGoster();
+}
+
+function kt5rSoruGoster(){
+  if(kt5rIndex >= kt5rSiraliSorular.length){
+    document.getElementById('kt5rSoru').textContent = '';
+    document.getElementById('kt5rSecenekler').innerHTML = '';
+    document.getElementById('kt5rAciklama').style.display = 'none';
+    document.getElementById('kt5rZorluk').textContent = '';
+    document.getElementById('kt5rSonrakiBtn').style.display = 'none';
+    const yuzde = Math.round((kt5rPuan/kt5rSiraliSorular.length)*100);
+    let kt5rSeviye;
+    if(yuzde>=90) kt5rSeviye = '🏆 Din Bilgisi Ustası';
+    else if(yuzde>=70) kt5rSeviye = '🥇 Çok Başarılı';
+    else if(yuzde>=50) kt5rSeviye = '🥈 Biraz Daha Çalış';
+    else kt5rSeviye = '📚 Konuyu Tekrar Et';
+    document.getElementById('kt5rSonuc').innerHTML = `🎉 Test bitti!<br><span style="font-size:1.25em;font-weight:bold;">${kt5rSeviye}</span><br>${kt5rPuan}/${kt5rSiraliSorular.length} doğru (%${yuzde})`;
+    return;
+  }
+  kt5rKilit = false;
+  document.getElementById('kt5rTur').textContent = kt5rIndex+1;
+  const oge = kt5rSiraliSorular[kt5rIndex];
+  const zorlukEtiket = oge.zorluk==='kolay' ? '🟢 Kolay' : oge.zorluk==='orta' ? '🟡 Orta' : '🔴 Zor';
+  document.getElementById('kt5rZorluk').textContent = zorlukEtiket;
+  document.getElementById('kt5rSoru').textContent = oge.soru;
+  document.getElementById('kt5rAciklama').style.display = 'none';
+  document.getElementById('kt5rAciklama').textContent = '';
+  document.getElementById('kt5rSonrakiBtn').style.display = 'none';
+  document.getElementById('kt5rSonuc').textContent = '';
+  const kutu = document.getElementById('kt5rSecenekler');
+  kutu.innerHTML = '';
+  oge.secenekler.forEach((sec,i)=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = sec;
+    btn.onclick = ()=>{
+      if(kt5rKilit) return;
+      kt5rKilit = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(i===oge.dogru){
+        btn.classList.add('dogru');
+        kt5rPuan++;
+        document.getElementById('kt5rPuan').textContent = kt5rPuan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn[oge.dogru].classList.add('dogru');
+        kt5rZayifKaydet(oge.soru);
+      }
+      const aciklamaKutu = document.getElementById('kt5rAciklama');
+      aciklamaKutu.style.display = 'block';
+      aciklamaKutu.innerHTML = `💡 <b>Açıklama:</b> ${oge.aciklama}`;
+      document.getElementById('kt5rSonrakiBtn').style.display = 'block';
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+function kt5rSonrakiSoru(){
+  kt5rIndex++;
+  kt5rSoruGoster();
+}
+
+// =====================================================================
+// 5. ÜNİTE KELİME HAVUZU (28 kavram)
+// =====================================================================
+const kelimeHavuzu5 = [
+  {kelime:"TEMİZLİK", anlam:"İnsanın görünen ve görünmeyen her türlü kirden arınması"},
+  {kelime:"TAHARET", anlam:"İslam kültüründe temizlik yerine kullanılan kavram"},
+  {kelime:"ABDEST", anlam:"Namaz öncesi yapılan dinî temizlik"},
+  {kelime:"MANEVİ", anlam:"Kalbin, iç dünyanın temiz ve güzel ahlaklı olması"},
+  {kelime:"MADDİ", anlam:"Bedenin, elbiselerin, çevrenin temiz tutulması"},
+  {kelime:"MİSVAK", anlam:"Peygamberimizin diş temizliğinde kullandığı ağaç parçası"},
+  {kelime:"ÇEVRE", anlam:"İçinde yaşadığımız, bizi her an etkisi altında bulunduran ortam"},
+  {kelime:"NİYET", anlam:"Abdest almaya başlarken kalpten yapılan karar"},
+  {kelime:"MESH", anlam:"Islak elle başın veya belirli yerlerin üzerini silme"},
+  {kelime:"SADAKA", anlam:"Bir ağaç dikip ondan bir kuşun/insanın yararlanmasının kazandırdığı sevap"},
+  {kelime:"BEDEN", anlam:"Vücudumuzun tamamı"},
+  {kelime:"GİYSİ", anlam:"Üzerimize giydiğimiz, temiz tutulması gereken kıyafet"},
+  {kelime:"TIRNAK", anlam:"Uzayınca kesilmesi gereken beden parçası"},
+  {kelime:"SAÇ", anlam:"Temiz ve bakımlı tutulması gereken beden parçası"},
+  {kelime:"DÜZEN", anlam:"Ev ve odanın toplu, dağınık olmayan hâli"},
+  {kelime:"ATIK", anlam:"Geri dönüşüme ayrılan kullanılmış madde"},
+  {kelime:"MİZAN", anlam:"Allah'ın evrende koyduğu ölçü ve denge"},
+  {kelime:"EROZYON", anlam:"Verimli toprağın aşınıp kaybolması"},
+  {kelime:"ORMAN", anlam:"Ağaçlardan oluşan, korunması gereken doğal alan"},
+  {kelime:"AĞAÇ", anlam:"Dikilmesi sevap sayılan, çevreye yararlı bitki"},
+  {kelime:"LANET", anlam:"Kötü davranışların sebep olduğu ilahi uzaklaştırma"},
+  {kelime:"EMANET", anlam:"Çevrenin insana Allah tarafından verildiği bilinç"},
+  {kelime:"HUZUR", anlam:"Temiz ve düzenli bir evde yaşamanın verdiği duygu"},
+  {kelime:"ÇÖP", anlam:"Yere değil, çöp kutusuna atılması gereken atık"},
+  {kelime:"DÖNÜŞÜM", anlam:"Kullanılmış maddelerin yeniden değerlendirilmesi"},
+  {kelime:"İMAN", anlam:"Allah'a kalpten inanma; temizlik bunun yarısı sayılır"},
+  {kelime:"HAK", anlam:"Kişinin sahip olduğu şey veya yetki"},
+  {kelime:"SORUMLULUK", anlam:"Üstlenilen görev"},
+];
+function ku5AnlamBul(kelime){
+  const bulunan = kelimeHavuzu5.find(x=>x.kelime===kelime);
+  return bulunan ? bulunan.anlam : '';
+}
+
+// =====================================================================
+// HIZLI KELİME ÜRETME (5. Ünite)
+// =====================================================================
+const ku5GecerliHarfler = ["T","A","M","Ç","S","D","E","H"];
+let ku5AktifHarf = '', ku5Bulunanlar = [], ku5Sure = 60, ku5Zamanlayici = null, ku5Puan = 0, ku5Bitti = true;
+
+function ku5Baslat(){
+  clearInterval(ku5Zamanlayici);
+  ku5AktifHarf = ku5GecerliHarfler[Math.floor(Math.random()*ku5GecerliHarfler.length)];
+  ku5Bulunanlar = []; ku5Puan = 0; ku5Sure = 60; ku5Bitti = false;
+  document.getElementById('ku5Harf').textContent = ku5AktifHarf;
+  document.getElementById('ku5Sure').textContent = ku5Sure;
+  document.getElementById('ku5Puan').textContent = 0;
+  document.getElementById('ku5Liste').innerHTML = '';
+  document.getElementById('ku5Sonuc').textContent = '';
+  document.getElementById('ku5Uyari').textContent = '';
+  document.getElementById('ku5Kacirilan').innerHTML = '';
+  const girdi = document.getElementById('ku5Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  ku5Zamanlayici = setInterval(()=>{
+    ku5Sure--;
+    document.getElementById('ku5Sure').textContent = ku5Sure;
+    if(ku5Sure<=0) ku5Bitir();
+  }, 1000);
+}
+
+function ku5Ekle(){
+  if(ku5Bitti) return;
+  const girdi = document.getElementById('ku5Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('ku5Uyari');
+  if(!kelime.startsWith(ku5AktifHarf)){ uyari.textContent = `❌ "${ku5AktifHarf}" harfiyle başlamalı!`; return; }
+  if(!kelimeHavuzu5.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(ku5Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  ku5Bulunanlar.push(kelime);
+  ku5Puan++;
+  document.getElementById('ku5Puan').textContent = ku5Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('ku5Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function ku5Bitir(){
+  clearInterval(ku5Zamanlayici);
+  ku5Bitti = true;
+  document.getElementById('ku5Girdi').disabled = true;
+  document.querySelectorAll('#ku5Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku5AnlamBul(kelime)}`;
+  });
+  const kacirilanKutu = document.getElementById('ku5Kacirilan');
+  kacirilanKutu.innerHTML = '';
+  const kacirilanlar = kelimeHavuzu5.filter(x=>x.kelime.startsWith(ku5AktifHarf) && !ku5Bulunanlar.includes(x.kelime));
+  if(kacirilanlar.length){
+    const baslik = document.createElement('p');
+    baslik.style.textAlign='center'; baslik.style.fontWeight='bold'; baslik.style.color='var(--kirmizi)';
+    baslik.textContent = 'Kaçırdıkların:';
+    kacirilanKutu.appendChild(baslik);
+    const ul = document.createElement('ul'); ul.className='ku-liste';
+    kacirilanlar.forEach(item=>{
+      const li = document.createElement('li');
+      li.style.background='#ffe8d6'; li.style.borderColor='var(--sari)';
+      li.textContent = `${item.kelime} — ${item.anlam}`;
+      ul.appendChild(li);
+    });
+    kacirilanKutu.appendChild(ul);
+  }
+  document.getElementById('ku5Sonuc').textContent = `⏰ Süre bitti! "${ku5AktifHarf}" harfiyle ${ku5Puan} doğru kelime yazdın!`;
+}
+
+// =====================================================================
+// TUZAK HARF (5. Ünite)
+// =====================================================================
+const tuzak5GecerliHarfler = ["A","E","İ","M","T"];
+let tuzak5Harf = '', tuzak5Bulunanlar = [], tuzak5Sure = 40, tuzak5Zamanlayici = null, tuzak5Puan = 0, tuzak5Bitti = true;
+
+function tuzak5Baslat(){
+  clearInterval(tuzak5Zamanlayici);
+  tuzak5Harf = tuzak5GecerliHarfler[Math.floor(Math.random()*tuzak5GecerliHarfler.length)];
+  tuzak5Bulunanlar = []; tuzak5Puan = 0; tuzak5Sure = 40; tuzak5Bitti = false;
+  document.getElementById('tuzak5Harf').textContent = tuzak5Harf;
+  document.getElementById('tuzak5Sure').textContent = tuzak5Sure;
+  document.getElementById('tuzak5Puan').textContent = 0;
+  document.getElementById('tuzak5Liste').innerHTML = '';
+  document.getElementById('tuzak5Sonuc').textContent = '';
+  document.getElementById('tuzak5Uyari').textContent = '';
+  const girdi = document.getElementById('tuzak5Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  tuzak5Zamanlayici = setInterval(()=>{
+    tuzak5Sure--;
+    document.getElementById('tuzak5Sure').textContent = tuzak5Sure;
+    if(tuzak5Sure<=0) tuzak5Bitir();
+  }, 1000);
+}
+
+function tuzak5Ekle(){
+  if(tuzak5Bitti) return;
+  const girdi = document.getElementById('tuzak5Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('tuzak5Uyari');
+  if(kelime.includes(tuzak5Harf)){ uyari.textContent = `🚫 Bu kelimede tuzak harf "${tuzak5Harf}" var, geçersiz!`; return; }
+  if(!kelimeHavuzu5.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(tuzak5Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  tuzak5Bulunanlar.push(kelime);
+  tuzak5Puan++;
+  document.getElementById('tuzak5Puan').textContent = tuzak5Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('tuzak5Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function tuzak5Bitir(){
+  clearInterval(tuzak5Zamanlayici);
+  tuzak5Bitti = true;
+  document.getElementById('tuzak5Girdi').disabled = true;
+  document.querySelectorAll('#tuzak5Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku5AnlamBul(kelime)}`;
+  });
+  document.getElementById('tuzak5Sonuc').textContent = `⏰ Süre bitti! "${tuzak5Harf}" harfini kullanmadan ${tuzak5Puan} kelime yazdın!`;
+}
+
+// =====================================================================
+// KELİME FABRİKASI (5. Ünite)
+// =====================================================================
+let kf5Sira = [], kf5Index = 0, kf5Uretilen = 0, kf5Hata = 0;
+
+function kf5Baslat(){
+  kf5Sira = karistir(kelimeHavuzu5.slice());
+  kf5Index = 0; kf5Uretilen = 0; kf5Hata = 0;
+  document.getElementById('kf5Uretilen').textContent = 0;
+  document.getElementById('kf5Toplam').textContent = kf5Sira.length;
+  document.getElementById('kf5Hata').textContent = 0;
+  document.getElementById('kf5Urunler').innerHTML = '';
+  document.getElementById('kf5Sonuc').textContent = '';
+  kf5Tur();
+}
+
+function kf5Tur(){
+  if(kf5Index >= kf5Sira.length){
+    document.getElementById('kf5BantAlani').innerHTML = '';
+    document.getElementById('kf5Siparis').textContent = '';
+    document.getElementById('kf5Girdi').disabled = true;
+    document.getElementById('kf5Sonuc').textContent = `🏭 Fabrika kapandı! ${kf5Uretilen}/${kf5Sira.length} kelime ürettin, ${kf5Hata} hata yaptın.`;
+    return;
+  }
+  const oge = kf5Sira[kf5Index];
+  document.getElementById('kf5Siparis').textContent = `📋 Sipariş: ${oge.anlam}`;
+  const harfler = karistir(oge.kelime.split(''));
+  const bant = document.getElementById('kf5BantAlani');
+  bant.innerHTML = '';
+  harfler.forEach(h=>{
+    const kutu = document.createElement('div');
+    kutu.className = 'kf-kutu';
+    kutu.textContent = h;
+    bant.appendChild(kutu);
+  });
+  const girdi = document.getElementById('kf5Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+}
+
+function kf5Uret(){
+  if(kf5Index >= kf5Sira.length) return;
+  const oge = kf5Sira[kf5Index];
+  const girdi = document.getElementById('kf5Girdi');
+  const tahmin = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  if(!tahmin) return;
+  if(tahmin === oge.kelime){
+    kf5Uretilen++;
+    document.getElementById('kf5Uretilen').textContent = kf5Uretilen;
+    const cip = document.createElement('div');
+    cip.className = 'dua-cip';
+    cip.textContent = `✅ ${oge.kelime}`;
+    document.getElementById('kf5Urunler').appendChild(cip);
+    kf5Index++;
+    setTimeout(()=>kf5Tur(), 400);
+  } else {
+    kf5Hata++;
+    document.getElementById('kf5Hata').textContent = kf5Hata;
+    girdi.classList.add('yanlis-girdi');
+    setTimeout(()=>girdi.classList.remove('yanlis-girdi'), 400);
+    girdi.value = '';
+  }
+}
+
+// =====================================================================
+// KELİME MÜHENDİSİ (5. Ünite)
+// =====================================================================
+function parcalaraBol(kelime){
+  const uzunluk = kelime.length;
+  let parcaSayisi = uzunluk<=4 ? 2 : uzunluk<=7 ? 3 : 4;
+  parcaSayisi = Math.min(parcaSayisi, uzunluk);
+  const parcalar = [];
+  let index = 0;
+  for(let i=0;i<parcaSayisi;i++){
+    const kalan = parcaSayisi - i;
+    const buBoyut = i===parcaSayisi-1 ? uzunluk-index : Math.ceil((uzunluk-index)/kalan);
+    parcalar.push(kelime.slice(index, index+buBoyut));
+    index += buBoyut;
+  }
+  return parcalar;
+}
+
+let km5Sira = [], km5Index = 0, km5DogruSayisi = 0;
+
+function km5Baslat(){
+  km5Sira = karistir(kelimeHavuzu5.slice());
+  km5Index = 0; km5DogruSayisi = 0;
+  document.getElementById('km5Dogru').textContent = 0;
+  document.getElementById('km5Toplam').textContent = km5Sira.length;
+  document.getElementById('km5Sonuc').textContent = '';
+  km5Tur();
+}
+
+function km5Tur(){
+  if(km5Index >= km5Sira.length){
+    document.getElementById('km5Ipucu').textContent = '';
+    document.getElementById('km5Banka').innerHTML = '';
+    document.getElementById('km5Cevap').innerHTML = '';
+    document.getElementById('km5Sonuc').textContent = `🏆 Tebrikler! Kelime mühendisliğini tamamladın! ${km5DogruSayisi}/${km5Sira.length} kelime inşa ettin.`;
+    return;
+  }
+  document.getElementById('km5Tur').textContent = km5Index+1;
+  const oge = km5Sira[km5Index];
+  document.getElementById('km5Ipucu').innerHTML = `📐 Plan: <b>${oge.anlam}</b>`;
+  const parcalar = parcalaraBol(oge.kelime);
+  siraOlustur({tokens:parcalar, bankaId:'km5Banka', cevapId:'km5Cevap', tamamlandi:()=>{
+    km5DogruSayisi++;
+    document.getElementById('km5Dogru').textContent = km5DogruSayisi;
+    document.getElementById('km5Sonuc').textContent = `✅ İnşa edildi: ${oge.kelime}`;
+    km5Index++;
+    setTimeout(()=>{ document.getElementById('km5Sonuc').textContent=''; km5Tur(); }, 1000);
+  }});
+}
+
+// =====================================================================
+// KAVRAM TURNUVASI (5. Ünite)
+// =====================================================================
+const turnuvaEslesmeler5 = [
+  {tur:"Çeyrek Final 1", a:"MADDİ", b:"MANEVİ", soru:"Hangisi bedenin ve elbiselerin temiz tutulmasıdır?", dogruCevap:"MADDİ"},
+  {tur:"Çeyrek Final 2", a:"ABDEST", b:"MİSVAK", soru:"Hangisi namazdan önce yapılan tam bir dinî temizliktir?", dogruCevap:"ABDEST"},
+  {tur:"Çeyrek Final 3", a:"ORMAN", b:"ÇÖP", soru:"Hangisi ağaçlardan oluşan, korunması gereken doğal alandır?", dogruCevap:"ORMAN"},
+  {tur:"Çeyrek Final 4", a:"SADAKA", b:"İMAN", soru:"Hangisi bir ağaç dikmenin kazandırdığı sevaba verilen isimdir?", dogruCevap:"SADAKA"},
+  {tur:"Yarı Final 1", a:"MADDİ", b:"ABDEST", soru:"Hangisi bir temizlik türü değil, namaz öncesi yapılan bir ibadettir?", dogruCevap:"ABDEST"},
+  {tur:"Yarı Final 2", a:"ORMAN", b:"SADAKA", soru:"Hangisi bir doğal alan değil, bir sevap kazanma yoludur?", dogruCevap:"SADAKA"},
+  {tur:"FİNAL", a:"ABDEST", b:"SADAKA", soru:"Hangisi namaz kılmadan önce yapılması gereken bir ibadettir?", dogruCevap:"ABDEST"},
+];
+let kt5Index = 0, kt5DogruHakemlik = 0;
+
+function kt5Baslat(){
+  kt5Index = 0; kt5DogruHakemlik = 0;
+  document.getElementById('kt5Puan').textContent = 0;
+  document.getElementById('kt5Toplam').textContent = turnuvaEslesmeler5.length;
+  document.getElementById('kt5Sonuc').textContent = '';
+  kt5Tur();
+}
+
+function kt5Tur(){
+  if(kt5Index >= turnuvaEslesmeler5.length){
+    document.getElementById('kt5Asama').textContent = '';
+    document.getElementById('kt5Eslesme').textContent = '';
+    document.getElementById('kt5Secenekler').innerHTML = '';
+    const sampiyon = turnuvaEslesmeler5[turnuvaEslesmeler5.length-1].dogruCevap;
+    document.getElementById('kt5Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt5DogruHakemlik}/${turnuvaEslesmeler5.length}`;
+    return;
+  }
+  const mac = turnuvaEslesmeler5[kt5Index];
+  document.getElementById('kt5Tur').textContent = kt5Index+1;
+  document.getElementById('kt5Asama').textContent = mac.tur;
+  document.getElementById('kt5Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
+  const kutu = document.getElementById('kt5Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  [mac.a, mac.b].forEach(aday=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = aday;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(aday === mac.dogruCevap){
+        btn.classList.add('dogru');
+        kt5DogruHakemlik++;
+        document.getElementById('kt5Puan').textContent = kt5DogruHakemlik;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===mac.dogruCevap) b.classList.add('dogru'); });
+      }
+      kt5Index++;
+      setTimeout(()=>kt5Tur(), 1300);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// BONUS OYUN — Hafıza Zinciri (5. Ünite)
+// =====================================================================
+const bz5Tuslar = [
+  {simge:"TEMİZLİK", renk:"#2a6f97"}, {simge:"TAHARET", renk:"#40916c"}, {simge:"ABDEST", renk:"#f4a261"},
+  {simge:"MANEVİ", renk:"#d62828"}, {simge:"MADDİ", renk:"#7b2cbf"}, {simge:"MİSVAK", renk:"#0077b6"},
+  {simge:"ÇEVRE", renk:"#e76f51"}, {simge:"NİYET", renk:"#2d6a4f"}, {simge:"SADAKA", renk:"#9d4edd"},
+  {simge:"DÜZEN", renk:"#457b9d"}, {simge:"MİZAN", renk:"#c9184a"}, {simge:"EMANET", renk:"#e09f3e"},
+];
+let bz5Sira = [], bz5KullaniciIndex = 0, bz5Seviye = 0, bz5Oynatiliyor = false;
+
+function bz5IzgaraOlustur(){
+  const izgara = document.getElementById('bz5Izgara');
+  izgara.innerHTML = '';
+  bz5Tuslar.forEach((t,i)=>{
+    const tus = document.createElement('div');
+    tus.className = 'bz-tus';
+    tus.style.background = t.renk;
+    tus.textContent = t.simge;
+    tus.onclick = ()=>bz5TusaTikla(i);
+    izgara.appendChild(tus);
+  });
+}
+function bz5Baslat(){
+  bz5Sira = []; bz5Seviye = 0; bz5KullaniciIndex = 0;
+  document.getElementById('bz5Seviye').textContent = 0;
+  document.getElementById('bz5Sonuc').textContent = '';
+  bz5IzgaraOlustur();
+  bz5SonrakiTur();
+}
+function bz5SonrakiTur(){
+  bz5Seviye++;
+  document.getElementById('bz5Seviye').textContent = bz5Seviye;
+  bz5Sira.push(Math.floor(Math.random()*bz5Tuslar.length));
+  bz5KullaniciIndex = 0;
+  bz5Oynat();
+}
+function bz5Oynat(){
+  bz5Oynatiliyor = true;
+  const dugmeler = document.querySelectorAll('#bz5Izgara .bz-tus');
+  dugmeler.forEach(d=>d.classList.add('bz-devre-disi'));
+  let i = 0;
+  const aralik = setInterval(()=>{
+    if(i>0) dugmeler[bz5Sira[i-1]].classList.remove('bz-yanik');
+    if(i>=bz5Sira.length){
+      clearInterval(aralik);
+      bz5Oynatiliyor = false;
+      dugmeler.forEach(d=>d.classList.remove('bz-devre-disi'));
+      return;
+    }
+    dugmeler[bz5Sira[i]].classList.add('bz-yanik');
+    i++;
+  }, 700);
+}
+function bz5TusaTikla(i){
+  if(bz5Oynatiliyor) return;
+  const dugmeler = document.querySelectorAll('#bz5Izgara .bz-tus');
+  dugmeler[i].classList.add('bz-yanik');
+  setTimeout(()=>dugmeler[i].classList.remove('bz-yanik'), 250);
+  if(bz5Sira[bz5KullaniciIndex] === i){
+    bz5KullaniciIndex++;
+    if(bz5KullaniciIndex === bz5Sira.length){
+      setTimeout(()=>bz5SonrakiTur(), 900);
+    }
+  } else {
+    document.getElementById('bz5Sonuc').textContent = `💥 Yanlış sıra! En uzun hatırladığın zincir: ${bz5Seviye-1}`;
+  }
+}
+function bz5OrnekOyna(){
+  document.getElementById('bz5Sonuc').textContent = '🎬 Örnek gösteriliyor: önce sıra yanacak, sonra otomatik olarak aynı sırayla tıklanacak...';
+  document.getElementById('bz5Seviye').textContent = 'Örnek';
+  bz5IzgaraOlustur();
+  const demoSira = [0, 2, 1];
+  const dugmeler = document.querySelectorAll('#bz5Izgara .bz-tus');
+  dugmeler.forEach(d=>d.classList.add('bz-devre-disi'));
+  let i = 0;
+  const gosterAralik = setInterval(()=>{
+    if(i>0) dugmeler[demoSira[i-1]].classList.remove('bz-yanik');
+    if(i >= demoSira.length){
+      clearInterval(gosterAralik);
+      let j = 0;
+      const tiklaAralik = setInterval(()=>{
+        if(j>0) dugmeler[demoSira[j-1]].classList.remove('bz-yanik');
+        if(j >= demoSira.length){
+          clearInterval(tiklaAralik);
+          dugmeler.forEach(d=>d.classList.remove('bz-devre-disi'));
+          document.getElementById('bz5Seviye').textContent = 0;
+          document.getElementById('bz5Sonuc').textContent = '👆 Gördüğün gibi: önce kavramlar sırayla yandı, sonra aynı sırayla tıklandı. Şimdi sıra sende — "Oyunu Başlat"a bas!';
+          return;
+        }
+        dugmeler[demoSira[j]].classList.add('bz-yanik');
+        j++;
+      }, 700);
+      return;
+    }
+    dugmeler[demoSira[i]].classList.add('bz-yanik');
+    i++;
+  }, 700);
+}
+
+// =====================================================================
+// KELİME AVI BULMACASI (5. Ünite)
+// =====================================================================
+const kelimeAvi5Listesi = [
+  {kelime:"TEMİZLİK", anlam:"İnsanın görünen ve görünmeyen her türlü kirden arınması"},
+  {kelime:"TAHARET", anlam:"İslam kültüründe temizlik yerine kullanılan kavram"},
+  {kelime:"ABDEST", anlam:"Namaz öncesi yapılan dinî temizlik"},
+  {kelime:"MANEVİ", anlam:"Kalbin, iç dünyanın temiz ve güzel ahlaklı olması"},
+  {kelime:"MADDİ", anlam:"Bedenin, elbiselerin, çevrenin temiz tutulması"},
+  {kelime:"MİSVAK", anlam:"Peygamberimizin diş temizliğinde kullandığı ağaç parçası"},
+  {kelime:"ÇEVRE", anlam:"İçinde yaşadığımız, bizi her an etkisi altında bulunduran ortam"},
+  {kelime:"NİYET", anlam:"Abdest almaya başlarken kalpten yapılan karar"},
+  {kelime:"MESH", anlam:"Islak elle başın veya belirli yerlerin üzerini silme"},
+  {kelime:"SADAKA", anlam:"Bir ağaç dikip ondan bir kuşun/insanın yararlanmasının kazandırdığı sevap"},
+  {kelime:"DÜZEN", anlam:"Ev ve odanın toplu, dağınık olmayan hâli"},
+  {kelime:"ATIK", anlam:"Geri dönüşüme ayrılan kullanılmış madde"},
+  {kelime:"EROZYON", anlam:"Verimli toprağın aşınıp kaybolması"},
+  {kelime:"ORMAN", anlam:"Ağaçlardan oluşan, korunması gereken doğal alan"},
+];
+const ka5SatirSayisi = 14, ka5SutunSayisi = 14;
+const ka5AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+
+function ka5KelimeYerlestir(izgara, kelime){
+  const yonler = karistir([{dr:0,dc:1},{dr:0,dc:-1},{dr:1,dc:0},{dr:-1,dc:0}]);
+  for(let deneme=0; deneme<200; deneme++){
+    const yon = yonler[deneme % yonler.length];
+    const satir = Math.floor(Math.random()*ka5SatirSayisi);
+    const sutun = Math.floor(Math.random()*ka5SutunSayisi);
+    const bitSatir = satir + yon.dr*(kelime.length-1);
+    const bitSutun = sutun + yon.dc*(kelime.length-1);
+    if(bitSatir<0 || bitSatir>=ka5SatirSayisi || bitSutun<0 || bitSutun>=ka5SutunSayisi) continue;
+    let uygun = true;
+    for(let i=0;i<kelime.length;i++){
+      const r = satir + yon.dr*i, c = sutun + yon.dc*i;
+      if(izgara[r][c] !== null && izgara[r][c] !== kelime[i]){ uygun=false; break; }
+    }
+    if(!uygun) continue;
+    const hucreler=[];
+    for(let i=0;i<kelime.length;i++){
+      const r = satir + yon.dr*i, c = sutun + yon.dc*i;
+      izgara[r][c] = kelime[i];
+      hucreler.push({r,c});
+    }
+    return hucreler;
+  }
+  return null;
+}
+
+function kelimeAvi5Olustur(){
+  let izgara, basarili=false;
+  for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
+    izgara = Array.from({length:ka5SatirSayisi}, ()=>Array(ka5SutunSayisi).fill(null));
+    basarili = true;
+    const siraliKelimeler = kelimeAvi5Listesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    for(const item of siraliKelimeler){
+      const hucreler = ka5KelimeYerlestir(izgara, item.kelime);
+      if(!hucreler){ basarili=false; break; }
+    }
+  }
+  for(let r=0;r<ka5SatirSayisi;r++){
+    for(let c=0;c<ka5SutunSayisi;c++){
+      if(izgara[r][c]===null) izgara[r][c] = ka5AsciiHarfler[Math.floor(Math.random()*ka5AsciiHarfler.length)];
+    }
+  }
+
+  const kutu = document.getElementById('ka5Izgara');
+  kutu.innerHTML = '';
+  kutu.style.gridTemplateColumns = `repeat(${ka5SutunSayisi}, 1fr)`;
+  const hucreElemanlari = [];
+  for(let r=0;r<ka5SatirSayisi;r++){
+    hucreElemanlari.push([]);
+    for(let c=0;c<ka5SutunSayisi;c++){
+      const h = document.createElement('div');
+      h.className = 'ka-hucre';
+      h.textContent = izgara[r][c];
+      h.dataset.r = r; h.dataset.c = c;
+      kutu.appendChild(h);
+      hucreElemanlari[r].push(h);
+    }
+  }
+
+  const liste = document.getElementById('ka5Liste');
+  liste.innerHTML = '';
+  kelimeAvi5Listesi.forEach(item=>{
+    const li = document.createElement('li');
+    li.id = 'ka5-kelime-' + item.kelime;
+    li.textContent = `${item.kelime} — ${item.anlam}`;
+    liste.appendChild(li);
+  });
+  document.getElementById('ka5Bulunan').textContent = 0;
+  document.getElementById('ka5Toplam').textContent = kelimeAvi5Listesi.length;
+  document.getElementById('ka5Sonuc').textContent = '';
+
+  let ilkHucre = null;
+  hucreElemanlari.flat().forEach(h=>{
+    h.onclick = ()=>{
+      if(h.classList.contains('ka-bulundu')) return;
+      if(!ilkHucre){ ilkHucre = h; h.classList.add('ka-secili'); return; }
+      if(ilkHucre === h){ ilkHucre.classList.remove('ka-secili'); ilkHucre=null; return; }
+      const r1=+ilkHucre.dataset.r, c1=+ilkHucre.dataset.c;
+      const r2=+h.dataset.r, c2=+h.dataset.c;
+      let yol = [];
+      if(r1===r2){
+        const adim = c2>c1?1:-1;
+        for(let c=c1;;c+=adim){ yol.push({r:r1,c}); if(c===c2) break; }
+      } else if(c1===c2){
+        const adim = r2>r1?1:-1;
+        for(let r=r1;;r+=adim){ yol.push({r,c:c1}); if(r===r2) break; }
+      } else {
+        ilkHucre.classList.remove('ka-secili');
+        h.classList.add('ka-secili');
+        ilkHucre = h;
+        return;
+      }
+      const secilenKelime = yol.map(p=>izgara[p.r][p.c]).join('');
+      const tersKelime = secilenKelime.split('').reverse().join('');
+      const eslesen = kelimeAvi5Listesi.find(item =>
+        (item.kelime===secilenKelime || item.kelime===tersKelime) &&
+        !document.getElementById('ka5-kelime-'+item.kelime).classList.contains('bulundu-satir')
+      );
+      if(eslesen){
+        yol.forEach(p=>{
+          hucreElemanlari[p.r][p.c].classList.remove('ka-secili');
+          hucreElemanlari[p.r][p.c].classList.add('ka-bulundu');
+        });
+        document.getElementById('ka5-kelime-'+eslesen.kelime).classList.add('bulundu-satir');
+        const bulunanSayisi = document.querySelectorAll('#ka5Liste .bulundu-satir').length;
+        document.getElementById('ka5Bulunan').textContent = bulunanSayisi;
+        if(bulunanSayisi === kelimeAvi5Listesi.length){
+          document.getElementById('ka5Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri buldun!';
+        }
+      } else {
+        ilkHucre.classList.remove('ka-secili');
+      }
+      ilkHucre = null;
+    };
+  });
+}
+
+// =====================================================================
+// ÇENGEL BULMACA (5. Ünite)
+// =====================================================================
+const cengel5Zinciri = [
+  {kelime:"AĞAÇ", anlam:"Dikilmesi sevap sayılan, çevreye yararlı bitki"},
+  {kelime:"ÇEVRE", anlam:"İçinde yaşadığımız, bizi her an etkisi altında bulunduran ortam"},
+  {kelime:"EMANET", anlam:"Çevrenin insana Allah tarafından verildiği bilinç"},
+  {kelime:"TAHARET", anlam:"İslam kültüründe temizlik yerine kullanılan kavram"},
+  {kelime:"TEMİZLİK", anlam:"İnsanın görünen ve görünmeyen her türlü kirden arınması"},
+];
+let cengel5HucreHarita = {}, cengel5InputMap = {};
+
+function cengel5Olustur(){
+  let r=0, c=0, dir='right';
+  const yerlesimler = [];
+  cengel5Zinciri.forEach(item=>{
+    const kelime = item.kelime;
+    const hucreler = [];
+    for(let j=0;j<kelime.length;j++){
+      hucreler.push(dir==='right' ? {r, c:c+j} : {r:r+j, c});
+    }
+    yerlesimler.push({...item, hucreler, dir});
+    const son = hucreler[hucreler.length-1];
+    r = son.r; c = son.c;
+    dir = dir==='right' ? 'down' : 'right';
+  });
+
+  let minR=Infinity,maxR=-Infinity,minC=Infinity,maxC=-Infinity;
+  yerlesimler.forEach(p=>p.hucreler.forEach(h=>{
+    minR=Math.min(minR,h.r); maxR=Math.max(maxR,h.r);
+    minC=Math.min(minC,h.c); maxC=Math.max(maxC,h.c);
+  }));
+  const satirSayisi = maxR-minR+1, sutunSayisi = maxC-minC+1;
+
+  cengel5HucreHarita = {};
+  yerlesimler.forEach(p=>{
+    p.hucreler.forEach((h,i)=>{
+      const key = (h.r-minR)+','+(h.c-minC);
+      cengel5HucreHarita[key] = p.kelime[i];
+    });
+  });
+
+  const siraliHucreler = [];
+  const gorulen = new Set();
+  yerlesimler.forEach((p, idx)=>{
+    const baslangic = idx===0 ? 0 : 1;
+    for(let i=baslangic;i<p.hucreler.length;i++){
+      const h = p.hucreler[i];
+      const key = (h.r-minR)+','+(h.c-minC);
+      if(!gorulen.has(key)){ gorulen.add(key); siraliHucreler.push(key); }
+    }
+  });
+
+  const izgara = document.getElementById('cengel5Izgara');
+  izgara.innerHTML = '';
+  izgara.style.gridTemplateColumns = `repeat(${sutunSayisi}, 34px)`;
+  izgara.style.gridTemplateRows = `repeat(${satirSayisi}, 34px)`;
+  cengel5InputMap = {};
+  for(let rr=0; rr<satirSayisi; rr++){
+    for(let cc=0; cc<sutunSayisi; cc++){
+      const key = rr+','+cc;
+      const hucreDiv = document.createElement('div');
+      hucreDiv.style.gridColumn = (cc+1);
+      hucreDiv.style.gridRow = (rr+1);
+      if(cengel5HucreHarita[key] !== undefined){
+        hucreDiv.className = 'cengel-hucre';
+        const girdi = document.createElement('input');
+        girdi.maxLength = 1;
+        girdi.className = 'cengel-girdi';
+        girdi.dataset.key = key;
+        girdi.oninput = (e)=>{
+          e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
+          e.target.classList.remove('dogru','yanlis');
+          const idx = siraliHucreler.indexOf(key);
+          if(idx>=0 && idx<siraliHucreler.length-1){
+            const sonrakiKey = siraliHucreler[idx+1];
+            if(cengel5InputMap[sonrakiKey]) cengel5InputMap[sonrakiKey].focus();
+          }
+        };
+        hucreDiv.appendChild(girdi);
+        cengel5InputMap[key] = girdi;
+      } else {
+        hucreDiv.className = 'cengel-bos';
+      }
+      izgara.appendChild(hucreDiv);
+    }
+  }
+
+  const liste = document.getElementById('cengel5Liste');
+  liste.innerHTML = '';
+  yerlesimler.forEach((p, idx)=>{
+    const li = document.createElement('li');
+    li.textContent = `${idx+1}. ${p.dir==='right'?'➡️':'⬇️'} (${p.kelime.length} harf) ${p.anlam}`;
+    liste.appendChild(li);
+  });
+
+  document.getElementById('cengel5Sonuc').textContent = '';
+}
+
+function cengel5KontrolEt(){
+  let dogruSayisi=0, toplam=0;
+  Object.keys(cengel5HucreHarita).forEach(key=>{
+    toplam++;
+    const girdi = cengel5InputMap[key];
+    const beklenen = cengel5HucreHarita[key];
+    if(girdi.value && girdi.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
+      girdi.classList.add('dogru'); girdi.classList.remove('yanlis');
+      dogruSayisi++;
+    } else {
+      girdi.classList.add('yanlis'); girdi.classList.remove('dogru');
+    }
+  });
+  document.getElementById('cengel5Sonuc').textContent = dogruSayisi===toplam
+    ? `🎉 Tebrikler! Çengel bulmacayı tamamen doğru çözdün! (${dogruSayisi}/${toplam})`
+    : `Sonuç: ${dogruSayisi}/${toplam} doğru harf. Devam et!`;
+}
+
+// =====================================================================
+// SÖZCÜK MERDİVENİ (5. Ünite)
+// =====================================================================
+const merdiven5Zinciri = [
+  {kelime:"MANEVİ", anlam:"Kalbin, iç dünyanın temiz ve güzel ahlaklı olması"},
+  {kelime:"İMAN", anlam:"Allah'a kalpten inanma; temizlik bunun yarısı sayılır"},
+  {kelime:"NİYET", anlam:"Abdest almaya başlarken kalpten yapılan karar"},
+  {kelime:"TIRNAK", anlam:"Uzayınca kesilmesi gereken beden parçası"},
+];
+const merdiven5Havuz = ["TEMİZLİK","TAHARET","ABDEST","MADDİ","MİSVAK","ÇEVRE","MESH","SADAKA","BEDEN","GİYSİ","SAÇ","DÜZEN","ATIK","MİZAN","EROZYON","ORMAN","AĞAÇ","LANET","EMANET","HUZUR","ÇÖP","DÖNÜŞÜM"];
+let merdiven5Index = 0;
+
+function merdiven5Baslat(){
+  merdiven5Index = 0;
+  document.getElementById('merdiven5Toplam').textContent = merdiven5Zinciri.length;
+  document.getElementById('merdiven5Sonuc').textContent = '';
+  document.getElementById('merdiven5Gorsel').innerHTML = '';
+  merdiven5BasamakEkle(merdiven5Zinciri[0].kelime, 0);
+  merdiven5Tur();
+}
+function merdiven5BasamakEkle(kelime, index){
+  const basamak = document.createElement('div');
+  basamak.style.background='white'; basamak.style.border='2px solid var(--yesil)'; basamak.style.borderRadius='10px';
+  basamak.style.padding='8px 14px'; basamak.style.margin='6px 0'; basamak.style.fontWeight='bold';
+  basamak.style.marginLeft = (index*24) + 'px';
+  basamak.textContent = `${index+1}. ${kelime}`;
+  document.getElementById('merdiven5Gorsel').appendChild(basamak);
+}
+function merdiven5Tur(){
+  document.getElementById('merdiven5Basamak').textContent = merdiven5Index+1;
+  if(merdiven5Index+1 >= merdiven5Zinciri.length){
+    document.getElementById('merdiven5Ipucu').textContent = '';
+    document.getElementById('merdiven5Secenekler').innerHTML = '';
+    document.getElementById('merdiven5Sonuc').textContent = '🎉 Tebrikler! Sözcük merdivenini tamamen tırmandın!';
+    return;
+  }
+  const oncekiKelime = merdiven5Zinciri[merdiven5Index].kelime;
+  const hedef = merdiven5Zinciri[merdiven5Index+1];
+  const gerekliHarf = oncekiKelime[oncekiKelime.length-1];
+  document.getElementById('merdiven5Ipucu').innerHTML = `🗨️ İpucu: <b>${hedef.anlam}</b><br>Bu kelime "<b>${gerekliHarf}</b>" harfiyle başlamalı!`;
+  const yanlisHavuz = karistir(merdiven5Havuz.filter(k=>k!==hedef.kelime)).slice(0,3);
+  const secenekler = karistir([hedef.kelime, ...yanlisHavuz]);
+  const kutu = document.getElementById('merdiven5Secenekler');
+  kutu.innerHTML = '';
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek;
+    btn.onclick = ()=>{
+      if(secenek === hedef.kelime){
+        btn.classList.add('dogru');
+        merdiven5Index++;
+        setTimeout(()=>{ merdiven5BasamakEkle(hedef.kelime, merdiven5Index); merdiven5Tur(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        setTimeout(()=>btn.classList.remove('yanlis'), 400);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// ŞİFRELİ SÖZCÜK (5. Ünite)
+// =====================================================================
+const turkAlfabesi5 = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split('');
+let sifre5Anahtari = {};
+
+function sifre5Olustur(){
+  const sayilar = karistir(turkAlfabesi5.map((_,i)=>i+1));
+  sifre5Anahtari = {};
+  turkAlfabesi5.forEach((harf,i)=>{ sifre5Anahtari[harf] = sayilar[i]; });
+
+  const anahtarKutu = document.getElementById('sifre5Anahtar');
+  anahtarKutu.innerHTML = '';
+  turkAlfabesi5.forEach(harf=>{
+    const hucre = document.createElement('div');
+    hucre.className = 'sifre-anahtar-hucre';
+    hucre.innerHTML = `<b>${harf}</b><br>${sifre5Anahtari[harf]}`;
+    anahtarKutu.appendChild(hucre);
+  });
+
+  const kutu = document.getElementById('sifre5Kelimeler');
+  kutu.innerHTML = '';
+  document.getElementById('sifre5Sonuc').textContent = '';
+
+  kelimeHavuzu5.slice(0,20).forEach(item=>{
+    const satir = document.createElement('div');
+    satir.className = 'sifre-satir';
+    const anlamP = document.createElement('p');
+    anlamP.className = 'sifre-ipucu';
+    anlamP.textContent = `💡 ${item.anlam}`;
+    satir.appendChild(anlamP);
+
+    const kutucuklar = document.createElement('div');
+    kutucuklar.className = 'sifre-kutucuklar';
+    const harfler = item.kelime.split('');
+    const girdiler = [];
+    harfler.forEach((harf)=>{
+      const grup = document.createElement('div');
+      grup.className = 'sifre-grup';
+      const sayiEtiket = document.createElement('div');
+      sayiEtiket.className = 'sifre-sayi';
+      sayiEtiket.textContent = sifre5Anahtari[harf];
+      const girdi = document.createElement('input');
+      girdi.maxLength = 1;
+      girdi.className = 'sifre-girdi';
+      girdi.dataset.beklenen = harf;
+      grup.appendChild(sayiEtiket);
+      grup.appendChild(girdi);
+      kutucuklar.appendChild(grup);
+      girdiler.push(girdi);
+    });
+    girdiler.forEach((girdi, hIdx)=>{
+      girdi.oninput = (e)=>{
+        e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
+        e.target.classList.remove('dogru','yanlis');
+        if(girdiler[hIdx+1]) girdiler[hIdx+1].focus();
+      };
+    });
+    satir.appendChild(kutucuklar);
+    kutu.appendChild(satir);
+  });
+}
+
+function sifre5KontrolEt(){
+  const girdiler = document.querySelectorAll('#sifre5Kelimeler .sifre-girdi');
+  let dogruSayisi=0;
+  girdiler.forEach(g=>{
+    const beklenen = g.dataset.beklenen;
+    if(g.value && g.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
+      g.classList.add('dogru'); g.classList.remove('yanlis');
+      dogruSayisi++;
+    } else {
+      g.classList.add('yanlis'); g.classList.remove('dogru');
+    }
+  });
+  document.getElementById('sifre5Sonuc').textContent = dogruSayisi===girdiler.length
+    ? `🎉 Tebrikler! Tüm şifreleri doğru çözdün! (${dogruSayisi}/${girdiler.length})`
+    : `Sonuç: ${dogruSayisi}/${girdiler.length} doğru harf. Anahtar tablosuna bakarak devam et!`;
+}
+
+// =====================================================================
+// ŞİFRELİ TANIM (5. Ünite)
+// =====================================================================
+const st5LeetHarita = {'a':'4','A':'4','e':'3','E':'3','i':'1','I':'1','İ':'1','ı':'1','o':'0','O':'0'};
+function st5TanimSifrele(metin){
+  return metin.split('').map(ch => st5LeetHarita[ch] !== undefined ? st5LeetHarita[ch] : ch).join('');
+}
+let st5Index = 0, st5Puan = 0, st5Sira = [];
+
+function st5Baslat(){
+  st5Sira = karistir(kelimeHavuzu5.slice());
+  st5Index = 0; st5Puan = 0;
+  document.getElementById('st5Puan').textContent = 0;
+  document.getElementById('st5Toplam').textContent = st5Sira.length;
+  document.getElementById('st5Sonuc').textContent = '';
+  st5Tur();
+}
+function st5Tur(){
+  if(st5Index >= st5Sira.length){
+    document.getElementById('st5Tanim').textContent = '';
+    document.getElementById('st5Secenekler').innerHTML = '';
+    document.getElementById('st5Sonuc').textContent = `🏆 Tebrikler! ${st5Puan}/${st5Sira.length} şifreli tanımı doğru çözdün!`;
+    return;
+  }
+  document.getElementById('st5Tur').textContent = st5Index+1;
+  const oge = st5Sira[st5Index];
+  document.getElementById('st5Tanim').textContent = st5TanimSifrele(oge.anlam);
+  const digerler = karistir(kelimeHavuzu5.filter(x=>x.kelime!==oge.kelime)).slice(0,3);
+  const secenekler = karistir([oge, ...digerler]);
+  const kutu = document.getElementById('st5Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.style.display='block'; btn.style.width='100%'; btn.style.marginBottom='6px';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.kelime === oge.kelime){
+        btn.classList.add('dogru');
+        st5Puan++;
+        document.getElementById('st5Puan').textContent = st5Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===oge.kelime) b.classList.add('dogru'); });
+      }
+      st5Index++;
+      setTimeout(()=>st5Tur(), 900);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// KELİME KODLAMA (5. Ünite)
+// =====================================================================
+const kk5Alfabe = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split('');
+const kk5KodTablosu = {};
+kk5Alfabe.forEach((harf,i)=>{ kk5KodTablosu[harf] = (i+1).toString(2).padStart(5,'0'); });
+function kk5KelimeyiKodla(kelime){
+  return kelime.split('').map(h => kk5KodTablosu[h] || '?????').join(' ');
+}
+let kk5Index = 0, kk5Puan = 0, kk5Sira = [];
+
+function kk5AnahtarOlustur(){
+  const kutu = document.getElementById('kk5Anahtar');
+  kutu.innerHTML = '';
+  kk5Alfabe.forEach(harf=>{
+    const hucre = document.createElement('div');
+    hucre.className = 'sifre-anahtar-hucre';
+    hucre.innerHTML = `<b>${harf}</b><br>${kk5KodTablosu[harf]}`;
+    kutu.appendChild(hucre);
+  });
+}
+function kk5Baslat(){
+  kk5AnahtarOlustur();
+  kk5Sira = karistir(kelimeHavuzu5.slice());
+  kk5Index = 0; kk5Puan = 0;
+  document.getElementById('kk5Puan').textContent = 0;
+  document.getElementById('kk5Toplam').textContent = kk5Sira.length;
+  document.getElementById('kk5Sonuc').textContent = '';
+  kk5Tur();
+}
+function kk5Tur(){
+  if(kk5Index >= kk5Sira.length){
+    document.getElementById('kk5Kod').textContent = '';
+    document.getElementById('kk5Ipucu').textContent = '';
+    document.getElementById('kk5Secenekler').innerHTML = '';
+    document.getElementById('kk5Sonuc').textContent = `🏆 Tebrikler! ${kk5Puan}/${kk5Sira.length} kodu doğru çözdün!`;
+    return;
+  }
+  document.getElementById('kk5Tur').textContent = kk5Index+1;
+  const oge = kk5Sira[kk5Index];
+  document.getElementById('kk5Ipucu').innerHTML = `💡 İpucu: <b>${oge.anlam}</b>`;
+  document.getElementById('kk5Kod').textContent = kk5KelimeyiKodla(oge.kelime);
+  const digerler = karistir(kelimeHavuzu5.filter(x=>x.kelime!==oge.kelime)).slice(0,3);
+  const secenekler = karistir([oge, ...digerler]);
+  const kutu = document.getElementById('kk5Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.style.display='block'; btn.style.width='100%'; btn.style.marginBottom='6px';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.kelime === oge.kelime){
+        btn.classList.add('dogru');
+        kk5Puan++;
+        document.getElementById('kk5Puan').textContent = kk5Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===oge.kelime) b.classList.add('dogru'); });
+      }
+      kk5Index++;
+      setTimeout(()=>kk5Tur(), 1000);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// NONOGRAM (5. Ünite)
+// =====================================================================
+const nonogram5Resimleri = {
+  camii: {
+    etiket: "🕌 Cami (İbadet Yeri)",
+    veri: [
+      "0000000000000000","0000000000000000","0000000000001000","0000000000001100",
+      "0000001000001100","0000111110001100","0001111111001100","0001111111001100",
+      "0011111111101100","0011111111101100","0011111111101100","0011100111101100",
+      "0011100111101100","0011100111111110","0000000000011110","0000000000000000",
+    ],
+  },
+  hilal: {
+    etiket: "🌙⭐ Hilal ve Yıldız",
+    veri: [
+      "0000000000000000","0000011111000000","0001111000001000","0011110000011100",
+      "0011100000111110","0111100000011100","0111100000001000","0111000000000000",
+      "0111100000000000","0111100000000000","0011100000000000","0011110000000000",
+      "0001111000000000","0000011111000000","0000000000000000","0000000000000000",
+    ],
+  },
+};
+let nonogram5AktifResim = 'camii';
+const nono5Boyut = nonogram5Resimleri.camii.veri.length;
+let nono5KullaniciIzgara = [];
+let nono5HucreElemanlari = [];
+
+function ipucu5Hesapla(diziStr){
+  const gruplar = diziStr.split('0').filter(s=>s.length>0).map(s=>s.length);
+  return gruplar.length ? gruplar : [0];
+}
+function nonogram5Sec(resimAdi){ nonogram5AktifResim = resimAdi; nonogram5Olustur(); }
+function nonogram5Olustur(){
+  const cozum = nonogram5Resimleri[nonogram5AktifResim].veri;
+  nono5KullaniciIzgara = Array.from({length:nono5Boyut}, ()=>Array(nono5Boyut).fill(false));
+  document.getElementById('nono5Sonuc').textContent = '';
+  const satirIpuclari = cozum.map(r=>ipucu5Hesapla(r));
+  const sutunDizeleri = [];
+  for(let c=0;c<nono5Boyut;c++){
+    let s='';
+    for(let r=0;r<nono5Boyut;r++) s += cozum[r][c];
+    sutunDizeleri.push(s);
+  }
+  const sutunIpuclari = sutunDizeleri.map(s=>ipucu5Hesapla(s));
+  const tablo = document.getElementById('nono5Tablo');
+  tablo.innerHTML = '';
+  const basSatir = document.createElement('tr');
+  const koseTd = document.createElement('td');
+  basSatir.appendChild(koseTd);
+  for(let c=0;c<nono5Boyut;c++){
+    const td = document.createElement('td');
+    td.className = 'nono-sutun-ipucu';
+    sutunIpuclari[c].forEach((sayi,i)=>{
+      if(i>0) td.appendChild(document.createElement('br'));
+      td.appendChild(document.createTextNode(sayi));
+    });
+    if((c+1)%5===0 && c<nono5Boyut-1) td.style.borderRight = '2px solid #333';
+    basSatir.appendChild(td);
+  }
+  tablo.appendChild(basSatir);
+  nono5HucreElemanlari = [];
+  for(let r=0;r<nono5Boyut;r++){
+    const tr = document.createElement('tr');
+    const satirTd = document.createElement('td');
+    satirTd.className = 'nono-satir-ipucu';
+    satirTd.textContent = satirIpuclari[r].join(' ');
+    if((r+1)%5===0 && r<nono5Boyut-1) satirTd.style.borderBottom = '2px solid #333';
+    tr.appendChild(satirTd);
+    nono5HucreElemanlari.push([]);
+    for(let c=0;c<nono5Boyut;c++){
+      const td = document.createElement('td');
+      td.className = 'nono-hucre';
+      if((c+1)%5===0 && c<nono5Boyut-1) td.style.borderRight = '2px solid #333';
+      if((r+1)%5===0 && r<nono5Boyut-1) td.style.borderBottom = '2px solid #333';
+      td.onclick = ((rr,cc)=>()=>{
+        nono5KullaniciIzgara[rr][cc] = !nono5KullaniciIzgara[rr][cc];
+        td.classList.toggle('dolu', nono5KullaniciIzgara[rr][cc]);
+        nonogram5KontrolEt(false);
+      })(r,c);
+      tr.appendChild(td);
+      nono5HucreElemanlari[r].push(td);
+    }
+    tablo.appendChild(tr);
+  }
+}
+function nonogram5KontrolEt(manuel){
+  const cozum = nonogram5Resimleri[nonogram5AktifResim].veri;
+  let tamMi = true;
+  for(let r=0;r<nono5Boyut;r++){
+    for(let c=0;c<nono5Boyut;c++){
+      const beklenen = cozum[r][c] === '1';
+      if(nono5KullaniciIzgara[r][c] !== beklenen) tamMi = false;
+    }
+  }
+  if(tamMi){
+    document.getElementById('nono5Sonuc').textContent = `🎉 Tebrikler! Gizli resmi (${nonogram5Resimleri[nonogram5AktifResim].etiket}) doğru tamamladın!`;
+  } else if(manuel){
+    document.getElementById('nono5Sonuc').textContent = 'Henüz tam değil, ipuçlarına bakarak devam et!';
+  }
+}
+function nonogram5Temizle(){
+  nono5KullaniciIzgara = Array.from({length:nono5Boyut}, ()=>Array(nono5Boyut).fill(false));
+  nono5HucreElemanlari.forEach(satir=>satir.forEach(td=>td.classList.remove('dolu')));
+  document.getElementById('nono5Sonuc').textContent = '';
+}
+
+// =====================================================================
+// KELİME SATRANCI (5. Ünite)
+// =====================================================================
+const ks5Boyut = 8;
+const ks5AtHamleleri = [[1,2],[1,-2],[-1,2],[-1,-2],[2,1],[2,-1],[-2,1],[-2,-1]];
+const ks5KelimeListesi = [
+  {kelime:"ABDEST", anlam:"Namaz öncesi yapılan dinî temizlik"},
+  {kelime:"MESH", anlam:"Islak elle başın veya belirli yerlerin üzerini silme"},
+  {kelime:"ATIK", anlam:"Geri dönüşüme ayrılan kullanılmış madde"},
+  {kelime:"ORMAN", anlam:"Ağaçlardan oluşan, korunması gereken doğal alan"},
+  {kelime:"AĞAÇ", anlam:"Dikilmesi sevap sayılan, çevreye yararlı bitki"},
+  {kelime:"ÇÖP", anlam:"Yere değil, çöp kutusuna atılması gereken atık"},
+  {kelime:"HUZUR", anlam:"Temiz ve düzenli bir evde yaşamanın verdiği duygu"},
+  {kelime:"MİZAN", anlam:"Allah'ın evrende koyduğu ölçü ve denge"},
+];
+const ks5AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+let ks5IzgaraVeri = [];
+let ks5HucreElemanlari = [];
+let ks5BulunanKelimeler = new Set();
+let ks5Yol = [];
+
+function ks5KelimeYerlestir(izgara, kelime){
+  for(let deneme=0; deneme<300; deneme++){
+    const gecici = izgara.map(satir=>satir.slice());
+    const r0 = Math.floor(Math.random()*ks5Boyut);
+    const c0 = Math.floor(Math.random()*ks5Boyut);
+    if(gecici[r0][c0] !== null && gecici[r0][c0] !== kelime[0]) continue;
+    gecici[r0][c0] = kelime[0];
+    const hucreler = [{r:r0,c:c0}];
+    const kullanilan = new Set([r0+','+c0]);
+    let r=r0, c=c0, basarili=true;
+    for(let i=1;i<kelime.length;i++){
+      const olasilar = karistir(ks5AtHamleleri.slice()).filter(([dr,dc])=>{
+        const nr=r+dr, nc=c+dc;
+        if(nr<0 || nr>=ks5Boyut || nc<0 || nc>=ks5Boyut) return false;
+        if(kullanilan.has(nr+','+nc)) return false;
+        return gecici[nr][nc]===null || gecici[nr][nc]===kelime[i];
+      });
+      if(olasilar.length===0){ basarili=false; break; }
+      const [dr,dc] = olasilar[0];
+      r+=dr; c+=dc;
+      gecici[r][c] = kelime[i];
+      hucreler.push({r,c});
+      kullanilan.add(r+','+c);
+    }
+    if(basarili){
+      hucreler.forEach((h,i)=>{ izgara[h.r][h.c] = kelime[i]; });
+      return hucreler;
+    }
+  }
+  return null;
+}
+function ks5Olustur(){
+  let izgara, basarili=false;
+  for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
+    izgara = Array.from({length:ks5Boyut}, ()=>Array(ks5Boyut).fill(null));
+    basarili = true;
+    const siraliKelimeler = ks5KelimeListesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    for(const item of siraliKelimeler){
+      const hucreler = ks5KelimeYerlestir(izgara, item.kelime);
+      if(!hucreler){ basarili=false; break; }
+    }
+  }
+  for(let r=0;r<ks5Boyut;r++){
+    for(let c=0;c<ks5Boyut;c++){
+      if(izgara[r][c]===null) izgara[r][c] = ks5AsciiHarfler[Math.floor(Math.random()*ks5AsciiHarfler.length)];
+    }
+  }
+  ks5IzgaraVeri = izgara;
+  ks5BulunanKelimeler = new Set();
+  ks5Yol = [];
+  const kutu = document.getElementById('ks5Izgara');
+  kutu.innerHTML = '';
+  ks5HucreElemanlari = [];
+  for(let r=0;r<ks5Boyut;r++){
+    ks5HucreElemanlari.push([]);
+    for(let c=0;c<ks5Boyut;c++){
+      const h = document.createElement('div');
+      h.className = 'ks-hucre ' + ((r+c)%2===0 ? 'acik' : 'koyu');
+      h.textContent = izgara[r][c];
+      h.onclick = ()=>ks5Tikla(r,c);
+      kutu.appendChild(h);
+      ks5HucreElemanlari[r].push(h);
+    }
+  }
+  const liste = document.getElementById('ks5Liste');
+  liste.innerHTML = '';
+  ks5KelimeListesi.forEach(item=>{
+    const li = document.createElement('li');
+    li.id = 'ks5-kelime-' + item.kelime;
+    li.textContent = `${item.kelime} — ${item.anlam}`;
+    liste.appendChild(li);
+  });
+  document.getElementById('ks5Bulunan').textContent = 0;
+  document.getElementById('ks5Toplam').textContent = ks5KelimeListesi.length;
+  document.getElementById('ks5Sonuc').textContent = '';
+}
+function ks5SecimiTemizle(){
+  ks5Yol.forEach(p=>ks5HucreElemanlari[p.r][p.c].classList.remove('ks-secili'));
+  ks5Yol = [];
+}
+function ks5Tikla(r,c){
+  const hucreEl = ks5HucreElemanlari[r][c];
+  if(hucreEl.classList.contains('ks-bulundu')) return;
+  let yeniYol;
+  if(ks5Yol.length===0){ yeniYol = [{r,c}]; }
+  else {
+    const son = ks5Yol[ks5Yol.length-1];
+    const gecerliHamle = ks5AtHamleleri.some(([hr,hc]) => son.r+hr===r && son.c+hc===c);
+    yeniYol = gecerliHamle ? [...ks5Yol, {r,c}] : [{r,c}];
+  }
+  const dizi = yeniYol.map(p=>ks5IzgaraVeri[p.r][p.c]).join('');
+  const tamEslesen = ks5KelimeListesi.find(item => item.kelime===dizi && !ks5BulunanKelimeler.has(item.kelime));
+  const onEkMi = ks5KelimeListesi.some(item => !ks5BulunanKelimeler.has(item.kelime) && item.kelime.startsWith(dizi));
+  ks5Yol.forEach(p=>ks5HucreElemanlari[p.r][p.c].classList.remove('ks-secili'));
+  if(tamEslesen){
+    yeniYol.forEach(p=>ks5HucreElemanlari[p.r][p.c].classList.add('ks-bulundu'));
+    ks5BulunanKelimeler.add(tamEslesen.kelime);
+    document.getElementById('ks5Bulunan').textContent = ks5BulunanKelimeler.size;
+    document.getElementById('ks5-kelime-'+tamEslesen.kelime).classList.add('bulundu-satir');
+    ks5Yol = [];
+    if(ks5BulunanKelimeler.size === ks5KelimeListesi.length){
+      document.getElementById('ks5Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri at hamlesiyle buldun!';
+    }
+  } else if(onEkMi){
+    yeniYol.forEach(p=>ks5HucreElemanlari[p.r][p.c].classList.add('ks-secili'));
+    ks5Yol = yeniYol;
+  } else {
+    const tekBaslangicUygun = ks5KelimeListesi.some(item => !ks5BulunanKelimeler.has(item.kelime) && item.kelime[0]===ks5IzgaraVeri[r][c]);
+    if(tekBaslangicUygun){ ks5Yol = [{r,c}]; hucreEl.classList.add('ks-secili'); }
+    else { ks5Yol = []; }
+  }
+}
+
+// =====================================================================
+// KELİME DEDEKTİFİ (5. Ünite)
+// =====================================================================
+const dd5KelimeHavuzu = kelimeHavuzu5.filter(x => x.kelime.length>=5 && x.kelime.length<=8);
+let dd5Hedef = null, dd5Deneme = 0;
+const dd5MaxDeneme = 5, dd5IpucuAcilmaSiniri = 2;
+let dd5Bitti = true, dd5SiraliVakalar = [], dd5VakaIndex = 0, dd5CozulenSayisi = 0;
+
+function dd5Baslat(){
+  dd5SiraliVakalar = karistir(dd5KelimeHavuzu.slice());
+  dd5VakaIndex = 0; dd5CozulenSayisi = 0;
+  document.getElementById('dd5Cozulen').textContent = 0;
+  document.getElementById('dd5ToplamVaka').textContent = dd5SiraliVakalar.length;
+  document.getElementById('dd5MaxDeneme').textContent = dd5MaxDeneme;
+  dd5VakaBaslat();
+}
+function dd5VakaBaslat(){
+  if(dd5VakaIndex >= dd5SiraliVakalar.length){
+    document.getElementById('dd5Ipucu').textContent = '';
+    document.getElementById('dd5Izgara').innerHTML = '';
+    document.getElementById('dd5Girdi').disabled = true;
+    document.getElementById('dd5Sonuc').textContent = `🏆 Tüm vakalar bitti! ${dd5CozulenSayisi}/${dd5SiraliVakalar.length} vakayı çözdün!`;
+    return;
+  }
+  document.getElementById('dd5Vaka').textContent = dd5VakaIndex+1;
+  dd5Hedef = dd5SiraliVakalar[dd5VakaIndex];
+  dd5Deneme = 0; dd5Bitti = false;
+  document.getElementById('dd5Ipucu').innerHTML = `🔍 Vaka: <b>${dd5Hedef.kelime.length} harfli</b> bir kavram (anlamı ${dd5IpucuAcilmaSiniri} yanlış tahminden sonra açılacak!)`;
+  document.getElementById('dd5Deneme').textContent = 0;
+  document.getElementById('dd5Izgara').innerHTML = '';
+  document.getElementById('dd5Sonuc').textContent = '';
+  document.getElementById('dd5Uyari').textContent = '';
+  const girdi = document.getElementById('dd5Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.maxLength = dd5Hedef.kelime.length; girdi.focus();
+}
+function dd5TahminEt(){
+  if(dd5Bitti) return;
+  const girdi = document.getElementById('dd5Girdi');
+  const tahmin = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  if(tahmin.length !== dd5Hedef.kelime.length){
+    document.getElementById('dd5Uyari').textContent = `Tahminin ${dd5Hedef.kelime.length} harfli olmalı!`;
+    return;
+  }
+  document.getElementById('dd5Uyari').textContent = '';
+  const hedefHarfler = dd5Hedef.kelime.split('');
+  const tahminHarfler = tahmin.split('');
+  const durumlar = new Array(tahminHarfler.length).fill('yok');
+  const kullanilan = new Array(hedefHarfler.length).fill(false);
+  tahminHarfler.forEach((h,i)=>{ if(h === hedefHarfler[i]){ durumlar[i]='dogru-yer'; kullanilan[i]=true; } });
+  tahminHarfler.forEach((h,i)=>{
+    if(durumlar[i]==='dogru-yer') return;
+    const idx = hedefHarfler.findIndex((hh,j)=> hh===h && !kullanilan[j]);
+    if(idx!==-1){ durumlar[i]='yanlis-yer'; kullanilan[idx]=true; }
+  });
+  const satir = document.createElement('div');
+  satir.className = 'dd-satir';
+  tahminHarfler.forEach((h,i)=>{
+    const kutu = document.createElement('div');
+    kutu.className = 'dd-kutu ' + durumlar[i];
+    kutu.textContent = h;
+    satir.appendChild(kutu);
+  });
+  document.getElementById('dd5Izgara').appendChild(satir);
+  dd5Deneme++;
+  document.getElementById('dd5Deneme').textContent = dd5Deneme;
+  girdi.value = '';
+  if(tahmin === dd5Hedef.kelime){
+    dd5Bitti = true; girdi.disabled = true;
+    dd5CozulenSayisi++;
+    document.getElementById('dd5Cozulen').textContent = dd5CozulenSayisi;
+    document.getElementById('dd5Ipucu').innerHTML = `🔍 İpucu: <b>${dd5Hedef.anlam}</b> (${dd5Hedef.kelime.length} harfli)`;
+    document.getElementById('dd5Sonuc').textContent = `🎉 Vaka çözüldü! Kelime: ${dd5Hedef.kelime} (${dd5Deneme} denemede)`;
+    dd5VakaIndex++;
+    setTimeout(()=>dd5VakaBaslat(), 1500);
+  } else if(dd5Deneme >= dd5MaxDeneme){
+    dd5Bitti = true; girdi.disabled = true;
+    document.getElementById('dd5Ipucu').innerHTML = `🔍 İpucu: <b>${dd5Hedef.anlam}</b> (${dd5Hedef.kelime.length} harfli)`;
+    document.getElementById('dd5Sonuc').textContent = `🔍 Vaka çözülemedi! Doğru kelime: ${dd5Hedef.kelime} — ${dd5Hedef.anlam}`;
+    dd5VakaIndex++;
+    setTimeout(()=>dd5VakaBaslat(), 2200);
+  } else if(dd5Deneme >= dd5IpucuAcilmaSiniri){
+    document.getElementById('dd5Ipucu').innerHTML = `🔍 İpucu açıldı: <b>${dd5Hedef.anlam}</b> (${dd5Hedef.kelime.length} harfli)`;
+  }
+}
+
+// =====================================================================
+// DİL DEDEKTİFİ (5. Ünite)
+// =====================================================================
+const dilDedektifi5Listesi = [
+  {dogru:"Temizlik imanın yarısıdır.", yanlislar:["Temizlik namazın yarısıdır.","Temizlik orucun yarısıdır.","Temizlik haccın yarısıdır."]},
+  {dogru:"Cennetin anahtarı namaz, namazın anahtarı da abdesttir.", yanlislar:["Cennetin anahtarı oruç, orucun anahtarı zekâttır.","Cennetin anahtarı zekât, zekâtın anahtarı hactır.","Cennetin anahtarı hac, haccın anahtarı orucdur."]},
+  {dogru:"Allah tertemiz olanları sever.", yanlislar:["Allah zengin olanları sever.","Allah güçlü olanları sever.","Allah akıllı olanları sever."]},
+  {dogru:"Peygamberimiz dişlerini misvak ile temizlerdi.", yanlislar:["Peygamberimiz dişlerini fırça ile temizlerdi.","Peygamberimiz dişlerini ipek mendille temizlerdi.","Peygamberimiz dişlerini sadece su ile temizlerdi."]},
+  {dogru:"Her yedi günde bir banyo yapmak Allah'ın Müslümanlar üzerindeki bir hakkıdır.", yanlislar:["Her otuz günde bir banyo yapmak Allah'ın Müslümanlar üzerindeki bir hakkıdır.","Her gün banyo yapmak zorunludur.","Banyo yapmanın önemi yoktur."]},
+  {dogru:"Bir Müslüman bir ağaç dikip ondan bir kuş yerse bu onun için sadaka sayılır.", yanlislar:["Bir Müslüman bir ağaç dikip ondan bir kuş yerse bu onun için günah sayılır.","Bir Müslüman bir ağaç dikip ondan bir kuş yerse bu israf sayılır.","Ağaç dikmenin sevabı yoktur."]},
+  {dogru:"Göğü Allah yükseltti ve mizanı (dengeyi) O koydu.", yanlislar:["Göğü Allah yükseltti ve toprağı O koydu.","Yeri Allah yaydı ve gökyüzünü O koydu.","Denizi Allah yarattı ve dağları O koydu."]},
+  {dogru:"Elbiseni tertemiz tut.", yanlislar:["Evini tertemiz tut.","Bahçeni tertemiz tut.","Aracını tertemiz tut."]},
+  {dogru:"Yemeğin bereketi, yemekten önce ve sonra elleri yıkamaktadır.", yanlislar:["Yemeğin bereketi, ayakları yıkamaktadır.","Yemeğin bereketi, yüzü yıkamaktadır.","Yemeğin bereketi, saçı yıkamaktadır."]},
+  {dogru:"Su kaynaklarına, yol ortasına ve gölgelik yerlere abdest bozmaktan sakının.", yanlislar:["Evlere, okullara ve camilere abdest bozmaktan sakının.","Ormanlara, denizlere ve dağlara abdest bozmaktan sakının.","Bahçelere, parklara ve sokaklara abdest bozmaktan sakının."]},
+];
+let ddl5Index = 0, ddl5Puan = 0, ddl5Sira = [];
+
+function ddl5Baslat(){
+  ddl5Sira = karistir(dilDedektifi5Listesi.slice());
+  ddl5Index = 0; ddl5Puan = 0;
+  document.getElementById('ddl5Puan').textContent = 0;
+  document.getElementById('ddl5Toplam').textContent = ddl5Sira.length;
+  document.getElementById('ddl5Sonuc').textContent = '';
+  ddl5Tur();
+}
+function ddl5Tur(){
+  if(ddl5Index >= ddl5Sira.length){
+    document.getElementById('ddl5Secenekler').innerHTML = '';
+    document.getElementById('ddl5Baslik').textContent = '';
+    document.getElementById('ddl5Sonuc').textContent = `🕵️ Soruşturma bitti! ${ddl5Puan}/${ddl5Sira.length} doğru bilgiyi tespit ettin!`;
+    return;
+  }
+  document.getElementById('ddl5Tur').textContent = ddl5Index+1;
+  const oge = ddl5Sira[ddl5Index];
+  document.getElementById('ddl5Baslik').textContent = '🔎 Hangi cümle DOĞRU bilgi veriyor?';
+  const secenekler = karistir([{metin:oge.dogru, dogruMu:true}, ...oge.yanlislar.map(y=>({metin:y, dogruMu:false}))]);
+  const kutu = document.getElementById('ddl5Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek.metin;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.dogruMu){
+        btn.classList.add('dogru');
+        ddl5Puan++;
+        document.getElementById('ddl5Puan').textContent = ddl5Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent === oge.dogru) b.classList.add('dogru'); });
+      }
+      ddl5Index++;
+      setTimeout(()=>ddl5Tur(), 1200);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// MANTIK ZİNCİRİ (5. Ünite)
+// =====================================================================
+const mantikZinciri5 = [
+  {kavram:"MADDİ", tanim:"Bedenin, elbiselerin, çevrenin temiz tutulması", mantik:"Kalbin, iç dünyanın temiz olmasına ne denir?"},
+  {kavram:"MANEVİ", tanim:"Kalbin, iç dünyanın temiz ve güzel ahlaklı olması", mantik:"Genel olarak insanın görünen ve görünmeyen kirden arınmasına ne denir?"},
+  {kavram:"TEMİZLİK", tanim:"İnsanın görünen ve görünmeyen her türlü kirden arınması", mantik:"İslam kültüründe temizlik yerine kullanılan kavram nedir?"},
+  {kavram:"TAHARET", tanim:"İslam kültüründe temizlik yerine kullanılan kavram", mantik:"Namazdan önce yapılması gereken dinî temizliğe ne denir?"},
+  {kavram:"ABDEST", tanim:"Namaz öncesi yapılan dinî temizlik", mantik:""},
+];
+let mz5Index = 0;
+
+function mz5Baslat(){
+  mz5Index = 0;
+  document.getElementById('mz5Toplam').textContent = mantikZinciri5.length;
+  document.getElementById('mz5Sonuc').textContent = '';
+  document.getElementById('mz5Gorsel').innerHTML = '';
+  mz5HalkaEkle(mantikZinciri5[0].kavram, 0);
+  mz5Tur();
+}
+function mz5HalkaEkle(kavram, index){
+  const halka = document.createElement('div');
+  halka.style.background='white'; halka.style.border='2px solid var(--yesil)'; halka.style.borderRadius='10px';
+  halka.style.padding='8px 14px'; halka.style.margin='6px 0'; halka.style.fontWeight='bold';
+  halka.style.marginLeft = (index*24) + 'px';
+  halka.textContent = `${index+1}. ${kavram}`;
+  document.getElementById('mz5Gorsel').appendChild(halka);
+}
+function mz5Tur(){
+  document.getElementById('mz5Halka').textContent = mz5Index+1;
+  if(mz5Index+1 >= mantikZinciri5.length){
+    document.getElementById('mz5Soru').textContent = '';
+    document.getElementById('mz5Secenekler').innerHTML = '';
+    document.getElementById('mz5Sonuc').textContent = '🎉 Tebrikler! Mantık zincirini tamamen çözdün!';
+    return;
+  }
+  const mevcut = mantikZinciri5[mz5Index];
+  const hedef = mantikZinciri5[mz5Index+1];
+  document.getElementById('mz5Soru').innerHTML = `🔗 <b>${mevcut.kavram}</b>: ${mevcut.tanim}<br>❓ ${mevcut.mantik}`;
+  const havuzDistractor = karistir(kelimeHavuzu5.filter(x => x.kelime!==hedef.kavram && !mantikZinciri5.some(z=>z.kavram===x.kelime))).slice(0,3);
+  const secenekler = karistir([{kelime:hedef.kavram}, ...havuzDistractor]);
+  const kutu = document.getElementById('mz5Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      if(secenek.kelime === hedef.kavram){
+        tiklandiMi = true;
+        btn.classList.add('dogru');
+        mz5Index++;
+        setTimeout(()=>{ mz5HalkaEkle(hedef.kavram, mz5Index); mz5Tur(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        setTimeout(()=>btn.classList.remove('yanlis'), 400);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// SEMANTİK LABİRENT (5. Ünite)
+// =====================================================================
+const semantikOdalar5 = [
+  {kategori:"TEMİZLİK TÜRLERİ (Maddi, Manevi, Taharet gibi)", kelimeler:["MADDİ","MANEVİ","TAHARET","ORMAN"], oddKelime:"ORMAN"},
+  {kategori:"ABDESTLE İLGİLİ KAVRAMLAR (Niyet, Mesh, Abdest gibi)", kelimeler:["NİYET","MESH","ABDEST","ÇÖP"], oddKelime:"ÇÖP"},
+  {kategori:"ÇEVRE UNSURLARI (Orman, Ağaç, Çevre gibi)", kelimeler:["ORMAN","AĞAÇ","ÇEVRE","MİSVAK"], oddKelime:"MİSVAK"},
+  {kategori:"BEDEN TEMİZLİĞİ İLE İLGİLİ KAVRAMLAR (Beden, Saç, Tırnak gibi)", kelimeler:["BEDEN","SAÇ","TIRNAK","MİZAN"], oddKelime:"MİZAN"},
+  {kategori:"ÇEVRE SORUNLARI VE ÇÖZÜMLERİ (Erozyon, Çöp, Dönüşüm gibi)", kelimeler:["EROZYON","ÇÖP","DÖNÜŞÜM","SADAKA"], oddKelime:"SADAKA"},
+  {kategori:"İYİ DAVRANIŞLAR VE DEĞERLER (Sadaka, Emanet, Huzur gibi)", kelimeler:["SADAKA","EMANET","HUZUR","GİYSİ"], oddKelime:"GİYSİ"},
+];
+let sz5OdaIndex = 0, sz5Can = 3;
+
+function sz5CanGoster(){ document.getElementById('sz5Can').textContent = '❤️'.repeat(Math.max(sz5Can,0)) + '🖤'.repeat(Math.max(3-sz5Can,0)); }
+function sz5Baslat(){
+  sz5OdaIndex = 0; sz5Can = 3;
+  document.getElementById('sz5ToplamOda').textContent = semantikOdalar5.length;
+  sz5CanGoster();
+  document.getElementById('sz5Sonuc').textContent = '';
+  sz5OdaGoster();
+}
+function sz5OdaGoster(){
+  document.getElementById('sz5Oda').textContent = sz5OdaIndex+1;
+  const oda = semantikOdalar5[sz5OdaIndex];
+  document.getElementById('sz5Kategori').innerHTML = `🚪 Oda ${sz5OdaIndex+1}: Bu kategoriye AİT OLMAYAN kelimeyi bul, kapıyı aç!<br>📂 Kategori: <b>${oda.kategori}</b>`;
+  const kutu = document.getElementById('sz5Secenekler');
+  kutu.innerHTML = '';
+  const karisikKelimeler = karistir(oda.kelimeler.slice());
+  karisikKelimeler.forEach(kelime=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = kelime;
+    btn.onclick = ()=>{
+      if(kelime === oda.oddKelime){
+        btn.classList.add('dogru');
+        sz5OdaIndex++;
+        setTimeout(()=>{
+          if(sz5OdaIndex >= semantikOdalar5.length){
+            document.getElementById('sz5Kategori').textContent = '';
+            document.getElementById('sz5Secenekler').innerHTML = '';
+            document.getElementById('sz5Sonuc').textContent = '🎉 Tebrikler! Semantik labirentten çıktın!';
+          } else { sz5OdaGoster(); }
+        }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        sz5Can--;
+        sz5CanGoster();
+        if(sz5Can<=0){
+          setTimeout(()=>{
+            sz5OdaIndex = 0; sz5Can = 3;
+            sz5CanGoster();
+            document.getElementById('sz5Sonuc').textContent = '💥 Canların bitti, labirentte kayboldun! Baştan başlıyorsun...';
+            setTimeout(()=>{ document.getElementById('sz5Sonuc').textContent=''; sz5OdaGoster(); }, 1500);
+          }, 500);
+        } else {
+          setTimeout(()=>btn.classList.remove('yanlis'), 400);
+        }
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// ÇELİŞKİ AVI (5. Ünite)
+// =====================================================================
+const celiskiListesi5 = [
+  {kelime:"Manevi", anlam1:"kalbin, iç dünyanın temiz olması", anlam2:"bedenin, elbiselerin temiz tutulması", celiskiVarMi:true},
+  {kelime:"Abdest", anlam1:"namaz öncesi yapılan dinî temizlik", anlam2:"Peygamberimizin diş temizliğinde kullandığı ağaç parçası", celiskiVarMi:true},
+  {kelime:"Mesh", anlam1:"ıslak elle başın üzerini silme", anlam2:"abdest almaya kalpten karar verme", celiskiVarMi:true},
+  {kelime:"Orman", anlam1:"ağaçlardan oluşan doğal alan", anlam2:"verimli toprağın aşınıp kaybolması", celiskiVarMi:true},
+  {kelime:"Sadaka", anlam1:"ağaç dikmenin kazandırdığı sevap", anlam2:"kullanılmış maddelerin yeniden değerlendirilmesi", celiskiVarMi:true},
+  {kelime:"Taharet", anlam1:"İslam kültüründe temizlik yerine kullanılan kavram", anlam2:"içinde yaşadığımız, bizi etkileyen ortam", celiskiVarMi:true},
+  {kelime:"Temizlik", anlam1:"insanın görünen kirlerden arınması", anlam2:"görünmeyen kirlerden arınması", celiskiVarMi:false},
+  {kelime:"Emanet", anlam1:"çevrenin insana Allah tarafından verildiği bilinç", anlam2:"korunması gereken bir sorumluluk", celiskiVarMi:false},
+  {kelime:"Huzur", anlam1:"temiz ve düzenli bir evde yaşamanın verdiği duygu", anlam2:"insana güven ve rahatlık veren hâl", celiskiVarMi:false},
+  {kelime:"Mizan", anlam1:"Allah'ın evrende koyduğu ölçü", anlam2:"denge", celiskiVarMi:false},
+  {kelime:"Ağaç", anlam1:"dikilmesi sevap sayılan bitki", anlam2:"çevreye yararlı bir doğal unsur", celiskiVarMi:false},
+  {kelime:"Düzen", anlam1:"evin, odanın toplu hâli", anlam2:"dağınık olmama durumu", celiskiVarMi:false},
+];
+let ca5Index = 0, ca5Puan = 0, ca5Sira = [], ca5Kilit = false;
+
+function ca5Baslat(){
+  ca5Sira = karistir(celiskiListesi5.slice());
+  ca5Index = 0; ca5Puan = 0;
+  document.getElementById('ca5Puan').textContent = 0;
+  document.getElementById('ca5Toplam').textContent = ca5Sira.length;
+  document.getElementById('ca5Sonuc').textContent = '';
+  document.getElementById('ca5Butonlar').style.display = 'flex';
+  ca5Tur();
+}
+function ca5Tur(){
+  if(ca5Index >= ca5Sira.length){
+    document.getElementById('ca5Cumle').textContent = '';
+    document.getElementById('ca5Butonlar').style.display = 'none';
+    document.getElementById('ca5GeriBildirim').textContent = '';
+    document.getElementById('ca5Sonuc').textContent = `🕵️ Avın bitti! ${ca5Puan}/${ca5Sira.length} çelişkiyi doğru tespit ettin!`;
+    return;
+  }
+  document.getElementById('ca5Tur').textContent = ca5Index+1;
+  const oge = ca5Sira[ca5Index];
+  document.getElementById('ca5Cumle').innerHTML = `"<b>${oge.kelime}</b>" hem "${oge.anlam1}" hem de "${oge.anlam2}" demektir.`;
+  document.getElementById('ca5GeriBildirim').textContent = '';
+  ca5Kilit = false;
+}
+function ca5Cevapla(cevapVarMi){
+  if(ca5Kilit) return;
+  ca5Kilit = true;
+  const oge = ca5Sira[ca5Index];
+  const dogruMu = (cevapVarMi === oge.celiskiVarMi);
+  if(dogruMu){
+    ca5Puan++;
+    document.getElementById('ca5Puan').textContent = ca5Puan;
+    document.getElementById('ca5GeriBildirim').textContent = '✅ Doğru!';
+  } else {
+    document.getElementById('ca5GeriBildirim').textContent = `❌ Yanlış! Doğrusu: ${oge.celiskiVarMi ? 'Çelişki VAR' : 'Çelişki YOK'}`;
+  }
+  ca5Index++;
+  setTimeout(()=>ca5Tur(), 1300);
+}
+
+// =====================================================================
+// LABİRENT (5. Ünite)
+// =====================================================================
+const lab5Satir = 12, lab5Sutun = 15;
+const lab5IfadeHavuzu = [
+  {kelime:"Temizlik", anlam:"İnsanın görünen ve görünmeyen her türlü kirden arınması"},
+  {kelime:"Taharet", anlam:"İslam kültüründe temizlik yerine kullanılan kavram"},
+  {kelime:"Abdest", anlam:"Namaz öncesi yapılan dinî temizlik"},
+  {kelime:"Manevi", anlam:"Kalbin, iç dünyanın temiz ve güzel ahlaklı olması"},
+  {kelime:"Maddi", anlam:"Bedenin, elbiselerin, çevrenin temiz tutulması"},
+  {kelime:"Misvak", anlam:"Peygamberimizin diş temizliğinde kullandığı ağaç parçası"},
+  {kelime:"Çevre", anlam:"İçinde yaşadığımız, bizi her an etkisi altında bulunduran ortam"},
+  {kelime:"Niyet", anlam:"Abdest almaya başlarken kalpten yapılan karar"},
+  {kelime:"Sadaka", anlam:"Ağaç dikmenin kazandırdığı sevap"},
+  {kelime:"Düzen", anlam:"Ev ve odanın toplu, dağınık olmayan hâli"},
+  {kelime:"Erozyon", anlam:"Verimli toprağın aşınıp kaybolması"},
+  {kelime:"Orman", anlam:"Ağaçlardan oluşan, korunması gereken doğal alan"},
+  {kelime:"Ağaç", anlam:"Dikilmesi sevap sayılan, çevreye yararlı bitki"},
+  {kelime:"Emanet", anlam:"Çevrenin insana Allah tarafından verildiği bilinç"},
+  {kelime:"Huzur", anlam:"Temiz ve düzenli bir evde yaşamanın verdiği duygu"},
+  {kelime:"Çöp", anlam:"Yere değil, çöp kutusuna atılması gereken atık"},
+  {kelime:"Mizan", anlam:"Allah'ın evrende koyduğu ölçü ve denge"},
+  {kelime:"Beden", anlam:"Vücudumuzun tamamı"},
+  {kelime:"Giysi", anlam:"Üzerimize giydiğimiz, temiz tutulması gereken kıyafet"},
+  {kelime:"Tırnak", anlam:"Uzayınca kesilmesi gereken beden parçası"},
+];
+let lab5Hucreler = [], lab5HucreElemanlari = [], lab5OyuncuKonum = {r:0,c:0}, lab5Toplananlar = {};
+let lab5HamleSayisi = 0, lab5ToplananSayisi = 0, lab5Saniye = 0, lab5Zamanlayici = null, lab5Bitti = false;
+
+function lab5Uret(){
+  const hucreler = [];
+  for(let r=0;r<lab5Satir;r++){
+    hucreler.push([]);
+    for(let c=0;c<lab5Sutun;c++){ hucreler[r].push({top:true,right:true,bottom:true,left:true,ziyaretEdildi:false}); }
+  }
+  const yigin = [{r:0,c:0}];
+  hucreler[0][0].ziyaretEdildi = true;
+  while(yigin.length>0){
+    const mevcut = yigin[yigin.length-1];
+    const {r,c} = mevcut;
+    const komsular = [];
+    if(r>0 && !hucreler[r-1][c].ziyaretEdildi) komsular.push({r:r-1,c,yon:'top'});
+    if(c<lab5Sutun-1 && !hucreler[r][c+1].ziyaretEdildi) komsular.push({r,c:c+1,yon:'right'});
+    if(r<lab5Satir-1 && !hucreler[r+1][c].ziyaretEdildi) komsular.push({r:r+1,c,yon:'bottom'});
+    if(c>0 && !hucreler[r][c-1].ziyaretEdildi) komsular.push({r,c:c-1,yon:'left'});
+    if(komsular.length===0){ yigin.pop(); }
+    else {
+      const secilen = komsular[Math.floor(Math.random()*komsular.length)];
+      if(secilen.yon==='top'){ hucreler[r][c].top=false; hucreler[secilen.r][secilen.c].bottom=false; }
+      if(secilen.yon==='right'){ hucreler[r][c].right=false; hucreler[secilen.r][secilen.c].left=false; }
+      if(secilen.yon==='bottom'){ hucreler[r][c].bottom=false; hucreler[secilen.r][secilen.c].top=false; }
+      if(secilen.yon==='left'){ hucreler[r][c].left=false; hucreler[secilen.r][secilen.c].right=false; }
+      hucreler[secilen.r][secilen.c].ziyaretEdildi = true;
+      yigin.push({r:secilen.r,c:secilen.c});
+    }
+  }
+  return hucreler;
+}
+function labirent5Baslat(){
+  clearInterval(lab5Zamanlayici);
+  lab5Hucreler = lab5Uret();
+  lab5OyuncuKonum = {r:0,c:0};
+  lab5HamleSayisi = 0; lab5ToplananSayisi = 0; lab5Saniye = 0; lab5Bitti = false;
+  document.getElementById('lab5Hamle').textContent = 0;
+  document.getElementById('lab5Toplanan').textContent = 0;
+  document.getElementById('lab5Sure').textContent = 0;
+  document.getElementById('lab5Durum').textContent = '';
+  document.getElementById('lab5Sonuc').textContent = '';
+  const tumHucreler = [];
+  for(let r=0;r<lab5Satir;r++) for(let c=0;c<lab5Sutun;c++){
+    if(!(r===0&&c===0) && !(r===lab5Satir-1&&c===lab5Sutun-1)) tumHucreler.push({r,c});
+  }
+  const secilenler = karistir(tumHucreler).slice(0, lab5IfadeHavuzu.length);
+  lab5Toplananlar = {};
+  secilenler.forEach((konum, i)=>{
+    lab5Toplananlar[konum.r+','+konum.c] = {kelime: lab5IfadeHavuzu[i].kelime, anlam: lab5IfadeHavuzu[i].anlam, toplandi:false};
+  });
+  document.getElementById('lab5ToplamYildiz').textContent = secilenler.length;
+  const izgara = document.getElementById('lab5Izgara');
+  izgara.innerHTML = '';
+  izgara.style.gridTemplateColumns = `repeat(${lab5Sutun}, 30px)`;
+  izgara.style.gridTemplateRows = `repeat(${lab5Satir}, 30px)`;
+  lab5HucreElemanlari = [];
+  for(let r=0;r<lab5Satir;r++){
+    lab5HucreElemanlari.push([]);
+    for(let c=0;c<lab5Sutun;c++){
+      const h = lab5Hucreler[r][c];
+      const div = document.createElement('div');
+      div.className = 'labirent-hucre';
+      div.style.gridColumn = c+1;
+      div.style.gridRow = r+1;
+      div.style.borderTop = h.top ? '2px solid #333' : '2px solid transparent';
+      div.style.borderRight = h.right ? '2px solid #333' : '2px solid transparent';
+      div.style.borderBottom = h.bottom ? '2px solid #333' : '2px solid transparent';
+      div.style.borderLeft = h.left ? '2px solid #333' : '2px solid transparent';
+      const key = r+','+c;
+      if(r===0 && c===0) div.textContent = '🚶';
+      else if(r===lab5Satir-1 && c===lab5Sutun-1) div.textContent = '🏡';
+      else if(lab5Toplananlar[key]) div.textContent = '⭐';
+      izgara.appendChild(div);
+      lab5HucreElemanlari[r].push(div);
+    }
+  }
+  lab5Zamanlayici = setInterval(()=>{
+    lab5Saniye++;
+    document.getElementById('lab5Sure').textContent = lab5Saniye;
+  }, 1000);
+}
+function labirent5Hareket(dr, dc){
+  if(lab5Bitti) return;
+  const {r,c} = lab5OyuncuKonum;
+  const hucre = lab5Hucreler[r][c];
+  let yeniR=r, yeniC=c;
+  if(dr===-1 && !hucre.top) yeniR = r-1;
+  else if(dr===1 && !hucre.bottom) yeniR = r+1;
+  else if(dc===-1 && !hucre.left) yeniC = c-1;
+  else if(dc===1 && !hucre.right) yeniC = c+1;
+  else return;
+  lab5HucreElemanlari[r][c].textContent = '';
+  lab5OyuncuKonum = {r:yeniR, c:yeniC};
+  lab5HamleSayisi++;
+  document.getElementById('lab5Hamle').textContent = lab5HamleSayisi;
+  const key = yeniR+','+yeniC;
+  if(lab5Toplananlar[key] && !lab5Toplananlar[key].toplandi){
+    lab5Toplananlar[key].toplandi = true;
+    lab5ToplananSayisi++;
+    document.getElementById('lab5Toplanan').textContent = lab5ToplananSayisi;
+    document.getElementById('lab5Durum').textContent = `✨ Topladın: ${lab5Toplananlar[key].kelime} — ${lab5Toplananlar[key].anlam}`;
+  }
+  if(yeniR===lab5Satir-1 && yeniC===lab5Sutun-1){
+    lab5HucreElemanlari[yeniR][yeniC].textContent = '🏁';
+    lab5Bitti = true;
+    clearInterval(lab5Zamanlayici);
+    const toplamYildiz = document.getElementById('lab5ToplamYildiz').textContent;
+    document.getElementById('lab5Sonuc').textContent =
+      `🎉 Tebrikler! Labirenti ${lab5HamleSayisi} hamlede ve ${lab5Saniye} saniyede tamamladın! (${lab5ToplananSayisi}/${toplamYildiz} yıldız topladın)`;
+    return;
+  }
+  lab5HucreElemanlari[yeniR][yeniC].textContent = '🚶';
+}
+document.addEventListener('keydown', (e)=>{
+  const aktifBolum = document.getElementById('labirent5');
+  if(!aktifBolum.classList.contains('aktif')) return;
+  const etiket = document.activeElement ? document.activeElement.tagName : '';
+  if(etiket==='INPUT' || etiket==='TEXTAREA') return;
+  if(e.key==='ArrowUp'){ e.preventDefault(); labirent5Hareket(-1,0); }
+  else if(e.key==='ArrowDown'){ e.preventDefault(); labirent5Hareket(1,0); }
+  else if(e.key==='ArrowLeft'){ e.preventDefault(); labirent5Hareket(0,-1); }
+  else if(e.key==='ArrowRight'){ e.preventDefault(); labirent5Hareket(0,1); }
+});
+
+// =====================================================================
+// BAŞLANGIÇ
+// =====================================================================
+bz5IzgaraOlustur();
+kelimeAvi5Olustur();
+cengel5Olustur();
+merdiven5Baslat();
+sifre5Olustur();
+ks5Olustur();
+nonogram5Olustur();
+istatistikleriGuncelleGoster();
+sonucIzlemeBaslat();
+
+// =====================================================================
+// EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — TEMIZLIK KAVRAMLARI
+// =====================================================================
+const ezberVeri5 = [
+  {
+    "parca": "Temizlik, insanın görünen ve görünmeyen her türlü kirden arınmasıdır.",
+    "anlam": "Temizlik",
+    "gizli": "arınmasıdır"
+  },
+  {
+    "parca": "Taharet, İslam kültüründe temizlik yerine kullanılan kavramdır.",
+    "anlam": "Taharet",
+    "gizli": "Taharet"
+  },
+  {
+    "parca": "Abdest, namaz öncesi yapılan dinî temizliktir.",
+    "anlam": "Abdest",
+    "gizli": "Abdest"
+  },
+  {
+    "parca": "Manevi temizlik, kalbin ve iç dünyanın temiz ve güzel ahlaklı olmasıdır.",
+    "anlam": "Manevi Temizlik",
+    "gizli": "ahlaklı"
+  },
+  {
+    "parca": "Maddi temizlik, bedenin, elbiselerin ve çevrenin temiz tutulmasıdır.",
+    "anlam": "Maddi Temizlik",
+    "gizli": "çevrenin"
+  },
+  {
+    "parca": "Peygamberimiz, diş temizliğinde misvak kullanırdı.",
+    "anlam": "Misvak",
+    "gizli": "misvak"
+  },
+  {
+    "parca": "Temizlik imandan gelir.",
+    "anlam": "Hz. Muhammed'in (sav) meşhur bir hadisi",
+    "gizli": "imandan"
+  },
+  {
+    "parca": "Çevre, içinde yaşadığımız ve bizi her an etkisi altında bulunduran ortamdır.",
+    "anlam": "Çevre",
+    "gizli": "ortamdır"
+  }
+];
+
+// --- 1) SIRALA BAKALIM ---
+function ez15Baslat(){
+  document.getElementById('ez15Sonuc').textContent='';
+  document.getElementById('ez15Dizilen').textContent='0';
+  siraOlustur({
+    tokens: ezberVeri5.map(x=>x.parca),
+    bankaId:'ez15Banka', cevapId:'ez15Cevap',
+    ilerleme:(n)=>{ document.getElementById('ez15Dizilen').textContent=n; },
+    tamamlandi:()=>{ document.getElementById('ez15Sonuc').innerHTML = "🎉 Tebrikler! Temizlik Kavramları'nı doğru sırayla dizdin!"; }
+  });
+}
+
+// --- 2) BOŞLUK DOLDUR ---
+let ez25Tur=0, ez25Dogru=0, ez25Sira=[];
+function ez25Baslat(){
+  ez25Tur=0; ez25Dogru=0;
+  ez25Sira = karistir(ezberVeri5.map((x,i)=>i));
+  document.getElementById('ez25Dogru').textContent='0';
+  document.getElementById('ez25Sonuc').textContent='';
+  ez25SoruGoster();
+}
+function ez25SoruGoster(){
+  if(ez25Tur>=ez25Sira.length){
+    document.getElementById('ez25Metin').textContent='';
+    document.getElementById('ez25Secenekler').innerHTML='';
+    document.getElementById('ez25Sonuc').innerHTML = `🎉 Bitti! ${ez25Dogru}/${ez25Sira.length} doğru.`;
+    return;
+  }
+  document.getElementById('ez25Tur').textContent = ez25Tur+1;
+  const i = ez25Sira[ez25Tur];
+  const oge = ezberVeri5[i];
+  document.getElementById('ez25Metin').textContent = oge.parca.replace(oge.gizli, '______');
+  const digerleri = ezberVeri5.filter((_,j)=>j!==i).map(x=>x.gizli);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.gizli, ...yanlislar]);
+  const kutu = document.getElementById('ez25Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez25Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.gizli){ btn.classList.add('dogru'); ez25Dogru++; document.getElementById('ez25Dogru').textContent=ez25Dogru; }
+      else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.gizli).classList.add('dogru');
+      }
+      setTimeout(()=>{ ez25Tur++; ez25SoruGoster(); }, 1100);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 3) ANLAM EŞLEŞTİR ---
+let ez35Secili=null, ez35Eslesen=0;
+function ez35Baslat(){
+  ez35Secili=null; ez35Eslesen=0;
+  document.getElementById('ez35Eslesen').textContent='0';
+  document.getElementById('ez35Sonuc').textContent='';
+  const solSira = karistir(ezberVeri5.map((x,i)=>i));
+  const sagSira = karistir(ezberVeri5.map((x,i)=>i));
+  const sol = document.getElementById('ez35Sol'); sol.innerHTML='';
+  const sag = document.getElementById('ez35Sag'); sag.innerHTML='';
+  solSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri5[i].parca;
+    b.dataset.i=i; b.dataset.taraf='sol';
+    b.onclick=()=>ez35Tikla(b);
+    sol.appendChild(b);
+  });
+  sagSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri5[i].anlam;
+    b.dataset.i=i; b.dataset.taraf='sag';
+    b.onclick=()=>ez35Tikla(b);
+    sag.appendChild(b);
+  });
+}
+function ez35Tikla(b){
+  if(b.classList.contains('eslesti')) return;
+  if(ez35Secili && ez35Secili.dataset.taraf===b.dataset.taraf){
+    ez35Secili.classList.remove('secili');
+    ez35Secili = b; b.classList.add('secili');
+    return;
+  }
+  if(!ez35Secili){ ez35Secili=b; b.classList.add('secili'); return; }
+  if(ez35Secili.dataset.i===b.dataset.i){
+    ez35Secili.classList.remove('secili'); ez35Secili.classList.add('eslesti');
+    b.classList.add('eslesti');
+    ez35Secili=null;
+    ez35Eslesen++;
+    document.getElementById('ez35Eslesen').textContent=ez35Eslesen;
+    if(ez35Eslesen===ezberVeri5.length){
+      document.getElementById('ez35Sonuc').innerHTML = "🎉 Tebrikler! Tüm cümleleri anlamlarıyla eşleştirdin!";
+    }
+  } else {
+    const digeri = ez35Secili;
+    digeri.classList.add('yanlis'); b.classList.add('yanlis');
+    setTimeout(()=>{ digeri.classList.remove('yanlis','secili'); b.classList.remove('yanlis'); },400);
+    ez35Secili=null;
+  }
+}
+
+// --- 4) HAFIZA KARTLARI ---
+let ez45Acik=[], ez45Bulunan=0, ez45Hamle=0, ez45Kilit=false;
+function ez45Baslat(){
+  ez45Acik=[]; ez45Bulunan=0; ez45Hamle=0; ez45Kilit=false;
+  document.getElementById('ez45Bulunan').textContent='0';
+  document.getElementById('ez45Hamle').textContent='0';
+  document.getElementById('ez45Sonuc').textContent='';
+  const kartlar=[];
+  ezberVeri5.forEach((x,i)=>{
+    kartlar.push({i, tip:'parca', metin:x.parca});
+    kartlar.push({i, tip:'anlam', metin:x.anlam});
+  });
+  const karisik = karistir(kartlar);
+  const izgara = document.getElementById('ez45Izgara');
+  izgara.innerHTML='';
+  karisik.forEach(k=>{
+    const kart=document.createElement('div');
+    kart.className='hafiza-kart';
+    kart.dataset.i=k.i; kart.dataset.tip=k.tip;
+    kart.innerHTML = `<div class="hafiza-on">🕌</div><div class="hafiza-arka">${k.metin}</div>`;
+    kart.onclick=()=>ez45KartTikla(kart);
+    izgara.appendChild(kart);
+  });
+}
+function ez45KartTikla(kart){
+  if(ez45Kilit || kart.classList.contains('acik') || kart.classList.contains('bulundu')) return;
+  kart.classList.add('acik');
+  ez45Acik.push(kart);
+  if(ez45Acik.length===2){
+    ez45Hamle++; document.getElementById('ez45Hamle').textContent=ez45Hamle;
+    ez45Kilit=true;
+    const [a,b]=ez45Acik;
+    if(a.dataset.i===b.dataset.i && a.dataset.tip!==b.dataset.tip){
+      a.classList.add('bulundu'); b.classList.add('bulundu');
+      ez45Bulunan++; document.getElementById('ez45Bulunan').textContent=ez45Bulunan;
+      ez45Acik=[]; ez45Kilit=false;
+      if(ez45Bulunan===ezberVeri5.length){
+        document.getElementById('ez45Sonuc').innerHTML = `🎉 Tebrikler! ${ez45Hamle} hamlede tüm çiftleri buldun!`;
+      }
+    } else {
+      setTimeout(()=>{
+        a.classList.remove('acik'); b.classList.remove('acik');
+        ez45Acik=[]; ez45Kilit=false;
+      }, 900);
+    }
+  }
+}
+
+// --- 5) ADIM ADIM EZBER ---
+let ez55Adim=0;
+function ez55Baslat(){
+  ez55Adim=0;
+  document.getElementById('ez55Liste').innerHTML='';
+  document.getElementById('ez55Sonuc').textContent='';
+  ez55SoruGoster();
+}
+function ez55SoruGoster(){
+  if(ez55Adim>=ezberVeri5.length){
+    document.getElementById('ez55Secenekler').innerHTML='';
+    document.getElementById('ez55Sonuc').innerHTML = "🎉 Tebrikler! Temizlik Kavramları'nı baştan sona tamamladın!";
+    return;
+  }
+  document.getElementById('ez55Adim').textContent = ez55Adim+1;
+  const oge = ezberVeri5[ez55Adim];
+  const digerleri = ezberVeri5.filter((_,j)=>j!==ez55Adim).map(x=>x.parca);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.parca, ...yanlislar]);
+  const kutu = document.getElementById('ez55Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez55Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.parca){
+        btn.classList.add('dogru');
+        const liste=document.getElementById('ez55Liste');
+        liste.innerHTML += `<div><b>${ez55Adim+1}.</b> ${oge.parca}</div>`;
+        setTimeout(()=>{ ez55Adim++; ez55SoruGoster(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        setTimeout(()=>{ ez55SoruGoster(); }, 1100);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 6) GİZLİ HARFLER ---
+let ez65Tur=0, ez65Dogru=0, ez65Sira=[];
+function ez65Baslat(){
+  ez65Tur=0; ez65Dogru=0; ez65Sira = karistir(ezberVeri5.map((x,i)=>i));
+  document.getElementById('ez65Dogru').textContent='0';
+  document.getElementById('ez65Sonuc').textContent='';
+  ez65Round();
+}
+function ez65Round(){
+  if(ez65Tur>=ez65Sira.length){
+    document.getElementById('ez65Metin').textContent='';
+    document.getElementById('ez65Cevap').innerHTML=''; document.getElementById('ez65Banka').innerHTML='';
+    document.getElementById('ez65Sonuc').innerHTML = `🎉 Bitti! ${ez65Dogru}/${ez65Sira.length} kelimeyi doğru tamamladın.`;
+    return;
+  }
+  document.getElementById('ez65Tur').textContent = ez65Tur+1;
+  const i = ez65Sira[ez65Tur];
+  const oge = ezberVeri5[i];
+  document.getElementById('ez65Metin').innerHTML = oge.parca.replace(oge.gizli, '<u>______</u>') + `<br><small>💡 ${oge.anlam}</small>`;
+  const harfler = oge.gizli.split('').filter(c=>c!==' ');
+  siraOlustur({
+    tokens: harfler,
+    bankaId:'ez65Banka', cevapId:'ez65Cevap',
+    tamamlandi:()=>{
+      ez65Dogru++; document.getElementById('ez65Dogru').textContent=ez65Dogru;
+      setTimeout(()=>{ ez65Tur++; ez65Round(); }, 900);
+    }
+  });
+}
+
+// --- 7) KAYBOLAN KELİMELER ---
+let ez75Tur=0, ez75Dogru=0, ez75Sira=[];
+function ez75Baslat(){
+  ez75Tur=0; ez75Dogru=0; ez75Sira = karistir(ezberVeri5.map((x,i)=>i));
+  document.getElementById('ez75Dogru').textContent='0';
+  document.getElementById('ez75Sonuc').textContent='';
+  ez75Round();
+}
+function ez75Round(){
+  if(ez75Tur>=ez75Sira.length){
+    document.getElementById('ez75Metin').textContent='';
+    document.getElementById('ez75Secenekler').innerHTML='';
+    document.getElementById('ez75Sonuc').innerHTML = `🎉 Bitti! ${ez75Dogru}/${ez75Sira.length} doğru hatırladın.`;
+    return;
+  }
+  document.getElementById('ez75Tur').textContent = ez75Tur+1;
+  const i = ez75Sira[ez75Tur];
+  const oge = ezberVeri5[i];
+  document.getElementById('ez75Metin').textContent = oge.parca;
+  document.getElementById('ez75Secenekler').innerHTML='';
+  setTimeout(()=>{
+    document.getElementById('ez75Metin').textContent = '🙈 ...';
+    const digerIdx = karistir(ezberVeri5.map((_,j)=>j).filter(j=>j!==i)).slice(0,2);
+    const varyantlar = digerIdx.map(j=>oge.parca.replace(oge.gizli, ezberVeri5[j].gizli));
+    const secenekler = karistir([oge.parca, ...varyantlar]);
+    const kutu = document.getElementById('ez75Secenekler');
+    kutu.innerHTML='';
+    secenekler.forEach(sec=>{
+      const btn=document.createElement('div');
+      btn.className='merdiven-secenek';
+      btn.textContent=sec;
+      btn.onclick=()=>{
+        document.querySelectorAll('#ez75Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+        document.getElementById('ez75Metin').textContent = oge.parca;
+        if(sec===oge.parca){ btn.classList.add('dogru'); ez75Dogru++; document.getElementById('ez75Dogru').textContent=ez75Dogru; }
+        else {
+          btn.classList.add('yanlis');
+          [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        }
+        setTimeout(()=>{ ez75Tur++; ez75Round(); }, 1300);
+      };
+      kutu.appendChild(btn);
+    });
+  }, 3000);
+}
+
+// --- 8) HIZ TESTİ ---
+let ez85Zamanlayici=null, ez85Kalan=60, ez85Dogru=0, ez85Yanlis=0, ez85Aktif=false;
+function ez85Baslat(){
+  clearInterval(ez85Zamanlayici);
+  ez85Kalan=60; ez85Dogru=0; ez85Yanlis=0; ez85Aktif=true;
+  document.getElementById('ez85Sayac').textContent=ez85Kalan;
+  document.getElementById('ez85Dogru').textContent='0';
+  document.getElementById('ez85Yanlis').textContent='0';
+  document.getElementById('ez85Sonuc').textContent='';
+  ez85Zamanlayici = setInterval(()=>{
+    ez85Kalan--;
+    document.getElementById('ez85Sayac').textContent=ez85Kalan;
+    if(ez85Kalan<=0){ ez85Bitir(); }
+  }, 1000);
+  ez85SoruGoster();
+}
+function ez85SoruGoster(){
+  if(!ez85Aktif) return;
+  const i = Math.floor(Math.random()*ezberVeri5.length);
+  const oge = ezberVeri5[i];
+  document.getElementById('ez85Metin').textContent = oge.anlam;
+  const digerleri = ezberVeri5.filter((_,j)=>j!==i).map(x=>x.parca);
+  const secenekler = karistir([oge.parca, ...karistir(digerleri).slice(0,3)]);
+  const kutu = document.getElementById('ez85Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      if(!ez85Aktif) return;
+      if(sec===oge.parca){ ez85Dogru++; document.getElementById('ez85Dogru').textContent=ez85Dogru; }
+      else { ez85Yanlis++; document.getElementById('ez85Yanlis').textContent=ez85Yanlis; }
+      ez85SoruGoster();
+    };
+    kutu.appendChild(btn);
+  });
+}
+function ez85Bitir(){
+  ez85Aktif=false;
+  clearInterval(ez85Zamanlayici);
+  document.getElementById('ez85Secenekler').innerHTML='';
+  document.getElementById('ez85Metin').textContent='';
+  const basari = ez85Dogru>=8 ? '🏆 Efsane Hız!' : ez85Dogru>=5 ? '🥇 Çok İyi!' : '📚 Biraz Daha Pratik!';
+  document.getElementById('ez85Sonuc').innerHTML = `🎉 Süre bitti! ${basari}<br>${ez85Dogru} doğru, ${ez85Yanlis} yanlış.`;
+}
+
+
+// ===================== SUNUM (SLAYT) GORUNUMU JS =====================
+window.sunumDurumu = window.sunumDurumu || {};
+function sunumNoktalariOlustur(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  const nokta = document.getElementById('sunumNoktalar'+suf);
+  if(!alan || !nokta) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  nokta.innerHTML = '';
+  for(let i=0;i<toplam;i++){
+    const d = document.createElement('span');
+    d.className = 'sunum-nokta' + (i===0?' aktif':'');
+    d.onclick = function(){ sunumIndexeGit(suf, i); };
+    nokta.appendChild(d);
+  }
+}
+function sunumGuncelle(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const slaytlar = alan.querySelectorAll('.sunum-slayt');
+  const idx = sunumDurumu[suf] || 0;
+  slaytlar.forEach(function(s,i){ s.classList.toggle('aktif', i===idx); });
+  const sayac = document.getElementById('sunumSayac'+suf);
+  if(sayac) sayac.textContent = (idx+1)+' / '+slaytlar.length;
+  document.querySelectorAll('#sunumNoktalar'+suf+' .sunum-nokta').forEach(function(n,i){ n.classList.toggle('aktif', i===idx); });
+}
+function sunumIndexeGit(suf, i){
+  sunumDurumu[suf] = i;
+  sunumGuncelle(suf);
+}
+function sunumGit(suf, yon){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  let idx = (sunumDurumu[suf]||0) + yon;
+  if(idx<0) idx=0;
+  if(idx>=toplam) idx=toplam-1;
+  sunumIndexeGit(suf, idx);
+}
+function sunumTamEkran(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  if(alan.requestFullscreen) alan.requestFullscreen();
+  else if(alan.webkitRequestFullscreen) alan.webkitRequestFullscreen();
+}
+document.addEventListener('keydown', function(e){
+  const slaytBolumu = document.getElementById('slayt');
+  if(!slaytBolumu || !slaytBolumu.classList.contains('aktif')) return;
+  if(e.key === 'ArrowRight') sunumGit('', 1);
+  if(e.key === 'ArrowLeft') sunumGit('', -1);
+});
+document.addEventListener('DOMContentLoaded', function(){ sunumNoktalariOlustur(''); sunumGuncelle(''); });
+
+
+const UNITE_KIMLIK = '4-5';
+
+// ===================== OGRENCI KIMLIGI VE OGRETMEN PANELI =====================
+const OP_ANAHTAR = 'dkabOgretmenPaneli_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname);
+
+function opOgrenciAdi(){
+  let ad = sessionStorage.getItem('dkabAktifOgrenci');
+  if(!ad){
+    ad = prompt('Merhaba! Öğretmenin ilerlemeni takip edebilmesi için adını ve soyadını yazar mısın?');
+    if(!ad || !ad.trim()) ad = 'İsimsiz Öğrenci';
+    ad = ad.trim().slice(0,40);
+    sessionStorage.setItem('dkabAktifOgrenci', ad);
+  }
+  return ad;
+}
+function opOgrenciDegistir(){
+  sessionStorage.removeItem('dkabAktifOgrenci');
+  ozelBildirim('Öğrenci bilgisi sıfırlandı. Bir sonraki oyun tamamlandığında yeni isim sorulacak.');
+}
+function opVerileriOku(){
+  try{ return JSON.parse(localStorage.getItem(OP_ANAHTAR)) || {}; }catch(e){ return {}; }
+}
+function opVerileriYaz(v){
+  try{ localStorage.setItem(OP_ANAHTAR, JSON.stringify(v)); }catch(e){}
+}
+function opOgrenciKaydiGetir(v, ad){
+  if(!v[ad]) v[ad] = {oyunlar:[], sonPuan:0, sonRozetler:[], ilkTarih:new Date().toLocaleString('tr-TR')};
+  return v[ad];
+}
+function opOyunTamamlandiKaydet(bolumId, toplamPuan, rozetler){
+  const ad = opOgrenciAdi();
+  const v = opVerileriOku();
+  const kayit = opOgrenciKaydiGetir(v, ad);
+  kayit.oyunlar.push({bolum: bolumId || 'bilinmiyor', tarih: new Date().toLocaleString('tr-TR')});
+  kayit.sonPuan = toplamPuan;
+  kayit.sonRozetler = rozetler || [];
+  opVerileriYaz(v);
+}
+
+const OP_SIFRE = 'ogretmen2026';
+let opGirisYapildi = false;
+
+function opGirisKontrol(){
+  if(opGirisYapildi){ opPaneliGoster(); return; }
+  const girilen = prompt('Öğretmen paneline erişim için şifreyi girin:');
+  if(girilen === OP_SIFRE){
+    opGirisYapildi = true;
+    opPaneliGoster();
+  } else if(girilen !== null){
+    ozelBildirim('Şifre yanlış.');
+    document.getElementById('opGirisEkrani').style.display = 'block';
+    document.getElementById('opPanelEkrani').style.display = 'none';
+  }
+}
+
+function opPaneliGoster(){
+  document.getElementById('opGirisEkrani').style.display = 'none';
+  document.getElementById('opPanelEkrani').style.display = 'block';
+  const v = opVerileriOku();
+  const isimler = Object.keys(v);
+  const govde = document.getElementById('opTabloGovde');
+  const bosMesaj = document.getElementById('opBosMesaj');
+  govde.innerHTML = '';
+  if(isimler.length === 0){
+    bosMesaj.style.display = 'block';
+    return;
+  }
+  bosMesaj.style.display = 'none';
+  isimler.sort((a,b)=> (v[b].oyunlar.length - v[a].oyunlar.length)).forEach(ad=>{
+    const kayit = v[ad];
+    const tr = document.createElement('tr');
+    const sonAktivite = kayit.oyunlar.length ? kayit.oyunlar[kayit.oyunlar.length-1].tarih : '-';
+    const oyunListesi = kayit.oyunlar.map(o=>o.bolum).join(', ');
+    tr.innerHTML = `
+      <td>${ad}</td>
+      <td>${kayit.sonPuan}</td>
+      <td>${kayit.oyunlar.length}</td>
+      <td>${(kayit.sonRozetler||[]).join(' ') || '-'}</td>
+      <td>${sonAktivite}</td>
+      <td><button class="op-detay-btn" onclick="opDetayGoster(this, '${ad.replace(/'/g,"\\'")}')">Detay</button></td>
+    `;
+    govde.appendChild(tr);
+    const detayTr = document.createElement('tr');
+    detayTr.className = 'op-detay-satir';
+    detayTr.style.display = 'none';
+    detayTr.innerHTML = `<td colspan="6"><b>Tamamlanan bölümler:</b> ${esc(oyunListesi) || 'Henüz yok'}</td>`;
+    govde.appendChild(detayTr);
+  });
+}
+function esc(s){ return String(s).replace(/</g,'&lt;'); }
+function opDetayGoster(btn, ad){
+  const tr = btn.closest('tr').nextElementSibling;
+  tr.style.display = tr.style.display === 'none' ? 'table-row' : 'none';
+}
+function opVerileriTemizle(){
+  ozelOnay('Bu ünitedeki tüm öğrenci verileri silinecek. Emin misiniz?', function(onaylandi){
+    if(onaylandi){
+      localStorage.removeItem(OP_ANAHTAR);
+      opPaneliGoster();
+    }
+  });
+}
+
+
+// ===================== OZEL MODAL / BILDIRIM (alert-confirm yerine) =====================
+function ozelBildirim(mesaj){
+  const eski = document.querySelector('.ozel-toast');
+  if(eski) eski.remove();
+  const toast = document.createElement('div');
+  toast.className = 'ozel-toast';
+  toast.textContent = mesaj;
+  document.body.appendChild(toast);
+  setTimeout(()=>toast.remove(), 3200);
+}
+function ozelOnay(mesaj, callback){
+  const arka = document.createElement('div');
+  arka.className = 'ozel-modal-arka';
+  arka.innerHTML = '<div class="ozel-modal-kutu"><p class="ozel-modal-mesaj"></p>' +
+    '<button class="ozel-modal-btn" style="background:var(--kirmizi);color:#fff;">Evet</button>' +
+    '<button class="ozel-modal-btn" style="background:#e2e8f0;">Vazgeç</button></div>';
+  arka.querySelector('.ozel-modal-mesaj').textContent = mesaj;
+  document.body.appendChild(arka);
+  const btnler = arka.querySelectorAll('.ozel-modal-btn');
+  btnler[0].onclick = ()=>{ arka.remove(); callback(true); };
+  btnler[1].onclick = ()=>{ arka.remove(); callback(false); };
+}
+
+
+// ===================== KENDIMI DEGERLENDIRIYORUM - CHECKBOX KAYDI =====================
+function degOku(uniteKimlik){
+  try{ return JSON.parse(localStorage.getItem('dkabDegerlendirme_'+uniteKimlik)) || {}; }catch(e){ return {}; }
+}
+function degKaydet(uniteKimlik){
+  const durum = {};
+  document.querySelectorAll('[id^="deg_'+uniteKimlik+'_"]').forEach(cb=>{ durum[cb.id] = cb.checked; });
+  try{ localStorage.setItem('dkabDegerlendirme_'+uniteKimlik, JSON.stringify(durum)); }catch(e){}
+}
+function degYukle(uniteKimlik){
+  const durum = degOku(uniteKimlik);
+  Object.keys(durum).forEach(id=>{
+    const cb = document.getElementById(id);
+    if(cb) cb.checked = durum[id];
+  });
+}
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof UNITE_KIMLIK !== 'undefined') degYukle(UNITE_KIMLIK);
+});
+
+
+// ===================== DUSUN VE CEVAPLA / AILEMLE YAPIYORUM - CEVAP KAYDI =====================
+function zbCevapAnahtari(tur){ return 'dkabZbCevap_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname) + '_' + tur; }
+function zbCevapKaydet(tur, el){
+  try{ localStorage.setItem(zbCevapAnahtari(tur), el.value); }catch(e){}
+  const not = document.getElementById('zbNot_'+tur);
+  if(not){
+    not.textContent = '✓ Cevabın kaydedildi';
+    clearTimeout(not._zbT);
+    not._zbT = setTimeout(()=>{ not.textContent=''; }, 2500);
+  }
+}
+function zbCevapYukle(){
+  ['dusun','aile','ikilem'].forEach(tur=>{
+    const el = document.getElementById('zbAlan_'+tur);
+    if(!el) return;
+    try{ const v = localStorage.getItem(zbCevapAnahtari(tur)); if(v) el.value = v; }catch(e){}
+  });
+}
+document.addEventListener('DOMContentLoaded', zbCevapYukle);
+
+
+// ===================== TEKRAR ZAMANI HATIRLATMASI =====================
+function zbTekrarHatirlatmaKontrol(){
+  const uniteKimlik = (typeof UNITE_KIMLIK !== 'undefined') ? UNITE_KIMLIK : location.pathname;
+  const anahtar = 'dkabSonZiyaret_' + uniteKimlik;
+  let son = null;
+  try{ son = localStorage.getItem(anahtar); }catch(e){}
+  const bugun = new Date();
+  if(son){
+    const gecenGun = Math.floor((bugun - new Date(son)) / 86400000);
+    if(gecenGun >= 3 && typeof ozelBildirim === 'function'){
+      setTimeout(()=>{ ozelBildirim('👋 Bu üniteyi ' + gecenGun + ' gündür tekrar etmedin. Hafızanı tazelemek ister misin?'); }, 1500);
+    }
+  }
+  try{ localStorage.setItem(anahtar, bugun.toISOString()); }catch(e){}
+}
+document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
+
+
+</script>
+
+</body>
+</html>

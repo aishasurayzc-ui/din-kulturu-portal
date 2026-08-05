@@ -1,0 +1,3606 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7. Sınıf Din Kültürü - 2. Ünite: Hac, Umre ve Kurban — Kendini Değerlendir</title>
+<meta name="description" content="7. Sınıf Din Kültürü - 2. Ünite: Hac, Umre ve Kurban — İnteraktif oyunlar, konu özeti, test, Kâfirun suresi ezber etkinlikleri ve sunum içeren dijital ders materyali.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mavi:#2a6f97; --acik:#a9d6e5; --yesil:#40916c; --kirmizi:#d62828;
+    --sari:#f4a261; --bg:#f7f4ec;
+    --navy:#1E3A8A; --turkuaz:#06B6D4; --acikgri:#f1f5f9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family: "Nunito", "Comic Sans MS", "Segoe UI", Tahoma, sans-serif;
+    background: var(--bg);
+    margin:0; padding:0; color:#22333b;
+  }
+  header{
+    background: linear-gradient(135deg, var(--mavi), var(--yesil));
+    color:white; text-align:center; padding:24px 10px;
+  }
+  header h1{ margin:0; font-size:1.8em;}
+  header p{ margin:6px 0 0; opacity:.9;}
+
+  .hero{
+    position:relative; overflow:hidden; text-align:center; padding:50px 20px 40px;
+    background: linear-gradient(135deg, var(--navy), var(--turkuaz));
+    color:white;
+  }
+  .hero-sekiller{ position:absolute; inset:0; pointer-events:none; }
+  .hero-sekiller span{
+    position:absolute; font-size:1.8em; opacity:.35; font-weight:800;
+    animation: hero-yuz 5s ease-in-out infinite;
+  }
+  @keyframes hero-yuz{
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-18px) rotate(8deg); }
+  }
+  .hero-baslik{ font-size:2.1em; margin:10px 0 6px; text-shadow:0 2px 14px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.35); }
+  .hero-alt{ max-width:520px; margin:0 auto; opacity:.95; font-size:1.05em; }
+  .hero-butonlar{ display:flex; gap:14px; justify-content:center; margin-top:22px; flex-wrap:wrap; }
+  .hero-btn{
+    padding:13px 26px; border:none; border-radius:26px; font-weight:800; font-size:1em;
+    cursor:pointer; transition:transform .15s;
+  }
+  .hero-btn:hover{ transform:scale(1.05); }
+  .hero-btn-birincil{ background:white; color:var(--navy); }
+  .hero-btn-ikincil{ background:rgba(255,255,255,.18); color:white; border:2px solid white; }
+
+  .istatistik-cubugu{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:14px;
+    background:white; padding:16px; margin:0; box-shadow:0 2px 6px rgba(0,0,0,.06);
+  }
+  .istatistik-kutu{
+    display:flex; flex-direction:column; align-items:center; min-width:110px;
+    background:var(--acikgri); border-radius:16px; padding:12px 18px;
+  }
+  .ist-ikon{ font-size:1.5em; }
+  .istatistik-kutu b{ font-size:1.3em; color:var(--navy); }
+  .ist-etiket{ font-size:.75em; color:#666; text-align:center; }
+
+  nav{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+    padding:16px; background:white; box-shadow:0 2px 6px rgba(0,0,0,.08);
+    position:sticky; top:0; z-index:10;
+  }
+  nav button{
+    padding:10px 18px; border:none; border-radius:20px; cursor:pointer;
+    background:var(--acik); font-weight:bold; font-size:.95em; color:#22333b;
+    transition:.15s;
+  }
+  nav button:hover{ background:var(--mavi); color:white; }
+  nav button.aktif{ background:var(--mavi); color:white; }
+  nav.kategori-nav{ padding:14px 16px 6px; }
+  nav.kategori-nav button{ background:#22333b; color:white; font-size:1em; }
+  nav.kategori-nav button:hover{ background:var(--yesil); }
+  nav.kategori-nav button.kat-aktif{ background:var(--yesil); }
+  nav.kategori-nav a.slayt-link{ padding:10px 18px; border:none; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1em; color:white; background:#8a5a00; text-decoration:none; display:inline-block; transition:.15s; }
+  nav.kategori-nav a.slayt-link:hover{ background:var(--yesil); }
+  .oyun-grubu{
+    display:none; flex-wrap:wrap; justify-content:center; gap:10px;
+    padding:10px 16px 16px; background:white; box-shadow:0 2px 6px rgba(0,0,0,.08);
+    position:sticky; top:56px; z-index:9;
+  }
+  .oyun-grubu.aktif{ display:flex; }
+  main{ max-width:900px; margin:0 auto; padding:20px; }
+  main section{ display:none; animation: fade .3s; }
+  section.aktif{ display:block; }
+  @keyframes fade{ from{opacity:0;} to{opacity:1;} }
+  h2{ color:var(--mavi); border-bottom:3px solid var(--acik); padding-bottom:8px;}
+  .kart-kutu{ display:flex; gap:24px; flex-wrap:wrap; justify-content:center; margin-top:20px;}
+  .kolon{ flex:1; min-width:240px; }
+  .kolon h3, .kolon h4{ text-align:center; color:var(--yesil); margin:6px 0;}
+  .kart{
+    background:white; border:2px solid var(--acik); border-radius:12px;
+    padding:12px 14px; margin:8px 0; cursor:pointer; text-align:center;
+    font-size:1.05em; transition:.15s; box-shadow:0 1px 4px rgba(0,0,0,.08);
+    position:relative; overflow:hidden;
+  }
+  .kart:hover{ transform:scale(1.03); }
+  .kart.secili{ border-color:var(--mavi); background:#eaf4fb; }
+  .kart.dogru{ background:#d8f3dc; border-color:var(--yesil); cursor:default; }
+  .kart.yanlis{ background:#ffccd5; border-color:var(--kirmizi); }
+  .skor{ text-align:center; font-size:1.2em; margin:16px 0; font-weight:bold; color:var(--mavi);}
+  .oyun-bilgi{
+    display:flex; gap:22px; justify-content:center; flex-wrap:wrap;
+    font-size:1.15em; font-weight:bold; margin:16px 0; color:var(--mavi);
+  }
+  .kutu-panel{
+    background:white; border-radius:14px; padding:18px; margin-top:16px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+  }
+  button.eylem{
+    display:block; margin:16px auto; padding:12px 24px; font-size:1em;
+    background:var(--yesil); color:white; border:none; border-radius:24px;
+    cursor:pointer; font-weight:bold;
+  }
+  button.eylem:hover{ background:#2d6a4f; }
+  input[type=text]{
+    width:100%; padding:10px; border-radius:8px; border:2px solid var(--acik);
+    font-family:inherit; font-size:1em;
+  }
+  .aciklama{ background:#fff8e1; border-left:5px solid var(--sari); padding:10px 14px; margin:14px 0; border-radius:6px;}
+  .sonuc-kutusu{ text-align:center; font-size:1.3em; font-weight:bold; margin-top:20px; color:var(--mavi); min-height:1.6em;}
+  .balon-durum{ text-align:center; font-size:1.2em; font-weight:bold; margin:10px 0; min-height:28px; }
+  footer{ text-align:center; padding:20px; color:#5f5f5f; font-size:.85em;}
+
+  .hafiza-izgara{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:520px; margin:16px auto;}
+  .hafiza-kart{ position:relative; height:78px; cursor:pointer; }
+  .hafiza-on, .hafiza-arka{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    border-radius:10px; backface-visibility:hidden; transition:transform .4s;
+    font-size:.78em; text-align:center; padding:4px; line-height:1.15; overflow:hidden;
+  }
+  .hafiza-on{ background:var(--mavi); color:white; font-size:1.7em; }
+  .hafiza-arka{ background:white; border:2px solid var(--yesil); font-weight:bold; transform:rotateY(180deg); }
+  .hafiza-kart.acik .hafiza-on{ transform:rotateY(180deg); }
+  .hafiza-kart.acik .hafiza-arka{ transform:rotateY(0deg); }
+  .hafiza-kart.bulundu .hafiza-arka{ background:#d8f3dc; border-color:var(--yesil); }
+  .hafiza-kart.bulundu{ cursor:default; opacity:.85; }
+
+  .kf-bant{
+    display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:16px 0; padding:14px;
+    background:repeating-linear-gradient(45deg,#f4a261,#f4a261 10px,#e76f51 10px,#e76f51 20px);
+    border-radius:10px;
+  }
+  .kf-kutu{
+    width:38px; height:38px; background:white; border:2px solid #6b4226; border-radius:6px;
+    display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2em;
+    box-shadow:0 2px 4px rgba(0,0,0,.3);
+  }
+  .kf-urunler{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:14px 0; max-height:160px; overflow-y:auto; }
+  .dua-cip{
+    background:#eaf4fb; border:2px solid var(--mavi); border-radius:20px;
+    padding:8px 14px; font-size:.9em; animation: cipAc .3s ease-out;
+  }
+  @keyframes cipAc{ from{ transform:scale(0);} to{ transform:scale(1);} }
+  input.yanlis-girdi{ border-color:var(--kirmizi) !important; animation: sallan .3s; }
+  @keyframes sallan{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-6px);} 75%{transform:translateX(6px);} }
+
+  .kelime-banka{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:14px 0; }
+  .kelime-cevap{
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center; min-height:50px;
+    margin:14px 0; padding:10px; background:#eaf4fb; border-radius:10px;
+  }
+  .kelime-tas{
+    background:white; border:2px solid var(--mavi); border-radius:8px; padding:9px 13px;
+    cursor:pointer; font-weight:bold; position:relative; overflow:hidden;
+  }
+  .kelime-tas.kullanildi{ opacity:.35; cursor:default; }
+  .kelime-tas.yanlis{ animation: sallan .3s; border-color:var(--kirmizi); }
+
+  .ku-liste{
+    list-style:none; padding:0; margin:14px auto; max-width:600px;
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+  }
+  .ku-liste li{
+    background:#d8f3dc; border:2px solid var(--yesil); border-radius:20px;
+    padding:6px 14px; font-weight:bold; font-size:.9em; animation: cipAc .3s ease-out;
+  }
+
+  .merdiven-secenek{
+    padding:10px 14px; border:2px solid var(--acik); border-radius:10px; background:white;
+    cursor:pointer; font-weight:bold; text-align:center;
+  }
+  .merdiven-secenek:hover{ background:#eaf4fb; }
+  .merdiven-secenek.dogru{ background:#d8f3dc; border-color:var(--yesil); }
+  .merdiven-secenek.yanlis{ background:#ffccd5; border-color:var(--kirmizi); }
+
+  .bz-izgara{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:460px; margin:16px auto; }
+  .bz-tus{
+    height:84px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    font-size:.85em; font-weight:bold; text-align:center; padding:6px; cursor:pointer;
+    opacity:.5; transition:opacity .15s; color:white;
+  }
+  .bz-tus.bz-yanik{ opacity:1; box-shadow:0 0 18px 4px rgba(255,255,255,.85) inset; }
+  .bz-tus.bz-devre-disi{ cursor:default; }
+
+  .ka-izgara{ display:grid; gap:2px; margin:16px auto; width:fit-content; background:white; }
+  .ka-hucre{
+    width:26px; height:26px; display:flex; align-items:center; justify-content:center;
+    background:white; border:1px solid var(--acik); border-radius:4px; font-weight:bold; cursor:pointer;
+    font-size:.75em; user-select:none;
+  }
+  .ka-hucre.ka-secili{ background:var(--acik); }
+  .ka-hucre.ka-bulundu{ background:#d8f3dc; border-color:var(--yesil); color:var(--yesil); cursor:default; }
+  .ka-liste{ list-style:none; padding:0; margin:0; min-width:220px; }
+  .ka-liste li{ padding:8px 10px; margin:4px 0; background:#fff8e1; border-radius:8px; font-size:.85em; }
+  .ka-liste li.bulundu-satir{ background:#d8f3dc; text-decoration:line-through; color:var(--yesil); }
+
+  .cengel-izgara{ display:grid; gap:2px; margin:16px auto; width:fit-content; }
+  .cengel-hucre, .cengel-bos{ width:34px; height:34px; }
+  .cengel-girdi{
+    width:34px; height:34px; text-align:center; font-weight:bold; font-size:1.1em;
+    border:2px solid var(--mavi); border-radius:4px; text-transform:uppercase; padding:0;
+    font-family:inherit;
+  }
+  .cengel-girdi.dogru{ background:#d8f3dc; border-color:var(--yesil); }
+  .cengel-girdi.yanlis{ background:#ffccd5; border-color:var(--kirmizi); }
+  .cengel-liste{ list-style:none; padding:0; margin:16px auto 0; max-width:520px; }
+  .cengel-liste li{ padding:8px 10px; margin:4px 0; background:#fff8e1; border-radius:8px; font-size:.88em; }
+
+  .sifre-anahtar{ display:grid; grid-template-columns:repeat(10,1fr); gap:4px; max-width:560px; margin:16px auto; }
+  .sifre-anahtar-hucre{ background:#eaf4fb; border:1px solid var(--acik); border-radius:6px; padding:4px 2px; text-align:center; font-size:.7em; }
+  .sifre-satir{ margin:18px 0; }
+  .sifre-ipucu{ text-align:center; font-weight:bold; color:var(--mavi); margin-bottom:8px; }
+  .sifre-kutucuklar{ display:flex; gap:6px; justify-content:center; flex-wrap:wrap; }
+  .sifre-grup{ display:flex; flex-direction:column; align-items:center; gap:2px; }
+  .sifre-sayi{ font-size:.75em; font-weight:bold; color:var(--kirmizi); }
+  .sifre-girdi{
+    width:32px; height:32px; text-align:center; font-weight:bold; font-size:1.05em;
+    border:2px solid var(--mavi); border-radius:4px; text-transform:uppercase; font-family:inherit;
+  }
+  .sifre-girdi.dogru{ background:#d8f3dc; border-color:var(--yesil); }
+  .sifre-girdi.yanlis{ background:#ffccd5; border-color:var(--kirmizi); }
+  .dua-satir{
+    font-size:1.3em; text-align:center; margin:10px 0; padding:10px;
+    background:#eaf4fb; border-radius:10px;
+  }
+
+  .nono-tablo{ border-collapse:collapse; margin:16px auto; }
+  .nono-hucre{ width:22px; height:22px; border:1px solid #ccc; cursor:pointer; background:white; padding:0; }
+  .nono-hucre.dolu{ background:var(--mavi); }
+  .nono-satir-ipucu{ text-align:right; padding-right:6px; font-weight:bold; font-size:.72em; white-space:nowrap; }
+  .nono-sutun-ipucu{ text-align:center; vertical-align:bottom; font-weight:bold; font-size:.68em; line-height:1.15; padding-bottom:4px; }
+
+  .ks-izgara{
+    display:grid; grid-template-columns:repeat(8,42px); grid-template-rows:repeat(8,42px);
+    margin:16px auto; width:fit-content; border:3px solid #6b4226;
+  }
+  .ks-hucre{
+    display:flex; align-items:center; justify-content:center; font-weight:bold;
+    font-size:1.05em; cursor:pointer;
+  }
+  .ks-hucre.acik{ background:#f0d9b5; }
+  .ks-hucre.koyu{ background:#b58863; }
+  .ks-hucre.ks-secili{ background:var(--acik) !important; }
+  .ks-hucre.ks-bulundu{ background:var(--yesil) !important; color:white; cursor:default; }
+
+  .dd-satir{ display:flex; gap:6px; justify-content:center; margin-bottom:8px; }
+  .dd-kutu{
+    width:38px; height:38px; display:flex; align-items:center; justify-content:center;
+    font-weight:bold; font-size:1.1em; color:white; border-radius:6px;
+  }
+  .dd-kutu.dogru-yer{ background:var(--yesil); }
+  .dd-kutu.yanlis-yer{ background:var(--sari); }
+  .dd-kutu.yok{ background:#999; }
+
+  .labirent-izgara{ display:grid; margin:16px auto; width:fit-content; background:white; box-shadow:0 2px 8px rgba(0,0,0,.15); }
+  .labirent-hucre{
+    width:30px; height:30px; box-sizing:border-box; display:flex; align-items:center;
+    justify-content:center; font-size:.95em;
+  }
+  .labirent-kontroller{ display:flex; flex-direction:column; align-items:center; gap:6px; margin:14px 0; }
+  .labirent-kontroller > div{ display:flex; gap:6px; }
+  .labirent-tus{
+    width:48px; height:48px; font-size:1.3em; border:none; border-radius:10px;
+    background:var(--mavi); color:white; cursor:pointer; font-weight:bold;
+  }
+  .labirent-tus:hover{ background:#1c4e6b; }
+
+/* ===================== SUNUM (SLAYT) GORUNUMU ===================== */
+.sunum-sarmal{ max-width:900px; margin:0 auto; }
+.sunum-ust{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.sunum-sayac{ font-weight:bold; color:var(--mavi); background:var(--acikgri); padding:6px 14px; border-radius:16px; font-size:.9em; }
+.sunum-tamekran-btn{ background:var(--navy); color:#fff; border:none; padding:8px 16px; border-radius:16px; cursor:pointer; font-weight:bold; font-size:.9em; }
+.sunum-tamekran-btn:hover{ background:var(--mavi); }
+.sunum-alan{
+  position:relative; width:100%; aspect-ratio:16/9; background:#0d1f2d;
+  border-radius:14px; overflow:hidden; box-shadow:0 6px 24px rgba(0,0,0,.25);
+}
+.sunum-alan:fullscreen{ border-radius:0; aspect-ratio:auto; display:flex; align-items:center; justify-content:center; }
+.sunum-alan:fullscreen .sunum-slayt{ max-width:1400px; max-height:90vh; margin:auto; }
+.sunum-slayt{
+  position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center;
+  padding:6% 8%; text-align:center; color:#fff; font-family:"Nunito","Segoe UI",sans-serif;
+  animation:sunumFade .35s ease;
+}
+.sunum-slayt.aktif{ display:flex; }
+@keyframes sunumFade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+.s-baslik, .s-kapanis{ background:linear-gradient(160deg,#1E3A8A,#0d1f2d); }
+.sb-daire{
+  width:90px; height:90px; border-radius:50%; background:var(--sari); color:#1E3A8A;
+  display:flex; align-items:center; justify-content:center; font-size:2.6em; margin-bottom:16px;
+  box-shadow:0 0 0 4px #fff3;
+}
+.sb-ust{ letter-spacing:2px; color:var(--sari); font-weight:bold; font-size:.95em; margin:0 0 8px; }
+.sb-baslik{ font-size:1.7em; margin:0 0 14px; }
+.sb-ders{ color:#cbd5e1; margin:2px 0; }
+.sb-ogretmen{ color:#b8c4d9; font-style:italic; font-size:.9em; margin:2px 0; }
+
+.s-liste{ background:var(--acik); color:#22333b; }
+.s-liste h3{ color:var(--mavi); font-size:1.3em; margin-top:0; }
+.sl-liste{ text-align:left; list-style:none; padding:0; margin:0; width:100%; max-width:640px; }
+.sl-liste li{
+  background:#fff; border-left:6px solid var(--mavi); border-radius:8px; padding:10px 16px;
+  margin-bottom:10px; font-size:.95em; box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+.s-ozet .sl-liste li{ border-left-color:var(--yesil); }
+
+.s-icerik{ background:#fff; color:#22333b; }
+.s-icerik h3{ color:var(--vurgu, var(--mavi)); font-size:1.25em; margin-top:0; }
+.si-liste{ text-align:left; list-style:none; padding:0; margin:0; width:100%; max-width:640px; }
+.si-liste li{
+  background:var(--acikgri); border-left:6px solid var(--vurgu, var(--mavi)); border-radius:8px;
+  padding:10px 16px; margin-bottom:10px; font-size:.92em; line-height:1.4;
+}
+
+.s-kavram{ background:var(--acikgri); color:#22333b; }
+.s-kavram h3{ color:var(--mavi); margin-top:0; }
+.sk-izgara{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:700px; }
+.sk-etiket{ color:#fff; font-weight:bold; padding:10px 18px; border-radius:20px; font-size:.9em; box-shadow:0 2px 6px rgba(0,0,0,.15); }
+
+.s-ayet{ background:linear-gradient(160deg,#1E3A8A,#0d1f2d); }
+.sa-ust{ color:var(--sari); font-weight:bold; letter-spacing:2px; font-size:.9em; }
+.sa-meal{ font-size:1.25em; font-style:italic; max-width:640px; line-height:1.5; margin:14px 0; font-family:Georgia,serif; }
+.sa-kaynak{ color:var(--sari); font-weight:bold; }
+.sa-arapca{ direction:rtl; unicode-bidi:isolate; font-size:1.6em; line-height:2.1; max-width:660px; margin:10px 0 4px; color:#fff; }
+.sa-okunus{ font-size:1.02em; font-style:italic; color:#d7e3f4; max-width:660px; line-height:1.6; margin:0 0 8px; }
+
+/* Sure kutusu (konu özeti içinde) */
+.sure-kutu{ background:#f8fafc; border:2px solid var(--acik); border-left:6px solid var(--mavi); border-radius:10px; padding:14px 16px; margin:12px 0; }
+.sure-arapca{ direction:rtl; unicode-bidi:isolate; text-align:right; font-size:1.75em; line-height:2.2; color:#12324a; margin:0 0 10px; }
+.sure-okunus{ font-style:italic; color:#1f4e6b; line-height:1.7; margin:0 0 8px; }
+.sure-meal{ line-height:1.7; margin:0; }
+.sure-etiket{ display:inline-block; background:var(--mavi); color:#fff; font-size:.78em; font-weight:bold; letter-spacing:1px; padding:3px 10px; border-radius:12px; margin-bottom:8px; }
+
+.s-video{ background:linear-gradient(160deg,#1E3A8A,#0d1f2d); }
+.sv-ust{ color:#8FD9B8; font-weight:bold; letter-spacing:2px; font-size:.9em; margin-bottom:10px; }
+.sv-cerceve{ width:100%; max-width:640px; aspect-ratio:16/9; border-radius:10px; overflow:hidden; border:2px solid var(--sari); box-shadow:0 4px 18px rgba(0,0,0,.4); }
+.sv-cerceve iframe{ width:100%; height:100%; border:none; }
+.sv-baslik{ margin-top:10px; font-size:.95em; color:#e5e7eb; }
+
+.sunum-nav{ display:flex; justify-content:space-between; align-items:center; margin-top:10px; gap:10px; }
+.sunum-nav button{
+  background:var(--mavi); color:#fff; border:none; padding:10px 20px; border-radius:20px;
+  cursor:pointer; font-weight:bold; font-size:.95em;
+}
+.sunum-nav button:hover{ background:var(--yesil); }
+.sunum-nav button:disabled{ opacity:.4; cursor:default; }
+.sunum-noktalar{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; max-width:400px; }
+.sunum-nokta{ width:9px; height:9px; border-radius:50%; background:#cbd5e1; cursor:pointer; }
+.sunum-nokta.aktif{ background:var(--mavi); }
+@media(max-width:640px){
+  .sb-baslik{ font-size:1.25em; } .sa-meal{ font-size:1em; } .sl-liste li,.si-liste li{ font-size:.85em; }
+}
+
+
+/* ===================== ZENGINLESTIRME KUTULARI ===================== */
+.zg-kutu{ border-radius:12px; padding:16px 18px; margin:16px 0; box-shadow:0 3px 10px rgba(0,0,0,.08); }
+.zg-baslik{ font-weight:bold; font-size:1.05em; margin:0 0 8px; display:flex; align-items:center; gap:8px; }
+.zg-metin{ margin:0; line-height:1.55; font-size:.97em; }
+.zg-bilgi{ background:#eaf2ff; border-left:6px solid #2a6f97; }
+.zg-bilgi .zg-baslik{ color:#2a6f97; }
+.zg-merak{ background:#f3ecfb; border-left:6px solid #7c3aed; }
+.zg-merak .zg-baslik{ color:#7c3aed; }
+.zg-soru{ background:#fff4e6; border-left:6px solid #f4a261; }
+.zg-soru .zg-baslik{ color:#c9740b; }
+.zg-hayat{ background:#eafaf1; border-left:6px solid #40916c; }
+.zg-hayat .zg-baslik{ color:#40916c; }
+
+
+.s-zg{ color:#22333b; }
+.s-zg-bilgi{ background:#eaf2ff; }
+.s-zg-merak{ background:#f3ecfb; }
+.s-zg-soru{ background:#fff4e6; }
+.s-zg-hayat{ background:#eafaf1; }
+.zg-slayt-ust{ font-weight:bold; letter-spacing:1.5px; font-size:.95em; margin-bottom:14px; }
+.s-zg-bilgi .zg-slayt-ust{ color:#2a6f97; }
+.s-zg-merak .zg-slayt-ust{ color:#7c3aed; }
+.s-zg-soru .zg-slayt-ust{ color:#c9740b; }
+.s-zg-hayat .zg-slayt-ust{ color:#40916c; }
+.zg-slayt-metin{ font-size:1.15em; line-height:1.55; max-width:640px; }
+
+
+/* ===================== OGRETMEN PANELI ===================== */
+.op-baglanti-satiri{ text-align:center; padding:6px; background:#f1f5f9; }
+.op-baglanti-satiri a{ color:#64748b; font-size:.8em; text-decoration:none; cursor:pointer; }
+.op-baglanti-satiri a:hover{ text-decoration:underline; }
+.op-tablo{ width:100%; border-collapse:collapse; margin:16px 0; font-size:.92em; }
+.op-tablo th{ background:var(--navy); color:#fff; padding:8px 10px; text-align:left; }
+.op-tablo td{ padding:8px 10px; border-bottom:1px solid #e2e8f0; }
+.op-tablo tr:nth-child(4n+1){ background:#f8fafc; }
+.op-detay-btn{ background:var(--mavi); color:#fff; border:none; padding:4px 12px; border-radius:12px; cursor:pointer; font-size:.85em; }
+.op-detay-satir td{ background:#eef2f7; font-size:.88em; }
+#ogretmenpaneli .aciklama{ margin-bottom:14px; }
+
+
+/* ===================== DOGRU CEVAPTA YILDIZ + KONFETI PATLAMASI ===================== */
+.dogru{ position:relative; overflow:visible !important; }
+.dogru::before{
+  content:'⭐';
+  position:absolute; top:50%; left:-4px; font-size:1.5em;
+  animation: dogruPatlamaSol .9s ease-out forwards;
+  pointer-events:none; z-index:5;
+}
+.dogru::after{
+  content:'🎊';
+  position:absolute; top:50%; right:-4px; font-size:1.5em;
+  animation: dogruPatlamaSag .9s ease-out forwards;
+  pointer-events:none; z-index:5;
+}
+@keyframes dogruPatlamaSol{
+  0%{ opacity:0; transform:translate(0,-50%) scale(0) rotate(0deg); }
+  25%{ opacity:1; transform:translate(-10px,-70%) scale(1.4) rotate(-20deg); }
+  100%{ opacity:0; transform:translate(-32px,-125%) scale(1.1) rotate(-60deg); }
+}
+@keyframes dogruPatlamaSag{
+  0%{ opacity:0; transform:translate(0,-50%) scale(0) rotate(0deg); }
+  25%{ opacity:1; transform:translate(10px,-70%) scale(1.4) rotate(20deg); }
+  100%{ opacity:0; transform:translate(32px,-125%) scale(1.1) rotate(60deg); }
+}
+
+
+/* ===================== OZEL MODAL / BILDIRIM (alert-confirm yerine) ===================== */
+.ozel-modal-arka{ position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:1000; padding:20px; }
+.ozel-modal-kutu{ background:#fff; border-radius:16px; padding:24px; max-width:360px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.35); animation:ozelModalGir .2s ease; }
+@keyframes ozelModalGir{ from{opacity:0; transform:scale(.9);} to{opacity:1; transform:scale(1);} }
+.ozel-modal-mesaj{ margin:0 0 18px; font-size:1.05em; line-height:1.4; }
+.ozel-modal-btn{ padding:10px 20px; border:none; border-radius:20px; font-weight:bold; cursor:pointer; margin:0 6px; font-size:.95em; }
+.ozel-toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#22333b; color:#fff; padding:14px 22px; border-radius:24px; box-shadow:0 6px 20px rgba(0,0,0,.3); z-index:1000; animation:ozelToastGir .3s ease; font-weight:bold; max-width:80vw; text-align:center; }
+@keyframes ozelToastGir{ from{opacity:0; transform:translateX(-50%) translateY(20px);} to{opacity:1; transform:translateX(-50%) translateY(0);} }
+
+
+/* ===================== 6 BOLUMLU ZENGINLESTIRME (Konu Ozeti) ===================== */
+.zb-kutu{ border-radius:12px; padding:16px 18px; margin:16px 0; box-shadow:0 3px 10px rgba(0,0,0,.08); }
+.zb-baslik{ font-weight:bold; font-size:1.05em; margin:0 0 8px; display:flex; align-items:center; gap:8px; }
+.zb-metin{ margin:0; line-height:1.55; font-size:.97em; }
+.zb-merak{ background:#f3ecfb; border-left:6px solid #7c3aed; }
+.zb-merak .zb-baslik{ color:#7c3aed; }
+.zb-yanlis{ background:#fff0f0; border-left:6px solid #d62828; }
+.zb-yanlis .zb-baslik{ color:#d62828; }
+.zb-yanlis .zb-yanlis-satir{ color:#a31515; margin:4px 0; }
+.zb-yanlis .zb-dogru-satir{ color:#2d6a4f; margin:4px 0; font-weight:bold; }
+.zb-ornek{ background:#eafaf1; border-left:6px solid #40916c; }
+.zb-ornek .zb-baslik{ color:#40916c; }
+.zb-dusun{ background:#fff4e6; border-left:6px solid #f4a261; }
+.zb-dusun .zb-baslik{ color:#c9740b; }
+.zb-aile{ background:#fdeef5; border-left:6px solid #d6336c; }
+.zb-aile .zb-baslik{ color:#d6336c; }
+.zb-degerlendir{ background:#eaf2ff; border-left:6px solid #2a6f97; }
+.zb-degerlendir .zb-baslik{ color:#2a6f97; }
+.zb-degerlendir ul{ list-style:none; padding:0; margin:0; }
+.zb-degerlendir li{ display:flex; align-items:flex-start; gap:8px; margin:8px 0; font-size:.95em; line-height:1.4; }
+.zb-degerlendir input[type=checkbox]{ width:18px; height:18px; margin-top:2px; flex-shrink:0; accent-color:#2a6f97; cursor:pointer; }
+.zb-degerlendir label{ cursor:pointer; }
+
+/* ===================== 6 BOLUMLU ZENGINLESTIRME (Sunum slaytlari) ===================== */
+.s-zb{ color:#22333b; }
+.s-zb-merak{ background:#f3ecfb; }
+.s-zb-yanlis{ background:#fff0f0; }
+.s-zb-ornek{ background:#eafaf1; }
+.s-zb-dusun{ background:#fff4e6; }
+.s-zb-aile{ background:#fdeef5; }
+.s-zb-degerlendir{ background:#eaf2ff; }
+.zb-slayt-ust{ font-weight:bold; letter-spacing:1.5px; font-size:.95em; margin-bottom:14px; }
+.s-zb-merak .zb-slayt-ust{ color:#7c3aed; }
+.s-zb-yanlis .zb-slayt-ust{ color:#d62828; }
+.s-zb-ornek .zb-slayt-ust{ color:#40916c; }
+.s-zb-dusun .zb-slayt-ust{ color:#c9740b; }
+.s-zb-aile .zb-slayt-ust{ color:#d6336c; }
+.s-zb-degerlendir .zb-slayt-ust{ color:#2a6f97; }
+.zb-slayt-metin{ font-size:1.1em; line-height:1.5; max-width:640px; }
+.zb-slayt-yanlis{ color:#a31515; font-size:1em; margin:6px 0; }
+.zb-slayt-dogru{ color:#2d6a4f; font-size:1em; margin:6px 0; font-weight:bold; }
+.zb-slayt-liste{ list-style:none; padding:0; margin:0; text-align:left; max-width:600px; }
+.zb-slayt-liste li{ font-size:1em; margin:8px 0; }
+
+
+.zb-derin{ background:#e6f7f9; border-left:6px solid #0891b2; }
+.zb-derin .zb-baslik{ color:#0891b2; }
+.zb-derin-liste{ list-style:none; padding:0; margin:8px 0 0; }
+.zb-derin-liste li{ font-size:.97em; margin:6px 0; padding-left:20px; position:relative; }
+.zb-derin-liste li::before{ content:'❓'; position:absolute; left:0; }
+.s-zb-derin{ background:#e6f7f9; }
+.s-zb-derin .zb-slayt-ust{ color:#0891b2; }
+
+
+.oyun-amaci{ background:#fff3cd; border-left:5px solid #f4a261; padding:8px 14px; margin:10px 0 14px; border-radius:6px; font-weight:bold; font-size:.92em; color:#7a4a00; }
+
+
+.zb-cevap-alani{ width:100%; box-sizing:border-box; margin-top:10px; padding:10px; border-radius:8px; border:1px solid #d0d0d0; font-family:inherit; font-size:.95em; resize:vertical; min-height:60px; }
+.zb-cevap-not{ font-size:.82em; color:#2a9d8f; font-weight:bold; margin:4px 0 0; min-height:1.1em; }
+
+
+.kutu-kazanim{ background:#f3eefc; border-left:6px solid #7c3aed; }
+.kutu-kazanim .kazanim-kaynak{ font-size:.82em; color:#5b21b6; font-style:italic; margin:2px 0 10px; }
+.kutu-kazanim ul{ margin:0; padding-left:22px; }
+.kutu-kazanim li{ margin-bottom:6px; }
+
+
+.zb-ikilem{ background:#eefcf3; border-left:6px solid #0f9d58; }
+.zb-ikilem .zb-baslik{ color:#0f7a44; }
+
+
+.kavram-harita-panel .kavram-harita-aciklama{ font-size:.9em; color:#555; margin-bottom:6px; }
+.kavram-harita{ display:flex; flex-direction:column; align-items:center; margin-top:18px; }
+.kh-merkez{ background:#7c3aed; color:#fff; font-weight:bold; padding:12px 22px; border-radius:30px; box-shadow:0 4px 10px rgba(124,58,237,.35); position:relative; margin-bottom:26px; text-align:center; max-width:80%; }
+.kh-merkez::after{ content:''; position:absolute; bottom:-22px; left:50%; width:2px; height:22px; background:#c4b5fd; }
+.kh-dallar{ display:flex; flex-wrap:wrap; justify-content:center; gap:20px 16px; }
+.kh-kavram{ background:#f3eefc; border:2px solid #c4b5fd; color:#5b21b6; font-weight:bold; padding:8px 16px; border-radius:20px; position:relative; }
+.kh-kavram::before{ content:''; position:absolute; top:-16px; left:50%; width:2px; height:16px; background:#c4b5fd; }
+
+
+.yazili-izgara{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:16px; }
+.yazili-kart{ display:block; text-decoration:none; color:inherit; background:#fff; border:2px solid #e2e8f0; border-radius:14px; padding:16px; text-align:center; transition:transform .15s, box-shadow .15s, border-color .15s; }
+.yazili-kart:hover{ transform:translateY(-3px); box-shadow:0 8px 18px rgba(0,0,0,.12); border-color:#7c3aed; }
+.yazili-kart .yk-ikon{ font-size:2em; margin-bottom:6px; }
+.yazili-kart h3{ margin:4px 0 2px; font-size:1em; }
+.yazili-kart p{ margin:0; font-size:.85em; color:#666; }
+.yazili-kart.yk-klasik{ border-style:dashed; }
+
+
+/* ===================== EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) ===================== */
+.ez-iki-sutun{ display:flex; gap:22px; justify-content:center; flex-wrap:wrap; margin:14px 0; }
+.ez-sutun{ display:flex; flex-direction:column; gap:8px; min-width:230px; max-width:340px; flex:1; }
+.ez-sutun h4{ text-align:center; margin:0 0 4px; color:var(--mavi); font-size:.95em; }
+.merdiven-secenek.secili{ background:#fff3cd; border-color:#f4a261; }
+.merdiven-secenek.eslesti{ background:#d8f3dc; border-color:var(--yesil); cursor:default; opacity:.85; }
+.merdiven-secenek.ez-oge{ font-size:.85em; text-align:left; padding:9px 12px; }
+.ez-zamanlayici{ text-align:center; font-size:1.6em; font-weight:800; color:var(--kirmizi); margin:8px 0; }
+.ez-ogrenilen-liste{ max-width:560px; margin:10px auto; padding:10px 16px; background:#f4f0ff; border-radius:8px; font-size:.88em; line-height:1.7; min-height:20px; }
+.ez-ogrenilen-liste b{ color:#4c1d95; }
+.ez-metin-goster{ text-align:center; font-size:1.1em; font-weight:700; color:var(--navy); background:#eef6ff; border-radius:8px; padding:16px 20px; margin:14px auto; max-width:640px; min-height:1.4em; }
+.ez-hafiza-izgara{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; max-width:640px; margin:16px auto; }
+.ez-hafiza-izgara .hafiza-kart{ height:88px; }
+.ez-hafiza-izgara .hafiza-on{ font-size:1.3em; }
+.ez-hafiza-izgara .hafiza-arka{ font-size:.62em; padding:4px; text-align:center; line-height:1.25; }
+@media(max-width:640px){ .ez-hafiza-izgara{ grid-template-columns:repeat(4,1fr); } .ez-hafiza-izgara .hafiza-kart{ height:74px; } }
+
+</style>
+<style id="ogrKatmaniStil">
+/* ===================== OGRENME DENEYIMI KATMANI (hedefler, ogrenme yolu, ilerleme) =====================
+   Bu blok, mevcut CSS/HTML/JS'e dokunmadan sadece EKLEME yapar: hiçbir id/onclick/veri yapısı
+   degistirilmez. Amac: statik "konu ozeti"ni Coursera/Khan Academy tarzi bir ogrenme yoluna,
+   hero'yu ise hedef+ilerleme gosteren bir tanitim alanina donusturmek. */
+.ogr-hero-ek{ max-width:640px; margin:22px auto 0; display:flex; flex-direction:column; align-items:center; gap:12px; position:relative; z-index:1; }
+.ogr-hedef-satir{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.ogr-hedef-cip{ display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.16); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.35); color:#fff; padding:7px 14px; border-radius:999px; font-size:.8em; font-weight:700; }
+.ogr-hedef-cip .ogr-hedef-no{ background:rgba(255,255,255,.9); color:var(--navy); width:17px; height:17px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:.82em; font-weight:800; flex-shrink:0; }
+.ogr-ilerleme-rozet{ display:inline-flex; align-items:center; gap:10px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.32); border-radius:999px; padding:7px 16px 7px 7px; color:#fff; font-size:.84em; font-weight:700; }
+.ogr-ring{ width:32px; height:32px; flex-shrink:0; }
+.ogr-ring circle{ fill:none; stroke-width:4; }
+.ogr-ring-arka{ stroke:rgba(255,255,255,.28); }
+.ogr-ring-on{ stroke:#fff; stroke-linecap:round; transform:rotate(-90deg); transform-origin:16px 16px; transition:stroke-dashoffset .6s ease; }
+
+.ogr-ozet-ust{ background:linear-gradient(160deg,#fff,var(--acikgri)); border:1px solid var(--acik); border-radius:16px; padding:18px 20px; margin:14px 0 26px; box-shadow:0 2px 10px rgba(0,0,0,.05); }
+.ogr-ozet-ust-satir{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.ogr-ozet-baslik{ font-weight:800; color:var(--navy); font-size:1.02em; display:flex; align-items:center; gap:8px; margin:0; }
+.ogr-ozet-meta{ display:flex; gap:14px; flex-wrap:wrap; font-size:.82em; color:#667; font-weight:700; }
+.ogr-ozet-meta span{ display:inline-flex; align-items:center; gap:5px; }
+.ogr-yol-liste{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+.ogr-yol-adim{ display:inline-flex; align-items:center; gap:7px; background:#fff; border:1.5px solid var(--acik); border-radius:999px; padding:5px 13px 5px 5px; font-size:.8em; font-weight:700; color:#22333b; cursor:pointer; transition:.15s; text-decoration:none; }
+.ogr-yol-adim:hover{ border-color:var(--mavi); transform:translateY(-1px); box-shadow:0 3px 8px rgba(0,0,0,.08); }
+.ogr-yol-adim .ogr-yol-no{ width:21px; height:21px; border-radius:50%; background:var(--acikgri); color:#8892a0; display:flex; align-items:center; justify-content:center; font-size:.85em; font-weight:800; flex-shrink:0; }
+.ogr-yol-adim.ogr-gorulen{ border-color:var(--yesil); }
+.ogr-yol-adim.ogr-gorulen .ogr-yol-no{ background:var(--yesil); color:#fff; font-size:0; }
+.ogr-yol-adim.ogr-gorulen .ogr-yol-no::after{ content:'✓'; font-size:11px; }
+.ogr-ilerleme-cubuk-dis{ height:7px; background:var(--acikgri); border-radius:999px; overflow:hidden; margin-top:12px; }
+.ogr-ilerleme-cubuk-ic{ height:100%; background:linear-gradient(90deg,var(--mavi),var(--yesil)); width:0%; transition:width .5s ease; border-radius:999px; }
+
+.ogr-modul{ position:relative; margin:0 0 8px; padding:0 0 0 52px; }
+.ogr-modul::before{ content:''; position:absolute; left:19px; top:42px; bottom:-8px; width:2px; background:var(--acik); }
+.ogr-modul:last-child::before{ display:none; }
+.ogr-modul-no{ position:absolute; left:0; top:0; width:40px; height:40px; border-radius:50%; background:var(--mavi); color:#fff; font-weight:800; font-size:1.05em; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,.18); z-index:1; transition:background .25s; }
+.ogr-modul.ogr-tamamlandi .ogr-modul-no{ background:var(--yesil); font-size:0; }
+.ogr-modul.ogr-tamamlandi .ogr-modul-no::after{ content:'✓'; font-size:17px; }
+.ogr-modul-sure{ position:absolute; left:52px; top:47px; font-size:.7em; font-weight:700; color:#8892a0; display:flex; align-items:center; gap:4px; }
+.ogr-modul-govde{ padding-top:26px; }
+
+.ogr-giris-karti{ display:flex; gap:14px; align-items:center; background:linear-gradient(160deg,#fff,var(--acikgri)); border:1px solid var(--acik); border-radius:16px; padding:16px 20px; margin:6px 0 22px; }
+.ogr-giris-ikon{ width:46px; height:46px; border-radius:12px; background:var(--mavi); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.4em; flex-shrink:0; }
+.ogr-giris-metin{ flex:1; min-width:0; }
+.ogr-giris-metin b{ display:block; font-size:.95em; color:var(--navy); margin-bottom:2px; }
+.ogr-giris-metin span{ font-size:.82em; color:#778; }
+@media(max-width:640px){
+  .ogr-ozet-ust-satir{ flex-direction:column; align-items:flex-start; }
+  .ogr-giris-karti{ flex-direction:column; text-align:center; }
+}
+</style>
+<style id="anaMenuStil">
+.hero{ padding:26px 20px 20px; }
+.hero-sekiller{ display:none; }
+.hero-baslik{ font-size:1.35em; margin:2px 0 8px; }
+.hero-alt{ font-size:.95em; max-width:440px; }
+.hero-butonlar{ margin-top:12px; }
+#oyun-gruplari{ scroll-margin-top:10px; max-width:900px; margin:0 auto; }
+.mega-menu{ max-width:900px; margin:0 auto; padding:26px 16px 34px; flex-wrap:wrap; gap:18px; justify-content:center; position:static !important; }
+.mega-kart{
+  flex:1 1 230px; max-width:280px; background:#fff; border:2px solid var(--acik); border-radius:20px;
+  padding:26px 20px; text-align:center; cursor:pointer; transition:.18s; box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+.mega-kart:hover{ transform:translateY(-4px); border-color:var(--mavi); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+.mega-kart-ikon{ font-size:2.2em; margin-bottom:8px; }
+.mega-kart h3{ margin:0 0 6px; color:var(--navy); font-size:1.15em; }
+.mega-kart p{ margin:0; font-size:.85em; color:#667; }
+#ogrHedefKonteyner:empty{ display:none; }
+#ogrHedefKonteyner .ogr-hero-ek{ margin:14px auto 0; }
+.oyun-grubu.mega-menu.aktif, #oyun-gruplari > .oyun-grubu:not(.mega-menu){ position:static !important; top:auto !important; }
+.geri-btn{
+  display:block; width:100%; margin:0 0 12px; background:none; border:none; color:var(--mavi); font-weight:800;
+  cursor:pointer; font-size:.9em; padding:4px; text-align:center;
+}
+.geri-btn:hover{ text-decoration:underline; }
+.oyunmerkezi-nav{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; width:100%; margin-bottom:4px; }
+.oyunmerkezi-nav button{
+  padding:9px 16px; border:none; border-radius:18px; cursor:pointer; background:#22333b; color:#fff;
+  font-weight:bold; font-size:.9em; transition:.15s;
+}
+.oyunmerkezi-nav button:hover, .oyunmerkezi-nav button.kat-aktif{ background:var(--yesil); }
+</style>
+<style id="omgKart2Stil">
+.omg-2kolon{ align-items:flex-start; gap:32px; }
+.omg-yan-menu{
+  display:flex; flex-direction:column; gap:10px;
+  flex:0 0 280px; max-width:280px;
+  position:sticky; top:16px;
+}
+.omg-yan-menu .geri-btn{ margin-bottom:0; }
+.omg-yan-baslik{ font-weight:800; color:var(--navy); font-size:1.05em; width:100%; margin:4px 0 0; text-align:left; padding:0 4px; }
+.omg-yan-oge{
+  text-align:left; width:100%; min-height:62px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 18px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-yan-oge:hover{ border-color:var(--mavi); }
+.omg-yan-ikon{ font-size:1.5em; flex-shrink:0; }
+.omg-yan-oge.kat-aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18);
+  border-left-color:var(--mavi) !important;
+}
+.omg-yan-oge.kat-aktif .omg-yan-ikon{ font-size:1.9em; }
+.omg-kart-alan{
+  flex:1 1 420px; min-width:0; width:100%;
+  max-height:660px; overflow-y:auto; padding:4px 4px 4px 0;
+  animation: omgKartGiris .3s ease;
+}
+@keyframes omgKartGiris{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+.omg-kart-izgara{
+  display:grid; grid-template-columns:repeat(2, 1fr);
+  gap:22px; width:100%; align-content:start;
+}
+.omg-oyun-kart{
+  position:relative; cursor:pointer;
+  background:#fff; border-radius:18px; padding:30px 24px 26px;
+  text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.06);
+  transition:.18s; display:flex; flex-direction:column; gap:8px;
+  min-height:180px; border:1px solid transparent;
+}
+.omg-oyun-kart:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(0,0,0,.12); border-color:var(--acik); }
+.omg-oyun-kart-ikon{ font-size:1.8em; }
+.omg-oyun-kart h4{ margin:2px 0 0; font-size:1.08em; color:#22333b; line-height:1.35; }
+.omg-oyun-kart p{ margin:0; font-size:.86em; color:#8892a0; line-height:1.5; flex:1; }
+.omg-oyun-kart-alt{ display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+.omg-zorluk{ font-size:.72em; font-weight:800; letter-spacing:.3px; padding:4px 11px; border-radius:999px; background:var(--acikgri); color:#667; }
+.omg-oyna-ok{ font-size:.85em; font-weight:800; color:var(--mavi); }
+@media(max-width:640px){
+  .omg-2kolon{ flex-direction:column; gap:16px; }
+  .omg-yan-menu{
+    flex-direction:row; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    max-width:100%; position:static; gap:8px; padding-bottom:4px;
+  }
+  .omg-yan-baslik{ display:none; }
+  .omg-yan-menu .geri-btn{ flex:0 0 auto; width:auto; white-space:nowrap; }
+  .omg-yan-oge{ min-height:44px; width:auto; flex:0 0 auto; white-space:nowrap; }
+  .omg-kart-izgara{ grid-template-columns:1fr; }
+  .omg-kart-alan{ max-height:none; overflow-y:visible; }
+}
+</style>
+<style id="omgTekliMenuStil">
+.omg-tekli-menu{ display:flex; flex-direction:column; gap:10px; max-width:440px; }
+.omg-tekli-menu > button:not(.geri-btn){
+  text-align:left; width:100%; min-height:58px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 20px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-tekli-menu > button:not(.geri-btn):hover{ border-color:var(--mavi); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
+.omg-tekli-menu > button.aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18) !important;
+  border-left-color:var(--mavi) !important;
+}
+</style>
+<style id="omgEgitimIzoleStil">
+#oyun-gruplari:not(:has(#kat-unite-ogren.aktif)):not(:has(#kat-unite-degerlendir.aktif)) ~ main .egitim-icerik{
+  display:none !important;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <p style="margin:0 0 6px;font-size:1.1em;font-weight:bold;letter-spacing:.5px;opacity:.95;">7. SINIF — 2. ÜNİTE</p>
+  <h1>🕋 Hac, Umre ve Kurban</h1>
+  <p>Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
+  <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+</header>
+<section class="hero">
+  <h2 class="hero-baslik">📝 Kendini Değerlendir</h2>
+  <p class="hero-alt">Testlerle ve yazılı hazırlıklarıyla ölç kendini.</p>
+  <div class="hero-butonlar">
+    <button class="hero-btn hero-btn-birincil" onclick="window.location.href='unite2.html'">◀ Ana Sayfaya Dön</button>
+  </div>
+</section>
+
+<div id="oyun-gruplari" role="navigation" aria-label="Değerlendirme menüsü">
+
+<div class="oyun-grubu omg-tekli-menu aktif" id="kat-unite72-degerlendir">
+  <button class="geri-btn" onclick="window.location.href='unite2.html'">◀ Ana Menüye Dön</button>
+  <button onclick="goster('konutekrari72', event)" class="aktif">📝 Konu Tekrarı Testi</button>
+  <button onclick="goster('yazili', event)">📝 Yazılı Sınavlar</button>
+</div>
+
+</div>
+
+<main>
+<section id="konutekrari72">
+  <h2>📝 Konu Tekrarı Testi (57 Soru)</h2>
+  <div class="oyun-amaci">🎯 Bu bölümün amacı: Ünitenin tamamını kapsamlı bir testle tekrar edip pekiştirmek.</div>
+  <div class="aciklama">4 şıklı, 57 sorudan oluşan kapsamlı bir tekrar testi! Kolay, orta ve zor sorular karışık geliyor. Cevabı seçince doğru/yanlış hemen görünüyor, altında da açıklaması çıkıyor.</div>
+
+  <div class="kutu-panel kutu-kazanim">
+    <h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
+    <p class="kazanim-kaynak">Kaynak: MEB Talim ve Terbiye Kurulu DKAB Öğretim Programı — 7.2. Hac, Umre ve Kurban</p>
+    <ul>
+      <li><b>7.2.1</b> — İslam'da hac ibadetinin önemini ayet ve hadisler ışığında yorumlar.</li>
+      <li><b>7.2.2</b> — Haccın yapılışını özetler.</li>
+      <li><b>7.2.3</b> — Umre ibadeti ve önemini açıklar.</li>
+      <li><b>7.2.4</b> — Kurban ibadetini İslam'ın yardımlaşma ve dayanışmaya verdiği önem açısından değerlendirir.</li>
+      <li><b>7.2.5</b> — Hz. İsmail'in (a.s.) hayatını ana hatlarıyla tanır.</li>
+      <li><b>7.2.6</b> — En'âm suresi 162. ayeti okur, anlamını söyler.</li>
+      <li><b>DKAB.7.2.4</b> (Türkiye Yüzyılı Maarif Modeli) — Kâfirun suresini yorumlayabilme: sureyi okur, mesajını kişisel hayatıyla anlamlandırır ve özetler.</li>
+    </ul>
+  </div>
+
+  <div class="kutu-panel kavram-harita-panel">
+    <h3 style="color:#5b21b6">🗺️ Kavram Haritası</h3>
+    <p class="kavram-harita-aciklama">Bu ünitenin MEB öğretim programında belirlenen anahtar kavramları, ünite temasıyla bağlantılı olarak aşağıda gösterilmiştir.</p>
+    <div class="kavram-harita">
+      <div class="kh-merkez">Hac, Umre ve Kurban</div>
+      <div class="kh-dallar">
+      <div class="kh-kavram">Hac</div>
+      <div class="kh-kavram">Umre</div>
+      <div class="kh-kavram">Kurban</div>
+      <div class="kh-kavram">Kâfirun Suresi</div>
+      </div>
+    </div>
+  </div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Soru: <b id="kt72rTur">1</b>/<b id="kt72rToplam">57</b></span>
+    <span>⭐ Puan: <b id="kt72rPuan">0</b></span>
+    <span id="kt72rZorluk"></span>
+  </div>
+  <div id="kt72rSoru" class="balon-durum"></div>
+  <div id="kt72rSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:560px;margin:0 auto;"></div>
+  <div class="aciklama" id="kt72rAciklama" style="display:none;"></div>
+  <div class="sonuc-kutusu" id="kt72rSonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" id="kt72rSonrakiBtn" style="display:none;" onclick="kt72rSonrakiSoru()">➡️ Sonraki Soru</button>
+    <button class="eylem" style="background:var(--sari)" onclick="kt72rBaslat()">📝 Teste Başla</button>
+  </div>
+</section>
+
+<section id="yazili">
+  <h2>📝 Yazılı Sınavlar</h2>
+  <div class="aciklama">7. sınıf Din Kültürü ve Ahlak Bilgisi dersine ait, resmî MEB sınav formatında hazırlanmış, yazdırılabilir yazılı yoklama sınavları. Her dönem için hem <b>karma</b> (boşluk doldurma, eşleştirme, doğru-yanlış, kısa cevap) hem de tamamen açık uçlu <b>klasik</b> format seçeneği bulunur. Kartlara tıklayınca sınav yeni sekmede açılır ve doğrudan yazdırılabilir.</div>
+  <div class="yazili-izgara">
+    <a class="yazili-kart" href="yazili1.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
+      <div class="yk-ikon">📄</div><h3>1. Dönem 1. Yazılı</h3><p>Karma format</p>
+    </a>
+    <a class="yazili-kart yk-klasik" href="yazili1_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
+      <div class="yk-ikon">✍️</div><h3>1. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
+    </a>
+    <a class="yazili-kart" href="yazili2.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
+      <div class="yk-ikon">📄</div><h3>1. Dönem 2. Yazılı</h3><p>Karma format</p>
+    </a>
+    <a class="yazili-kart yk-klasik" href="yazili2_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
+      <div class="yk-ikon">✍️</div><h3>1. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
+    </a>
+    <a class="yazili-kart" href="yazili3.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
+      <div class="yk-ikon">📄</div><h3>2. Dönem 1. Yazılı</h3><p>Karma format</p>
+    </a>
+    <a class="yazili-kart yk-klasik" href="yazili3_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
+      <div class="yk-ikon">✍️</div><h3>2. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
+    </a>
+    <a class="yazili-kart" href="yazili4.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
+      <div class="yk-ikon">📄</div><h3>2. Dönem 2. Yazılı</h3><p>Karma format</p>
+    </a>
+    <a class="yazili-kart yk-klasik" href="yazili4_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
+      <div class="yk-ikon">✍️</div><h3>2. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
+    </a>
+  </div>
+</section>
+</main>
+
+<script>
+function goster(id, ev){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('aktif'));
+  document.getElementById(id).classList.add('aktif');
+  document.querySelectorAll('.oyun-grubu button').forEach(b=>b.classList.remove('aktif'));
+  if(ev && ev.target) ev.target.classList.add('aktif');
+}
+function kategoriGoster(id, ev){
+  document.querySelectorAll('.oyun-grubu').forEach(g=>g.classList.remove('aktif'));
+  document.getElementById(id).classList.add('aktif');
+  document.querySelectorAll('.kategori-nav button').forEach(b=>b.classList.remove('kat-aktif'));
+  if(ev && ev.target) ev.target.classList.add('kat-aktif');
+}
+function kategoriGosterVeKaydir(kategoriId){
+  document.querySelectorAll('.oyun-grubu').forEach(g=>g.classList.remove('aktif'));
+  document.getElementById(kategoriId).classList.add('aktif');
+  document.querySelectorAll('.kategori-nav button').forEach(b=>{
+    b.classList.toggle('kat-aktif', b.getAttribute('onclick').includes(kategoriId));
+  });
+  document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'});
+}
+
+function karistir(a){ return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]); }
+
+let puanDurumu;
+try{ puanDurumu = JSON.parse(localStorage.getItem('dkabPuanDurumu7sinif')) || {}; }catch(e){ puanDurumu = {}; }
+puanDurumu = Object.assign({toplamPuan:0, tamamlanan:0, rozetler:[], sonOyunTarihi:null, seri:0}, puanDurumu);
+
+function puanKaydet(){ try{ localStorage.setItem('dkabPuanDurumu7sinif', JSON.stringify(puanDurumu)); }catch(e){} }
+
+function gunlukSeriGuncelle(){
+  const bugun = new Date().toDateString();
+  if(puanDurumu.sonOyunTarihi !== bugun){
+    const dun = new Date(); dun.setDate(dun.getDate()-1);
+    puanDurumu.seri = (puanDurumu.sonOyunTarihi === dun.toDateString()) ? puanDurumu.seri+1 : 1;
+    puanDurumu.sonOyunTarihi = bugun;
+  }
+}
+
+function istatistikleriGuncelleGoster(){
+  const tp = document.getElementById('istToplamPuan');
+  if(!tp) return;
+  document.getElementById('istToplamPuan').textContent = puanDurumu.toplamPuan;
+  document.getElementById('istTamamlanan').textContent = puanDurumu.tamamlanan;
+  document.getElementById('istSeri').textContent = puanDurumu.seri;
+  document.getElementById('istRozet').textContent = puanDurumu.rozetler.length;
+}
+
+function oyunTamamlandi(bolumId){
+  puanDurumu.toplamPuan += 10;
+  puanDurumu.tamamlanan++;
+  gunlukSeriGuncelle();
+  const esikler = [{sayi:1,ad:"🥉 İlk Adım"},{sayi:5,ad:"🥈 Azimli Öğrenci"},{sayi:10,ad:"🥇 Kelime Ustası"},{sayi:20,ad:"🏆 Efsane"}];
+  esikler.forEach(e=>{
+    if(puanDurumu.tamamlanan>=e.sayi && !puanDurumu.rozetler.includes(e.ad)) puanDurumu.rozetler.push(e.ad);
+  });
+  puanKaydet();
+  istatistikleriGuncelleGoster();
+  opOyunTamamlandiKaydet(bolumId, puanDurumu.toplamPuan, puanDurumu.rozetler);
+}
+
+function sonucIzlemeBaslat(){
+  document.querySelectorAll('.sonuc-kutusu').forEach(el=>{
+    const gozlemci = new MutationObserver(()=>{
+      const metin = el.textContent;
+      if((metin.includes('🎉') || metin.includes('🏆')) && el.dataset.sonOdul !== metin){
+        el.dataset.sonOdul = metin;
+        oyunTamamlandi(el.closest('section') ? el.closest('section').id : null);
+      }
+    });
+    gozlemci.observe(el, {childList:true, characterData:true, subtree:true});
+  });
+}
+
+function siraOlustur(cfg){
+  const banka = document.getElementById(cfg.bankaId);
+  const cevap = document.getElementById(cfg.cevapId);
+  banka.innerHTML=''; cevap.innerHTML='';
+  let beklenen = 0;
+  const karisikSira = karistir(cfg.tokens.map((t,i)=>({t,i})));
+  karisikSira.forEach(obj=>{
+    const tas = document.createElement('div');
+    tas.className='kelime-tas';
+    tas.textContent = obj.t;
+    tas.dataset.sira = obj.i;
+    tas.onclick = ()=>{
+      if(tas.classList.contains('kullanildi')) return;
+      if(parseInt(tas.dataset.sira,10) === beklenen){
+        tas.classList.add('kullanildi');
+        tas.onclick = null;
+        const kopya = document.createElement('div');
+        kopya.className='kelime-tas';
+        kopya.textContent = obj.t;
+        cevap.appendChild(kopya);
+        beklenen++;
+        if(cfg.ilerleme) cfg.ilerleme(beklenen);
+        if(beklenen === cfg.tokens.length && cfg.tamamlandi) cfg.tamamlandi();
+      } else {
+        tas.classList.add('yanlis');
+        setTimeout(()=>tas.classList.remove('yanlis'), 300);
+      }
+    };
+    banka.appendChild(tas);
+  });
+}
+
+// =====================================================================
+// KONU TEKRARI TESTİ (57 Soru)
+// =====================================================================
+const konuTekrariSorulari72 = [
+  {zorluk:"kolay", soru:"İmkânı olan Müslümanların zilhicce ayında ihram giyerek, Arafat'ta vakfe yaparak ve Kâbe'yi tavaf ederek yaptıkları farz ibadete ne denir?", secenekler:["Hac","Umre","Namaz","Zekât"], dogru:0, aciklama:"Bu ibadete hac denir."},
+  {zorluk:"kolay", soru:"Hac ibadeti İslam'ın kaç şartından biridir?", secenekler:["Beş","Üç","Dört","Altı"], dogru:0, aciklama:"Hac, İslam'ın beş şartından biridir."},
+  {zorluk:"kolay", soru:"Hac ve umre yolculuğuna çıkanların Mekke çevresinde ihrama girmek zorunda oldukları sınırlara ne denir?", secenekler:["Mikat","Arafat","Mina","Müzdelife"], dogru:0, aciklama:"Bu sınırlara mikat denir."},
+  {zorluk:"kolay", soru:"Hac ve umre için ihrama giren kişinin haccetmeye başlarken söylediği duaya ne denir?", secenekler:["Telbiye","Vakfe","Say","Tavaf"], dogru:0, aciklama:"Bu duaya telbiye denir."},
+  {zorluk:"kolay", soru:"Mikat bölgesinde niyet ederek giyilen dikişsiz beyaz kıyafete ne denir?", secenekler:["İhram","Kefen","Cübbe","Sarık"], dogru:0, aciklama:"Bu kıyafete ihram denir."},
+  {zorluk:"kolay", soru:"Kâbe'yi soluna alarak etrafında bir kez dönmeye ne denir?", secenekler:["Şavt","Tavaf","Say","Vakfe"], dogru:0, aciklama:"Bu harekete şavt denir."},
+  {zorluk:"kolay", soru:"Kâbe'nin etrafında yedi defa dönmeye ne denir?", secenekler:["Tavaf","Şavt","Say","Vakfe"], dogru:0, aciklama:"Bu harekete tavaf denir."},
+  {zorluk:"kolay", soru:"Safa ile Merve tepeleri arasında dört gidiş üç geliş olmak üzere yapılan yürüyüşe ne denir?", secenekler:["Say","Tavaf","Şavt","Vakfe"], dogru:0, aciklama:"Bu yürüyüşe say denir."},
+  {zorluk:"kolay", soru:"Arife Günü öğle vaktinden Kurban Bayramı'nın ilk günü güneş doğuncaya kadar Arafat'ta beklemeye ne denir?", secenekler:["Vakfe","Say","Tavaf","Şavt"], dogru:0, aciklama:"Bu beklemeye vakfe denir."},
+  {zorluk:"kolay", soru:"Hz. İbrahim'in eşi Hz. Hacer ile oğlu Hz. İsmail'i Mekke'ye bıraktığında Allah tarafından ikram olarak verilen kaynak suya ne denir?", secenekler:["Zemzem","Kevser","Selsebil","Tesnim"], dogru:0, aciklama:"Bu suya zemzem denir."},
+  {zorluk:"kolay", soru:"Kâbe'nin güneydoğu köşesinde bulunan, tavafın başlangıç yerini gösteren siyah taşa ne denir?", secenekler:["Hacerülesved","Makam-ı İbrahim","Mizab-ı Rahmet","Hicr"], dogru:0, aciklama:"Bu taşa Hacerülesved denir."},
+  {zorluk:"kolay", soru:"Mekke'de, Mescid-i Haram'ın ortasında bulunan mabede ne denir?", secenekler:["Kâbe","Ravza","Mescid-i Nebevi","Mina"], dogru:0, aciklama:"Bu mabede Kâbe denir."},
+  {zorluk:"kolay", soru:"Hac mevsimi dışında ihramlı olarak Kâbe'yi tavaf edip Safa ile Merve arasında say yaptıktan sonra ihramdan çıkılan ibadete ne denir?", secenekler:["Umre","Hac","Kurban","Zekât"], dogru:0, aciklama:"Bu ibadete umre denir."},
+  {zorluk:"kolay", soru:"Belli nitelikleri olan bazı hayvanları, belirli günlerde, ibadet niyetiyle usulüne uygun olarak kesmeye ne denir?", secenekler:["Kurban","Sadaka","Zekât","İnfak"], dogru:0, aciklama:"Bu ibadete kurban denir."},
+  {zorluk:"kolay", soru:"Bir isteğin gerçekleşmesi durumunda kesileceğine söz verilen kurbana ne denir?", secenekler:["Adak","Akika","Şükür kurbanı","Tığlama"], dogru:0, aciklama:"Bu kurbana adak denir."},
+  {zorluk:"kolay", soru:"Bir ailenin çocuğu doğduğunda Allah'a şükür mahiyetinde kesilen kurbana ne denir?", secenekler:["Akika","Adak","Dâr kurbanı","Musahiplik kurbanı"], dogru:0, aciklama:"Bu kurbana akika denir."},
+  {zorluk:"kolay", soru:"Hz. İsmail'in annesi kimdir?", secenekler:["Hz. Hacer","Hz. Sara","Hz. Meryem","Hz. Hatice"], dogru:0, aciklama:"Hz. İsmail'in annesi Hz. Hacer'dir."},
+
+  {zorluk:"orta", soru:"Hac ibadeti hangi yıl farz kılınmıştır?", secenekler:["Hicretin dokuzuncu yılı","Hicretin birinci yılı","Hicretin beşinci yılı","Hicretin onuncu yılı"], dogru:0, aciklama:"Hac, Hicretin dokuzuncu yılında farz kılınmıştır."},
+  {zorluk:"orta", soru:"Haccın farzı kaçtır?", secenekler:["Üç","İki","Dört","Beş"], dogru:0, aciklama:"Haccın farzı üçtür."},
+  {zorluk:"orta", soru:"Haccın farzları nelerdir?", secenekler:["İhrama girmek, Arafat'ta vakfe, Kâbe'yi tavaf","Sadece ihrama girmek","Sadece tavaf","Sadece vakfe"], dogru:0, aciklama:"Haccın farzları ihrama girmek, Arafat'ta vakfe ve Kâbe'yi tavaftır."},
+  {zorluk:"orta", soru:"Kâbe'nin doğusunda kalan, say ibadetinin yapıldığı tepelere ne denir?", secenekler:["Safa ve Merve","Arafat ve Mina","Müzdelife ve Mina","Uhud ve Sevr"], dogru:0, aciklama:"Bu tepelere Safa ve Merve denir."},
+  {zorluk:"orta", soru:"Hacıların vakfe yapmak üzere geceyi geçirdikleri, Arafat ile Mina arasındaki yere ne denir?", secenekler:["Müzdelife","Mina","Arafat","Safa"], dogru:0, aciklama:"Bu yere Müzdelife denir."},
+  {zorluk:"orta", soru:"Mekke ile Arafat arasında bulunan, hacıların kurban kesip şeytan taşladıkları yere ne denir?", secenekler:["Mina","Müzdelife","Arafat","Safa"], dogru:0, aciklama:"Bu yere Mina denir."},
+  {zorluk:"orta", soru:"Mekke'nin doğusunda bulunan, hacı adaylarının Arife Günü toplanıp vakfe yaptıkları alanın adı nedir?", secenekler:["Arafat","Mina","Müzdelife","Safa"], dogru:0, aciklama:"Bu alana Arafat denir."},
+  {zorluk:"orta", soru:"Kâbe'ye Allah'ın evi anlamında hangi isim verilir?", secenekler:["Beytullah","Beytülmakdis","Beytülhikme","Beytülmal"], dogru:0, aciklama:"Kâbe'ye Beytullah denir."},
+  {zorluk:"orta", soru:"Kurban Bayramı'nın kaçıncı gününde kurban kesilir?", secenekler:["İlk üç günü","Sadece ilk günü","İlk beş günü","Sadece ikinci günü"], dogru:0, aciklama:"Kurban, Kurban Bayramı'nın ilk üç gününde kesilir."},
+  {zorluk:"orta", soru:"Küçükbaş hayvanlar kaç kişi adına kurban edilebilir?", secenekler:["Bir kişi","İki kişi","Üç kişi","Yedi kişi"], dogru:0, aciklama:"Küçükbaş hayvanlar bir kişi adına kurban edilebilir."},
+  {zorluk:"orta", soru:"Büyükbaş hayvanlar kaç kişi adına kurban edilebilir?", secenekler:["1-7 kişi","Sadece bir kişi","1-3 kişi","1-10 kişi"], dogru:0, aciklama:"Büyükbaş hayvanlar 1-7 kişi adına kurban edilebilir."},
+  {zorluk:"orta", soru:"Deve kurban edilebilmesi için en az kaç yaşını doldurmuş olmalıdır?", secenekler:["Beş","Bir","İki","Üç"], dogru:0, aciklama:"Deve en az beş yaşını doldurmuş olmalıdır."},
+  {zorluk:"orta", soru:"Alevilik-Bektaşilikte kurban kesme işlemine ne ad verilir?", secenekler:["Tığlama","Vakfe","Say","Akika"], dogru:0, aciklama:"Bu işleme tığlama denir."},
+  {zorluk:"orta", soru:"Adak kurbanının diğer adı nedir?", secenekler:["Nezir","Şükür kurbanı","Dâr kurbanı","Musahiplik kurbanı"], dogru:0, aciklama:"Adak kurbanına nezir de denir."},
+  {zorluk:"orta", soru:"Hz. İbrahim'in Kâbe'yi kimle birlikte inşa ettiği bildirilir?", secenekler:["Hz. İsmail","Hz. İshak","Hz. Lut","Hz. Yakup"], dogru:0, aciklama:"Kâbe'yi Hz. İbrahim, oğlu Hz. İsmail ile birlikte inşa etmiştir."},
+  {zorluk:"orta", soru:"Hz. İsmail'in kabri nerede bulunmaktadır?", secenekler:["Hicr-i İsmail'de","Cennetülbakî'de","Ravza-i Mutahhara'da","Mescid-i Nebevi'de"], dogru:0, aciklama:"Hz. İsmail'in kabri Hicr-i İsmail'dedir."},
+  {zorluk:"orta", soru:"Enam suresi 162. ayette hangi kavramların Allah için olduğu belirtilir?", secenekler:["Namaz, ibadet, hayat ve ölüm","Sadece namaz","Sadece oruç","Sadece hac"], dogru:0, aciklama:"Ayette namaz, ibadet, hayat ve ölümün Allah için olduğu belirtilir."},
+
+  {zorluk:"zor", soru:"Hz. Peygamber'e göre haccı Allah için yapıp günahtan sakınan kişi nasıl döner?", secenekler:["Annesinden doğduğu günkü gibi günahsız","Hiçbir değişiklik olmadan","Daha fazla günahla","Sadece maddi olarak zenginleşerek"], dogru:0, aciklama:"Bu kişi annesinden doğduğu günkü gibi günahsız döner."},
+  {zorluk:"zor", soru:"\"Umre, daha sonraki umreye kadar işlenen günahlar için kefarettir.\" hadisi kime aittir?", secenekler:["Hz. Muhammed","Hz. İbrahim","Hz. İsmail","Hz. Ömer"], dogru:0, aciklama:"Bu hadis Hz. Muhammed'e aittir."},
+  {zorluk:"zor", soru:"Hac ile umre arasındaki farklardan biri hangisidir?", secenekler:["Hac yılda bir kez, umre her zaman yapılabilir","İkisi de sadece Kurban Bayramı'nda yapılır","İkisinin de farzı üçtür","İkisinde de kurban kesilir"], dogru:0, aciklama:"Hac yılda bir kez, umre ise hac günleri dışında her zaman yapılabilir."},
+  {zorluk:"zor", soru:"Hz. İbrahim'in Allah'tan istediği \"iyilerden bir evlat\" hangi peygamberdir?", secenekler:["Hz. İsmail","Hz. İshak","Hz. Yakup","Hz. Yusuf"], dogru:0, aciklama:"Bu peygamber Hz. İsmail'dir."},
+  {zorluk:"zor", soru:"Hz. Hacer'in Safa ile Merve arasında su araması kaç defa gerçekleşmiştir?", secenekler:["Yedi","Üç","Beş","Dört"], dogru:0, aciklama:"Hz. Hacer yedi defa gidip gelmiştir."},
+  {zorluk:"zor", soru:"Mekke'ye zemzem suyunu görünce yerleşen kabile hangisidir?", secenekler:["Cürhüm","Kureyş","Sakif","Evs"], dogru:0, aciklama:"Bu kabile Cürhüm'dür."},
+  {zorluk:"zor", soru:"Hz. İbrahim'in rüyasında gördüğü, oğlunu kurban etme olayı hangi surede anlatılır?", secenekler:["Saffat suresi","Hac suresi","Bakara suresi","Kevser suresi"], dogru:0, aciklama:"Bu olay Saffat suresinde anlatılır."},
+  {zorluk:"zor", soru:"Kur'an-ı Kerim'de Hz. İsmail'den kaç yerde bahsedilmektedir?", secenekler:["On iki","Beş","Yirmi","Üç"], dogru:0, aciklama:"Kur'an'da Hz. İsmail'den on iki yerde bahsedilmektedir."},
+  {zorluk:"zor", soru:"Enam suresi hangi dönemde inmiştir?", secenekler:["Mekke döneminde","Medine döneminde","Hicret sırasında","Veda haccında"], dogru:0, aciklama:"Enam suresi Mekke döneminde inmiştir."},
+  {zorluk:"zor", soru:"Kurban kesiminde Hz. Peygamber'in tavsiyesi neydi?", secenekler:["Bayram namazından sonra kesmek","Namazdan önce kesmek","Geceleyin kesmek","Sadece cuma günü kesmek"], dogru:0, aciklama:"Hz. Peygamber, önce bayram namazının kılınmasını, sonra kurban kesilmesini tavsiye etmiştir."},
+  {zorluk:"zor", soru:"\"Kim gücü yettiği hâlde kurban kesmezse bizim mescidimize yaklaşmasın.\" hadisinin vurguladığı husus nedir?", secenekler:["İmkânı olanların kurban kesmesinin önemi","Herkesin kurban kesmesi zorunluluğu","Kurbanın sadece zenginlere farz olmadığı","Mescide gitmenin şartı"], dogru:0, aciklama:"Bu hadis, imkânı olanların kurban kesmesinin önemini vurgular."},
+  {zorluk:"zor", soru:"Kesilen kurban eti kaça ayrılır?", secenekler:["Üçe (ev halkı, ihtiyaç sahipleri, komşu-misafir)","İkiye","Dörde","Ayrılmaz, tamamı ev halkına verilir"], dogru:0, aciklama:"Kurban eti genelde üçe ayrılır."},
+  {zorluk:"zor", soru:"Adak kurbanının etini kimler yiyemez?", secenekler:["Adakta bulunan kişi ve bakmakla yükümlü olduğu kişiler","Sadece komşular","Sadece misafirler","Herkes yiyebilir"], dogru:0, aciklama:"Adakta bulunan kişi ve bakmakla yükümlü olduğu kişiler bu etten yiyemez."},
+  {zorluk:"zor", soru:"Zilhicce ayının hangi günü \"Arife Günü\" olarak bilinir?", secenekler:["Dokuzuncu gün","Sekizinci gün","Onuncu gün","On birinci gün"], dogru:0, aciklama:"Zilhicce ayının dokuzuncu günü Arife Günü'dür."},
+  {zorluk:"zor", soru:"Hz. İsmail'in Kur'an'da anlatılan temel özelliklerinden biri hangisidir?", secenekler:["Sözünde duran, ailesine namaz ve zekâtı emreden biri olması","Sadece savaşçı kişiliği","Sadece ticaretle uğraşması","Sadece şair olması"], dogru:0, aciklama:"Hz. İsmail sözünde duran, ailesine namaz ve zekâtı emreden biriydi."},
+  {zorluk:"zor", soru:"Enam suresi 162. ayetin verdiği temel mesaj nedir?", secenekler:["Bütün ibadetlerin sadece Allah'ın rızası için yapılması gerektiği","Sadece namazın önemli olduğu","Kurbanın gereksiz olduğu","İbadetlerin gösteriş için yapılabileceği"], dogru:0, aciklama:"Ayetin mesajı, bütün ibadetlerin sadece Allah'ın rızası için yapılması gerektiğidir."},
+  {zorluk:"kolay", soru:"\"Kâfirun\" kelimesi ne anlama gelir?", secenekler:["İnkâr edenler","İnananlar","Peygamberler","Melekler"], dogru:0, aciklama:"Kâfirun, \"inkâr edenler\" anlamına gelir ve sure adını ilk ayetteki bu kelimeden alır."},
+  {zorluk:"kolay", soru:"Kâfirun suresi kaç ayettir?", secenekler:["Altı","Üç","Beş","Yedi"], dogru:0, aciklama:"Kâfirun suresi altı ayetten oluşur."},
+  {zorluk:"orta", soru:"Kâfirun suresi hangi dönemde inmiştir?", secenekler:["Mekke döneminde","Medine döneminde","Hicret sırasında","Veda Haccı'nda"], dogru:0, aciklama:"Kâfirun suresi Mekke döneminde inmiştir."},
+  {zorluk:"orta", soru:"Müşrikler Peygamberimize \"bir yıl sen bizim putlarımıza tap, bir yıl da biz senin Allah'ına tapalım\" teklifini yapınca hangi sure inmiştir?", secenekler:["Kâfirun suresi","Kevser suresi","Nasr suresi","Felak suresi"], dogru:0, aciklama:"Bu uzlaşma teklifi üzerine Kâfirun suresi inmiş ve teklif kesin bir dille reddedilmiştir."},
+  {zorluk:"orta", soru:"\"Leküm dînüküm ve liye dîn\" ayetinin anlamı aşağıdakilerden hangisidir?", secenekler:["Sizin dininiz size, benim dinim banadır.","Ben sizin taptıklarınıza tapmam.","De ki: Ey kâfirler!","Rabbin için namaz kıl ve kurban kes."], dogru:0, aciklama:"Bu, Kâfirun suresinin 6. ve son ayetidir."},
+  {zorluk:"zor", soru:"Kâfirun suresinin son ayetinden çıkarılabilecek en doğru sonuç hangisidir?", secenekler:["Kişi kendi inancından taviz vermez, ama başkasının inancına da baskı yapmaz","Herkesin aynı dine inanması sağlanmalıdır","İnanç konusunda uzlaşma her zaman doğrudur","İnancını gizlemek gerekir"], dogru:0, aciklama:"Son ayet hem inanç netliğini hem de farklı inançlara saygıyı birlikte öğretir; herkes kendi tercihinden sorumludur."},
+  {zorluk:"zor", soru:"Kâfirun suresinin temel mesajı ile hac ve umre ibadetleri arasındaki ortak nokta nedir?", secenekler:["İkisinin de merkezinde yalnızca Allah'a kulluk (tevhit) bilinci vardır","İkisi de yılda bir kez yapılır","İkisi de sadece Mekke'de geçerlidir","İkisi de kurban kesmeyi gerektirir"], dogru:0, aciklama:"Telbiyedeki \"Senin hiçbir ortağın yoktur\" sözü ile Kâfirun suresinin tevhit vurgusu aynı noktada buluşur."},
+];
+let kt72rIndex = 0, kt72rPuan = 0, kt72rSiraliSorular = [], kt72rKilit = false;
+
+function kt72rZayifAnahtari(){ return 'dkabZayifSorular_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname); }
+function kt72rZayifOku(){
+  try{ return JSON.parse(localStorage.getItem(kt72rZayifAnahtari())) || {}; }catch(e){ return {}; }
+}
+function kt72rZayifKaydet(soruMetni){
+  const v = kt72rZayifOku();
+  v[soruMetni] = (v[soruMetni]||0) + 1;
+  try{ localStorage.setItem(kt72rZayifAnahtari(), JSON.stringify(v)); }catch(e){}
+}
+function kt72rAgirlikliKaristir(sorular){
+  const zayif = kt72rZayifOku();
+  return sorular
+    .map(s => ({s, r: Math.random() - (zayif[s.soru]||0) * 0.15}))
+    .sort((a,b)=>a.r-b.r)
+    .map(x=>x.s);
+}
+
+function kt72rBaslat(){
+  kt72rSiraliSorular = kt72rAgirlikliKaristir(konuTekrariSorulari72.slice());
+  kt72rIndex = 0; kt72rPuan = 0;
+  document.getElementById('kt72rPuan').textContent = 0;
+  document.getElementById('kt72rToplam').textContent = kt72rSiraliSorular.length;
+  document.getElementById('kt72rSonuc').textContent = '';
+  document.getElementById('kt72rSonrakiBtn').style.display = 'none';
+  kt72rSoruGoster();
+}
+
+function kt72rSoruGoster(){
+  if(kt72rIndex >= kt72rSiraliSorular.length){
+    document.getElementById('kt72rSoru').textContent = '';
+    document.getElementById('kt72rSecenekler').innerHTML = '';
+    document.getElementById('kt72rAciklama').style.display = 'none';
+    document.getElementById('kt72rZorluk').textContent = '';
+    document.getElementById('kt72rSonrakiBtn').style.display = 'none';
+    const yuzde = Math.round((kt72rPuan/kt72rSiraliSorular.length)*100);
+    let kt72rSeviye;
+    if(yuzde>=90) kt72rSeviye = '🏆 Din Bilgisi Ustası';
+    else if(yuzde>=70) kt72rSeviye = '🥇 Çok Başarılı';
+    else if(yuzde>=50) kt72rSeviye = '🥈 Biraz Daha Çalış';
+    else kt72rSeviye = '📚 Konuyu Tekrar Et';
+    document.getElementById('kt72rSonuc').innerHTML = `🎉 Test bitti!<br><span style="font-size:1.25em;font-weight:bold;">${kt72rSeviye}</span><br>${kt72rPuan}/${kt72rSiraliSorular.length} doğru (%${yuzde})`;
+    return;
+  }
+  kt72rKilit = false;
+  document.getElementById('kt72rTur').textContent = kt72rIndex+1;
+  const oge = kt72rSiraliSorular[kt72rIndex];
+  const zorlukEtiket = oge.zorluk==='kolay' ? '🟢 Kolay' : oge.zorluk==='orta' ? '🟡 Orta' : '🔴 Zor';
+  document.getElementById('kt72rZorluk').textContent = zorlukEtiket;
+  document.getElementById('kt72rSoru').textContent = oge.soru;
+  document.getElementById('kt72rAciklama').style.display = 'none';
+  document.getElementById('kt72rAciklama').textContent = '';
+  document.getElementById('kt72rSonrakiBtn').style.display = 'none';
+  document.getElementById('kt72rSonuc').textContent = '';
+  const kutu = document.getElementById('kt72rSecenekler');
+  kutu.innerHTML = '';
+  oge.secenekler.forEach((sec,i)=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = sec;
+    btn.onclick = ()=>{
+      if(kt72rKilit) return;
+      kt72rKilit = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(i===oge.dogru){
+        btn.classList.add('dogru');
+        kt72rPuan++;
+        document.getElementById('kt72rPuan').textContent = kt72rPuan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn[oge.dogru].classList.add('dogru');
+        kt72rZayifKaydet(oge.soru);
+      }
+      const aciklamaKutu = document.getElementById('kt72rAciklama');
+      aciklamaKutu.style.display = 'block';
+      aciklamaKutu.innerHTML = `💡 <b>Açıklama:</b> ${oge.aciklama}`;
+      document.getElementById('kt72rSonrakiBtn').style.display = 'block';
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+function kt72rSonrakiSoru(){
+  kt72rIndex++;
+  kt72rSoruGoster();
+}
+
+// =====================================================================
+// 2. ÜNİTE KELİME HAVUZU (28 kavram) — 7. Sınıf
+// =====================================================================
+const kelimeHavuzu72 = [
+  {kelime:"HAC", anlam:"İmkânı olan Müslümanların zilhicce ayında ihram giyerek, Arafat'ta vakfe yaparak ve Kâbe'yi tavaf ederek yaptıkları farz ibadet"},
+  {kelime:"MİKAT", anlam:"Hac ve umre yolculuğuna çıkanların Mekke çevresinde ihrama girmek zorunda oldukları sınırlar"},
+  {kelime:"TELBİYE", anlam:"Hac ve umre için ihrama giren kişinin haccetmeye başlarken söylediği dua"},
+  {kelime:"İHRAM", anlam:"Hac ve umre yapmak isteyenlerin mikat bölgesinde niyet ederek giymeye mecbur oldukları dikişsiz beyaz kıyafet"},
+  {kelime:"ŞAVT", anlam:"Kâbe'yi soluna alarak etrafında bir kez dönme"},
+  {kelime:"TAVAF", anlam:"Hac ve umre yapan kişilerin Kâbe'nin etrafında yedi defa dönmeleri"},
+  {kelime:"SAY", anlam:"Safa ile Merve tepeleri arasında dört gidiş üç geliş olmak üzere yapılan yürüyüş"},
+  {kelime:"VAKFE", anlam:"Arife Günü öğle vaktinden Kurban Bayramı'nın ilk günü güneş doğuncaya kadar Arafat'ta bir müddet beklemek"},
+  {kelime:"ZEMZEM", anlam:"Hz. İbrahim'in eşi Hz. Hacer ile oğlu Hz. İsmail'i Mekke'ye bıraktığında Allah tarafından ikram olarak verilen kaynak suyu"},
+  {kelime:"HACERÜLESVED", anlam:"Kâbe'nin güneydoğu köşesinde bulunan, tavafın başlangıç yerini gösteren siyah taş"},
+  {kelime:"KÂBE", anlam:"Mekke'de, Mescid-i Haram'ın ortasında bulunan, yeryüzündeki ilk mabet"},
+  {kelime:"SAFA", anlam:"Kâbe'nin doğusunda kalan, say ibadetinin yapıldığı tepelerden biri"},
+  {kelime:"MERVE", anlam:"Safa'nın karşısında bulunan, say ibadetinin yapıldığı diğer tepe"},
+  {kelime:"MÜZDELİFE", anlam:"Hacıların vakfe yapmak üzere geceyi geçirdikleri, Arafat ile Mina arasındaki yer"},
+  {kelime:"MİNA", anlam:"Hacıların kurban kesip şeytan taşladıkları, Mekke ile Arafat arasındaki yer"},
+  {kelime:"ARAFAT", anlam:"Mekke'nin doğusunda bulunan, hacı adaylarının Arife Günü toplanıp vakfe yaptıkları alan"},
+  {kelime:"UMRE", anlam:"Hac mevsimi dışında ihramlı olarak Kâbe'yi tavaf edip Safa ile Merve arasında say yaptıktan sonra tıraş olarak ihramdan çıkılan ibadet"},
+  {kelime:"KURBAN", anlam:"Belli nitelikleri olan bazı hayvanları, belirli günlerde, ibadet niyetiyle usulüne uygun olarak kesme"},
+  {kelime:"ADAK", anlam:"Bir isteğin gerçekleşmesi durumunda kesileceğine söz verilen kurban, nezir"},
+  {kelime:"AKİKA", anlam:"Bir ailenin çocuğu doğduğunda Allah'a şükür mahiyetinde kesilen kurban"},
+  {kelime:"TIĞLAMA", anlam:"Alevilik-Bektaşilikte kurban kesme işlemine verilen ad"},
+  {kelime:"ARİFE", anlam:"Zilhicce ayının dokuzuncu günü, Kurban Bayramı'ndan bir gün önceki gün"},
+  {kelime:"BEYTULLAH", anlam:"Kâbe'ye verilen, \"Allah'ın evi\" anlamına gelen isim"},
+  {kelime:"MESCİDİHARAM", anlam:"Ortasında Kâbe'nin bulunduğu, insanların tavaf yaptığı büyük alan"},
+  {kelime:"İSMAİL", anlam:"Hz. İbrahim'in oğlu, Hz. Hacer'in çocuğu, kurban edilmek istenen peygamber"},
+  {kelime:"MESCİDİNEBEVİ", anlam:"Hz. Peygamber'in Medine'deki mescidi"},
+  {kelime:"RAVZA", anlam:"Hz. Peygamber'in kabrinin bulunduğu, Ravza-i Mutahhara olarak bilinen kutsal alan"},
+  {kelime:"CÜRHÜM", anlam:"Mekke'ye yerleşen, Hz. İsmail'in evlendiği kabile"},
+  {kelime:"KÂFİRUN", anlam:"Mekke döneminde inen, altı ayetlik, adı \"inkâr edenler\" anlamına gelen 109. sure"},
+  {kelime:"TEVHİT", anlam:"Allah'ın bir ve tek olduğuna, ortağı bulunmadığına inanma"},
+];
+function ku72AnlamBul(kelime){
+  const bulunan = kelimeHavuzu72.find(x=>x.kelime===kelime);
+  return bulunan ? bulunan.anlam : '';
+}
+
+// =====================================================================
+// HIZLI KELİME ÜRETME
+// =====================================================================
+const ku72GecerliHarfler = ["H","M","T","İ","S","K","A"];
+let ku72AktifHarf = '', ku72Bulunanlar = [], ku72Sure = 60, ku72Zamanlayici = null, ku72Puan = 0, ku72Bitti = true;
+
+function ku72Baslat(){
+  clearInterval(ku72Zamanlayici);
+  ku72AktifHarf = ku72GecerliHarfler[Math.floor(Math.random()*ku72GecerliHarfler.length)];
+  ku72Bulunanlar = []; ku72Puan = 0; ku72Sure = 60; ku72Bitti = false;
+  document.getElementById('ku72Harf').textContent = ku72AktifHarf;
+  document.getElementById('ku72Sure').textContent = ku72Sure;
+  document.getElementById('ku72Puan').textContent = 0;
+  document.getElementById('ku72Liste').innerHTML = '';
+  document.getElementById('ku72Sonuc').textContent = '';
+  document.getElementById('ku72Uyari').textContent = '';
+  document.getElementById('ku72Kacirilan').innerHTML = '';
+  const girdi = document.getElementById('ku72Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  ku72Zamanlayici = setInterval(()=>{
+    ku72Sure--;
+    document.getElementById('ku72Sure').textContent = ku72Sure;
+    if(ku72Sure<=0) ku72Bitir();
+  }, 1000);
+}
+
+function ku72Ekle(){
+  if(ku72Bitti) return;
+  const girdi = document.getElementById('ku72Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('ku72Uyari');
+  if(!kelime.startsWith(ku72AktifHarf)){ uyari.textContent = `❌ "${ku72AktifHarf}" harfiyle başlamalı!`; return; }
+  if(!kelimeHavuzu72.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(ku72Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  ku72Bulunanlar.push(kelime);
+  ku72Puan++;
+  document.getElementById('ku72Puan').textContent = ku72Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('ku72Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function ku72Bitir(){
+  clearInterval(ku72Zamanlayici);
+  ku72Bitti = true;
+  document.getElementById('ku72Girdi').disabled = true;
+  document.querySelectorAll('#ku72Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku72AnlamBul(kelime)}`;
+  });
+  const kacirilanKutu = document.getElementById('ku72Kacirilan');
+  kacirilanKutu.innerHTML = '';
+  const kacirilanlar = kelimeHavuzu72.filter(x=>x.kelime.startsWith(ku72AktifHarf) && !ku72Bulunanlar.includes(x.kelime));
+  if(kacirilanlar.length){
+    const baslik = document.createElement('p');
+    baslik.style.textAlign='center'; baslik.style.fontWeight='bold'; baslik.style.color='var(--kirmizi)';
+    baslik.textContent = 'Kaçırdıkların:';
+    kacirilanKutu.appendChild(baslik);
+    const ul = document.createElement('ul'); ul.className='ku-liste';
+    kacirilanlar.forEach(item=>{
+      const li = document.createElement('li');
+      li.style.background='#ffe8d6'; li.style.borderColor='var(--sari)';
+      li.textContent = `${item.kelime} — ${item.anlam}`;
+      ul.appendChild(li);
+    });
+    kacirilanKutu.appendChild(ul);
+  }
+  document.getElementById('ku72Sonuc').textContent = `⏰ Süre bitti! "${ku72AktifHarf}" harfiyle ${ku72Puan} doğru kelime yazdın!`;
+}
+
+// =====================================================================
+// TUZAK HARF
+// =====================================================================
+const tuzak72GecerliHarfler = ["A","E","İ","M","T"];
+let tuzak72Harf = '', tuzak72Bulunanlar = [], tuzak72Sure = 40, tuzak72Zamanlayici = null, tuzak72Puan = 0, tuzak72Bitti = true;
+
+function tuzak72Baslat(){
+  clearInterval(tuzak72Zamanlayici);
+  tuzak72Harf = tuzak72GecerliHarfler[Math.floor(Math.random()*tuzak72GecerliHarfler.length)];
+  tuzak72Bulunanlar = []; tuzak72Puan = 0; tuzak72Sure = 40; tuzak72Bitti = false;
+  document.getElementById('tuzak72Harf').textContent = tuzak72Harf;
+  document.getElementById('tuzak72Sure').textContent = tuzak72Sure;
+  document.getElementById('tuzak72Puan').textContent = 0;
+  document.getElementById('tuzak72Liste').innerHTML = '';
+  document.getElementById('tuzak72Sonuc').textContent = '';
+  document.getElementById('tuzak72Uyari').textContent = '';
+  const girdi = document.getElementById('tuzak72Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  tuzak72Zamanlayici = setInterval(()=>{
+    tuzak72Sure--;
+    document.getElementById('tuzak72Sure').textContent = tuzak72Sure;
+    if(tuzak72Sure<=0) tuzak72Bitir();
+  }, 1000);
+}
+
+function tuzak72Ekle(){
+  if(tuzak72Bitti) return;
+  const girdi = document.getElementById('tuzak72Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('tuzak72Uyari');
+  if(kelime.includes(tuzak72Harf)){ uyari.textContent = `🚫 Bu kelimede tuzak harf "${tuzak72Harf}" var, geçersiz!`; return; }
+  if(!kelimeHavuzu72.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(tuzak72Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  tuzak72Bulunanlar.push(kelime);
+  tuzak72Puan++;
+  document.getElementById('tuzak72Puan').textContent = tuzak72Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('tuzak72Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function tuzak72Bitir(){
+  clearInterval(tuzak72Zamanlayici);
+  tuzak72Bitti = true;
+  document.getElementById('tuzak72Girdi').disabled = true;
+  document.querySelectorAll('#tuzak72Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku72AnlamBul(kelime)}`;
+  });
+  document.getElementById('tuzak72Sonuc').textContent = `⏰ Süre bitti! "${tuzak72Harf}" harfini kullanmadan ${tuzak72Puan} kelime yazdın!`;
+}
+
+// =====================================================================
+// KELİME FABRİKASI
+// =====================================================================
+let kf72Sira = [], kf72Index = 0, kf72Uretilen = 0, kf72Hata = 0;
+
+function kf72Baslat(){
+  kf72Sira = karistir(kelimeHavuzu72.slice());
+  kf72Index = 0; kf72Uretilen = 0; kf72Hata = 0;
+  document.getElementById('kf72Uretilen').textContent = 0;
+  document.getElementById('kf72Toplam').textContent = kf72Sira.length;
+  document.getElementById('kf72Hata').textContent = 0;
+  document.getElementById('kf72Urunler').innerHTML = '';
+  document.getElementById('kf72Sonuc').textContent = '';
+  kf72Tur();
+}
+
+function kf72Tur(){
+  if(kf72Index >= kf72Sira.length){
+    document.getElementById('kf72BantAlani').innerHTML = '';
+    document.getElementById('kf72Siparis').textContent = '';
+    document.getElementById('kf72Girdi').disabled = true;
+    document.getElementById('kf72Sonuc').textContent = `🏭 Fabrika kapandı! ${kf72Uretilen}/${kf72Sira.length} kelime ürettin, ${kf72Hata} hata yaptın.`;
+    return;
+  }
+  const oge = kf72Sira[kf72Index];
+  document.getElementById('kf72Siparis').textContent = `📋 Sipariş: ${oge.anlam}`;
+  const harfler = karistir(oge.kelime.split(''));
+  const bant = document.getElementById('kf72BantAlani');
+  bant.innerHTML = '';
+  harfler.forEach(h=>{
+    const kutu = document.createElement('div');
+    kutu.className = 'kf-kutu';
+    kutu.textContent = h;
+    bant.appendChild(kutu);
+  });
+  const girdi = document.getElementById('kf72Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+}
+
+function kf72Uret(){
+  if(kf72Index >= kf72Sira.length) return;
+  const oge = kf72Sira[kf72Index];
+  const girdi = document.getElementById('kf72Girdi');
+  const tahmin = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  if(!tahmin) return;
+  if(tahmin === oge.kelime){
+    kf72Uretilen++;
+    document.getElementById('kf72Uretilen').textContent = kf72Uretilen;
+    const cip = document.createElement('div');
+    cip.className = 'dua-cip';
+    cip.textContent = `✅ ${oge.kelime}`;
+    document.getElementById('kf72Urunler').appendChild(cip);
+    kf72Index++;
+    setTimeout(()=>kf72Tur(), 400);
+  } else {
+    kf72Hata++;
+    document.getElementById('kf72Hata').textContent = kf72Hata;
+    girdi.classList.add('yanlis-girdi');
+    setTimeout(()=>girdi.classList.remove('yanlis-girdi'), 400);
+    girdi.value = '';
+  }
+}
+
+// =====================================================================
+// KELİME MÜHENDİSİ
+// =====================================================================
+function parcalaraBol(kelime){
+  const uzunluk = kelime.length;
+  let parcaSayisi = uzunluk<=4 ? 2 : uzunluk<=7 ? 3 : 4;
+  parcaSayisi = Math.min(parcaSayisi, uzunluk);
+  const parcalar = [];
+  let index = 0;
+  for(let i=0;i<parcaSayisi;i++){
+    const kalan = parcaSayisi - i;
+    const buBoyut = i===parcaSayisi-1 ? uzunluk-index : Math.ceil((uzunluk-index)/kalan);
+    parcalar.push(kelime.slice(index, index+buBoyut));
+    index += buBoyut;
+  }
+  return parcalar;
+}
+
+let km72Sira = [], km72Index = 0, km72DogruSayisi = 0;
+
+function km72Baslat(){
+  km72Sira = karistir(kelimeHavuzu72.slice());
+  km72Index = 0; km72DogruSayisi = 0;
+  document.getElementById('km72Dogru').textContent = 0;
+  document.getElementById('km72Toplam').textContent = km72Sira.length;
+  document.getElementById('km72Sonuc').textContent = '';
+  km72Tur();
+}
+
+function km72Tur(){
+  if(km72Index >= km72Sira.length){
+    document.getElementById('km72Ipucu').textContent = '';
+    document.getElementById('km72Banka').innerHTML = '';
+    document.getElementById('km72Cevap').innerHTML = '';
+    document.getElementById('km72Sonuc').textContent = `🏆 Tebrikler! Kelime mühendisliğini tamamladın! ${km72DogruSayisi}/${km72Sira.length} kelime inşa ettin.`;
+    return;
+  }
+  document.getElementById('km72Tur').textContent = km72Index+1;
+  const oge = km72Sira[km72Index];
+  document.getElementById('km72Ipucu').innerHTML = `📐 Plan: <b>${oge.anlam}</b>`;
+  const parcalar = parcalaraBol(oge.kelime);
+  siraOlustur({tokens:parcalar, bankaId:'km72Banka', cevapId:'km72Cevap', tamamlandi:()=>{
+    km72DogruSayisi++;
+    document.getElementById('km72Dogru').textContent = km72DogruSayisi;
+    document.getElementById('km72Sonuc').textContent = `✅ İnşa edildi: ${oge.kelime}`;
+    km72Index++;
+    setTimeout(()=>{ document.getElementById('km72Sonuc').textContent=''; km72Tur(); }, 1000);
+  }});
+}
+
+// =====================================================================
+// KAVRAM TURNUVASI
+// =====================================================================
+const turnuvaEslesmeler72 = [
+  {tur:"Çeyrek Final 1", a:"HAC", b:"UMRE", soru:"Hangisi İslam'ın beş şartından biri olan farz ibadettir?", dogruCevap:"HAC"},
+  {tur:"Çeyrek Final 2", a:"KÂBE", b:"ARAFAT", soru:"Hangisi yeryüzündeki ilk mabettir?", dogruCevap:"KÂBE"},
+  {tur:"Çeyrek Final 3", a:"TAVAF", b:"SAY", soru:"Hangisi Kâbe'nin etrafında yedi kez dönmektir?", dogruCevap:"TAVAF"},
+  {tur:"Çeyrek Final 4", a:"KURBAN", b:"ADAK", soru:"Hangisi belirli hayvanları ibadet niyetiyle kesmenin genel adıdır?", dogruCevap:"KURBAN"},
+  {tur:"Yarı Final 1", a:"HAC", b:"KÂBE", soru:"Hangisi bir ibadettir, mekân değildir?", dogruCevap:"HAC"},
+  {tur:"Yarı Final 2", a:"TAVAF", b:"KURBAN", soru:"Hangisi Kâbe'nin etrafında dönme ibadetidir?", dogruCevap:"TAVAF"},
+  {tur:"FİNAL", a:"HAC", b:"TAVAF", soru:"Hangisi haccın bütününü kapsayan farz ibadettir?", dogruCevap:"HAC"},
+];
+let kt72Index = 0, kt72DogruHakemlik = 0;
+
+function kt72Baslat(){
+  kt72Index = 0; kt72DogruHakemlik = 0;
+  document.getElementById('kt72Puan').textContent = 0;
+  document.getElementById('kt72Toplam').textContent = turnuvaEslesmeler72.length;
+  document.getElementById('kt72Sonuc').textContent = '';
+  kt72Tur();
+}
+
+function kt72Tur(){
+  if(kt72Index >= turnuvaEslesmeler72.length){
+    document.getElementById('kt72Asama').textContent = '';
+    document.getElementById('kt72Eslesme').textContent = '';
+    document.getElementById('kt72Secenekler').innerHTML = '';
+    const sampiyon = turnuvaEslesmeler72[turnuvaEslesmeler72.length-1].dogruCevap;
+    document.getElementById('kt72Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt72DogruHakemlik}/${turnuvaEslesmeler72.length}`;
+    return;
+  }
+  const mac = turnuvaEslesmeler72[kt72Index];
+  document.getElementById('kt72Tur').textContent = kt72Index+1;
+  document.getElementById('kt72Asama').textContent = mac.tur;
+  document.getElementById('kt72Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
+  const kutu = document.getElementById('kt72Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  [mac.a, mac.b].forEach(aday=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = aday;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(aday === mac.dogruCevap){
+        btn.classList.add('dogru');
+        kt72DogruHakemlik++;
+        document.getElementById('kt72Puan').textContent = kt72DogruHakemlik;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===mac.dogruCevap) b.classList.add('dogru'); });
+      }
+      kt72Index++;
+      setTimeout(()=>kt72Tur(), 1300);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// BONUS OYUN — Hafıza Zinciri
+// =====================================================================
+const bz72Tuslar = [
+  {simge:"HAC", renk:"#2a6f97"}, {simge:"MİKAT", renk:"#40916c"}, {simge:"İHRAM", renk:"#f4a261"},
+  {simge:"TAVAF", renk:"#d62828"}, {simge:"SAY", renk:"#7b2cbf"}, {simge:"VAKFE", renk:"#0077b6"},
+  {simge:"ZEMZEM", renk:"#e76f51"}, {simge:"KÂBE", renk:"#2d6a4f"}, {simge:"ARAFAT", renk:"#9d4edd"},
+  {simge:"UMRE", renk:"#457b9d"}, {simge:"KURBAN", renk:"#c9184a"}, {simge:"İSMAİL", renk:"#e09f3e"},
+];
+let bz72Sira = [], bz72KullaniciIndex = 0, bz72Seviye = 0, bz72Oynatiliyor = false;
+
+function bz72IzgaraOlustur(){
+  const izgara = document.getElementById('bz72Izgara');
+  izgara.innerHTML = '';
+  bz72Tuslar.forEach((t,i)=>{
+    const tus = document.createElement('div');
+    tus.className = 'bz-tus';
+    tus.style.background = t.renk;
+    tus.textContent = t.simge;
+    tus.onclick = ()=>bz72TusaTikla(i);
+    izgara.appendChild(tus);
+  });
+}
+function bz72Baslat(){
+  bz72Sira = []; bz72Seviye = 0; bz72KullaniciIndex = 0;
+  document.getElementById('bz72Seviye').textContent = 0;
+  document.getElementById('bz72Sonuc').textContent = '';
+  bz72IzgaraOlustur();
+  bz72SonrakiTur();
+}
+function bz72SonrakiTur(){
+  bz72Seviye++;
+  document.getElementById('bz72Seviye').textContent = bz72Seviye;
+  bz72Sira.push(Math.floor(Math.random()*bz72Tuslar.length));
+  bz72KullaniciIndex = 0;
+  bz72Oynat();
+}
+function bz72Oynat(){
+  bz72Oynatiliyor = true;
+  const dugmeler = document.querySelectorAll('#bz72Izgara .bz-tus');
+  dugmeler.forEach(d=>d.classList.add('bz-devre-disi'));
+  let i = 0;
+  const aralik = setInterval(()=>{
+    if(i>0) dugmeler[bz72Sira[i-1]].classList.remove('bz-yanik');
+    if(i>=bz72Sira.length){
+      clearInterval(aralik);
+      bz72Oynatiliyor = false;
+      dugmeler.forEach(d=>d.classList.remove('bz-devre-disi'));
+      return;
+    }
+    dugmeler[bz72Sira[i]].classList.add('bz-yanik');
+    i++;
+  }, 700);
+}
+function bz72TusaTikla(i){
+  if(bz72Oynatiliyor) return;
+  const dugmeler = document.querySelectorAll('#bz72Izgara .bz-tus');
+  dugmeler[i].classList.add('bz-yanik');
+  setTimeout(()=>dugmeler[i].classList.remove('bz-yanik'), 250);
+  if(bz72Sira[bz72KullaniciIndex] === i){
+    bz72KullaniciIndex++;
+    if(bz72KullaniciIndex === bz72Sira.length){
+      setTimeout(()=>bz72SonrakiTur(), 900);
+    }
+  } else {
+    document.getElementById('bz72Sonuc').textContent = `💥 Yanlış sıra! En uzun hatırladığın zincir: ${bz72Seviye-1}`;
+  }
+}
+function bz72OrnekOyna(){
+  document.getElementById('bz72Sonuc').textContent = '🎬 Örnek gösteriliyor: önce sıra yanacak, sonra otomatik olarak aynı sırayla tıklanacak...';
+  document.getElementById('bz72Seviye').textContent = 'Örnek';
+  bz72IzgaraOlustur();
+  const demoSira = [0, 2, 1];
+  const dugmeler = document.querySelectorAll('#bz72Izgara .bz-tus');
+  dugmeler.forEach(d=>d.classList.add('bz-devre-disi'));
+  let i = 0;
+  const gosterAralik = setInterval(()=>{
+    if(i>0) dugmeler[demoSira[i-1]].classList.remove('bz-yanik');
+    if(i >= demoSira.length){
+      clearInterval(gosterAralik);
+      let j = 0;
+      const tiklaAralik = setInterval(()=>{
+        if(j>0) dugmeler[demoSira[j-1]].classList.remove('bz-yanik');
+        if(j >= demoSira.length){
+          clearInterval(tiklaAralik);
+          dugmeler.forEach(d=>d.classList.remove('bz-devre-disi'));
+          document.getElementById('bz72Seviye').textContent = 0;
+          document.getElementById('bz72Sonuc').textContent = '👆 Gördüğün gibi: önce kavramlar sırayla yandı, sonra aynı sırayla tıklandı. Şimdi sıra sende — "Oyunu Başlat"a bas!';
+          return;
+        }
+        dugmeler[demoSira[j]].classList.add('bz-yanik');
+        j++;
+      }, 700);
+      return;
+    }
+    dugmeler[demoSira[i]].classList.add('bz-yanik');
+    i++;
+  }, 700);
+}
+
+// =====================================================================
+// KELİME AVI BULMACASI
+// =====================================================================
+const kelimeAvi72Listesi = [
+  {kelime:"HAC", anlam:"İmkânı olan Müslümanların zilhicce ayında ihram giyerek, Arafat'ta vakfe yaparak ve Kâbe'yi tavaf ederek yaptıkları farz ibadet"},
+  {kelime:"MİKAT", anlam:"Hac ve umre yolculuğuna çıkanların Mekke çevresinde ihrama girmek zorunda oldukları sınırlar"},
+  {kelime:"İHRAM", anlam:"Hac ve umre yapmak isteyenlerin mikat bölgesinde niyet ederek giymeye mecbur oldukları dikişsiz beyaz kıyafet"},
+  {kelime:"ŞAVT", anlam:"Kâbe'yi soluna alarak etrafında bir kez dönme"},
+  {kelime:"TAVAF", anlam:"Hac ve umre yapan kişilerin Kâbe'nin etrafında yedi defa dönmeleri"},
+  {kelime:"SAY", anlam:"Safa ile Merve tepeleri arasında dört gidiş üç geliş olmak üzere yapılan yürüyüş"},
+  {kelime:"VAKFE", anlam:"Arife Günü öğle vaktinden Kurban Bayramı'nın ilk günü güneş doğuncaya kadar Arafat'ta bir müddet beklemek"},
+  {kelime:"ZEMZEM", anlam:"Hz. İbrahim'in eşi Hz. Hacer ile oğlu Hz. İsmail'i Mekke'ye bıraktığında Allah tarafından ikram olarak verilen kaynak suyu"},
+  {kelime:"KÂBE", anlam:"Mekke'de, Mescid-i Haram'ın ortasında bulunan, yeryüzündeki ilk mabet"},
+  {kelime:"SAFA", anlam:"Kâbe'nin doğusunda kalan, say ibadetinin yapıldığı tepelerden biri"},
+  {kelime:"MERVE", anlam:"Safa'nın karşısında bulunan, say ibadetinin yapıldığı diğer tepe"},
+  {kelime:"ARAFAT", anlam:"Mekke'nin doğusunda bulunan, hacı adaylarının Arife Günü toplanıp vakfe yaptıkları alan"},
+  {kelime:"UMRE", anlam:"Hac mevsimi dışında ihramlı olarak Kâbe'yi tavaf edip Safa ile Merve arasında say yaptıktan sonra tıraş olarak ihramdan çıkılan ibadet"},
+  {kelime:"KURBAN", anlam:"Belli nitelikleri olan bazı hayvanları, belirli günlerde, ibadet niyetiyle usulüne uygun olarak kesme"},
+];
+const ka72SatirSayisi = 14, ka72SutunSayisi = 14;
+const ka72AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+
+function ka72KelimeYerlestir(izgara, kelime){
+  const yonler = karistir([{dr:0,dc:1},{dr:0,dc:-1},{dr:1,dc:0},{dr:-1,dc:0}]);
+  for(let deneme=0; deneme<200; deneme++){
+    const yon = yonler[deneme % yonler.length];
+    const satir = Math.floor(Math.random()*ka72SatirSayisi);
+    const sutun = Math.floor(Math.random()*ka72SutunSayisi);
+    const bitSatir = satir + yon.dr*(kelime.length-1);
+    const bitSutun = sutun + yon.dc*(kelime.length-1);
+    if(bitSatir<0 || bitSatir>=ka72SatirSayisi || bitSutun<0 || bitSutun>=ka72SutunSayisi) continue;
+    let uygun = true;
+    for(let i=0;i<kelime.length;i++){
+      const r = satir + yon.dr*i, c = sutun + yon.dc*i;
+      if(izgara[r][c] !== null && izgara[r][c] !== kelime[i]){ uygun=false; break; }
+    }
+    if(!uygun) continue;
+    const hucreler=[];
+    for(let i=0;i<kelime.length;i++){
+      const r = satir + yon.dr*i, c = sutun + yon.dc*i;
+      izgara[r][c] = kelime[i];
+      hucreler.push({r,c});
+    }
+    return hucreler;
+  }
+  return null;
+}
+
+function kelimeAvi72Olustur(){
+  let izgara, basarili=false;
+  for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
+    izgara = Array.from({length:ka72SatirSayisi}, ()=>Array(ka72SutunSayisi).fill(null));
+    basarili = true;
+    const siraliKelimeler = kelimeAvi72Listesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    for(const item of siraliKelimeler){
+      const hucreler = ka72KelimeYerlestir(izgara, item.kelime);
+      if(!hucreler){ basarili=false; break; }
+    }
+  }
+  for(let r=0;r<ka72SatirSayisi;r++){
+    for(let c=0;c<ka72SutunSayisi;c++){
+      if(izgara[r][c]===null) izgara[r][c] = ka72AsciiHarfler[Math.floor(Math.random()*ka72AsciiHarfler.length)];
+    }
+  }
+
+  const kutu = document.getElementById('ka72Izgara');
+  kutu.innerHTML = '';
+  kutu.style.gridTemplateColumns = `repeat(${ka72SutunSayisi}, 1fr)`;
+  const hucreElemanlari = [];
+  for(let r=0;r<ka72SatirSayisi;r++){
+    hucreElemanlari.push([]);
+    for(let c=0;c<ka72SutunSayisi;c++){
+      const h = document.createElement('div');
+      h.className = 'ka-hucre';
+      h.textContent = izgara[r][c];
+      h.dataset.r = r; h.dataset.c = c;
+      kutu.appendChild(h);
+      hucreElemanlari[r].push(h);
+    }
+  }
+
+  const liste = document.getElementById('ka72Liste');
+  liste.innerHTML = '';
+  kelimeAvi72Listesi.forEach(item=>{
+    const li = document.createElement('li');
+    li.id = 'ka72-kelime-' + item.kelime;
+    li.textContent = `${item.kelime} — ${item.anlam}`;
+    liste.appendChild(li);
+  });
+  document.getElementById('ka72Bulunan').textContent = 0;
+  document.getElementById('ka72Toplam').textContent = kelimeAvi72Listesi.length;
+  document.getElementById('ka72Sonuc').textContent = '';
+
+  let ilkHucre = null;
+  hucreElemanlari.flat().forEach(h=>{
+    h.onclick = ()=>{
+      if(h.classList.contains('ka-bulundu')) return;
+      if(!ilkHucre){ ilkHucre = h; h.classList.add('ka-secili'); return; }
+      if(ilkHucre === h){ ilkHucre.classList.remove('ka-secili'); ilkHucre=null; return; }
+      const r1=+ilkHucre.dataset.r, c1=+ilkHucre.dataset.c;
+      const r2=+h.dataset.r, c2=+h.dataset.c;
+      let yol = [];
+      if(r1===r2){
+        const adim = c2>c1?1:-1;
+        for(let c=c1;;c+=adim){ yol.push({r:r1,c}); if(c===c2) break; }
+      } else if(c1===c2){
+        const adim = r2>r1?1:-1;
+        for(let r=r1;;r+=adim){ yol.push({r,c:c1}); if(r===r2) break; }
+      } else {
+        ilkHucre.classList.remove('ka-secili');
+        h.classList.add('ka-secili');
+        ilkHucre = h;
+        return;
+      }
+      const secilenKelime = yol.map(p=>izgara[p.r][p.c]).join('');
+      const tersKelime = secilenKelime.split('').reverse().join('');
+      const eslesen = kelimeAvi72Listesi.find(item =>
+        (item.kelime===secilenKelime || item.kelime===tersKelime) &&
+        !document.getElementById('ka72-kelime-'+item.kelime).classList.contains('bulundu-satir')
+      );
+      if(eslesen){
+        yol.forEach(p=>{
+          hucreElemanlari[p.r][p.c].classList.remove('ka-secili');
+          hucreElemanlari[p.r][p.c].classList.add('ka-bulundu');
+        });
+        document.getElementById('ka72-kelime-'+eslesen.kelime).classList.add('bulundu-satir');
+        const bulunanSayisi = document.querySelectorAll('#ka72Liste .bulundu-satir').length;
+        document.getElementById('ka72Bulunan').textContent = bulunanSayisi;
+        if(bulunanSayisi === kelimeAvi72Listesi.length){
+          document.getElementById('ka72Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri buldun!';
+        }
+      } else {
+        ilkHucre.classList.remove('ka-secili');
+      }
+      ilkHucre = null;
+    };
+  });
+}
+
+// =====================================================================
+// ÇENGEL BULMACA
+// =====================================================================
+const cengel72Zinciri = [
+  {kelime:"HAC", anlam:"İmkânı olan Müslümanların zilhicce ayında ihram giyerek, Arafat'ta vakfe yaparak ve Kâbe'yi tavaf ederek yaptıkları farz ibadet"},
+  {kelime:"CÜRHÜM", anlam:"Mekke'ye yerleşen, Hz. İsmail'in evlendiği kabile"},
+  {kelime:"MİNA", anlam:"Hacıların kurban kesip şeytan taşladıkları, Mekke ile Arafat arasındaki yer"},
+  {kelime:"ADAK", anlam:"Bir isteğin gerçekleşmesi durumunda kesileceğine söz verilen kurban, nezir"},
+  {kelime:"KÂBE", anlam:"Mekke'de, Mescid-i Haram'ın ortasında bulunan, yeryüzündeki ilk mabet"},
+];
+let cengel72HucreHarita = {}, cengel72InputMap = {};
+
+function cengel72Olustur(){
+  let r=0, c=0, dir='right';
+  const yerlesimler = [];
+  cengel72Zinciri.forEach(item=>{
+    const kelime = item.kelime;
+    const hucreler = [];
+    for(let j=0;j<kelime.length;j++){
+      hucreler.push(dir==='right' ? {r, c:c+j} : {r:r+j, c});
+    }
+    yerlesimler.push({...item, hucreler, dir});
+    const son = hucreler[hucreler.length-1];
+    r = son.r; c = son.c;
+    dir = dir==='right' ? 'down' : 'right';
+  });
+
+  let minR=Infinity,maxR=-Infinity,minC=Infinity,maxC=-Infinity;
+  yerlesimler.forEach(p=>p.hucreler.forEach(h=>{
+    minR=Math.min(minR,h.r); maxR=Math.max(maxR,h.r);
+    minC=Math.min(minC,h.c); maxC=Math.max(maxC,h.c);
+  }));
+  const satirSayisi = maxR-minR+1, sutunSayisi = maxC-minC+1;
+
+  cengel72HucreHarita = {};
+  yerlesimler.forEach(p=>{
+    p.hucreler.forEach((h,i)=>{
+      const key = (h.r-minR)+','+(h.c-minC);
+      cengel72HucreHarita[key] = p.kelime[i];
+    });
+  });
+
+  const siraliHucreler = [];
+  const gorulen = new Set();
+  yerlesimler.forEach((p, idx)=>{
+    const baslangic = idx===0 ? 0 : 1;
+    for(let i=baslangic;i<p.hucreler.length;i++){
+      const h = p.hucreler[i];
+      const key = (h.r-minR)+','+(h.c-minC);
+      if(!gorulen.has(key)){ gorulen.add(key); siraliHucreler.push(key); }
+    }
+  });
+
+  const izgara = document.getElementById('cengel72Izgara');
+  izgara.innerHTML = '';
+  izgara.style.gridTemplateColumns = `repeat(${sutunSayisi}, 34px)`;
+  izgara.style.gridTemplateRows = `repeat(${satirSayisi}, 34px)`;
+  cengel72InputMap = {};
+  for(let rr=0; rr<satirSayisi; rr++){
+    for(let cc=0; cc<sutunSayisi; cc++){
+      const key = rr+','+cc;
+      const hucreDiv = document.createElement('div');
+      hucreDiv.style.gridColumn = (cc+1);
+      hucreDiv.style.gridRow = (rr+1);
+      if(cengel72HucreHarita[key] !== undefined){
+        hucreDiv.className = 'cengel-hucre';
+        const girdi = document.createElement('input');
+        girdi.maxLength = 1;
+        girdi.className = 'cengel-girdi';
+        girdi.dataset.key = key;
+        girdi.oninput = (e)=>{
+          e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
+          e.target.classList.remove('dogru','yanlis');
+          const idx = siraliHucreler.indexOf(key);
+          if(idx>=0 && idx<siraliHucreler.length-1){
+            const sonrakiKey = siraliHucreler[idx+1];
+            if(cengel72InputMap[sonrakiKey]) cengel72InputMap[sonrakiKey].focus();
+          }
+        };
+        hucreDiv.appendChild(girdi);
+        cengel72InputMap[key] = girdi;
+      } else {
+        hucreDiv.className = 'cengel-bos';
+      }
+      izgara.appendChild(hucreDiv);
+    }
+  }
+
+  const liste = document.getElementById('cengel72Liste');
+  liste.innerHTML = '';
+  yerlesimler.forEach((p, idx)=>{
+    const li = document.createElement('li');
+    li.textContent = `${idx+1}. ${p.dir==='right'?'➡️':'⬇️'} (${p.kelime.length} harf) ${p.anlam}`;
+    liste.appendChild(li);
+  });
+
+  document.getElementById('cengel72Sonuc').textContent = '';
+}
+
+function cengel72KontrolEt(){
+  let dogruSayisi=0, toplam=0;
+  Object.keys(cengel72HucreHarita).forEach(key=>{
+    toplam++;
+    const girdi = cengel72InputMap[key];
+    const beklenen = cengel72HucreHarita[key];
+    if(girdi.value && girdi.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
+      girdi.classList.add('dogru'); girdi.classList.remove('yanlis');
+      dogruSayisi++;
+    } else {
+      girdi.classList.add('yanlis'); girdi.classList.remove('dogru');
+    }
+  });
+  document.getElementById('cengel72Sonuc').textContent = dogruSayisi===toplam
+    ? `🎉 Tebrikler! Çengel bulmacayı tamamen doğru çözdün! (${dogruSayisi}/${toplam})`
+    : `Sonuç: ${dogruSayisi}/${toplam} doğru harf. Devam et!`;
+}
+
+// =====================================================================
+// SÖZCÜK MERDİVENİ
+// =====================================================================
+const merdiven72Zinciri = [
+  {kelime:"ZEMZEM", anlam:"Hz. İbrahim'in eşi Hz. Hacer ile oğlu Hz. İsmail'i Mekke'ye bıraktığında Allah tarafından ikram olarak verilen kaynak suyu"},
+  {kelime:"MESCİDİHARAM", anlam:"Ortasında Kâbe'nin bulunduğu, insanların tavaf yaptığı büyük alan"},
+  {kelime:"MESCİDİNEBEVİ", anlam:"Hz. Peygamber'in Medine'deki mescidi"},
+  {kelime:"İSMAİL", anlam:"Hz. İbrahim'in oğlu, Hz. Hacer'in çocuğu, kurban edilmek istenen peygamber"},
+];
+const merdiven72Havuz = ["TELBİYE","ŞAVT","TAVAF","SAY","VAKFE","HACERÜLESVED","SAFA","MERVE","MÜZDELİFE","ARAFAT","UMRE","KURBAN","AKİKA","TIĞLAMA","ARİFE","BEYTULLAH","RAVZA","CÜRHÜM"];
+let merdiven72Index = 0;
+
+function merdiven72Baslat(){
+  merdiven72Index = 0;
+  document.getElementById('merdiven72Toplam').textContent = merdiven72Zinciri.length;
+  document.getElementById('merdiven72Sonuc').textContent = '';
+  document.getElementById('merdiven72Gorsel').innerHTML = '';
+  merdiven72BasamakEkle(merdiven72Zinciri[0].kelime, 0);
+  merdiven72Tur();
+}
+function merdiven72BasamakEkle(kelime, index){
+  const basamak = document.createElement('div');
+  basamak.style.background='white'; basamak.style.border='2px solid var(--yesil)'; basamak.style.borderRadius='10px';
+  basamak.style.padding='8px 14px'; basamak.style.margin='6px 0'; basamak.style.fontWeight='bold';
+  basamak.style.marginLeft = (index*24) + 'px';
+  basamak.textContent = `${index+1}. ${kelime}`;
+  document.getElementById('merdiven72Gorsel').appendChild(basamak);
+}
+function merdiven72Tur(){
+  document.getElementById('merdiven72Basamak').textContent = merdiven72Index+1;
+  if(merdiven72Index+1 >= merdiven72Zinciri.length){
+    document.getElementById('merdiven72Ipucu').textContent = '';
+    document.getElementById('merdiven72Secenekler').innerHTML = '';
+    document.getElementById('merdiven72Sonuc').textContent = '🎉 Tebrikler! Sözcük merdivenini tamamen tırmandın!';
+    return;
+  }
+  const oncekiKelime = merdiven72Zinciri[merdiven72Index].kelime;
+  const hedef = merdiven72Zinciri[merdiven72Index+1];
+  const gerekliHarf = oncekiKelime[oncekiKelime.length-1];
+  document.getElementById('merdiven72Ipucu').innerHTML = `🗨️ İpucu: <b>${hedef.anlam}</b><br>Bu kelime "<b>${gerekliHarf}</b>" harfiyle başlamalı!`;
+  const yanlisHavuz = karistir(merdiven72Havuz.filter(k=>k!==hedef.kelime)).slice(0,3);
+  const secenekler = karistir([hedef.kelime, ...yanlisHavuz]);
+  const kutu = document.getElementById('merdiven72Secenekler');
+  kutu.innerHTML = '';
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek;
+    btn.onclick = ()=>{
+      if(secenek === hedef.kelime){
+        btn.classList.add('dogru');
+        merdiven72Index++;
+        setTimeout(()=>{ merdiven72BasamakEkle(hedef.kelime, merdiven72Index); merdiven72Tur(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        setTimeout(()=>btn.classList.remove('yanlis'), 400);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// ŞİFRELİ SÖZCÜK
+// =====================================================================
+const turkAlfabesi72 = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split('');
+let sifre72Anahtari = {};
+
+function sifre72Olustur(){
+  const sayilar = karistir(turkAlfabesi72.map((_,i)=>i+1));
+  sifre72Anahtari = {};
+  turkAlfabesi72.forEach((harf,i)=>{ sifre72Anahtari[harf] = sayilar[i]; });
+
+  const anahtarKutu = document.getElementById('sifre72Anahtar');
+  anahtarKutu.innerHTML = '';
+  turkAlfabesi72.forEach(harf=>{
+    const hucre = document.createElement('div');
+    hucre.className = 'sifre-anahtar-hucre';
+    hucre.innerHTML = `<b>${harf}</b><br>${sifre72Anahtari[harf]}`;
+    anahtarKutu.appendChild(hucre);
+  });
+
+  const kutu = document.getElementById('sifre72Kelimeler');
+  kutu.innerHTML = '';
+  document.getElementById('sifre72Sonuc').textContent = '';
+
+  kelimeHavuzu72.slice(0,20).forEach(item=>{
+    const satir = document.createElement('div');
+    satir.className = 'sifre-satir';
+    const anlamP = document.createElement('p');
+    anlamP.className = 'sifre-ipucu';
+    anlamP.textContent = `💡 ${item.anlam}`;
+    satir.appendChild(anlamP);
+
+    const kutucuklar = document.createElement('div');
+    kutucuklar.className = 'sifre-kutucuklar';
+    const harfler = item.kelime.split('');
+    const girdiler = [];
+    harfler.forEach((harf)=>{
+      const grup = document.createElement('div');
+      grup.className = 'sifre-grup';
+      const sayiEtiket = document.createElement('div');
+      sayiEtiket.className = 'sifre-sayi';
+      sayiEtiket.textContent = sifre72Anahtari[harf];
+      const girdi = document.createElement('input');
+      girdi.maxLength = 1;
+      girdi.className = 'sifre-girdi';
+      girdi.dataset.beklenen = harf;
+      grup.appendChild(sayiEtiket);
+      grup.appendChild(girdi);
+      kutucuklar.appendChild(grup);
+      girdiler.push(girdi);
+    });
+    girdiler.forEach((girdi, hIdx)=>{
+      girdi.oninput = (e)=>{
+        e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
+        e.target.classList.remove('dogru','yanlis');
+        if(girdiler[hIdx+1]) girdiler[hIdx+1].focus();
+      };
+    });
+    satir.appendChild(kutucuklar);
+    kutu.appendChild(satir);
+  });
+}
+
+function sifre72KontrolEt(){
+  const girdiler = document.querySelectorAll('#sifre72Kelimeler .sifre-girdi');
+  let dogruSayisi=0;
+  girdiler.forEach(g=>{
+    const beklenen = g.dataset.beklenen;
+    if(g.value && g.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
+      g.classList.add('dogru'); g.classList.remove('yanlis');
+      dogruSayisi++;
+    } else {
+      g.classList.add('yanlis'); g.classList.remove('dogru');
+    }
+  });
+  document.getElementById('sifre72Sonuc').textContent = dogruSayisi===girdiler.length
+    ? `🎉 Tebrikler! Tüm şifreleri doğru çözdün! (${dogruSayisi}/${girdiler.length})`
+    : `Sonuç: ${dogruSayisi}/${girdiler.length} doğru harf. Anahtar tablosuna bakarak devam et!`;
+}
+
+// =====================================================================
+// ŞİFRELİ TANIM
+// =====================================================================
+const st72LeetHarita = {'a':'4','A':'4','e':'3','E':'3','i':'1','I':'1','İ':'1','ı':'1','o':'0','O':'0'};
+function st72TanimSifrele(metin){
+  return metin.split('').map(ch => st72LeetHarita[ch] !== undefined ? st72LeetHarita[ch] : ch).join('');
+}
+let st72Index = 0, st72Puan = 0, st72Sira = [];
+
+function st72Baslat(){
+  st72Sira = karistir(kelimeHavuzu72.slice());
+  st72Index = 0; st72Puan = 0;
+  document.getElementById('st72Puan').textContent = 0;
+  document.getElementById('st72Toplam').textContent = st72Sira.length;
+  document.getElementById('st72Sonuc').textContent = '';
+  st72Tur();
+}
+function st72Tur(){
+  if(st72Index >= st72Sira.length){
+    document.getElementById('st72Tanim').textContent = '';
+    document.getElementById('st72Secenekler').innerHTML = '';
+    document.getElementById('st72Sonuc').textContent = `🏆 Tebrikler! ${st72Puan}/${st72Sira.length} şifreli tanımı doğru çözdün!`;
+    return;
+  }
+  document.getElementById('st72Tur').textContent = st72Index+1;
+  const oge = st72Sira[st72Index];
+  document.getElementById('st72Tanim').textContent = st72TanimSifrele(oge.anlam);
+  const digerler = karistir(kelimeHavuzu72.filter(x=>x.kelime!==oge.kelime)).slice(0,3);
+  const secenekler = karistir([oge, ...digerler]);
+  const kutu = document.getElementById('st72Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.style.display='block'; btn.style.width='100%'; btn.style.marginBottom='6px';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.kelime === oge.kelime){
+        btn.classList.add('dogru');
+        st72Puan++;
+        document.getElementById('st72Puan').textContent = st72Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===oge.kelime) b.classList.add('dogru'); });
+      }
+      st72Index++;
+      setTimeout(()=>st72Tur(), 900);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// KELİME KODLAMA
+// =====================================================================
+const kk72Alfabe = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split('');
+const kk72KodTablosu = {};
+kk72Alfabe.forEach((harf,i)=>{ kk72KodTablosu[harf] = (i+1).toString(2).padStart(5,'0'); });
+function kk72KelimeyiKodla(kelime){
+  return kelime.split('').map(h => kk72KodTablosu[h] || '?????').join(' ');
+}
+let kk72Index = 0, kk72Puan = 0, kk72Sira = [];
+
+function kk72AnahtarOlustur(){
+  const kutu = document.getElementById('kk72Anahtar');
+  kutu.innerHTML = '';
+  kk72Alfabe.forEach(harf=>{
+    const hucre = document.createElement('div');
+    hucre.className = 'sifre-anahtar-hucre';
+    hucre.innerHTML = `<b>${harf}</b><br>${kk72KodTablosu[harf]}`;
+    kutu.appendChild(hucre);
+  });
+}
+function kk72Baslat(){
+  kk72AnahtarOlustur();
+  kk72Sira = karistir(kelimeHavuzu72.slice());
+  kk72Index = 0; kk72Puan = 0;
+  document.getElementById('kk72Puan').textContent = 0;
+  document.getElementById('kk72Toplam').textContent = kk72Sira.length;
+  document.getElementById('kk72Sonuc').textContent = '';
+  kk72Tur();
+}
+function kk72Tur(){
+  if(kk72Index >= kk72Sira.length){
+    document.getElementById('kk72Kod').textContent = '';
+    document.getElementById('kk72Ipucu').textContent = '';
+    document.getElementById('kk72Secenekler').innerHTML = '';
+    document.getElementById('kk72Sonuc').textContent = `🏆 Tebrikler! ${kk72Puan}/${kk72Sira.length} kodu doğru çözdün!`;
+    return;
+  }
+  document.getElementById('kk72Tur').textContent = kk72Index+1;
+  const oge = kk72Sira[kk72Index];
+  document.getElementById('kk72Ipucu').innerHTML = `💡 İpucu: <b>${oge.anlam}</b>`;
+  document.getElementById('kk72Kod').textContent = kk72KelimeyiKodla(oge.kelime);
+  const digerler = karistir(kelimeHavuzu72.filter(x=>x.kelime!==oge.kelime)).slice(0,3);
+  const secenekler = karistir([oge, ...digerler]);
+  const kutu = document.getElementById('kk72Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.style.display='block'; btn.style.width='100%'; btn.style.marginBottom='6px';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.kelime === oge.kelime){
+        btn.classList.add('dogru');
+        kk72Puan++;
+        document.getElementById('kk72Puan').textContent = kk72Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent===oge.kelime) b.classList.add('dogru'); });
+      }
+      kk72Index++;
+      setTimeout(()=>kk72Tur(), 1000);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// NONOGRAM
+// =====================================================================
+const nonogram72Resimleri = {
+  camii: {
+    etiket: "🕌 Cami (İbadet Yeri)",
+    veri: [
+      "0000000000000000","0000000000000000","0000000000001000","0000000000001100",
+      "0000001000001100","0000111110001100","0001111111001100","0001111111001100",
+      "0011111111101100","0011111111101100","0011111111101100","0011100111101100",
+      "0011100111101100","0011100111111110","0000000000011110","0000000000000000",
+    ],
+  },
+  hilal: {
+    etiket: "🌙⭐ Hilal ve Yıldız",
+    veri: [
+      "0000000000000000","0000011111000000","0001111000001000","0011110000011100",
+      "0011100000111110","0111100000011100","0111100000001000","0111000000000000",
+      "0111100000000000","0111100000000000","0011100000000000","0011110000000000",
+      "0001111000000000","0000011111000000","0000000000000000","0000000000000000",
+    ],
+  },
+};
+let nonogram72AktifResim = 'camii';
+const nono72Boyut = nonogram72Resimleri.camii.veri.length;
+let nono72KullaniciIzgara = [];
+let nono72HucreElemanlari = [];
+
+function ipucu72Hesapla(diziStr){
+  const gruplar = diziStr.split('0').filter(s=>s.length>0).map(s=>s.length);
+  return gruplar.length ? gruplar : [0];
+}
+function nonogram72Sec(resimAdi){ nonogram72AktifResim = resimAdi; nonogram72Olustur(); }
+function nonogram72Olustur(){
+  const cozum = nonogram72Resimleri[nonogram72AktifResim].veri;
+  nono72KullaniciIzgara = Array.from({length:nono72Boyut}, ()=>Array(nono72Boyut).fill(false));
+  document.getElementById('nono72Sonuc').textContent = '';
+  const satirIpuclari = cozum.map(r=>ipucu72Hesapla(r));
+  const sutunDizeleri = [];
+  for(let c=0;c<nono72Boyut;c++){
+    let s='';
+    for(let r=0;r<nono72Boyut;r++) s += cozum[r][c];
+    sutunDizeleri.push(s);
+  }
+  const sutunIpuclari = sutunDizeleri.map(s=>ipucu72Hesapla(s));
+  const tablo = document.getElementById('nono72Tablo');
+  tablo.innerHTML = '';
+  const basSatir = document.createElement('tr');
+  const koseTd = document.createElement('td');
+  basSatir.appendChild(koseTd);
+  for(let c=0;c<nono72Boyut;c++){
+    const td = document.createElement('td');
+    td.className = 'nono-sutun-ipucu';
+    sutunIpuclari[c].forEach((sayi,i)=>{
+      if(i>0) td.appendChild(document.createElement('br'));
+      td.appendChild(document.createTextNode(sayi));
+    });
+    if((c+1)%5===0 && c<nono72Boyut-1) td.style.borderRight = '2px solid #333';
+    basSatir.appendChild(td);
+  }
+  tablo.appendChild(basSatir);
+  nono72HucreElemanlari = [];
+  for(let r=0;r<nono72Boyut;r++){
+    const tr = document.createElement('tr');
+    const satirTd = document.createElement('td');
+    satirTd.className = 'nono-satir-ipucu';
+    satirTd.textContent = satirIpuclari[r].join(' ');
+    if((r+1)%5===0 && r<nono72Boyut-1) satirTd.style.borderBottom = '2px solid #333';
+    tr.appendChild(satirTd);
+    nono72HucreElemanlari.push([]);
+    for(let c=0;c<nono72Boyut;c++){
+      const td = document.createElement('td');
+      td.className = 'nono-hucre';
+      if((c+1)%5===0 && c<nono72Boyut-1) td.style.borderRight = '2px solid #333';
+      if((r+1)%5===0 && r<nono72Boyut-1) td.style.borderBottom = '2px solid #333';
+      td.onclick = ((rr,cc)=>()=>{
+        nono72KullaniciIzgara[rr][cc] = !nono72KullaniciIzgara[rr][cc];
+        td.classList.toggle('dolu', nono72KullaniciIzgara[rr][cc]);
+        nonogram72KontrolEt(false);
+      })(r,c);
+      tr.appendChild(td);
+      nono72HucreElemanlari[r].push(td);
+    }
+    tablo.appendChild(tr);
+  }
+}
+function nonogram72KontrolEt(manuel){
+  const cozum = nonogram72Resimleri[nonogram72AktifResim].veri;
+  let tamMi = true;
+  for(let r=0;r<nono72Boyut;r++){
+    for(let c=0;c<nono72Boyut;c++){
+      const beklenen = cozum[r][c] === '1';
+      if(nono72KullaniciIzgara[r][c] !== beklenen) tamMi = false;
+    }
+  }
+  if(tamMi){
+    document.getElementById('nono72Sonuc').textContent = `🎉 Tebrikler! Gizli resmi (${nonogram72Resimleri[nonogram72AktifResim].etiket}) doğru tamamladın!`;
+  } else if(manuel){
+    document.getElementById('nono72Sonuc').textContent = 'Henüz tam değil, ipuçlarına bakarak devam et!';
+  }
+}
+function nonogram72Temizle(){
+  nono72KullaniciIzgara = Array.from({length:nono72Boyut}, ()=>Array(nono72Boyut).fill(false));
+  nono72HucreElemanlari.forEach(satir=>satir.forEach(td=>td.classList.remove('dolu')));
+  document.getElementById('nono72Sonuc').textContent = '';
+}
+
+// =====================================================================
+// KELİME SATRANCI
+// =====================================================================
+const ks72Boyut = 8;
+const ks72AtHamleleri = [[1,2],[1,-2],[-1,2],[-1,-2],[2,1],[2,-1],[-2,1],[-2,-1]];
+const ks72KelimeListesi = [
+  {kelime:"HAC", anlam:"İmkânı olan Müslümanların zilhicce ayında ihram giyerek yaptıkları farz ibadet"},
+  {kelime:"ŞAVT", anlam:"Kâbe'yi soluna alarak etrafında bir kez dönme"},
+  {kelime:"SAY", anlam:"Safa ile Merve tepeleri arasında yapılan yürüyüş"},
+  {kelime:"KÂBE", anlam:"Yeryüzündeki ilk mabet"},
+  {kelime:"MİNA", anlam:"Hacıların kurban kesip şeytan taşladıkları yer"},
+  {kelime:"UMRE", anlam:"Hac mevsimi dışında yapılan tavaf ve say ibadeti"},
+  {kelime:"ADAK", anlam:"Bir isteğin gerçekleşmesi durumunda kesileceğine söz verilen kurban"},
+  {kelime:"MERVE", anlam:"Safa'nın karşısında bulunan, say ibadetinin yapıldığı diğer tepe"},
+];
+const ks72AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+let ks72IzgaraVeri = [];
+let ks72HucreElemanlari = [];
+let ks72BulunanKelimeler = new Set();
+let ks72Yol = [];
+
+function ks72KelimeYerlestir(izgara, kelime){
+  for(let deneme=0; deneme<300; deneme++){
+    const gecici = izgara.map(satir=>satir.slice());
+    const r0 = Math.floor(Math.random()*ks72Boyut);
+    const c0 = Math.floor(Math.random()*ks72Boyut);
+    if(gecici[r0][c0] !== null && gecici[r0][c0] !== kelime[0]) continue;
+    gecici[r0][c0] = kelime[0];
+    const hucreler = [{r:r0,c:c0}];
+    const kullanilan = new Set([r0+','+c0]);
+    let r=r0, c=c0, basarili=true;
+    for(let i=1;i<kelime.length;i++){
+      const olasilar = karistir(ks72AtHamleleri.slice()).filter(([dr,dc])=>{
+        const nr=r+dr, nc=c+dc;
+        if(nr<0 || nr>=ks72Boyut || nc<0 || nc>=ks72Boyut) return false;
+        if(kullanilan.has(nr+','+nc)) return false;
+        return gecici[nr][nc]===null || gecici[nr][nc]===kelime[i];
+      });
+      if(olasilar.length===0){ basarili=false; break; }
+      const [dr,dc] = olasilar[0];
+      r+=dr; c+=dc;
+      gecici[r][c] = kelime[i];
+      hucreler.push({r,c});
+      kullanilan.add(r+','+c);
+    }
+    if(basarili){
+      hucreler.forEach((h,i)=>{ izgara[h.r][h.c] = kelime[i]; });
+      return hucreler;
+    }
+  }
+  return null;
+}
+function ks72Olustur(){
+  let izgara, basarili=false;
+  for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
+    izgara = Array.from({length:ks72Boyut}, ()=>Array(ks72Boyut).fill(null));
+    basarili = true;
+    const siraliKelimeler = ks72KelimeListesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    for(const item of siraliKelimeler){
+      const hucreler = ks72KelimeYerlestir(izgara, item.kelime);
+      if(!hucreler){ basarili=false; break; }
+    }
+  }
+  for(let r=0;r<ks72Boyut;r++){
+    for(let c=0;c<ks72Boyut;c++){
+      if(izgara[r][c]===null) izgara[r][c] = ks72AsciiHarfler[Math.floor(Math.random()*ks72AsciiHarfler.length)];
+    }
+  }
+  ks72IzgaraVeri = izgara;
+  ks72BulunanKelimeler = new Set();
+  ks72Yol = [];
+  const kutu = document.getElementById('ks72Izgara');
+  kutu.innerHTML = '';
+  ks72HucreElemanlari = [];
+  for(let r=0;r<ks72Boyut;r++){
+    ks72HucreElemanlari.push([]);
+    for(let c=0;c<ks72Boyut;c++){
+      const h = document.createElement('div');
+      h.className = 'ks-hucre ' + ((r+c)%2===0 ? 'acik' : 'koyu');
+      h.textContent = izgara[r][c];
+      h.onclick = ()=>ks72Tikla(r,c);
+      kutu.appendChild(h);
+      ks72HucreElemanlari[r].push(h);
+    }
+  }
+  const liste = document.getElementById('ks72Liste');
+  liste.innerHTML = '';
+  ks72KelimeListesi.forEach(item=>{
+    const li = document.createElement('li');
+    li.id = 'ks72-kelime-' + item.kelime;
+    li.textContent = `${item.kelime} — ${item.anlam}`;
+    liste.appendChild(li);
+  });
+  document.getElementById('ks72Bulunan').textContent = 0;
+  document.getElementById('ks72Toplam').textContent = ks72KelimeListesi.length;
+  document.getElementById('ks72Sonuc').textContent = '';
+}
+function ks72SecimiTemizle(){
+  ks72Yol.forEach(p=>ks72HucreElemanlari[p.r][p.c].classList.remove('ks-secili'));
+  ks72Yol = [];
+}
+function ks72Tikla(r,c){
+  const hucreEl = ks72HucreElemanlari[r][c];
+  if(hucreEl.classList.contains('ks-bulundu')) return;
+  let yeniYol;
+  if(ks72Yol.length===0){ yeniYol = [{r,c}]; }
+  else {
+    const son = ks72Yol[ks72Yol.length-1];
+    const gecerliHamle = ks72AtHamleleri.some(([hr,hc]) => son.r+hr===r && son.c+hc===c);
+    yeniYol = gecerliHamle ? [...ks72Yol, {r,c}] : [{r,c}];
+  }
+  const dizi = yeniYol.map(p=>ks72IzgaraVeri[p.r][p.c]).join('');
+  const tamEslesen = ks72KelimeListesi.find(item => item.kelime===dizi && !ks72BulunanKelimeler.has(item.kelime));
+  const onEkMi = ks72KelimeListesi.some(item => !ks72BulunanKelimeler.has(item.kelime) && item.kelime.startsWith(dizi));
+  ks72Yol.forEach(p=>ks72HucreElemanlari[p.r][p.c].classList.remove('ks-secili'));
+  if(tamEslesen){
+    yeniYol.forEach(p=>ks72HucreElemanlari[p.r][p.c].classList.add('ks-bulundu'));
+    ks72BulunanKelimeler.add(tamEslesen.kelime);
+    document.getElementById('ks72Bulunan').textContent = ks72BulunanKelimeler.size;
+    document.getElementById('ks72-kelime-'+tamEslesen.kelime).classList.add('bulundu-satir');
+    ks72Yol = [];
+    if(ks72BulunanKelimeler.size === ks72KelimeListesi.length){
+      document.getElementById('ks72Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri at hamlesiyle buldun!';
+    }
+  } else if(onEkMi){
+    yeniYol.forEach(p=>ks72HucreElemanlari[p.r][p.c].classList.add('ks-secili'));
+    ks72Yol = yeniYol;
+  } else {
+    const tekBaslangicUygun = ks72KelimeListesi.some(item => !ks72BulunanKelimeler.has(item.kelime) && item.kelime[0]===ks72IzgaraVeri[r][c]);
+    if(tekBaslangicUygun){ ks72Yol = [{r,c}]; hucreEl.classList.add('ks-secili'); }
+    else { ks72Yol = []; }
+  }
+}
+
+// =====================================================================
+// KELİME DEDEKTİFİ
+// =====================================================================
+const dd72KelimeHavuzu = kelimeHavuzu72.filter(x => x.kelime.length>=5 && x.kelime.length<=8);
+let dd72Hedef = null, dd72Deneme = 0;
+const dd72MaxDeneme = 5, dd72IpucuAcilmaSiniri = 2;
+let dd72Bitti = true, dd72SiraliVakalar = [], dd72VakaIndex = 0, dd72CozulenSayisi = 0;
+
+function dd72Baslat(){
+  dd72SiraliVakalar = karistir(dd72KelimeHavuzu.slice());
+  dd72VakaIndex = 0; dd72CozulenSayisi = 0;
+  document.getElementById('dd72Cozulen').textContent = 0;
+  document.getElementById('dd72ToplamVaka').textContent = dd72SiraliVakalar.length;
+  document.getElementById('dd72MaxDeneme').textContent = dd72MaxDeneme;
+  dd72VakaBaslat();
+}
+function dd72VakaBaslat(){
+  if(dd72VakaIndex >= dd72SiraliVakalar.length){
+    document.getElementById('dd72Ipucu').textContent = '';
+    document.getElementById('dd72Izgara').innerHTML = '';
+    document.getElementById('dd72Girdi').disabled = true;
+    document.getElementById('dd72Sonuc').textContent = `🏆 Tüm vakalar bitti! ${dd72CozulenSayisi}/${dd72SiraliVakalar.length} vakayı çözdün!`;
+    return;
+  }
+  document.getElementById('dd72Vaka').textContent = dd72VakaIndex+1;
+  dd72Hedef = dd72SiraliVakalar[dd72VakaIndex];
+  dd72Deneme = 0; dd72Bitti = false;
+  document.getElementById('dd72Ipucu').innerHTML = `🔍 Vaka: <b>${dd72Hedef.kelime.length} harfli</b> bir kavram (anlamı ${dd72IpucuAcilmaSiniri} yanlış tahminden sonra açılacak!)`;
+  document.getElementById('dd72Deneme').textContent = 0;
+  document.getElementById('dd72Izgara').innerHTML = '';
+  document.getElementById('dd72Sonuc').textContent = '';
+  document.getElementById('dd72Uyari').textContent = '';
+  const girdi = document.getElementById('dd72Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.maxLength = dd72Hedef.kelime.length; girdi.focus();
+}
+function dd72TahminEt(){
+  if(dd72Bitti) return;
+  const girdi = document.getElementById('dd72Girdi');
+  const tahmin = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  if(tahmin.length !== dd72Hedef.kelime.length){
+    document.getElementById('dd72Uyari').textContent = `Tahminin ${dd72Hedef.kelime.length} harfli olmalı!`;
+    return;
+  }
+  document.getElementById('dd72Uyari').textContent = '';
+  const hedefHarfler = dd72Hedef.kelime.split('');
+  const tahminHarfler = tahmin.split('');
+  const durumlar = new Array(tahminHarfler.length).fill('yok');
+  const kullanilan = new Array(hedefHarfler.length).fill(false);
+  tahminHarfler.forEach((h,i)=>{ if(h === hedefHarfler[i]){ durumlar[i]='dogru-yer'; kullanilan[i]=true; } });
+  tahminHarfler.forEach((h,i)=>{
+    if(durumlar[i]==='dogru-yer') return;
+    const idx = hedefHarfler.findIndex((hh,j)=> hh===h && !kullanilan[j]);
+    if(idx!==-1){ durumlar[i]='yanlis-yer'; kullanilan[idx]=true; }
+  });
+  const satir = document.createElement('div');
+  satir.className = 'dd-satir';
+  tahminHarfler.forEach((h,i)=>{
+    const kutu = document.createElement('div');
+    kutu.className = 'dd-kutu ' + durumlar[i];
+    kutu.textContent = h;
+    satir.appendChild(kutu);
+  });
+  document.getElementById('dd72Izgara').appendChild(satir);
+  dd72Deneme++;
+  document.getElementById('dd72Deneme').textContent = dd72Deneme;
+  girdi.value = '';
+  if(tahmin === dd72Hedef.kelime){
+    dd72Bitti = true; girdi.disabled = true;
+    dd72CozulenSayisi++;
+    document.getElementById('dd72Cozulen').textContent = dd72CozulenSayisi;
+    document.getElementById('dd72Ipucu').innerHTML = `🔍 İpucu: <b>${dd72Hedef.anlam}</b> (${dd72Hedef.kelime.length} harfli)`;
+    document.getElementById('dd72Sonuc').textContent = `🎉 Vaka çözüldü! Kelime: ${dd72Hedef.kelime} (${dd72Deneme} denemede)`;
+    dd72VakaIndex++;
+    setTimeout(()=>dd72VakaBaslat(), 1500);
+  } else if(dd72Deneme >= dd72MaxDeneme){
+    dd72Bitti = true; girdi.disabled = true;
+    document.getElementById('dd72Ipucu').innerHTML = `🔍 İpucu: <b>${dd72Hedef.anlam}</b> (${dd72Hedef.kelime.length} harfli)`;
+    document.getElementById('dd72Sonuc').textContent = `🔍 Vaka çözülemedi! Doğru kelime: ${dd72Hedef.kelime} — ${dd72Hedef.anlam}`;
+    dd72VakaIndex++;
+    setTimeout(()=>dd72VakaBaslat(), 2200);
+  } else if(dd72Deneme >= dd72IpucuAcilmaSiniri){
+    document.getElementById('dd72Ipucu').innerHTML = `🔍 İpucu açıldı: <b>${dd72Hedef.anlam}</b> (${dd72Hedef.kelime.length} harfli)`;
+  }
+}
+
+// =====================================================================
+// DİL DEDEKTİFİ
+// =====================================================================
+const dilDedektifi72Listesi = [
+  {dogru:"Hac, Hicret'in dokuzuncu yılında Müslümanlara farz kılınmıştır.", yanlislar:["Hac, Hicret'in birinci yılında farz kılınmıştır.","Hac hiçbir zaman farz kılınmamıştır.","Hac, Mekke'nin fethinden önce farz kılınmıştır."]},
+  {dogru:"Haccın farzı üçtür: ihrama girmek, Arafat'ta vakfe yapmak, Kâbe'yi tavaf etmek.", yanlislar:["Haccın farzı beştir.","Haccın farzı sadece ihrama girmektir.","Haccın hiçbir farzı yoktur."]},
+  {dogru:"Kâbe'yi Hz. İbrahim ile oğlu Hz. İsmail inşa etmiştir.", yanlislar:["Kâbe'yi Hz. Musa inşa etmiştir.","Kâbe'yi kimin inşa ettiği bilinmemektedir.","Kâbe'yi Hz. Muhammed inşa etmiştir."]},
+  {dogru:"Safa ile Merve arasında say yapmak, Hz. Hacer'in su aramasının anısınadır.", yanlislar:["Say yapmanın bir anlamı yoktur.","Say, Hz. İbrahim'in savaşının anısınadır.","Say yapmak sadece erkeklere farzdır."]},
+  {dogru:"Hac, yılda bir kez; umre ise hac günleri dışında her zaman yapılabilir.", yanlislar:["Hac ve umre sadece aynı anda yapılabilir.","Umre yılda sadece bir kez yapılabilir.","Hac her zaman yapılabilir."]},
+  {dogru:"Küçükbaş hayvanlar bir kişi, büyükbaş hayvanlar bir ile yedi kişi adına kurban edilebilir.", yanlislar:["Küçükbaş hayvanlar da yedi kişi adına kurban edilebilir.","Büyükbaş hayvanlar sadece bir kişi adına kurban edilebilir.","Kurban için kişi sayısı sınırı yoktur."]},
+  {dogru:"Adak kurbanının etini adakta bulunan kişi yiyemez.", yanlislar:["Adak kurbanının etini sadece adakta bulunan kişi yiyebilir.","Adak kurbanının eti dağıtılmaz.","Adak kurbanı kesilmesi zorunlu değildir."]},
+  {dogru:"Akika kurbanı, çocuk doğduğunda şükür için kesilir ve sünnettir.", yanlislar:["Akika kurbanı vaciptir.","Akika kurbanı sadece kız çocuklar için kesilir.","Akika kurbanının etinden aile yiyemez."]},
+  {dogru:"Hz. İsmail'in annesi Hz. Hacer, babası Hz. İbrahim'dir.", yanlislar:["Hz. İsmail'in annesi Hz. Sara'dır.","Hz. İsmail'in babası Hz. İshak'tır.","Hz. İsmail'in ailesi bilinmemektedir."]},
+  {dogru:"Enam suresi 162. ayette namaz, ibadet, hayat ve ölümün Allah için olduğu bildirilir.", yanlislar:["Enam suresi 162. ayet miras hükümlerini anlatır.","Enam suresi 162. ayet savaş hükümlerini anlatır.","Enam suresi 162. ayetin konusu bilinmemektedir."]},
+];
+let ddl72Index = 0, ddl72Puan = 0, ddl72Sira = [];
+
+function ddl72Baslat(){
+  ddl72Sira = karistir(dilDedektifi72Listesi.slice());
+  ddl72Index = 0; ddl72Puan = 0;
+  document.getElementById('ddl72Puan').textContent = 0;
+  document.getElementById('ddl72Toplam').textContent = ddl72Sira.length;
+  document.getElementById('ddl72Sonuc').textContent = '';
+  ddl72Tur();
+}
+function ddl72Tur(){
+  if(ddl72Index >= ddl72Sira.length){
+    document.getElementById('ddl72Secenekler').innerHTML = '';
+    document.getElementById('ddl72Baslik').textContent = '';
+    document.getElementById('ddl72Sonuc').textContent = `🕵️ Soruşturma bitti! ${ddl72Puan}/${ddl72Sira.length} doğru bilgiyi tespit ettin!`;
+    return;
+  }
+  document.getElementById('ddl72Tur').textContent = ddl72Index+1;
+  const oge = ddl72Sira[ddl72Index];
+  document.getElementById('ddl72Baslik').textContent = '🔎 Hangi cümle DOĞRU bilgi veriyor?';
+  const secenekler = karistir([{metin:oge.dogru, dogruMu:true}, ...oge.yanlislar.map(y=>({metin:y, dogruMu:false}))]);
+  const kutu = document.getElementById('ddl72Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek.metin;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      tiklandiMi = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(secenek.dogruMu){
+        btn.classList.add('dogru');
+        ddl72Puan++;
+        document.getElementById('ddl72Puan').textContent = ddl72Puan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn.forEach(b=>{ if(b.textContent === oge.dogru) b.classList.add('dogru'); });
+      }
+      ddl72Index++;
+      setTimeout(()=>ddl72Tur(), 1200);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// MANTIK ZİNCİRİ
+// =====================================================================
+const mantikZinciri72 = [
+  {kavram:"İHRAM", tanim:"Mikat bölgesinde niyet ederek giyilen dikişsiz beyaz kıyafet", mantik:"İhrama girdikten sonra Kâbe'nin etrafında yedi kez dönmeye ne denir?"},
+  {kavram:"TAVAF", tanim:"Kâbe'nin etrafında yedi defa dönme", mantik:"Tavaftan sonra Safa ile Merve tepeleri arasında yapılan yürüyüşe ne denir?"},
+  {kavram:"SAY", tanim:"Safa ile Merve arasında yapılan yürüyüş", mantik:"Arife Günü Arafat'ta bir müddet beklemeye ne denir?"},
+  {kavram:"VAKFE", tanim:"Arafat'ta bir müddet beklemek", mantik:"Hz. İbrahim'in eşi Hz. Hacer'e Allah'ın ikram ettiği kutsal suya ne denir?"},
+  {kavram:"ZEMZEM", tanim:"Hz. Hacer'e Allah'ın ikram ettiği kaynak suyu", mantik:""},
+];
+let mz72Index = 0;
+
+function mz72Baslat(){
+  mz72Index = 0;
+  document.getElementById('mz72Toplam').textContent = mantikZinciri72.length;
+  document.getElementById('mz72Sonuc').textContent = '';
+  document.getElementById('mz72Gorsel').innerHTML = '';
+  mz72HalkaEkle(mantikZinciri72[0].kavram, 0);
+  mz72Tur();
+}
+function mz72HalkaEkle(kavram, index){
+  const halka = document.createElement('div');
+  halka.style.background='white'; halka.style.border='2px solid var(--yesil)'; halka.style.borderRadius='10px';
+  halka.style.padding='8px 14px'; halka.style.margin='6px 0'; halka.style.fontWeight='bold';
+  halka.style.marginLeft = (index*24) + 'px';
+  halka.textContent = `${index+1}. ${kavram}`;
+  document.getElementById('mz72Gorsel').appendChild(halka);
+}
+function mz72Tur(){
+  document.getElementById('mz72Halka').textContent = mz72Index+1;
+  if(mz72Index+1 >= mantikZinciri72.length){
+    document.getElementById('mz72Soru').textContent = '';
+    document.getElementById('mz72Secenekler').innerHTML = '';
+    document.getElementById('mz72Sonuc').textContent = '🎉 Tebrikler! Mantık zincirini tamamen çözdün!';
+    return;
+  }
+  const mevcut = mantikZinciri72[mz72Index];
+  const hedef = mantikZinciri72[mz72Index+1];
+  document.getElementById('mz72Soru').innerHTML = `🔗 <b>${mevcut.kavram}</b>: ${mevcut.tanim}<br>❓ ${mevcut.mantik}`;
+  const havuzDistractor = karistir(kelimeHavuzu72.filter(x => x.kelime!==hedef.kavram && !mantikZinciri72.some(z=>z.kavram===x.kelime))).slice(0,3);
+  const secenekler = karistir([{kelime:hedef.kavram}, ...havuzDistractor]);
+  const kutu = document.getElementById('mz72Secenekler');
+  kutu.innerHTML = '';
+  let tiklandiMi = false;
+  secenekler.forEach(secenek=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = secenek.kelime;
+    btn.onclick = ()=>{
+      if(tiklandiMi) return;
+      if(secenek.kelime === hedef.kavram){
+        tiklandiMi = true;
+        btn.classList.add('dogru');
+        mz72Index++;
+        setTimeout(()=>{ mz72HalkaEkle(hedef.kavram, mz72Index); mz72Tur(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        setTimeout(()=>btn.classList.remove('yanlis'), 400);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// SEMANTİK LABİRENT
+// =====================================================================
+const semantikOdalar72 = [
+  {kategori:"HAC İLE İLGİLİ TEMEL KAVRAMLAR (İhram, Tavaf, Say gibi)", kelimeler:["İHRAM","TAVAF","SAY","ZEMZEM"], oddKelime:"ZEMZEM"},
+  {kategori:"HAC İLE İLGİLİ MEKÂNLAR (Kâbe, Safa, Merve gibi)", kelimeler:["KÂBE","SAFA","MERVE","VAKFE"], oddKelime:"VAKFE"},
+  {kategori:"ARAFAT VE ÇEVRESİ (Arafat, Müzdelife, Mina gibi)", kelimeler:["ARAFAT","MÜZDELİFE","MİNA","UMRE"], oddKelime:"UMRE"},
+  {kategori:"KURBAN ÇEŞİTLERİ (Adak, Akika, Tığlama gibi)", kelimeler:["ADAK","AKİKA","TIĞLAMA","ARİFE"], oddKelime:"ARİFE"},
+  {kategori:"HZ. İSMAİL İLE İLGİLİ KAVRAMLAR (İsmail, Cürhüm, Zemzem gibi)", kelimeler:["İSMAİL","CÜRHÜM","ZEMZEM","TIĞLAMA"], oddKelime:"TIĞLAMA"},
+  {kategori:"KURBAN İBADETİYLE İLGİLİ KAVRAMLAR (Kurban, Adak, Akika gibi)", kelimeler:["KURBAN","ADAK","AKİKA","MİKAT"], oddKelime:"MİKAT"},
+];
+let sz72OdaIndex = 0, sz72Can = 3;
+
+function sz72CanGoster(){ document.getElementById('sz72Can').textContent = '❤️'.repeat(Math.max(sz72Can,0)) + '🖤'.repeat(Math.max(3-sz72Can,0)); }
+function sz72Baslat(){
+  sz72OdaIndex = 0; sz72Can = 3;
+  document.getElementById('sz72ToplamOda').textContent = semantikOdalar72.length;
+  sz72CanGoster();
+  document.getElementById('sz72Sonuc').textContent = '';
+  sz72OdaGoster();
+}
+function sz72OdaGoster(){
+  document.getElementById('sz72Oda').textContent = sz72OdaIndex+1;
+  const oda = semantikOdalar72[sz72OdaIndex];
+  document.getElementById('sz72Kategori').innerHTML = `🚪 Oda ${sz72OdaIndex+1}: Bu kategoriye AİT OLMAYAN kelimeyi bul, kapıyı aç!<br>📂 Kategori: <b>${oda.kategori}</b>`;
+  const kutu = document.getElementById('sz72Secenekler');
+  kutu.innerHTML = '';
+  const karisikKelimeler = karistir(oda.kelimeler.slice());
+  karisikKelimeler.forEach(kelime=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = kelime;
+    btn.onclick = ()=>{
+      if(kelime === oda.oddKelime){
+        btn.classList.add('dogru');
+        sz72OdaIndex++;
+        setTimeout(()=>{
+          if(sz72OdaIndex >= semantikOdalar72.length){
+            document.getElementById('sz72Kategori').textContent = '';
+            document.getElementById('sz72Secenekler').innerHTML = '';
+            document.getElementById('sz72Sonuc').textContent = '🎉 Tebrikler! Semantik labirentten çıktın!';
+          } else { sz72OdaGoster(); }
+        }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        sz72Can--;
+        sz72CanGoster();
+        if(sz72Can<=0){
+          setTimeout(()=>{
+            sz72OdaIndex = 0; sz72Can = 3;
+            sz72CanGoster();
+            document.getElementById('sz72Sonuc').textContent = '💥 Canların bitti, labirentte kayboldun! Baştan başlıyorsun...';
+            setTimeout(()=>{ document.getElementById('sz72Sonuc').textContent=''; sz72OdaGoster(); }, 1500);
+          }, 500);
+        } else {
+          setTimeout(()=>btn.classList.remove('yanlis'), 400);
+        }
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// =====================================================================
+// ÇELİŞKİ AVI
+// =====================================================================
+const celiskiListesi72 = [
+  {kelime:"Tavaf", anlam1:"Kâbe'nin etrafında yedi kez dönme", anlam2:"Safa ile Merve arasında yapılan yürüyüş", celiskiVarMi:true},
+  {kelime:"Vakfe", anlam1:"Arafat'ta bir müddet beklemek", anlam2:"hac ve umre için ihrama giren kişinin okuduğu dua", celiskiVarMi:true},
+  {kelime:"Kurban", anlam1:"belirli hayvanları ibadet niyetiyle kesme", anlam2:"bir isteğin gerçekleşmesi durumunda kesileceğine söz verilen kurban", celiskiVarMi:true},
+  {kelime:"Umre", anlam1:"hac mevsimi dışında Kâbe'yi tavaf edip ihramdan çıkma ibadeti", anlam2:"İslam'ın beş şartından biri olan farz ibadet", celiskiVarMi:true},
+  {kelime:"Mina", anlam1:"hacıların kurban kesip şeytan taşladıkları yer", anlam2:"hacıların vakfe yapmak üzere geceyi geçirdikleri yer", celiskiVarMi:true},
+  {kelime:"Akika", anlam1:"bir ailenin çocuğu doğduğunda şükür için kesilen kurban", anlam2:"ziyaret yerlerine giderken tığlanan kurban", celiskiVarMi:true},
+  {kelime:"Hac", anlam1:"imkânı olan Müslümanların ihram giyerek yaptıkları farz ibadet", anlam2:"İslam'ın beş şartından biri", celiskiVarMi:false},
+  {kelime:"İhram", anlam1:"mikat bölgesinde niyet ederek giyilen dikişsiz beyaz kıyafet", anlam2:"hac ve umre yapılırken giyilen özel kıyafet", celiskiVarMi:false},
+  {kelime:"Zemzem", anlam1:"Hz. Hacer'e Allah'ın ikram ettiği kaynak suyu", anlam2:"Kâbe'nin yanında bulunan kutsal su", celiskiVarMi:false},
+  {kelime:"Arafat", anlam1:"hacı adaylarının Arife Günü toplanıp vakfe yaptıkları alan", anlam2:"Mekke'nin doğusunda bulunan bölge", celiskiVarMi:false},
+  {kelime:"Kâbe", anlam1:"yeryüzündeki ilk mabet", anlam2:"Mescid-i Haram'ın ortasında bulunan mabet", celiskiVarMi:false},
+  {kelime:"Şavt", anlam1:"Kâbe'nin etrafında bir kez dönme", anlam2:"tavafın bir birimi", celiskiVarMi:false},
+];
+let ca72Index = 0, ca72Puan = 0, ca72Sira = [], ca72Kilit = false;
+
+function ca72Baslat(){
+  ca72Sira = karistir(celiskiListesi72.slice());
+  ca72Index = 0; ca72Puan = 0;
+  document.getElementById('ca72Puan').textContent = 0;
+  document.getElementById('ca72Toplam').textContent = ca72Sira.length;
+  document.getElementById('ca72Sonuc').textContent = '';
+  document.getElementById('ca72Butonlar').style.display = 'flex';
+  ca72Tur();
+}
+function ca72Tur(){
+  if(ca72Index >= ca72Sira.length){
+    document.getElementById('ca72Cumle').textContent = '';
+    document.getElementById('ca72Butonlar').style.display = 'none';
+    document.getElementById('ca72GeriBildirim').textContent = '';
+    document.getElementById('ca72Sonuc').textContent = `🕵️ Avın bitti! ${ca72Puan}/${ca72Sira.length} çelişkiyi doğru tespit ettin!`;
+    return;
+  }
+  document.getElementById('ca72Tur').textContent = ca72Index+1;
+  const oge = ca72Sira[ca72Index];
+  document.getElementById('ca72Cumle').innerHTML = `"<b>${oge.kelime}</b>" hem "${oge.anlam1}" hem de "${oge.anlam2}" demektir.`;
+  document.getElementById('ca72GeriBildirim').textContent = '';
+  ca72Kilit = false;
+}
+function ca72Cevapla(cevapVarMi){
+  if(ca72Kilit) return;
+  ca72Kilit = true;
+  const oge = ca72Sira[ca72Index];
+  const dogruMu = (cevapVarMi === oge.celiskiVarMi);
+  if(dogruMu){
+    ca72Puan++;
+    document.getElementById('ca72Puan').textContent = ca72Puan;
+    document.getElementById('ca72GeriBildirim').textContent = '✅ Doğru!';
+  } else {
+    document.getElementById('ca72GeriBildirim').textContent = `❌ Yanlış! Doğrusu: ${oge.celiskiVarMi ? 'Çelişki VAR' : 'Çelişki YOK'}`;
+  }
+  ca72Index++;
+  setTimeout(()=>ca72Tur(), 1300);
+}
+
+// =====================================================================
+// LABİRENT
+// =====================================================================
+const lab72Satir = 12, lab72Sutun = 15;
+const lab72IfadeHavuzu = [
+  {kelime:"Hac", anlam:"İmkânı olan Müslümanların yaptıkları farz ibadet"},
+  {kelime:"Mikat", anlam:"Hac ve umre yolculuğuna çıkanların ihrama girdiği sınırlar"},
+  {kelime:"Telbiye", anlam:"Haccetmeye başlarken söylenen dua"},
+  {kelime:"İhram", anlam:"Mikat bölgesinde giyilen dikişsiz beyaz kıyafet"},
+  {kelime:"Şavt", anlam:"Kâbe'nin etrafında bir kez dönme"},
+  {kelime:"Tavaf", anlam:"Kâbe'nin etrafında yedi kez dönme"},
+  {kelime:"Say", anlam:"Safa ile Merve arasında yapılan yürüyüş"},
+  {kelime:"Vakfe", anlam:"Arafat'ta bir müddet beklemek"},
+  {kelime:"Zemzem", anlam:"Hz. Hacer'e ikram edilen kutsal su"},
+  {kelime:"Kâbe", anlam:"Yeryüzündeki ilk mabet"},
+  {kelime:"Safa", anlam:"Say ibadetinin yapıldığı tepelerden biri"},
+  {kelime:"Merve", anlam:"Say ibadetinin yapıldığı diğer tepe"},
+  {kelime:"Müzdelife", anlam:"Arafat ile Mina arasındaki yer"},
+  {kelime:"Mina", anlam:"Kurban kesilip şeytan taşlanan yer"},
+  {kelime:"Arafat", anlam:"Arife Günü vakfe yapılan alan"},
+  {kelime:"Umre", anlam:"Hac mevsimi dışında yapılan ibadet"},
+  {kelime:"Kurban", anlam:"İbadet niyetiyle hayvan kesme"},
+  {kelime:"Adak", anlam:"Bir isteğin gerçekleşmesiyle kesilen kurban"},
+  {kelime:"Akika", anlam:"Çocuk doğumunda şükür için kesilen kurban"},
+  {kelime:"İsmail", anlam:"Hz. İbrahim'in oğlu, kurban edilmek istenen peygamber"},
+];
+let lab72Hucreler = [], lab72HucreElemanlari = [], lab72OyuncuKonum = {r:0,c:0}, lab72Toplananlar = {};
+let lab72HamleSayisi = 0, lab72ToplananSayisi = 0, lab72Saniye = 0, lab72Zamanlayici = null, lab72Bitti = false;
+
+function lab72Uret(){
+  const hucreler = [];
+  for(let r=0;r<lab72Satir;r++){
+    hucreler.push([]);
+    for(let c=0;c<lab72Sutun;c++){ hucreler[r].push({top:true,right:true,bottom:true,left:true,ziyaretEdildi:false}); }
+  }
+  const yigin = [{r:0,c:0}];
+  hucreler[0][0].ziyaretEdildi = true;
+  while(yigin.length>0){
+    const mevcut = yigin[yigin.length-1];
+    const {r,c} = mevcut;
+    const komsular = [];
+    if(r>0 && !hucreler[r-1][c].ziyaretEdildi) komsular.push({r:r-1,c,yon:'top'});
+    if(c<lab72Sutun-1 && !hucreler[r][c+1].ziyaretEdildi) komsular.push({r,c:c+1,yon:'right'});
+    if(r<lab72Satir-1 && !hucreler[r+1][c].ziyaretEdildi) komsular.push({r:r+1,c,yon:'bottom'});
+    if(c>0 && !hucreler[r][c-1].ziyaretEdildi) komsular.push({r,c:c-1,yon:'left'});
+    if(komsular.length===0){ yigin.pop(); }
+    else {
+      const secilen = komsular[Math.floor(Math.random()*komsular.length)];
+      if(secilen.yon==='top'){ hucreler[r][c].top=false; hucreler[secilen.r][secilen.c].bottom=false; }
+      if(secilen.yon==='right'){ hucreler[r][c].right=false; hucreler[secilen.r][secilen.c].left=false; }
+      if(secilen.yon==='bottom'){ hucreler[r][c].bottom=false; hucreler[secilen.r][secilen.c].top=false; }
+      if(secilen.yon==='left'){ hucreler[r][c].left=false; hucreler[secilen.r][secilen.c].right=false; }
+      hucreler[secilen.r][secilen.c].ziyaretEdildi = true;
+      yigin.push({r:secilen.r,c:secilen.c});
+    }
+  }
+  return hucreler;
+}
+function labirent72Baslat(){
+  clearInterval(lab72Zamanlayici);
+  lab72Hucreler = lab72Uret();
+  lab72OyuncuKonum = {r:0,c:0};
+  lab72HamleSayisi = 0; lab72ToplananSayisi = 0; lab72Saniye = 0; lab72Bitti = false;
+  document.getElementById('lab72Hamle').textContent = 0;
+  document.getElementById('lab72Toplanan').textContent = 0;
+  document.getElementById('lab72Sure').textContent = 0;
+  document.getElementById('lab72Durum').textContent = '';
+  document.getElementById('lab72Sonuc').textContent = '';
+  const tumHucreler = [];
+  for(let r=0;r<lab72Satir;r++) for(let c=0;c<lab72Sutun;c++){
+    if(!(r===0&&c===0) && !(r===lab72Satir-1&&c===lab72Sutun-1)) tumHucreler.push({r,c});
+  }
+  const secilenler = karistir(tumHucreler).slice(0, lab72IfadeHavuzu.length);
+  lab72Toplananlar = {};
+  secilenler.forEach((konum, i)=>{
+    lab72Toplananlar[konum.r+','+konum.c] = {kelime: lab72IfadeHavuzu[i].kelime, anlam: lab72IfadeHavuzu[i].anlam, toplandi:false};
+  });
+  document.getElementById('lab72ToplamYildiz').textContent = secilenler.length;
+  const izgara = document.getElementById('lab72Izgara');
+  izgara.innerHTML = '';
+  izgara.style.gridTemplateColumns = `repeat(${lab72Sutun}, 30px)`;
+  izgara.style.gridTemplateRows = `repeat(${lab72Satir}, 30px)`;
+  lab72HucreElemanlari = [];
+  for(let r=0;r<lab72Satir;r++){
+    lab72HucreElemanlari.push([]);
+    for(let c=0;c<lab72Sutun;c++){
+      const h = lab72Hucreler[r][c];
+      const div = document.createElement('div');
+      div.className = 'labirent-hucre';
+      div.style.gridColumn = c+1;
+      div.style.gridRow = r+1;
+      div.style.borderTop = h.top ? '2px solid #333' : '2px solid transparent';
+      div.style.borderRight = h.right ? '2px solid #333' : '2px solid transparent';
+      div.style.borderBottom = h.bottom ? '2px solid #333' : '2px solid transparent';
+      div.style.borderLeft = h.left ? '2px solid #333' : '2px solid transparent';
+      const key = r+','+c;
+      if(r===0 && c===0) div.textContent = '🚶';
+      else if(r===lab72Satir-1 && c===lab72Sutun-1) div.textContent = '🕋';
+      else if(lab72Toplananlar[key]) div.textContent = '⭐';
+      izgara.appendChild(div);
+      lab72HucreElemanlari[r].push(div);
+    }
+  }
+  lab72Zamanlayici = setInterval(()=>{
+    lab72Saniye++;
+    document.getElementById('lab72Sure').textContent = lab72Saniye;
+  }, 1000);
+}
+function labirent72Hareket(dr, dc){
+  if(lab72Bitti) return;
+  const {r,c} = lab72OyuncuKonum;
+  const hucre = lab72Hucreler[r][c];
+  let yeniR=r, yeniC=c;
+  if(dr===-1 && !hucre.top) yeniR = r-1;
+  else if(dr===1 && !hucre.bottom) yeniR = r+1;
+  else if(dc===-1 && !hucre.left) yeniC = c-1;
+  else if(dc===1 && !hucre.right) yeniC = c+1;
+  else return;
+  lab72HucreElemanlari[r][c].textContent = '';
+  lab72OyuncuKonum = {r:yeniR, c:yeniC};
+  lab72HamleSayisi++;
+  document.getElementById('lab72Hamle').textContent = lab72HamleSayisi;
+  const key = yeniR+','+yeniC;
+  if(lab72Toplananlar[key] && !lab72Toplananlar[key].toplandi){
+    lab72Toplananlar[key].toplandi = true;
+    lab72ToplananSayisi++;
+    document.getElementById('lab72Toplanan').textContent = lab72ToplananSayisi;
+    document.getElementById('lab72Durum').textContent = `✨ Topladın: ${lab72Toplananlar[key].kelime} — ${lab72Toplananlar[key].anlam}`;
+  }
+  if(yeniR===lab72Satir-1 && yeniC===lab72Sutun-1){
+    lab72HucreElemanlari[yeniR][yeniC].textContent = '🏁';
+    lab72Bitti = true;
+    clearInterval(lab72Zamanlayici);
+    const toplamYildiz = document.getElementById('lab72ToplamYildiz').textContent;
+    document.getElementById('lab72Sonuc').textContent =
+      `🎉 Tebrikler! Labirenti ${lab72HamleSayisi} hamlede ve ${lab72Saniye} saniyede tamamladın! (${lab72ToplananSayisi}/${toplamYildiz} yıldız topladın)`;
+    return;
+  }
+  lab72HucreElemanlari[yeniR][yeniC].textContent = '🚶';
+}
+document.addEventListener('keydown', (e)=>{
+  const aktifBolum = document.getElementById('labirent72');
+  if(!aktifBolum.classList.contains('aktif')) return;
+  const etiket = document.activeElement ? document.activeElement.tagName : '';
+  if(etiket==='INPUT' || etiket==='TEXTAREA') return;
+  if(e.key==='ArrowUp'){ e.preventDefault(); labirent72Hareket(-1,0); }
+  else if(e.key==='ArrowDown'){ e.preventDefault(); labirent72Hareket(1,0); }
+  else if(e.key==='ArrowLeft'){ e.preventDefault(); labirent72Hareket(0,-1); }
+  else if(e.key==='ArrowRight'){ e.preventDefault(); labirent72Hareket(0,1); }
+});
+
+// =====================================================================
+// BAŞLANGIÇ
+// =====================================================================
+[bz72IzgaraOlustur, kelimeAvi72Olustur, cengel72Olustur, merdiven72Baslat, sifre72Olustur, ks72Olustur, nonogram72Olustur, istatistikleriGuncelleGoster, sonucIzlemeBaslat].forEach(function(fn){ try{ fn(); }catch(e){} });
+
+// =====================================================================
+// EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — KÂFİRUN SURESİ
+// =====================================================================
+const ezberVeri72 = [
+  {
+    "parca": "Kul yâ eyyühel kâfirûn",
+    "anlam": "1. ayet: De ki: Ey kâfirler!",
+    "gizli": "kâfirûn"
+  },
+  {
+    "parca": "Lâ a'büdü mâ ta'büdûn",
+    "anlam": "2. ayet: Ben sizin taptıklarınıza tapmam.",
+    "gizli": "ta'büdûn"
+  },
+  {
+    "parca": "Ve lâ entüm âbidûne",
+    "anlam": "3. ayetin başı: Siz de tapıcılar değilsiniz…",
+    "gizli": "entüm"
+  },
+  {
+    "parca": "mâ a'büd",
+    "anlam": "3. ayetin sonu: …benim taptığıma.",
+    "gizli": "a'büd"
+  },
+  {
+    "parca": "Ve lâ ene âbidün mâ abedtüm",
+    "anlam": "4. ayet: Ben asla sizin taptıklarınıza tapacak değilim.",
+    "gizli": "abedtüm"
+  },
+  {
+    "parca": "Ve lâ entüm âbidûne mâ a'büd",
+    "anlam": "5. ayet: Siz de benim taptığıma tapacak değilsiniz.",
+    "gizli": "âbidûne"
+  },
+  {
+    "parca": "Leküm dînüküm",
+    "anlam": "6. ayetin başı: Sizin dininiz size…",
+    "gizli": "dînüküm"
+  },
+  {
+    "parca": "ve liye dîn",
+    "anlam": "6. ayetin sonu: …benim dinim banadır.",
+    "gizli": "liye dîn"
+  }
+];
+
+// --- 1) SIRALA BAKALIM ---
+function ez172Baslat(){
+  document.getElementById('ez172Sonuc').textContent='';
+  document.getElementById('ez172Dizilen').textContent='0';
+  siraOlustur({
+    tokens: ezberVeri72.map(x=>x.parca),
+    bankaId:'ez172Banka', cevapId:'ez172Cevap',
+    ilerleme:(n)=>{ document.getElementById('ez172Dizilen').textContent=n; },
+    tamamlandi:()=>{ document.getElementById('ez172Sonuc').innerHTML = "🎉 Tebrikler! Kâfirun Suresi'ni doğru sırayla dizdin!"; }
+  });
+}
+
+// --- 2) BOŞLUK DOLDUR ---
+let ez272Tur=0, ez272Dogru=0, ez272Sira=[];
+function ez272Baslat(){
+  ez272Tur=0; ez272Dogru=0;
+  ez272Sira = karistir(ezberVeri72.map((x,i)=>i));
+  document.getElementById('ez272Dogru').textContent='0';
+  document.getElementById('ez272Sonuc').textContent='';
+  ez272SoruGoster();
+}
+function ez272SoruGoster(){
+  if(ez272Tur>=ez272Sira.length){
+    document.getElementById('ez272Metin').textContent='';
+    document.getElementById('ez272Secenekler').innerHTML='';
+    document.getElementById('ez272Sonuc').innerHTML = `🎉 Bitti! ${ez272Dogru}/${ez272Sira.length} doğru.`;
+    return;
+  }
+  document.getElementById('ez272Tur').textContent = ez272Tur+1;
+  const i = ez272Sira[ez272Tur];
+  const oge = ezberVeri72[i];
+  document.getElementById('ez272Metin').textContent = oge.parca.replace(oge.gizli, '______');
+  const digerleri = ezberVeri72.filter((_,j)=>j!==i).map(x=>x.gizli);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.gizli, ...yanlislar]);
+  const kutu = document.getElementById('ez272Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez272Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.gizli){ btn.classList.add('dogru'); ez272Dogru++; document.getElementById('ez272Dogru').textContent=ez272Dogru; }
+      else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.gizli).classList.add('dogru');
+      }
+      setTimeout(()=>{ ez272Tur++; ez272SoruGoster(); }, 1100);
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 3) ANLAM EŞLEŞTİR ---
+let ez372Secili=null, ez372Eslesen=0;
+function ez372Baslat(){
+  ez372Secili=null; ez372Eslesen=0;
+  document.getElementById('ez372Eslesen').textContent='0';
+  document.getElementById('ez372Sonuc').textContent='';
+  const solSira = karistir(ezberVeri72.map((x,i)=>i));
+  const sagSira = karistir(ezberVeri72.map((x,i)=>i));
+  const sol = document.getElementById('ez372Sol'); sol.innerHTML='';
+  const sag = document.getElementById('ez372Sag'); sag.innerHTML='';
+  solSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri72[i].parca;
+    b.dataset.i=i; b.dataset.taraf='sol';
+    b.onclick=()=>ez372Tikla(b);
+    sol.appendChild(b);
+  });
+  sagSira.forEach(i=>{
+    const b=document.createElement('div');
+    b.className='merdiven-secenek ez-oge';
+    b.textContent=ezberVeri72[i].anlam;
+    b.dataset.i=i; b.dataset.taraf='sag';
+    b.onclick=()=>ez372Tikla(b);
+    sag.appendChild(b);
+  });
+}
+function ez372Tikla(b){
+  if(b.classList.contains('eslesti')) return;
+  if(ez372Secili && ez372Secili.dataset.taraf===b.dataset.taraf){
+    ez372Secili.classList.remove('secili');
+    ez372Secili = b; b.classList.add('secili');
+    return;
+  }
+  if(!ez372Secili){ ez372Secili=b; b.classList.add('secili'); return; }
+  if(ez372Secili.dataset.i===b.dataset.i){
+    ez372Secili.classList.remove('secili'); ez372Secili.classList.add('eslesti');
+    b.classList.add('eslesti');
+    ez372Secili=null;
+    ez372Eslesen++;
+    document.getElementById('ez372Eslesen').textContent=ez372Eslesen;
+    if(ez372Eslesen===ezberVeri72.length){
+      document.getElementById('ez372Sonuc').innerHTML = "🎉 Tebrikler! Kâfirun Suresi'nin tüm bölümlerini anlamlarıyla eşleştirdin!";
+    }
+  } else {
+    const digeri = ez372Secili;
+    digeri.classList.add('yanlis'); b.classList.add('yanlis');
+    setTimeout(()=>{ digeri.classList.remove('yanlis','secili'); b.classList.remove('yanlis'); },400);
+    ez372Secili=null;
+  }
+}
+
+// --- 4) HAFIZA KARTLARI ---
+let ez472Acik=[], ez472Bulunan=0, ez472Hamle=0, ez472Kilit=false;
+function ez472Baslat(){
+  ez472Acik=[]; ez472Bulunan=0; ez472Hamle=0; ez472Kilit=false;
+  document.getElementById('ez472Bulunan').textContent='0';
+  document.getElementById('ez472Hamle').textContent='0';
+  document.getElementById('ez472Sonuc').textContent='';
+  const kartlar=[];
+  ezberVeri72.forEach((x,i)=>{
+    kartlar.push({i, tip:'parca', metin:x.parca});
+    kartlar.push({i, tip:'anlam', metin:x.anlam});
+  });
+  const karisik = karistir(kartlar);
+  const izgara = document.getElementById('ez472Izgara');
+  izgara.innerHTML='';
+  karisik.forEach(k=>{
+    const kart=document.createElement('div');
+    kart.className='hafiza-kart';
+    kart.dataset.i=k.i; kart.dataset.tip=k.tip;
+    kart.innerHTML = `<div class="hafiza-on">🕌</div><div class="hafiza-arka">${k.metin}</div>`;
+    kart.onclick=()=>ez472KartTikla(kart);
+    izgara.appendChild(kart);
+  });
+}
+function ez472KartTikla(kart){
+  if(ez472Kilit || kart.classList.contains('acik') || kart.classList.contains('bulundu')) return;
+  kart.classList.add('acik');
+  ez472Acik.push(kart);
+  if(ez472Acik.length===2){
+    ez472Hamle++; document.getElementById('ez472Hamle').textContent=ez472Hamle;
+    ez472Kilit=true;
+    const [a,b]=ez472Acik;
+    if(a.dataset.i===b.dataset.i && a.dataset.tip!==b.dataset.tip){
+      a.classList.add('bulundu'); b.classList.add('bulundu');
+      ez472Bulunan++; document.getElementById('ez472Bulunan').textContent=ez472Bulunan;
+      ez472Acik=[]; ez472Kilit=false;
+      if(ez472Bulunan===ezberVeri72.length){
+        document.getElementById('ez472Sonuc').innerHTML = `🎉 Tebrikler! ${ez472Hamle} hamlede tüm çiftleri buldun!`;
+      }
+    } else {
+      setTimeout(()=>{
+        a.classList.remove('acik'); b.classList.remove('acik');
+        ez472Acik=[]; ez472Kilit=false;
+      }, 900);
+    }
+  }
+}
+
+// --- 5) ADIM ADIM EZBER ---
+let ez572Adim=0;
+function ez572Baslat(){
+  ez572Adim=0;
+  document.getElementById('ez572Liste').innerHTML='';
+  document.getElementById('ez572Sonuc').textContent='';
+  ez572SoruGoster();
+}
+function ez572SoruGoster(){
+  if(ez572Adim>=ezberVeri72.length){
+    document.getElementById('ez572Secenekler').innerHTML='';
+    document.getElementById('ez572Sonuc').innerHTML = "🎉 Tebrikler! Kâfirun Suresi'ni baştan sona tamamladın!";
+    return;
+  }
+  document.getElementById('ez572Adim').textContent = ez572Adim+1;
+  const oge = ezberVeri72[ez572Adim];
+  const digerleri = ezberVeri72.filter((_,j)=>j!==ez572Adim).map(x=>x.parca);
+  const yanlislar = karistir(digerleri).slice(0,3);
+  const secenekler = karistir([oge.parca, ...yanlislar]);
+  const kutu = document.getElementById('ez572Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      document.querySelectorAll('#ez572Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+      if(sec===oge.parca){
+        btn.classList.add('dogru');
+        const liste=document.getElementById('ez572Liste');
+        liste.innerHTML += `<div><b>${ez572Adim+1}.</b> ${oge.parca}</div>`;
+        setTimeout(()=>{ ez572Adim++; ez572SoruGoster(); }, 700);
+      } else {
+        btn.classList.add('yanlis');
+        [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        setTimeout(()=>{ ez572SoruGoster(); }, 1100);
+      }
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+// --- 6) GİZLİ HARFLER ---
+let ez672Tur=0, ez672Dogru=0, ez672Sira=[];
+function ez672Baslat(){
+  ez672Tur=0; ez672Dogru=0; ez672Sira = karistir(ezberVeri72.map((x,i)=>i));
+  document.getElementById('ez672Dogru').textContent='0';
+  document.getElementById('ez672Sonuc').textContent='';
+  ez672Round();
+}
+function ez672Round(){
+  if(ez672Tur>=ez672Sira.length){
+    document.getElementById('ez672Metin').textContent='';
+    document.getElementById('ez672Cevap').innerHTML=''; document.getElementById('ez672Banka').innerHTML='';
+    document.getElementById('ez672Sonuc').innerHTML = `🎉 Bitti! ${ez672Dogru}/${ez672Sira.length} kelimeyi doğru tamamladın.`;
+    return;
+  }
+  document.getElementById('ez672Tur').textContent = ez672Tur+1;
+  const i = ez672Sira[ez672Tur];
+  const oge = ezberVeri72[i];
+  document.getElementById('ez672Metin').innerHTML = oge.parca.replace(oge.gizli, '<u>______</u>') + `<br><small>💡 ${oge.anlam}</small>`;
+  const harfler = oge.gizli.split('').filter(c=>c!==' ');
+  siraOlustur({
+    tokens: harfler,
+    bankaId:'ez672Banka', cevapId:'ez672Cevap',
+    tamamlandi:()=>{
+      ez672Dogru++; document.getElementById('ez672Dogru').textContent=ez672Dogru;
+      setTimeout(()=>{ ez672Tur++; ez672Round(); }, 900);
+    }
+  });
+}
+
+// --- 7) KAYBOLAN KELİMELER ---
+let ez772Tur=0, ez772Dogru=0, ez772Sira=[];
+function ez772Baslat(){
+  ez772Tur=0; ez772Dogru=0; ez772Sira = karistir(ezberVeri72.map((x,i)=>i));
+  document.getElementById('ez772Dogru').textContent='0';
+  document.getElementById('ez772Sonuc').textContent='';
+  ez772Round();
+}
+function ez772Round(){
+  if(ez772Tur>=ez772Sira.length){
+    document.getElementById('ez772Metin').textContent='';
+    document.getElementById('ez772Secenekler').innerHTML='';
+    document.getElementById('ez772Sonuc').innerHTML = `🎉 Bitti! ${ez772Dogru}/${ez772Sira.length} doğru hatırladın.`;
+    return;
+  }
+  document.getElementById('ez772Tur').textContent = ez772Tur+1;
+  const i = ez772Sira[ez772Tur];
+  const oge = ezberVeri72[i];
+  document.getElementById('ez772Metin').textContent = oge.parca;
+  document.getElementById('ez772Secenekler').innerHTML='';
+  setTimeout(()=>{
+    document.getElementById('ez772Metin').textContent = '🙈 ...';
+    const digerIdx = karistir(ezberVeri72.map((_,j)=>j).filter(j=>j!==i)).slice(0,2);
+    const varyantlar = digerIdx.map(j=>oge.parca.replace(oge.gizli, ezberVeri72[j].gizli));
+    const secenekler = karistir([oge.parca, ...varyantlar]);
+    const kutu = document.getElementById('ez772Secenekler');
+    kutu.innerHTML='';
+    secenekler.forEach(sec=>{
+      const btn=document.createElement('div');
+      btn.className='merdiven-secenek';
+      btn.textContent=sec;
+      btn.onclick=()=>{
+        document.querySelectorAll('#ez772Secenekler .merdiven-secenek').forEach(b=>b.onclick=null);
+        document.getElementById('ez772Metin').textContent = oge.parca;
+        if(sec===oge.parca){ btn.classList.add('dogru'); ez772Dogru++; document.getElementById('ez772Dogru').textContent=ez772Dogru; }
+        else {
+          btn.classList.add('yanlis');
+          [...kutu.children].find(b=>b.textContent===oge.parca).classList.add('dogru');
+        }
+        setTimeout(()=>{ ez772Tur++; ez772Round(); }, 1300);
+      };
+      kutu.appendChild(btn);
+    });
+  }, 3000);
+}
+
+// --- 8) HIZ TESTİ ---
+let ez872Zamanlayici=null, ez872Kalan=60, ez872Dogru=0, ez872Yanlis=0, ez872Aktif=false;
+function ez872Baslat(){
+  clearInterval(ez872Zamanlayici);
+  ez872Kalan=60; ez872Dogru=0; ez872Yanlis=0; ez872Aktif=true;
+  document.getElementById('ez872Sayac').textContent=ez872Kalan;
+  document.getElementById('ez872Dogru').textContent='0';
+  document.getElementById('ez872Yanlis').textContent='0';
+  document.getElementById('ez872Sonuc').textContent='';
+  ez872Zamanlayici = setInterval(()=>{
+    ez872Kalan--;
+    document.getElementById('ez872Sayac').textContent=ez872Kalan;
+    if(ez872Kalan<=0){ ez872Bitir(); }
+  }, 1000);
+  ez872SoruGoster();
+}
+function ez872SoruGoster(){
+  if(!ez872Aktif) return;
+  const i = Math.floor(Math.random()*ezberVeri72.length);
+  const oge = ezberVeri72[i];
+  document.getElementById('ez872Metin').textContent = oge.anlam;
+  const digerleri = ezberVeri72.filter((_,j)=>j!==i).map(x=>x.parca);
+  const secenekler = karistir([oge.parca, ...karistir(digerleri).slice(0,3)]);
+  const kutu = document.getElementById('ez872Secenekler');
+  kutu.innerHTML='';
+  secenekler.forEach(sec=>{
+    const btn=document.createElement('div');
+    btn.className='merdiven-secenek';
+    btn.textContent=sec;
+    btn.onclick=()=>{
+      if(!ez872Aktif) return;
+      if(sec===oge.parca){ ez872Dogru++; document.getElementById('ez872Dogru').textContent=ez872Dogru; }
+      else { ez872Yanlis++; document.getElementById('ez872Yanlis').textContent=ez872Yanlis; }
+      ez872SoruGoster();
+    };
+    kutu.appendChild(btn);
+  });
+}
+function ez872Bitir(){
+  ez872Aktif=false;
+  clearInterval(ez872Zamanlayici);
+  document.getElementById('ez872Secenekler').innerHTML='';
+  document.getElementById('ez872Metin').textContent='';
+  const basari = ez872Dogru>=8 ? '🏆 Efsane Hız!' : ez872Dogru>=5 ? '🥇 Çok İyi!' : '📚 Biraz Daha Pratik!';
+  document.getElementById('ez872Sonuc').innerHTML = `🎉 Süre bitti! ${basari}<br>${ez872Dogru} doğru, ${ez872Yanlis} yanlış.`;
+}
+
+
+// ===================== SUNUM (SLAYT) GORUNUMU JS =====================
+window.sunumDurumu = window.sunumDurumu || {};
+function sunumNoktalariOlustur(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  const nokta = document.getElementById('sunumNoktalar'+suf);
+  if(!alan || !nokta) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  nokta.innerHTML = '';
+  for(let i=0;i<toplam;i++){
+    const d = document.createElement('span');
+    d.className = 'sunum-nokta' + (i===0?' aktif':'');
+    d.onclick = function(){ sunumIndexeGit(suf, i); };
+    nokta.appendChild(d);
+  }
+}
+function sunumGuncelle(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const slaytlar = alan.querySelectorAll('.sunum-slayt');
+  const idx = sunumDurumu[suf] || 0;
+  slaytlar.forEach(function(s,i){ s.classList.toggle('aktif', i===idx); });
+  const sayac = document.getElementById('sunumSayac'+suf);
+  if(sayac) sayac.textContent = (idx+1)+' / '+slaytlar.length;
+  document.querySelectorAll('#sunumNoktalar'+suf+' .sunum-nokta').forEach(function(n,i){ n.classList.toggle('aktif', i===idx); });
+}
+function sunumIndexeGit(suf, i){
+  sunumDurumu[suf] = i;
+  sunumGuncelle(suf);
+}
+function sunumGit(suf, yon){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  let idx = (sunumDurumu[suf]||0) + yon;
+  if(idx<0) idx=0;
+  if(idx>=toplam) idx=toplam-1;
+  sunumIndexeGit(suf, idx);
+}
+function sunumTamEkran(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  if(alan.requestFullscreen) alan.requestFullscreen();
+  else if(alan.webkitRequestFullscreen) alan.webkitRequestFullscreen();
+}
+document.addEventListener('keydown', function(e){
+  const slaytBolumu = document.getElementById('slayt');
+  if(!slaytBolumu || !slaytBolumu.classList.contains('aktif')) return;
+  if(e.key === 'ArrowRight') sunumGit('', 1);
+  if(e.key === 'ArrowLeft') sunumGit('', -1);
+});
+document.addEventListener('DOMContentLoaded', function(){ sunumNoktalariOlustur(''); sunumGuncelle(''); });
+
+
+const UNITE_KIMLIK = '7-2';
+
+// ===================== OGRENCI KIMLIGI VE OGRETMEN PANELI =====================
+const OP_ANAHTAR = 'dkabOgretmenPaneli_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname);
+
+function opOgrenciAdi(){
+  let ad = sessionStorage.getItem('dkabAktifOgrenci');
+  if(!ad){
+    ad = prompt('Merhaba! Öğretmenin ilerlemeni takip edebilmesi için adını ve soyadını yazar mısın?');
+    if(!ad || !ad.trim()) ad = 'İsimsiz Öğrenci';
+    ad = ad.trim().slice(0,40);
+    sessionStorage.setItem('dkabAktifOgrenci', ad);
+  }
+  return ad;
+}
+function opOgrenciDegistir(){
+  sessionStorage.removeItem('dkabAktifOgrenci');
+  ozelBildirim('Öğrenci bilgisi sıfırlandı. Bir sonraki oyun tamamlandığında yeni isim sorulacak.');
+}
+function opVerileriOku(){
+  try{ return JSON.parse(localStorage.getItem(OP_ANAHTAR)) || {}; }catch(e){ return {}; }
+}
+function opVerileriYaz(v){
+  try{ localStorage.setItem(OP_ANAHTAR, JSON.stringify(v)); }catch(e){}
+}
+function opOgrenciKaydiGetir(v, ad){
+  if(!v[ad]) v[ad] = {oyunlar:[], sonPuan:0, sonRozetler:[], ilkTarih:new Date().toLocaleString('tr-TR')};
+  return v[ad];
+}
+function opOyunTamamlandiKaydet(bolumId, toplamPuan, rozetler){
+  const ad = opOgrenciAdi();
+  const v = opVerileriOku();
+  const kayit = opOgrenciKaydiGetir(v, ad);
+  kayit.oyunlar.push({bolum: bolumId || 'bilinmiyor', tarih: new Date().toLocaleString('tr-TR')});
+  kayit.sonPuan = toplamPuan;
+  kayit.sonRozetler = rozetler || [];
+  opVerileriYaz(v);
+}
+
+const OP_SIFRE = 'ogretmen2026';
+let opGirisYapildi = false;
+
+function opGirisKontrol(){
+  if(opGirisYapildi){ opPaneliGoster(); return; }
+  const girilen = prompt('Öğretmen paneline erişim için şifreyi girin:');
+  if(girilen === OP_SIFRE){
+    opGirisYapildi = true;
+    opPaneliGoster();
+  } else if(girilen !== null){
+    ozelBildirim('Şifre yanlış.');
+    document.getElementById('opGirisEkrani').style.display = 'block';
+    document.getElementById('opPanelEkrani').style.display = 'none';
+  }
+}
+
+function opPaneliGoster(){
+  document.getElementById('opGirisEkrani').style.display = 'none';
+  document.getElementById('opPanelEkrani').style.display = 'block';
+  const v = opVerileriOku();
+  const isimler = Object.keys(v);
+  const govde = document.getElementById('opTabloGovde');
+  const bosMesaj = document.getElementById('opBosMesaj');
+  govde.innerHTML = '';
+  if(isimler.length === 0){
+    bosMesaj.style.display = 'block';
+    return;
+  }
+  bosMesaj.style.display = 'none';
+  isimler.sort((a,b)=> (v[b].oyunlar.length - v[a].oyunlar.length)).forEach(ad=>{
+    const kayit = v[ad];
+    const tr = document.createElement('tr');
+    const sonAktivite = kayit.oyunlar.length ? kayit.oyunlar[kayit.oyunlar.length-1].tarih : '-';
+    const oyunListesi = kayit.oyunlar.map(o=>o.bolum).join(', ');
+    tr.innerHTML = `
+      <td>${ad}</td>
+      <td>${kayit.sonPuan}</td>
+      <td>${kayit.oyunlar.length}</td>
+      <td>${(kayit.sonRozetler||[]).join(' ') || '-'}</td>
+      <td>${sonAktivite}</td>
+      <td><button class="op-detay-btn" onclick="opDetayGoster(this, '${ad.replace(/'/g,"\\'")}')">Detay</button></td>
+    `;
+    govde.appendChild(tr);
+    const detayTr = document.createElement('tr');
+    detayTr.className = 'op-detay-satir';
+    detayTr.style.display = 'none';
+    detayTr.innerHTML = `<td colspan="6"><b>Tamamlanan bölümler:</b> ${esc(oyunListesi) || 'Henüz yok'}</td>`;
+    govde.appendChild(detayTr);
+  });
+}
+function esc(s){ return String(s).replace(/</g,'&lt;'); }
+function opDetayGoster(btn, ad){
+  const tr = btn.closest('tr').nextElementSibling;
+  tr.style.display = tr.style.display === 'none' ? 'table-row' : 'none';
+}
+function opVerileriTemizle(){
+  ozelOnay('Bu ünitedeki tüm öğrenci verileri silinecek. Emin misiniz?', function(onaylandi){
+    if(onaylandi){
+      localStorage.removeItem(OP_ANAHTAR);
+      opPaneliGoster();
+    }
+  });
+}
+
+
+// ===================== OZEL MODAL / BILDIRIM (alert-confirm yerine) =====================
+function ozelBildirim(mesaj){
+  const eski = document.querySelector('.ozel-toast');
+  if(eski) eski.remove();
+  const toast = document.createElement('div');
+  toast.className = 'ozel-toast';
+  toast.textContent = mesaj;
+  document.body.appendChild(toast);
+  setTimeout(()=>toast.remove(), 3200);
+}
+function ozelOnay(mesaj, callback){
+  const arka = document.createElement('div');
+  arka.className = 'ozel-modal-arka';
+  arka.innerHTML = '<div class="ozel-modal-kutu"><p class="ozel-modal-mesaj"></p>' +
+    '<button class="ozel-modal-btn" style="background:var(--kirmizi);color:#fff;">Evet</button>' +
+    '<button class="ozel-modal-btn" style="background:#e2e8f0;">Vazgeç</button></div>';
+  arka.querySelector('.ozel-modal-mesaj').textContent = mesaj;
+  document.body.appendChild(arka);
+  const btnler = arka.querySelectorAll('.ozel-modal-btn');
+  btnler[0].onclick = ()=>{ arka.remove(); callback(true); };
+  btnler[1].onclick = ()=>{ arka.remove(); callback(false); };
+}
+
+
+// ===================== KENDIMI DEGERLENDIRIYORUM - CHECKBOX KAYDI =====================
+function degOku(uniteKimlik){
+  try{ return JSON.parse(localStorage.getItem('dkabDegerlendirme_'+uniteKimlik)) || {}; }catch(e){ return {}; }
+}
+function degKaydet(uniteKimlik){
+  const durum = {};
+  document.querySelectorAll('[id^="deg_'+uniteKimlik+'_"]').forEach(cb=>{ durum[cb.id] = cb.checked; });
+  try{ localStorage.setItem('dkabDegerlendirme_'+uniteKimlik, JSON.stringify(durum)); }catch(e){}
+}
+function degYukle(uniteKimlik){
+  const durum = degOku(uniteKimlik);
+  Object.keys(durum).forEach(id=>{
+    const cb = document.getElementById(id);
+    if(cb) cb.checked = durum[id];
+  });
+}
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof UNITE_KIMLIK !== 'undefined') degYukle(UNITE_KIMLIK);
+});
+
+
+// ===================== DUSUN VE CEVAPLA / AILEMLE YAPIYORUM - CEVAP KAYDI =====================
+function zbCevapAnahtari(tur){ return 'dkabZbCevap_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname) + '_' + tur; }
+function zbCevapKaydet(tur, el){
+  try{ localStorage.setItem(zbCevapAnahtari(tur), el.value); }catch(e){}
+  const not = document.getElementById('zbNot_'+tur);
+  if(not){
+    not.textContent = '✓ Cevabın kaydedildi';
+    clearTimeout(not._zbT);
+    not._zbT = setTimeout(()=>{ not.textContent=''; }, 2500);
+  }
+}
+function zbCevapYukle(){
+  ['dusun','aile','ikilem'].forEach(tur=>{
+    const el = document.getElementById('zbAlan_'+tur);
+    if(!el) return;
+    try{ const v = localStorage.getItem(zbCevapAnahtari(tur)); if(v) el.value = v; }catch(e){}
+  });
+}
+document.addEventListener('DOMContentLoaded', zbCevapYukle);
+
+
+// ===================== TEKRAR ZAMANI HATIRLATMASI =====================
+function zbTekrarHatirlatmaKontrol(){
+  const uniteKimlik = (typeof UNITE_KIMLIK !== 'undefined') ? UNITE_KIMLIK : location.pathname;
+  const anahtar = 'dkabSonZiyaret_' + uniteKimlik;
+  let son = null;
+  try{ son = localStorage.getItem(anahtar); }catch(e){}
+  const bugun = new Date();
+  if(son){
+    const gecenGun = Math.floor((bugun - new Date(son)) / 86400000);
+    if(gecenGun >= 3 && typeof ozelBildirim === 'function'){
+      setTimeout(()=>{ ozelBildirim('👋 Bu üniteyi ' + gecenGun + ' gündür tekrar etmedin. Hafızanı tazelemek ister misin?'); }, 1500);
+    }
+  }
+  try{ localStorage.setItem(anahtar, bugun.toISOString()); }catch(e){}
+}
+document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
+
+</script>
+<script id="ogrKatmaniScript">
+/* ===================== OGRENME DENEYIMI KATMANI (JS) =====================
+   Sadece EKLEME yapar: mevcut id/onclick/veri yapisina dokunmaz, hicbir
+   fonksiyonu yeniden tanimlamaz. Amac: hero'ya hedef+ilerleme, konu ozetine
+   "ogrenme yolu" (modul kartlari + ilerleme cubugu), sunum/test bolumlerine
+   kisa tanitim kartlari eklemek. Tum yeni fonksiyon/degiskenler "ogr" onekiyle
+   isimlendirildi ki mevcut kodla asla çakismasin. */
+(function(){
+  function ogrUniteKimlik(){ return (typeof UNITE_KIMLIK !== 'undefined') ? UNITE_KIMLIK : location.pathname; }
+  function ogrEmojiTemizle(t){
+    return (t||'')
+      .replace(/^\s*\d+️?⃣\s*/,'') /* baştaki "1️⃣" gibi sayı+tuş takımı simgesi */
+      .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2000}-\u{206F}️⃣]/gu,'')
+      .trim();
+  }
+  function ogrSureTahmini(karakterSayisi){
+    return Math.max(1, Math.round(karakterSayisi/700));
+  }
+  function ogrGorulenOku(anahtar){
+    try{ return JSON.parse(localStorage.getItem(anahtar)) || []; }catch(e){ return []; }
+  }
+  function ogrGorulenYaz(anahtar, dizi){
+    try{ localStorage.setItem(anahtar, JSON.stringify(dizi)); }catch(e){}
+  }
+
+  /* ---------- 1) KONU OZETI: ogrenme yolu + ilerleme ---------- */
+  function ogrOzetGelistir(){
+    const ozet = document.querySelector('main section[id^="ozet"]');
+    if(!ozet || ozet.dataset.ogrHazir) return;
+
+    const cocuklar = Array.from(ozet.children);
+    const modulBaslar = [];
+    cocuklar.forEach(function(c, i){
+      if(c.classList && c.classList.contains('kutu-panel') && c.querySelector(':scope > h3')) modulBaslar.push(i);
+    });
+    if(modulBaslar.length < 2) return; /* tek modullu ünitede ekstra karmasaya gerek yok */
+    ozet.dataset.ogrHazir = '1';
+
+    const moduller = modulBaslar.map(function(baslangic, idx){
+      const bitis = idx+1 < modulBaslar.length ? modulBaslar[idx+1] : cocuklar.length;
+      const nodes = cocuklar.slice(baslangic, bitis);
+      const h3 = nodes[0].querySelector(':scope > h3');
+      const baslikMetni = ogrEmojiTemizle(h3 ? h3.textContent : ('Bölüm ' + (idx+1)));
+      const karakterSayisi = nodes.reduce(function(t,n){ return t + (n.textContent||'').length; }, 0);
+      return { nodes:nodes, baslik:baslikMetni, sure: ogrSureTahmini(karakterSayisi) };
+    });
+    const toplamSure = moduller.reduce(function(t,m){ return t+m.sure; }, 0);
+
+    const gorulenAnahtar = 'dkabOzetGorulen_' + ogrUniteKimlik();
+    let gorulenler = ogrGorulenOku(gorulenAnahtar);
+
+    /* Üst özet paneli */
+    const ustPanel = document.createElement('div');
+    ustPanel.className = 'ogr-ozet-ust';
+    const yolLi = moduller.map(function(m,i){
+      return '<a href="#ogrModul'+i+'" class="ogr-yol-adim" data-ogr-index="'+i+'">'+
+        '<span class="ogr-yol-no">'+(i+1)+'</span><span class="ogr-yol-baslik">'+m.baslik+'</span></a>';
+    }).join('');
+    ustPanel.innerHTML =
+      '<div class="ogr-ozet-ust-satir">'+
+        '<p class="ogr-ozet-baslik">🗺️ Öğrenme Yolu</p>'+
+        '<div class="ogr-ozet-meta">'+
+          '<span>📚 '+moduller.length+' bölüm</span>'+
+          '<span>⏱️ ~'+toplamSure+' dk okuma</span>'+
+        '</div>'+
+      '</div>'+
+      '<ul class="ogr-yol-liste">'+yolLi+'</ul>'+
+      '<div class="ogr-ilerleme-cubuk-dis"><div class="ogr-ilerleme-cubuk-ic" id="ogrIlerlemeCubuk"></div></div>';
+    const ozetH2 = ozet.querySelector(':scope > h2');
+    if(ozetH2 && ozetH2.nextSibling) ozet.insertBefore(ustPanel, ozetH2.nextSibling);
+    else ozet.insertBefore(ustPanel, ozet.firstChild);
+
+    ustPanel.querySelectorAll('.ogr-yol-adim').forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        const hedef = document.getElementById('ogrModul'+a.dataset.ogrIndex);
+        if(hedef) hedef.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    /* Modülleri sar (mevcut node'lar tasinir, KOPYALANMAZ; id/onclick/veri korunur) */
+    moduller.forEach(function(m, i){
+      const sarmalayici = document.createElement('div');
+      sarmalayici.className = 'ogr-modul';
+      sarmalayici.id = 'ogrModul' + i;
+      if(gorulenler.indexOf(i) !== -1) sarmalayici.classList.add('ogr-tamamlandi');
+      const no = document.createElement('div'); no.className='ogr-modul-no'; no.textContent = String(i+1);
+      const sure = document.createElement('div'); sure.className='ogr-modul-sure'; sure.textContent = '⏱️ ~'+m.sure+' dk';
+      const govde = document.createElement('div'); govde.className='ogr-modul-govde';
+      m.nodes.forEach(function(n){ govde.appendChild(n); }); /* appendChild = tasima, kopyalama degil */
+      sarmalayici.appendChild(no);
+      sarmalayici.appendChild(sure);
+      sarmalayici.appendChild(govde);
+      ozet.appendChild(sarmalayici);
+    });
+
+    function ogrIlerlemeGuncelle(){
+      const oran = moduller.length ? gorulenler.length/moduller.length : 0;
+      const cubuk = document.getElementById('ogrIlerlemeCubuk');
+      if(cubuk) cubuk.style.width = Math.round(oran*100)+'%';
+      ustPanel.querySelectorAll('.ogr-yol-adim').forEach(function(a){
+        a.classList.toggle('ogr-gorulen', gorulenler.indexOf(+a.dataset.ogrIndex) !== -1);
+      });
+    }
+    ogrIlerlemeGuncelle();
+
+    if('IntersectionObserver' in window){
+      const gozlemci = new IntersectionObserver(function(kayitlar){
+        let degisti = false;
+        kayitlar.forEach(function(kayit){
+          if(kayit.isIntersecting){
+            const idx = +kayit.target.id.replace('ogrModul','');
+            if(gorulenler.indexOf(idx) === -1){
+              gorulenler.push(idx);
+              kayit.target.classList.add('ogr-tamamlandi');
+              degisti = true;
+            }
+          }
+        });
+        if(degisti){ ogrGorulenYaz(gorulenAnahtar, gorulenler); ogrIlerlemeGuncelle(); }
+      }, {threshold:0.55});
+      moduller.forEach(function(m,i){ gozlemci.observe(document.getElementById('ogrModul'+i)); });
+    }
+  }
+
+  /* ---------- 2) HERO: ogrenme hedefleri + ilerleme rozeti ---------- */
+  function ogrHeroGelistir(){
+    const hero = document.querySelector('.hero');
+    const butonlar = hero ? hero.querySelector('.hero-butonlar') : null;
+    if(!hero || !butonlar || hero.dataset.ogrHazir) return;
+    hero.dataset.ogrHazir = '1';
+
+    const basliklar = Array.from(document.querySelectorAll('main section[id^="ozet"] .kutu-panel > h3')).map(function(h){
+      return ogrEmojiTemizle(h.textContent);
+    });
+    const ek = document.createElement('div');
+    ek.className = 'ogr-hero-ek';
+    let ic = '';
+    if(basliklar.length){
+      ic += '<div class="ogr-hedef-satir">' + basliklar.map(function(b,i){
+        return '<span class="ogr-hedef-cip"><span class="ogr-hedef-no">'+(i+1)+'</span>'+b+'</span>';
+      }).join('') + '</div>';
+    }
+    ic += '<span class="ogr-ilerleme-rozet"><svg class="ogr-ring" viewBox="0 0 32 32" aria-hidden="true">'+
+      '<circle class="ogr-ring-arka" cx="16" cy="16" r="13"></circle>'+
+      '<circle class="ogr-ring-on" id="ogrHeroRing" cx="16" cy="16" r="13" stroke-dasharray="81.68" stroke-dashoffset="81.68"></circle>'+
+      '</svg><span id="ogrHeroRozetMetin">Bu üniteye yeni başlıyorsun</span></span>';
+    ek.innerHTML = ic;
+    butonlar.insertAdjacentElement('afterend', ek);
+
+    const toplamEtkinlik = document.querySelectorAll('.oyun-grubu button').length || 1;
+    function ogrHeroIlerlemeGuncelle(){
+      const tamamlananEl = document.getElementById('istTamamlanan');
+      const tamamlanan = tamamlananEl ? (parseInt(tamamlananEl.textContent,10) || 0) : 0;
+      const oran = Math.min(1, tamamlanan/toplamEtkinlik);
+      const ring = document.getElementById('ogrHeroRing');
+      if(ring) ring.setAttribute('stroke-dashoffset', String(81.68*(1-oran)));
+      const metin = document.getElementById('ogrHeroRozetMetin');
+      if(metin){
+        metin.textContent = tamamlanan===0
+          ? 'Bu üniteye yeni başlıyorsun'
+          : (tamamlanan+'/'+toplamEtkinlik+' etkinlik tamamlandı (%'+Math.round(oran*100)+')');
+      }
+    }
+    ogrHeroIlerlemeGuncelle();
+    const istTamamlananEl = document.getElementById('istTamamlanan');
+    if(istTamamlananEl && 'MutationObserver' in window){
+      new MutationObserver(ogrHeroIlerlemeGuncelle).observe(istTamamlananEl, {childList:true, characterData:true, subtree:true});
+    }
+  }
+
+  /* ---------- 3) SUNUM / TEST: kisa tanitim kartlari ---------- */
+  function ogrGirisKartiEkle(sectionEl, ikon, baslik, metin){
+    if(!sectionEl || sectionEl.dataset.ogrGirisHazir) return;
+    sectionEl.dataset.ogrGirisHazir = '1';
+    const h2 = sectionEl.querySelector(':scope > h2');
+    if(!h2) return;
+    const kart = document.createElement('div');
+    kart.className = 'ogr-giris-karti';
+    kart.innerHTML = '<div class="ogr-giris-ikon">'+ikon+'</div><div class="ogr-giris-metin"><b>'+baslik+'</b><span>'+metin+'</span></div>';
+    h2.insertAdjacentElement('afterend', kart);
+  }
+  function ogrSunumTanitimEkle(){
+    const slaytBolumu = document.getElementById('slayt');
+    if(!slaytBolumu) return;
+    const sayac = slaytBolumu.querySelector('#sunumSayac');
+    const eslesme = sayac ? sayac.textContent.match(/\/\s*(\d+)/) : null;
+    const toplamSlayt = eslesme ? eslesme[1] : '?';
+    ogrGirisKartiEkle(slaytBolumu, '🖥️', 'Ünitenin tamamını 5-10 dakikada gözden geçir',
+      toplamSlayt+' slaytlık kısa bir sunum — okuduğun konuları toparlamak için ideal.');
+  }
+  function ogrTestTanitimEkle(){
+    const testBolumu = document.querySelector('main section[id^="konutekrari"]');
+    if(!testBolumu) return;
+    const h2Metin = testBolumu.querySelector(':scope > h2') ? testBolumu.querySelector(':scope > h2').textContent : '';
+    const eslesme = h2Metin.match(/\((\d+)\s*Soru\)/i);
+    const soruSayisi = eslesme ? eslesme[1] : '?';
+    ogrGirisKartiEkle(testBolumu, '📝', 'Ne kadar hazır olduğunu ölç',
+      soruSayisi+' soruluk karma bir test — her yanlışta açıklamasıyla birlikte anında geri bildirim alırsın.');
+  }
+
+  function ogrBaslat(){
+    ogrOzetGelistir();
+    ogrHeroGelistir();
+    ogrSunumTanitimEkle();
+    ogrTestTanitimEkle();
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ogrBaslat);
+  else ogrBaslat();
+})();
+</script>
+</body>
+</html>

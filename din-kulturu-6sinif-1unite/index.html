@@ -6,19 +6,89 @@
 <title>6. Sınıf Din Kültürü - 1. Ünite: Peygamber ve İlahi Kitap İnancı</title>
 <meta name="description" content="6. Sınıf Din Kültürü - 1. Ünite: Peygamber ve İlahi Kitap İnancı — İnteraktif oyunlar, konu özeti, test ve sunum içeren dijital ders materyali.">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  :root{
+    /* ---- Giriş Bölümü tasarım sistemi (yalnızca .gb-*/.om-* bileşenlerinde kullanılır;
+       oyun/etkinlik içeriğindeki mevcut --navy/--mavi/--yesil vb. değişmedi) ---- */
+    --gb-font:'Plus Jakarta Sans','Nunito','Segoe UI',sans-serif;
+    --gb-primary:#2563EB; --gb-primary-koyu:#1d4ed8; --gb-secondary:#14B8A6;
+    --gb-bg:#F8FAFC; --gb-text:#0F172A; --gb-text-mute:#64748b; --gb-border:#E2E8F0;
+    --gb-radius-card:20px; --gb-radius-btn:16px;
+    --gb-shadow:0 4px 16px rgba(15,23,42,.06);
+    --gb-shadow-hover:0 16px 32px -8px rgba(37,99,235,.22), 0 4px 10px rgba(15,23,42,.06);
+  }
+  :root[data-theme="dark"]{
+    --gb-bg:#0f1620; --gb-text:#e7ecf1; --gb-text-mute:#9aa7b4; --gb-border:#26303c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --gb-bg:#0f1620; --gb-text:#e7ecf1; --gb-text-mute:#9aa7b4; --gb-border:#26303c; }
+  }
   :root{
     --mavi:#2a6f97; --acik:#a9d6e5; --yesil:#40916c; --kirmizi:#d62828;
     --sari:#f4a261; --bg:#f7f4ec;
     --navy:#1E3A8A; --turkuaz:#06B6D4; --acikgri:#f1f5f9;
+
+    /* ---- Tasarım Token Sistemi (ek; yukarıdaki 9 değişken korunuyor) ---- */
+    --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px;
+    --radius-sm:10px; --radius-md:14px; --radius-lg:20px;
+    --shadow-sm:0 2px 6px rgba(0,0,0,.08);
+    --shadow-md:0 4px 14px rgba(0,0,0,.10);
+    --shadow-lg:0 10px 28px rgba(0,0,0,.16);
+
+    /* Semantik renk katmanı (mevcut ham renklerin üzerine, onları değiştirmeden) */
+    --color-selected: var(--mavi);
+    --color-success: var(--yesil);
+    --color-warning: var(--sari);
+    --color-progress: var(--turkuaz);
+    --color-surface:#ffffff;
+    --color-surface-alt: var(--acikgri);
+    --color-text:#22333b;
+    --color-text-muted:#667;
+    --color-border:#e2e8f0;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121a21; --acikgri:#1b2530;
+      --color-surface:#1b2530; --color-surface-alt:#222e3a;
+      --color-text:#e7ecf1; --color-text-muted:#9aa7b4; --color-border:#2c3947;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121a21; --acikgri:#1b2530;
+    --color-surface:#1b2530; --color-surface-alt:#222e3a;
+    --color-text:#e7ecf1; --color-text-muted:#9aa7b4; --color-border:#2c3947;
+  }
+  :root[data-theme="light"]{
+    --bg:#f7f4ec; --acikgri:#f1f5f9;
+    --color-surface:#ffffff; --color-surface-alt:#f1f5f9;
+    --color-text:#22333b; --color-text-muted:#667; --color-border:#e2e8f0;
   }
   *{box-sizing:border-box;}
   body{
     font-family: "Nunito", "Comic Sans MS", "Segoe UI", Tahoma, sans-serif;
     background: var(--bg);
-    margin:0; padding:0; color:#22333b;
+    margin:0; padding:0; color:var(--color-text);
   }
+
+  /* ---- Erişilebilirlik: odak halkası + atla bağlantısı ---- */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{
+    outline: 3px solid var(--turkuaz); outline-offset: 2px; border-radius: 4px;
+  }
+  .atla-baglantisi{
+    position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    background:var(--navy); color:#fff; padding:12px 20px; border-radius:0 0 10px 0;
+    z-index:2000; font-weight:800; text-decoration:none;
+  }
+  .atla-baglantisi:focus{ left:0; top:0; width:auto; height:auto; }
+
+  /* ---- Tema değiştirme düğmesi ---- */
+  .tema-degistir-btn{
+    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.5); color:#fff;
+    border-radius:999px; padding:6px 14px; font-size:.85em; font-weight:800; cursor:pointer;
+    display:inline-flex; align-items:center; gap:6px; transition:background .2s ease;
+  }
+  .tema-degistir-btn:hover{ background:rgba(255,255,255,.3); }
   header{
     background: linear-gradient(135deg, var(--mavi), var(--yesil));
     color:white; text-align:center; padding:24px 10px;
@@ -27,10 +97,11 @@
   header p{ margin:6px 0 0; opacity:.9;}
 
   .hero{
-    position:relative; overflow:hidden; text-align:center; padding:50px 20px 40px;
+    position:relative; overflow:hidden; text-align:center; padding:26px 20px;
     background: linear-gradient(135deg, var(--navy), var(--turkuaz));
     color:white;
   }
+  .hero .ogr-hero-ek{ display:none; }
   .hero-sekiller{ position:absolute; inset:0; pointer-events:none; }
   .hero-sekiller span{
     position:absolute; font-size:1.8em; opacity:.35; font-weight:800;
@@ -52,7 +123,7 @@
   .hero-btn-ikincil{ background:rgba(255,255,255,.18); color:white; border:2px solid white; }
 
   .istatistik-cubugu{
-    display:flex; flex-wrap:wrap; justify-content:center; gap:14px;
+    display:none; flex-wrap:wrap; justify-content:center; gap:14px;
     background:white; padding:16px; margin:0; box-shadow:0 2px 6px rgba(0,0,0,.06);
   }
   .istatistik-kutu{
@@ -82,11 +153,9 @@
   nav.kategori-nav a.slayt-link{ padding:10px 18px; border:none; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1em; color:white; background:#8a5a00; text-decoration:none; display:inline-block; transition:.15s; }
   nav.kategori-nav a.slayt-link:hover{ background:var(--yesil); }
   .oyun-grubu{
-    display:none; flex-wrap:wrap; justify-content:center; gap:10px;
-    padding:10px 16px 16px; background:white; box-shadow:0 2px 6px rgba(0,0,0,.08);
-    position:sticky; top:56px; z-index:9;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:18px;
+    padding:0; background:none; box-shadow:none; position:static; z-index:auto;
   }
-  .oyun-grubu.aktif{ display:flex; }
   main{ max-width:900px; margin:0 auto; padding:20px; }
   main section{ display:none; animation: fade .3s; }
   section.aktif{ display:block; }
@@ -594,32 +663,115 @@
   .ogr-giris-karti{ flex-direction:column; text-align:center; }
 }
 </style>
+<style id="omOyunMerkeziStil">
+/* ===================== OYUN MERKEZİ (Hero + Öğrenme Yolculuğu kart tasarımı) =====================
+   Bu blok #oyun-gruplari içindeki görünümü değiştirir; hiçbir id/onclick/JS fonksiyonu bozulmaz. */
+.om-hero, .om-anamenu, .om-alan, .om-grup, .om-kart, .om-menukart{ font-family:var(--gb-font); }
+.om-hero{ text-align:center; padding:44px 20px 8px; animation:omGir .6s ease both; }
+.om-hero-ikon{ font-size:2.4em; margin-bottom:4px; }
+.om-hero-baslik{ font-size:1.7em; margin:4px 0 8px; font-weight:900; color:var(--navy); }
+.om-hero-alt{ max-width:460px; margin:0 auto; color:var(--color-text-muted); font-size:1em; line-height:1.5; }
+
+.om-yolculuk{ max-width:720px; margin:0 auto; padding:26px 16px 34px; display:flex; flex-direction:column; gap:16px; }
+
+.om-grup{ background:var(--color-surface); border:1.5px solid var(--gb-border); border-radius:var(--gb-radius-card); box-shadow:var(--gb-shadow); overflow:hidden; animation:omYukari .6s ease both; }
+.om-grup-baslik{ width:100%; display:flex; align-items:center; gap:16px; padding:22px 24px; background:none; border:none; cursor:pointer; text-align:left; font-family:inherit; transition:background .2s ease; }
+.om-grup-baslik:hover{ background:var(--color-surface-alt); }
+.om-grup-ikon{ font-size:1.9em; flex-shrink:0; transition:transform .25s ease; }
+.om-grup-baslik:hover .om-grup-ikon{ transform:scale(1.12); }
+.om-grup-metin{ flex:1; min-width:0; }
+.om-grup-ad{ font-weight:900; font-size:1.12em; color:var(--gb-text); margin:0; }
+.om-grup-aciklama{ margin:2px 0 0; font-size:.88em; color:var(--gb-text-mute); }
+.om-grup-cta{ display:flex; align-items:center; gap:8px; flex-shrink:0; padding:10px 18px; border-radius:20px; color:#fff; font-weight:800; font-size:.88em; white-space:nowrap; }
+.om-grup-ok{ display:inline-block; transition:transform .25s ease; }
+.om-grup.acik .om-grup-ok{ transform:rotate(90deg); }
+.om-grup[data-om-renk="ogren"] .om-grup-cta{ background:#10B981; }
+.om-grup[data-om-renk="pekistir"] .om-grup-cta{ background:#3B82F6; }
+.om-grup[data-om-renk="final"] .om-grup-cta{ background:#EF4444; }
+.om-grup[data-om-renk="ogren"].acik .om-grup-baslik{ background:color-mix(in srgb, #10B981 10%, var(--color-surface)); }
+.om-grup[data-om-renk="pekistir"].acik .om-grup-baslik{ background:color-mix(in srgb, #3B82F6 10%, var(--color-surface)); }
+.om-grup[data-om-renk="final"].acik .om-grup-baslik{ background:color-mix(in srgb, #EF4444 10%, var(--color-surface)); }
+
+.om-grup-govde{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+.om-grup-govde-ic{ padding:4px 24px 26px; }
+
+.om-kart{ display:flex; align-items:center; gap:14px; text-align:left; width:100%; background:var(--color-surface); border:1.5px solid var(--gb-border); border-radius:var(--gb-radius-card); padding:16px 18px; box-shadow:var(--shadow-sm); cursor:pointer; font-family:inherit; transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease; }
+.om-kart *{ pointer-events:none; }
+.om-kart + .om-kart{ margin-top:10px; }
+.om-kart:hover, .om-kart:focus-visible{ transform:translateY(-3px); box-shadow:var(--gb-shadow-hover); border-color:var(--gb-primary); outline:none; }
+.om-kart:hover .om-kart-ikon{ transform:scale(1.15); }
+.om-kart-ikon{ font-size:1.8em; flex-shrink:0; transition:transform .25s ease; }
+.om-kart-metin{ flex:1; min-width:0; }
+.om-kart-baslik{ display:block; font-weight:900; font-size:.98em; color:var(--gb-text); }
+.om-kart-amac{ display:block; font-size:.82em; color:var(--gb-text-mute); line-height:1.4; margin-top:2px; }
+.om-kart-cta{ flex-shrink:0; padding:9px 20px; border-radius:20px; background:var(--gb-primary); color:#fff; font-weight:800; font-size:.85em; transition:background .2s ease,transform .2s ease; }
+.om-kart:hover .om-kart-cta{ background:var(--gb-primary-koyu); transform:scale(1.05); }
+
+@keyframes omGir{ from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);} }
+@keyframes omYukari{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+/* ---- Ana menü (3 büyük kart) + alanlar (Konu / Oyun / Değerlendirme, tek seferde biri görünür) ---- */
+.om-anamenu{ max-width:960px; margin:0 auto; padding:36px 16px 44px; display:flex; flex-wrap:wrap; gap:18px; animation:omYukari .6s ease both; }
+.om-menukart{ flex:1 1 260px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; background:var(--color-surface); border:1.5px solid var(--gb-border); border-radius:var(--gb-radius-card); padding:32px 22px; box-shadow:var(--gb-shadow); cursor:pointer; font-family:inherit; transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease; }
+.om-menukart *{ pointer-events:none; }
+.om-menukart:hover, .om-menukart:focus-visible{ transform:translateY(-6px); box-shadow:var(--gb-shadow-hover); border-color:var(--gb-primary); outline:none; }
+.om-menukart:hover .om-menukart-ikon{ transform:scale(1.15); }
+.om-menukart-ikon{ font-size:2.6em; transition:transform .25s ease; }
+.om-menukart-ad{ display:block; font-weight:900; font-size:1.15em; color:var(--gb-text); }
+.om-menukart-aciklama{ margin:4px 0 0; font-size:.88em; color:var(--gb-text-mute); line-height:1.45; }
+
+.om-alan{ display:none; max-width:1080px; margin:0 auto; padding:20px 16px 44px; }
+.om-alan.om-alan-acik{ display:block; animation:omYukari .5s ease both; }
+.om-geri{ background:none; border:none; cursor:pointer; font-family:inherit; font-weight:800; font-size:.88em; color:var(--gb-primary); padding:8px 0; margin-bottom:10px; }
+.om-geri:hover{ text-decoration:underline; }
+.om-alan-baslik{ display:flex; align-items:center; gap:12px; margin:6px 0 20px; }
+.om-alan-ikon{ font-size:1.8em; }
+.om-alan-ad{ margin:0; font-size:1.3em; color:var(--gb-text); }
+#alanKonu .oyun-grubu, #alanDeger .oyun-grubu{ max-width:720px; margin:0 auto; }
+
+@media(max-width:640px){
+  .om-hero-baslik{ font-size:1.4em; }
+  .om-grup-baslik{ flex-wrap:wrap; padding:18px; }
+  .om-grup-cta{ width:100%; justify-content:center; order:3; }
+  .om-kart{ flex-wrap:wrap; }
+  .om-kart-cta{ width:100%; box-sizing:border-box; text-align:center; margin-top:8px; }
+  .om-menukart{ flex:1 1 100%; }
+}
+</style>
 
 </head>
 <body>
+<script>
+/* Tema (açık/koyu) — erken uygulama: yanıp sönmeyi (flash) önlemek için body render olmadan önce çalışır.
+   Yeni localStorage anahtarı kullanılır; mevcut 'dkabPuanDurumu6sinif' vb. anahtarlara dokunulmaz. */
+(function(){
+  try{
+    var kayitliTema = localStorage.getItem('dkabTemaTercihi');
+    if(kayitliTema === 'dark' || kayitliTema === 'light'){
+      document.documentElement.setAttribute('data-theme', kayitliTema);
+    }
+  }catch(e){}
+})();
+</script>
+
+<a href="#main-icerik" class="atla-baglantisi">İçeriğe geç</a>
 
 <header>
   <p style="margin:0 0 6px;font-size:1.1em;font-weight:bold;letter-spacing:.5px;opacity:.95;">6. SINIF — 1. ÜNİTE</p>
   <h1>📯 Peygamber ve İlahi Kitap İnancı</h1>
   <p>Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
   <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+  <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;">
+    <button type="button" id="temaDegistirBtn" class="tema-degistir-btn" onclick="temaDegistir()" aria-label="Koyu/açık tema değiştir">🌙 Koyu Tema</button>
+  </div>
 </header>
 <div class="op-baglanti-satiri"><a onclick="goster('ogretmenpaneli', event)" role="button" aria-label="Öğretmen paneline git">🔒 Öğretmen Paneli</a></div>
 
 <section class="hero">
-  <div class="hero-sekiller">
-    <span style="top:8%; left:6%; animation-delay:0s;">📯</span>
-    <span style="top:65%; left:10%; animation-delay:1.2s;">✨</span>
-    <span style="top:20%; left:85%; animation-delay:.6s;">📜</span>
-    <span style="top:75%; left:88%; animation-delay:1.8s;">🕯️</span>
-    <span style="top:50%; left:16%; animation-delay:2.4s;">📖</span>
-    <span style="top:6%; left:78%; animation-delay:.9s;">💫</span>
-  </div>
-  <h2 class="hero-baslik">Peygamberleri ve İlahi Kitapları Keşfet!</h2>
-  <p class="hero-alt">Peygamberlik, vahiy, ilahi kitaplar ve Felak suresi hakkında oyunlarla öğren!</p>
+  <p class="hero-alt">Peygamberlik, vahiy, ilahi kitaplar ve Felak suresi hakkında adım adım ilerle.</p>
   <div class="hero-butonlar">
-    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">🚀 Oyuna Başla</button>
-    <button class="hero-btn hero-btn-ikincil" onclick="kategoriGosterVeKaydir('kat-unite6')">📚 Konuları Keşfet</button>
+    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">▶ Üniteye Başla</button>
+    <button class="hero-btn hero-btn-ikincil" onclick="window.location.href='oyun-merkezi.html'">🎮 Oyun Merkezi'ni Aç</button>
   </div>
 </section>
 
@@ -630,67 +782,137 @@
   <div class="istatistik-kutu"><span class="ist-ikon">📈</span><b id="istTamamlanan">0</b><span class="ist-etiket">Tamamlanan Etkinlik</span></div>
 </div>
 
-<div id="oyun-gruplari" role="navigation" aria-label="Ünite bölümleri menüsü">
-<nav class="kategori-nav" role="navigation" aria-label="Ana kategori menüsü">
-  <button onclick="kategoriGoster('kat-unite6', event)" class="kat-aktif">📯 Ünite Konuları</button>
-  <button onclick="kategoriGoster('kat-bulmaca6', event)">🧩 Kelime Bulmacaları</button>
-  <button onclick="kategoriGoster('kat-yarisma6', event)">🎮 Yarışma Oyunları</button>
-  <button onclick="kategoriGoster('kat-mantik6', event)">🕵️ Mantık &amp; Dedektiflik</button>
-  <button onclick="kategoriGoster('kat-macera6', event)">🌀 Macera</button>
-  <button onclick="kategoriGoster('kat-ezber6', event)">🕌 Ezber Etkinlikleri</button>
-</nav>
+<div id="oyun-gruplari">
 
-<div class="oyun-grubu aktif" id="kat-unite6">
-  <button onclick="goster('ozet6', event)" class="aktif">📖 Konu Özeti</button>
-  <button onclick="goster('konutekrari6', event)">📝 Konu Tekrarı Testi</button>
-  <button onclick="goster('slayt', event)">🖥️ Ünite Sunumu</button>
-  <button onclick="goster('yazili', event)">📝 Yazılı Sınavlar</button>
+<div class="om-anamenu" id="omAnaMenu">
+  <button class="om-menukart" data-om-renk="konu" onclick="omAlanGoster('alanKonu')">
+    <span class="om-menukart-ikon">📖</span>
+    <span class="om-menukart-metin"><span class="om-menukart-ad">Konuyu Öğren</span><p class="om-menukart-aciklama">Konu anlatımları, sunular ve kavramlar.</p></span>
+  </button>
+  <button class="om-menukart" data-om-renk="oyun" onclick="omAlanGoster('alanOyun')">
+    <span class="om-menukart-ikon">🎮</span>
+    <span class="om-menukart-metin"><span class="om-menukart-ad">Oyun Merkezi</span><p class="om-menukart-aciklama">Konuyu eğlenerek pekiştir.</p></span>
+  </button>
+  <button class="om-menukart" data-om-renk="deger" onclick="omAlanGoster('alanDeger')">
+    <span class="om-menukart-ikon">📝</span>
+    <span class="om-menukart-metin"><span class="om-menukart-ad">Kendini Değerlendir</span><p class="om-menukart-aciklama">Testler, yazılı hazırlıkları ve denemeler.</p></span>
+  </button>
 </div>
 
-<div class="oyun-grubu" id="kat-bulmaca6">
-  <button onclick="goster('kelimeavi6', event)">🔎 Kelime Avı</button>
-  <button onclick="goster('cengel6', event)">🧩 Çengel Bulmaca</button>
-  <button onclick="goster('merdiven6', event)">🪜 Sözcük Merdiveni</button>
-  <button onclick="goster('sifre6', event)">🔐 Şifreli Sözcük</button>
-  <button onclick="goster('sifretanim6', event)">🔐 Şifreli Tanım</button>
-  <button onclick="goster('kelimekodlama6', event)">💻 Kelime Kodlama</button>
-  <button onclick="goster('nonogram6', event)">🖼️ Nonogram</button>
-  <button onclick="goster('satranc6', event)">♞ Kelime Satrancı</button>
+<div class="om-alan" id="alanKonu">
+  <button class="om-geri" onclick="omAlanGoster('menu')">← Ana Menüye Dön</button>
+  <div class="om-alan-baslik"><span class="om-alan-ikon">📖</span><h2 class="om-alan-ad">Konuyu Öğren</h2></div>
+  <div class="oyun-grubu aktif" id="kat-konu6">
+    <button class="om-kart" data-om-id="ozet6" onclick="goster('ozet6', event)"><span class="om-kart-ikon">📖</span><span class="om-kart-metin"><span class="om-kart-baslik">Konu Özeti</span><span class="om-kart-amac">Peygamberlik, vahiy ve ilahi kitaplar konusunun özetini oku.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+    <button class="om-kart" data-om-id="slayt" onclick="goster('slayt', event)"><span class="om-kart-ikon">🖥️</span><span class="om-kart-metin"><span class="om-kart-baslik">Ünite Sunumu</span><span class="om-kart-amac">Sunumla üniteyi görsel olarak baştan sona izle.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-yarisma6">
-  <button onclick="goster('kelimeuret6', event)">⚡ Hızlı Kelime</button>
-  <button onclick="goster('tuzak6', event)">🚫 Tuzak Harf</button>
-  <button onclick="goster('fabrika6', event)">🏭 Kelime Fabrikası</button>
-  <button onclick="goster('muhendis6', event)">🛠️ Kelime Mühendisi</button>
-  <button onclick="goster('kavramturnuvasi6', event)">🏆 Kavram Turnuvası</button>
-  <button onclick="goster('bonus6', event)">🎮 Bonus Oyun</button>
+<div class="om-alan" id="alanOyun">
+  <button class="om-geri" onclick="omAlanGoster('menu')">← Ana Menüye Dön</button>
+  <section class="om-hero">
+    <div class="om-hero-ikon">🎮</div>
+    <h2 class="om-hero-baslik">Oyun Merkezi</h2>
+    <p class="om-hero-alt">Bu ünitedeki oyunları adım adım tamamlayarak konuyu pekiştir.</p>
+  </section>
+
+  <div class="om-yolculuk">
+
+<div class="om-grup" data-om-renk="ogren" id="omGrupOgren">
+  <button class="om-grup-baslik" onclick="omGrupAcKapa('omGrupOgren')">
+    <span class="om-grup-ikon">🟢</span>
+    <span class="om-grup-metin"><span class="om-grup-ad">Öğren</span><p class="om-grup-aciklama">Temel kavramları eğlenerek öğren.</p></span>
+    <span class="om-grup-cta"><span class="om-grup-ok">▶</span> Başla</span>
+  </button>
+  <div class="om-grup-govde">
+    <div class="om-grup-govde-ic">
+      <div class="oyun-grubu aktif" id="kat-unite6">
+        <button class="om-kart" data-om-id="kelimeavi6" onclick="goster('kelimeavi6', event)"><span class="om-kart-ikon">🔎</span><span class="om-kart-metin"><span class="om-kart-baslik">Kelime Avı</span><span class="om-kart-amac">Ünitenin temel kavramlarını harf tablosunda bul.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="ezadimadim6" onclick="goster('ezadimadim6', event)"><span class="om-kart-ikon">5️⃣</span><span class="om-kart-metin"><span class="om-kart-baslik">Adım Adım Ezber</span><span class="om-kart-amac">Felak suresini adım adım, kelime kelime öğren.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-mantik6">
-  <button onclick="goster('dedektif6', event)">🕵️ Kelime Dedektifi</button>
-  <button onclick="goster('dildedektifi6', event)">🕵️‍♀️ Dil Dedektifi</button>
-  <button onclick="goster('mantikzinciri6', event)">🔗 Mantık Zinciri</button>
-  <button onclick="goster('semantiklabirent6', event)">🧠 Semantik Labirent</button>
-  <button onclick="goster('celiskiavi6', event)">🕵️‍♂️ Çelişki Avı</button>
+<div class="om-grup" data-om-renk="pekistir" id="omGrupPekistir">
+  <button class="om-grup-baslik" onclick="omGrupAcKapa('omGrupPekistir')">
+    <span class="om-grup-ikon">🔵</span>
+    <span class="om-grup-metin"><span class="om-grup-ad">Pekiştir</span><p class="om-grup-aciklama">Öğrendiklerini oyunlarla tekrar et.</p></span>
+    <span class="om-grup-cta"><span class="om-grup-ok">▶</span> Devam Et</span>
+  </button>
+  <div class="om-grup-govde">
+    <div class="om-grup-govde-ic">
+      <div class="oyun-grubu aktif" id="kat-bulmaca6">
+        <button class="om-kart" data-om-id="cengel6" onclick="goster('cengel6', event)"><span class="om-kart-ikon">🧩</span><span class="om-kart-metin"><span class="om-kart-baslik">Çengel Bulmaca</span><span class="om-kart-amac">İpuçlarından yola çıkarak kavramları bulmacada eşleştir.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="merdiven6" onclick="goster('merdiven6', event)"><span class="om-kart-ikon">🪜</span><span class="om-kart-metin"><span class="om-kart-baslik">Sözcük Merdiveni</span><span class="om-kart-amac">Basamak basamak ilerleyerek doğru kelimeye ulaş.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="sifre6" onclick="goster('sifre6', event)"><span class="om-kart-ikon">🔐</span><span class="om-kart-metin"><span class="om-kart-baslik">Şifreli Sözcük</span><span class="om-kart-amac">Şifreyi çöz, gizli kelimeyi ortaya çıkar.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="kelimekodlama6" onclick="goster('kelimekodlama6', event)"><span class="om-kart-ikon">💻</span><span class="om-kart-metin"><span class="om-kart-baslik">Kelime Kodlama</span><span class="om-kart-amac">Kodlanmış harfleri çözerek ünite kelimelerini bul.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="nonogram6" onclick="goster('nonogram6', event)"><span class="om-kart-ikon">🖼️</span><span class="om-kart-metin"><span class="om-kart-baslik">Nonogram</span><span class="om-kart-amac">Sayı ipuçlarını takip ederek gizli görseli ortaya çıkar.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="satranc6" onclick="goster('satranc6', event)"><span class="om-kart-ikon">♞</span><span class="om-kart-metin"><span class="om-kart-baslik">Kelime Satrancı</span><span class="om-kart-amac">Doğru hamlelerle kelimeleri eşleştirerek ilerle.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="mantikzinciri6" onclick="goster('mantikzinciri6', event)"><span class="om-kart-ikon">🔗</span><span class="om-kart-metin"><span class="om-kart-baslik">Mantık Zinciri</span><span class="om-kart-amac">Kavramları mantık sırasına göre zincirleme birleştir.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="semantiklabirent6" onclick="goster('semantiklabirent6', event)"><span class="om-kart-ikon">🧠</span><span class="om-kart-metin"><span class="om-kart-baslik">Semantik Labirent</span><span class="om-kart-amac">Anlamca doğru yolu seçerek labirentte ilerle.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+      </div>
+      <div class="oyun-grubu aktif" id="kat-ezber6-pekistir">
+        <button class="om-kart" data-om-id="ezsira6" onclick="goster('ezsira6', event)"><span class="om-kart-ikon">1️⃣</span><span class="om-kart-metin"><span class="om-kart-baslik">Sırala Bakalım</span><span class="om-kart-amac">Felak suresinin ayetlerini doğru sıraya diz.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="ezeslestir6" onclick="goster('ezeslestir6', event)"><span class="om-kart-ikon">3️⃣</span><span class="om-kart-metin"><span class="om-kart-baslik">Anlam Eşleştir</span><span class="om-kart-amac">Ayetleri anlamlarıyla doğru şekilde eşleştir.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="ezhafiza6" onclick="goster('ezhafiza6', event)"><span class="om-kart-ikon">4️⃣</span><span class="om-kart-metin"><span class="om-kart-baslik">Hafıza Kartları</span><span class="om-kart-amac">Kartları çevirerek eşleşen ayet-anlam çiftlerini bul.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="ezgizli6" onclick="goster('ezgizli6', event)"><span class="om-kart-ikon">6️⃣</span><span class="om-kart-metin"><span class="om-kart-baslik">Gizli Harfler</span><span class="om-kart-amac">Eksik harfleri tamamlayarak ayeti hatırla.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-macera6">
-  <button onclick="goster('labirent6', event)">🌀 Labirent</button>
+<div class="om-grup" data-om-renk="final" id="omGrupFinal">
+  <button class="om-grup-baslik" onclick="omGrupAcKapa('omGrupFinal')">
+    <span class="om-grup-ikon">🏆</span>
+    <span class="om-grup-metin"><span class="om-grup-ad">Final</span><p class="om-grup-aciklama">Bilgini test et ve üniteyi tamamla.</p></span>
+    <span class="om-grup-cta"><span class="om-grup-ok">▶</span> Başla</span>
+  </button>
+  <div class="om-grup-govde">
+    <div class="om-grup-govde-ic">
+      <div class="oyun-grubu aktif" id="kat-mantik6">
+        <button class="om-kart" data-om-id="sifretanim6" onclick="goster('sifretanim6', event)"><span class="om-kart-ikon">🔐</span><span class="om-kart-metin"><span class="om-kart-baslik">Şifreli Tanım</span><span class="om-kart-amac">Verilen tanımın hangi kavrama ait olduğunu çöz.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="dedektif6" onclick="goster('dedektif6', event)"><span class="om-kart-ikon">🕵️</span><span class="om-kart-metin"><span class="om-kart-baslik">Kelime Dedektifi</span><span class="om-kart-amac">İpuçlarını takip ederek doğru kelimeyi tahmin et.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="dildedektifi6" onclick="goster('dildedektifi6', event)"><span class="om-kart-ikon">🕵️‍♀️</span><span class="om-kart-metin"><span class="om-kart-baslik">Dil Dedektifi</span><span class="om-kart-amac">Cümledeki kavram hatasını bulup düzelt.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="celiskiavi6" onclick="goster('celiskiavi6', event)"><span class="om-kart-ikon">🕵️‍♂️</span><span class="om-kart-metin"><span class="om-kart-baslik">Çelişki Avı</span><span class="om-kart-amac">Doğru ve yanlış bilgileri ayırt ederek çelişkiyi yakala.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+      </div>
+      <div class="oyun-grubu aktif" id="kat-ezber6-dene">
+        <button class="om-kart" data-om-id="ezbosluk6" onclick="goster('ezbosluk6', event)"><span class="om-kart-ikon">2️⃣</span><span class="om-kart-metin"><span class="om-kart-baslik">Boşluk Doldur</span><span class="om-kart-amac">Felak suresindeki boşlukları doğru kelimelerle tamamla.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+      </div>
+      <div class="oyun-grubu aktif" id="kat-yarisma6">
+        <button class="om-kart" data-om-id="kelimeuret6" onclick="goster('kelimeuret6', event)"><span class="om-kart-ikon">⚡</span><span class="om-kart-metin"><span class="om-kart-baslik">Hızlı Kelime</span><span class="om-kart-amac">Süre bitmeden olabildiğince çok doğru kelime üret.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="tuzak6" onclick="goster('tuzak6', event)"><span class="om-kart-ikon">🚫</span><span class="om-kart-metin"><span class="om-kart-baslik">Tuzak Harf</span><span class="om-kart-amac">Tuzak harflere düşmeden doğru kelimeleri yakala.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="fabrika6" onclick="goster('fabrika6', event)"><span class="om-kart-ikon">🏭</span><span class="om-kart-metin"><span class="om-kart-baslik">Kelime Fabrikası</span><span class="om-kart-amac">Bant hızında gelen kelimeleri doğru kategoriye ayır.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="muhendis6" onclick="goster('muhendis6', event)"><span class="om-kart-ikon">🛠️</span><span class="om-kart-metin"><span class="om-kart-baslik">Kelime Mühendisi</span><span class="om-kart-amac">Parçaları birleştirerek süresi içinde doğru kelimeyi inşa et.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="kavramturnuvasi6" onclick="goster('kavramturnuvasi6', event)"><span class="om-kart-ikon">🏆</span><span class="om-kart-metin"><span class="om-kart-baslik">Kavram Turnuvası</span><span class="om-kart-amac">Kavramlar arasında turnuva usulü en doğrusunu seç.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="bonus6" onclick="goster('bonus6', event)"><span class="om-kart-ikon">🎮</span><span class="om-kart-metin"><span class="om-kart-baslik">Bonus Oyun</span><span class="om-kart-amac">Ekstra puan için bonus mini oyunu tamamla.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+      </div>
+      <div class="oyun-grubu aktif" id="kat-macera6">
+        <button class="om-kart" data-om-id="labirent6" onclick="goster('labirent6', event)"><span class="om-kart-ikon">🌀</span><span class="om-kart-metin"><span class="om-kart-baslik">Labirent</span><span class="om-kart-amac">Doğru yolu seçerek labirentten çıkışı bul.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+      </div>
+      <div class="oyun-grubu aktif" id="kat-ezber6-yaris">
+        <button class="om-kart" data-om-id="ezkaybolan6" onclick="goster('ezkaybolan6', event)"><span class="om-kart-ikon">7️⃣</span><span class="om-kart-metin"><span class="om-kart-baslik">Kaybolan Kelimeler</span><span class="om-kart-amac">Kaybolmadan önce kelimeleri hızla ezberle.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+        <button class="om-kart" data-om-id="ezhiz6" onclick="goster('ezhiz6', event)"><span class="om-kart-ikon">8️⃣</span><span class="om-kart-metin"><span class="om-kart-baslik">Hız Testi</span><span class="om-kart-amac">Süreye karşı yarışarak ezberini son kez sına.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-ezber6">
-  <button onclick="goster('ezsira6', event)">1️⃣ Sırala Bakalım</button>
-  <button onclick="goster('ezbosluk6', event)">2️⃣ Boşluk Doldur</button>
-  <button onclick="goster('ezeslestir6', event)">3️⃣ Anlam Eşleştir</button>
-  <button onclick="goster('ezhafiza6', event)">4️⃣ Hafıza Kartları</button>
-  <button onclick="goster('ezadimadim6', event)">5️⃣ Adım Adım Ezber</button>
-  <button onclick="goster('ezgizli6', event)">6️⃣ Gizli Harfler</button>
-  <button onclick="goster('ezkaybolan6', event)">7️⃣ Kaybolan Kelimeler</button>
-  <button onclick="goster('ezhiz6', event)">8️⃣ Hız Testi</button>
+  </div>
 </div>
 
-<main>
+<div class="om-alan" id="alanDeger">
+  <button class="om-geri" onclick="omAlanGoster('menu')">← Ana Menüye Dön</button>
+  <div class="om-alan-baslik"><span class="om-alan-ikon">📝</span><h2 class="om-alan-ad">Kendini Değerlendir</h2></div>
+  <div class="oyun-grubu aktif" id="kat-deger6">
+    <button class="om-kart" data-om-id="konutekrari6" onclick="goster('konutekrari6', event)"><span class="om-kart-ikon">📝</span><span class="om-kart-metin"><span class="om-kart-baslik">Konu Tekrarı Testi</span><span class="om-kart-amac">Tüm üniteyi kapsayan sorularla bilgini test et.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+    <button class="om-kart" data-om-id="yazili" onclick="goster('yazili', event)"><span class="om-kart-ikon">📝</span><span class="om-kart-metin"><span class="om-kart-baslik">Yazılı Sınavlar</span><span class="om-kart-amac">Üniteyi tamamladıktan sonra kendini yazılı sınavla değerlendir.</span></span><span class="om-kart-cta">▶ Başla</span></button>
+  </div>
+</div>
+
+</div>
+
+<main id="main-icerik">
 <section id="ogretmenpaneli">
 <h2>🔒 Öğretmen Paneli</h2>
 <div id="opGirisEkrani">
@@ -4273,6 +4495,60 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ogrBaslat);
   else ogrBaslat();
 })();
+</script>
+<script>
+/* ===================== OYUN MERKEZİ EK KATMANI (sadece EKLEME: ana menü ↔ alan geçişi + accordion aç/kapa) =====================
+   Mevcut fonksiyonlara (goster, kategoriGoster, oyunTamamlandi vb.) dokunmaz; yeni, bağımsız bir davranış ekler. */
+function omAlanGoster(alanId){
+  var menu = document.getElementById('omAnaMenu');
+  document.querySelectorAll('.om-alan').forEach(function(a){ a.classList.remove('om-alan-acik'); });
+  if(alanId === 'menu'){
+    if(menu) menu.style.display = '';
+    document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth', block:'start'});
+    return;
+  }
+  if(menu) menu.style.display = 'none';
+  var hedef = document.getElementById(alanId);
+  if(hedef){
+    hedef.classList.add('om-alan-acik');
+    hedef.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+function omGrupAcKapa(grupId){
+  var tikGrup = document.getElementById(grupId);
+  if(!tikGrup) return;
+  var acilacak = !tikGrup.classList.contains('acik');
+  document.querySelectorAll('.om-grup').forEach(function(g){
+    var govde = g.querySelector('.om-grup-govde');
+    g.classList.remove('acik');
+    if(govde) govde.style.maxHeight = null;
+  });
+  if(acilacak){
+    tikGrup.classList.add('acik');
+    var govde = tikGrup.querySelector('.om-grup-govde');
+    if(govde) govde.style.maxHeight = govde.scrollHeight + 'px';
+  }
+}
+
+/* ---- Tema (açık/koyu) değiştirme — tamamen bağımsız, yeni bir localStorage anahtarı kullanır ---- */
+function temaDegistir(){
+  var kok = document.documentElement;
+  var suanKoyuMu = kok.getAttribute('data-theme') === 'dark'
+    || (kok.getAttribute('data-theme') !== 'light' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var yeniTema = suanKoyuMu ? 'light' : 'dark';
+  kok.setAttribute('data-theme', yeniTema);
+  try{ localStorage.setItem('dkabTemaTercihi', yeniTema); }catch(e){}
+  temaButonEtiketiGuncelle();
+}
+function temaButonEtiketiGuncelle(){
+  var btn = document.getElementById('temaDegistirBtn');
+  if(!btn) return;
+  var kok = document.documentElement;
+  var koyuMu = kok.getAttribute('data-theme') === 'dark'
+    || (kok.getAttribute('data-theme') !== 'light' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  btn.textContent = koyuMu ? '☀️ Açık Tema' : '🌙 Koyu Tema';
+}
+document.addEventListener('DOMContentLoaded', temaButonEtiketiGuncelle);
 </script>
 </body>
 </html>

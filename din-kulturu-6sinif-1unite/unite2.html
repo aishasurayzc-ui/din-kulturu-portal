@@ -6,19 +6,89 @@
 <title>6. Sınıf Din Kültürü - 2. Ünite: Ramazan ve Oruç</title>
 <meta name="description" content="6. Sınıf Din Kültürü - 2. Ünite: Ramazan ve Oruç — İnteraktif oyunlar, konu özeti, test ve sunum içeren dijital ders materyali.">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  :root{
+    /* ---- Giriş Bölümü tasarım sistemi (yalnızca .gb-*/.om-* bileşenlerinde kullanılır;
+       oyun/etkinlik içeriğindeki mevcut --navy/--mavi/--yesil vb. değişmedi) ---- */
+    --gb-font:'Plus Jakarta Sans','Nunito','Segoe UI',sans-serif;
+    --gb-primary:#2563EB; --gb-primary-koyu:#1d4ed8; --gb-secondary:#14B8A6;
+    --gb-bg:#F8FAFC; --gb-text:#0F172A; --gb-text-mute:#64748b; --gb-border:#E2E8F0;
+    --gb-radius-card:20px; --gb-radius-btn:16px;
+    --gb-shadow:0 4px 16px rgba(15,23,42,.06);
+    --gb-shadow-hover:0 16px 32px -8px rgba(37,99,235,.22), 0 4px 10px rgba(15,23,42,.06);
+  }
+  :root[data-theme="dark"]{
+    --gb-bg:#0f1620; --gb-text:#e7ecf1; --gb-text-mute:#9aa7b4; --gb-border:#26303c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --gb-bg:#0f1620; --gb-text:#e7ecf1; --gb-text-mute:#9aa7b4; --gb-border:#26303c; }
+  }
   :root{
     --mavi:#2a6f97; --acik:#a9d6e5; --yesil:#40916c; --kirmizi:#d62828;
     --sari:#f4a261; --bg:#f7f4ec;
     --navy:#1E3A8A; --turkuaz:#06B6D4; --acikgri:#f1f5f9;
+
+    /* ---- Tasarım Token Sistemi (ek; yukarıdaki 9 değişken korunuyor) ---- */
+    --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px;
+    --radius-sm:10px; --radius-md:14px; --radius-lg:20px;
+    --shadow-sm:0 2px 6px rgba(0,0,0,.08);
+    --shadow-md:0 4px 14px rgba(0,0,0,.10);
+    --shadow-lg:0 10px 28px rgba(0,0,0,.16);
+
+    /* Semantik renk katmanı (mevcut ham renklerin üzerine, onları değiştirmeden) */
+    --color-selected: var(--mavi);
+    --color-success: var(--yesil);
+    --color-warning: var(--sari);
+    --color-progress: var(--turkuaz);
+    --color-surface:#ffffff;
+    --color-surface-alt: var(--acikgri);
+    --color-text:#22333b;
+    --color-text-muted:#667;
+    --color-border:#e2e8f0;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121a21; --acikgri:#1b2530;
+      --color-surface:#1b2530; --color-surface-alt:#222e3a;
+      --color-text:#e7ecf1; --color-text-muted:#9aa7b4; --color-border:#2c3947;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121a21; --acikgri:#1b2530;
+    --color-surface:#1b2530; --color-surface-alt:#222e3a;
+    --color-text:#e7ecf1; --color-text-muted:#9aa7b4; --color-border:#2c3947;
+  }
+  :root[data-theme="light"]{
+    --bg:#f7f4ec; --acikgri:#f1f5f9;
+    --color-surface:#ffffff; --color-surface-alt:#f1f5f9;
+    --color-text:#22333b; --color-text-muted:#667; --color-border:#e2e8f0;
   }
   *{box-sizing:border-box;}
   body{
     font-family: "Nunito", "Comic Sans MS", "Segoe UI", Tahoma, sans-serif;
     background: var(--bg);
-    margin:0; padding:0; color:#22333b;
+    margin:0; padding:0; color:var(--color-text);
   }
+
+  /* ---- Erişilebilirlik: odak halkası + atla bağlantısı ---- */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{
+    outline: 3px solid var(--turkuaz); outline-offset: 2px; border-radius: 4px;
+  }
+  .atla-baglantisi{
+    position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    background:var(--navy); color:#fff; padding:12px 20px; border-radius:0 0 10px 0;
+    z-index:2000; font-weight:800; text-decoration:none;
+  }
+  .atla-baglantisi:focus{ left:0; top:0; width:auto; height:auto; }
+
+  /* ---- Tema değiştirme düğmesi ---- */
+  .tema-degistir-btn{
+    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.5); color:#fff;
+    border-radius:999px; padding:6px 14px; font-size:.85em; font-weight:800; cursor:pointer;
+    display:inline-flex; align-items:center; gap:6px; transition:background .2s ease;
+  }
+  .tema-degistir-btn:hover{ background:rgba(255,255,255,.3); }
   header{
     background: linear-gradient(135deg, var(--mavi), var(--yesil));
     color:white; text-align:center; padding:24px 10px;
@@ -621,6 +691,7 @@
   <div class="hero-butonlar">
     <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">🚀 Oyuna Başla</button>
     <button class="hero-btn hero-btn-ikincil" onclick="kategoriGosterVeKaydir('kat-unite62')">📚 Konuları Keşfet</button>
+    <button class="hero-btn hero-btn-ikincil" onclick="window.location.href='unite2-oyun-merkezi.html'">🎮 Oyun Merkezi'ni Aç</button>
   </div>
 </section>
 

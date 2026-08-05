@@ -6,78 +6,164 @@
 <title>4. Sınıf Din Kültürü - 1. Ünite: Günlük Hayattaki Dinî İfadeler</title>
 <meta name="description" content="4. Sınıf Din Kültürü - 1. Ünite: Günlük Hayattaki Dinî İfadeler — İnteraktif oyunlar, konu özeti, test ve sunum içeren dijital ders materyali.">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  :root{
+    /* ---- Giriş Bölümü tasarım sistemi (yalnızca .gb-* bileşenlerinde kullanılır;
+       oyun/etkinlik içeriğindeki mevcut --navy/--mavi/--yesil vb. değişmedi) ---- */
+    --gb-font:'Plus Jakarta Sans','Nunito','Segoe UI',sans-serif;
+    --gb-primary:#2563EB; --gb-primary-koyu:#1d4ed8; --gb-secondary:#14B8A6;
+    --gb-bg:#F8FAFC; --gb-text:#0F172A; --gb-text-mute:#64748b; --gb-border:#E2E8F0;
+    --gb-radius-card:20px; --gb-radius-btn:16px;
+    --gb-shadow:0 4px 16px rgba(15,23,42,.06);
+    --gb-shadow-hover:0 16px 32px -8px rgba(37,99,235,.22), 0 4px 10px rgba(15,23,42,.06);
+  }
+  :root[data-theme="dark"]{
+    --gb-bg:#0f1620; --gb-text:#e7ecf1; --gb-text-mute:#9aa7b4; --gb-border:#26303c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --gb-bg:#0f1620; --gb-text:#e7ecf1; --gb-text-mute:#9aa7b4; --gb-border:#26303c; }
+  }
   :root{
     --mavi:#2a6f97; --acik:#a9d6e5; --yesil:#40916c; --kirmizi:#d62828;
     --sari:#f4a261; --bg:#f7f4ec;
     --navy:#1E3A8A; --turkuaz:#06B6D4; --acikgri:#f1f5f9;
+
+    /* ---- Tasarım Token Sistemi (ek; yukarıdaki 9 değişken korunuyor) ---- */
+    --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px;
+    --radius-sm:10px; --radius-md:14px; --radius-lg:20px;
+    --shadow-sm:0 2px 6px rgba(0,0,0,.08);
+    --shadow-md:0 4px 14px rgba(0,0,0,.10);
+    --shadow-lg:0 10px 28px rgba(0,0,0,.16);
+
+    /* Semantik renk katmanı (mevcut ham renklerin üzerine, onları değiştirmeden) */
+    --color-selected: var(--mavi);
+    --color-success: var(--yesil);
+    --color-warning: var(--sari);
+    --color-progress: var(--turkuaz);
+    --color-surface:#ffffff;
+    --color-surface-alt: var(--acikgri);
+    --color-text:#22333b;
+    --color-text-muted:#667;
+    --color-border:#e2e8f0;
+  }
+
+  /* Koyu tema: sistem tercihine göre varsayılan, data-theme ile açıkça ezilebilir */
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121a21; --acikgri:#1b2530;
+      --color-surface:#1b2530; --color-surface-alt:#222e3a;
+      --color-text:#e7ecf1; --color-text-muted:#9aa7b4; --color-border:#2c3947;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121a21; --acikgri:#1b2530;
+    --color-surface:#1b2530; --color-surface-alt:#222e3a;
+    --color-text:#e7ecf1; --color-text-muted:#9aa7b4; --color-border:#2c3947;
+  }
+  :root[data-theme="light"]{
+    --bg:#f7f4ec; --acikgri:#f1f5f9;
+    --color-surface:#ffffff; --color-surface-alt:#f1f5f9;
+    --color-text:#22333b; --color-text-muted:#667; --color-border:#e2e8f0;
   }
   *{box-sizing:border-box;}
+  body{ color: var(--color-text); }
+
+  /* ---- Erişilebilirlik: odak halkası + atla bağlantısı ---- */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{
+    outline: 3px solid var(--turkuaz); outline-offset: 2px; border-radius: 4px;
+  }
+  .atla-baglantisi{
+    position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    background:var(--navy); color:#fff; padding:12px 20px; border-radius:0 0 10px 0;
+    z-index:2000; font-weight:800; text-decoration:none;
+  }
+  .atla-baglantisi:focus{ left:0; top:0; width:auto; height:auto; }
+
+  /* ---- Tema değiştirme düğmesi ---- */
+  .tema-degistir-btn{
+    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.5); color:#fff;
+    border-radius:999px; padding:6px 14px; font-size:.85em; font-weight:800; cursor:pointer;
+    display:inline-flex; align-items:center; gap:6px; transition:background .2s ease;
+  }
+  .tema-degistir-btn:hover{ background:rgba(255,255,255,.3); }
   body{
     font-family: "Nunito", "Comic Sans MS", "Segoe UI", Tahoma, sans-serif;
     background: var(--bg);
     margin:0; padding:0; color:#22333b;
   }
 
-  /* --- Hero --- */
-  .hero{
-    position:relative; overflow:hidden; text-align:center; padding:50px 20px 40px;
-    background: linear-gradient(135deg, var(--navy), var(--turkuaz));
-    color:white;
+  /* --- Giriş Bölümü: header + hero, tek premium görsel bütün olarak akar.
+     A/B/C harfleri ve dağınık emoji dekorları kaldırıldı; yerine yumuşak
+     blur-circle + çok düşük opasiteli nokta dokusu geldi. Yazı tipi bu
+     bileşende Plus Jakarta Sans'a geçer; oyun/etkinlik içeriği Nunito'da
+     kalmaya devam eder (--gb-* değişkenleri yalnızca burada kullanılıyor). --- */
+  header, .hero{
+    font-family:var(--gb-font); position:relative; overflow:hidden; text-align:center; color:#fff;
+    background:
+      radial-gradient(ellipse 70% 55% at 12% -10%, rgba(255,255,255,.16), transparent 60%),
+      linear-gradient(135deg, var(--navy) 0%, var(--gb-primary) 55%, var(--gb-secondary) 100%);
   }
-  .hero-sekiller{ position:absolute; inset:0; pointer-events:none; }
-  .hero-sekiller span{
-    position:absolute; font-size:1.8em; opacity:.35; font-weight:800;
-    animation: hero-yuz 5s ease-in-out infinite;
+  header{ padding:52px 20px 6px; }
+  .hero{ padding:22px 20px 64px; }
+  .hero::before{
+    content:''; position:absolute; inset:0; opacity:.5; pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px);
+    background-size:22px 22px;
   }
-  @keyframes hero-yuz{
-    0%,100%{ transform:translateY(0) rotate(0deg); }
-    50%{ transform:translateY(-18px) rotate(8deg); }
-  }
-  .hero-baslik{ font-size:2.1em; margin:10px 0 6px; text-shadow:0 2px 14px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.35); }
-  .hero-alt{ max-width:520px; margin:0 auto; opacity:.95; font-size:1.05em; }
-  .hero-butonlar{ display:flex; gap:14px; justify-content:center; margin-top:22px; flex-wrap:wrap; }
+  .hero-sekiller{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+  .hero-sekiller::before, .hero-sekiller::after{ content:''; position:absolute; border-radius:50%; filter:blur(55px); }
+  .hero-sekiller::before{ width:280px; height:280px; background:rgba(255,255,255,.22); top:-90px; left:-60px; }
+  .hero-sekiller::after{ width:320px; height:320px; background:var(--gb-secondary); opacity:.4; bottom:-130px; right:-80px; }
+  .hero-sekiller span{ display:none; }
+  .hero-baslik{ position:relative; font-size:1.5em; font-weight:700; margin:0 0 8px; text-shadow:none; }
+  .hero-alt{ position:relative; max-width:520px; margin:0 auto; opacity:.92; font-size:1.02em; font-weight:500; line-height:1.55; }
+  .hero-butonlar{ position:relative; display:flex; gap:14px; justify-content:center; margin-top:28px; flex-wrap:wrap; }
   .hero-btn{
-    padding:13px 26px; border:none; border-radius:26px; font-weight:800; font-size:1em;
-    cursor:pointer; transition:transform .15s;
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--gb-font);
+    padding:16px 30px; border:none; border-radius:var(--gb-radius-btn); font-weight:700; font-size:1em;
+    cursor:pointer; transition:transform .25s ease, box-shadow .25s ease; box-shadow:0 10px 24px -8px rgba(0,0,0,.3);
   }
-  .hero-btn:hover{ transform:scale(1.05); }
-  .hero-btn-birincil{ background:white; color:var(--navy); }
-  .hero-btn-ikincil{ background:rgba(255,255,255,.18); color:white; border:2px solid white; }
+  .hero-btn:hover{ transform:translateY(-3px); box-shadow:0 16px 32px -10px rgba(0,0,0,.36); }
+  .hero-btn:active{ transform:translateY(-1px) scale(.98); }
+  .hero-btn-birincil{ background:linear-gradient(135deg,#fff,#eef4ff); color:var(--gb-primary-koyu); }
+  .hero-btn-ikincil{ background:rgba(255,255,255,.14); color:#fff; border:1.5px solid rgba(255,255,255,.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+  @media(max-width:600px){ .hero-butonlar{ flex-direction:column; } .hero-btn{ width:100%; justify-content:center; } }
 
-  /* --- İstatistik Çubuğu --- */
+  /* --- İstatistik Çubuğu (sakin, düşük vurgulu durum satırı) --- */
   .istatistik-cubugu{
-    display:flex; flex-wrap:wrap; justify-content:center; gap:14px;
-    background:white; padding:16px; margin:0; box-shadow:0 2px 6px rgba(0,0,0,.06);
+    display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+    background:var(--color-surface); padding:10px; margin:0; box-shadow:var(--shadow-sm);
   }
   .istatistik-kutu{
-    display:flex; flex-direction:column; align-items:center; min-width:110px;
-    background:var(--acikgri); border-radius:16px; padding:12px 18px;
+    display:flex; flex-direction:row; align-items:center; gap:6px; min-width:auto;
+    background:var(--color-surface-alt); border-radius:var(--radius-sm); padding:6px 14px;
   }
-  .ist-ikon{ font-size:1.5em; }
-  .istatistik-kutu b{ font-size:1.3em; color:var(--navy); }
-  .ist-etiket{ font-size:.75em; color:#666; text-align:center; }
+  .ist-ikon{ font-size:1.1em; }
+  .istatistik-kutu b{ font-size:1em; color:var(--navy); }
+  .ist-etiket{ font-size:.72em; color:var(--color-text-muted); text-align:center; }
 
   /* --- Kategori Kartları --- */
   .kategori-kartlari{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:16px; max-width:900px; margin:24px auto; padding:0 20px;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); font-family:var(--gb-font);
+    gap:var(--sp-5); max-width:900px; margin:60px auto 24px; padding:0 20px;
   }
   .kategori-kart{
-    background:white; border-radius:18px; padding:22px 16px; text-align:center;
-    box-shadow:0 3px 10px rgba(0,0,0,.08); cursor:pointer; transition:transform .2s, box-shadow .2s;
+    background:var(--color-surface); border:1px solid var(--gb-border); border-radius:var(--gb-radius-card);
+    padding:var(--sp-5) var(--sp-4); text-align:center; box-shadow:var(--gb-shadow);
+    cursor:pointer; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   }
-  .kategori-kart:hover{ transform:translateY(-6px) scale(1.03); box-shadow:0 8px 18px rgba(0,0,0,.15); }
-  .kk-ikon{ font-size:2.2em; margin-bottom:6px; }
-  .kategori-kart h3{ margin:6px 0; color:var(--navy); font-size:1.05em; }
-  .kategori-kart p{ margin:0; font-size:.82em; color:#666; }
+  .kategori-kart:hover{ transform:translateY(-4px); box-shadow:var(--gb-shadow-hover); border-color:color-mix(in srgb, var(--gb-primary) 40%, var(--gb-border)); }
+  .kk-ikon{ font-size:2.2em; margin-bottom:6px; transition:transform .25s ease; }
+  .kategori-kart:hover .kk-ikon{ transform:scale(1.1); }
+  .kategori-kart h3{ margin:6px 0; color:var(--gb-text); font-size:1.05em; font-weight:700; }
+  .kategori-kart p{ margin:0; font-size:.82em; color:var(--gb-text-mute); font-weight:500; }
 
   /* --- Günün Meydan Okuması --- */
   .gunun-meydan-okumasi{ max-width:640px; margin:24px auto; padding:0 20px; }
   .gmo-kart{
     background:linear-gradient(135deg,#fff8e1,#ffe8d6); border:2px solid var(--sari);
-    border-radius:20px; padding:22px; box-shadow:0 4px 12px rgba(0,0,0,.08);
+    border-radius:var(--radius-lg); padding:var(--sp-5); box-shadow:var(--shadow-md);
   }
   .gmo-baslik{ text-align:center; font-weight:800; color:var(--sari); margin:0 0 8px; text-transform:uppercase; font-size:.85em; letter-spacing:1px; }
   .gmo-soru{ text-align:center; font-size:1.05em; font-weight:bold; margin-bottom:14px; }
@@ -86,56 +172,111 @@
   .populer-oyunlar{ max-width:900px; margin:24px auto 32px; padding:0 20px; }
   .po-izgara{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
   .po-kart{
-    background:white; border-radius:16px; padding:18px 10px; text-align:center;
-    box-shadow:0 3px 8px rgba(0,0,0,.08); cursor:pointer; transition:transform .2s;
+    background:var(--color-surface); border-radius:var(--radius-md); padding:var(--sp-4) var(--sp-3); text-align:center;
+    box-shadow:var(--shadow-sm); cursor:pointer; transition:transform .2s ease, background .2s ease;
     display:flex; flex-direction:column; align-items:center; gap:6px; font-weight:bold; font-size:.9em;
   }
-  .po-kart:hover{ transform:translateY(-4px) scale(1.04); background:var(--acikgri); }
+  .po-kart:hover{ transform:translateY(-2px); background:var(--acikgri); }
   .po-ikon{ font-size:1.8em; }
-  header{
-    background: linear-gradient(135deg, var(--mavi), var(--yesil));
-    color:white; text-align:center; padding:24px 10px;
+  header{ padding:52px 20px 6px; }
+  .gb-eyebrow{
+    display:inline-flex; align-items:center; gap:6px; margin:0 0 14px; padding:7px 18px;
+    background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.3); border-radius:999px;
+    font-size:.8em; font-weight:700; letter-spacing:.5px; text-transform:uppercase;
   }
-  header h1{ margin:0; font-size:1.8em;}
-  header p{ margin:6px 0 0; opacity:.9;}
+  header h1{ margin:0 0 8px; font-size:2.1em; font-weight:800; letter-spacing:-.01em; }
+  .gb-ders-adi{ margin:0; font-size:1.02em; font-weight:500; opacity:.92; }
+  .gb-yazar{ margin:14px 0 0; font-size:.92em; font-weight:500; opacity:.85; }
+  .gb-kontrol-satiri{ margin:14px 0 0; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; align-items:center; }
   nav{
     display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
-    padding:16px; background:white; box-shadow:0 2px 6px rgba(0,0,0,.08);
+    padding:16px; background:var(--color-surface); box-shadow:var(--shadow-sm);
     position:sticky; top:0; z-index:10;
   }
   nav button{
-    padding:10px 18px; border:none; border-radius:20px; cursor:pointer;
-    background:var(--acik); font-weight:bold; font-size:.95em; color:#22333b;
-    transition:.15s;
+    padding:10px 18px; border:none; border-radius:999px; cursor:pointer;
+    background:var(--acik); font-weight:bold; font-size:.95em; color:var(--color-text);
+    transition:background .18s ease, color .18s ease;
   }
   nav button:hover{ background:var(--mavi); color:white; }
   nav button.aktif{ background:var(--mavi); color:white; }
-  nav.kategori-nav{ padding:14px 16px 6px; }
-  nav.kategori-nav button{ background:#22333b; color:white; font-size:1em; }
-  nav.kategori-nav button:hover{ background:var(--yesil); }
-  nav.kategori-nav button.kat-aktif{ background:var(--yesil); }
-  nav.kategori-nav a.slayt-link{ padding:10px 18px; border:none; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1em; color:white; background:#8a5a00; text-decoration:none; display:inline-block; transition:.15s; }
-  nav.kategori-nav a.slayt-link:hover{ background:var(--yesil); }
-  .oyun-grubu{
-    display:none; flex-wrap:wrap; justify-content:center; gap:10px;
-    padding:10px 16px 16px; background:white; box-shadow:0 2px 6px rgba(0,0,0,.08);
-    position:sticky; top:56px; z-index:9;
+  /* Ana kategori çubuğu (üst seviye "sekmeler") ve alt-menü (.oyun-grubu) tek bir görsel
+     bütün gibi okunsun diye aynı yüzey rengi ve pil-şekilli düğme dili kullanılır. */
+  /* nav.kategori-nav ve #kat-unite: açıklamalı büyük kartlar (icon + başlık +
+     kısa açıklama + ok). Diğer oyun-grubu'ları (bulmaca/yarışma/mantık/macera/
+     ezber): aynı kart dili ama sade — mevcut "emoji + başlık" metni değişmedi,
+     yalnızca kart görünümüne büründü ve ok eklendi. Hiçbir onclick/id/class
+     kaldırılmadı; kategoriGoster/goster fonksiyonları aynı <button>'ları hedef
+     almaya devam ediyor. */
+  nav.kategori-nav{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-4); font-family:var(--gb-font);
+    max-width:900px; margin:60px auto 0; padding:0 20px; background:transparent; border:none;
+    box-shadow:none; position:static;
   }
-  .oyun-grubu.aktif{ display:flex; }
+  #kat-unite.oyun-grubu{ grid-template-columns:repeat(2,1fr); }
+  nav.kategori-nav button, nav.kategori-nav a.slayt-link, #kat-unite.oyun-grubu button{
+    display:flex; align-items:center; gap:16px; text-align:left; text-decoration:none;
+    background:var(--color-surface); color:var(--gb-text); font-family:var(--gb-font);
+    border:1px solid var(--gb-border); border-radius:var(--gb-radius-card); box-shadow:var(--gb-shadow);
+    padding:22px 24px; font-size:1em; cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  nav.kategori-nav button:hover, nav.kategori-nav a.slayt-link:hover, #kat-unite.oyun-grubu button:hover{
+    transform:translateY(-3px); box-shadow:var(--gb-shadow-hover); border-color:var(--gb-primary);
+  }
+  nav.kategori-nav button.kat-aktif, #kat-unite.oyun-grubu button.aktif{
+    border-color:var(--gb-primary); background:color-mix(in srgb, var(--gb-primary) 6%, var(--color-surface));
+  }
+  nav.kategori-nav button::after, nav.kategori-nav a.slayt-link::after, #kat-unite.oyun-grubu button::after{
+    content:'→'; margin-left:auto; padding-left:10px; font-size:1.3em; color:var(--gb-text-mute); flex-shrink:0;
+    transition:transform .2s ease, color .2s ease;
+  }
+  nav.kategori-nav button:hover::after, nav.kategori-nav a.slayt-link:hover::after, #kat-unite.oyun-grubu button:hover::after{
+    transform:translateX(4px); color:var(--gb-primary);
+  }
+  /* pointer-events:none: goster()/kategoriGoster() js'i ev.target'a
+     dayanıyor — iç span'lar tıklamayı yutmasın, hedef her zaman <button>
+     kalsın diye tıklama olayları görmezden gelinir. */
+  .gb-kart-ikon, .gb-kart-metin, .gb-kart-metin b, .gb-kart-metin small{ pointer-events:none; }
+  .gb-kart-ikon{ font-size:1.8em; flex-shrink:0; line-height:1; transition:transform .2s ease; }
+  nav.kategori-nav button:hover .gb-kart-ikon, #kat-unite.oyun-grubu button:hover .gb-kart-ikon{ transform:scale(1.12); }
+  .gb-kart-metin{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+  .gb-kart-metin b{ font-size:1.02em; font-weight:700; }
+  .gb-kart-metin small{ font-size:.8em; font-weight:500; color:var(--gb-text-mute); line-height:1.4; }
+
+  .oyun-grubu{
+    display:none; grid-template-columns:repeat(2,1fr); gap:var(--sp-3); font-family:var(--gb-font);
+    max-width:900px; margin:0 auto; padding:24px 20px 8px; background:transparent; box-shadow:none; position:static;
+  }
+  .oyun-grubu.aktif{ display:grid; }
+  .oyun-grubu button{
+    display:flex; align-items:center; gap:10px; text-align:left;
+    background:var(--color-surface); color:var(--gb-text);
+    border:1px solid var(--gb-border); border-radius:16px; box-shadow:var(--gb-shadow);
+    padding:16px 18px; font-size:1em; font-weight:700; cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .oyun-grubu button::after{ content:'→'; margin-left:auto; padding-left:10px; color:var(--gb-text-mute); flex-shrink:0; transition:transform .2s ease, color .2s ease; }
+  .oyun-grubu button:hover{ transform:translateY(-3px); box-shadow:var(--gb-shadow-hover); border-color:var(--gb-primary); }
+  .oyun-grubu button:hover::after{ transform:translateX(4px); color:var(--gb-primary); }
+  .oyun-grubu button.aktif{ border-color:var(--gb-primary); background:color-mix(in srgb, var(--gb-primary) 6%, var(--color-surface)); }
+  @media(max-width:640px){
+    nav.kategori-nav, .oyun-grubu{ grid-template-columns:1fr; }
+  }
   main{ max-width:900px; margin:0 auto; padding:20px; }
-  main section{ display:none; animation: fade .3s; }
+  main section{ display:none; animation: fade .3s ease; }
   section.aktif{ display:block; }
   @keyframes fade{ from{opacity:0;} to{opacity:1;} }
   h2{ color:var(--mavi); border-bottom:3px solid var(--acik); padding-bottom:8px;}
-  .kart-kutu{ display:flex; gap:24px; flex-wrap:wrap; justify-content:center; margin-top:20px;}
+  .kart-kutu{ display:flex; gap:var(--sp-5); flex-wrap:wrap; justify-content:center; margin-top:20px;}
   .kolon{ flex:1; min-width:240px; }
   .kolon h3, .kolon h4{ text-align:center; color:var(--yesil); margin:6px 0;}
   .kart{
-    background:white; border:2px solid var(--acik); border-radius:12px;
-    padding:12px 14px; margin:8px 0; cursor:pointer; text-align:center;
-    font-size:1.05em; transition:.15s; box-shadow:0 1px 4px rgba(0,0,0,.08);
+    background:var(--color-surface); border:2px solid var(--acik); border-radius:var(--radius-sm);
+    padding:var(--sp-3) var(--sp-4); margin:8px 0; cursor:pointer; text-align:center;
+    font-size:1.05em; transition:transform .18s ease, box-shadow .18s ease, background .18s ease; box-shadow:var(--shadow-sm);
   }
-  .kart:hover{ transform:scale(1.03); }
+  .kart:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); }
   .kart.secili{ border-color:var(--mavi); background:#eaf4fb; }
   .kart.dogru{ background:#d8f3dc; border-color:var(--yesil); cursor:default; }
   .kart.yanlis{ background:#ffccd5; border-color:var(--kirmizi); }
@@ -146,8 +287,8 @@
     font-size:1.15em; font-weight:bold; margin:16px 0; color:var(--mavi);
   }
   .kutu-panel{
-    background:white; border-radius:14px; padding:18px; margin-top:16px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    background:var(--color-surface); border-radius:var(--radius-md); padding:var(--sp-4); margin-top:var(--sp-4);
+    box-shadow:var(--shadow-sm);
   }
   .dua-satir{
     font-size:1.3em; text-align:center; margin:10px 0; padding:10px;
@@ -156,10 +297,10 @@
   .arapca{ font-size:1.6em; text-align:center; margin:14px 0; color:var(--mavi);}
   button.eylem{
     display:block; margin:16px auto; padding:12px 24px; font-size:1em;
-    background:var(--yesil); color:white; border:none; border-radius:24px;
-    cursor:pointer; font-weight:bold;
+    background:var(--yesil); color:white; border:none; border-radius:999px;
+    cursor:pointer; font-weight:bold; transition:background .18s ease, transform .18s ease;
   }
-  button.eylem:hover{ background:#2d6a4f; }
+  button.eylem:hover{ background:#2d6a4f; transform:translateY(-1px); }
   textarea, input[type=text]{
     width:100%; padding:10px; border-radius:8px; border:2px solid var(--acik);
     font-family:inherit; font-size:1em;
@@ -168,12 +309,12 @@
   /* --- Dua Ağacı --- */
   .agac-sahne{
     position:relative; width:100%; max-width:420px; height:420px; margin:16px auto 0;
-    border-radius:24px; box-shadow:0 10px 24px rgba(0,0,0,.22); overflow:hidden;
-    transition:transform .4s ease, box-shadow .4s ease;
+    border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden;
+    transition:transform .3s ease, box-shadow .3s ease;
   }
   .agac-sahne:hover{
-    transform:perspective(900px) rotateX(6deg) rotateY(-6deg) scale(1.02);
-    box-shadow:0 20px 34px rgba(0,0,0,.3);
+    transform:perspective(900px) rotateX(3deg) rotateY(-3deg) scale(1.01);
+    box-shadow:0 14px 28px rgba(0,0,0,.24);
   }
   .agac-svg{ position:absolute; top:0; left:0; width:100%; height:100%; }
   .yapraklar-katman{ position:absolute; top:0; left:0; width:100%; height:100%; }
@@ -534,7 +675,7 @@
 
 
 /* ===================== ZENGINLESTIRME KUTULARI ===================== */
-.zg-kutu{ border-radius:12px; padding:16px 18px; margin:16px 0; box-shadow:0 3px 10px rgba(0,0,0,.08); }
+.zg-kutu{ border-radius:var(--radius-md); padding:var(--sp-4) var(--sp-4); margin:var(--sp-4) 0; box-shadow:var(--shadow-sm); }
 .zg-baslik{ font-weight:bold; font-size:1.05em; margin:0 0 8px; display:flex; align-items:center; gap:8px; }
 .zg-metin{ margin:0; line-height:1.55; font-size:.97em; }
 .zg-bilgi{ background:#eaf2ff; border-left:6px solid #2a6f97; }
@@ -610,7 +751,7 @@
 
 
 /* ===================== 6 BOLUMLU ZENGINLESTIRME (Konu Ozeti) ===================== */
-.zb-kutu{ border-radius:12px; padding:16px 18px; margin:16px 0; box-shadow:0 3px 10px rgba(0,0,0,.08); }
+.zb-kutu{ border-radius:var(--radius-md); padding:var(--sp-4) var(--sp-4); margin:var(--sp-4) 0; box-shadow:var(--shadow-sm); }
 .zb-baslik{ font-weight:bold; font-size:1.05em; margin:0 0 8px; display:flex; align-items:center; gap:8px; }
 .zb-metin{ margin:0; line-height:1.55; font-size:.97em; }
 .zb-merak{ background:#f3ecfb; border-left:6px solid #7c3aed; }
@@ -689,13 +830,22 @@
 .kh-kavram::before{ content:''; position:absolute; top:-16px; left:50%; width:2px; height:16px; background:#c4b5fd; }
 
 
-.yazili-izgara{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:16px; }
-.yazili-kart{ display:block; text-decoration:none; color:inherit; background:#fff; border:2px solid #e2e8f0; border-radius:14px; padding:16px; text-align:center; transition:transform .15s, box-shadow .15s, border-color .15s; }
-.yazili-kart:hover{ transform:translateY(-3px); box-shadow:0 8px 18px rgba(0,0,0,.12); border-color:#7c3aed; }
+.yazili-izgara{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:var(--sp-4); margin-top:var(--sp-4); }
+.yazili-kart{ display:block; text-decoration:none; color:inherit; background:var(--color-surface); border:2px solid var(--color-border); border-radius:var(--radius-md); padding:var(--sp-4); text-align:center; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.yazili-kart:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:#7c3aed; }
 .yazili-kart .yk-ikon{ font-size:2em; margin-bottom:6px; }
 .yazili-kart h3{ margin:4px 0 2px; font-size:1em; }
-.yazili-kart p{ margin:0; font-size:.85em; color:#666; }
+.yazili-kart p{ margin:0; font-size:.85em; color:var(--color-text-muted); }
 .yazili-kart.yk-klasik{ border-style:dashed; }
+
+/* ---- Sayfa sonuna taşınan bölümler: Yazılı Sınavlar ayrı, sakin bir alan olarak ---- */
+.disi-bolum{ max-width:900px; margin:0 auto; padding:0 20px; }
+.yazili-disi-bolum{
+  max-width:900px; margin:40px auto 10px; padding:28px 24px; background:var(--color-surface-alt);
+  border-radius:var(--radius-lg); box-shadow:var(--shadow-sm);
+}
+.yazili-disi-bolum h2{ margin-top:0; }
+.gunun-meydan-okumasi.disi-gmo{ margin:28px auto; }
 
 /* ===================== EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) ===================== */
 .ez-iki-sutun{ display:flex; gap:22px; justify-content:center; flex-wrap:wrap; margin:14px 0; }
@@ -713,6 +863,17 @@
 .ez-hafiza-izgara .hafiza-on{ font-size:1.3em; }
 .ez-hafiza-izgara .hafiza-arka{ font-size:.62em; padding:4px; text-align:center; line-height:1.25; }
 @media(max-width:640px){ .ez-hafiza-izgara{ grid-template-columns:repeat(4,1fr); } .ez-hafiza-izgara .hafiza-kart{ height:74px; } }
+
+/* ===================== DAR EKRANLAR İÇİN SABİT-SÜTUNLU IZGARALARI ESNETME =====================
+   Bu 5 ızgaranın JS'i hücreleri DOM sırasına göre yerleştiriyor (mutlak piksel konumlandırma
+   kullanmıyor), bu yüzden sütun sayısını dar ekranda azaltmak oyun mantığını bozmaz. */
+@media(max-width:480px){
+  .hafiza-izgara{ grid-template-columns:repeat(3,1fr); gap:8px; }
+  .bz-izgara{ grid-template-columns:repeat(2,1fr); gap:10px; }
+  .mg-izgara{ grid-template-columns:repeat(2,1fr); gap:8px; }
+  .sifre-anahtar{ grid-template-columns:repeat(5,1fr); gap:3px; }
+  .surukle-kutular{ grid-template-columns:repeat(2,1fr); gap:10px; }
+}
 
 </style>
 <style id="ogrKatmaniStil">
@@ -765,143 +926,164 @@
 }
 </style>
 
+<style id="anaMenuStil">
+.hero{ padding:26px 20px 20px; }
+.hero-sekiller{ display:none; }
+.hero-baslik{ font-size:1.35em; margin:2px 0 8px; }
+.hero-alt{ font-size:.95em; max-width:440px; }
+.hero-butonlar{ margin-top:12px; }
+#oyun-gruplari{ scroll-margin-top:10px; max-width:900px; margin:0 auto; }
+.mega-menu{ max-width:900px; margin:0 auto; padding:26px 16px 34px; flex-wrap:wrap; gap:18px; justify-content:center; position:static !important; }
+.mega-kart{
+  flex:1 1 230px; max-width:280px; background:#fff; border:2px solid var(--acik); border-radius:20px;
+  padding:26px 20px; text-align:center; cursor:pointer; transition:.18s; box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+.mega-kart:hover{ transform:translateY(-4px); border-color:var(--mavi); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+.mega-kart-ikon{ font-size:2.2em; margin-bottom:8px; }
+.mega-kart h3{ margin:0 0 6px; color:var(--navy); font-size:1.15em; }
+.mega-kart p{ margin:0; font-size:.85em; color:#667; }
+#ogrHedefKonteyner:empty{ display:none; }
+#ogrHedefKonteyner .ogr-hero-ek{ margin:14px auto 0; }
+.oyun-grubu.mega-menu.aktif, #oyun-gruplari > .oyun-grubu:not(.mega-menu){ position:static !important; top:auto !important; }
+.geri-btn{
+  display:block; width:100%; margin:0 0 12px; background:none; border:none; color:var(--mavi); font-weight:800;
+  cursor:pointer; font-size:.9em; padding:4px; text-align:center;
+}
+.geri-btn:hover{ text-decoration:underline; }
+.oyunmerkezi-nav{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; width:100%; margin-bottom:4px; }
+.oyunmerkezi-nav button{
+  padding:9px 16px; border:none; border-radius:18px; cursor:pointer; background:#22333b; color:#fff;
+  font-weight:bold; font-size:.9em; transition:.15s;
+}
+.oyunmerkezi-nav button:hover, .oyunmerkezi-nav button.kat-aktif{ background:var(--yesil); }
+</style>
+<style id="omgKart2Stil">
+.omg-2kolon{ align-items:flex-start; gap:32px; }
+.omg-yan-menu{
+  display:flex; flex-direction:column; gap:10px;
+  flex:0 0 280px; max-width:280px;
+  position:sticky; top:16px;
+}
+.omg-yan-menu .geri-btn{ margin-bottom:0; }
+.omg-yan-baslik{ font-weight:800; color:var(--navy); font-size:1.05em; width:100%; margin:4px 0 0; text-align:left; padding:0 4px; }
+.omg-yan-oge{
+  text-align:left; width:100%; min-height:62px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 18px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-yan-oge:hover{ border-color:var(--mavi); }
+.omg-yan-ikon{ font-size:1.5em; flex-shrink:0; }
+.omg-yan-oge.kat-aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18);
+  border-left-color:var(--mavi) !important;
+}
+.omg-yan-oge.kat-aktif .omg-yan-ikon{ font-size:1.9em; }
+.omg-kart-alan{
+  flex:1 1 420px; min-width:0; width:100%;
+  max-height:660px; overflow-y:auto; padding:4px 4px 4px 0;
+  animation: omgKartGiris .3s ease;
+}
+@keyframes omgKartGiris{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+.omg-kart-izgara{
+  display:grid; grid-template-columns:repeat(2, 1fr);
+  gap:22px; width:100%; align-content:start;
+}
+.omg-oyun-kart{
+  position:relative; cursor:pointer;
+  background:#fff; border-radius:18px; padding:30px 24px 26px;
+  text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.06);
+  transition:.18s; display:flex; flex-direction:column; gap:8px;
+  min-height:180px; border:1px solid transparent;
+}
+.omg-oyun-kart:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(0,0,0,.12); border-color:var(--acik); }
+.omg-oyun-kart-ikon{ font-size:1.8em; }
+.omg-oyun-kart h4{ margin:2px 0 0; font-size:1.08em; color:#22333b; line-height:1.35; }
+.omg-oyun-kart p{ margin:0; font-size:.86em; color:#8892a0; line-height:1.5; flex:1; }
+.omg-oyun-kart-alt{ display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+.omg-zorluk{ font-size:.72em; font-weight:800; letter-spacing:.3px; padding:4px 11px; border-radius:999px; background:var(--acikgri); color:#667; }
+.omg-oyna-ok{ font-size:.85em; font-weight:800; color:var(--mavi); }
+@media(max-width:640px){
+  .omg-2kolon{ flex-direction:column; gap:16px; }
+  .omg-yan-menu{
+    flex-direction:row; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    max-width:100%; position:static; gap:8px; padding-bottom:4px;
+  }
+  .omg-yan-baslik{ display:none; }
+  .omg-yan-menu .geri-btn{ flex:0 0 auto; width:auto; white-space:nowrap; }
+  .omg-yan-oge{ min-height:44px; width:auto; flex:0 0 auto; white-space:nowrap; }
+  .omg-kart-izgara{ grid-template-columns:1fr; }
+  .omg-kart-alan{ max-height:none; overflow-y:visible; }
+}
+</style>
+<style id="omgTekliMenuStil">
+.omg-tekli-menu{ display:flex; flex-direction:column; gap:10px; max-width:440px; }
+.omg-tekli-menu > button:not(.geri-btn){
+  text-align:left; width:100%; min-height:58px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 20px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-tekli-menu > button:not(.geri-btn):hover{ border-color:var(--mavi); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
+.omg-tekli-menu > button.aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18) !important;
+  border-left-color:var(--mavi) !important;
+}
+</style>
+<style id="omgEgitimIzoleStil">
+#oyun-gruplari:not(:has(#kat-unite-ogren.aktif)):not(:has(#kat-unite-degerlendir.aktif)) ~ main .egitim-icerik{
+  display:none !important;
+}
+</style>
 </head>
 <body>
 
 <header>
-  <p style="margin:0 0 6px;font-size:1.1em;font-weight:bold;letter-spacing:.5px;opacity:.95;">4. SINIF — 1. ÜNİTE</p>
+  <p class="gb-eyebrow">4. SINIF — 1. ÜNİTE</p>
   <h1>🕌 Günlük Hayattaki Dinî İfadeler</h1>
-  <p>Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
-  <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
-  <p style="margin-top:10px;"><a href="../en/din-kulturu-4sinif-1unite/index.html" lang="en" style="display:inline-block;padding:6px 16px;border-radius:16px;background:rgba(255,255,255,.22);color:white;text-decoration:none;font-weight:bold;font-size:.85em;border:1px solid rgba(255,255,255,.55);">English</a></p>
+  <p class="gb-ders-adi">Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
+  <p class="gb-yazar">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+  <div class="gb-kontrol-satiri">
+    <a href="../en/din-kulturu-4sinif-1unite/index.html" lang="en" style="display:inline-block;padding:6px 16px;border-radius:16px;background:rgba(255,255,255,.22);color:white;text-decoration:none;font-weight:bold;font-size:.85em;border:1px solid rgba(255,255,255,.55);">English</a>
+    <button type="button" id="temaDegistirBtn" class="tema-degistir-btn" onclick="temaDegistir()" aria-label="Koyu/açık tema değiştir">🌙 Koyu Tema</button>
+  </div>
 </header>
 <div class="op-baglanti-satiri"><a onclick="goster('ogretmenpaneli', event)" role="button" aria-label="Öğretmen paneline git">🔒 Öğretmen Paneli</a></div>
-
 <section class="hero">
-  <div class="hero-sekiller">
-    <span style="top:8%; left:6%; animation-delay:0s;">A</span>
-    <span style="top:65%; left:10%; animation-delay:1.2s;">📖</span>
-    <span style="top:20%; left:85%; animation-delay:.6s;">💡</span>
-    <span style="top:75%; left:88%; animation-delay:1.8s;">B</span>
-    <span style="top:50%; left:16%; animation-delay:2.4s;">🧩</span>
-    <span style="top:6%; left:78%; animation-delay:.9s;">C</span>
-  </div>
   <h2 class="hero-baslik">Düşün, Keşfet, Öğren!</h2>
   <p class="hero-alt">Kelime oyunları, zekâ etkinlikleri ve eğlenceli ders içerikleriyle öğrenmeyi keyfe dönüştür.</p>
   <div class="hero-butonlar">
-    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">🚀 Oyuna Başla</button>
-    <button class="hero-btn hero-btn-ikincil" onclick="kategoriGosterVeKaydir('kat-unite')">📚 Etkinlikleri Keşfet</button>
-  </div>
-</section>
-
-<div class="istatistik-cubugu">
-  <div class="istatistik-kutu"><span class="ist-ikon">⭐</span><b id="istToplamPuan">0</b><span class="ist-etiket">Toplam Puan</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🏅</span><b id="istRozet">0</b><span class="ist-etiket">Rozet</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🔥</span><b id="istSeri">0</b><span class="ist-etiket">Günlük Seri</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">📈</span><b id="istTamamlanan">0</b><span class="ist-etiket">Tamamlanan Etkinlik</span></div>
-</div>
-
-<section class="kategori-kartlari">
-  <div class="kategori-kart" onclick="kategoriGosterVeKaydir('kat-bulmaca')">
-    <div class="kk-ikon">🧩</div><h3>Kelime Oyunları</h3><p>Çengel, şifre, kodlama ve daha fazlası</p>
-  </div>
-  <div class="kategori-kart" onclick="kategoriGosterVeKaydir('kat-mantik')">
-    <div class="kk-ikon">🧠</div><h3>Mantık Oyunları</h3><p>Bulmacalar ve akıl yürütme etkinlikleri</p>
-  </div>
-  <div class="kategori-kart" onclick="kategoriGosterVeKaydir('kat-unite')">
-    <div class="kk-ikon">📖</div><h3>Ders Etkinlikleri</h3><p>Günlük ifadeler, dualar, Sübhâneke</p>
-  </div>
-  <div class="kategori-kart" onclick="kategoriGosterVeKaydir('kat-yarisma')">
-    <div class="kk-ikon">🏆</div><h3>Haftanın Görevi</h3><p>Yarışma ve turnuva oyunları</p>
-  </div>
-</section>
-
-<section class="gunun-meydan-okumasi">
-  <h3 style="text-align:center;color:var(--navy);">🔥 Günün Meydan Okuması</h3>
-  <div class="gmo-kart">
-    <p class="gmo-baslik">Bugünkü Görev</p>
-    <p id="gmoSoru" class="gmo-soru"></p>
-    <div id="gmoSecenekler" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"></div>
-    <p id="gmoSonuc" class="sonuc-kutusu"></p>
-  </div>
-</section>
-
-<section class="populer-oyunlar">
-  <h3 style="text-align:center;color:var(--navy);">⭐ Popüler Oyunlar</h3>
-  <div class="po-izgara">
-    <div class="po-kart" onclick="kategoriGosterVeKaydirSonraGoster('kat-macera','labirent')"><span class="po-ikon">🎯</span><span>Kelime Kaçışı</span></div>
-    <div class="po-kart" onclick="kategoriGosterVeKaydirSonraGoster('kat-bulmaca','sifre')"><span class="po-ikon">🔐</span><span>Gizli Şifre</span></div>
-    <div class="po-kart" onclick="kategoriGosterVeKaydirSonraGoster('kat-mantik','dildedektifi')"><span class="po-ikon">🕵️</span><span>Dil Dedektifi</span></div>
-    <div class="po-kart" onclick="kategoriGosterVeKaydirSonraGoster('kat-mantik','semantiklabirent')"><span class="po-ikon">🧩</span><span>Kavram Avı</span></div>
-    <div class="po-kart" onclick="kategoriGosterVeKaydirSonraGoster('kat-yarisma','kelimeuret')"><span class="po-ikon">⚡</span><span>60 Saniye Meydan Okuması</span></div>
-    <div class="po-kart" onclick="kategoriGosterVeKaydirSonraGoster('kat-yarisma','kavramturnuvasi')"><span class="po-ikon">🏆</span><span>Kelime Arenası</span></div>
+    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">▶ Üniteye Başla</button>
   </div>
 </section>
 
 <div id="oyun-gruplari" role="navigation" aria-label="Ünite bölümleri menüsü">
-<nav class="kategori-nav" role="navigation" aria-label="Ana kategori menüsü">
-  <button onclick="kategoriGoster('kat-unite', event)" class="kat-aktif">📘 Ünite Konuları</button>
-  <button onclick="kategoriGoster('kat-bulmaca', event)">🧩 Kelime Bulmacaları</button>
-  <button onclick="kategoriGoster('kat-yarisma', event)">🎮 Yarışma Oyunları</button>
-  <button onclick="kategoriGoster('kat-mantik', event)">🕵️ Mantık &amp; Dedektiflik</button>
-  <button onclick="kategoriGoster('kat-macera', event)">🌀 Macera</button>
-  <button onclick="kategoriGoster('kat-ezber', event)">🕌 Ezber Etkinlikleri</button>
-</nav>
 
-<div class="oyun-grubu aktif" id="kat-unite">
-  <button onclick="goster('ozet', event)">📋 Konu Özeti</button>
-  <button onclick="goster('konu1', event)" class="aktif">1️⃣ Günlük İfadeler</button>
-  <button onclick="goster('konu2', event)">2️⃣ Dilek ve Dualar</button>
-  <button onclick="goster('konu3', event)">3️⃣ Sübhâneke Duası</button>
-  <button onclick="goster('degerlendirme', event)">✅ Değerlendirme</button>
-  <button onclick="goster('arastirma', event)">📝 Araştırma Oyunları</button>
-  <button onclick="goster('konutekrari', event)">📝 Konu Tekrarı Testi</button>
-  <button onclick="goster('slayt', event)">🖥️ Ünite Sunumu</button>
-  <button onclick="goster('yazili', event)">📝 Yazılı Sınavlar</button>
+<div class="oyun-grubu mega-menu aktif" id="kat-anamenu">
+  <div class="mega-kart" onclick="window.location.href='konuyu-ogren.html'">
+    <div class="mega-kart-ikon">📖</div><h3>Konuyu Öğren</h3>
+    <p>Konu anlatımları, sunular ve kavramlar.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='oyun-merkezi.html'">
+    <div class="mega-kart-ikon">🎮</div><h3>Oyunlar</h3>
+    <p>Konuyu eğlenerek pekiştir.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='degerlendirme.html'">
+    <div class="mega-kart-ikon">📝</div><h3>Değerlendirme</h3>
+    <p>Testler ve değerlendirme soruları.</p>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-bulmaca">
-  <button onclick="goster('kelimeavi', event)">🔎 Kelime Avı</button>
-  <button onclick="goster('cengel', event)">🧩 Çengel Bulmaca</button>
-  <button onclick="goster('merdiven', event)">🪜 Sözcük Merdiveni</button>
-  <button onclick="goster('sifre', event)">🔐 Şifreli Sözcük</button>
-  <button onclick="goster('sifretanim', event)">🔐 Şifreli Tanım</button>
-  <button onclick="goster('kelimekodlama', event)">💻 Kelime Kodlama</button>
-  <button onclick="goster('nonogram', event)">🖼️ Nonogram</button>
-  <button onclick="goster('satranc', event)">♞ Kelime Satrancı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-yarisma">
-  <button onclick="goster('kelimeuret', event)">⚡ Hızlı Kelime</button>
-  <button onclick="goster('tuzak', event)">🚫 Tuzak Harf</button>
-  <button onclick="goster('fabrika', event)">🏭 Kelime Fabrikası</button>
-  <button onclick="goster('muhendis', event)">🛠️ Kelime Mühendisi</button>
-  <button onclick="goster('kavramturnuvasi', event)">🏆 Kavram Turnuvası</button>
-  <button onclick="goster('bonus', event)">🎮 Bonus Oyun</button>
-</div>
-
-<div class="oyun-grubu" id="kat-mantik">
-  <button onclick="goster('dedektif', event)">🕵️ Kelime Dedektifi</button>
-  <button onclick="goster('dildedektifi', event)">🕵️‍♀️ Dil Dedektifi</button>
-  <button onclick="goster('mantikzinciri', event)">🔗 Mantık Zinciri</button>
-  <button onclick="goster('semantiklabirent', event)">🧠 Semantik Labirent</button>
-  <button onclick="goster('celiskiavi', event)">🕵️‍♂️ Çelişki Avı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-macera">
-  <button onclick="goster('labirent', event)">🌀 Labirent</button>
-</div>
-
-<div class="oyun-grubu" id="kat-ezber">
-  <button onclick="goster('ezsira', event)">1️⃣ Sırala Bakalım</button>
-  <button onclick="goster('ezbosluk', event)">2️⃣ Boşluk Doldur</button>
-  <button onclick="goster('ezeslestir', event)">3️⃣ Anlam Eşleştir</button>
-  <button onclick="goster('ezhafiza', event)">4️⃣ Hafıza Kartları</button>
-  <button onclick="goster('ezadimadim', event)">5️⃣ Adım Adım Ezber</button>
-  <button onclick="goster('ezgizli', event)">6️⃣ Gizli Harfler</button>
-  <button onclick="goster('ezkaybolan', event)">7️⃣ Kaybolan Kelimeler</button>
-  <button onclick="goster('ezhiz', event)">8️⃣ Hız Testi</button>
-</div>
 </div>
 
 <main>
@@ -924,1351 +1106,38 @@
   </div>
 </div>
 </section>
-
-<section id="slayt">
-<h2>🖥️ Ünite Sunumu</h2>
-
-  <div class="sunum-sarmal">
-    <div class="sunum-ust">
-      <span class="sunum-sayac" id="sunumSayac">1 / 21</span>
-      <button class="sunum-tamekran-btn" onclick="sunumTamEkran('')" aria-label="Sunumu tam ekran aç">⛶ Tam Ekran</button>
-    </div>
-    <div class="sunum-alan" id="sunumAlan">
-      
-  <div class="sunum-slayt aktif s-baslik" data-tip="baslik">
-    <div class="sb-daire">💬</div>
-    <p class="sb-ust">4. SINIF — 1. ÜNİTE</p>
-    <h2 class="sb-baslik">Günlük Hayattaki Dinî İfadeler</h2>
-    <p class="sb-ders">Din Kültürü ve Ahlak Bilgisi</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı</p>
-  </div>
-
-  <div class="sunum-slayt s-liste" data-tip="hedef">
-    <h3>🎯 Bu Ünitede Neler Öğreneceğiz?</h3>
-    <ul class="sl-liste">
-      <li>Günlük Konuşmalarda Dinî İfadeler</li><li>Dilek ve Dualarda Geçen Dinî İfadeler</li><li>Bir Dua Tanıyorum: Sübhâneke Duası ve Anlamı</li><li>Öğrendiklerimizi Değerlendiriyoruz</li><li>Genişletilmiş Kavramlar Sözlüğü</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Günlük Konuşmalarda Dinî İfadeler (1/9)</h3>
-    <ul class="si-liste">
-      <li>Bu ifadeler, günlük hayatın hemen her anında karşımıza çıkar: bir işe başlarken, bir nimete kavuşunca, birine rastlayınca ya da bir hatamızı fark edince... Her birinin kendine göre bir kullanım yeri ve manevi anlamı vardır.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Günlük Konuşmalarda Dinî İfadeler (2/9)</h3>
-    <ul class="si-liste">
-      <li><b>📿 Besmele — "Bismillâhirrahmânirrahîm"</b><br>Anlamı: "Rahman ve Rahim olan Allah'ın adıyla." Yemeğe, derse, bir işe veya yolculuğa başlarken söylenir. Besmeleyle başlanan işlerin bereketli ve hayırlı olacağına inanılır. Bu yüzden peygamberimiz her güzel işe besmeleyle başlamamızı öğütlemiştir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Günlük Konuşmalarda Dinî İfadeler (3/9)</h3>
-    <ul class="si-liste">
-      <li><b>🙏 Hamd — "Elhamdülillah"</b><br>Anlamı: "Övgü ve şükür Allah'a mahsustur." Bir nimete, güzel bir habere ya da başarıya kavuştuğumuzda Allah'ı övmek ve O'na teşekkür etmek için söylenir. Hamd etmek, sahip olduklarımızın kıymetini bilmemizi sağlar.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Günlük Konuşmalarda Dinî İfadeler (4/9)</h3>
-    <ul class="si-liste">
-      <li><b>💚 Şükür — "Allah'a şükür"</b><br>Anlamı: Allah'ın bize verdiği nimetlere karşı duyulan minnettarlığı dile getirmektir. Şükür, sadece dille söylenen bir söz değil; nimeti yerinde kullanmak ve başkalarıyla paylaşmaktır da.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Günlük Konuşmalarda Dinî İfadeler (5/9)</h3>
-    <ul class="si-liste">
-      <li><b>🤝 Selam — "Selamünaleyküm" / "Ve aleykümselam"</b><br>Anlamı: "Allah'ın selameti/esenliği senin üzerine olsun." Müslümanların karşılaştıklarında birbirlerine söylediği, sevgi ve barış dileyen bir ifadedir. Peygamberimiz selamı yaymayı, insanlar arasında sevgiyi artıran bir davranış olarak tavsiye etmiştir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Günlük Konuşmalarda Dinî İfadeler (6/9)</h3>
-    <ul class="si-liste">
-      <li><b>🕌 Tekbir — "Allahu Ekber"</b><br>Anlamı: "Allah en büyüktür." Allah'ın büyüklüğünü, üstünlüğünü anmak için söylenir. Namazın başında ve içinde, ezanda ve bayramlarda sıkça duyduğumuz bir ifadedir.</li><li><b>🌙 Salavat — "Allahümme salli alâ seyyidina Muhammed"</b><br>Anlamı: Peygamberimize dua etmek, ona sevgi ve saygı sunmaktır. Peygamberimizin adı anıldığında salavat getirmek, ona olan bağlılığımızı gösterir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Günlük Konuşmalarda Dinî İfadeler (7/9)</h3>
-    <ul class="si-liste">
-      <li><b>😔 İstiğfar — "Estağfirullah"</b><br>Anlamı: "Allah'tan bağışlanma dilerim." Yanlışlıkla kötü bir söz söylediğimizde, bir hata yaptığımızda ya da pişmanlık duyduğumuzda Allah'tan af dilemek için söylenir. İstiğfar etmek, hatalarımızdan ders çıkarıp kendimizi düzeltmeye çalışmamız gerektiğini hatırlatır.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Günlük Konuşmalarda Dinî İfadeler (8/9)</h3>
-    <ul class="si-liste">
-      <li><b>✨ Tesbih — "Sübhanallah"</b><br>Anlamı: "Allah'ı bütün eksikliklerden uzak tutarım." Allah'ın hiçbir kusuru olamayacağını, O'nun yüceliğini dile getirmek için; genellikle hayranlık uyandıran güzellikler karşısında da söylenir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Günlük Konuşmalarda Dinî İfadeler (9/9)</h3>
-    <ul class="si-liste">
-      <li><b>Biliyor muydunuz?</b> Kur'an okumaya başlarken "<b>Eûzü billâhi mine'ş-şeytâni'r-racîm</b>" (Kovulmuş şeytanın şerrinden Allah'a sığınırım) denir. Biri hapşırıp "Elhamdülillah" dediğinde ise ona "<b>Yerhamükallah</b>" (Allah sana merhamet etsin) diye karşılık verilir; o kişi de buna "Yehdinallah" diyerek cevap verir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-zb s-zb-merak" data-tip="zb">
-    <p class="zb-slayt-ust">🤔 Merak Ettin mi?</p>
-    <p class="zb-slayt-metin">Neden hapşırınca "Elhamdülillah" deriz de yanımızdakiler "Yerhamükallah" der? Bu karşılıklı dua geleneği Peygamberimizin sünnetinden gelir.</p>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Dilek ve Dualarda Geçen Dinî İfadeler (1/3)</h3>
-    <ul class="si-liste">
-      <li><b>Dua</b>, kulun Allah'a yönelerek O'ndan bir şey istemesi, O'na yalvarması ve gönlünü açmasıdır. Sevdiklerimize iyi dileklerde bulunurken de aslında onlar için Allah'tan bir şeyler dileriz. İşte bu yüzden günlük hayatımızda birçok "dilek ifadesi" kullanırız:</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Dilek ve Dualarda Geçen Dinî İfadeler (2/3)</h3>
-    <ul class="si-liste">
-      <li><b>Allah şifa versin</b> — Hasta olan birine, acil bir iyileşme dileğiyle söylenir.</li><li><b>Allah'a emanet ol</b> — Yolculuğa çıkan birinin yolunun ve kendisinin Allah'ın korumasında olmasını dilemek için söylenir.</li><li><b>İnşallah</b> — "Allah izin verirse/dilerse" anlamına gelir; gelecekte olmasını umduğumuz bir işten bahsederken söylenir. Bu söz, her şeyin Allah'ın izniyle gerçekleştiğini hatırlamamızı sağlar.</li><li><b>Allah razı olsun</b> — Bize iyilik yapan, yardım eden birine teşekkür etmek için söylenir.</li><li><b>Amin</b> — "Öyle olsun, kabul et Allah'ım" anlamındadır. Bir dua bittiğinde, o duanın kabul olması dileğiyle hep birlikte söylenir.</li><li><b>Allah bereket versin</b> — Birinin kazancına, emeğine veya evine bolluk dilemek için söylenir.</li><li><b>Hayırlı olsun</b> — Yeni bir eve taşınan, yeni bir işe başlayan ya da yeni bir eşyaya kavuşan birine söylenir.</li><li><b>Allah kolaylık versin</b> — Zor bir işe girişen birine güç ve kolaylık dilemek için söylenir.</li><li><b>Allah rahmet eylesin</b> — Vefat etmiş bir kimse anıldığında, onun için Allah'tan merhamet dilenerek söylenir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Dilek ve Dualarda Geçen Dinî İfadeler (3/3)</h3>
-    <ul class="si-liste">
-      <li><b>Unutmayalım:</b> Bu ifadeleri kullanırken sadece bir söz söylemiş olmuyoruz; aynı zamanda karşımızdaki kişi için içtenlikle dua etmiş oluyoruz. Bu yüzden bu sözleri gönülden söylemeliyiz.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-zb s-zb-yanlis" data-tip="zb">
-    <p class="zb-slayt-ust">❌ Yanlış Bilinenler</p>
-    <p class="zb-slayt-yanlis">❌ Bazıları "İnşallah" demeyi "belki olur belki olmaz" gibi bir belirsizlik ifadesi sanır.</p>
-    <p class="zb-slayt-dogru">✅ Aslında "İnşallah", her şeyin Allah'ın izniyle gerçekleştiğine olan inancımızı, kesin bir tevekkül bilinciyle ifade eder.</p>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 Bir Dua Tanıyorum: Sübhâneke Duası ve Anlamı (1/3)</h3>
-    <ul class="si-liste">
-      <li>🕋 سُبْحَانَكَ اَللّٰهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالٰى جَدُّكَ وَلاَ اِلٰهَ غَيْرُكَ — Sübhânekellâhümme ve bi hamdik ve tebârekesmük ve teâlâ ceddük ve lâ ilâhe ğayrük.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 Bir Dua Tanıyorum: Sübhâneke Duası ve Anlamı: Kelime kelime anlamı</h3>
-    <ul class="si-liste">
-      <li><b>Sübhânekellâhümme ve bi hamdik</b> — "Allah'ım! Sen eksik sıfatlardan uzaksın, seni daima böyle tenzih eder ve överim."</li><li><b>ve tebârekesmük</b> — "Senin adın mübarektir."</li><li><b>ve teâlâ ceddük</b> — "Varlığın, şanın her şeyden üstündür."</li><li><b>ve lâ ilâhe ğayrük</b> — "Senden başka ilah yoktur."</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 Bir Dua Tanıyorum: Sübhâneke Duası ve Anlamı (3/3)</h3>
-    <ul class="si-liste">
-      <li><b>Ne zaman okunur?</b> Sübhâneke duası, namaza durup iftitah (başlangıç) tekbiri aldıktan hemen sonra, Kur'an okumaya başlamadan önce okunur. Bu yüzden bu duaya "namazın anahtarı" da denilebilir.</li><li><b>Neden önemlidir?</b> Sübhâneke duasıyla namaza, Allah'ı övüp yücelterek ve O'ndan başka ilah olmadığını hatırlayarak başlarız. Bu dua, kalbimizi ibadete hazırlar ve Allah'a olan bağlılığımızı tazeler.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-zb s-zb-ornek" data-tip="zb">
-    <p class="zb-slayt-ust">🌍 Gerçek Hayattan Bir Örnek</p>
-    <p class="zb-slayt-metin">Bir arkadaşın sınavdan yüksek not aldığında "Elhamdülillah, çok sevindim!" demesi, hem başarısının kıymetini bilmesini hem de bunu Allah'a şükrederek kutlamasını gösterir.</p>
-  </div>
-
-  <div class="sunum-slayt s-zb s-zb-dusun" data-tip="zb">
-    <p class="zb-slayt-ust">💭 Düşün ve Cevapla</p>
-    <p class="zb-slayt-metin">Sence günlük hayatta en sık hangi dinî ifadeyi kullanıyoruz? Neden bu ifadeyi bu kadar sık kullanırız?</p>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Öğrendiklerimizi Değerlendiriyoruz (1/2)</h3>
-    <ul class="si-liste">
-      <li>Ünitenin sonunda şu kazanımlar değerlendirilir:</li><li>Günlük konuşmalarda geçen dinî ifadeleri doğru durumda kullanabilme.</li><li>Dilek ve dualarda geçen ifadelerin anlamlarını bilme ve yerinde kullanabilme.</li><li>Sübhâneke duasını doğru okuyup anlamını açıklayabilme.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Öğrendiklerimizi Değerlendiriyoruz (2/2)</h3>
-    <ul class="si-liste">
-      <li>Bu kazanımlar, sayfadaki "✅ Değerlendirme" ve "📝 Araştırma Oyunları" bölümlerindeki zamanlı testlerle (can hakkı ve puanlama ile) ölçülür.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-zb s-zb-aile" data-tip="zb">
-    <p class="zb-slayt-ust">👨‍👩‍👧 Ailemle Yapıyorum</p>
-    <p class="zb-slayt-metin">Bu hafta ailenle birlikte, evde en sık kullandığınız 5 dinî ifadeyi ve anlamlarını bir kağıda yazıp mutfağa asın.</p>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:#7c3aed">
-    <h3>📌 Genişletilmiş Kavramlar Sözlüğü (1/7)</h3>
-    <ul class="si-liste">
-      <li>Dinî ifadeleri daha iyi anlayabilmek için bilmemiz gereken temel kavramlar, konularına göre gruplandırılmıştır:</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:#7c3aed">
-    <h3>📌 Genişletilmiş Kavramlar Sözlüğü: Allah ve Peygamberimizle İlgili Kavramlar</h3>
-    <ul class="si-liste">
-      <li><b>Allah</b> — Evrenin ve bizim tek yaratıcımız; eşi, benzeri ve ortağı yoktur.</li><li><b>Peygamber</b> — Allah'ın, insanlara doğru yolu göstermek için gönderdiği elçi.</li><li><b>Vahiy</b> — Allah'ın, peygamberlerine gönderdiği bilgi ve mesaj.</li><li><b>Melek</b> — Allah'ın nurdan yarattığı, hiç günah işlemeyen, sürekli O'na itaat eden varlık.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:#7c3aed">
-    <h3>📌 Genişletilmiş Kavramlar Sözlüğü: Allah'ın Bize Verdikleri</h3>
-    <ul class="si-liste">
-      <li><b>Nimet</b> — Allah'ın kullarına verdiği güzellik ve iyilik (sağlık, aile, yiyecek gibi).</li><li><b>Rahmet</b> — Allah'ın kullarına olan sonsuz merhameti ve acıması.</li><li><b>Lütuf</b> — Allah'ın, hak etmediğimiz hâlde bize bahşettiği iyilik ve ihsan.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:#7c3aed">
-    <h3>📌 Genişletilmiş Kavramlar Sözlüğü: Davranışlarımızın Karşılığı</h3>
-    <ul class="si-liste">
-      <li><b>Sevap</b> — İyi bir davranışın Allah katındaki karşılığı, mükâfatı.</li><li><b>Günah</b> — Allah'ın hoş görmediği, yasakladığı kötü davranış.</li><li><b>Helal</b> — Dinimizin yapılmasına izin verdiği şey.</li><li><b>Haram</b> — Dinimizin kesin olarak yasakladığı şey.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:#7c3aed">
-    <h3>📌 Genişletilmiş Kavramlar Sözlüğü: Ahiretle İlgili Kavramlar</h3>
-    <ul class="si-liste">
-      <li><b>Cennet</b> — İyi, güzel işler yapan insanların öldükten sonra gideceği, hiç eksiği olmayan güzel yer.</li><li><b>Cehennem</b> — Kötülük yapıp tövbe etmeyenlerin gideceği söylenen, azap dolu yer.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:#7c3aed">
-    <h3>📌 Genişletilmiş Kavramlar Sözlüğü: İbadetlerle İlgili Kavramlar</h3>
-    <ul class="si-liste">
-      <li><b>İbadet</b> — Allah'a olan sevgi, saygı ve bağlılığımızı göstermek için yaptığımız davranışların tümü.</li><li><b>Namaz</b> — Müslümanların günde beş vakit kıldığı, bedenle yapılan en önemli ibadet.</li><li><b>Ezan</b> — Namaz vaktinin geldiğini bildiren, minarelerden okunan çağrı.</li><li><b>Oruç</b> — İmsak vaktinden akşam ezanına kadar yeme, içme ve nefsin isteklerinden uzak durma ibadeti.</li><li><b>Zekat</b> — Belli bir zenginliğe ulaşan Müslümanların, mallarının bir kısmını ihtiyaç sahiplerine vermesi.</li><li><b>Kurban</b> — Allah'ın rızasını kazanmak amacıyla belirli şartlarda kesilen hayvan.</li><li><b>Hac</b> — Gücü yeten Müslümanların, ömürlerinde bir kez Mekke'ye yaptığı ibadet yolculuğu.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:#7c3aed">
-    <h3>📌 Genişletilmiş Kavramlar Sözlüğü: Mübarek Zaman ve Günler</h3>
-    <ul class="si-liste">
-      <li><b>Ramazan</b> — Oruç tutulan, Kur'an'ın indirilmeye başladığı mübarek ay.</li><li><b>Bayram</b> — Dinimizde sevinç ve kardeşlik duygularıyla kutlanan özel günler (Ramazan ve Kurban Bayramı gibi).</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-zb s-zb-degerlendir" data-tip="zb">
-    <p class="zb-slayt-ust">✅ Kendimi Değerlendiriyorum</p>
-    <ul class="zb-slayt-liste"><li>☐ Günlük hayatta kullanılan en az 5 dinî ifadeyi ve anlamlarını söyleyebilirim.</li><li>☐ Sübhâneke duasının anlamını açıklayabilirim.</li><li>☐ Bu ifadeleri ne zaman kullanacağımı biliyorum.</li><li>☐ Öğrendiğim ifadeleri günlük hayatımda kullanmaya özen gösteriyorum.</li></ul>
-  </div>
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">Din</span><span class="sk-etiket" style="background:var(--mavi)">Dua</span><span class="sk-etiket" style="background:var(--kirmizi)">Eûzü-Besmele</span><span class="sk-etiket" style="background:var(--turkuaz)">Elhamdülillah</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"Hamd, âlemlerin Rabbi Allah'a mahsustur."</p>
-    <p class="sa-kaynak">— Fatiha suresi, 2. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"Eğer şükrederseniz, elbette size nimetimi artırırım."</p>
-    <p class="sa-kaynak">— İbrahim suresi, 7. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-video" data-tip="video">
-    <p class="sv-ust">🎬 KONUYLA İLGİLİ VİDEO</p>
-    <div class="sv-cerceve">
-      <iframe src="https://www.youtube.com/embed/Y_U_fmZotVk" title="Çocuk İlahileri | Bibercik İlahileri" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
-    <p class="sv-baslik">Çocuk İlahileri | Bibercik İlahileri</p>
-  </div>
-
-    <div class="sunum-slayt s-zb s-zb-derin" data-tip="zb">
-    <p class="zb-slayt-ust">🔍 DERİNLEMESİNE DÜŞÜNELİM</p>
-    <ul class="zb-slayt-liste">
-      <li>Bu bilgi benim hayatımı nasıl etkiler?</li>
-      <li>Bu kavram neden önemlidir?</li>
-      <li>Günlük yaşamda bunun karşılığı nedir?</li>
-    </ul>
-  </div>
-
-
-  <div class="sunum-slayt s-liste s-ozet" data-tip="ozet">
-    <h3>📝 Ünite Özeti</h3>
-    <ul class="sl-liste">
-      <li>Dinî ifadeler nedir? İnsanlar, düşüncelerini ve duygularını dille ifade eder.</li><li>Dilimizde, dinimizin etkisiyle ortaya çıkmış ve günlük konuşmalarımıza yerleşmiş birçok söz ve kavram vardır.</li><li>İşte bunlara dinî ifadeler denir.</li><li>Sevincimizi, üzüntümüzü, şükranımızı, dileğimizi ya da bir hatamızı fark ettiğimizde bu ifadeleri kullanırız.</li><li>Bu ifadeleri yerinde ve bilinçli kullanmak; Allah'ı, Peygamberimizi ve dinimizin öğütlediği güzel ahlakı hatırlamamızı sağlar.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-kapanis" data-tip="kapanis">
-    <div class="sb-daire">🌟</div>
-    <h2 class="sb-baslik">Dinlediğiniz İçin Teşekkürler</h2>
-    <p class="sb-ders">Başarılar dilerim.</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı — Din Kültürü ve Ahlak Bilgisi Öğretmeni</p>
-  </div>
-    </div>
-    <div class="sunum-nav">
-      <button onclick="sunumGit('',-1)" aria-label="Önceki slayt">⬅ Önceki</button>
-      <div class="sunum-noktalar" id="sunumNoktalar"></div>
-      <button onclick="sunumGit('',1)" aria-label="Sonraki slayt">Sonraki ➡</button>
-    </div>
-  </div>
-</section>
-
-<section id="yazili">
-  <h2>📝 Yazılı Sınavlar</h2>
-  <div class="aciklama">4. sınıf Din Kültürü ve Ahlak Bilgisi dersine ait, resmî MEB sınav formatında hazırlanmış, yazdırılabilir yazılı yoklama sınavları. Her dönem için hem <b>karma</b> (boşluk doldurma, eşleştirme, doğru-yanlış, kısa cevap) hem de tamamen açık uçlu <b>klasik</b> format seçeneği bulunur. Kartlara tıklayınca sınav yeni sekmede açılır ve doğrudan yazdırılabilir.</div>
-  <div class="yazili-izgara">
-    <a class="yazili-kart" href="yazili1.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili1_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili2.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili2_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili3.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>2. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili3_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>2. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili4.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>2. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili4_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>2. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-  </div>
-</section>
-
-
-<!-- KONU ÖZETİ -->
-<section id="ozet">
-  <h2>📋 1. Ünite Konu Özeti: Günlük Hayattaki Dinî İfadeler</h2>
-
-  <div class="aciklama">
-    <b>Dinî ifadeler nedir?</b> İnsanlar, düşüncelerini ve duygularını dille ifade eder. Dilimizde, dinimizin etkisiyle ortaya çıkmış ve günlük konuşmalarımıza yerleşmiş birçok söz ve kavram vardır. İşte bunlara <b>dinî ifadeler</b> denir. Sevincimizi, üzüntümüzü, şükranımızı, dileğimizi ya da bir hatamızı fark ettiğimizde bu ifadeleri kullanırız. Bu ifadeleri yerinde ve bilinçli kullanmak; Allah'ı, Peygamberimizi ve dinimizin öğütlediği güzel ahlakı hatırlamamızı sağlar.
-  </div>
-
-  <div class="kutu-panel kutu-kazanim">
-    <h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
-    <p class="kazanim-kaynak">Kaynak: 2018 DKAB Öğretim Programı (MEB Talim ve Terbiye Kurulu) — 4.1. Günlük Hayattaki Dinî İfadeler</p>
-    <ul>
-      <li><b>4.1.1</b> — Dinî ifadeleri, günlük konuşmalarda doğru ve yerinde kullanır.</li>
-      <li><b>4.1.2</b> — Tekbir ve salavatı söyler.</li>
-      <li><b>4.1.3</b> — Dilek ve dualarda kullanılan dinî ifadelere örnekler verir.</li>
-      <li><b>4.1.4</b> — Sübhaneke duasını okur, anlamını söyler.</li>
-    </ul>
-  </div>
-
-  <div class="kutu-panel kavram-harita-panel">
-    <h3 style="color:#5b21b6">🗺️ Kavram Haritası</h3>
-    <p class="kavram-harita-aciklama">Bu ünitenin MEB öğretim programında belirlenen anahtar kavramları, ünite temasıyla bağlantılı olarak aşağıda gösterilmiştir.</p>
-    <div class="kavram-harita">
-      <div class="kh-merkez">Günlük Hayattaki Dinî İfadeler</div>
-      <div class="kh-dallar">
-      <div class="kh-kavram">Din</div>
-      <div class="kh-kavram">Dua</div>
-      <div class="kh-kavram">Eûzü-Besmele</div>
-      <div class="kh-kavram">Elhamdülillah</div>
-      <div class="kh-kavram">Şükür</div>
-      <div class="kh-kavram">Helal</div>
-      <div class="kh-kavram">Temizlik</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="kutu-panel kutu-kazanim">
-    <h3 style="color:#5b21b6">🎯 Güncel MEB Kazanımları (2024 Türkiye Yüzyılı Maarif Modeli)</h3>
-    <p class="kazanim-kaynak">Kaynak: Türkiye Yüzyılı Maarif Modeli DKAB Öğretim Programı — 1. Ünite: Günlük Hayat ve Din</p>
-    <ul>
-      <li><b>DKAB.4.1.1</b> — Günlük hayatta kullanılan dinî ifadeleri özetler.</li>
-      <li><b>DKAB.4.1.2</b> — Gözlemlerinden yola çıkarak İslam dininin temizliğe verdiği önemi tahmin eder.</li>
-      <li><b>DKAB.4.1.3</b> — Allah'a şükretmenin önemini fark eder ve bunu günlük hayatına yansıtır.</li>
-      <li><b>DKAB.4.1.4</b> — İslam'a göre helal ve sağlıklı beslenmenin önemi hakkında bilgi toplar.</li>
-      <li><b>DKAB.4.1.5</b> — Sübhâneke duasını okur ve anlamını yorumlar.</li>
-    </ul>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ Günlük Konuşmalarda Dinî İfadeler</h3>
-    <p>Bu ifadeler, günlük hayatın hemen her anında karşımıza çıkar: bir işe başlarken, bir nimete kavuşunca, birine rastlayınca ya da bir hatamızı fark edince... Her birinin kendine göre bir kullanım yeri ve manevi anlamı vardır.</p>
-
-    <p><b>📿 Besmele — "Bismillâhirrahmânirrahîm"</b><br>
-    Anlamı: "Rahman ve Rahim olan Allah'ın adıyla." Yemeğe, derse, bir işe veya yolculuğa başlarken söylenir. Besmeleyle başlanan işlerin bereketli ve hayırlı olacağına inanılır. Bu yüzden peygamberimiz her güzel işe besmeleyle başlamamızı öğütlemiştir.</p>
-
-    <p><b>🙏 Hamd — "Elhamdülillah"</b><br>
-    Anlamı: "Övgü ve şükür Allah'a mahsustur." Bir nimete, güzel bir habere ya da başarıya kavuştuğumuzda Allah'ı övmek ve O'na teşekkür etmek için söylenir. Hamd etmek, sahip olduklarımızın kıymetini bilmemizi sağlar.</p>
-
-    <p><b>💚 Şükür — "Allah'a şükür"</b><br>
-    Anlamı: Allah'ın bize verdiği nimetlere karşı duyulan minnettarlığı dile getirmektir. Şükür, sadece dille söylenen bir söz değil; nimeti yerinde kullanmak ve başkalarıyla paylaşmaktır da.</p>
-
-    <p><b>🤝 Selam — "Selamünaleyküm" / "Ve aleykümselam"</b><br>
-    Anlamı: "Allah'ın selameti/esenliği senin üzerine olsun." Müslümanların karşılaştıklarında birbirlerine söylediği, sevgi ve barış dileyen bir ifadedir. Peygamberimiz selamı yaymayı, insanlar arasında sevgiyi artıran bir davranış olarak tavsiye etmiştir.</p>
-
-    <p><b>🕌 Tekbir — "Allahu Ekber"</b><br>
-    Anlamı: "Allah en büyüktür." Allah'ın büyüklüğünü, üstünlüğünü anmak için söylenir. Namazın başında ve içinde, ezanda ve bayramlarda sıkça duyduğumuz bir ifadedir.</p>
-
-    <p><b>🌙 Salavat — "Allahümme salli alâ seyyidina Muhammed"</b><br>
-    Anlamı: Peygamberimize dua etmek, ona sevgi ve saygı sunmaktır. Peygamberimizin adı anıldığında salavat getirmek, ona olan bağlılığımızı gösterir.</p>
-
-    <p><b>😔 İstiğfar — "Estağfirullah"</b><br>
-    Anlamı: "Allah'tan bağışlanma dilerim." Yanlışlıkla kötü bir söz söylediğimizde, bir hata yaptığımızda ya da pişmanlık duyduğumuzda Allah'tan af dilemek için söylenir. İstiğfar etmek, hatalarımızdan ders çıkarıp kendimizi düzeltmeye çalışmamız gerektiğini hatırlatır.</p>
-
-    <p><b>✨ Tesbih — "Sübhanallah"</b><br>
-    Anlamı: "Allah'ı bütün eksikliklerden uzak tutarım." Allah'ın hiçbir kusuru olamayacağını, O'nun yüceliğini dile getirmek için; genellikle hayranlık uyandıran güzellikler karşısında da söylenir.</p>
-
-    <div class="aciklama"><b>Biliyor muydunuz?</b> Kur'an okumaya başlarken "<b>Eûzü billâhi mine'ş-şeytâni'r-racîm</b>" (Kovulmuş şeytanın şerrinden Allah'a sığınırım) denir. Biri hapşırıp "Elhamdülillah" dediğinde ise ona "<b>Yerhamükallah</b>" (Allah sana merhamet etsin) diye karşılık verilir; o kişi de buna "Yehdinallah" diyerek cevap verir.</div>
-  </div>
-  <div class="zb-kutu zb-merak">
-    <p class="zb-baslik">🤔 Merak Ettin mi?</p>
-    <p class="zb-metin">Neden hapşırınca "Elhamdülillah" deriz de yanımızdakiler "Yerhamükallah" der? Bu karşılıklı dua geleneği Peygamberimizin sünnetinden gelir.</p>
-  </div>
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Dilek ve Dualarda Geçen Dinî İfadeler</h3>
-    <p><b>Dua</b>, kulun Allah'a yönelerek O'ndan bir şey istemesi, O'na yalvarması ve gönlünü açmasıdır. Sevdiklerimize iyi dileklerde bulunurken de aslında onlar için Allah'tan bir şeyler dileriz. İşte bu yüzden günlük hayatımızda birçok "dilek ifadesi" kullanırız:</p>
-    <ul>
-      <li><b>Allah şifa versin</b> — Hasta olan birine, acil bir iyileşme dileğiyle söylenir.</li>
-      <li><b>Allah'a emanet ol</b> — Yolculuğa çıkan birinin yolunun ve kendisinin Allah'ın korumasında olmasını dilemek için söylenir.</li>
-      <li><b>İnşallah</b> — "Allah izin verirse/dilerse" anlamına gelir; gelecekte olmasını umduğumuz bir işten bahsederken söylenir. Bu söz, her şeyin Allah'ın izniyle gerçekleştiğini hatırlamamızı sağlar.</li>
-      <li><b>Allah razı olsun</b> — Bize iyilik yapan, yardım eden birine teşekkür etmek için söylenir.</li>
-      <li><b>Amin</b> — "Öyle olsun, kabul et Allah'ım" anlamındadır. Bir dua bittiğinde, o duanın kabul olması dileğiyle hep birlikte söylenir.</li>
-      <li><b>Allah bereket versin</b> — Birinin kazancına, emeğine veya evine bolluk dilemek için söylenir.</li>
-      <li><b>Hayırlı olsun</b> — Yeni bir eve taşınan, yeni bir işe başlayan ya da yeni bir eşyaya kavuşan birine söylenir.</li>
-      <li><b>Allah kolaylık versin</b> — Zor bir işe girişen birine güç ve kolaylık dilemek için söylenir.</li>
-      <li><b>Allah rahmet eylesin</b> — Vefat etmiş bir kimse anıldığında, onun için Allah'tan merhamet dilenerek söylenir.</li>
-    </ul>
-    <div class="aciklama"><b>Unutmayalım:</b> Bu ifadeleri kullanırken sadece bir söz söylemiş olmuyoruz; aynı zamanda karşımızdaki kişi için içtenlikle dua etmiş oluyoruz. Bu yüzden bu sözleri gönülden söylemeliyiz.</div>
-  </div>
-  <div class="zb-kutu zb-yanlis">
-    <p class="zb-baslik">❌ Yanlış Bilinenler</p>
-    <p class="zb-metin zb-yanlis-satir">❌ Bazıları "İnşallah" demeyi "belki olur belki olmaz" gibi bir belirsizlik ifadesi sanır.</p>
-    <p class="zb-metin zb-dogru-satir">✅ Aslında "İnşallah", her şeyin Allah'ın izniyle gerçekleştiğine olan inancımızı, kesin bir tevekkül bilinciyle ifade eder.</p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Bir Dua Tanıyorum: Sübhâneke Duası ve Anlamı</h3>
-    <div class="arapca" style="font-size:1.3em;text-align:left;">سُبْحَانَكَ اَللّٰهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالٰى جَدُّكَ وَلاَ اِلٰهَ غَيْرُكَ</div>
-    <p style="text-align:left;font-style:italic;">Sübhânekellâhümme ve bi hamdik ve tebârekesmük ve teâlâ ceddük ve lâ ilâhe ğayrük.</p>
-    <p><b>Kelime kelime anlamı:</b></p>
-    <ul>
-      <li><b>Sübhânekellâhümme ve bi hamdik</b> — "Allah'ım! Sen eksik sıfatlardan uzaksın, seni daima böyle tenzih eder ve överim."</li>
-      <li><b>ve tebârekesmük</b> — "Senin adın mübarektir."</li>
-      <li><b>ve teâlâ ceddük</b> — "Varlığın, şanın her şeyden üstündür."</li>
-      <li><b>ve lâ ilâhe ğayrük</b> — "Senden başka ilah yoktur."</li>
-    </ul>
-    <p><b>Ne zaman okunur?</b> Sübhâneke duası, namaza durup iftitah (başlangıç) tekbiri aldıktan hemen sonra, Kur'an okumaya başlamadan önce okunur. Bu yüzden bu duaya "namazın anahtarı" da denilebilir.</p>
-    <p><b>Neden önemlidir?</b> Sübhâneke duasıyla namaza, Allah'ı övüp yücelterek ve O'ndan başka ilah olmadığını hatırlayarak başlarız. Bu dua, kalbimizi ibadete hazırlar ve Allah'a olan bağlılığımızı tazeler.</p>
-  </div>
-  <div class="zb-kutu zb-ornek">
-    <p class="zb-baslik">🌍 Gerçek Hayattan Bir Örnek</p>
-    <p class="zb-metin">Bir arkadaşın sınavdan yüksek not aldığında "Elhamdülillah, çok sevindim!" demesi, hem başarısının kıymetini bilmesini hem de bunu Allah'a şükrederek kutlamasını gösterir.</p>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşün ve Cevapla</p>
-    <p class="zb-metin">Sence günlük hayatta en sık hangi dinî ifadeyi kullanıyoruz? Neden bu ifadeyi bu kadar sık kullanırız?</p>
-  <textarea id="zbAlan_dusun" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-  <p class="zb-cevap-not" id="zbNot_dusun"></p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Şükrü Hayatımıza Yansıtmak</h3>
-    <p>"Elhamdülillah" demek güzel bir alışkanlıktır ama önemli olan, bu sözün arkasındaki şükür duygusunu davranışlarımızda da göstermektir. Şükretmek; sağlığımızın, ailemizin, evimizin ve önümüzdeki yemeğin kıymetini bilmek, bunları boşa harcamamak ve elimizdekini ihtiyacı olanlarla paylaşmaktır.</p>
-    <p>Gerçek şükür yalnızca dille söylenen bir kelime değildir. Sahip olduğumuz nimetleri iyi kullanmak, onlara özen göstermek ve başkalarına yardımcı olmak, şükrü hayatımıza yansıtmanın en güzel yollarındandır.</p>
-    <ul>
-      <li>Sofradaki yemeği israf etmeden, ihtiyacımız kadar yemek</li>
-      <li>Sağlığımızın kıymetini bilip ona özen göstermek</li>
-      <li>Sahip olduklarımızı ihtiyacı olanlarla paylaşmak</li>
-      <li>Bize iyilik eden herkese teşekkür etmek</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-ornek">
-    <p class="zb-baslik">🌍 Gerçek Hayattan Bir Örnek</p>
-    <p class="zb-metin">Tabağına ihtiyacı kadar yemek alıp tabağını bitiren bir öğrenci, hem nimete şükretmiş hem de dinimizin öğütlediği tutumlu olma alışkanlığını hayatına geçirmiş olur.</p>
-  </div>
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">5️⃣ Dinimizde Temizliğin Önemi</h3>
-    <p>Çevremizi gözlemlediğimizde dinimizin temizliğe çok büyük bir önem verdiğini görürüz: Namaza durmadan önce alınan abdest, camilerin özenle temiz tutulması, yemekten önce ellerin yıkanması gibi pek çok alışkanlığımız aslında bu önemden kaynaklanır.</p>
-    <p>Peygamberimiz, temizliğin inancımızın önemli bir parçası olduğunu belirtmiş ve Müslümanları hem bedence hem de çevrece temiz olmaya özendirmiştir. Temizlik yalnızca bedenimizi değil; kıyafetlerimizi, evimizi, okulumuzu ve birlikte kullandığımız yerleri de kapsar.</p>
-    <p>Bedenimizin temizliği kadar kalbimizin temizliği de önemlidir: doğru sözlü olmak, kimseye kötülük düşünmemek ve güzel duygular taşımak da bir çeşit manevi temizliktir.</p>
-  </div>
-  <div class="zb-kutu zb-merak">
-    <p class="zb-baslik">🤔 Merak Ettin mi?</p>
-    <p class="zb-metin">Camiye girmeden önce ayakkabılarımızı çıkarmamız ve abdest almamız, ibadete hem bedenen hem de niyetimizle temiz bir şekilde başlamamız gerektiğini hatırlatır.</p>
-  </div>
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">6️⃣ Helal ve Sağlıklı Beslenme</h3>
-    <p>Dinimiz, yediğimiz ve içtiğimiz şeylerin hem <b>helal</b> hem de sağlığımıza uygun olmasına önem verir. Helal olan bir yiyecek aynı zamanda temiz ve zararsız olmalıdır; bu yüzden dinimiz beslenirken hem "ne yediğimize" hem de "nasıl yediğimize" dikkat etmemizi öğütler.</p>
-    <p>Kur'an-ı Kerim'de yiyip içerken ölçülü davranmamız ve israftan kaçınmamız öğütlenir. Aşırı yemek yemek de yemeği ziyan etmek de dinimizin hoş görmediği davranışlardandır.</p>
-    <ul>
-      <li>Yemeklerimize besmele ile başlayıp ihtiyacımız kadar yemek</li>
-      <li>Temiz ve sağlıklı gıdaları tercih etmek</li>
-      <li>Yemeği israf etmemek, artanı değerlendirmek</li>
-      <li>Yemekten sonra Allah'a hamd etmek</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-yanlis">
-    <p class="zb-baslik">❌ Yanlış Bilinenler</p>
-    <p class="zb-metin zb-yanlis-satir">❌ Bazıları helal olmanın, bir yiyeceğin sağlıklı olup olmamasıyla ilgisi olmayan sadece dinî bir kural olduğunu sanır.</p>
-    <p class="zb-metin zb-dogru-satir">✅ Aslında dinimiz, yiyeceğin helal olmasının yanında temiz, zararsız ve ölçülü tüketilmesini de ister; böylece hem inancımıza hem sağlığımıza uygun davranmış oluruz.</p>
-  </div>
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">✅ Öğrendiklerimizi Değerlendiriyoruz</h3>
-    <p>Ünitenin sonunda şu kazanımlar değerlendirilir:</p>
-    <ul>
-      <li>Günlük konuşmalarda geçen dinî ifadeleri doğru durumda kullanabilme.</li>
-      <li>Dilek ve dualarda geçen ifadelerin anlamlarını bilme ve yerinde kullanabilme.</li>
-      <li>Sübhâneke duasını doğru okuyup anlamını açıklayabilme.</li>
-      <li>Şükür duygusunu davranışlara yansıtabilme.</li>
-      <li>Dinimizin temizliğe verdiği önemi günlük hayattan örneklerle açıklayabilme.</li>
-      <li>Helal ve sağlıklı beslenmenin önemi hakkında bilgi toplayabilme.</li>
-    </ul>
-    <p>Bu kazanımlar, sayfadaki "✅ Değerlendirme" ve "📝 Araştırma Oyunları" bölümlerindeki zamanlı testlerle (can hakkı ve puanlama ile) ölçülür.</p>
-  </div>
-  <div class="zb-kutu zb-aile">
-    <p class="zb-baslik">👨‍👩‍👧 Ailemle Yapıyorum</p>
-    <p class="zb-metin">Bu hafta ailenle birlikte, evde en sık kullandığınız 5 dinî ifadeyi ve anlamlarını bir kağıda yazıp mutfağa asın.</p>
-  <textarea id="zbAlan_aile" class="zb-cevap-alani" placeholder="Ailenle yaptığın etkinliği kısaca anlat..." onchange="zbCevapKaydet('aile', this)" aria-label="Ailenle yaptığın etkinliği kısaca anlat..."></textarea>
-  <p class="zb-cevap-not" id="zbNot_aile"></p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">📖 Genişletilmiş Kavramlar Sözlüğü</h3>
-    <p>Dinî ifadeleri daha iyi anlayabilmek için bilmemiz gereken temel kavramlar, konularına göre gruplandırılmıştır:</p>
-
-    <p><b>Allah ve Peygamberimizle İlgili Kavramlar</b></p>
-    <ul>
-      <li><b>Allah</b> — Evrenin ve bizim tek yaratıcımız; eşi, benzeri ve ortağı yoktur.</li>
-      <li><b>Peygamber</b> — Allah'ın, insanlara doğru yolu göstermek için gönderdiği elçi.</li>
-      <li><b>Vahiy</b> — Allah'ın, peygamberlerine gönderdiği bilgi ve mesaj.</li>
-      <li><b>Melek</b> — Allah'ın nurdan yarattığı, hiç günah işlemeyen, sürekli O'na itaat eden varlık.</li>
-    </ul>
-
-    <p><b>Allah'ın Bize Verdikleri</b></p>
-    <ul>
-      <li><b>Nimet</b> — Allah'ın kullarına verdiği güzellik ve iyilik (sağlık, aile, yiyecek gibi).</li>
-      <li><b>Rahmet</b> — Allah'ın kullarına olan sonsuz merhameti ve acıması.</li>
-      <li><b>Lütuf</b> — Allah'ın, hak etmediğimiz hâlde bize bahşettiği iyilik ve ihsan.</li>
-    </ul>
-
-    <p><b>Davranışlarımızın Karşılığı</b></p>
-    <ul>
-      <li><b>Sevap</b> — İyi bir davranışın Allah katındaki karşılığı, mükâfatı.</li>
-      <li><b>Günah</b> — Allah'ın hoş görmediği, yasakladığı kötü davranış.</li>
-      <li><b>Helal</b> — Dinimizin yapılmasına izin verdiği şey.</li>
-      <li><b>Haram</b> — Dinimizin kesin olarak yasakladığı şey.</li>
-    </ul>
-
-    <p><b>Ahiretle İlgili Kavramlar</b></p>
-    <ul>
-      <li><b>Cennet</b> — İyi, güzel işler yapan insanların öldükten sonra gideceği, hiç eksiği olmayan güzel yer.</li>
-      <li><b>Cehennem</b> — Kötülük yapıp tövbe etmeyenlerin gideceği söylenen, azap dolu yer.</li>
-    </ul>
-
-    <p><b>İbadetlerle İlgili Kavramlar</b></p>
-    <ul>
-      <li><b>İbadet</b> — Allah'a olan sevgi, saygı ve bağlılığımızı göstermek için yaptığımız davranışların tümü.</li>
-      <li><b>Namaz</b> — Müslümanların günde beş vakit kıldığı, bedenle yapılan en önemli ibadet.</li>
-      <li><b>Ezan</b> — Namaz vaktinin geldiğini bildiren, minarelerden okunan çağrı.</li>
-      <li><b>Oruç</b> — İmsak vaktinden akşam ezanına kadar yeme, içme ve nefsin isteklerinden uzak durma ibadeti.</li>
-      <li><b>Zekat</b> — Belli bir zenginliğe ulaşan Müslümanların, mallarının bir kısmını ihtiyaç sahiplerine vermesi.</li>
-      <li><b>Kurban</b> — Allah'ın rızasını kazanmak amacıyla belirli şartlarda kesilen hayvan.</li>
-      <li><b>Hac</b> — Gücü yeten Müslümanların, ömürlerinde bir kez Mekke'ye yaptığı ibadet yolculuğu.</li>
-    </ul>
-
-    <p><b>Mübarek Zaman ve Günler</b></p>
-    <ul>
-      <li><b>Ramazan</b> — Oruç tutulan, Kur'an'ın indirilmeye başladığı mübarek ay.</li>
-      <li><b>Bayram</b> — Dinimizde sevinç ve kardeşlik duygularıyla kutlanan özel günler (Ramazan ve Kurban Bayramı gibi).</li>
-    </ul>
-
-    <p><b>Temizlik ve Sağlıklı Yaşamla İlgili Kavramlar</b></p>
-    <ul>
-      <li><b>Abdest</b> — Namaza başlamadan önce el, ağız, burun, yüz, kollar ve ayakların belirli bir şekilde yıkanmasıyla yapılan bedensel temizlik.</li>
-      <li><b>Temizlik</b> — Bedenimizin, kıyafetlerimizin ve çevremizin her zaman düzenli ve temiz tutulması; dinimizin önemle üzerinde durduğu bir değer.</li>
-      <li><b>İsraf</b> — Sahip olduğumuz nimetleri gereğinden fazla veya boşuna kullanıp ziyan etmek; dinimizin hoş görmediği bir davranış.</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-degerlendir">
-    <p class="zb-baslik">✅ Kendimi Değerlendiriyorum</p>
-    <ul>
-      <li><input type="checkbox" id="deg_4-1_0" onchange="degKaydet('4-1')"><label for="deg_4-1_0">Günlük hayatta kullanılan en az 5 dinî ifadeyi ve anlamlarını söyleyebilirim.</label></li>
-      <li><input type="checkbox" id="deg_4-1_1" onchange="degKaydet('4-1')"><label for="deg_4-1_1">Sübhâneke duasının anlamını açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_4-1_2" onchange="degKaydet('4-1')"><label for="deg_4-1_2">Bu ifadeleri ne zaman kullanacağımı biliyorum.</label></li>
-      <li><input type="checkbox" id="deg_4-1_3" onchange="degKaydet('4-1')"><label for="deg_4-1_3">Öğrendiğim ifadeleri günlük hayatımda kullanmaya özen gösteriyorum.</label></li>
-      <li><input type="checkbox" id="deg_4-1_4" onchange="degKaydet('4-1')"><label for="deg_4-1_4">Dinimizin temizliğe neden önem verdiğini açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_4-1_5" onchange="degKaydet('4-1')"><label for="deg_4-1_5">Şükür duygusunu günlük davranışlarıma yansıtmaya çalışıyorum.</label></li>
-      <li><input type="checkbox" id="deg_4-1_6" onchange="degKaydet('4-1')"><label for="deg_4-1_6">Helal ve sağlıklı beslenmenin önemini biliyorum.</label></li>
-    </ul>
-  </div>
-
-
-</section>
-
-<!-- KONU TEKRARI TESTİ -->
-<section id="konutekrari">
-  <h2>📝 Konu Tekrarı Testi (50 Soru)</h2>
-  <div class="oyun-amaci">🎯 Bu bölümün amacı: Ünitenin tamamını kapsamlı bir testle tekrar edip pekiştirmek.</div>
-  <div class="aciklama">4 şıklı, 50 sorudan oluşan kapsamlı bir tekrar testi! Kolay, orta ve zor sorular karışık geliyor. Cevabı seçince doğru/yanlış hemen görünüyor, altında da açıklaması çıkıyor.</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Soru: <b id="ktrTur">1</b>/<b id="ktrToplam">50</b></span>
-    <span>⭐ Puan: <b id="ktrPuan">0</b></span>
-    <span id="ktrZorluk"></span>
-  </div>
-  <div id="ktrSoru" class="balon-durum"></div>
-  <div id="ktrSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:560px;margin:0 auto;"></div>
-  <div class="aciklama" id="ktrAciklama" style="display:none;"></div>
-  <div class="sonuc-kutusu" id="ktrSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" id="ktrSonrakiBtn" style="display:none;" onclick="ktrSonrakiSoru()">➡️ Sonraki Soru</button>
-    <button class="eylem" style="background:var(--sari)" onclick="ktrBaslat()">📝 Teste Başla</button>
-  </div>
-</section>
-
-<!-- KONU 1: HAFIZA KARTLARI -->
-<section id="konu1" class="aktif">
-  <h2>Günlük Konuşmalarda Dinî İfadeler</h2>
-  <div class="aciklama">Bu bölümde öğreneceğimiz dinî ifade türleri: <b>Besmele, Hamd, Şükür, Selam, Tekbir, Salavat (Peygamberimiz), İstiğfar, Tesbih</b>. 🧠 <b>Hafıza Kartları:</b> Kartları çevirerek durum ile ifadenin eşini bul. Az hamlede tüm çiftleri bulmaya çalış!</div>
-  <div class="oyun-bilgi">
-    <span>🔁 Hamle: <b id="hamle1">0</b></span>
-    <span>✅ Çift: <b id="cift1Bulunan">0</b>/<b id="cift1Toplam">8</b></span>
-    <span>⏱️ Süre: <b id="sure1">0</b>sn</span>
-  </div>
-  <div class="hafiza-izgara" id="izgara1"></div>
-  <div class="sonuc-kutusu" id="sonuc1"></div>
-  <button class="eylem" onclick="baslat1()">🔄 Yeniden Karıştır</button>
-
-  <div class="kutu-panel">
-    <h3 style="text-align:center;color:var(--yesil)">🎯 İfadeleri Doğru Kutuya Sürükle</h3>
-    <p class="aciklama">İfadeleri parmağınla/farenle sürükleyip ait olduğu kategori kutusuna bırak!</p>
-    <div id="surukleHavuz" class="surukle-havuz"></div>
-    <div id="surukleKutular" class="surukle-kutular"></div>
-    <div class="sonuc-kutusu" id="surukleSonuc"></div>
-    <button class="eylem" onclick="surukleBaslat()">🔄 Yeniden Başlat</button>
-  </div>
-</section>
-
-<!-- KONU 2: BALON PATLATMA + DUA AĞACI -->
-<section id="konu2">
-  <h2>Dilek ve Dualarda Geçen Dinî İfadeler</h2>
-  <div class="aciklama">🎈 <b>Balon Patlatma:</b> Üstte bir durum yazacak. Yükselen balonlardan doğru ifadeyi bulup patlat! Yanlış balona dokunursan can kaybedersin, süre biterse de can gider.</div>
-  <div class="oyun-bilgi">
-    <span id="balonCanK2">❤️❤️❤️</span>
-    <span>⭐ Puan: <b id="balonPuanK2">0</b></span>
-  </div>
-  <div class="balon-durum" id="balonDurumK2">Başlamak için düğmeye bas 👇</div>
-  <div class="balon-alani" id="balonAlaniK2"></div>
-  <div class="sonuc-kutusu" id="balonSonucK2"></div>
-  <button class="eylem" onclick="balonBaslatK2()">🎈 Oyunu Başlat</button>
-
-  <div class="kutu-panel">
-    <h3 style="text-align:center;color:var(--yesil)">🌳 Dua Ağacım</h3>
-    <p style="text-align:center;">Kendi dua ya da dileğini yaz, ağaca bir yaprak/çiçek olarak ekle. Ağaçtaki yapraklara tıklayınca duayı okuyabilirsin.</p>
-    <input type="text" id="duaGirdi" placeholder="Dua/dileğini yaz, örn: Rabbim ailemi korusun" onkeydown="if(event.key==='Enter'){duaEkle();}">
-    <button class="eylem" onclick="duaEkle()">🌱 Ağaca Ekle</button>
-    <p id="seciliDua">Bir yaprağa tıklayınca duası burada görünecek 👆</p>
-    <div class="agac-sahne">
-      <svg class="agac-svg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="tacGradient" cx="35%" cy="28%" r="75%">
-            <stop offset="0%" stop-color="#b7e4c7"/>
-            <stop offset="55%" stop-color="#52b788"/>
-            <stop offset="100%" stop-color="#2d6a4f"/>
-          </radialGradient>
-          <linearGradient id="govdeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#6b4226"/>
-            <stop offset="50%" stop-color="#9c6b3e"/>
-            <stop offset="100%" stop-color="#6b4226"/>
-          </linearGradient>
-          <linearGradient id="gokyuzu" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#eaf6ff"/>
-            <stop offset="100%" stop-color="#cfe8ff"/>
-          </linearGradient>
-          <radialGradient id="parlaklik" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="white" stop-opacity="0.55"/>
-            <stop offset="100%" stop-color="white" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="golgeGradient" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#081c15" stop-opacity="0.4"/>
-            <stop offset="100%" stop-color="#081c15" stop-opacity="0"/>
-          </radialGradient>
-          <filter id="golge" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#1b4332" flood-opacity="0.4"/>
-          </filter>
-        </defs>
-
-        <rect x="0" y="0" width="400" height="420" rx="24" fill="url(#gokyuzu)"/>
-        <circle cx="340" cy="55" r="28" fill="#ffe066" opacity="0.9"/>
-        <path d="M40 60 q12 -10 24 0 q12 -10 24 0" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.85"/>
-        <path d="M300 130 q10 -8 20 0 q10 -8 20 0" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
-
-        <ellipse cx="200" cy="405" rx="180" ry="16" fill="#000" opacity="0.10"/>
-        <path d="M0 398 Q100 382 200 398 T400 398 V420 H0 Z" fill="#a3d9a5"/>
-        <path d="M0 402 Q100 390 200 402 T400 402" stroke="#8fcf95" stroke-width="3" fill="none" opacity="0.6"/>
-
-        <path d="M185 300 Q150 335 115 368" stroke="url(#govdeGradient)" stroke-width="13" fill="none" stroke-linecap="round"/>
-        <path d="M215 300 Q250 335 285 368" stroke="url(#govdeGradient)" stroke-width="13" fill="none" stroke-linecap="round"/>
-        <g filter="url(#golge)">
-          <path d="M188 253 Q180 320 186 388 L214 388 Q220 320 212 253 Z" fill="url(#govdeGradient)"/>
-        </g>
-        <path d="M196 268 Q192 320 195 380" stroke="#5a3a1e" stroke-width="2" fill="none" opacity="0.55"/>
-        <path d="M206 268 Q210 320 206 380" stroke="#5a3a1e" stroke-width="2" fill="none" opacity="0.55"/>
-        <path d="M209 258 Q216 320 210 385" stroke="#3d2712" stroke-width="5" fill="none" opacity="0.35"/>
-
-        <g filter="url(#golge)">
-          <circle cx="200" cy="90" r="95" fill="url(#tacGradient)"/>
-          <circle cx="105" cy="205" r="92" fill="url(#tacGradient)"/>
-          <circle cx="295" cy="205" r="92" fill="url(#tacGradient)"/>
-          <circle cx="200" cy="175" r="138" fill="url(#tacGradient)" opacity="0.95"/>
-        </g>
-
-        <!-- hacim/gölge katmanları: sol üst parlak, sağ alt gölgeli -->
-        <ellipse cx="150" cy="80" rx="80" ry="46" fill="url(#parlaklik)"/>
-        <ellipse cx="120" cy="180" rx="55" ry="40" fill="url(#parlaklik)" opacity="0.7"/>
-        <ellipse cx="270" cy="235" rx="100" ry="75" fill="url(#golgeGradient)"/>
-        <ellipse cx="230" cy="120" rx="60" ry="45" fill="url(#golgeGradient)" opacity="0.6"/>
-
-        <circle cx="150" cy="110" r="30" fill="#d8f3dc" opacity="0.35"/>
-        <circle cx="255" cy="140" r="24" fill="#d8f3dc" opacity="0.25"/>
-        <circle cx="190" cy="225" r="26" fill="#1b4332" opacity="0.2"/>
-
-        <circle cx="130" cy="150" r="5" fill="#ffb3c6"/>
-        <circle cx="262" cy="100" r="5" fill="#ffb3c6"/>
-        <circle cx="222" cy="232" r="5" fill="#fff3b0"/>
-        <circle cx="150" cy="232" r="5" fill="#fff3b0"/>
-        <circle cx="95" cy="170" r="4" fill="#ffb3c6"/>
-        <circle cx="300" cy="180" r="4" fill="#fff3b0"/>
-      </svg>
-      <div id="yapraklar" class="yapraklar-katman"></div>
-    </div>
-    <p style="text-align:center;color:#5f5f5f;">🌿 Ağaçtaki dua sayısı: <span id="duaSayisi">0</span></p>
-  </div>
-</section>
-
-<!-- KONU 3: EŞLEŞTİRME + KELİME SIRALA + EZBER -->
-<section id="konu3">
-  <h2>Bir Dua Tanıyorum: Sübhâneke Duası ve Anlamı</h2>
-  <div class="arapca">سُبْحَانَكَ اَللّٰهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالٰى جَدُّكَ وَلاَ اِلٰهَ غَيْرُكَ</div>
-  <p style="text-align:center; font-style:italic;">Sübhânekellâhümme ve bi hamdik ve tebârekesmük ve teâlâ ceddük ve lâ ilâhe ğayrük.</p>
-
-  <div class="aciklama">Duanın her bölümünü, doğru Türkçe anlamıyla eşleştir.</div>
-  <div class="skor">Puan: <span id="skor3">0</span> / <span id="toplam3">4</span></div>
-  <div class="kart-kutu">
-    <div class="kolon"><h3>Dua Bölümü</h3><div id="sol3"></div></div>
-    <div class="kolon"><h3>Anlamı</h3><div id="sag3"></div></div>
-  </div>
-  <button class="eylem" onclick="baslat3()">🔄 Yeniden Başlat</button>
-
-  <div class="kutu-panel">
-    <h3 style="text-align:center;color:var(--yesil)">🧩 Kelime Sırala: Duayı Doğru Sırada Diz</h3>
-    <p class="aciklama">Kelimeleri doğru sırada tıklayarak duayı baştan sona diz. Yanlış tıklarsan taş titrer, tekrar dene!</p>
-    <div class="kelime-cevap" id="subKelimeCevap"></div>
-    <div class="kelime-banka" id="subKelimeBanka"></div>
-    <div class="sonuc-kutusu" id="subKelimeSonuc"></div>
-    <button class="eylem" onclick="subKelimeBaslat()">🔄 Karıştır ve Baştan Başla</button>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="text-align:center;color:var(--yesil)">📖 Adım 1: Kelimeleri Aç</h3>
-    <p style="text-align:center;">Aşağıdaki düğmeye her bastığında bir kelime daha görünür. Duayı ezberden tamamlamaya çalış!</p>
-    <div class="dua-satir" id="ezberAlan">••• ••••••••• •• •• ••••• •• ••••••••• •••• •• ••••••••••••</div>
-    <button class="eylem" onclick="ezberIlerlet()">👁️ Bir Kelime Daha Göster</button>
-    <p class="aciklama">💡 Bilgi: Sübhâneke duası, namaza başlarken (iftitah tekbirinden hemen sonra) okunur.</p>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="text-align:center;color:var(--yesil)">🌫️ Adım 2: Kaybolan Kelimeler</h3>
-    <p class="aciklama">Şimdi tam tersi! Dua tamamen görünüyor. Düğmeye bastıkça rastgele bir kelime kaybolacak — kaybolan kelimeleri ezbercen söylemeye çalış. Hepsi kaybolunca duayı tamamen ezbere biliyorsun demektir!</p>
-    <div class="dua-satir" id="kayboAlan"></div>
-    <p style="text-align:center;color:#5f5f5f;">Gizlenen: <span id="kayboSayac">0</span>/13</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <button class="eylem" style="background:var(--kirmizi)" onclick="kayboGizle()">🙈 Bir Kelime Daha Gizle</button>
-      <button class="eylem" onclick="kayboBaslat()">🔄 Baştan Başla</button>
-    </div>
-    <div class="sonuc-kutusu" id="kayboSonuc"></div>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="text-align:center;color:var(--yesil)">⌨️ Adım 3: Duayı Yazarak Sınav Ol</h3>
-    <p class="aciklama">Sübhâneke duasını hatırladığın gibi (kelimeleri boşlukla ayırarak) aşağıya yaz, sonra kontrol et. Doğru kelimeler yeşil, yanlışlar kırmızı, eksikler gri görünecek.</p>
-    <textarea id="yazSinavGirdi" rows="3" placeholder="Sübhânekellâhümme ve bi hamdik..."></textarea>
-    <button class="eylem" onclick="yazSinavKontrol()">✅ Kontrol Et</button>
-    <p id="yazSinavSonucDetay" style="text-align:center;line-height:1.9;"></p>
-    <div class="sonuc-kutusu" id="yazSinavSonuc"></div>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="text-align:center;color:var(--yesil)">🔁 Bonus: Tekrar Sayacı</h3>
-    <p class="aciklama">Duayı sesli olarak oku, sonra düğmeye bas. Ne kadar çok tekrar edersen o kadar iyi ezberlersin!</p>
-    <p style="text-align:center;">Tekrar sayısı: <b id="tekrarSayisi">0</b></p>
-    <p class="sonuc-kutusu" id="tekrarRozet"></p>
-    <button class="eylem" onclick="tekrarEkle()">🔁 Bir Kez Daha Okudum!</button>
-  </div>
-</section>
-
-<!-- DEĞERLENDİRME: ZAMANLI TEST (CAN + PUAN) -->
-<section id="degerlendirme">
-  <h2>✅ Öğrendiklerimizi Değerlendiriyoruz</h2>
-  <div class="oyun-amaci">🎯 Bu bölümün amacı: Üniteyi ne kadar öğrendiğini hızlı bir testle ölçmek.</div>
-  <div class="aciklama">⏱️ Her soru için sınırlı sürenüz var, 3 canınız var — dikkatli ve hızlı ol!</div>
-  <div class="oyun-bilgi">
-    <span id="degCan">❤️❤️❤️</span>
-    <span>⭐ Puan: <b id="degPuan">0</b></span>
-  </div>
-  <div id="degSoruAlani"></div>
-  <div class="sonuc-kutusu" id="degSonuc"></div>
-  <button class="eylem" onclick="degBaslat()">🎮 Teste Başla</button>
-</section>
-
-<!-- ARAŞTIRMA OYUNLARI -->
-<section id="arastirma">
-  <h2>📝 Araştırma Oyunlarım (Aile Büyükleriyle Birlikte)</h2>
-  <div class="oyun-amaci">🎯 Bu bölümün amacı: Öğrendiklerini araştırma temelli etkinliklerle derinleştirmek.</div>
-  <div class="aciklama">Önce her başlıktaki görevi aile büyüklerinle konuşarak araştır ve defterine yaz, sonra öğrendiklerini pekiştirmek için oyunu oyna!</div>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ Dua, Hamd, Şükür ve Tekbir — Hız Testi</h3>
-    <p class="aciklama">📌 Görev: Bu dört kavramın anlamını araştırıp defterine yaz. Sonra Doğru/Yanlış hız testinde ne kadar bildiğini gör!</p>
-    <div class="oyun-bilgi">
-      <span id="g1HizCan">❤️❤️❤️</span>
-      <span>⭐ Puan: <b id="g1HizPuan">0</b></span>
-      <span>⏱️ <b id="g1HizSure">6</b>sn</span>
-    </div>
-    <div id="g1HizOyunAlani" style="display:none;">
-      <p style="text-align:center;font-size:1.15em;" id="g1HizSoru"></p>
-      <div style="display:flex;gap:14px;justify-content:center;">
-        <button class="eylem" style="background:var(--yesil)" onclick="g1Cevapla(true)">✅ DOĞRU</button>
-        <button class="eylem" style="background:var(--kirmizi)" onclick="g1Cevapla(false)">❌ YANLIŞ</button>
-      </div>
-      <p style="text-align:center;font-weight:bold;" id="g1HizGeriBildirim"></p>
-    </div>
-    <div class="sonuc-kutusu" id="g1HizSonuc"></div>
-    <button class="eylem" onclick="g1HizBaslat()">🎮 Teste Başla</button>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Salavat Getirmek Ne Demek?</h3>
-    <p class="aciklama">📌 Görev: Salavat getirmenin anlamını aile büyüklerine sor, sonra kartı çevirerek kontrol et!</p>
-    <div class="flashkart" id="flashKartG2" onclick="flashCevirG2()">
-      <div class="flashkart-on"></div>
-      <div class="flashkart-arka"></div>
-    </div>
-    <p style="text-align:center;color:#5f5f5f;">Karta tıkla çevir 🔄 — Kart: <span id="flashSayacG2">1/2</span></p>
-    <button class="eylem" onclick="flashSonrakiG2()">Sonraki Kart ▶</button>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Günlük Hayattan 3 Dua Cümlesi Topla</h3>
-    <p class="aciklama">📌 Görev: Aile büyüklerinden yardım alarak günlük hayatta kullanılan 3 dua cümlesi öğren ve kutuya at!</p>
-    <input type="text" id="g3Girdi" placeholder="Öğrendiğin dua cümlesini yaz" onkeydown="if(event.key==='Enter'){g3Ekle();}">
-    <button class="eylem" onclick="g3Ekle()">📥 Kutuya At</button>
-    <div class="ilerleme-bar"><div class="ilerleme-dolu" id="g3Bar"></div></div>
-    <div id="g3Liste" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px;"></div>
-    <p class="skor">Toplanan: <span id="g3Sayac">0</span> / 3 <span id="g3Tebrik"></span></p>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Allah (c.c.)'ın Özellikleri — Hafıza Kartları</h3>
-    <p class="aciklama">📌 Görev: Allah'ın özelliklerini aile büyüklerinle konuş, sonra kartları çevirip eşleştir.</p>
-    <div class="oyun-bilgi">
-      <span>🔁 Hamle: <b id="hamleG4">0</b></span>
-      <span>✅ Çift: <b id="ciftG4Bulunan">0</b>/<b id="ciftG4Toplam">6</b></span>
-      <span>⏱️ Süre: <b id="sureG4">0</b>sn</span>
-    </div>
-    <div class="hafiza-izgara" id="izgaraG4"></div>
-    <div class="sonuc-kutusu" id="sonucG4"></div>
-    <button class="eylem" onclick="baslatG4()">🔄 Yeniden Karıştır</button>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">5️⃣ Beş Peygamberimizi Tanıyorum — Harf Sırala</h3>
-    <p class="aciklama">📌 Görev: Beş peygamberin ismini öğrenip defterine yaz. İpucuna bakarak harfleri doğru sırada tıkla, ismi baştan sona diz!</p>
-    <div class="oyun-bilgi"><span>🏆 Tur: <b id="g5Tur">1</b>/5</span></div>
-    <p style="text-align:center;font-style:italic;" id="g5Ipucu"></p>
-    <div class="kelime-cevap" id="g5Cevap"></div>
-    <div class="kelime-banka" id="g5Banka"></div>
-    <div class="sonuc-kutusu" id="g5Sonuc"></div>
-    <button class="eylem" onclick="g5Baslat()">🔄 Yeniden Başlat</button>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">6️⃣ Sübhâneke Duasını Tamamla — Zamanlı Test</h3>
-    <p class="aciklama">📌 Görev: Sübhâneke duasını ve anlamını defterine yaz. Şimdi boşlukları zamanla yarışarak doldur!</p>
-    <div class="oyun-bilgi">
-      <span id="g6Can">❤️❤️❤️</span>
-      <span>⭐ Puan: <b id="g6Puan">0</b></span>
-    </div>
-    <div id="g6SoruAlani"></div>
-    <div class="sonuc-kutusu" id="g6Sonuc"></div>
-    <button class="eylem" onclick="g6Baslat()">🎮 Teste Başla</button>
-  </div>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">🎯 Bonus: Yakala Oyunu (Köstebek)</h3>
-    <p class="aciklama">Üstte bir durum yazacak. Deliklerden çıkan ifadelerin arasından doğru olanı yakala, yanlışı yakalarsan can kaybedersin!</p>
-    <div class="oyun-bilgi">
-      <span id="mgCan">❤️❤️❤️</span>
-      <span>⭐ Puan: <b id="mgPuan">0</b></span>
-    </div>
-    <div class="balon-durum" id="mgDurum">Başlamak için düğmeye bas 👇</div>
-    <div class="mg-izgara" id="mgIzgara"></div>
-    <div class="sonuc-kutusu" id="mgSonuc"></div>
-    <button class="eylem" onclick="mgBaslat()">🎯 Oyunu Başlat</button>
-  </div>
-  <div class="zb-kutu zb-derin">
-    <p class="zb-baslik">🔍 Derinlemesine Düşünelim</p>
-    <p class="zb-metin">Bu ünitede öğrendiklerini derinlemesine değerlendirmek için kendine şu soruları sor:</p>
-    <ul class="zb-derin-liste">
-      <li>Bu bilgi benim hayatımı nasıl etkiler?</li>
-      <li>Bu kavram neden önemlidir?</li>
-      <li>Günlük yaşamda bunun karşılığı nedir?</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-ikilem">
-    <p class="zb-baslik">⚖️ Ahlaki İkilem — Sen Olsaydın Ne Yapardın?</p>
-    <p class="zb-metin">Arkadaşın sana bir haber verdiğinde alışkanlıkla "Elhamdülillah" diyorsun ama aslında o an hiç şükür hissetmiyorsun; sadece herkes öyle dediği için söylüyorsun. Bu ifadeyi hiç kullanmamak mı, yoksa içinden gelmese de kullanmaya devam edip anlamını sonradan hissetmeye çalışmak mı daha doğru olur?</p>
-    <textarea id="zbAlan_ikilem" class="zb-cevap-alani" placeholder="Ne yapardın ve neden? Düşünceni buraya yazabilirsin..." onchange="zbCevapKaydet('ikilem', this)" aria-label="Ahlaki ikilem cevabın"></textarea>
-    <p class="zb-cevap-not" id="zbNot_ikilem"></p>
-  </div>
-
-</section>
-
-<!-- BONUS OYUN: HAFIZA ZİNCİRİ (SIMON) -->
-<section id="bonus">
-  <h2>🎮 Bonus Oyun: Dinî İfadeler Hafıza Zinciri</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
-  <div class="aciklama">Yanan ifadeleri sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir ifade daha uzuyor. Kaç ifadeye kadar hatırlayabileceksin?</div>
-  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bzSeviye">0</b></span></div>
-  <div class="bz-izgara" id="bzIzgara"></div>
-  <div class="sonuc-kutusu" id="bzSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" style="background:var(--sari)" onclick="bzOrnekOyna()">🎬 Önce Örnek Gör</button>
-    <button class="eylem" onclick="bzBaslat()">🎮 Oyunu Başlat</button>
-  </div>
-</section>
-
-<!-- KELİME AVI BULMACASI -->
-<section id="kelimeavi">
-  <h2>🔎 Kelime Avı Bulmacası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
-  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="kaBulunan">0</b>/<b id="kaToplam">10</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ka-izgara" id="kaIzgara"></div>
-    <ul class="ka-liste" id="kaListe"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="kaSonuc"></div>
-  <button class="eylem" onclick="kelimeAviOlustur()">🔄 Yeni Bulmaca</button>
-</section>
-
-<!-- ÇENGEL BULMACA -->
-<section id="cengel">
-  <h2>🧩 Çengel Bulmaca</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
-  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur — bir harf yazınca otomatik olarak bir sonraki kutucuğa geçersin.</div>
-  <div class="cengel-izgara" id="cengelIzgara"></div>
-  <ul class="cengel-liste" id="cengelListe"></ul>
-  <div class="sonuc-kutusu" id="cengelSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="cengelKontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="cengelOlustur()">🔄 Baştan Başla</button>
-  </div>
-</section>
-
-<!-- SÖZCÜK MERDİVENİ -->
-<section id="merdiven">
-  <h2>🪜 Sözcük Merdiveni</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
-  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç ve merdiveni tırman.</div>
-  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdivenBasamak">1</b>/<b id="merdivenToplam">6</b></span></div>
-  <div id="merdivenIpucu" class="balon-durum"></div>
-  <div id="merdivenSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="merdiven-gorsel" id="merdivenGorsel"></div>
-  <div class="sonuc-kutusu" id="merdivenSonuc"></div>
-  <button class="eylem" onclick="merdivenBaslat()">🔄 Yeniden Başlat</button>
-</section>
-
-<!-- ŞİFRELİ SÖZCÜK OYUNU -->
-<section id="sifre">
-  <h2>🔐 Şifreli Sözcük Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
-  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
-  <div class="sifre-anahtar" id="sifreAnahtar"></div>
-  <div id="sifreKelimeler"></div>
-  <div class="sonuc-kutusu" id="sifreSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="sifreKontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="sifreOlustur()">🔄 Yeni Şifre</button>
-  </div>
-</section>
-
-<!-- LABİRENT OYUNU -->
-<section id="labirent">
-  <h2>🌀 Labirent Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
-  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 🕌'ye ulaştır! Yolda parıldayan yıldızlara basarsan dinî bir ifade toplarsın.</div>
-  <div class="oyun-bilgi">
-    <span>🔁 Hamle: <b id="labirentHamle">0</b></span>
-    <span>⭐ Toplanan: <b id="labirentToplanan">0</b>/<b id="labirentToplamYildiz">5</b></span>
-    <span>⏱️ Süre: <b id="labirentSure">0</b>sn</span>
-  </div>
-  <div class="balon-durum" id="labirentDurum"></div>
-  <div class="labirent-izgara" id="labirentIzgara"></div>
-  <div class="labirent-kontroller">
-    <button class="labirent-tus" onclick="labirentHareket(-1,0)">▲</button>
-    <div>
-      <button class="labirent-tus" onclick="labirentHareket(0,-1)">◀</button>
-      <button class="labirent-tus" onclick="labirentHareket(1,0)">▼</button>
-      <button class="labirent-tus" onclick="labirentHareket(0,1)">▶</button>
-    </div>
-  </div>
-  <div class="sonuc-kutusu" id="labirentSonuc"></div>
-  <button class="eylem" onclick="labirentBaslat()">🔄 Yeni Labirent</button>
-</section>
-
-<!-- NONOGRAM -->
-<section id="nonogram">
-  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
-  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak ünite ile ilgili gizli resmi ortaya çıkar!</div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
-    <button class="eylem" onclick="nonogramSec('camii')">🕌 Cami (İbadet Yeri)</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogramSec('hilal')">🌙⭐ Hilal ve Yıldız</button>
-  </div>
-  <div style="overflow-x:auto;">
-    <table class="nono-tablo" id="nonoTablo"></table>
-  </div>
-  <div class="sonuc-kutusu" id="nonoSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="nonogramKontrolEt(true)">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogramTemizle()">🧹 Temizle</button>
-  </div>
-</section>
-
-<!-- HIZLI KELİME ÜRETME OYUNU -->
-<section id="kelimeuret">
-  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
-  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen dinî ifade/kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
-  <div class="oyun-bilgi">
-    <span>🔤 Harf: <b id="kuHarf">-</b></span>
-    <span>⭐ Puan: <b id="kuPuan">0</b></span>
-    <span>⏱️ Süre: <b id="kuSure">60</b>sn</span>
-  </div>
-  <input type="text" id="kuGirdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){kuEkle();}">
-  <p class="balon-durum" id="kuUyari"></p>
-  <ul class="ku-liste" id="kuListe"></ul>
-  <div class="sonuc-kutusu" id="kuSonuc"></div>
-  <div id="kuKacirilan"></div>
-  <button class="eylem" onclick="kuBaslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME FABRİKASI -->
-<section id="fabrika">
-  <h2>🏭 Kelime Fabrikası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
-  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret! Doğru yazıp "Üret!"e bas (ya da Enter'a bas). Kelime havuzu çok geniş, fabrika kapanana kadar üretmeye devam et!</div>
-  <div class="oyun-bilgi">
-    <span>🏭 Üretilen: <b id="kfUretilen">0</b>/<b id="kfToplam">36</b></span>
-    <span>❌ Hata: <b id="kfHata">0</b></span>
-  </div>
-  <div id="kfSiparis" class="balon-durum"></div>
-  <div class="kf-bant" id="kfBantAlani"></div>
-  <input type="text" id="kfGirdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kfUret();}">
-  <button class="eylem" onclick="kfUret()">🏭 Üret!</button>
-  <div class="kf-urunler" id="kfUrunler"></div>
-  <div class="sonuc-kutusu" id="kfSonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="kfBaslat()">🔄 Fabrikayı Başlat/Yenile</button>
-</section>
-
-<!-- KELİME MÜHENDİSİ -->
-<section id="muhendis">
-  <h2>🛠️ Kelime Mühendisi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
-  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
-  <div class="oyun-bilgi">
-    <span>🏗️ Tur: <b id="kmTur">1</b>/<b id="kmToplam">37</b></span>
-    <span>✅ İnşa Edilen: <b id="kmDogru">0</b></span>
-  </div>
-  <div id="kmIpucu" class="balon-durum"></div>
-  <div class="kelime-cevap" id="kmCevap"></div>
-  <div class="kelime-banka" id="kmBanka"></div>
-  <div class="sonuc-kutusu" id="kmSonuc"></div>
-  <button class="eylem" onclick="kmBaslat()">🛠️ Mühendisliğe Başla</button>
-</section>
-
-<!-- TUZAK HARF OYUNU -->
-<section id="tuzak">
-  <h2>🚫 Tuzak Harf Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
-  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen dinî ifade/kavramları süre bitmeden art arda yaz! Tuzak harfi olan bir kelime yazarsan sayılmaz.</div>
-  <div class="oyun-bilgi">
-    <span>🚫 Tuzak Harf: <b id="tuzakHarf">-</b></span>
-    <span>⭐ Puan: <b id="tuzakPuan">0</b></span>
-    <span>⏱️ Süre: <b id="tuzakSure">40</b>sn</span>
-  </div>
-  <input type="text" id="tuzakGirdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzakEkle();}">
-  <p class="balon-durum" id="tuzakUyari"></p>
-  <ul class="ku-liste" id="tuzakListe"></ul>
-  <div class="sonuc-kutusu" id="tuzakSonuc"></div>
-  <button class="eylem" onclick="tuzakBaslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME DEDEKTİFİ -->
-<section id="dedektif">
-  <h2>🕵️ Kelime Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
-  <div class="aciklama">Gizli kelimeyi (bir dinî ifade/kavram) 6 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Vaka: <b id="ddVaka">1</b>/<b id="ddToplamVaka">27</b></span>
-    <span>✅ Çözülen: <b id="ddCozulen">0</b></span>
-    <span>🔍 Deneme: <b id="ddDeneme">0</b>/<b id="ddMaxDeneme">6</b></span>
-  </div>
-  <div id="ddIpucu" class="balon-durum"></div>
-  <div id="ddIzgara"></div>
-  <input type="text" id="ddGirdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ddTahminEt();}">
-  <p class="balon-durum" id="ddUyari"></p>
-  <div class="sonuc-kutusu" id="ddSonuc"></div>
-  <button class="eylem" onclick="ddBaslat()">🕵️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- ŞİFRELİ TANIM OYUNU -->
-<section id="sifretanim">
-  <h2>🔐 Şifreli Tanım Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
-  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="stTur">1</b>/<b id="stToplam">37</b></span>
-    <span>⭐ Puan: <b id="stPuan">0</b></span>
-  </div>
-  <div id="stTanim" class="dua-satir"></div>
-  <div id="stSecenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="stSonuc"></div>
-  <button class="eylem" onclick="stBaslat()">🔐 Oyunu Başlat</button>
-</section>
-
-<!-- MANTIK ZİNCİRİ OYUNU -->
-<section id="mantikzinciri">
-  <h2>🔗 Mantık Zinciri Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
-  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
-  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mzHalka">1</b>/<b id="mzToplam">7</b></span></div>
-  <div id="mzSoru" class="balon-durum"></div>
-  <div id="mzSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="merdiven-gorsel" id="mzGorsel"></div>
-  <div class="sonuc-kutusu" id="mzSonuc"></div>
-  <button class="eylem" onclick="mzBaslat()">🔗 Zinciri Başlat</button>
-</section>
-
-<!-- KELİME SATRANCI -->
-<section id="satranc">
-  <h2>♞ Kelime Satrancı</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
-  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul! İlk harfe tıkla, sonra geçerli bir at hamlesiyle ulaşılabilen bir sonraki harfe tıkla. Yanlış hamle seçimini sıfırlar.</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ksBulunan">0</b>/<b id="ksToplam">8</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ks-izgara" id="ksIzgara"></div>
-    <ul class="ka-liste" id="ksListe"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ksSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="ksSecimiTemizle()">🧹 Seçimi Temizle</button>
-    <button class="eylem" style="background:var(--sari)" onclick="ksOlustur()">🔄 Yeni Tahta</button>
-  </div>
-</section>
-
-<!-- DİL DEDEKTİFİ -->
-<section id="dildedektifi">
-  <h2>🕵️‍♀️ Dil Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki 4 cümleden hangisinde dinî ifade doğru yerde/durumda kullanılmış? Doğru cümleyi bul!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ddlTur">1</b>/<b id="ddlToplam">10</b></span>
-    <span>⭐ Puan: <b id="ddlPuan">0</b></span>
-  </div>
-  <div id="ddlBaslik" class="balon-durum"></div>
-  <div id="ddlSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="ddlSonuc"></div>
-  <button class="eylem" onclick="ddlBaslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- KELİME KODLAMA OYUNU -->
-<section id="kelimekodlama">
-  <h2>💻 Kelime Kodlama Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
-  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz, ipucuna da bakarak doğru kelimeyi seç.</div>
-  <div class="sifre-anahtar" id="kkAnahtar"></div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="kkTur">1</b>/<b id="kkToplam">37</b></span>
-    <span>⭐ Puan: <b id="kkPuan">0</b></span>
-  </div>
-  <div id="kkIpucu" class="balon-durum"></div>
-  <div id="kkKod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
-  <div id="kkSecenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kkSonuc"></div>
-  <button class="eylem" onclick="kkBaslat()">💻 Kodlamayı Başlat</button>
-</section>
-
-<!-- SEMANTİK LABİRENT -->
-<section id="semantiklabirent">
-  <h2>🧠 Semantik Labirent</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
-  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin, canların biterse baştan başlarsın.</div>
-  <div class="oyun-bilgi">
-    <span>🚪 Oda: <b id="szOda">1</b>/<b id="szToplamOda">6</b></span>
-    <span id="szCan">❤️❤️❤️</span>
-  </div>
-  <div id="szKategori" class="balon-durum"></div>
-  <div id="szSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="szSonuc"></div>
-  <button class="eylem" onclick="szBaslat()">🌀 Labirente Gir</button>
-</section>
-
-<!-- ÇELİŞKİ AVI -->
-<section id="celiskiavi">
-  <h2>🕵️‍♂️ Çelişki Avı</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu? Doğru düğmeye bas!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="caTur">1</b>/<b id="caToplam">12</b></span>
-    <span>⭐ Puan: <b id="caPuan">0</b></span>
-  </div>
-  <div id="caCumle" class="dua-satir"></div>
-  <div id="caButonlar" style="display:flex;gap:14px;justify-content:center;">
-    <button class="eylem" style="background:var(--kirmizi)" onclick="caCevapla(true)">⚡ Çelişki VAR</button>
-    <button class="eylem" style="background:var(--yesil)" onclick="caCevapla(false)">✅ Çelişki YOK</button>
-  </div>
-  <p style="text-align:center;font-weight:bold;" id="caGeriBildirim"></p>
-  <div class="sonuc-kutusu" id="caSonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="caBaslat()">🕵️‍♂️ Ava Başla</button>
-</section>
-
-<!-- KAVRAM TURNUVASI -->
-<section id="kavramturnuvasi">
-  <h2>🏆 Kavram Turnuvası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
-  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap. Kavramlar birbirine çok yakın anlamlı olduğu için dikkatli ol, bu turnuva ZOR!</div>
-  <div class="oyun-bilgi">
-    <span>🥊 Maç: <b id="ktTur">1</b>/<b id="ktToplam">7</b></span>
-    <span>✅ Doğru Hakemlik: <b id="ktPuan">0</b></span>
-  </div>
-  <div id="ktAsama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
-  <div id="ktEslesme" class="balon-durum"></div>
-  <div id="ktSecenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="ktSonuc"></div>
-  <button class="eylem" onclick="ktBaslat()">🏆 Turnuvayı Başlat</button>
-</section>
-
-
-<!-- ================= EZBER ETKİNLİKLERİ (8 ADET) — SÜBHÂNEKE DUASI ================= -->
-
-<section id="ezsira">
-  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Sübhâneke Duası'nın cümlelerini doğru sırayla dizebileceksin.</div>
-  <div class="aciklama">Karışık sırada verilen cümleleri, Sübhâneke Duası'ndaki doğru sıraya göre tıklayarak diz.</div>
-  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez1Dizilen">0</b>/<b>4</b></span></div>
-  <div class="kelime-cevap" id="ez1Cevap"></div>
-  <div class="kelime-banka" id="ez1Banka"></div>
-  <div class="sonuc-kutusu" id="ez1Sonuc"></div>
-  <button class="eylem" onclick="ez1Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezbosluk">
-  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Sübhâneke Duası cümlelerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
-  <div class="aciklama">Cümledeki boşluğa gelen doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez2Tur">1</b>/<b>4</b></span><span>✅ Doğru: <b id="ez2Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez2Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez2Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez2Sonuc"></div>
-  <button class="eylem" onclick="ez2Baslat()">📝 Başla</button>
-</section>
-
-<section id="ezeslestir">
-  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Sübhâneke Duası'nın her cümlesini anlamıyla eşleştirebileceksin.</div>
-  <div class="aciklama">Soldan bir cümle, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
-  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez3Eslesen">0</b>/<b>4</b></span></div>
-  <div class="ez-iki-sutun">
-    <div class="ez-sutun"><h4>Cümle</h4><div id="ez3Sol"></div></div>
-    <div class="ez-sutun"><h4>Anlam</h4><div id="ez3Sag"></div></div>
-  </div>
-  <div class="sonuc-kutusu" id="ez3Sonuc"></div>
-  <button class="eylem" onclick="ez3Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezhafiza">
-  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: cümle-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
-  <div class="aciklama">İki kartı çevir. Bir cümle ile doğru anlamı eşleşirse kartlar açık kalır.</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez4Bulunan">0</b>/<b>4</b></span><span>🔁 Hamle: <b id="ez4Hamle">0</b></span></div>
-  <div class="ez-hafiza-izgara" id="ez4Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
-  <div class="sonuc-kutusu" id="ez4Sonuc"></div>
-  <button class="eylem" onclick="ez4Baslat()">🔄 Yeni Oyun</button>
-</section>
-
-<section id="ezadimadim">
-  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Sübhâneke Duası'nı baştan sona, cümle sırasını bularak ezberleyeceksin.</div>
-  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi cümlenin geldiğini seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez5Adim">1</b>/<b>4</b></span></div>
-  <div class="ez-ogrenilen-liste" id="ez5Liste"></div>
-  <div class="balon-durum">Sırada hangi cümle geliyor?</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez5Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez5Sonuc"></div>
-  <button class="eylem" onclick="ez5Baslat()">▶️ Başla</button>
-</section>
-
-<section id="ezgizli">
-  <h2>6️⃣ Ezber: Gizli Harfler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Sübhâneke Duası'nın anahtar kelimelerini harf harf hatırlayacaksın.</div>
-  <div class="aciklama">Cümledeki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez6Tur">1</b>/<b>4</b></span><span>✅ Doğru: <b id="ez6Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez6Metin"></div>
-  <div class="kelime-cevap" id="ez6Cevap"></div>
-  <div class="kelime-banka" id="ez6Banka"></div>
-  <div class="sonuc-kutusu" id="ez6Sonuc"></div>
-  <button class="eylem" onclick="ez6Baslat()">🔐 Başla</button>
-</section>
-
-<section id="ezkaybolan">
-  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun cümleyi hafızandan tanıyabileceksin.</div>
-  <div class="aciklama">Cümleyi 3 saniye izle, sonra kaybolacak. Az önce gördüğün cümlenin BİREBİR aynısını seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez7Tur">1</b>/<b>4</b></span><span>✅ Doğru: <b id="ez7Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez7Metin">👁️ Başlamak için düğmeye bas</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez7Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez7Sonuc"></div>
-  <button class="eylem" onclick="ez7Baslat()">👁️ Başla</button>
-</section>
-
-<section id="ezhiz">
-  <h2>8️⃣ Ezber: Hız Testi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Sübhâneke Duası cümle-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
-  <div class="aciklama">Süre dolmadan verilen anlama ait doğru cümleyi seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
-  <div class="ez-zamanlayici" id="ez8Sayac">60</div>
-  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez8Dogru">0</b></span><span>❌ Yanlış: <b id="ez8Yanlis">0</b></span></div>
-  <div class="ez-metin-goster" id="ez8Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez8Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez8Sonuc"></div>
-  <button class="eylem" onclick="ez8Baslat()">⏱️ Başla</button>
-</section>
-
 </main>
 
-<footer>4. Sınıf Din Kültürü ve Ahlak Bilgisi — 1. Ünite İnteraktif Oyun Seti</footer>
-
+<script>
+/* Tema (açık/koyu) — erken uygulama: yanıp sönmeyi (flash) önlemek için body render olmadan önce çalışır.
+   Yeni localStorage anahtarı kullanılır; mevcut 'dkabPuanDurumu' vb. anahtarlara dokunulmaz. */
+(function(){
+  try{
+    var kayitliTema = localStorage.getItem('dkabTemaTercihi');
+    if(kayitliTema === 'dark' || kayitliTema === 'light'){
+      document.documentElement.setAttribute('data-theme', kayitliTema);
+    }
+  }catch(e){}
+})();
+function temaDegistir(){
+  var kok = document.documentElement;
+  var suanKoyuMu = kok.getAttribute('data-theme') === 'dark'
+    || (kok.getAttribute('data-theme') !== 'light' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var yeniTema = suanKoyuMu ? 'light' : 'dark';
+  kok.setAttribute('data-theme', yeniTema);
+  try{ localStorage.setItem('dkabTemaTercihi', yeniTema); }catch(e){}
+  temaButonEtiketiGuncelle();
+}
+function temaButonEtiketiGuncelle(){
+  var btn = document.getElementById('temaDegistirBtn');
+  if(!btn) return;
+  var kok = document.documentElement;
+  var koyuMu = kok.getAttribute('data-theme') === 'dark'
+    || (kok.getAttribute('data-theme') !== 'light' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  btn.textContent = koyuMu ? '☀️ Açık Tema' : '🌙 Koyu Tema';
+}
+document.addEventListener('DOMContentLoaded', temaButonEtiketiGuncelle);
+</script>
 <script>
 function goster(id, ev){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('aktif'));
@@ -5278,28 +4147,16 @@ function ktTur(){
 }
 
 // =====================================================================
-// BAŞLANGIÇ
+// BAŞLANGIÇ (her çağrı ayrı korunur: bu ünitede bazı etkinlikler artık
+// Konuyu Öğren sayfasında olduğu için, o sayfada olmayan bir öğeye
+// erişmeye çalışan bir çağrı diğerlerini durdurmasın)
 // =====================================================================
-baslat1();
-baslat3();
-subKelimeBaslat();
-ezberIlerlet();
-kayboBaslat();
-baslatG4();
-flashGosterG2();
-surukleBaslat();
-mgDelikleriOlustur();
-bzIzgaraOlustur();
-kelimeAviOlustur();
-cengelOlustur();
-merdivenBaslat();
-sifreOlustur();
-labirentBaslat();
-nonogramOlustur();
-ksOlustur();
-istatistikleriGuncelleGoster();
-gunlukMeydanOkumasiYukle();
-sonucIzlemeBaslat();
+[baslat1, baslat3, subKelimeBaslat, ezberIlerlet, kayboBaslat, baslatG4,
+ flashGosterG2, surukleBaslat, mgDelikleriOlustur, bzIzgaraOlustur,
+ kelimeAviOlustur, cengelOlustur, merdivenBaslat, sifreOlustur,
+ labirentBaslat, nonogramOlustur, ksOlustur, istatistikleriGuncelleGoster,
+ gunlukMeydanOkumasiYukle, sonucIzlemeBaslat
+].forEach(function(fn){ try{ fn(); }catch(e){} });
 
 // =====================================================================
 // EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — SÜBHÂNEKE DUASI
@@ -5888,7 +4745,6 @@ function zbTekrarHatirlatmaKontrol(){
 document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
 </script>
-
 <script id="ogrKatmaniScript">
 /* ===================== OGRENME DENEYIMI KATMANI (JS) =====================
    Sadece EKLEME yapar: mevcut id/onclick/veri yapisina dokunmaz, hicbir
@@ -6016,10 +4872,9 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
   /* ---------- 2) HERO: ogrenme hedefleri + ilerleme rozeti ---------- */
   function ogrHeroGelistir(){
-    const hero = document.querySelector('.hero');
-    const butonlar = hero ? hero.querySelector('.hero-butonlar') : null;
-    if(!hero || !butonlar || hero.dataset.ogrHazir) return;
-    hero.dataset.ogrHazir = '1';
+    const hedefKonteyner = document.getElementById('ogrHedefKonteyner');
+    if(!hedefKonteyner || hedefKonteyner.dataset.ogrHazir) return;
+    hedefKonteyner.dataset.ogrHazir = '1';
 
     const basliklar = Array.from(document.querySelectorAll('main section[id^="ozet"] .kutu-panel > h3')).map(function(h){
       return ogrEmojiTemizle(h.textContent);
@@ -6037,7 +4892,7 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
       '<circle class="ogr-ring-on" id="ogrHeroRing" cx="16" cy="16" r="13" stroke-dasharray="81.68" stroke-dashoffset="81.68"></circle>'+
       '</svg><span id="ogrHeroRozetMetin">Bu üniteye yeni başlıyorsun</span></span>';
     ek.innerHTML = ic;
-    butonlar.insertAdjacentElement('afterend', ek);
+    hedefKonteyner.appendChild(ek);
 
     const toplamEtkinlik = document.querySelectorAll('.oyun-grubu button').length || 1;
     function ogrHeroIlerlemeGuncelle(){

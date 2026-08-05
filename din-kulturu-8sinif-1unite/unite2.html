@@ -625,6 +625,125 @@
   .ogr-giris-karti{ flex-direction:column; text-align:center; }
 }
 </style>
+<style id="anaMenuStil">
+.hero{ padding:26px 20px 20px; }
+.hero-sekiller{ display:none; }
+.hero-baslik{ font-size:1.35em; margin:2px 0 8px; }
+.hero-alt{ font-size:.95em; max-width:440px; }
+.hero-butonlar{ margin-top:12px; }
+#oyun-gruplari{ scroll-margin-top:10px; max-width:900px; margin:0 auto; }
+.mega-menu{ max-width:900px; margin:0 auto; padding:26px 16px 34px; flex-wrap:wrap; gap:18px; justify-content:center; position:static !important; }
+.mega-kart{
+  flex:1 1 230px; max-width:280px; background:#fff; border:2px solid var(--acik); border-radius:20px;
+  padding:26px 20px; text-align:center; cursor:pointer; transition:.18s; box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+.mega-kart:hover{ transform:translateY(-4px); border-color:var(--mavi); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+.mega-kart-ikon{ font-size:2.2em; margin-bottom:8px; }
+.mega-kart h3{ margin:0 0 6px; color:var(--navy); font-size:1.15em; }
+.mega-kart p{ margin:0; font-size:.85em; color:#667; }
+#ogrHedefKonteyner:empty{ display:none; }
+#ogrHedefKonteyner .ogr-hero-ek{ margin:14px auto 0; }
+.oyun-grubu.mega-menu.aktif, #oyun-gruplari > .oyun-grubu:not(.mega-menu){ position:static !important; top:auto !important; }
+.geri-btn{
+  display:block; width:100%; margin:0 0 12px; background:none; border:none; color:var(--mavi); font-weight:800;
+  cursor:pointer; font-size:.9em; padding:4px; text-align:center;
+}
+.geri-btn:hover{ text-decoration:underline; }
+.oyunmerkezi-nav{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; width:100%; margin-bottom:4px; }
+.oyunmerkezi-nav button{
+  padding:9px 16px; border:none; border-radius:18px; cursor:pointer; background:#22333b; color:#fff;
+  font-weight:bold; font-size:.9em; transition:.15s;
+}
+.oyunmerkezi-nav button:hover, .oyunmerkezi-nav button.kat-aktif{ background:var(--yesil); }
+</style>
+<style id="omgKart2Stil">
+.omg-2kolon{ align-items:flex-start; gap:32px; }
+.omg-yan-menu{
+  display:flex; flex-direction:column; gap:10px;
+  flex:0 0 280px; max-width:280px;
+  position:sticky; top:16px;
+}
+.omg-yan-menu .geri-btn{ margin-bottom:0; }
+.omg-yan-baslik{ font-weight:800; color:var(--navy); font-size:1.05em; width:100%; margin:4px 0 0; text-align:left; padding:0 4px; }
+.omg-yan-oge{
+  text-align:left; width:100%; min-height:62px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 18px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-yan-oge:hover{ border-color:var(--mavi); }
+.omg-yan-ikon{ font-size:1.5em; flex-shrink:0; }
+.omg-yan-oge.kat-aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18);
+  border-left-color:var(--mavi) !important;
+}
+.omg-yan-oge.kat-aktif .omg-yan-ikon{ font-size:1.9em; }
+.omg-kart-alan{
+  flex:1 1 420px; min-width:0; width:100%;
+  max-height:660px; overflow-y:auto; padding:4px 4px 4px 0;
+  animation: omgKartGiris .3s ease;
+}
+@keyframes omgKartGiris{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+.omg-kart-izgara{
+  display:grid; grid-template-columns:repeat(2, 1fr);
+  gap:22px; width:100%; align-content:start;
+}
+.omg-oyun-kart{
+  position:relative; cursor:pointer;
+  background:#fff; border-radius:18px; padding:30px 24px 26px;
+  text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.06);
+  transition:.18s; display:flex; flex-direction:column; gap:8px;
+  min-height:180px; border:1px solid transparent;
+}
+.omg-oyun-kart:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(0,0,0,.12); border-color:var(--acik); }
+.omg-oyun-kart-ikon{ font-size:1.8em; }
+.omg-oyun-kart h4{ margin:2px 0 0; font-size:1.08em; color:#22333b; line-height:1.35; }
+.omg-oyun-kart p{ margin:0; font-size:.86em; color:#8892a0; line-height:1.5; flex:1; }
+.omg-oyun-kart-alt{ display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+.omg-zorluk{ font-size:.72em; font-weight:800; letter-spacing:.3px; padding:4px 11px; border-radius:999px; background:var(--acikgri); color:#667; }
+.omg-oyna-ok{ font-size:.85em; font-weight:800; color:var(--mavi); }
+@media(max-width:640px){
+  .omg-2kolon{ flex-direction:column; gap:16px; }
+  .omg-yan-menu{
+    flex-direction:row; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    max-width:100%; position:static; gap:8px; padding-bottom:4px;
+  }
+  .omg-yan-baslik{ display:none; }
+  .omg-yan-menu .geri-btn{ flex:0 0 auto; width:auto; white-space:nowrap; }
+  .omg-yan-oge{ min-height:44px; width:auto; flex:0 0 auto; white-space:nowrap; }
+  .omg-kart-izgara{ grid-template-columns:1fr; }
+  .omg-kart-alan{ max-height:none; overflow-y:visible; }
+}
+</style>
+<style id="omgTekliMenuStil">
+.omg-tekli-menu{ display:flex; flex-direction:column; gap:10px; max-width:440px; }
+.omg-tekli-menu > button:not(.geri-btn){
+  text-align:left; width:100%; min-height:58px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 20px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-tekli-menu > button:not(.geri-btn):hover{ border-color:var(--mavi); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
+.omg-tekli-menu > button.aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18) !important;
+  border-left-color:var(--mavi) !important;
+}
+</style>
+<style id="omgEgitimIzoleStil">
+#oyun-gruplari:not(:has(#kat-unite82-ogren.aktif)):not(:has(#kat-unite82-degerlendir.aktif)) ~ main .egitim-icerik{
+  display:none !important;
+}
+</style>
 </head>
 <body>
 
@@ -635,89 +754,31 @@
   <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
 </header>
 <div class="op-baglanti-satiri"><a onclick="goster('ogretmenpaneli', event)" role="button" aria-label="Öğretmen paneline git">🔒 Öğretmen Paneli</a></div>
-
 <section class="hero">
-  <div class="hero-sekiller">
-    <span style="top:8%; left:6%; animation-delay:0s;">🤲</span>
-    <span style="top:65%; left:10%; animation-delay:1.2s;">💰</span>
-    <span style="top:20%; left:85%; animation-delay:.6s;">🌾</span>
-    <span style="top:75%; left:88%; animation-delay:1.8s;">❤️</span>
-    <span style="top:50%; left:16%; animation-delay:2.4s;">🎁</span>
-    <span style="top:6%; left:78%; animation-delay:.9s;">🕌</span>
-  </div>
   <h2 class="hero-baslik">Paylaşmanın Gücünü Keşfet!</h2>
   <p class="hero-alt">Zekât, sadaka, infak, nisap kavramlarını ve Hz. Şuayb'ın (as) hayatını oyunlarla öğren!</p>
   <div class="hero-butonlar">
-    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">🚀 Oyuna Başla</button>
-    <button class="hero-btn hero-btn-ikincil" onclick="kategoriGosterVeKaydir('kat-unite82')">📚 Konuları Keşfet</button>
+    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">▶ Üniteye Başla</button>
   </div>
 </section>
 
-<div class="istatistik-cubugu">
-  <div class="istatistik-kutu"><span class="ist-ikon">⭐</span><b id="istToplamPuan">0</b><span class="ist-etiket">Toplam Puan</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🏅</span><b id="istRozet">0</b><span class="ist-etiket">Rozet</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🔥</span><b id="istSeri">0</b><span class="ist-etiket">Günlük Seri</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">📈</span><b id="istTamamlanan">0</b><span class="ist-etiket">Tamamlanan Etkinlik</span></div>
-</div>
-
 <div id="oyun-gruplari" role="navigation" aria-label="Ünite bölümleri menüsü">
-<nav class="kategori-nav" role="navigation" aria-label="Ana kategori menüsü">
-  <button onclick="kategoriGoster('kat-unite82', event)" class="kat-aktif">🤲 Ünite Konuları</button>
-  <button onclick="kategoriGoster('kat-bulmaca82', event)">🧩 Kelime Bulmacaları</button>
-  <button onclick="kategoriGoster('kat-yarisma82', event)">🎮 Yarışma Oyunları</button>
-  <button onclick="kategoriGoster('kat-mantik82', event)">🕵️ Mantık &amp; Dedektiflik</button>
-  <button onclick="kategoriGoster('kat-macera82', event)">🌀 Macera</button>
-  <button onclick="kategoriGoster('kat-ezber82', event)">🕌 Ezber Etkinlikleri</button>
-</nav>
 
-<div class="oyun-grubu aktif" id="kat-unite82">
-  <button onclick="goster('ozet82', event)" class="aktif">📖 Konu Özeti</button>
-  <button onclick="goster('konutekrari82', event)">📝 Konu Tekrarı Testi</button>
-  <button onclick="goster('slayt', event)">🖥️ Ünite Sunumu</button>
-  <button onclick="goster('yazili', event)">📝 Yazılı Sınavlar</button>
+<div class="oyun-grubu mega-menu aktif" id="kat-anamenu">
+  <div class="mega-kart" onclick="window.location.href='unite2-konuyu-ogren.html'">
+    <div class="mega-kart-ikon">📖</div><h3>Konuyu Öğren</h3>
+    <p>Konu anlatımları, sunular ve kavramlar.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='unite2-oyun-merkezi.html'">
+    <div class="mega-kart-ikon">🎮</div><h3>Oyunlar</h3>
+    <p>Konuyu eğlenerek pekiştir.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='unite2-degerlendirme.html'">
+    <div class="mega-kart-ikon">📝</div><h3>Değerlendirme</h3>
+    <p>Testler ve değerlendirme soruları.</p>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-bulmaca82">
-  <button onclick="goster('kelimeavi82', event)">🔎 Kelime Avı</button>
-  <button onclick="goster('cengel82', event)">🧩 Çengel Bulmaca</button>
-  <button onclick="goster('merdiven82', event)">🪜 Sözcük Merdiveni</button>
-  <button onclick="goster('sifre82', event)">🔐 Şifreli Sözcük</button>
-  <button onclick="goster('sifretanim82', event)">🔐 Şifreli Tanım</button>
-  <button onclick="goster('kelimekodlama82', event)">💻 Kelime Kodlama</button>
-  <button onclick="goster('nonogram82', event)">🖼️ Nonogram</button>
-  <button onclick="goster('satranc82', event)">♞ Kelime Satrancı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-yarisma82">
-  <button onclick="goster('kelimeuret82', event)">⚡ Hızlı Kelime</button>
-  <button onclick="goster('tuzak82', event)">🚫 Tuzak Harf</button>
-  <button onclick="goster('fabrika82', event)">🏭 Kelime Fabrikası</button>
-  <button onclick="goster('muhendis82', event)">🛠️ Kelime Mühendisi</button>
-  <button onclick="goster('kavramturnuvasi82', event)">🏆 Kavram Turnuvası</button>
-  <button onclick="goster('bonus82', event)">🎮 Bonus Oyun</button>
-</div>
-
-<div class="oyun-grubu" id="kat-mantik82">
-  <button onclick="goster('dedektif82', event)">🕵️ Kelime Dedektifi</button>
-  <button onclick="goster('dildedektifi82', event)">🕵️‍♀️ Dil Dedektifi</button>
-  <button onclick="goster('mantikzinciri82', event)">🔗 Mantık Zinciri</button>
-  <button onclick="goster('semantiklabirent82', event)">🧠 Semantik Labirent</button>
-  <button onclick="goster('celiskiavi82', event)">🕵️‍♂️ Çelişki Avı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-macera82">
-  <button onclick="goster('labirent82', event)">🌀 Labirent</button>
-</div>
-
-<div class="oyun-grubu" id="kat-ezber82">
-  <button onclick="goster('ezsira82', event)">1️⃣ Sırala Bakalım</button>
-  <button onclick="goster('ezbosluk82', event)">2️⃣ Boşluk Doldur</button>
-  <button onclick="goster('ezeslestir82', event)">3️⃣ Anlam Eşleştir</button>
-  <button onclick="goster('ezhafiza82', event)">4️⃣ Hafıza Kartları</button>
-  <button onclick="goster('ezadimadim82', event)">5️⃣ Adım Adım Ezber</button>
-  <button onclick="goster('ezgizli82', event)">6️⃣ Gizli Harfler</button>
-  <button onclick="goster('ezkaybolan82', event)">7️⃣ Kaybolan Kelimeler</button>
-  <button onclick="goster('ezhiz82', event)">8️⃣ Hız Testi</button>
 </div>
 
 <main>
@@ -740,906 +801,7 @@
   </div>
 </div>
 </section>
-
-<section id="slayt">
-<h2>🖥️ Ünite Sunumu</h2>
-
-  <div class="sunum-sarmal">
-    <div class="sunum-ust">
-      <span class="sunum-sayac" id="sunumSayac">1 / 26</span>
-      <button class="sunum-tamekran-btn" onclick="sunumTamEkran('')" aria-label="Sunumu tam ekran aç">⛶ Tam Ekran</button>
-    </div>
-    <div class="sunum-alan" id="sunumAlan">
-
-  <div class="sunum-slayt aktif s-baslik" data-tip="baslik">
-    <div class="sb-daire">🤲</div>
-    <p class="sb-ust">8. SINIF — 2. ÜNİTE</p>
-    <h2 class="sb-baslik">Zekât ve Sadaka</h2>
-    <p class="sb-ders">Din Kültürü ve Ahlak Bilgisi</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı</p>
-  </div>
-
-  <div class="sunum-slayt s-liste" data-tip="hedef">
-    <h3>🎯 Bu Ünitede Neler Öğreneceğiz?</h3>
-    <ul class="sl-liste">
-      <li>İslam'ın Paylaşma ve Yardımlaşmaya Verdiği Önem</li><li>Zekât ve Sadaka İbadeti</li><li>Zekât ve Sadakanın Bireysel ve Toplumsal Faydaları</li><li>Bir Peygamber Tanıyorum: Hz. Şuayb (as)</li><li>Bir Sure Tanıyorum: Maun Suresi ve Anlamı</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 İslam'ın Paylaşma ve Yardımlaşmaya Verdiği Önem (1/2)</h3>
-    <ul class="si-liste">
-      <li>Paylaşma ve yardımlaşma sosyal hayatın bir gereğidir; insan doğumundan itibaren çevresiyle ilişki kurarak ihtiyaçlarını paylaşma ve yardımlaşmayla giderir.</li><li>Paylaşma ve yardımlaşma, insanın yaradılışında var olan <b>merhamet</b> duygusundan kaynaklanır.</li><li>"Onların (zenginlerin) mallarında, muhtaç ve yoksullar için hak vardır." (Zariyat suresi, 19. ayet) buyrularak varlıklıların paylaşması istenir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 İslam'ın Paylaşma ve Yardımlaşmaya Verdiği Önem (2/2)</h3>
-    <ul class="si-liste">
-      <li>Hz. Muhammed (sav) yardımlaşmada örnek olmuştur: "Her kim Müslüman kardeşinin bir ihtiyacını giderirse Allah da onun ihtiyacını giderir."</li><li>Paylaşma ve yardımlaşmada öncelik yakın çevreden başlar: anne baba, akraba, yetim, yoksul, komşu, yolcu.</li><li>Paylaşma ve yardımlaşma iyilik ve takva üzere olmalı, günah ve düşmanlık üzere yapılmamalıdır.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-merak" data-tip="zb">
-    <p class="zb-slayt-ust">🤔 MERAK ETTİN Mİ?</p>
-    <p class="zb-slayt-metin">"Sadaka taşı" geleneğinde, yardım etmek isteyenler içi oyuk yüksek bir taşın üzerine sadakalarını bırakır; ihtiyaç sahipleri de oradan alırdı. Böylece yardım eden ve edilen birbirini hiç görmezdi.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Zekât ve Sadaka İbadeti (1/2)</h3>
-    <ul class="si-liste">
-      <li><b>Zekât</b>, İslam'ın beş şartından biridir; zengin Müslümanların her yıl mallarından ve paralarından bir miktarını fakirler başta olmak üzere Kur'an'ın belirlediği yerlere vermesidir.</li><li>Zekât; ergenlik çağına gelmiş, akıllı, hür ve <b>nisap</b> miktarında malı olan Müslümanlara farzdır.</li><li>Nisap, zekât, hac ve kurban gibi ibadetler için Allah (cc) ve Resulü tarafından belirlenen mali yeterlilik ölçüsüdür.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-yanlis" data-tip="zb">
-    <p class="zb-slayt-ust">❌ YANLIŞ BİLİNENLER</p>
-    <p class="zb-slayt-yanlis">❌ Bazıları zekâtı, sadece isteyen kişinin dilediği zaman verdiği gönüllü bir bağış sanır.</p>
-    <p class="zb-slayt-dogru">✅ Zekât farz bir ibadettir; kimin, ne kadar, kime vereceği ayet ve hadislerle bellidir.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Zekât ve Sadaka İbadeti (2/2)</h3>
-    <ul class="si-liste">
-      <li><b>İnfak</b>, sırf Allah (cc) rızası için yapılan gönüllü harcama ve bağıştır; farz olan zekâtı ve gönüllü yapılan her çeşit hayrı da içerir.</li><li><b>Sadaka</b>, hem maddi hem manevi yardımları ifade eden en geniş kapsamlı kavramdır; bir güler yüz ya da güzel söz de sadaka sayılır.</li><li><b>Fitre</b>, nisap miktarı malı olan Müslümanların ramazan ayında vermesi vacip olan sadakadır.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-ornek" data-tip="zb">
-    <p class="zb-slayt-ust">🌍 GERÇEK HAYATTAN BİR ÖRNEK</p>
-    <p class="zb-slayt-metin">Zimem defterinde, ramazan ayında zenginler esnafı gezip veresiye alışveriş yapan yoksulların borcunu öderdi; esnaf kimin ödediğini kimseye söylemezdi. Bu, gizli infakın güzel bir örneğidir.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 Zekât ve Sadakanın Bireysel ve Toplumsal Faydaları (1/2)</h3>
-    <ul class="si-liste">
-      <li>Kulluk bilincini diri tutar; kişi mal sevgisini Allah'a (cc) kulluğun önüne koymaz.</li><li>Şükür duygusunu geliştirir; zekât malın, sadaka ise sahip olunan her imkânın şükrüdür.</li><li>Cömertliği artırır, cimriliği azaltır; <b>isar</b> (diğerkâmlık) yani başkalarını kendine tercih etme duygusunu geliştirir.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-dusun" data-tip="zb">
-    <p class="zb-slayt-ust">💭 DÜŞÜN VE CEVAPLA</p>
-    <p class="zb-slayt-metin">Başkalarına yardım ederken ve birilerinden yardım gördüğünüzde neler hissedersiniz?</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 Zekât ve Sadakanın Bireysel ve Toplumsal Faydaları (2/2)</h3>
-    <ul class="si-liste">
-      <li>Sevgi ve saygı bağlarını güçlendirir; zengin ile yoksul arasındaki kıskançlığı azaltarak toplumsal çatışmayı önler.</li><li>Dilenme ihtiyacını azaltır ve sosyal adaletin sağlanmasına katkıda bulunur.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-aile" data-tip="zb">
-    <p class="zb-slayt-ust">👨‍👩‍👧 AİLEMLE YAPIYORUM</p>
-    <p class="zb-slayt-metin">Çevrenizde bulunan bir yardım kurumunu ailenizle birlikte araştırıp elde ettiğiniz bilgileri kısaca not edin.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Bir Peygamber Tanıyorum: Hz. Şuayb (as) (1/2)</h3>
-    <ul class="si-liste">
-      <li>Hz. Şuayb, Kuzeybatı Arabistan'da, ticaret yolları üzerindeki <b>Medyen</b> halkına peygamber olarak gönderilmiştir.</li><li>Medyen halkı tevhit inancından uzaklaşmış, ölçü ve tartıda hile yaparak dürüstlükten ayrılmıştı.</li><li>Hz. Şuayb, "Ölçüyü ve tartıyı adaletle tam yapın." diyerek kavmini uyardı.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-derin" data-tip="zb">
-    <p class="zb-slayt-ust">🔍 DERİNLEMESİNE DÜŞÜNELİM</p>
-    <ul class="zb-slayt-liste">
-      <li>Ölçü ve tartıda dürüstlük günümüz alışverişinde nasıl karşılık bulur?</li>
-      <li>Hz. Şuayb'ın tehditler karşısındaki kararlılığından ne öğrenebiliriz?</li>
-    </ul>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Bir Peygamber Tanıyorum: Hz. Şuayb (as) (2/2)</h3>
-    <ul class="si-liste">
-      <li>Medyen halkı Hz. Şuayb'ı tehdit etti, namazıyla alay etti; Hz. Şuayb yılmadan tebliğine devam etti ve etkili konuşma yeteneğiyle <b>"Hatîbu'l-Enbiya"</b> (peygamberlerin hatibi) unvanını kazandı.</li><li>Öğütlerine kulak asmayan Medyen halkı, sonunda şiddetli bir azapla cezalandırıldı; Hz. Şuayb ve iman edenler Allah'ın (cc) yardımıyla kurtuldu.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-ikilem" data-tip="zb">
-    <p class="zb-slayt-ust">⚖️ AHLAKİ İKİLEM — SEN OLSAYDIN NE YAPARDIN?</p>
-    <p class="zb-slayt-metin">Bir arkadaşın yardım ederken bunu herkese anlatıp övünüyor. Riya ve ihlas kavramlarını düşünerek ona ne söylerdin?</p>
-  </div>
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--sari)">
-    <h3>📌 Bir Sure Tanıyorum: Maun Suresi ve Anlamı</h3>
-    <ul class="si-liste">
-      <li><b>Maun suresi</b>, Kur'an-ı Kerim'in 107. suresidir; Mekke'de inmiştir ve 7 ayettir. Adını, son ayetteki "maun" (yardım) kelimesinden alır.</li><li>Surede yetimi itip kakan, yoksula yardım etmeyi özendirmeyen ve namazında gösteriş (<b>riya</b>) yapan kimseler kınanır.</li><li>Bu davranışların temelinde ahirete gerçekten inanmamak yatar; gerçek iman, hem ibadette ihlaslı olmayı hem de yardımlaşmayı gerektirir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (1/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">Zekât</span><span class="sk-etiket" style="background:var(--mavi)">Sadaka</span><span class="sk-etiket" style="background:var(--kirmizi)">İnfak</span><span class="sk-etiket" style="background:var(--turkuaz)">Nisap</span><span class="sk-etiket" style="background:#7c3aed">Öşür</span><span class="sk-etiket" style="background:var(--yesil)">Fitre</span><span class="sk-etiket" style="background:var(--mavi)">Miskin</span><span class="sk-etiket" style="background:var(--kirmizi)">Yoksul</span><span class="sk-etiket" style="background:var(--turkuaz)">İsar</span><span class="sk-etiket" style="background:#7c3aed">Vakıf</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (2/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">İhlas</span><span class="sk-etiket" style="background:var(--mavi)">Riya</span><span class="sk-etiket" style="background:var(--kirmizi)">Merhamet</span><span class="sk-etiket" style="background:var(--turkuaz)">Cömertlik</span><span class="sk-etiket" style="background:#7c3aed">Şuayb</span><span class="sk-etiket" style="background:var(--yesil)">Medyen</span><span class="sk-etiket" style="background:var(--mavi)">Maun</span><span class="sk-etiket" style="background:var(--kirmizi)">Sadakayıcariye</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"Onların (zenginlerin) mallarında, muhtaç ve yoksullar için hak vardır."</p>
-    <p class="sa-kaynak">— Zariyat suresi, 19. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"... İyilik ve takva (Allah'a karşı gelmekten sakınma) üzere yardımlaşın. Günah ve düşmanlık üzere yardımlaşmayın. Allah'a karşı gelmekten sakının..."</p>
-    <p class="sa-kaynak">— Maide suresi, 2. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-video" data-tip="video">
-    <p class="sv-ust">🎬 KONUYLA İLGİLİ VİDEO</p>
-    <div class="sv-cerceve">
-      <p class="sv-yer-tutucu">🎥 Buraya "Zekât ve Sadaka" ile ilgili seçtiğiniz bir eğitim videosunun YouTube bağlantısını ekleyebilirsiniz. (iframe src alanını doldurun)</p>
-    </div>
-    <p class="sv-baslik">Zekât ve Sadaka</p>
-  </div>
-
-  <div class="sunum-slayt s-zb s-zb-degerlendir" data-tip="zb">
-    <p class="zb-slayt-ust">✅ KENDİMİ DEĞERLENDİRİYORUM</p>
-    <ul class="zb-slayt-liste">
-      <li>☐ Zekât, sadaka ve infak kavramlarını örnekleriyle açıklayabilirim.</li>
-      <li>☐ Nisap kavramını ve zekât verilecek kimseleri sayabilirim.</li>
-      <li>☐ Zekât ve sadakanın bireysel ve toplumsal faydalarını açıklayabilirim.</li>
-      <li>☐ Hz. Şuayb'ın (as) hayatını ana hatlarıyla anlatabilirim.</li>
-      <li>☐ Maun suresinin verdiği mesajı yorumlayabilirim.</li>
-    </ul>
-  </div>
-
-
-  <div class="sunum-slayt s-liste s-ozet" data-tip="ozet">
-    <h3>📝 Ünite Özeti</h3>
-    <ul class="sl-liste">
-      <li>İslam'ın Paylaşma ve Yardımlaşmaya Verdiği Önem</li><li>Zekât ve Sadaka İbadeti</li><li>Zekât ve Sadakanın Bireysel ve Toplumsal Faydaları</li><li>Bir Peygamber Tanıyorum: Hz. Şuayb (as)</li><li>Bir Sure Tanıyorum: Maun Suresi ve Anlamı</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-kapanis" data-tip="kapanis">
-    <div class="sb-daire">🌟</div>
-    <h2 class="sb-baslik">Dinlediğiniz İçin Teşekkürler</h2>
-    <p class="sb-ders">Başarılar dilerim.</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı — Din Kültürü ve Ahlak Bilgisi Öğretmeni</p>
-  </div>
-    </div>
-    <div class="sunum-nav">
-      <button onclick="sunumGit('',-1)" aria-label="Önceki slayt">⬅ Önceki</button>
-      <div class="sunum-noktalar" id="sunumNoktalar"></div>
-      <button onclick="sunumGit('',1)" aria-label="Sonraki slayt">Sonraki ➡</button>
-    </div>
-  </div>
-</section>
-
-<section id="yazili">
-  <h2>📝 Yazılı Sınavlar</h2>
-  <div class="aciklama">8. sınıf Din Kültürü ve Ahlak Bilgisi dersine ait, resmî MEB sınav formatında hazırlanmış, yazdırılabilir yazılı yoklama sınavları. Hem <b>karma</b> (boşluk doldurma, eşleştirme, doğru-yanlış, kısa cevap) hem de tamamen açık uçlu <b>klasik</b> format seçeneği bulunur. Kartlara tıklayınca sınav yeni sekmede açılır ve doğrudan yazdırılabilir. Diğer dönem yazılıları, sonraki üniteler eklendikçe bu bölüme eklenecektir.</div>
-  <div class="yazili-izgara">
-    <a class="yazili-kart" href="yazili1.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili1_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili2.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili2_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-  </div>
-</section>
-
-<!-- KONU ÖZETİ -->
-<section id="ozet82" class="aktif">
-  <h2>📖 2. Ünite Konu Özeti: Zekât ve Sadaka</h2>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ İslam'ın Paylaşma ve Yardımlaşmaya Verdiği Önem</h3>
-    <p class="ko-giris">Doğduğun andan itibaren bir başkasının bakımına, sevgisine, yardımına muhtaç oldun. Hiç tamamen yalnız başına ayakta durabilir miydin?</p>
-    <p class="ko-amac">🎯 Bu bölümde: Paylaşma ve yardımlaşmanın İslam'da neden bu kadar önemli olduğunu öğreneceğiz.</p>
-    <p>Paylaşma ve yardımlaşma sosyal hayatın bir gereğidir. İnsan, doğumundan itibaren çevresiyle ilişki kurarak hayatını sürdürür; ihtiyaçlarını paylaşarak ve yardımlaşarak giderir. Bu davranış, insanın yaradılışında var olan <b>merhamet</b> duygusundan kaynaklanır.</p>
-    <p>Peki bu yardımlaşmaya kimden başlanmalı? Önce yakın çevreden: anne baba, akraba, yetim, yoksul, komşu, yolcu. Ayrıca bu paylaşma iyilik ve takva üzere olmalı; günah ve düşmanlık üzere yapılan bir "yardımlaşma" gerçek anlamda yardımlaşma sayılmaz.</p>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">📖 Ayetle Düşünelim</p>
-    <p class="zb-ayet-metin">"Onların (zenginlerin) mallarında, muhtaç ve yoksullar için hak vardır."</p>
-    <p class="zb-ayet-kaynak">— Zariyat suresi, 19. ayet</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Zenginlik sadece bir imkân değil, aynı zamanda bir sorumluluktur; varlıklı olan kişinin malında, ihtiyaç sahiplerinin de bir hakkı vardır.</p>
-  </div>
-  <div class="zb-kutu zb-merak">
-    <p class="zb-baslik">🤔 Merak Ettin mi?</p>
-    <p class="zb-metin">"Sadaka taşı" geleneğinde, yardım etmek isteyenler içi oyuk yüksek bir taşın üzerine sadakalarını bırakır, ihtiyaç sahipleri de oradan alırdı. Böylece yardım eden ile yardım edilen birbirini hiç görmez, kimse incinmezdi.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li>Yardımlaşmada öncelik sırası: önce <b>yakın çevre</b> (aile, akraba, komşu), sonra diğerleri.</li>
-      <li>Yardımlaşma <b>iyilik ve takva üzere</b> olmalı; kötülükte yardımlaşılmaz.</li>
-      <li>Hz. Muhammed (sav): "Her kim Müslüman kardeşinin bir ihtiyacını giderirse Allah da onun ihtiyacını giderir."</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşünelim</p>
-    <p class="zb-metin">Bugün kime, nasıl küçük bir yardımda bulundun ya da bulunabilirdin? (Bir kalem vermek de bir yardımlaşma örneğidir.)</p>
-    <textarea id="zbAlan_dusun_2_1" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun_2_1', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-    <p class="zb-cevap-not" id="zbNot_dusun_2_1"></p>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Paylaşma ve yardımlaşma, merhamet duygusundan doğan sosyal bir gerekliliktir; önce yakın çevreden başlar ve iyilik üzere olmalıdır.</p>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Zekât ve Sadaka İbadeti</h3>
-    <p class="ko-giris">Bir arkadaşın sana "Zekât ile sadaka aynı şey değil mi?" diye sorsa, ne cevap verirdin?</p>
-    <p class="ko-amac">🎯 Bu bölümde: Zekât, sadaka, infak ve fitre kavramları arasındaki farkları öğreneceğiz.</p>
-    <p><b>Zekât</b>, İslam'ın beş şartından biridir; zengin Müslümanların her yıl mallarından belirli bir miktarı, ibadet niyetiyle fakirlere vermesidir. Zekât; ergenlik çağına gelmiş, akıllı, hür ve <b>nisap</b> miktarında malı olan Müslümanlara farzdır — yani zekât, gönüllü değil, zorunlu bir ibadettir. Nisap ise bu zorunluluğun sınırını belirleyen mali yeterlilik ölçüsüdür.</p>
-    <p>Peki toplanan zekât kime verilir? Kur'an-ı Kerim, zekâtın rastgele değil, gerçekten ihtiyacı olan kimselere ulaştırılması gerektiğini bildirir: yoksullar ve muhtaçlar, borcunu ödeyemeyecek durumda olanlar, yolda kalmış yolcular ve Allah yolunda hizmet edenler bu kimselerden bazılarıdır. Böylece zekât, toplumdaki ihtiyaç sahiplerinin fark edilip gözetilmesini sağlayan bir denge ve dayanışma aracıdır.</p>
-    <p>Zekât, her malın aynı oranda verilmez; malın türüne göre değişen belli oranları vardır. Nakit para, altın, gümüş ve ticaret malında zekât oranı <b>kırkta bir (%2,5)</b>'dir. Toprak ürünlerinde ise verilen zekâta <b>öşür</b> denir: yağmur veya nehirle, masrafsız sulanan topraklarda öşür oranı <b>onda bir</b>, kova veya motorla, masraflı sulanan topraklarda ise <b>yirmide bir</b>dir. Definelerde ve madenlerde ise oran <b>beşte bir</b>e çıkar, çünkü bunlar emek harcanmadan elde edilen kazançlardır.</p>
-    <p>Zekâtın yanında iki kavram daha vardır. <b>İnfak</b>, sırf Allah (cc) rızası için yapılan gönüllü harcama ve bağıştır. <b>Sadaka</b> ise çok daha geniş bir kavramdır: hem maddi hem manevi her türlü iyiliği kapsar — bir güler yüz bile sadaka sayılır. <b>Fitre</b> de ramazan ayında, ailenin her ferdi adına verilmesi vacip olan özel bir sadakadır.</p>
-    <p>Sadakanın, yapıldıktan sonra da fayda üretmeye devam eden türüne <b>sadaka-i câriye</b> denir. "Câriye" kelimesi "akan, devam eden" anlamına gelir; bir çeşme yaptırmak, fidan dikmek, kuyu açtırmak ya da kitap bağışlamak gibi kalıcı hayırlar, insanlar ondan yararlanmaya devam ettikçe, o hayrı yapan kişiye sevap kazandırmaya devam eder — kişi vefat etmiş olsa bile.</p>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">📖 Ayetle Düşünelim</p>
-    <p class="zb-ayet-metin">"Zekât; Allah tarafından farz kılınmış bir yükümlülük olarak yoksullara, muhtaçlara, borcunu ödeyemeyenlere, yolda kalmış yolculara ve Allah yolunda çaba gösterenlere verilir."</p>
-    <p class="zb-ayet-kaynak">— Tevbe suresi, 60. ayet (meali özetlenmiştir)</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Zekât, kime verileceği belli olan, düzenli ve adil bir paylaşım biçimidir; bu sayede toplumda kimin desteğe ihtiyacı olduğu unutulmaz.</p>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">🕋 Hadisle Düşünelim</p>
-    <p class="zb-ayet-metin">İnsan öldüğünde bütün amel defteri kapanır; ancak üç şeyin sevabı kapanmadan devam eder: geride bıraktığı sadaka-i câriye, insanların yararlandığı bir ilim ve kendisine dua eden hayırlı bir evlat.</p>
-    <p class="zb-ayet-kaynak">— Hz. Peygamber (sav) (Müslim, Vasiyet, 14 — anlamı özetlenmiştir)</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> Sadaka-i câriye, insanın ölümünden sonra bile sevap kazanmaya devam edebileceği çok özel bir hayır türüdür.</p>
-  </div>
-  <div class="zb-kutu zb-yanlis">
-    <p class="zb-baslik">❌ Yanlış Bilinenler</p>
-    <p class="zb-metin zb-yanlis-satir">❌ Bazıları zekâtı, sadece isteyen kişinin dilediği zaman verdiği gönüllü bir bağış sanır.</p>
-    <p class="zb-metin zb-dogru-satir">✅ Zekât farz bir ibadettir; kimin, hangi maldan, ne kadar ve kime vereceği ayet ve hadislerle bellidir.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li><b>Zekât</b> = Farz (zorunlu). <b>Sadaka/İnfak</b> = Gönüllü.</li>
-      <li><b>Nisap</b>: Zekât için gereken mali yeterlilik ölçüsü.</li>
-      <li><b>Öşür</b>: Toprak ürünlerinden verilen zekât. <b>Fitre</b>: Ramazanda verilen özel sadaka.</li>
-      <li>Zekât; <b>yoksullara, muhtaçlara, borçlulara, yolda kalmışlara</b> ve Allah yolunda çalışanlara verilir.</li>
-      <li><b>Sadaka-i câriye</b>: Çeşme, ağaç, kitap gibi kalıcı hayırlar — yararlanıldıkça sevap kazandırmaya devam eder.</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-ornek">
-    <p class="zb-baslik">🏠 Hayatımızdan</p>
-    <p class="zb-metin">Zimem defterinde, ramazan ayında zenginler esnafı gezip veresiye alışveriş yapan yoksulların borcunu öderdi; esnaf kimin ödediğini kimseye söylemezdi. Bu, gizli infakın güzel bir örneğidir.</p>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşünelim</p>
-    <p class="zb-metin">Zekât ile sadaka arasındaki en önemli farkı kendi cümlenle nasıl anlatırdın?</p>
-    <textarea id="zbAlan_dusun_2_2" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun_2_2', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-    <p class="zb-cevap-not" id="zbNot_dusun_2_2"></p>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Zekât farz, sadaka ve infak gönüllüdür. Nisap zekâtın ölçüsü, öşür toprak ürünlerinin zekâtı, fitre ise ramazana özel bir sadakadır. Zekât; yoksul, muhtaç, borçlu ve yolda kalmış gibi ihtiyaç sahiplerine verilir; sadaka-i câriye ise kalıcı sevap kazandıran bir sadaka türüdür.</p>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Zekât ve Sadakanın Bireysel ve Toplumsal Faydaları</h3>
-    <p class="ko-giris">Zekât vermek sadece alan kişiye mi yarar, yoksa vereni de mi değiştirir?</p>
-    <p class="ko-amac">🎯 Bu bölümde: Zekât ve sadakanın hem bireye hem topluma kattığı faydaları öğreneceğiz.</p>
-    <p>Zekât ve sadaka, önce veren kişiye fayda sağlar: kulluk bilincini diri tutar, şükür duygusunu geliştirir, cömertliği artırıp cimriliği azaltır. Kişinin kendi ihtiyacı olduğu hâlde başkalarını kendisine tercih etmesine <b>isar</b> (diğerkâmlık) denir; zekât ve sadaka bu güzel duyguyu da güçlendirir.</p>
-    <p>Toplum açısından ise zekât ve sadaka, varlıklı ile yoksul arasındaki sevgi bağlarını güçlendirir, kıskançlığı azaltıp toplumsal çatışmayı önler, dilenme ihtiyacını azaltır ve sosyal adaletin sağlanmasına katkıda bulunur. Kişilerin mallarını bağışlamasıyla oluşan <b>vakıf</b> kurumları (Vakıf Guraba Hastanesi, Darülaceze gibi), bu faydaların kalıcı, kurumsal örnekleridir.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li><b>Bireysel fayda</b>: Kulluk bilinci, şükür, cömertlik, isar (diğerkâmlık).</li>
-      <li><b>Toplumsal fayda</b>: Sevgi bağları, sosyal adalet, dilenmenin azalması.</li>
-      <li><b>Vakıf</b>: Bu faydaların kalıcı hâle geldiği kurumlardır.</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşünelim</p>
-    <p class="zb-metin">Başkalarına yardım ederken ve birilerinden yardım gördüğünde neler hissedersin?</p>
-    <textarea id="zbAlan_dusun_2_3" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun_2_3', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-    <p class="zb-cevap-not" id="zbNot_dusun_2_3"></p>
-  </div>
-  <div class="zb-kutu zb-aile">
-    <p class="zb-baslik">👨‍👩‍👧 Hayatımızdan</p>
-    <p class="zb-metin">Çevrenizde bulunan bir yardım kurumunu ailenizle birlikte araştırıp elde ettiğiniz bilgileri kısaca not edin.</p>
-    <textarea id="zbAlan_aile" class="zb-cevap-alani" placeholder="Ailenle yaptığın etkinliği kısaca anlat..." onchange="zbCevapKaydet('aile', this)" aria-label="Ailenle yaptığın etkinliği kısaca anlat..."></textarea>
-    <p class="zb-cevap-not" id="zbNot_aile"></p>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Zekât ve sadaka hem vereni (kulluk bilinci, cömertlik) hem toplumu (adalet, dayanışma) güçlendirir; vakıflar bu faydaların kalıcı örnekleridir.</p>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Bir Peygamber Tanıyorum: Hz. Şuayb (as)</h3>
-    <p class="ko-giris">Kendi halkın seni tehdit etse, namazınla alay etse... yine de doğru bildiğini söylemeye devam eder miydin?</p>
-    <p class="ko-amac">🎯 Bu bölümde: Hz. Şuayb'ın (as) mücadelesini ve verdiği mesajı öğreneceğiz.</p>
-    <p><b>Hz. Şuayb</b>, ticaret yolları üzerindeki <b>Medyen</b> halkına peygamber olarak gönderilmiştir. Bu halk tevhit inancından uzaklaşmış, özellikle ticarette ölçü ve tartıda hileye başvurarak dürüstlükten ayrılmıştı. Hz. Şuayb onlara "Ölçüyü ve tartıyı adaletle tam yapın." diyerek dürüst ticareti hatırlattı.</p>
-    <p>Medyen halkı bu davete karşı çıktı; Hz. Şuayb'ı tehdit etti, namazıyla alay etti. Ama o hiç yılmadı — üstelik öyle güzel ve etkili konuşurdu ki kendisine <b>"Hatîbu'l-Enbiya"</b> (peygamberlerin hatibi) denildi. Sonunda öğütlerine kulak asmayan Medyenliler şiddetli bir azapla cezalandırıldı; Hz. Şuayb ve iman edenler ise Allah'ın (cc) yardımıyla kurtuldu.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li>Hz. Şuayb, <b>Medyen</b> halkını ölçü-tartıda dürüstlüğe çağırdı.</li>
-      <li>Güzel konuşma yeteneği sayesinde <b>"Hatîbu'l-Enbiya"</b> unvanını aldı.</li>
-      <li>Tehdit ve alaylara rağmen tebliğ görevinden vazgeçmedi.</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-derin">
-    <p class="zb-baslik">🔍 Derinlemesine Düşünelim</p>
-    <p class="zb-metin">Bu ünitede öğrendiklerini derinlemesine değerlendirmek için kendine şu soruları sor:</p>
-    <ul class="zb-derin-liste">
-      <li>Ölçü ve tartıda dürüstlük günümüz alışverişinde nasıl karşılık bulur?</li>
-      <li>Hz. Şuayb'ın tehditler karşısındaki kararlılığından ne öğrenebilirim?</li>
-      <li>Paylaşma ve yardımlaşma günlük hayatımda neyi değiştirir?</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-ikilem">
-    <p class="zb-baslik">⚖️ Ahlaki İkilem — Sen Olsaydın Ne Yapardın?</p>
-    <p class="zb-metin">Bir arkadaşın yardım ederken bunu herkese anlatıp övünüyor. Riya ve ihlas kavramlarını düşünerek ona ne söylerdin?</p>
-    <textarea id="zbAlan_ikilem" class="zb-cevap-alani" placeholder="Ne yapardın ve neden? Düşünceni buraya yazabilirsin..." onchange="zbCevapKaydet('ikilem', this)" aria-label="Ahlaki ikilem cevabın"></textarea>
-    <p class="zb-cevap-not" id="zbNot_ikilem"></p>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Hz. Şuayb (as), Medyen halkını dürüst ticarete çağırdı; tehditlere boyun eğmeden tebliğine devam etti ve Allah'ın (cc) yardımıyla kurtuldu.</p>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">5️⃣ Bir Sure Tanıyorum: Maun Suresi ve Anlamı</h3>
-    <p class="ko-giris">Namaz kılan biri hâlâ "kötü" bir davranış içinde olabilir mi? Maun suresi tam olarak bunu anlatır.</p>
-    <p class="ko-amac">🎯 Bu bölümde: Maun suresini ve verdiği mesajı öğreneceğiz.</p>
-    <p><b>Maun suresi</b>, Kur'an-ı Kerim'in 107. suresidir; Mekke'de inmiştir ve toplam yedi ayetten oluşur. Adını, son ayette geçen "maun" (yardım, günlük ihtiyaç maddeleri) kelimesinden alır. Surede önce yetimi itip kakan ve yoksula yardım etmeyi özendirmeyen kimseler kınanır.</p>
-    <p>Surenin devamında ise namazlarını ciddiye almayan ve ibadetlerinde gösteriş yapan (<b>riya</b>) kimseler eleştirilir. Riya, ibadet ve iyilikleri insanlara gösteriş için yapmaktır. Maun suresinin verdiği mesaj nettir: samimi (<b>ihlas</b>lı) ibadet ile yardımlaşma birbirinden ayrılamaz.</p>
-  </div>
-  <div class="zb-kutu zb-okunus">
-    <p class="zb-baslik">🕌 Maun Suresi — Okunuşu ve Anlamı</p>
-    <table class="okunus-tablo">
-      <tr><td class="okunus-sutun">Bismillâhirrahmânirrahîm.</td><td class="anlam-sutun">Rahman ve Rahîm olan Allah'ın adıyla.</td></tr>
-      <tr><td class="okunus-sutun">1. Eraeytellezî yükezzibü biddîn</td><td class="anlam-sutun">Gördün mü, o hesap ve ceza gününü yalanlayanı?</td></tr>
-      <tr><td class="okunus-sutun">2. Feẕâlikellezî yedu'ul yetîm</td><td class="anlam-sutun">İşte o, yetimi itip kakan,</td></tr>
-      <tr><td class="okunus-sutun">3. Velâ yehuddu alâ ta'âmilmiskîn</td><td class="anlam-sutun">yoksula yedirmeyi özendirmeyen kimsedir.</td></tr>
-      <tr><td class="okunus-sutun">4. Feveylün lilmusallîn</td><td class="anlam-sutun">Yazıklar olsun o namaz kılanlara ki</td></tr>
-      <tr><td class="okunus-sutun">5. Ellezîne hüm an salâtihim sâhûn</td><td class="anlam-sutun">onlar namazlarını ciddiye almazlar.</td></tr>
-      <tr><td class="okunus-sutun">6. Ellezîne hüm yürâûne</td><td class="anlam-sutun">Onlar (namazlarıyla) gösteriş yaparlar.</td></tr>
-      <tr><td class="okunus-sutun">7. Veyemne'ûnel mâûn</td><td class="anlam-sutun">Ufacık bir yardıma bile engel olurlar.</td></tr>
-    </table>
-  </div>
-  <div class="zb-kutu zb-ayet">
-    <p class="zb-baslik">📖 Ayetle Düşünelim</p>
-    <p class="zb-ayet-metin">"Yazıklar olsun o namaz kılanlara ki onlar namazlarını ciddiye almazlar. Onlar (namazlarıyla) gösteriş yaparlar. Ufacık bir yardıma bile engel olurlar."</p>
-    <p class="zb-ayet-kaynak">— Maun suresi, 4-7. ayetler</p>
-    <p class="zb-ayet-mesaj"><b>Mesajı:</b> İbadet etmek tek başına yetmez; o ibadeti neden yaptığımız ve başkalarına karşı nasıl davrandığımız da en az ibadetin kendisi kadar önemlidir.</p>
-  </div>
-  <div class="zb-kutu zb-unutma">
-    <p class="zb-baslik">📌 Unutma!</p>
-    <ul>
-      <li>Maun suresi <b>107. sure</b>, Mekke'de inmiştir, <b>7 ayettir</b>.</li>
-      <li><b>Riya</b>: İbadetleri gösteriş için yapmak.</li>
-      <li>Gerçek iman, hem ibadette samimi olmayı hem yardımlaşmayı gerektirir.</li>
-    </ul>
-  </div>
-  <p class="ko-ozet">📝 <b>Özetle:</b> Maun suresi, yardım etmeyen ve ibadette gösteriş yapan kimseleri kınar; ihlaslı ibadet ile yardımlaşmanın birlikte yürümesi gerektiğini öğretir.</p>
-
-
-
-  <div class="zb-kutu zb-degerlendir">
-    <p class="zb-baslik">✅ Kendimi Değerlendiriyorum</p>
-    <ul>
-      <li><input type="checkbox" id="deg_8-2_0" onchange="degKaydet('8-2')"><label for="deg_8-2_0">Zekât, sadaka ve infak kavramlarını örnekleriyle açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_8-2_1" onchange="degKaydet('8-2')"><label for="deg_8-2_1">Nisap kavramını ve zekât verilecek kimseleri sayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_8-2_2" onchange="degKaydet('8-2')"><label for="deg_8-2_2">Zekât ve sadakanın bireysel ve toplumsal faydalarını açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_8-2_3" onchange="degKaydet('8-2')"><label for="deg_8-2_3">Hz. Şuayb'ın (as) hayatını ana hatlarıyla anlatabilirim.</label></li>
-      <li><input type="checkbox" id="deg_8-2_4" onchange="degKaydet('8-2')"><label for="deg_8-2_4">Maun suresinin verdiği mesajı yorumlayabilirim.</label></li>
-    </ul>
-  </div>
-
-
-</section>
-
-<!-- KONU TEKRARI TESTİ -->
-<section id="konutekrari82">
-  <h2>📝 Konu Tekrarı Testi (50 Soru)</h2>
-  <div class="oyun-amaci">🎯 Bu bölümün amacı: Ünitenin tamamını kapsamlı bir testle tekrar edip pekiştirmek.</div>
-  <div class="aciklama">4 şıklı, 50 sorudan oluşan kapsamlı bir tekrar testi! Kolay, orta ve zor sorular karışık geliyor. Cevabı seçince doğru/yanlış hemen görünüyor, altında da açıklaması çıkıyor.</div>
-
-  <div class="kutu-panel kutu-kazanim">
-    <h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
-    <p class="kazanim-kaynak">Kaynak: 2018 DKAB Öğretim Programı (MEB Talim ve Terbiye Kurulu) — 8.2. Zekât ve Sadaka</p>
-    <ul>
-      <li><b>8.2.1</b> — Paylaşma ve yardımlaşmanın önemini örneklerle açıklar.</li>
-      <li><b>8.2.2</b> — Zekât, sadaka ve infak kavramlarını ilişkilendirerek değerlendirir.</li>
-      <li><b>8.2.3</b> — Nisap kavramını ve zekât verilecek kimseleri açıklar.</li>
-      <li><b>8.2.4</b> — Zekât ve sadakanın bireysel ve toplumsal faydalarını yorumlar.</li>
-      <li><b>8.2.5</b> — Hz. Şuayb'ın (as) hayatını ana hatlarıyla tanır.</li>
-      <li><b>8.2.6</b> — Maun suresini okur, anlamı üzerinde düşünür.</li>
-    </ul>
-  </div>
-
-  <div class="kutu-panel kavram-harita-panel">
-    <h3 style="color:#5b21b6">🗺️ Kavram Haritası</h3>
-    <p class="kavram-harita-aciklama">Bu ünitenin MEB öğretim programında belirlenen anahtar kavramları, ünite temasıyla bağlantılı olarak aşağıda gösterilmiştir.</p>
-    <div class="kavram-harita">
-      <div class="kh-merkez">Zekât ve Sadaka</div>
-      <div class="kh-dallar">
-      <div class="kh-kavram">Zekât</div>
-      <div class="kh-kavram">Sadaka</div>
-      <div class="kh-kavram">İnfak</div>
-      <div class="kh-kavram">Nisap</div>
-      <div class="kh-kavram">Öşür</div>
-      <div class="kh-kavram">Fitre</div>
-      </div>
-    </div>
-  </div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Soru: <b id="kt82rTur">1</b>/<b id="kt82rToplam">50</b></span>
-    <span>⭐ Puan: <b id="kt82rPuan">0</b></span>
-    <span id="kt82rZorluk"></span>
-  </div>
-  <div id="kt82rSoru" class="balon-durum"></div>
-  <div id="kt82rSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:560px;margin:0 auto;"></div>
-  <div class="aciklama" id="kt82rAciklama" style="display:none;"></div>
-  <div class="sonuc-kutusu" id="kt82rSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" id="kt82rSonrakiBtn" style="display:none;" onclick="kt82rSonrakiSoru()">➡️ Sonraki Soru</button>
-    <button class="eylem" style="background:var(--sari)" onclick="kt82rBaslat()">📝 Teste Başla</button>
-  </div>
-</section>
-
-<!-- HIZLI KELİME ÜRETME -->
-<section id="kelimeuret82">
-  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
-  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
-  <div class="oyun-bilgi">
-    <span>🔤 Harf: <b id="ku82Harf">-</b></span>
-    <span>⭐ Puan: <b id="ku82Puan">0</b></span>
-    <span>⏱️ Süre: <b id="ku82Sure">60</b>sn</span>
-  </div>
-  <input type="text" id="ku82Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ku82Ekle();}">
-  <p class="balon-durum" id="ku82Uyari"></p>
-  <ul class="ku-liste" id="ku82Liste"></ul>
-  <div class="sonuc-kutusu" id="ku82Sonuc"></div>
-  <div id="ku82Kacirilan"></div>
-  <button class="eylem" onclick="ku82Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- TUZAK HARF -->
-<section id="tuzak82">
-  <h2>🚫 Tuzak Harf Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
-  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen kavramları süre bitmeden art arda yaz!</div>
-  <div class="oyun-bilgi">
-    <span>🚫 Tuzak Harf: <b id="tuzak82Harf">-</b></span>
-    <span>⭐ Puan: <b id="tuzak82Puan">0</b></span>
-    <span>⏱️ Süre: <b id="tuzak82Sure">40</b>sn</span>
-  </div>
-  <input type="text" id="tuzak82Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzak82Ekle();}">
-  <p class="balon-durum" id="tuzak82Uyari"></p>
-  <ul class="ku-liste" id="tuzak82Liste"></ul>
-  <div class="sonuc-kutusu" id="tuzak82Sonuc"></div>
-  <button class="eylem" onclick="tuzak82Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME FABRİKASI -->
-<section id="fabrika82">
-  <h2>🏭 Kelime Fabrikası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
-  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!</div>
-  <div class="oyun-bilgi">
-    <span>🏭 Üretilen: <b id="kf82Uretilen">0</b>/<b id="kf82Toplam">28</b></span>
-    <span>❌ Hata: <b id="kf82Hata">0</b></span>
-  </div>
-  <div id="kf82Siparis" class="balon-durum"></div>
-  <div class="kf-bant" id="kf82BantAlani"></div>
-  <input type="text" id="kf82Girdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kf82Uret();}">
-  <button class="eylem" onclick="kf82Uret()">🏭 Üret!</button>
-  <div class="kf-urunler" id="kf82Urunler"></div>
-  <div class="sonuc-kutusu" id="kf82Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="kf82Baslat()">🔄 Fabrikayı Başlat/Yenile</button>
-</section>
-
-<!-- KELİME MÜHENDİSİ -->
-<section id="muhendis82">
-  <h2>🛠️ Kelime Mühendisi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
-  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
-  <div class="oyun-bilgi">
-    <span>🏗️ Tur: <b id="km82Tur">1</b>/<b id="km82Toplam">28</b></span>
-    <span>✅ İnşa Edilen: <b id="km82Dogru">0</b></span>
-  </div>
-  <div id="km82Ipucu" class="balon-durum"></div>
-  <div class="kelime-cevap" id="km82Cevap"></div>
-  <div class="kelime-banka" id="km82Banka"></div>
-  <div class="sonuc-kutusu" id="km82Sonuc"></div>
-  <button class="eylem" onclick="km82Baslat()">🛠️ Mühendisliğe Başla</button>
-</section>
-
-<!-- KAVRAM TURNUVASI -->
-<section id="kavramturnuvasi82">
-  <h2>🏆 Kavram Turnuvası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
-  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap.</div>
-  <div class="oyun-bilgi">
-    <span>🥊 Maç: <b id="kt82Tur">1</b>/<b id="kt82Toplam">7</b></span>
-    <span>✅ Doğru Hakemlik: <b id="kt82Puan">0</b></span>
-  </div>
-  <div id="kt82Asama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
-  <div id="kt82Eslesme" class="balon-durum"></div>
-  <div id="kt82Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kt82Sonuc"></div>
-  <button class="eylem" onclick="kt82Baslat()">🏆 Turnuvayı Başlat</button>
-</section>
-
-<!-- BONUS OYUN: HAFIZA ZİNCİRİ -->
-<section id="bonus82">
-  <h2>🎮 Bonus Oyun: Kavramlar Hafıza Zinciri</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
-  <div class="aciklama">Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir kavram daha uzuyor.</div>
-  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bz82Seviye">0</b></span></div>
-  <div class="bz-izgara" id="bz82Izgara"></div>
-  <div class="sonuc-kutusu" id="bz82Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" style="background:var(--sari)" onclick="bz82OrnekOyna()">🎬 Önce Örnek Gör</button>
-    <button class="eylem" onclick="bz82Baslat()">🎮 Oyunu Başlat</button>
-  </div>
-</section>
-
-<!-- KELİME AVI -->
-<section id="kelimeavi82">
-  <h2>🔎 Kelime Avı Bulmacası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
-  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka82Bulunan">0</b>/<b id="ka82Toplam">14</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ka-izgara" id="ka82Izgara"></div>
-    <ul class="ka-liste" id="ka82Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ka82Sonuc"></div>
-  <button class="eylem" onclick="kelimeAvi82Olustur()">🔄 Yeni Bulmaca</button>
-</section>
-
-<!-- ÇENGEL BULMACA -->
-<section id="cengel82">
-  <h2>🧩 Çengel Bulmaca</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
-  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
-  <div class="cengel-izgara" id="cengel82Izgara"></div>
-  <ul class="cengel-liste" id="cengel82Liste"></ul>
-  <div class="sonuc-kutusu" id="cengel82Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="cengel82KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="cengel82Olustur()">🔄 Baştan Başla</button>
-  </div>
-</section>
-
-<!-- SÖZCÜK MERDİVENİ -->
-<section id="merdiven82">
-  <h2>🪜 Sözcük Merdiveni</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
-  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdiven82Basamak">1</b>/<b id="merdiven82Toplam">4</b></span></div>
-  <div id="merdiven82Ipucu" class="balon-durum"></div>
-  <div id="merdiven82Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="merdiven82Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="merdiven82Sonuc"></div>
-  <button class="eylem" onclick="merdiven82Baslat()">🔄 Yeniden Başlat</button>
-</section>
-
-<!-- ŞİFRELİ SÖZCÜK -->
-<section id="sifre82">
-  <h2>🔐 Şifreli Sözcük Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
-  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
-  <div class="sifre-anahtar" id="sifre82Anahtar"></div>
-  <div id="sifre82Kelimeler"></div>
-  <div class="sonuc-kutusu" id="sifre82Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="sifre82KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="sifre82Olustur()">🔄 Yeni Şifre</button>
-  </div>
-</section>
-
-<!-- ŞİFRELİ TANIM -->
-<section id="sifretanim82">
-  <h2>🔐 Şifreli Tanım Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
-  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="st82Tur">1</b>/<b id="st82Toplam">28</b></span>
-    <span>⭐ Puan: <b id="st82Puan">0</b></span>
-  </div>
-  <div id="st82Tanim" class="dua-satir"></div>
-  <div id="st82Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="st82Sonuc"></div>
-  <button class="eylem" onclick="st82Baslat()">🔐 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME KODLAMA -->
-<section id="kelimekodlama82">
-  <h2>💻 Kelime Kodlama Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
-  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz.</div>
-  <div class="sifre-anahtar" id="kk82Anahtar"></div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="kk82Tur">1</b>/<b id="kk82Toplam">28</b></span>
-    <span>⭐ Puan: <b id="kk82Puan">0</b></span>
-  </div>
-  <div id="kk82Ipucu" class="balon-durum"></div>
-  <div id="kk82Kod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
-  <div id="kk82Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kk82Sonuc"></div>
-  <button class="eylem" onclick="kk82Baslat()">💻 Kodlamayı Başlat</button>
-</section>
-
-<!-- NONOGRAM -->
-<section id="nonogram82">
-  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
-  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak gizli resmi ortaya çıkar!</div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
-    <button class="eylem" onclick="nonogram82Sec('camii')">🕌 Cami (İbadet Yeri)</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram82Sec('hilal')">🌙⭐ Hilal ve Yıldız</button>
-  </div>
-  <div style="overflow-x:auto;">
-    <table class="nono-tablo" id="nono82Tablo"></table>
-  </div>
-  <div class="sonuc-kutusu" id="nono82Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="nonogram82KontrolEt(true)">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram82Temizle()">🧹 Temizle</button>
-  </div>
-</section>
-
-<!-- KELİME SATRANCI -->
-<section id="satranc82">
-  <h2>♞ Kelime Satrancı</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
-  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ks82Bulunan">0</b>/<b id="ks82Toplam">8</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ks-izgara" id="ks82Izgara"></div>
-    <ul class="ka-liste" id="ks82Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ks82Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="ks82SecimiTemizle()">🧹 Seçimi Temizle</button>
-    <button class="eylem" style="background:var(--sari)" onclick="ks82Olustur()">🔄 Yeni Tahta</button>
-  </div>
-</section>
-
-<!-- KELİME DEDEKTİFİ -->
-<section id="dedektif82">
-  <h2>🕵️ Kelime Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
-  <div class="aciklama">Gizli kelimeyi (bir kavram) 5 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Vaka: <b id="dd82Vaka">1</b>/<b id="dd82ToplamVaka">1</b></span>
-    <span>✅ Çözülen: <b id="dd82Cozulen">0</b></span>
-    <span>🔍 Deneme: <b id="dd82Deneme">0</b>/<b id="dd82MaxDeneme">5</b></span>
-  </div>
-  <div id="dd82Ipucu" class="balon-durum"></div>
-  <div id="dd82Izgara"></div>
-  <input type="text" id="dd82Girdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){dd82TahminEt();}">
-  <p class="balon-durum" id="dd82Uyari"></p>
-  <div class="sonuc-kutusu" id="dd82Sonuc"></div>
-  <button class="eylem" onclick="dd82Baslat()">🕵️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- DİL DEDEKTİFİ -->
-<section id="dildedektifi82">
-  <h2>🕵️‍♀️ Dil Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ddl82Tur">1</b>/<b id="ddl82Toplam">10</b></span>
-    <span>⭐ Puan: <b id="ddl82Puan">0</b></span>
-  </div>
-  <div id="ddl82Baslik" class="balon-durum"></div>
-  <div id="ddl82Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="ddl82Sonuc"></div>
-  <button class="eylem" onclick="ddl82Baslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- MANTIK ZİNCİRİ -->
-<section id="mantikzinciri82">
-  <h2>🔗 Mantık Zinciri Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
-  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
-  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mz82Halka">1</b>/<b id="mz82Toplam">5</b></span></div>
-  <div id="mz82Soru" class="balon-durum"></div>
-  <div id="mz82Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="mz82Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="mz82Sonuc"></div>
-  <button class="eylem" onclick="mz82Baslat()">🔗 Zinciri Başlat</button>
-</section>
-
-<!-- SEMANTİK LABİRENT -->
-<section id="semantiklabirent82">
-  <h2>🧠 Semantik Labirent</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
-  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin.</div>
-  <div class="oyun-bilgi">
-    <span>🚪 Oda: <b id="sz82Oda">1</b>/<b id="sz82ToplamOda">6</b></span>
-    <span id="sz82Can">❤️❤️❤️</span>
-  </div>
-  <div id="sz82Kategori" class="balon-durum"></div>
-  <div id="sz82Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="sz82Sonuc"></div>
-  <button class="eylem" onclick="sz82Baslat()">🌀 Labirente Gir</button>
-</section>
-
-<!-- ÇELİŞKİ AVI -->
-<section id="celiskiavi82">
-  <h2>🕵️‍♂️ Çelişki Avı</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu?</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ca82Tur">1</b>/<b id="ca82Toplam">12</b></span>
-    <span>⭐ Puan: <b id="ca82Puan">0</b></span>
-  </div>
-  <div id="ca82Cumle" class="dua-satir"></div>
-  <div id="ca82Butonlar" style="display:flex;gap:14px;justify-content:center;">
-    <button class="eylem" style="background:var(--kirmizi)" onclick="ca82Cevapla(true)">⚡ Çelişki VAR</button>
-    <button class="eylem" style="background:var(--yesil)" onclick="ca82Cevapla(false)">✅ Çelişki YOK</button>
-  </div>
-  <p style="text-align:center;font-weight:bold;" id="ca82GeriBildirim"></p>
-  <div class="sonuc-kutusu" id="ca82Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="ca82Baslat()">🕵️‍♂️ Ava Başla</button>
-</section>
-
-<!-- LABİRENT -->
-<section id="labirent82">
-  <h2>🌀 Labirent Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
-  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 🕌'ye ulaştır! Yolda parıldayan yıldızlara basarsan bir kavram toplarsın.</div>
-  <div class="oyun-bilgi">
-    <span>🔁 Hamle: <b id="lab82Hamle">0</b></span>
-    <span>⭐ Toplanan: <b id="lab82Toplanan">0</b>/<b id="lab82ToplamYildiz">20</b></span>
-    <span>⏱️ Süre: <b id="lab82Sure">0</b>sn</span>
-  </div>
-  <div class="balon-durum" id="lab82Durum"></div>
-  <div class="labirent-izgara" id="lab82Izgara"></div>
-  <div class="labirent-kontroller">
-    <button class="labirent-tus" onclick="labirent82Hareket(-1,0)">▲</button>
-    <div>
-      <button class="labirent-tus" onclick="labirent82Hareket(0,-1)">◀</button>
-      <button class="labirent-tus" onclick="labirent82Hareket(1,0)">▼</button>
-      <button class="labirent-tus" onclick="labirent82Hareket(0,1)">▶</button>
-    </div>
-  </div>
-  <div class="sonuc-kutusu" id="lab82Sonuc"></div>
-  <button class="eylem" onclick="labirent82Baslat()">🔄 Yeni Labirent</button>
-</section>
-
-<!-- ================= EZBER ETKİNLİKLERİ (8 ADET) — MAUN SURESİ ================= -->
-
-<section id="ezsira82">
-  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Maun suresinin ayetlerini doğru sırayla dizebileceksin.</div>
-  <div class="aciklama">Karışık sırada verilen ayetleri, Maun suresindeki doğru sıraya göre tıklayarak diz.</div>
-  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez182Dizilen">0</b>/<b>8</b></span></div>
-  <div class="kelime-cevap" id="ez182Cevap"></div>
-  <div class="kelime-banka" id="ez182Banka"></div>
-  <div class="sonuc-kutusu" id="ez182Sonuc"></div>
-  <button class="eylem" onclick="ez182Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezbosluk82">
-  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Maun suresi ayetlerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
-  <div class="aciklama">Ayetteki boşluğa gelen doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez282Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez282Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez282Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez282Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez282Sonuc"></div>
-  <button class="eylem" onclick="ez282Baslat()">📝 Başla</button>
-</section>
-
-<section id="ezeslestir82">
-  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Maun suresinin her ayetini anlamıyla eşleştirebileceksin.</div>
-  <div class="aciklama">Soldan bir ayet, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
-  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez382Eslesen">0</b>/<b>8</b></span></div>
-  <div class="ez-iki-sutun">
-    <div class="ez-sutun"><h4>Ayet</h4><div id="ez382Sol"></div></div>
-    <div class="ez-sutun"><h4>Anlam</h4><div id="ez382Sag"></div></div>
-  </div>
-  <div class="sonuc-kutusu" id="ez382Sonuc"></div>
-  <button class="eylem" onclick="ez382Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezhafiza82">
-  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ayet-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
-  <div class="aciklama">İki kartı çevir. Bir ayet ile doğru anlamı eşleşirse kartlar açık kalır.</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez482Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="ez482Hamle">0</b></span></div>
-  <div class="ez-hafiza-izgara" id="ez482Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
-  <div class="sonuc-kutusu" id="ez482Sonuc"></div>
-  <button class="eylem" onclick="ez482Baslat()">🔄 Yeni Oyun</button>
-</section>
-
-<section id="ezadimadim82">
-  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Maun suresini baştan sona, ayet sırasını bularak ezberleyeceksin.</div>
-  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi ayetin geldiğini seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez582Adim">1</b>/<b>8</b></span></div>
-  <div class="ez-ogrenilen-liste" id="ez582Liste"></div>
-  <div class="balon-durum">Sırada hangi ayet geliyor?</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez582Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez582Sonuc"></div>
-  <button class="eylem" onclick="ez582Baslat()">▶️ Başla</button>
-</section>
-
-<section id="ezgizli82">
-  <h2>6️⃣ Ezber: Gizli Harfler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Maun suresinin anahtar kelimelerini harf harf hatırlayacaksın.</div>
-  <div class="aciklama">Ayetteki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez682Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez682Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez682Metin"></div>
-  <div class="kelime-cevap" id="ez682Cevap"></div>
-  <div class="kelime-banka" id="ez682Banka"></div>
-  <div class="sonuc-kutusu" id="ez682Sonuc"></div>
-  <button class="eylem" onclick="ez682Baslat()">🔐 Başla</button>
-</section>
-
-<section id="ezkaybolan82">
-  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun ayeti hafızandan tanıyabileceksin.</div>
-  <div class="aciklama">Ayeti 3 saniye izle, sonra kaybolacak. Az önce gördüğün ayetin BİREBİR aynısını seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez782Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez782Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez782Metin">👁️ Başlamak için düğmeye bas</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez782Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez782Sonuc"></div>
-  <button class="eylem" onclick="ez782Baslat()">👁️ Başla</button>
-</section>
-
-<section id="ezhiz82">
-  <h2>8️⃣ Ezber: Hız Testi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Maun suresi ayet-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
-  <div class="aciklama">Süre dolmadan verilen anlama ait doğru ayeti seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
-  <div class="ez-zamanlayici" id="ez882Sayac">60</div>
-  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez882Dogru">0</b></span><span>❌ Yanlış: <b id="ez882Yanlis">0</b></span></div>
-  <div class="ez-metin-goster" id="ez882Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez882Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez882Sonuc"></div>
-  <button class="eylem" onclick="ez882Baslat()">⏱️ Başla</button>
-</section>
-
 </main>
-</div>
-
-<footer>8. Sınıf Din Kültürü ve Ahlak Bilgisi — 1. Ünite İnteraktif Oyun Seti</footer>
 
 <script>
 function goster(id, ev){
@@ -4167,7 +3329,6 @@ function zbTekrarHatirlatmaKontrol(){
 document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
 </script>
-
 <script id="ogrKatmaniScript">
 /* ===================== OGRENME DENEYIMI KATMANI (JS) =====================
    Sadece EKLEME yapar: mevcut id/onclick/veri yapisina dokunmaz, hicbir
@@ -4295,10 +3456,9 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
   /* ---------- 2) HERO: ogrenme hedefleri + ilerleme rozeti ---------- */
   function ogrHeroGelistir(){
-    const hero = document.querySelector('.hero');
-    const butonlar = hero ? hero.querySelector('.hero-butonlar') : null;
-    if(!hero || !butonlar || hero.dataset.ogrHazir) return;
-    hero.dataset.ogrHazir = '1';
+    const hedefKonteyner = document.getElementById('ogrHedefKonteyner');
+    if(!hedefKonteyner || hedefKonteyner.dataset.ogrHazir) return;
+    hedefKonteyner.dataset.ogrHazir = '1';
 
     const basliklar = Array.from(document.querySelectorAll('main section[id^="ozet"] .kutu-panel > h3')).map(function(h){
       return ogrEmojiTemizle(h.textContent);
@@ -4316,7 +3476,7 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
       '<circle class="ogr-ring-on" id="ogrHeroRing" cx="16" cy="16" r="13" stroke-dasharray="81.68" stroke-dashoffset="81.68"></circle>'+
       '</svg><span id="ogrHeroRozetMetin">Bu üniteye yeni başlıyorsun</span></span>';
     ek.innerHTML = ic;
-    butonlar.insertAdjacentElement('afterend', ek);
+    hedefKonteyner.appendChild(ek);
 
     const toplamEtkinlik = document.querySelectorAll('.oyun-grubu button').length || 1;
     function ogrHeroIlerlemeGuncelle(){
@@ -4381,4 +3541,3 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 </script>
 </body>
 </html>
-

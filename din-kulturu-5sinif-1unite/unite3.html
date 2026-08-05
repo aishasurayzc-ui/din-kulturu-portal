@@ -594,6 +594,125 @@
   .ogr-giris-karti{ flex-direction:column; text-align:center; }
 }
 </style>
+<style id="anaMenuStil">
+.hero{ padding:26px 20px 20px; }
+.hero-sekiller{ display:none; }
+.hero-baslik{ font-size:1.35em; margin:2px 0 8px; }
+.hero-alt{ font-size:.95em; max-width:440px; }
+.hero-butonlar{ margin-top:12px; }
+#oyun-gruplari{ scroll-margin-top:10px; max-width:900px; margin:0 auto; }
+.mega-menu{ max-width:900px; margin:0 auto; padding:26px 16px 34px; flex-wrap:wrap; gap:18px; justify-content:center; position:static !important; }
+.mega-kart{
+  flex:1 1 230px; max-width:280px; background:#fff; border:2px solid var(--acik); border-radius:20px;
+  padding:26px 20px; text-align:center; cursor:pointer; transition:.18s; box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+.mega-kart:hover{ transform:translateY(-4px); border-color:var(--mavi); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+.mega-kart-ikon{ font-size:2.2em; margin-bottom:8px; }
+.mega-kart h3{ margin:0 0 6px; color:var(--navy); font-size:1.15em; }
+.mega-kart p{ margin:0; font-size:.85em; color:#667; }
+#ogrHedefKonteyner:empty{ display:none; }
+#ogrHedefKonteyner .ogr-hero-ek{ margin:14px auto 0; }
+.oyun-grubu.mega-menu.aktif, #oyun-gruplari > .oyun-grubu:not(.mega-menu){ position:static !important; top:auto !important; }
+.geri-btn{
+  display:block; width:100%; margin:0 0 12px; background:none; border:none; color:var(--mavi); font-weight:800;
+  cursor:pointer; font-size:.9em; padding:4px; text-align:center;
+}
+.geri-btn:hover{ text-decoration:underline; }
+.oyunmerkezi-nav{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; width:100%; margin-bottom:4px; }
+.oyunmerkezi-nav button{
+  padding:9px 16px; border:none; border-radius:18px; cursor:pointer; background:#22333b; color:#fff;
+  font-weight:bold; font-size:.9em; transition:.15s;
+}
+.oyunmerkezi-nav button:hover, .oyunmerkezi-nav button.kat-aktif{ background:var(--yesil); }
+</style>
+<style id="omgKart2Stil">
+.omg-2kolon{ align-items:flex-start; gap:32px; }
+.omg-yan-menu{
+  display:flex; flex-direction:column; gap:10px;
+  flex:0 0 280px; max-width:280px;
+  position:sticky; top:16px;
+}
+.omg-yan-menu .geri-btn{ margin-bottom:0; }
+.omg-yan-baslik{ font-weight:800; color:var(--navy); font-size:1.05em; width:100%; margin:4px 0 0; text-align:left; padding:0 4px; }
+.omg-yan-oge{
+  text-align:left; width:100%; min-height:62px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 18px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-yan-oge:hover{ border-color:var(--mavi); }
+.omg-yan-ikon{ font-size:1.5em; flex-shrink:0; }
+.omg-yan-oge.kat-aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18);
+  border-left-color:var(--mavi) !important;
+}
+.omg-yan-oge.kat-aktif .omg-yan-ikon{ font-size:1.9em; }
+.omg-kart-alan{
+  flex:1 1 420px; min-width:0; width:100%;
+  max-height:660px; overflow-y:auto; padding:4px 4px 4px 0;
+  animation: omgKartGiris .3s ease;
+}
+@keyframes omgKartGiris{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+.omg-kart-izgara{
+  display:grid; grid-template-columns:repeat(2, 1fr);
+  gap:22px; width:100%; align-content:start;
+}
+.omg-oyun-kart{
+  position:relative; cursor:pointer;
+  background:#fff; border-radius:18px; padding:30px 24px 26px;
+  text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.06);
+  transition:.18s; display:flex; flex-direction:column; gap:8px;
+  min-height:180px; border:1px solid transparent;
+}
+.omg-oyun-kart:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(0,0,0,.12); border-color:var(--acik); }
+.omg-oyun-kart-ikon{ font-size:1.8em; }
+.omg-oyun-kart h4{ margin:2px 0 0; font-size:1.08em; color:#22333b; line-height:1.35; }
+.omg-oyun-kart p{ margin:0; font-size:.86em; color:#8892a0; line-height:1.5; flex:1; }
+.omg-oyun-kart-alt{ display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+.omg-zorluk{ font-size:.72em; font-weight:800; letter-spacing:.3px; padding:4px 11px; border-radius:999px; background:var(--acikgri); color:#667; }
+.omg-oyna-ok{ font-size:.85em; font-weight:800; color:var(--mavi); }
+@media(max-width:640px){
+  .omg-2kolon{ flex-direction:column; gap:16px; }
+  .omg-yan-menu{
+    flex-direction:row; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    max-width:100%; position:static; gap:8px; padding-bottom:4px;
+  }
+  .omg-yan-baslik{ display:none; }
+  .omg-yan-menu .geri-btn{ flex:0 0 auto; width:auto; white-space:nowrap; }
+  .omg-yan-oge{ min-height:44px; width:auto; flex:0 0 auto; white-space:nowrap; }
+  .omg-kart-izgara{ grid-template-columns:1fr; }
+  .omg-kart-alan{ max-height:none; overflow-y:visible; }
+}
+</style>
+<style id="omgTekliMenuStil">
+.omg-tekli-menu{ display:flex; flex-direction:column; gap:10px; max-width:440px; }
+.omg-tekli-menu > button:not(.geri-btn){
+  text-align:left; width:100%; min-height:58px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 20px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-tekli-menu > button:not(.geri-btn):hover{ border-color:var(--mavi); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
+.omg-tekli-menu > button.aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18) !important;
+  border-left-color:var(--mavi) !important;
+}
+</style>
+<style id="omgEgitimIzoleStil">
+#oyun-gruplari:not(:has(#kat-unite-ogren.aktif)):not(:has(#kat-unite-degerlendir.aktif)) ~ main .egitim-icerik{
+  display:none !important;
+}
+</style>
 
 </head>
 <body>
@@ -605,89 +724,31 @@
   <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
 </header>
 <div class="op-baglanti-satiri"><a onclick="goster('ogretmenpaneli', event)" role="button" aria-label="Öğretmen paneline git">🔒 Öğretmen Paneli</a></div>
-
 <section class="hero">
-  <div class="hero-sekiller">
-    <span style="top:8%; left:6%; animation-delay:0s;">📖</span>
-    <span style="top:65%; left:10%; animation-delay:1.2s;">✨</span>
-    <span style="top:20%; left:85%; animation-delay:.6s;">🕋</span>
-    <span style="top:75%; left:88%; animation-delay:1.8s;">🌙</span>
-    <span style="top:50%; left:16%; animation-delay:2.4s;">📿</span>
-    <span style="top:6%; left:78%; animation-delay:.9s;">💫</span>
-  </div>
   <h2 class="hero-baslik">Kur'an-ı Keşfet, Rehberini Bul!</h2>
   <p class="hero-alt">Kur'an'ın iç düzeni, temel özellikleri, ana konuları ve Kevser suresi hakkında oyunlarla öğren!</p>
   <div class="hero-butonlar">
-    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">🚀 Oyuna Başla</button>
-    <button class="hero-btn hero-btn-ikincil" onclick="kategoriGosterVeKaydir('kat-unite3')">📚 Konuları Keşfet</button>
+    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">▶ Üniteye Başla</button>
   </div>
 </section>
 
-<div class="istatistik-cubugu">
-  <div class="istatistik-kutu"><span class="ist-ikon">⭐</span><b id="istToplamPuan">0</b><span class="ist-etiket">Toplam Puan</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🏅</span><b id="istRozet">0</b><span class="ist-etiket">Rozet</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🔥</span><b id="istSeri">0</b><span class="ist-etiket">Günlük Seri</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">📈</span><b id="istTamamlanan">0</b><span class="ist-etiket">Tamamlanan Etkinlik</span></div>
-</div>
-
 <div id="oyun-gruplari" role="navigation" aria-label="Ünite bölümleri menüsü">
-<nav class="kategori-nav" role="navigation" aria-label="Ana kategori menüsü">
-  <button onclick="kategoriGoster('kat-unite3', event)" class="kat-aktif">📖 Ünite Konuları</button>
-  <button onclick="kategoriGoster('kat-bulmaca3', event)">🧩 Kelime Bulmacaları</button>
-  <button onclick="kategoriGoster('kat-yarisma3', event)">🎮 Yarışma Oyunları</button>
-  <button onclick="kategoriGoster('kat-mantik3', event)">🕵️ Mantık &amp; Dedektiflik</button>
-  <button onclick="kategoriGoster('kat-macera3', event)">🌀 Macera</button>
-  <button onclick="kategoriGoster('kat-ezber3', event)">🕌 Ezber Etkinlikleri</button>
-</nav>
 
-<div class="oyun-grubu aktif" id="kat-unite3">
-  <button onclick="goster('ozet3', event)" class="aktif">📖 Konu Özeti</button>
-  <button onclick="goster('konutekrari3', event)">📝 Konu Tekrarı Testi</button>
-  <button onclick="goster('slayt', event)">🖥️ Ünite Sunumu</button>
-  <button onclick="goster('yazili', event)">📝 Yazılı Sınavlar</button>
+<div class="oyun-grubu mega-menu aktif" id="kat-anamenu">
+  <div class="mega-kart" onclick="window.location.href='unite3-konuyu-ogren.html'">
+    <div class="mega-kart-ikon">📖</div><h3>Konuyu Öğren</h3>
+    <p>Konu anlatımları, sunular ve kavramlar.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='unite3-oyun-merkezi.html'">
+    <div class="mega-kart-ikon">🎮</div><h3>Oyunlar</h3>
+    <p>Konuyu eğlenerek pekiştir.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='unite3-degerlendirme.html'">
+    <div class="mega-kart-ikon">📝</div><h3>Değerlendirme</h3>
+    <p>Testler ve değerlendirme soruları.</p>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-bulmaca3">
-  <button onclick="goster('kelimeavi3', event)">🔎 Kelime Avı</button>
-  <button onclick="goster('cengel3', event)">🧩 Çengel Bulmaca</button>
-  <button onclick="goster('merdiven3', event)">🪜 Sözcük Merdiveni</button>
-  <button onclick="goster('sifre3', event)">🔐 Şifreli Sözcük</button>
-  <button onclick="goster('sifretanim3', event)">🔐 Şifreli Tanım</button>
-  <button onclick="goster('kelimekodlama3', event)">💻 Kelime Kodlama</button>
-  <button onclick="goster('nonogram3', event)">🖼️ Nonogram</button>
-  <button onclick="goster('satranc3', event)">♞ Kelime Satrancı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-yarisma3">
-  <button onclick="goster('kelimeuret3', event)">⚡ Hızlı Kelime</button>
-  <button onclick="goster('tuzak3', event)">🚫 Tuzak Harf</button>
-  <button onclick="goster('fabrika3', event)">🏭 Kelime Fabrikası</button>
-  <button onclick="goster('muhendis3', event)">🛠️ Kelime Mühendisi</button>
-  <button onclick="goster('kavramturnuvasi3', event)">🏆 Kavram Turnuvası</button>
-  <button onclick="goster('bonus3', event)">🎮 Bonus Oyun</button>
-</div>
-
-<div class="oyun-grubu" id="kat-mantik3">
-  <button onclick="goster('dedektif3', event)">🕵️ Kelime Dedektifi</button>
-  <button onclick="goster('dildedektifi3', event)">🕵️‍♀️ Dil Dedektifi</button>
-  <button onclick="goster('mantikzinciri3', event)">🔗 Mantık Zinciri</button>
-  <button onclick="goster('semantiklabirent3', event)">🧠 Semantik Labirent</button>
-  <button onclick="goster('celiskiavi3', event)">🕵️‍♂️ Çelişki Avı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-macera3">
-  <button onclick="goster('labirent3', event)">🌀 Labirent</button>
-</div>
-
-<div class="oyun-grubu" id="kat-ezber3">
-  <button onclick="goster('ezsira3', event)">1️⃣ Sırala Bakalım</button>
-  <button onclick="goster('ezbosluk3', event)">2️⃣ Boşluk Doldur</button>
-  <button onclick="goster('ezeslestir3', event)">3️⃣ Anlam Eşleştir</button>
-  <button onclick="goster('ezhafiza3', event)">4️⃣ Hafıza Kartları</button>
-  <button onclick="goster('ezadimadim3', event)">5️⃣ Adım Adım Ezber</button>
-  <button onclick="goster('ezgizli3', event)">6️⃣ Gizli Harfler</button>
-  <button onclick="goster('ezkaybolan3', event)">7️⃣ Kaybolan Kelimeler</button>
-  <button onclick="goster('ezhiz3', event)">8️⃣ Hız Testi</button>
 </div>
 
 <main>
@@ -710,796 +771,7 @@
   </div>
 </div>
 </section>
-
-<section id="slayt">
-<h2>🖥️ Ünite Sunumu</h2>
-
-  <div class="sunum-sarmal">
-    <div class="sunum-ust">
-      <span class="sunum-sayac" id="sunumSayac">1 / 16</span>
-      <button class="sunum-tamekran-btn" onclick="sunumTamEkran('')" aria-label="Sunumu tam ekran aç">⛶ Tam Ekran</button>
-    </div>
-    <div class="sunum-alan" id="sunumAlan">
-      
-  <div class="sunum-slayt aktif s-baslik" data-tip="baslik">
-    <div class="sb-daire">📖</div>
-    <p class="sb-ust">5. SINIF — 3. ÜNİTE</p>
-    <h2 class="sb-baslik">Kur'an-ı Kerim</h2>
-    <p class="sb-ders">Din Kültürü ve Ahlak Bilgisi</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı</p>
-  </div>
-
-  <div class="sunum-slayt s-liste" data-tip="hedef">
-    <h3>🎯 Bu Ünitede Neler Öğreneceğiz?</h3>
-    <ul class="sl-liste">
-      <li>Kur'an-ı Kerim'in İç Düzeni</li><li>Kur'an-ı Kerim'in Temel Özellikleri</li><li>Kur'an-ı Kerim'in Ana Konuları</li><li>Bir Sure Öğreniyorum: Kevser Suresi</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Kur'an-ı Kerim'in İç Düzeni (1/3)</h3>
-    <ul class="si-liste">
-      <li>Kur'an-ı Kerim, Allah'ın (cc) peygamberler aracılığıyla insanlara gönderdiği vahyi bildiren son kitaptır.</li><li>610 yılı ramazan ayında indirilmeye başlanmış, vahiy meleği Cebrail tarafından Hz.</li><li>Muhammed'e (sav) bildirilmiştir; tamamlanması 23 yıl sürmüştür. Dili Arapçadır.</li><li>Kur'an'ın güzel isimleri: Furkan (doğru ile yanlışı ayırt eden), Nur (yolu aydınlatan), Şifa (kalplere şifa veren), Zikir (yaratıcıyı hatırlatan), Kelam (Allah'ın sözü).</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Kur'an-ı Kerim'in İç Düzeni (2/3)</h3>
-    <ul class="si-liste">
-      <li>Ayet, Kur'an surelerini oluşturan harf, kelime veya cümlelerdir; durak denilen yuvarlak işaretlerle ayrılır.</li><li>Mekke'de inen ayetlere Mekki, Medine'de inenlere Medeni ayet denir.</li><li>Sure, ayetlerden oluşan bölümdür; ilk sure Fatiha, son sure Nâs'tır. En uzun sure Bakara (286 ayet), en kısa sure Kevser'dir (3 ayet).</li><li>Kur'an-ı Kerim'de 114 sure, 6236 ayet vardır.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-merak" data-tip="zb">
-    <p class="zb-slayt-ust">🤔 MERAK ETTİN Mİ?</p>
-    <p class="zb-slayt-metin">Kur'an'ın en uzun suresi Bakara (286 ayet), en kısa suresi Kevser'dir (3 ayet).</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 Kur'an-ı Kerim'in İç Düzeni (3/3)</h3>
-    <ul class="si-liste">
-      <li>Cüz, Kur'an'ın yirmi sayfadan oluşan her bir bölümüdür; toplam 30 cüz vardır, başlangıcında cüz gülü bulunur.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-yanlis" data-tip="zb">
-    <p class="zb-slayt-ust">❌ YANLIŞ BİLİNENLER</p>
-    <p class="zb-slayt-yanlis">❌ Bazıları Kur'an'daki ayetlerin iniş sırasına göre dizildiğini sanır.</p>
-    <p class="zb-slayt-dogru">✅ Kur'an'daki sure/ayet sıralaması iniş sırasına göre değil, Cebrail'in bildirdiği şekilde Peygamberimiz tarafından belirlenen ilahi bir düzenlemedir.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Kur'an-ı Kerim'in Temel Özellikleri</h3>
-    <ul class="si-liste">
-      <li>Kur'an-ı Kerim'in Temel Özellikleri</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-ornek" data-tip="zb">
-    <p class="zb-slayt-ust">🌍 GERÇEK HAYATTAN BİR ÖRNEK</p>
-    <p class="zb-slayt-metin">Kur'an kursunda bir öğrencinin hatim yapması (baştan sona okuması), Kur'an'la kurulan derin bir bağın somut göstergesidir.</p>
-  </div>
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 Kur'an-ı Kerim'in Ana Konuları</h3>
-    <ul class="si-liste">
-      <li>Kur'an-ı Kerim'in Ana Konuları</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-dusun" data-tip="zb">
-    <p class="zb-slayt-ust">💭 DÜŞÜN VE CEVAPLA</p>
-    <p class="zb-slayt-metin">Kur'an'daki kıssalardan hangisi sana en çok ders veriyor? Neden?</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Bir Sure Öğreniyorum: Kevser Suresi (1/2)</h3>
-    <ul class="si-liste">
-      <li>Kevser suresi, üç ayetten oluşur ve Kur'an-ı Kerim'in en kısa suresidir. "Kevser" kelimesi bolluk, bereket, maddi ve manevi çokluk anlamına gelir.</li><li>Cahiliye Dönemi'nde Hz. Muhammed'in (sav) oğlu Kasım'ın küçük yaşta vefatı üzerine müşrikler onu "ebter" (nesli kesik) diyerek üzdüler.</li><li>Bunun üzerine Yüce Allah, Kevser suresini indirdi; Hz. Peygamber'in soyu kızı Hz. Fatıma'nın çocukları Hz. Hasan ve Hz.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-aile" data-tip="zb">
-    <p class="zb-slayt-ust">👨‍👩‍👧 AİLEMLE YAPIYORUM</p>
-    <p class="zb-slayt-metin">Ailenle birlikte sevdiğiniz bir sureyi (örneğin Kevser veya Fatiha) Türkçe anlamıyla birlikte okuyup üzerine sohbet edin.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Bir Sure Öğreniyorum: Kevser Suresi (2/2)</h3>
-    <ul class="si-liste">
-      <li>Hüseyin ile devam etmiştir.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-degerlendir" data-tip="zb">
-    <p class="zb-slayt-ust">✅ KENDİMİ DEĞERLENDİRİYORUM</p>
-    <ul class="zb-slayt-liste">
-      <li>☐ Kur'an-ı Kerim'in temel özelliklerini sayabilirim.</li>
-      <li>☐ Mekki ve Medeni ayet farkını açıklayabilirim.</li>
-      <li>☐ Kur'an'ın isimlerinden (Furkan, Nur, Şifa) örnek verebilirim.</li>
-      <li>☐ Kur'an okumaya özen gösteriyorum.</li>
-    </ul>
-  </div>
-
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (1/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">Kur'an-ı Kerim</span><span class="sk-etiket" style="background:var(--mavi)">Cebrail</span><span class="sk-etiket" style="background:var(--kirmizi)">23 yıl</span><span class="sk-etiket" style="background:var(--turkuaz)">Kur'an'ın güzel isimleri:</span><span class="sk-etiket" style="background:#7c3aed">Ayet</span><span class="sk-etiket" style="background:var(--yesil)">durak</span><span class="sk-etiket" style="background:var(--mavi)">Mekki</span><span class="sk-etiket" style="background:var(--kirmizi)">Medeni</span><span class="sk-etiket" style="background:var(--turkuaz)">Sure</span><span class="sk-etiket" style="background:#7c3aed">114 sure</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (2/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">6236 ayet</span><span class="sk-etiket" style="background:var(--mavi)">Cüz</span><span class="sk-etiket" style="background:var(--kirmizi)">30 cüz</span><span class="sk-etiket" style="background:var(--turkuaz)">cüz gülü</span><span class="sk-etiket" style="background:#7c3aed">Kevser suresi</span><span class="sk-etiket" style="background:var(--yesil)">ebter</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"Doğrusu kitabı biz indirdik, onun koruyucusu elbette biziz."</p>
-    <p class="sa-kaynak">— Hicr suresi, 9. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"Elif Lâm Mîm. Bu, kendisinde şüphe olmayan kitaptır; muttakiler için bir hidayettir."</p>
-    <p class="sa-kaynak">— Bakara suresi, 1-2. ayetler</p>
-  </div>
-
-  <div class="sunum-slayt s-video" data-tip="video">
-    <p class="sv-ust">🎬 KONUYLA İLGİLİ VİDEO</p>
-    <div class="sv-cerceve">
-      <iframe src="https://www.youtube.com/embed/-CuSBVJnq4Y" title="Kur'an-ı Kerim'i Tanıyalım" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
-    <p class="sv-baslik">Kur'an-ı Kerim'i Tanıyalım</p>
-  </div>
-
-    <div class="sunum-slayt s-zb s-zb-derin" data-tip="zb">
-    <p class="zb-slayt-ust">🔍 DERİNLEMESİNE DÜŞÜNELİM</p>
-    <ul class="zb-slayt-liste">
-      <li>Bu bilgi benim hayatımı nasıl etkiler?</li>
-      <li>Bu kavram neden önemlidir?</li>
-      <li>Günlük yaşamda bunun karşılığı nedir?</li>
-    </ul>
-  </div>
-
-
-  <div class="sunum-slayt s-liste s-ozet" data-tip="ozet">
-    <h3>📝 Ünite Özeti</h3>
-    <ul class="sl-liste">
-      <li>Ayet: "Doğrusu kitabı biz indirdik, onun koruyucusu elbette biziz."</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-kapanis" data-tip="kapanis">
-    <div class="sb-daire">🌟</div>
-    <h2 class="sb-baslik">Dinlediğiniz İçin Teşekkürler</h2>
-    <p class="sb-ders">Başarılar dilerim.</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı — Din Kültürü ve Ahlak Bilgisi Öğretmeni</p>
-  </div>
-    </div>
-    <div class="sunum-nav">
-      <button onclick="sunumGit('',-1)" aria-label="Önceki slayt">⬅ Önceki</button>
-      <div class="sunum-noktalar" id="sunumNoktalar"></div>
-      <button onclick="sunumGit('',1)" aria-label="Sonraki slayt">Sonraki ➡</button>
-    </div>
-  </div>
-</section>
-
-<section id="yazili">
-  <h2>📝 Yazılı Sınavlar</h2>
-  <div class="aciklama">5. sınıf Din Kültürü ve Ahlak Bilgisi dersine ait, resmî MEB sınav formatında hazırlanmış, yazdırılabilir yazılı yoklama sınavları. Her dönem için hem <b>karma</b> (boşluk doldurma, eşleştirme, doğru-yanlış, kısa cevap) hem de tamamen açık uçlu <b>klasik</b> format seçeneği bulunur. Kartlara tıklayınca sınav yeni sekmede açılır ve doğrudan yazdırılabilir.</div>
-  <div class="yazili-izgara">
-    <a class="yazili-kart" href="yazili1.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili1_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili2.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili2_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili3.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>2. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili3_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>2. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili4.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>2. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili4_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>2. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-  </div>
-</section>
-
-
-<!-- KONU ÖZETİ -->
-<section id="ozet3" class="aktif">
-  <h2>📖 3. Ünite Konu Özeti: Kur'an-ı Kerim</h2>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ Kur'an-ı Kerim'in İç Düzeni</h3>
-    <p><b>Kur'an-ı Kerim</b>, Allah'ın (cc) peygamberler aracılığıyla insanlara gönderdiği vahyi bildiren son kitaptır. 610 yılı ramazan ayında indirilmeye başlanmış, vahiy meleği <b>Cebrail</b> tarafından Hz. Muhammed'e (sav) bildirilmiştir; tamamlanması <b>23 yıl</b> sürmüştür. Dili Arapçadır.</p>
-    <div class="aciklama"><b>Ayet:</b> "Doğrusu kitabı biz indirdik, onun koruyucusu elbette biziz."</div>
-
-  <div class="kutu-panel kutu-kazanim">
-    <h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
-    <p class="kazanim-kaynak">Kaynak: Türkiye Yüzyılı Maarif Modeli DKAB Öğretim Programı (2024) — 3. Ünite: Kur'an-ı Kerim</p>
-    <ul>
-      <li><b>DKAB.5.3.1</b> — Kur'an-ı Kerim'in iç düzenini çözümler.</li>
-      <li><b>DKAB.5.3.2</b> — Kur'an-ı Kerim'in temel özellikleri hakkında bilgi toplar.</li>
-      <li><b>DKAB.5.3.3</b> — Kur'an-ı Kerim'in ana konularını sınıflandırır.</li>
-      <li><b>DKAB.5.3.4</b> — Kevser suresini okuyarak yorumlar.</li>
-    </ul>
-  </div>
-
-  <div class="kutu-panel kavram-harita-panel">
-    <h3 style="color:#5b21b6">🗺️ Kavram Haritası</h3>
-    <p class="kavram-harita-aciklama">Bu ünitenin MEB öğretim programında belirlenen anahtar kavramları, ünite temasıyla bağlantılı olarak aşağıda gösterilmiştir.</p>
-    <div class="kavram-harita">
-      <div class="kh-merkez">Kur'an-ı Kerim</div>
-      <div class="kh-dallar">
-      <div class="kh-kavram">Ayet</div>
-      <div class="kh-kavram">Cüz</div>
-      <div class="kh-kavram">Kıssa</div>
-      <div class="kh-kavram">Sure</div>
-      </div>
-    </div>
-  </div>
-    <p><b>Kur'an'ın güzel isimleri:</b> Furkan (doğru ile yanlışı ayırt eden), Nur (yolu aydınlatan), Şifa (kalplere şifa veren), Zikir (yaratıcıyı hatırlatan), Kelam (Allah'ın sözü).</p>
-    <p><b>Ayet</b>, Kur'an surelerini oluşturan harf, kelime veya cümlelerdir; <b>durak</b> denilen yuvarlak işaretlerle ayrılır. Mekke'de inen ayetlere <b>Mekki</b>, Medine'de inenlere <b>Medeni</b> ayet denir. <b>Sure</b>, ayetlerden oluşan bölümdür; ilk sure Fatiha, son sure Nâs'tır. En uzun sure Bakara (286 ayet), en kısa sure Kevser'dir (3 ayet). Kur'an-ı Kerim'de <b>114 sure</b>, <b>6236 ayet</b> vardır. <b>Cüz</b>, Kur'an'ın yirmi sayfadan oluşan her bir bölümüdür; toplam <b>30 cüz</b> vardır, başlangıcında <b>cüz gülü</b> bulunur.</p>
-    <p><b>Bu üç kavram birbiriyle iç içedir:</b> Birçok ayet yan yana gelerek bir sureyi oluşturur, sureler bir araya gelerek de Kur'an-ı Kerim'in tamamını meydana getirir. Cüzler ise ezberleme ve okumayı kolaylaştırmak için yapılmış sayfa temelli bir bölümlemedir; bu yüzden bazen bir sure birden fazla cüze yayılabilir, bazen de bir cüzün içinde birkaç kısa sure birden bulunabilir.</p>
-    <div class="aciklama"><b>Hafız</b>, Kur'an-ı Kerim'i baştan sona ezberleyen kişidir. <b>Hatim</b>, Kur'an-ı Kerim'i baştan sonuna kadar okumaktır.</div>
-  </div>
-  <div class="zb-kutu zb-merak">
-    <p class="zb-baslik">🤔 Merak Ettin mi?</p>
-    <p class="zb-metin">Kur'an'ın en uzun suresi Bakara (286 ayet), en kısa suresi Kevser'dir (3 ayet).</p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Kur'an-ı Kerim'in Temel Özellikleri</h3>
-    <ul>
-      <li><b>İyiye, doğruya ve güzele yönlendirir</b> — "...İyilik edin. Şüphesiz Allah iyilik edenleri sever."</li>
-      <li><b>Kötülüklerden sakındırır</b> — "Sizden, hayra çağıran, iyiliği emreden ve kötülükten meneden bir topluluk bulunsun..."</li>
-      <li><b>Açıklayıcıdır</b> — İnanç esasları, ibadetler, ahlaki değerler, kıssalar ve sosyal hayata dair konuları açıklar.</li>
-      <li><b>İnsanlara yol gösterir (hidayet rehberidir)</b> — "Bu, kendisinde şüphe olmayan kitaptır. Allah'a karşı gelmekten sakınanlar için yol göstericidir."</li>
-      <li><b>İnsanları düşünmeye ve aklını kullanmaya yöneltir</b> — Pek çok ayette "Ey akıl sahipleri!" diye seslenilir.</li>
-    </ul>
-    <div class="aciklama"><b>Hadis:</b> Peygamberimiz (sav) bir hadisinde, Kur'an'ı öğrenip başkalarına öğreten kişilerin insanların en hayırlıları arasında olduğunu bildirmiştir (Buhârî, Fezâilü'l-Kur'ân, 21). Bu hadis, Kur'an'ı hem kendimiz öğrenmemizin hem de öğrendiklerimizi başkalarıyla paylaşmamızın ne kadar değerli olduğunu gösterir.</div>
-  </div>
-  <div class="zb-kutu zb-yanlis">
-    <p class="zb-baslik">❌ Yanlış Bilinenler</p>
-    <p class="zb-metin zb-yanlis-satir">❌ Bazıları Kur'an'daki ayetlerin iniş sırasına göre dizildiğini sanır.</p>
-    <p class="zb-metin zb-dogru-satir">✅ Kur'an'daki sure/ayet sıralaması iniş sırasına göre değil, Cebrail'in bildirdiği şekilde Peygamberimiz tarafından belirlenen ilahi bir düzenlemedir.</p>
-  </div>
-  <div class="zb-kutu zb-ornek">
-    <p class="zb-baslik">🌍 Gerçek Hayattan Bir Örnek</p>
-    <p class="zb-metin">Kur'an kursunda bir öğrencinin hatim yapması (baştan sona okuması), Kur'an'la kurulan derin bir bağın somut göstergesidir.</p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Kur'an-ı Kerim'in Ana Konuları</h3>
-    <p>Kur'an-ı Kerim, hem kişisel hayatımızı hem de birlikte yaşadığımız toplumu ilgilendiren her konuya değinen ilahi bir rehberdir. Bu geniş içeriği daha kolay incelemek için ana konular şu başlıklar altında toplanır:</p>
-    <ul>
-      <li><b>İnanç</b> — Allah'ın (cc) bildirdiği esasları tereddütsüz kabul etmek. İslam'ın altı temel inanç esası vardır.</li>
-      <li><b>İbadet</b> — Allah'ın emrettiği, insanların yapmakla yükümlü olduğu davranışlar (namaz, oruç, zekât, hac ve daha fazlası).</li>
-      <li><b>Ahlak</b> — İnsanı iyi veya kötü olarak niteleyen huylar ve davranışlar. "Allah şüphesiz adaleti, iyilik yapmayı, yakınlara bakmayı emreder; hayasızlığı, fenalığı ve haddi aşmayı yasak eder."</li>
-      <li><b>Sosyal Hayat</b> — İnsanlar arası ilişkileri ve toplum hayatını düzenleyen ayetler (aile ilişkileri, dürüst alışveriş vb.).</li>
-      <li><b>Kıssa</b> — Geçmiş peygamberler ve kavimlerle ilgili ibret verici olaylar. "Andolsun ki, onların kıssalarında akıl sahipleri için ibret vardır..."</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşün ve Cevapla</p>
-    <p class="zb-metin">Kur'an'daki kıssalardan hangisi sana en çok ders veriyor? Neden?</p>
-  <textarea id="zbAlan_dusun" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-  <p class="zb-cevap-not" id="zbNot_dusun"></p>
-  </div>
-  <div class="zb-kutu zb-aile">
-    <p class="zb-baslik">👨‍👩‍👧 Ailemle Yapıyorum</p>
-    <p class="zb-metin">Ailenle birlikte sevdiğiniz bir sureyi (örneğin Kevser veya Fatiha) Türkçe anlamıyla birlikte okuyup üzerine sohbet edin.</p>
-  <textarea id="zbAlan_aile" class="zb-cevap-alani" placeholder="Ailenle yaptığın etkinliği kısaca anlat..." onchange="zbCevapKaydet('aile', this)" aria-label="Ailenle yaptığın etkinliği kısaca anlat..."></textarea>
-  <p class="zb-cevap-not" id="zbNot_aile"></p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Bir Sure Öğreniyorum: Kevser Suresi</h3>
-    <p><b>Kevser suresi</b>, üç ayetten oluşur ve Kur'an-ı Kerim'in en kısa suresidir. "Kevser" kelimesi bolluk, bereket, maddi ve manevi çokluk anlamına gelir. Cahiliye Dönemi'nde Hz. Muhammed'in (sav) oğlu Kasım'ın küçük yaşta vefatı üzerine müşrikler onu "<b>ebter</b>" (nesli kesik) diyerek üzdüler. Bunun üzerine Yüce Allah, Kevser suresini indirdi; Hz. Peygamber'in soyu kızı Hz. Fatıma'nın çocukları Hz. Hasan ve Hz. Hüseyin ile devam etmiştir.</p>
-    <table style="width:100%; border-collapse:collapse; margin-top:10px;">
-      <tr style="background:#eaf4fb;"><th style="text-align:left; padding:6px; border-bottom:1px solid var(--acik);">Okunuşu</th><th style="text-align:left; padding:6px; border-bottom:1px solid var(--acik);">Anlamı</th></tr>
-      <tr><td style="padding:6px; border-bottom:1px solid #eee;">İnnâ e'taynâ kelkevser</td><td style="padding:6px; border-bottom:1px solid #eee;">Şüphesiz biz sana bitip tükenmez nimetler verdik.</td></tr>
-      <tr><td style="padding:6px; border-bottom:1px solid #eee;">Fesalli lirabbike venhar</td><td style="padding:6px; border-bottom:1px solid #eee;">Şimdi sen rabbin için namaz kıl ve kurban kes!</td></tr>
-      <tr><td style="padding:6px;">İnne şânieke hüvel ebter</td><td style="padding:6px;">Asıl soyu gelmeyecek olan, sana karşı nefret duyandır.</td></tr>
-    </table>
-  </div>
-  <div class="zb-kutu zb-derin">
-    <p class="zb-baslik">🔍 Derinlemesine Düşünelim</p>
-    <p class="zb-metin">Bu ünitede öğrendiklerini derinlemesine değerlendirmek için kendine şu soruları sor:</p>
-    <ul class="zb-derin-liste">
-      <li>Bu bilgi benim hayatımı nasıl etkiler?</li>
-      <li>Bu kavram neden önemlidir?</li>
-      <li>Günlük yaşamda bunun karşılığı nedir?</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-ikilem">
-    <p class="zb-baslik">⚖️ Ahlaki İkilem — Sen Olsaydın Ne Yapardın?</p>
-    <p class="zb-metin">Arkadaşın Kur'an-ı Kerim'i çok güzel ezbere okuyor ama anlamını hiç bilmiyor; sen ise yavaş okuyorsun ama anlamını araştırıyorsun. Sence hangisi Kur'an'la daha güçlü bir bağ kurmuş olur? Neden?</p>
-    <textarea id="zbAlan_ikilem" class="zb-cevap-alani" placeholder="Ne yapardın ve neden? Düşünceni buraya yazabilirsin..." onchange="zbCevapKaydet('ikilem', this)" aria-label="Ahlaki ikilem cevabın"></textarea>
-    <p class="zb-cevap-not" id="zbNot_ikilem"></p>
-  </div>
-
-  <div class="zb-kutu zb-degerlendir">
-    <p class="zb-baslik">✅ Kendimi Değerlendiriyorum</p>
-    <ul>
-      <li><input type="checkbox" id="deg_5-3_0" onchange="degKaydet('5-3')"><label for="deg_5-3_0">Kur'an-ı Kerim'in temel özelliklerini sayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_5-3_1" onchange="degKaydet('5-3')"><label for="deg_5-3_1">Mekki ve Medeni ayet farkını açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_5-3_2" onchange="degKaydet('5-3')"><label for="deg_5-3_2">Kur'an'ın isimlerinden (Furkan, Nur, Şifa) örnek verebilirim.</label></li>
-      <li><input type="checkbox" id="deg_5-3_3" onchange="degKaydet('5-3')"><label for="deg_5-3_3">Kur'an okumaya özen gösteriyorum.</label></li>
-    </ul>
-  </div>
-
-
-</section>
-
-<!-- KONU TEKRARI TESTİ -->
-<section id="konutekrari3">
-  <h2>📝 Konu Tekrarı Testi (50 Soru)</h2>
-  <div class="oyun-amaci">🎯 Bu bölümün amacı: Ünitenin tamamını kapsamlı bir testle tekrar edip pekiştirmek.</div>
-  <div class="aciklama">4 şıklı, 50 sorudan oluşan kapsamlı bir tekrar testi! Kolay, orta ve zor sorular karışık geliyor. Cevabı seçince doğru/yanlış hemen görünüyor, altında da açıklaması çıkıyor.</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Soru: <b id="kt3rTur">1</b>/<b id="kt3rToplam">50</b></span>
-    <span>⭐ Puan: <b id="kt3rPuan">0</b></span>
-    <span id="kt3rZorluk"></span>
-  </div>
-  <div id="kt3rSoru" class="balon-durum"></div>
-  <div id="kt3rSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:560px;margin:0 auto;"></div>
-  <div class="aciklama" id="kt3rAciklama" style="display:none;"></div>
-  <div class="sonuc-kutusu" id="kt3rSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" id="kt3rSonrakiBtn" style="display:none;" onclick="kt3rSonrakiSoru()">➡️ Sonraki Soru</button>
-    <button class="eylem" style="background:var(--sari)" onclick="kt3rBaslat()">📝 Teste Başla</button>
-  </div>
-</section>
-
-<!-- HIZLI KELİME ÜRETME -->
-<section id="kelimeuret3">
-  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
-  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
-  <div class="oyun-bilgi">
-    <span>🔤 Harf: <b id="ku3Harf">-</b></span>
-    <span>⭐ Puan: <b id="ku3Puan">0</b></span>
-    <span>⏱️ Süre: <b id="ku3Sure">60</b>sn</span>
-  </div>
-  <input type="text" id="ku3Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ku3Ekle();}">
-  <p class="balon-durum" id="ku3Uyari"></p>
-  <ul class="ku-liste" id="ku3Liste"></ul>
-  <div class="sonuc-kutusu" id="ku3Sonuc"></div>
-  <div id="ku3Kacirilan"></div>
-  <button class="eylem" onclick="ku3Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- TUZAK HARF -->
-<section id="tuzak3">
-  <h2>🚫 Tuzak Harf Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
-  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen kavramları süre bitmeden art arda yaz!</div>
-  <div class="oyun-bilgi">
-    <span>🚫 Tuzak Harf: <b id="tuzak3Harf">-</b></span>
-    <span>⭐ Puan: <b id="tuzak3Puan">0</b></span>
-    <span>⏱️ Süre: <b id="tuzak3Sure">40</b>sn</span>
-  </div>
-  <input type="text" id="tuzak3Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzak3Ekle();}">
-  <p class="balon-durum" id="tuzak3Uyari"></p>
-  <ul class="ku-liste" id="tuzak3Liste"></ul>
-  <div class="sonuc-kutusu" id="tuzak3Sonuc"></div>
-  <button class="eylem" onclick="tuzak3Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME FABRİKASI -->
-<section id="fabrika3">
-  <h2>🏭 Kelime Fabrikası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
-  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!</div>
-  <div class="oyun-bilgi">
-    <span>🏭 Üretilen: <b id="kf3Uretilen">0</b>/<b id="kf3Toplam">28</b></span>
-    <span>❌ Hata: <b id="kf3Hata">0</b></span>
-  </div>
-  <div id="kf3Siparis" class="balon-durum"></div>
-  <div class="kf-bant" id="kf3BantAlani"></div>
-  <input type="text" id="kf3Girdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kf3Uret();}">
-  <button class="eylem" onclick="kf3Uret()">🏭 Üret!</button>
-  <div class="kf-urunler" id="kf3Urunler"></div>
-  <div class="sonuc-kutusu" id="kf3Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="kf3Baslat()">🔄 Fabrikayı Başlat/Yenile</button>
-</section>
-
-<!-- KELİME MÜHENDİSİ -->
-<section id="muhendis3">
-  <h2>🛠️ Kelime Mühendisi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
-  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
-  <div class="oyun-bilgi">
-    <span>🏗️ Tur: <b id="km3Tur">1</b>/<b id="km3Toplam">28</b></span>
-    <span>✅ İnşa Edilen: <b id="km3Dogru">0</b></span>
-  </div>
-  <div id="km3Ipucu" class="balon-durum"></div>
-  <div class="kelime-cevap" id="km3Cevap"></div>
-  <div class="kelime-banka" id="km3Banka"></div>
-  <div class="sonuc-kutusu" id="km3Sonuc"></div>
-  <button class="eylem" onclick="km3Baslat()">🛠️ Mühendisliğe Başla</button>
-</section>
-
-<!-- KAVRAM TURNUVASI -->
-<section id="kavramturnuvasi3">
-  <h2>🏆 Kavram Turnuvası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
-  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap.</div>
-  <div class="oyun-bilgi">
-    <span>🥊 Maç: <b id="kt3Tur">1</b>/<b id="kt3Toplam">7</b></span>
-    <span>✅ Doğru Hakemlik: <b id="kt3Puan">0</b></span>
-  </div>
-  <div id="kt3Asama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
-  <div id="kt3Eslesme" class="balon-durum"></div>
-  <div id="kt3Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kt3Sonuc"></div>
-  <button class="eylem" onclick="kt3Baslat()">🏆 Turnuvayı Başlat</button>
-</section>
-
-<!-- BONUS OYUN: HAFIZA ZİNCİRİ -->
-<section id="bonus3">
-  <h2>🎮 Bonus Oyun: Kavramlar Hafıza Zinciri</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
-  <div class="aciklama">Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir kavram daha uzuyor.</div>
-  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bz3Seviye">0</b></span></div>
-  <div class="bz-izgara" id="bz3Izgara"></div>
-  <div class="sonuc-kutusu" id="bz3Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" style="background:var(--sari)" onclick="bz3OrnekOyna()">🎬 Önce Örnek Gör</button>
-    <button class="eylem" onclick="bz3Baslat()">🎮 Oyunu Başlat</button>
-  </div>
-</section>
-
-<!-- KELİME AVI -->
-<section id="kelimeavi3">
-  <h2>🔎 Kelime Avı Bulmacası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
-  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka3Bulunan">0</b>/<b id="ka3Toplam">14</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ka-izgara" id="ka3Izgara"></div>
-    <ul class="ka-liste" id="ka3Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ka3Sonuc"></div>
-  <button class="eylem" onclick="kelimeAvi3Olustur()">🔄 Yeni Bulmaca</button>
-</section>
-
-<!-- ÇENGEL BULMACA -->
-<section id="cengel3">
-  <h2>🧩 Çengel Bulmaca</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
-  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
-  <div class="cengel-izgara" id="cengel3Izgara"></div>
-  <ul class="cengel-liste" id="cengel3Liste"></ul>
-  <div class="sonuc-kutusu" id="cengel3Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="cengel3KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="cengel3Olustur()">🔄 Baştan Başla</button>
-  </div>
-</section>
-
-<!-- SÖZCÜK MERDİVENİ -->
-<section id="merdiven3">
-  <h2>🪜 Sözcük Merdiveni</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
-  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdiven3Basamak">1</b>/<b id="merdiven3Toplam">4</b></span></div>
-  <div id="merdiven3Ipucu" class="balon-durum"></div>
-  <div id="merdiven3Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="merdiven3Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="merdiven3Sonuc"></div>
-  <button class="eylem" onclick="merdiven3Baslat()">🔄 Yeniden Başlat</button>
-</section>
-
-<!-- ŞİFRELİ SÖZCÜK -->
-<section id="sifre3">
-  <h2>🔐 Şifreli Sözcük Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
-  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
-  <div class="sifre-anahtar" id="sifre3Anahtar"></div>
-  <div id="sifre3Kelimeler"></div>
-  <div class="sonuc-kutusu" id="sifre3Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="sifre3KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="sifre3Olustur()">🔄 Yeni Şifre</button>
-  </div>
-</section>
-
-<!-- ŞİFRELİ TANIM -->
-<section id="sifretanim3">
-  <h2>🔐 Şifreli Tanım Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
-  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="st3Tur">1</b>/<b id="st3Toplam">28</b></span>
-    <span>⭐ Puan: <b id="st3Puan">0</b></span>
-  </div>
-  <div id="st3Tanim" class="dua-satir"></div>
-  <div id="st3Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="st3Sonuc"></div>
-  <button class="eylem" onclick="st3Baslat()">🔐 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME KODLAMA -->
-<section id="kelimekodlama3">
-  <h2>💻 Kelime Kodlama Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
-  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz.</div>
-  <div class="sifre-anahtar" id="kk3Anahtar"></div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="kk3Tur">1</b>/<b id="kk3Toplam">28</b></span>
-    <span>⭐ Puan: <b id="kk3Puan">0</b></span>
-  </div>
-  <div id="kk3Ipucu" class="balon-durum"></div>
-  <div id="kk3Kod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
-  <div id="kk3Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kk3Sonuc"></div>
-  <button class="eylem" onclick="kk3Baslat()">💻 Kodlamayı Başlat</button>
-</section>
-
-<!-- NONOGRAM -->
-<section id="nonogram3">
-  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
-  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak gizli resmi ortaya çıkar!</div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
-    <button class="eylem" onclick="nonogram3Sec('camii')">🕌 Cami (İbadet Yeri)</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram3Sec('hilal')">🌙⭐ Hilal ve Yıldız</button>
-  </div>
-  <div style="overflow-x:auto;">
-    <table class="nono-tablo" id="nono3Tablo"></table>
-  </div>
-  <div class="sonuc-kutusu" id="nono3Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="nonogram3KontrolEt(true)">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram3Temizle()">🧹 Temizle</button>
-  </div>
-</section>
-
-<!-- KELİME SATRANCI -->
-<section id="satranc3">
-  <h2>♞ Kelime Satrancı</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
-  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ks3Bulunan">0</b>/<b id="ks3Toplam">8</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ks-izgara" id="ks3Izgara"></div>
-    <ul class="ka-liste" id="ks3Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ks3Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="ks3SecimiTemizle()">🧹 Seçimi Temizle</button>
-    <button class="eylem" style="background:var(--sari)" onclick="ks3Olustur()">🔄 Yeni Tahta</button>
-  </div>
-</section>
-
-<!-- KELİME DEDEKTİFİ -->
-<section id="dedektif3">
-  <h2>🕵️ Kelime Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
-  <div class="aciklama">Gizli kelimeyi (bir kavram) 5 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Vaka: <b id="dd3Vaka">1</b>/<b id="dd3ToplamVaka">1</b></span>
-    <span>✅ Çözülen: <b id="dd3Cozulen">0</b></span>
-    <span>🔍 Deneme: <b id="dd3Deneme">0</b>/<b id="dd3MaxDeneme">5</b></span>
-  </div>
-  <div id="dd3Ipucu" class="balon-durum"></div>
-  <div id="dd3Izgara"></div>
-  <input type="text" id="dd3Girdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){dd3TahminEt();}">
-  <p class="balon-durum" id="dd3Uyari"></p>
-  <div class="sonuc-kutusu" id="dd3Sonuc"></div>
-  <button class="eylem" onclick="dd3Baslat()">🕵️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- DİL DEDEKTİFİ -->
-<section id="dildedektifi3">
-  <h2>🕵️‍♀️ Dil Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ddl3Tur">1</b>/<b id="ddl3Toplam">10</b></span>
-    <span>⭐ Puan: <b id="ddl3Puan">0</b></span>
-  </div>
-  <div id="ddl3Baslik" class="balon-durum"></div>
-  <div id="ddl3Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="ddl3Sonuc"></div>
-  <button class="eylem" onclick="ddl3Baslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- MANTIK ZİNCİRİ -->
-<section id="mantikzinciri3">
-  <h2>🔗 Mantık Zinciri Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
-  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
-  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mz3Halka">1</b>/<b id="mz3Toplam">5</b></span></div>
-  <div id="mz3Soru" class="balon-durum"></div>
-  <div id="mz3Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="mz3Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="mz3Sonuc"></div>
-  <button class="eylem" onclick="mz3Baslat()">🔗 Zinciri Başlat</button>
-</section>
-
-<!-- SEMANTİK LABİRENT -->
-<section id="semantiklabirent3">
-  <h2>🧠 Semantik Labirent</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
-  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin.</div>
-  <div class="oyun-bilgi">
-    <span>🚪 Oda: <b id="sz3Oda">1</b>/<b id="sz3ToplamOda">6</b></span>
-    <span id="sz3Can">❤️❤️❤️</span>
-  </div>
-  <div id="sz3Kategori" class="balon-durum"></div>
-  <div id="sz3Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="sz3Sonuc"></div>
-  <button class="eylem" onclick="sz3Baslat()">🌀 Labirente Gir</button>
-</section>
-
-<!-- ÇELİŞKİ AVI -->
-<section id="celiskiavi3">
-  <h2>🕵️‍♂️ Çelişki Avı</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu?</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ca3Tur">1</b>/<b id="ca3Toplam">12</b></span>
-    <span>⭐ Puan: <b id="ca3Puan">0</b></span>
-  </div>
-  <div id="ca3Cumle" class="dua-satir"></div>
-  <div id="ca3Butonlar" style="display:flex;gap:14px;justify-content:center;">
-    <button class="eylem" style="background:var(--kirmizi)" onclick="ca3Cevapla(true)">⚡ Çelişki VAR</button>
-    <button class="eylem" style="background:var(--yesil)" onclick="ca3Cevapla(false)">✅ Çelişki YOK</button>
-  </div>
-  <p style="text-align:center;font-weight:bold;" id="ca3GeriBildirim"></p>
-  <div class="sonuc-kutusu" id="ca3Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="ca3Baslat()">🕵️‍♂️ Ava Başla</button>
-</section>
-
-<!-- LABİRENT -->
-<section id="labirent3">
-  <h2>🌀 Labirent Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
-  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 📖'ye ulaştır! Yolda parıldayan yıldızlara basarsan bir kavram toplarsın.</div>
-  <div class="oyun-bilgi">
-    <span>🔁 Hamle: <b id="lab3Hamle">0</b></span>
-    <span>⭐ Toplanan: <b id="lab3Toplanan">0</b>/<b id="lab3ToplamYildiz">20</b></span>
-    <span>⏱️ Süre: <b id="lab3Sure">0</b>sn</span>
-  </div>
-  <div class="balon-durum" id="lab3Durum"></div>
-  <div class="labirent-izgara" id="lab3Izgara"></div>
-  <div class="labirent-kontroller">
-    <button class="labirent-tus" onclick="labirent3Hareket(-1,0)">▲</button>
-    <div>
-      <button class="labirent-tus" onclick="labirent3Hareket(0,-1)">◀</button>
-      <button class="labirent-tus" onclick="labirent3Hareket(1,0)">▼</button>
-      <button class="labirent-tus" onclick="labirent3Hareket(0,1)">▶</button>
-    </div>
-  </div>
-  <div class="sonuc-kutusu" id="lab3Sonuc"></div>
-  <button class="eylem" onclick="labirent3Baslat()">🔄 Yeni Labirent</button>
-</section>
-
-
-<!-- ================= EZBER ETKİNLİKLERİ (8 ADET) — KEVSER SURESI ================= -->
-
-<section id="ezsira3">
-  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kevser Suresi'nin ayetlerini doğru sırayla dizebileceksin.</div>
-  <div class="aciklama">Karışık sırada verilen ayetleri, Kevser Suresi'ndeki doğru sıraya göre tıklayarak diz.</div>
-  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez13Dizilen">0</b>/<b>3</b></span></div>
-  <div class="kelime-cevap" id="ez13Cevap"></div>
-  <div class="kelime-banka" id="ez13Banka"></div>
-  <div class="sonuc-kutusu" id="ez13Sonuc"></div>
-  <button class="eylem" onclick="ez13Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezbosluk3">
-  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kevser Suresi ayetlerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
-  <div class="aciklama">Ayetteki boşluğa gelen doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez23Tur">1</b>/<b>3</b></span><span>✅ Doğru: <b id="ez23Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez23Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez23Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez23Sonuc"></div>
-  <button class="eylem" onclick="ez23Baslat()">📝 Başla</button>
-</section>
-
-<section id="ezeslestir3">
-  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kevser Suresi'nin her ayetini anlamıyla eşleştirebileceksin.</div>
-  <div class="aciklama">Soldan bir ayet, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
-  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez33Eslesen">0</b>/<b>3</b></span></div>
-  <div class="ez-iki-sutun">
-    <div class="ez-sutun"><h4>Ayet</h4><div id="ez33Sol"></div></div>
-    <div class="ez-sutun"><h4>Anlam</h4><div id="ez33Sag"></div></div>
-  </div>
-  <div class="sonuc-kutusu" id="ez33Sonuc"></div>
-  <button class="eylem" onclick="ez33Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezhafiza3">
-  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: ayet-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
-  <div class="aciklama">İki kartı çevir. Bir ayet ile doğru anlamı eşleşirse kartlar açık kalır.</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez43Bulunan">0</b>/<b>3</b></span><span>🔁 Hamle: <b id="ez43Hamle">0</b></span></div>
-  <div class="ez-hafiza-izgara" id="ez43Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
-  <div class="sonuc-kutusu" id="ez43Sonuc"></div>
-  <button class="eylem" onclick="ez43Baslat()">🔄 Yeni Oyun</button>
-</section>
-
-<section id="ezadimadim3">
-  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kevser Suresi'ni baştan sona, ayet sırasını bularak ezberleyeceksin.</div>
-  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi ayetin geldiğini seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez53Adim">1</b>/<b>3</b></span></div>
-  <div class="ez-ogrenilen-liste" id="ez53Liste"></div>
-  <div class="balon-durum">Sırada hangi ayet geliyor?</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez53Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez53Sonuc"></div>
-  <button class="eylem" onclick="ez53Baslat()">▶️ Başla</button>
-</section>
-
-<section id="ezgizli3">
-  <h2>6️⃣ Ezber: Gizli Harfler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kevser Suresi'nin anahtar kelimelerini harf harf hatırlayacaksın.</div>
-  <div class="aciklama">Ayetteki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez63Tur">1</b>/<b>3</b></span><span>✅ Doğru: <b id="ez63Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez63Metin"></div>
-  <div class="kelime-cevap" id="ez63Cevap"></div>
-  <div class="kelime-banka" id="ez63Banka"></div>
-  <div class="sonuc-kutusu" id="ez63Sonuc"></div>
-  <button class="eylem" onclick="ez63Baslat()">🔐 Başla</button>
-</section>
-
-<section id="ezkaybolan3">
-  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun ayeti hafızandan tanıyabileceksin.</div>
-  <div class="aciklama">Ayeti 3 saniye izle, sonra kaybolacak. Az önce gördüğün ayetin BİREBİR aynısını seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez73Tur">1</b>/<b>3</b></span><span>✅ Doğru: <b id="ez73Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez73Metin">👁️ Başlamak için düğmeye bas</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez73Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez73Sonuc"></div>
-  <button class="eylem" onclick="ez73Baslat()">👁️ Başla</button>
-</section>
-
-<section id="ezhiz3">
-  <h2>8️⃣ Ezber: Hız Testi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kevser Suresi ayet-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
-  <div class="aciklama">Süre dolmadan verilen anlama ait doğru ayeti seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
-  <div class="ez-zamanlayici" id="ez83Sayac">60</div>
-  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez83Dogru">0</b></span><span>❌ Yanlış: <b id="ez83Yanlis">0</b></span></div>
-  <div class="ez-metin-goster" id="ez83Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez83Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez83Sonuc"></div>
-  <button class="eylem" onclick="ez83Baslat()">⏱️ Başla</button>
-</section>
-
 </main>
-</div>
-
-<footer>5. Sınıf Din Kültürü ve Ahlak Bilgisi — 3. Ünite İnteraktif Oyun Seti</footer>
 
 <script>
 function goster(id, ev){
@@ -3444,15 +2716,7 @@ document.addEventListener('keydown', (e)=>{
 // =====================================================================
 // BAŞLANGIÇ
 // =====================================================================
-bz3IzgaraOlustur();
-kelimeAvi3Olustur();
-cengel3Olustur();
-merdiven3Baslat();
-sifre3Olustur();
-ks3Olustur();
-nonogram3Olustur();
-istatistikleriGuncelleGoster();
-sonucIzlemeBaslat();
+[bz3IzgaraOlustur, kelimeAvi3Olustur, cengel3Olustur, merdiven3Baslat, sifre3Olustur, ks3Olustur, nonogram3Olustur, istatistikleriGuncelleGoster, sonucIzlemeBaslat].forEach(function(fn){ try{ fn(); }catch(e){} });
 
 // =====================================================================
 // EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — KEVSER SURESI
@@ -4036,7 +3300,6 @@ function zbTekrarHatirlatmaKontrol(){
 document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
 </script>
-
 <script id="ogrKatmaniScript">
 /* ===================== OGRENME DENEYIMI KATMANI (JS) =====================
    Sadece EKLEME yapar: mevcut id/onclick/veri yapisina dokunmaz, hicbir

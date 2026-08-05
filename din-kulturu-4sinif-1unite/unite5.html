@@ -595,6 +595,125 @@
 }
 </style>
 
+<style id="anaMenuStil">
+.hero{ padding:26px 20px 20px; }
+.hero-sekiller{ display:none; }
+.hero-baslik{ font-size:1.35em; margin:2px 0 8px; }
+.hero-alt{ font-size:.95em; max-width:440px; }
+.hero-butonlar{ margin-top:12px; }
+#oyun-gruplari{ scroll-margin-top:10px; max-width:900px; margin:0 auto; }
+.mega-menu{ max-width:900px; margin:0 auto; padding:26px 16px 34px; flex-wrap:wrap; gap:18px; justify-content:center; position:static !important; }
+.mega-kart{
+  flex:1 1 230px; max-width:280px; background:#fff; border:2px solid var(--acik); border-radius:20px;
+  padding:26px 20px; text-align:center; cursor:pointer; transition:.18s; box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+.mega-kart:hover{ transform:translateY(-4px); border-color:var(--mavi); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+.mega-kart-ikon{ font-size:2.2em; margin-bottom:8px; }
+.mega-kart h3{ margin:0 0 6px; color:var(--navy); font-size:1.15em; }
+.mega-kart p{ margin:0; font-size:.85em; color:#667; }
+#ogrHedefKonteyner:empty{ display:none; }
+#ogrHedefKonteyner .ogr-hero-ek{ margin:14px auto 0; }
+.oyun-grubu.mega-menu.aktif, #oyun-gruplari > .oyun-grubu:not(.mega-menu){ position:static !important; top:auto !important; }
+.geri-btn{
+  display:block; width:100%; margin:0 0 12px; background:none; border:none; color:var(--mavi); font-weight:800;
+  cursor:pointer; font-size:.9em; padding:4px; text-align:center;
+}
+.geri-btn:hover{ text-decoration:underline; }
+.oyunmerkezi-nav{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; width:100%; margin-bottom:4px; }
+.oyunmerkezi-nav button{
+  padding:9px 16px; border:none; border-radius:18px; cursor:pointer; background:#22333b; color:#fff;
+  font-weight:bold; font-size:.9em; transition:.15s;
+}
+.oyunmerkezi-nav button:hover, .oyunmerkezi-nav button.kat-aktif{ background:var(--yesil); }
+</style>
+<style id="omgKart2Stil">
+.omg-2kolon{ align-items:flex-start; gap:32px; }
+.omg-yan-menu{
+  display:flex; flex-direction:column; gap:10px;
+  flex:0 0 280px; max-width:280px;
+  position:sticky; top:16px;
+}
+.omg-yan-menu .geri-btn{ margin-bottom:0; }
+.omg-yan-baslik{ font-weight:800; color:var(--navy); font-size:1.05em; width:100%; margin:4px 0 0; text-align:left; padding:0 4px; }
+.omg-yan-oge{
+  text-align:left; width:100%; min-height:62px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 18px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-yan-oge:hover{ border-color:var(--mavi); }
+.omg-yan-ikon{ font-size:1.5em; flex-shrink:0; }
+.omg-yan-oge.kat-aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18);
+  border-left-color:var(--mavi) !important;
+}
+.omg-yan-oge.kat-aktif .omg-yan-ikon{ font-size:1.9em; }
+.omg-kart-alan{
+  flex:1 1 420px; min-width:0; width:100%;
+  max-height:660px; overflow-y:auto; padding:4px 4px 4px 0;
+  animation: omgKartGiris .3s ease;
+}
+@keyframes omgKartGiris{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+.omg-kart-izgara{
+  display:grid; grid-template-columns:repeat(2, 1fr);
+  gap:22px; width:100%; align-content:start;
+}
+.omg-oyun-kart{
+  position:relative; cursor:pointer;
+  background:#fff; border-radius:18px; padding:30px 24px 26px;
+  text-align:left; box-shadow:0 2px 10px rgba(0,0,0,.06);
+  transition:.18s; display:flex; flex-direction:column; gap:8px;
+  min-height:180px; border:1px solid transparent;
+}
+.omg-oyun-kart:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(0,0,0,.12); border-color:var(--acik); }
+.omg-oyun-kart-ikon{ font-size:1.8em; }
+.omg-oyun-kart h4{ margin:2px 0 0; font-size:1.08em; color:#22333b; line-height:1.35; }
+.omg-oyun-kart p{ margin:0; font-size:.86em; color:#8892a0; line-height:1.5; flex:1; }
+.omg-oyun-kart-alt{ display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+.omg-zorluk{ font-size:.72em; font-weight:800; letter-spacing:.3px; padding:4px 11px; border-radius:999px; background:var(--acikgri); color:#667; }
+.omg-oyna-ok{ font-size:.85em; font-weight:800; color:var(--mavi); }
+@media(max-width:640px){
+  .omg-2kolon{ flex-direction:column; gap:16px; }
+  .omg-yan-menu{
+    flex-direction:row; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    max-width:100%; position:static; gap:8px; padding-bottom:4px;
+  }
+  .omg-yan-baslik{ display:none; }
+  .omg-yan-menu .geri-btn{ flex:0 0 auto; width:auto; white-space:nowrap; }
+  .omg-yan-oge{ min-height:44px; width:auto; flex:0 0 auto; white-space:nowrap; }
+  .omg-kart-izgara{ grid-template-columns:1fr; }
+  .omg-kart-alan{ max-height:none; overflow-y:visible; }
+}
+</style>
+<style id="omgTekliMenuStil">
+.omg-tekli-menu{ display:flex; flex-direction:column; gap:10px; max-width:440px; }
+.omg-tekli-menu > button:not(.geri-btn){
+  text-align:left; width:100%; min-height:58px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px 20px; border-radius:14px;
+  border:2px solid var(--acik); border-left:5px solid transparent;
+  background:#fff; color:#22333b;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  font-size:.95em; font-weight:700;
+  transition:.15s; white-space:normal;
+}
+.omg-tekli-menu > button:not(.geri-btn):hover{ border-color:var(--mavi); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
+.omg-tekli-menu > button.aktif{
+  border-color:var(--mavi) !important; background:linear-gradient(135deg,#e3f0fb,#eef7f1) !important;
+  box-shadow:0 4px 14px rgba(42,111,151,.18) !important;
+  border-left-color:var(--mavi) !important;
+}
+</style>
+<style id="omgEgitimIzoleStil">
+#oyun-gruplari:not(:has(#kat-unite5-ogren.aktif)):not(:has(#kat-unite5-degerlendir.aktif)) ~ main .egitim-icerik{
+  display:none !important;
+}
+</style>
 </head>
 <body>
 
@@ -605,89 +724,31 @@
   <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
 </header>
 <div class="op-baglanti-satiri"><a onclick="goster('ogretmenpaneli', event)" role="button" aria-label="Öğretmen paneline git">🔒 Öğretmen Paneli</a></div>
-
 <section class="hero">
-  <div class="hero-sekiller">
-    <span style="top:8%; left:6%; animation-delay:0s;">🧼</span>
-    <span style="top:65%; left:10%; animation-delay:1.2s;">💧</span>
-    <span style="top:20%; left:85%; animation-delay:.6s;">🌳</span>
-    <span style="top:75%; left:88%; animation-delay:1.8s;">🏡</span>
-    <span style="top:50%; left:16%; animation-delay:2.4s;">✨</span>
-    <span style="top:6%; left:78%; animation-delay:.9s;">🌍</span>
-  </div>
   <h2 class="hero-baslik">Temiz Ol, Temiz Kal, Çevreni Koru!</h2>
   <p class="hero-alt">Maddi ve manevi temizlik, abdest, beden-giysi-ev-okul-çevre temizliği hakkında oyunlarla öğren!</p>
   <div class="hero-butonlar">
-    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">🚀 Oyuna Başla</button>
-    <button class="hero-btn hero-btn-ikincil" onclick="kategoriGosterVeKaydir('kat-unite5')">📚 Konuları Keşfet</button>
+    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">▶ Üniteye Başla</button>
   </div>
 </section>
 
-<div class="istatistik-cubugu">
-  <div class="istatistik-kutu"><span class="ist-ikon">⭐</span><b id="istToplamPuan">0</b><span class="ist-etiket">Toplam Puan</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🏅</span><b id="istRozet">0</b><span class="ist-etiket">Rozet</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">🔥</span><b id="istSeri">0</b><span class="ist-etiket">Günlük Seri</span></div>
-  <div class="istatistik-kutu"><span class="ist-ikon">📈</span><b id="istTamamlanan">0</b><span class="ist-etiket">Tamamlanan Etkinlik</span></div>
-</div>
-
 <div id="oyun-gruplari" role="navigation" aria-label="Ünite bölümleri menüsü">
-<nav class="kategori-nav" role="navigation" aria-label="Ana kategori menüsü">
-  <button onclick="kategoriGoster('kat-unite5', event)" class="kat-aktif">🧼 Ünite Konuları</button>
-  <button onclick="kategoriGoster('kat-bulmaca5', event)">🧩 Kelime Bulmacaları</button>
-  <button onclick="kategoriGoster('kat-yarisma5', event)">🎮 Yarışma Oyunları</button>
-  <button onclick="kategoriGoster('kat-mantik5', event)">🕵️ Mantık &amp; Dedektiflik</button>
-  <button onclick="kategoriGoster('kat-macera5', event)">🌀 Macera</button>
-  <button onclick="kategoriGoster('kat-ezber5', event)">🕌 Ezber Etkinlikleri</button>
-</nav>
 
-<div class="oyun-grubu aktif" id="kat-unite5">
-  <button onclick="goster('ozet5', event)" class="aktif">🧼 Konu Özeti</button>
-  <button onclick="goster('konutekrari5', event)">📝 Konu Tekrarı Testi</button>
-  <button onclick="goster('slayt', event)">🖥️ Ünite Sunumu</button>
-  <button onclick="goster('yazili', event)">📝 Yazılı Sınavlar</button>
+<div class="oyun-grubu mega-menu aktif" id="kat-anamenu">
+  <div class="mega-kart" onclick="window.location.href='unite5-konuyu-ogren.html'">
+    <div class="mega-kart-ikon">📖</div><h3>Konuyu Öğren</h3>
+    <p>Konu anlatımları, sunular ve kavramlar.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='unite5-oyun-merkezi.html'">
+    <div class="mega-kart-ikon">🎮</div><h3>Oyunlar</h3>
+    <p>Konuyu eğlenerek pekiştir.</p>
+  </div>
+  <div class="mega-kart" onclick="window.location.href='unite5-degerlendirme.html'">
+    <div class="mega-kart-ikon">📝</div><h3>Değerlendirme</h3>
+    <p>Testler ve değerlendirme soruları.</p>
+  </div>
 </div>
 
-<div class="oyun-grubu" id="kat-bulmaca5">
-  <button onclick="goster('kelimeavi5', event)">🔎 Kelime Avı</button>
-  <button onclick="goster('cengel5', event)">🧩 Çengel Bulmaca</button>
-  <button onclick="goster('merdiven5', event)">🪜 Sözcük Merdiveni</button>
-  <button onclick="goster('sifre5', event)">🔐 Şifreli Sözcük</button>
-  <button onclick="goster('sifretanim5', event)">🔐 Şifreli Tanım</button>
-  <button onclick="goster('kelimekodlama5', event)">💻 Kelime Kodlama</button>
-  <button onclick="goster('nonogram5', event)">🖼️ Nonogram</button>
-  <button onclick="goster('satranc5', event)">♞ Kelime Satrancı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-yarisma5">
-  <button onclick="goster('kelimeuret5', event)">⚡ Hızlı Kelime</button>
-  <button onclick="goster('tuzak5', event)">🚫 Tuzak Harf</button>
-  <button onclick="goster('fabrika5', event)">🏭 Kelime Fabrikası</button>
-  <button onclick="goster('muhendis5', event)">🛠️ Kelime Mühendisi</button>
-  <button onclick="goster('kavramturnuvasi5', event)">🏆 Kavram Turnuvası</button>
-  <button onclick="goster('bonus5', event)">🎮 Bonus Oyun</button>
-</div>
-
-<div class="oyun-grubu" id="kat-mantik5">
-  <button onclick="goster('dedektif5', event)">🕵️ Kelime Dedektifi</button>
-  <button onclick="goster('dildedektifi5', event)">🕵️‍♀️ Dil Dedektifi</button>
-  <button onclick="goster('mantikzinciri5', event)">🔗 Mantık Zinciri</button>
-  <button onclick="goster('semantiklabirent5', event)">🧠 Semantik Labirent</button>
-  <button onclick="goster('celiskiavi5', event)">🕵️‍♂️ Çelişki Avı</button>
-</div>
-
-<div class="oyun-grubu" id="kat-macera5">
-  <button onclick="goster('labirent5', event)">🌀 Labirent</button>
-</div>
-
-<div class="oyun-grubu" id="kat-ezber5">
-  <button onclick="goster('ezsira5', event)">1️⃣ Sırala Bakalım</button>
-  <button onclick="goster('ezbosluk5', event)">2️⃣ Boşluk Doldur</button>
-  <button onclick="goster('ezeslestir5', event)">3️⃣ Anlam Eşleştir</button>
-  <button onclick="goster('ezhafiza5', event)">4️⃣ Hafıza Kartları</button>
-  <button onclick="goster('ezadimadim5', event)">5️⃣ Adım Adım Ezber</button>
-  <button onclick="goster('ezgizli5', event)">6️⃣ Gizli Harfler</button>
-  <button onclick="goster('ezkaybolan5', event)">7️⃣ Kaybolan Kelimeler</button>
-  <button onclick="goster('ezhiz5', event)">8️⃣ Hız Testi</button>
 </div>
 
 <main>
@@ -710,806 +771,7 @@
   </div>
 </div>
 </section>
-
-<section id="slayt">
-<h2>🖥️ Ünite Sunumu</h2>
-
-  <div class="sunum-sarmal">
-    <div class="sunum-ust">
-      <span class="sunum-sayac" id="sunumSayac">1 / 19</span>
-      <button class="sunum-tamekran-btn" onclick="sunumTamEkran('')" aria-label="Sunumu tam ekran aç">⛶ Tam Ekran</button>
-    </div>
-    <div class="sunum-alan" id="sunumAlan">
-      
-  <div class="sunum-slayt aktif s-baslik" data-tip="baslik">
-    <div class="sb-daire">💧</div>
-    <p class="sb-ust">4. SINIF — 5. ÜNİTE</p>
-    <h2 class="sb-baslik">İslam Dini ve Temizlik</h2>
-    <p class="sb-ders">Din Kültürü ve Ahlak Bilgisi</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı</p>
-  </div>
-
-  <div class="sunum-slayt s-liste" data-tip="hedef">
-    <h3>🎯 Bu Ünitede Neler Öğreneceğiz?</h3>
-    <ul class="sl-liste">
-      <li>İslam Dini ve Temizlik</li><li>Bedenimi ve Giysilerimi Temiz Tutarım</li><li>Evimi ve Okulumu Temiz Tutarım</li><li>Çevremi Temiz Tutarım</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 İslam Dini ve Temizlik (1/3)</h3>
-    <ul class="si-liste">
-      <li>Temizlik, insanın görünen ve görünmeyen her türlü kirden arınmasıdır.</li><li>Temizlik ikiye ayrılır: Maddi temizlik (bedenin, elbiselerin, çevrenin temiz tutulması) ve manevi temizlik (insanın iç dünyasının, kalbinin temiz olması; güzel ahlaklı olması).</li><li>Manevi temizliğe kültürümüzde iç temizliği ve kalp temizliği de denir.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 İslam Dini ve Temizlik (2/3)</h3>
-    <ul class="si-liste">
-      <li>İslam kültüründe temizlik yerine zaman zaman taharet kavramı kullanılır.</li><li>Allah (cc) temiz olanları sever: "...Allah tertemiz olanları sever." (Tevbe suresi, 108. ayet.) Peygamberimiz (sav): "Allah güzeldir, güzelliği sever; temizdir, temizliği sever..." (Tirmizi, Edeb, 41.) — "...Temizlik…</li><li>Namaz kılacak Müslüman öncelikle abdest almalıdır.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-merak" data-tip="zb">
-    <p class="zb-slayt-ust">🤔 MERAK ETTİN Mİ?</p>
-    <p class="zb-slayt-metin">Bir pet şişenin doğada yok olması yaklaşık 400 yıl sürer — bu yüzden geri dönüşüm hem dini hem çevresel bir sorumluluktur.</p>
-  </div>
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
-    <h3>📌 İslam Dini ve Temizlik (3/3)</h3>
-    <ul class="si-liste">
-      <li>Peygamberimiz (sav): "Cennetin anahtarı namaz, namazın anahtarı da abdesttir." (Tirmizi, Taharet, 1.) Kâbe'yi ziyaret edecek kişilerin de abdestli olması gerekir.</li><li>Abdest alma sırası: Niyet edilip Eûzü-besmele çekilir → Eller yıkanır → Ağız çalkalanır → Burun temizlenir → Yüz yıkanır → Sağ, sonra sol kol dirseklerle yıkanır → Baş ıslak elle mesh edilir → Kulakların içi…</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-yanlis" data-tip="zb">
-    <p class="zb-slayt-ust">❌ YANLIŞ BİLİNENLER</p>
-    <p class="zb-slayt-yanlis">❌ Bazıları temizliği sadece beden temizliği (yıkanmak) olarak düşünür.</p>
-    <p class="zb-slayt-dogru">✅ İslam'da temizlik hem maddi (beden, çevre) hem de manevi (doğruluk, dürüstlük, kötü huylardan arınma) boyutu olan geniş bir kavramdır.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Bedenimi ve Giysilerimi Temiz Tutarım (1/2)</h3>
-    <ul class="si-liste">
-      <li>Beden temizliği; ellerin, yüzün, ağzın, burnun, ayakların, tırnakların, saçın, kısacası bedenin tamamının temiz olmasıdır.</li><li>Eller en fazla kirlenen organımızdır; yemeklerden önce-sonra ve tuvaletten çıkınca yıkanmalıdır.</li><li>Ağız ve diş sağlığı önemlidir. Hz. Peygamber (sav), dişlerini misvak denilen bir tür ağaç fırçasıyla temizlerdi. "Misvak kullanın...</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
-    <h3>📌 Bedenimi ve Giysilerimi Temiz Tutarım (2/2)</h3>
-    <ul class="si-liste">
-      <li>Cebrail bana diş temizliğini o kadar çok tavsiye etti ki bana ve ümmetime bunun farz olacağından korktum." (İbni Mace, Taharet, 7.)</li><li>Saç ve tırnak temizliğine önem verilmelidir.</li><li>Elbise temizliği de beden temizliğinin bir parçasıdır: "Elbiseni tertemiz tut." (Müddessir suresi, 4. ayet.) "İnsanlar kıyafetlerine göre karşılanır, düşüncelerine göre uğurlanır." sözü, temiz giyinmenin önemine işaret…</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-ornek" data-tip="zb">
-    <p class="zb-slayt-ust">🌍 GERÇEK HAYATTAN BİR ÖRNEK</p>
-    <p class="zb-slayt-metin">Bir öğrencinin okul bahçesindeki çöpü görüp çöp kutusuna atması, hem maddi temizliğe hem de "kul hakkı" bilincine güzel bir örnektir.</p>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 Evimi ve Okulumu Temiz Tutarım (1/2)</h3>
-    <ul class="si-liste">
-      <li>Temiz ve düzenli bir evde yaşamak insana huzur verir.</li><li>Odamızı düzenli kullanmalı, yatağımızı toplamalı, eşyalarımızı yerli yerine koymalıyız.</li><li>Tuvalet, mutfak, salon gibi ortak alanların temizliğinde de sorumluluk almalıyız.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-dusun" data-tip="zb">
-    <p class="zb-slayt-ust">💭 DÜŞÜN VE CEVAPLA</p>
-    <p class="zb-slayt-metin">Çevremizi temiz tutmak neden dini bir sorumluluk olarak görülür?</p>
-  </div>
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
-    <h3>📌 Evimi ve Okulumu Temiz Tutarım (2/2)</h3>
-    <ul class="si-liste">
-      <li>Okulumuzun temiz ve düzenli olması sağlığımız ve eğitimimiz açısından önemlidir.</li><li>Okulu kirletmenin, başkalarının hakkını çiğnemek yani kul hakkı yemek anlamına geldiğini unutmamalıyız.</li>
-    </ul>
-  </div>
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Çevremi Temiz Tutarım (1/3)</h3>
-    <ul class="si-liste">
-      <li>Çevre, içinde yaşadığımız, bizi her an etkisi altında bulunduran ortamdır (hava, su, toprak, bitkiler, hayvanlar).</li><li>Her yıl 743 milyon ton verimli üst toprağımız erozyonla kayboluyor; dünya genelinde her yıl İsviçre'nin 3 katı büyüklüğünde alan çölleşmeyle yok oluyor.</li><li>Allah (cc) her şeyi bir ölçü ve dengede yaratmıştır: "Gerçekten biz, her şeyi bir ölçü ve dengede yarattık." (Kamer suresi, 49. ayet.) "Göğü Allah yükseltti ve mizanı (dengeyi) O koydu.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-aile" data-tip="zb">
-    <p class="zb-slayt-ust">👨‍👩‍👧 AİLEMLE YAPIYORUM</p>
-    <p class="zb-slayt-metin">Ailenle birlikte evde bir gün "sıfır atık" kuralı uygulayın (geri dönüştürülebilir atıkları ayırın) ve deneyiminizi paylaşın.</p>
-  </div>
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Çevremi Temiz Tutarım (2/3)</h3>
-    <ul class="si-liste">
-      <li>Sakın dengeyi bozmayın." (Rahman suresi, 7-8. ayetler.)</li><li>Çevreyi oluşturan unsurlar insana Allah'ın emanetidir. "İnsanların bizzat kendi işledikleri yüzünden karada ve denizde düzen bozuldu..." (Rum suresi, 41. ayet.)</li><li>Peygamberimiz (sav) ağaç dikmeyi teşvik etmiştir: "Bir Müslüman bir ağaç diker veya ekin eker de ondan bir kuş, insan veya herhangi bir hayvan yerse bu, onun için sadaka sayılır." (Buhari, Edeb, 27.) "Birinizin elinde…</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-zb s-zb-degerlendir" data-tip="zb">
-    <p class="zb-slayt-ust">✅ KENDİMİ DEĞERLENDİRİYORUM</p>
-    <ul class="zb-slayt-liste">
-      <li>☐ Maddi ve manevi temizlik arasındaki farkı açıklayabilirim.</li>
-      <li>☐ Abdestin temel adımlarını sayabilirim.</li>
-      <li>☐ Çevre kirliliğinin zararlarına örnek verebilirim.</li>
-      <li>☐ Çevremi temiz tutmaya özen gösteriyorum.</li>
-    </ul>
-  </div>
-
-
-
-  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
-    <h3>📌 Çevremi Temiz Tutarım (3/3)</h3>
-    <ul class="si-liste">
-      <li>Çöpleri çöp kutusuna atmalı, geri dönüştürülebilir atıkları geri dönüşüm kutularına ayırmalı, ormanları ve ağaçları korumalıyız.</li>
-    </ul>
-  </div>
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (1/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">Maddi temizlik</span><span class="sk-etiket" style="background:var(--mavi)">manevi temizlik</span><span class="sk-etiket" style="background:var(--kirmizi)">iç temizliği</span><span class="sk-etiket" style="background:var(--turkuaz)">kalp temizliği</span><span class="sk-etiket" style="background:#7c3aed">taharet</span><span class="sk-etiket" style="background:var(--yesil)">abdest</span><span class="sk-etiket" style="background:var(--mavi)">Abdest alma sırası:</span><span class="sk-etiket" style="background:var(--kirmizi)">misvak</span><span class="sk-etiket" style="background:var(--turkuaz)">huzur</span><span class="sk-etiket" style="background:#7c3aed">kul hakkı</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-kavram" data-tip="kavram">
-    <h3>🔑 Önemli Kavramlar (2/2)</h3>
-    <div class="sk-izgara">
-      <span class="sk-etiket" style="background:var(--yesil)">Çevre</span><span class="sk-etiket" style="background:var(--mavi)">erozyon</span><span class="sk-etiket" style="background:var(--kirmizi)">3 katı</span><span class="sk-etiket" style="background:var(--turkuaz)">emanetidir</span><span class="sk-etiket" style="background:#7c3aed">sadaka</span><span class="sk-etiket" style="background:var(--yesil)">geri dönüşüm</span>
-    </div>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"Allah tertemiz olanları sever."</p>
-    <p class="sa-kaynak">— Tevbe suresi, 108. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-ayet" data-tip="ayet">
-    <p class="sa-ust">📖 AYETLERLE DÜŞÜNELİM</p>
-    <p class="sa-meal">"Elbiseni tertemiz tut."</p>
-    <p class="sa-kaynak">— Müddessir suresi, 4. ayet</p>
-  </div>
-
-  <div class="sunum-slayt s-video" data-tip="video">
-    <p class="sv-ust">🎬 KONUYLA İLGİLİ VİDEO</p>
-    <div class="sv-cerceve">
-      <iframe src="https://www.youtube.com/embed/zgPCFMYkwc8" title="Temizlik İmandan Gelir - Nussa ve Rarra" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
-    <p class="sv-baslik">Temizlik İmandan Gelir - Nussa ve Rarra</p>
-  </div>
-
-    <div class="sunum-slayt s-zb s-zb-derin" data-tip="zb">
-    <p class="zb-slayt-ust">🔍 DERİNLEMESİNE DÜŞÜNELİM</p>
-    <ul class="zb-slayt-liste">
-      <li>Bu bilgi benim hayatımı nasıl etkiler?</li>
-      <li>Bu kavram neden önemlidir?</li>
-      <li>Günlük yaşamda bunun karşılığı nedir?</li>
-    </ul>
-  </div>
-
-
-  <div class="sunum-slayt s-liste s-ozet" data-tip="ozet">
-    <h3>📝 Ünite Özeti</h3>
-    <ul class="sl-liste">
-      <li>Hadis-i Şerif: "Mümin, kendisiyle hoş geçinilen kimsedir.</li><li>Kendisiyle hoş geçinilmeyen, başkalarıyla geçinemeyen kimsede hayır yoktur." (Ahmed bin Hanbel, el-Müsned, C 2, s.</li>
-    </ul>
-  </div>
-  <div class="sunum-slayt s-kapanis" data-tip="kapanis">
-    <div class="sb-daire">🌟</div>
-    <h2 class="sb-baslik">Dinlediğiniz İçin Teşekkürler</h2>
-    <p class="sb-ders">Başarılar dilerim.</p>
-    <p class="sb-ogretmen">Ayşe Yazıcı — Din Kültürü ve Ahlak Bilgisi Öğretmeni</p>
-  </div>
-    </div>
-    <div class="sunum-nav">
-      <button onclick="sunumGit('',-1)" aria-label="Önceki slayt">⬅ Önceki</button>
-      <div class="sunum-noktalar" id="sunumNoktalar"></div>
-      <button onclick="sunumGit('',1)" aria-label="Sonraki slayt">Sonraki ➡</button>
-    </div>
-  </div>
-</section>
-
-<section id="yazili">
-  <h2>📝 Yazılı Sınavlar</h2>
-  <div class="aciklama">4. sınıf Din Kültürü ve Ahlak Bilgisi dersine ait, resmî MEB sınav formatında hazırlanmış, yazdırılabilir yazılı yoklama sınavları. Her dönem için hem <b>karma</b> (boşluk doldurma, eşleştirme, doğru-yanlış, kısa cevap) hem de tamamen açık uçlu <b>klasik</b> format seçeneği bulunur. Kartlara tıklayınca sınav yeni sekmede açılır ve doğrudan yazdırılabilir.</div>
-  <div class="yazili-izgara">
-    <a class="yazili-kart" href="yazili1.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili1_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili2.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>1. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili2_klasik.html" target="_blank" rel="noopener" aria-label="1. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>1. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili3.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>2. Dönem 1. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili3_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 1. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>2. Dönem 1. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-    <a class="yazili-kart" href="yazili4.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Karma Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">📄</div><h3>2. Dönem 2. Yazılı</h3><p>Karma format</p>
-    </a>
-    <a class="yazili-kart yk-klasik" href="yazili4_klasik.html" target="_blank" rel="noopener" aria-label="2. Dönem 2. Yazılı Klasik Sınavı, yeni sekmede açılır">
-      <div class="yk-ikon">✍️</div><h3>2. Dönem 2. Yazılı</h3><p>Klasik (açık uçlu)</p>
-    </a>
-  </div>
-</section>
-
-
-<!-- KONU ÖZETİ -->
-<section id="ozet5" class="aktif">
-  <h2>🧼 5. Ünite Konu Özeti: İslam Dini ve Temizlik</h2>
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ İslam Dini ve Temizlik</h3>
-    <p>Temizlik, insanın görünen ve görünmeyen her türlü kirden arınmasıdır. Temizlik ikiye ayrılır: <b>Maddi temizlik</b> (bedenin, elbiselerin, çevrenin temiz tutulması) ve <b>manevi temizlik</b> (insanın iç dünyasının, kalbinin temiz olması; güzel ahlaklı olması). Manevi temizliğe kültürümüzde <b>iç temizliği</b> ve <b>kalp temizliği</b> de denir.</p>
-    <div class="aciklama"><b>Hadis-i Şerif:</b> "Mümin, kendisiyle hoş geçinilen kimsedir. Kendisiyle hoş geçinilmeyen, başkalarıyla geçinemeyen kimsede hayır yoktur." (Ahmed bin Hanbel, el-Müsned, C 2, s. 400.)</div>
-
-  <div class="kutu-panel kutu-kazanim">
-    <h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
-    <p class="kazanim-kaynak">Kaynak: 2018 DKAB Öğretim Programı (MEB Talim ve Terbiye Kurulu) — 4.5. Din ve Temizlik</p>
-    <ul>
-      <li><b>4.5.1</b> — İslam dininin temizliğe verdiği öneme örnekler verir.</li>
-      <li><b>4.5.2</b> — Temiz ve düzenli olmaya özen gösterir.</li>
-    </ul>
-    <p class="kazanim-kaynak">Güncel Türkiye Yüzyılı Maarif Modeli (2024) programında bu içerik, 4. sınıf 1. ünite "Günlük Hayat ve Din" başlığı altında <b>DKAB.4.1.2</b> öğrenme çıktısıyla — İslam'ın temizliğe verdiği önemi günlük hayatını gözlemleyerek fark etme — yeniden ele alınmaktadır.</p>
-  </div>
-
-  <div class="kutu-panel kavram-harita-panel">
-    <h3 style="color:#5b21b6">🗺️ Kavram Haritası</h3>
-    <p class="kavram-harita-aciklama">Bu ünitenin MEB öğretim programında belirlenen anahtar kavramları, ünite temasıyla bağlantılı olarak aşağıda gösterilmiştir.</p>
-    <div class="kavram-harita">
-      <div class="kh-merkez">Din ve Temizlik</div>
-      <div class="kh-dallar">
-      <div class="kh-kavram">Abdest</div>
-      <div class="kh-kavram">Taharet</div>
-      </div>
-    </div>
-  </div>
-    <p>İslam kültüründe temizlik yerine zaman zaman <b>taharet</b> kavramı kullanılır. Allah (cc) temiz olanları sever: "...Allah tertemiz olanları sever." (Tevbe suresi, 108. ayet.) Peygamberimiz (sav): "Allah güzeldir, güzelliği sever; temizdir, temizliği sever..." (Tirmizi, Edeb, 41.) — "...Temizlik imanın yarısıdır." (Tirmizi, Daavat, 86.)</p>
-    <p>Namaz kılacak Müslüman öncelikle <b>abdest</b> almalıdır. Peygamberimiz (sav): "Cennetin anahtarı namaz, namazın anahtarı da abdesttir." (Tirmizi, Taharet, 1.) Kâbe'yi ziyaret edecek kişilerin de abdestli olması gerekir.</p>
-    <div class="aciklama"><b>Ayet:</b> "Ey iman edenler! Namaza kalkacağınız zaman yüzlerinizi, dirseklere kadar ellerinizi ve -başlarınıza mesh edip- her iki topuğa kadar da ayaklarınızı yıkayın... Allah size herhangi bir güçlük çıkarmak istemez. Fakat O sizi tertemiz yapmak ve üzerinizdeki nimetini tamamlamak ister ki şükredesiniz." (Maide suresi, 6. ayet.)</div>
-    <p><b>Abdest alma sırası:</b> Niyet edilip Eûzü-besmele çekilir → Eller yıkanır → Ağız çalkalanır → Burun temizlenir → Yüz yıkanır → Sağ, sonra sol kol dirseklerle yıkanır → Baş ıslak elle mesh edilir → Kulakların içi şehadet/serçe parmakla, arkası başparmakla mesh edilir → Boyun mesh edilir → Sağ, sonra sol ayak topuklarla yıkanır.</p>
-  </div>
-  <div class="zb-kutu zb-merak">
-    <p class="zb-baslik">🤔 Merak Ettin mi?</p>
-    <p class="zb-metin">Bir pet şişenin doğada yok olması yaklaşık 400 yıl sürer — bu yüzden geri dönüşüm hem dini hem çevresel bir sorumluluktur.</p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Bedenimi ve Giysilerimi Temiz Tutarım</h3>
-    <p>Beden temizliği; ellerin, yüzün, ağzın, burnun, ayakların, tırnakların, saçın, kısacası bedenin tamamının temiz olmasıdır. Eller en fazla kirlenen organımızdır; yemeklerden önce-sonra ve tuvaletten çıkınca yıkanmalıdır.</p>
-    <p>Vücudumuz, Allah'ın (cc) bize verdiği ve bize emanet ettiği bir nimettir; bu yüzden ona iyi bakmak, hem Allah'a karşı bir sorumluluğumuz hem de kendimize olan bir görevimizdir. Ellerimizi ve bedenimizi düzenli olarak yıkamak, hastalıklara yol açan mikroplardan korunmamızı da sağlar; yani temizlik aynı zamanda sağlıklı yaşamanın da bir yoludur.</p>
-    <div class="aciklama"><b>Hadis-i Şerif:</b> "Yemeğin bereketi, yemekten önce ve sonra elleri yıkamaktadır." (Ebu Davud, Et'ime, 11.) — "Her yedi günde bir saçını ve bedenini yıkayarak banyo yapması, Allah'ın bütün Müslümanlar üzerindeki bir hakkıdır." (Buhari, Cuma, 12; Müslim, Cuma, 9.)</div>
-    <p>Ağız ve diş sağlığı önemlidir. Hz. Peygamber (sav), dişlerini <b>misvak</b> denilen bir tür ağaç fırçasıyla temizlerdi. "Misvak kullanın... Cebrail bana diş temizliğini o kadar çok tavsiye etti ki bana ve ümmetime bunun farz olacağından korktum." (İbni Mace, Taharet, 7.)</p>
-    <p>Saç ve tırnak temizliğine önem verilmelidir. Elbise temizliği de beden temizliğinin bir parçasıdır: "Elbiseni tertemiz tut." (Müddessir suresi, 4. ayet.) "İnsanlar kıyafetlerine göre karşılanır, düşüncelerine göre uğurlanır." sözü, temiz giyinmenin önemine işaret eder.</p>
-  </div>
-  <div class="zb-kutu zb-yanlis">
-    <p class="zb-baslik">❌ Yanlış Bilinenler</p>
-    <p class="zb-metin zb-yanlis-satir">❌ Bazıları temizliği sadece beden temizliği (yıkanmak) olarak düşünür.</p>
-    <p class="zb-metin zb-dogru-satir">✅ İslam'da temizlik hem maddi (beden, çevre) hem de manevi (doğruluk, dürüstlük, kötü huylardan arınma) boyutu olan geniş bir kavramdır.</p>
-  </div>
-  <div class="zb-kutu zb-ornek">
-    <p class="zb-baslik">🌍 Gerçek Hayattan Bir Örnek</p>
-    <p class="zb-metin">Bir öğrencinin okul bahçesindeki çöpü görüp çöp kutusuna atması, hem maddi temizliğe hem de "kul hakkı" bilincine güzel bir örnektir.</p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Evimi ve Okulumu Temiz Tutarım</h3>
-    <p>Temiz ve düzenli bir evde yaşamak insana <b>huzur</b> verir. Odamızı düzenli kullanmalı, yatağımızı toplamalı, eşyalarımızı yerli yerine koymalıyız. Tuvalet, mutfak, salon gibi ortak alanların temizliğinde de sorumluluk almalıyız.</p>
-    <p>Okulumuzun temiz ve düzenli olması sağlığımız ve eğitimimiz açısından önemlidir. Okulu kirletmenin, başkalarının hakkını çiğnemek yani <b>kul hakkı</b> yemek anlamına geldiğini unutmamalıyız.</p>
-  </div>
-  <div class="zb-kutu zb-dusun">
-    <p class="zb-baslik">💭 Düşün ve Cevapla</p>
-    <p class="zb-metin">Çevremizi temiz tutmak neden dini bir sorumluluk olarak görülür?</p>
-  <textarea id="zbAlan_dusun" class="zb-cevap-alani" placeholder="Cevabını buraya yazabilirsin..." onchange="zbCevapKaydet('dusun', this)" aria-label="Cevabını buraya yazabilirsin..."></textarea>
-  <p class="zb-cevap-not" id="zbNot_dusun"></p>
-  </div>
-  <div class="zb-kutu zb-aile">
-    <p class="zb-baslik">👨‍👩‍👧 Ailemle Yapıyorum</p>
-    <p class="zb-metin">Ailenle birlikte evde bir gün "sıfır atık" kuralı uygulayın (geri dönüştürülebilir atıkları ayırın) ve deneyiminizi paylaşın.</p>
-  <textarea id="zbAlan_aile" class="zb-cevap-alani" placeholder="Ailenle yaptığın etkinliği kısaca anlat..." onchange="zbCevapKaydet('aile', this)" aria-label="Ailenle yaptığın etkinliği kısaca anlat..."></textarea>
-  <p class="zb-cevap-not" id="zbNot_aile"></p>
-  </div>
-
-
-
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Çevremi Temiz Tutarım</h3>
-    <p><b>Çevre</b>, içinde yaşadığımız, bizi her an etkisi altında bulunduran ortamdır (hava, su, toprak, bitkiler, hayvanlar). Her yıl 743 milyon ton verimli üst toprağımız <b>erozyon</b>la kayboluyor; dünya genelinde her yıl İsviçre'nin <b>3 katı</b> büyüklüğünde alan çölleşmeyle yok oluyor.</p>
-    <div class="aciklama"><b>Doğada yok oluş süreleri:</b> Pet şişe 400 yıl, cam şişe 4000 yıl, plastik malzeme 1000 yıl, kâğıt/gazete 3 ay.</div>
-    <p>Allah (cc) her şeyi bir ölçü ve dengede yaratmıştır: "Gerçekten biz, her şeyi bir ölçü ve dengede yarattık." (Kamer suresi, 49. ayet.) "Göğü Allah yükseltti ve mizanı (dengeyi) O koydu. Sakın dengeyi bozmayın." (Rahman suresi, 7-8. ayetler.)</p>
-    <p>Çevreyi oluşturan unsurlar insana Allah'ın <b>emanetidir</b>. "İnsanların bizzat kendi işledikleri yüzünden karada ve denizde düzen bozuldu..." (Rum suresi, 41. ayet.)</p>
-    <p>Peygamberimiz (sav) ağaç dikmeyi teşvik etmiştir: "Bir Müslüman bir ağaç diker veya ekin eker de ondan bir kuş, insan veya herhangi bir hayvan yerse bu, onun için <b>sadaka</b> sayılır." (Buhari, Edeb, 27.) "Birinizin elinde bir hurma fidanı varsa, kıyamet kopuyor olsa bile hemen onu diksin!" (Ahmed bin Hanbel.)</p>
-    <div class="aciklama"><b>Hadis-i Şerif:</b> "Lanete sebep olan şu üç şeyi yapmaktan sakının: Su kaynaklarına, yol ortasına ve gölgelik yerlere abdest bozmaktan sakının." (Ebu Davud, Taharet, 14.)</div>
-    <p>Su, Allah'ın verdiği en değerli nimetlerden biridir ve <b>israf</b> edilmeden kullanılmalıdır. Peygamberimiz (sav), abdest alırken suyu gereğinden fazla harcayan bir sahabesini uyarmış; akan bir nehrin kenarında bile olunsa suyun boşa harcanmaması gerektiğini öğütlemiştir (İbn Mâce, Tahâret, 48). Bu öğütten hareketle, diş fırçalarken veya bulaşık yıkarken musluğu gereksiz yere açık bırakmamamız gerektiğini unutmamalıyız.</p>
-    <p>Çöpleri çöp kutusuna atmalı, geri dönüştürülebilir atıkları <b>geri dönüşüm</b> kutularına ayırmalı, ormanları ve ağaçları korumalıyız.</p>
-  </div>
-  <div class="zb-kutu zb-derin">
-    <p class="zb-baslik">🔍 Derinlemesine Düşünelim</p>
-    <p class="zb-metin">Bu ünitede öğrendiklerini derinlemesine değerlendirmek için kendine şu soruları sor:</p>
-    <ul class="zb-derin-liste">
-      <li>Bu bilgi benim hayatımı nasıl etkiler?</li>
-      <li>Bu kavram neden önemlidir?</li>
-      <li>Günlük yaşamda bunun karşılığı nedir?</li>
-    </ul>
-  </div>
-  <div class="zb-kutu zb-ikilem">
-    <p class="zb-baslik">⚖️ Ahlaki İkilem — Sen Olsaydın Ne Yapardın?</p>
-    <p class="zb-metin">Arkadaşın "Bedenim temiz olsun yeter, kalbimin veya sözlerimin temiz olması önemli değil" diyor. Sen ona ne söylerdin? İslam'da temizlik sadece bedensel midir?</p>
-    <textarea id="zbAlan_ikilem" class="zb-cevap-alani" placeholder="Ne yapardın ve neden? Düşünceni buraya yazabilirsin..." onchange="zbCevapKaydet('ikilem', this)" aria-label="Ahlaki ikilem cevabın"></textarea>
-    <p class="zb-cevap-not" id="zbNot_ikilem"></p>
-  </div>
-
-  <div class="zb-kutu zb-degerlendir">
-    <p class="zb-baslik">✅ Kendimi Değerlendiriyorum</p>
-    <ul>
-      <li><input type="checkbox" id="deg_4-5_0" onchange="degKaydet('4-5')"><label for="deg_4-5_0">Maddi ve manevi temizlik arasındaki farkı açıklayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_4-5_1" onchange="degKaydet('4-5')"><label for="deg_4-5_1">Abdestin temel adımlarını sayabilirim.</label></li>
-      <li><input type="checkbox" id="deg_4-5_2" onchange="degKaydet('4-5')"><label for="deg_4-5_2">Çevre kirliliğinin zararlarına örnek verebilirim.</label></li>
-      <li><input type="checkbox" id="deg_4-5_3" onchange="degKaydet('4-5')"><label for="deg_4-5_3">Çevremi temiz tutmaya özen gösteriyorum.</label></li>
-    </ul>
-  </div>
-
-
-</section>
-
-<!-- KONU TEKRARI TESTİ -->
-<section id="konutekrari5">
-  <h2>📝 Konu Tekrarı Testi (50 Soru)</h2>
-  <div class="oyun-amaci">🎯 Bu bölümün amacı: Ünitenin tamamını kapsamlı bir testle tekrar edip pekiştirmek.</div>
-  <div class="aciklama">4 şıklı, 50 sorudan oluşan kapsamlı bir tekrar testi! Kolay, orta ve zor sorular karışık geliyor. Cevabı seçince doğru/yanlış hemen görünüyor, altında da açıklaması çıkıyor.</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Soru: <b id="kt5rTur">1</b>/<b id="kt5rToplam">50</b></span>
-    <span>⭐ Puan: <b id="kt5rPuan">0</b></span>
-    <span id="kt5rZorluk"></span>
-  </div>
-  <div id="kt5rSoru" class="balon-durum"></div>
-  <div id="kt5rSecenekler" style="display:flex;flex-direction:column;gap:10px;max-width:560px;margin:0 auto;"></div>
-  <div class="aciklama" id="kt5rAciklama" style="display:none;"></div>
-  <div class="sonuc-kutusu" id="kt5rSonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" id="kt5rSonrakiBtn" style="display:none;" onclick="kt5rSonrakiSoru()">➡️ Sonraki Soru</button>
-    <button class="eylem" style="background:var(--sari)" onclick="kt5rBaslat()">📝 Teste Başla</button>
-  </div>
-</section>
-
-<!-- HIZLI KELİME ÜRETME -->
-<section id="kelimeuret5">
-  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
-  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
-  <div class="oyun-bilgi">
-    <span>🔤 Harf: <b id="ku5Harf">-</b></span>
-    <span>⭐ Puan: <b id="ku5Puan">0</b></span>
-    <span>⏱️ Süre: <b id="ku5Sure">60</b>sn</span>
-  </div>
-  <input type="text" id="ku5Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ku5Ekle();}">
-  <p class="balon-durum" id="ku5Uyari"></p>
-  <ul class="ku-liste" id="ku5Liste"></ul>
-  <div class="sonuc-kutusu" id="ku5Sonuc"></div>
-  <div id="ku5Kacirilan"></div>
-  <button class="eylem" onclick="ku5Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- TUZAK HARF -->
-<section id="tuzak5">
-  <h2>🚫 Tuzak Harf Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
-  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen kavramları süre bitmeden art arda yaz!</div>
-  <div class="oyun-bilgi">
-    <span>🚫 Tuzak Harf: <b id="tuzak5Harf">-</b></span>
-    <span>⭐ Puan: <b id="tuzak5Puan">0</b></span>
-    <span>⏱️ Süre: <b id="tuzak5Sure">40</b>sn</span>
-  </div>
-  <input type="text" id="tuzak5Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzak5Ekle();}">
-  <p class="balon-durum" id="tuzak5Uyari"></p>
-  <ul class="ku-liste" id="tuzak5Liste"></ul>
-  <div class="sonuc-kutusu" id="tuzak5Sonuc"></div>
-  <button class="eylem" onclick="tuzak5Baslat()">🎮 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME FABRİKASI -->
-<section id="fabrika5">
-  <h2>🏭 Kelime Fabrikası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
-  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!</div>
-  <div class="oyun-bilgi">
-    <span>🏭 Üretilen: <b id="kf5Uretilen">0</b>/<b id="kf5Toplam">28</b></span>
-    <span>❌ Hata: <b id="kf5Hata">0</b></span>
-  </div>
-  <div id="kf5Siparis" class="balon-durum"></div>
-  <div class="kf-bant" id="kf5BantAlani"></div>
-  <input type="text" id="kf5Girdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kf5Uret();}">
-  <button class="eylem" onclick="kf5Uret()">🏭 Üret!</button>
-  <div class="kf-urunler" id="kf5Urunler"></div>
-  <div class="sonuc-kutusu" id="kf5Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="kf5Baslat()">🔄 Fabrikayı Başlat/Yenile</button>
-</section>
-
-<!-- KELİME MÜHENDİSİ -->
-<section id="muhendis5">
-  <h2>🛠️ Kelime Mühendisi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
-  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
-  <div class="oyun-bilgi">
-    <span>🏗️ Tur: <b id="km5Tur">1</b>/<b id="km5Toplam">28</b></span>
-    <span>✅ İnşa Edilen: <b id="km5Dogru">0</b></span>
-  </div>
-  <div id="km5Ipucu" class="balon-durum"></div>
-  <div class="kelime-cevap" id="km5Cevap"></div>
-  <div class="kelime-banka" id="km5Banka"></div>
-  <div class="sonuc-kutusu" id="km5Sonuc"></div>
-  <button class="eylem" onclick="km5Baslat()">🛠️ Mühendisliğe Başla</button>
-</section>
-
-<!-- KAVRAM TURNUVASI -->
-<section id="kavramturnuvasi5">
-  <h2>🏆 Kavram Turnuvası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
-  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap.</div>
-  <div class="oyun-bilgi">
-    <span>🥊 Maç: <b id="kt5Tur">1</b>/<b id="kt5Toplam">7</b></span>
-    <span>✅ Doğru Hakemlik: <b id="kt5Puan">0</b></span>
-  </div>
-  <div id="kt5Asama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
-  <div id="kt5Eslesme" class="balon-durum"></div>
-  <div id="kt5Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kt5Sonuc"></div>
-  <button class="eylem" onclick="kt5Baslat()">🏆 Turnuvayı Başlat</button>
-</section>
-
-<!-- BONUS OYUN: HAFIZA ZİNCİRİ -->
-<section id="bonus5">
-  <h2>🎮 Bonus Oyun: Kavramlar Hafıza Zinciri</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
-  <div class="aciklama">Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir kavram daha uzuyor.</div>
-  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bz5Seviye">0</b></span></div>
-  <div class="bz-izgara" id="bz5Izgara"></div>
-  <div class="sonuc-kutusu" id="bz5Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" style="background:var(--sari)" onclick="bz5OrnekOyna()">🎬 Önce Örnek Gör</button>
-    <button class="eylem" onclick="bz5Baslat()">🎮 Oyunu Başlat</button>
-  </div>
-</section>
-
-<!-- KELİME AVI -->
-<section id="kelimeavi5">
-  <h2>🔎 Kelime Avı Bulmacası</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
-  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka5Bulunan">0</b>/<b id="ka5Toplam">14</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ka-izgara" id="ka5Izgara"></div>
-    <ul class="ka-liste" id="ka5Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ka5Sonuc"></div>
-  <button class="eylem" onclick="kelimeAvi5Olustur()">🔄 Yeni Bulmaca</button>
-</section>
-
-<!-- ÇENGEL BULMACA -->
-<section id="cengel5">
-  <h2>🧩 Çengel Bulmaca</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
-  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
-  <div class="cengel-izgara" id="cengel5Izgara"></div>
-  <ul class="cengel-liste" id="cengel5Liste"></ul>
-  <div class="sonuc-kutusu" id="cengel5Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="cengel5KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="cengel5Olustur()">🔄 Baştan Başla</button>
-  </div>
-</section>
-
-<!-- SÖZCÜK MERDİVENİ -->
-<section id="merdiven5">
-  <h2>🪜 Sözcük Merdiveni</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
-  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdiven5Basamak">1</b>/<b id="merdiven5Toplam">4</b></span></div>
-  <div id="merdiven5Ipucu" class="balon-durum"></div>
-  <div id="merdiven5Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="merdiven5Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="merdiven5Sonuc"></div>
-  <button class="eylem" onclick="merdiven5Baslat()">🔄 Yeniden Başlat</button>
-</section>
-
-<!-- ŞİFRELİ SÖZCÜK -->
-<section id="sifre5">
-  <h2>🔐 Şifreli Sözcük Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
-  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
-  <div class="sifre-anahtar" id="sifre5Anahtar"></div>
-  <div id="sifre5Kelimeler"></div>
-  <div class="sonuc-kutusu" id="sifre5Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="sifre5KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="sifre5Olustur()">🔄 Yeni Şifre</button>
-  </div>
-</section>
-
-<!-- ŞİFRELİ TANIM -->
-<section id="sifretanim5">
-  <h2>🔐 Şifreli Tanım Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
-  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="st5Tur">1</b>/<b id="st5Toplam">28</b></span>
-    <span>⭐ Puan: <b id="st5Puan">0</b></span>
-  </div>
-  <div id="st5Tanim" class="dua-satir"></div>
-  <div id="st5Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="st5Sonuc"></div>
-  <button class="eylem" onclick="st5Baslat()">🔐 Oyunu Başlat</button>
-</section>
-
-<!-- KELİME KODLAMA -->
-<section id="kelimekodlama5">
-  <h2>💻 Kelime Kodlama Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
-  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz.</div>
-  <div class="sifre-anahtar" id="kk5Anahtar"></div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="kk5Tur">1</b>/<b id="kk5Toplam">28</b></span>
-    <span>⭐ Puan: <b id="kk5Puan">0</b></span>
-  </div>
-  <div id="kk5Ipucu" class="balon-durum"></div>
-  <div id="kk5Kod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
-  <div id="kk5Secenekler" style="max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="kk5Sonuc"></div>
-  <button class="eylem" onclick="kk5Baslat()">💻 Kodlamayı Başlat</button>
-</section>
-
-<!-- NONOGRAM -->
-<section id="nonogram5">
-  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
-  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak gizli resmi ortaya çıkar!</div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
-    <button class="eylem" onclick="nonogram5Sec('camii')">🕌 Cami (İbadet Yeri)</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram5Sec('hilal')">🌙⭐ Hilal ve Yıldız</button>
-  </div>
-  <div style="overflow-x:auto;">
-    <table class="nono-tablo" id="nono5Tablo"></table>
-  </div>
-  <div class="sonuc-kutusu" id="nono5Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="nonogram5KontrolEt(true)">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="nonogram5Temizle()">🧹 Temizle</button>
-  </div>
-</section>
-
-<!-- KELİME SATRANCI -->
-<section id="satranc5">
-  <h2>♞ Kelime Satrancı</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
-  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ks5Bulunan">0</b>/<b id="ks5Toplam">8</b></span></div>
-  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-    <div class="ks-izgara" id="ks5Izgara"></div>
-    <ul class="ka-liste" id="ks5Liste"></ul>
-  </div>
-  <div class="sonuc-kutusu" id="ks5Sonuc"></div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <button class="eylem" onclick="ks5SecimiTemizle()">🧹 Seçimi Temizle</button>
-    <button class="eylem" style="background:var(--sari)" onclick="ks5Olustur()">🔄 Yeni Tahta</button>
-  </div>
-</section>
-
-<!-- KELİME DEDEKTİFİ -->
-<section id="dedektif5">
-  <h2>🕵️ Kelime Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
-  <div class="aciklama">Gizli kelimeyi (bir kavram) 5 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Vaka: <b id="dd5Vaka">1</b>/<b id="dd5ToplamVaka">1</b></span>
-    <span>✅ Çözülen: <b id="dd5Cozulen">0</b></span>
-    <span>🔍 Deneme: <b id="dd5Deneme">0</b>/<b id="dd5MaxDeneme">5</b></span>
-  </div>
-  <div id="dd5Ipucu" class="balon-durum"></div>
-  <div id="dd5Izgara"></div>
-  <input type="text" id="dd5Girdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){dd5TahminEt();}">
-  <p class="balon-durum" id="dd5Uyari"></p>
-  <div class="sonuc-kutusu" id="dd5Sonuc"></div>
-  <button class="eylem" onclick="dd5Baslat()">🕵️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- DİL DEDEKTİFİ -->
-<section id="dildedektifi5">
-  <h2>🕵️‍♀️ Dil Dedektifi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ddl5Tur">1</b>/<b id="ddl5Toplam">10</b></span>
-    <span>⭐ Puan: <b id="ddl5Puan">0</b></span>
-  </div>
-  <div id="ddl5Baslik" class="balon-durum"></div>
-  <div id="ddl5Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="ddl5Sonuc"></div>
-  <button class="eylem" onclick="ddl5Baslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
-</section>
-
-<!-- MANTIK ZİNCİRİ -->
-<section id="mantikzinciri5">
-  <h2>🔗 Mantık Zinciri Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
-  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
-  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mz5Halka">1</b>/<b id="mz5Toplam">5</b></span></div>
-  <div id="mz5Soru" class="balon-durum"></div>
-  <div id="mz5Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="kutu-panel" id="mz5Gorsel" style="max-width:460px;margin:20px auto;"></div>
-  <div class="sonuc-kutusu" id="mz5Sonuc"></div>
-  <button class="eylem" onclick="mz5Baslat()">🔗 Zinciri Başlat</button>
-</section>
-
-<!-- SEMANTİK LABİRENT -->
-<section id="semantiklabirent5">
-  <h2>🧠 Semantik Labirent</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
-  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin.</div>
-  <div class="oyun-bilgi">
-    <span>🚪 Oda: <b id="sz5Oda">1</b>/<b id="sz5ToplamOda">6</b></span>
-    <span id="sz5Can">❤️❤️❤️</span>
-  </div>
-  <div id="sz5Kategori" class="balon-durum"></div>
-  <div id="sz5Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
-  <div class="sonuc-kutusu" id="sz5Sonuc"></div>
-  <button class="eylem" onclick="sz5Baslat()">🌀 Labirente Gir</button>
-</section>
-
-<!-- ÇELİŞKİ AVI -->
-<section id="celiskiavi5">
-  <h2>🕵️‍♂️ Çelişki Avı</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
-  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu?</div>
-  <div class="oyun-bilgi">
-    <span>🗂️ Tur: <b id="ca5Tur">1</b>/<b id="ca5Toplam">12</b></span>
-    <span>⭐ Puan: <b id="ca5Puan">0</b></span>
-  </div>
-  <div id="ca5Cumle" class="dua-satir"></div>
-  <div id="ca5Butonlar" style="display:flex;gap:14px;justify-content:center;">
-    <button class="eylem" style="background:var(--kirmizi)" onclick="ca5Cevapla(true)">⚡ Çelişki VAR</button>
-    <button class="eylem" style="background:var(--yesil)" onclick="ca5Cevapla(false)">✅ Çelişki YOK</button>
-  </div>
-  <p style="text-align:center;font-weight:bold;" id="ca5GeriBildirim"></p>
-  <div class="sonuc-kutusu" id="ca5Sonuc"></div>
-  <button class="eylem" style="background:var(--sari)" onclick="ca5Baslat()">🕵️‍♂️ Ava Başla</button>
-</section>
-
-<!-- LABİRENT -->
-<section id="labirent5">
-  <h2>🌀 Labirent Oyunu</h2>
-  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
-  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 🏡'ye ulaştır! Yolda parıldayan yıldızlara basarsan bir kavram toplarsın.</div>
-  <div class="oyun-bilgi">
-    <span>🔁 Hamle: <b id="lab5Hamle">0</b></span>
-    <span>⭐ Toplanan: <b id="lab5Toplanan">0</b>/<b id="lab5ToplamYildiz">20</b></span>
-    <span>⏱️ Süre: <b id="lab5Sure">0</b>sn</span>
-  </div>
-  <div class="balon-durum" id="lab5Durum"></div>
-  <div class="labirent-izgara" id="lab5Izgara"></div>
-  <div class="labirent-kontroller">
-    <button class="labirent-tus" onclick="labirent5Hareket(-1,0)">▲</button>
-    <div>
-      <button class="labirent-tus" onclick="labirent5Hareket(0,-1)">◀</button>
-      <button class="labirent-tus" onclick="labirent5Hareket(1,0)">▼</button>
-      <button class="labirent-tus" onclick="labirent5Hareket(0,1)">▶</button>
-    </div>
-  </div>
-  <div class="sonuc-kutusu" id="lab5Sonuc"></div>
-  <button class="eylem" onclick="labirent5Baslat()">🔄 Yeni Labirent</button>
-</section>
-
-
-<!-- ================= EZBER ETKİNLİKLERİ (8 ADET) — TEMIZLIK KAVRAMLARI ================= -->
-
-<section id="ezsira5">
-  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları'nın cümlelerini doğru sırayla dizebileceksin.</div>
-  <div class="aciklama">Karışık sırada verilen cümleleri, Temizlik Kavramları'ndaki doğru sıraya göre tıklayarak diz.</div>
-  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez15Dizilen">0</b>/<b>8</b></span></div>
-  <div class="kelime-cevap" id="ez15Cevap"></div>
-  <div class="kelime-banka" id="ez15Banka"></div>
-  <div class="sonuc-kutusu" id="ez15Sonuc"></div>
-  <button class="eylem" onclick="ez15Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezbosluk5">
-  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları cümlelerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
-  <div class="aciklama">Cümledeki boşluğa gelen doğru kelimeyi seç.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez25Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez25Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez25Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez25Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez25Sonuc"></div>
-  <button class="eylem" onclick="ez25Baslat()">📝 Başla</button>
-</section>
-
-<section id="ezeslestir5">
-  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları'nın her cümlesini anlamıyla eşleştirebileceksin.</div>
-  <div class="aciklama">Soldan bir cümle, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
-  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez35Eslesen">0</b>/<b>8</b></span></div>
-  <div class="ez-iki-sutun">
-    <div class="ez-sutun"><h4>Cümle</h4><div id="ez35Sol"></div></div>
-    <div class="ez-sutun"><h4>Anlam</h4><div id="ez35Sag"></div></div>
-  </div>
-  <div class="sonuc-kutusu" id="ez35Sonuc"></div>
-  <button class="eylem" onclick="ez35Baslat()">🔀 Karıştır ve Başla</button>
-</section>
-
-<section id="ezhafiza5">
-  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: cümle-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
-  <div class="aciklama">İki kartı çevir. Bir cümle ile doğru anlamı eşleşirse kartlar açık kalır.</div>
-  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez45Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="ez45Hamle">0</b></span></div>
-  <div class="ez-hafiza-izgara" id="ez45Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
-  <div class="sonuc-kutusu" id="ez45Sonuc"></div>
-  <button class="eylem" onclick="ez45Baslat()">🔄 Yeni Oyun</button>
-</section>
-
-<section id="ezadimadim5">
-  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları'nı baştan sona, cümle sırasını bularak ezberleyeceksin.</div>
-  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi cümlenin geldiğini seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez55Adim">1</b>/<b>8</b></span></div>
-  <div class="ez-ogrenilen-liste" id="ez55Liste"></div>
-  <div class="balon-durum">Sırada hangi cümle geliyor?</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez55Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez55Sonuc"></div>
-  <button class="eylem" onclick="ez55Baslat()">▶️ Başla</button>
-</section>
-
-<section id="ezgizli5">
-  <h2>6️⃣ Ezber: Gizli Harfler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları'nın anahtar kelimelerini harf harf hatırlayacaksın.</div>
-  <div class="aciklama">Cümledeki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez65Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez65Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez65Metin"></div>
-  <div class="kelime-cevap" id="ez65Cevap"></div>
-  <div class="kelime-banka" id="ez65Banka"></div>
-  <div class="sonuc-kutusu" id="ez65Sonuc"></div>
-  <button class="eylem" onclick="ez65Baslat()">🔐 Başla</button>
-</section>
-
-<section id="ezkaybolan5">
-  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun cümleyi hafızandan tanıyabileceksin.</div>
-  <div class="aciklama">Cümleyi 3 saniye izle, sonra kaybolacak. Az önce gördüğün cümlenin BİREBİR aynısını seç!</div>
-  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez75Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez75Dogru">0</b></span></div>
-  <div class="ez-metin-goster" id="ez75Metin">👁️ Başlamak için düğmeye bas</div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez75Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez75Sonuc"></div>
-  <button class="eylem" onclick="ez75Baslat()">👁️ Başla</button>
-</section>
-
-<section id="ezhiz5">
-  <h2>8️⃣ Ezber: Hız Testi</h2>
-  <div class="oyun-amaci">🎯 Bu oyun sonunda: Temizlik Kavramları cümle-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
-  <div class="aciklama">Süre dolmadan verilen anlama ait doğru cümleyi seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
-  <div class="ez-zamanlayici" id="ez85Sayac">60</div>
-  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez85Dogru">0</b></span><span>❌ Yanlış: <b id="ez85Yanlis">0</b></span></div>
-  <div class="ez-metin-goster" id="ez85Metin"></div>
-  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez85Secenekler" style="margin:0 auto;"></div></div>
-  <div class="sonuc-kutusu" id="ez85Sonuc"></div>
-  <button class="eylem" onclick="ez85Baslat()">⏱️ Başla</button>
-</section>
-
 </main>
-</div>
-
-<footer>4. Sınıf Din Kültürü ve Ahlak Bilgisi — 5. Ünite İnteraktif Oyun Seti</footer>
 
 <script>
 function goster(id, ev){
@@ -4071,7 +3333,6 @@ function zbTekrarHatirlatmaKontrol(){
 document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
 </script>
-
 <script id="ogrKatmaniScript">
 /* ===================== OGRENME DENEYIMI KATMANI (JS) =====================
    Sadece EKLEME yapar: mevcut id/onclick/veri yapisina dokunmaz, hicbir
@@ -4199,10 +3460,9 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
   /* ---------- 2) HERO: ogrenme hedefleri + ilerleme rozeti ---------- */
   function ogrHeroGelistir(){
-    const hero = document.querySelector('.hero');
-    const butonlar = hero ? hero.querySelector('.hero-butonlar') : null;
-    if(!hero || !butonlar || hero.dataset.ogrHazir) return;
-    hero.dataset.ogrHazir = '1';
+    const hedefKonteyner = document.getElementById('ogrHedefKonteyner');
+    if(!hedefKonteyner || hedefKonteyner.dataset.ogrHazir) return;
+    hedefKonteyner.dataset.ogrHazir = '1';
 
     const basliklar = Array.from(document.querySelectorAll('main section[id^="ozet"] .kutu-panel > h3')).map(function(h){
       return ogrEmojiTemizle(h.textContent);
@@ -4220,7 +3480,7 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
       '<circle class="ogr-ring-on" id="ogrHeroRing" cx="16" cy="16" r="13" stroke-dasharray="81.68" stroke-dashoffset="81.68"></circle>'+
       '</svg><span id="ogrHeroRozetMetin">Bu üniteye yeni başlıyorsun</span></span>';
     ek.innerHTML = ic;
-    butonlar.insertAdjacentElement('afterend', ek);
+    hedefKonteyner.appendChild(ek);
 
     const toplamEtkinlik = document.querySelectorAll('.oyun-grubu button').length || 1;
     function ogrHeroIlerlemeGuncelle(){

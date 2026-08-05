@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 Religious Culture - Unit 3: Religion and Life</title>
+<meta name="description" content="Grade 8 Religious Culture - Unit 3: Religion and Life — Digital course material with topic summary and presentation.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mavi:#2a6f97; --acik:#a9d6e5; --yesil:#40916c; --kirmizi:#d62828;
+    --sari:#f4a261; --bg:#f7f4ec;
+    --navy:#1E3A8A; --turkuaz:#06B6D4; --acikgri:#f1f5f9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family: "Nunito", "Comic Sans MS", "Segoe UI", Tahoma, sans-serif;
+    background: var(--bg);
+    margin:0; padding:0; color:#22333b;
+  }
+  header{
+    background: linear-gradient(135deg, var(--mavi), var(--yesil));
+    color:white; text-align:center; padding:24px 10px;
+  }
+  header h1{ margin:0; font-size:1.8em;}
+  header p{ margin:6px 0 0; opacity:.9;}
+
+  .hero{
+    position:relative; overflow:hidden; text-align:center; padding:50px 20px 40px;
+    background: linear-gradient(135deg, var(--navy), var(--turkuaz));
+    color:white;
+  }
+  .hero-sekiller{ position:absolute; inset:0; pointer-events:none; }
+  .hero-sekiller span{
+    position:absolute; font-size:1.8em; opacity:.35; font-weight:800;
+    animation: hero-yuz 5s ease-in-out infinite;
+  }
+  @keyframes hero-yuz{
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-18px) rotate(8deg); }
+  }
+  .hero-baslik{ font-size:2.1em; margin:10px 0 6px; text-shadow:0 2px 14px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.35); }
+  .hero-alt{ max-width:520px; margin:0 auto; opacity:.95; font-size:1.05em; }
+  .hero-butonlar{ display:flex; gap:14px; justify-content:center; margin-top:22px; flex-wrap:wrap; }
+  .hero-btn{
+    padding:13px 26px; border:none; border-radius:26px; font-weight:800; font-size:1em;
+    cursor:pointer; transition:transform .15s;
+  }
+  .hero-btn:hover{ transform:scale(1.05); }
+  .hero-btn-birincil{ background:white; color:var(--navy); }
+  .hero-btn-ikincil{ background:rgba(255,255,255,.18); color:white; border:2px solid white; }
+
+  .istatistik-cubugu{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:14px;
+    background:white; padding:16px; margin:0; box-shadow:0 2px 6px rgba(0,0,0,.06);
+  }
+  .istatistik-kutu{
+    display:flex; flex-direction:column; align-items:center; min-width:110px;
+    background:var(--acikgri); border-radius:16px; padding:12px 18px;
+  }
+  .ist-ikon{ font-size:1.5em; }
+  .istatistik-kutu b{ font-size:1.3em; color:var(--navy); }
+  .ist-etiket{ font-size:.75em; color:#666; text-align:center; }
+
+  nav{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+    padding:16px; background:white; box-shadow:0 2px 6px rgba(0,0,0,.08);
+    position:sticky; top:0; z-index:10;
+  }
+  nav button{
+    padding:10px 18px; border:none; border-radius:20px; cursor:pointer;
+    background:var(--acik); font-weight:bold; font-size:.95em; color:#22333b;
+    transition:.15s;
+  }
+  nav button:hover{ background:var(--mavi); color:white; }
+  nav button.aktif{ background:var(--mavi); color:white; }
+  nav.kategori-nav{ padding:14px 16px 6px; }
+  nav.kategori-nav button{ background:#22333b; color:white; font-size:1em; }
+  nav.kategori-nav button:hover{ background:var(--yesil); }
+  nav.kategori-nav button.kat-aktif{ background:var(--yesil); }
+  .oyun-grubu{
+    display:none; flex-wrap:wrap; justify-content:center; gap:10px;
+    padding:10px 16px 16px; background:white; box-shadow:0 2px 6px rgba(0,0,0,.08);
+    position:sticky; top:56px; z-index:9;
+  }
+  .oyun-grubu.aktif{ display:flex; }
+  main{ max-width:900px; margin:0 auto; padding:20px; }
+  main section{ display:none; animation: fade .3s; }
+  section.aktif{ display:block; }
+  @keyframes fade{ from{opacity:0;} to{opacity:1;} }
+  h2{ color:var(--mavi); border-bottom:3px solid var(--acik); padding-bottom:8px;}
+  .aciklama{ background:#fff8e1; border-left:5px solid var(--sari); padding:10px 14px; margin:14px 0; border-radius:6px;}
+  footer{ text-align:center; padding:20px; color:#5f5f5f; font-size:.85em;}
+
+  button.eylem{
+    display:block; margin:16px auto; padding:12px 24px; font-size:1em;
+    background:var(--yesil); color:white; border:none; border-radius:24px;
+    cursor:pointer; font-weight:bold;
+  }
+  button.eylem:hover{ background:#2d6a4f; }
+
+/* ===================== SUNUM (SLAYT) GORUNUMU ===================== */
+.sunum-sarmal{ max-width:900px; margin:0 auto; }
+.sunum-ust{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.sunum-sayac{ font-weight:bold; color:var(--mavi); background:var(--acikgri); padding:6px 14px; border-radius:16px; font-size:.9em; }
+.sunum-tamekran-btn{ background:var(--navy); color:#fff; border:none; padding:8px 16px; border-radius:16px; cursor:pointer; font-weight:bold; font-size:.9em; }
+.sunum-tamekran-btn:hover{ background:var(--mavi); }
+.sunum-alan{
+  position:relative; width:100%; aspect-ratio:16/9; background:#0d1f2d;
+  border-radius:14px; overflow:hidden; box-shadow:0 6px 24px rgba(0,0,0,.25);
+}
+.sunum-alan:fullscreen{ border-radius:0; aspect-ratio:auto; display:flex; align-items:center; justify-content:center; }
+.sunum-alan:fullscreen .sunum-slayt{ max-width:1400px; max-height:90vh; margin:auto; }
+.sunum-slayt{
+  position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center;
+  padding:6% 8%; text-align:center; color:#fff; font-family:"Nunito","Segoe UI",sans-serif;
+  animation:sunumFade .35s ease;
+}
+.sunum-slayt.aktif{ display:flex; }
+@keyframes sunumFade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+.s-baslik, .s-kapanis{ background:linear-gradient(160deg,#1E3A8A,#0d1f2d); }
+.sb-daire{
+  width:90px; height:90px; border-radius:50%; background:var(--sari); color:#1E3A8A;
+  display:flex; align-items:center; justify-content:center; font-size:2.6em; margin-bottom:16px;
+  box-shadow:0 0 0 4px #fff3;
+}
+.sb-ust{ letter-spacing:2px; color:var(--sari); font-weight:bold; font-size:.95em; margin:0 0 8px; }
+.sb-baslik{ font-size:1.7em; margin:0 0 14px; }
+.sb-ders{ color:#cbd5e1; margin:2px 0; }
+.sb-ogretmen{ color:#b8c4d9; font-style:italic; font-size:.9em; margin:2px 0; }
+
+.s-liste{ background:var(--acik); color:#22333b; }
+.s-liste h3{ color:var(--mavi); font-size:1.3em; margin-top:0; }
+.sl-liste{ text-align:left; list-style:none; padding:0; margin:0; width:100%; max-width:640px; }
+.sl-liste li{
+  background:#fff; border-left:6px solid var(--mavi); border-radius:8px; padding:10px 16px;
+  margin-bottom:10px; font-size:.95em; box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+.s-ozet .sl-liste li{ border-left-color:var(--yesil); }
+
+.s-icerik{ background:#fff; color:#22333b; }
+.s-icerik h3{ color:var(--vurgu, var(--mavi)); font-size:1.25em; margin-top:0; }
+.si-liste{ text-align:left; list-style:none; padding:0; margin:0; width:100%; max-width:640px; }
+.si-liste li{
+  background:var(--acikgri); border-left:6px solid var(--vurgu, var(--mavi)); border-radius:8px;
+  padding:10px 16px; margin-bottom:10px; font-size:.92em; line-height:1.4;
+}
+
+.s-kavram{ background:var(--acikgri); color:#22333b; }
+.s-kavram h3{ color:var(--mavi); margin-top:0; }
+.sk-izgara{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:700px; }
+.sk-etiket{ color:#fff; font-weight:bold; padding:10px 18px; border-radius:20px; font-size:.9em; box-shadow:0 2px 6px rgba(0,0,0,.15); }
+
+.s-ayet{ background:linear-gradient(160deg,#1E3A8A,#0d1f2d); }
+.sa-ust{ color:var(--sari); font-weight:bold; letter-spacing:2px; font-size:.9em; }
+.sa-meal{ font-size:1.25em; font-style:italic; max-width:640px; line-height:1.5; margin:14px 0; font-family:Georgia,serif; }
+.sa-kaynak{ color:var(--sari); font-weight:bold; }
+
+.s-video{ background:linear-gradient(160deg,#1E3A8A,#0d1f2d); }
+.sv-ust{ color:#8FD9B8; font-weight:bold; letter-spacing:2px; font-size:.9em; margin-bottom:10px; }
+.sv-cerceve{ width:100%; max-width:640px; aspect-ratio:16/9; border-radius:10px; overflow:hidden; border:2px solid var(--sari); box-shadow:0 4px 18px rgba(0,0,0,.4); display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.06); }
+.sv-cerceve iframe{ width:100%; height:100%; border:none; }
+.sv-yer-tutucu{ color:#cbd5e1; font-size:.9em; padding:20px; text-align:center; }
+.sv-baslik{ margin-top:10px; font-size:.95em; color:#e5e7eb; }
+
+.sunum-nav{ display:flex; justify-content:space-between; align-items:center; margin-top:10px; gap:10px; }
+.sunum-nav button{
+  background:var(--mavi); color:#fff; border:none; padding:10px 20px; border-radius:20px;
+  cursor:pointer; font-weight:bold; font-size:.95em;
+}
+.sunum-nav button:hover{ background:var(--yesil); }
+.sunum-nav button:disabled{ opacity:.4; cursor:default; }
+.sunum-noktalar{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; max-width:400px; }
+.sunum-nokta{ width:9px; height:9px; border-radius:50%; background:#cbd5e1; cursor:pointer; }
+.sunum-nokta.aktif{ background:var(--mavi); }
+@media(max-width:640px){
+  .sb-baslik{ font-size:1.25em; } .sa-meal{ font-size:1em; } .sl-liste li,.si-liste li{ font-size:.85em; }
+}
+
+/* ===================== ZENGINLESTIRME KUTULARI ===================== */
+.zg-kutu{ border-radius:12px; padding:16px 18px; margin:16px 0; box-shadow:0 3px 10px rgba(0,0,0,.08); }
+.zg-baslik{ font-weight:bold; font-size:1.05em; margin:0 0 8px; display:flex; align-items:center; gap:8px; }
+.zg-metin{ margin:0; line-height:1.55; font-size:.97em; }
+
+/* ===================== OGRETMEN PANELI ===================== */
+.op-baglanti-satiri{ text-align:center; padding:6px; background:#f1f5f9; }
+.op-baglanti-satiri a{ color:#64748b; font-size:.8em; text-decoration:none; cursor:pointer; }
+.op-baglanti-satiri a:hover{ text-decoration:underline; }
+.op-tablo{ width:100%; border-collapse:collapse; margin:16px 0; font-size:.92em; }
+.op-tablo th{ background:var(--navy); color:#fff; padding:8px 10px; text-align:left; }
+.op-tablo td{ padding:8px 10px; border-bottom:1px solid #e2e8f0; }
+.op-tablo tr:nth-child(4n+1){ background:#f8fafc; }
+.op-detay-btn{ background:var(--mavi); color:#fff; border:none; padding:4px 12px; border-radius:12px; cursor:pointer; font-size:.85em; }
+.op-detay-satir td{ background:#eef2f7; font-size:.88em; }
+#ogretmenpaneli .aciklama{ margin-bottom:14px; }
+
+/* ===================== OZEL MODAL / BILDIRIM ===================== */
+.ozel-modal-arka{ position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:1000; padding:20px; }
+.ozel-modal-kutu{ background:#fff; border-radius:16px; padding:24px; max-width:360px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.35); animation:ozelModalGir .2s ease; }
+@keyframes ozelModalGir{ from{opacity:0; transform:scale(.9);} to{opacity:1; transform:scale(1);} }
+.ozel-modal-mesaj{ margin:0 0 18px; font-size:1.05em; line-height:1.4; }
+.ozel-modal-btn{ padding:10px 20px; border:none; border-radius:20px; font-weight:bold; cursor:pointer; margin:0 6px; font-size:.95em; }
+.ozel-toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#22333b; color:#fff; padding:14px 22px; border-radius:24px; box-shadow:0 6px 20px rgba(0,0,0,.3); z-index:1000; animation:ozelToastGir .3s ease; font-weight:bold; max-width:80vw; text-align:center; }
+@keyframes ozelToastGir{ from{opacity:0; transform:translateX(-50%) translateY(20px);} to{opacity:1; transform:translateX(-50%) translateY(0);} }
+
+/* ===================== 6 BOLUMLU ZENGINLESTIRME (Konu Ozeti) ===================== */
+.zb-kutu{ border-radius:12px; padding:16px 18px; margin:16px 0; box-shadow:0 3px 10px rgba(0,0,0,.08); }
+.zb-baslik{ font-weight:bold; font-size:1.05em; margin:0 0 8px; display:flex; align-items:center; gap:8px; }
+.zb-metin{ margin:0; line-height:1.55; font-size:.97em; }
+.zb-merak{ background:#f3ecfb; border-left:6px solid #7c3aed; }
+.zb-merak .zb-baslik{ color:#7c3aed; }
+.zb-yanlis{ background:#fff0f0; border-left:6px solid #d62828; }
+.zb-yanlis .zb-baslik{ color:#d62828; }
+.zb-yanlis .zb-yanlis-satir{ color:#a31515; margin:4px 0; }
+.zb-yanlis .zb-dogru-satir{ color:#2d6a4f; margin:4px 0; font-weight:bold; }
+.zb-ornek{ background:#eafaf1; border-left:6px solid #40916c; }
+.zb-ornek .zb-baslik{ color:#40916c; }
+.zb-dusun{ background:#fff4e6; border-left:6px solid #f4a261; }
+.zb-dusun .zb-baslik{ color:#c9740b; }
+.zb-aile{ background:#fdeef5; border-left:6px solid #d6336c; }
+.zb-aile .zb-baslik{ color:#d6336c; }
+.zb-degerlendir{ background:#eaf2ff; border-left:6px solid #2a6f97; }
+.zb-degerlendir .zb-baslik{ color:#2a6f97; }
+.zb-degerlendir ul{ list-style:none; padding:0; margin:0; }
+.zb-degerlendir li{ display:flex; align-items:flex-start; gap:8px; margin:8px 0; font-size:.95em; line-height:1.4; }
+.zb-degerlendir input[type=checkbox]{ width:18px; height:18px; margin-top:2px; flex-shrink:0; accent-color:#2a6f97; cursor:pointer; }
+.zb-degerlendir label{ cursor:pointer; }
+
+/* ===================== PEDAGOJIK YAPI ===================== */
+.ko-giris{ font-size:1.06em; font-style:italic; color:var(--mavi); margin:0 0 12px; padding:2px 0 2px 14px; border-left:3px solid var(--acik); line-height:1.5; }
+.ko-amac{ display:inline-flex; align-items:center; gap:6px; background:var(--acikgri); color:#4a5568; font-weight:800; font-size:.8em; padding:6px 14px; border-radius:999px; margin:0 0 14px; }
+.ko-ozet{ margin:16px 0 0; padding:12px 16px; background:var(--acikgri); border-radius:10px; font-size:.94em; line-height:1.5; }
+.ko-ozet b{ color:var(--mavi); }
+
+.zb-ayet{ background:linear-gradient(160deg,#eef4fb,#fdfefe); border-left:6px solid var(--navy); }
+.zb-ayet .zb-baslik{ color:var(--navy); }
+.zb-ayet-metin{ font-style:italic; font-family:Georgia,serif; font-size:1.03em; line-height:1.55; margin:0 0 8px; }
+.zb-ayet-kaynak{ font-weight:800; color:var(--navy); font-size:.85em; margin:0 0 10px; }
+.zb-ayet-mesaj{ font-size:.92em; background:rgba(255,255,255,.65); border-radius:8px; padding:9px 12px; margin:0; }
+.zb-ayet-mesaj b{ color:var(--navy); }
+
+.zb-unutma{ background:#fff8e1; border-left:6px solid var(--sari); }
+.zb-unutma .zb-baslik{ color:#a15c00; }
+.zb-unutma ul{ margin:6px 0 0; padding-left:20px; }
+.zb-unutma li{ margin:4px 0; }
+
+.zb-okunus{ background:#f4f0ff; border-left:6px solid #7c3aed; }
+.zb-okunus .zb-baslik{ color:#5b21b6; }
+.okunus-tablo{ width:100%; border-collapse:collapse; margin-top:8px; }
+.okunus-tablo td{ padding:8px 10px; vertical-align:top; border-bottom:1px dashed #d8cdf5; font-size:.92em; }
+.okunus-tablo td.okunus-sutun{ width:48%; font-weight:700; color:#4c1d95; font-style:italic; }
+.okunus-tablo td.anlam-sutun{ color:#22333b; }
+.okunus-tablo tr:last-child td{ border-bottom:none; }
+@media(max-width:640px){
+  .okunus-tablo, .okunus-tablo tbody, .okunus-tablo tr, .okunus-tablo td{ display:block; width:100%; }
+  .okunus-tablo tr{ padding:8px 0; border-bottom:1px dashed #d8cdf5; }
+  .okunus-tablo td{ border-bottom:none; padding:2px 0; }
+}
+
+/* ===================== 6 BOLUMLU ZENGINLESTIRME (Sunum slaytlari) ===================== */
+.s-zb{ color:#22333b; }
+.s-zb-merak{ background:#f3ecfb; }
+.s-zb-yanlis{ background:#fff0f0; }
+.s-zb-ornek{ background:#eafaf1; }
+.s-zb-dusun{ background:#fff4e6; }
+.s-zb-aile{ background:#fdeef5; }
+.s-zb-degerlendir{ background:#eaf2ff; }
+.zb-slayt-ust{ font-weight:bold; letter-spacing:1.5px; font-size:.95em; margin-bottom:14px; }
+.s-zb-merak .zb-slayt-ust{ color:#7c3aed; }
+.s-zb-yanlis .zb-slayt-ust{ color:#d62828; }
+.s-zb-ornek .zb-slayt-ust{ color:#40916c; }
+.s-zb-dusun .zb-slayt-ust{ color:#c9740b; }
+.s-zb-aile .zb-slayt-ust{ color:#d6336c; }
+.s-zb-degerlendir .zb-slayt-ust{ color:#2a6f97; }
+.zb-slayt-metin{ font-size:1.1em; line-height:1.5; max-width:640px; }
+.zb-slayt-yanlis{ color:#a31515; font-size:1em; margin:6px 0; }
+.zb-slayt-dogru{ color:#2d6a4f; font-size:1em; margin:6px 0; font-weight:bold; }
+.zb-slayt-liste{ list-style:none; padding:0; margin:0; text-align:left; max-width:600px; }
+.zb-slayt-liste li{ font-size:1em; margin:8px 0; }
+
+.zb-derin{ background:#e6f7f9; border-left:6px solid #0891b2; }
+.zb-derin .zb-baslik{ color:#0891b2; }
+.zb-derin-liste{ list-style:none; padding:0; margin:8px 0 0; }
+.zb-derin-liste li{ font-size:.97em; margin:6px 0; padding-left:20px; position:relative; }
+.zb-derin-liste li::before{ content:'❓'; position:absolute; left:0; }
+.s-zb-derin{ background:#e6f7f9; }
+.s-zb-derin .zb-slayt-ust{ color:#0891b2; }
+
+.zb-cevap-alani{ width:100%; box-sizing:border-box; margin-top:10px; padding:10px; border-radius:8px; border:1px solid #d0d0d0; font-family:inherit; font-size:.95em; resize:vertical; min-height:60px; }
+.zb-cevap-not{ font-size:.82em; color:#2a9d8f; font-weight:bold; margin:4px 0 0; min-height:1.1em; }
+
+.zb-ikilem{ background:#eefcf3; border-left:6px solid #0f9d58; }
+.zb-ikilem .zb-baslik{ color:#0f7a44; }
+</style>
+</head>
+<body>
+
+<header>
+  <p style="margin:0 0 6px;font-size:1.1em;font-weight:bold;letter-spacing:.5px;opacity:.95;">GRADE 8 — UNIT 3</p>
+  <h1>⏳ Religion and Life</h1>
+  <p>Religious Culture and Ethics — Interactive Games</p>
+  <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Prepared by: Religious Culture Teacher Ayşe Yazıcı</p>
+  <p style="margin-top:10px;"><a href="../../din-kulturu-8sinif-1unite/unite3.html" style="display:inline-block;color:white;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.6);padding:5px 14px;border-radius:16px;text-decoration:none;font-size:.85em;font-weight:bold;">🌐 Türkçe</a></p>
+</header>
+<div class="op-baglanti-satiri"><a onclick="goster('ogretmenpaneli', event)" role="button" aria-label="Go to teacher panel">🔒 Teacher Panel</a></div>
+
+<section class="hero">
+  <h2 class="hero-baslik">📖 Learn the Topic</h2>
+  <p class="hero-alt">Lessons, summaries, and presentations for this unit. (Interactive games for this unit are coming soon in English.)</p>
+  <div class="hero-butonlar">
+    <button class="hero-btn hero-btn-birincil" onclick="document.getElementById('oyun-gruplari').scrollIntoView({behavior:'smooth'})">🚀 Start Learning</button>
+  </div>
+</section>
+
+<div class="istatistik-cubugu">
+  <div class="istatistik-kutu"><span class="ist-ikon">⭐</span><b id="istToplamPuan">0</b><span class="ist-etiket">Total Score</span></div>
+  <div class="istatistik-kutu"><span class="ist-ikon">🏅</span><b id="istRozet">0</b><span class="ist-etiket">Badges</span></div>
+  <div class="istatistik-kutu"><span class="ist-ikon">🔥</span><b id="istSeri">0</b><span class="ist-etiket">Daily Streak</span></div>
+  <div class="istatistik-kutu"><span class="ist-ikon">📈</span><b id="istTamamlanan">0</b><span class="ist-etiket">Completed Activities</span></div>
+</div>
+
+<div id="oyun-gruplari" role="navigation" aria-label="Unit sections menu">
+<nav class="kategori-nav" role="navigation" aria-label="Main category menu">
+  <button onclick="kategoriGoster('kat-unite83', event)" class="kat-aktif">📖 Unit Topics</button>
+</nav>
+
+<div class="oyun-grubu aktif" id="kat-unite83">
+  <button onclick="goster('ozet83', event)" class="aktif">📖 Topic Summary</button>
+  <button onclick="goster('slayt', event)">🖥️ Unit Presentation</button>
+</div>
+</div>
+
+<main>
+<section id="ogretmenpaneli">
+<h2>🔒 Teacher Panel</h2>
+<div id="opGirisEkrani">
+  <p class="aciklama">This panel is for teachers only. Please log in to continue.</p>
+  <button class="eylem" onclick="opGirisKontrol()">🔑 Log In</button>
+</div>
+<div id="opPanelEkrani" style="display:none;">
+  <p class="aciklama">Registered student progress for this unit (only data saved on this device/browser is shown; entries from other devices are not listed here).</p>
+  <table class="op-tablo">
+    <thead><tr><th>Student</th><th>Score</th><th>Completed Games</th><th>Badges</th><th>Last Activity</th><th></th></tr></thead>
+    <tbody id="opTabloGovde"></tbody>
+  </table>
+  <p id="opBosMesaj" style="display:none;">No student data recorded yet. This will appear here once a student completes a game.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button class="eylem" style="background:var(--kirmizi)" onclick="opVerileriTemizle()">🗑️ Clear Data</button>
+    <button class="eylem" onclick="opOgrenciDegistir()">👤 Switch to Next Student</button>
+  </div>
+</div>
+</section>
+
+<section id="ozet83" class="aktif">
+  <h2>📖 Unit 3 Topic Summary: Religion and Life</h2>
+
+  <div class="kutu-panel" style="background:white; border-radius:14px; padding:18px; margin-top:16px; box-shadow:0 2px 8px rgba(0,0,0,.08);">
+    <h3 style="color:var(--mavi)">1️⃣ The Purpose of Religion: The Five Essential Values (Zarûrât-ı Hamse)</h3>
+    <p class="ko-giris">Why do games have rules? Are rules made to spoil the game, or so that everyone can play safely?</p>
+    <p class="ko-amac">🎯 In this section: we will learn what religion aims to achieve and the five essential values it seeks to protect.</p>
+    <p>The <b>purpose</b> of religion is to secure a person's happiness both in this world and in the hereafter. That is why its commands and prohibitions are not arbitrary; all of them look after the good of the human being. Islamic scholars named the five essential values that religion aims to protect <b>zarûrât-ı hamse</b> (the five necessities). "Zarûrât" means indispensable, necessary things; "hamse" means five.</p>
+    <p>These five essential values are: <b>1) protection of life, 2) protection of the intellect, 3) protection of lineage, 4) protection of property, 5) protection of religion.</b> These rights belong not only to Muslims but to all human beings.</p>
+    <p>Many of religion's prohibitions exist specifically to protect these five values. The prohibition of taking a life protects <b>life</b>; the prohibition of intoxicants (alcohol, drugs) protects the <b>intellect</b>; the prohibition of adultery protects <b>lineage</b>; the prohibition of theft, fraud, bribery, gambling, and interest protects <b>property</b>; and the fact that no one can be forced to abandon their faith protects <b>religion</b>.</p>
+  </div>
+  <div class="zb-kutu zb-ayet">
+    <p class="zb-baslik">📖 Reflecting on a Verse</p>
+    <p class="zb-ayet-metin">"...Whoever kills a soul unless for a soul or for corruption [done] in the land - it is as if he had slain mankind entirely. And whoever saves one - it is as if he had saved mankind entirely..."</p>
+    <p class="zb-ayet-kaynak">— Surah Al-Ma'idah, verse 32</p>
+    <p class="zb-ayet-mesaj"><b>Message:</b> Even a single human life is as valuable as all of humanity. The protection of life is one of religion's foremost purposes.</p>
+  </div>
+  <div class="zb-kutu zb-merak">
+    <p class="zb-baslik">🤔 Did You Know?</p>
+    <p class="zb-metin">"Zarûrât-ı hamse" is an Arabic phrase: <b>zarûrât</b> means "indispensable, necessary things," and <b>hamse</b> means "five." So the phrase simply means "the five indispensable values."</p>
+  </div>
+  <div class="zb-kutu zb-unutma">
+    <p class="zb-baslik">📌 Remember!</p>
+    <ul>
+      <li>Zarûrât-ı hamse: <b>life — intellect — lineage — property — religion</b>.</li>
+      <li>The purpose of religion is to secure a person's <b>happiness in this world and the hereafter</b>.</li>
+      <li>"There is no compulsion in religion." (Surah Al-Baqarah, 256) → <b>freedom of religion</b>.</li>
+    </ul>
+  </div>
+  <div class="zb-kutu zb-dusun">
+    <p class="zb-baslik">💭 Let's Think</p>
+    <p class="zb-metin">If one of the five essential values were not protected (for example, if property were not secure), how would daily life change?</p>
+    <textarea id="zbAlan_dusun_3_1" class="zb-cevap-alani" placeholder="You can write your answer here..." onchange="zbCevapKaydet('dusun_3_1', this)" aria-label="You can write your answer here..."></textarea>
+    <p class="zb-cevap-not" id="zbNot_dusun_3_1"></p>
+  </div>
+  <p class="ko-ozet">📝 <b>In summary:</b> The purpose of religion is a person's happiness in both worlds; to achieve this, it aims to protect five essential values (zarûrât-ı hamse): life, intellect, lineage, property, and religion.</p>
+
+  <div class="kutu-panel" style="background:white; border-radius:14px; padding:18px; margin-top:16px; box-shadow:0 2px 8px rgba(0,0,0,.08);">
+    <h3 style="color:var(--mavi)">2️⃣ Religion Is a Social Phenomenon</h3>
+    <p class="ko-giris">If acts of worship were purely "between you and Allah," why do most of them bring people together?</p>
+    <p class="ko-amac">🎯 In this section: we will learn the place of religion in social life and what acts of worship contribute to society.</p>
+    <p>Religion is not merely a feeling experienced in a person's inner world; it is also a <b>social phenomenon</b>. It brings people together, creates shared values among them, and makes living together easier. We see this most clearly in acts of worship.</p>
+    <p><b>Prayer (salah)</b> gives a person discipline and order. Performed in congregation, it teaches even more: in the same row, the rich and the poor, the employer and the employee stand shoulder to shoulder. No one's rank, wealth, or title gives them superiority here; everyone is equal. This scene nurtures a sense of unity and equality in society.</p>
+    <p><b>Fasting</b> strengthens patience and willpower. A person who goes hungry all day understands the condition of those who go hungry every day; this <b>empathy</b> drives them toward helping others. Fasting also teaches avoidance of waste by reminding people of the value of blessings.</p>
+    <p><b>Zakat</b> turns sharing and mutual aid into an organized system. Because a regular share passes from the wealthy to those in need, income inequality decreases, and resentment and envy in society give way to solidarity.</p>
+    <p><b>Hajj</b>, meanwhile, brings together people from every corner of the world who speak different languages and come from different backgrounds, in the same place. Everyone worships in the same garments, saying the same words. In this way, international brotherhood and acquaintance (<b>ta'aruf</b>) take place.</p>
+    <p>As a result, religion strengthens feelings of <b>trust, solidarity, brotherhood, and peace</b> among individuals. In a society that has internalized religious values, people trust one another more and do not leave each other alone in difficult times.</p>
+  </div>
+  <div class="zb-kutu zb-ayet">
+    <p class="zb-baslik">📖 Reflecting on a Verse</p>
+    <p class="zb-ayet-metin">"O mankind, indeed We have created you from male and female and made you peoples and tribes that you may know one another. Indeed, the most noble of you in the sight of Allah is the most righteous of you..."</p>
+    <p class="zb-ayet-kaynak">— Surah Al-Hujurat, verse 13</p>
+    <p class="zb-ayet-mesaj"><b>Message:</b> Differences are not a reason for superiority but an occasion for getting to know one another (ta'aruf). The Hajj is the clearest example of this principle.</p>
+  </div>
+  <div class="zb-kutu zb-ayet">
+    <p class="zb-baslik">🕋 Reflecting on a Hadith</p>
+    <p class="zb-ayet-metin">"The believers, in their mutual love, mercy, and compassion, are like a single body. When one organ suffers, the rest of the body responds with sleeplessness and fever."</p>
+    <p class="zb-ayet-kaynak">— The Prophet (pbuh) (Bukhari, Adab, 27 — meaning summarized)</p>
+    <p class="zb-ayet-mesaj"><b>Message:</b> Society resembles a single body; one person's trouble is everyone's trouble. Religion nurtures this sense of solidarity.</p>
+  </div>
+  <div class="zb-kutu zb-yanlis">
+    <p class="zb-baslik">❌ Common Misconceptions</p>
+    <p class="zb-metin zb-yanlis-satir">❌ Some people think religion is only a private matter that stays in a person's heart and never touches society.</p>
+    <p class="zb-metin zb-dogru-satir">✅ Religion is a social phenomenon; acts of worship such as prayer, fasting, zakat, and Hajj directly organize and strengthen social life.</p>
+  </div>
+  <div class="zb-kutu zb-unutma">
+    <p class="zb-baslik">📌 Remember!</p>
+    <ul>
+      <li><b>Prayer</b> → discipline, order, equality and unity in congregation.</li>
+      <li><b>Fasting</b> → patience, willpower, empathy, avoiding waste.</li>
+      <li><b>Zakat</b> → sharing, mutual aid, reduced income inequality.</li>
+      <li><b>Hajj</b> → international brotherhood, unity, acquaintance (<b>ta'aruf</b>).</li>
+      <li>Religion strengthens <b>trust, solidarity, brotherhood, and peace</b>.</li>
+    </ul>
+  </div>
+  <div class="zb-kutu zb-ornek">
+    <p class="zb-baslik">🏠 From Our Lives</p>
+    <p class="zb-metin">During an earthquake or a flood, people who have never met each other fill relief trucks, open their doors, and wait in line for hours. Behind this reflex of solidarity lies the sense of brotherhood and compassion that religion teaches.</p>
+  </div>
+  <div class="zb-kutu zb-dusun">
+    <p class="zb-baslik">💭 Let's Think</p>
+    <p class="zb-metin">What does it tell you that the rich and the poor stand side by side in the same row during congregational prayer?</p>
+    <textarea id="zbAlan_dusun_3_2" class="zb-cevap-alani" placeholder="You can write your answer here..." onchange="zbCevapKaydet('dusun_3_2', this)" aria-label="You can write your answer here..."></textarea>
+    <p class="zb-cevap-not" id="zbNot_dusun_3_2"></p>
+  </div>
+  <p class="ko-ozet">📝 <b>In summary:</b> Religion is a social phenomenon. Prayer brings discipline and equality, fasting brings patience and empathy, zakat brings sharing and justice, and Hajj brings brotherhood and acquaintance, binding society together.</p>
+
+  <div class="kutu-panel" style="background:white; border-radius:14px; padding:18px; margin-top:16px; box-shadow:0 2px 8px rgba(0,0,0,.08);">
+    <h3 style="color:var(--mavi)">3️⃣ Lawful and Unlawful Ways of Earning</h3>
+    <p class="ko-giris">Between a 100 earned by cheating on a test and a 70 earned by studying... which one is really yours?</p>
+    <p class="ko-amac">🎯 In this section: we will learn the importance of lawful earning and the forbidden ways of unjust gain.</p>
+    <p>Islam bases earnings on <b>labor</b>. Working, producing, and putting in effort are valuable. <b>Lawful earning</b> means that both the way of earning and the thing earned are legitimate. This principle is a direct consequence of the value of <b>protection of property</b> within the zarûrât-ı hamse: everyone's property must be secure, and no one should grow rich by consuming another's rights.</p>
+    <p>For this reason, unjust ways of earning are forbidden. <b>Theft</b> is taking another's property without permission. <b>Fraud</b> is deceiving the other party in a transaction, hiding a defect in goods, or giving short measure or weight. <b>Bribery</b> is a benefit given or received to get something done unjustly; it directly corrupts justice.</p>
+    <p><b>Gambling</b> aims to gain purely through chance, without any effort; wherever there is a winner, there is certainly a loser. For this reason it destroys both families and society. <b>Interest (riba)</b> is the effortless, unearned multiplication of money; it is forbidden because it profits from the hardship of someone in need.</p>
+    <p>The common purpose of all these prohibitions is clear: to protect <b>justice, trust, and respect for labor</b> in society. In a society where people trust one another's property, there is peace; where fraud and unjust gain spread, mistrust grows.</p>
+  </div>
+  <div class="zb-kutu zb-ayet">
+    <p class="zb-baslik">📖 Reflecting on a Verse</p>
+    <p class="zb-ayet-metin">"O you who believe, do not consume one another's wealth unjustly but only [in lawful] business by mutual consent..."</p>
+    <p class="zb-ayet-kaynak">— Surah An-Nisa, verse 29</p>
+    <p class="zb-ayet-mesaj"><b>Message:</b> For earning to be legitimate, mutual consent and effort are essential; wealth obtained unjustly carries no blessing.</p>
+  </div>
+  <div class="zb-kutu zb-yanlis">
+    <p class="zb-baslik">❌ Common Misconceptions</p>
+    <p class="zb-metin zb-yanlis-satir">❌ Some people think, "It doesn't matter how I earn it, as long as I earn it."</p>
+    <p class="zb-metin zb-dogru-satir">✅ In Islam, the <b>way</b> of earning matters as much as the amount; earnings obtained unlawfully harm both the person and society.</p>
+  </div>
+  <div class="zb-kutu zb-unutma">
+    <p class="zb-baslik">📌 Remember!</p>
+    <ul>
+      <li><b>Lawful earning</b>: earning obtained through labor, by legitimate means.</li>
+      <li>Unlawful ways of earning: <b>theft, fraud, bribery, gambling, interest (riba)</b>.</li>
+      <li>These prohibitions protect <b>justice, trust, and respect for labor</b>.</li>
+      <li>The principle of lawful earning rests on the value of <b>protection of property</b> in the zarûrât-ı hamse.</li>
+    </ul>
+  </div>
+  <div class="zb-kutu zb-dusun">
+    <p class="zb-baslik">💭 Let's Think</p>
+    <p class="zb-metin">If a shopkeeper profits once by deceiving a customer, what does he lose in the long run?</p>
+    <textarea id="zbAlan_dusun_3_3" class="zb-cevap-alani" placeholder="You can write your answer here..." onchange="zbCevapKaydet('dusun_3_3', this)" aria-label="You can write your answer here..."></textarea>
+    <p class="zb-cevap-not" id="zbNot_dusun_3_3"></p>
+  </div>
+  <div class="zb-kutu zb-aile">
+    <p class="zb-baslik">👨‍👩‍👧 From Our Lives</p>
+    <p class="zb-metin">Talk with a family member about their profession and how it benefits society; note it down briefly in terms of lawful earning.</p>
+    <textarea id="zbAlan_aile" class="zb-cevap-alani" placeholder="Briefly describe the activity you did with your family..." onchange="zbCevapKaydet('aile', this)" aria-label="Briefly describe the activity you did with your family..."></textarea>
+    <p class="zb-cevap-not" id="zbNot_aile"></p>
+  </div>
+  <p class="ko-ozet">📝 <b>In summary:</b> Islam bases lawful earning on labor; by forbidding unjust ways of earning such as theft, fraud, bribery, gambling, and interest, it protects justice, trust, and respect for labor.</p>
+
+  <div class="kutu-panel" style="background:white; border-radius:14px; padding:18px; margin-top:16px; box-shadow:0 2px 8px rgba(0,0,0,.08);">
+    <h3 style="color:var(--mavi)">4️⃣ False Religious Knowledge and Practices: Bid'ah, Superstition, Tahrif</h3>
+    <p class="ko-giris">Does saying "everyone does it this way" prove that a behavior is part of religion?</p>
+    <p class="ko-amac">🎯 In this section: we will grasp the concepts of bid'ah, superstition, and tahrif, and the importance of learning religion from correct sources.</p>
+    <p>Over time, certain beliefs and practices that are not actually part of religion can become mixed into it. We name these with three concepts.</p>
+    <p><b>Bid'ah</b> refers to beliefs and practices that appear in religion later on, which are not actually part of it. When a person presents a behavior they invented themselves as "a command of religion," that is bid'ah.</p>
+    <p><b>Superstition</b> refers to false beliefs, incompatible with reason and religion, that have become mixed into religion over time. For example, believing that seeing a black cat or the number 13 brings bad luck, thinking only an evil-eye bead can protect a person, or believing one can learn about the future through fortune-telling or amulets, are all superstitions. All of these are wrong, because they attribute a power that in reality belongs only to Allah to other objects and people.</p>
+    <p><b>Tahrif</b>, on the other hand, is the distortion of a religion's original form and its sacred texts by human hands. The Qur'an has never changed since the day it was revealed; Allah has declared that He will protect it.</p>
+    <p>So what is the solution? To learn religion from <b>correct sources</b>: the Qur'an, the authentic sunnah of the Prophet, and the works of reliable scholars. Ignorance paves the way for superstition; correct knowledge saves a person from both false beliefs and needless fears.</p>
+  </div>
+  <div class="zb-kutu zb-ayet">
+    <p class="zb-baslik">📖 Reflecting on a Verse</p>
+    <p class="zb-ayet-metin">"And do not pursue that of which you have no knowledge. Indeed, the hearing, the sight, and the heart - about all those [one] will be questioned."</p>
+    <p class="zb-ayet-kaynak">— Surah Al-Isra, verse 36</p>
+    <p class="zb-ayet-mesaj"><b>Message:</b> We should not believe anything without investigating its truth, and especially in religious matters we should turn to information from reliable sources.</p>
+  </div>
+  <div class="zb-kutu zb-yanlis">
+    <p class="zb-baslik">❌ Common Misconceptions</p>
+    <p class="zb-metin zb-yanlis-satir">❌ "This belief is very old and everyone knows it, so it must be part of religion."</p>
+    <p class="zb-metin zb-dogru-satir">✅ A belief being old or widespread does not make it religious knowledge; the standard is whether it conforms to the Qur'an and the authentic sunnah.</p>
+  </div>
+  <div class="zb-kutu zb-unutma">
+    <p class="zb-baslik">📌 Remember!</p>
+    <ul>
+      <li><b>Bid'ah</b>: a practice/belief that appears in religion later on, which is not actually part of it.</li>
+      <li><b>Superstition</b>: a false belief incompatible with reason and religion (bad luck, learning the unseen through amulets, etc.).</li>
+      <li><b>Tahrif</b>: the distortion of a religion's original form and its sacred texts.</li>
+      <li>Correct sources: <b>the Qur'an, the authentic sunnah, reliable scholars</b>.</li>
+    </ul>
+  </div>
+  <div class="zb-kutu zb-derin">
+    <p class="zb-baslik">🔍 Let's Think Deeper</p>
+    <p class="zb-metin">To reflect deeply on what you learned in this section, ask yourself these questions:</p>
+    <ul class="zb-derin-liste">
+      <li>What sources must a piece of information rest on to be considered "religious knowledge"?</li>
+      <li>Why shouldn't I immediately believe every religious post I see online?</li>
+      <li>How do superstitions make people's lives harder?</li>
+    </ul>
+  </div>
+  <div class="zb-kutu zb-ikilem">
+    <p class="zb-baslik">⚖️ Moral Dilemma — What Would You Do?</p>
+    <p class="zb-metin">A friend of yours believes that they will fail an exam unless they have their "lucky pen" with them. Thinking about the concepts of superstition and trust in Allah (tawakkul), what would you say to them?</p>
+    <textarea id="zbAlan_ikilem" class="zb-cevap-alani" placeholder="What would you do and why? You can write your thoughts here..." onchange="zbCevapKaydet('ikilem', this)" aria-label="Your answer to the moral dilemma"></textarea>
+    <p class="zb-cevap-not" id="zbNot_ikilem"></p>
+  </div>
+  <p class="ko-ozet">📝 <b>In summary:</b> Bid'ah is a practice added to religion later, superstition is a false belief incompatible with reason and religion, and tahrif is the distortion of religion's original form. The way to guard against these is to learn religion from correct sources.</p>
+
+  <div class="kutu-panel" style="background:white; border-radius:14px; padding:18px; margin-top:16px; box-shadow:0 2px 8px rgba(0,0,0,.08);">
+    <h3 style="color:var(--mavi)">5️⃣ Getting to Know a Prophet: Prophet Joseph (Yusuf), peace be upon him</h3>
+    <p class="ko-giris">If the person who wronged you the most one day asked you for help, what would you do?</p>
+    <p class="ko-amac">🎯 In this section: we will grasp the story of Prophet Joseph and the values it teaches us.</p>
+    <p>The life of <b>Prophet Joseph</b> is told from beginning to end as a complete narrative in the Qur'an, in <b>Surah Yusuf</b>. The Qur'an describes this story as <b>"ahsan al-qasas"</b>, meaning "the most beautiful of stories."</p>
+    <p>Joseph was a child deeply loved by his father, Prophet Jacob. His brothers grew jealous and threw him into a <b>well</b>. A passing caravan found him and took him to <b>Egypt</b>, selling him as a slave. Years later, he resisted a shameful proposal made to him and preserved his <b>chastity (iffah)</b>; nevertheless he was falsely accused and remained in prison for many years despite being innocent.</p>
+    <p>Even in prison, Joseph never lost his hope or his honesty. He became known for interpreting dreams accurately; when he interpreted the king's dream and presented a plan for the years of famine, his trustworthiness was recognized, and he was made <b>a high official over Egypt</b> (the senior official responsible for the treasury). He carried out this responsibility entrusted to him in the best way, <b>upholding the trust</b> placed in him.</p>
+    <p>When the years of famine came, those who came to obtain provisions included his own brothers. Joseph recognized them. He had the power to take revenge, but he did not. He <b>forgave</b> them, brought his family to him, and the scattered family was reunited.</p>
+    <p>The values this story teaches are: <b>patience, chastity, truthfulness and honesty, trustworthiness (upholding trust), forgiveness</b>, and the importance of family bonds.</p>
+  </div>
+  <div class="zb-kutu zb-ayet">
+    <p class="zb-baslik">📖 Reflecting on a Verse</p>
+    <p class="zb-ayet-metin">"(Joseph) said, 'No blame will there be upon you today. Allah will forgive you; and He is the most merciful of the merciful.'"</p>
+    <p class="zb-ayet-kaynak">— Surah Yusuf, verse 92</p>
+    <p class="zb-ayet-mesaj"><b>Message:</b> Being able to forgive when one has the power not to is one of the greatest virtues; forgiveness rebuilds broken bonds.</p>
+  </div>
+  <div class="zb-kutu zb-unutma">
+    <p class="zb-baslik">📌 Remember!</p>
+    <ul>
+      <li>The story of Prophet Joseph is told in <b>Surah Yusuf</b>; the Qur'an calls it <b>"ahsan al-qasas"</b> (the most beautiful of stories).</li>
+      <li>Jealousy → the well → slavery in Egypt → false accusation and prison → patience → becoming a high official of Egypt → forgiveness.</li>
+      <li>Values it teaches: <b>patience, chastity, truthfulness, upholding trust, forgiveness</b>, family bonds.</li>
+    </ul>
+  </div>
+  <p class="ko-ozet">📝 <b>In summary:</b> Prophet Joseph responded to every injustice he suffered with patience and chastity; through his trustworthiness he became a high official of Egypt, and he forgave the brothers who had wronged him.</p>
+
+  <div class="kutu-panel" style="background:white; border-radius:14px; padding:18px; margin-top:16px; box-shadow:0 2px 8px rgba(0,0,0,.08);">
+    <h3 style="color:var(--mavi)">6️⃣ Getting to Know a Surah: Surah Al-Asr and Its Meaning</h3>
+    <p class="ko-giris">What were you doing at this time yesterday? Is there any way to bring back time that has passed?</p>
+    <p class="ko-amac">🎯 In this section: we will learn Surah Al-Asr and the four-point formula for salvation it offers.</p>
+    <p><b>Surah Al-Asr</b> is the 103rd surah of the Qur'an; it was revealed in Mecca and consists of only <b>three verses</b>. The word "asr" means time, an era, or the late afternoon. The surah takes its name from this oath in the first verse.</p>
+    <p>The surah begins by swearing an oath by time, because time is a person's most precious and irretrievable capital. A striking judgment follows: mankind is truly in loss, that is, in <b>hasr (loss)</b>. Every moment wasted works against the person.</p>
+    <p>However, the surah also shows a way out. Those saved from loss have four qualities: <b>1) those who believe, 2) those who do righteous deeds (beneficial, good works), 3) those who enjoin one another to truth, 4) those who enjoin one another to patience.</b> The mutual counsel mentioned in the last two points is called <b>tawasi</b>; this shows that salvation is not achieved alone, but together.</p>
+  </div>
+  <div class="zb-kutu zb-okunus">
+    <p class="zb-baslik">📿 Surah Al-Asr — Recitation and Meaning</p>
+    <table class="okunus-tablo">
+      <tr><td class="okunus-sutun">Bismillahir rahmanir raheem.</td><td class="anlam-sutun">In the name of Allah, the Most Gracious, the Most Merciful.</td></tr>
+      <tr><td class="okunus-sutun">1. Wal 'asr</td><td class="anlam-sutun">By time (the age),</td></tr>
+      <tr><td class="okunus-sutun">2. Innal insana lafi khusr</td><td class="anlam-sutun">indeed, mankind is truly in loss,</td></tr>
+      <tr><td class="okunus-sutun">3. Illal ladhina amanu wa 'amilus salihati wa tawasaw bil haqqi wa tawasaw bis sabr</td><td class="anlam-sutun">except for those who have believed and done righteous deeds and advised each other to truth and advised each other to patience.</td></tr>
+    </table>
+  </div>
+  <div class="zb-kutu zb-ayet">
+    <p class="zb-baslik">📖 Reflecting on a Verse</p>
+    <p class="zb-ayet-metin">"By time, indeed mankind is in loss, except for those who have believed and done righteous deeds and advised each other to truth and advised each other to patience."</p>
+    <p class="zb-ayet-kaynak">— Surah Al-Asr, verses 1-3</p>
+    <p class="zb-ayet-mesaj"><b>Message:</b> Time is our most valuable capital. If we do not spend it on faith, righteous deeds, and enjoining one another to truth and patience, we will be the losers.</p>
+  </div>
+  <div class="zb-kutu zb-merak">
+    <p class="zb-baslik">🤔 Did You Know?</p>
+    <p class="zb-metin">Imam Shafi'i said of this surah: "If people reflected deeply on this surah, it would be enough for them." This short, three-verse surah is described this way because it summarizes all the conditions of salvation.</p>
+  </div>
+  <div class="zb-kutu zb-unutma">
+    <p class="zb-baslik">📌 Remember!</p>
+    <ul>
+      <li>Surah Al-Asr is the <b>103rd surah</b>, revealed in Mecca, and has <b>3 verses</b>.</li>
+      <li><b>Asr</b>: time, an era, the late afternoon. <b>Khusr</b>: loss.</li>
+      <li>The four conditions of salvation: <b>faith — righteous deeds — enjoining truth — enjoining patience</b>.</li>
+      <li><b>Tawasi</b>: giving mutual counsel, advising one another.</li>
+    </ul>
+  </div>
+  <p class="ko-ozet">📝 <b>In summary:</b> Surah Al-Asr reminds us of the value of time; it declares that everyone is in loss except those who believe, do righteous deeds, enjoin truth, and enjoin patience.</p>
+
+  <div class="zb-kutu zb-degerlendir">
+    <p class="zb-baslik">✅ Assessing Myself</p>
+    <ul>
+      <li><input type="checkbox" id="deg_8-3_0" onchange="degKaydet('8-3')"><label for="deg_8-3_0">I can list and give examples of the zarûrât-ı hamse (life, intellect, lineage, property, religion).</label></li>
+      <li><input type="checkbox" id="deg_8-3_1" onchange="degKaydet('8-3')"><label for="deg_8-3_1">I can explain religion's function in social life with examples from acts of worship.</label></li>
+      <li><input type="checkbox" id="deg_8-3_2" onchange="degKaydet('8-3')"><label for="deg_8-3_2">I can distinguish the importance of lawful earning from unlawful ways of earning.</label></li>
+      <li><input type="checkbox" id="deg_8-3_3" onchange="degKaydet('8-3')"><label for="deg_8-3_3">I can explain the concepts of bid'ah, superstition, and tahrif with examples.</label></li>
+      <li><input type="checkbox" id="deg_8-3_4" onchange="degKaydet('8-3')"><label for="deg_8-3_4">I can describe the values drawn from the story of Prophet Joseph, peace be upon him.</label></li>
+      <li><input type="checkbox" id="deg_8-3_5" onchange="degKaydet('8-3')"><label for="deg_8-3_5">I can read Surah Al-Asr and interpret its message.</label></li>
+    </ul>
+  </div>
+</section>
+
+<section id="slayt">
+<h2>🖥️ Unit Presentation</h2>
+
+  <div class="sunum-sarmal">
+    <div class="sunum-ust">
+      <span class="sunum-sayac" id="sunumSayac">1 / 28</span>
+      <button class="sunum-tamekran-btn" onclick="sunumTamEkran('')" aria-label="Open presentation in full screen">⛶ Full Screen</button>
+    </div>
+    <div class="sunum-alan" id="sunumAlan">
+
+  <div class="sunum-slayt aktif s-baslik" data-tip="baslik">
+    <div class="sb-daire">⏳</div>
+    <p class="sb-ust">GRADE 8 — UNIT 3</p>
+    <h2 class="sb-baslik">Religion and Life</h2>
+    <p class="sb-ders">Religious Culture and Ethics</p>
+    <p class="sb-ogretmen">Ayşe Yazıcı</p>
+  </div>
+
+  <div class="sunum-slayt s-liste" data-tip="hedef">
+    <h3>🎯 What Will We Learn in This Unit?</h3>
+    <ul class="sl-liste">
+      <li>The Purpose of Religion: The Five Essential Values (Zarûrât-ı Hamse)</li><li>Religion Is a Social Phenomenon</li><li>Lawful and Unlawful Ways of Earning</li><li>False Religious Knowledge and Practices: Bid'ah, Superstition, Tahrif</li><li>Getting to Know a Prophet: Prophet Joseph, peace be upon him</li><li>Getting to Know a Surah: Surah Al-Asr and Its Meaning</li>
+    </ul>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
+    <h3>📌 The Purpose of Religion: Zarûrât-ı Hamse (1/2)</h3>
+    <ul class="si-liste">
+      <li>Religion aims to secure a person's happiness in both this world and the hereafter; its commands and prohibitions serve this purpose.</li><li>The five essential values that religion aims to protect are called <b>zarûrât-ı hamse</b> (the five necessities).</li><li>These are the protection of <b>life, intellect, lineage, property, and religion</b>. A peaceful life cannot be built without protecting these five values.</li>
+    </ul>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--yesil)">
+    <h3>📌 The Purpose of Religion: Zarûrât-ı Hamse (2/2)</h3>
+    <ul class="si-liste">
+      <li>For the safety of <b>life</b>, killing is forbidden; for the safety of the <b>intellect</b>, intoxicants are forbidden.</li><li>For the safety of <b>lineage</b>, adultery is forbidden; for the safety of <b>property</b>, theft, fraud, bribery, gambling, and interest are forbidden.</li><li>For the safety of <b>religion</b>, it has been declared that no one can be forced to abandon their faith: "There is no compulsion in religion." (Surah Al-Baqarah, 256)</li>
+    </ul>
+  </div>
+  <div class="sunum-slayt s-zb s-zb-merak" data-tip="zb">
+    <p class="zb-slayt-ust">🤔 DID YOU KNOW?</p>
+    <p class="zb-slayt-metin">The word "zarûrât" means "indispensable, necessary things," and "hamse" means "five." So zarûrât-ı hamse means "the five indispensable values." These five values belong not only to Muslims but to all human beings.</p>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
+    <h3>📌 Religion Is a Social Phenomenon (1/2)</h3>
+    <ul class="si-liste">
+      <li>Religion does not remain solely in a person's inner world; acts of worship build strong bonds connecting a person to society.</li><li><b>Prayer</b> gives a person discipline and order; in congregation, the rich and the poor stand shoulder to shoulder in the same row, experiencing equality and unity.</li><li><b>Fasting</b> strengthens patience and willpower; a person who goes hungry understands the condition of the poor (empathy) and learns to avoid waste.</li>
+    </ul>
+  </div>
+  <div class="sunum-slayt s-zb s-zb-yanlis" data-tip="zb">
+    <p class="zb-slayt-ust">❌ COMMON MISCONCEPTIONS</p>
+    <p class="zb-slayt-yanlis">❌ Some people think religion is only a matter between the person and Allah that never touches society.</p>
+    <p class="zb-slayt-dogru">✅ Religion is a social phenomenon; acts of worship strengthen trust, solidarity, brotherhood, and peace.</p>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
+    <h3>📌 Religion Is a Social Phenomenon (2/2)</h3>
+    <ul class="si-liste">
+      <li><b>Zakat</b> institutionalizes sharing and mutual aid; it reduces income inequality and prevents resentment in society.</li><li><b>Hajj</b> brings together Muslims from every corner of the world; it provides international brotherhood and acquaintance (<b>ta'aruf</b>).</li><li>In this way, religion becomes a social bond that strengthens feelings of <b>trust, solidarity, brotherhood, and peace</b> among individuals.</li>
+    </ul>
+  </div>
+  <div class="sunum-slayt s-zb s-zb-ornek" data-tip="zb">
+    <p class="zb-slayt-ust">🌍 A REAL-LIFE EXAMPLE</p>
+    <p class="zb-slayt-metin">During an earthquake or flood, people from every corner of the country rush to help campaigns for those they have never met. Behind this reflex of solidarity lies the sense of brotherhood and compassion that religion teaches.</p>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
+    <h3>📌 Lawful and Unlawful Ways of Earning (1/2)</h3>
+    <ul class="si-liste">
+      <li>Islam bases lawful earning on <b>labor</b>; it exalts work and effort.</li><li>Lawful earning means that both the way of earning and the property earned are legitimate.</li><li>This principle is a direct consequence of the value of <b>protection of property</b> within the zarûrât-ı hamse.</li>
+    </ul>
+  </div>
+  <div class="sunum-slayt s-zb s-zb-dusun" data-tip="zb">
+    <p class="zb-slayt-ust">💭 THINK AND ANSWER</p>
+    <p class="zb-slayt-metin">Does money earned without effort truly make a person happy? Why?</p>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
+    <h3>📌 Lawful and Unlawful Ways of Earning (2/2)</h3>
+    <ul class="si-liste">
+      <li>Unjust ways of earning are forbidden: <b>theft</b> (taking another's property without permission), <b>fraud</b> (deceiving, hiding a defect), <b>bribery</b> (gaining a benefit to get something done unjustly).</li><li><b>Gambling</b> seeks effortless gain based on chance; <b>interest (riba)</b> is the effortless, unearned multiplication of money.</li><li>These prohibitions protect <b>justice, trust, and respect for labor</b> in society.</li>
+    </ul>
+  </div>
+  <div class="sunum-slayt s-zb s-zb-aile" data-tip="zb">
+    <p class="zb-slayt-ust">👨‍👩‍👧 DOING THIS WITH MY FAMILY</p>
+    <p class="zb-slayt-metin">Talk with a family member about their profession and how it benefits society; note it down briefly in terms of lawful earning.</p>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
+    <h3>📌 False Religious Knowledge and Practices (1/2)</h3>
+    <ul class="si-liste">
+      <li><b>Bid'ah</b>: beliefs and practices that appear in religion later on, which are not actually part of it.</li><li><b>Superstition</b>: false beliefs, incompatible with reason and religion, that have become mixed into religion over time.</li><li><b>Tahrif</b>: the distortion of a religion's original form and its sacred texts.</li>
+    </ul>
+  </div>
+  <div class="sunum-slayt s-zb s-zb-derin" data-tip="zb">
+    <p class="zb-slayt-ust">🔍 LET'S THINK DEEPER</p>
+    <ul class="zb-slayt-liste">
+      <li>What sources must a piece of information rest on to be considered "religious knowledge"?</li>
+      <li>Why shouldn't we immediately believe every religious post we see online?</li>
+    </ul>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
+    <h3>📌 False Religious Knowledge and Practices (2/2)</h3>
+    <ul class="si-liste">
+      <li>Examples of superstition: believing a black cat or the number 13 brings bad luck, thinking only an evil-eye bead can protect someone, believing the unseen can be learned through fortune-telling or amulets.</li><li>All of these are wrong because they attribute a power that in reality belongs only to Allah to other things.</li><li>The solution is clear: religion should be learned from correct sources such as <b>the Qur'an, the authentic sunnah, and reliable scholars</b>; ignorance paves the way for superstition.</li>
+    </ul>
+  </div>
+  <div class="sunum-slayt s-zb s-zb-ikilem" data-tip="zb">
+    <p class="zb-slayt-ust">⚖️ MORAL DILEMMA — WHAT WOULD YOU DO?</p>
+    <p class="zb-slayt-metin">A friend of yours believes they will fail an exam unless they have their "lucky pen." Thinking about the concepts of superstition and trust in Allah, what would you say to them?</p>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--sari)">
+    <h3>📌 Getting to Know a Prophet: Prophet Joseph, peace be upon him (1/2)</h3>
+    <ul class="si-liste">
+      <li>The life of Prophet Joseph is told as a complete narrative in the Qur'an, in <b>Surah Yusuf</b>, and is described as <b>"ahsan al-qasas"</b> (the most beautiful of stories).</li><li>His brothers grew jealous of him and threw him into a well; a passing caravan found him and sold him as a slave in <b>Egypt</b>.</li><li>He resisted a shameful proposal made to him, preserving his <b>chastity</b>; nevertheless he was falsely accused and remained in prison for years.</li>
+    </ul>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--sari)">
+    <h3>📌 Getting to Know a Prophet: Prophet Joseph, peace be upon him (2/2)</h3>
+    <ul class="si-liste">
+      <li>Thanks to his <b>patience, truthfulness, and trustworthiness</b>, he was released from prison; by interpreting the king's dream he became <b>a high official</b> over Egypt (the senior official responsible for the treasury).</li><li>During the years of famine, he recognized his brothers who came to obtain provisions; instead of taking revenge, he <b>forgave</b> them and brought his family to him.</li><li>The values the story teaches: <b>patience, chastity, truthfulness, upholding trust, forgiveness</b>, and the importance of family bonds.</li>
+    </ul>
+  </div>
+
+  <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--mavi)">
+    <h3>📌 Getting to Know a Surah: Surah Al-Asr and Its Meaning</h3>
+    <ul class="si-liste">
+      <li><b>Surah Al-Asr</b> is the 103rd surah of the Qur'an; it was revealed in Mecca and has <b>3 verses</b>. "Asr" means time, an era, or the late afternoon.</li><li>The surah begins by swearing by time and declares that mankind is in loss (<b>khusr</b>).</li><li>Four conditions of salvation from loss are given: <b>believing, doing righteous deeds, enjoining truth, and enjoining patience</b>.</li>
+    </ul>
+  </div>
+
+  <div class="sunum-slayt s-kavram" data-tip="kavram">
+    <h3>🔑 Key Concepts (1/2)</h3>
+    <div class="sk-izgara">
+      <span class="sk-etiket" style="background:var(--yesil)">Zarûrât-ı hamse</span><span class="sk-etiket" style="background:var(--mavi)">Purpose</span><span class="sk-etiket" style="background:var(--kirmizi)">Life</span><span class="sk-etiket" style="background:var(--turkuaz)">Intellect</span><span class="sk-etiket" style="background:#7c3aed">Lineage</span><span class="sk-etiket" style="background:var(--yesil)">Property</span><span class="sk-etiket" style="background:var(--mavi)">Religion</span><span class="sk-etiket" style="background:var(--kirmizi)">Bid'ah</span><span class="sk-etiket" style="background:var(--turkuaz)">Superstition</span><span class="sk-etiket" style="background:#7c3aed">Tahrif</span>
+    </div>
+  </div>
+
+  <div class="sunum-slayt s-kavram" data-tip="kavram">
+    <h3>🔑 Key Concepts (2/2)</h3>
+    <div class="sk-izgara">
+      <span class="sk-etiket" style="background:var(--yesil)">Lawful earning</span><span class="sk-etiket" style="background:var(--mavi)">Bribery</span><span class="sk-etiket" style="background:var(--kirmizi)">Gambling</span><span class="sk-etiket" style="background:var(--turkuaz)">Interest (riba)</span><span class="sk-etiket" style="background:#7c3aed">Joseph</span><span class="sk-etiket" style="background:var(--yesil)">Chastity</span><span class="sk-etiket" style="background:var(--mavi)">Trust</span><span class="sk-etiket" style="background:var(--kirmizi)">Al-Asr</span><span class="sk-etiket" style="background:var(--turkuaz)">Patience</span><span class="sk-etiket" style="background:#7c3aed">Tawasi</span>
+    </div>
+  </div>
+
+  <div class="sunum-slayt s-ayet" data-tip="ayet">
+    <p class="sa-ust">📖 REFLECTING ON VERSES</p>
+    <p class="sa-meal">"By time, indeed mankind is in loss, except for those who have believed and done righteous deeds and advised each other to truth and advised each other to patience."</p>
+    <p class="sa-kaynak">— Surah Al-Asr, verses 1-3</p>
+  </div>
+
+  <div class="sunum-slayt s-ayet" data-tip="ayet">
+    <p class="sa-ust">📖 REFLECTING ON VERSES</p>
+    <p class="sa-meal">"There is no compulsion in religion. Truth stands out clearly from falsehood..."</p>
+    <p class="sa-kaynak">— Surah Al-Baqarah, verse 256</p>
+  </div>
+
+  <div class="sunum-slayt s-video" data-tip="video">
+    <p class="sv-ust">🎬 A RELATED VIDEO</p>
+    <div class="sv-cerceve">
+      <p class="sv-yer-tutucu">🎥 You can add a YouTube link to an educational video you choose about "Religion and Life" here. (Fill in the iframe src.)</p>
+    </div>
+    <p class="sv-baslik">Religion and Life</p>
+  </div>
+
+  <div class="sunum-slayt s-zb s-zb-degerlendir" data-tip="zb">
+    <p class="zb-slayt-ust">✅ ASSESSING MYSELF</p>
+    <ul class="zb-slayt-liste">
+      <li>☐ I can list and give examples of the zarûrât-ı hamse (the five essential values).</li>
+      <li>☐ I can explain religion's function in social life with examples from acts of worship.</li>
+      <li>☐ I can distinguish the importance of lawful earning from unlawful ways of earning.</li>
+      <li>☐ I can explain the concepts of bid'ah, superstition, and tahrif with examples.</li>
+      <li>☐ I can describe the values drawn from the story of Prophet Joseph, peace be upon him.</li>
+      <li>☐ I can read Surah Al-Asr and interpret its message.</li>
+    </ul>
+  </div>
+
+  <div class="sunum-slayt s-liste s-ozet" data-tip="ozet">
+    <h3>📝 Unit Summary</h3>
+    <ul class="sl-liste">
+      <li>The Purpose of Religion: The Five Essential Values (Zarûrât-ı Hamse)</li><li>Religion Is a Social Phenomenon</li><li>Lawful and Unlawful Ways of Earning</li><li>False Religious Knowledge and Practices: Bid'ah, Superstition, Tahrif</li><li>Getting to Know a Prophet: Prophet Joseph, peace be upon him</li><li>Getting to Know a Surah: Surah Al-Asr and Its Meaning</li>
+    </ul>
+  </div>
+  <div class="sunum-slayt s-kapanis" data-tip="kapanis">
+    <div class="sb-daire">🌟</div>
+    <h2 class="sb-baslik">Thank You for Watching</h2>
+    <p class="sb-ders">I wish you every success.</p>
+    <p class="sb-ogretmen">Ayşe Yazıcı — Religious Culture and Ethics Teacher</p>
+  </div>
+    </div>
+    <div class="sunum-nav">
+      <button onclick="sunumGit('',-1)" aria-label="Previous slide">⬅ Previous</button>
+      <div class="sunum-noktalar" id="sunumNoktalar"></div>
+      <button onclick="sunumGit('',1)" aria-label="Next slide">Next ➡</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>© Ayşe Yazıcı — Religious Culture and Ethics Digital Course Materials</footer>
+
+<script>
+function goster(id, ev){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('aktif'));
+  document.getElementById(id).classList.add('aktif');
+  document.querySelectorAll('.oyun-grubu button').forEach(b=>b.classList.remove('aktif'));
+  if(ev && ev.target) ev.target.classList.add('aktif');
+}
+function kategoriGoster(id, ev){
+  document.querySelectorAll('.oyun-grubu').forEach(g=>g.classList.remove('aktif'));
+  document.getElementById(id).classList.add('aktif');
+  document.querySelectorAll('.kategori-nav button').forEach(b=>b.classList.remove('kat-aktif'));
+  if(ev && ev.target) ev.target.classList.add('kat-aktif');
+}
+
+let puanDurumu;
+try{ puanDurumu = JSON.parse(localStorage.getItem('dkabPuanDurumu8sinif')) || {}; }catch(e){ puanDurumu = {}; }
+puanDurumu = Object.assign({toplamPuan:0, tamamlanan:0, rozetler:[], sonOyunTarihi:null, seri:0}, puanDurumu);
+
+function puanKaydet(){ try{ localStorage.setItem('dkabPuanDurumu8sinif', JSON.stringify(puanDurumu)); }catch(e){} }
+
+function istatistikleriGuncelleGoster(){
+  const tp = document.getElementById('istToplamPuan');
+  if(!tp) return;
+  document.getElementById('istToplamPuan').textContent = puanDurumu.toplamPuan;
+  document.getElementById('istTamamlanan').textContent = puanDurumu.tamamlanan;
+  document.getElementById('istSeri').textContent = puanDurumu.seri;
+  document.getElementById('istRozet').textContent = puanDurumu.rozetler.length;
+}
+istatistikleriGuncelleGoster();
+
+const UNITE_KIMLIK = '8-3';
+
+// ===================== SUNUM (SLAYT) GORUNUMU JS =====================
+window.sunumDurumu = window.sunumDurumu || {};
+function sunumNoktalariOlustur(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  const nokta = document.getElementById('sunumNoktalar'+suf);
+  if(!alan || !nokta) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  nokta.innerHTML = '';
+  for(let i=0;i<toplam;i++){
+    const d = document.createElement('span');
+    d.className = 'sunum-nokta' + (i===0?' aktif':'');
+    d.onclick = function(){ sunumIndexeGit(suf, i); };
+    nokta.appendChild(d);
+  }
+}
+function sunumGuncelle(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const slaytlar = alan.querySelectorAll('.sunum-slayt');
+  const idx = sunumDurumu[suf] || 0;
+  slaytlar.forEach(function(s,i){ s.classList.toggle('aktif', i===idx); });
+  const sayac = document.getElementById('sunumSayac'+suf);
+  if(sayac) sayac.textContent = (idx+1)+' / '+slaytlar.length;
+  document.querySelectorAll('#sunumNoktalar'+suf+' .sunum-nokta').forEach(function(n,i){ n.classList.toggle('aktif', i===idx); });
+}
+function sunumIndexeGit(suf, i){
+  sunumDurumu[suf] = i;
+  sunumGuncelle(suf);
+}
+function sunumGit(suf, yon){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  let idx = (sunumDurumu[suf]||0) + yon;
+  if(idx<0) idx=0;
+  if(idx>=toplam) idx=toplam-1;
+  sunumIndexeGit(suf, idx);
+}
+function sunumTamEkran(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  if(alan.requestFullscreen) alan.requestFullscreen();
+  else if(alan.webkitRequestFullscreen) alan.webkitRequestFullscreen();
+}
+document.addEventListener('keydown', function(e){
+  const slaytBolumu = document.getElementById('slayt');
+  if(!slaytBolumu || !slaytBolumu.classList.contains('aktif')) return;
+  if(e.key === 'ArrowRight') sunumGit('', 1);
+  if(e.key === 'ArrowLeft') sunumGit('', -1);
+});
+document.addEventListener('DOMContentLoaded', function(){ sunumNoktalariOlustur(''); sunumGuncelle(''); });
+
+// ===================== STUDENT IDENTITY AND TEACHER PANEL =====================
+const OP_ANAHTAR = 'dkabOgretmenPaneli_' + UNITE_KIMLIK;
+
+function opOgrenciAdi(){
+  let ad = sessionStorage.getItem('dkabAktifOgrenci');
+  if(!ad){
+    ad = prompt('Hello! So your teacher can track your progress, could you type your first and last name?');
+    if(!ad || !ad.trim()) ad = 'Unnamed Student';
+    ad = ad.trim().slice(0,40);
+    sessionStorage.setItem('dkabAktifOgrenci', ad);
+  }
+  return ad;
+}
+function opOgrenciDegistir(){
+  sessionStorage.removeItem('dkabAktifOgrenci');
+  ozelBildirim('Student information has been reset. A new name will be asked the next time a game is completed.');
+}
+function opVerileriOku(){
+  try{ return JSON.parse(localStorage.getItem(OP_ANAHTAR)) || {}; }catch(e){ return {}; }
+}
+function opVerileriYaz(v){
+  try{ localStorage.setItem(OP_ANAHTAR, JSON.stringify(v)); }catch(e){}
+}
+function opOgrenciKaydiGetir(v, ad){
+  if(!v[ad]) v[ad] = {oyunlar:[], sonPuan:0, sonRozetler:[], ilkTarih:new Date().toLocaleString('en-US')};
+  return v[ad];
+}
+function opOyunTamamlandiKaydet(bolumId, toplamPuan, rozetler){
+  const ad = opOgrenciAdi();
+  const v = opVerileriOku();
+  const kayit = opOgrenciKaydiGetir(v, ad);
+  kayit.oyunlar.push({bolum: bolumId || 'unknown', tarih: new Date().toLocaleString('en-US')});
+  kayit.sonPuan = toplamPuan;
+  kayit.sonRozetler = rozetler || [];
+  opVerileriYaz(v);
+}
+
+const OP_SIFRE = 'ogretmen2026';
+let opGirisYapildi = false;
+
+function opGirisKontrol(){
+  if(opGirisYapildi){ opPaneliGoster(); return; }
+  const girilen = prompt('Enter the password to access the teacher panel:');
+  if(girilen === OP_SIFRE){
+    opGirisYapildi = true;
+    opPaneliGoster();
+  } else if(girilen !== null){
+    ozelBildirim('Incorrect password.');
+    document.getElementById('opGirisEkrani').style.display = 'block';
+    document.getElementById('opPanelEkrani').style.display = 'none';
+  }
+}
+
+function opPaneliGoster(){
+  document.getElementById('opGirisEkrani').style.display = 'none';
+  document.getElementById('opPanelEkrani').style.display = 'block';
+  const v = opVerileriOku();
+  const isimler = Object.keys(v);
+  const govde = document.getElementById('opTabloGovde');
+  const bosMesaj = document.getElementById('opBosMesaj');
+  govde.innerHTML = '';
+  if(isimler.length === 0){
+    bosMesaj.style.display = 'block';
+    return;
+  }
+  bosMesaj.style.display = 'none';
+  isimler.sort((a,b)=> (v[b].oyunlar.length - v[a].oyunlar.length)).forEach(ad=>{
+    const kayit = v[ad];
+    const tr = document.createElement('tr');
+    const sonAktivite = kayit.oyunlar.length ? kayit.oyunlar[kayit.oyunlar.length-1].tarih : '-';
+    const oyunListesi = kayit.oyunlar.map(o=>o.bolum).join(', ');
+    tr.innerHTML = `
+      <td>${ad}</td>
+      <td>${kayit.sonPuan}</td>
+      <td>${kayit.oyunlar.length}</td>
+      <td>${(kayit.sonRozetler||[]).join(' ') || '-'}</td>
+      <td>${sonAktivite}</td>
+      <td><button class="op-detay-btn" onclick="opDetayGoster(this, '${ad.replace(/'/g,"\\'")}')">Details</button></td>
+    `;
+    govde.appendChild(tr);
+    const detayTr = document.createElement('tr');
+    detayTr.className = 'op-detay-satir';
+    detayTr.style.display = 'none';
+    detayTr.innerHTML = `<td colspan="6"><b>Completed sections:</b> ${esc(oyunListesi) || 'None yet'}</td>`;
+    govde.appendChild(detayTr);
+  });
+}
+function esc(s){ return String(s).replace(/</g,'&lt;'); }
+function opDetayGoster(btn, ad){
+  const tr = btn.closest('tr').nextElementSibling;
+  tr.style.display = tr.style.display === 'none' ? 'table-row' : 'none';
+}
+function opVerileriTemizle(){
+  ozelOnay('All student data for this unit will be deleted. Are you sure?', function(onaylandi){
+    if(onaylandi){
+      localStorage.removeItem(OP_ANAHTAR);
+      opPaneliGoster();
+    }
+  });
+}
+
+// ===================== CUSTOM MODAL / NOTIFICATION =====================
+function ozelBildirim(mesaj){
+  const eski = document.querySelector('.ozel-toast');
+  if(eski) eski.remove();
+  const toast = document.createElement('div');
+  toast.className = 'ozel-toast';
+  toast.textContent = mesaj;
+  document.body.appendChild(toast);
+  setTimeout(()=>toast.remove(), 3200);
+}
+function ozelOnay(mesaj, callback){
+  const arka = document.createElement('div');
+  arka.className = 'ozel-modal-arka';
+  arka.innerHTML = '<div class="ozel-modal-kutu"><p class="ozel-modal-mesaj"></p>' +
+    '<button class="ozel-modal-btn" style="background:var(--kirmizi);color:#fff;">Yes</button>' +
+    '<button class="ozel-modal-btn" style="background:#e2e8f0;">Cancel</button></div>';
+  arka.querySelector('.ozel-modal-mesaj').textContent = mesaj;
+  document.body.appendChild(arka);
+  const btnler = arka.querySelectorAll('.ozel-modal-btn');
+  btnler[0].onclick = ()=>{ arka.remove(); callback(true); };
+  btnler[1].onclick = ()=>{ arka.remove(); callback(false); };
+}
+
+// ===================== "ASSESSING MYSELF" - CHECKBOX STORAGE =====================
+function degOku(uniteKimlik){
+  try{ return JSON.parse(localStorage.getItem('dkabDegerlendirme_'+uniteKimlik)) || {}; }catch(e){ return {}; }
+}
+function degKaydet(uniteKimlik){
+  const durum = {};
+  document.querySelectorAll('[id^="deg_'+uniteKimlik+'_"]').forEach(cb=>{ durum[cb.id] = cb.checked; });
+  try{ localStorage.setItem('dkabDegerlendirme_'+uniteKimlik, JSON.stringify(durum)); }catch(e){}
+}
+function degYukle(uniteKimlik){
+  const durum = degOku(uniteKimlik);
+  Object.keys(durum).forEach(id=>{
+    const cb = document.getElementById(id);
+    if(cb) cb.checked = durum[id];
+  });
+}
+document.addEventListener('DOMContentLoaded', function(){ degYukle(UNITE_KIMLIK); });
+
+// ===================== "THINK" / "WITH MY FAMILY" - ANSWER STORAGE =====================
+function zbCevapAnahtari(tur){ return 'dkabZbCevap_' + UNITE_KIMLIK + '_' + tur; }
+function zbCevapKaydet(tur, el){
+  try{ localStorage.setItem(zbCevapAnahtari(tur), el.value); }catch(e){}
+  const not = document.getElementById('zbNot_'+tur);
+  if(not){
+    not.textContent = '✓ Your answer has been saved';
+    clearTimeout(not._zbT);
+    not._zbT = setTimeout(()=>{ not.textContent=''; }, 2500);
+  }
+}
+function zbCevapYukle(){
+  document.querySelectorAll('[id^="zbAlan_"]').forEach(el=>{
+    const tur = el.id.slice('zbAlan_'.length);
+    try{ const v = localStorage.getItem(zbCevapAnahtari(tur)); if(v) el.value = v; }catch(e){}
+  });
+}
+document.addEventListener('DOMContentLoaded', zbCevapYukle);
+</script>
+</body>
+</html>

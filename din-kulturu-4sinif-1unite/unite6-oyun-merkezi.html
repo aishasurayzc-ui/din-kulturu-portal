@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4. Sınıf Din Kültürü - 6. Ünite: Allah Sevgisi — Oyun Merkezi</title>
+<meta name="description" content="4. Sınıf Din Kültürü - 6. Ünite: Allah Sevgisi — İnteraktif oyunlar, konu özeti, test ve sunum içeren dijital ders materyali.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../ortak/oyun-merkezi.css">
+
+<body>
+
+<header>
+  <p class="gb-eyebrow">4. SINIF — 6. ÜNİTE</p>
+  <h1>🤲 Allah Sevgisi</h1>
+  <p class="gb-ders-adi">Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
+  <p class="gb-yazar">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+  <div class="gb-kontrol-satiri">
+    <a href="../en/din-kulturu-4sinif-1unite/index.html" lang="en" style="display:inline-block;padding:6px 16px;border-radius:16px;background:rgba(255,255,255,.22);color:white;text-decoration:none;font-weight:bold;font-size:.85em;border:1px solid rgba(255,255,255,.55);">English</a>
+    <button type="button" id="temaDegistirBtn" class="tema-degistir-btn" onclick="temaDegistir()" aria-label="Koyu/açık tema değiştir">🌙 Koyu Tema</button>
+  </div>
+</header>
+<section class="hero">
+  <h2 class="hero-baslik">🎮 Oyun Merkezi</h2>
+  <p class="hero-alt">Bu ünitedeki oyunlarla konuyu pekiştir.</p>
+  <div class="hero-butonlar">
+    <button class="hero-btn hero-btn-birincil" onclick="window.location.href='unite6.html'">◀ Ana Sayfaya Dön</button>
+  </div>
+</section>
+
+<div id="oyun-gruplari" role="navigation" aria-label="Oyun merkezi menüsü"></div>
+
+<main>
+<section id="kelimeavi6">
+  <h2>🔎 Kelime Avı Bulmacası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
+  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka6Bulunan">0</b>/<b id="ka6Toplam">14</b></span></div>
+  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+    <div class="ka-izgara" id="ka6Izgara"></div>
+    <ul class="ka-liste" id="ka6Liste"></ul>
+  </div>
+  <div class="sonuc-kutusu" id="ka6Sonuc"></div>
+  <button class="eylem" onclick="kelimeAvi6Olustur()">🔄 Yeni Bulmaca</button>
+</section>
+
+<section id="cengel6">
+  <h2>🧩 Çengel Bulmaca</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
+  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
+  <div class="cengel-izgara" id="cengel6Izgara"></div>
+  <ul class="cengel-liste" id="cengel6Liste"></ul>
+  <div class="sonuc-kutusu" id="cengel6Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="cengel6KontrolEt()">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="cengel6Olustur()">🔄 Baştan Başla</button>
+  </div>
+</section>
+
+<section id="merdiven6">
+  <h2>🪜 Sözcük Merdiveni</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları ipuçlarından yararlanarak hızlıca çözebileceksin.</div>
+  <div class="aciklama">Merdivenin ilk basamağında bir kelime var. Her yeni basamak, bir öncekinin SON harfiyle başlamalı! İpucuna göre doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🪜 Basamak: <b id="merdiven6Basamak">1</b>/<b id="merdiven6Toplam">4</b></span></div>
+  <div id="merdiven6Ipucu" class="balon-durum"></div>
+  <div id="merdiven6Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="kutu-panel" id="merdiven6Gorsel" style="max-width:460px;margin:20px auto;"></div>
+  <div class="sonuc-kutusu" id="merdiven6Sonuc"></div>
+  <button class="eylem" onclick="merdiven6Baslat()">🔄 Yeniden Başlat</button>
+</section>
+
+<section id="sifre6">
+  <h2>🔐 Şifreli Sözcük Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harf-sayı eşleşmesi yaparak kavramları şifre çözer gibi bulabilmek.</div>
+  <div class="aciklama">Her harfin bir sayı karşılığı var! Aşağıdaki anahtar tablosuna bakarak sayılardan kelimeleri çöz ve kutucuklara yaz.</div>
+  <div class="sifre-anahtar" id="sifre6Anahtar"></div>
+  <div id="sifre6Kelimeler"></div>
+  <div class="sonuc-kutusu" id="sifre6Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="sifre6KontrolEt()">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="sifre6Olustur()">🔄 Yeni Şifre</button>
+  </div>
+</section>
+
+<section id="sifretanim6">
+  <h2>🔐 Şifreli Tanım Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir tanımın hangi kavrama ait olduğunu şifre çözerek bulabilmek.</div>
+  <div class="aciklama">Tanımın bazı harfleri sayı/sembole dönüştürülerek "şifrelendi" (A=4, E=3, İ/I=1, O=0). Şifreyi çöz, anlamı doğru kelimeyle eşleştir!</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="st6Tur">1</b>/<b id="st6Toplam">28</b></span>
+    <span>⭐ Puan: <b id="st6Puan">0</b></span>
+  </div>
+  <div id="st6Tanim" class="dua-satir"></div>
+  <div id="st6Secenekler" style="max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="st6Sonuc"></div>
+  <button class="eylem" onclick="st6Baslat()">🔐 Oyunu Başlat</button>
+</section>
+
+<section id="kelimekodlama6">
+  <h2>💻 Kelime Kodlama Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları kod çözme mantığıyla tanıyabileceksin.</div>
+  <div class="aciklama">Her harfin alfabedeki sırasına göre sabit bir 5 bitlik ikili (binary) kodu var! Kod tablosuna bakarak aşağıdaki ikili kodu çöz.</div>
+  <div class="sifre-anahtar" id="kk6Anahtar"></div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="kk6Tur">1</b>/<b id="kk6Toplam">28</b></span>
+    <span>⭐ Puan: <b id="kk6Puan">0</b></span>
+  </div>
+  <div id="kk6Ipucu" class="balon-durum"></div>
+  <div id="kk6Kod" class="dua-satir" style="font-family:monospace;letter-spacing:2px;"></div>
+  <div id="kk6Secenekler" style="max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kk6Sonuc"></div>
+  <button class="eylem" onclick="kk6Baslat()">💻 Kodlamayı Başlat</button>
+</section>
+
+<section id="nonogram6">
+  <h2>🖼️ Nonogram: Gizli Resmi Bul</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Dikkat ve mantık yürüterek gizli bir görseli/kavramı ortaya çıkarmak.</div>
+  <div class="aciklama">Satır ve sütunlardaki sayılar, o satır/sütunda arka arkaya kaç kutunun boyanacağını gösterir. Doğru kutuları tıklayarak gizli resmi ortaya çıkar!</div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;">
+    <button class="eylem" onclick="nonogram6Sec('kalp')">❤️ Kalp (Sevgi)</button>
+    <button class="eylem" style="background:var(--sari)" onclick="nonogram6Sec('hilal')">🌙⭐ Hilal ve Yıldız</button>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="nono-tablo" id="nono6Tablo"></table>
+  </div>
+  <div class="sonuc-kutusu" id="nono6Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="nonogram6KontrolEt(true)">✅ Kontrol Et</button>
+    <button class="eylem" style="background:var(--sari)" onclick="nonogram6Temizle()">🧹 Temizle</button>
+  </div>
+</section>
+
+<section id="satranc6">
+  <h2>♞ Kelime Satrancı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramları tahta üzerinde stratejik biçimde bulup eşleştirebilmek.</div>
+  <div class="aciklama">Satranç tahtasında <b>at (♞) hamlesiyle</b> (L şeklinde) birbirine bağlı harfleri sırayla tıklayarak kelimeleri bul!</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ks6Bulunan">0</b>/<b id="ks6Toplam">8</b></span></div>
+  <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+    <div class="ks-izgara" id="ks6Izgara"></div>
+    <ul class="ka-liste" id="ks6Liste"></ul>
+  </div>
+  <div class="sonuc-kutusu" id="ks6Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" onclick="ks6SecimiTemizle()">🧹 Seçimi Temizle</button>
+    <button class="eylem" style="background:var(--sari)" onclick="ks6Olustur()">🔄 Yeni Tahta</button>
+  </div>
+</section>
+
+<section id="kelimeuret6">
+  <h2>⚡ Hızlı Kelime Üretme Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Ünitede geçen kavramları hızlıca hatırlayıp üretebileceksin.</div>
+  <div class="aciklama">Belirlenen harfle başlayan, ünitede geçen kavramları süre bitmeden art arda yaz! Her doğru ve farklı kelime bir puan kazandırır.</div>
+  <div class="oyun-bilgi">
+    <span>🔤 Harf: <b id="ku6Harf">-</b></span>
+    <span>⭐ Puan: <b id="ku6Puan">0</b></span>
+    <span>⏱️ Süre: <b id="ku6Sure">60</b>sn</span>
+  </div>
+  <input type="text" id="ku6Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){ku6Ekle();}">
+  <p class="balon-durum" id="ku6Uyari"></p>
+  <ul class="ku-liste" id="ku6Liste"></ul>
+  <div class="sonuc-kutusu" id="ku6Sonuc"></div>
+  <div id="ku6Kacirilan"></div>
+  <button class="eylem" onclick="ku6Baslat()">🎮 Oyunu Başlat</button>
+</section>
+
+<section id="tuzak6">
+  <h2>🚫 Tuzak Harf Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramı yanıltıcı (tuzak) seçenekler arasından ayırt edebilmek.</div>
+  <div class="aciklama">Bir "tuzak harf" belirlenecek. O harfi İÇERMEYEN, ünitede geçen kavramları süre bitmeden art arda yaz!</div>
+  <div class="oyun-bilgi">
+    <span>🚫 Tuzak Harf: <b id="tuzak6Harf">-</b></span>
+    <span>⭐ Puan: <b id="tuzak6Puan">0</b></span>
+    <span>⏱️ Süre: <b id="tuzak6Sure">40</b>sn</span>
+  </div>
+  <input type="text" id="tuzak6Girdi" placeholder="Önce oyunu başlat, sonra kelimeyi yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){tuzak6Ekle();}">
+  <p class="balon-durum" id="tuzak6Uyari"></p>
+  <ul class="ku-liste" id="tuzak6Liste"></ul>
+  <div class="sonuc-kutusu" id="tuzak6Sonuc"></div>
+  <button class="eylem" onclick="tuzak6Baslat()">🎮 Oyunu Başlat</button>
+</section>
+
+<section id="fabrika6">
+  <h2>🏭 Kelime Fabrikası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Harflerden doğru kavramı üreterek kelime dağarcığını genişletmek.</div>
+  <div class="aciklama">Üretim bandındaki karışık harfleri kullanarak siparişteki ipucuna uyan kelimeyi üret!</div>
+  <div class="oyun-bilgi">
+    <span>🏭 Üretilen: <b id="kf6Uretilen">0</b>/<b id="kf6Toplam">28</b></span>
+    <span>❌ Hata: <b id="kf6Hata">0</b></span>
+  </div>
+  <div id="kf6Siparis" class="balon-durum"></div>
+  <div class="kf-bant" id="kf6BantAlani"></div>
+  <input type="text" id="kf6Girdi" placeholder="Önce fabrikayı başlat, sonra kelimeyi yaz..." disabled onkeydown="if(event.key==='Enter'){kf6Uret();}">
+  <button class="eylem" onclick="kf6Uret()">🏭 Üret!</button>
+  <div class="kf-urunler" id="kf6Urunler"></div>
+  <div class="sonuc-kutusu" id="kf6Sonuc"></div>
+  <button class="eylem" style="background:var(--sari)" onclick="kf6Baslat()">🔄 Fabrikayı Başlat/Yenile</button>
+</section>
+
+<section id="muhendis6">
+  <h2>🛠️ Kelime Mühendisi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları parçalarından birleştirerek doğru şekilde kurabileceksin.</div>
+  <div class="aciklama">Her kelime küçük parçalara ayrıldı. Plana (anlama) bakarak parçaları doğru sırada tıkla ve kelimeyi inşa et!</div>
+  <div class="oyun-bilgi">
+    <span>🏗️ Tur: <b id="km6Tur">1</b>/<b id="km6Toplam">28</b></span>
+    <span>✅ İnşa Edilen: <b id="km6Dogru">0</b></span>
+  </div>
+  <div id="km6Ipucu" class="balon-durum"></div>
+  <div class="kelime-cevap" id="km6Cevap"></div>
+  <div class="kelime-banka" id="km6Banka"></div>
+  <div class="sonuc-kutusu" id="km6Sonuc"></div>
+  <button class="eylem" onclick="km6Baslat()">🛠️ Mühendisliğe Başla</button>
+</section>
+
+<section id="kavramturnuvasi6">
+  <h2>🏆 Kavram Turnuvası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Öğrenilen kavramları hızlı ve rekabetçi bir ortamda pekiştirmek.</div>
+  <div class="aciklama">8 kavram tek eleme usulü yarışıyor! Her maçta hangi kavramın soruya doğru cevap olduğuna hakemlik yap.</div>
+  <div class="oyun-bilgi">
+    <span>🥊 Maç: <b id="kt6Tur">1</b>/<b id="kt6Toplam">7</b></span>
+    <span>✅ Doğru Hakemlik: <b id="kt6Puan">0</b></span>
+  </div>
+  <div id="kt6Asama" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="kt6Eslesme" class="balon-durum"></div>
+  <div id="kt6Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="kt6Sonuc"></div>
+  <button class="eylem" onclick="kt6Baslat()">🏆 Turnuvayı Başlat</button>
+</section>
+
+<section id="bonus6">
+  <h2>🎮 Bonus Oyun: Kavramlar Hafıza Zinciri</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünite bilgilerini eğlenceli bir ek etkinlikle tekrar etmek.</div>
+  <div class="aciklama">Yanan kavramları sırasıyla izle, sonra aynı sırayla tıkla! Her turda zincir bir kavram daha uzuyor.</div>
+  <div class="oyun-bilgi"><span>🏆 Seviye: <b id="bz6Seviye">0</b></span></div>
+  <div class="bz-izgara" id="bz6Izgara"></div>
+  <div class="sonuc-kutusu" id="bz6Sonuc"></div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="eylem" style="background:var(--sari)" onclick="bz6OrnekOyna()">🎬 Önce Örnek Gör</button>
+    <button class="eylem" onclick="bz6Baslat()">🎮 Oyunu Başlat</button>
+  </div>
+</section>
+
+<section id="dedektif6">
+  <h2>🕵️ Kelime Dedektifi</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak doğru kavramı mantık yürüterek bulmak.</div>
+  <div class="aciklama">Gizli kelimeyi (bir kavram) 5 denemede bul! Her tahminden sonra harfler renklenir: 🟩 doğru yerde, 🟨 kelimede var ama yanlış yerde, ⬜ kelimede yok.</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Vaka: <b id="dd6Vaka">1</b>/<b id="dd6ToplamVaka">1</b></span>
+    <span>✅ Çözülen: <b id="dd6Cozulen">0</b></span>
+    <span>🔍 Deneme: <b id="dd6Deneme">0</b>/<b id="dd6MaxDeneme">5</b></span>
+  </div>
+  <div id="dd6Ipucu" class="balon-durum"></div>
+  <div id="dd6Izgara"></div>
+  <input type="text" id="dd6Girdi" placeholder="Önce oyunu başlat, sonra tahminini yaz ve Enter'a bas" disabled onkeydown="if(event.key==='Enter'){dd6TahminEt();}">
+  <p class="balon-durum" id="dd6Uyari"></p>
+  <div class="sonuc-kutusu" id="dd6Sonuc"></div>
+  <button class="eylem" onclick="dd6Baslat()">🕵️ Soruşturmayı Başlat</button>
+</section>
+
+<section id="dildedektifi6">
+  <h2>🕵️‍♀️ Dil Dedektifi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Cümle içinde doğru/yanlış kullanılan kavramları ayırt edebileceksin.</div>
+  <div class="aciklama">Aşağıdaki 4 cümleden hangisi DOĞRU bilgi veriyor? Doğru cümleyi bul!</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="ddl6Tur">1</b>/<b id="ddl6Toplam">10</b></span>
+    <span>⭐ Puan: <b id="ddl6Puan">0</b></span>
+  </div>
+  <div id="ddl6Baslik" class="balon-durum"></div>
+  <div id="ddl6Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="ddl6Sonuc"></div>
+  <button class="eylem" onclick="ddl6Baslat()">🕵️‍♀️ Soruşturmayı Başlat</button>
+</section>
+
+<section id="mantikzinciri6">
+  <h2>🔗 Mantık Zinciri Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavramlar arasındaki mantıksal bağlantıları kurabilmek.</div>
+  <div class="aciklama">Bir kavramın tanımını ve mantık sorusunu oku, zincirde bir sonraki kavramı doğru seçerek zinciri tamamla!</div>
+  <div class="oyun-bilgi"><span>🔗 Halka: <b id="mz6Halka">1</b>/<b id="mz6Toplam">5</b></span></div>
+  <div id="mz6Soru" class="balon-durum"></div>
+  <div id="mz6Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="kutu-panel" id="mz6Gorsel" style="max-width:460px;margin:20px auto;"></div>
+  <div class="sonuc-kutusu" id="mz6Sonuc"></div>
+  <button class="eylem" onclick="mz6Baslat()">🔗 Zinciri Başlat</button>
+</section>
+
+<section id="semantiklabirent6">
+  <h2>🧠 Semantik Labirent</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Kavram ilişkilerini takip ederek doğru yolu bulabilmek.</div>
+  <div class="aciklama">Her odada bir kategori var. 4 kelimeden kategoriye AİT OLMAYANI (yabancı olanı) bulup kapıyı aç, bir sonraki odaya geç! Yanlış seçersen can kaybedersin.</div>
+  <div class="oyun-bilgi">
+    <span>🚪 Oda: <b id="sz6Oda">1</b>/<b id="sz6ToplamOda">6</b></span>
+    <span id="sz6Can">❤️❤️❤️</span>
+  </div>
+  <div id="sz6Kategori" class="balon-durum"></div>
+  <div id="sz6Secenekler" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="sz6Sonuc"></div>
+  <button class="eylem" onclick="sz6Baslat()">🌀 Labirente Gir</button>
+</section>
+
+<section id="celiskiavi6">
+  <h2>🕵️‍♂️ Çelişki Avı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bilgiyle çelişen ifadeleri fark edebileceksin.</div>
+  <div class="aciklama">Aşağıdaki cümlede bir kelimeye iki anlam yükleniyor. Bu iki anlam birbiriyle ÇELİŞİYOR mu, yoksa ikisi de doğru ve uyumlu mu?</div>
+  <div class="oyun-bilgi">
+    <span>🗂️ Tur: <b id="ca6Tur">1</b>/<b id="ca6Toplam">12</b></span>
+    <span>⭐ Puan: <b id="ca6Puan">0</b></span>
+  </div>
+  <div id="ca6Cumle" class="dua-satir"></div>
+  <div id="ca6Butonlar" style="display:flex;gap:14px;justify-content:center;">
+    <button class="eylem" style="background:var(--kirmizi)" onclick="ca6Cevapla(true)">⚡ Çelişki VAR</button>
+    <button class="eylem" style="background:var(--yesil)" onclick="ca6Cevapla(false)">✅ Çelişki YOK</button>
+  </div>
+  <p style="text-align:center;font-weight:bold;" id="ca6GeriBildirim"></p>
+  <div class="sonuc-kutusu" id="ca6Sonuc"></div>
+  <button class="eylem" style="background:var(--sari)" onclick="ca6Baslat()">🕵️‍♂️ Ava Başla</button>
+</section>
+
+<section id="labirent6">
+  <h2>🌀 Labirent Oyunu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Doğru kavramları takip ederek labirentte hedefe ulaşmak.</div>
+  <div class="aciklama">🚶 karakterini oklarla (klavye ok tuşları veya aşağıdaki düğmeler) yönlendirerek 🏡'ye ulaştır! Yolda parıldayan yıldızlara basarsan bir kavram toplarsın.</div>
+  <div class="oyun-bilgi">
+    <span>🔁 Hamle: <b id="lab6Hamle">0</b></span>
+    <span>⭐ Toplanan: <b id="lab6Toplanan">0</b>/<b id="lab6ToplamYildiz">20</b></span>
+    <span>⏱️ Süre: <b id="lab6Sure">0</b>sn</span>
+  </div>
+  <div class="balon-durum" id="lab6Durum"></div>
+  <div class="labirent-izgara" id="lab6Izgara"></div>
+  <div class="labirent-kontroller">
+    <button class="labirent-tus" onclick="labirent6Hareket(-1,0)">▲</button>
+    <div>
+      <button class="labirent-tus" onclick="labirent6Hareket(0,-1)">◀</button>
+      <button class="labirent-tus" onclick="labirent6Hareket(1,0)">▼</button>
+      <button class="labirent-tus" onclick="labirent6Hareket(0,1)">▶</button>
+    </div>
+  </div>
+  <div class="sonuc-kutusu" id="lab6Sonuc"></div>
+  <button class="eylem" onclick="labirent6Baslat()">🔄 Yeni Labirent</button>
+</section>
+
+<section id="ezsira6">
+  <h2>1️⃣ Ezber: Sırala Bakalım</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Amentü Duası'nın cümlelerini doğru sırayla dizebileceksin.</div>
+  <div class="aciklama">Karışık sırada verilen cümleleri, Amentü Duası'ndaki doğru sıraya göre tıklayarak diz.</div>
+  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="ez16Dizilen">0</b>/<b>8</b></span></div>
+  <div class="kelime-cevap" id="ez16Cevap"></div>
+  <div class="kelime-banka" id="ez16Banka"></div>
+  <div class="sonuc-kutusu" id="ez16Sonuc"></div>
+  <button class="eylem" onclick="ez16Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezbosluk6">
+  <h2>2️⃣ Ezber: Boşluk Doldur</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Amentü Duası cümlelerindeki kelimeleri tam olarak hatırlayabileceksin.</div>
+  <div class="aciklama">Cümledeki boşluğa gelen doğru kelimeyi seç.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez26Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez26Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez26Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez26Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez26Sonuc"></div>
+  <button class="eylem" onclick="ez26Baslat()">📝 Başla</button>
+</section>
+
+<section id="ezeslestir6">
+  <h2>3️⃣ Ezber: Anlam Eşleştir</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Amentü Duası'nın her cümlesini anlamıyla eşleştirebileceksin.</div>
+  <div class="aciklama">Soldan bir cümle, sağdan onun anlamını seç. Doğru eşleşirse ikisi de kilitlenir.</div>
+  <div class="oyun-bilgi"><span>✅ Eşleşen: <b id="ez36Eslesen">0</b>/<b>8</b></span></div>
+  <div class="ez-iki-sutun">
+    <div class="ez-sutun"><h4>Cümle</h4><div id="ez36Sol"></div></div>
+    <div class="ez-sutun"><h4>Anlam</h4><div id="ez36Sag"></div></div>
+  </div>
+  <div class="sonuc-kutusu" id="ez36Sonuc"></div>
+  <button class="eylem" onclick="ez36Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezhafiza6">
+  <h2>4️⃣ Ezber: Hafıza Kartları</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: cümle-anlam çiftlerini eşleştirerek hafızanı güçlendireceksin.</div>
+  <div class="aciklama">İki kartı çevir. Bir cümle ile doğru anlamı eşleşirse kartlar açık kalır.</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ez46Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="ez46Hamle">0</b></span></div>
+  <div class="ez-hafiza-izgara" id="ez46Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
+  <div class="sonuc-kutusu" id="ez46Sonuc"></div>
+  <button class="eylem" onclick="ez46Baslat()">🔄 Yeni Oyun</button>
+</section>
+
+<section id="ezadimadim6">
+  <h2>5️⃣ Ezber: Adım Adım Ezber</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Amentü Duası'nı baştan sona, cümle sırasını bularak ezberleyeceksin.</div>
+  <div class="aciklama">Şimdiye kadar öğrendiklerin aşağıda listelenir. Sırada hangi cümlenin geldiğini seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Adım: <b id="ez56Adim">1</b>/<b>8</b></span></div>
+  <div class="ez-ogrenilen-liste" id="ez56Liste"></div>
+  <div class="balon-durum">Sırada hangi cümle geliyor?</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez56Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez56Sonuc"></div>
+  <button class="eylem" onclick="ez56Baslat()">▶️ Başla</button>
+</section>
+
+<section id="ezgizli6">
+  <h2>6️⃣ Ezber: Gizli Harfler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Amentü Duası'nın anahtar kelimelerini harf harf hatırlayacaksın.</div>
+  <div class="aciklama">Cümledeki gizli kelimenin harfleri karıştırıldı. Harflere doğru sırayla tıklayarak kelimeyi tamamla.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez66Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez66Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez66Metin"></div>
+  <div class="kelime-cevap" id="ez66Cevap"></div>
+  <div class="kelime-banka" id="ez66Banka"></div>
+  <div class="sonuc-kutusu" id="ez66Sonuc"></div>
+  <button class="eylem" onclick="ez66Baslat()">🔐 Başla</button>
+</section>
+
+<section id="ezkaybolan6">
+  <h2>7️⃣ Ezber: Kaybolan Kelimeler</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Az önce okuduğun cümleyi hafızandan tanıyabileceksin.</div>
+  <div class="aciklama">Cümleyi 3 saniye izle, sonra kaybolacak. Az önce gördüğün cümlenin BİREBİR aynısını seç!</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ez76Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ez76Dogru">0</b></span></div>
+  <div class="ez-metin-goster" id="ez76Metin">👁️ Başlamak için düğmeye bas</div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez76Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez76Sonuc"></div>
+  <button class="eylem" onclick="ez76Baslat()">👁️ Başla</button>
+</section>
+
+<section id="ezhiz6">
+  <h2>8️⃣ Ezber: Hız Testi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Amentü Duası cümle-anlam eşleşmelerini hızlı ve akıcı hatırlayacaksın.</div>
+  <div class="aciklama">Süre dolmadan verilen anlama ait doğru cümleyi seç. Ne kadar çok doğru cevaplarsan o kadar yüksek puan alırsın!</div>
+  <div class="ez-zamanlayici" id="ez86Sayac">60</div>
+  <div class="oyun-bilgi"><span>✅ Doğru: <b id="ez86Dogru">0</b></span><span>❌ Yanlış: <b id="ez86Yanlis">0</b></span></div>
+  <div class="ez-metin-goster" id="ez86Metin"></div>
+  <div class="ez-iki-sutun"><div class="ez-sutun" id="ez86Secenekler" style="margin:0 auto;"></div></div>
+  <div class="sonuc-kutusu" id="ez86Sonuc"></div>
+  <button class="eylem" onclick="ez86Baslat()">⏱️ Başla</button>
+</section>
+
+<!-- ===================== İKİ KİŞİLİK OYUNLAR (20 yeni oyun) ===================== -->
+
+<section id="qb6">
+  <h2>⚔️ Bilgi Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Allah sevgisi ve iman esaslarıyla ilgili bilgilerini pekiştireceksin.</div>
+  <div class="aciklama">İki oyuncu aynı cihazdan sırayla oynar. Cihazı arkadaşına ver, sorulan soruya doğru cevabı seç, puan topla!</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="qb6SoruNo">1</b>/<b id="qb6Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="qb6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="qb6Puan2">0</b></span>
+  </div>
+  <div id="qb6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="qb6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="qb6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="qb6Secenekler"></div>
+  <div class="sonuc-kutusu" id="qb6Sonuc"></div>
+  <div id="qb6YenidenBaslat"></div>
+  <button class="eylem" onclick="qb6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="mm6">
+  <h2>🧠 Hafıza Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Allah sevgisiyle ilgili kavramların anlamlarını hafızanda güçlendireceksin.</div>
+  <div class="aciklama">Sırayla iki kart aç. Kavram ile anlamı eşleşirse puan kazanır ve tekrar oynarsın; eşleşmezse sıra rakibine geçer.</div>
+  <div class="oyun-bilgi">
+    <span>🔵 1. Oyuncu: <b id="mm6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="mm6Puan2">0</b></span>
+  </div>
+  <p style="text-align:center;font-weight:bold;" id="mm6SiraKimde"></p>
+  <div class="hafiza-izgara" id="mm6Izgara"></div>
+  <div class="sonuc-kutusu" id="mm6Sonuc"></div>
+  <div id="mm6YenidenBaslat"></div>
+  <button class="eylem" onclick="mm6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="tl6">
+  <h2>📜 Zaman Çizelgesi Yarışı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İman esaslarının ve şükrün doğru sırasını öğreneceksin.</div>
+  <div class="aciklama">Cihazı sırayla arkadaşına ver. Verilen öğeleri tıklayarak doğru sıraya diz, ne kadar hızlı ve doğru dizersen o kadar puan kazanırsın.</div>
+  <div class="oyun-bilgi">
+    <span>🔁 Tur: <b id="tl6TurNo">1</b>/<b id="tl6TurToplam">3</b></span>
+    <span>🔵 1. Oyuncu: <b id="tl6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="tl6Puan2">0</b></span>
+  </div>
+  <div id="tl6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="tl6SiraKimde"></p>
+  <p style="text-align:center;font-style:italic;" id="tl6Baslik"></p>
+  <div class="kelime-cevap" id="tl6Cevap"></div>
+  <div class="kelime-banka" id="tl6Banka"></div>
+  <div class="sonuc-kutusu" id="tl6Sonuc"></div>
+  <div id="tl6YenidenBaslat"></div>
+  <button class="eylem" onclick="tl6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="sq6">
+  <h2>⏩ Hızlı Bilgi Yarışı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Allah sevgisiyle ilgili bilgileri hızlı hatırlayacaksın.</div>
+  <div class="aciklama">Her soru için 15 saniyen var! Süre dolarsa soru yanlış sayılır ve sıra rakibine geçer.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="sq6SoruNo">1</b>/<b id="sq6Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="sq6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="sq6Puan2">0</b></span>
+    <span>⏱️ <b id="sq6Sure">-</b>sn</span>
+  </div>
+  <div id="sq6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="sq6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="sq6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="sq6Secenekler"></div>
+  <div class="sonuc-kutusu" id="sq6Sonuc"></div>
+  <div id="sq6YenidenBaslat"></div>
+  <button class="eylem" onclick="sq6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="myb6">
+  <h2>🎁 Gizem Kutusu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Bazı sorularda sürpriz bonus puanlar kazanabileceksin.</div>
+  <div class="aciklama">Her kutu bir soru gizler. Bazı kutular ⭐ bonuslu sorulardır — doğru cevaplarsan çift puan kazanırsın!</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="myb6SoruNo">1</b>/<b id="myb6Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="myb6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="myb6Puan2">0</b></span>
+  </div>
+  <div id="myb6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="myb6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="myb6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="myb6Secenekler"></div>
+  <div class="sonuc-kutusu" id="myb6Sonuc"></div>
+  <div id="myb6YenidenBaslat"></div>
+  <button class="eylem" onclick="myb6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="cc6">
+  <h2>🔗 Kavram Bağlantısı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Kavramları doğru açıklamalarıyla bileceksin.</div>
+  <div class="aciklama">Sırayla iki kart aç. Kavram ile açıklaması eşleşirse puan kazanırsın.</div>
+  <div class="oyun-bilgi">
+    <span>🔵 1. Oyuncu: <b id="cc6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="cc6Puan2">0</b></span>
+  </div>
+  <p style="text-align:center;font-weight:bold;" id="cc6SiraKimde"></p>
+  <div class="hafiza-izgara" id="cc6Izgara"></div>
+  <div class="sonuc-kutusu" id="cc6Sonuc"></div>
+  <div id="cc6YenidenBaslat"></div>
+  <button class="eylem" onclick="cc6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="esc6">
+  <h2>🚪 Kaçış Görevi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Tüm kapılardan doğru cevaplarla geçerek görevi tamamlayacaksın.</div>
+  <div class="aciklama">Her kapıyı geçmek için soruyu doğru cevapla. Son kapıdan çıkan kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>🚪 Kapı: <b id="esc6SoruNo">1</b>/<b id="esc6Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="esc6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="esc6Puan2">0</b></span>
+  </div>
+  <div id="esc6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="esc6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="esc6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="esc6Secenekler"></div>
+  <div class="sonuc-kutusu" id="esc6Sonuc"></div>
+  <div id="esc6YenidenBaslat"></div>
+  <button class="eylem" onclick="esc6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="kr6">
+  <h2>🏁 Bilgi Yarışı Parkuru</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru bildikçe parkurda ilerleyeceksin.</div>
+  <div class="aciklama">Her doğru cevap seni parkurda bir adım ileri taşır. Önce bitiren kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>🏁 Adım: <b id="kr6SoruNo">1</b>/<b id="kr6Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="kr6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="kr6Puan2">0</b></span>
+  </div>
+  <div id="kr6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="kr6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="kr6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="kr6Secenekler"></div>
+  <div class="sonuc-kutusu" id="kr6Sonuc"></div>
+  <div id="kr6YenidenBaslat"></div>
+  <button class="eylem" onclick="kr6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="lg6">
+  <h2>🧩 Mantık Bulmacası</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İpuçlarından yola çıkarak mantık yürütmeyi öğreneceksin.</div>
+  <div class="aciklama">Verilen ipuçlarını oku ve hangi kavramın anlatıldığını bul.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="lg6SoruNo">1</b>/<b id="lg6Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="lg6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="lg6Puan2">0</b></span>
+  </div>
+  <div id="lg6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="lg6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="lg6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="lg6Secenekler"></div>
+  <div class="sonuc-kutusu" id="lg6Sonuc"></div>
+  <div id="lg6YenidenBaslat"></div>
+  <button class="eylem" onclick="lg6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="mc6">
+  <h2>🃏 Görev Kartları</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Günlük hayatta Allah sevgisiyle ilgili doğru davranışları bileceksin.</div>
+  <div class="aciklama">Her görev kartı bir durum anlatır. Doğru cevabı seçip kartı tamamla!</div>
+  <div class="oyun-bilgi">
+    <span>🃏 Kart: <b id="mc6SoruNo">1</b>/<b id="mc6Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="mc6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="mc6Puan2">0</b></span>
+  </div>
+  <div id="mc6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="mc6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="mc6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="mc6Secenekler"></div>
+  <div class="sonuc-kutusu" id="mc6Sonuc"></div>
+  <div id="mc6YenidenBaslat"></div>
+  <button class="eylem" onclick="mc6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="dc6">
+  <h2>💬 Fikir Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru gerekçeyle düşünmeyi öğreneceksin.</div>
+  <div class="aciklama">Verilen durumda hangi görüşün daha doğru ve güçlü olduğuna karar ver.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="dc6SoruNo">1</b>/<b id="dc6Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="dc6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="dc6Puan2">0</b></span>
+  </div>
+  <div id="dc6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="dc6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.05em;" id="dc6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="dc6Secenekler"></div>
+  <div class="sonuc-kutusu" id="dc6Sonuc"></div>
+  <div id="dc6YenidenBaslat"></div>
+  <button class="eylem" onclick="dc6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="fm6">
+  <h2>✅ Doğru mu Efsane mi?</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Doğru ve yanlış bilgileri ayırt edebileceksin.</div>
+  <div class="aciklama">Verilen ifadenin doğru mu yanlış mı olduğuna hızlıca karar ver.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="fm6SoruNo">1</b>/<b id="fm6Toplam">8</b></span>
+    <span>🔵 1. Oyuncu: <b id="fm6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="fm6Puan2">0</b></span>
+  </div>
+  <div id="fm6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="fm6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="fm6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="fm6Secenekler"></div>
+  <div class="sonuc-kutusu" id="fm6Sonuc"></div>
+  <div id="fm6YenidenBaslat"></div>
+  <button class="eylem" onclick="fm6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="cb6">
+  <h2>🔓 Şifre Kırıcı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İpuçlarından kelime çözmede ustalaşacaksın.</div>
+  <div class="aciklama">İpuçlarını oku, gizli kelimeyi tahmin et. Az ipuçla bilirsen daha çok puan kazanırsın! Ekstra ipucu için butona bas.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="cb6SoruNo">1</b>/<b id="cb6Toplam">4</b></span>
+    <span>🔵 1. Oyuncu: <b id="cb6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="cb6Puan2">0</b></span>
+  </div>
+  <div id="cb6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="cb6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.05em;" id="cb6Ipucu"></p>
+  <input type="text" id="cb6Girdi" placeholder="Cevabını yaz">
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
+    <button class="eylem" onclick="ikiliIpucuYeni('cb6')">💡 Yeni İpucu</button>
+    <button class="eylem" onclick="ikiliIpucuGonder('cb6')">📤 Cevabı Gönder</button>
+  </div>
+  <div class="sonuc-kutusu" id="cb6Sonuc"></div>
+  <div id="cb6YenidenBaslat"></div>
+  <button class="eylem" onclick="cb6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="pz6">
+  <h2>🧩 Bulmaca Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Tanımlardan kavrama ulaşmada hızlanacaksın.</div>
+  <div class="aciklama">İpuçlarını sırayla oku, kavramı tahmin et. İlk ipucuyla bilirsen en yüksek puanı alırsın!</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="pz6SoruNo">1</b>/<b id="pz6Toplam">4</b></span>
+    <span>🔵 1. Oyuncu: <b id="pz6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="pz6Puan2">0</b></span>
+  </div>
+  <div id="pz6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="pz6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.05em;" id="pz6Ipucu"></p>
+  <input type="text" id="pz6Girdi" placeholder="Cevabını yaz">
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
+    <button class="eylem" onclick="ikiliIpucuYeni('pz6')">💡 Yeni İpucu</button>
+    <button class="eylem" onclick="ikiliIpucuGonder('pz6')">📤 Cevabı Gönder</button>
+  </div>
+  <div class="sonuc-kutusu" id="pz6Sonuc"></div>
+  <div id="pz6YenidenBaslat"></div>
+  <button class="eylem" onclick="pz6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="th6">
+  <h2>🗺️ Hazine Avı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: İpuçlarını takip ederek bilgi hazinesine ulaşacaksın.</div>
+  <div class="aciklama">Her doğru cevap seni hazineye bir adım yaklaştırır. İlk ulaşan kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>🗺️ İpucu: <b id="th6SoruNo">1</b>/<b id="th6Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="th6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="th6Puan2">0</b></span>
+  </div>
+  <div id="th6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="th6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="th6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="th6Secenekler"></div>
+  <div class="sonuc-kutusu" id="th6Sonuc"></div>
+  <div id="th6YenidenBaslat"></div>
+  <button class="eylem" onclick="th6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="sb6">
+  <h2>♟️ Strateji Tahtası</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Allah'ın isimleri ve sıfatlarıyla ilgili bilgilerini pekiştireceksin.</div>
+  <div class="aciklama">Her doğru cevap seni tahtada bir kare ileri taşır. Önce bitiren kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>♟️ Kare: <b id="sb6SoruNo">1</b>/<b id="sb6Toplam">6</b></span>
+    <span>🔵 1. Oyuncu: <b id="sb6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="sb6Puan2">0</b></span>
+  </div>
+  <div id="sb6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="sb6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="sb6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="sb6Secenekler"></div>
+  <div class="sonuc-kutusu" id="sb6Sonuc"></div>
+  <div id="sb6YenidenBaslat"></div>
+  <button class="eylem" onclick="sb6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="fc6">
+  <h2>⚡ Şimşek Yarışması</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Allah sevgisiyle ilgili bilgileri anında hatırlayabileceksin.</div>
+  <div class="aciklama">Sadece 6 saniyen var! Süre dolarsa soru yanlış sayılır.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="fc6SoruNo">1</b>/<b id="fc6Toplam">8</b></span>
+    <span>🔵 1. Oyuncu: <b id="fc6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="fc6Puan2">0</b></span>
+    <span>⏱️ <b id="fc6Sure">-</b>sn</span>
+  </div>
+  <div id="fc6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="fc6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="fc6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="fc6Secenekler"></div>
+  <div class="sonuc-kutusu" id="fc6Sonuc"></div>
+  <div id="fc6YenidenBaslat"></div>
+  <button class="eylem" onclick="fc6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="sv6">
+  <h2>💔 Hayatta Kalma Modu</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Dikkatli ve doğru cevap vermenin önemini öğreneceksin.</div>
+  <div class="aciklama">Her oyuncunun 3 canı var. Yanlış cevap can kaybettirir. Son ayakta kalan kazanır!</div>
+  <div class="oyun-bilgi">
+    <span>🔵 1. Oyuncu: <b id="sv6Can1">❤️❤️❤️</b></span>
+    <span>🔴 2. Oyuncu: <b id="sv6Can2">❤️❤️❤️</b></span>
+  </div>
+  <div id="sv6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="sv6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="sv6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="sv6Secenekler"></div>
+  <div class="sonuc-kutusu" id="sv6Sonuc"></div>
+  <div id="sv6YenidenBaslat"></div>
+  <button class="eylem" onclick="sv6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="dm6">
+  <h2>🤔 Doğru Kararı Ver</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Günlük hayatta doğru kararlar vermeyi öğreneceksin.</div>
+  <div class="aciklama">Verilen senaryoda en doğru davranışı seç.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="dm6SoruNo">1</b>/<b id="dm6Toplam">5</b></span>
+    <span>🔵 1. Oyuncu: <b id="dm6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="dm6Puan2">0</b></span>
+  </div>
+  <div id="dm6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="dm6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.05em;" id="dm6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="dm6Secenekler"></div>
+  <div class="sonuc-kutusu" id="dm6Sonuc"></div>
+  <div id="dm6YenidenBaslat"></div>
+  <button class="eylem" onclick="dm6Baslat()">🎮 Oyuna Başla</button>
+</section>
+
+<section id="ca6">
+  <h2>🏆 Şampiyonlar Arenası</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Bu ünitede öğrendiğin her şeyi büyük bir final turnuvasında göstereceksin.</div>
+  <div class="aciklama">20 soruluk final turnuvası! En yüksek puanı alan şampiyon olur.</div>
+  <div class="oyun-bilgi">
+    <span>❓ Soru: <b id="ca6SoruNo">1</b>/<b id="ca6Toplam">20</b></span>
+    <span>🔵 1. Oyuncu: <b id="ca6Puan1">0</b></span>
+    <span>🔴 2. Oyuncu: <b id="ca6Puan2">0</b></span>
+  </div>
+  <div id="ca6ElDegistir"></div>
+  <p style="text-align:center;font-weight:bold;" id="ca6SiraKimde"></p>
+  <p style="text-align:center;font-size:1.1em;" id="ca6SoruMetin"></p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;" id="ca6Secenekler"></div>
+  <div class="sonuc-kutusu" id="ca6Sonuc"></div>
+  <div id="ca6YenidenBaslat"></div>
+  <button class="eylem" onclick="ca6Baslat()">🎮 Oyuna Başla</button>
+</section>
+</main>
+
+<script src="../ortak/oyun-merkezi.js"></script>
+<script>
+const LS_PUAN_ANAHTARI = 'dkabPuanDurumu';
+const OYUN_LISTESI = [
+  {id:'kelimeavi', kategori:'bulmaca', ikon:'🔎', baslik:'Kelime Avı', aciklama:'Harf tablosunda gizlenmiş kelimeleri bul.'},
+  {id:'cengel', kategori:'bulmaca', ikon:'🧩', baslik:'Çengel Bulmaca', aciklama:'İpuçlarından yola çıkarak bulmacayı tamamla.'},
+  {id:'merdiven', kategori:'bulmaca', ikon:'🪜', baslik:'Sözcük Merdiveni', aciklama:'Basamak basamak doğru kelimeye ulaş.'},
+  {id:'sifre', kategori:'bulmaca', ikon:'🔐', baslik:'Şifreli Sözcük', aciklama:'Şifreyi çöz, gizli kelimeyi ortaya çıkar.'},
+  {id:'sifretanim', kategori:'bulmaca', ikon:'🔐', baslik:'Şifreli Tanım', aciklama:'Tanımdan yola çıkarak şifreyi çöz.'},
+  {id:'kelimekodlama', kategori:'bulmaca', ikon:'💻', baslik:'Kelime Kodlama', aciklama:'Harfleri kodla, kelimeyi tamamla.'},
+  {id:'nonogram', kategori:'bulmaca', ikon:'🖼️', baslik:'Nonogram', aciklama:'Sayı ipuçlarıyla gizli resmi ortaya çıkar.'},
+  {id:'satranc', kategori:'bulmaca', ikon:'♞', baslik:'Kelime Satrancı', aciklama:'Doğru hamleyle kelimeyi tamamla.'},
+  {id:'kelimeuret', kategori:'yarisma', ikon:'⚡', baslik:'Hızlı Kelime', aciklama:'Süre bitmeden doğru kelimeyi bul.'},
+  {id:'tuzak', kategori:'yarisma', ikon:'🚫', baslik:'Tuzak Harf', aciklama:'Yanıltıcı harflere dikkat et, doğruyu seç.'},
+  {id:'fabrika', kategori:'yarisma', ikon:'🏭', baslik:'Kelime Fabrikası', aciklama:'Harflerden yeni kelimeler üret.'},
+  {id:'muhendis', kategori:'yarisma', ikon:'🛠️', baslik:'Kelime Mühendisi', aciklama:'Parçaları birleştirip kelimeyi inşa et.'},
+  {id:'kavramturnuvasi', kategori:'yarisma', ikon:'🏆', baslik:'Kavram Turnuvası', aciklama:'Bilgini turnuva formatında test et.'},
+  {id:'bonus', kategori:'yarisma', ikon:'🎮', baslik:'Bonus Oyun', aciklama:'Ekstra puan için bonus turu oyna.'},
+  {id:'dedektif', kategori:'mantik', ikon:'🕵️', baslik:'Kelime Dedektifi', aciklama:'İpuçlarını takip et, kelimeyi çöz.'},
+  {id:'dildedektifi', kategori:'mantik', ikon:'🕵️‍♀️', baslik:'Dil Dedektifi', aciklama:'Dilsel ipuçlarıyla doğru cevaba ulaş.'},
+  {id:'mantikzinciri', kategori:'mantik', ikon:'🔗', baslik:'Mantık Zinciri', aciklama:'Mantık bağlantılarını sırayla kur.'},
+  {id:'semantiklabirent', kategori:'mantik', ikon:'🧠', baslik:'Semantik Labirent', aciklama:'Anlam ilişkilerini takip ederek ilerle.'},
+  {id:'celiskiavi', kategori:'mantik', ikon:'🕵️‍♂️', baslik:'Çelişki Avı', aciklama:'Metindeki çelişkiyi bul.'},
+  {id:'labirent', kategori:'macera', ikon:'🌀', baslik:'Labirent', aciklama:'Doğru yolu bulup labirentten çık.'},
+  {id:'ezsira', kategori:'ezber', ikon:'1️⃣', baslik:'Sırala Bakalım', aciklama:'Parçaları doğru sıraya diz.'},
+  {id:'ezbosluk', kategori:'ezber', ikon:'2️⃣', baslik:'Boşluk Doldur', aciklama:'Cümledeki boşlukları doğru doldur.'},
+  {id:'ezeslestir', kategori:'ezber', ikon:'3️⃣', baslik:'Anlam Eşleştir', aciklama:'Kavramları doğru anlamlarıyla eşleştir.'},
+  {id:'ezhafiza', kategori:'ezber', ikon:'4️⃣', baslik:'Hafıza Kartları', aciklama:'Eşleri bul, hafızanı güçlendir.'},
+  {id:'ezadimadim', kategori:'ezber', ikon:'5️⃣', baslik:'Adım Adım Ezber', aciklama:'Metni adım adım ezberle.'},
+  {id:'ezgizli', kategori:'ezber', ikon:'6️⃣', baslik:'Gizli Harfler', aciklama:'Gizlenmiş harfleri bulup kelimeyi tamamla.'},
+  {id:'ezkaybolan', kategori:'ezber', ikon:'7️⃣', baslik:'Kaybolan Kelimeler', aciklama:'Kaybolan kelimeleri hafızandan bul.'},
+  {id:'ezhiz', kategori:'ezber', ikon:'8️⃣', baslik:'Hız Testi', aciklama:'Süre dolmadan hızlıca cevapla.'},
+  {id:'qb', kategori:'ikikisilik', ikon:'⚔️', baslik:'Bilgi Düellosu', aciklama:'İki oyuncu aynı sorulara sırayla cevap verir, en çok doğru bilen kazanır.'},
+  {id:'mm', kategori:'ikikisilik', ikon:'🧠', baslik:'Hafıza Düellosu', aciklama:"Allah sevgisiyle ilgili kavramları hafıza kartlarıyla eşleştir."},
+  {id:'tl', kategori:'ikikisilik', ikon:'📜', baslik:'Zaman Çizelgesi Yarışı', aciklama:'İman esaslarını ve şükrün adımlarını doğru sıraya dizerek rakibini geç.'},
+  {id:'sq', kategori:'ikikisilik', ikon:'⏩', baslik:'Hızlı Bilgi Yarışı', aciklama:'Süre dolmadan en hızlı doğru cevabı ver, puanı kap.'},
+  {id:'myb', kategori:'ikikisilik', ikon:'🎁', baslik:'Gizem Kutusu', aciklama:'Her turda rastgele bir soru veya bonus ödül çıkar.'},
+  {id:'cc', kategori:'ikikisilik', ikon:'🔗', baslik:'Kavram Bağlantısı', aciklama:'Kavramları doğru açıklamalarıyla eşleştir.'},
+  {id:'esc', kategori:'ikikisilik', ikon:'🚪', baslik:'Kaçış Görevi', aciklama:'Doğru cevaplarla kapılardan geçip görevi tamamla.'},
+  {id:'kr', kategori:'ikikisilik', ikon:'🏁', baslik:'Bilgi Yarışı Parkuru', aciklama:'Doğru cevaplarla parkurda ilerle, önce bitiren kazanır.'},
+  {id:'lg', kategori:'ikikisilik', ikon:'🧩', baslik:'Mantık Bulmacası', aciklama:'İpuçlarını kullanarak doğru cevaba mantıkla ulaş.'},
+  {id:'mc', kategori:'ikikisilik', ikon:'🃏', baslik:'Görev Kartları', aciklama:'Görev kartlarını sırayla aç, doğru cevapla puan topla.'},
+  {id:'dc', kategori:'ikikisilik', ikon:'💬', baslik:'Fikir Düellosu', aciklama:'Verilen durumda en doğru ve güçlü gerekçeyi seç.'},
+  {id:'fm', kategori:'ikikisilik', ikon:'✅', baslik:'Doğru mu Efsane mi?', aciklama:'İfadenin doğru mu yanlış mı olduğuna hızlıca karar ver.'},
+  {id:'cb', kategori:'ikikisilik', ikon:'🔓', baslik:'Şifre Kırıcı', aciklama:'Bilgi ipuçlarını kullanarak gizli kelimenin şifresini çöz.'},
+  {id:'pz', kategori:'ikikisilik', ikon:'🧩', baslik:'Bulmaca Düellosu', aciklama:'İpucu ipucu gelen tanımlardan kavramı ilk sen bul.'},
+  {id:'th', kategori:'ikikisilik', ikon:'🗺️', baslik:'Hazine Avı', aciklama:'İpuçlarını takip ederek bilgi hazinesine ilk sen ulaş.'},
+  {id:'sb', kategori:'ikikisilik', ikon:'♟️', baslik:'Strateji Tahtası', aciklama:'Doğru cevaplarla tahtada ilerleyerek rakibini geç.'},
+  {id:'fc', kategori:'ikikisilik', ikon:'⚡', baslik:'Şimşek Yarışması', aciklama:'Sadece birkaç saniyen var — hızlı düşün, hızlı cevapla!'},
+  {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
+  {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
+  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'}
+];
+oyunMerkeziOlustur(OYUN_LISTESI, '6', 'unite6.html');
+
+/* ===================== İKİ KİŞİLİK OYUNLAR - VERİ VE BAŞLATMA (20 oyun) ===================== */
+const QB6_SORULAR = [
+  {soru:"Evreni ve içindeki her şeyi yaratan kimdir?", secenekler:["Allah (cc)","Melekler"], dogru:"Allah (cc)"},
+  {soru:"Allah'ın sonsuz güç sahibi olmasına ne denir?", secenekler:["Kudret","Şükür"], dogru:"Kudret"},
+  {soru:"Allah'ın dünyada herkese merhamet etmesini ifade eden ismi hangisidir?", secenekler:["Rahman","Rahim"], dogru:"Rahman"},
+  {soru:"Allah'ın verdiği her türlü iyiliğe ne denir?", secenekler:["Nimet","Kader"], dogru:"Nimet"},
+  {soru:"Nimetlere karşı duyulan minnettarlık duygusuna ne denir?", secenekler:["Şükür","Kudret"], dogru:"Şükür"},
+  {soru:"Allah'a içten seslenip isteklerimizi açmaya ne denir?", secenekler:["Dua","Şehadet"], dogru:"Dua"}
+];
+function qb6Baslat(){ ikiliOyunBaslat({onek:'qb6', sorular:QB6_SORULAR}); }
+
+const MM6_CIFTLER = [
+  {metin1:"Kudret", metin2:"Allah'ın sonsuz güç sahibi olması"},
+  {metin1:"Rahman", metin2:"Allah'ın dünyada herkese merhamet etmesi"},
+  {metin1:"Rahim", metin2:"Allah'ın ahirette inananlara özel merhameti"},
+  {metin1:"Nimet", metin2:"Allah'ın verdiği her türlü iyilik"},
+  {metin1:"Şükür", metin2:"Nimetlere karşı duyulan minnettarlık"},
+  {metin1:"Tevhit", metin2:"Allah'ın bir ve tek olduğuna inanmak"}
+];
+function mm6Baslat(){ ikiliHafizaBaslat({onek:'mm6', ciftler:MM6_CIFTLER}); }
+
+const TL6_TURLAR = [
+  {baslik:"Amentü duasındaki iman esaslarını sırala", ogeler:["Allah'a iman","Meleklere iman","Kitaplara iman","Peygamberlere iman","Ahirete iman","Kadere iman"]},
+  {baslik:"Dua ederken izlenecek sırayı diz", ogeler:["Abdest alınır","Kıbleye dönülür","Eller açılır","Samimiyetle dua edilir"]},
+  {baslik:"Şükrün adımlarını sırala", ogeler:["Nimeti fark et","Kalpten teşekkür et","Nimeti yerinde kullan","Başkalarıyla paylaş"]}
+];
+function tl6Baslat(){ ikiliSiralaBaslat({onek:'tl6', turlar:TL6_TURLAR}); }
+
+const SQ6_SORULAR = [
+  {soru:"Allah'a ve Peygambere inandığına tanıklık etmeye ne denir?", secenekler:["Şehadet","Tevhit"], dogru:"Şehadet"},
+  {soru:"İslam'ın altı iman esasını özetleyen dua hangisidir?", secenekler:["Amentü","Fatiha"], dogru:"Amentü"},
+  {soru:"Allah'ın nurdan yarattığı varlıklara ne denir?", secenekler:["Melek","Peygamber"], dogru:"Melek"},
+  {soru:"Ölümden sonra başlayacak sonsuz hayata ne denir?", secenekler:["Ahiret","Dünya"], dogru:"Ahiret"},
+  {soru:"Allah'ın her şeyi ezelden bilip takdir etmesine ne denir?", secenekler:["Kader","Şükür"], dogru:"Kader"},
+  {soru:"İbadetleri yalnızca Allah rızası için yapmaya ne denir?", secenekler:["İhlas","Şükür"], dogru:"İhlas"}
+];
+function sq6Baslat(){ ikiliOyunBaslat({onek:'sq6', sorular:SQ6_SORULAR, sureSN:15}); }
+
+const MYB6_SORULAR = [
+  {soru:"Dua ederken kalpten olma haline ne denir?", secenekler:["Samimiyet","Kibir"], dogru:"Samimiyet", bonus:true},
+  {soru:"İman nedir?", secenekler:["Altı esasa kalpten inanmak","Sadece namaz kılmak"], dogru:"Altı esasa kalpten inanmak"},
+  {soru:"Rahman ile Rahim arasındaki fark nedir?", secenekler:["Rahman dünyada herkese, Rahim ahirette inananlara","İkisi de aynı anlama gelir"], dogru:"Rahman dünyada herkese, Rahim ahirette inananlara", bonus:true},
+  {soru:"Evrendeki düzen bize neyi hatırlatır?", secenekler:["Allah'ın kudretini","Tesadüfü"], dogru:"Allah'ın kudretini"},
+  {soru:"Şükrün bir yolu nedir?", secenekler:["Nimeti paylaşmak ve teşekkür etmek","Nimeti unutmak"], dogru:"Nimeti paylaşmak ve teşekkür etmek"},
+  {soru:"Peygamber kimdir?", secenekler:["Allah'ın gönderdiği elçi","Bir melek"], dogru:"Allah'ın gönderdiği elçi"}
+];
+function myb6Baslat(){ ikiliOyunBaslat({onek:'myb6', sorular:MYB6_SORULAR}); }
+
+const CC6_CIFTLER = [
+  {metin1:"Melek", metin2:"Nurdan yaratılan, günah işlemeyen varlık"},
+  {metin1:"Peygamber", metin2:"Allah'ın gönderdiği elçi"},
+  {metin1:"Ahiret", metin2:"Ölümden sonraki sonsuz hayat"},
+  {metin1:"Kader", metin2:"Allah'ın her şeyi ezelden bilmesi"},
+  {metin1:"İhlas", metin2:"Yalnızca Allah rızası için yapmak"},
+  {metin1:"Samimiyet", metin2:"Dua ederken kalpten olma hali"}
+];
+function cc6Baslat(){ ikiliHafizaBaslat({onek:'cc6', ciftler:CC6_CIFTLER}); }
+
+const ESC6_SORULAR = [
+  {soru:"Kapı 1: Evreni yaratan kimdir?", secenekler:["Allah","Melekler"], dogru:"Allah"},
+  {soru:"Kapı 2: Nimetlere karşı duyulan minnete ne denir?", secenekler:["Şükür","Kudret"], dogru:"Şükür"},
+  {soru:"Kapı 3: Allah'a içten seslenmeye ne denir?", secenekler:["Dua","Şehadet"], dogru:"Dua"},
+  {soru:"Kapı 4: Allah'ın bir ve tek olduğuna inanmaya ne denir?", secenekler:["Tevhit","Kader"], dogru:"Tevhit"},
+  {soru:"Kapı 5 (Çıkış): Altı iman esasını özetleyen dua hangisidir?", secenekler:["Amentü","Fatiha"], dogru:"Amentü"}
+];
+function esc6Baslat(){ ikiliOyunBaslat({onek:'esc6', sorular:ESC6_SORULAR}); }
+
+const KR6_SORULAR = [
+  {soru:"Kudret nedir?", secenekler:["Sonsuz güç sahibi olmak","Merhamet sahibi olmak"], dogru:"Sonsuz güç sahibi olmak"},
+  {soru:"Rahman ismi ne ifade eder?", secenekler:["Dünyada herkese merhamet","Ahirette özel merhamet"], dogru:"Dünyada herkese merhamet"},
+  {soru:"Rahim ismi ne ifade eder?", secenekler:["Ahirette inananlara özel merhamet","Dünyada herkese merhamet"], dogru:"Ahirette inananlara özel merhamet"},
+  {soru:"Nimet nedir?", secenekler:["Allah'ın verdiği iyilik","Bir çeşit ibadet"], dogru:"Allah'ın verdiği iyilik"},
+  {soru:"Tevhit nedir?", secenekler:["Allah'ın bir ve tek olduğuna inanmak","Allah'a şükretmek"], dogru:"Allah'ın bir ve tek olduğuna inanmak"},
+  {soru:"Şehadet nedir?", secenekler:["Allah'a ve Peygambere tanıklık","Bir dua çeşidi"], dogru:"Allah'a ve Peygambere tanıklık"}
+];
+function kr6Baslat(){ ikiliOyunBaslat({onek:'kr6', sorular:KR6_SORULAR}); }
+
+const LG6_SORULAR = [
+  {soru:"Bu, Allah'ın sonsuz güç sahibi olmasıdır. Nedir?", secenekler:["Kudret","Şükür"], dogru:"Kudret"},
+  {soru:"Bu, nimetlere karşı duyulan minnettarlıktır. Nedir?", secenekler:["Şükür","Kudret"], dogru:"Şükür"},
+  {soru:"Bu, Allah'a içten seslenip isteklerimizi açmaktır. Nedir?", secenekler:["Dua","Şehadet"], dogru:"Dua"},
+  {soru:"Bu, altı iman esasını özetleyen duadır. Nedir?", secenekler:["Amentü","Fatiha"], dogru:"Amentü"},
+  {soru:"Bu, ibadetleri yalnızca Allah rızası için yapmaktır. Nedir?", secenekler:["İhlas","Şükür"], dogru:"İhlas"}
+];
+function lg6Baslat(){ ikiliOyunBaslat({onek:'lg6', sorular:LG6_SORULAR}); }
+
+const MC6_SORULAR = [
+  {soru:"Görev Kartı 1: Bir nimete kavuştuğunda ne yaparsın?", secenekler:["Şükrederim","Unuturum"], dogru:"Şükrederim"},
+  {soru:"Görev Kartı 2: Bir isteğin olduğunda ne yaparsın?", secenekler:["Dua ederim","Hiçbir şey yapmam"], dogru:"Dua ederim"},
+  {soru:"Görev Kartı 3: Allah'ın bir olduğuna nasıl inanırsın?", secenekler:["Tevhit ile","Şükürle"], dogru:"Tevhit ile"},
+  {soru:"Görev Kartı 4: İbadetlerini kimin için yaparsın?", secenekler:["Sadece Allah rızası için","Gösteriş için"], dogru:"Sadece Allah rızası için"},
+  {soru:"Görev Kartı 5: Dua ederken nasıl olmalısın?", secenekler:["Samimi","Kayıtsız"], dogru:"Samimi"},
+  {soru:"Görev Kartı 6: Amentü duası neyi özetler?", secenekler:["İman esaslarını","İslam'ın şartlarını"], dogru:"İman esaslarını"}
+];
+function mc6Baslat(){ ikiliOyunBaslat({onek:'mc6', sorular:MC6_SORULAR}); }
+
+const DC6_SORULAR = [
+  {soru:"'Dua etmenin bir faydası yok' diyen arkadaşına ne dersin?", secenekler:["Dua, Allah'a içten seslenmek ve O'na güvenmektir, faydalıdır","Haklısın, faydası yok"], dogru:"Dua, Allah'a içten seslenmek ve O'na güvenmektir, faydalıdır"},
+  {soru:"'Şükretmek sadece söz söylemektir' diyen arkadaşına ne dersin?", secenekler:["Şükür, nimeti paylaşmayı ve doğru kullanmayı da içerir","Evet, sadece söz yeterli"], dogru:"Şükür, nimeti paylaşmayı ve doğru kullanmayı da içerir"},
+  {soru:"'Melekler günah işleyebilir' diyen arkadaşına ne dersin?", secenekler:["Hayır, melekler günah işlemeyen, nurdan yaratılan varlıklardır","Evet, işleyebilirler"], dogru:"Hayır, melekler günah işlemeyen, nurdan yaratılan varlıklardır"},
+  {soru:"'İhlassız ibadet de kabul olur' diyen arkadaşına ne dersin?", secenekler:["İbadetlerimizi yalnızca Allah rızası için, ihlasla yapmalıyız","Haklısın, önemli değil"], dogru:"İbadetlerimizi yalnızca Allah rızası için, ihlasla yapmalıyız"},
+  {soru:"'Kader konusu önemli değil' diyen arkadaşına ne dersin?", secenekler:["Kader, iman esaslarından biridir, önemlidir","Haklısın, önemli değil"], dogru:"Kader, iman esaslarından biridir, önemlidir"}
+];
+function dc6Baslat(){ ikiliOyunBaslat({onek:'dc6', sorular:DC6_SORULAR}); }
+
+const FM6_SORULAR = [
+  {soru:"Allah evreni ve içindeki her şeyi yaratmıştır.", secenekler:["Doğru","Yanlış"], dogru:"Doğru"},
+  {soru:"Rahman ismi sadece ahiretteki merhameti ifade eder.", secenekler:["Doğru","Yanlış"], dogru:"Yanlış"},
+  {soru:"Şükür, nimetlere karşı minnettarlıktır.", secenekler:["Doğru","Yanlış"], dogru:"Doğru"},
+  {soru:"Melekler günah işleyebilir.", secenekler:["Doğru","Yanlış"], dogru:"Yanlış"},
+  {soru:"Amentü duası altı iman esasını özetler.", secenekler:["Doğru","Yanlış"], dogru:"Doğru"},
+  {soru:"Tevhit, Allah'ın çok olduğuna inanmaktır.", secenekler:["Doğru","Yanlış"], dogru:"Yanlış"},
+  {soru:"İhlas, ibadetleri yalnızca Allah rızası için yapmaktır.", secenekler:["Doğru","Yanlış"], dogru:"Doğru"},
+  {soru:"Dua ederken samimi olmak önemli değildir.", secenekler:["Doğru","Yanlış"], dogru:"Yanlış"}
+];
+function fm6Baslat(){ ikiliOyunBaslat({onek:'fm6', sorular:FM6_SORULAR}); }
+
+const CB6_SORULAR = [
+  {cevap:"KUDRET", ipuclari:["Allah'ın sonsuz gücüdür","Bir sıfattır","Evrendeki düzende görülür"]},
+  {cevap:"ŞÜKÜR", ipuclari:["Nimete karşı minnettarlıktır","Kalpten ve davranışla yapılır","Zıttı nankörlüktür"]},
+  {cevap:"TEVHİT", ipuclari:["Allah'ın bir ve tek olduğuna inanmaktır","İslam'ın temelidir","Şirkin zıttıdır"]},
+  {cevap:"AMENTÜ", ipuclari:["Bir duadır","Altı iman esasını özetler","Namazlarda da okunur"]}
+];
+function cb6Baslat(){ ikiliIpucuBaslat({onek:'cb6', sorular:CB6_SORULAR}); }
+
+const PZ6_SORULAR = [
+  {cevap:"MELEK", ipuclari:["Nurdan yaratılmıştır","Günah işlemez","Allah'a itaat eder"]},
+  {cevap:"PEYGAMBER", ipuclari:["Allah'ın gönderdiği elçidir","İnsanlara doğru yolu gösterir","Örnek alınır"]},
+  {cevap:"AHİRET", ipuclari:["Ölümden sonraki hayattır","Sonsuzdur","İman esaslarından biridir"]},
+  {cevap:"İHLAS", ipuclari:["Sadece Allah rızası içindir","Gösterişten uzaktır","İbadetin kalitesini artırır"]}
+];
+function pz6Baslat(){ ikiliIpucuBaslat({onek:'pz6', sorular:PZ6_SORULAR}); }
+
+const TH6_SORULAR = [
+  {soru:"İpucu 1: Evreni yaratan kimdir?", secenekler:["Allah","Melekler"], dogru:"Allah"},
+  {soru:"İpucu 2: Nimete karşı duyulan minnete ne denir?", secenekler:["Şükür","Kudret"], dogru:"Şükür"},
+  {soru:"İpucu 3: Allah'a içten seslenmeye ne denir?", secenekler:["Dua","Şehadet"], dogru:"Dua"},
+  {soru:"İpucu 4: Allah'ın bir ve tek olduğuna inanmaya ne denir?", secenekler:["Tevhit","Kader"], dogru:"Tevhit"},
+  {soru:"Son ipucu: Hazineyi bulmak için altı iman esasını özetleyen duayı söyle!", secenekler:["Amentü","Fatiha"], dogru:"Amentü"}
+];
+function th6Baslat(){ ikiliOyunBaslat({onek:'th6', sorular:TH6_SORULAR}); }
+
+const SB6_SORULAR = [
+  {soru:"Kalbimizin atması, çiçeklerin açması bize neyi hatırlatır?", secenekler:["Allah'ın kudretini","Tesadüfü"], dogru:"Allah'ın kudretini"},
+  {soru:"Rahman ile Rahim arasındaki fark nedir?", secenekler:["Rahman dünyada herkese, Rahim ahirette inananlara","İkisi aynı anlamdadır"], dogru:"Rahman dünyada herkese, Rahim ahirette inananlara"},
+  {soru:"Şükrün bir yolu nedir?", secenekler:["Nimeti paylaşmak ve teşekkür etmek","Nimeti unutmak"], dogru:"Nimeti paylaşmak ve teşekkür etmek"},
+  {soru:"İman nedir?", secenekler:["Altı esasa kalpten inanmak","Sadece dua etmek"], dogru:"Altı esasa kalpten inanmak"},
+  {soru:"Peygamber kimdir?", secenekler:["Allah'ın gönderdiği elçi","Bir melek"], dogru:"Allah'ın gönderdiği elçi"},
+  {soru:"Samimiyet nedir?", secenekler:["Dua ederken kalpten olma hali","Bir çeşit ibadet"], dogru:"Dua ederken kalpten olma hali"}
+];
+function sb6Baslat(){ ikiliOyunBaslat({onek:'sb6', sorular:SB6_SORULAR}); }
+
+const FC6_SORULAR = [
+  {soru:"Evreni yaratan kimdir?", secenekler:["Allah","Melekler"], dogru:"Allah"},
+  {soru:"Kudret nedir?", secenekler:["Sonsuz güç","Merhamet"], dogru:"Sonsuz güç"},
+  {soru:"Nimete karşı minnete ne denir?", secenekler:["Şükür","Kudret"], dogru:"Şükür"},
+  {soru:"Allah'a seslenmeye ne denir?", secenekler:["Dua","Şehadet"], dogru:"Dua"},
+  {soru:"Allah'ın bir olduğuna inanmaya ne denir?", secenekler:["Tevhit","Kader"], dogru:"Tevhit"},
+  {soru:"Tanıklığa ne denir?", secenekler:["Şehadet","Dua"], dogru:"Şehadet"},
+  {soru:"Amentü neyi özetler?", secenekler:["İman esaslarını","İslam'ın şartlarını"], dogru:"İman esaslarını"},
+  {soru:"Melek kimdir?", secenekler:["Nurdan yaratılan varlık","Allah'ın elçisi"], dogru:"Nurdan yaratılan varlık"}
+];
+function fc6Baslat(){ ikiliOyunBaslat({onek:'fc6', sorular:FC6_SORULAR, sureSN:6}); }
+
+const SV6_SORULAR = [
+  {soru:"Evreni yaratan kimdir?", secenekler:["Allah","Melekler"], dogru:"Allah"},
+  {soru:"Nimete karşı minnete ne denir?", secenekler:["Şükür","Kudret"], dogru:"Şükür"},
+  {soru:"Allah'a seslenmeye ne denir?", secenekler:["Dua","Şehadet"], dogru:"Dua"},
+  {soru:"Allah'ın bir olduğuna inanmaya ne denir?", secenekler:["Tevhit","Kader"], dogru:"Tevhit"},
+  {soru:"Amentü neyi özetler?", secenekler:["İman esaslarını","İslam'ın şartlarını"], dogru:"İman esaslarını"},
+  {soru:"Melek kimdir?", secenekler:["Nurdan yaratılan varlık","Allah'ın elçisi"], dogru:"Nurdan yaratılan varlık"}
+];
+function sv6Baslat(){ ikiliHayattaBaslat({onek:'sv6', sorular:SV6_SORULAR, can:3}); }
+
+const DM6_SORULAR = [
+  {soru:"Güzel bir nimete kavuştun, ne yaparsın?", secenekler:["Allah'a şükrederim","Fark etmez, unuturum"], dogru:"Allah'a şükrederim"},
+  {soru:"Zor bir durumdasın, ne yaparsın?", secenekler:["Allah'a dua ederim","Umutsuzluğa kapılırım"], dogru:"Allah'a dua ederim"},
+  {soru:"Arkadaşın Allah'ın varlığından şüphe ediyor, ne dersin?", secenekler:["Evrendeki düzenin O'nun kudretinin işareti olduğunu anlatırım","Hiçbir şey söylemem"], dogru:"Evrendeki düzenin O'nun kudretinin işareti olduğunu anlatırım"},
+  {soru:"İbadet ederken dikkatin dağılıyor, ne yaparsın?", secenekler:["Samimiyetle ve ihlasla tekrar odaklanırım","Vazgeçerim"], dogru:"Samimiyetle ve ihlasla tekrar odaklanırım"},
+  {soru:"Bir arkadaşın iman esaslarını unutmuş, ne yaparsın?", secenekler:["Ona Amentü duasını hatırlatırım","İlgilenmem"], dogru:"Ona Amentü duasını hatırlatırım"}
+];
+function dm6Baslat(){ ikiliOyunBaslat({onek:'dm6', sorular:DM6_SORULAR}); }
+
+const CA6_SORULAR = [
+  {soru:"Evreni ve içindeki her şeyi yaratan kimdir?", secenekler:["Allah (cc)","Melekler"], dogru:"Allah (cc)"},
+  {soru:"Allah'ın sonsuz güç sahibi olmasına ne denir?", secenekler:["Kudret","Şükür"], dogru:"Kudret"},
+  {soru:"Allah'ın dünyada herkese merhamet etmesini ifade eden ismi hangisidir?", secenekler:["Rahman","Rahim"], dogru:"Rahman"},
+  {soru:"Allah'ın ahirette inananlara özel merhamet ismi hangisidir?", secenekler:["Rahim","Rahman"], dogru:"Rahim"},
+  {soru:"Allah'ın verdiği her türlü iyiliğe ne denir?", secenekler:["Nimet","Kader"], dogru:"Nimet"},
+  {soru:"Nimetlere karşı duyulan minnettarlığa ne denir?", secenekler:["Şükür","Kudret"], dogru:"Şükür"},
+  {soru:"Allah'a içten seslenmeye ne denir?", secenekler:["Dua","Şehadet"], dogru:"Dua"},
+  {soru:"Allah'ın bir ve tek olduğuna inanmaya ne denir?", secenekler:["Tevhit","Kader"], dogru:"Tevhit"},
+  {soru:"Allah'a ve Peygambere tanıklık etmeye ne denir?", secenekler:["Şehadet","Tevhit"], dogru:"Şehadet"},
+  {soru:"İslam'ın altı iman esasını özetleyen dua hangisidir?", secenekler:["Amentü","Fatiha"], dogru:"Amentü"},
+  {soru:"Allah'ın nurdan yarattığı varlıklara ne denir?", secenekler:["Melek","Peygamber"], dogru:"Melek"},
+  {soru:"Allah'ın insanlara gönderdiği elçiye ne denir?", secenekler:["Peygamber","Melek"], dogru:"Peygamber"},
+  {soru:"Ölümden sonra başlayacak sonsuz hayata ne denir?", secenekler:["Ahiret","Dünya"], dogru:"Ahiret"},
+  {soru:"Allah'ın her şeyi ezelden bilip takdir etmesine ne denir?", secenekler:["Kader","Şükür"], dogru:"Kader"},
+  {soru:"İbadetleri yalnızca Allah rızası için yapmaya ne denir?", secenekler:["İhlas","Şükür"], dogru:"İhlas"},
+  {soru:"Dua ederken kalpten olma haline ne denir?", secenekler:["Samimiyet","Kibir"], dogru:"Samimiyet"},
+  {soru:"İman nedir?", secenekler:["Altı esasa kalpten inanmak","Sadece namaz kılmak"], dogru:"Altı esasa kalpten inanmak"},
+  {soru:"Evrendeki düzen bize neyi hatırlatır?", secenekler:["Allah'ın kudretini","Tesadüfü"], dogru:"Allah'ın kudretini"},
+  {soru:"Şükrün bir yolu nedir?", secenekler:["Nimeti paylaşmak ve teşekkür etmek","Nimeti unutmak"], dogru:"Nimeti paylaşmak ve teşekkür etmek"},
+  {soru:"Rahman ile Rahim arasındaki fark nedir?", secenekler:["Rahman dünyada herkese, Rahim ahirette inananlara","İkisi de aynı anlama gelir"], dogru:"Rahman dünyada herkese, Rahim ahirette inananlara"}
+];
+function ca6Baslat(){ ikiliOyunBaslat({onek:'ca6', sorular:CA6_SORULAR}); }
+
+
+
+
+
+
+
+
+
+
+// =====================================================================
+// KONU TEKRARI TESTİ (50 Soru)
+// =====================================================================
+const konuTekrariSorulari6 = [
+  {zorluk:"kolay", soru:"Evreni ve içindeki her şeyi yaratan kimdir?", secenekler:["İnsanlar","Allah (cc)","Melekler","Hayvanlar"], dogru:1, aciklama:"Allah (cc), evreni ve içindeki her şeyi yaratan tek yaratıcıdır."},
+  {zorluk:"kolay", soru:"Allah'ın (cc) sonsuz güç sahibi olmasına ne denir?", secenekler:["Kudret","Şükür","Kader","İhlas"], dogru:0, aciklama:"Kudret, Allah'ın sonsuz güç ve kuvvet sahibi olmasıdır."},
+  {zorluk:"kolay", soru:"Allah'ın dünyada iyi kötü herkese merhamet etmesini ifade eden ismi hangisidir?", secenekler:["Rahim","Rahman","Kerim","Vedud"], dogru:1, aciklama:"Rahman ismi, Allah'ın dünyada herkese sınırsız merhamet ettiğini ifade eder."},
+  {zorluk:"kolay", soru:"Allah'ın ahirette sadece inananlara özel merhamet etmesini ifade eden ismi hangisidir?", secenekler:["Rahman","Rahim","Gafur","Vedud"], dogru:1, aciklama:"Rahim ismi, Allah'ın ahirette iman edenlere göstereceği özel merhameti ifade eder."},
+  {zorluk:"kolay", soru:"Allah'ın verdiği her türlü iyiliğe ne denir?", secenekler:["Nimet","Kader","Şükür","İman"], dogru:0, aciklama:"Nimet, Allah'ın kullarına verdiği her türlü iyiliktir."},
+  {zorluk:"kolay", soru:"Nimetlere karşı duyulan minnettarlık duygusuna ne denir?", secenekler:["Şükür","Kudret","İhlas","Tevhit"], dogru:0, aciklama:"Şükür, Allah'ın verdiği nimetlere karşı duyulan minnettarlıktır."},
+  {zorluk:"kolay", soru:"Allah'a içten seslenip isteklerimizi ve dertlerimizi O'na açmaya ne denir?", secenekler:["Şükür","Dua","Şehadet","Kader"], dogru:1, aciklama:"Dua, Allah'a içten seslenip istek ve dertlerimizi O'na açmaktır."},
+  {zorluk:"kolay", soru:"Allah'ın (cc) bir ve tek olduğuna inanmaya ne denir?", secenekler:["Şehadet","Tevhit","Amentü","Kader"], dogru:1, aciklama:"Tevhit, Allah'ın bir ve tek olduğuna inanmaktır."},
+  {zorluk:"kolay", soru:"Allah'a ve Peygambere inandığına tanıklık etmeye ne denir?", secenekler:["Tevhit","Şehadet","Dua","Nimet"], dogru:1, aciklama:"Şehadet, Allah'a ve Peygambere inandığına tanıklık etmektir."},
+  {zorluk:"kolay", soru:"İslam'ın altı iman esasını özetleyen dua hangisidir?", secenekler:["Fatiha","Amentü","Kevser","Nas"], dogru:1, aciklama:"Amentü duası, İslam'ın altı iman esasını özetler."},
+  {zorluk:"kolay", soru:"Allah'ın nurdan yarattığı, hiç günah işlemeyen varlıklara ne denir?", secenekler:["Melek","Peygamber","Cin","İnsan"], dogru:0, aciklama:"Melekler, Allah'ın nurdan yarattığı, hiç günah işlemeyen varlıklardır."},
+  {zorluk:"kolay", soru:"Allah'ın insanlara gönderdiği elçiye ne denir?", secenekler:["Melek","Peygamber","Veli","Alim"], dogru:1, aciklama:"Peygamber, Allah'ın insanlara gönderdiği elçidir."},
+  {zorluk:"kolay", soru:"Ölümden sonra başlayacak sonsuz hayata ne denir?", secenekler:["Dünya","Ahiret","Kader","Rüya"], dogru:1, aciklama:"Ahiret, ölümden sonra başlayacak olan sonsuz hayattır."},
+  {zorluk:"kolay", soru:"Allah'ın her şeyi ezelden bilip takdir etmesine ne denir?", secenekler:["Kader","Şükür","İhlas","Tevhit"], dogru:0, aciklama:"Kader, Allah'ın her şeyi ezelden bilip takdir etmesidir."},
+  {zorluk:"kolay", soru:"İbadet ve davranışları yalnızca Allah'ın rızası için yapmaya ne denir?", secenekler:["Şükür","İhlas","Kader","Nimet"], dogru:1, aciklama:"İhlas, ibadet ve davranışları yalnızca Allah'ın rızası için yapmaktır."},
+  {zorluk:"kolay", soru:"Dua ederken kalpten, içten olma haline ne denir?", secenekler:["Samimiyet","Kibir","Şüphe","Umutsuzluk"], dogru:0, aciklama:"Samimiyet, dua ederken kalpten ve içten olma halidir."},
+  {zorluk:"kolay", soru:"Allah'a (cc), meleklerine, kitaplarına, peygamberlerine, ahiret gününe ve kadere inanmaya ne denir?", secenekler:["Şükür","İman","Dua","Şehadet"], dogru:1, aciklama:"İman, altı esasa kalpten inanmaktır."},
+
+  {zorluk:"orta", soru:"Kalbimiz durmadan atar, çiçekler açar, mevsimler birbirini izler. Bunlar bize neyi hatırlatır?", secenekler:["Sadece tesadüf olduğunu","Allah'ın (cc) sonsuz kudretini ve düzenini","Hiçbir şey ifade etmediğini","İnsanların bunu planladığını"], dogru:1, aciklama:"Evrendeki düzen, Allah'ın (cc) sonsuz kudretinin somut bir işaretidir."},
+  {zorluk:"orta", soru:"'Rahman' ismi ile 'Rahim' ismi arasındaki temel fark nedir?", secenekler:["İkisi de aynı anlama gelir","Rahman dünyada herkese, Rahim ahirette inananlara özel merhameti ifade eder","Rahman sadece meleklere, Rahim sadece insanlara yöneliktir","Rahman'ın Rahim ile ilgisi yoktur"], dogru:1, aciklama:"Rahman dünyadaki genel merhameti, Rahim ise ahiretteki özel merhameti ifade eder."},
+  {zorluk:"orta", soru:"Allah'ın verdiği nimetlere karşı şükretmenin bir yolu nedir?", secenekler:["Nimetleri unutmak","Nimetleri başkalarıyla paylaşmak ve Allah'a teşekkür etmek","Nimetlerden şikayet etmek","Nimetleri israf etmek"], dogru:1, aciklama:"Şükür, hem dille teşekkürü hem nimeti yerinde kullanmayı içerir."},
+  {zorluk:"orta", soru:"Dua etme ihtiyacı insanda ne zaman daha çok ortaya çıkar?", secenekler:["Hiçbir zaman","Güçsüz ve çaresiz hissettiği anlarda","Sadece mutlu anlarda","Sadece uyurken"], dogru:1, aciklama:"İnsan güçsüz ve çaresiz hissettiği anlarda dua etme ihtiyacı duyar."},
+  {zorluk:"orta", soru:"Dua ederken nelere dikkat etmek güzel bir adaptır?", secenekler:["Sadece kalabalıkta dua etmek","Temiz olmak, samimi olmak ve içtenlikle Allah'a yönelmek","Yüksek sesle bağırmak","Sadece belirli bir yerde dua etmek"], dogru:1, aciklama:"Temiz olmak ve samimiyetle dua etmek güzel bir dua adabıdır."},
+  {zorluk:"orta", soru:"İslam'da dua ile ilgili doğru bilgi hangisidir?", secenekler:["Dua sadece camide yapılabilir","Dua her an her yerde yapılabilir","Dua sadece Arapça yapılabilir","Dua sadece yetişkinler yapabilir"], dogru:1, aciklama:"İslam'da dua için özel bir yer veya an şartı yoktur."},
+  {zorluk:"orta", soru:"Kelime-i tevhidin anlamı nedir?", secenekler:["Allah'tan başka ilah yoktur, Muhammed O'nun elçisidir","Namaz beş vakittir","Oruç Ramazan ayında tutulur","Zekât malın kırkta biridir"], dogru:0, aciklama:"Kelime-i tevhit, Allah'ın birliğini ve Hz. Muhammed'in elçiliğini ifade eder."},
+  {zorluk:"orta", soru:"Kelime-i şehadet ile kelime-i tevhit arasındaki ilişki nedir?", secenekler:["Birbirinden tamamen farklı konulardır","Şehadet, tevhit inancına tanıklık etme cümlesidir","Tevhit sadece kadınlar için geçerlidir","İkisinin hiç ilgisi yoktur"], dogru:1, aciklama:"Kelime-i şehadet, tevhit inancına bizzat tanıklık etmemizi sağlar."},
+  {zorluk:"orta", soru:"Amentü duasında kaç iman esası özetlenir?", secenekler:["Dört","Beş","Altı","Yedi"], dogru:2, aciklama:"Amentü duası altı iman esasını özetler."},
+  {zorluk:"orta", soru:"Amentü duasında sayılmayan iman esası hangisidir?", secenekler:["Meleklere iman","Kitaplara iman","Peygamberlere iman","Hacca iman (böyle bir esas yoktur)"], dogru:3, aciklama:"Hac bir ibadettir; altı iman esasından biri değildir."},
+  {zorluk:"orta", soru:"Amentü duasının sonunda hangi cümle yer alır?", secenekler:["Kelime-i şehadet","Sadece Fatiha suresi","Sadece besmele","Ezan"], dogru:0, aciklama:"Amentü duasının sonunda kelime-i şehadet getirilir."},
+  {zorluk:"orta", soru:"Meleklerin özelliği aşağıdakilerden hangisidir?", secenekler:["Yorulur ve uyurlar","Hiç günah işlemezler","İnsanlar gibi yer içerler","Zaman zaman Allah'a isyan ederler"], dogru:1, aciklama:"Melekler nurdan yaratılmıştır ve hiç günah işlemezler."},
+  {zorluk:"orta", soru:"Peygamberlerin görevi nedir?", secenekler:["Allah'ın (cc) mesajlarını insanlara ulaştırmak","Sadece dua etmek","Sadece namaz kıldırmak","Sadece kitap yazmak"], dogru:0, aciklama:"Peygamberler Allah'ın mesajlarını insanlara ulaştıran elçilerdir."},
+  {zorluk:"orta", soru:"Ahiret inancı insana ne kazandırır?", secenekler:["Hiçbir şey kazandırmaz","Yaptıklarının karşılığını göreceği bilinciyle sorumlu davranma","Sadece korku duygusu","Umursamazlık"], dogru:1, aciklama:"Ahirete iman, insanı sorumlu davranmaya yönlendirir."},
+  {zorluk:"orta", soru:"Kader inancı bir Müslümanın nasıl davranmasını gerektirir?", secenekler:["Hiçbir çaba göstermemesini","Allah'a güvenip elinden geleni yapmasını, çalışmasını ve dua etmesini","Sorumluluk almamasını","Sadece şansa güvenmesini"], dogru:1, aciklama:"Kadere iman, çalışmayı ve duayı bırakmayı değil, sorumluluk almayı gerektirir."},
+  {zorluk:"orta", soru:"İhlasın karşıtı olan davranış hangisidir?", secenekler:["Samimiyet","Gösteriş (riya)","Sabır","Şükür"], dogru:1, aciklama:"İhlasın karşıtı, ibadetleri başkalarına gösteriş için yapmaktır (riya)."},
+  {zorluk:"orta", soru:"Aşağıdakilerden hangisi Allah'ın (cc) sevgisinin karşılığı olarak bizden istenir?", secenekler:["O'nu sevip emirlerine uymak","O'nu unutmak","Sadece kendi çıkarımızı düşünmek","Hiçbir şey istenmez"], dogru:0, aciklama:"Allah'ın sevgisinin karşılığında bizden O'nu sevip emirlerine uymamız istenir."},
+
+  {zorluk:"zor", soru:"Amentü duasının Arapçadaki 'Âmentü billâhi' ifadesinin Türkçe anlamı nedir?", secenekler:["Ben Allah'a inandım","Ben oruç tuttum","Ben zekât verdim","Ben hacca gittim"], dogru:0, aciklama:"'Âmentü billâhi' — 'Ben Allah'a inandım' demektir."},
+  {zorluk:"zor", soru:"Amentü duasındaki 've'l-yevmi'l-âhiri' ifadesi neye işaret eder?", secenekler:["Ahiret gününe","Cuma gününe","Bayram gününe","Kadir gecesine"], dogru:0, aciklama:"'El-yevmi'l-âhir', ahiret gününü ifade eder."},
+  {zorluk:"zor", soru:"Amentü duasındaki 've bi'l-kaderi hayrihî ve şerrihî' ifadesi neyi anlatır?", secenekler:["İyiliğin ve kötülüğün Allah'ın takdiriyle olduğunu","Sadece iyiliklerin Allah'tan geldiğini","Kötülüklerin insanlardan geldiğini, Allah'la ilgisi olmadığını","Hiçbir anlamı yoktur"], dogru:0, aciklama:"Bu ifade, hayrın ve şerrin Allah'ın takdiriyle (kaderle) olduğuna inanmayı anlatır."},
+  {zorluk:"zor", soru:"Kelime-i şehadetin Arapça metninde geçen 'abdühû ve rasûlühû' ifadesi kime işaret eder?", secenekler:["Hz. Muhammed'in Allah'ın kulu ve elçisi olduğuna","Meleklere","Sahabelere","Diğer peygamberlere"], dogru:0, aciklama:"'Abdühû ve rasûlühû', Hz. Muhammed'in (sav) Allah'ın kulu ve elçisi olduğunu anlatır."},
+  {zorluk:"zor", soru:"'Lâ ilâhe illallah' ifadesinin Türkçe karşılığı nedir?", secenekler:["Allah'tan başka ilah yoktur","Allah büyüktür","Allah birdir demek yasaktır","Allah her yerdedir"], dogru:0, aciklama:"'Lâ ilâhe illallah' — 'Allah'tan başka ilah yoktur' demektir."},
+  {zorluk:"zor", soru:"Allah'ın (cc) Rahman ve Rahim isimlerinin ikisi birden hangi gerçeği vurgular?", secenekler:["Allah'ın merhametinin hem dünyada hem ahirette sürdüğünü","Allah'ın sadece dünyada var olduğunu","Merhametin sadece insanlara özgü olduğunu","Rahman ve Rahim isimlerinin ilgisiz olduğunu"], dogru:0, aciklama:"Rahman ve Rahim birlikte, Allah'ın merhametinin hem dünyada hem ahirette sürdüğünü gösterir."},
+  {zorluk:"zor", soru:"Bir çocuğun kalbinin durmadan atması, gökyüzündeki düzen gibi örnekler ünitede neyi anlatmak için kullanılır?", secenekler:["Allah'ın (cc) ilim ve kudretinin somut işaretlerini","Bilimin dinle hiç ilgisi olmadığını","Tesadüflerin evreni yönettiğini","Hiçbir dini anlamı olmadığını"], dogru:0, aciklama:"Bu örnekler, Allah'ın (cc) sonsuz ilim ve kudretinin somut işaretleridir."},
+  {zorluk:"zor", soru:"Dua ederken 'samimi olmak' ne anlama gelir?", secenekler:["Sadece kalabalık önünde dua etmek","İçten, kalpten ve gösterişsiz bir şekilde Allah'a yönelmek","Yüksek sesle herkese duyurmak","Sadece dua kitabından okumak"], dogru:1, aciklama:"Samimiyet, içten ve gösterişsiz bir şekilde Allah'a yönelmektir."},
+  {zorluk:"zor", soru:"Aşağıdakilerden hangisi kader inancı ile ilgili YANLIŞ bir anlayıştır?", secenekler:["Allah her şeyi ezelden bilir","Kadere inanan kişi hiçbir çaba göstermemelidir","Kader inancı insanı sorumluluktan kurtarmaz","İnsan dua ve gayretle sorumluluğunu yerine getirir"], dogru:1, aciklama:"Kadere inanmak, çabayı ve sorumluluğu bırakmayı gerektirmez; bu yanlış bir anlayıştır."},
+  {zorluk:"zor", soru:"Şehadet kelimesinin kök anlamı olan 'tanıklık etme' ne anlama gelir?", secenekler:["Bir şeyi görmüş gibi kesin bilgiyle onaylamak","Sadece bir tahmin yürütmek","Bir konuda şüphe duymak","Bir şeyi reddetmek"], dogru:0, aciklama:"Tanıklık etmek, bir gerçeği kesin bir bilgiyle onaylamaktır."},
+  {zorluk:"zor", soru:"Ünitede anlatılan altı iman esası aşağıdakilerden hangisinde eksiksiz sayılmıştır?", secenekler:["Allah, melek, kitap, peygamber, ahiret, kader","Allah, melek, kitap, namaz, oruç, hac","Allah, dua, şükür, ihlas, kader, ahiret","Melek, kitap, peygamber, namaz, oruç, zekât"], dogru:0, aciklama:"Altı iman esası: Allah'a, meleklere, kitaplara, peygamberlere, ahirete ve kadere iman."},
+  {zorluk:"zor", soru:"Allah'ın (cc) kullarına olan sevgisi nasıl gözlemlenebilir?", secenekler:["Verdiği sayısız nimetler ve evrendeki düzen üzerinden","Sadece rüyalarda","Hiçbir şekilde gözlemlenemez","Sadece kitaplarda yazdığı için"], dogru:0, aciklama:"Allah'ın sevgisi, verdiği nimetler ve evrendeki düzen gözlemlenerek fark edilebilir."},
+  {zorluk:"zor", soru:"Kelime-i tevhit ile kelime-i şehadeti birlikte ele aldığımızda ortak vurguladıkları temel gerçek nedir?", secenekler:["Allah'ın birliği ve Hz. Muhammed'in O'nun elçisi olduğu","Sadece namazın önemi","Sadece orucun önemi","Sadece haccın önemi"], dogru:0, aciklama:"Her iki cümle de Allah'ın birliğini ve Hz. Muhammed'in elçiliğini vurgular."},
+  {zorluk:"zor", soru:"Bir kişi 'dua yalnızca sıkıntılı anlarda yapılır' derse bu bilgiyle ilgili ne söylenebilir?", secenekler:["Tamamen doğrudur","Eksiktir; dua her an, hem sıkıntıda hem şükürde yapılabilir","Dua sadece bayramlarda yapılır","Dua hiçbir zaman yapılmamalıdır"], dogru:1, aciklama:"Dua, sadece sıkıntılı anlarda değil, her an ve her durumda yapılabilir."},
+  {zorluk:"zor", soru:"Amentü duasını okuyup anlamını düşünmek bir Müslümana ne kazandırır?", secenekler:["İmanının temel esaslarını daha iyi kavramasını","Hiçbir katkısı yoktur","Sadece ezber becerisini","Yalnızca dil bilgisi"], dogru:0, aciklama:"Amentü duasını anlayarak okumak, iman esaslarını daha iyi kavramamızı sağlar."},
+  {zorluk:"zor", soru:"Ünitenin temel amacı aşağıdakilerden hangisidir?", secenekler:["Allah'ı tanımak, O'nun sevgisini fark etmek, dua etmeyi öğrenmek ve temel iman ifadelerini kavramak","Sadece Arapça öğrenmek","Sadece dua ezberletmek","Sadece tarih öğretmek"], dogru:0, aciklama:"Bu ünitenin temel amacı, Allah'ı tanımak, sevgisini fark etmek, dua etmeyi ve temel iman ifadelerini öğrenmektir."},
+];
+let kt6rIndex = 0, kt6rPuan = 0, kt6rSiraliSorular = [], kt6rKilit = false;
+
+function kt6rZayifAnahtari(){ return 'dkabZayifSorular_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname); }
+function kt6rZayifOku(){
+  try{ return JSON.parse(localStorage.getItem(kt6rZayifAnahtari())) || {}; }catch(e){ return {}; }
+}
+function kt6rZayifKaydet(soruMetni){
+  const v = kt6rZayifOku();
+  v[soruMetni] = (v[soruMetni]||0) + 1;
+  try{ localStorage.setItem(kt6rZayifAnahtari(), JSON.stringify(v)); }catch(e){}
+}
+function kt6rAgirlikliKaristir(sorular){
+  const zayif = kt6rZayifOku();
+  return sorular
+    .map(s => ({s, r: Math.random() - (zayif[s.soru]||0) * 0.15}))
+    .sort((a,b)=>a.r-b.r)
+    .map(x=>x.s);
+}
+
+function kt6rBaslat(){
+  kt6rSiraliSorular = kt6rAgirlikliKaristir(konuTekrariSorulari6.slice());
+  kt6rIndex = 0; kt6rPuan = 0;
+  document.getElementById('kt6rPuan').textContent = 0;
+  document.getElementById('kt6rToplam').textContent = kt6rSiraliSorular.length;
+  document.getElementById('kt6rSonuc').textContent = '';
+  document.getElementById('kt6rSonrakiBtn').style.display = 'none';
+  kt6rSoruGoster();
+}
+
+function kt6rSoruGoster(){
+  if(kt6rIndex >= kt6rSiraliSorular.length){
+    document.getElementById('kt6rSoru').textContent = '';
+    document.getElementById('kt6rSecenekler').innerHTML = '';
+    document.getElementById('kt6rAciklama').style.display = 'none';
+    document.getElementById('kt6rZorluk').textContent = '';
+    document.getElementById('kt6rSonrakiBtn').style.display = 'none';
+    const yuzde = Math.round((kt6rPuan/kt6rSiraliSorular.length)*100);
+    let kt6rSeviye;
+    if(yuzde>=90) kt6rSeviye = '🏆 Din Bilgisi Ustası';
+    else if(yuzde>=70) kt6rSeviye = '🥇 Çok Başarılı';
+    else if(yuzde>=50) kt6rSeviye = '🥈 Biraz Daha Çalış';
+    else kt6rSeviye = '📚 Konuyu Tekrar Et';
+    document.getElementById('kt6rSonuc').innerHTML = `🎉 Test bitti!<br><span style="font-size:1.25em;font-weight:bold;">${kt6rSeviye}</span><br>${kt6rPuan}/${kt6rSiraliSorular.length} doğru (%${yuzde})`;
+    return;
+  }
+  kt6rKilit = false;
+  document.getElementById('kt6rTur').textContent = kt6rIndex+1;
+  const oge = kt6rSiraliSorular[kt6rIndex];
+  const zorlukEtiket = oge.zorluk==='kolay' ? '🟢 Kolay' : oge.zorluk==='orta' ? '🟡 Orta' : '🔴 Zor';
+  document.getElementById('kt6rZorluk').textContent = zorlukEtiket;
+  document.getElementById('kt6rSoru').textContent = oge.soru;
+  document.getElementById('kt6rAciklama').style.display = 'none';
+  document.getElementById('kt6rAciklama').textContent = '';
+  document.getElementById('kt6rSonrakiBtn').style.display = 'none';
+  document.getElementById('kt6rSonuc').textContent = '';
+  const kutu = document.getElementById('kt6rSecenekler');
+  kutu.innerHTML = '';
+  oge.secenekler.forEach((sec,i)=>{
+    const btn = document.createElement('div');
+    btn.className = 'merdiven-secenek';
+    btn.textContent = sec;
+    btn.onclick = ()=>{
+      if(kt6rKilit) return;
+      kt6rKilit = true;
+      const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
+      if(i===oge.dogru){
+        btn.classList.add('dogru');
+        kt6rPuan++;
+        document.getElementById('kt6rPuan').textContent = kt6rPuan;
+      } else {
+        btn.classList.add('yanlis');
+        tumBtn[oge.dogru].classList.add('dogru');
+        kt6rZayifKaydet(oge.soru);
+      }
+      const aciklamaKutu = document.getElementById('kt6rAciklama');
+      aciklamaKutu.style.display = 'block';
+      aciklamaKutu.innerHTML = `💡 <b>Açıklama:</b> ${oge.aciklama}`;
+      document.getElementById('kt6rSonrakiBtn').style.display = 'block';
+    };
+    kutu.appendChild(btn);
+  });
+}
+
+function kt6rSonrakiSoru(){
+  kt6rIndex++;
+  kt6rSoruGoster();
+}
+
+// =====================================================================
+// 6. ÜNİTE KELİME HAVUZU (28 kavram)
+// =====================================================================
+const kelimeHavuzu6 = [
+  {kelime:"ALLAH", anlam:"Evreni ve içindeki her şeyi yaratan tek yaratıcı"},
+  {kelime:"YARATICI", anlam:"Allah'ın (cc) her şeyi var eden en yüce sıfatı"},
+  {kelime:"KUDRET", anlam:"Allah'ın (cc) sonsuz güç ve kuvvet sahibi olması"},
+  {kelime:"İLİM", anlam:"Allah'ın (cc) her şeyi sonsuz bilgiyle bilmesi"},
+  {kelime:"RAHMAN", anlam:"Allah'ın (cc) dünyada herkese sınırsız merhamet etmesi"},
+  {kelime:"RAHİM", anlam:"Allah'ın (cc) ahirette inananlara özel merhamet etmesi"},
+  {kelime:"MERHAMET", anlam:"Karşılık beklemeden şefkat ve sevgi gösterme"},
+  {kelime:"NİMET", anlam:"Allah'ın (cc) kullarına verdiği her türlü iyilik"},
+  {kelime:"ŞÜKÜR", anlam:"Allah'ın (cc) verdiği nimetlere karşı duyulan minnettarlık"},
+  {kelime:"DUA", anlam:"Allah'a (cc) içten seslenip istek ve dertlerimizi açma"},
+  {kelime:"SIĞINMA", anlam:"Güçsüz kaldığımız anlarda Allah'a (cc) yönelme ihtiyacı"},
+  {kelime:"SAMİMİYET", anlam:"Dua ederken kalpten, içten olma hâli"},
+  {kelime:"TEVHİT", anlam:"Allah'ın (cc) bir ve tek olduğuna inanma"},
+  {kelime:"ŞEHADET", anlam:"Allah'a ve Peygambere inandığına tanıklık etme"},
+  {kelime:"İMAN", anlam:"Allah'a, meleklerine, kitaplarına, peygamberlerine, ahirete ve kadere kalpten inanma"},
+  {kelime:"AMENTÜ", anlam:"İslam'ın altı iman esasını özetleyen dua"},
+  {kelime:"MELEK", anlam:"Allah'ın (cc) nurdan yarattığı, hiç günah işlemeyen kulları"},
+  {kelime:"KİTAP", anlam:"Allah'ın (cc) peygamberlerine gönderdiği ilahi sözler"},
+  {kelime:"PEYGAMBER", anlam:"Allah'ın (cc) insanlara gönderdiği elçi"},
+  {kelime:"AHİRET", anlam:"Ölümden sonra başlayacak olan sonsuz hayat"},
+  {kelime:"KADER", anlam:"Allah'ın (cc) her şeyi ezelden bilip takdir etmesi"},
+  {kelime:"İHLAS", anlam:"İbadet ve davranışları yalnızca Allah (cc) rızası için yapma"},
+  {kelime:"EVREN", anlam:"Allah'ın (cc) yarattığı, düzen içindeki gökyüzü ve yeryüzü"},
+  {kelime:"DÜZEN", anlam:"Evrende ve canlılarda görülen kusursuz uyum"},
+  {kelime:"KALP", anlam:"Duanın içten, samimi bir şekilde seslendiği yer"},
+  {kelime:"EMİR", anlam:"Allah'ın (cc) kullarından yapmalarını istediği şey"},
+  {kelime:"GÜVEN", anlam:"Dua eden kişinin Allah'a (cc) duyduğu güven duygusu"},
+  {kelime:"YÜCELİK", anlam:"Allah'ın (cc) her şeyden üstün ve büyük olması"},
+];
+function ku6AnlamBul(kelime){
+  const bulunan = kelimeHavuzu6.find(x=>x.kelime===kelime);
+  return bulunan ? bulunan.anlam : '';
+}
+
+// =====================================================================
+// HIZLI KELİME ÜRETME (6. Ünite)
+// =====================================================================
+const ku6GecerliHarfler = ["A","K","İ","R","M","Ş","D","S"];
+let ku6AktifHarf = '', ku6Bulunanlar = [], ku6Sure = 60, ku6Zamanlayici = null, ku6Puan = 0, ku6Bitti = true;
+
+function ku6Baslat(){
+  clearInterval(ku6Zamanlayici);
+  ku6AktifHarf = ku6GecerliHarfler[Math.floor(Math.random()*ku6GecerliHarfler.length)];
+  ku6Bulunanlar = []; ku6Puan = 0; ku6Sure = 60; ku6Bitti = false;
+  document.getElementById('ku6Harf').textContent = ku6AktifHarf;
+  document.getElementById('ku6Sure').textContent = ku6Sure;
+  document.getElementById('ku6Puan').textContent = 0;
+  document.getElementById('ku6Liste').innerHTML = '';
+  document.getElementById('ku6Sonuc').textContent = '';
+  document.getElementById('ku6Uyari').textContent = '';
+  document.getElementById('ku6Kacirilan').innerHTML = '';
+  const girdi = document.getElementById('ku6Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  ku6Zamanlayici = setInterval(()=>{
+    ku6Sure--;
+    document.getElementById('ku6Sure').textContent = ku6Sure;
+    if(ku6Sure<=0) ku6Bitir();
+  }, 1000);
+}
+
+function ku6Ekle(){
+  if(ku6Bitti) return;
+  const girdi = document.getElementById('ku6Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('ku6Uyari');
+  if(!kelime.startsWith(ku6AktifHarf)){ uyari.textContent = `❌ "${ku6AktifHarf}" harfiyle başlamalı!`; return; }
+  if(!kelimeHavuzu6.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(ku6Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  ku6Bulunanlar.push(kelime);
+  ku6Puan++;
+  document.getElementById('ku6Puan').textContent = ku6Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('ku6Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function ku6Bitir(){
+  clearInterval(ku6Zamanlayici);
+  ku6Bitti = true;
+  document.getElementById('ku6Girdi').disabled = true;
+  document.querySelectorAll('#ku6Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku6AnlamBul(kelime)}`;
+  });
+  const kacirilanKutu = document.getElementById('ku6Kacirilan');
+  kacirilanKutu.innerHTML = '';
+  const kacirilanlar = kelimeHavuzu6.filter(x=>x.kelime.startsWith(ku6AktifHarf) && !ku6Bulunanlar.includes(x.kelime));
+  if(kacirilanlar.length){
+    const baslik = document.createElement('p');
+    baslik.style.textAlign='center'; baslik.style.fontWeight='bold'; baslik.style.color='var(--kirmizi)';
+    baslik.textContent = 'Kaçırdıkların:';
+    kacirilanKutu.appendChild(baslik);
+    const ul = document.createElement('ul'); ul.className='ku-liste';
+    kacirilanlar.forEach(item=>{
+      const li = document.createElement('li');
+      li.style.background='#ffe8d6'; li.style.borderColor='var(--sari)';
+      li.textContent = `${item.kelime} — ${item.anlam}`;
+      ul.appendChild(li);
+    });
+    kacirilanKutu.appendChild(ul);
+  }
+  document.getElementById('ku6Sonuc').textContent = `⏰ Süre bitti! "${ku6AktifHarf}" harfiyle ${ku6Puan} doğru kelime yazdın!`;
+}
+
+// =====================================================================
+// TUZAK HARF (6. Ünite)
+// =====================================================================
+const tuzak6GecerliHarfler = ["A","E","İ","M","R"];
+let tuzak6Harf = '', tuzak6Bulunanlar = [], tuzak6Sure = 40, tuzak6Zamanlayici = null, tuzak6Puan = 0, tuzak6Bitti = true;
+
+function tuzak6Baslat(){
+  clearInterval(tuzak6Zamanlayici);
+  tuzak6Harf = tuzak6GecerliHarfler[Math.floor(Math.random()*tuzak6GecerliHarfler.length)];
+  tuzak6Bulunanlar = []; tuzak6Puan = 0; tuzak6Sure = 40; tuzak6Bitti = false;
+  document.getElementById('tuzak6Harf').textContent = tuzak6Harf;
+  document.getElementById('tuzak6Sure').textContent = tuzak6Sure;
+  document.getElementById('tuzak6Puan').textContent = 0;
+  document.getElementById('tuzak6Liste').innerHTML = '';
+  document.getElementById('tuzak6Sonuc').textContent = '';
+  document.getElementById('tuzak6Uyari').textContent = '';
+  const girdi = document.getElementById('tuzak6Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+  tuzak6Zamanlayici = setInterval(()=>{
+    tuzak6Sure--;
+    document.getElementById('tuzak6Sure').textContent = tuzak6Sure;
+    if(tuzak6Sure<=0) tuzak6Bitir();
+  }, 1000);
+}
+
+function tuzak6Ekle(){
+  if(tuzak6Bitti) return;
+  const girdi = document.getElementById('tuzak6Girdi');
+  const kelime = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  girdi.value = '';
+  if(!kelime) return;
+  const uyari = document.getElementById('tuzak6Uyari');
+  if(kelime.includes(tuzak6Harf)){ uyari.textContent = `🚫 Bu kelimede tuzak harf "${tuzak6Harf}" var, geçersiz!`; return; }
+  if(!kelimeHavuzu6.some(x=>x.kelime===kelime)){ uyari.textContent = `🤔 Bu kelimeyi bilmiyorum, ünitedeki bir kavram olmalı!`; return; }
+  if(tuzak6Bulunanlar.includes(kelime)){ uyari.textContent = `⚠️ Bu kelimeyi zaten yazdın!`; return; }
+  tuzak6Bulunanlar.push(kelime);
+  tuzak6Puan++;
+  document.getElementById('tuzak6Puan').textContent = tuzak6Puan;
+  const li = document.createElement('li');
+  li.textContent = kelime;
+  document.getElementById('tuzak6Liste').appendChild(li);
+  uyari.textContent = '';
+}
+
+function tuzak6Bitir(){
+  clearInterval(tuzak6Zamanlayici);
+  tuzak6Bitti = true;
+  document.getElementById('tuzak6Girdi').disabled = true;
+  document.querySelectorAll('#tuzak6Liste li').forEach(li=>{
+    const kelime = li.textContent;
+    li.textContent = `${kelime} — ${ku6AnlamBul(kelime)}`;
+  });
+  document.getElementById('tuzak6Sonuc').textContent = `⏰ Süre bitti! "${tuzak6Harf}" harfini kullanmadan ${tuzak6Puan} kelime yazdın!`;
+}
+
+// =====================================================================
+// KELİME FABRİKASI (6. Ünite)
+// =====================================================================
+let kf6Sira = [], kf6Index = 0, kf6Uretilen = 0, kf6Hata = 0;
+
+function kf6Baslat(){
+  kf6Sira = karistir(kelimeHavuzu6.slice());
+  kf6Index = 0; kf6Uretilen = 0; kf6Hata = 0;
+  document.getElementById('kf6Uretilen').textContent = 0;
+  document.getElementById('kf6Toplam').textContent = kf6Sira.length;
+  document.getElementById('kf6Hata').textContent = 0;
+  document.getElementById('kf6Urunler').innerHTML = '';
+  document.getElementById('kf6Sonuc').textContent = '';
+  kf6Tur();
+}
+
+function kf6Tur(){
+  if(kf6Index >= kf6Sira.length){
+    document.getElementById('kf6BantAlani').innerHTML = '';
+    document.getElementById('kf6Siparis').textContent = '';
+    document.getElementById('kf6Girdi').disabled = true;
+    document.getElementById('kf6Sonuc').textContent = `🏭 Fabrika kapandı! ${kf6Uretilen}/${kf6Sira.length} kelime ürettin, ${kf6Hata} hata yaptın.`;
+    return;
+  }
+  const oge = kf6Sira[kf6Index];
+  document.getElementById('kf6Siparis').textContent = `📋 Sipariş: ${oge.anlam}`;
+  const harfler = karistir(oge.kelime.split(''));
+  const bant = document.getElementById('kf6BantAlani');
+  bant.innerHTML = '';
+  harfler.forEach(h=>{
+    const kutu = document.createElement('div');
+    kutu.className = 'kf-kutu';
+    kutu.textContent = h;
+    bant.appendChild(kutu);
+  });
+  const girdi = document.getElementById('kf6Girdi');
+  girdi.value = ''; girdi.disabled = false; girdi.focus();
+}
+
+function kf6Uret(){
+  if(kf6Index >= kf6Sira.length) return;
+  const oge = kf6Sira[kf6Index];
+  const girdi = document.getElementById('kf6Girdi');
+  const tahmin = girdi.value.trim().toLocaleUpperCase('tr-TR');
+  if(!tahmin) return;
+  if(tahmin === oge.kelime){
+    kf6Uretilen++;
+    document.getElementById('kf6Uretilen').textContent = kf6Uretilen;
+    const cip = document.createElement('div');
+    cip.className = 'dua-cip';
+    cip.textContent = `✅ ${oge.kelime}`;
+    document.getElementById('kf6Urunler').appendChild(cip);
+    kf6Index++;
+    setTimeout(()=>kf6Tur(), 400);
+  } else {
+    kf6Hata++;
+    document.getElementById('kf6Hata').textContent = kf6Hata;
+    girdi.classList.add('yanlis-girdi');
+    setTimeout(()=>girdi.classList.remove('yanlis-girdi'), 400);
+    girdi.value = '';
+  }
+}
+
+// =====================================================================
+// KELİME MÜHENDİSİ (6. Ünite)
+// =====================================================================
+function parcalaraBol(kelime){
+  const uzunluk = kelime.length;
+  let parcaSayisi = uzunluk<=4 ? 2 : uzunluk<=7 ? 3 : 4;
+  parcaSayisi = Math.min(parcaSayisi, uzunluk);
+  const parcalar = [];
+  let index = 0;
+  for(let i=0;i<parcaSayisi;i++){
+    const kalan = parcaSayisi - i;
+    const buBoyut = i===parcaSayisi-1 ? uzunluk-index : Math.ceil((uzunluk-index)/kalan);
+    parcalar.push(kelime.slice(index, index+buBoyut));
+    index += buBoyut;
+  }
+  return parcalar;
+}
+
+let km6Sira = [], km6Index = 0, km6DogruSayisi = 0;
+
+function km6Baslat(){
+  km6Sira = karistir(kelimeHavuzu6.slice());
+  km6Index = 0; km6DogruSayisi = 0;
+  document.getElementById('km6Dogru').textContent = 0;
+  document.getElementById('km6Toplam').textContent = km6Sira.length;
+  document.getElementById('km6Sonuc').textContent = '';
+  km6Tur();
+}
+
+function km6Tur(){
+  if(km6Index >= km6Sira.length){
+    document.getElementById('km6Ipucu').textContent = '';
+    document.getElementById('km6Banka').innerHTML = '';
+    document.getElementById('km6Cevap').innerHTML = '';
+    document.getElementById('km6Sonuc').textContent = `🏆 Tebrikler! Kelime mühendisliğini tamamladın! ${km6DogruSayisi}/${km6Sira.length} kelime inşa ettin.`;
+    return;
+  }
+  document.getElementById('km6Tur').textContent = km6Index+1;
+  const oge = km6Sira[km6Index];
+  document.getElementById('km6Ipucu').innerHTML = `📐 Plan: <b>${oge.anlam}</b>`;
+  const parcalar = parcalaraBol(oge.kelime);
+  siraOlustur({tokens:parcalar, bankaId:'km6Banka', cevapId:'km6Cevap', tamamlandi:()=>{
+    km6DogruSayisi++;
+    document.getElementById('km6Dogru').textContent = km6DogruSayisi;
+    document.getElementById('km6Sonuc').textContent = `✅ İnşa edildi: ${oge.kelime}`;
+    km6Index++;
+    setTimeout(()=>{ document.getElementById('km6Sonuc').textContent=''; km6Tur(); }, 1000);
+  }});
+}
+
+<!--PLACEHOLDER:JS3-->
+
+// ===================== SUNUM (SLAYT) GORUNUMU JS =====================
+window.sunumDurumu = window.sunumDurumu || {};
+function sunumNoktalariOlustur(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  const nokta = document.getElementById('sunumNoktalar'+suf);
+  if(!alan || !nokta) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  nokta.innerHTML = '';
+  for(let i=0;i<toplam;i++){
+    const d = document.createElement('span');
+    d.className = 'sunum-nokta' + (i===0?' aktif':'');
+    d.onclick = function(){ sunumIndexeGit(suf, i); };
+    nokta.appendChild(d);
+  }
+}
+function sunumGuncelle(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const slaytlar = alan.querySelectorAll('.sunum-slayt');
+  const idx = sunumDurumu[suf] || 0;
+  slaytlar.forEach(function(s,i){ s.classList.toggle('aktif', i===idx); });
+  const sayac = document.getElementById('sunumSayac'+suf);
+  if(sayac) sayac.textContent = (idx+1)+' / '+slaytlar.length;
+  document.querySelectorAll('#sunumNoktalar'+suf+' .sunum-nokta').forEach(function(n,i){ n.classList.toggle('aktif', i===idx); });
+}
+function sunumIndexeGit(suf, i){
+  sunumDurumu[suf] = i;
+  sunumGuncelle(suf);
+}
+function sunumGit(suf, yon){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  const toplam = alan.querySelectorAll('.sunum-slayt').length;
+  let idx = (sunumDurumu[suf]||0) + yon;
+  if(idx<0) idx=0;
+  if(idx>=toplam) idx=toplam-1;
+  sunumIndexeGit(suf, idx);
+}
+function sunumTamEkran(suf){
+  const alan = document.getElementById('sunumAlan'+suf);
+  if(!alan) return;
+  if(alan.requestFullscreen) alan.requestFullscreen();
+  else if(alan.webkitRequestFullscreen) alan.webkitRequestFullscreen();
+}
+document.addEventListener('keydown', function(e){
+  const slaytBolumu = document.getElementById('slayt');
+  if(!slaytBolumu || !slaytBolumu.classList.contains('aktif')) return;
+  if(e.key === 'ArrowRight') sunumGit('', 1);
+  if(e.key === 'ArrowLeft') sunumGit('', -1);
+});
+document.addEventListener('DOMContentLoaded', function(){ sunumNoktalariOlustur(''); sunumGuncelle(''); });
+
+
+const UNITE_KIMLIK = '4-6';
+
+// ===================== OGRENCI KIMLIGI VE OGRETMEN PANELI =====================
+const OP_ANAHTAR = 'dkabOgretmenPaneli_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname);
+
+function opOgrenciAdi(){
+  let ad = sessionStorage.getItem('dkabAktifOgrenci');
+  if(!ad){
+    ad = prompt('Merhaba! Öğretmenin ilerlemeni takip edebilmesi için adını ve soyadını yazar mısın?');
+    if(!ad || !ad.trim()) ad = 'İsimsiz Öğrenci';
+    ad = ad.trim().slice(0,40);
+    sessionStorage.setItem('dkabAktifOgrenci', ad);
+  }
+  return ad;
+}
+function opOgrenciDegistir(){
+  sessionStorage.removeItem('dkabAktifOgrenci');
+  ozelBildirim('Öğrenci bilgisi sıfırlandı. Bir sonraki oyun tamamlandığında yeni isim sorulacak.');
+}
+function opVerileriOku(){
+  try{ return JSON.parse(localStorage.getItem(OP_ANAHTAR)) || {}; }catch(e){ return {}; }
+}
+function opVerileriYaz(v){
+  try{ localStorage.setItem(OP_ANAHTAR, JSON.stringify(v)); }catch(e){}
+}
+function opOgrenciKaydiGetir(v, ad){
+  if(!v[ad]) v[ad] = {oyunlar:[], sonPuan:0, sonRozetler:[], ilkTarih:new Date().toLocaleString('tr-TR')};
+  return v[ad];
+}
+function opOyunTamamlandiKaydet(bolumId, toplamPuan, rozetler){
+  const ad = opOgrenciAdi();
+  const v = opVerileriOku();
+  const kayit = opOgrenciKaydiGetir(v, ad);
+  kayit.oyunlar.push({bolum: bolumId || 'bilinmiyor', tarih: new Date().toLocaleString('tr-TR')});
+  kayit.sonPuan = toplamPuan;
+  kayit.sonRozetler = rozetler || [];
+  opVerileriYaz(v);
+}
+
+const OP_SIFRE = 'ogretmen2026';
+let opGirisYapildi = false;
+
+function opGirisKontrol(){
+  if(opGirisYapildi){ opPaneliGoster(); return; }
+  const girilen = prompt('Öğretmen paneline erişim için şifreyi girin:');
+  if(girilen === OP_SIFRE){
+    opGirisYapildi = true;
+    opPaneliGoster();
+  } else if(girilen !== null){
+    ozelBildirim('Şifre yanlış.');
+    document.getElementById('opGirisEkrani').style.display = 'block';
+    document.getElementById('opPanelEkrani').style.display = 'none';
+  }
+}
+
+function opPaneliGoster(){
+  document.getElementById('opGirisEkrani').style.display = 'none';
+  document.getElementById('opPanelEkrani').style.display = 'block';
+  const v = opVerileriOku();
+  const isimler = Object.keys(v);
+  const govde = document.getElementById('opTabloGovde');
+  const bosMesaj = document.getElementById('opBosMesaj');
+  govde.innerHTML = '';
+  if(isimler.length === 0){
+    bosMesaj.style.display = 'block';
+    return;
+  }
+  bosMesaj.style.display = 'none';
+  isimler.sort((a,b)=> (v[b].oyunlar.length - v[a].oyunlar.length)).forEach(ad=>{
+    const kayit = v[ad];
+    const tr = document.createElement('tr');
+    const sonAktivite = kayit.oyunlar.length ? kayit.oyunlar[kayit.oyunlar.length-1].tarih : '-';
+    const oyunListesi = kayit.oyunlar.map(o=>o.bolum).join(', ');
+    tr.innerHTML = `
+      <td>${ad}</td>
+      <td>${kayit.sonPuan}</td>
+      <td>${kayit.oyunlar.length}</td>
+      <td>${(kayit.sonRozetler||[]).join(' ') || '-'}</td>
+      <td>${sonAktivite}</td>
+      <td><button class="op-detay-btn" onclick="opDetayGoster(this, '${ad.replace(/'/g,"\\'")}')">Detay</button></td>
+    `;
+    govde.appendChild(tr);
+    const detayTr = document.createElement('tr');
+    detayTr.className = 'op-detay-satir';
+    detayTr.style.display = 'none';
+    detayTr.innerHTML = `<td colspan="6"><b>Tamamlanan bölümler:</b> ${esc(oyunListesi) || 'Henüz yok'}</td>`;
+    govde.appendChild(detayTr);
+  });
+}
+function esc(s){ return String(s).replace(/</g,'&lt;'); }
+function opDetayGoster(btn, ad){
+  const tr = btn.closest('tr').nextElementSibling;
+  tr.style.display = tr.style.display === 'none' ? 'table-row' : 'none';
+}
+function opVerileriTemizle(){
+  ozelOnay('Bu ünitedeki tüm öğrenci verileri silinecek. Emin misiniz?', function(onaylandi){
+    if(onaylandi){
+      localStorage.removeItem(OP_ANAHTAR);
+      opPaneliGoster();
+    }
+  });
+}
+
+
+// ===================== OZEL MODAL / BILDIRIM (alert-confirm yerine) =====================
+function ozelBildirim(mesaj){
+  const eski = document.querySelector('.ozel-toast');
+  if(eski) eski.remove();
+  const toast = document.createElement('div');
+  toast.className = 'ozel-toast';
+  toast.textContent = mesaj;
+  document.body.appendChild(toast);
+  setTimeout(()=>toast.remove(), 3200);
+}
+function ozelOnay(mesaj, callback){
+  const arka = document.createElement('div');
+  arka.className = 'ozel-modal-arka';
+  arka.innerHTML = '<div class="ozel-modal-kutu"><p class="ozel-modal-mesaj"></p>' +
+    '<button class="ozel-modal-btn" style="background:var(--kirmizi);color:#fff;">Evet</button>' +
+    '<button class="ozel-modal-btn" style="background:#e2e8f0;">Vazgeç</button></div>';
+  arka.querySelector('.ozel-modal-mesaj').textContent = mesaj;
+  document.body.appendChild(arka);
+  const btnler = arka.querySelectorAll('.ozel-modal-btn');
+  btnler[0].onclick = ()=>{ arka.remove(); callback(true); };
+  btnler[1].onclick = ()=>{ arka.remove(); callback(false); };
+}
+
+
+// ===================== KENDIMI DEGERLENDIRIYORUM - CHECKBOX KAYDI =====================
+function degOku(uniteKimlik){
+  try{ return JSON.parse(localStorage.getItem('dkabDegerlendirme_'+uniteKimlik)) || {}; }catch(e){ return {}; }
+}
+function degKaydet(uniteKimlik){
+  const durum = {};
+  document.querySelectorAll('[id^="deg_'+uniteKimlik+'_"]').forEach(cb=>{ durum[cb.id] = cb.checked; });
+  try{ localStorage.setItem('dkabDegerlendirme_'+uniteKimlik, JSON.stringify(durum)); }catch(e){}
+}
+function degYukle(uniteKimlik){
+  const durum = degOku(uniteKimlik);
+  Object.keys(durum).forEach(id=>{
+    const cb = document.getElementById(id);
+    if(cb) cb.checked = durum[id];
+  });
+}
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof UNITE_KIMLIK !== 'undefined') degYukle(UNITE_KIMLIK);
+});
+
+
+// ===================== DUSUN VE CEVAPLA / AILEMLE YAPIYORUM - CEVAP KAYDI =====================
+function zbCevapAnahtari(tur){ return 'dkabZbCevap_' + (typeof UNITE_KIMLIK !== 'undefined' ? UNITE_KIMLIK : location.pathname) + '_' + tur; }
+function zbCevapKaydet(tur, el){
+  try{ localStorage.setItem(zbCevapAnahtari(tur), el.value); }catch(e){}
+  const not = document.getElementById('zbNot_'+tur);
+  if(not){
+    not.textContent = '✓ Cevabın kaydedildi';
+    clearTimeout(not._zbT);
+    not._zbT = setTimeout(()=>{ not.textContent=''; }, 2500);
+  }
+}
+function zbCevapYukle(){
+  ['dusun','aile','ikilem'].forEach(tur=>{
+    const el = document.getElementById('zbAlan_'+tur);
+    if(!el) return;
+    try{ const v = localStorage.getItem(zbCevapAnahtari(tur)); if(v) el.value = v; }catch(e){}
+  });
+}
+document.addEventListener('DOMContentLoaded', zbCevapYukle);
+
+
+// ===================== TEKRAR ZAMANI HATIRLATMASI =====================
+function zbTekrarHatirlatmaKontrol(){
+  const uniteKimlik = (typeof UNITE_KIMLIK !== 'undefined') ? UNITE_KIMLIK : location.pathname;
+  const anahtar = 'dkabSonZiyaret_' + uniteKimlik;
+  let son = null;
+  try{ son = localStorage.getItem(anahtar); }catch(e){}
+  const bugun = new Date();
+  if(son){
+    const gecenGun = Math.floor((bugun - new Date(son)) / 86400000);
+    if(gecenGun >= 3 && typeof ozelBildirim === 'function'){
+      setTimeout(()=>{ ozelBildirim('👋 Bu üniteyi ' + gecenGun + ' gündür tekrar etmedin. Hafızanı tazelemek ister misin?'); }, 1500);
+    }
+  }
+  try{ localStorage.setItem(anahtar, bugun.toISOString()); }catch(e){}
+}
+document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
+
+
+</script>
+
+</body>
+</html>
