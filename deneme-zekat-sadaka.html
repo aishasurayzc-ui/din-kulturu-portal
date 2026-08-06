@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deneme Sınavı — Zekât ve Sadaka (LGS DKAB)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+:root{
+  --navy:#1E3A8A; --turkuaz:#06B6D4; --sari:#f4a261; --yesil:#40916c;
+  --bg:#f7f4ec; --acikgri:#f1f5f9; --metin:#22333b; --metin-ikincil:#5d6b7a;
+  --yuzey:#ffffff; --kenar:#e2e8f0;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px;
+  --radius-s:8px; --radius-m:14px; --radius-l:20px;
+  --shadow-1:0 1px 3px rgba(30,58,138,.08); --shadow-2:0 8px 24px rgba(30,58,138,.10);
+  --motion:.2s ease;
+}
+:root[data-tema="dark"]{
+  --bg:#111826; --acikgri:#1a2333; --metin:#e7ecf3; --metin-ikincil:#9aa7b8;
+  --yuzey:#1c2536; --kenar:#2b3750;
+  --shadow-1:0 1px 3px rgba(0,0,0,.3); --shadow-2:0 8px 24px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--metin);transition:background var(--motion),color var(--motion);}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;z-index:100;}
+.skip-link:focus{left:0;}
+.ust-serit{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:var(--yuzey);border-bottom:1px solid var(--kenar);position:sticky;top:0;z-index:20;}
+.marka{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--navy);font-weight:800;font-size:1.05rem;}
+.marka .material-symbols-outlined{font-size:22px;}
+#temaDugme{border:1px solid var(--kenar);background:var(--acikgri);color:var(--metin);border-radius:999px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.cs-hero{padding:var(--sp-7) var(--sp-5) var(--sp-5);text-align:center;max-width:760px;margin:0 auto;}
+.cs-hero h1{margin:0 0 8px;font-size:1.9rem;font-weight:800;color:var(--navy);}
+.cs-hero p{margin:0;color:var(--metin-ikincil);font-size:1rem;line-height:1.55;}
+.geri-link{display:inline-flex;align-items:center;gap:4px;margin-bottom:14px;color:var(--turkuaz);text-decoration:none;font-weight:700;font-size:.85rem;}
+main{max-width:920px;margin:0 auto;padding:0 var(--sp-5) var(--sp-7);}
+.test-secici{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:var(--sp-6);position:sticky;top:70px;background:var(--bg);padding:10px 0;z-index:10;}
+.yil-pil{border:1px solid var(--kenar);background:var(--yuzey);color:var(--metin);padding:8px 16px;border-radius:999px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all var(--motion);}
+.yil-pil:hover{border-color:var(--navy);}
+.yil-pil.aktif{background:var(--navy);color:#fff;border-color:var(--navy);}
+.test-baslik{display:flex;align-items:center;gap:10px;color:var(--navy);font-size:1.2rem;margin:0 0 var(--sp-4);}
+.yil-etiket{font-size:.75rem;font-weight:700;background:var(--acikgri);color:var(--metin-ikincil);padding:3px 10px;border-radius:999px;}
+.soru-karti{background:var(--yuzey);border:1px solid var(--kenar);border-radius:var(--radius-m);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-1);}
+.soru-ust{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.soru-no{background:var(--navy);color:#fff;font-weight:800;font-size:.85rem;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.soru-tema{font-size:.75rem;font-weight:700;color:var(--turkuaz);background:rgba(6,182,212,.1);padding:3px 10px;border-radius:999px;}
+.soru-metin{font-size:.95rem;line-height:1.6;margin:0 0 10px;white-space:pre-line;}
+.secenekler{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.secenek{font-size:.88rem;line-height:1.45;padding:8px 12px;background:var(--acikgri);border-radius:var(--radius-s);cursor:pointer;border:2px solid transparent;transition:all var(--motion);}
+.secenek:hover{border-color:var(--turkuaz);}
+.secenek b{color:var(--navy);margin-right:4px;}
+.soru-karti.cevaplandi .secenek{cursor:default;}
+.soru-karti.cevaplandi .secenek:hover{border-color:transparent;}
+.secenek.dogru-cevap{background:rgba(64,145,108,.15);border-color:var(--yesil);}
+.secenek.dogru-cevap b{color:var(--yesil);}
+.secenek.yanlis-secim{background:rgba(220,38,38,.1);border-color:#dc2626;}
+.secenek.yanlis-secim b{color:#dc2626;}
+.cevap-etiketi{display:none;margin-top:10px;font-size:.82rem;font-weight:700;padding:6px 10px;border-radius:var(--radius-s);}
+.cevap-etiketi.gorunur{display:inline-block;}
+.cevap-etiketi.dogru-mesaj{background:rgba(64,145,108,.15);color:var(--yesil);}
+.cevap-etiketi.yanlis-mesaj{background:rgba(220,38,38,.1);color:#dc2626;}
+@media (max-width:600px){.secenekler{grid-template-columns:1fr;}.test-secici{position:static;}}
+footer{text-align:center;padding:var(--sp-6) var(--sp-5);color:var(--metin-ikincil);font-size:.82rem;border-top:1px solid var(--kenar);margin-top:var(--sp-6);}
+footer a{color:var(--navy);text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+<a href="#ana-icerik" class="skip-link">İçeriğe geç</a>
+<nav class="ust-serit">
+  <a class="marka" href="din-kulturu-tum-siniflar.html"><span class="material-symbols-outlined">mosque</span> DKAB Portal</a>
+  <button id="temaDugme" aria-label="Tema değiştir"><span class="material-symbols-outlined">dark_mode</span></button>
+</nav>
+
+<header class="cs-hero">
+  <a class="geri-link" href="deneme-sinavlari.html">← Tüm deneme sınavları</a>
+  <h1>🤲 Deneme Sınavı: Zekât ve Sadaka</h1>
+  <p>Bu ünite için hazırlanmış 5 ayrı deneme sınavı, her biri 20 soru. Gerçek LGS'de çıkmış sorulara benzer formatta hazırlanmış özgün deneme sorularıdır. Bir şıkka tıklayarak cevabını görebilirsin.</p>
+</header>
+
+<main id="ana-icerik">
+  <div class="test-secici" id="testSecici"></div>
+  <div id="soruAlani"></div>
+</main>
+
+<footer>
+  <a href="deneme-sinavlari.html">← Tüm deneme sınavlarına dön</a>
+  <p style="margin-top:10px;">Bu sayfadaki sorular, gerçek LGS DKAB sorularının formatı ve konu kapsamı örnek alınarak hazırlanmış özgün deneme sorularıdır.</p>
+</footer>
+
+<script>
+const guvenliOku=(k,v)=>{try{return localStorage.getItem(k)??v;}catch(e){return v;}};
+const guvenliYaz=(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}};
+(function(){
+  const tema=guvenliOku('dkab_tema','light');
+  document.documentElement.setAttribute('data-tema',tema);
+})();
+document.getElementById('temaDugme').addEventListener('click',()=>{
+  const su=document.documentElement.getAttribute('data-tema')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-tema',su);
+  guvenliYaz('dkab_tema',su);
+});
+
+const TESTLER = [
+  {
+    "baslik": "Deneme 1",
+    "sorular": [
+      {"tema": "Zekâtın Tanımı", "metin": "Zekât, sözlükte \"artma, çoğalma, temizlenme, arınma\" gibi anlamlara gelir. Terim olarak ise dinen zengin sayılan bir Müslümanın malının belirli bir bölümünü Allah rızası için hak sahibi kişilere vermesidir.\nBuna göre zekâtla ilgili aşağıdaki yargılardan hangisine ulaşılamaz?", "secenekler": ["Zekât, malı çoğaltan ve bereketlendiren bir ibadettir.", "Zekât vermek yalnızca zengin Müslümanlara farzdır.", "Zekât, kişinin nefsini cimrilikten arındırır.", "Zekât miktarı kişinin kendi isteğine göre belirlenir."], "dogru": 3},
+      {"tema": "Zekâtın Şartları", "metin": "Bir kişinin zekâtla yükümlü olabilmesi için bazı şartları taşıması gerekir.\nAşağıdakilerden hangisi zekâtla yükümlü olmanın şartlarından biri değildir?", "secenekler": ["Müslüman olmak", "Akıl baliğ olmak", "Hür (özgür) olmak", "Evli olmak"], "dogru": 3},
+      {"tema": "Nisap", "metin": "İslam dininde bir malın zekâta tabi olması için o malın ulaşması gereken asgari miktara ne ad verilir?", "secenekler": ["Nisap", "Öşür", "Infak", "Nafaka"], "dogru": 0},
+      {"tema": "Zekâtın Şartları", "metin": "I. Malın nisap miktarına ulaşmış olması\nII. Mal üzerinden bir yıl (havelan-ı havl) geçmiş olması\nIII. Malın ihtiyaç fazlası olması\nIV. Kişinin evli olması\nYukarıdakilerden hangileri zekâtın farz olması için gereken şartlar arasında yer alır?", "secenekler": ["I ve II", "I, II ve III", "II, III ve IV", "I, II, III ve IV"], "dogru": 1},
+      {"tema": "Zekâtın Şartları", "metin": "Kerim Bey, nisap miktarının üzerinde bir paraya sahip olduğu hâlde bu parayı henüz bir yıl elinde bulundurmamıştır.\nBuna göre Kerim Bey'in bu parası için aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Zekâtı hemen o an verilmelidir.", "Zekâtı ancak nisap miktarı iki katına çıkınca verilir.", "Üzerinden bir yıl geçmeden zekâta tabi olmaz.", "Bu para için zekât değil sadece sadaka verilir."], "dogru": 2},
+      {"tema": "Ayet Yorumu", "metin": "Kur'an-ı Kerim'de zekâtla ilgili şöyle buyurulur:\n\"Onların mallarından, kendilerini temizleyeceğin ve arındıracağın bir sadaka (zekât) al...\" (Tevbe suresi, 103. ayet)\nBu ayette zekâtın hangi yönü ön plana çıkarılmaktadır?", "secenekler": ["Zekâtın toplumsal dayanışmayı artırması", "Zekâtın kişiyi mal sevgisinden ve cimrilikten arındırması", "Zekâtın belirli bir orana göre hesaplanması", "Zekâtın devlet tarafından toplanması gerektiği"], "dogru": 1},
+      {"tema": "Zekât Oranı", "metin": "Nisap miktarına ulaşan ve üzerinden bir yıl geçen altın, gümüş ve ticaret malları için genel olarak uygulanan zekât oranı aşağıdakilerden hangisidir?", "secenekler": ["Onda bir", "Kırkta bir", "Beşte bir", "Yirmide bir"], "dogru": 1},
+      {"tema": "Zekâtın Hükmü", "metin": "Zekâtla ilgili aşağıdaki bilgilerden hangisi yanlıştır?", "secenekler": ["Zekât, İslam'ın beş temel şartından biridir.", "Zekât, nisap miktarına ulaşan mala sahip her Müslümana farzdır.", "Zekât vermek isteyen kişi ancak zengin olursa bu ibadeti yerine getirebilir.", "Zekât, kişinin dinî görevi olmayıp tamamen gönüllülük esasına dayanır."], "dogru": 3},
+      {"tema": "Zekâta Tabi Mallar", "metin": "Esra Hanım, üzerinden bir yıl geçmiş olan ve nisap miktarını aşan bir miktar borcu bulunmaktadır. Elindeki nakit parası ise bu borcu karşılamaktan biraz fazladır.\nBuna göre Esra Hanım'ın zekâtla yükümlü olması için öncelikle hangisi gereklidir?", "secenekler": ["Elindeki paranın borcundan sonra da nisabı aşması", "Elindeki paranın altına çevrilmiş olması", "Borcunu hiç ödememesi", "Parasının bankada tutulması"], "dogru": 0},
+      {"tema": "Nisap", "metin": "Nisap kavramıyla ilgili aşağıdaki ifadelerden hangisi doğrudur?", "secenekler": ["Nisap miktarı her Müslüman için farklı bir dinî hükme tabidir.", "Nisap, bir kişinin dinen zengin sayılması için gereken asgari mal miktarıdır.", "Nisap miktarına ulaşmayan mallar için de zekât vermek farzdır.", "Nisap, yalnızca hayvan varlığı için geçerli bir ölçüdür."], "dogru": 1},
+      {"tema": "Zekâta Tabi Mallar", "metin": "I. Nisap miktarına ulaşan altın ve gümüş\nII. Ticaret amacıyla elde tutulan mallar\nIII. Belirli sayıya ulaşan büyükbaş ve küçükbaş hayvanlar\nIV. Kişinin oturduğu ev\nYukarıdakilerden hangileri zekâta tabi mallar arasında yer alır?", "secenekler": ["I ve II", "I, II ve III", "II, III ve IV", "I, II, III ve IV"], "dogru": 1},
+      {"tema": "Hadis Yorumu", "metin": "Hz. Muhammed (sav) şöyle buyurmuştur: \"Zekâtını vermeyen kimsenin malı kıyamet günü onun için ateşten bir azaba dönüşür.\"\nBu hadisten hareketle aşağıdaki yargılardan hangisine ulaşılamaz?", "secenekler": ["Zekât vermemenin ahirette karşılığı vardır.", "Zekât, ciddiyetle yerine getirilmesi gereken bir sorumluluktur.", "Zekâtını vermeyen kişi dünya hayatında hiçbir sıkıntı yaşamaz.", "Mal, zekâtı verilmediğinde kişi için bir yük hâline gelebilir."], "dogru": 2},
+      {"tema": "Zekâta Tabi Mallar", "metin": "Çiftçilik yapan bir kişinin topraktan elde ettiği ürünler için verdiği zekâta ne ad verilir?", "secenekler": ["Fitre", "Öşür", "Kefaret", "Nafaka"], "dogru": 1},
+      {"tema": "Zekâta Tabi Mallar", "metin": "Yağmur suyuyla sulanan (doğal sulamayla yetişen) toprak ürünlerinde zekât (öşür) oranı, suni sulama ile yetişen ürünlere göre nasıldır?", "secenekler": ["Daha düşüktür.", "Daha yüksektir.", "Tamamen aynıdır.", "Hiç zekât verilmez."], "dogru": 1},
+      {"tema": "Zekâta Tabi Mallar", "metin": "Belirli sayıya ulaşan koyun, sığır ve deve gibi hayvanlara sahip olan kişilerin bu hayvanlardan verdiği zekâta ne ad verilir?", "secenekler": ["Sâime zekâtı", "Öşür", "Fitre", "İnfak"], "dogru": 0},
+      {"tema": "Zekâtın Hikmeti", "metin": "Zekât ibadetinin bireye kazandırdığı hikmetlerle ilgili aşağıdakilerden hangisi söylenemez?", "secenekler": ["Kişiyi cimrilikten ve mal düşkünlüğünden korur.", "Kişide şükür bilincini geliştirir.", "Kişinin malının azalmayıp aksine bereketlenmesine vesile olur.", "Kişinin toplumdaki itibarını artırmak için gösterişe teşvik eder."], "dogru": 3},
+      {"tema": "Zekâta Tabi Mallar", "metin": "Bir kuyumcuda satış amacıyla bulundurulan altın ve gümüş takılar için aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Satış amaçlı olduğu için zekâta tabi değildir.", "Ticaret malı sayıldığından nisabı aşması hâlinde zekâta tabidir.", "Sadece kullanım eşyası olduğundan zekâttan muaftır.", "Zekât yerine yalnızca fitre verilir."], "dogru": 1},
+      {"tema": "Nisap ve Havelan-ı Havl", "metin": "Aşağıdaki kavram-açıklama eşleştirmelerinden hangisi yanlıştır?", "secenekler": ["Nisap: Zekâta tabi olacak asgari mal miktarı", "Havelan-ı havl: Malın üzerinden bir kamerî yılın geçmesi", "Öşür: Toprak ürünlerinden verilen zekât", "İnfak: Zekâtın devlet eliyle dağıtılması"], "dogru": 3},
+      {"tema": "Zekâtın Farz Oluşu", "metin": "Mehmet Bey nisap miktarının üzerinde bir servete sahiptir ancak bu servet üzerinden henüz altı ay geçmiştir.\nBu durumda Mehmet Bey ile ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Zekâtla şu an için yükümlü değildir.", "Zekâtını hemen ödemesi gerekir.", "Zekâtını iki katına çıkararak ödemelidir.", "Zekât yerine sadece fitre vermesi yeterlidir."], "dogru": 0},
+      {"tema": "Genel Değerlendirme", "metin": "Zekât ibadetiyle ilgili;\nI. Toplumdaki gelir dağılımı dengesizliğini azaltmaya katkı sağlar.\nII. Yalnızca fakir kişiler tarafından yerine getirilebilir.\nIII. Kişinin malını Allah rızası için paylaşmasını sağlar.\nIV. Belirli şartları taşıyan her Müslümana farzdır.\nyargılarından hangileri doğrudur?", "secenekler": ["I ve II", "I, III ve IV", "II ve III", "I, II, III ve IV"], "dogru": 1}
+    ]
+  },
+  {
+    "baslik": "Deneme 2",
+    "sorular": [
+      {"tema": "Zekât Verilecek Yerler", "metin": "Kur'an-ı Kerim'de zekâtın kimlere verileceği şöyle bildirilir:\n\"Sadakalar (zekâtlar) Allah'tan bir farz olarak ancak fakirlere, düşkünlere, zekât işinde çalışan görevlilere, kalpleri İslam'a ısındırılacak olanlara, kölelikten kurtulmak isteyenlere, borçlulara, Allah yolunda cihad edenlere ve yolda kalmışlara mahsustur.\" (Tevbe suresi, 60. ayet)\nBu ayete göre aşağıdakilerden hangisi zekât verilebilecek gruplardan biri değildir?", "secenekler": ["Borcunu ödeyemeyecek durumda olan kişiler", "Yolculukta parasız kalan kişiler", "Zengin olup malını artırmak isteyen kişiler", "Geçimini sağlayamayan yoksul kişiler"], "dogru": 2},
+      {"tema": "Zekât Verilemeyecek Kişiler", "metin": "Bir kişinin bakmakla yükümlü olduğu eşine, çocuklarına veya anne babasına zekât vermesiyle ilgili aşağıdakilerden hangisi doğrudur?", "secenekler": ["Bu kişilere zekât verilebilir, hatta öncelik onlaradır.", "Bu kişilere zekât verilemez çünkü nafakalarını sağlamak zaten kişinin sorumluluğudur.", "Bu kişilere yalnızca yılda bir kez zekât verilebilir.", "Bu kişilere zekât ancak hacca gitmeden önce verilir."], "dogru": 1},
+      {"tema": "Zekâtta Akraba Önceliği", "metin": "Kişinin zekâtını verebileceği yakınları aşağıdakilerin hangisinde doğru verilmiştir?", "secenekler": ["Annesi - Babası - Çocuğu - Eşi", "Amcası - Halası - Dayısı - Teyzesi", "Dedesi - Ninesi - Eşi - Kızı", "Babası - Oğlu - Annesi - Kızı"], "dogru": 1},
+      {"tema": "Zekât Verilemeyecek Kişiler", "metin": "Selim, kendisinden maddi olarak çok daha varlıklı olan ağabeyine zekâtını vermek istemektedir.\nBu durumla ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Kardeşler birbirine her zaman zekât verebilir.", "Zengin bir kişiye zekât verilemeyeceği için bu, dinen doğru olmaz.", "Zekât ancak kardeşlere verilebileceğinden bu doğru bir davranıştır.", "Ağabeyi zengin olsa da akraba olduğu için zekât alabilir."], "dogru": 1},
+      {"tema": "Zekât Verilecek Yerler", "metin": "I. Geçimini sağlayamayan yoksullar\nII. Yolda parasız kalan yolcular\nIII. Borcunu ödeyemeyecek durumda olan kişiler\nIV. Bakmakla yükümlü olunan çocuklar\nYukarıdakilerden hangileri zekât verilebilecek kişiler arasında yer alır?", "secenekler": ["I ve IV", "I, II ve III", "II, III ve IV", "I, II, III ve IV"], "dogru": 1},
+      {"tema": "Fakir-Miskin Ayrımı", "metin": "Zekât verilecek gruplar arasında yer alan \"fakir\" ve \"miskin\" kavramlarıyla ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Her iki kavram da hiçbir geliri ve malı olmayan, ihtiyaç içindeki kişileri ifade eder ve zekât alabilirler.", "Fakir zengin, miskin ise orta hâlli kişi demektir.", "Bu kavramlar yalnızca yolcular için kullanılır.", "Bu kişilere zekât değil yalnızca borç verilebilir."], "dogru": 0},
+      {"tema": "Zekât Verilecek Yerler", "metin": "Borcu, malından fazla olup ödeme güçlüğü çeken bir kişiye zekât verilmesiyle ilgili aşağıdakilerden hangisi doğrudur?", "secenekler": ["Böyle bir kişiye zekât verilemez.", "Bu kişi \"garimîn\" (borçlular) grubuna girdiği için kendisine zekât verilebilir.", "Bu kişiye ancak faizli borç verilebilir.", "Bu kişiye zekât yerine sadece fitre verilmelidir."], "dogru": 1},
+      {"tema": "Zekât Verilecek Yerler", "metin": "Yolculuk sırasında maddi imkânları tükenen, memleketinde parası olduğu hâlde bulunduğu yerde ihtiyaç içine düşen kişiye ne ad verilir?", "secenekler": ["Miskin", "İbnü's-sebîl (yolda kalmış)", "Müellefe-i kulûb", "Âmilîn"], "dogru": 1},
+      {"tema": "Zekât Verilemeyecek Kişiler", "metin": "Bir kişinin eşine zekât vermesiyle ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Eşler birbirlerine zekât veremez çünkü aralarında nafaka yükümlülüğü vardır.", "Eş, zekât verilecek kişilerin başında gelir.", "Eşe yalnızca ramazan ayında zekât verilebilir.", "Eşe zekât vermek, akrabaya vermekten daha faziletlidir."], "dogru": 0},
+      {"tema": "Zekât Verilemeyecek Kişiler", "metin": "Aşağıdakilerden hangisine zekât verilemez?", "secenekler": ["Kişinin bakmakla yükümlü olduğu küçük çocuğuna", "Kişinin zengin olmayan amcasına", "Kişinin geçim sıkıntısı çeken teyzesine", "Kişinin borcunu ödeyemeyen dayısına"], "dogru": 0},
+      {"tema": "Zekât Toplama Görevlileri", "metin": "Zekâtı toplamak ve hak sahiplerine ulaştırmakla görevlendirilen kişilere ne ad verilir?", "secenekler": ["Âmilîn", "Müellefe-i kulûb", "Rikab", "Garimîn"], "dogru": 0},
+      {"tema": "Zekât Verilecek Yerler", "metin": "Ayşe Öğretmen, öğrencilerine sınıfta zekâtın kimlere verilebileceğini anlatırken şu örnekleri veriyor: \"Ailesinin geçimini tek başına sağlamaya çalışan, evine ekmek götürmekte zorlanan bir komşumuz\", \"Aracı arızalanıp memleketine dönemeyen, parası da biten bir yolcu.\"\nAyşe Öğretmen bu örneklerle zekât verilebilecek hangi grupları anlatmaktadır?", "secenekler": ["Zenginler ve borçlular", "Yoksullar ve yolda kalmışlar", "Akrabalar ve komşular", "Öğretmenler ve öğrenciler"], "dogru": 1},
+      {"tema": "Zekât Verilemeyecek Kişiler", "metin": "Gayrimüslim bir komşuya maddi yardım yapmak isteyen bir Müslüman için aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Bu yardım zekât olarak verilebilir çünkü zekât herkese verilir.", "Zekât yalnızca Müslümanlara verilebileceğinden bu yardım sadaka ya da genel bağış olarak yapılabilir.", "Gayrimüslimlere hiçbir şekilde yardım edilemez.", "Bu yardım ancak fitre olarak verilebilir."], "dogru": 1},
+      {"tema": "Zekât Verilecek Yerler", "metin": "I. Fakir ve düşkün kişiler\nII. Borcundan dolayı zor durumda kalanlar\nIII. Zengin olup görkemli bir hayat süren kişiler\nIV. Yolda parasız kalan yolcular\nYukarıdakilerden hangileri zekât verilebilecek kişiler arasında yer almaz?", "secenekler": ["Yalnız III", "I ve II", "III ve IV", "I, II ve IV"], "dogru": 0},
+      {"tema": "Zekâtta Akraba Önceliği", "metin": "Kişinin kendi öz dedesine zekât vermesiyle ilgili aşağıdakilerden hangisi doğrudur?", "secenekler": ["Dede, bakmakla yükümlü olunan yakınlardan sayıldığı için kendisine zekât verilemez.", "Dedeye her zaman öncelikli olarak zekât verilir.", "Dede yalnızca hacdan sonra zekât alabilir.", "Dedeye zekât vermek farz değil haramdır."], "dogru": 0},
+      {"tema": "Hadis Yorumu", "metin": "Hz. Muhammed (sav), zekât ve sadaka verirken önceliğin yakın çevreden başlaması gerektiğini vurgulayarak yardımın önce ihtiyaç sahibi akrabalara, sonra komşulara ulaştırılmasını tavsiye etmiştir.\nBu durumun temel gerekçesi aşağıdakilerden hangisi olabilir?", "secenekler": ["Akrabalık bağlarının güçlendirilmesi ve yardımın en yakın ihtiyaç sahibine ulaşmasının sağlanması", "Uzaktaki insanların yardıma hiç ihtiyacının olmaması", "Zekâtın yalnızca aile içinde kalması gerektiği", "Komşulara yardımın dinen yasak olması"], "dogru": 0},
+      {"tema": "Zekât Verilecek Yerler", "metin": "Aşağıdaki metinde boş bırakılan yere en uygun ifade hangisidir?\n\"Ailesiyle birlikte geçim sıkıntısı yaşayan, evinde yeterli erzağı bulunmayan Kemal Bey'e komşuları tarafından her ay düzenli olarak zekât veriliyor. Çünkü Kemal Bey ......\"", "secenekler": ["zengin ve varlıklı bir tüccardır.", "temel ihtiyaçlarını karşılayamayan bir yoksuldur.", "zekât toplamakla görevli bir memurdur.", "borcu olmayan, hâli vakti yerinde bir kişidir."], "dogru": 1},
+      {"tema": "Zekât Verilecek Yerler", "metin": "Zekât verilecek sekiz sınıf içinde yer alan ve İslam'a yeni ısınan, kalbi henüz pekişmemiş kişilere ne ad verilir?", "secenekler": ["Müellefe-i kulûb", "İbnü's-sebîl", "Rikab", "Garimîn"], "dogru": 0},
+      {"tema": "Zekât Verilecek Yerler", "metin": "Bir kişiye zengin olup olmadığına bakılmaksızın zekât verilebilecek tek durum aşağıdakilerden hangisidir?", "secenekler": ["Kişinin akraba olması", "Kişinin zekât toplama işinde görevli (âmil) olarak çalışması", "Kişinin komşu olması", "Kişinin yaşlı olması"], "dogru": 1},
+      {"tema": "Toplumsal Denge", "metin": "Kur'an-ı Kerim'de servetin belli ellerde toplanmasının sakıncasına dikkat çekilerek malın \"yalnızca zenginler arasında dolaşan bir güç aracı olmaması\" gerektiği bildirilir (Haşr suresi, 7. ayet).\nBu ayetten hareketle zekâtın hangi işlevi vurgulanmaktadır?", "secenekler": ["Servetin toplumda adil bir şekilde dağılımına katkı sağlaması", "Zenginlerin daha da zenginleşmesini sağlaması", "Zekâtın yalnızca ticaret mallarına uygulanması", "Zekâtın devletin gelir kaynağı olması"], "dogru": 0}
+    ]
+  },
+  {
+    "baslik": "Deneme 3",
+    "sorular": [
+      {"tema": "Sadaka Kavramı", "metin": "Sadaka kavramıyla ilgili aşağıdakilerden hangisi söylenemez?", "secenekler": ["Sadaka, gönüllülük esasına dayanan bir yardımlaşma biçimidir.", "Sadaka vermenin dinen belirlenmiş asgari bir miktarı yoktur.", "Sadaka yalnızca Ramazan ayında verilebilir.", "Sadaka, mal ile verilebileceği gibi güzel söz ve davranışla da yerine getirilebilir."], "dogru": 2},
+      {"tema": "Sadaka-i Cariye", "metin": "Toplumun uzun süre yararlanabileceği, kişi hayatta olmasa bile sevabı devam eden yardımlara ne ad verilir?", "secenekler": ["Sadaka-i cariye", "Fitre", "Öşür", "Kefaret"], "dogru": 0},
+      {"tema": "Sadaka-i Cariye", "metin": "Aşağıdakilerden hangisi sadaka-i cariyeye örnek olarak verilemez?", "secenekler": ["Bir köy için çeşme yaptırmak", "Kimsesiz çocuklar için okul inşa ettirmek", "Yol kenarına gölge versin diye fidan dikmek", "Bir dilenciye tek seferlik erzak yardımı yapmak"], "dogru": 3},
+      {"tema": "İnfak", "metin": "\"İnfak\" kavramı en genel anlamıyla neyi ifade eder?", "secenekler": ["Yalnızca zekât miktarının hesaplanmasını", "Kişinin sahip olduğu maldan Allah rızası için harcamasını, başkalarıyla paylaşmasını", "Sadece kurban kesmeyi", "Sadece hacca gitmeyi"], "dogru": 1},
+      {"tema": "Gizli Yardım / Riyadan Kaçınma", "metin": "Cemil Bey, her ay düzenli olarak ihtiyaç sahibi ailelere yardım göndermekte, ancak bu yardımları kimseye söylemeden, oğlu aracılığıyla ve kimliğini gizleyerek ulaştırmaktadır. Yakınları bu durumu fark edip kendisine sorduğunda ise \"Bu benimle Rabbim arasında bir mesele\" demektedir.\nBu metinden Cemil Bey ile ilgili aşağıdaki yargılardan hangisine ulaşılamaz?", "secenekler": ["Yardımlarını gösterişten uzak bir şekilde yapmaktadır.", "Yardımlarını düzenli olarak sürdürmektedir.", "Yaptığı yardımların tamamı sadaka-i cariye niteliğindedir.", "Yardımlarını ihlasla, samimiyetle yapmaya özen göstermektedir."], "dogru": 2},
+      {"tema": "Ayet Yorumu", "metin": "Kur'an-ı Kerim'de şöyle buyurulur:\n\"Sadakaları açıktan verirseniz ne güzel! Fakat onları gizleyerek fakirlere verirseniz, bu sizin için daha hayırlıdır...\" (Bakara suresi, 271. ayet)\nBu ayetten hareketle aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Sadaka her zaman açıktan verilmelidir.", "Gizlice verilen sadakanın riyadan uzak olması sebebiyle ayrı bir değeri vardır.", "Açıktan verilen sadaka dinen geçersizdir.", "Sadaka sadece belirli kişilere verilmelidir."], "dogru": 1},
+      {"tema": "Riyadan Kaçınma", "metin": "\"Riya\" kavramı, sadaka ve infak bağlamında en doğru şekilde nasıl açıklanabilir?", "secenekler": ["Yapılan iyiliği başkalarına gösteriş amacıyla yapmak", "Yardımı gizlice, kimseye belli etmeden yapmak", "Yardımı yalnızca akrabalara yapmak", "Yardımı düzenli aralıklarla yapmak"], "dogru": 0},
+      {"tema": "Sadaka Çeşitleri", "metin": "I. Muhtaç bir aileye erzak yardımında bulunmak\nII. Yolda karşılaşılan birine güler yüzle davranmak\nIII. Toplum yararına bir kütüphane yaptırmak\nIV. Bir hayvana su vermek\nYukarıdakilerden hangileri sadaka kapsamında değerlendirilebilir?", "secenekler": ["Yalnız I", "I ve III", "I, II ve IV", "I, II, III ve IV"], "dogru": 3},
+      {"tema": "Hadis Yorumu", "metin": "Hz. Muhammed (sav) şöyle buyurmuştur: \"Kardeşine tebessüm etmen bile senin için bir sadakadır.\"\nBu hadisten hareketle aşağıdakilerden hangisine ulaşılabilir?", "secenekler": ["Sadaka yalnızca maddi imkânı olanların yapabileceği bir ibadettir.", "Sadaka, sadece para ve mal vererek yapılabilir.", "Sadaka kavramı, güzel söz ve davranışları da kapsayacak kadar geniştir.", "Tebessüm etmek sadakanın yerini asla tutmaz."], "dogru": 2},
+      {"tema": "Sadakada İhlas", "metin": "Yardımını yaparken içinde bulunduğu ruh hâliyle ilgili olarak bir kişi \"Bu yardımı sırf Allah rızası için yapıyorum, kimsenin bilmesini istemiyorum\" diyorsa bu kişi hangi kavrama uygun davranmaktadır?", "secenekler": ["İhlas", "Riya", "Nisap", "Öşür"], "dogru": 0},
+      {"tema": "Sadaka Kavramı", "metin": "Sadaka verme konusunda aşağıdakilerden hangisi yanlıştır?", "secenekler": ["Sadaka, kişinin gücü ölçüsünde her zaman verilebilir.", "Sadaka vermek için zengin olma şartı yoktur.", "Sadaka, yalnızca belirli bir mal cinsinden verilebilir.", "Sadaka, maddi imkânla birlikte manevi/davranışsal şekillerde de yapılabilir."], "dogru": 2},
+      {"tema": "Sadakada İncitmeme", "metin": "Kur'an-ı Kerim'de şöyle buyurulur:\n\"Ey iman edenler! Allah'a ve ahiret gününe inanmadığı hâlde insanlara gösteriş için malını harcayan kimse gibi, sadakalarınızı başa kakma ve incitme yoluyla boşa çıkarmayın...\" (Bakara suresi, 264. ayet)\nBu ayette sadaka verirken kaçınılması gereken hangi davranışa dikkat çekilmektedir?", "secenekler": ["Sadakayı az miktarda vermeye", "Yardım edilen kişiyi üzecek söz ve tavırlar sergilemeye", "Sadakayı akrabalara vermeye", "Sadakayı düzenli olarak vermeye"], "dogru": 1},
+      {"tema": "Sadaka-i Cariye", "metin": "Ölümünden yıllar sonra bile insanların kullanmaya devam ettiği bir hayır çeşmesini yaptıran kişi için aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Yaptığı hayır, kendisi vefat ettiği için sevabı da sona ermiştir.", "Yaptığı hayırdan, insanlar yararlandıkça sevap almaya devam eder.", "Bu hayır yalnızca zekât kapsamında değerlendirilir.", "Bu hayrın hiçbir dinî karşılığı yoktur."], "dogru": 1},
+      {"tema": "Hadis Yorumu", "metin": "Hz. Muhammed (sav) şöyle buyurmuştur: \"Sadaka vermekle mal asla eksilmez.\"\nBu hadisten hareketle aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Sadaka veren kişinin malı görünürde azalsa da Allah katında bereketlenir.", "Sadaka veren kişi maddi olarak zarara uğrar.", "Sadaka vermek kişiyi fakirleştirir.", "Sadaka vermek isteğe bağlı olmayıp herkese aynı miktarda farzdır."], "dogru": 0},
+      {"tema": "İnfak", "metin": "I. İnfak, yalnızca zenginlerin yapabileceği bir davranıştır.\nII. İnfak, kişinin sahip olduklarından başkalarına pay ayırmasıdır.\nIII. İnfak, yalnızca para ile yapılabilir.\nIV. İnfak, toplumsal yardımlaşma bilincini geliştirir.\nYukarıdaki yargılardan hangileri doğrudur?", "secenekler": ["Yalnız II", "II ve IV", "I, II ve III", "I, III ve IV"], "dogru": 1},
+      {"tema": "Sadaka-i Cariye", "metin": "Meryem Hanım, vefat eden babasının anısına bir köy okuluna kütüphane kurdurmuş ve öğrencilerin yıllarca bu kütüphaneden faydalanmasını sağlamıştır.\nBu davranış aşağıdaki kavramlardan hangisiyle en iyi açıklanır?", "secenekler": ["Fitre", "Öşür", "Sadaka-i cariye", "Kefaret"], "dogru": 2},
+      {"tema": "Sadaka Verme Zamanı", "metin": "Sadaka verme zamanıyla ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Sadaka yalnızca Cuma günleri verilebilir.", "Sadaka, belirli bir zaman şartına bağlı olmaksızın her an verilebilir.", "Sadaka sadece yılda bir kez verilir.", "Sadaka ancak hacca gidildiğinde verilebilir."], "dogru": 1},
+      {"tema": "Sadakada İhlas", "metin": "Bir kişinin verdiği sadakanın Allah katında kabul görmesi için en önemli şart aşağıdakilerden hangisidir?", "secenekler": ["Sadakanın çok miktarda olması", "Sadakanın herkesin önünde verilmesi", "Sadakanın samimi bir niyetle, Allah rızası gözetilerek verilmesi", "Sadakanın yalnızca akrabalara verilmesi"], "dogru": 2},
+      {"tema": "Sadaka Çeşitleri", "metin": "Aşağıdakilerden hangisi maddi değil manevi bir sadaka örneğidir?", "secenekler": ["Bir yetime kıyafet almak", "Muhtaç bir öğrenciye kırtasiye yardımı yapmak", "Yolunu kaybetmiş birine doğru yolu göstermek", "Bir camiye halı bağışlamak"], "dogru": 2},
+      {"tema": "Genel Değerlendirme", "metin": "Sadaka ibadetinin toplumsal hayata katkılarıyla ilgili aşağıdakilerden hangisi söylenemez?", "secenekler": ["İnsanlar arasındaki yardımlaşma ve dayanışma duygusunu güçlendirir.", "Zengin ile fakir arasındaki sevgi bağını pekiştirir.", "Toplumda paylaşma ve empati kültürünün gelişmesine katkı sağlar.", "Sadaka veren kişiyi toplumda diğerlerinden üstün ve ayrıcalıklı kılar."], "dogru": 3}
+    ]
+  },
+  {
+    "baslik": "Deneme 4",
+    "sorular": [
+      {"tema": "Zekât-Sadaka Farkı", "metin": "Zekât ile sadaka arasındaki temel farklardan biri aşağıdakilerden hangisidir?", "secenekler": ["Zekât farz bir ibadettir, sadaka ise gönüllülük esasına dayanır.", "Sadaka yalnızca zenginler tarafından verilebilir.", "Zekât herkes tarafından, sadaka ise sadece akrabalar arasında verilir.", "Zekât ve sadaka arasında hiçbir fark yoktur."], "dogru": 0},
+      {"tema": "Zekât-Sadaka Farkı", "metin": "Zekâtın miktarı dinen belirlenmişken sadakanın miktarıyla ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Sadakanın da zekât gibi kesin bir oranı vardır.", "Sadakanın miktarı kişinin gücüne ve isteğine bağlıdır, kesin bir sınırı yoktur.", "Sadaka miktarı devlet tarafından belirlenir.", "Sadaka yalnızca nisap miktarınca verilir."], "dogru": 1},
+      {"tema": "Zekât-Sadaka Farkı", "metin": "Zekâtın farz olabilmesi için malın nisap miktarına ulaşması şartı aranırken sadaka için böyle bir şart aranmamasının nedeni aşağıdakilerden hangisi olabilir?", "secenekler": ["Sadakanın zekâttan daha az önemli bir ibadet olması", "Sadakanın gönüllülük esasına dayanması ve herkesin gücü ölçüsünde verebilmesi", "Sadakanın yalnızca zenginlere farz olması", "Sadakanın zekâttan sonra icat edilmiş olması"], "dogru": 1},
+      {"tema": "Zekât-Sadaka Farkı", "metin": "Aynur Öğretmen sınıfta şu açıklamayı yapıyor: \"Bu ibadette belirli bir mal cinsi, belirli bir miktar (nisap) ve belirli bir zaman (bir yıl) şartı aranır; kişi bu şartları taşıyorsa ibadeti yerine getirmek zorundadır.\"\nAynur Öğretmen hangi ibadetten söz etmektedir?", "secenekler": ["Zekât", "Sadaka", "İnfakın genel hâli", "Gönüllü bağış"], "dogru": 0},
+      {"tema": "Zekât-Sadaka Ortak Yönleri", "metin": "I. Allah rızasını gözeterek yapılırlar.\nII. Toplumsal dayanışmayı güçlendirirler.\nIII. Her ikisinin de miktarı dinen kesin olarak belirlenmiştir.\nIV. Muhtaç kişilerin ihtiyaçlarının karşılanmasına katkı sağlarlar.\nYukarıdakilerden hangileri zekât ve sadakanın ortak özellikleri arasında yer alır?", "secenekler": ["I ve III", "I, II ve IV", "II, III ve IV", "I, II, III ve IV"], "dogru": 1},
+      {"tema": "Fitre", "metin": "Ramazan Bayramı öncesinde, nisap miktarına sahip olan Müslümanların kendileri ve bakmakla yükümlü oldukları kişiler için verdiği sadakaya ne ad verilir?", "secenekler": ["Fitre (sadaka-i fıtır)", "Öşür", "Kefaret", "Akika"], "dogru": 0},
+      {"tema": "Fitre", "metin": "Fitre (sadaka-i fıtır) ile ilgili aşağıdakilerden hangisi söylenemez?", "secenekler": ["Ramazan ayının sonunda, bayramdan önce verilmesi tavsiye edilir.", "Bir kimsenin kendisi ile bakmakla yükümlü olduğu kişiler için de verilebilir.", "Miktarı, temel bir gıda maddesinin değeri esas alınarak belirlenir.", "Zekâtla tamamen aynı şartlara ve orana (kırkta bir) tabidir."], "dogru": 3},
+      {"tema": "Fitre", "metin": "Fitre verme zamanıyla ilgili aşağıdaki bilgilerden hangisi doğrudur?", "secenekler": ["Fitre en faziletli şekilde ramazan bayramı namazından önce verilir.", "Fitre yalnızca Kurban Bayramı'nda verilir.", "Fitre, yılın herhangi bir gününde verilemez.", "Fitre yalnızca hacıların vermesi gereken bir ibadettir."], "dogru": 0},
+      {"tema": "Zekâta Tabi Mallar", "metin": "Günümüzde kullanılan kâğıt para ve banka hesaplarındaki nakit varlıklar zekât açısından hangi mala kıyaslanarak değerlendirilir?", "secenekler": ["Toprak ürünlerine", "Altın ve gümüşe", "Kullanım eşyalarına", "Kurbanlık hayvanlara"], "dogru": 1},
+      {"tema": "Zekâta Tabi Mallar", "metin": "Banka hesabında nisap miktarını aşan ve üzerinden bir yıl geçen bir parası bulunan Zeynep Hanım'ın bu parasıyla ilgili aşağıdakilerden hangisi doğrudur?", "secenekler": ["Nakit para zekâta tabi olmadığı için herhangi bir yükümlülüğü yoktur.", "Bu para altın ve gümüş gibi değerlendirilerek zekâta tabi olur.", "Bu paranın zekâtı ancak altına çevrildiğinde verilir.", "Banka hesabındaki paralar zekâttan muaftır."], "dogru": 1},
+      {"tema": "Zekât-Fitre Farkı", "metin": "Zekât ile fitre arasındaki farklardan biri aşağıdakilerden hangisidir?", "secenekler": ["Zekât malın belirli bir oranı üzerinden hesaplanırken fitre kişi başına belirli bir miktar olarak verilir.", "Fitre yalnızca zenginlere, zekât ise herkese farzdır.", "Zekât yılda birkaç kez, fitre ise hiç verilmez.", "Zekât ve fitre arasında hiçbir fark yoktur, ikisi aynı ibadettir."], "dogru": 0},
+      {"tema": "Zekât-Sadaka Farkı", "metin": "I. Zekât farzdır, sadaka nafile (gönüllü) bir ibadettir.\nII. Zekâtın verileceği kişiler dinen belirlenmiştir, sadaka ise herkese verilebilir.\nIII. Zekâtın miktarı bellidir, sadakanın miktarı kişinin isteğine bağlıdır.\nIV. Zekât yalnızca ramazanda, sadaka ise yılın her günü verilir.\nYukarıdaki yargılardan hangileri doğrudur?", "secenekler": ["I ve IV", "I, II ve III", "II, III ve IV", "I, II, III ve IV"], "dogru": 1},
+      {"tema": "Zekât-Sadaka Farkı", "metin": "Ahmet Bey hem nisap miktarını aşan altınının zekâtını hesaplayıp vermiş hem de yolda gördüğü bir dilenciye kendi isteğiyle bir miktar para vermiştir.\nBuna göre Ahmet Bey'in verdiği bu iki yardımla ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Her ikisi de aynı dinî hükme (farz) tabidir.", "Birincisi farz olan zekât, ikincisi ise gönüllü verilen bir sadakadır.", "Her ikisi de sadaka sayılır, zekât değildir.", "Her ikisi de aynı miktarda olmak zorundadır."], "dogru": 1},
+      {"tema": "Zekâtın Ekonomik Etkisi", "metin": "Zekâtın toplum ekonomisine katkısıyla ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Zekât, servetin belirli kişilerde birikip durağanlaşmasını önleyerek ekonomik dolaşımı destekler.", "Zekât, yalnızca zengin kesimin daha çok kazanmasını sağlar.", "Zekât, ekonomik hayatla hiçbir ilgisi olmayan bireysel bir ibadettir.", "Zekât, fakirlerin çalışma isteğini tamamen ortadan kaldırır."], "dogru": 0},
+      {"tema": "Sadakanın Kapsamı", "metin": "Sadakanın herkesin gücü ölçüsünde verilebilmesiyle ilgili aşağıdaki örneklerden hangisi bu duruma uygun değildir?", "secenekler": ["Az gelirli bir öğrencinin arkadaşına kalemini ödünç vermesi", "Zengin bir iş insanının bir hastaneye bağışta bulunması", "Bir çocuğun okulda arkadaşına yardım etmesi", "Nisap miktarına ulaşmayan bir kişinin zekât ödemekle yükümlü tutulması"], "dogru": 3},
+      {"tema": "Zekâtın Farz Oluşu", "metin": "Aşağıdakilerden hangisi yalnızca zekât için geçerli olup sadaka için geçerli değildir?", "secenekler": ["Allah rızası gözetilerek yapılması", "Belirli bir nisap miktarı ve oranının (kırkta bir gibi) bulunması", "Muhtaç kişilere fayda sağlaması", "Gösterişten uzak yapılmasının tavsiye edilmesi"], "dogru": 1},
+      {"tema": "Metinden Sonuç Çıkarma", "metin": "Zekâtın \"belirli\" bir ibadet, sadakanın ise \"esnek\" bir ibadet olduğunu söyleyen bir öğretmen bu yargısını neyle temellendirebilir?", "secenekler": ["Zekâtın miktar, mal cinsi ve muhatap kitlesinin dinen net şekilde belirlenmiş, sadakanın ise bu yönlerden serbest bırakılmış olmasıyla", "Zekâtın sadece kadınlara, sadakanın sadece erkeklere farz olmasıyla", "Zekâtın yılda iki kez, sadakanın hiç verilmemesiyle", "Zekâtın isteğe bağlı, sadakanın zorunlu olmasıyla"], "dogru": 0},
+      {"tema": "Fitrenin Amacı", "metin": "Fitrenin, oruç tutan kişinin varsa oruçtaki kusurlarını tamamlaması ve yoksulların bayram sevincine ortak edilmesi amacına hizmet ettiği bilinmektedir.\nBuna göre fitrenin öncelikli olarak verilmesi gereken zaman dilimi aşağıdakilerden hangisidir?", "secenekler": ["Kurban Bayramı'nın ilk günü", "Ramazan Bayramı namazından önce", "Yılın herhangi bir rastgele günü", "Hac mevsiminde"], "dogru": 1},
+      {"tema": "Karşılaştırma", "metin": "Zekât ve sadaka karşılaştırıldığında;\nI. İkisi de mal varlığıyla ilişkilidir.\nII. İkisi de yalnızca nakit para ile verilir.\nIII. İkisi de toplumsal yardımlaşmaya katkı sunar.\nIV. İkisi de aynı oranda (kırkta bir) hesaplanır.\nyargılarından hangileri yanlıştır?", "secenekler": ["Yalnız I", "II ve IV", "I ve III", "I, II ve III"], "dogru": 1},
+      {"tema": "Genel Değerlendirme", "metin": "Zekât ve sadaka arasındaki ilişkiyle ilgili aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Zekât, sadakanın dinen farz kılınmış ve şartları belirlenmiş özel bir türü gibi değerlendirilebilir.", "Zekât ile sadakanın hiçbir ortak amacı yoktur.", "Sadaka, zekâtın yerini her zaman tutar.", "Zekât veren kişinin ayrıca sadaka vermesine gerek yoktur."], "dogru": 0}
+    ]
+  },
+  {
+    "baslik": "Deneme 5",
+    "sorular": [
+      {"tema": "Toplumsal Dayanışma", "metin": "Zekât ve sadaka gibi ibadetlerin toplumsal hayata en temel katkısı aşağıdakilerden hangisidir?", "secenekler": ["Zenginler ile yoksullar arasındaki yardımlaşma ve dayanışmayı güçlendirmesi", "Yalnızca zenginlerin birbiriyle ilişkisini artırması", "Toplumda rekabeti körüklemesi", "Ekonomik farklılıkları görünmez kılması"], "dogru": 0},
+      {"tema": "Eşitsizliği Azaltma", "metin": "Zekâtın, toplumdaki gelir dağılımı adaletsizliğini azaltmadaki rolüyle ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Zekât, zenginlerin malının bir bölümünü ihtiyaç sahiplerine aktararak gelir uçurumunun büyümesini yavaşlatır.", "Zekât, zenginlerin daha fazla mal biriktirmesini teşvik eder.", "Zekât, yoksullukla mücadelede hiçbir işlev üstlenmez.", "Zekât, yalnızca sembolik bir ibadettir; toplumsal bir etkisi yoktur."], "dogru": 0},
+      {"tema": "Ayet Yorumu", "metin": "Kur'an-ı Kerim'de şöyle buyurulur:\n\"Onların mallarında isteyen ve mahrum olan (yoksul) için bir hak vardır.\" (Zâriyât suresi, 19. ayet)\nBu ayetten hareketle aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Zenginlerin malında yoksulların da bir hakkı bulunmaktadır.", "Mal, tamamen kişinin kendi tasarrufundadır ve başkasının hiçbir hakkı yoktur.", "Yoksullara yardım etmek sadece devletin görevidir.", "Bu ayet yalnızca zekâtı değil hiçbir ibadeti ilgilendirmez."], "dogru": 0},
+      {"tema": "Hadis Yorumu", "metin": "Hz. Muhammed (sav) şöyle buyurmuştur: \"Komşusu açken tok yatan kimse (olgun bir mü'min sayılmaz).\"\nBu hadisten hareketle aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Müslümanın kendi ihtiyacı dışında çevresindeki insanların hâlinden de sorumlu olduğu", "Komşuluk ilişkilerinin dinen hiçbir önemi olmadığı", "Yalnızca akrabalara yardım etmenin yeterli olduğu", "Aç kalan kişilerin bu durumdan kendilerinin sorumlu olduğu"], "dogru": 0},
+      {"tema": "Toplumsal Dayanışma", "metin": "Bir mahallede yaşayan komşular, ihtiyaç sahibi bir aile için düzenli olarak erzak topluyor, bu yardımı ailenin mahcup olmaması için kapıya bırakarak yapıyorlardı.\nBu davranışta aşağıdaki değerlerden hangisi ya da hangileri öne çıkmaktadır?", "secenekler": ["Yalnızca maddi çıkar", "Yardımlaşma ve mahremiyete/onura saygı", "Gösteriş ve şöhret isteği", "Yardımı sadece tanıdıklara yapma isteği"], "dogru": 1},
+      {"tema": "Zekâtın Hikmetleri", "metin": "I. Toplumda sevgi ve kardeşlik bağlarını güçlendirir.\nII. Zenginle yoksul arasındaki mesafeyi azaltır.\nIII. Kişiyi mal biriktirme hırsından uzaklaştırır.\nIV. Zekât veren kişiyi toplumda ayrıcalıklı bir sınıf hâline getirir.\nYukarıdakilerden hangileri zekâtın hikmetleri arasında yer alır?", "secenekler": ["I, II ve III", "I ve IV", "II, III ve IV", "I, II, III ve IV"], "dogru": 0},
+      {"tema": "Zekât Vermemenin Sonuçları", "metin": "Zekât ve sadaka gibi paylaşma ibadetlerinin ihmal edildiği bir toplumda ortaya çıkması muhtemel durum aşağıdakilerden hangisidir?", "secenekler": ["Zengin ile yoksul arasındaki uçurumun derinleşmesi ve toplumsal huzursuzluğun artması", "Toplumda gelir dağılımının kendiliğinden dengelenmesi", "Yardımlaşma duygusunun otomatik olarak güçlenmesi", "Hiçbir olumsuz sonucun ortaya çıkmaması"], "dogru": 0},
+      {"tema": "Sadakanın Köprü İşlevi", "metin": "Sadaka veren zengin ile sadakayı alan yoksul arasındaki ilişki için aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Bu ilişki, toplumda kesimler arası güven ve sevgi köprüsü kurulmasına katkı sağlar.", "Bu ilişki, zengin ile yoksul arasında daima gerginlik doğurur.", "Bu ilişkinin toplumsal barışla hiçbir ilgisi yoktur.", "Bu ilişki yalnızca ekonomik bir alışveriştir, dinî bir yönü yoktur."], "dogru": 0},
+      {"tema": "Yardımlaşma Kültürü", "metin": "Bir sınıfta öğrenciler, kışın ihtiyacı olan bir arkadaşları için gizlice mont ve kışlık ayakkabı topluyor, bu yardımı arkadaşları fark etmesin diye dolabına bırakıyorlardı.\nBu davranışta öğrencilerin hangi tutumu benimsediği söylenebilir?", "secenekler": ["Yardımı gösterişe kaçmadan, arkadaşlarını incitmeden yapma", "Yardımı herkese duyurarak takdir toplama isteği", "Yardımı yalnızca maddi çıkar beklentisiyle yapma", "Yardımı yalnızca öğretmenin zorlamasıyla yapma"], "dogru": 0},
+      {"tema": "Ayet Yorumu", "metin": "Kur'an-ı Kerim'de şöyle buyurulur:\n\"Sevdiğiniz şeylerden Allah yolunda harcamadıkça (infak etmedikçe) gerçek iyiliğe asla erişemezsiniz...\" (Âl-i İmrân suresi, 92. ayet)\nBu ayetten hareketle aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["İnfakın gerçek değer taşıması için kişinin kıymet verdiği şeylerden de paylaşması gerektiği", "İnfakın yalnızca ihtiyaç fazlası, değersiz eşyalarla yapılabileceği", "İnfakın iyilikle hiçbir ilgisinin bulunmadığı", "İnfakın sadece belirli bir mevsimde yapılması gerektiği"], "dogru": 0},
+      {"tema": "Hadis Yorumu", "metin": "Hz. Muhammed (sav) şöyle buyurmuştur: \"Veren el, alan elden üstündür.\"\nBu hadisten hareketle aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Başkasına yardım edebilecek imkâna sahip olmak ve bunu paylaşmak değerli bir konumdur.", "Yardım almak dinen yasaktır.", "Yardım eden kişi, yardım alan kişiden dinen üstün bir statüye sahip olur ve onu küçük görebilir.", "Bu hadis yalnızca zekâtla ilgilidir, sadakayla ilgisi yoktur."], "dogru": 0},
+      {"tema": "Toplumsal Fayda", "metin": "I. Zekât ve sadaka, muhtaç kişilerin temel ihtiyaçlarının karşılanmasına katkı sağlar.\nII. Zekât ve sadaka, toplumda güven ve kardeşlik duygusunu pekiştirir.\nIII. Zekât ve sadaka, veren kişiyi ekonomik olarak fakirleştirmeyi amaçlar.\nIV. Zekât ve sadaka, sınıflar arası düşmanlığı artırmayı hedefler.\nYukarıdaki yargılardan hangileri doğrudur?", "secenekler": ["I ve II", "I, III ve IV", "II ve IV", "I, II, III ve IV"], "dogru": 0},
+      {"tema": "Karma Değerlendirme", "metin": "Fatma Hanım, nisap miktarını aşan ve üzerinden bir yıl geçen altınlarının zekâtını hesaplayıp öncelikle geçim sıkıntısı çeken teyzesine, kalanını ise bir yetimhaneye vermiştir.\nBu metne göre aşağıdaki yargılardan hangisine ulaşılamaz?", "secenekler": ["Fatma Hanım zekâtını nisap ve havelan-ı havl şartları oluştuktan sonra vermiştir.", "Fatma Hanım zekâtını öncelikle ihtiyaç sahibi bir akrabasına yönlendirmiştir.", "Fatma Hanım'ın verdiği zekât miktarı kendi belirlediği rastgele bir orandır.", "Fatma Hanım yetimhaneye yaptığı yardımla da hak sahiplerine ulaşmıştır."], "dogru": 2},
+      {"tema": "Karma Değerlendirme", "metin": "Bir kişi hem farz olan zekâtını nisap miktarına göre hesaplayarak veriyor hem de imkânı ölçüsünde gönüllü sadakalar veriyor, üstelik bu yardımlarını kimseye duyurmadan yapmaya özen gösteriyorsa bu kişi için aşağıdakilerden hangisi söylenemez?", "secenekler": ["Hem farz hem nafile ibadetleri bir arada yerine getirmektedir.", "Yardımlarında riyadan kaçınmaya özen göstermektedir.", "Zekâtını dinen belirlenen ölçütlere göre hesaplamaktadır.", "Yaptığı tüm yardımlar sadaka-i cariye kapsamındadır."], "dogru": 3},
+      {"tema": "Sadaka-i Cariye ve İnfak", "metin": "Bir hayırsever, vefatından sonra da öğrencilerin faydalanması için bir okula burs fonu kurmuş ve bu fonun her yıl düzenli olarak yeni öğrencilere burs vermesini sağlamıştır.\nBu davranış aşağıdaki kavramlardan hangileriyle ilişkilendirilebilir?", "secenekler": ["Yalnızca zekâtla", "İnfak ve sadaka-i cariye ile", "Yalnızca fitreyle", "Yalnızca öşürle"], "dogru": 1},
+      {"tema": "Metinde Ana Fikir", "metin": "\"Malını Allah yolunda harcayanların örneği, bir tohum gibidir ki yedi başak bitirir, her başakta yüz tane bulunur. Allah dilediğine kat kat verir.\" (Bakara suresi, 261. ayet, meal)\nBu ayette asıl vurgulanmak istenen aşağıdakilerden hangisidir?", "secenekler": ["Allah yolunda yapılan harcamaların (infakın) kat kat karşılık göreceği", "Tarımla uğraşan kişilerin daha çok zekât vermesi gerektiği", "Sadece tohum ekmenin ibadet sayıldığı", "Malın hiçbir zaman paylaşılmaması gerektiği"], "dogru": 0},
+      {"tema": "Karma Senaryo", "metin": "Bir öğretmen öğrencilerine şu soruyu yöneltiyor: \"Zengin bir kişi, kendi öz kardeşine mi yoksa hiç tanımadığı uzak bir şehirdeki yoksula mı zekâtını öncelikli olarak verebilir?\"\nBu soruya en uygun cevap aşağıdakilerden hangisidir?", "secenekler": ["Kardeş bakmakla yükümlü olunan biri değilse ve ihtiyaç sahibiyse öncelik ona verilebilir.", "Zekât yalnızca uzak şehirdeki kişilere verilmelidir, akrabaya asla verilmez.", "Zekât sadece komşulara verilebilir.", "Zekât verirken akrabalık hiçbir zaman dikkate alınmaz."], "dogru": 0},
+      {"tema": "Ayet-Hadis Bütünleme", "metin": "Hem \"Sevdiğiniz şeylerden infak etmedikçe iyiliğe eremezsiniz\" ayeti hem de \"Sadaka vermekle mal eksilmez\" hadisi birlikte değerlendirildiğinde aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Kıymetli olandan vermek hem manevi olgunluğa hem de Allah katında bereketlenmeye vesiledir.", "İnfak yalnızca değersiz eşyalarla yapılmalı ve hiçbir manevi karşılığı yoktur.", "Sadaka vermek kişiyi maddi olarak fakirleştirdiği için tavsiye edilmez.", "Ayet ve hadis birbiriyle çelişmektedir."], "dogru": 0},
+      {"tema": "Hadis Yorumu", "metin": "Hz. Muhammed (sav) şöyle buyurmuştur: \"Zenginlik, mal çokluğu değil, gönül tokluğudur.\"\nBu hadisten hareketle zekât ve sadaka ibadetleriyle ilgili aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Kişinin elindekini paylaşabilmesi, mal biriktirme hırsından çok gönül zenginliğiyle ilgilidir.", "Zengin sayılmak için tek ölçüt biriktirilen mal miktarıdır.", "Zekât ve sadaka yalnızca büyük servet sahibi kişiler tarafından verilebilir.", "Gönül tokluğunun paylaşma ve yardımlaşmayla hiçbir ilgisi yoktur."], "dogru": 0},
+      {"tema": "Ünite Özeti", "metin": "Zekât, sadaka ve infak kavramları bir bütün olarak değerlendirildiğinde bu ibadetlerin ortak amacı aşağıdakilerden hangisiyle en iyi ifade edilir?", "secenekler": ["Malı sadece biriktirip saklamak", "Allah rızasını gözeterek paylaşmayı ve toplumsal dayanışmayı hayatın bir parçası hâline getirmek", "Yalnızca zenginlerin daha görkemli bir yaşam sürmesini sağlamak", "İbadetleri yalnızca şekil şartlarına indirgemek"], "dogru": 1}
+    ]
+  }
+];
+
+let aktifTest = 0;
+function testleriRenderEt(){
+  const secici = document.getElementById('testSecici');
+  secici.innerHTML = TESTLER.map((t,i)=>`<button class="yil-pil ${i===aktifTest?'aktif':''}" data-i="${i}">${t.baslik}</button>`).join('');
+  secici.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    aktifTest=parseInt(b.dataset.i);
+    testleriRenderEt();
+    soruAlaniniRenderEt();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+}
+function soruAlaniniRenderEt(){
+  const alan = document.getElementById('soruAlani');
+  const test = TESTLER[aktifTest];
+  const harfler=['A','B','C','D'];
+  alan.innerHTML = `<h2 class="test-baslik">${test.baslik} <span class="yil-etiket">20 Soru</span></h2>` + test.sorular.map((s,i)=>`
+    <div class="soru-karti" data-dogru="${s.dogru}">
+      <div class="soru-ust"><span class="soru-no">${i+1}</span><span class="soru-tema">${s.tema}</span></div>
+      <p class="soru-metin"></p>
+      <div class="secenekler">
+        ${s.secenekler.map((sec,j)=>`<div class="secenek" data-index="${j}"><b>${harfler[j]})</b> <span></span></div>`).join('')}
+      </div>
+      <div class="cevap-etiketi"></div>
+    </div>
+  `).join('');
+  const kartlar = alan.querySelectorAll('.soru-karti');
+  kartlar.forEach((kart,i)=>{
+    kart.querySelector('.soru-metin').textContent = test.sorular[i].metin;
+    kart.querySelectorAll('.secenek span').forEach((span,j)=>{
+      span.textContent = test.sorular[i].secenekler[j];
+    });
+    kart.addEventListener('click', e=>{
+      const secenek = e.target.closest('.secenek');
+      if(!secenek || kart.classList.contains('cevaplandi')) return;
+      const dogruIndex = parseInt(kart.dataset.dogru);
+      const secilenIndex = parseInt(secenek.dataset.index);
+      kart.classList.add('cevaplandi');
+      const secenekler = kart.querySelectorAll('.secenek');
+      secenekler[dogruIndex].classList.add('dogru-cevap');
+      const etiket = kart.querySelector('.cevap-etiketi');
+      if(secilenIndex===dogruIndex){
+        etiket.textContent='✓ Doğru cevap!';
+        etiket.classList.add('gorunur','dogru-mesaj');
+      } else {
+        secenek.classList.add('yanlis-secim');
+        etiket.textContent=`✗ Yanlış. Doğru cevap: ${harfler[dogruIndex]}`;
+        etiket.classList.add('gorunur','yanlis-mesaj');
+      }
+    });
+  });
+}
+testleriRenderEt();
+soruAlaniniRenderEt();
+</script>
+</body>
+</html>
