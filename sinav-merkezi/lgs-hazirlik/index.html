@@ -24,45 +24,17 @@
     <div class="sm-hero-ic">
       <div class="sm-hero-ikon" aria-hidden="true"><span class="msi">school</span></div>
       <h1>LGS Hazırlık Merkezi</h1>
-      <p>8. sınıf Din Kültürü ve Ahlak Bilgisi — LGS'ye özel konu anlatımı, kazanım testleri, denemeler, rozetler ve kişisel çalışma araçların tek yerde.</p>
+      <p>8. sınıf Din Kültürü ve Ahlak Bilgisi LGS hazırlığın tek yerde.</p>
     </div>
     <svg class="sm-hero-dalga" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z"></path></svg>
   </section>
 
   <main class="sm-sarmal" style="--vurgu:var(--lgs)">
-    <nav class="sm-sekme-satir" id="lgsSekme" role="tablist" aria-label="LGS Hazırlık bölümleri">
-      <button type="button" data-sekme="dashboard" aria-selected="true"><span class="msi" aria-hidden="true">dashboard</span> Dashboard</button>
-      <button type="button" data-sekme="geri-sayim" aria-selected="false"><span class="msi" aria-hidden="true">hourglass_top</span> Geri Sayım</button>
-      <button type="button" data-sekme="gunun-sorusu" aria-selected="false"><span class="msi" aria-hidden="true">today</span> Günün Sorusu</button>
-      <button type="button" data-sekme="konu-anlatimlari" aria-selected="false"><span class="msi" aria-hidden="true">menu_book</span> Konu Anlatımları</button>
-      <button type="button" data-sekme="konu-ozetleri" aria-selected="false"><span class="msi" aria-hidden="true">description</span> Konu Özetleri</button>
-      <button type="button" data-sekme="kazanim-testleri" aria-selected="false"><span class="msi" aria-hidden="true">task_alt</span> Kazanım Testleri</button>
-      <button type="button" data-sekme="konu-testleri" aria-selected="false"><span class="msi" aria-hidden="true">quiz</span> Konu Testleri</button>
-      <button type="button" data-sekme="deneme-merkezi" aria-selected="false"><span class="msi" aria-hidden="true">timer</span> Deneme Merkezi</button>
-      <button type="button" data-sekme="cikmis-sorular" aria-selected="false"><span class="msi" aria-hidden="true">history</span> Çıkmış Sorular</button>
-      <button type="button" data-sekme="yeni-nesil" aria-selected="false"><span class="msi" aria-hidden="true">auto_awesome</span> Yeni Nesil Sorular</button>
-      <button type="button" data-sekme="oyun-merkezi" aria-selected="false"><span class="msi" aria-hidden="true">stadia_controller</span> Oyun Merkezi</button>
-      <button type="button" data-sekme="ai-koc" aria-selected="false"><span class="msi" aria-hidden="true">smart_toy</span> Akıllı Çalışma Koçu</button>
-      <button type="button" data-sekme="gunluk-program" aria-selected="false"><span class="msi" aria-hidden="true">checklist</span> Günlük Program</button>
-      <button type="button" data-sekme="calisma-plani" aria-selected="false"><span class="msi" aria-hidden="true">event_note</span> Günlük Çalışma Planı</button>
-      <button type="button" data-sekme="performans" aria-selected="false"><span class="msi" aria-hidden="true">monitoring</span> Performans Analizi</button>
-      <button type="button" data-sekme="rozet-sistemi" aria-selected="false"><span class="msi" aria-hidden="true">military_tech</span> Rozet Sistemi</button>
-      <button type="button" data-sekme="favoriler" aria-selected="false"><span class="msi" aria-hidden="true">star</span> Favoriler</button>
-      <button type="button" data-sekme="istatistikler" aria-selected="false"><span class="msi" aria-hidden="true">bar_chart</span> İstatistikler</button>
-    </nav>
 
-    <!-- 1) DASHBOARD -->
-    <section class="sm-panel" data-panel="dashboard">
-      <h2>Dashboard</h2>
-      <p class="sm-panel-aciklama">Günlük hedefin, çalışma sürenin ve genel ilerlemenin özeti — kullandıkça gerçek verilerinle dolar.</p>
-      <div id="lgsDashboard"></div>
-    </section>
-
-    <!-- 17) GERİ SAYIM -->
-    <section class="sm-panel" data-panel="geri-sayim" hidden>
-      <h2>LGS Geri Sayım</h2>
-      <p class="sm-panel-aciklama">Sınav tarihini bir kez gir ve kaydet — o andan itibaren kaç gün kaldığını burada görürsün.</p>
-      <div class="sm-arac-kart" id="lgsGeriSayim">
+    <!-- DURUM ŞERİDİ: Dashboard özeti + Geri Sayım — kart değil, ana ekranın üstünde sabit -->
+    <div class="lgs-durum-seridi">
+      <div class="lgs-durum-kutu" id="lgsDashboard"></div>
+      <div class="lgs-durum-kutu sm-arac-kart" id="lgsGeriSayim" style="margin:0">
         <div class="sm-hedef-satir">
           <span>Sınav tarihin:</span>
           <input type="date" class="sm-geri-sayim-girdi">
@@ -70,160 +42,203 @@
         </div>
         <div class="sm-geri-sayim-sonuc"></div>
       </div>
-    </section>
+    </div>
 
-    <!-- 4) GÜNÜN SORUSU -->
-    <section class="sm-panel" data-panel="gunun-sorusu" hidden>
-      <h2>Günün Sorusu</h2>
-      <p class="sm-panel-aciklama">Her gün otomatik olarak değişir. Cevabını seç, açıklamayı oku, istersen ilgili konuya veya benzer sorulara geç.</p>
-      <div class="sm-gunun-sorusu" id="lgsGununSorusu"></div>
-    </section>
+    <!-- ANA MENÜ: yalnızca 4 kart -->
+    <div class="lgs-ana-menu" data-lgs-menu>
+      <button type="button" class="lgs-kart" data-lgs-git="konular">
+        <span class="lgs-kart-ikon" aria-hidden="true">📚</span>
+        <b>Konular</b>
+        <span>Konu anlatımı, kazanım testleri ve oyunlarla çalışın.</span>
+      </button>
+      <button type="button" class="lgs-kart" data-lgs-git="denemeler">
+        <span class="lgs-kart-ikon" aria-hidden="true">🧪</span>
+        <b>Denemeler</b>
+        <span>Deneme çözün, günlük ve haftalık planınızı takip edin.</span>
+      </button>
+      <button type="button" class="lgs-kart" data-lgs-git="cikmis-sorular">
+        <span class="lgs-kart-ikon" aria-hidden="true">📝</span>
+        <b>Çıkmış Sorular</b>
+        <span>Geçmiş yıl sorularını ve günün sorusunu inceleyin.</span>
+      </button>
+      <button type="button" class="lgs-kart" data-lgs-git="sinav-analizi">
+        <span class="lgs-kart-ikon" aria-hidden="true">📊</span>
+        <b>Sınav Analizi</b>
+        <span>Sınavların konu ve kazanım analizlerini inceleyin.</span>
+      </button>
+    </div>
 
-    <!-- KONU ANLATIMLARI (mevcut, korunuyor) -->
-    <section class="sm-panel" data-panel="konu-anlatimlari" hidden>
-      <h2>Konu Anlatımları</h2>
-      <p class="sm-panel-aciklama">8. sınıf ünitelerinin tam konu anlatım sayfalarına doğrudan git.</p>
-      <div class="sm-link-izgara" id="lgsKonuAnlatimlari">
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/index.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">balance</span></span><span><b>1. Ünite</b><span>Kader İnancı</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">volunteer_activism</span></span><span><b>2. Ünite</b><span>Zekât ve Sadaka</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">diversity_3</span></span><span><b>3. Ünite</b><span>Din ve Hayat</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">star</span></span><span><b>4. Ünite</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">auto_stories</span></span><span><b>5. Ünite</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
-      </div>
-    </section>
+    <!-- DETAY: bir kart seçilince açılır -->
+    <div class="lgs-detay" data-lgs-detay hidden>
+      <button type="button" class="lgs-geri" data-lgs-geri><span class="msi" aria-hidden="true">arrow_back</span> LGS Hazırlık</button>
 
-    <!-- KONU ÖZETLERİ (mevcut, korunuyor) -->
-    <section class="sm-panel" data-panel="konu-ozetleri" hidden>
-      <h2>Konu Özetleri</h2>
-      <p class="sm-panel-aciklama">Aynı ünitelerin özet bölümlerine kısayol.</p>
-      <div class="sm-link-izgara" id="lgsKonuOzetleri">
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/index.html#ozet8"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>1. Ünite Özeti</b><span>Kader İnancı</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2.html#ozet82"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>2. Ünite Özeti</b><span>Zekât ve Sadaka</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3.html#ozet83"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>3. Ünite Özeti</b><span>Din ve Hayat</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4.html#ozet84"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>4. Ünite Özeti</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5.html#ozet85"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>5. Ünite Özeti</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
-      </div>
-    </section>
-
-    <!-- 3) KAZANIM TESTLERİ -->
-    <section class="sm-panel" data-panel="kazanim-testleri" hidden>
-      <h2>Kazanım Testleri</h2>
-      <p class="sm-panel-aciklama">Her kazanım için 5 soruluk kısa bir test. Zorluk seviyesi ve tamamlanma yüzden kart üzerinde görünür.</p>
-      <div class="sm-kazanim-izgara" id="lgsKazanimTestleri"></div>
-    </section>
-
-    <!-- KONU TESTLERİ (mevcut, korunuyor) -->
-    <section class="sm-panel" data-panel="konu-testleri" hidden>
-      <div class="sm-yakinda"><span class="msi" aria-hidden="true">quiz</span><h3>Konu Testleri hazırlanıyor</h3><p>Her ünite için kısa, anlık konu testleri hazırlanıyor. Bu arada Kazanım Testleri sekmesindeki testleri deneyebilirsin.</p></div>
-    </section>
-
-    <!-- 6) DENEME MERKEZİ -->
-    <section class="sm-panel" data-panel="deneme-merkezi" hidden>
-      <h2>Deneme Merkezi</h2>
-      <p class="sm-panel-aciklama">Boyutu seç, süreli/süresiz oynamayı belirle, denemeni çöz. Sonunda net, doğru/yanlış/boş ve gerçek performansın görünür.</p>
-      <div id="lgsDenemeMerkezi">
-        <div class="sm-deneme-secim-alani">
-          <div class="sm-deneme-sure-secim">
-            <button type="button" data-sureli="0" aria-pressed="true">Süresiz</button>
-            <button type="button" data-sureli="1" aria-pressed="false">Süreli (40 sn/soru)</button>
-          </div>
-          <div class="sm-deneme-izgara" style="margin-top:16px;">
-            <div class="sm-deneme-kart" data-boyut="10"><span class="msi" aria-hidden="true">bolt</span><h4>Mini Deneme</h4><span>10 soru</span></div>
-            <div class="sm-deneme-kart" data-boyut="20"><span class="msi" aria-hidden="true">quiz</span><h4>20 Soru</h4><span>Orta yoğunluk</span></div>
-            <div class="sm-deneme-kart" data-boyut="40"><span class="msi" aria-hidden="true">library_books</span><h4>40 Soru</h4><span>Yoğun tekrar</span></div>
-            <div class="sm-deneme-kart" data-boyut="52"><span class="msi" aria-hidden="true">workspace_premium</span><h4>Tam Deneme</h4><span>Tüm soru havuzu (52 soru)</span></div>
-          </div>
+      <!-- 📚 KONULAR -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="konular" hidden>
+        <nav class="sm-sekme-satir" id="lgsKonularSekme" role="tablist" aria-label="Konular">
+          <button type="button" data-sekme="konu-anlatimlari" aria-selected="true">Konu Anlatımları</button>
+          <button type="button" data-sekme="konu-ozetleri" aria-selected="false">Konu Özetleri</button>
+          <button type="button" data-sekme="kazanim-testleri" aria-selected="false">Kazanım Testleri</button>
+          <button type="button" data-sekme="konu-testleri" aria-selected="false">Konu Testleri</button>
+          <button type="button" data-sekme="oyun-merkezi" aria-selected="false">Oyun Merkezi</button>
+          <button type="button" data-sekme="favoriler" aria-selected="false">Favorilerim</button>
+        </nav>
+        <div id="lgsKonularPaneller">
+          <section class="sm-panel" data-panel="konu-anlatimlari">
+            <div class="sm-link-izgara" id="lgsKonuAnlatimlari">
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/index.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">balance</span></span><span><b>1. Ünite</b><span>Kader İnancı</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">volunteer_activism</span></span><span><b>2. Ünite</b><span>Zekât ve Sadaka</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">diversity_3</span></span><span><b>3. Ünite</b><span>Din ve Hayat</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">star</span></span><span><b>4. Ünite</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">auto_stories</span></span><span><b>5. Ünite</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="konu-ozetleri" hidden>
+            <div class="sm-link-izgara" id="lgsKonuOzetleri">
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/index.html#ozet8"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>1. Ünite Özeti</b><span>Kader İnancı</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2.html#ozet82"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>2. Ünite Özeti</b><span>Zekât ve Sadaka</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3.html#ozet83"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>3. Ünite Özeti</b><span>Din ve Hayat</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4.html#ozet84"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>4. Ünite Özeti</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5.html#ozet85"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>5. Ünite Özeti</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="kazanim-testleri" hidden>
+            <div class="sm-kazanim-izgara" id="lgsKazanimTestleri"></div>
+          </section>
+          <section class="sm-panel" data-panel="konu-testleri" hidden>
+            <div class="sm-yakinda"><span class="msi" aria-hidden="true">quiz</span><h3>Konu Testleri hazırlanıyor</h3><p>Bu arada Kazanım Testleri'ndeki testleri deneyebilirsin.</p></div>
+          </section>
+          <section class="sm-panel" data-panel="oyun-merkezi" hidden>
+            <div class="sm-oyun-izgara" id="lgsOyunMerkezi">
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>1. Ünite Oyunları</b><span>Kader İnancı</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>2. Ünite Oyunları</b><span>Zekât ve Sadaka</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>3. Ünite Oyunları</b><span>Din ve Hayat</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>4. Ünite Oyunları</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>5. Ünite Oyunları</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="favoriler" hidden>
+            <div id="lgsFavoriler"></div>
+          </section>
         </div>
-        <div class="sm-deneme-oyun-alani" hidden></div>
       </div>
-    </section>
 
-    <!-- ÇIKMIŞ SORULAR (mevcut, korunuyor — gerçek geçmiş sınav metni uydurulamaz) -->
-    <section class="sm-panel" data-panel="cikmis-sorular" hidden>
-      <div class="sm-yakinda"><span class="msi" aria-hidden="true">history</span><h3>Çıkmış Sorular hazırlanıyor</h3><p>Geçmiş yıllara ait LGS Din Kültürü sorularının konu bazlı arşivi hazırlanıyor. Bu arada Deneme Merkezi ve Kazanım Testleri'ndeki pratik sorularını çözebilirsin.</p></div>
-    </section>
-    <!-- YENİ NESİL SORULAR (mevcut, korunuyor) -->
-    <section class="sm-panel" data-panel="yeni-nesil" hidden>
-      <div class="sm-yakinda"><span class="msi" aria-hidden="true">auto_awesome</span><h3>Yeni Nesil Sorular hazırlanıyor</h3><p>Senaryo/metin temelli, çok adımlı yeni nesil soru tipleri hazırlanıyor.</p></div>
-    </section>
-
-    <!-- 11) OYUN MERKEZİ -->
-    <section class="sm-panel" data-panel="oyun-merkezi" hidden>
-      <h2>Oyun Merkezi</h2>
-      <p class="sm-panel-aciklama">Mevcut oyun sistemini kullanır — her ünitenin kendi Oyun Merkezi'nde Bilgi Yarışması, Kelime Avı, Doğru/Yanlış, Eşleştirme, Hafıza Oyunu, Zamana Karşı, Çarkıfelek, Kart Eşleştirme ve Hızlı Cevap tarzı onlarca oyun hazır. Aynı motoru tekrar yazmak yerine doğrudan oraya yönlendiriyoruz.</p>
-      <div class="sm-oyun-izgara" id="lgsOyunMerkezi">
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>1. Ünite Oyunları</b><span>Kader İnancı</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>2. Ünite Oyunları</b><span>Zekât ve Sadaka</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>3. Ünite Oyunları</b><span>Din ve Hayat</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>4. Ünite Oyunları</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
-        <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>5. Ünite Oyunları</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
-      </div>
-    </section>
-
-    <!-- 5) AKILLI ÇALIŞMA KOÇU -->
-    <section class="sm-panel" data-panel="ai-koc" hidden>
-      <h2>Akıllı Çalışma Koçu</h2>
-      <p class="sm-panel-aciklama">Bu bir sohbet botu değildir — gerçek çalışma verilerinden (hedef, seri, deneme sonuçları) kural tabanlı, dürüst öneriler üretir.</p>
-      <div class="sm-koc-kart">
-        <div class="sm-koc-baslik">
-          <div class="sm-koc-avatar"><span class="msi" aria-hidden="true">smart_toy</span></div>
-          <div><b>Çalışma Koçun</b><span>Verilerine göre güncellenir</span></div>
+      <!-- 🧪 DENEMELER -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="denemeler" hidden>
+        <nav class="sm-sekme-satir" id="lgsDenemelerSekme" role="tablist" aria-label="Denemeler">
+          <button type="button" data-sekme="deneme-merkezi" aria-selected="true">Deneme Merkezi</button>
+          <button type="button" data-sekme="gunluk-program" aria-selected="false">Günlük Program</button>
+          <button type="button" data-sekme="calisma-plani" aria-selected="false">Çalışma Planı</button>
+        </nav>
+        <div id="lgsDenemelerPaneller">
+          <section class="sm-panel" data-panel="deneme-merkezi">
+            <div id="lgsDenemeMerkezi">
+              <div class="sm-deneme-secim-alani">
+                <div class="sm-deneme-sure-secim">
+                  <button type="button" data-sureli="0" aria-pressed="true">Süresiz</button>
+                  <button type="button" data-sureli="1" aria-pressed="false">Süreli (40 sn/soru)</button>
+                </div>
+                <div class="sm-deneme-izgara" style="margin-top:16px;">
+                  <div class="sm-deneme-kart" data-boyut="10"><span class="msi" aria-hidden="true">bolt</span><h4>Mini Deneme</h4><span>10 soru</span></div>
+                  <div class="sm-deneme-kart" data-boyut="20"><span class="msi" aria-hidden="true">quiz</span><h4>20 Soru</h4><span>Orta yoğunluk</span></div>
+                  <div class="sm-deneme-kart" data-boyut="40"><span class="msi" aria-hidden="true">library_books</span><h4>40 Soru</h4><span>Yoğun tekrar</span></div>
+                  <div class="sm-deneme-kart" data-boyut="52"><span class="msi" aria-hidden="true">workspace_premium</span><h4>Tam Deneme</h4><span>Tüm soru havuzu (52 soru)</span></div>
+                </div>
+              </div>
+              <div class="sm-deneme-oyun-alani" hidden></div>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="gunluk-program" hidden>
+            <div class="sm-checklist" id="lgsGunlukProgram"></div>
+          </section>
+          <section class="sm-panel" data-panel="calisma-plani" hidden>
+            <div class="sm-plan-izgara" id="lgsCalismaPlani" style="margin-bottom:20px"></div>
+            <div class="sm-arac-kart" id="lgsGunlukHedef">
+              <div class="sm-hedef-satir">
+                <span>Günlük hedefim:</span>
+                <input type="number" class="sm-hedef-girdi" min="1" max="100" value="10">
+                <span>soru</span>
+              </div>
+              <div class="sm-ilerleme-dis"><div class="sm-ilerleme-ic" style="width:0%"></div></div>
+              <p class="sm-hedef-metin">Bugün: 0 / 10 soru</p>
+              <button type="button" class="sm-btn sm-hedef-artir"><span class="msi" aria-hidden="true">add</span> 1 Soru Çözdüm</button>
+              <button type="button" class="sm-btn sm-btn-ikincil sm-hedef-sifirla">Bugünü Sıfırla</button>
+            </div>
+          </section>
         </div>
-        <div id="lgsKoc"></div>
       </div>
-    </section>
 
-    <!-- 9) GÜNLÜK PROGRAM -->
-    <section class="sm-panel" data-panel="gunluk-program" hidden>
-      <h2>Günlük Program</h2>
-      <p class="sm-panel-aciklama">Bugünkü hedeflerini işaretle — her gün otomatik olarak sıfırlanır.</p>
-      <div class="sm-checklist" id="lgsGunlukProgram"></div>
-    </section>
-
-    <!-- GÜNLÜK ÇALIŞMA PLANI (mevcut, korunuyor) -->
-    <section class="sm-panel" data-panel="calisma-plani" hidden>
-      <h2>Günlük Çalışma Planı</h2>
-      <p class="sm-panel-aciklama">Haftanın her günü için ne çalışacağını kısaca yaz; tarayıcında saklanır. Alttan günlük soru hedefini de belirleyebilirsin.</p>
-      <div class="sm-plan-izgara" id="lgsCalismaPlani" style="margin-bottom:20px"></div>
-      <div class="sm-arac-kart" id="lgsGunlukHedef">
-        <div class="sm-hedef-satir">
-          <span>Günlük hedefim:</span>
-          <input type="number" class="sm-hedef-girdi" min="1" max="100" value="10">
-          <span>soru</span>
+      <!-- 📝 ÇIKMIŞ SORULAR -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="cikmis-sorular" hidden>
+        <nav class="sm-sekme-satir" id="lgsSorularSekme" role="tablist" aria-label="Çıkmış Sorular">
+          <button type="button" data-sekme="cikmis-sorular" aria-selected="true">Çıkmış Sorular</button>
+          <button type="button" data-sekme="yeni-nesil" aria-selected="false">Yeni Nesil Sorular</button>
+          <button type="button" data-sekme="gunun-sorusu" aria-selected="false">Günün Sorusu</button>
+        </nav>
+        <div id="lgsSorularPaneller">
+          <section class="sm-panel" data-panel="cikmis-sorular">
+            <div class="sm-yakinda"><span class="msi" aria-hidden="true">history</span><h3>Çıkmış Sorular hazırlanıyor</h3><p>Gerçek geçmiş sınav sorusu uydurulamaz; bu arada Deneme Merkezi ve Kazanım Testleri'ni çözebilirsin.</p></div>
+          </section>
+          <section class="sm-panel" data-panel="yeni-nesil" hidden>
+            <div class="sm-yakinda"><span class="msi" aria-hidden="true">auto_awesome</span><h3>Yeni Nesil Sorular hazırlanıyor</h3><p>Senaryo/metin temelli, çok adımlı soru tipleri hazırlanıyor.</p></div>
+          </section>
+          <section class="sm-panel" data-panel="gunun-sorusu" hidden>
+            <div class="sm-gunun-sorusu" id="lgsGununSorusu"></div>
+          </section>
         </div>
-        <div class="sm-ilerleme-dis"><div class="sm-ilerleme-ic" style="width:0%"></div></div>
-        <p class="sm-hedef-metin">Bugün: 0 / 10 soru</p>
-        <button type="button" class="sm-btn sm-hedef-artir"><span class="msi" aria-hidden="true">add</span> 1 Soru Çözdüm</button>
-        <button type="button" class="sm-btn sm-btn-ikincil sm-hedef-sifirla">Bugünü Sıfırla</button>
       </div>
-    </section>
 
-    <!-- 8) PERFORMANS ANALİZİ (mevcut, korunuyor + gerçek grafik eklendi) -->
-    <section class="sm-panel" data-panel="performans" hidden>
-      <h2>Performans Analizi</h2>
-      <p class="sm-panel-aciklama">Test/deneme verileri biriktikçe burada net ve konu bazlı performansın görünecek.</p>
-      <div id="lgsYanlisAnaliz" style="margin-bottom:24px;"></div>
-      <div id="lgsPerformansGrafik"></div>
-    </section>
+      <!-- 📊 SINAV ANALİZİ -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="sinav-analizi" hidden>
+        <nav class="sm-sekme-satir" id="lgsAnalizSekme" role="tablist" aria-label="Sınav Analizi">
+          <button type="button" data-sekme="sinav-analizi" aria-selected="true">Analiz</button>
+          <button type="button" data-sekme="performans" aria-selected="false">Performans</button>
+          <button type="button" data-sekme="istatistikler" aria-selected="false">İstatistikler</button>
+          <button type="button" data-sekme="rozet-sistemi" aria-selected="false">Rozetler</button>
+          <button type="button" data-sekme="ai-koc" aria-selected="false">Çalışma Koçu</button>
+        </nav>
+        <div id="lgsAnalizPaneller">
+          <section class="sm-panel" data-panel="sinav-analizi">
+            <div class="sm-analiz" id="lgsSinavAnalizi">
+              <div class="sm-analiz-baslik">
+                <p class="sm-panel-aciklama">2021–2026 LGS Din Kültürü sınavlarının konu, kazanım ve soru eğilimlerini inceleyin.</p>
+              </div>
+              <div class="sm-analiz-menu" data-analiz-menu>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="yillar"><span class="sm-analiz-kart-ikon" aria-hidden="true">📅</span><b>Yıllara Göre</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="konular"><span class="sm-analiz-kart-ikon" aria-hidden="true">📚</span><b>Konulara Göre</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="kazanimlar"><span class="sm-analiz-kart-ikon" aria-hidden="true">🎯</span><b>Kazanımlara Göre</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="egilimler"><span class="sm-analiz-kart-ikon" aria-hidden="true">📈</span><b>Soru Eğilimleri</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="oneriler"><span class="sm-analiz-kart-ikon" aria-hidden="true">⭐</span><b>Çalışma Önerileri</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="ara"><span class="sm-analiz-kart-ikon" aria-hidden="true">🔍</span><b>Ara</b></button>
+              </div>
+              <div class="sm-analiz-detay-alani" data-analiz-detay hidden>
+                <button type="button" class="sm-analiz-geri" data-analiz-geri><span class="msi" aria-hidden="true">arrow_back</span> Sınav Analizi</button>
+                <div data-analiz-icerik></div>
+              </div>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="performans" hidden>
+            <div id="lgsYanlisAnaliz" style="margin-bottom:24px;"></div>
+            <div id="lgsPerformansGrafik"></div>
+          </section>
+          <section class="sm-panel" data-panel="istatistikler" hidden>
+            <div id="lgsIstatistikler"></div>
+          </section>
+          <section class="sm-panel" data-panel="rozet-sistemi" hidden>
+            <div class="sm-rozet-izgara" id="lgsRozetler"></div>
+          </section>
+          <section class="sm-panel" data-panel="ai-koc" hidden>
+            <div class="sm-koc-kart">
+              <div class="sm-koc-baslik">
+                <div class="sm-koc-avatar"><span class="msi" aria-hidden="true">smart_toy</span></div>
+                <div><b>Çalışma Koçun</b><span>Verilerine göre güncellenir</span></div>
+              </div>
+              <div id="lgsKoc"></div>
+            </div>
+          </section>
+        </div>
+      </div>
 
-    <!-- 10) ROZET SİSTEMİ -->
-    <section class="sm-panel" data-panel="rozet-sistemi" hidden>
-      <h2>Rozet Sistemi</h2>
-      <p class="sm-panel-aciklama">Rozetler gerçek ilerlemenden (çözülen soru sayısı, günlük seri, ünite başarı oranları) otomatik hesaplanır.</p>
-      <div class="sm-rozet-izgara" id="lgsRozetler"></div>
-    </section>
-
-    <!-- 12) FAVORİLER -->
-    <section class="sm-panel" data-panel="favoriler" hidden>
-      <div id="lgsFavoriler"></div>
-    </section>
-
-    <!-- 13) İSTATİSTİKLER -->
-    <section class="sm-panel" data-panel="istatistikler" hidden>
-      <h2>İstatistikler</h2>
-      <p class="sm-panel-aciklama">Tüm zamanların gerçek toplamları.</p>
-      <div id="lgsIstatistikler"></div>
-    </section>
+    </div>
   </main>
 
   <script src="../assets/sinav-merkezi.js"></script>
@@ -313,13 +328,13 @@ const LGS_SORU_HAVUZU = [
 /* ======================================================================
    BAŞLATMA
 ====================================================================== */
-smSekmeKur('#lgsSekme');
 smYanlisAnalizKur('lgs', 'lgsYanlisAnaliz');
 smCalismaPlaniKur('lgs', 'lgsCalismaPlani');
 smGunlukHedefKur('lgs', 'lgsGunlukHedef');
 
 smDashboardKur('lgs', 'lgsDashboard');
 smGeriSayimKur('lgs', 'lgsGeriSayim');
+smSinavAnaliziKur('lgs', 'lgsSinavAnalizi', LGS_KAZANIMLAR, LGS_SORU_HAVUZU, LGS_UNITE_ADLARI);
 smGununSorusuKur('lgs', 'lgsGununSorusu', LGS_SORU_HAVUZU);
 smKazanimTestleriKur('lgs', 'lgsKazanimTestleri', LGS_KAZANIMLAR, LGS_SORU_HAVUZU);
 smDenemeMerkeziKur('lgs', 'lgsDenemeMerkezi', LGS_SORU_HAVUZU);
@@ -332,23 +347,56 @@ smFavorilerPaneliKur('lgs', 'lgsFavoriler');
 smFavoriYildizlariEkle('lgs', '#lgsKonuAnlatimlari, #lgsKonuOzetleri, #lgsOyunMerkezi');
 smSonKonuTakibiKur('lgs', '#lgsKonuAnlatimlari, #lgsKonuOzetleri');
 
-/* Sekme değiştirildiğinde ilgili paneli GERÇEK, güncel veriyle yeniden çiz */
-document.getElementById('lgsSekme').addEventListener('click', function(e){
-  const btn = e.target.closest('button[data-sekme]');
-  if(!btn) return;
-  const yenile = {
-    'dashboard': function(){ smDashboardKur('lgs','lgsDashboard'); },
-    'geri-sayim': function(){ smGeriSayimKur('lgs','lgsGeriSayim'); },
-    'kazanim-testleri': function(){ smKazanimTestleriKur('lgs','lgsKazanimTestleri', LGS_KAZANIMLAR, LGS_SORU_HAVUZU); },
-    'ai-koc': function(){ smKocKur('lgs','lgsKoc', LGS_UNITE_ADLARI); },
-    'rozet-sistemi': function(){ smRozetKur('lgs','lgsRozetler'); },
-    'favoriler': function(){ smFavorilerPaneliKur('lgs','lgsFavoriler'); },
-    'istatistikler': function(){ smIstatistiklerKur('lgs','lgsIstatistikler', LGS_UNITE_ADLARI); },
-    'performans': function(){ smYanlisAnalizKur('lgs','lgsYanlisAnaliz'); smPerformansGrafikKur('lgs','lgsPerformansGrafik', LGS_UNITE_ADLARI); },
-    'gunluk-program': function(){ smGunlukProgramKur('lgs','lgsGunlukProgram'); }
-  };
-  if(yenile[btn.dataset.sekme]) yenile[btn.dataset.sekme]();
+/* Kartın içindeki alt sekmeler — her kart kendi paneller kapsayıcısına bağlı */
+smSekmeKur('#lgsKonularSekme', '#lgsKonularPaneller');
+smSekmeKur('#lgsDenemelerSekme', '#lgsDenemelerPaneller');
+smSekmeKur('#lgsSorularSekme', '#lgsSorularPaneller');
+smSekmeKur('#lgsAnalizSekme', '#lgsAnalizPaneller');
+
+/* Alt sekme değiştirildiğinde ilgili paneli GERÇEK, güncel veriyle yeniden çiz */
+function lgsSekmeYenile(navId, harita){
+  const nav = document.getElementById(navId);
+  if(!nav) return;
+  nav.addEventListener('click', function(e){
+    const btn = e.target.closest('button[data-sekme]');
+    if(!btn) return;
+    if(harita[btn.dataset.sekme]) harita[btn.dataset.sekme]();
+  });
+}
+lgsSekmeYenile('lgsKonularSekme', {
+  'kazanim-testleri': function(){ smKazanimTestleriKur('lgs','lgsKazanimTestleri', LGS_KAZANIMLAR, LGS_SORU_HAVUZU); },
+  'favoriler': function(){ smFavorilerPaneliKur('lgs','lgsFavoriler'); }
 });
+lgsSekmeYenile('lgsDenemelerSekme', {
+  'gunluk-program': function(){ smGunlukProgramKur('lgs','lgsGunlukProgram'); }
+});
+lgsSekmeYenile('lgsAnalizSekme', {
+  'performans': function(){ smYanlisAnalizKur('lgs','lgsYanlisAnaliz'); smPerformansGrafikKur('lgs','lgsPerformansGrafik', LGS_UNITE_ADLARI); },
+  'istatistikler': function(){ smIstatistiklerKur('lgs','lgsIstatistikler', LGS_UNITE_ADLARI); },
+  'rozet-sistemi': function(){ smRozetKur('lgs','lgsRozetler'); },
+  'ai-koc': function(){ smKocKur('lgs','lgsKoc', LGS_UNITE_ADLARI); }
+});
+
+/* ANA MENÜ ↔ DETAY geçişi (4 kart) */
+(function(){
+  const menu = document.querySelector('[data-lgs-menu]');
+  const detay = document.querySelector('[data-lgs-detay]');
+  const geriBtn = document.querySelector('[data-lgs-geri]');
+  const icerikler = document.querySelectorAll('[data-lgs-icerik]');
+
+  menu.addEventListener('click', function(e){
+    const btn = e.target.closest('[data-lgs-git]');
+    if(!btn) return;
+    menu.hidden = true;
+    detay.hidden = false;
+    icerikler.forEach(function(el){ el.hidden = (el.dataset.lgsIcerik !== btn.dataset.lgsGit); });
+  });
+  geriBtn.addEventListener('click', function(){
+    detay.hidden = true;
+    menu.hidden = false;
+    smDashboardKur('lgs', 'lgsDashboard');
+  });
+})();
   </script>
 </body>
 </html>

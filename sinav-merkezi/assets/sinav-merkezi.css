@@ -362,6 +362,95 @@ button{ font-family:inherit; }
 /* ---- Oyun Merkezi bağlantı kartları (mevcut oyun sistemine yönlendirir) ---- */
 .sm-oyun-izgara{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
 
+/* ---- LGS Hazırlık: sade ana ekran, yalnızca 4 kart — 2026-08-06 ---- */
+.lgs-durum-seridi{ display:flex; flex-wrap:wrap; gap:16px; margin-bottom:40px; }
+.lgs-durum-seridi > *{ flex:1 1 300px; }
+/* Dashboard'un tam içeriği (5 kutu + 2 satır) bu şeritte gereğinden kalabalık olur;
+   şeritte yalnızca kısa özet kutuları görünür, ayrıntı Sınav Analizi > Performans'ta kalır. */
+.lgs-durum-kutu .sm-dash-son{ display:none; }
+.lgs-durum-kutu .sm-dash-izgara{ grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:10px; margin-bottom:0; }
+.lgs-durum-kutu .sm-dash-kart{ padding:12px 10px; }
+.lgs-durum-kutu .sm-dash-kart b{ font-size:1.15em; }
+
+.lgs-ana-menu{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:28px; max-width:980px; }
+.lgs-kart{
+  display:flex; flex-direction:column; align-items:flex-start; gap:10px; text-align:left; font-family:inherit;
+  background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-lg);
+  padding:32px 26px; min-height:176px; box-shadow:var(--golge-sm); cursor:pointer;
+  transition:border-color .15s ease;
+}
+.lgs-kart:hover{ border-color:var(--vurgu); }
+.lgs-kart-ikon{ font-size:2rem; line-height:1; }
+.lgs-kart b{ font-size:1.05rem; color:var(--metin); font-weight:800; }
+.lgs-kart > span:last-child{ font-size:.84rem; color:var(--metin-ikincil); line-height:1.5; }
+
+.lgs-detay{ margin-top:4px; }
+.lgs-geri{
+  display:inline-flex; align-items:center; gap:4px; background:none; border:none; color:var(--vurgu);
+  font-weight:700; font-size:.9rem; padding:0; margin-bottom:28px; cursor:pointer; font-family:inherit;
+}
+.lgs-kart-icerik .sm-panel{ padding-top:24px; }
+
+@media(max-width:640px){
+  .lgs-durum-seridi{ margin-bottom:28px; }
+  .lgs-ana-menu{ gap:16px; }
+  .lgs-kart{ padding:24px 20px; min-height:auto; }
+}
+
+/* ---- Sınav Analizi: minimal, Apple-tarzı, tek vurgu rengi ---- */
+.sm-analiz-baslik{ margin-bottom:28px; }
+.sm-analiz-baslik h2{ margin:0 0 8px; }
+.sm-analiz-menu{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; max-width:960px; }
+.sm-analiz-kart{
+  display:flex; flex-direction:column; align-items:flex-start; gap:10px; text-align:left; font-family:inherit;
+  background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-lg); padding:24px 20px;
+  box-shadow:var(--golge-sm); cursor:pointer;
+  transition:transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.sm-analiz-kart:hover{ transform:translateY(-3px); box-shadow:var(--golge); border-color:color-mix(in srgb, var(--vurgu) 30%, var(--kenar)); }
+.sm-analiz-kart-ikon{ font-size:1.8em; line-height:1; }
+.sm-analiz-kart b{ font-size:.96em; color:var(--metin); font-weight:700; }
+
+.sm-analiz-detay-alani{ max-width:640px; }
+.sm-analiz-geri{
+  display:inline-flex; align-items:center; gap:4px; background:none; border:none; color:var(--vurgu);
+  font-weight:700; font-size:.88em; padding:0; margin-bottom:20px; cursor:pointer; font-family:inherit;
+}
+.sm-analiz-geri-ic{
+  display:inline-flex; align-items:center; gap:2px; background:none; border:none; color:var(--metin-ikincil);
+  font-weight:700; font-size:.82em; padding:0; margin-bottom:14px; cursor:pointer; font-family:inherit;
+}
+.sm-analiz-geri:hover, .sm-analiz-geri-ic:hover{ color:var(--vurgu); }
+.sm-analiz-detay-alani h3{ margin:0 0 16px; font-size:1.05em; }
+.sm-analiz-detay-alani h4{ margin:0 0 6px; font-size:1em; color:var(--metin); }
+
+.sm-analiz-liste{ display:flex; flex-direction:column; gap:6px; }
+.sm-analiz-satir{
+  display:flex; flex-direction:column; align-items:flex-start; gap:2px; text-align:left; font-family:inherit;
+  background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-md); padding:13px 16px;
+  font-size:.92em; font-weight:600; color:var(--metin); cursor:pointer;
+  transition:border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.sm-analiz-satir:hover{ border-color:var(--vurgu); background:color-mix(in srgb, var(--vurgu) 5%, var(--yuzey)); }
+.sm-analiz-satir-alt{ font-size:.78em; font-weight:600; color:var(--metin-ikincil); }
+
+.sm-analiz-arama-kutu{
+  width:100%; max-width:420px; padding:11px 16px; border-radius:var(--r-pill); border:1.5px solid var(--kenar);
+  font-family:inherit; font-size:.9em; color:var(--metin); background:var(--yuzey); margin-bottom:16px;
+}
+.sm-analiz-arama-kutu:focus{ outline:none; border-color:var(--vurgu); }
+
+.sm-analiz-bilgi-kart{
+  background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-lg); padding:18px 20px;
+  box-shadow:var(--golge-sm); margin-bottom:14px;
+}
+.sm-analiz-bilgi-kart p{ margin:0 0 8px; font-size:.88em; line-height:1.6; color:var(--metin-ikincil); }
+.sm-analiz-bilgi-kart p:last-child{ margin-bottom:0; }
+.sm-analiz-bilgi-kart a{ color:var(--vurgu); font-weight:700; text-decoration:none; }
+.sm-analiz-bilgi-kart a:hover{ text-decoration:underline; }
+.sm-analiz-bilgi-izgara{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; max-width:900px; }
+.sm-analiz-bilgi-kart-kucuk{ margin-bottom:0; }
+
 /* ---- Sınav Merkezi giriş ekranı: LGS için büyük/öne çıkan premium kart ---- */
 .sm-secim-kart-buyuk{
   grid-column:1/-1; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:22px;

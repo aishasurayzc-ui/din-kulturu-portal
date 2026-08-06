@@ -120,6 +120,167 @@ function smGeriSayimKur(modul, kokId){
   ciz();
 }
 
+/* ===== Sınav Analizi =====
+   modul: 'lgs' | 'tyt' | 'ayt'. kazanımlar/soruHavuzu/uniteAdlari sayfaya
+   özel gerçek veridir (bkz. sayfanın kendi <script> bloğu) — burada hiçbir
+   geçmiş yıl sınav sorusu/istatistiği UYDURULMAZ; "Yıllara Göre" sekmesi,
+   gerçek dijitalleştirilmiş veri girilene kadar dürüst bir boş durum gösterir. */
+function smSinavAnaliziKur(modul, kokId, kazanimlar, soruHavuzu, uniteAdlari){
+  const kok = document.getElementById(kokId);
+  if(!kok) return;
+  const menu = kok.querySelector('[data-analiz-menu]');
+  const detayAlani = kok.querySelector('[data-analiz-detay]');
+  const icerik = kok.querySelector('[data-analiz-icerik]');
+  const geriBtn = kok.querySelector('[data-analiz-geri]');
+  const YILLAR = [2018,2019,2020,2021,2022,2023,2024,2025];
+
+  function konuSorulari(uid){ return soruHavuzu.filter(function(s){ return s.uniteId===uid; }); }
+  function zorlukDagilimi(sorular){
+    const d = {kolay:0, orta:0, zor:0};
+    sorular.forEach(function(s){ if(d[s.zorluk]!==undefined) d[s.zorluk]++; });
+    return d;
+  }
+
+  const renderler = {
+    yillar: function(){
+      return '<h3>Yıllara Göre</h3><div class="sm-analiz-liste">'+
+        YILLAR.map(function(y){ return '<button type="button" class="sm-analiz-satir" data-yil="'+y+'">'+y+'</button>'; }).join('')+
+        '</div>';
+    },
+    yilDetay: function(yil){
+      return '<button type="button" class="sm-analiz-geri-ic" data-analiz-geri-liste="yillar"><span class="msi" aria-hidden="true">chevron_left</span> Yıllara Göre</button>'+
+        '<div class="sm-analiz-bilgi-kart"><h4>'+yil+'</h4>'+
+        '<p>Bu yıla ait dijitalleştirilmiş soru analizi henüz eklenmedi — gerçek geçmiş sınav sorusu/istatistiği burada uydurulmaz, veri girildikçe bu bölüm dolar.</p>'+
+        '<p>Bu arada <b>Deneme Merkezi</b> ve <b>Kazanım Testleri</b>\'ndeki pratik sorularını çözebilirsin.</p></div>';
+    },
+    konular: function(){
+      return '<h3>Konulara Göre</h3><div class="sm-analiz-liste">'+
+        Object.keys(uniteAdlari).map(function(uid){ return '<button type="button" class="sm-analiz-satir" data-konu="'+uid+'">'+uniteAdlari[uid]+'</button>'; }).join('')+
+        '</div>';
+    },
+    konuDetay: function(uid){
+      const ad = uniteAdlari[uid] || uid;
+      const sorular = konuSorulari(uid);
+      const d = zorlukDagilimi(sorular);
+      const kzSayisi = kazanimlar.filter(function(k){ return k.uniteId===uid; }).length;
+      return '<button type="button" class="sm-analiz-geri-ic" data-analiz-geri-liste="konular"><span class="msi" aria-hidden="true">chevron_left</span> Konulara Göre</button>'+
+        '<div class="sm-analiz-bilgi-kart"><h4>'+ad+'</h4>'+
+        '<p>Pratik soru havuzunda bu konudan <b>'+sorular.length+' soru</b> var — '+d.kolay+' kolay, '+d.orta+' orta, '+d.zor+' zor.</p>'+
+        '<p>'+kzSayisi+' kazanım bu konuya bağlı.</p></div>'+
+        '<div class="sm-analiz-bilgi-kart"><p>Bu konuyu tekrar etmek için <a href="#" data-konu-git="konu-anlatimlari">konu anlatımına</a> veya <a href="#" data-konu-git="kazanim-testleri">kazanım testlerine</a> gidebilirsin.</p></div>';
+    },
+    kazanimlar: function(){
+      return '<h3>Kazanımlara Göre</h3>'+
+        '<input type="search" class="sm-analiz-arama-kutu" placeholder="Kazanım ara…" data-kazanim-arama>'+
+        '<div class="sm-analiz-liste" data-kazanim-liste>'+
+        kazanimlar.map(function(k){ return '<button type="button" class="sm-analiz-satir" data-kazanim="'+k.id+'">'+k.baslik+'<span class="sm-analiz-satir-alt">'+k.uniteAd+'</span></button>'; }).join('')+
+        '</div>';
+    },
+    kazanimDetay: function(kid){
+      const k = kazanimlar.find(function(x){ return x.id===kid; });
+      if(!k) return '';
+      const toplam = soruHavuzu.filter(function(s){ return s.kazanimId===kid; }).length;
+      return '<button type="button" class="sm-analiz-geri-ic" data-analiz-geri-liste="kazanimlar"><span class="msi" aria-hidden="true">chevron_left</span> Kazanımlara Göre</button>'+
+        '<div class="sm-analiz-bilgi-kart"><h4>'+k.baslik+'</h4><p class="sm-analiz-satir-alt">'+k.uniteAd+'</p>'+
+        '<p>Bu kazanım için pratik soru havuzunda <b>'+toplam+' soru</b> var. Zorluk: '+k.zorluklar.join(', ')+'.</p></div>'+
+        '<div class="sm-analiz-bilgi-kart"><p>Bu kazanımı çözmek için <a href="#" data-konu-git="kazanim-testleri">Kazanım Testleri</a> sekmesine gidebilirsin.</p></div>';
+    },
+    egilimler: function(){
+      const notlar = [
+        'Son yıllarda yorum ve çıkarım gerektiren sorular arttı.',
+        'Görsel/metin temelli yorum soruları daha sık kullanılıyor.',
+        'Günlük hayattan senaryolar öne çıkıyor.',
+        'Birden fazla kazanımı birlikte ölçen sorular görülüyor.',
+        'Ezber bilgiden çok, bilgiyi yeni bir duruma uygulama becerisi ölçülüyor.'
+      ];
+      return '<h3>Soru Eğilimleri</h3><div class="sm-analiz-bilgi-izgara">'+
+        notlar.map(function(n){ return '<div class="sm-analiz-bilgi-kart sm-analiz-bilgi-kart-kucuk"><p>'+n+'</p></div>'; }).join('')+
+        '</div>';
+    },
+    oneriler: function(){
+      const oneriler = Object.keys(uniteAdlari).map(function(uid){
+        const sorular = konuSorulari(uid);
+        const d = zorlukDagilimi(sorular);
+        const metin = d.zor > 0
+          ? '"'+uniteAdlari[uid]+'" konusunda zor seviyede sorular var — bu kazanımları tekrar etmen önerilir.'
+          : '"'+uniteAdlari[uid]+'" konusundan düzenli soru geliyor, pratik testlerle pekiştir.';
+        return '<div class="sm-analiz-bilgi-kart sm-analiz-bilgi-kart-kucuk"><p>'+metin+'</p></div>';
+      });
+      return '<h3>Çalışma Önerileri</h3><div class="sm-analiz-bilgi-izgara">'+oneriler.join('')+'</div>';
+    },
+    ara: function(){
+      return '<h3>Ara</h3>'+
+        '<input type="search" class="sm-analiz-arama-kutu" placeholder="Yıl, konu veya kazanım yaz…" data-genel-arama>'+
+        '<div class="sm-analiz-liste" data-genel-sonuc></div>';
+    }
+  };
+
+  function goster(gorunum){
+    menu.hidden = true;
+    detayAlani.hidden = false;
+    icerik.innerHTML = renderler[gorunum] ? renderler[gorunum]() : '';
+  }
+  function menuyeDon(){
+    detayAlani.hidden = true;
+    menu.hidden = false;
+    icerik.innerHTML = '';
+  }
+
+  menu.addEventListener('click', function(e){
+    const btn = e.target.closest('[data-analiz-git]');
+    if(!btn) return;
+    goster(btn.dataset.analizGit);
+  });
+  geriBtn.addEventListener('click', menuyeDon);
+
+  icerik.addEventListener('click', function(e){
+    const yilBtn = e.target.closest('[data-yil]');
+    if(yilBtn){ icerik.innerHTML = renderler.yilDetay(yilBtn.dataset.yil); return; }
+    const konuBtn = e.target.closest('[data-konu]');
+    if(konuBtn){ icerik.innerHTML = renderler.konuDetay(konuBtn.dataset.konu); return; }
+    const kazanimBtn = e.target.closest('[data-kazanim]');
+    if(kazanimBtn){ icerik.innerHTML = renderler.kazanimDetay(kazanimBtn.dataset.kazanim); return; }
+    const aramaBtn = e.target.closest('[data-arama-git]');
+    if(aramaBtn){
+      const tip = aramaBtn.dataset.aramaGit, deger = aramaBtn.dataset.aramaDeger;
+      if(tip==='yil') icerik.innerHTML = renderler.yilDetay(deger);
+      else if(tip==='konu') icerik.innerHTML = renderler.konuDetay(deger);
+      else if(tip==='kazanim') icerik.innerHTML = renderler.kazanimDetay(deger);
+      return;
+    }
+    const geriListe = e.target.closest('[data-analiz-geri-liste]');
+    if(geriListe){ icerik.innerHTML = renderler[geriListe.dataset.analizGeriListe](); return; }
+    const konuGit = e.target.closest('[data-konu-git]');
+    if(konuGit){
+      e.preventDefault();
+      const sekmeBtn = kok.closest('main').querySelector('[data-sekme="'+konuGit.dataset.konuGit+'"]');
+      if(sekmeBtn) sekmeBtn.click();
+    }
+  });
+
+  icerik.addEventListener('input', function(e){
+    if(e.target.matches('[data-kazanim-arama]')){
+      const q = e.target.value.trim().toLocaleLowerCase('tr');
+      icerik.querySelectorAll('[data-kazanim-liste] [data-kazanim]').forEach(function(row){
+        row.hidden = q && row.textContent.toLocaleLowerCase('tr').indexOf(q)===-1;
+      });
+      return;
+    }
+    if(e.target.matches('[data-genel-arama]')){
+      const q = e.target.value.trim().toLocaleLowerCase('tr');
+      const sonuc = icerik.querySelector('[data-genel-sonuc]');
+      if(!q){ sonuc.innerHTML = ''; return; }
+      const eslesenler = [];
+      YILLAR.forEach(function(y){ if((''+y).indexOf(q)>-1) eslesenler.push({tip:'yil', deger:y, etiket:''+y}); });
+      Object.keys(uniteAdlari).forEach(function(uid){ if(uniteAdlari[uid].toLocaleLowerCase('tr').indexOf(q)>-1) eslesenler.push({tip:'konu', deger:uid, etiket:uniteAdlari[uid]}); });
+      kazanimlar.forEach(function(k){ if(k.baslik.toLocaleLowerCase('tr').indexOf(q)>-1) eslesenler.push({tip:'kazanim', deger:k.id, etiket:k.baslik}); });
+      sonuc.innerHTML = eslesenler.length
+        ? eslesenler.map(function(m){ return '<button type="button" class="sm-analiz-satir" data-arama-git="'+m.tip+'" data-arama-deger="'+m.deger+'">'+m.etiket+'</button>'; }).join('')
+        : '<p class="sm-hedef-metin">Sonuç bulunamadı.</p>';
+    }
+  });
+}
+
 /* ===== Çalışma Planı aracı (haftalık, serbest metin) =====
    Her gün için öğrencinin kendi yazdığı kısa çalışma notu — gerçek konu
    verisi henüz olmadığından serbest metin tabanlı, dürüst bir araçtır. */
