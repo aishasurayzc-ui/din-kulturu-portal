@@ -362,15 +362,9 @@ button{ font-family:inherit; }
 /* ---- Oyun Merkezi bağlantı kartları (mevcut oyun sistemine yönlendirir) ---- */
 .sm-oyun-izgara{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
 
-/* ---- LGS Hazırlık: sade ana ekran, yalnızca 4 kart — 2026-08-06 ---- */
-.lgs-durum-seridi{ display:flex; flex-wrap:wrap; gap:16px; margin-bottom:40px; }
-.lgs-durum-seridi > *{ flex:1 1 300px; }
-/* Dashboard'un tam içeriği (5 kutu + 2 satır) bu şeritte gereğinden kalabalık olur;
-   şeritte yalnızca kısa özet kutuları görünür, ayrıntı Sınav Analizi > Performans'ta kalır. */
-.lgs-durum-kutu .sm-dash-son{ display:none; }
-.lgs-durum-kutu .sm-dash-izgara{ grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:10px; margin-bottom:0; }
-.lgs-durum-kutu .sm-dash-kart{ padding:12px 10px; }
-.lgs-durum-kutu .sm-dash-kart b{ font-size:1.15em; }
+/* ---- LGS Hazırlık: çalışma paneli — motivasyon/hero değil, işlev odaklı — 2026-08-06 ---- */
+.lgs-panel-baslik{ max-width:1040px; margin:0 auto; padding:32px 24px 8px; }
+.lgs-panel-baslik h1{ margin:0; font-size:1.3em; font-weight:800; color:var(--metin); }
 
 .lgs-ana-menu{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:28px; max-width:980px; }
 .lgs-kart{
@@ -391,8 +385,47 @@ button{ font-family:inherit; }
 }
 .lgs-kart-icerik .sm-panel{ padding-top:24px; }
 
+/* ---- Soru Laboratuvarı: tek sütun akordeon, sade, hafif gölge ---- */
+.sm-lab-soru{
+  background:var(--yuzey); border:1px solid var(--kenar); border-radius:var(--r-lg);
+  box-shadow:var(--golge-sm); margin-bottom:14px; overflow:hidden;
+}
+.sm-lab-baslik{
+  width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:none; border:none; padding:18px 20px; cursor:pointer; font-family:inherit;
+  text-align:left; color:var(--metin);
+}
+.sm-lab-etiket{ font-weight:800; font-size:.92em; }
+.sm-lab-ok{ color:var(--metin-ikincil); transition:transform .15s ease; }
+.sm-lab-baslik[aria-expanded="true"] .sm-lab-ok{ transform:rotate(180deg); }
+.sm-lab-govde{ padding:0 20px 24px; border-top:1px solid var(--kenar); }
+.sm-lab-metin{ margin:20px 0 14px; font-size:.94em; line-height:1.7; color:var(--metin); }
+.sm-lab-secenekler{ display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
+.sm-lab-secenek{ font-size:.88em; padding:9px 12px; border-radius:var(--r-sm); background:var(--acikgri); color:var(--metin-ikincil); }
+.sm-lab-secenek.sm-lab-dogru{ background:color-mix(in srgb, var(--yesil) 14%, var(--yuzey)); color:var(--metin); font-weight:700; }
+.sm-lab-secenek.sm-lab-dogru .msi{ color:var(--yesil); font-size:16px; vertical-align:middle; }
+.sm-lab-uyari{ font-size:.72em; color:var(--metin-ikincil); font-style:italic; margin:0 0 20px; line-height:1.5; }
+
+.sm-lab-dna{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px; }
+.sm-dna-rozet{
+  display:inline-flex; align-items:center; gap:5px; font-size:.72em; font-weight:700;
+  background:var(--acikgri); color:var(--metin-ikincil); padding:5px 12px; border-radius:var(--r-pill);
+}
+.sm-dna-rozet b{ color:var(--vurgu); font-weight:800; }
+
+.sm-lab-blok{ margin-bottom:18px; }
+.sm-lab-blok h4{ margin:0 0 6px; font-size:.82em; font-weight:800; color:var(--vurgu); text-transform:uppercase; letter-spacing:.02em; }
+.sm-lab-blok p{ margin:0; font-size:.88em; line-height:1.7; color:var(--metin-ikincil); }
+
+.sm-lab-not-etiket{ display:block; font-size:.78em; font-weight:700; color:var(--metin-ikincil); margin-bottom:6px; }
+.sm-lab-not-alani{
+  width:100%; min-height:64px; border:1px solid var(--kenar); border-radius:var(--r-md); padding:10px 12px;
+  font-family:inherit; font-size:.86em; color:var(--metin); background:var(--acikgri); resize:vertical; margin-bottom:18px;
+}
+.sm-lab-sonraki{ display:flex; flex-wrap:wrap; gap:10px; }
+
 @media(max-width:640px){
-  .lgs-durum-seridi{ margin-bottom:28px; }
+  .lgs-panel-baslik{ padding:24px 16px 4px; }
   .lgs-ana-menu{ gap:16px; }
   .lgs-kart{ padding:24px 20px; min-height:auto; }
 }

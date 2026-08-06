@@ -120,6 +120,91 @@ function smGeriSayimKur(modul, kokId){
   ciz();
 }
 
+/* ===== Soru Laboratuvarı =====
+   Gerçek geçmiş sınav sorularının pedagojik analizi. "Önerilen doğru
+   cevap" ve "en güçlü çeldirici" alanları öğretmenin/analistin kendi
+   alan bilgisine dayalı değerlendirmedir — resmi cevap anahtarı DEĞİLDİR,
+   yayınlamadan önce öğretmen onayından geçmelidir. "Hata analizi" de
+   gerçek öğrenci istatistiği değildir; soru/çeldirici tasarımına dayalı
+   pedagojik bir tahmindir — arayüzde bu ikisi de açıkça belirtilir.
+   gitCallback(tip, hedef): "konu" | "kazanim" | "deneme" butonlarına
+   tıklanınca çağrılır; sayfaya özel yönlendirme mantığı orada tanımlanır. */
+function smSoruLaboratuvariKur(modul, kokId, sorular, gitCallback){
+  const kok = document.getElementById(kokId);
+  if(!kok) return;
+
+  function esc(s){ return String(s).replace(/</g,'&lt;'); }
+  function rozet(etiket, deger){
+    return '<span class="sm-dna-rozet"><b>'+etiket+'</b>'+esc(deger)+'</span>';
+  }
+
+  kok.innerHTML = sorular.map(function(s){
+    const id = 'lab-'+modul+'-'+s.yil+'-'+s.no;
+    const secenekHtml = s.secenekler.map(function(sec, j){
+      const harf = String.fromCharCode(65+j);
+      const dogruMu = harf === s.dogruSik;
+      return '<div class="sm-lab-secenek'+(dogruMu?' sm-lab-dogru':'')+'">'+esc(sec)+(dogruMu?' <span class="msi" aria-hidden="true">check_circle</span>':'')+'</div>';
+    }).join('');
+    return ''+
+    '<div class="sm-lab-soru">'+
+      '<button type="button" class="sm-lab-baslik" data-lab-ac="'+id+'" aria-expanded="false">'+
+        '<span class="sm-lab-etiket">'+s.yil+' · Soru '+s.no+'</span>'+
+        '<span class="msi sm-lab-ok" aria-hidden="true">expand_more</span>'+
+      '</button>'+
+      '<div class="sm-lab-govde" id="'+id+'" hidden>'+
+        '<p class="sm-lab-metin">'+esc(s.soru)+'</p>'+
+        '<div class="sm-lab-secenekler">'+secenekHtml+'</div>'+
+        '<p class="sm-lab-uyari">Önerilen doğru cevap ve analiz, alan bilgisine dayalı bir değerlendirmedir; resmi cevap anahtarı değildir — kullanmadan önce öğretmen onayından geçmelidir.</p>'+
+
+        '<div class="sm-lab-dna">'+
+          rozet('Yorum Düzeyi', s.dna.yorum)+
+          rozet('Kavram Yoğunluğu', s.dna.kavram)+
+          rozet('Günlük Hayat', s.dna.gunlukHayat)+
+          rozet('Ayet/Hadis', s.dna.ayetHadis)+
+          rozet('Çıkarım Gerektirir mi', s.dna.cikarim ? 'Evet' : 'Hayır')+
+        '</div>'+
+
+        '<div class="sm-lab-blok"><h4>Hangi kazanımı ölçüyor?</h4><p>'+esc(s.kazanimAciklama)+'</p></div>'+
+        '<div class="sm-lab-blok"><h4>MEB bu soruyla ne ölçmek istedi?</h4><p>'+esc(s.mebAmac)+'</p></div>'+
+        '<div class="sm-lab-blok"><h4>En güçlü çeldirici hangisi?</h4><p><b>'+s.guecluCeldirici+')</b> '+esc(s.celdiriciAciklama)+'</p></div>'+
+        '<div class="sm-lab-blok"><h4>Bu soruda öğrenciler neden hata yapar?</h4><p>'+esc(s.hataNedeni)+'</p></div>'+
+        '<div class="sm-lab-blok"><h4>Bu soru neden zor?</h4><p>'+esc(s.zorlukNedeni)+'</p></div>'+
+        '<div class="sm-lab-blok"><h4>Bu soru bugün hazırlansaydı nasıl değişirdi?</h4><p>'+esc(s.bugunNasil)+'</p></div>'+
+        '<div class="sm-lab-blok"><h4>Aynı mantıkla özgün benzer soru önerisi</h4><p>'+esc(s.benzerSoru)+'</p></div>'+
+
+        '<label class="sm-lab-not-etiket" for="'+id+'-not">Notun</label>'+
+        '<textarea class="sm-lab-not-alani" id="'+id+'-not" data-lab-not="'+id+'" placeholder="Bu soru için kendi notunu yaz..."></textarea>'+
+
+        '<div class="sm-lab-sonraki">'+
+          (s.ilgiliKonuHref ? '<a class="sm-btn sm-btn-ikincil" href="'+s.ilgiliKonuHref+'">Konu özetine git</a>' : '')+
+          '<button type="button" class="sm-btn sm-btn-ikincil" data-lab-git="kazanim">Benzer sorular çöz</button>'+
+          '<button type="button" class="sm-btn sm-btn-ikincil" data-lab-git="deneme">Mini test çöz</button>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+
+  kok.addEventListener('click', function(e){
+    const acBtn = e.target.closest('[data-lab-ac]');
+    if(acBtn){
+      const govde = document.getElementById(acBtn.dataset.labAc);
+      govde.hidden = !govde.hidden;
+      acBtn.setAttribute('aria-expanded', govde.hidden ? 'false' : 'true');
+      return;
+    }
+    const gitBtn = e.target.closest('[data-lab-git]');
+    if(gitBtn && typeof gitCallback === 'function'){
+      gitCallback(gitBtn.dataset.labGit);
+    }
+  });
+
+  kok.querySelectorAll('[data-lab-not]').forEach(function(ta){
+    const key = 'smerkez_'+modul+'_lab_not_'+ta.dataset.labNot;
+    ta.value = smOku(key) || '';
+    ta.addEventListener('input', function(){ smYaz(key, ta.value); });
+  });
+}
+
 /* ===== Sınav Analizi =====
    modul: 'lgs' | 'tyt' | 'ayt'. kazanımlar/soruHavuzu/uniteAdlari sayfaya
    özel gerçek veridir (bkz. sayfanın kendi <script> bloğu) — burada hiçbir
