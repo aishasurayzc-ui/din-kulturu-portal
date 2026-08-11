@@ -711,6 +711,32 @@
   <div id="ca85YenidenBaslat"></div>
   <button class="eylem" onclick="ca85Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu85">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td85Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td85Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td85Sure">60</b> sn</span>
+    <span>🔵 <b id="td85Puan1">0</b></span>
+    <span>🔴 <b id="td85Puan2">0</b></span>
+  </div>
+  <div id="td85ElDegistir" style="text-align:center;"></div>
+  <div id="td85SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td85Kelime" class="omg-anlat-kelime"></div>
+  <div id="td85Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td85', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td85', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td85Sonuc"></div>
+  <div id="td85YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td85Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -764,7 +790,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece birkaç saniyen var, hızlı düşün!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '85', 'unite5.html');
 
@@ -923,6 +950,25 @@ const CA85_SORULAR = [
   {soru:'İslam mimarisinin temel özelliklerinden biri nedir?', secenekler:['Sadelik, işlevsellik ve güzellik dengesi','Aşırı gösteriş ve lüks','Sadece büyüklük ve heybet','Yalnızca dış görünüşe önem verme'], dogru:'Sadelik, işlevsellik ve güzellik dengesi'}
 ];
 function ca85Baslat(){ ikiliOyunBaslat({onek:'ca85', sorular:CA85_SORULAR}); }
+
+const TD85_KARTLAR = [
+  {kelime:"Cami", yasakli:["ibadet","minare","namaz","bina"]},
+  {kelime:"Minare", yasakli:["kule","ezan","yüksek","cami"]},
+  {kelime:"Kubbe", yasakli:["yuvarlak","tavan","üst","cami"]},
+  {kelime:"Mihrab", yasakli:["kıble","oyuk","cami","yön"]},
+  {kelime:"Minber", yasakli:["merdiven","hutbe","cami","imam"]},
+  {kelime:"Şadırvan", yasakli:["su","abdest","avlu","cami"]},
+  {kelime:"Çini", yasakli:["seramik","desen","süsleme","renkli"]},
+  {kelime:"Hat Sanatı", yasakli:["yazı","güzel","sanat","kalem"]},
+  {kelime:"Ebru", yasakli:["su","sanat","desen","renk"]},
+  {kelime:"Külliye", yasakli:["bina","topluluk","cami","yapı"]},
+  {kelime:"Avlu", yasakli:["açık","alan","cami","dış"]},
+  {kelime:"Alem", yasakli:["tepe","süs","kubbe","hilal"]},
+  {kelime:"Türbe", yasakli:["mezar","bina","kabir","anıt"]},
+  {kelime:"Selatin Camii", yasakli:["padişah","büyük","cami","sultan"]},
+  {kelime:"Kalem İşi", yasakli:["desen","süsleme","el","tavan"]}
+];
+function td85Baslat(){ ikiliAnlatBaslat({onek:'td85', kartlar:TD85_KARTLAR, sureSN:60}); }
 
 const MM85_CIFTLER = [
   {metin1:'Minare', metin2:'Ezan okunan kule'},

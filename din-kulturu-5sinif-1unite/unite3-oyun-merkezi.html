@@ -711,6 +711,32 @@
   <div id="ca3YenidenBaslat"></div>
   <button class="eylem" onclick="ca3Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu3">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td3Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td3Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td3Sure">60</b> sn</span>
+    <span>🔵 <b id="td3Puan1">0</b></span>
+    <span>🔴 <b id="td3Puan2">0</b></span>
+  </div>
+  <div id="td3ElDegistir" style="text-align:center;"></div>
+  <div id="td3SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td3Kelime" class="omg-anlat-kelime"></div>
+  <div id="td3Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td3', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td3', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td3Sonuc"></div>
+  <div id="td3YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td3Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -764,7 +790,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece birkaç saniyen var, hızlı düşün!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '3', 'unite3.html');
 
@@ -923,6 +950,25 @@ const CA3_SORULAR = [
   {soru:'Kur\'an\'ın insanlara yol göstericiliğine ne denir?', secenekler:['Hidayet','Şirk','Nifak','Küfür'], dogru:'Hidayet'}
 ];
 function ca3Baslat(){ ikiliOyunBaslat({onek:'ca3', sorular:CA3_SORULAR}); }
+
+const TD3_KARTLAR = [
+  {kelime:"Vahiy", yasakli:["Allah","mesaj","peygamber","indirmek"]},
+  {kelime:"Sure", yasakli:["bölüm","Kur'an","isim","ayet"]},
+  {kelime:"Ayet", yasakli:["cümle","Kur'an","satır","sure"]},
+  {kelime:"Cüz", yasakli:["bölüm","otuz","Kur'an","parça"]},
+  {kelime:"Hafız", yasakli:["ezber","Kur'an","bilen","tamamı"]},
+  {kelime:"Mushaf", yasakli:["kitap","Kur'an","yazılı","sayfa"]},
+  {kelime:"İlk Vahiy", yasakli:["Hira","oku","ilk","mağara"]},
+  {kelime:"Fatiha Suresi", yasakli:["ilk","sure","namaz","açılış"]},
+  {kelime:"Kur'an Kursu", yasakli:["öğrenmek","okumak","yer","ders"]},
+  {kelime:"Kur'an'a Saygı", yasakli:["temiz","tutmak","elleme","abdest"]},
+  {kelime:"Tecvid", yasakli:["kural","okuma","doğru","harf"]},
+  {kelime:"Elif-Ba", yasakli:["harf","alfabe","öğrenmek","ilk"]},
+  {kelime:"Kıraat", yasakli:["okumak","ses","güzel","tilavet"]},
+  {kelime:"Miraç", yasakli:["yolculuk","gece","gökyüzü","yükselmek"]},
+  {kelime:"Cebrail", yasakli:["melek","vahiy","getirmek","Allah"]}
+];
+function td3Baslat(){ ikiliAnlatBaslat({onek:'td3', kartlar:TD3_KARTLAR, sureSN:60}); }
 
 const MM3_CIFTLER = [
   {metin1:'Ayet', metin2:'Sureyi oluşturan cümle'},
