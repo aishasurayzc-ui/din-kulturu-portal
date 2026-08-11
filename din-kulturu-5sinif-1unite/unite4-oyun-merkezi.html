@@ -737,6 +737,29 @@
   <div id="td84YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td84Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki84">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc84Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc84Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc84SoruNo">1</b>/<b id="bc84Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc84Sure">12</b> sn</span>
+    <span>🔵 <b id="bc84Puan1">0</b></span>
+    <span>🔴 <b id="bc84Puan2">0</b></span>
+  </div>
+  <div id="bc84ElDegistir" style="text-align:center;"></div>
+  <div id="bc84SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc84SoruMetin" class="balon-durum"></div>
+  <div id="bc84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc84Sonuc"></div>
+  <div id="bc84YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc84Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '84', 'unite4.html');
 
@@ -969,6 +993,34 @@ const TD84_KARTLAR = [
   {kelime:"Rüya (Yûsuf)", yasakli:["uyku","görmek","yıldız","gelecek"]}
 ];
 function td84Baslat(){ ikiliAnlatBaslat({onek:'td84', kartlar:TD84_KARTLAR, sureSN:60}); }
+
+const BC84_KATEGORILER = [
+  {ad:"Hz. Âdem ve Hz. Nûh", ikon:"🌊", sorular:[
+    {soru:"İlk insan ve ilk peygamber kimdir?", secenekler:["Hz. Âdem","Hz. Nûh","Hz. İbrahim","Hz. Mûsâ"], dogru:"Hz. Âdem"},
+    {soru:"Kavmini gemi yapmaya çağıran ve büyük su baskınından kurtulan peygamber kimdir?", secenekler:["Hz. Nûh","Hz. Âdem","Hz. Yûsuf","Hz. Yûnus"], dogru:"Hz. Nûh"},
+    {soru:"Hz. Nûh kıssasında yaşanan büyük su baskınına ne denir?", secenekler:["Tufan","Kuraklık","Deprem","Fırtına"], dogru:"Tufan"},
+    {soru:"Peygamber kıssalarından çıkarılan öğüt ve derse ne denir?", secenekler:["İbret","Eğlence","Masal","Şaka"], dogru:"İbret"}
+  ]},
+  {ad:"Hz. İbrahim ve Ailesi", ikon:"🔥", sorular:[
+    {soru:"Putlara tapan kavmine karşı çıkan ve ateşe atılan peygamber kimdir?", secenekler:["Hz. İbrahim","Hz. Nûh","Hz. Mûsâ","Hz. Yûsuf"], dogru:"Hz. İbrahim"},
+    {soru:"Hz. İbrahim'i ateşe attıran zalim kral kimdir?", secenekler:["Nemrut","Firavun","Ebû Cehil","Ebû Leheb"], dogru:"Nemrut"},
+    {soru:"Hz. İbrahim'in oğlu ve kurban kıssasında adı geçen peygamber kimdir?", secenekler:["Hz. İsmail","Hz. İshak","Hz. Yakub","Hz. Yûsuf"], dogru:"Hz. İsmail"},
+    {soru:"Zorluklara dayanmaya ve Allah'a güvenmeye ne denir?", secenekler:["Sabır","Acelecilik","Öfke","Korku"], dogru:"Sabır"}
+  ]},
+  {ad:"Hz. Mûsâ ve Hz. Yûsuf", ikon:"👑", sorular:[
+    {soru:"Firavun'un zulmüne karşı çıkan ve asasıyla mucizeler gösteren peygamber kimdir?", secenekler:["Hz. Mûsâ","Hz. İbrahim","Hz. Nûh","Hz. Yûsuf"], dogru:"Hz. Mûsâ"},
+    {soru:"Hz. Mûsâ'nın asasıyla ikiye ayrılan deniz hangisidir?", secenekler:["Kızıldeniz","Karadeniz","Akdeniz","Marmara Denizi"], dogru:"Kızıldeniz"},
+    {soru:"Kardeşleri tarafından kuyuya atılan ve sonra Mısır'a vezir olan peygamber kimdir?", secenekler:["Hz. Yûsuf","Hz. Mûsâ","Hz. Nûh","Hz. Yûnus"], dogru:"Hz. Yûsuf"},
+    {soru:"Hz. Yûsuf'un kıssasında önemli bir yer tutan ve gelecekle ilgili gördüğü şey nedir?", secenekler:["Rüya","Mektup","Harita","Resim"], dogru:"Rüya"}
+  ]},
+  {ad:"Kıssalardan Dersler", ikon:"🐋", sorular:[
+    {soru:"Hz. Yûsuf'un kardeşlerinin ona karşı duyduğu olumsuz duygu nedir?", secenekler:["Kıskançlık","Sevgi","Saygı","Hayranlık"], dogru:"Kıskançlık"},
+    {soru:"Denize düşüp bir deniz canlısı tarafından yutulan peygamber kimdir?", secenekler:["Hz. Yûnus","Hz. Yûsuf","Hz. Mûsâ","Hz. Nûh"], dogru:"Hz. Yûnus"},
+    {soru:"Hz. Yûnus'un içinde kaldığı yer neresidir?", secenekler:["Balığın Karnı","Bir Mağara","Bir Kuyu","Bir Gemi"], dogru:"Balığın Karnı"},
+    {soru:"Peygamberlerin başından geçen, ibret dolu olaylara ne denir?", secenekler:["Kıssa","Efsane","Masal","Şiir"], dogru:"Kıssa"}
+  ]}
+];
+function bc84Baslat(){ ikiliCarkBaslat({onek:'bc84', kategoriler:BC84_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 const MM84_CIFTLER = [
   {metin1:'Kavim', metin2:'Aynı soydan gelen topluluk'},

@@ -737,6 +737,29 @@
   <div id="td3YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td3Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki3">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc3Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc3Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc3SoruNo">1</b>/<b id="bc3Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc3Sure">12</b> sn</span>
+    <span>🔵 <b id="bc3Puan1">0</b></span>
+    <span>🔴 <b id="bc3Puan2">0</b></span>
+  </div>
+  <div id="bc3ElDegistir" style="text-align:center;"></div>
+  <div id="bc3SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc3SoruMetin" class="balon-durum"></div>
+  <div id="bc3Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc3Sonuc"></div>
+  <div id="bc3YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc3Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '3', 'unite3.html');
 
@@ -969,6 +993,34 @@ const TD3_KARTLAR = [
   {kelime:"Cebrail", yasakli:["melek","vahiy","getirmek","Allah"]}
 ];
 function td3Baslat(){ ikiliAnlatBaslat({onek:'td3', kartlar:TD3_KARTLAR, sureSN:60}); }
+
+const BC3_KATEGORILER = [
+  {ad:"Kur'an'ın Bölümleri", ikon:"📖", sorular:[
+    {soru:"Kur'an'ın bölümlerinden her birine ne denir?", secenekler:["Sure","Ayet","Cüz","Harf"], dogru:"Sure"},
+    {soru:"Bir surenin cümlelerinden her birine ne denir?", secenekler:["Ayet","Sure","Cüz","Sayfa"], dogru:"Ayet"},
+    {soru:"Kur'an'ın otuz eşit bölümünden her birine ne denir?", secenekler:["Cüz","Sure","Ayet","Hizb"], dogru:"Cüz"},
+    {soru:"Yazılı hâldeki Kur'an-ı Kerim'e ne denir?", secenekler:["Mushaf","Hadis Kitabı","Tefsir","Fıkıh Kitabı"], dogru:"Mushaf"}
+  ]},
+  {ad:"Vahiy Süreci", ikon:"✨", sorular:[
+    {soru:"Allah'tan peygambere gelen bilgiye ne denir?", secenekler:["Vahiy","Hadis","Sünnet","Fetva"], dogru:"Vahiy"},
+    {soru:"Hz. Muhammed'e gelen ilk vahiy nerede gerçekleşmiştir?", secenekler:["Hira Mağarası","Kâbe","Medine","Kudüs"], dogru:"Hira Mağarası"},
+    {soru:"Vahyi Allah'tan alıp peygambere getiren melek hangisidir?", secenekler:["Cebrail","Mikâil","İsrâfil","Azrâil"], dogru:"Cebrail"},
+    {soru:"Hz. Muhammed'in gökyüzüne yükseltildiği geceye ne denir?", secenekler:["Miraç","Hicret","Bedir","Fetih"], dogru:"Miraç"}
+  ]},
+  {ad:"Kur'an Okuma", ikon:"🎙️", sorular:[
+    {soru:"Kur'an'ı doğru ve güzel okuma kurallarına ne denir?", secenekler:["Tecvid","Tefsir","Fıkıh","Kelam"], dogru:"Tecvid"},
+    {soru:"Güzel sesle Kur'an okumaya ne denir?", secenekler:["Kıraat","Hutbe","Vaaz","Sohbet"], dogru:"Kıraat"},
+    {soru:"Arap alfabesinin harflerini öğrenmeye ne denir?", secenekler:["Elif-Ba","Tecvid","Tefsir","Kıraat"], dogru:"Elif-Ba"},
+    {soru:"Kur'an-ı Kerim'in tamamını ezberleyen kişiye ne denir?", secenekler:["Hafız","İmam","Müezzin","Vaiz"], dogru:"Hafız"}
+  ]},
+  {ad:"Kur'an'a Bağlılık", ikon:"💛", sorular:[
+    {soru:"Kur'an'ın ilk suresi ve namazlarda okunan sure hangisidir?", secenekler:["Fatiha Suresi","İhlas Suresi","Nas Suresi","Kevser Suresi"], dogru:"Fatiha Suresi"},
+    {soru:"Çocukların Kur'an öğrendiği yere ne denir?", secenekler:["Kur'an Kursu","Anaokulu","Kütüphane","Spor Salonu"], dogru:"Kur'an Kursu"},
+    {soru:"Kur'an'ı temiz elle ve abdestli tutmaya ne denir?", secenekler:["Kur'an'a Saygı","Kur'an'ı İhmal Etmek","Kur'an'a İlgisizlik","Kur'an'ı Unutmak"], dogru:"Kur'an'a Saygı"},
+    {soru:"Kur'an okumaya başlarken söylenen 'Bismillahirrahmanirrahim' sözüne ne denir?", secenekler:["Besmele","Tekbir","Selam","Tesbih"], dogru:"Besmele"}
+  ]}
+];
+function bc3Baslat(){ ikiliCarkBaslat({onek:'bc3', kategoriler:BC3_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 const MM3_CIFTLER = [
   {metin1:'Ayet', metin2:'Sureyi oluşturan cümle'},

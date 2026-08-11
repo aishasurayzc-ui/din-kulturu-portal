@@ -737,6 +737,29 @@
   <div id="td85YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td85Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki85">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc85Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc85Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc85SoruNo">1</b>/<b id="bc85Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc85Sure">12</b> sn</span>
+    <span>🔵 <b id="bc85Puan1">0</b></span>
+    <span>🔴 <b id="bc85Puan2">0</b></span>
+  </div>
+  <div id="bc85ElDegistir" style="text-align:center;"></div>
+  <div id="bc85SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc85SoruMetin" class="balon-durum"></div>
+  <div id="bc85Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc85Sonuc"></div>
+  <div id="bc85YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc85Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '85', 'unite5.html');
 
@@ -969,6 +993,34 @@ const TD85_KARTLAR = [
   {kelime:"Kalem İşi", yasakli:["desen","süsleme","el","tavan"]}
 ];
 function td85Baslat(){ ikiliAnlatBaslat({onek:'td85', kartlar:TD85_KARTLAR, sureSN:60}); }
+
+const BC85_KATEGORILER = [
+  {ad:"Caminin Bölümleri", ikon:"🕌", sorular:[
+    {soru:"Müslümanların toplu ibadet ettiği yapıya ne denir?", secenekler:["Cami","Ev","Okul","Han"], dogru:"Cami"},
+    {soru:"Caminin yüksek, ince kulesine ne denir?", secenekler:["Minare","Kubbe","Mihrab","Minber"], dogru:"Minare"},
+    {soru:"Caminin yuvarlak, üstü kapalı tavan bölümüne ne denir?", secenekler:["Kubbe","Minare","Avlu","Şadırvan"], dogru:"Kubbe"},
+    {soru:"İmamın namaz kıldırdığı, kıbleyi gösteren oyuk bölüme ne denir?", secenekler:["Mihrab","Minber","Minare","Kubbe"], dogru:"Mihrab"}
+  ]},
+  {ad:"Caminin Diğer Bölümleri", ikon:"🏛️", sorular:[
+    {soru:"İmamın hutbe okuduğu merdivenli yüksek yere ne denir?", secenekler:["Minber","Mihrab","Minare","Kubbe"], dogru:"Minber"},
+    {soru:"Cami avlusunda abdest almak için kullanılan su yapısına ne denir?", secenekler:["Şadırvan","Havuz","Çeşme","Kuyu"], dogru:"Şadırvan"},
+    {soru:"Caminin açık, dış alanına ne denir?", secenekler:["Avlu","Kubbe","Mihrab","Minber"], dogru:"Avlu"},
+    {soru:"Minarenin müezzinin ezan okuduğu balkon kısmına ne denir?", secenekler:["Şerefe","Kubbe","Mihrab","Alem"], dogru:"Şerefe"}
+  ]},
+  {ad:"Süsleme Sanatları", ikon:"🎨", sorular:[
+    {soru:"Cami duvarlarını süsleyen desenli seramik levhalara ne denir?", secenekler:["Çini","Ebru","Hat","Kalem İşi"], dogru:"Çini"},
+    {soru:"Güzel yazı yazma sanatına ne denir?", secenekler:["Hat Sanatı","Çini Sanatı","Ebru Sanatı","Nakış Sanatı"], dogru:"Hat Sanatı"},
+    {soru:"Su üzerine boyayla yapılan desenli sanata ne denir?", secenekler:["Ebru","Çini","Hat","Minyatür"], dogru:"Ebru"},
+    {soru:"Cami tavanlarını süsleyen el işi desenlere ne denir?", secenekler:["Kalem İşi","Çini","Ebru","Hat"], dogru:"Kalem İşi"}
+  ]},
+  {ad:"Külliye ve Anıtlar", ikon:"🏰", sorular:[
+    {soru:"Cami, medrese, imarethane gibi yapılardan oluşan yapı topluluğuna ne denir?", secenekler:["Külliye","Avlu","Türbe","Minare"], dogru:"Külliye"},
+    {soru:"Kubbenin en tepesinde bulunan hilal biçimli süse ne denir?", secenekler:["Alem","Şerefe","Mihrab","Minber"], dogru:"Alem"},
+    {soru:"Önemli bir kişinin mezarının bulunduğu anıt yapıya ne denir?", secenekler:["Türbe","Cami","Külliye","Minber"], dogru:"Türbe"},
+    {soru:"Padişahlar tarafından yaptırılan büyük camilere ne denir?", secenekler:["Selatin Camii","Mescit","Külliye","Türbe"], dogru:"Selatin Camii"}
+  ]}
+];
+function bc85Baslat(){ ikiliCarkBaslat({onek:'bc85', kategoriler:BC85_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 const MM85_CIFTLER = [
   {metin1:'Minare', metin2:'Ezan okunan kule'},
