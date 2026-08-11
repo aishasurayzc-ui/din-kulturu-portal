@@ -907,6 +907,32 @@
   <div id="ca1YenidenBaslat"></div>
   <button class="eylem" onclick="ca1Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu1">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan ifadeyi anlatabilmeyi, ifadenin anlamını iyi bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (ifadeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td1Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td1Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td1Sure">60</b> sn</span>
+    <span>🔵 <b id="td1Puan1">0</b></span>
+    <span>🔴 <b id="td1Puan2">0</b></span>
+  </div>
+  <div id="td1ElDegistir" style="text-align:center;"></div>
+  <div id="td1SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td1Kelime" class="omg-anlat-kelime"></div>
+  <div id="td1Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td1', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td1', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td1Sonuc"></div>
+  <div id="td1YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td1Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 
@@ -962,7 +988,8 @@ const OYUN_LISTESI = [
   {id:'fc1', kategori:'ikikisilik', ikon:'⚡', baslik:'Şimşek Yarışması', aciklama:'Sadece birkaç saniyen var — hızlı düşün, hızlı cevapla!'},
   {id:'sv1', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm1', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
-  {id:'ca1', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'}
+  {id:'ca1', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
+  {id:'tabuduellosu1', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan ifadeyi arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '', 'index.html');
 
@@ -1172,6 +1199,25 @@ const CA1_SORULAR = [
   {soru:"'Maşallah' demenin amacı nedir?", secenekler:["Nazara karşı hayır duası","Kızgınlık ifadesi"], dogru:"Nazara karşı hayır duası"}
 ];
 function ca1Baslat(){ ikiliOyunBaslat({onek:'ca1', sorular:CA1_SORULAR}); }
+
+const TD1_KARTLAR = [
+  {kelime:"Bismillah", yasakli:["başlarken","Allah","adıyla"]},
+  {kelime:"Elhamdülillah", yasakli:["şükür","Allah","teşekkür"]},
+  {kelime:"İnşallah", yasakli:["dilek","umut","izniyle"]},
+  {kelime:"Maşallah", yasakli:["beğenmek","güzel","nazar"]},
+  {kelime:"Estağfirullah", yasakli:["özür","pişmanlık","Allah'tan"]},
+  {kelime:"Selamün Aleyküm", yasakli:["selam","karşılaşma","dilek"]},
+  {kelime:"Sübhanallah", yasakli:["hayret","Allah","temiz"]},
+  {kelime:"Allah'a Emanet Ol", yasakli:["veda","güvenlik","ayrılık"]},
+  {kelime:"Hayırlı Olsun", yasakli:["tebrik","yeni","dilek"]},
+  {kelime:"Allah Razı Olsun", yasakli:["teşekkür","minnet","dua"]},
+  {kelime:"Amin", yasakli:["dua","sonunda","kabul"]},
+  {kelime:"Geçmiş Olsun", yasakli:["hastalık","dilek","ziyaret"]},
+  {kelime:"Afiyet Olsun", yasakli:["yemek","dilek","sofra"]},
+  {kelime:"Kolay Gelsin", yasakli:["çalışan","dilek","iş"]},
+  {kelime:"Allah Kabul Etsin", yasakli:["ibadet","dua","oruç"]}
+];
+function td1Baslat(){ ikiliAnlatBaslat({onek:'td1', kartlar:TD1_KARTLAR, sureSN:60}); }
 
 
 

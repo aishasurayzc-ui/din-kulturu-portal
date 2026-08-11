@@ -795,6 +795,32 @@
   <div id="ca2YenidenBaslat"></div>
   <button class="eylem" onclick="ca2Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu2">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, kavramı iyi bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td2Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td2Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td2Sure">60</b> sn</span>
+    <span>🔵 <b id="td2Puan1">0</b></span>
+    <span>🔴 <b id="td2Puan2">0</b></span>
+  </div>
+  <div id="td2ElDegistir" style="text-align:center;"></div>
+  <div id="td2SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td2Kelime" class="omg-anlat-kelime"></div>
+  <div id="td2Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td2', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td2', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td2Sonuc"></div>
+  <div id="td2YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td2Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -848,7 +874,8 @@ const OYUN_LISTESI = [
   {id:'fc', kategori:'ikikisilik', ikon:'⚡', baslik:'Şimşek Yarışması', aciklama:'Sadece birkaç saniyen var — hızlı düşün, hızlı cevapla!'},
   {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
-  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'}
+  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '2', 'unite2.html');
 
@@ -1058,6 +1085,25 @@ const CA2_SORULAR = [
   {soru:"Kelime-i şehadette hangi iki gerçek dile getirilir?", secenekler:["Allah'ın birliği ve Hz. Muhammed'in peygamberliği","Namaz ve oruç"], dogru:"Allah'ın birliği ve Hz. Muhammed'in peygamberliği"}
 ];
 function ca2Baslat(){ ikiliOyunBaslat({onek:'ca2', sorular:CA2_SORULAR}); }
+
+const TD2_KARTLAR = [
+  {kelime:"İman", yasakli:["inanmak","kalp","Allah"]},
+  {kelime:"Kelime-i Şehadet", yasakli:["şahitlik","Allah","peygamber"]},
+  {kelime:"Namaz", yasakli:["ibadet","secde","beş vakit"]},
+  {kelime:"Oruç", yasakli:["yememek","Ramazan","sabır"]},
+  {kelime:"Zekât", yasakli:["vermek","mal","fakir"]},
+  {kelime:"Hac", yasakli:["Kâbe","yolculuk","ibadet"]},
+  {kelime:"Melek", yasakli:["görünmez","varlık","Allah"]},
+  {kelime:"Peygamber", yasakli:["elçi","Allah","örnek"]},
+  {kelime:"Kutsal Kitap", yasakli:["Kur'an","indirilen","sayfa"]},
+  {kelime:"Ahiret", yasakli:["öldükten sonra","hayat","cennet"]},
+  {kelime:"Kader", yasakli:["Allah","bilmek","gelecek"]},
+  {kelime:"Müslüman", yasakli:["inanan","İslam","kişi"]},
+  {kelime:"Cami", yasakli:["ibadet","namaz","bina"]},
+  {kelime:"Kur'an-ı Kerim", yasakli:["kitap","ayet","Allah"]},
+  {kelime:"İslam'ın Şartları", yasakli:["beş","namaz","oruç"]}
+];
+function td2Baslat(){ ikiliAnlatBaslat({onek:'td2', kartlar:TD2_KARTLAR, sureSN:60}); }
 
 
 

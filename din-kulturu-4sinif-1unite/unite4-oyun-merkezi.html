@@ -795,6 +795,32 @@
   <div id="ca4YenidenBaslat"></div>
   <button class="eylem" onclick="ca4Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu4">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, kavramı iyi bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td4Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td4Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td4Sure">60</b> sn</span>
+    <span>🔵 <b id="td4Puan1">0</b></span>
+    <span>🔴 <b id="td4Puan2">0</b></span>
+  </div>
+  <div id="td4ElDegistir" style="text-align:center;"></div>
+  <div id="td4SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td4Kelime" class="omg-anlat-kelime"></div>
+  <div id="td4Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td4', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td4', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td4Sonuc"></div>
+  <div id="td4YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td4Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -848,7 +874,8 @@ const OYUN_LISTESI = [
   {id:'fc', kategori:'ikikisilik', ikon:'⚡', baslik:'Şimşek Yarışması', aciklama:'Sadece birkaç saniyen var — hızlı düşün, hızlı cevapla!'},
   {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
-  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'}
+  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '4', 'unite4.html');
 
@@ -1058,6 +1085,25 @@ const CA4_SORULAR = [
   {soru:"Çölde göçebe yaşayanlara ne denir?", secenekler:["Bedevi","Hadari"], dogru:"Bedevi"}
 ];
 function ca4Baslat(){ ikiliOyunBaslat({onek:'ca4', sorular:CA4_SORULAR}); }
+
+const TD4_KARTLAR = [
+  {kelime:"Mekke", yasakli:["şehir","doğum","Kâbe"]},
+  {kelime:"Hz. Amine", yasakli:["anne","Peygamber","annesi"]},
+  {kelime:"Hz. Abdullah", yasakli:["baba","Peygamber","babası"]},
+  {kelime:"El-Emin", yasakli:["güvenilir","lakap","dürüst"]},
+  {kelime:"Hz. Hatice", yasakli:["eş","hanım","ilk"]},
+  {kelime:"Hira Mağarası", yasakli:["dağ","vahiy","ilk"]},
+  {kelime:"Kutlu Doğum", yasakli:["doğum günü","Peygamber","kutlama"]},
+  {kelime:"Çobanlık", yasakli:["koyun","meslek","gençlik"]},
+  {kelime:"Dürüstlük", yasakli:["doğru","güven","yalan"]},
+  {kelime:"Şefkat", yasakli:["sevgi","çocuk","davranmak"]},
+  {kelime:"Miraç", yasakli:["yolculuk","gece","gökyüzü"]},
+  {kelime:"Hicret", yasakli:["göç","Medine","yolculuk"]},
+  {kelime:"Peygamberlik", yasakli:["elçilik","görev","Allah"]},
+  {kelime:"Örnek Davranışlar", yasakli:["güzel","model","huy"]},
+  {kelime:"Vahiy", yasakli:["mesaj","Allah","melek"]}
+];
+function td4Baslat(){ ikiliAnlatBaslat({onek:'td4', kartlar:TD4_KARTLAR, sureSN:60}); }
 
 
 

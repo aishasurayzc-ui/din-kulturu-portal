@@ -795,6 +795,32 @@
   <div id="ca3YenidenBaslat"></div>
   <button class="eylem" onclick="ca3Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu3">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, kavramı iyi bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td3Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td3Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td3Sure">60</b> sn</span>
+    <span>🔵 <b id="td3Puan1">0</b></span>
+    <span>🔴 <b id="td3Puan2">0</b></span>
+  </div>
+  <div id="td3ElDegistir" style="text-align:center;"></div>
+  <div id="td3SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td3Kelime" class="omg-anlat-kelime"></div>
+  <div id="td3Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td3', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td3', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td3Sonuc"></div>
+  <div id="td3YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td3Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -848,7 +874,8 @@ const OYUN_LISTESI = [
   {id:'fc', kategori:'ikikisilik', ikon:'⚡', baslik:'Şimşek Yarışması', aciklama:'Sadece birkaç saniyen var — hızlı düşün, hızlı cevapla!'},
   {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
-  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'}
+  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '3', 'unite3.html');
 
@@ -1058,6 +1085,25 @@ const CA3_SORULAR = [
   {soru:"Arkadaş seçerken nelere dikkat edilmeli?", secenekler:["İyi ahlaklı olmasına","Zengin olmasına"], dogru:"İyi ahlaklı olmasına"}
 ];
 function ca3Baslat(){ ikiliOyunBaslat({onek:'ca3', sorular:CA3_SORULAR}); }
+
+const TD3_KARTLAR = [
+  {kelime:"Saygı", yasakli:["büyük","değer","davranış"]},
+  {kelime:"Yardımlaşma", yasakli:["birlikte","destek","el"]},
+  {kelime:"Doğruluk", yasakli:["yalan","gerçek","söz"]},
+  {kelime:"Hoşgörü", yasakli:["anlayış","kabul","farklı"]},
+  {kelime:"Sabır", yasakli:["beklemek","dayanmak","zorluk"]},
+  {kelime:"Merhamet", yasakli:["acımak","şefkat","sevgi"]},
+  {kelime:"Adalet", yasakli:["hak","eşit","doğru"]},
+  {kelime:"Cömertlik", yasakli:["vermek","paylaşmak","mal"]},
+  {kelime:"Dürüstlük", yasakli:["doğru","yalan","güven"]},
+  {kelime:"Nezaket", yasakli:["kibar","davranış","saygı"]},
+  {kelime:"Vefa", yasakli:["söz","bağlılık","unutmamak"]},
+  {kelime:"Tevazu", yasakli:["alçakgönüllü","övünmemek","gösteriş"]},
+  {kelime:"Cesaret", yasakli:["korkusuz","kararlı","güç"]},
+  {kelime:"Şükür", yasakli:["teşekkür","nimet","memnun"]},
+  {kelime:"İyilik", yasakli:["yardım","güzel","davranış"]}
+];
+function td3Baslat(){ ikiliAnlatBaslat({onek:'td3', kartlar:TD3_KARTLAR, sureSN:60}); }
 
 
 

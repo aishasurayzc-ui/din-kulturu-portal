@@ -795,6 +795,32 @@
   <div id="ca5YenidenBaslat"></div>
   <button class="eylem" onclick="ca5Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu5">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, kavramı iyi bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td5Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td5Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td5Sure">60</b> sn</span>
+    <span>🔵 <b id="td5Puan1">0</b></span>
+    <span>🔴 <b id="td5Puan2">0</b></span>
+  </div>
+  <div id="td5ElDegistir" style="text-align:center;"></div>
+  <div id="td5SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td5Kelime" class="omg-anlat-kelime"></div>
+  <div id="td5Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td5', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td5', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td5Sonuc"></div>
+  <div id="td5YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td5Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -848,7 +874,8 @@ const OYUN_LISTESI = [
   {id:'fc', kategori:'ikikisilik', ikon:'⚡', baslik:'Şimşek Yarışması', aciklama:'Sadece birkaç saniyen var — hızlı düşün, hızlı cevapla!'},
   {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
-  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'}
+  {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '5', 'unite5.html');
 
@@ -1058,6 +1085,25 @@ const CA5_SORULAR = [
   {soru:"Gusül nedir?", secenekler:["Büyük dinî temizlik","Küçük bir dua"], dogru:"Büyük dinî temizlik"}
 ];
 function ca5Baslat(){ ikiliOyunBaslat({onek:'ca5', sorular:CA5_SORULAR}); }
+
+const TD5_KARTLAR = [
+  {kelime:"Temizlik", yasakli:["temiz","kir","yıkamak"]},
+  {kelime:"Abdest", yasakli:["yıkamak","namaz","su"]},
+  {kelime:"Gusül", yasakli:["yıkanmak","tam","beden"]},
+  {kelime:"Beden Temizliği", yasakli:["yıkamak","vücut","sağlık"]},
+  {kelime:"Çevre Temizliği", yasakli:["doğa","atık","temiz"]},
+  {kelime:"Misvak", yasakli:["diş","fırça","temizlik"]},
+  {kelime:"Kıyafet Temizliği", yasakli:["elbise","temiz","giymek"]},
+  {kelime:"Sağlık", yasakli:["hastalık","vücut","iyi"]},
+  {kelime:"Niyet Temizliği", yasakli:["kalp","iyi","düşünce"]},
+  {kelime:"Tırnak Temizliği", yasakli:["kesmek","el","bakım"]},
+  {kelime:"Saç Temizliği", yasakli:["yıkamak","baş","bakım"]},
+  {kelime:"Ev Temizliği", yasakli:["oda","düzen","yıkamak"]},
+  {kelime:"Su", yasakli:["temizlik","içmek","sıvı"]},
+  {kelime:"Sabun", yasakli:["köpük","yıkamak","temizlik"]},
+  {kelime:"İman ve Temizlik", yasakli:["hadis","temizlik","yarısı"]}
+];
+function td5Baslat(){ ikiliAnlatBaslat({onek:'td5', kartlar:TD5_KARTLAR, sureSN:60}); }
 
 
 
