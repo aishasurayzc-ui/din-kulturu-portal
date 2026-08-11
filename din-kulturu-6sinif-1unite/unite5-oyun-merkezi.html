@@ -761,6 +761,29 @@
   <div id="td65YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td65Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki65">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc65Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc65Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc65SoruNo">1</b>/<b id="bc65Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc65Sure">12</b> sn</span>
+    <span>🔵 <b id="bc65Puan1">0</b></span>
+    <span>🔴 <b id="bc65Puan2">0</b></span>
+  </div>
+  <div id="bc65ElDegistir" style="text-align:center;"></div>
+  <div id="bc65SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc65SoruMetin" class="balon-durum"></div>
+  <div id="bc65Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc65Sonuc"></div>
+  <div id="bc65YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc65Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -815,7 +838,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '65', 'index.html');
 
@@ -993,6 +1017,34 @@ const TD65_KARTLAR = [
   {kelime:"Kubbe Süslemesi", yasakli:["cami","tavan","desen","yuvarlak"]}
 ];
 function td65Baslat(){ ikiliAnlatBaslat({onek:'td65', kartlar:TD65_KARTLAR, sureSN:60}); }
+
+const BC65_KATEGORILER = [
+  {ad:"El Sanatları", ikon:"🎨", sorular:[
+    {soru:"Güzel yazı yazma sanatına ne denir?", secenekler:["Hüsn-i Hat","Tezhip","Minyatür","Ebru"], dogru:"Hüsn-i Hat"},
+    {soru:"El yazması eserleri altın ve renkli desenlerle süslemeye ne denir?", secenekler:["Tezhip","Hüsn-i Hat","Ebru","Nakış"], dogru:"Tezhip"},
+    {soru:"Kitaplarda kullanılan küçük, ince işçilikli resim sanatına ne denir?", secenekler:["Minyatür","Ebru","Tezhip","Hat"], dogru:"Minyatür"},
+    {soru:"Su üzerine boyayla yapılan desenli sanata ne denir?", secenekler:["Ebru","Minyatür","Tezhip","Hat"], dogru:"Ebru"}
+  ]},
+  {ad:"Dinî Zamanlar", ikon:"🌙", sorular:[
+    {soru:"Mübarek gecelerde camilerde yakılan ışıklara ne denir?", secenekler:["Kandil","Meşale","Fener","Mum"], dogru:"Kandil"},
+    {soru:"Hz. Muhammed'in doğumunu anmak için düzenlenen törene ne denir?", secenekler:["Mevlit","Miraç Kandili","Berat Kandili","Regaip Kandili"], dogru:"Mevlit"},
+    {soru:"Ramazan ve Kurban Bayramı hangi tür bayramlardandır?", secenekler:["Dinî Bayramlar","Millî Bayramlar","Resmî Tatiller","Yerel Bayramlar"], dogru:"Dinî Bayramlar"},
+    {soru:"Ay'ın hareketlerine göre düzenlenen İslami takvime ne denir?", secenekler:["Hicri Takvim","Miladi Takvim","Rumi Takvim","Güneş Takvimi"], dogru:"Hicri Takvim"}
+  ]},
+  {ad:"Süsleme ve Mimari", ikon:"🕌", sorular:[
+    {soru:"Kumaş veya duvarlar üzerine iplikle yapılan süsleme sanatına ne denir?", secenekler:["Nakış","Ebru","Hat","Tezhip"], dogru:"Nakış"},
+    {soru:"Camilerde görülen kubbe, kemer gibi süsleyici desenlere ne denir?", secenekler:["Mimari Motif","Minyatür","Tezhip","Ebru"], dogru:"Mimari Motif"},
+    {soru:"Caminin kubbe iç yüzeyindeki süslemelere ne denir?", secenekler:["Kubbe Süslemesi","Minare Süslemesi","Avlu Süslemesi","Kapı Süslemesi"], dogru:"Kubbe Süslemesi"},
+    {soru:"Kur'an-ı Kerim okurken kitabı üzerine koyan ahşap sehpaya ne denir?", secenekler:["Rahle","Kürsü","Minber","Sedir"], dogru:"Rahle"}
+  ]},
+  {ad:"Gelenek ve Kültür", ikon:"📿", sorular:[
+    {soru:"Kandil geceleri gibi dinî açıdan önemli gecelere ne denir?", secenekler:["Mübarek Geceler","Sıradan Geceler","Tatil Geceleri","Bayram Sabahları"], dogru:"Mübarek Geceler"},
+    {soru:"Dinî içerikli, manevi duygular taşıyan ezgilere ne denir?", secenekler:["İlahi","Türkü","Marş","Ninni"], dogru:"İlahi"},
+    {soru:"Nesilden nesile aktarılan el becerisi ürünlerine ne denir?", secenekler:["Geleneksel El Sanatları","Modern Sanat","Dijital Sanat","Endüstriyel Üretim"], dogru:"Geleneksel El Sanatları"},
+    {soru:"Bir toplumun nesilden nesile aktardığı gelenek ve alışkanlıklarına ne denir?", secenekler:["Örf ve Âdet","Kanun","Yönetmelik","Talimat"], dogru:"Örf ve Âdet"}
+  ]}
+];
+function bc65Baslat(){ ikiliCarkBaslat({onek:'bc65', kategoriler:BC65_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 const MM65_CIFTLER = [
   {metin1:'Mevlit', metin2:'Hz. Peygamber\'i anlatan program'},

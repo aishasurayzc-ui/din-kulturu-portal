@@ -761,6 +761,29 @@
   <div id="td64YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td64Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki64">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc64Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc64Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc64SoruNo">1</b>/<b id="bc64Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc64Sure">12</b> sn</span>
+    <span>🔵 <b id="bc64Puan1">0</b></span>
+    <span>🔴 <b id="bc64Puan2">0</b></span>
+  </div>
+  <div id="bc64ElDegistir" style="text-align:center;"></div>
+  <div id="bc64SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc64SoruMetin" class="balon-durum"></div>
+  <div id="bc64Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc64Sonuc"></div>
+  <div id="bc64YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc64Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -815,7 +838,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '64', 'index.html');
 
@@ -993,6 +1017,34 @@ const TD64_KARTLAR = [
   {kelime:"Peygamberlik Öncesi Ahlak", yasakli:["dürüst","örnek","güzel","davranış"]}
 ];
 function td64Baslat(){ ikiliAnlatBaslat({onek:'td64', kartlar:TD64_KARTLAR, sureSN:60}); }
+
+const BC64_KATEGORILER = [
+  {ad:"Doğum ve Çocukluk", ikon:"👶", sorular:[
+    {soru:"Hz. Muhammed hangi şehirde doğmuştur?", secenekler:["Mekke","Medine","Kudüs","Şam"], dogru:"Mekke"},
+    {soru:"Hz. Muhammed'in annesinin adı nedir?", secenekler:["Hz. Amine","Hz. Hatice","Hz. Ayşe","Hz. Fatıma"], dogru:"Hz. Amine"},
+    {soru:"Hz. Muhammed doğmadan önce vefat eden babasının adı nedir?", secenekler:["Hz. Abdullah","Hz. Ebubekir","Hz. Ömer","Hz. Ali"], dogru:"Hz. Abdullah"},
+    {soru:"Hz. Muhammed'i çölde emziren süt annesinin adı nedir?", secenekler:["Halime","Amine","Hatice","Ayşe"], dogru:"Halime"}
+  ]},
+  {ad:"Gençlik Yılları", ikon:"🌱", sorular:[
+    {soru:"Hz. Muhammed'i yetim kaldığında himayesine alan amcasının adı nedir?", secenekler:["Ebû Tâlib","Ebû Bekir","Ebû Cehil","Ebû Leheb"], dogru:"Ebû Tâlib"},
+    {soru:"Hz. Muhammed gençliğinde hangi mesleği yapmıştır?", secenekler:["Çobanlık","Marangozluk","Demircilik","Denizcilik"], dogru:"Çobanlık"},
+    {soru:"Hz. Muhammed'in kervanlarla yaptığı iş hangisidir?", secenekler:["Ticaret","Çiftçilik","Avcılık","Balıkçılık"], dogru:"Ticaret"},
+    {soru:"Anne ve babasını küçük yaşta kaybetmiş olma durumuna ne denir?", secenekler:["Yetimlik","Gençlik","Evlilik","Bekârlık"], dogru:"Yetimlik"}
+  ]},
+  {ad:"Erdemli Davranışlar", ikon:"⭐", sorular:[
+    {soru:"Hz. Muhammed'e gençliğinde verilen 'güvenilir' anlamındaki lakap nedir?", secenekler:["El-Emin","El-Kerim","El-Fatih","El-Adil"], dogru:"El-Emin"},
+    {soru:"Mekke'de haksızlığa uğrayanları korumak için gençlerin kurduğu erdem antlaşmasına ne denir?", secenekler:["Hılfu'l-Fudûl","Akabe Biatı","Medine Sözleşmesi","Hudeybiye Antlaşması"], dogru:"Hılfu'l-Fudûl"},
+    {soru:"Kâbe'nin köşesinde bulunan kutsal siyah taşa ne denir?", secenekler:["Hacerü'l-Esved","Zemzem","Makam-ı İbrahim","Mültezem"], dogru:"Hacerü'l-Esved"},
+    {soru:"Hz. Muhammed'in gençliğinde katkıda bulunduğu Kâbe onarım çalışmasına ne denir?", secenekler:["Kâbe'nin Tamiri","Kâbe'nin Fethi","Kâbe'nin İnşası","Kâbe'nin Yıkımı"], dogru:"Kâbe'nin Tamiri"}
+  ]},
+  {ad:"Evlilik ve Tefekkür", ikon:"💭", sorular:[
+    {soru:"Hz. Muhammed'in ticaret ortaklığı sonrası evlendiği hanımının adı nedir?", secenekler:["Hz. Hatice","Hz. Ayşe","Hz. Amine","Hz. Fatıma"], dogru:"Hz. Hatice"},
+    {soru:"Hz. Muhammed'in peygamberlikten önce sıkça gidip düşündüğü mağara neresidir?", secenekler:["Hira Mağarası","Sevr Mağarası","Ashab-ı Kehf Mağarası","Uhud Mağarası"], dogru:"Hira Mağarası"},
+    {soru:"Hz. Muhammed'in peygamberlik öncesi hayatını niteleyen en önemli özellik hangisidir?", secenekler:["Güzel Ahlak","Kabalık","Öfkelilik","Bencillik"], dogru:"Güzel Ahlak"},
+    {soru:"Aynı süt anneden emen çocuklar arasındaki bağa ne denir?", secenekler:["Süt Kardeşliği","Kan Kardeşliği","Din Kardeşliği","Akrabalık"], dogru:"Süt Kardeşliği"}
+  ]}
+];
+function bc64Baslat(){ ikiliCarkBaslat({onek:'bc64', kategoriler:BC64_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 const MM64_CIFTLER = [
   {metin1:'el-Emin', metin2:'Güvenilir kişi'},

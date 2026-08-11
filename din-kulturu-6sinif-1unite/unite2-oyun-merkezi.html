@@ -761,6 +761,29 @@
   <div id="td62YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td62Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki62">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc62Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc62Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc62SoruNo">1</b>/<b id="bc62Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc62Sure">12</b> sn</span>
+    <span>🔵 <b id="bc62Puan1">0</b></span>
+    <span>🔴 <b id="bc62Puan2">0</b></span>
+  </div>
+  <div id="bc62ElDegistir" style="text-align:center;"></div>
+  <div id="bc62SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc62SoruMetin" class="balon-durum"></div>
+  <div id="bc62Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc62Sonuc"></div>
+  <div id="bc62YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc62Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -815,7 +838,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '62', 'index.html');
 
@@ -993,6 +1017,34 @@ const TD62_KARTLAR = [
   {kelime:"Hilal", yasakli:["ay","gökyüzü","başlangıç","şekil"]}
 ];
 function td62Baslat(){ ikiliAnlatBaslat({onek:'td62', kartlar:TD62_KARTLAR, sureSN:60}); }
+
+const BC62_KATEGORILER = [
+  {ad:"Orucun Temel Kavramları", ikon:"🌙", sorular:[
+    {soru:"Sabahtan akşama kadar yeme içmeden uzak durma ibadetine ne denir?", secenekler:["Oruç","Namaz","Zekât","Hac"], dogru:"Oruç"},
+    {soru:"Orucun farz olduğu İslam ayına ne denir?", secenekler:["Ramazan","Şevval","Muharrem","Recep"], dogru:"Ramazan"},
+    {soru:"Oruca başlarken kalpten yapılan karara ne denir?", secenekler:["Niyet","Dua","Zikir","Şükür"], dogru:"Niyet"},
+    {soru:"Orucun başlangıç vaktine ne denir?", secenekler:["İmsak","İftar","Sahur","Bayram"], dogru:"İmsak"}
+  ]},
+  {ad:"Sahur ve İftar", ikon:"🍽️", sorular:[
+    {soru:"Oruca başlamadan önce sabaha karşı yenen yemeğe ne denir?", secenekler:["Sahur","İftar","Bayram","Ziyafet"], dogru:"Sahur"},
+    {soru:"Orucun akşam güneş batınca açılmasına ne denir?", secenekler:["İftar","Sahur","İmsak","Sofra"], dogru:"İftar"},
+    {soru:"Ramazan ayının başlangıcını gösteren gök cismi hangisidir?", secenekler:["Hilal","Güneş","Yıldız","Dünya"], dogru:"Hilal"},
+    {soru:"Ramazan ayında paylaşmanın artmasına ne denir?", secenekler:["Bereket","Kıtlık","Sıkıntı","Yoksulluk"], dogru:"Bereket"}
+  ]},
+  {ad:"Ramazan İbadetleri", ikon:"🕌", sorular:[
+    {soru:"Ramazan gecelerinde kılınan özel namaza ne denir?", secenekler:["Teravih","Cuma Namazı","Bayram Namazı","Cenaze Namazı"], dogru:"Teravih"},
+    {soru:"Kur'an'ın indirilmeye başladığı, bin aydan hayırlı gece hangisidir?", secenekler:["Kadir Gecesi","Regaip Gecesi","Berat Gecesi","Miraç Gecesi"], dogru:"Kadir Gecesi"},
+    {soru:"Ramazan ayında fakirlere verilen yardıma ne denir?", secenekler:["Fitre","Kurban","Hac","Umre"], dogru:"Fitre"},
+    {soru:"Ramazan ayının sonunda kutlanan bayrama ne denir?", secenekler:["Ramazan Bayramı","Kurban Bayramı","Cumhuriyet Bayramı","Zafer Bayramı"], dogru:"Ramazan Bayramı"}
+  ]},
+  {ad:"Orucun Faydaları", ikon:"💚", sorular:[
+    {soru:"Oruç tutarken açlığa dayanmaya ne denir?", secenekler:["Sabır","Acelecilik","Öfke","Tembellik"], dogru:"Sabır"},
+    {soru:"Orucun bedene kazandırdığı olumlu etkiye ne denir?", secenekler:["Sağlık Faydası","Yorgunluk","Hastalık","Zayıflama endişesi"], dogru:"Sağlık Faydası"},
+    {soru:"Ramazan ayında fakirlerle paylaşmaya ve destek olmaya ne denir?", secenekler:["Yardımlaşma","Bencillik","Cimrilik","İlgisizlik"], dogru:"Yardımlaşma"},
+    {soru:"Nimetlere karşı teşekkür etmeye ne denir?", secenekler:["Şükür","Nankörlük","Kibir","Cimrilik"], dogru:"Şükür"}
+  ]}
+];
+function bc62Baslat(){ ikiliCarkBaslat({onek:'bc62', kategoriler:BC62_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 const MM62_CIFTLER = [
   {metin1:'Sahur', metin2:'İmsaktan önce yenilen yemek'},

@@ -761,6 +761,29 @@
   <div id="td63YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td63Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki63">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc63Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc63Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc63SoruNo">1</b>/<b id="bc63Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc63Sure">12</b> sn</span>
+    <span>🔵 <b id="bc63Puan1">0</b></span>
+    <span>🔴 <b id="bc63Puan2">0</b></span>
+  </div>
+  <div id="bc63ElDegistir" style="text-align:center;"></div>
+  <div id="bc63SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc63SoruMetin" class="balon-durum"></div>
+  <div id="bc63Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc63Sonuc"></div>
+  <div id="bc63YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc63Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -815,7 +838,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '63', 'index.html');
 
@@ -993,6 +1017,34 @@ const TD63_KARTLAR = [
   {kelime:"İyi Söz", yasakli:["konuşma","güzel","nazik","kırmamak"]}
 ];
 function td63Baslat(){ ikiliAnlatBaslat({onek:'td63', kartlar:TD63_KARTLAR, sureSN:60}); }
+
+const BC63_KATEGORILER = [
+  {ad:"Güven ve Dürüstlük", ikon:"🤝", sorular:[
+    {soru:"Doğru sözlü ve yalandan uzak olmaya ne denir?", secenekler:["Dürüstlük","Cimrilik","Kibir","Korkaklık"], dogru:"Dürüstlük"},
+    {soru:"Bir kişinin güvenilebilir olmasına ne denir?", secenekler:["Güvenilirlik","Yalancılık","Hainlik","İkiyüzlülük"], dogru:"Güvenilirlik"},
+    {soru:"Verilen sözü tutmaya ne denir?", secenekler:["Sözünde Durmak","Sözden Caymak","Yalan Söylemek","Unutmak"], dogru:"Sözünde Durmak"},
+    {soru:"Kendisine teslim edilen bir şeyi koruyup zamanında geri vermeye ne denir?", secenekler:["Emanete Riayet","İhanet","Kayıtsızlık","Unutkanlık"], dogru:"Emanete Riayet"}
+  ]},
+  {ad:"Vefa ve Cömertlik", ikon:"💝", sorular:[
+    {soru:"Verilen söze ve dostluğa bağlı kalmaya ne denir?", secenekler:["Vefa","Vefasızlık","Unutkanlık","İhanet"], dogru:"Vefa"},
+    {soru:"Sahip olduklarını başkalarıyla paylaşmaya ne denir?", secenekler:["Cömertlik","Cimrilik","Bencillik","Hasislik"], dogru:"Cömertlik"},
+    {soru:"Başkalarına destek olmaya ve el uzatmaya ne denir?", secenekler:["Yardımseverlik","Bencillik","İlgisizlik","Kayıtsızlık"], dogru:"Yardımseverlik"},
+    {soru:"Zayıf ve çaresizlere karşı duyulan şefkate ne denir?", secenekler:["Merhamet","Sertlik","Kabalık","İlgisizlik"], dogru:"Merhamet"}
+  ]},
+  {ad:"Adalet ve Hoşgörü", ikon:"⚖️", sorular:[
+    {soru:"Herkese hakkını vermeye, eşit davranmaya ne denir?", secenekler:["Adalet","Haksızlık","Kayırma","Ayrımcılık"], dogru:"Adalet"},
+    {soru:"Bir insanın başka bir insan üzerindeki hakkına ne denir?", secenekler:["Kul Hakkı","Allah Hakkı","Hayvan Hakkı","Devlet Hakkı"], dogru:"Kul Hakkı"},
+    {soru:"Kızgınlık anında sakin kalabilmeye ne denir?", secenekler:["Öfkeyi Yenmek","Öfkelenmek","Bağırmak","Kırmak"], dogru:"Öfkeyi Yenmek"},
+    {soru:"Bir kişinin hatasını bağışlamaya ne denir?", secenekler:["Affetmek","Kin Tutmak","İntikam Almak","Küsmek"], dogru:"Affetmek"}
+  ]},
+  {ad:"Saygı ve Erdem", ikon:"🌸", sorular:[
+    {soru:"Kendini beğenmişlikten uzak, alçakgönüllü olmaya ne denir?", secenekler:["Alçakgönüllülük","Kibir","Gösteriş","Böbürlenme"], dogru:"Alçakgönüllülük"},
+    {soru:"Büyüklere değer verme davranışına ne denir?", secenekler:["Saygı","Saygısızlık","Kabalık","İlgisizlik"], dogru:"Saygı"},
+    {soru:"Zorluklara dayanma ve beklemeye ne denir?", secenekler:["Sabır","Acelecilik","Sabırsızlık","Tembellik"], dogru:"Sabır"},
+    {soru:"Karşıdakini kırmayan, nazik konuşmaya ne denir?", secenekler:["İyi Söz","Kaba Söz","Alay","Küfür"], dogru:"İyi Söz"}
+  ]}
+];
+function bc63Baslat(){ ikiliCarkBaslat({onek:'bc63', kategoriler:BC63_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 const MM63_CIFTLER = [
   {metin1:'Merhamet', metin2:'Şefkat gösterme, acıma'},
