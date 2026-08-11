@@ -737,6 +737,29 @@
   <div id="td83YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td83Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki83">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc83Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc83Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc83SoruNo">1</b>/<b id="bc83Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc83Sure">12</b> sn</span>
+    <span>🔵 <b id="bc83Puan1">0</b></span>
+    <span>🔴 <b id="bc83Puan2">0</b></span>
+  </div>
+  <div id="bc83ElDegistir" style="text-align:center;"></div>
+  <div id="bc83SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc83SoruMetin" class="balon-durum"></div>
+  <div id="bc83Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc83Sonuc"></div>
+  <div id="bc83YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc83Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '83', 'unite3.html');
 
@@ -1047,6 +1071,34 @@ const TD83_KARTLAR = [
   {kelime:"Kaynak Birliği", yasakli:["Kur'an","Sünnet","ortak","temel"]}
 ];
 function td83Baslat(){ ikiliAnlatBaslat({onek:'td83', kartlar:TD83_KARTLAR, sureSN:60}); }
+
+const BC83_KATEGORILER = [
+  {ad:"Mezhep Kavramları", ikon:"📚", sorular:[
+    {soru:"Dinin anlaşılması ve yaşanmasındaki farklı yorum biçimlerine ne denir?", secenekler:["Mezhep","Peygamber","Melek","Kitap"], dogru:"Mezhep"},
+    {soru:"İnanç esaslarıyla ilgili yorum farklılıklarına ne denir?", secenekler:["İtikadi Mezhep","Fıkhi Mezhep","Tarikat","Cemaat"], dogru:"İtikadi Mezhep"},
+    {soru:"İbadet ve hukuki konulardaki yorum farklılıklarına ne denir?", secenekler:["Fıkhi Mezhep","İtikadi Mezhep","Tasavvuf","Tarikat"], dogru:"Fıkhi Mezhep"},
+    {soru:"Aynı kaynaklardan farklı anlayışların doğmasına ne denir?", secenekler:["Farklı Yorumlar","Tek Yorum","Kesin Hüküm","Değişmez Kural"], dogru:"Farklı Yorumlar"}
+  ]},
+  {ad:"Fıkhi Mezhepler", ikon:"⚖️", sorular:[
+    {soru:"Türkiye'de en yaygın fıkhi mezheplerden biri hangisidir?", secenekler:["Hanefi","Şafii","Maliki","Hanbeli"], dogru:"Hanefi"},
+    {soru:"Türkiye'de bazı bölgelerde yaygın olan diğer fıkhi mezhep hangisidir?", secenekler:["Şafii","Hanefi","Caferi","Zeydi"], dogru:"Şafii"},
+    {soru:"Bir konuda Kur'an ve Sünnet'ten hüküm çıkarma çabasına ne denir?", secenekler:["İçtihat","Tefsir","Tercüme","Ezber"], dogru:"İçtihat"},
+    {soru:"Bir dinî konuda âlimin verdiği görüşe ne denir?", secenekler:["Fetva","Hutbe","Vaaz","Sohbet"], dogru:"Fetva"}
+  ]},
+  {ad:"Tasavvufi Yorumlar", ikon:"🕊️", sorular:[
+    {soru:"Kalbi arındırmayı ve Allah'a manevi yakınlığı amaçlayan anlayışa ne denir?", secenekler:["Tasavvuf","Fıkıh","Kelam","Hadis"], dogru:"Tasavvuf"},
+    {soru:"Tasavvufi eğitim ve terbiye yoluna ne denir?", secenekler:["Tarikat","Mezhep","Cemaat","Kurum"], dogru:"Tarikat"},
+    {soru:"Anadolu kültüründe önemli bir yeri olan tasavvufi-kültürel yorum hangisidir?", secenekler:["Alevilik-Bektaşilik","Hanefilik","Şafiilik","Maturidilik"], dogru:"Alevilik-Bektaşilik"},
+    {soru:"Müslümanların büyük çoğunluğunun bağlı olduğu itikadi yola ne denir?", secenekler:["Ehl-i Sünnet","Tasavvuf","Tarikat","Fıkıh"], dogru:"Ehl-i Sünnet"}
+  ]},
+  {ad:"Ortak Değerler", ikon:"🤝", sorular:[
+    {soru:"İçtihat yapabilecek bilgi birikimine sahip âlime ne denir?", secenekler:["Müctehid","Müezzin","Hafız","Vaiz"], dogru:"Müctehid"},
+    {soru:"Bir toplumda nesilden nesile aktarılan gelenek ve alışkanlıklara ne denir?", secenekler:["Örf","Farz","Vacip","Sünnet"], dogru:"Örf"},
+    {soru:"Farklı mezheplere saygı duyup birlikte yaşamaya ne denir?", secenekler:["Mezhepler Arası Hoşgörü","Ayrımcılık","Dışlama","Çatışma"], dogru:"Mezhepler Arası Hoşgörü"},
+    {soru:"Tüm mezheplerin ortak dayandığı temel kaynaklara ne denir?", secenekler:["Kaynak Birliği","Kaynak Çeşitliliği","Kaynak Karmaşası","Kaynak Yokluğu"], dogru:"Kaynak Birliği"}
+  ]}
+];
+function bc83Baslat(){ ikiliCarkBaslat({onek:'bc83', kategoriler:BC83_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================

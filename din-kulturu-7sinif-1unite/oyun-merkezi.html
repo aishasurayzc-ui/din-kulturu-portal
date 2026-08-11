@@ -737,6 +737,29 @@
   <div id="td8YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td8Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki8">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc8Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc8Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc8SoruNo">1</b>/<b id="bc8Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc8Sure">12</b> sn</span>
+    <span>🔵 <b id="bc8Puan1">0</b></span>
+    <span>🔴 <b id="bc8Puan2">0</b></span>
+  </div>
+  <div id="bc8ElDegistir" style="text-align:center;"></div>
+  <div id="bc8SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc8SoruMetin" class="balon-durum"></div>
+  <div id="bc8Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc8Sonuc"></div>
+  <div id="bc8YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc8Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '8', 'index.html');
 
@@ -1046,6 +1070,34 @@ const TD8_KARTLAR = [
   {kelime:"Kabir Hayatı", yasakli:["mezar","ölüm","ara","dönem"]}
 ];
 function td8Baslat(){ ikiliAnlatBaslat({onek:'td8', kartlar:TD8_KARTLAR, sureSN:60}); }
+
+const BC8_KATEGORILER = [
+  {ad:"Dört Büyük Melek", ikon:"👼", sorular:[
+    {soru:"Görünmez, nurdan yaratılmış itaatkâr varlıklara ne denir?", secenekler:["Melek","Cin","İnsan","Peygamber"], dogru:"Melek"},
+    {soru:"Allah ile peygamberler arasında vahiy taşıyan büyük meleğe ne denir?", secenekler:["Cebrail","Mikâil","İsrâfil","Azrâil"], dogru:"Cebrail"},
+    {soru:"Doğa olayları ve rızıkla görevli melek hangisidir?", secenekler:["Mikâil","Cebrail","İsrâfil","Azrâil"], dogru:"Mikâil"},
+    {soru:"Kıyametin kopuşunu sur'a üfleyerek bildirecek melek hangisidir?", secenekler:["İsrâfil","Cebrail","Mikâil","Azrâil"], dogru:"İsrâfil"}
+  ]},
+  {ad:"Ahiret Aşaması 1", ikon:"⏳", sorular:[
+    {soru:"Canları almakla görevli melek hangisidir?", secenekler:["Azrâil","Cebrail","Mikâil","İsrâfil"], dogru:"Azrâil"},
+    {soru:"Öldükten sonraki hayata ne denir?", secenekler:["Ahiret","Dünya","Kabir","Cennet"], dogru:"Ahiret"},
+    {soru:"Dünya hayatının sona ermesine ne denir?", secenekler:["Kıyamet","Haşir","Ba's","Mizan"], dogru:"Kıyamet"},
+    {soru:"Ölümden sonra kıyamete kadar geçen dönemin yaşandığı yere ne denir?", secenekler:["Kabir","Cennet","Cehennem","Dünya"], dogru:"Kabir"}
+  ]},
+  {ad:"Ahiret Aşaması 2", ikon:"⚖️", sorular:[
+    {soru:"Kıyametten sonra insanların yeniden diriltilmesine ne denir?", secenekler:["Ba's","Haşir","Mizan","Sırat"], dogru:"Ba's"},
+    {soru:"Dirilen insanların hesap için bir araya toplanmasına ne denir?", secenekler:["Haşir","Ba's","Mizan","Sırat"], dogru:"Haşir"},
+    {soru:"İnsanların amellerinin tartılacağı teraziye ne denir?", secenekler:["Mizan","Ba's","Haşir","Sırat"], dogru:"Mizan"},
+    {soru:"Cennete ulaşmak için üzerinden geçilecek köprüye ne denir?", secenekler:["Sırat","Mizan","Haşir","Ba's"], dogru:"Sırat"}
+  ]},
+  {ad:"Ahiretin Sonu", ikon:"🌅", sorular:[
+    {soru:"İyi amel işleyenlerin gideceği sonsuz mükafat yurduna ne denir?", secenekler:["Cennet","Cehennem","Kabir","Dünya"], dogru:"Cennet"},
+    {soru:"Kötü amel işleyenlerin cezalandırılacağı yere ne denir?", secenekler:["Cehennem","Cennet","Kabir","Dünya"], dogru:"Cehennem"},
+    {soru:"İnsanın dünyada yaptığı işlerin kayıt altına alındığı deftere ne denir?", secenekler:["Amel Defteri","Nüfus Cüzdanı","Günlük","Takvim"], dogru:"Amel Defteri"},
+    {soru:"Peygamberlerin ahirette günahkâr müminler için yapacağı aracılığa ne denir?", secenekler:["Şefaat","Mizan","Sırat","Haşir"], dogru:"Şefaat"}
+  ]}
+];
+function bc8Baslat(){ ikiliCarkBaslat({onek:'bc8', kategoriler:BC8_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================

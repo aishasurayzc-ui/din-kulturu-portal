@@ -737,6 +737,29 @@
   <div id="td82YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td82Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki82">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc82Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc82Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc82SoruNo">1</b>/<b id="bc82Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc82Sure">12</b> sn</span>
+    <span>🔵 <b id="bc82Puan1">0</b></span>
+    <span>🔴 <b id="bc82Puan2">0</b></span>
+  </div>
+  <div id="bc82ElDegistir" style="text-align:center;"></div>
+  <div id="bc82SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc82SoruMetin" class="balon-durum"></div>
+  <div id="bc82Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc82Sonuc"></div>
+  <div id="bc82YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc82Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '82', 'unite2.html');
 
@@ -1047,6 +1071,34 @@ const TD82_KARTLAR = [
   {kelime:"Hacer-i Esved", yasakli:["taş","siyah","köşe","Kâbe"]}
 ];
 function td82Baslat(){ ikiliAnlatBaslat({onek:'td82', kartlar:TD82_KARTLAR, sureSN:60}); }
+
+const BC82_KATEGORILER = [
+  {ad:"Kâbe ve Çevresi", ikon:"🕋", sorular:[
+    {soru:"Müslümanların namazda yöneldiği, Mekke'deki kutsal yapıya ne denir?", secenekler:["Kâbe","Mescid-i Aksa","Ravza","Mihrab"], dogru:"Kâbe"},
+    {soru:"Kâbe'nin köşesinde bulunan kutsal siyah taşa ne denir?", secenekler:["Hacer-i Esved","Makam-ı İbrahim","Mültezem","Rükn-i Yemani"], dogru:"Hacer-i Esved"},
+    {soru:"Mekke'de bulunan ve hacılar tarafından içilen kutsal suya ne denir?", secenekler:["Zemzem","Kevser","Selsebil","Tesnim"], dogru:"Zemzem"},
+    {soru:"Hz. Hacer'in su ararken arasında koştuğu iki tepeye ne denir?", secenekler:["Safa ve Merve","Arafat ve Müzdelife","Mina ve Cemre","Hira ve Sevr"], dogru:"Safa ve Merve"}
+  ]},
+  {ad:"Hac İbadetleri 1", ikon:"🤍", sorular:[
+    {soru:"İmkânı olan Müslümanların ömründe bir kez Kâbe'yi ziyaret etmesine ne denir?", secenekler:["Hac","Umre","Namaz","Zekât"], dogru:"Hac"},
+    {soru:"Hac dışında herhangi bir zamanda yapılan küçük Kâbe ziyaretine ne denir?", secenekler:["Umre","Hac","Zekât","Kurban"], dogru:"Umre"},
+    {soru:"Hac ve umre sırasında giyilen dikişsiz beyaz kıyafete ne denir?", secenekler:["İhram","Kefen","Cübbe","Sarık"], dogru:"İhram"},
+    {soru:"İhrama girmek için belirlenen sınır bölgelere ne denir?", secenekler:["Mikat","Arafat","Müzdelife","Mina"], dogru:"Mikat"}
+  ]},
+  {ad:"Hac İbadetleri 2", ikon:"🚶", sorular:[
+    {soru:"Kâbe'nin etrafında yedi kez dönmeye ne denir?", secenekler:["Tavaf","Sa'y","Vakfe","Telbiye"], dogru:"Tavaf"},
+    {soru:"Safa ile Merve arasında yedi kez gidip gelmeye ne denir?", secenekler:["Sa'y","Tavaf","Vakfe","Telbiye"], dogru:"Sa'y"},
+    {soru:"Arafat'ta belirli bir süre durup dua etmeye ne denir?", secenekler:["Vakfe","Tavaf","Sa'y","Telbiye"], dogru:"Vakfe"},
+    {soru:"Hac ibadetinin en önemli rüknü olan, vakfenin yapıldığı yer hangisidir?", secenekler:["Arafat","Mina","Müzdelife","Uhud"], dogru:"Arafat"}
+  ]},
+  {ad:"Kurban ve Bayram", ikon:"🐑", sorular:[
+    {soru:"Hac sırasında sembolik olarak şeytanı taşlama ritüeline ne denir?", secenekler:["Şeytan Taşlama","Tavaf","Sa'y","Vakfe"], dogru:"Şeytan Taşlama"},
+    {soru:"Allah rızası için hayvan kesme ibadetine ne denir?", secenekler:["Kurban","Sadaka","Zekât","Fitre"], dogru:"Kurban"},
+    {soru:"Kurban kesmenin ibadet olduğu, dört gün süren bayrama ne denir?", secenekler:["Kurban Bayramı","Ramazan Bayramı","Mevlit Kandili","Aşure Günü"], dogru:"Kurban Bayramı"},
+    {soru:"Hac sırasında söylenen 'Buyur Allah'ım buyur' anlamındaki söze ne denir?", secenekler:["Telbiye","Tekbir","Tesbih","Salavat"], dogru:"Telbiye"}
+  ]}
+];
+function bc82Baslat(){ ikiliCarkBaslat({onek:'bc82', kategoriler:BC82_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================

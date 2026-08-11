@@ -737,6 +737,29 @@
   <div id="td84YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td84Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki84">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc84Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc84Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc84SoruNo">1</b>/<b id="bc84Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc84Sure">12</b> sn</span>
+    <span>🔵 <b id="bc84Puan1">0</b></span>
+    <span>🔴 <b id="bc84Puan2">0</b></span>
+  </div>
+  <div id="bc84ElDegistir" style="text-align:center;"></div>
+  <div id="bc84SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc84SoruMetin" class="balon-durum"></div>
+  <div id="bc84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc84Sonuc"></div>
+  <div id="bc84YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc84Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '84', 'unite4.html');
 
@@ -1047,6 +1071,34 @@ const TD84_KARTLAR = [
   {kelime:"Hicret", yasakli:["göç","Medine","Mekke","yolculuk"]}
 ];
 function td84Baslat(){ ikiliAnlatBaslat({onek:'td84', kartlar:TD84_KARTLAR, sureSN:60}); }
+
+const BC84_KATEGORILER = [
+  {ad:"Mekke Dönemi Başlangıcı", ikon:"🕋", sorular:[
+    {soru:"Hz. Muhammed'in peygamberliğinin başladığı ilk olay hangisidir?", secenekler:["İlk Vahiy","Hicret","Miraç","Fetih"], dogru:"İlk Vahiy"},
+    {soru:"Hz. Muhammed'in ilk yıllarda yakın çevresine yaptığı davete ne denir?", secenekler:["Gizli Davet","Açık Davet","Toplu Davet","Genel Davet"], dogru:"Gizli Davet"},
+    {soru:"Hz. Muhammed'in daha sonra herkese yönelik yaptığı davete ne denir?", secenekler:["Açık Davet","Gizli Davet","Özel Davet","Sessiz Davet"], dogru:"Açık Davet"},
+    {soru:"Mekkeli müşriklerin Müslümanlara uyguladığı ambargoya ne denir?", secenekler:["Boykot","Antlaşma","Barış","İttifak"], dogru:"Boykot"}
+  ]},
+  {ad:"Zorluklar ve Göçler", ikon:"✈️", sorular:[
+    {soru:"Baskılar artınca bazı Müslümanların sığındığı ilk göç nereye yapılmıştır?", secenekler:["Habeşistan","Medine","Şam","Yemen"], dogru:"Habeşistan"},
+    {soru:"Hz. Muhammed'in Mekke'den Medine'ye göç etmesine ne denir?", secenekler:["Hicret","Miraç","Fetih","Umre"], dogru:"Hicret"},
+    {soru:"Medineli Müslümanların Hz. Muhammed'e bağlılık yemini ettiği antlaşmalara ne denir?", secenekler:["Akabe Biatları","Hudeybiye Antlaşması","Medine Sözleşmesi","Veda Haccı"], dogru:"Akabe Biatları"},
+    {soru:"Hz. Muhammed'in bir gece Mekke'den Kudüs'e ve göklere yükseltilmesine ne denir?", secenekler:["Miraç","Hicret","Bedir","Uhud"], dogru:"Miraç"}
+  ]},
+  {ad:"Medine Dönemi ve Savaşlar", ikon:"⚔️", sorular:[
+    {soru:"Medine'de farklı din ve kabilelerin bir arada yaşamasını düzenleyen ilk belgeye ne denir?", secenekler:["Medine Sözleşmesi","Hudeybiye Antlaşması","Veda Hutbesi","Akabe Biatı"], dogru:"Medine Sözleşmesi"},
+    {soru:"Müslümanların kazandığı ilk büyük savaş hangisidir?", secenekler:["Bedir Savaşı","Uhud Savaşı","Hendek Savaşı","Huneyn Savaşı"], dogru:"Bedir Savaşı"},
+    {soru:"Okçuların yerini terk etmesi sonucu zorlu geçen savaş hangisidir?", secenekler:["Uhud Savaşı","Bedir Savaşı","Hendek Savaşı","Huneyn Savaşı"], dogru:"Uhud Savaşı"},
+    {soru:"Medine'nin etrafına hendek kazılarak savunulduğu savaş hangisidir?", secenekler:["Hendek Savaşı","Bedir Savaşı","Uhud Savaşı","Huneyn Savaşı"], dogru:"Hendek Savaşı"}
+  ]},
+  {ad:"Barış ve Zafer", ikon:"🕊️", sorular:[
+    {soru:"Mekkelilerle Müslümanlar arasında yapılan ve barış getiren antlaşma hangisidir?", secenekler:["Hudeybiye Antlaşması","Medine Sözleşmesi","Akabe Biatı","Veda Hutbesi"], dogru:"Hudeybiye Antlaşması"},
+    {soru:"Hz. Muhammed'in Mekke'yi savaşsız ve affederek almasına ne denir?", secenekler:["Mekke'nin Fethi","Hicret","Miraç","Bedir Zaferi"], dogru:"Mekke'nin Fethi"},
+    {soru:"Hz. Muhammed'in vefatından kısa süre önce yaptığı son hacca ne denir?", secenekler:["Veda Haccı","İlk Hac","Umre","Kurban Bayramı"], dogru:"Veda Haccı"},
+    {soru:"Hz. Muhammed'in adaletli ve örnek yönetim tarzına ne denir?", secenekler:["Örnek Liderlik","Baskıcı Yönetim","Kayıtsız Yönetim","Keyfi Yönetim"], dogru:"Örnek Liderlik"}
+  ]}
+];
+function bc84Baslat(){ ikiliCarkBaslat({onek:'bc84', kategoriler:BC84_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================

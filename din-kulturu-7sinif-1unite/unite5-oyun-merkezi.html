@@ -737,6 +737,29 @@
   <div id="td85YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td85Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki85">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc85Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc85Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc85SoruNo">1</b>/<b id="bc85Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc85Sure">12</b> sn</span>
+    <span>🔵 <b id="bc85Puan1">0</b></span>
+    <span>🔴 <b id="bc85Puan2">0</b></span>
+  </div>
+  <div id="bc85ElDegistir" style="text-align:center;"></div>
+  <div id="bc85SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc85SoruMetin" class="balon-durum"></div>
+  <div id="bc85Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc85Sonuc"></div>
+  <div id="bc85YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc85Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '85', 'unite5.html');
 
@@ -1047,6 +1071,34 @@ const TD85_KARTLAR = [
   {kelime:"Misyoner", yasakli:["yaymak","din","gönüllü","tebliğ"]}
 ];
 function td85Baslat(){ ikiliAnlatBaslat({onek:'td85', kartlar:TD85_KARTLAR, sureSN:60}); }
+
+const BC85_KATEGORILER = [
+  {ad:"Semavi Dinler", ikon:"📜", sorular:[
+    {soru:"Hz. Mûsâ'ya dayanan ve Tevrat'a inanan din hangisidir?", secenekler:["Yahudilik","Hristiyanlık","Hinduizm","Budizm"], dogru:"Yahudilik"},
+    {soru:"Hz. İsa'ya dayanan ve İncil'e inanan din hangisidir?", secenekler:["Hristiyanlık","Yahudilik","Hinduizm","Budizm"], dogru:"Hristiyanlık"},
+    {soru:"Bir peygamber ve vahiy yoluyla gelen dinlere ne denir?", secenekler:["Semavi Din","Beşeri Din","Doğu Dini","Yerel Din"], dogru:"Semavi Din"},
+    {soru:"Tek bir Allah'a inanan din anlayışına ne denir?", secenekler:["Tek Tanrılı Din","Çok Tanrılı Din","Tanrısız Din","Doğa Dini"], dogru:"Tek Tanrılı Din"}
+  ]},
+  {ad:"Doğu Dinleri", ikon:"🕉️", sorular:[
+    {soru:"Hindistan kökenli, çok sayıda tanrı inancı içeren din hangisidir?", secenekler:["Hinduizm","Yahudilik","Hristiyanlık","İslam"], dogru:"Hinduizm"},
+    {soru:"Buda'nın öğretilerine dayanan, aydınlanmayı amaçlayan din hangisidir?", secenekler:["Budizm","Hinduizm","Yahudilik","Hristiyanlık"], dogru:"Budizm"},
+    {soru:"Birden fazla tanrıya inanan din anlayışına ne denir?", secenekler:["Çok Tanrılı Din","Tek Tanrılı Din","Semavi Din","İlahi Din"], dogru:"Çok Tanrılı Din"},
+    {soru:"Hindu ve Budistlerin ibadet ettiği yapıya ne denir?", secenekler:["Tapınak","Cami","Kilise","Havra"], dogru:"Tapınak"}
+  ]},
+  {ad:"İbadet Yerleri ve Din Adamları", ikon:"⛪", sorular:[
+    {soru:"Yahudilerin ibadet ettiği yere ne denir?", secenekler:["Havra","Kilise","Cami","Tapınak"], dogru:"Havra"},
+    {soru:"Hristiyanların ibadet ettiği yere ne denir?", secenekler:["Kilise","Havra","Cami","Tapınak"], dogru:"Kilise"},
+    {soru:"Yahudilikte din adamına ne denir?", secenekler:["Haham","Papaz","Rahip","Ruhban"], dogru:"Haham"},
+    {soru:"Hristiyanlıkta din adamına ne denir?", secenekler:["Papaz","Haham","Müezzin","İmam"], dogru:"Papaz"}
+  ]},
+  {ad:"Hoşgörü ve İletişim", ikon:"🤝", sorular:[
+    {soru:"Hristiyanlıkta din görevlisi sınıfına genel olarak ne denir?", secenekler:["Ruhban","Cemaat","Havari","Millet"], dogru:"Ruhban"},
+    {soru:"Farklı dinlere mensup insanların birbirine saygıyla yaklaşmasına ne denir?", secenekler:["Dinler Arası Hoşgörü","Din Çatışması","Ayrımcılık","Dışlama"], dogru:"Dinler Arası Hoşgörü"},
+    {soru:"Başka inançlara sahip insanlara saygılı davranmaya ne denir?", secenekler:["Farklı İnançlara Saygı","Baskı","Zorlama","Hor Görme"], dogru:"Farklı İnançlara Saygı"},
+    {soru:"Kendi dinini başkalarına yaymaya çalışan kişiye ne denir?", secenekler:["Misyoner","Haham","Papaz","Ruhban"], dogru:"Misyoner"}
+  ]}
+];
+function bc85Baslat(){ ikiliCarkBaslat({onek:'bc85', kategoriler:BC85_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================
