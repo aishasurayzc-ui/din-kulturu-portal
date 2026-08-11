@@ -735,6 +735,32 @@
   <div id="ca63YenidenBaslat"></div>
   <button class="eylem" onclick="ca63Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu63">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td63Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td63Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td63Sure">60</b> sn</span>
+    <span>🔵 <b id="td63Puan1">0</b></span>
+    <span>🔴 <b id="td63Puan2">0</b></span>
+  </div>
+  <div id="td63ElDegistir" style="text-align:center;"></div>
+  <div id="td63SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td63Kelime" class="omg-anlat-kelime"></div>
+  <div id="td63Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td63', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td63', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td63Sonuc"></div>
+  <div id="td63YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td63Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -788,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece birkaç saniyen var, hızlı düşün!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '63', 'index.html');
 
@@ -947,6 +974,25 @@ const CA63_SORULAR = [
   {soru:'Tüm canlıların acıları karşısında duyarlı olma sorumluluğuna ne denir?', secenekler:['Vicdan','Şefkat','Sevgi','Adap'], dogru:'Vicdan'}
 ];
 function ca63Baslat(){ ikiliOyunBaslat({onek:'ca63', sorular:CA63_SORULAR}); }
+
+const TD63_KARTLAR = [
+  {kelime:"Dürüstlük", yasakli:["doğru","yalan","güven","söz"]},
+  {kelime:"Güvenilirlik", yasakli:["emin","inanmak","söz","tutmak"]},
+  {kelime:"Vefa", yasakli:["söz","bağlılık","unutmamak","dost"]},
+  {kelime:"Cömertlik", yasakli:["vermek","paylaşmak","mal","yardım"]},
+  {kelime:"Alçakgönüllülük", yasakli:["tevazu","övünmemek","gösteriş","kibir"]},
+  {kelime:"Adalet", yasakli:["hak","eşit","doğru","karar"]},
+  {kelime:"Sözünde Durmak", yasakli:["söz","vermek","tutmak","güven"]},
+  {kelime:"Emanete Riayet", yasakli:["güven","saklamak","teslim","emanet"]},
+  {kelime:"Kul Hakkı", yasakli:["hak","insan","ihlal","ödemek"]},
+  {kelime:"Öfkeyi Yenmek", yasakli:["sakin","kızmak","kontrol","sabır"]},
+  {kelime:"Affetmek", yasakli:["bağışlamak","kin","geçmiş","hoşgörü"]},
+  {kelime:"Yardımseverlik", yasakli:["yardım","destek","el uzatmak","iyilik"]},
+  {kelime:"Saygı", yasakli:["değer","büyük","davranış","hürmet"]},
+  {kelime:"Sabır", yasakli:["dayanmak","beklemek","zorluk","tahammül"]},
+  {kelime:"İyi Söz", yasakli:["konuşma","güzel","nazik","kırmamak"]}
+];
+function td63Baslat(){ ikiliAnlatBaslat({onek:'td63', kartlar:TD63_KARTLAR, sureSN:60}); }
 
 const MM63_CIFTLER = [
   {metin1:'Merhamet', metin2:'Şefkat gösterme, acıma'},

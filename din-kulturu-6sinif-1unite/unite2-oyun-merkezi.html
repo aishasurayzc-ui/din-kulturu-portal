@@ -735,6 +735,32 @@
   <div id="ca62YenidenBaslat"></div>
   <button class="eylem" onclick="ca62Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu62">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td62Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td62Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td62Sure">60</b> sn</span>
+    <span>🔵 <b id="td62Puan1">0</b></span>
+    <span>🔴 <b id="td62Puan2">0</b></span>
+  </div>
+  <div id="td62ElDegistir" style="text-align:center;"></div>
+  <div id="td62SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td62Kelime" class="omg-anlat-kelime"></div>
+  <div id="td62Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td62', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td62', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td62Sonuc"></div>
+  <div id="td62YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td62Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -788,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece birkaç saniyen var, hızlı düşün!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '62', 'index.html');
 
@@ -947,6 +974,25 @@ const CA62_SORULAR = [
   {soru:'Şevval ayında altı gün oruç tutan kişi için Hz. Peygamber ne buyurmuştur?', secenekler:['Bütün yıl oruç tutmuş gibi olur','Hiçbir sevap kazanmaz','Sadece bir günlük sevap kazanır','Orucu geçersiz olur'], dogru:'Bütün yıl oruç tutmuş gibi olur'}
 ];
 function ca62Baslat(){ ikiliOyunBaslat({onek:'ca62', sorular:CA62_SORULAR}); }
+
+const TD62_KARTLAR = [
+  {kelime:"Oruç", yasakli:["yememek","içmemek","ibadet","gün"]},
+  {kelime:"Ramazan", yasakli:["ay","oruç","kutsal","dokuzuncu"]},
+  {kelime:"Sahur", yasakli:["yemek","sabah","erken","imsak"]},
+  {kelime:"İftar", yasakli:["yemek","akşam","açmak","güneş"]},
+  {kelime:"Niyet", yasakli:["kalp","karar","ibadet","başlamak"]},
+  {kelime:"İmsak", yasakli:["başlamak","sabah","vakit","oruç"]},
+  {kelime:"Fitre", yasakli:["vermek","fakir","bayram","zekât"]},
+  {kelime:"Teravih", yasakli:["namaz","gece","Ramazan","kılmak"]},
+  {kelime:"Kadir Gecesi", yasakli:["gece","kutsal","bin ay","vahiy"]},
+  {kelime:"Ramazan Bayramı", yasakli:["kutlama","oruç","üç gün","şeker"]},
+  {kelime:"Sabır (Oruçta)", yasakli:["dayanmak","açlık","beklemek","zorluk"]},
+  {kelime:"Sağlık Faydası", yasakli:["vücut","iyi","beden","temizlenme"]},
+  {kelime:"Yardımlaşma", yasakli:["paylaşmak","fakir","destek","birlik"]},
+  {kelime:"Şükür", yasakli:["teşekkür","nimet","memnun","Allah"]},
+  {kelime:"Hilal", yasakli:["ay","gökyüzü","başlangıç","şekil"]}
+];
+function td62Baslat(){ ikiliAnlatBaslat({onek:'td62', kartlar:TD62_KARTLAR, sureSN:60}); }
 
 const MM62_CIFTLER = [
   {metin1:'Sahur', metin2:'İmsaktan önce yenilen yemek'},

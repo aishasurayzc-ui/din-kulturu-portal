@@ -735,6 +735,32 @@
   <div id="ca64YenidenBaslat"></div>
   <button class="eylem" onclick="ca64Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu64">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td64Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td64Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td64Sure">60</b> sn</span>
+    <span>🔵 <b id="td64Puan1">0</b></span>
+    <span>🔴 <b id="td64Puan2">0</b></span>
+  </div>
+  <div id="td64ElDegistir" style="text-align:center;"></div>
+  <div id="td64SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td64Kelime" class="omg-anlat-kelime"></div>
+  <div id="td64Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td64', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td64', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td64Sonuc"></div>
+  <div id="td64YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td64Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -788,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece birkaç saniyen var, hızlı düşün!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '64', 'index.html');
 
@@ -947,6 +974,25 @@ const CA64_SORULAR = [
   {soru:'Hacerülesved\'i yerine yerleştirmek için hakem kim seçilmiştir?', secenekler:['Hz. Muhammed','Ebu Talib','Abdülmuttalib','Zübeyr'], dogru:'Hz. Muhammed'}
 ];
 function ca64Baslat(){ ikiliOyunBaslat({onek:'ca64', sorular:CA64_SORULAR}); }
+
+const TD64_KARTLAR = [
+  {kelime:"Mekke", yasakli:["şehir","doğum","Kâbe","yer"]},
+  {kelime:"Hz. Amine", yasakli:["anne","Peygamber","vefat","annesi"]},
+  {kelime:"Hz. Abdullah", yasakli:["baba","Peygamber","vefat","babası"]},
+  {kelime:"Halime", yasakli:["süt anne","çöl","bakmak","emzirmek"]},
+  {kelime:"Ebû Tâlib", yasakli:["amca","koruma","yetim","bakmak"]},
+  {kelime:"Çobanlık", yasakli:["koyun","meslek","gençlik","sürü"]},
+  {kelime:"Ticaret", yasakli:["kervan","alışveriş","Şam","mal"]},
+  {kelime:"Hz. Hatice", yasakli:["eş","evlilik","ilk","hanım"]},
+  {kelime:"Hılfu'l-Fudûl", yasakli:["antlaşma","zulüm","gençlik","yemin"]},
+  {kelime:"Hacerü'l-Esved", yasakli:["taş","Kâbe","siyah","köşe"]},
+  {kelime:"El-Emin", yasakli:["güvenilir","lakap","dürüst","insan"]},
+  {kelime:"Yetimlik", yasakli:["anne","baba","kaybetmek","küçükken"]},
+  {kelime:"Kâbe'nin Tamiri", yasakli:["bina","onarım","taş","inşa"]},
+  {kelime:"Hira'da Tefekkür", yasakli:["mağara","düşünmek","yalnız","dağ"]},
+  {kelime:"Peygamberlik Öncesi Ahlak", yasakli:["dürüst","örnek","güzel","davranış"]}
+];
+function td64Baslat(){ ikiliAnlatBaslat({onek:'td64', kartlar:TD64_KARTLAR, sureSN:60}); }
 
 const MM64_CIFTLER = [
   {metin1:'el-Emin', metin2:'Güvenilir kişi'},

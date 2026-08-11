@@ -735,6 +735,32 @@
   <div id="ca6YenidenBaslat"></div>
   <button class="eylem" onclick="ca6Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu6">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td6Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td6Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td6Sure">60</b> sn</span>
+    <span>🔵 <b id="td6Puan1">0</b></span>
+    <span>🔴 <b id="td6Puan2">0</b></span>
+  </div>
+  <div id="td6ElDegistir" style="text-align:center;"></div>
+  <div id="td6SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td6Kelime" class="omg-anlat-kelime"></div>
+  <div id="td6Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td6', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td6', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td6Sonuc"></div>
+  <div id="td6YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td6Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -788,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece birkaç saniyen var, hızlı düşün!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '6', 'index.html');
 
@@ -947,6 +974,25 @@ const CA6_SORULAR = [
   {soru:'Kur\'an\'daki geçmiş peygamberlerle ilgili ibretli olaylara ne denir?', secenekler:['Kıssa','Suhuf','Vahiy','Tahrif'], dogru:'Kıssa'}
 ];
 function ca6Baslat(){ ikiliOyunBaslat({onek:'ca6', sorular:CA6_SORULAR}); }
+
+const TD6_KARTLAR = [
+  {kelime:"Peygamber", yasakli:["elçi","Allah","görev","insan"]},
+  {kelime:"Nübüvvet", yasakli:["peygamberlik","görev","Allah","makam"]},
+  {kelime:"Vahiy", yasakli:["mesaj","Allah","indirmek","peygamber"]},
+  {kelime:"İlahi Kitap", yasakli:["kutsal","Allah","indirilen","yazılı"]},
+  {kelime:"Tevrat", yasakli:["Musa","kitap","indirilen","ilahi"]},
+  {kelime:"Zebûr", yasakli:["Davud","kitap","indirilen","ilahi"]},
+  {kelime:"İncil", yasakli:["İsa","kitap","indirilen","ilahi"]},
+  {kelime:"Suhuf", yasakli:["sayfa","küçük","kitapçık","indirilen"]},
+  {kelime:"Mucize", yasakli:["olağanüstü","peygamber","kanıt","güç"]},
+  {kelime:"İsmet", yasakli:["günahsız","peygamber","sıfat","temiz"]},
+  {kelime:"Tebliğ", yasakli:["bildirmek","peygamber","görev","anlatmak"]},
+  {kelime:"Son Peygamber", yasakli:["Hz. Muhammed","hatem","son","elçi"]},
+  {kelime:"Kitaplara İman", yasakli:["inanmak","kutsal","esas","altı"]},
+  {kelime:"Peygamberlere İman", yasakli:["inanmak","elçi","esas","altı"]},
+  {kelime:"Emanet (Sıfat)", yasakli:["güvenilir","sıfat","peygamber","teslim"]}
+];
+function td6Baslat(){ ikiliAnlatBaslat({onek:'td6', kartlar:TD6_KARTLAR, sureSN:60}); }
 
 const MM6_CIFTLER = [
   {metin1:'Sıdk', metin2:'Doğru sözlülük'},
