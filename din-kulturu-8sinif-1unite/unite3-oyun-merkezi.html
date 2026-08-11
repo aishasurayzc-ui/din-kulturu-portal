@@ -711,6 +711,32 @@
   <div id="ca83YenidenBaslat"></div>
   <button class="eylem" onclick="ca83Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu83">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td83Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td83Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td83Sure">60</b> sn</span>
+    <span>🔵 <b id="td83Puan1">0</b></span>
+    <span>🔴 <b id="td83Puan2">0</b></span>
+  </div>
+  <div id="td83ElDegistir" style="text-align:center;"></div>
+  <div id="td83SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td83Kelime" class="omg-anlat-kelime"></div>
+  <div id="td83Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td83', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td83', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td83Sonuc"></div>
+  <div id="td83YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td83Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -764,7 +790,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece 5 saniyen var, hızlı cevapla!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '83', 'unite3.html');
 
@@ -1001,6 +1028,26 @@ const CA83_SORULAR = [
   {soru:"Rüşvetin yasaklanma gerekçesi nedir?", secenekler:["Adaleti bozup haksız kazanç sağlaması","Ticareti hızlandırması","Devlet gelirini artırması","Çalışmayı özendirmesi"], dogru:0}
 ];
 function ca83Baslat(){ ikiliOyunBaslat({onek:'ca83', sorular:CA83_SORULAR}); }
+
+const TD83_KARTLAR = [
+  {kelime:"Din", yasakli:["inanç","Allah","kurallar","ibadet","yaşam"]},
+  {kelime:"Hurafe", yasakli:["batıl","inanç","yanlış","uydurma","gerçek dışı"]},
+  {kelime:"Fıtrat", yasakli:["yaratılış","doğa","insan","öz","doğuştan"]},
+  {kelime:"Sünnetullah", yasakli:["yasa","düzen","değişmez","Allah","evren"]},
+  {kelime:"Aile", yasakli:["ev","anne","baba","birlik","çocuk"]},
+  {kelime:"Cami", yasakli:["ibadet","mescit","namaz","minare","toplu"]},
+  {kelime:"Komşuluk", yasakli:["yan","ev","ilişki","saygı","yardımlaşma"]},
+  {kelime:"Çocuk Hakları", yasakli:["eğitim","koruma","sevgi","ihtiyaç","çocuk"]},
+  {kelime:"Akıl", yasakli:["düşünmek","anlamak","insan","karar","zihin"]},
+  {kelime:"Vahiy", yasakli:["bilgi","Allah","peygamber","indirmek","mesaj"]},
+  {kelime:"Toplumsal Dayanışma", yasakli:["birlik","yardım","toplum","beraber","destek"]},
+  {kelime:"Ahlak", yasakli:["davranış","doğru","yanlış","değer","iyi"]},
+  {kelime:"Batıl İnanç", yasakli:["uğursuzluk","nazar","boncuk","hurafe","yanlış"]},
+  {kelime:"Hoşgörü", yasakli:["anlayış","kabul","farklılık","saygı","tolerans"]},
+  {kelime:"Merhamet", yasakli:["şefkat","acımak","sevgi","iyilik","yardım"]},
+  {kelime:"Sosyal Sorumluluk", yasakli:["toplum","görev","yardım","katkı","birey"]}
+];
+function td83Baslat(){ ikiliAnlatBaslat({onek:'td83', kartlar:TD83_KARTLAR, sureSN:60}); }
 
 
 // =====================================================================

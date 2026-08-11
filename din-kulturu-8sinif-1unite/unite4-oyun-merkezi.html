@@ -711,6 +711,32 @@
   <div id="ca84YenidenBaslat"></div>
   <button class="eylem" onclick="ca84Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu84">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td84Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td84Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td84Sure">60</b> sn</span>
+    <span>🔵 <b id="td84Puan1">0</b></span>
+    <span>🔴 <b id="td84Puan2">0</b></span>
+  </div>
+  <div id="td84ElDegistir" style="text-align:center;"></div>
+  <div id="td84SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td84Kelime" class="omg-anlat-kelime"></div>
+  <div id="td84Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td84', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td84', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td84Sonuc"></div>
+  <div id="td84YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td84Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -764,7 +790,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece 5 saniyen var, hızlı cevapla!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '84', 'unite4.html');
 
@@ -1001,6 +1028,27 @@ const CA84_SORULAR = [
   {soru:"Kureyş suresinde geçen 'şitâ' kelimesi ne demektir?", secenekler:["Kış","Yaz","Gece","Yolculuk"], dogru:0}
 ];
 function ca84Baslat(){ ikiliOyunBaslat({onek:'ca84', sorular:CA84_SORULAR}); }
+
+const TD84_KARTLAR = [
+  {kelime:"Hicret", yasakli:["göç","Medine","Mekke","peygamber","yolculuk"]},
+  {kelime:"El-Emin", yasakli:["güvenilir","lakap","doğru","dürüst","peygamber"]},
+  {kelime:"Mekke'nin Fethi", yasakli:["zafer","şehir","savaşsız","af","dönüş"]},
+  {kelime:"Sünnet", yasakli:["söz","davranış","peygamber","örnek","uygulama"]},
+  {kelime:"İstişare", yasakli:["danışma","fikir","karar","birlikte","görüş"]},
+  {kelime:"Veda Hutbesi", yasakli:["son","konuşma","hac","öğüt","haklar"]},
+  {kelime:"Şefkat", yasakli:["sevgi","çocuk","merhamet","ilgi","koruma"]},
+  {kelime:"Adalet", yasakli:["hak","eşit","doğru","karar","tarafsız"]},
+  {kelime:"Affedicilik", yasakli:["bağışlamak","öç","kin","hoşgörü","geçmiş"]},
+  {kelime:"Tâif Yolculuğu", yasakli:["taş","şehir","üzüntü","sabır","yolculuk"]},
+  {kelime:"Ashab", yasakli:["sahabe","arkadaş","peygamber","takipçi","dost"]},
+  {kelime:"Örnek Ahlak", yasakli:["davranış","güzel","model","huy","tutum"]},
+  {kelime:"Miraç", yasakli:["yükseliş","gece","gökyüzü","namaz","yolculuk"]},
+  {kelime:"İlk Vahiy", yasakli:["Hira","mağara","oku","melek","ilk"]},
+  {kelime:"Peygamberlik", yasakli:["elçilik","görev","vahiy","Allah","tebliğ"]},
+  {kelime:"Komşu Hakkı", yasakli:["yan","ev","ilişki","Cebrail","saygı"]},
+  {kelime:"Güzel Söz", yasakli:["konuşma","nazik","kırmamak","iletişim","dil"]}
+];
+function td84Baslat(){ ikiliAnlatBaslat({onek:'td84', kartlar:TD84_KARTLAR, sureSN:60}); }
 
 
 // =====================================================================

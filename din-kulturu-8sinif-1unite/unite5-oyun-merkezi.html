@@ -711,6 +711,32 @@
   <div id="ca85YenidenBaslat"></div>
   <button class="eylem" onclick="ca85Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu85">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td85Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td85Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td85Sure">60</b> sn</span>
+    <span>🔵 <b id="td85Puan1">0</b></span>
+    <span>🔴 <b id="td85Puan2">0</b></span>
+  </div>
+  <div id="td85ElDegistir" style="text-align:center;"></div>
+  <div id="td85SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td85Kelime" class="omg-anlat-kelime"></div>
+  <div id="td85Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td85', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td85', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td85Sonuc"></div>
+  <div id="td85YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td85Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -764,7 +790,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece 5 saniyen var, hızlı cevapla!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '85', 'unite5.html');
 
@@ -1001,6 +1028,27 @@ const CA85_SORULAR = [
   {soru:"Kur'an'ın 23 yılda indirilmesinin faydası nedir?", secenekler:["Ezber ve uygulamanın kolaylaşması","Kitabın kısalması","Ayetlerin unutulması","Surelerin azalması"], dogru:0}
 ];
 function ca85Baslat(){ ikiliOyunBaslat({onek:'ca85', sorular:CA85_SORULAR}); }
+
+const TD85_KARTLAR = [
+  {kelime:"Vahiy", yasakli:["bilgi","Allah","peygamber","mesaj","indirmek"]},
+  {kelime:"Mucize", yasakli:["olağanüstü","benzersiz","güç","kanıt","insanüstü"]},
+  {kelime:"İ'caz", yasakli:["mucize","benzersizlik","Kur'an","eşsiz","güç"]},
+  {kelime:"Hafız", yasakli:["ezber","Kur'an","bilen","koruyan","tamamı"]},
+  {kelime:"Furkan", yasakli:["ayırt","doğru","yanlış","isim","Kur'an"]},
+  {kelime:"Mekki Ayet", yasakli:["Mekke","önce","hicret","indirilen","dönem"]},
+  {kelime:"Medeni Ayet", yasakli:["Medine","sonra","hicret","indirilen","dönem"]},
+  {kelime:"Kıssa", yasakli:["hikaye","geçmiş","peygamber","ibret","anlatım"]},
+  {kelime:"Tilavet", yasakli:["okumak","Kur'an","ses","güzel","düzgün"]},
+  {kelime:"Tecvid", yasakli:["kural","okuma","harf","doğru","Kur'an"]},
+  {kelime:"Mushaf", yasakli:["kitap","yazılı","Kur'an","sayfa","cilt"]},
+  {kelime:"Sure", yasakli:["bölüm","ayet","Kur'an","başlık","grup"]},
+  {kelime:"Ayet", yasakli:["cümle","Kur'an","işaret","bölüm","sure"]},
+  {kelime:"Zikir", yasakli:["anmak","Allah","isim","Kur'an","hatırlamak"]},
+  {kelime:"Hidayet", yasakli:["doğru yol","rehber","Allah","yön","kılavuz"]},
+  {kelime:"Evrensellik", yasakli:["herkes","mesaj","sınırsız","tüm insanlık","genel"]},
+  {kelime:"Korunmuşluk", yasakli:["değişmemiş","orijinal","koruma","bozulmamış","Allah"]}
+];
+function td85Baslat(){ ikiliAnlatBaslat({onek:'td85', kartlar:TD85_KARTLAR, sureSN:60}); }
 
 
 // =====================================================================

@@ -711,6 +711,32 @@
   <div id="ca82YenidenBaslat"></div>
   <button class="eylem" onclick="ca82Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu82">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td82Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td82Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td82Sure">60</b> sn</span>
+    <span>🔵 <b id="td82Puan1">0</b></span>
+    <span>🔴 <b id="td82Puan2">0</b></span>
+  </div>
+  <div id="td82ElDegistir" style="text-align:center;"></div>
+  <div id="td82SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td82Kelime" class="omg-anlat-kelime"></div>
+  <div id="td82Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td82', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td82', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td82Sonuc"></div>
+  <div id="td82YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td82Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -764,7 +790,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece 5 saniyen var, hızlı cevapla!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '82', 'unite2.html');
 
@@ -1001,6 +1028,27 @@ const CA82_SORULAR = [
   {soru:"'Sadakanın en faziletlisi' hadisine göre en faziletli sadaka nedir?", secenekler:["İlim öğrenip öğretmek","Para vermek","Yemek dağıtmak","Kurban kesmek"], dogru:0}
 ];
 function ca82Baslat(){ ikiliOyunBaslat({onek:'ca82', sorular:CA82_SORULAR}); }
+
+const TD82_KARTLAR = [
+  {kelime:"Zekât", yasakli:["farz","mal","vermek","nisap","ibadet"]},
+  {kelime:"Nisap", yasakli:["miktar","sınır","zekât","mal","asgari"]},
+  {kelime:"Sadaka", yasakli:["gönüllü","vermek","yardım","para","hayır"]},
+  {kelime:"Fitre", yasakli:["ramazan","bayram","vermek","zekât","fakir"]},
+  {kelime:"İnfak", yasakli:["harcamak","Allah","yolunda","vermek","mal"]},
+  {kelime:"Cömertlik", yasakli:["vermek","paylaşmak","cimri","mal","iyilik"]},
+  {kelime:"Cimrilik", yasakli:["vermemek","biriktirmek","kötü","mal","bencillik"]},
+  {kelime:"Fakir", yasakli:["yoksul","para","ihtiyaç","mal","zengin"]},
+  {kelime:"Zekât Verilecek Sınıflar", yasakli:["fakir","yolcu","borçlu","sekiz","kimler"]},
+  {kelime:"Nema", yasakli:["artış","mal","büyümek","kâr","zekât"]},
+  {kelime:"Sadaka-i Cariye", yasakli:["ölüm","devam eden","hayır","eser","sevap"]},
+  {kelime:"İsraf", yasakli:["harcamak","gereksiz","aşırı","tüketmek","günah"]},
+  {kelime:"Yardımlaşma", yasakli:["dayanışma","birlikte","destek","toplum","elele"]},
+  {kelime:"Kanaat", yasakli:["yetinmek","tokgözlü","azla","memnun","hırs"]},
+  {kelime:"Emanet", yasakli:["güven","saklamak","teslim","mal","sorumluluk"]},
+  {kelime:"Malın Arınması", yasakli:["zekât","temiz","hak","pay","fakir"]},
+  {kelime:"Muhtaç", yasakli:["ihtiyaç","yardım","fakir","zor durum","destek"]}
+];
+function td82Baslat(){ ikiliAnlatBaslat({onek:'td82', kartlar:TD82_KARTLAR, sureSN:60}); }
 
 
 // =====================================================================
