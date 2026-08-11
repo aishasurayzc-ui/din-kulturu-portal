@@ -737,6 +737,29 @@
   <div id="td8YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td8Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki8">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc8Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc8Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc8SoruNo">1</b>/<b id="bc8Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc8Sure">12</b> sn</span>
+    <span>🔵 <b id="bc8Puan1">0</b></span>
+    <span>🔴 <b id="bc8Puan2">0</b></span>
+  </div>
+  <div id="bc8ElDegistir" style="text-align:center;"></div>
+  <div id="bc8SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc8SoruMetin" class="balon-durum"></div>
+  <div id="bc8Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc8Sonuc"></div>
+  <div id="bc8YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc8Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '8', 'index.html');
 
@@ -1051,6 +1075,34 @@ const TD8_KARTLAR = [
   {kelime:"Kaderi Bahane Etme", yasakli:["sorumluluk","hata","bahane","tembellik","kaçmak"]}
 ];
 function td8Baslat(){ ikiliAnlatBaslat({onek:'td8', kartlar:TD8_KARTLAR, sureSN:60}); }
+
+const BC8_KATEGORILER = [
+  {ad:"Kader ve Kaza", ikon:"🌌", sorular:[
+    {soru:"Allah'ın her şeyi ezelden bilip takdir etmesine ne denir?", secenekler:["Kader","Kaza","Rızık","Ecel"], dogru:"Kader"},
+    {soru:"Takdir edilen şeylerin zamanı gelince gerçekleşmesine ne denir?", secenekler:["Kaza","Kader","Tevekkül","Sabır"], dogru:"Kaza"},
+    {soru:"Kadere iman, İslam'ın kaç iman esasından biridir?", secenekler:["Altı","Beş","Dört","Üç"], dogru:"Altı"},
+    {soru:"Kendi hata ve ihmalini kadere yükleyip sorumluluktan kaçmaya ne denir?", secenekler:["Kaderi Bahane Etme","Tevekkül","Sabır","Şükür"], dogru:"Kaderi Bahane Etme"}
+  ]},
+  {ad:"Allah'ın Sıfatları", ikon:"✨", sorular:[
+    {soru:"Allah'ın sonsuz güç sahibi olma sıfatına ne denir?", secenekler:["Kudret","İlim","İrade","Kelam"], dogru:"Kudret"},
+    {soru:"Her şeyi yoktan var eden anlamına gelen Allah'ın ismi hangisidir?", secenekler:["Hâlık","Rezzâk","Vekîl","Hafîz"], dogru:"Hâlık"},
+    {soru:"Allah'ın sınırsız dileme gücüne ne denir?", secenekler:["Külli İrade","Cüzi İrade","Kader","Kaza"], dogru:"Külli İrade"},
+    {soru:"İnsana verilen sınırlı seçme gücüne ne denir?", secenekler:["Cüzi İrade","Külli İrade","Kader","Kaza"], dogru:"Cüzi İrade"}
+  ]},
+  {ad:"Tevekkül ve Sabır", ikon:"🤲", sorular:[
+    {soru:"Gerekli çabayı gösterdikten sonra sonucu Allah'a bırakmaya ne denir?", secenekler:["Tevekkül","Kaza","İsyan","Kibir"], dogru:"Tevekkül"},
+    {soru:"Bir amaca ulaşmak için kararlılıkla devam etmeye ne denir?", secenekler:["Sebat","Vazgeçmek","Tembellik","Kaçmak"], dogru:"Sebat"},
+    {soru:"Zorluklara dayanma ve beklemeye ne denir?", secenekler:["Sabır","Acelecilik","Öfke","Panik"], dogru:"Sabır"},
+    {soru:"Nimetlere karşı teşekkür etmeye ne denir?", secenekler:["Şükür","Nankörlük","Kibir","Cimrilik"], dogru:"Şükür"}
+  ]},
+  {ad:"Ahiret ve Sorumluluk", ikon:"⚖️", sorular:[
+    {soru:"Allah tarafından yaratılıp verilen mal ve nimete ne denir?", secenekler:["Rızık","Ecel","Kader","Kaza"], dogru:"Rızık"},
+    {soru:"Her canlı için belirlenmiş ölüm vaktine ne denir?", secenekler:["Ecel","Rızık","Kader","Kaza"], dogru:"Ecel"},
+    {soru:"İnsanın akıl ve iradesi nedeniyle yaptıklarından hesaba çekilmesine ne denir?", secenekler:["Sorumluluk","Kader","Tevekkül","Şükür"], dogru:"Sorumluluk"},
+    {soru:"Ahirette insanların amellerinin sorgulanacağı güne ne denir?", secenekler:["Hesap Günü","Doğum Günü","Bayram","Cuma"], dogru:"Hesap Günü"}
+  ]}
+];
+function bc8Baslat(){ ikiliCarkBaslat({onek:'bc8', kategoriler:BC8_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================

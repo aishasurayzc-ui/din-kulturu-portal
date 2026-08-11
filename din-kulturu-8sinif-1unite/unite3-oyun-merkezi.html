@@ -737,6 +737,29 @@
   <div id="td83YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td83Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki83">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc83Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc83Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc83SoruNo">1</b>/<b id="bc83Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc83Sure">12</b> sn</span>
+    <span>🔵 <b id="bc83Puan1">0</b></span>
+    <span>🔴 <b id="bc83Puan2">0</b></span>
+  </div>
+  <div id="bc83ElDegistir" style="text-align:center;"></div>
+  <div id="bc83SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc83SoruMetin" class="balon-durum"></div>
+  <div id="bc83Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc83Sonuc"></div>
+  <div id="bc83YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc83Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '83', 'unite3.html');
 
@@ -1048,6 +1072,34 @@ const TD83_KARTLAR = [
   {kelime:"Sosyal Sorumluluk", yasakli:["toplum","görev","yardım","katkı","birey"]}
 ];
 function td83Baslat(){ ikiliAnlatBaslat({onek:'td83', kartlar:TD83_KARTLAR, sureSN:60}); }
+
+const BC83_KATEGORILER = [
+  {ad:"Dinin Temelleri", ikon:"🕌", sorular:[
+    {soru:"Allah'a inanma ve O'na göre yaşama biçimine ne denir?", secenekler:["Din","Kanun","Gelenek","Kültür"], dogru:"Din"},
+    {soru:"Allah'tan peygambere gelen bilgiye ne denir?", secenekler:["Vahiy","Hadis","Sünnet","Fetva"], dogru:"Vahiy"},
+    {soru:"İnsanın doğuştan sahip olduğu, Allah'ı tanımaya yatkın yaratılışına ne denir?", secenekler:["Fıtrat","Hurafe","Batıl İnanç","Gelenek"], dogru:"Fıtrat"},
+    {soru:"Allah'ın evrende koyduğu değişmez yasa ve düzene ne denir?", secenekler:["Sünnetullah","Hurafe","Fıtrat","Kader"], dogru:"Sünnetullah"}
+  ]},
+  {ad:"Doğru ve Yanlış İnançlar", ikon:"❓", sorular:[
+    {soru:"Dinin özüyle ilgisi olmayan, uydurma inançlara ne denir?", secenekler:["Hurafe","Din","Vahiy","Ahlak"], dogru:"Hurafe"},
+    {soru:"Nazar boncuğuna aşırı güvenmek gibi yanlış inançlara ne denir?", secenekler:["Batıl İnanç","Doğru İnanç","Din","Ahlak"], dogru:"Batıl İnanç"},
+    {soru:"Doğru ile yanlışı ayırt etmeyi sağlayan güce ne denir?", secenekler:["Akıl","Duygu","Hayal","Rüya"], dogru:"Akıl"},
+    {soru:"İyi ve doğru davranış kurallarına ne denir?", secenekler:["Ahlak","Hurafe","Batıl İnanç","Gelenek"], dogru:"Ahlak"}
+  ]},
+  {ad:"Aile ve Toplum", ikon:"👨‍👩‍👧", sorular:[
+    {soru:"Anne, baba ve çocuklardan oluşan temel topluluğa ne denir?", secenekler:["Aile","Sınıf","Takım","Cemaat"], dogru:"Aile"},
+    {soru:"Yan yana yaşayan insanlar arasındaki ilişkiye ne denir?", secenekler:["Komşuluk","Akrabalık","Arkadaşlık","Meslektaşlık"], dogru:"Komşuluk"},
+    {soru:"Çocukların eğitim, sevgi ve korunma gibi ihtiyaçlarına ne denir?", secenekler:["Çocuk Hakları","Yetişkin Hakları","Hayvan Hakları","Çevre Hakları"], dogru:"Çocuk Hakları"},
+    {soru:"Müslümanların toplu ibadet ettiği yere ne denir?", secenekler:["Cami","Ev","Okul","Park"], dogru:"Cami"}
+  ]},
+  {ad:"Sosyal Değerler", ikon:"🤝", sorular:[
+    {soru:"Toplumda birlik ve beraberlik içinde yaşamaya ne denir?", secenekler:["Toplumsal Dayanışma","Bireysellik","Bencillik","Ayrışma"], dogru:"Toplumsal Dayanışma"},
+    {soru:"Farklı görüş ve davranışları anlayışla karşılamaya ne denir?", secenekler:["Hoşgörü","Ayrımcılık","Dışlama","Baskı"], dogru:"Hoşgörü"},
+    {soru:"Zayıf ve çaresizlere karşı duyulan şefkate ne denir?", secenekler:["Merhamet","Sertlik","Kabalık","İlgisizlik"], dogru:"Merhamet"},
+    {soru:"Bireyin topluma karşı görev ve sorumluluklarına ne denir?", secenekler:["Sosyal Sorumluluk","Bireysel Özgürlük","Kişisel Hak","Özel Yaşam"], dogru:"Sosyal Sorumluluk"}
+  ]}
+];
+function bc83Baslat(){ ikiliCarkBaslat({onek:'bc83', kategoriler:BC83_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================

@@ -737,6 +737,29 @@
   <div id="td84YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td84Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki84">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc84Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc84Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc84SoruNo">1</b>/<b id="bc84Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc84Sure">12</b> sn</span>
+    <span>🔵 <b id="bc84Puan1">0</b></span>
+    <span>🔴 <b id="bc84Puan2">0</b></span>
+  </div>
+  <div id="bc84ElDegistir" style="text-align:center;"></div>
+  <div id="bc84SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc84SoruMetin" class="balon-durum"></div>
+  <div id="bc84Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc84Sonuc"></div>
+  <div id="bc84YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc84Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '84', 'unite4.html');
 
@@ -1049,6 +1073,34 @@ const TD84_KARTLAR = [
   {kelime:"Güzel Söz", yasakli:["konuşma","nazik","kırmamak","iletişim","dil"]}
 ];
 function td84Baslat(){ ikiliAnlatBaslat({onek:'td84', kartlar:TD84_KARTLAR, sureSN:60}); }
+
+const BC84_KATEGORILER = [
+  {ad:"Peygamberliğin Başlangıcı", ikon:"🕋", sorular:[
+    {soru:"Hz. Muhammed'e ilk vahyin geldiği mağara neresidir?", secenekler:["Hira Mağarası","Sevr Mağarası","Ashab-ı Kehf Mağarası","Uhud Mağarası"], dogru:"Hira Mağarası"},
+    {soru:"Hz. Muhammed'e peygamberlik görevi kaç yaşında verilmiştir?", secenekler:["40","25","30","50"], dogru:"40"},
+    {soru:"Hz. Muhammed'in bir gece Mekke'den Kudüs'e ve göklere yükseltilmesine ne denir?", secenekler:["Miraç","Hicret","Bedir","Fetih"], dogru:"Miraç"},
+    {soru:"Hz. Muhammed'e gençliğinde verilen 'güvenilir' anlamındaki lakap nedir?", secenekler:["El-Emin","El-Kerim","El-Fatih","El-Adil"], dogru:"El-Emin"}
+  ]},
+  {ad:"Önemli Olaylar", ikon:"📜", sorular:[
+    {soru:"Hz. Muhammed'in Mekke'den Medine'ye göç etmesine ne denir?", secenekler:["Hicret","Miraç","Fetih","Umre"], dogru:"Hicret"},
+    {soru:"Hz. Muhammed'in Mekke'yi savaşsız ve affederek almasına ne denir?", secenekler:["Mekke'nin Fethi","Hicret","Miraç","Bedir Zaferi"], dogru:"Mekke'nin Fethi"},
+    {soru:"Hz. Muhammed'in taşlanarak kovulduğu ancak beddua etmediği şehir neresidir?", secenekler:["Tâif","Medine","Kudüs","Şam"], dogru:"Tâif"},
+    {soru:"Hz. Muhammed'in vefatından kısa süre önce yaptığı ve önemli öğütler verdiği konuşmaya ne denir?", secenekler:["Veda Hutbesi","İlk Vahiy","Miraç","Hicret"], dogru:"Veda Hutbesi"}
+  ]},
+  {ad:"Örnek Erdemler", ikon:"⭐", sorular:[
+    {soru:"Herkese hakkını vermeye, eşit davranmaya ne denir?", secenekler:["Adalet","Haksızlık","Kayırma","Ayrımcılık"], dogru:"Adalet"},
+    {soru:"Hz. Muhammed'in kendisine kötülük yapanları bağışlamasına ne denir?", secenekler:["Affedicilik","Öfkelilik","Kincilik","Bencillik"], dogru:"Affedicilik"},
+    {soru:"Küçüklere ve zayıflara karşı gösterilen ilgi ve sevgiye ne denir?", secenekler:["Şefkat","Kabalık","İlgisizlik","Sertlik"], dogru:"Şefkat"},
+    {soru:"Önemli kararlarda başkalarına danışmaya ne denir?", secenekler:["İstişare","Dayatma","Baskı","Emir"], dogru:"İstişare"}
+  ]},
+  {ad:"Günlük Hayattaki Örnekliği", ikon:"💬", sorular:[
+    {soru:"Hz. Muhammed'in söz, davranış ve onaylarına genel olarak ne denir?", secenekler:["Sünnet","Farz","Vacip","Mekruh"], dogru:"Sünnet"},
+    {soru:"Hz. Muhammed'in hayatının Müslümanlar için nasıl kabul edildiğine ne denir?", secenekler:["Örnek Ahlak","Efsane","Masal","Hikaye"], dogru:"Örnek Ahlak"},
+    {soru:"Komşularımıza karşı gösterdiğimiz iyi davranış ve sorumluluklara ne denir?", secenekler:["Komşu Hakkı","Akraba Hakkı","Devlet Hakkı","Hayvan Hakkı"], dogru:"Komşu Hakkı"},
+    {soru:"Karşıdakini kırmayan, nazik ve kibar konuşmaya ne denir?", secenekler:["Güzel Söz","Kaba Söz","Alay","Küfür"], dogru:"Güzel Söz"}
+  ]}
+];
+function bc84Baslat(){ ikiliCarkBaslat({onek:'bc84', kategoriler:BC84_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================

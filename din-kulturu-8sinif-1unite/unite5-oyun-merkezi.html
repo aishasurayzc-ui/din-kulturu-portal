@@ -737,6 +737,29 @@
   <div id="td85YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td85Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki85">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc85Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc85Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc85SoruNo">1</b>/<b id="bc85Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc85Sure">12</b> sn</span>
+    <span>🔵 <b id="bc85Puan1">0</b></span>
+    <span>🔴 <b id="bc85Puan2">0</b></span>
+  </div>
+  <div id="bc85ElDegistir" style="text-align:center;"></div>
+  <div id="bc85SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc85SoruMetin" class="balon-durum"></div>
+  <div id="bc85Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc85Sonuc"></div>
+  <div id="bc85YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc85Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '85', 'unite5.html');
 
@@ -1049,6 +1073,34 @@ const TD85_KARTLAR = [
   {kelime:"Korunmuşluk", yasakli:["değişmemiş","orijinal","koruma","bozulmamış","Allah"]}
 ];
 function td85Baslat(){ ikiliAnlatBaslat({onek:'td85', kartlar:TD85_KARTLAR, sureSN:60}); }
+
+const BC85_KATEGORILER = [
+  {ad:"Kur'an'ın Kaynağı", ikon:"✨", sorular:[
+    {soru:"Allah'tan peygambere gelen bilgiye ne denir?", secenekler:["Vahiy","Hadis","Sünnet","Fetva"], dogru:"Vahiy"},
+    {soru:"Peygamberlere Allah tarafından verilen olağanüstü olaya ne denir?", secenekler:["Mucize","Kerâmet","Rüya","Efsane"], dogru:"Mucize"},
+    {soru:"Kur'an'ın hiçbir insan sözüyle taklit edilemeyecek benzersizliğine ne denir?", secenekler:["İ'caz","Tecvid","Tilavet","Kıraat"], dogru:"İ'caz"},
+    {soru:"Kur'an'ın değiştirilmeden, bozulmadan günümüze ulaşmasına ne denir?", secenekler:["Korunmuşluk","Değişkenlik","Kaybolma","Unutulma"], dogru:"Korunmuşluk"}
+  ]},
+  {ad:"Kur'an'ın Bölümleri", ikon:"📖", sorular:[
+    {soru:"Kur'an'ın bölümlerinden her birine ne denir?", secenekler:["Sure","Ayet","Cüz","Harf"], dogru:"Sure"},
+    {soru:"Bir surenin cümlelerinden her birine ne denir?", secenekler:["Ayet","Sure","Cüz","Sayfa"], dogru:"Ayet"},
+    {soru:"Yazılı hâldeki Kur'an-ı Kerim'e ne denir?", secenekler:["Mushaf","Hadis Kitabı","Tefsir","Fıkıh Kitabı"], dogru:"Mushaf"},
+    {soru:"Doğru ile yanlışı birbirinden ayırt eden anlamına gelen Kur'an isimlerinden biri hangisidir?", secenekler:["Furkan","Zikir","Hüdâ","Nur"], dogru:"Furkan"}
+  ]},
+  {ad:"İndiriliş Süreci", ikon:"🕰️", sorular:[
+    {soru:"Hicretten önce Mekke'de inen ayetlere ne denir?", secenekler:["Mekki Ayet","Medeni Ayet","İlk Ayet","Son Ayet"], dogru:"Mekki Ayet"},
+    {soru:"Hicretten sonra Medine'de inen ayetlere ne denir?", secenekler:["Medeni Ayet","Mekki Ayet","İlk Ayet","Son Ayet"], dogru:"Medeni Ayet"},
+    {soru:"Kur'an'da geçen, geçmiş peygamberlerin ibret verici hikayelerine ne denir?", secenekler:["Kıssa","Efsane","Masal","Şiir"], dogru:"Kıssa"},
+    {soru:"Kur'an'ın insanlığa doğru yolu gösterme özelliğine ne denir?", secenekler:["Hidayet","Sapma","Yanılgı","Kayıtsızlık"], dogru:"Hidayet"}
+  ]},
+  {ad:"Okuma ve Etki", ikon:"🎙️", sorular:[
+    {soru:"Güzel sesle Kur'an okumaya ne denir?", secenekler:["Tilavet","Hutbe","Vaaz","Sohbet"], dogru:"Tilavet"},
+    {soru:"Kur'an'ı doğru ve güzel okuma kurallarına ne denir?", secenekler:["Tecvid","Tefsir","Fıkıh","Kelam"], dogru:"Tecvid"},
+    {soru:"Kur'an-ı Kerim'in tamamını ezberleyen kişiye ne denir?", secenekler:["Hafız","İmam","Müezzin","Vaiz"], dogru:"Hafız"},
+    {soru:"Kur'an'ın mesajının tüm insanlığa yönelik olmasına ne denir?", secenekler:["Evrensellik","Yerellik","Sınırlılık","Özgüllük"], dogru:"Evrensellik"}
+  ]}
+];
+function bc85Baslat(){ ikiliCarkBaslat({onek:'bc85', kategoriler:BC85_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================

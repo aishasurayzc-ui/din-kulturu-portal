@@ -737,6 +737,29 @@
   <div id="td82YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td82Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki82">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc82Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc82Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc82SoruNo">1</b>/<b id="bc82Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc82Sure">12</b> sn</span>
+    <span>🔵 <b id="bc82Puan1">0</b></span>
+    <span>🔴 <b id="bc82Puan2">0</b></span>
+  </div>
+  <div id="bc82ElDegistir" style="text-align:center;"></div>
+  <div id="bc82SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc82SoruMetin" class="balon-durum"></div>
+  <div id="bc82Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc82Sonuc"></div>
+  <div id="bc82YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc82Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -791,7 +814,8 @@ const OYUN_LISTESI = [
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '82', 'unite2.html');
 
@@ -1049,6 +1073,34 @@ const TD82_KARTLAR = [
   {kelime:"Muhtaç", yasakli:["ihtiyaç","yardım","fakir","zor durum","destek"]}
 ];
 function td82Baslat(){ ikiliAnlatBaslat({onek:'td82', kartlar:TD82_KARTLAR, sureSN:60}); }
+
+const BC82_KATEGORILER = [
+  {ad:"Zekât Kavramları", ikon:"💰", sorular:[
+    {soru:"Zengin Müslümanların malının belirli bir kısmını fakirlere vermesine ne denir?", secenekler:["Zekât","Sadaka","Fitre","İnfak"], dogru:"Zekât"},
+    {soru:"Zekâtın farz olması için gereken asgari mal miktarına ne denir?", secenekler:["Nisap","Nema","Fitre","İsraf"], dogru:"Nisap"},
+    {soru:"Kur'an'da zekât verilecek kişi gruplarının sayısı kaçtır?", secenekler:["Sekiz","Beş","Altı","Dört"], dogru:"Sekiz"},
+    {soru:"Zekât verilerek malın manevi olarak temizlenmesine ne denir?", secenekler:["Malın Arınması","Malın Kirlenmesi","Malın Artması","Malın Azalması"], dogru:"Malın Arınması"}
+  ]},
+  {ad:"Sadaka ve İnfak", ikon:"🤲", sorular:[
+    {soru:"Gönüllü olarak ihtiyaç sahiplerine yapılan bağışa ne denir?", secenekler:["Sadaka","Zekât","Nisap","Nema"], dogru:"Sadaka"},
+    {soru:"Ramazan Bayramı öncesi fakirlere verilen yardıma ne denir?", secenekler:["Fitre","Zekât","Nisap","Kurban"], dogru:"Fitre"},
+    {soru:"Allah yolunda mal harcamaya genel olarak ne denir?", secenekler:["İnfak","İsraf","Cimrilik","Nema"], dogru:"İnfak"},
+    {soru:"Kişi öldükten sonra da sevabı devam eden hayır işine ne denir?", secenekler:["Sadaka-i Cariye","Zekât","Fitre","Nisap"], dogru:"Sadaka-i Cariye"}
+  ]},
+  {ad:"Cömertlik ve Cimrilik", ikon:"⚖️", sorular:[
+    {soru:"Sahip olduklarını başkalarıyla paylaşmaya ne denir?", secenekler:["Cömertlik","Cimrilik","İsraf","Kanaat"], dogru:"Cömertlik"},
+    {soru:"Malını başkalarıyla paylaşmaktan kaçınmaya ne denir?", secenekler:["Cimrilik","Cömertlik","Kanaat","Yardımlaşma"], dogru:"Cimrilik"},
+    {soru:"Gereksiz ve aşırı harcamaya ne denir?", secenekler:["İsraf","Kanaat","Cömertlik","Nema"], dogru:"İsraf"},
+    {soru:"Sahip olduğuyla yetinip azla mutlu olmaya ne denir?", secenekler:["Kanaat","Hırs","İsraf","Cimrilik"], dogru:"Kanaat"}
+  ]},
+  {ad:"Toplumsal Dayanışma", ikon:"🤝", sorular:[
+    {soru:"Temel ihtiyaçlarını karşılamakta zorlanan kişiye ne denir?", secenekler:["Fakir","Zengin","Tüccar","Yönetici"], dogru:"Fakir"},
+    {soru:"Yardıma ihtiyacı olan kişiye ne denir?", secenekler:["Muhtaç","Varlıklı","Zengin","Rahat"], dogru:"Muhtaç"},
+    {soru:"Zekât verilen malın zamanla artmasına ne denir?", secenekler:["Nema","İsraf","Kayıp","Zarar"], dogru:"Nema"},
+    {soru:"Toplumda birlikte iş yaparak birbirine destek olmaya ne denir?", secenekler:["Yardımlaşma","Bencillik","Cimrilik","İlgisizlik"], dogru:"Yardımlaşma"}
+  ]}
+];
+function bc82Baslat(){ ikiliCarkBaslat({onek:'bc82', kategoriler:BC82_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 // =====================================================================
