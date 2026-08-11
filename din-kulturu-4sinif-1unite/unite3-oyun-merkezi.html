@@ -821,6 +821,29 @@
   <div id="td3YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td3Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki3">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc3Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc3Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc3SoruNo">1</b>/<b id="bc3Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc3Sure">12</b> sn</span>
+    <span>🔵 <b id="bc3Puan1">0</b></span>
+    <span>🔴 <b id="bc3Puan2">0</b></span>
+  </div>
+  <div id="bc3ElDegistir" style="text-align:center;"></div>
+  <div id="bc3SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc3SoruMetin" class="balon-durum"></div>
+  <div id="bc3Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc3Sonuc"></div>
+  <div id="bc3YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc3Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -875,7 +898,8 @@ const OYUN_LISTESI = [
   {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
   {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '3', 'unite3.html');
 
@@ -1104,6 +1128,34 @@ const TD3_KARTLAR = [
   {kelime:"İyilik", yasakli:["yardım","güzel","davranış"]}
 ];
 function td3Baslat(){ ikiliAnlatBaslat({onek:'td3', kartlar:TD3_KARTLAR, sureSN:60}); }
+
+const BC3_KATEGORILER = [
+  {ad:"Saygı ve Nezaket", ikon:"🙇", sorular:[
+    {soru:"Büyüklere karşı gösterilen değer ve önem gösterme davranışına ne denir?", secenekler:["Saygı","Nezaket","Tevazu","Hoşgörü"], dogru:"Saygı"},
+    {soru:"İnce ve kibar davranışlara ne denir?", secenekler:["Nezaket","Saygı","Cesaret","Vefa"], dogru:"Nezaket"},
+    {soru:"Kendini beğenmişlikten uzak, alçakgönüllü olmaya ne denir?", secenekler:["Tevazu","Saygı","Cömertlik","Dürüstlük"], dogru:"Tevazu"},
+    {soru:"Farklı görüş ve davranışları anlayışla karşılamaya ne denir?", secenekler:["Hoşgörü","Nezaket","Adalet","Şükür"], dogru:"Hoşgörü"}
+  ]},
+  {ad:"Yardımseverlik", ikon:"🤲", sorular:[
+    {soru:"Birlikte iş yaparak birbirine destek olmaya ne denir?", secenekler:["Yardımlaşma","Cömertlik","Merhamet","Saygı"], dogru:"Yardımlaşma"},
+    {soru:"Sahip olduklarını başkalarıyla paylaşmaya ne denir?", secenekler:["Cömertlik","Cimrilik","Tevazu","Adalet"], dogru:"Cömertlik"},
+    {soru:"Zayıf ve çaresizlere karşı duyulan şefkate ne denir?", secenekler:["Merhamet","Cesaret","Vefa","Nezaket"], dogru:"Merhamet"},
+    {soru:"Başkalarına faydalı olacak güzel davranışlara ne denir?", secenekler:["İyilik","Kötülük","Cimrilik","Kibir"], dogru:"İyilik"}
+  ]},
+  {ad:"Dürüstlük ve Cesaret", ikon:"💪", sorular:[
+    {soru:"Yalan söylemeden gerçeği söylemeye ne denir?", secenekler:["Doğruluk","Cömertlik","Hoşgörü","Tevazu"], dogru:"Doğruluk"},
+    {soru:"Söz ve davranışlarında güvenilir olmaya ne denir?", secenekler:["Dürüstlük","Cimrilik","Kibir","Korkaklık"], dogru:"Dürüstlük"},
+    {soru:"Zorluklar karşısında korkmadan doğru olanı yapmaya ne denir?", secenekler:["Cesaret","Tevazu","Nezaket","Şükür"], dogru:"Cesaret"},
+    {soru:"Verilen söze ve dostluğa bağlı kalmaya ne denir?", secenekler:["Vefa","Cimrilik","Kibir","Adaletsizlik"], dogru:"Vefa"}
+  ]},
+  {ad:"Adalet, Sabır ve Şükür", ikon:"⚖️", sorular:[
+    {soru:"Herkese hakkını vermeye, eşit davranmaya ne denir?", secenekler:["Adalet","Cimrilik","Kibir","Bencillik"], dogru:"Adalet"},
+    {soru:"Sahip olunan nimetlere karşı teşekkür etmeye ne denir?", secenekler:["Şükür","Nankörlük","Cimrilik","Kibir"], dogru:"Şükür"},
+    {soru:"Zorluklara karşı dayanmaya, sonucu beklemeye ne denir?", secenekler:["Sabır","Acelecilik","Öfke","Tembellik"], dogru:"Sabır"},
+    {soru:"Bir kişinin hatasını bağışlamaya ne denir?", secenekler:["Affetmek","Kin tutmak","İntikam almak","Küsmek"], dogru:"Affetmek"}
+  ]}
+];
+function bc3Baslat(){ ikiliCarkBaslat({onek:'bc3', kategoriler:BC3_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 

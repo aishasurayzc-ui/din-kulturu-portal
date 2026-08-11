@@ -821,6 +821,29 @@
   <div id="td6YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td6Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki6">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc6Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc6Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc6SoruNo">1</b>/<b id="bc6Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc6Sure">12</b> sn</span>
+    <span>🔵 <b id="bc6Puan1">0</b></span>
+    <span>🔴 <b id="bc6Puan2">0</b></span>
+  </div>
+  <div id="bc6ElDegistir" style="text-align:center;"></div>
+  <div id="bc6SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc6SoruMetin" class="balon-durum"></div>
+  <div id="bc6Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc6Sonuc"></div>
+  <div id="bc6YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc6Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -875,7 +898,8 @@ const OYUN_LISTESI = [
   {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
   {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '6', 'unite6.html');
 
@@ -1104,6 +1128,34 @@ const TD6_KARTLAR = [
   {kelime:"Allah'a Güven", yasakli:["tevekkül","inanmak","dayanmak"]}
 ];
 function td6Baslat(){ ikiliAnlatBaslat({onek:'td6', kartlar:TD6_KARTLAR, sureSN:60}); }
+
+const BC6_KATEGORILER = [
+  {ad:"Allah'ın İsimleri", ikon:"🌟", sorular:[
+    {soru:"Kalpte Allah'a duyulan bağlılık ve muhabbete ne denir?", secenekler:["Allah Sevgisi","Korku","Kızgınlık","İlgisizlik"], dogru:"Allah Sevgisi"},
+    {soru:"Her şeyi yoktan var edene ne denir?", secenekler:["Yaratan","Yardımcı","Komşu","Arkadaş"], dogru:"Yaratan"},
+    {soru:"'Çok merhametli' anlamına gelen ve Besmelede geçen isim hangisidir?", secenekler:["Rahman","Kadir","Alîm","Semi"], dogru:"Rahman"},
+    {soru:"'Merhamet eden' anlamına gelen ve Rahman ile birlikte geçen isim hangisidir?", secenekler:["Rahim","Hâlık","Basir","Vedud"], dogru:"Rahim"}
+  ]},
+  {ad:"Şükür ve Dua", ikon:"🙏", sorular:[
+    {soru:"Allah'ın kullarına verdiği güzel şeylere ne denir?", secenekler:["Nimet","Sıkıntı","Yük","Görev"], dogru:"Nimet"},
+    {soru:"Nimetlere karşı teşekkür etmeye ne denir?", secenekler:["Şükür","Nankörlük","Kibir","Cimrilik"], dogru:"Şükür"},
+    {soru:"Allah'a yönelip istekte bulunmaya ne denir?", secenekler:["Dua","Sohbet","Şarkı","Oyun"], dogru:"Dua"},
+    {soru:"Zorluklarda Allah'a dayanıp güvenmeye ne denir?", secenekler:["Allah'a Güven","Korku","Endişe","Umutsuzluk"], dogru:"Allah'a Güven"}
+  ]},
+  {ad:"Sevgi ve Canlılar", ikon:"🌿", sorular:[
+    {soru:"Ağaçları, çiçekleri ve doğayı sevmeye ne denir?", secenekler:["Doğa Sevgisi","Doğa Düşmanlığı","İlgisizlik","Kayıtsızlık"], dogru:"Doğa Sevgisi"},
+    {soru:"Hayvanlara iyi davranıp zarar vermemeye ne denir?", secenekler:["Canlıları Korumak","Hayvanlara Kötü Davranmak","İlgisizlik","Kayıtsızlık"], dogru:"Canlıları Korumak"},
+    {soru:"Allah'ın yarattığı bütün canlılara duyulan sevgiye ne denir?", secenekler:["Yaratıklara Sevgi","Kızgınlık","Korku","Nefret"], dogru:"Yaratıklara Sevgi"},
+    {soru:"Hz. Muhammed'e duyulan sevgi ve bağlılığa ne denir?", secenekler:["Peygamber Sevgisi","İlgisizlik","Unutkanlık","Kayıtsızlık"], dogru:"Peygamber Sevgisi"}
+  ]},
+  {ad:"İtaat ve Güzel Davranış", ikon:"✨", sorular:[
+    {soru:"Allah'ın emir ve yasaklarına uymaya ne denir?", secenekler:["İtaat","İsyan","Karşı Gelme","Reddetme"], dogru:"İtaat"},
+    {soru:"Kur'an-ı Kerim'i sevip öğrenmeye çalışmaya ne denir?", secenekler:["Kur'an Sevgisi","İlgisizlik","Unutkanlık","Kayıtsızlık"], dogru:"Kur'an Sevgisi"},
+    {soru:"İyi ve doğru davranışlar sergilemeye ne denir?", secenekler:["Güzel Davranış","Kötü Davranış","Kabalık","Bencillik"], dogru:"Güzel Davranış"},
+    {soru:"Küçüklere ve zayıflara karşı gösterilen ilgi ve sevgiye ne denir?", secenekler:["Şefkat","Kabalık","İlgisizlik","Sertlik"], dogru:"Şefkat"}
+  ]}
+];
+function bc6Baslat(){ ikiliCarkBaslat({onek:'bc6', kategoriler:BC6_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 

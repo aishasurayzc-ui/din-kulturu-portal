@@ -821,6 +821,29 @@
   <div id="td2YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td2Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki2">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc2Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc2Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc2SoruNo">1</b>/<b id="bc2Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc2Sure">12</b> sn</span>
+    <span>🔵 <b id="bc2Puan1">0</b></span>
+    <span>🔴 <b id="bc2Puan2">0</b></span>
+  </div>
+  <div id="bc2ElDegistir" style="text-align:center;"></div>
+  <div id="bc2SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc2SoruMetin" class="balon-durum"></div>
+  <div id="bc2Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc2Sonuc"></div>
+  <div id="bc2YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc2Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -875,7 +898,8 @@ const OYUN_LISTESI = [
   {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
   {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '2', 'unite2.html');
 
@@ -1104,6 +1128,34 @@ const TD2_KARTLAR = [
   {kelime:"İslam'ın Şartları", yasakli:["beş","namaz","oruç"]}
 ];
 function td2Baslat(){ ikiliAnlatBaslat({onek:'td2', kartlar:TD2_KARTLAR, sureSN:60}); }
+
+const BC2_KATEGORILER = [
+  {ad:"İman Esasları", ikon:"🌟", sorular:[
+    {soru:"Allah'a, meleklere, kitaplara, peygamberlere, ahirete ve kadere inanmaya ne denir?", secenekler:["İman","İbadet","Kulluk","Namaz"], dogru:"İman"},
+    {soru:"Görünmez, nurdan yaratılmış varlıklara ne denir?", secenekler:["Melek","Peygamber","Cin","İnsan"], dogru:"Melek"},
+    {soru:"Allah tarafından insanlara gönderilen kutsal kitaplara ne denir?", secenekler:["İlahi Kitap","Hadis","Fıkıh","Tefsir"], dogru:"İlahi Kitap"},
+    {soru:"Allah'ın doğru yolu göstermek için gönderdiği elçilere ne denir?", secenekler:["Peygamber","Melek","Halife","İmam"], dogru:"Peygamber"}
+  ]},
+  {ad:"İbadetler", ikon:"🕌", sorular:[
+    {soru:"Günde beş vakit kılınan ibadete ne denir?", secenekler:["Namaz","Oruç","Zekât","Hac"], dogru:"Namaz"},
+    {soru:"Ramazan ayında yeme içmeden uzak durmaya ne denir?", secenekler:["Oruç","Namaz","Zekât","Hac"], dogru:"Oruç"},
+    {soru:"Zengin Müslümanların malının bir kısmını fakirlere vermesine ne denir?", secenekler:["Zekât","Sadaka","Fitre","İnfak"], dogru:"Zekât"},
+    {soru:"İmkânı olanların ömründe bir kez Kâbe'yi ziyaret etmesine ne denir?", secenekler:["Hac","Umre","Ziyaret","Yolculuk"], dogru:"Hac"}
+  ]},
+  {ad:"Kur'an ve Cami", ikon:"📖", sorular:[
+    {soru:"Hz. Muhammed'e indirilen son kutsal kitabımız hangisidir?", secenekler:["Kur'an-ı Kerim","Tevrat","İncil","Zebur"], dogru:"Kur'an-ı Kerim"},
+    {soru:"Müslümanların toplu ibadet ettiği yere ne denir?", secenekler:["Cami","Ev","Okul","Park"], dogru:"Cami"},
+    {soru:"İslam dinine inanan kişiye ne denir?", secenekler:["Müslüman","Melek","Peygamber","Halife"], dogru:"Müslüman"},
+    {soru:"'Allah'tan başka ilah yoktur, Muhammed O'nun elçisidir' sözüne ne denir?", secenekler:["Kelime-i Şehadet","Kelime-i Tevhid","Ezan","Dua"], dogru:"Kelime-i Şehadet"}
+  ]},
+  {ad:"İnanç Esasları", ikon:"✨", sorular:[
+    {soru:"Öldükten sonraki hayata ne denir?", secenekler:["Ahiret","Dünya","Kabir","Cennet"], dogru:"Ahiret"},
+    {soru:"Allah'ın her şeyi ezelden bilip takdir etmesine ne denir?", secenekler:["Kader","Kaza","Kısmet","Talih"], dogru:"Kader"},
+    {soru:"İslam'ın kaç şartı vardır?", secenekler:["Beş","Altı","Dört","Üç"], dogru:"Beş"},
+    {soru:"Kelime-i Şehadet, namaz, oruç, zekât ve hac neyin şartlarındandır?", secenekler:["İslam'ın","İmanın","Ahlakın","Sünnetin"], dogru:"İslam'ın"}
+  ]}
+];
+function bc2Baslat(){ ikiliCarkBaslat({onek:'bc2', kategoriler:BC2_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 

@@ -821,6 +821,29 @@
   <div id="td4YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td4Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki4">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc4Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc4Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc4SoruNo">1</b>/<b id="bc4Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc4Sure">12</b> sn</span>
+    <span>🔵 <b id="bc4Puan1">0</b></span>
+    <span>🔴 <b id="bc4Puan2">0</b></span>
+  </div>
+  <div id="bc4ElDegistir" style="text-align:center;"></div>
+  <div id="bc4SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc4SoruMetin" class="balon-durum"></div>
+  <div id="bc4Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc4Sonuc"></div>
+  <div id="bc4YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc4Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -875,7 +898,8 @@ const OYUN_LISTESI = [
   {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
   {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '4', 'unite4.html');
 
@@ -1104,6 +1128,34 @@ const TD4_KARTLAR = [
   {kelime:"Vahiy", yasakli:["mesaj","Allah","melek"]}
 ];
 function td4Baslat(){ ikiliAnlatBaslat({onek:'td4', kartlar:TD4_KARTLAR, sureSN:60}); }
+
+const BC4_KATEGORILER = [
+  {ad:"Doğum ve Aile", ikon:"👶", sorular:[
+    {soru:"Hz. Muhammed hangi şehirde doğmuştur?", secenekler:["Mekke","Medine","Kudüs","Şam"], dogru:"Mekke"},
+    {soru:"Hz. Muhammed'in annesinin adı nedir?", secenekler:["Hz. Amine","Hz. Hatice","Hz. Ayşe","Hz. Fatıma"], dogru:"Hz. Amine"},
+    {soru:"Hz. Muhammed'in babasının adı nedir?", secenekler:["Hz. Abdullah","Hz. Ebubekir","Hz. Ömer","Hz. Ali"], dogru:"Hz. Abdullah"},
+    {soru:"Hz. Muhammed'in ilk eşinin adı nedir?", secenekler:["Hz. Hatice","Hz. Ayşe","Hz. Amine","Hz. Fatıma"], dogru:"Hz. Hatice"}
+  ]},
+  {ad:"Gençlik Yılları", ikon:"🌱", sorular:[
+    {soru:"Hz. Muhammed'e gençliğinde verilen 'güvenilir' anlamındaki lakap nedir?", secenekler:["El-Emin","El-Kerim","El-Fatih","El-Adil"], dogru:"El-Emin"},
+    {soru:"Hz. Muhammed gençliğinde hangi mesleği yapmıştır?", secenekler:["Çobanlık","Marangozluk","Demircilik","Çiftçilik"], dogru:"Çobanlık"},
+    {soru:"Hz. Muhammed'in en belirgin özelliklerinden biri hangisidir?", secenekler:["Dürüstlük","Cimrilik","Öfkelilik","Kibir"], dogru:"Dürüstlük"},
+    {soru:"Hz. Muhammed'in ilk vahyi aldığı mağaranın adı nedir?", secenekler:["Hira Mağarası","Sevr Mağarası","Ashab-ı Kehf Mağarası","Uhud Mağarası"], dogru:"Hira Mağarası"}
+  ]},
+  {ad:"Peygamberlik", ikon:"📿", sorular:[
+    {soru:"Allah'tan peygambere gelen bilgiye ne denir?", secenekler:["Vahiy","Hadis","Sünnet","Fetva"], dogru:"Vahiy"},
+    {soru:"Hz. Muhammed'e peygamberlik görevi kaç yaşında verilmiştir?", secenekler:["40","25","30","50"], dogru:"40"},
+    {soru:"Hz. Muhammed'in doğum gününün anıldığı haftaya ne denir?", secenekler:["Kutlu Doğum Haftası","Ramazan Bayramı","Kurban Bayramı","Miraç Kandili"], dogru:"Kutlu Doğum Haftası"},
+    {soru:"Hz. Muhammed'in bir gece Mekke'den Kudüs'e ve göklere yükseltilmesine ne denir?", secenekler:["Miraç","Hicret","Bedir","Fetih"], dogru:"Miraç"}
+  ]},
+  {ad:"Örnek Davranışlar", ikon:"💫", sorular:[
+    {soru:"Hz. Muhammed'in çocuklara karşı gösterdiği tutum hangisidir?", secenekler:["Şefkat","İlgisizlik","Sertlik","Kayıtsızlık"], dogru:"Şefkat"},
+    {soru:"Hz. Muhammed'in Mekke'den Medine'ye göç etmesine ne denir?", secenekler:["Hicret","Miraç","Fetih","Umre"], dogru:"Hicret"},
+    {soru:"Hz. Muhammed'in hayatı Müslümanlar için nasıl kabul edilir?", secenekler:["Örnek","Efsane","Hikaye","Masal"], dogru:"Örnek"},
+    {soru:"Hz. Muhammed'in kendisine kötülük yapanları bağışlaması hangi özelliğine örnektir?", secenekler:["Affedicilik","Öfkelilik","Kincilik","Bencillik"], dogru:"Affedicilik"}
+  ]}
+];
+function bc4Baslat(){ ikiliCarkBaslat({onek:'bc4', kategoriler:BC4_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 

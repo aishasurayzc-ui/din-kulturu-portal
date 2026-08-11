@@ -933,6 +933,29 @@
   <div id="td1YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td1Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki1">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc1Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc1Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc1SoruNo">1</b>/<b id="bc1Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc1Sure">12</b> sn</span>
+    <span>🔵 <b id="bc1Puan1">0</b></span>
+    <span>🔴 <b id="bc1Puan2">0</b></span>
+  </div>
+  <div id="bc1ElDegistir" style="text-align:center;"></div>
+  <div id="bc1SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc1SoruMetin" class="balon-durum"></div>
+  <div id="bc1Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc1Sonuc"></div>
+  <div id="bc1YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc1Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 
@@ -989,7 +1012,8 @@ const OYUN_LISTESI = [
   {id:'sv1', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm1', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
   {id:'ca1', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
-  {id:'tabuduellosu1', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan ifadeyi arkadaşına anlat.'}
+  {id:'tabuduellosu1', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan ifadeyi arkadaşına anlat.'},
+  {id:'bilgicarki1', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '', 'index.html');
 
@@ -1218,6 +1242,34 @@ const TD1_KARTLAR = [
   {kelime:"Allah Kabul Etsin", yasakli:["ibadet","dua","oruç"]}
 ];
 function td1Baslat(){ ikiliAnlatBaslat({onek:'td1', kartlar:TD1_KARTLAR, sureSN:60}); }
+
+const BC1_KATEGORILER = [
+  {ad:"Başlangıç İfadeleri", ikon:"🌟", sorular:[
+    {soru:"Bir işe başlarken söylenen 'Allah'ın adıyla' anlamına gelen ifade hangisidir?", secenekler:["Bismillah","Elhamdülillah","İnşallah","Maşallah"], dogru:"Bismillah"},
+    {soru:"'Allah izin verirse' anlamına gelen ifade hangisidir?", secenekler:["İnşallah","Maşallah","Sübhanallah","Amin"], dogru:"İnşallah"},
+    {soru:"Güzel bir şey görüldüğünde nazardan korunmak için söylenen ifade hangisidir?", secenekler:["Maşallah","Bismillah","Amin","Elhamdülillah"], dogru:"Maşallah"},
+    {soru:"Allah'ı eksikliklerden tenzih etmek için söylenen ifade hangisidir?", secenekler:["Sübhanallah","İnşallah","Maşallah","Amin"], dogru:"Sübhanallah"}
+  ]},
+  {ad:"Şükür ve Dua", ikon:"🙏", sorular:[
+    {soru:"Bir nimete kavuşunca şükretmek için söylenen ifade hangisidir?", secenekler:["Elhamdülillah","İnşallah","Maşallah","Estağfirullah"], dogru:"Elhamdülillah"},
+    {soru:"Duanın sonunda kabul dileğiyle söylenen kelime hangisidir?", secenekler:["Amin","İnşallah","Bismillah","Maşallah"], dogru:"Amin"},
+    {soru:"Bir ibadeti bitiren kişiye söylenen iyi dilek hangisidir?", secenekler:["Allah Kabul Etsin","Hayırlı Olsun","Kolay Gelsin","Geçmiş Olsun"], dogru:"Allah Kabul Etsin"},
+    {soru:"Birine yardımı için teşekkür ederken söylenen ifade hangisidir?", secenekler:["Allah Razı Olsun","Maşallah","Amin","Sübhanallah"], dogru:"Allah Razı Olsun"}
+  ]},
+  {ad:"Selam ve Vedalar", ikon:"👋", sorular:[
+    {soru:"Karşılaşınca söylenen ve esenlik dileyen selam ifadesi hangisidir?", secenekler:["Selamün Aleyküm","Allah'a Emanet Ol","Hoşça Kal","Merhaba"], dogru:"Selamün Aleyküm"},
+    {soru:"Bir yolculuğa çıkan kişiye söylenen veda ifadesi hangisidir?", secenekler:["Allah'a Emanet Ol","Selamün Aleyküm","Hayırlı Olsun","Amin"], dogru:"Allah'a Emanet Ol"},
+    {soru:"Yeni bir eve taşınan kişiye söylenen iyi dilek hangisidir?", secenekler:["Hayırlı Olsun","Kolay Gelsin","Geçmiş Olsun","Afiyet Olsun"], dogru:"Hayırlı Olsun"},
+    {soru:"Çalışmakta olan birine söylenen iyi dilek ifadesi hangisidir?", secenekler:["Kolay Gelsin","Hayırlı Olsun","Afiyet Olsun","Geçmiş Olsun"], dogru:"Kolay Gelsin"}
+  ]},
+  {ad:"İyi Dilekler", ikon:"💐", sorular:[
+    {soru:"Hasta olan birine söylenen iyi dilek ifadesi hangisidir?", secenekler:["Geçmiş Olsun","Afiyet Olsun","Kolay Gelsin","Hayırlı Olsun"], dogru:"Geçmiş Olsun"},
+    {soru:"Yemek yiyen birine söylenen iyi dilek ifadesi hangisidir?", secenekler:["Afiyet Olsun","Geçmiş Olsun","Kolay Gelsin","Amin"], dogru:"Afiyet Olsun"},
+    {soru:"Bir hata yapıldığında pişmanlıkla söylenen ifade hangisidir?", secenekler:["Estağfirullah","İnşallah","Maşallah","Bismillah"], dogru:"Estağfirullah"},
+    {soru:"'Allah senden razı olsun' anlamına gelen teşekkür ifadesi hangisidir?", secenekler:["Allah Razı Olsun","Allah Kabul Etsin","Hayırlı Olsun","Sübhanallah"], dogru:"Allah Razı Olsun"}
+  ]}
+];
+function bc1Baslat(){ ikiliCarkBaslat({onek:'bc1', kategoriler:BC1_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 

@@ -821,6 +821,29 @@
   <div id="td5YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="td5Baslat()">🙊 Düelloyu Başlat</button>
 </section>
+
+<section id="bilgicarki5">
+  <h2>🎡 Bilgi Çarkı</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Farklı konu başlıklarını şans faktörüyle birleştirerek eğlenceli tekrar yapmak.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Çarkı çevir, hangi kategoriden soru geleceğini gör, sonra cevapla.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="bc5Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="bc5Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>❓ Tur: <b id="bc5SoruNo">1</b>/<b id="bc5Toplam">8</b></span>
+    <span>⏱️ Süre: <b id="bc5Sure">12</b> sn</span>
+    <span>🔵 <b id="bc5Puan1">0</b></span>
+    <span>🔴 <b id="bc5Puan2">0</b></span>
+  </div>
+  <div id="bc5ElDegistir" style="text-align:center;"></div>
+  <div id="bc5SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="bc5SoruMetin" class="balon-durum"></div>
+  <div id="bc5Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="bc5Sonuc"></div>
+  <div id="bc5YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="bc5Baslat()">🎡 Çarkı Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -875,7 +898,8 @@ const OYUN_LISTESI = [
   {id:'sv', kategori:'ikikisilik', ikon:'💔', baslik:'Hayatta Kalma Modu', aciklama:'Yanlış cevap can kaybettirir, son ayakta kalan kazanır.'},
   {id:'dm', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
   {id:'ca', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
-  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '5', 'unite5.html');
 
@@ -1104,6 +1128,34 @@ const TD5_KARTLAR = [
   {kelime:"İman ve Temizlik", yasakli:["hadis","temizlik","yarısı"]}
 ];
 function td5Baslat(){ ikiliAnlatBaslat({onek:'td5', kartlar:TD5_KARTLAR, sureSN:60}); }
+
+const BC5_KATEGORILER = [
+  {ad:"İbadet Temizliği", ikon:"🕌", sorular:[
+    {soru:"Namaz kılmadan önce el, yüz ve ayakların yıkanmasına ne denir?", secenekler:["Abdest","Gusül","Teyemmüm","Vudu"], dogru:"Abdest"},
+    {soru:"Bütün vücudun baştan ayağa yıkanmasına ne denir?", secenekler:["Gusül","Abdest","Teyemmüm","Duş"], dogru:"Gusül"},
+    {soru:"Diş temizliği için kullanılan, Peygamberimizin de kullandığı doğal fırçaya ne denir?", secenekler:["Misvak","Diş Fırçası","Macun","Sabun"], dogru:"Misvak"},
+    {soru:"Yemekten önce ve sonra yıkanması gereken vücut bölümü hangisidir?", secenekler:["Eller","Saç","Kulaklar","Dizler"], dogru:"Eller"}
+  ]},
+  {ad:"Beden ve Görünüm", ikon:"🧼", sorular:[
+    {soru:"Vücudun düzenli olarak yıkanmasına ne denir?", secenekler:["Beden Temizliği","Çevre Temizliği","Ev Temizliği","Manevi Temizlik"], dogru:"Beden Temizliği"},
+    {soru:"Uzadığında kesilmesi gereken vücut parçası hangisidir?", secenekler:["Tırnak","Kaş","Kirpik","Dudak"], dogru:"Tırnak"},
+    {soru:"Düzenli yıkanması gereken baştaki organ hangisidir?", secenekler:["Saç","El","Ayak","Diz"], dogru:"Saç"},
+    {soru:"Temiz ve düzenli giyilmesi gereken şey nedir?", secenekler:["Kıyafet","Ayakkabı bağı","Çanta","Şapka"], dogru:"Kıyafet"}
+  ]},
+  {ad:"Çevre ve Ev", ikon:"🏡", sorular:[
+    {soru:"Doğayı ve ortak yaşam alanlarını temiz tutmaya ne denir?", secenekler:["Çevre Temizliği","Beden Temizliği","Niyet Temizliği","Manevi Temizlik"], dogru:"Çevre Temizliği"},
+    {soru:"Yaşanılan odanın ve evin düzenli tutulmasına ne denir?", secenekler:["Ev Temizliği","Çevre Temizliği","Beden Temizliği","Kıyafet Temizliği"], dogru:"Ev Temizliği"},
+    {soru:"Temizlik yaparken en çok kullanılan doğal madde hangisidir?", secenekler:["Su","Toprak","Ateş","Rüzgar"], dogru:"Su"},
+    {soru:"Yıkanırken kir ve mikropları temizlemeye yarayan köpüklü madde hangisidir?", secenekler:["Sabun","Şeker","Tuz","Un"], dogru:"Sabun"}
+  ]},
+  {ad:"Temizlik ve İman", ikon:"✨", sorular:[
+    {soru:"Hem bedeni hem çevreyi kapsayan genel kavrama ne denir?", secenekler:["Temizlik","Kirlilik","Tembellik","Savurganlık"], dogru:"Temizlik"},
+    {soru:"Düzenli temizlik alışkanlığının insana kazandırdığı şey nedir?", secenekler:["Sağlık","Hastalık","Yorgunluk","Tembellik"], dogru:"Sağlık"},
+    {soru:"Kalbin kötü düşüncelerden arındırılmasına ne denir?", secenekler:["Niyet Temizliği","Beden Temizliği","Ev Temizliği","Çevre Temizliği"], dogru:"Niyet Temizliği"},
+    {soru:"'Temizlik imandandır' sözü hangi kavramla ilişkilidir?", secenekler:["İman ve Temizlik","Sadece Beden Temizliği","Sadece Ev Temizliği","Sadece Çevre Temizliği"], dogru:"İman ve Temizlik"}
+  ]}
+];
+function bc5Baslat(){ ikiliCarkBaslat({onek:'bc5', kategoriler:BC5_KATEGORILER, turSayisi:8, sureSN:12}); }
 
 
 
