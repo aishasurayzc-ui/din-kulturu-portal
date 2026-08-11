@@ -711,6 +711,32 @@
   <div id="ca8YenidenBaslat"></div>
   <button class="eylem" onclick="ca8Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu8">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td8Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td8Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td8Sure">60</b> sn</span>
+    <span>🔵 <b id="td8Puan1">0</b></span>
+    <span>🔴 <b id="td8Puan2">0</b></span>
+  </div>
+  <div id="td8ElDegistir" style="text-align:center;"></div>
+  <div id="td8SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td8Kelime" class="omg-anlat-kelime"></div>
+  <div id="td8Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td8', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td8', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td8Sonuc"></div>
+  <div id="td8YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td8Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -764,7 +790,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece birkaç saniyen var, hızlı düşün!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'Her oyuncunun sınırlı canı var, dikkatli cevapla.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Verilen senaryoda en doğru kararı ver.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvası, en yüksek puanlı oyuncu şampiyon olur.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '8', 'index.html');
 
@@ -1000,6 +1027,25 @@ const CA8_SORULAR = [
   {soru:"Nâs ve Felak sureleri birlikte hangi isimle anılır?", secenekler:["Muavvizeteyn","Kevser","Furkan","Tevhit"], dogru:0}
 ];
 function ca8Baslat(){ ikiliOyunBaslat({onek:'ca8', sorular:CA8_SORULAR}); }
+
+const TD8_KARTLAR = [
+  {kelime:"Melek", yasakli:["görünmez","nurani","Allah","varlık"]},
+  {kelime:"Cebrail", yasakli:["vahiy","büyük","getirmek","melek"]},
+  {kelime:"Mikâil", yasakli:["rızık","doğa","görevli","melek"]},
+  {kelime:"İsrâfil", yasakli:["sur","üflemek","kıyamet","melek"]},
+  {kelime:"Azrâil", yasakli:["can","almak","ölüm","melek"]},
+  {kelime:"Ahiret", yasakli:["öldükten sonra","hayat","ebedi","dünya"]},
+  {kelime:"Kıyamet", yasakli:["son","dünya","yıkılmak","kopmak"]},
+  {kelime:"Ba's (Yeniden Diriliş)", yasakli:["dirilmek","kabir","kalkmak","hayat"]},
+  {kelime:"Haşir", yasakli:["toplanmak","mahşer","insanlar","meydan"]},
+  {kelime:"Mizan", yasakli:["terazi","tartmak","amel","hesap"]},
+  {kelime:"Sırat", yasakli:["köprü","geçmek","cehennem","ince"]},
+  {kelime:"Cennet", yasakli:["mükafat","güzel","sonsuz","nimet"]},
+  {kelime:"Cehennem", yasakli:["azap","ceza","ateş","günah"]},
+  {kelime:"Amel Defteri", yasakli:["kayıt","melek","hesap","yazmak"]},
+  {kelime:"Kabir Hayatı", yasakli:["mezar","ölüm","ara","dönem"]}
+];
+function td8Baslat(){ ikiliAnlatBaslat({onek:'td8', kartlar:TD8_KARTLAR, sureSN:60}); }
 
 
 // =====================================================================

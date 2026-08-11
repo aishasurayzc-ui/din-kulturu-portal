@@ -711,6 +711,32 @@
   <div id="ca84YenidenBaslat"></div>
   <button class="eylem" onclick="ca84Baslat()">🎮 Oyuna Başla</button>
 </section>
+
+<section id="tabuduellosu84">
+  <h2>🙊 Tabu Düellosu</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Yasaklı kelimeleri kullanmadan kavramı anlatabilmeyi, dolayısıyla kavramı derinlemesine bilmeyi test etmek.</div>
+  <div class="aciklama">📱 Cihazı anlatan tutar (kelimeyi ve yasaklı kelimeleri sadece o görür), karşı taraf sesli olarak tahmin eder. Anlatan, doğru bilinince "✅ Doğru Bildi", takılırsa "⏭️ Pas" tuşuna basar. Süre bitince sıra değişir.</div>
+  <div class="omg-isim-satir">
+    <input type="text" id="td84Isim1" placeholder="🔵 1. Oyuncu adı" maxlength="20">
+    <input type="text" id="td84Isim2" placeholder="🔴 2. Oyuncu adı" maxlength="20">
+  </div>
+  <div class="oyun-bilgi">
+    <span>⏱️ Süre: <b id="td84Sure">60</b> sn</span>
+    <span>🔵 <b id="td84Puan1">0</b></span>
+    <span>🔴 <b id="td84Puan2">0</b></span>
+  </div>
+  <div id="td84ElDegistir" style="text-align:center;"></div>
+  <div id="td84SiraKimde" style="text-align:center;font-weight:bold;color:var(--sari);"></div>
+  <div id="td84Kelime" class="omg-anlat-kelime"></div>
+  <div id="td84Yasakli" class="omg-anlat-yasakli"></div>
+  <div class="omg-anlat-butonlar">
+    <button class="eylem omg-anlat-dogru" onclick="ikiliAnlatSonucVer('td84', true)">✅ Doğru Bildi</button>
+    <button class="eylem omg-anlat-pas" onclick="ikiliAnlatSonucVer('td84', false)">⏭️ Pas</button>
+  </div>
+  <div class="sonuc-kutusu" id="td84Sonuc"></div>
+  <div id="td84YenidenBaslat" style="text-align:center;"></div>
+  <button class="eylem" onclick="td84Baslat()">🙊 Düelloyu Başlat</button>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -764,7 +790,8 @@ const OYUN_LISTESI = [
   {id:'flashchallenge', kategori:'ikikisilik', ikon:'⚡', baslik:'Flash Challenge', aciklama:'Sadece 5 saniyen var, hızlı cevapla!'},
   {id:'survivalmode', kategori:'ikikisilik', ikon:'💔', baslik:'Survival Mode', aciklama:'3 canın var, dikkatli cevapla, hayatta kal.'},
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
-  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'}
+  {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
+  {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '84', 'unite4.html');
 
@@ -1001,6 +1028,25 @@ const CA84_SORULAR = [
   {soru:"Kureyş suresinde geçen 'şitâ' kelimesi ne demektir?", secenekler:["Kış","Yaz","Gece","Yolculuk"], dogru:0}
 ];
 function ca84Baslat(){ ikiliOyunBaslat({onek:'ca84', sorular:CA84_SORULAR}); }
+
+const TD84_KARTLAR = [
+  {kelime:"İlk Vahiy", yasakli:["Hira","oku","melek","mağara"]},
+  {kelime:"Gizli Davet", yasakli:["yakın","çevre","ilk","aile"]},
+  {kelime:"Açık Davet", yasakli:["herkes","ilan","tebliğ","duyurmak"]},
+  {kelime:"Boykot", yasakli:["ambargo","dışlamak","vadi","yasak"]},
+  {kelime:"Habeşistan'a Hicret", yasakli:["göç","kral","ilk","sığınmak"]},
+  {kelime:"Akabe Biatları", yasakli:["söz","antlaşma","Medine","yemin"]},
+  {kelime:"Medine Sözleşmesi", yasakli:["antlaşma","madde","birlik","belge"]},
+  {kelime:"Bedir Savaşı", yasakli:["ilk","zafer","savaş","müslüman"]},
+  {kelime:"Uhud Savaşı", yasakli:["dağ","savaş","okçular","geçit"]},
+  {kelime:"Hendek Savaşı", yasakli:["kazı","savunma","savaş","çukur"]},
+  {kelime:"Hudeybiye Antlaşması", yasakli:["barış","antlaşma","Mekke","imza"]},
+  {kelime:"Mekke'nin Fethi", yasakli:["zafer","af","savaşsız","dönüş"]},
+  {kelime:"Veda Haccı", yasakli:["son","hac","hutbe","öğüt"]},
+  {kelime:"Örnek Liderlik", yasakli:["yönetmek","adalet","model","önder"]},
+  {kelime:"Hicret", yasakli:["göç","Medine","Mekke","yolculuk"]}
+];
+function td84Baslat(){ ikiliAnlatBaslat({onek:'td84', kartlar:TD84_KARTLAR, sureSN:60}); }
 
 
 // =====================================================================
