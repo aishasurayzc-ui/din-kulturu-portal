@@ -460,6 +460,10 @@
 .zb-degerlendir li{ display:flex; align-items:flex-start; gap:8px; margin:8px 0; font-size:.95em; line-height:1.4; }
 .zb-degerlendir input[type=checkbox]{ width:18px; height:18px; margin-top:2px; flex-shrink:0; accent-color:#2a6f97; cursor:pointer; }
 .zb-degerlendir label{ cursor:pointer; }
+.zb-hayatta{ background:#e6fbfa; border-left:6px solid #06B6D4; }
+.zb-hayatta .zb-baslik{ color:#0891a8; }
+.zb-hayatta .ht-onay{ display:flex; align-items:center; gap:8px; margin:10px 0 0; cursor:pointer; font-weight:700; font-size:.95em; }
+.zb-hayatta .ht-onay input[type=checkbox]{ width:20px; height:20px; accent-color:#06B6D4; cursor:pointer; }
 
 /* ===================== 6 BOLUMLU ZENGINLESTIRME (Sunum slaytlari) ===================== */
 .s-zb{ color:#22333b; }
@@ -882,6 +886,18 @@
     </ul>
   </div>
 
+
+
+  <div class="zb-kutu zb-hayatta">
+    <p class="zb-baslik">🌍 Hayatta Dene</p>
+    <p class="zb-metin"><b>Bugünün görevi:</b> Hz. Muhammed'in çocuklara gösterdiği şefkati örnek alarak, bugün küçük bir çocuğa (kardeşin, komşun vb.) nazikçe zaman ayır.</p>
+    <label class="ht-onay" for="htDene_4-4">
+      <input type="checkbox" id="htDene_4-4" onchange="htDeneKaydet('4-4')">
+      <span>☑ Görevi yaptım</span>
+    </label>
+    <textarea id="zbAlan_hayatta_4-4" class="zb-cevap-alani" placeholder="Nasıl hissettin? Kısaca yazabilirsin..." onchange="zbCevapKaydet('hayatta_4-4', this)" aria-label="Nasıl hissettin?"></textarea>
+    <p class="zb-cevap-not" id="zbNot_hayatta_4-4"></p>
+  </div>
 
 </section>
 
@@ -3597,6 +3613,20 @@ function degYukle(uniteKimlik){
 }
 document.addEventListener('DOMContentLoaded', function(){
   if(typeof UNITE_KIMLIK !== 'undefined') degYukle(UNITE_KIMLIK);
+});
+
+// ===================== HAYATTA DENE - GOREV ONAYI =====================
+function htDeneKaydet(uniteKimlik){
+  const cb = document.getElementById('htDene_'+uniteKimlik);
+  if(cb) try{ localStorage.setItem('dkabHayattaDene_'+uniteKimlik, cb.checked ? '1' : ''); }catch(e){}
+}
+function htDeneYukle(uniteKimlik){
+  const cb = document.getElementById('htDene_'+uniteKimlik);
+  if(!cb) return;
+  try{ cb.checked = localStorage.getItem('dkabHayattaDene_'+uniteKimlik) === '1'; }catch(e){}
+}
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof UNITE_KIMLIK !== 'undefined') htDeneYukle(UNITE_KIMLIK);
 });
 
 
