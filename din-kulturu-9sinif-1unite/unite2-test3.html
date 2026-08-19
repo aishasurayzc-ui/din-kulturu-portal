@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Ünite — Test 3 | İslam'da İnanç Esasları</title>
+<style>
+:root{
+  --ink:#17242e; --ink2:#41525f; --bg:#f6f4ef; --card:#ffffff;
+  --line:#e3ddd2; --teal:#0f6f66; --teal-soft:#e6f2f0;
+  --blue:#1e5a8a; --blue-soft:#e8f1f8;
+  --green:#3c6b2f; --green-soft:#ecf4e8;
+  --red:#a33a34; --red-soft:#fbeceb;
+  --amber:#a4610b; --amber-soft:#fbf1e2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.65;font-size:16px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 80px}
+a{color:var(--teal)}
+header.hero{background:linear-gradient(160deg,#0f6f66 0%,#134e5e 60%,#173a4a 100%);color:#fff;padding:34px 20px 30px;margin-bottom:22px}
+header.hero .inner{max-width:760px;margin:0 auto}
+.kicker{letter-spacing:.16em;text-transform:uppercase;font-size:11.5px;opacity:.82;margin:0 0 8px}
+header.hero h1{margin:0 0 8px;font-size:clamp(21px,4vw,28px)}
+header.hero p{margin:0;opacity:.92;font-size:14.5px}
+.zortag{background:var(--red);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:2px 9px;border-radius:999px;margin-left:8px;vertical-align:middle}
+.top-back{max-width:760px;margin:14px auto 0;padding:0 20px}
+.top-back a{display:inline-flex;gap:6px;color:var(--ink2);text-decoration:none;font-size:13.5px;font-weight:650}
+.quiz-q{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin:14px 0}
+.quiz-q .qh{font-weight:650;margin-bottom:10px;display:flex;gap:9px;align-items:flex-start}
+.quiz-q .qn{background:var(--blue);color:#fff;border-radius:7px;padding:1px 9px;font-size:13px;height:fit-content;flex:none;margin-top:2px}
+.opt{display:block;padding:8px 12px;border:1px solid var(--line);border-radius:9px;margin:5px 0;cursor:pointer;font-size:15px;transition:.12s}
+.opt:hover{background:#f2f7fb;border-color:#b9d3e6}
+.opt input{margin-right:8px}
+.opt.correct{background:var(--green-soft);border-color:var(--green)}
+.opt.wrong{background:var(--red-soft);border-color:var(--red)}
+.qexp{display:none;margin-top:10px;padding:10px 14px;background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:0 9px 9px 0;font-size:14.4px}
+.qexp.show{display:block}
+.quiz-bar{position:sticky;bottom:0;display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:14px 0;background:linear-gradient(180deg,rgba(246,244,239,0),var(--bg) 30%)}
+button.btn{background:var(--teal);color:#fff;border:0;border-radius:10px;padding:12px 22px;font-size:15px;font-weight:650;cursor:pointer;font-family:inherit}
+button.btn:hover{background:#0c5b53}
+#score{font-weight:750;font-size:16px;background:#fff;border:1px solid var(--line);padding:8px 16px;border-radius:10px}
+</style>
+</head>
+<body>
+
+<div class="top-back"><a href="unite2.html">← Konuya Dön</a></div>
+
+<header class="hero">
+  <div class="inner">
+    <p class="kicker">Din Kültürü ve Ahlak Bilgisi · 2. Ünite · Test 3/4</p>
+    <h1>İslam'da İnanç Esasları — Test 3</h1>
+    <p>20 soru · 5 seçenekli · TYT/AYT formatı. Kırmızı etiketli sorular daha zorlayıcıdır.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div id="quiz"></div>
+  <div class="quiz-bar">
+    <button class="btn" id="btnBitir">Sonuçları Gör</button>
+    <span id="score"></span>
+  </div>
+</div>
+
+<script>
+const SORULAR = [
+{z:0, s:"'…Allah, Mûsâ ile de konuştu' ayeti Allah'ın hangi sıfatına işaret eder?", o:["İlim","Kelâm","İrade","Kudret","Semi'"], d:1, a:"Kelâm, Allah'ın peygamberleriyle vahiy yoluyla konuşmasıdır."},
+{z:0, s:"Esmâ-i hüsnâdan 'el-Bâkī' ismi Allah'ın hangi sıfatıyla ilişkilidir?", o:["Kıdem","Bekā","Vücûd","Vahdâniyet","Hayat"], d:1, a:"el-Bâkī, Allah'ın varlığının ebedî olmasını ifade eden bekā sıfatıyla ilişkilidir."},
+{z:0, s:"Kader ve kaza inancı Allah'ın hangi sıfatlarıyla ilişkilendirilir?", o:["Yalnızca selbî sıfatlarla","İlim, irade, kudret ve tekvîn sıfatlarıyla","Yalnızca kelâm sıfatıyla","Yalnızca semi' sıfatıyla","Yalnızca vücûd sıfatıyla"], d:1, a:"Kader ve kaza; Allah'ın ilim, irade, kudret ve tekvîn sıfatlarının bir sonucu olarak açıklanır."},
+{z:0, s:"Suhuf ile kitap arasındaki temel fark nedir?", o:["Suhuf daha büyük hacimlidir","Suhuf küçük hacimli, kitap büyük hacimlidir","Suhuf yalnızca Hz. Muhammed'e indirilmiştir","Kitap yalnızca sözlü aktarılır","İkisi arasında fark yoktur"], d:1, a:"Suhuf, sayfalar hâlinde küçük hacimli vahiyleri; kitap ise büyük hacimli, kapsamlı vahiyleri ifade eder."},
+{z:1, s:"'Bu meleğin adı Cebrâil'le birlikte Bakara 2/98'de açıkça zikredilir; tabiat olaylarını ve rızıkları yönetmekle görevlidir.' Sözü edilen melek hangisidir?", o:["İsrâfil","Azrâil","Mîkâil","Münker","Hamele-i Arş"], d:2, a:"Mîkâil, tabiat olayları ve rızıklarla görevlidir; Bakara 2/98'de Cebrâil'le birlikte ismen anılır."},
+{z:0, s:"Peygamberlerin güvenilir olması hangi sıfatla ifade edilir?", o:["Sıdk","Emanet","Fetanet","Tebliğ","İsmet"], d:1, a:"Emanet, peygamberlerin güvenilirlik sıfatıdır."},
+{z:0, s:"Ahiret hayatının aşamaları arasında, amellerin tartılacağı yer hangisidir?", o:["Haşir","Hesap","Mizan","Sırat","Berzah"], d:2, a:"Mizan, amellerin değerlendirilmesi için kurulacak teraziyi ifade eder."},
+{z:1, s:"Bir kişi ahirete inanmadığını, ancak Kur'an'ı Allah'ın kelamı olarak kabul ettiğini söylüyor. Bu durum aşağıdaki ilişkilerden hangisiyle çelişir?", o:["Meleklere iman - kitaplara iman","Kitaplara iman - ahirete iman","Allah'a iman - kadere iman","Peygamberlere iman - meleklere iman","Kadere iman - ahirete iman"], d:1, a:"Ahiretle ilgili bilginin kaynağı vahiydir (kitap); kitabı kabul edip ahireti reddetmek bu bağı görmezden gelmek olur."},
+{z:0, s:"'Allah'a inanmakla birlikte başka varlıkları da tanrı kabul etmek' hangi kavramla ifade edilir?", o:["Tevhit","Şirk","Takva","Birr","İhsan"], d:1, a:"Şirk, Allah'a ortak koşmaktır; tevhidin zıddıdır."},
+{z:0, s:"Dört büyük kitaptan hangisi 'değiştirilmeden' günümüze ulaştığı özellikle vurgulanan kitaptır?", o:["Tevrat","Zebûr","İncil","Kur'an-ı Kerim","Suhuf"], d:3, a:"Kur'an-ı Kerim, indirildiği hâliyle korunmuş tek kutsal kitaptır."},
+{z:1, s:"Bir ayette Allah'a, ahiret gününe, meleklere, kitaplara ve peygamberlere iman sayılır; ancak kader bu ayette doğrudan zikredilmez. Bahsedilen ayet hangisidir?", o:["İhlâs 112","Bakara 2/177","Nisâ 4/136","Rûm 30/30","Enbiyâ 21/25"], d:1, a:"Bakara 2/177'de beş esas sayılır; kader ayrıca zikredilmez, Cibrîl hadisinde altıncı esas olarak bildirilir."},
+{z:0, s:"Peygamberlerin sonuncusu olduğunu bildiren ayet hangisidir?", o:["Ahzâb 33/40","Hicr 15/9","Mâide 5/46","Nisâ 4/163","Bakara 2/285"], d:0, a:"Ahzâb 33/40, Hz. Muhammed'in peygamberlerin sonuncusu olduğunu bildirir."},
+{z:0, s:"Kirâmen Kâtibîn melekleri hangi görevi üstlenir?", o:["Kabirde sorgu","İnsanın iyi/kötü fiillerini kaydetme","Sûra üfleme","Arşı taşıma","Rızıkları yönetme"], d:1, a:"Kirâmen Kâtibîn, insanın sağında ve solunda fiillerini kaydeden meleklerdir."},
+{z:1, s:"'İnsan, yaratılışın bir amacı olduğunu fark ettiğinde hayatın ölümle biten anlamsız bir süreç olamayacağını anlar; adalet ve hakkaniyet duygusu, iyilik ve kötülüğün karşılığının verileceği bir hayatı zorunlu kılar.' Bu parça neyin aklî delilini açıklamaktadır?", o:["Allah'ın varlığının","Meleklerin varlığının","Ahiretin gerekliliğinin","Kaderin işleyişinin","Peygamberliğin gerekliliğinin"], d:2, a:"Bu, ahiretin akıl yoluyla da kavranabilecek gerekliliğine dair bir açıklamadır; adalet ve sonsuzluk duygusu ahireti zorunlu kılar."},
+{z:0, s:"'Doğruluk birre, birr de cennete ulaştırır' hadisinde vurgulanan ilişki hangi kavramlar arasındadır?", o:["Sıdk-birr-cennet","Şirk-tevhit","Tasdik-ikrar","Kader-kaza","İman-amel"], d:0, a:"Hadis, doğruluğun (sıdk) gerçek iyiliğe (birr), onun da cennete ulaştırdığını belirtir."},
+{z:0, s:"Aşağıdakilerden hangisi Cibrîl hadisinde ayrı ayrı sorulan üç kavramdan biri DEĞİLDİR?", o:["İslam","İman","İhsan","Tevhit","Hiçbiri (üçü de sorulur)"], d:3, a:"Cibrîl hadisinde İslam, iman ve ihsan ayrı ayrı sorulmuştur; tevhit bunlardan biri olarak ayrıca sorulmaz."},
+{z:1, s:"'Vahdâniyet sübûtî sıfattır' ifadesi neden yanlıştır?", o:["Vahdâniyet diye bir sıfat yoktur","Vahdâniyet selbîdir, sübûtî değildir","Sübûtî sıfat sayısı yanlış verilmiştir","Selbî sıfat sayısı yanlış verilmiştir","Vahdâniyet Allah'a ait değildir"], d:1, a:"Vahdâniyet, Allah'ın ne olmadığını bildiren selbî (tenzîhî) sıfatlardandır; sübûtî değildir."},
+{z:0, s:"'İnsanların anlaşmazlığa düştükleri konularda hüküm vermesi için kitapların gönderildiği' hangi ayette belirtilir?", o:["Bakara 2/213","Hicr 15/9","Nisâ 4/136","Enbiyâ 21/25","Mâide 5/44"], d:0, a:"Bakara 2/213, kitapların anlaşmazlıklarda hak yolu göstermek için gönderildiğini bildirir."},
+{z:0, s:"Allah'ın 'her şeye gücünün yetmesi' hangi sıfatla ifade edilir?", o:["İlim","İrade","Kudret","Kelâm","Tekvîn"], d:2, a:"Kudret, Allah'ın her şeye gücünün yetmesidir."},
+{z:1, s:"'İman esasları sade, açık ve anlaşılırdır; aklıselim tarafından kolaylıkla kabul edilebilir.' Bu ifade iman esaslarının hangi özelliğine karşılık gelir?", o:["Tevhide dayanması","Sadelik","Değişmezlik","Bir bütün oluşu","Özgür iradeye dayanması"], d:1, a:"İman esaslarının sade, açık ve anlaşılır olması, aklıselim tarafından kolaylıkla idrak edilebilmesiyle ilgilidir."}
+];
+
+const q = document.getElementById('quiz');
+q.innerHTML = SORULAR.map(function(item,i){
+  var opts = item.o.map(function(op,j){
+    var harf = "ABCDE"[j];
+    return '<label class="opt" data-i="'+j+'"><input type="radio" name="q'+i+'" value="'+j+'"> <b>'+harf+')</b> '+op+'</label>';
+  }).join('');
+  return '<div class="quiz-q" data-d="'+item.d+'">'+
+    '<div class="qh"><span class="qn">'+(i+1)+'</span><span>'+item.s+(item.z? '<span class="zortag">ZOR</span>':'')+'</span></div>'+
+    opts+
+    '<div class="qexp">'+item.a+'</div>'+
+  '</div>';
+}).join('');
+
+document.getElementById('btnBitir').addEventListener('click', function(){
+  var qs = document.querySelectorAll('.quiz-q');
+  var dogru = 0;
+  qs.forEach(function(el){
+    var d = parseInt(el.getAttribute('data-d'),10);
+    var secili = el.querySelector('input:checked');
+    var opts = el.querySelectorAll('.opt');
+    opts.forEach(function(o,i){
+      if(i===d) o.classList.add('correct');
+      if(secili && parseInt(secili.value,10)===i && i!==d) o.classList.add('wrong');
+    });
+    if(secili && parseInt(secili.value,10)===d) dogru++;
+    el.querySelector('.qexp').classList.add('show');
+  });
+  document.getElementById('score').textContent = 'Sonuç: '+dogru+' / '+qs.length;
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+
+</body>
+</html>

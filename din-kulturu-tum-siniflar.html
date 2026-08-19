@@ -1110,7 +1110,7 @@
      daha aşağıda, seçimden sonra geliyor). -->
 <section class="sinif-odak-bolum sinif-odak-bolum--giris" aria-labelledby="sinifOdakBaslik">
   <div class="sinif-sekme-sarmal">
-    <p class="bolum-on-etiket">4 Farklı Sınıf Seviyesi</p>
+    <p class="bolum-on-etiket">5 Farklı Sınıf Seviyesi</p>
     <h2 class="sinif-odak-baslik" id="sinifOdakBaslik">Sınıfını Seç</h2>
     <p class="sinif-sekme-onsoz">Sınıf seviyenizi seçerek Türkiye Yüzyılı Maarif Modeli'ne uygun içeriklere ulaşabilirsiniz.</p>
 
@@ -1333,7 +1333,7 @@
   <div class="footer-ic">
     <div class="footer-sutun">
       <h3><span class="msi" aria-hidden="true">info</span> Site Hakkında</h3>
-      <p>Din Kültürü ve Ahlak Bilgisi — 4, 5, 6 ve 7. Sınıflar için hazırlanmış ünite konu özetleri, interaktif oyunlar, sunumlar ve yazılı sınavları tek platformda buluşturan dijital ders materyalleri portalı.</p>
+      <p>Din Kültürü ve Ahlak Bilgisi — 4, 5, 6, 7 ve 8. Sınıflar için hazırlanmış ünite konu özetleri, interaktif oyunlar, sunumlar ve yazılı sınavları tek platformda buluşturan dijital ders materyalleri portalı.</p>
       <p class="footer-satir" id="footerIstatistik"></p>
       <div class="sosyal-satir" aria-label="Sosyal medya (yakında)">
         <span class="sosyal-ikon" title="Instagram (yakında)" aria-hidden="true"><span class="msi">photo_camera</span></span>
@@ -1349,7 +1349,8 @@
         <li><a href="din-kulturu-5sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 5. Sınıf</a></li>
         <li><a href="din-kulturu-6sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 6. Sınıf</a></li>
         <li><a href="din-kulturu-7sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 7. Sınıf</a></li>
-        <li><a href="din-kulturu-9sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 9. Sınıf (Yakında)</a></li>
+        <li><a href="din-kulturu-8sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 8. Sınıf</a></li>
+        <li><a href="din-kulturu-9sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 9. Sınıf</a></li>
         <li><a href="din-kulturu-10sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 10. Sınıf (Yakında)</a></li>
         <li><a href="din-kulturu-11sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 11. Sınıf (Yakında)</a></li>
         <li><a href="din-kulturu-12sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 12. Sınıf (Yakında)</a></li>
@@ -1425,7 +1426,12 @@ const SINIFLAR = [
   /* Lise (9-12. sınıf): içerikler hazırlanana kadar uniteler:[] olarak kalır —
      TOPLAM_UNITE/istatistiklere sahte bir sayı eklenmez, sinifPaneliHtml() bu
      durumda otomatik olarak "hazırlanıyor" mesajı gösterir. */
-  { id:'s9', ad:'9. Sınıf', ikon:'🚧', msi:'construction', vurgu:'--lise9', slogan:'Yapım Aşamasında', klasor:'din-kulturu-9sinif-1unite', yaziliSiniri:0, uniteler:[] },
+  { id:'s9', ad:'9. Sınıf', ikon:'📿', msi:'auto_awesome', vurgu:'--lise9', slogan:'İnanç, İbadet ve Ahlak', klasor:'din-kulturu-9sinif-1unite', yaziliSiniri:4, sadeceKlasik:true, uniteler:[
+    {dosya:'index.html', ikon:'🤲', msi:'volunteer_activism', baslik:"Allah-İnsan İlişkisi"},
+    {dosya:'unite2.html', ikon:'📿', msi:'auto_awesome', baslik:"İslamda İnanç Esasları"},
+    {dosya:'unite3.html', ikon:'🕌', msi:'mosque', baslik:"İslamda İbadetler"},
+    {dosya:'unite4.html', ikon:'💞', msi:'favorite', baslik:"İslamda Ahlak İlkeleri"}
+  ]},
   { id:'s10', ad:'10. Sınıf', ikon:'🚧', msi:'construction', vurgu:'--lise10', slogan:'Yapım Aşamasında', klasor:'din-kulturu-10sinif-1unite', yaziliSiniri:0, uniteler:[] },
   { id:'s11', ad:'11. Sınıf', ikon:'🚧', msi:'construction', vurgu:'--lise11', slogan:'Yapım Aşamasında', klasor:'din-kulturu-11sinif-1unite', yaziliSiniri:0, uniteler:[] },
   { id:'s12', ad:'12. Sınıf', ikon:'🚧', msi:'construction', vurgu:'--lise12', slogan:'Yapım Aşamasında', klasor:'din-kulturu-12sinif-1unite', yaziliSiniri:0, uniteler:[] }
@@ -1447,8 +1453,8 @@ const YAZILI_DESEN = [1,2,3,4].flatMap(function(no){
    klasik olmak üzere 2 kayıt demektir); tanımlı değilse tüm desen kullanılır. */
 function yaziliMevcutListesi(sinif){
   if(sinif.yaziliSiniri === 0) return [];
-  if(sinif.yaziliSiniri == null) return YAZILI_DESEN;
-  return YAZILI_DESEN.slice(0, sinif.yaziliSiniri*2);
+  const desen = sinif.yaziliSiniri == null ? YAZILI_DESEN : YAZILI_DESEN.slice(0, sinif.yaziliSiniri*2);
+  return sinif.sadeceKlasik ? desen.filter(function(y){ return y.dosya.indexOf('_klasik')!==-1; }) : desen;
 }
 
 /* Kartlardaki "son güncelleme" etiketi bu portalın gerçekten GitHub'a

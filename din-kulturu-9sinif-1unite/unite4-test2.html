@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4. Ünite — Test 2 | İslam'da Ahlak İlkeleri — 9. Sınıf DKAB</title>
+<style>
+:root{
+  --ink:#17242e; --ink2:#41525f; --bg:#f6f4ef; --card:#ffffff;
+  --line:#e3ddd2; --teal:#0f6f66; --teal-soft:#e6f2f0;
+  --blue:#1e5a8a; --blue-soft:#e8f1f8;
+  --green:#2f6b2f; --green-soft:#eaf4ea;
+  --red:#a33a34; --red-soft:#fbeceb;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.62;font-size:16px}
+.wrap{max-width:820px;margin:0 auto;padding:20px 18px 90px}
+a.geri{display:inline-block;margin-bottom:14px;font-size:14px;font-weight:650;color:var(--teal);text-decoration:none}
+header.hero{background:linear-gradient(160deg,#0f6f66 0%,#134e5e 60%,#173a4a 100%);color:#fff;padding:26px 22px;border-radius:16px;margin-bottom:22px}
+header.hero .kicker{letter-spacing:.16em;text-transform:uppercase;font-size:11.5px;opacity:.82;margin:0 0 6px}
+header.hero h1{margin:0 0 6px;font-size:22px}
+header.hero p{margin:0;opacity:.92;font-size:14px}
+.quiz-q{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin:14px 0}
+.quiz-q.hard{border-left:4px solid var(--blue)}
+.qh{font-weight:650;margin-bottom:10px;display:flex;gap:9px;align-items:flex-start}
+.qn{background:var(--teal);color:#fff;border-radius:7px;padding:1px 9px;font-size:13px;flex:none}
+.qh.hard .qn{background:var(--blue)}
+.qtag{font-size:11px;background:var(--blue-soft);color:var(--blue);border-radius:999px;padding:2px 9px;font-weight:700;margin-left:auto;white-space:nowrap}
+.qtext{font-size:15.3px}
+.opt{display:block;padding:8px 12px;border:1px solid var(--line);border-radius:9px;margin:6px 0 0;cursor:pointer;font-size:15px}
+.opt:hover{background:#f4f2ec}
+.opt input{margin-right:8px}
+.opt.correct{background:var(--green-soft);border-color:var(--green)}
+.opt.wrong{background:var(--red-soft);border-color:var(--red)}
+.qexp{display:none;margin-top:10px;padding:10px 14px;background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:0 9px 9px 0;font-size:14.3px}
+.qexp.show{display:block}
+.quiz-bar{position:sticky;bottom:0;display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:rgba(246,244,239,.95);backdrop-filter:blur(6px);padding:14px 0;border-top:1px solid var(--line);margin-top:10px}
+button.btn{background:var(--teal);color:#fff;border:0;border-radius:10px;padding:11px 22px;font-size:15px;font-weight:650;cursor:pointer;font-family:inherit}
+button.btn:hover{background:#0c5b53}
+#score{font-weight:700;font-size:15.5px}
+.testnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.testnav a{font-size:12.5px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:var(--ink2)}
+.testnav a.aktif{background:var(--teal);color:#fff;border-color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="geri" href="unite4.html">← Konuya Dön</a>
+  <header class="hero">
+    <p class="kicker">9. Sınıf DKAB · 4. Ünite · İslam'da Ahlak İlkeleri</p>
+    <h1>Test 2</h1>
+    <p>20 soru · 5 seçenekli · TYT/AYT formatında karışık zorlukta test</p>
+  </header>
+  <div class="testnav">
+    <a href="unite4-test1.html">Test 1</a>
+    <a class="aktif" href="unite4-test2.html">Test 2</a>
+    <a href="unite4-test3.html">Test 3</a>
+    <a href="unite4-test4.html">Test 4</a>
+  </div>
+  <div id="quiz"></div>
+  <div class="quiz-bar">
+    <button class="btn" onclick="degerlendir()">Sonuçları Gör</button>
+    <span id="score"></span>
+  </div>
+</div>
+<script>
+const SORULAR = [
+{q:"Ahlaki yapıyı belirleyen etkenler arasında aşağıdakilerden hangisi sayılmaz?",opts:["Dinî inanışlar","Aile","Örf ve âdetler","Gezegenlerin konumu","Eğitim"],c:3,exp:"Ders kitabında sayılan etkenler dinî inanışlar, toplum, aile, örf-âdet, gelenek-görenek, hukuk, sosyal-ekonomik şartlar ve eğitimdir; astrolojik bir etken sayılmaz.",hard:false},
+{q:"'Ahlakın mahiyeti' ifadesi neyi kapsar?",opts:["Yalnızca ibadetlerin şeklini","Ahlakın ne olduğu, kaynağı, konusu, unsurları ile tutum ve davranışların tamamını","Sadece hukuki yaptırımları","Yalnızca ekonomik ilişkileri","Sadece aile içi ilişkileri"],c:1,exp:"Ahlakın mahiyeti; ahlakın ne olduğu, kaynağı, konusu, unsurları ile ahlaki tutum, davranış ve değerlere dair meselelerin tamamını kapsar.",hard:false},
+{q:"Nefis kavramıyla ilgili aşağıdakilerden hangisi doğrudur?",opts:["Nefis yalnızca iyiliğe meyillidir","Nefis; bencillik, kibir, hevâ ve hevese uyma gibi özellikleriyle kötülüğe de meyillidir","Nefis insanın dışında bir varlıktır","Nefis terbiye edilemez","Nefis yalnızca yetişkinlerde bulunur"],c:1,exp:"Metne göre nefis bencillik, kibir, hevâ ve hevese uyma gibi özellikleriyle isyana ve kötü ahlaka meyillidir; Şems suresi bu ikili yönü anlatır.",hard:false},
+{q:"İslam ahlakının toplumsal amacı için aşağıdakilerden hangisi söylenebilir?",opts:["Bireyleri toplumdan izole etmek","Erdemli davranışların sosyal, siyasi ve ekonomik hayata hâkim olmasını sağlamak","Yalnızca ibadet hayatını düzenlemek","Ticareti tamamen yasaklamak","Sadece aile içi ilişkileri düzenlemek"],c:1,exp:"Toplumsal amaç; ahlaklı bireylerden oluşan erdemli bir toplum meydana getirmek ve erdemli davranışların sosyal-siyasi-ekonomik hayata hâkim olmasını sağlamaktır.",hard:false},
+{q:"\"Hz. Âişe'ye Hz. Peygamber'in ahlakı sorulduğunda, önce 'Sen Kur'an okuyorsun değil mi?' diye sormuş, 'evet' cevabı üzerine 'İşte Hz. Peygamber'in ahlakı Kur'an'dı' demiştir.\" Bu rivayetten aşağıdakilerden hangisi çıkarılamaz?",opts:["Hz. Peygamber'in ahlakı soyut değil somuttur.","Kur'an, Hz. Peygamber'in yaşayışında vücut bulmuştur.","Hz. Peygamber'in ahlakını anlamak için Kur'an'a bakmak yeterlidir.","Hz. Âişe, Hz. Peygamber'in ahlakını yalnızca dış görünüşüyle sınırlı görmüştür.","Kur'an ile Hz. Peygamber'in şahsiyeti arasında güçlü bir bağ vardır."],c:3,exp:"Rivayet, Hz. Peygamber'in ahlakının Kur'an'ın yaşanmış hâli olduğunu anlatır; 'yalnızca dış görünüş' gibi daraltıcı bir yargıya rivayette yer yoktur, bu nedenle çıkarılamaz.",hard:true},
+{q:"Adalet erdemi hangi güçleri dengeler?",opts:["Yalnızca öfkeyi","Öfke, arzu ve aklın tümünü","Yalnızca arzuyu","Yalnızca bedensel ihtiyaçları","Yalnızca sosyal statüyü"],c:1,exp:"Tabloya göre adalet, öfke, arzu ve aklın tümünü dengeleyen erdemdir; bu yönüyle diğer erdemlerin de temelini oluşturur.",hard:false},
+{q:"Şecaatten doğan faziletler arasında aşağıdakilerden hangisi sayılmaz?",opts:["Cömertlik","Fedakârlık","Hakları savunma","Dürüst davranma","Aşırı temkinlilikle her işten kaçınma"],c:4,exp:"Şecaatten doğan faziletler arasında cömertlik, fedakârlık, hakları savunma ve dürüst davranma sayılır; 'her işten kaçınma' korkaklığa işaret eder, şecaatin faziletlerinden değildir.",hard:false},
+{q:"İffetli kişinin ihtiyaçlarını nasıl karşıladığı belirtilir?",opts:["Her yoldan, sonucu düşünmeden","Yalnızca helal yollardan, onurunu koruyarak","Başkalarının hakkını gözetmeden","Sadece borçla","Hiç ihtiyaç karşılamadan"],c:1,exp:"İffetli kişi ihtiyaçlarını helal yollardan karşılar, dünyanın geçici hazları için şeref ve değerinden ödün vermez.",hard:false},
+{q:"Hikmetli kişinin özellikleri arasında aşağıdakilerden hangisi yoktur?",opts:["Söz ve davranışta doğru olmak","Hüküm verirken adil davranmak","Allah'ın yaratmasındaki anlamları tefekkür etmek","Hakikati araştırmak","Düşüncelerinde aşırı uçlara savrulmak"],c:4,exp:"Hikmet, insanı aşırı uçlara savrulmaktan korur; 'aşırı uçlara savrulmak' hikmetli kişinin özelliği değil, hikmetin karşıtıdır.",hard:false},
+{q:"Bir kişi, elindeki tüm parasını gösteriş amacıyla bir defada harcayıp kendisini ve ailesini muhtaç duruma düşürüyor; başka biri ise ihtiyaç sahiplerine hiçbir zaman yardım etmeyip her kuruşunu biriktiriyor. Bu iki davranış, İsrâ 29. ayetin öğütlediği hangi dengenin ihlaline örnektir?",opts:["Adalet – zulüm dengesi","Cimrilik – israf arasındaki denge (cömertlik)","Sabır – isyan dengesi","Şecaat – korkaklık dengesi","Hikmet – cehalet dengesi"],c:1,exp:"Birinci davranış israf, ikincisi cimriliktir; İsrâ 29. ayet ikisi arasındaki orta yol olan cömertliği öğütler.",hard:true},
+{q:"Dürüstlüğün dört şartı olarak sayılanlar aşağıdakilerden hangisidir?",opts:["Tutarlılık, tarafsızlık, doğruluk, güvenilirlik","Cömertlik, cesaret, sabır, hikmet","Zekât, sadaka, infak, vakıf","Selam, teşekkür, saygı, nezaket","Namaz, oruç, zekât, hac"],c:0,exp:"Metinde dürüstlüğün dört şartı tutarlılık, tarafsızlık, doğruluk ve güvenilirlik olarak sayılır.",hard:false},
+{q:"Ahilikte kuralların yazılı olduğu kitaplara ne ad verilir?",opts:["Siyer","Fütüvvetname","Hilye","Mevlid","Kasidename"],c:1,exp:"Ahiliğin kuralları fütüvvetname adı verilen kitaplarda yer alır.",hard:false},
+{q:"\"Güneşin doğduğu her gün, insanın bütün eklemleri için sadaka vermesi gerekir... güzel söz de sadakadır...\" hadisine göre aşağıdakilerden hangisi söylenebilir?",opts:["Sadaka yalnızca para ile verilebilir","Sadaka kavramı yalnızca zenginlere hastır","Yardımlaşma sadece maddi boyutla sınırlı değildir","Güzel söz söylemenin ibadetle ilgisi yoktur","Sadaka yalnızca Ramazan ayına özgüdür"],c:2,exp:"Hadis; güzel sözü, iki kişinin arasını düzeltmeyi ve yoldaki engeli kaldırmayı da sadaka sayarak yardımlaşmanın yalnızca maddi olmadığını gösterir.",hard:false},
+{q:"Sadaka verirken uyulması gereken ilkeler arasında aşağıdakilerden hangisi yoktur?",opts:["Gösterişten uzak olmak","Karşılıksız olmak","Yalnızca Allah rızası gözetmek","Başa kakmadan vermek","Yardımı mutlaka açıktan, herkese duyurarak yapmak"],c:4,exp:"Bakara 2/264 gösterişi ve başa kakmayı yasaklar; 'herkese duyurarak yapmak' bu ilkelerle çelişir.",hard:false},
+{q:"\"Sabır, ancak musibetin ilk başa geldiği anda olmalıdır.\" hadisinin anlamıyla ilgili aşağıdakilerden hangisi doğrudur?",opts:["Sabrın değeri, zaman geçtikten sonra ortaya çıkar.","Sabrın asıl değeri, olay tazeyken ve duygular yoğunken gösterilmesindedir.","Sabır yalnızca ibadetlerde gösterilir.","Sabır pasif bir teslimiyettir, çaba gerektirmez.","Musibetin ilk anında sabretmemek daha erdemlidir."],c:1,exp:"Hadis, sabrın asıl değerinin olay tazeyken ve duygular en yoğunken gösterilmesinde olduğunu; zamanla herkesin zaten alıştığını anlatır.",hard:true},
+{q:"Adabımuaşeretin toplumsal işlevi için aşağıdakilerden hangisi söylenemez?",opts:["Kul hakkı ihlallerini önler","Bireylerin zarif ve kibar olmasını sağlar","Toplumsal düzen ve huzura katkı sağlar","Birlikte yaşama kültürünü güçlendirir","Toplumdaki tüm hukuki anlaşmazlıkları ortadan kaldırır"],c:4,exp:"Adabımuaşeret nezaket ve görgü kurallarıyla ilgilidir; toplumdaki tüm hukuki anlaşmazlıkları ortadan kaldırmak gibi bir işlevi metinde geçmez, aşırı bir genellemedir.",hard:false},
+{q:"İsrâ 25. ayette vurgulanan konu nedir?",opts:["Yalnızca dış görünüşün önemi","Allah'ın kalplerdeki niyeti en iyi bilmesi ve yönelenleri bağışlaması","Yalnızca maddi ibadetlerin değeri","Toplumsal statünün önemi","Akraba hakkının önemsizliği"],c:1,exp:"Ayet, kalplerdekini en iyi bilenin Allah olduğunu ve iyi niyetle O'na yönelenlerin bağışlanacağını bildirir; ihlas ilkesiyle bağlantılıdır.",hard:false},
+{q:"İsrâ 26-27. ayetlerde akraba, yoksul ve yolcu için kullanılan \"hakkını ver\" ifadesiyle ilgili aşağıdakilerden hangisi söylenebilir?",opts:["Bu bir tavsiyedir, bağlayıcı değildir.","İhtiyaç sahiplerinin, varlıklı kişinin malında bir hakkı olduğu vurgulanır.","Bu ifade yalnızca akrabalar için geçerlidir.","Ayet zekâtı hiç ilgilendirmez.","Bu ifade sadece Mekke döneminde geçerliydi."],c:1,exp:"Ayet 'yardım et' değil 'hakkını ver' der; bu, ihtiyaç sahiplerinin varlıklı kişinin malında bir hakkı olduğunu, zekâtın da bu hakkın ödenmesi olduğunu gösterir.",hard:true},
+{q:"\"Eli sıkı olma, ölçüsüzce eli açık da olma; sonra kınanacak, kendi kendine hayıflanacak duruma düşersin!\" (İsrâ 29) ayetiyle ilgili aşağıdakilerden hangisi söylenemez?",opts:["Ayet, cimrilik ile israf arasında bir denge önerir.","Ölçüsüz harcama kişiyi pişmanlığa sürükleyebilir.","Ayet, cimriliği tek başına doğru bir tutum olarak över.","İsraf eden kişi sonunda muhtaç duruma düşebilir.","Ayet harcamada itidali öğütler."],c:2,exp:"Ayet hem cimriliği ('eli sıkı olma') hem israfı ('ölçüsüzce eli açık olma') birlikte yasaklar; cimriliği öven bir yargı ayetle çelişir ve söylenemez.",hard:true}
+];
+function render(){
+  const el = document.getElementById('quiz');
+  el.innerHTML = SORULAR.map(function(s,i){
+    const opts = s.opts.map(function(o,j){
+      return '<label class="opt" data-i="'+i+'" data-j="'+j+'"><input type="radio" name="q'+i+'" value="'+j+'"> '+String.fromCharCode(65+j)+') '+o+'</label>';
+    }).join('');
+    return '<div class="quiz-q'+(s.hard?' hard':'')+'" id="qbox'+i+'">'+
+      '<div class="qh'+(s.hard?' hard':'')+'"><span class="qn">'+(i+1)+'</span><span class="qtext">'+s.q+'</span>'+(s.hard?'<span class="qtag">TYT/AYT</span>':'')+'</div>'+
+      opts+
+      '<div class="qexp" id="qexp'+i+'"><b>Doğru cevap: '+String.fromCharCode(65+s.c)+')</b> '+s.exp+'</div>'+
+    '</div>';
+  }).join('');
+}
+function degerlendir(){
+  let dogru = 0, cevapsiz = 0;
+  SORULAR.forEach(function(s,i){
+    const secili = document.querySelector('input[name="q'+i+'"]:checked');
+    const secIdx = secili ? parseInt(secili.value,10) : -1;
+    if(secIdx === -1) cevapsiz++;
+    else if(secIdx === s.c) dogru++;
+    document.querySelectorAll('label[data-i="'+i+'"]').forEach(function(lbl){
+      const j = parseInt(lbl.getAttribute('data-j'),10);
+      if(j === s.c) lbl.classList.add('correct');
+      else if(j === secIdx) lbl.classList.add('wrong');
+    });
+    document.getElementById('qexp'+i).classList.add('show');
+  });
+  document.getElementById('score').textContent = 'Sonuç: '+dogru+' / '+SORULAR.length+' doğru'+(cevapsiz?' ('+cevapsiz+' boş)':'');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+render();
+</script>
+</body>
+</html>
