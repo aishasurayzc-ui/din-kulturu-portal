@@ -239,6 +239,61 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
   nav.toc{display:none} .qexp{display:block} details{page-break-inside:avoid}
   body{background:#fff;font-size:11pt}
 }
+
+/* ---------- BÖLÜM SEKMELERİ (pedagojik gezinme) ---------- */
+nav.sekmeler{position:sticky;top:0;z-index:50;background:rgba(246,244,239,.96);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-bottom:28px;
+  padding:10px 20px}
+.sekme-row{max-width:1000px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.sekme-btn{flex:none;display:flex;align-items:center;gap:7px;background:#fff;
+  border:1.5px solid var(--line);border-radius:11px;padding:9px 14px;
+  font-size:13.6px;font-weight:650;color:var(--ink2);cursor:pointer;
+  font-family:inherit;white-space:nowrap;transition:.12s}
+.sekme-btn:hover{border-color:#b7d6d0;color:var(--teal)}
+.sekme-btn .ico{font-size:16px}
+.sekme-btn.aktif{background:var(--teal);border-color:var(--teal);color:#fff}
+[data-tab]{display:none}
+[data-tab].panel-aktif{display:block}
+
+/* ---------- YENİ PEDAGOJİK BLOKLAR ---------- */
+.problem{background:#fff;border:2px solid var(--blue);border-radius:14px;
+  padding:16px 20px;margin:16px 0 20px;position:relative}
+.problem .pb-tag{position:absolute;top:-12px;left:16px;background:var(--blue);
+  color:#fff;font-size:12px;font-weight:700;letter-spacing:.04em;
+  padding:3px 12px;border-radius:999px}
+.problem p{margin:6px 0 0;font-size:15.6px}
+.problem p:first-of-type{margin-top:8px}
+.dusun{background:var(--teal-soft);border:2px dashed var(--teal);border-radius:14px;
+  padding:16px 20px;margin:18px 0}
+.dusun b.baslik{display:block;color:var(--teal);font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:8px}
+.dusun p{font-size:15.8px;font-weight:600;margin:0}
+.gunluk{background:var(--green-soft);border-left:5px solid var(--green);
+  border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0}
+.gunluk b.baslik{display:block;color:var(--green);font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:8px}
+.gunluk ul{margin:6px 0 0;padding-left:20px}
+.gunluk li{margin-bottom:5px;font-size:15px}
+.tier{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;
+  padding:2px 9px;border-radius:999px;letter-spacing:.03em;flex:none}
+.tier.yesil{background:#e5f3e1;color:#2f6b26}
+.tier.sari{background:#fdf1d6;color:#8a6413}
+.tier.kirmizi{background:#fbe6e5;color:#a33a34}
+.ozdeger{background:#fff;border:1px solid var(--line);border-radius:13px;
+  padding:16px 20px;margin:16px 0}
+.ozdeger h4{margin:0 0 10px;color:var(--teal)}
+.ozdeger label{display:flex;align-items:flex-start;gap:9px;padding:5px 0;
+  font-size:15px;cursor:pointer}
+.ozdeger input{margin-top:4px;flex:none}
+.birlestir{background:linear-gradient(135deg,#173a4a,#0f6f66);color:#fff;
+  border-radius:16px;padding:22px 24px;margin:20px 0}
+.birlestir b.baslik{display:block;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.8;margin-bottom:10px}
+.birlestir .zincirler{display:grid;gap:8px;margin-bottom:16px;font-size:14.5px}
+.birlestir .zincirler div{background:rgba(255,255,255,.1);border-radius:9px;padding:8px 12px}
+.birlestir .soru{background:rgba(255,255,255,.14);border-radius:10px;padding:12px 16px;
+  font-weight:650;font-size:16px}
 </style>
 </head>
 <body>
@@ -274,24 +329,21 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
   </div>
 </div>
 
-<nav class="toc">
-  <ul>
-    <li><a href="#harita">Ünite Haritası</a></li>
-    <li><a href="#k1">4.1 Ahlakın Mahiyeti</a></li>
-    <li><a href="#k2">4.2 Temel Unsurlar</a></li>
-    <li><a href="#k3">4.3 Tutum ve Davranışlar</a></li>
-    <li><a href="#k4">4.4 İsrâ 23–29</a></li>
-    <li><a href="#kavramlar">Kavram Sözlüğü</a></li>
-    <li><a href="#sinav">TYT/AYT Özet</a></li>
-    <li><a href="#erdem-test">Erdemler Mini Test</a></li>
-    <li><a href="#test">27 Soruluk Test</a></li>
-  </ul>
+<nav class="sekmeler">
+<div class="sekme-row" id="sekmeRow">
+<button type="button" class="sekme-btn aktif" data-git="hedef"><span class="ico">🎯</span> Ne Öğreneceğim?</button>
+<button type="button" class="sekme-btn" data-git="konu"><span class="ico">📖</span> Konu Anlatımı</button>
+<button type="button" class="sekme-btn" data-git="kavramlar"><span class="ico">💡</span> Temel Kavramlar</button>
+<button type="button" class="sekme-btn" data-git="etkinlik"><span class="ico">🎮</span> Etkinlik</button>
+<button type="button" class="sekme-btn" data-git="dene"><span class="ico">📝</span> Kendini Dene</button>
+<button type="button" class="sekme-btn" data-git="degerlendirme"><span class="ico">📊</span> Ünite Değerlendirme</button>
+</div>
 </nav>
 
 <div class="wrap">
 
 <!-- ============ ÜNİTE HARİTASI ============ -->
-<section id="harita">
+<section id="harita" data-tab="hedef">
   <div class="sec-head">
     <div class="sec-num">★</div>
     <div>
@@ -350,6 +402,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 4.1 ============ -->
 <section id="k1">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">4.1</div>
     <div>
@@ -358,6 +411,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Bir toplumda "yalan söylemek" serbest bırakılsa ne olurdu? <b>İyi-kötü, doğru-yanlış kararını insanlar kendi başlarına mı verir, yoksa ortak bir ölçü mü gerekir?</b></p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>Ahlak nedir, kaynağı nedir ve bir davranışın iyi ya da kötü olduğuna neye göre karar verilir?</span></div>
 
   <div class="asama"><div class="no">1</div>
@@ -466,8 +522,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Ahlak (huy + iradeli davranış) → kaynak: akıl · irade · vicdan, ölçü: Kur'an ve sünnet → amaç: olgun birey + erdemli toplum → örnek: Hz. Muhammed (sav) → <u>ihlas ve terbiye ile gelişir</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>Bir davranış toplum tarafından kabul ediliyor diye ahlaken doğru kabul edilebilir mi? Kur'an ve sünneti ölçü almanın, sadece toplumsal kabule bakmaktan farkı nedir?</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Bugün bir kararını verirken "vicdanın" seni nasıl yönlendirdi?</li>
+  <li>Hz. Muhammed'in (sav) örnekliğinden hatırladığın bir ahlaki davranışı düşün.</li>
+  </ul>
+  </div>
+  </div>
 
-  <div class="cikmis"><div class="ch"><b>Sınav Sorusu — 4.1 İslam'da Ahlakın Mahiyeti</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
+  <div class="cikmis" data-tab="dene"><div class="ch"><b>Sınav Sorusu — 4.1 İslam'da Ahlakın Mahiyeti</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil">ÖSYM tarzı</span>
 <p class="metin">İnsan, bazı huy ve eğilimlerle dünyaya gelir. Ancak bu huylar sabit ve değişmez değildir; <b>aile, eğitim, çevre ve yaşam tecrübeleri</b> onları biçimlendirir. Nitekim Hz. Peygamber <i>"Hiçbir baba, evladına güzel terbiyeden daha üstün bir hediye vermemiştir."</i> buyurmuştur.</p>
@@ -494,7 +560,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 1 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 1</span><h4>"İyi mi, Kötü mü?" — Ölçüt Masası</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -549,7 +615,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier yesil">🟢 TEMEL</div>
     <h4 style="margin-top:0">Kontrol Noktası — 4.1</h4>
     <div class="tbl-scroll">
     <table>
@@ -571,6 +638,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 4.2 ============ -->
 <section id="k2">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">4.2</div>
     <div>
@@ -579,6 +647,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Cesaret bazen aşırıya kaçarsa "gözü karalık", eksik kalırsa "korkaklık" olur. <b>Bir erdemin "aşırısı" da "eksiği" de neden kötü sayılır?</b></p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>Bütün güzel huyların temelinde hangi erdemler vardır?</span></div>
 
   <div class="ipucu"><b>Ortak mantık:</b> Dört erdemin hepsi <u>iki aşırı ucun ortasında</u>dır. Erdem, insandaki güdü ve dürtülerin yok edilmesi değil, <b>terbiye edilip dengeye getirilmesi</b>dir. Bu erdemler hem kendileri birer erdemdir hem de diğer erdemlere <b>ölçü ve düzen</b> verir.</div>
@@ -658,8 +729,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Güdü ve dürtüler → terbiye → adalet (denge) · şecaat (cesaret) · iffet (ölçü) · hikmet (bilgelik) → <u>bütün güzel huyların temeli</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>Aristoteles'in "erdem iki aşırı ucun ortasıdır" fikri ile İslam ahlakındaki "itidal" ilkesi arasında nasıl bir benzerlik kurabilirsin? Cesaret erdeminin iki aşırı ucu ne olabilir?</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Adalet, şecaat, iffet, hikmet erdemlerinden hangisinde kendini daha güçlü hissediyorsun?</li>
+  <li>Bugün "hikmet" (doğru zamanda doğru kararı verme) gerektiren bir durumla karşılaştın mı?</li>
+  </ul>
+  </div>
+  </div>
 
-  <div class="cikmis"><div class="ch"><b>Sınav Sorusu — 4.2 Ahlakın Temel Unsurları</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
+  <div class="cikmis" data-tab="dene"><div class="ch"><b>Sınav Sorusu — 4.2 Ahlakın Temel Unsurları</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil">ÖSYM tarzı</span>
 <p class="metin"><b>Birinci kişi</b>, gözünün önünde yaşanan bir haksızlığa başı derde girer korkusuyla hiç ses çıkarmamış; <b>ikinci kişi</b> ise aynı olayda öfkesine yenilerek karşısındakine hakaret edip saldırmıştır.</p>
@@ -686,7 +767,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 2 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 2</span><h4>"Orta Yol Terazisi" — Dört Erdem Atölyesi</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -752,7 +833,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier sari">🟡 YORUM</div>
     <h4 style="margin-top:0">Kontrol Noktası — 4.2</h4>
     <p>Adalet, şecaat, iffet ve hikmet erdemlerinin bireysel ve toplumsal hayat açısından önemini açıklayan kısa bir metin yazınız.</p>
     <span class="yaz"></span><span class="yaz"></span><span class="yaz"></span><span class="yaz"></span>
@@ -764,6 +846,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 4.3 ============ -->
 <section id="k3">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">4.3</div>
     <div>
@@ -772,6 +855,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Bir sınavda kopya çekme fırsatın olsa ve kimse görmese bile çekmemek — bu hangi erdemin günlük hayattaki karşılığıdır? <b>Erdemler, soyut kavramlar olarak kalmayıp nasıl somut davranışa dönüşür?</b></p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>Erdemler günlük hayatta hangi davranışlara dönüşür ve bunlara neden ihtiyaç duyulur?</span></div>
 
   <div class="asama plum"><div class="no">1</div>
@@ -887,8 +973,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Dürüstlük (güven) → yardımseverlik (dayanışma) → sabır (dayanıklılık) → adabımuaşeret (nezaket) → <u>huzurlu birey ve birlikte yaşanabilir toplum</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>Sabır göstermek ile "haksızlığa boyun eğmek" arasındaki fark nedir? Sabrın bir erdem, teslimiyetçiliğin ise bir zaaf olduğu sınırı nasıl çizilir?</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Bugün küçük de olsa bir "dürüstlük" testinden geçtin mi (yanlış para üstü, bulunan bir eşya vb.)?</li>
+  <li>Adabımuaşeretin (nezaket kurallarının) günlük ilişkilerine kattığı bir örnek düşün.</li>
+  </ul>
+  </div>
+  </div>
 
-  <div class="cikmis"><div class="ch"><b>Sınav Sorusu — 4.3 Ahlaki Tutum ve Davranışlar</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
+  <div class="cikmis" data-tab="dene"><div class="ch"><b>Sınav Sorusu — 4.3 Ahlaki Tutum ve Davranışlar</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil">ÖSYM tarzı</span>
 <p class="metin">Ahiliğin kuralları <b>fütüvvetname</b> adı verilen kitaplarda yazılıdır. Buna göre bir ahide bulunması gereken vasıflar vefa, doğruluk, emniyet, cömertlik, tevazu ve affedicilikken; <b>içki, zina, yalan, gıybet ve hile</b> gibi davranışlar kişinin <u>meslekten atılmasını</u> gerektiren sebeplerdendir.</p>
@@ -915,7 +1011,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 3 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 3</span><h4>"Olsaydı — Olmasaydı" — Davranış Laboratuvarı</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -978,7 +1074,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier yesil">🟢 TEMEL</div>
     <h4 style="margin-top:0">Kontrol Noktası — 4.3 (3–2–1)</h4>
     <p><b>3</b> — Ahlaki tutum ve davranışlarla ilgili öğrendiğim üç şey:</p>
     <span class="yaz"></span><span class="yaz"></span><span class="yaz"></span>
@@ -991,6 +1088,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 4.4 ============ -->
 <section id="k4">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">4.4</div>
     <div>
@@ -999,6 +1097,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Bir arkadaşın "Allah'a inanıyorum, o yeter; anne babama nasıl davrandığım ayrı bir konu" dese, ona İsrâ suresi açısından ne söylerdin?</p>
+  </div>
   <div class="card">
     <h4 style="margin-top:0">Sure künyesi</h4>
     <div class="tbl-scroll">
@@ -1078,8 +1179,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Allah'a kulluk → anne babaya iyilik → kalbi güzelleştirmek → akraba, yoksul ve yolcunun hakkını vermek → <u>cimrilik ile israf arasında cömertlik</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>İsrâ suresi, Allah'a kulluk emrinin hemen ardından anne-babaya iyiliği zikrediyor. Bu sıralama, ahlaki önceliklerimiz hakkında ne söylüyor olabilir?</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Bugün anne-babana veya bir akrabana karşı gösterdiğin küçük bir iyiliği hatırla.</li>
+  <li>Harcamalarında "cimrilik" ile "israf" arasındaki dengeyi nasıl kuruyorsun?</li>
+  </ul>
+  </div>
+  </div>
 
-  <div class="cikmis"><div class="ch"><b>Sınav Sorusu — 4.4 Kur'an'dan Mesajlar: İsrâ 23-29</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
+  <div class="cikmis" data-tab="dene"><div class="ch"><b>Sınav Sorusu — 4.4 Kur'an'dan Mesajlar: İsrâ 23-29</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil">ÖSYM tarzı</span>
 <div class="kaynakayet">"Rabbin sadece kendisine kulluk etmenizi ve <b>anne babanıza iyi davranmanızı</b> emretti. Onlardan biri veya ikisi senin yanında yaşlanırsa onlara <b>öf bile deme!</b> Onları azarlama! İkisine de <b>gönül alıcı güzel sözler</b> söyle. Onlara merhametle ve alçak gönüllülükle <b>kol kanat ger</b>. 'Rabbim! Onlar nasıl küçüklükte beni şefkatle eğitip yetiştirdilerse şimdi sen de onlara merhamet göster' diyerek <b>dua et</b>." <span class="kaynak">İsrâ 17/23-24</span></div>
@@ -1106,7 +1217,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 4 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 4</span><h4>"Vazife Haritası" — İsrâ 23–29 Bilgi Kartları</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -1157,7 +1268,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier sari">🟡 YORUM</div>
     <h4 style="margin-top:0">Kontrol Noktası — 4.4</h4>
     <ol>
       <li>İnsanın Yüce Allah'a karşı vazifeleri nelerdir?<span class="yaz"></span></li>
@@ -1173,7 +1285,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 
 <!-- ============ KAVRAM SÖZLÜĞÜ ============ -->
-<section id="kavramlar">
+<section id="kavramlar" data-tab="kavramlar">
   <div class="sec-head">
     <div class="sec-num">★</div>
     <div>
@@ -1208,7 +1320,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 
 <!-- ============ TYT/AYT ÖZET ============ -->
-<section id="sinav">
+<section id="sinav" data-tab="degerlendirme">
   <div class="sec-head">
     <div class="sec-num">✎</div>
     <div>
@@ -1288,10 +1400,49 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Zincir 4 — İsrâ 23–29</b>
     <div class="zincir">Kulluk → anne baba → kalp/niyet → akraba-yoksul-yolcunun hakkı → <u>cimrilik ile israf arasında cömertlik</u></div>
   </div>
+
+  <h3>🧩 Üniteyi Birleştir</h3>
+  <div class="birlestir">
+    <b class="baslik">Dört zincir arasındaki bağ</b>
+    <div class="zincirler">
+      <div><b>1 — Mahiyet:</b> Huy + iradeli davranış → akıl, irade, vicdan → ölçü Kur'an ve sünnet → terbiyeyle gelişir</div>
+      <div><b>2 — Erdemler:</b> Adalet, şecaat, iffet, hikmet — hepsi iki aşırı ucun ortası</div>
+      <div><b>3 — Davranışlar:</b> Dürüstlük → yardımseverlik → sabır → adabımuaşeret</div>
+      <div><b>4 — İsrâ 23-29:</b> Kulluk → anne baba → kalp/niyet → akraba-yoksul-yolcunun hakkı → cömertlik</div>
+    </div>
+    <div class="soru">Bu dört zincir bir piramit gibi işler: <b>temel erdemler</b> (Zincir 2), terbiye yoluyla <b>ahlakın kaynağından</b> (Zincir 1) beslenir; bu erdemler günlük hayatta somut <b>davranışlara</b> dönüşür (Zincir 3); İsrâ suresi ise bunun Kur'an'daki <b>somut örneğini</b> verir (Zincir 4). Sence dört erdemden (adalet, şecaat, iffet, hikmet) hangisi olmadan diğer üçü de zayıflar? Neden?</div>
+  </div>
+
+  <h3>📊 Öz Değerlendirme — Bu üniteyi ne kadar öğrendim?</h3>
+  <div class="ozdeger">
+    <h4>4.1 — İslam'da Ahlakın Mahiyeti</h4>
+    <label><input type="checkbox"> Ahlak kavramını ve kaynaklarını (akıl, irade, vicdan) açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Ahlakın ölçüsünün Kur'an ve sünnet olduğunu örneklerle açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Hz. Muhammed'in (sav) ahlaki örnekliğini bir olayla ilişkilendirebiliyorum.</label>
+    <label><input type="checkbox"> Bir davranışın ahlaki olup olmadığına dair verilen bir parçadan çıkarım yapabiliyorum.</label>
+  </div>
+  <div class="ozdeger">
+    <h4>4.2 — Ahlakın Temel Unsurları</h4>
+    <label><input type="checkbox"> Adalet, şecaat, iffet, hikmet erdemlerini tanımlayabiliyorum.</label>
+    <label><input type="checkbox"> Her erdemin "aşırı" ve "eksik" uçlarını örnekleyebiliyorum.</label>
+    <label><input type="checkbox"> Bir davranışın hangi erdemle ilgili olduğunu belirleyebiliyorum.</label>
+  </div>
+  <div class="ozdeger">
+    <h4>4.3 — Ahlaki Tutum ve Davranışlar</h4>
+    <label><input type="checkbox"> Dürüstlük, yardımseverlik, sabır ve adabımuaşereti günlük örneklerle açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Bu davranışların birey ve toplum için önemini yorumlayabiliyorum.</label>
+    <label><input type="checkbox"> Bir örnek olaydan hangi ahlaki tutumun sergilendiğine dair çıkarım yapabiliyorum.</label>
+  </div>
+  <div class="ozdeger">
+    <h4>4.4 — Kur'an'dan Mesajlar: İsrâ 23-29</h4>
+    <label><input type="checkbox"> Ayetlerdeki ahlaki vazifeleri (Allah, anne-baba, akraba, mal) sıralayabiliyorum.</label>
+    <label><input type="checkbox"> Cimrilik ile israf arasındaki "denge" mesajını açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Verilen bir ayetten hangi ahlaki vazifeye işaret ettiği çıkarımını yapabiliyorum.</label>
+  </div>
 </section>
 
 <!-- ============ ERDEMLER MİNİ TESTİ ============ -->
-<section id="erdem-test">
+<section id="erdem-test" data-tab="dene">
   <div class="sec-head">
     <div class="sec-num">Σ</div>
     <div>
@@ -1427,7 +1578,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 
 <!-- ============ TEST ============ -->
-<section id="test">
+<section id="test" data-tab="dene">
   <div class="sec-head">
     <div class="sec-num">?</div>
     <div>
@@ -1705,6 +1856,33 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div>
 
 <script>
+/* ---------- SEKME GEZİNMESİ ---------- */
+function sekmeAc(ad){
+  document.querySelectorAll('[data-tab]').forEach(function(el){
+    el.classList.toggle('panel-aktif', el.getAttribute('data-tab') === ad);
+  });
+  document.querySelectorAll('.sekme-btn').forEach(function(b){
+    b.classList.toggle('aktif', b.getAttribute('data-git') === ad);
+  });
+  document.querySelector('.wrap').scrollIntoView({behavior:'smooth', block:'start'});
+}
+document.querySelectorAll('.sekme-btn').forEach(function(b){
+  b.addEventListener('click', function(){ sekmeAc(b.getAttribute('data-git')); });
+});
+sekmeAc('hedef');
+
+/* ---------- ÖZ DEĞERLENDİRME (tarayıcıda hatırlanır) ---------- */
+(function(){
+  var kutular = document.querySelectorAll('.ozdeger input[type="checkbox"]');
+  kutular.forEach(function(kutu, i){
+    var anahtar = 'u4-ozdeger-' + i;
+    kutu.checked = localStorage.getItem(anahtar) === '1';
+    kutu.addEventListener('change', function(){
+      localStorage.setItem(anahtar, kutu.checked ? '1' : '0');
+    });
+  });
+})();
+
 function kontrolEt(cid, sid){
   cid = cid || 'quiz'; sid = sid || 'score';
   var qs = document.querySelectorAll('#' + cid + ' .quiz-q');
