@@ -212,6 +212,61 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
   nav.toc{display:none} .qexp{display:block} details{page-break-inside:avoid}
   body{background:#fff;font-size:11pt}
 }
+
+/* ---------- BÖLÜM SEKMELERİ (pedagojik gezinme) ---------- */
+nav.sekmeler{position:sticky;top:0;z-index:50;background:rgba(246,244,239,.96);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-bottom:28px;
+  padding:10px 20px}
+.sekme-row{max-width:1000px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.sekme-btn{flex:none;display:flex;align-items:center;gap:7px;background:#fff;
+  border:1.5px solid var(--line);border-radius:11px;padding:9px 14px;
+  font-size:13.6px;font-weight:650;color:var(--ink2);cursor:pointer;
+  font-family:inherit;white-space:nowrap;transition:.12s}
+.sekme-btn:hover{border-color:#b7d6d0;color:var(--teal)}
+.sekme-btn .ico{font-size:16px}
+.sekme-btn.aktif{background:var(--teal);border-color:var(--teal);color:#fff}
+[data-tab]{display:none}
+[data-tab].panel-aktif{display:block}
+
+/* ---------- YENİ PEDAGOJİK BLOKLAR ---------- */
+.problem{background:#fff;border:2px solid var(--blue);border-radius:14px;
+  padding:16px 20px;margin:16px 0 20px;position:relative}
+.problem .pb-tag{position:absolute;top:-12px;left:16px;background:var(--blue);
+  color:#fff;font-size:12px;font-weight:700;letter-spacing:.04em;
+  padding:3px 12px;border-radius:999px}
+.problem p{margin:6px 0 0;font-size:15.6px}
+.problem p:first-of-type{margin-top:8px}
+.dusun{background:var(--teal-soft);border:2px dashed var(--teal);border-radius:14px;
+  padding:16px 20px;margin:18px 0}
+.dusun b.baslik{display:block;color:var(--teal);font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:8px}
+.dusun p{font-size:15.8px;font-weight:600;margin:0}
+.gunluk{background:var(--green-soft);border-left:5px solid var(--green);
+  border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0}
+.gunluk b.baslik{display:block;color:var(--green);font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:8px}
+.gunluk ul{margin:6px 0 0;padding-left:20px}
+.gunluk li{margin-bottom:5px;font-size:15px}
+.tier{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;
+  padding:2px 9px;border-radius:999px;letter-spacing:.03em;flex:none}
+.tier.yesil{background:#e5f3e1;color:#2f6b26}
+.tier.sari{background:#fdf1d6;color:#8a6413}
+.tier.kirmizi{background:#fbe6e5;color:#a33a34}
+.ozdeger{background:#fff;border:1px solid var(--line);border-radius:13px;
+  padding:16px 20px;margin:16px 0}
+.ozdeger h4{margin:0 0 10px;color:var(--teal)}
+.ozdeger label{display:flex;align-items:flex-start;gap:9px;padding:5px 0;
+  font-size:15px;cursor:pointer}
+.ozdeger input{margin-top:4px;flex:none}
+.birlestir{background:linear-gradient(135deg,#173a4a,#0f6f66);color:#fff;
+  border-radius:16px;padding:22px 24px;margin:20px 0}
+.birlestir b.baslik{display:block;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.8;margin-bottom:10px}
+.birlestir .zincirler{display:grid;gap:8px;margin-bottom:16px;font-size:14.5px}
+.birlestir .zincirler div{background:rgba(255,255,255,.1);border-radius:9px;padding:8px 12px}
+.birlestir .soru{background:rgba(255,255,255,.14);border-radius:10px;padding:12px 16px;
+  font-weight:650;font-size:16px}
 </style>
 </head>
 <body>
@@ -249,24 +304,21 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
   </div>
 </div>
 
-<nav class="toc">
-  <ul>
-    <li><a href="#harita">Ünite Haritası</a></li>
-    <li><a href="#k1">2.1 İman</a></li>
-    <li><a href="#k2">2.2 İman Esasları</a></li>
-    <li><a href="#k3">2.3 Kazandırdıkları</a></li>
-    <li><a href="#k4">2.4 Bakara 177</a></li>
-    <li><a href="#kavramlar">Kavram Sözlüğü</a></li>
-    <li><a href="#sinav">TYT/AYT Özet</a></li>
-    <li><a href="#sifat-test">Sıfatlar Mini Test</a></li>
-    <li><a href="#test">25 Soruluk Test</a></li>
-  </ul>
+<nav class="sekmeler">
+<div class="sekme-row" id="sekmeRow">
+<button type="button" class="sekme-btn aktif" data-git="hedef"><span class="ico">🎯</span> Ne Öğreneceğim?</button>
+<button type="button" class="sekme-btn" data-git="konu"><span class="ico">📖</span> Konu Anlatımı</button>
+<button type="button" class="sekme-btn" data-git="kavramlar"><span class="ico">💡</span> Temel Kavramlar</button>
+<button type="button" class="sekme-btn" data-git="etkinlik"><span class="ico">🎮</span> Etkinlik</button>
+<button type="button" class="sekme-btn" data-git="dene"><span class="ico">📝</span> Kendini Dene</button>
+<button type="button" class="sekme-btn" data-git="degerlendirme"><span class="ico">📊</span> Ünite Değerlendirme</button>
+</div>
 </nav>
 
 <div class="wrap">
 
 <!-- ============ ÜNİTE HARİTASI ============ -->
-<section id="harita">
+<section id="harita" data-tab="hedef">
   <div class="sec-head">
     <div class="sec-num">★</div>
     <div>
@@ -326,6 +378,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 2.1 ============ -->
 <section id="k1">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">2.1</div>
     <div>
@@ -334,6 +387,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Küçük bir çocuk bile karanlıkta korkunca içgüdüsel olarak bir yere/kimseye sığınmak ister. <b>Neden hiçbir kültür ve toplum "inanmadan" yaşayamamış, her yerde bir din olgusu ortaya çıkmıştır?</b></p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>İman nedir ve insan için niçin bir ihtiyaçtır?</span></div>
 
   <div class="asama"><div class="no">1</div>
@@ -411,9 +467,19 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Fıtrî inanma ihtiyacı → Peygamber ve vahiy → Kalp ile tasdik → Dil ile ikrar → Salih amel → <u>Tahkikî (araştırmaya dayalı) iman</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>Bir kişi "Ben Allah'a kalpten inanıyorum ama namaz kılmıyorum, oruç tutmuyorum" dese, bu durum "iman-amel" ilişkisi açısından ne kadar tutarlıdır? Tartış.</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Etrafındaki insanlardan, inandığı bir şeyi hiç sorgulamadan (taklidî) kabul edenlere mi, yoksa araştırıp (tahkikî) kabul edenlere mi daha çok rastlıyorsun?</li>
+  <li>Bugün yaptığın hangi davranış "salih amel" tanımına girer?</li>
+  </ul>
+  </div>
+  </div>
 
   <!-- YENİ ETKİNLİK 1 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 1</span><h4>"Taklit mi, Tahkik mi?" — İman Terazisi</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -456,7 +522,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier yesil">🟢 TEMEL</div>
     <h4 style="margin-top:0">Kontrol Noktası — 2.1</h4>
     <ol>
       <li>İmanın geçerliliği için gerekli olan şart nedir? Neden ikrar da istenir?<span class="yaz"></span></li>
@@ -473,6 +540,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 2.2 ============ -->
 <section id="k2">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">2.2</div>
     <div>
@@ -481,6 +549,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Bir arkadaşın sana "Ben sadece Allah'a inanıyorum, meleklere veya kadere inanmak zorunda değilim, önemli olan niyetim" dese, ona İslam inancı açısından ne cevap verirdin?</p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>Bir mümin neye iman eder ve bu esaslar birbiriyle nasıl bağlantılıdır?</span></div>
 
   <div class="asama amber"><div class="no">1</div>
@@ -893,9 +964,19 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Tevhit → Allah'a iman → melekler (vahyin taşıyıcısı) → kitaplar (vahyin metni) → peygamberler (vahyin tebliğcisi) → ahiret (vahyin haber verdiği son) → kader → <u>bölünmez bir bütün</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>İman esaslarının "bölünmez bir bütün" olması ne anlama gelir? Bir kişi altı esastan beşine inanıp birine inanmasa, bu kişinin durumu İslam inancına göre nasıl değerlendirilir?</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Esmâ-i hüsnâdan (Allah'ın isimlerinden) bugün hangi ismi hatırlamak sana iyi geldi?</li>
+  <li>Meleklere iman, "her an gözetleniyorum" bilinciyle davranışlarını nasıl etkileyebilir?</li>
+  </ul>
+  </div>
+  </div>
 
   <!-- YENİ ETKİNLİK 2 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 2</span><h4>"Zincirin Halkası" — Esas Bulmaca</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -939,7 +1020,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier sari">🟡 YORUM</div>
     <h4 style="margin-top:0">Kontrol Noktası — 2.2</h4>
     <ol>
       <li>Selbî ve sübûtî sıfatlar arasındaki temel fark nedir?<span class="yaz"></span></li>
@@ -958,6 +1040,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 2.3 ============ -->
 <section id="k3">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">2.3</div>
     <div>
@@ -966,6 +1049,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>İki arkadaşın var: biri zor bir sınav öncesi çok sakin ve umutlu, diğeri sürekli endişeli ve güvensiz. Aralarındaki fark sadece karakter mi, yoksa <b>inanç ve tevekkül</b> bu ruh hâlini etkiler mi?</p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>İman etmek insanın hayatında ve toplumda neyi değiştirir?</span></div>
 
   <div class="asama plum"><div class="no">1</div>
@@ -1036,9 +1122,19 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">İman → ahiret bilinci (takva) → güzel ahlakın sürekliliği → bireyde huzur, sabır, tevekkül → toplumda birlik, adalet, yardımlaşma → <u>yaşanabilir toplum</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>İmanı güçlü ama ahlakı zayıf görünen biri var mı hiç düşündün mü? Bu iki şeyin (iman ve ahlak) birbirini beslemesi gerektiği hâlde, hayatta bazen ayrışması nasıl açıklanabilir?</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Bugün yaşadığın zor bir anda "tevekkül" (tedbir alıp sonucu Allah'a bırakma) tavrını uygulayabildin mi?</li>
+  <li>Çevrende imanın topluma kazandırdığı "yardımlaşma/dayanışma" örneğine rastladın mı?</li>
+  </ul>
+  </div>
+  </div>
 
   <!-- YENİ ETKİNLİK 3 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 3</span><h4>"İki Sütun" — İmanın İzini Sür</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -1081,7 +1177,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier yesil">🟢 TEMEL</div>
     <h4 style="margin-top:0">Kontrol Noktası — 2.3 (3–2–1 Çıkış Kartı)</h4>
     <p><b>3</b> — İmanın bireye kazandırdığı üç özellik:</p>
     <span class="yaz"></span><span class="yaz"></span><span class="yaz"></span>
@@ -1094,6 +1191,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 2.4 ============ -->
 <section id="k4">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">2.4</div>
     <div>
@@ -1102,6 +1200,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Bazı insanlar dini sadece "namaz kılmak, oruç tutmak" gibi ibadetlerden ibaret sanır. Peki <b>gerçek iyilik (birr) sadece ibadetten mi ibarettir, yoksa daha kapsamlı bir şey midir?</b></p>
+  </div>
   <div class="card">
     <h4 style="margin-top:0">Sure künyesi</h4>
     <div class="tbl-scroll">
@@ -1186,9 +1287,19 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Şekil değil öz → iman → ibadet (infak·namaz·zekât) → sosyal ahlak (ahde vefa) → bireysel ahlak (sabır) → <u>sâdıklar ve müttakiler</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>Bakara 177'ye göre, ibadetlerini eksiksiz yapan ama malını hiç kimseyle paylaşmayan, sözünde durmayan biri "birr" sahibi sayılır mı? Neden?</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Bugün "sevdiğin bir şeyden" (zaman, eşya, para) birine verdiğin bir örnek var mı?</li>
+  <li>Verdiğin bir sözü tutma konusunda kendini nasıl değerlendirirsin?</li>
+  </ul>
+  </div>
+  </div>
 
   <!-- YENİ ETKİNLİK 4 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 4</span><h4>"İyilik Haritası" — Birr'i Dört Sütuna Ayır</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -1236,7 +1347,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier sari">🟡 YORUM</div>
     <h4 style="margin-top:0">Kontrol Noktası — 2.4</h4>
     <p>Bakara 177'ye göre "iyilik" kavramını tabloda özetleyiniz.</p>
     <div class="tbl-scroll">
@@ -1258,7 +1370,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 
 <!-- ============ KAVRAM SÖZLÜĞÜ ============ -->
-<section id="kavramlar">
+<section id="kavramlar" data-tab="kavramlar">
   <div class="sec-head">
     <div class="sec-num">★</div>
     <div>
@@ -1290,7 +1402,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 
 <!-- ============ TYT/AYT ÖZET ============ -->
-<section id="sinav">
+<section id="sinav" data-tab="degerlendirme">
   <div class="sec-head">
     <div class="sec-num">✎</div>
     <div>
@@ -1372,11 +1484,53 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Zincir 4 — Bakara 177</b>
     <div class="zincir">Şekil değil öz → iman + ibadet + sosyal ahlak + bireysel ahlak → <u>sıdk ve takva</u></div>
   </div>
+
+  <h3>🧩 Üniteyi Birleştir</h3>
+  <div class="birlestir">
+    <b class="baslik">Dört zincir arasındaki bağ</b>
+    <div class="zincirler">
+      <div><b>1 — İman:</b> Fıtrî ihtiyaç → tasdik → ikrar → amel → tahkikî iman</div>
+      <div><b>2 — Esaslar:</b> Tevhit → Allah, melek, kitap, peygamber, ahiret, kader → bölünmez bütün</div>
+      <div><b>3 — Kazanımlar:</b> Ahiret bilinci (takva) → ahlakın sürekliliği → birey ve toplumda huzur</div>
+      <div><b>4 — Bakara 177:</b> Şekil değil öz → iman + ibadet + sosyal/bireysel ahlak → sıdk ve takva</div>
+    </div>
+    <div class="soru">Bu dört zincir tek bir hikâyenin parçaları: önce <b>ne olduğunu</b> (Zincir 1) ve <b>neye</b> inanılacağını (Zincir 2) öğrenen insan, bu imanı <b>bireysel ve toplumsal hayata</b> yansıtır (Zincir 3); Bakara 177 ise bunun somut <b>ölçüsünü</b> verir (Zincir 4). Sence "iman esasları" ile "birr (iyilik)" arasında nasıl bir sebep-sonuç ilişkisi var? Biri olmadan diğeri eksik kalır mı?</div>
+  </div>
+
+  <h3>📊 Öz Değerlendirme — Bu üniteyi ne kadar öğrendim?</h3>
+  <div class="ozdeger">
+    <h4>2.1 — İman ve İmanın Mahiyeti</h4>
+    <label><input type="checkbox"> Tasdik ve ikrar kavramlarını, aralarındaki farkı kendi cümlelerimle açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Taklidî ve tahkikî imanı örneklerle ayırt edebiliyorum.</label>
+    <label><input type="checkbox"> İman-amel ilişkisinin karşılıklı olduğunu bir örnekle gösterebiliyorum.</label>
+    <label><input type="checkbox"> Bir ifadeden hareketle kişinin imanının taklidî mi tahkikî mi olduğu çıkarımını yapabiliyorum.</label>
+  </div>
+  <div class="ozdeger">
+    <h4>2.2 — İslam'da İman Esasları</h4>
+    <label><input type="checkbox"> Amentünün altı esasını sayabiliyorum.</label>
+    <label><input type="checkbox"> Selbî ve sübûtî sıfatları ayırt edebiliyorum.</label>
+    <label><input type="checkbox"> "İman esasları bölünmez bir bütündür" ilkesini bir örnekle açıklayabiliyorum.</label>
+    <label><input type="checkbox"> İslam'ın şartları ile imanın esaslarını karıştırmadan ayırt edebiliyorum.</label>
+  </div>
+  <div class="ozdeger">
+    <h4>2.3 — İmanın Bireye ve Topluma Kazandırdıkları</h4>
+    <label><input type="checkbox"> İmanın bireye kazandırdıklarını (huzur, sabır, tevekkül) örnekleyebiliyorum.</label>
+    <label><input type="checkbox"> İmanın topluma kazandırdıklarını (birlik, adalet, yardımlaşma) örnekleyebiliyorum.</label>
+    <label><input type="checkbox"> Takva kavramını kendi cümlelerimle açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Bir örnek olaydan imanın davranışa yansımasına dair çıkarım yapabiliyorum.</label>
+  </div>
+  <div class="ozdeger">
+    <h4>2.4 — Kur'an'dan Mesajlar: Bakara 177</h4>
+    <label><input type="checkbox"> "Birr"in dört boyutunu (iman, ibadet, sosyal ahlak, bireysel ahlak) sayabiliyorum.</label>
+    <label><input type="checkbox"> Ayetin "şekil değil öz" mesajını bir örnekle açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Verilen bir davranışın hangi "birr" boyutuna girdiğini belirleyebiliyorum.</label>
+    <label><input type="checkbox"> Sadıklar ve müttakiler kavramlarını ayetle ilişkilendirebiliyorum.</label>
+  </div>
 </section>
 
 
 <!-- ============ SIFATLAR MİNİ TESTİ ============ -->
-<section id="sifat-test">
+<section id="sifat-test" data-tab="dene">
   <div class="sec-head">
     <div class="sec-num">Σ</div>
     <div>
@@ -1539,7 +1693,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 
 <!-- ============ TEST ============ -->
-<section id="test">
+<section id="test" data-tab="dene">
   <div class="sec-head">
     <div class="sec-num">?</div>
     <div>
@@ -1800,6 +1954,33 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div>
 
 <script>
+/* ---------- SEKME GEZİNMESİ ---------- */
+function sekmeAc(ad){
+  document.querySelectorAll('[data-tab]').forEach(function(el){
+    el.classList.toggle('panel-aktif', el.getAttribute('data-tab') === ad);
+  });
+  document.querySelectorAll('.sekme-btn').forEach(function(b){
+    b.classList.toggle('aktif', b.getAttribute('data-git') === ad);
+  });
+  document.querySelector('.wrap').scrollIntoView({behavior:'smooth', block:'start'});
+}
+document.querySelectorAll('.sekme-btn').forEach(function(b){
+  b.addEventListener('click', function(){ sekmeAc(b.getAttribute('data-git')); });
+});
+sekmeAc('hedef');
+
+/* ---------- ÖZ DEĞERLENDİRME (tarayıcıda hatırlanır) ---------- */
+(function(){
+  var kutular = document.querySelectorAll('.ozdeger input[type="checkbox"]');
+  kutular.forEach(function(kutu, i){
+    var anahtar = 'u2-ozdeger-' + i;
+    kutu.checked = localStorage.getItem(anahtar) === '1';
+    kutu.addEventListener('change', function(){
+      localStorage.setItem(anahtar, kutu.checked ? '1' : '0');
+    });
+  });
+})();
+
 function kontrolEt(cid, sid){
   cid = cid || 'quiz'; sid = sid || 'score';
   var qs = document.querySelectorAll('#' + cid + ' .quiz-q');
