@@ -239,6 +239,61 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
   nav.toc{display:none} .qexp{display:block} details{page-break-inside:avoid}
   body{background:#fff;font-size:11pt}
 }
+
+/* ---------- BÖLÜM SEKMELERİ (pedagojik gezinme) ---------- */
+nav.sekmeler{position:sticky;top:0;z-index:50;background:rgba(246,244,239,.96);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-bottom:28px;
+  padding:10px 20px}
+.sekme-row{max-width:1000px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.sekme-btn{flex:none;display:flex;align-items:center;gap:7px;background:#fff;
+  border:1.5px solid var(--line);border-radius:11px;padding:9px 14px;
+  font-size:13.6px;font-weight:650;color:var(--ink2);cursor:pointer;
+  font-family:inherit;white-space:nowrap;transition:.12s}
+.sekme-btn:hover{border-color:#b7d6d0;color:var(--teal)}
+.sekme-btn .ico{font-size:16px}
+.sekme-btn.aktif{background:var(--teal);border-color:var(--teal);color:#fff}
+[data-tab]{display:none}
+[data-tab].panel-aktif{display:block}
+
+/* ---------- YENİ PEDAGOJİK BLOKLAR ---------- */
+.problem{background:#fff;border:2px solid var(--blue);border-radius:14px;
+  padding:16px 20px;margin:16px 0 20px;position:relative}
+.problem .pb-tag{position:absolute;top:-12px;left:16px;background:var(--blue);
+  color:#fff;font-size:12px;font-weight:700;letter-spacing:.04em;
+  padding:3px 12px;border-radius:999px}
+.problem p{margin:6px 0 0;font-size:15.6px}
+.problem p:first-of-type{margin-top:8px}
+.dusun{background:var(--teal-soft);border:2px dashed var(--teal);border-radius:14px;
+  padding:16px 20px;margin:18px 0}
+.dusun b.baslik{display:block;color:var(--teal);font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:8px}
+.dusun p{font-size:15.8px;font-weight:600;margin:0}
+.gunluk{background:var(--green-soft);border-left:5px solid var(--green);
+  border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0}
+.gunluk b.baslik{display:block;color:var(--green);font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:8px}
+.gunluk ul{margin:6px 0 0;padding-left:20px}
+.gunluk li{margin-bottom:5px;font-size:15px}
+.tier{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;
+  padding:2px 9px;border-radius:999px;letter-spacing:.03em;flex:none}
+.tier.yesil{background:#e5f3e1;color:#2f6b26}
+.tier.sari{background:#fdf1d6;color:#8a6413}
+.tier.kirmizi{background:#fbe6e5;color:#a33a34}
+.ozdeger{background:#fff;border:1px solid var(--line);border-radius:13px;
+  padding:16px 20px;margin:16px 0}
+.ozdeger h4{margin:0 0 10px;color:var(--teal)}
+.ozdeger label{display:flex;align-items:flex-start;gap:9px;padding:5px 0;
+  font-size:15px;cursor:pointer}
+.ozdeger input{margin-top:4px;flex:none}
+.birlestir{background:linear-gradient(135deg,#173a4a,#0f6f66);color:#fff;
+  border-radius:16px;padding:22px 24px;margin:20px 0}
+.birlestir b.baslik{display:block;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.8;margin-bottom:10px}
+.birlestir .zincirler{display:grid;gap:8px;margin-bottom:16px;font-size:14.5px}
+.birlestir .zincirler div{background:rgba(255,255,255,.1);border-radius:9px;padding:8px 12px}
+.birlestir .soru{background:rgba(255,255,255,.14);border-radius:10px;padding:12px 16px;
+  font-weight:650;font-size:16px}
 </style>
 </head>
 <body>
@@ -274,24 +329,21 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
   </div>
 </div>
 
-<nav class="toc">
-  <ul>
-    <li><a href="#harita">Ünite Haritası</a></li>
-    <li><a href="#k1">3.1 İbadetin Kapsamı</a></li>
-    <li><a href="#k2">3.2 Temel İbadetler</a></li>
-    <li><a href="#k3">3.3 İnsan ve İbadet</a></li>
-    <li><a href="#k4">3.4 Kur'an'dan Mesajlar</a></li>
-    <li><a href="#kavramlar">Kavram Sözlüğü</a></li>
-    <li><a href="#sinav">TYT/AYT Özet</a></li>
-    <li><a href="#sinif-test">Sınıflandırma Mini Test</a></li>
-    <li><a href="#test">27 Soruluk Test</a></li>
-  </ul>
+<nav class="sekmeler">
+<div class="sekme-row" id="sekmeRow">
+<button type="button" class="sekme-btn aktif" data-git="hedef"><span class="ico">🎯</span> Ne Öğreneceğim?</button>
+<button type="button" class="sekme-btn" data-git="konu"><span class="ico">📖</span> Konu Anlatımı</button>
+<button type="button" class="sekme-btn" data-git="kavramlar"><span class="ico">💡</span> Temel Kavramlar</button>
+<button type="button" class="sekme-btn" data-git="etkinlik"><span class="ico">🎮</span> Etkinlik</button>
+<button type="button" class="sekme-btn" data-git="dene"><span class="ico">📝</span> Kendini Dene</button>
+<button type="button" class="sekme-btn" data-git="degerlendirme"><span class="ico">📊</span> Ünite Değerlendirme</button>
+</div>
 </nav>
 
 <div class="wrap">
 
 <!-- ============ ÜNİTE HARİTASI ============ -->
-<section id="harita">
+<section id="harita" data-tab="hedef">
   <div class="sec-head">
     <div class="sec-num">★</div>
     <div>
@@ -351,6 +403,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 3.1 ============ -->
 <section id="k1">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">3.1</div>
     <div>
@@ -359,6 +412,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Bir arkadaşın "İbadet sadece namaz kılmak ve oruç tutmaktır, gerisi ibadet sayılmaz" dese, ona ne cevap verirdin? <b>İbadetin kapsamı gerçekten bu kadar dar mıdır?</b></p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>İbadet nedir ve hangi ilkelere göre yapılır?</span></div>
 
   <div class="asama"><div class="no">1</div>
@@ -444,8 +500,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Yaratılış amacı kulluk → ibadet (genel + özel anlam) → mükellefiyet ve teklif → beş ilke (Kur'an-sünnet · niyet · ihlas · süreklilik · itidal) → <u>kabul edilen, hayata yayılmış ibadet</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>Bir davranış Allah rızası için değil, "insanlar beni görsün" diye yapılırsa, o davranış ibadet sayılır mı? İhlas kavramını düşünerek tartış.</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Bugün yaptığın, ibadetin "geniş anlamına" giren bir davranış bulabilir misin (trafik kuralına uymak, işini düzgün yapmak vb.)?</li>
+  <li>İhlas, niyet ve süreklilik ilkelerinden hangisi senin için en zor uygulanandır?</li>
+  </ul>
+  </div>
+  </div>
 
-  <div class="cikmis"><div class="ch"><b>Sınav Sorusu — 3.1 İslam'da İbadetin Kapsamı</b><span class="say">2 soru · çözümlü</span></div><div class="cb">
+  <div class="cikmis" data-tab="dene"><div class="ch"><b>Sınav Sorusu — 3.1 İslam'da İbadetin Kapsamı</b><span class="say">2 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil">ÖSYM tarzı</span>
 <p class="metin">Bir Müslüman için ibadet, camiye girdiği anda başlayıp çıktığı anda biten bir faaliyet değildir. Trafikte sıraya riayet etmesi, komşusunu rahatsız etmemesi, üstlendiği işi eksiksiz teslim etmesi, çevreyi kirletmemesi ve bir yetimin başını okşaması da <b>Allah'ın rızasını gözettiği sürece</b> onun kulluğunun bir parçasıdır.</p>
@@ -495,7 +561,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 1 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 1</span><h4>"Hangi İlke Devrede?" — İbadet Pusulası</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -550,7 +616,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier yesil">🟢 TEMEL</div>
     <h4 style="margin-top:0">Kontrol Noktası — 3.1 (3–2–1)</h4>
     <p><b>3</b> — İbadet ve ilkeleriyle ilgili öğrendiğim üç şey:</p>
     <span class="yaz"></span><span class="yaz"></span><span class="yaz"></span>
@@ -569,6 +636,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 3.2 ============ -->
 <section id="k2">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">3.2</div>
     <div>
@@ -577,6 +645,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Namaz farz, teravih sünnet, kurban vaciptir. Peki bunlar arasındaki fark ne işe yarar? <b>Bir ibadetin "farz" ya da "sünnet" olması, onu yapan kişi için ne değiştirir?</b></p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>İslam'ın temel ibadetleri nelerdir ve nasıl sınıflandırılır?</span></div>
 
   <div class="asama amber"><div class="no">1</div>
@@ -729,8 +800,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Temel ibadetler (namaz·oruç·zekât·hac·kurban) → hükmüne göre (farz·vacip·sünnet·mendup) + yapılışına göre (mal·beden·ikisi) → hazırlık şartları ve usul → <u>salih amelle hayatın tamamına yayılma</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>Bir kişi "farz" ibadetleri hiç aksatmıyor ama "sünnet/mendup" olanları hiç önemsemiyor. Bu tutum, ibadet bilinci açısından yeterli midir? Tartış.</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>Namaz, oruç, zekât, hac ve kurbandan hangisi hayatında şu an uygulanabilir durumda? Hangisi zamana bağlı?</li>
+  <li>Bedenle yapılan bir ibadetle (namaz gibi) malla yapılan bir ibadeti (zekât gibi) karşılaştır — hangisi sence daha "görünmez" bir çaba gerektiriyor?</li>
+  </ul>
+  </div>
+  </div>
 
-  <div class="cikmis"><div class="ch"><b>Sınav Sorusu — 3.2 İslam'da Temel İbadetler</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
+  <div class="cikmis" data-tab="dene"><div class="ch"><b>Sınav Sorusu — 3.2 İslam'da Temel İbadetler</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil">ÖSYM tarzı</span>
 <p class="metin">Bir öğrenci defterine şu üç ibadeti yan yana yazmıştır: <b>kurban kesmek</b>, <b>vitir namazı kılmak</b>, <b>bayram namazı kılmak</b>.</p>
@@ -757,7 +838,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 2 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 2</span><h4>"Çift Etiket" — İbadet Sınıflandırma Atölyesi</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -828,7 +909,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier sari">🟡 YORUM</div>
     <h4 style="margin-top:0">Kontrol Noktası — 3.2</h4>
     <ol>
       <li>İslam'da ibadetler hangi iki ölçüte göre sınıflandırılır?<span class="yaz"></span></li>
@@ -845,6 +927,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 3.3 ============ -->
 <section id="k3">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">3.3</div>
     <div>
@@ -853,6 +936,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Camide yan yana namaz kılan zengin-fakir, yaşlı-genç herkes aynı safta durur. <b>İbadetler sadece bireyin Allah'la ilişkisini mi güçlendirir, yoksa toplumu da mı değiştirir?</b></p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>İbadet etmek insanı ve toplumu nasıl değiştirir?</span></div>
 
   <div class="asama plum"><div class="no">1</div>
@@ -926,8 +1012,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Fıtrî ibadet ihtiyacı → ihlasla ve sürekli ibadet → takva · tevazu · ihsan · tefekkür → bireyde sabır, disiplin, merhamet → toplumda <u>birlik, kardeşlik ve yardımlaşma</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>Namazda saf tutarken zengin-fakir, amir-memur ayrımı gözetilmez. Bu uygulama, ibadetlerin toplumsal eşitlik ve kardeşlik açısından verdiği mesajı nasıl yansıtır?</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>İbadetlerin sana kazandırdığını düşündüğün bir "disiplin" ya da "sabır" örneği var mı?</li>
+  <li>Toplu yapılan bir ibadette (namaz, bayram vb.) yaşadığın "birlik/kardeşlik" hissini hatırla.</li>
+  </ul>
+  </div>
+  </div>
 
-  <div class="cikmis"><div class="ch"><b>Sınav Sorusu — 3.3 İnsan ve İbadet</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
+  <div class="cikmis" data-tab="dene"><div class="ch"><b>Sınav Sorusu — 3.3 İnsan ve İbadet</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil">ÖSYM tarzı</span>
 <p class="metin">Hz. Peygamber, İslam'ın ilk yıllarında müşriklerin bütün engellemelerine rağmen <b>Dârülerkam</b>'da Müslümanlarla toplanır, onlarla sohbet eder ve birlikte namaz kılardı. Medine'ye hicret ettiğinde yaptığı ilk iş, Müslümanların bir araya geleceği bir <b>mescit inşa etmek</b> olmuştur. Ayrıca cemaatle kılınan namazın, bireysel olarak kılınan namazdan <b>daha fazla sevap</b> olduğu bildirilmiştir.</p>
@@ -954,7 +1050,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 3 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 3</span><h4>"İki Yüzü Var" — İbadetin Etki Haritası</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -1008,7 +1104,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" data-tab="dene">
+    <div class="tier yesil">🟢 TEMEL</div>
     <h4 style="margin-top:0">Kontrol Noktası — 3.3</h4>
     <div class="grid2">
       <div><b style="color:var(--plum)">Bireysel faydalar</b><span class="yaz"></span><span class="yaz"></span><span class="yaz"></span></div>
@@ -1023,6 +1120,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 
 <!-- ============ 3.4 ============ -->
 <section id="k4">
+  <div data-tab="konu">
   <div class="sec-head">
     <div class="sec-num">3.4</div>
     <div>
@@ -1031,6 +1129,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     </div>
   </div>
 
+  <div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+  <p>Bazı insanlar "Ben yaşlanınca, emekli olunca ibadete ağırlık veririm" der. <b>Kulluğun bir süresi/sonu var mıdır, yoksa hayat boyu mu sürer?</b></p>
+  </div>
   <div class="temelsoru"><b>Bölümün temel sorusu</b><span>İnsan niçin, kime ve ne zamana kadar ibadet eder?</span></div>
 
   <div class="ipucu"><b>Üç ayet, üç soru:</b> Bu üç ayet birlikte okunduğunda kulluğun üç boyutunu verir — <b>Bakara 21</b> "niçin/kime?" · <b>Zâriyât 56</b> "hangi amaçla yaratıldık?" · <b>Hicr 99</b> "ne zamana kadar?"</div>
@@ -1092,9 +1193,19 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Bölümün ana şeması</b>
     <div class="zincir">Yaratan O'dur (Bakara 21) → yaratılış amacı kulluktur (Zâriyât 56) → kulluk ölüme kadar sürer (Hicr 99) → sonuç: <u>takva sahibi, ihlas ve tevazu ile yaşayan bir kul</u></div>
   </div>
+  <div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+  <p>Hicr 99 "sana yakîn (ölüm) gelinceye kadar Rabbine ibadet et" der. Bu ayet, "ibadeti belli bir yaşa/döneme erteleme" düşüncesine ne cevap verir?</p>
+  </div>
+  <div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+  <ul>
+  <li>"Kulluğun bir emeklilik yaşı yoktur" fikrini kendi hayat planına nasıl yansıtırsın?</li>
+  <li>Bakara 21'deki "sizi ve sizden öncekileri yaratan" ifadesi, kulluğun gerekçesini nasıl temellendiriyor?</li>
+  </ul>
+  </div>
+  </div>
 
   <!-- YENİ ETKİNLİK 4 -->
-  <div class="etkinlik">
+  <div class="etkinlik" data-tab="etkinlik">
     <div class="et-head"><span class="tag">Yeni Etkinlik 4</span><h4>"Üç Soru Üç Ayet" — Mesaj Çözümleme</h4></div>
     <div class="et-body">
       <div class="et-meta">
@@ -1142,7 +1253,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 
 <!-- ============ KAVRAM SÖZLÜĞÜ ============ -->
-<section id="kavramlar">
+<section id="kavramlar" data-tab="kavramlar">
   <div class="sec-head">
     <div class="sec-num">★</div>
     <div>
@@ -1175,7 +1286,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 
 <!-- ============ TYT/AYT ÖZET ============ -->
-<section id="sinav">
+<section id="sinav" data-tab="degerlendirme">
   <div class="sec-head">
     <div class="sec-num">✎</div>
     <div>
@@ -1255,10 +1366,49 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
     <b>Zincir 4 — Etki</b>
     <div class="zincir">Takva → tevazu → ihsan → tefekkür → bireyde olgunluk, toplumda <u>birlik ve yardımlaşma</u></div>
   </div>
+
+  <h3>🧩 Üniteyi Birleştir</h3>
+  <div class="birlestir">
+    <b class="baslik">Dört zincir arasındaki bağ</b>
+    <div class="zincirler">
+      <div><b>1 — Kapsam:</b> Kulluk → genel anlamda ibadet + özel anlamda ibadet → mükellefiyet</div>
+      <div><b>2 — İlkeler:</b> Kur'an-sünnet → niyet → ihlas → süreklilik → itidal</div>
+      <div><b>3 — Sınıflandırma:</b> Hüküm (farz-vacip-sünnet-mendup) + Yapılış (mal-beden-ikisi)</div>
+      <div><b>4 — Etki:</b> Takva → tevazu → ihsan → tefekkür → bireyde olgunluk, toplumda birlik</div>
+    </div>
+    <div class="soru">Bu dört zincir birbirini tamamlar: ibadetin <b>kapsamını</b> (Zincir 1) bilen bir kişi, doğru <b>ilkelerle</b> (Zincir 2) ve doğru <b>sınıflandırma bilgisiyle</b> (Zincir 3) ibadet ettiğinde, bunun <b>bireysel ve toplumsal etkileri</b> (Zincir 4) ortaya çıkar. Sence bir kişi ilkeleri (Zincir 2) bilmeden sadece "hangi ibadet farz, hangisi sünnet" (Zincir 3) bilgisine sahip olsa, ibadetleri gerçek etkisini (Zincir 4) gösterir mi?</div>
+  </div>
+
+  <h3>📊 Öz Değerlendirme — Bu üniteyi ne kadar öğrendim?</h3>
+  <div class="ozdeger">
+    <h4>3.1 — İslam'da İbadetin Kapsamı</h4>
+    <label><input type="checkbox"> İbadetin genel ve özel anlamını örneklerle açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Mükellef ve teklif kavramlarını açıklayabiliyorum.</label>
+    <label><input type="checkbox"> İbadetin beş temel ilkesini (Kur'an-sünnet, niyet, ihlas, süreklilik, itidal) sayabiliyorum.</label>
+    <label><input type="checkbox"> Bir örnek davranışın "ibadet" sayılıp sayılmayacağına dair çıkarım yapabiliyorum.</label>
+  </div>
+  <div class="ozdeger">
+    <h4>3.2 — İslam'da Temel İbadetler</h4>
+    <label><input type="checkbox"> Namaz, oruç, zekât, hac, kurbanı hüküm bakımından (farz/vacip/sünnet) sınıflandırabiliyorum.</label>
+    <label><input type="checkbox"> İbadetleri yapılış bakımından (mal/beden/ikisi) sınıflandırabiliyorum.</label>
+    <label><input type="checkbox"> Bir ibadetin hangi sınıfa girdiğine dair çıkarım yapabiliyorum.</label>
+  </div>
+  <div class="ozdeger">
+    <h4>3.3 — İnsan ve İbadet</h4>
+    <label><input type="checkbox"> İbadetin bireye kazandırdıklarını (takva, tevazu, ihsan, tefekkür) örnekleyebiliyorum.</label>
+    <label><input type="checkbox"> İbadetin topluma kazandırdıklarını (birlik, kardeşlik, yardımlaşma) örnekleyebiliyorum.</label>
+    <label><input type="checkbox"> Bir örnek olaydan ibadetin bireysel/toplumsal etkisine dair çıkarım yapabiliyorum.</label>
+  </div>
+  <div class="ozdeger">
+    <h4>3.4 — Kur'an'dan Mesajlar: Bakara 21 · Zâriyât 56 · Hicr 99</h4>
+    <label><input type="checkbox"> Üç ayetin kulluğun "kime, niçin, ne zamana kadar" sorularına verdiği cevabı açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Kulluğun ölüme kadar sürdüğü mesajını kendi cümlelerimle açıklayabiliyorum.</label>
+    <label><input type="checkbox"> Verilen bir ayetten hangi soruya (kime/niçin/ne zamana) cevap verdiği çıkarımını yapabiliyorum.</label>
+  </div>
 </section>
 
 <!-- ============ SINIFLANDIRMA MİNİ TESTİ ============ -->
-<section id="sinif-test">
+<section id="sinif-test" data-tab="dene">
   <div class="sec-head">
     <div class="sec-num">Σ</div>
     <div>
@@ -1394,7 +1544,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 
 <!-- ============ TEST ============ -->
-<section id="test">
+<section id="test" data-tab="dene">
   <div class="sec-head">
     <div class="sec-num">?</div>
     <div>
@@ -1672,6 +1822,33 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div>
 
 <script>
+/* ---------- SEKME GEZİNMESİ ---------- */
+function sekmeAc(ad){
+  document.querySelectorAll('[data-tab]').forEach(function(el){
+    el.classList.toggle('panel-aktif', el.getAttribute('data-tab') === ad);
+  });
+  document.querySelectorAll('.sekme-btn').forEach(function(b){
+    b.classList.toggle('aktif', b.getAttribute('data-git') === ad);
+  });
+  document.querySelector('.wrap').scrollIntoView({behavior:'smooth', block:'start'});
+}
+document.querySelectorAll('.sekme-btn').forEach(function(b){
+  b.addEventListener('click', function(){ sekmeAc(b.getAttribute('data-git')); });
+});
+sekmeAc('hedef');
+
+/* ---------- ÖZ DEĞERLENDİRME (tarayıcıda hatırlanır) ---------- */
+(function(){
+  var kutular = document.querySelectorAll('.ozdeger input[type="checkbox"]');
+  kutular.forEach(function(kutu, i){
+    var anahtar = 'u3-ozdeger-' + i;
+    kutu.checked = localStorage.getItem(anahtar) === '1';
+    kutu.addEventListener('change', function(){
+      localStorage.setItem(anahtar, kutu.checked ? '1' : '0');
+    });
+  });
+})();
+
 function kontrolEt(cid, sid){
   cid = cid || 'quiz'; sid = sid || 'score';
   var qs = document.querySelectorAll('#' + cid + ' .quiz-q');
