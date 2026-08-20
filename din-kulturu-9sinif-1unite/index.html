@@ -240,6 +240,65 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
   nav.toc{display:none} .qexp{display:block} details{page-break-inside:avoid}
   body{background:#fff;font-size:11pt}
 }
+
+/* ---------- BÖLÜM SEKMELERİ (pedagojik gezinme) ---------- */
+nav.sekmeler{position:sticky;top:0;z-index:50;background:rgba(246,244,239,.96);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-bottom:28px;
+  padding:10px 20px}
+.sekme-row{max-width:1000px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.sekme-btn{flex:none;display:flex;align-items:center;gap:7px;background:#fff;
+  border:1.5px solid var(--line);border-radius:11px;padding:9px 14px;
+  font-size:13.6px;font-weight:650;color:var(--ink2);cursor:pointer;
+  font-family:inherit;white-space:nowrap;transition:.12s}
+.sekme-btn:hover{border-color:#b7d6d0;color:var(--teal)}
+.sekme-btn .ico{font-size:16px}
+.sekme-btn.aktif{background:var(--teal);border-color:var(--teal);color:#fff}
+[data-tab]{display:none}
+[data-tab].panel-aktif{display:block}
+.panel-baslik{max-width:1000px;margin:0 auto 18px;padding:0 0 14px;
+  border-bottom:2px solid var(--teal)}
+.panel-baslik h2{margin:0 0 4px;font-size:clamp(20px,3vw,26px)}
+.panel-baslik p{margin:0;color:var(--ink2);font-size:14.5px}
+
+/* ---------- YENİ PEDAGOJİK BLOKLAR ---------- */
+.problem{background:#fff;border:2px solid var(--blue);border-radius:14px;
+  padding:16px 20px;margin:16px 0 20px;position:relative}
+.problem .pb-tag{position:absolute;top:-12px;left:16px;background:var(--blue);
+  color:#fff;font-size:12px;font-weight:700;letter-spacing:.04em;
+  padding:3px 12px;border-radius:999px}
+.problem p{margin:6px 0 0;font-size:15.6px}
+.problem p:first-of-type{margin-top:8px}
+.dusun{background:var(--teal-soft);border:2px dashed var(--teal);border-radius:14px;
+  padding:16px 20px;margin:18px 0}
+.dusun b.baslik{display:block;color:var(--teal);font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:8px}
+.dusun p{font-size:15.8px;font-weight:600;margin:0}
+.gunluk{background:var(--green-soft);border-left:5px solid var(--green);
+  border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0}
+.gunluk b.baslik{display:block;color:var(--green);font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:8px}
+.gunluk ul{margin:6px 0 0;padding-left:20px}
+.gunluk li{margin-bottom:5px;font-size:15px}
+.tier{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;
+  padding:2px 9px;border-radius:999px;letter-spacing:.03em;flex:none}
+.tier.yesil{background:#e5f3e1;color:#2f6b26}
+.tier.sari{background:#fdf1d6;color:#8a6413}
+.tier.kirmizi{background:#fbe6e5;color:#a33a34}
+.ozdeger{background:#fff;border:1px solid var(--line);border-radius:13px;
+  padding:16px 20px;margin:16px 0}
+.ozdeger h4{margin:0 0 10px;color:var(--teal)}
+.ozdeger label{display:flex;align-items:flex-start;gap:9px;padding:5px 0;
+  font-size:15px;cursor:pointer}
+.ozdeger input{margin-top:4px;flex:none}
+.birlestir{background:linear-gradient(135deg,#173a4a,#0f6f66);color:#fff;
+  border-radius:16px;padding:22px 24px;margin:20px 0}
+.birlestir b.baslik{display:block;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.8;margin-bottom:10px}
+.birlestir .zincirler{display:grid;gap:8px;margin-bottom:16px;font-size:14.5px}
+.birlestir .zincirler div{background:rgba(255,255,255,.1);border-radius:9px;padding:8px 12px}
+.birlestir .soru{background:rgba(255,255,255,.14);border-radius:10px;padding:12px 16px;
+  font-weight:650;font-size:16px}
 </style>
 </head>
 <body>
@@ -258,17 +317,15 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div>
 </div>
 </header>
-<nav class="toc">
-<ul>
-<li><a href="#harita">Ünite Haritası</a></li>
-<li><a href="#k1">1.1 Yaratılış</a></li>
-<li><a href="#k2">1.2 Doğruyu Arama</a></li>
-<li><a href="#k3">1.3 İbadet &amp; Dua</a></li>
-<li><a href="#k4">1.4 Rum Suresi</a></li>
-<li><a href="#kavramlar">Kavram Sözlüğü</a></li>
-<li><a href="#sinav">TYT/AYT Özet</a></li>
-<li><a href="#test">27 Soruluk Test</a></li>
-</ul>
+<nav class="sekmeler">
+<div class="sekme-row" id="sekmeRow">
+<button type="button" class="sekme-btn aktif" data-git="hedef"><span class="ico">🎯</span> Ne Öğreneceğim?</button>
+<button type="button" class="sekme-btn" data-git="konu"><span class="ico">📖</span> Konu Anlatımı</button>
+<button type="button" class="sekme-btn" data-git="kavramlar"><span class="ico">💡</span> Temel Kavramlar</button>
+<button type="button" class="sekme-btn" data-git="etkinlik"><span class="ico">🎮</span> Etkinlik</button>
+<button type="button" class="sekme-btn" data-git="dene"><span class="ico">📝</span> Kendini Dene</button>
+<button type="button" class="sekme-btn" data-git="degerlendirme"><span class="ico">📊</span> Ünite Değerlendirme</button>
+</div>
 </nav>
 <div class="wrap">
 <!-- ============ TESTLER KUTUSU ============ -->
@@ -283,7 +340,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div>
 </div>
 <!-- ============ ÜNİTE HARİTASI ============ -->
-<section id="harita">
+<section id="harita" data-tab="hedef">
 <div class="sec-head">
 <div class="sec-num">★</div>
 <div>
@@ -336,12 +393,16 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 <!-- ============ 1.1 ============ -->
 <section id="k1">
+<div data-tab="konu">
 <div class="sec-head">
 <div class="sec-num">1.1</div>
 <div>
 <h2>İnsan ve İnsanın Yaratılışı</h2>
 <p class="sub">Yaratılmış bir varlık olarak insanın kökeni, üstün özellikleri ve yaratılış amacı</p>
 </div>
+</div>
+<div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+<p>Bir arkadaşın sana "Neden buradayız, hayatın bir anlamı var mı?" diye soruyor. Cevap vermeden önce bir düşün: <b>İnsan gerçekten tesadüfen mi var, yoksa bir amaçla mı yaratıldı?</b> Bu soruya nasıl cevap verirdin?</p>
 </div>
 <div class="temelsoru"><b>Bölümün temel sorusu</b><span>İnsan nasıl bir varlıktır ve niçin yaratılmıştır?</span></div>
 <div class="asama"><div class="no">1</div>
@@ -425,8 +486,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 <b>Bölümün ana şeması</b>
 <div class="zincir">İnsan yaratıldı → akıl · irade · ilim verildi → halife ve emanet sahibi oldu → <u>sorumlu (mükellef)</u> hâle geldi → yaratılışının anlamını arayarak Rabbini tanımaya yöneldi.</div>
 </div>
+<div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+<p>Bir insan "Ben kimseye zarar vermiyorum, istediğim gibi yaşarım, kimseye hesap vermem" dese, bu düşünce "emanet" ve "halifelik" kavramlarıyla ne kadar bağdaşır? Tartış.</p>
+</div>
+<div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+<ul>
+<li>Bugün yaptığın hangi davranış "yeryüzünü imar etme" (halifelik) sorumluluğuna bir örnek olabilir?</li>
+<li>Sana verilen akıl ve iradeyi (emaneti) bugün nasıl kullandın — bir karar anını hatırla.</li>
+</ul>
+</div>
+</div>
 
-<div class="cikmis"><div class="ch"><b>ÖSYM Çıkmış Sorular — 1.1 İnsan ve İnsanın Yaratılışı</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
+<div class="cikmis" data-tab="dene"><div class="ch"><span class="tier kirmizi" style="background:rgba(255,255,255,.2);color:#fff">🔴 ÜST DÜZEY</span> <b>ÖSYM Çıkmış Sorular — 1.1 İnsan ve İnsanın Yaratılışı</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil">2022-TYT</span>
 <p class="metin">"Hayat, ölüme doğru akıp giden bir yolculuktur. Bu yolculukta çeşitli duraklar ve bizi bekleyen çok yönlü sınavlar vardır. <b>Benlik emanetini yüklenmiş olan insanın</b> Allah tarafından bildirilenleri <b>yerine getirme</b> ve yasaklananlardan <b>kaçınma gibi bir görevi</b> vardır. Dünyada oyun ve eğlencenin yeri ve zamanı olsa da insanoğlu dünyaya bunlar için gönderilmemiştir; <b>kulluk görev ve bilinci</b> her şeyden daha önemlidir."</p>
@@ -454,7 +525,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 1 -->
-<div class="etkinlik">
+<div class="etkinlik" data-tab="etkinlik">
 <div class="et-head"><span class="tag">Yeni Etkinlik 1</span><h4>"Ölçü mü, Tesadüf mü?" — Delil Defteri</h4></div>
 <div class="et-body">
 <div class="et-meta">
@@ -483,7 +554,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </details>
 </div>
 </div>
-<div class="card">
+<div class="card" data-tab="dene">
+<div class="tier yesil">🟢 TEMEL</div>
 <h4 style="margin-top:0">Kontrol Noktası — 1.1</h4>
 <ol>
 <li>İnsanı diğer varlıklardan ayıran üç temel özelliği yazınız.<span class="yaz"></span></li>
@@ -499,12 +571,16 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 <!-- ============ 1.2 ============ -->
 <section id="k2">
+<div data-tab="konu">
 <div class="sec-head">
 <div class="sec-num">1.2</div>
 <div>
 <h2>Doğruyu Arayan Bir Varlık Olarak İnsan</h2>
 <p class="sub">Bilgiye ulaşma yolları: duyu — akıl — vahiy</p>
 </div>
+</div>
+<div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+<p>Bir arkadaşın sosyal medyada gördüğü bir bilgiyi sana gönderiyor: "Bilim insanları şunu kanıtladı..." Paylaşmadan önce bu bilginin doğru olduğunu nasıl anlarsın? <b>Bir bilgiye "doğru" diyebilmek için neye ihtiyacın var?</b></p>
 </div>
 <div class="temelsoru"><b>Bölümün temel sorusu</b><span>İnsan doğru bilgiye nasıl ulaşır?</span></div>
 <div class="asama amber"><div class="no">1</div>
@@ -572,8 +648,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 <b>Bölümün ana şeması</b>
 <div class="zincir">Duyular → Akıl → Tefekkür → Marifet → Vahyin rehberliği → Doğru bilgi → <u>Sorumluluk</u></div>
 </div>
+<div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+<p>Bir bilginin çok kişi tarafından paylaşılması, o bilginin doğru olduğunu gösterir mi? İnsan aklı bazı doğrulara kendi başına ulaşabiliyorsa, vahye neden ihtiyaç duyulur? Bu iki soruyu birlikte düşün.</p>
+</div>
+<div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+<ul>
+<li>Sosyal medyada gördüğün bir bilgiyi paylaşmadan önce sor: Kaynağı kim? Hangi kanıta dayanıyor? Başka kaynaklarda doğrulanıyor mu?</li>
+<li>Bugün "duyarak", "düşünerek" ve "güvenilir bir kaynaktan öğrenerek" edindiğin birer bilgi örneği bulabilir misin?</li>
+</ul>
+</div>
+</div>
 
-<div class="cikmis"><div class="ch"><b>ÖSYM Çıkmış Sorular — 1.2 Doğruyu Arayan Bir Varlık Olarak İnsan</b><span class="say">2 soru · çözümlü</span></div><div class="cb">
+<div class="cikmis" data-tab="dene"><div class="ch"><span class="tier kirmizi" style="background:rgba(255,255,255,.2);color:#fff">🔴 ÜST DÜZEY</span> <b>ÖSYM Çıkmış Sorular — 1.2 Doğruyu Arayan Bir Varlık Olarak İnsan</b><span class="say">2 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil">2024-TYT</span>
 <p class="metin">Öğretmen, derste ahlaki davranışların neler olduğu ve bir davranışın ahlaki olup olmadığının nasıl anlaşılacağı konusunda bir tartışma başlatmıştır. Öğrenciler şunları söylemiştir:<br><br><b>Furkan:</b> Allah <u>Kur'an'da</u> hangi davranışların doğru veya yanlış olduğuna dair açıklamalar yapmaktadır.<br><b>Zeynep:</b> Bence bir davranışın iyi veya kötü olduğunu <u>düşünerek</u> bulabiliriz. Örneğin yalan söylemek herkes için kötü bir davranıştır; topluma zarar veren bu davranışın iyi olduğunu kimse iddia edemez.<br><b>Efe:</b> Bir davranışın doğru olup olmadığını <u>gözlemleyerek</u> de karar verebiliriz. Örneğin hafta sonu ev işlerinde anneme yardım ettiğim için annem çok mutlu olmuştu. Bunu gören küçük kardeşim de aynı şekilde davranmak istedi.</p>
@@ -626,7 +712,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 2 -->
-<div class="etkinlik">
+<div class="etkinlik" data-tab="etkinlik">
 <div class="et-head"><span class="tag">Yeni Etkinlik 2</span><h4>"Hangi Kapıdan Geldi?" — Bilgi Ayıklama Atölyesi</h4></div>
 <div class="et-body">
 <div class="et-meta">
@@ -664,7 +750,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
       </div></details>
 </div>
 </div>
-<div class="card">
+<div class="card" data-tab="dene">
+<div class="tier sari">🟡 YORUM</div>
 <h4 style="margin-top:0">Kontrol Noktası — 1.2</h4>
 <p>Aşağıdaki kavramları kullanarak "doğruyu arayan bir varlık olarak insan" konusunda kısa bir değerlendirme metni yazınız:</p>
 <div class="chiprow"><span class="chip">fıtrat</span><span class="chip">Hâdî</span><span class="chip">ilim</span><span class="chip">mükellef</span><span class="chip">peygamber</span><span class="chip">tefekkür</span><span class="chip">vahiy</span></div>
@@ -674,12 +761,16 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 <!-- ============ 1.3 ============ -->
 <section id="k3">
+<div data-tab="konu">
 <div class="sec-head">
 <div class="sec-num">1.3</div>
 <div>
 <h2>İbadet ve Dua Eden Bir Varlık Olarak İnsan</h2>
 <p class="sub">Allah ile iletişimin yolları: ibadet — dua — tövbe — Kur'an</p>
 </div>
+</div>
+<div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+<p>Çok sevdiğin, güvendiğin bir insandan uzun süre haber almasan aranızdaki bağ nasıl etkilenir? Peki insanın Allah'la olan bağı, hiç "iletişim kurmadan" canlı kalabilir mi? <b>İnsan Allah ile ilişkisini nasıl sürdürür?</b></p>
 </div>
 <div class="temelsoru"><b>Bölümün temel sorusu</b><span>İnsan Allah'ı tanıdıktan sonra O'nunla ilişkisini nasıl sürdürür?</span></div>
 <div class="asama plum"><div class="no">1</div>
@@ -800,8 +891,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 <div class="card">
 <p style="margin:0"><b>Ahlaka yansıma:</b> İnsanın Allah ile kurduğu bağ, insanlarla ilişkisine yansır. Kullukta samimiyet ahlakı güzelleştirir; kişi kötülüklerden sakınır, başkalarına karşı saygılı ve sorumlu davranır. Yani <b>iyi kul olmak, iyi insan olmayı gerektirir</b>.</p>
 </div>
+<div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+<p>Bir kişi sadece sıkıntıya düştüğünde dua ediyor, işleri yolundayken Allah'ı hiç anmıyorsa, bu durum Kur'an'ın eleştirdiği tutuma (İsrâ 17/83) ne kadar benziyor? Kendi hayatından bir örnekle düşün.</p>
+</div>
+<div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+<ul>
+<li>Bugün bir "tövbe" (hatanı fark edip düzeltme) anı yaşadın mı? Küçük bir örnek düşün.</li>
+<li>Esmâ-i hüsnâ tablosundaki isimlerden hangisi bugünkü ruh hâline en çok uyuyor? Neden?</li>
+</ul>
+</div>
+</div>
 
-<div class="cikmis"><div class="ch"><b>ÖSYM Çıkmış Sorular — 1.3 İbadet ve Dua Eden Bir Varlık Olarak İnsan</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
+<div class="cikmis" data-tab="dene"><div class="ch"><span class="tier kirmizi" style="background:rgba(255,255,255,.2);color:#fff">🔴 ÜST DÜZEY</span> <b>ÖSYM Çıkmış Sorular — 1.3 İbadet ve Dua Eden Bir Varlık Olarak İnsan</b><span class="say">1 soru · çözümlü</span></div><div class="cb">
 <div class="cs">
 <span class="yil bilinmiyor">TYT — yıl görselde okunmuyor</span>
 <p class="metin">İyilik yapmanın yanı sıra kötülük yapma temayülüne de sahip olan insan, işlediği bir günah veya yaptığı bir hatadan duyduğu <b>pişmanlığı Allah'a arz eder</b>. Bu arz ediş <b>bağışlanma talebidir</b> ve buna tövbe denir. Mümin, Hz. Muhammed'in bir sözünde belirttiği gibi, işlediği <b>küçük bir günahı bile</b> tepesinde dikilip üzerine düşeceğinden korktuğu <b>bir dağ gibi görür</b>. Bu yüzden <b>vakit kaybetmeden</b>, duyduğu pişmanlığı Allah'a arz edip <b>kulluğunun bilincinde olduğunu, sözüne sadık kalacağını</b> ifade ederek bağışlanma talebinde bulunur.</p>
@@ -830,7 +931,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></div>
 
 <!-- YENİ ETKİNLİK 3 -->
-<div class="etkinlik">
+<div class="etkinlik" data-tab="etkinlik">
 <div class="et-head"><span class="tag">Yeni Etkinlik 3</span><h4>"İsimle Dua Ediyorum" — Esmâ Eşleştirme Kartları</h4></div>
 <div class="et-body">
 <div class="et-meta">
@@ -867,7 +968,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div></details>
 </div>
 </div>
-<div class="card">
+<div class="card" data-tab="dene">
+<div class="tier yesil">🟢 TEMEL</div>
 <h4 style="margin-top:0">Kontrol Noktası — 1.3</h4>
 <p>Tanımları uygun kavramlarla eşleştiriniz: <i>afüvv, dua, hamt, ibadet, mucîb, settâr, tevvâb, tövbe</i></p>
 <ol>
@@ -885,12 +987,16 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </section>
 <!-- ============ 1.4 ============ -->
 <section id="k4">
+<div data-tab="konu">
 <div class="sec-head">
 <div class="sec-num">1.4</div>
 <div>
 <h2>Kur'an'dan Mesajlar: Rûm Suresi 17–27. Ayetler</h2>
 <p class="sub">Evrendeki ve insandaki "âyetler" (deliller) ve ahiretin ispatı</p>
 </div>
+</div>
+<div class="problem"><span class="pb-tag">🎬 Konuya Başlarken</span>
+<p>Bir kış günü kupkuru duran bir toprağın, ilkbaharda yemyeşil bitkilerle dolduğunu düşün. <b>Bu, ölümden sonra dirilişin mümkün olduğuna dair bir işaret sayılabilir mi?</b> Rûm suresi tam olarak bu soruyu soruyor.</p>
 </div>
 <div class="card">
 <h4 style="margin-top:0">Sure künyesi</h4>
@@ -1009,8 +1115,18 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 <div class="card">
 <p style="margin:0"><b>Bölümün temel mesajı:</b> Kâinattaki düzen, insanın yaratılışı, insanlar arasındaki çeşitlilik ve doğadaki olaylar; Allah'ın kudretinin ve varlığının <b>delilleri</b> olarak düşünülmelidir.</p>
 </div>
+<div class="dusun"><b class="baslik">🧠 Düşün ve Yorumla</b>
+<p>Rûm suresi hem "insanın kendisindeki" (enfüsî) hem de "dış dünyadaki" (âfâkî) delillerden bahsediyor. Sence bir insan hiç dışarıya bakmadan, sadece kendi bedenini ve duygularını gözlemleyerek Allah'ın varlığına dair bir sonuca ulaşabilir mi?</p>
+</div>
+<div class="gunluk"><b class="baslik">🌍 Günlük Hayata Taşı</b>
+<ul>
+<li>Bugün çevrende gördüğün, "amaçsız olamaz" dediğin bir düzen örneği bul (bir bitki, bir hayvan davranışı, bir doğa olayı).</li>
+<li>Ailende veya çevrende gördüğün bir "dil/renk/kültür" farklılığını, Rûm 30/22'nin verdiği mesajla (üstünlük değil, tanışma vesilesi) nasıl açıklarsın?</li>
+</ul>
+</div>
+</div>
 <!-- YENİ ETKİNLİK 4 -->
-<div class="etkinlik">
+<div class="etkinlik" data-tab="etkinlik">
 <div class="et-head"><span class="tag">Yeni Etkinlik 4</span><h4>"Ayet Muhabiri" — Delil Haber Bülteni</h4></div>
 <div class="et-body">
 <div class="et-meta">
@@ -1041,7 +1157,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div>
 </section>
 <!-- ============ KAVRAM SÖZLÜĞÜ ============ -->
-<section id="kavramlar">
+<section id="kavramlar" data-tab="kavramlar">
 <div class="sec-head">
 <div class="sec-num">★</div>
 <div>
@@ -1070,7 +1186,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </div>
 </section>
 <!-- ============ TYT/AYT ÖZET ============ -->
-<section id="sinav">
+<section id="sinav" data-tab="degerlendirme">
 <div class="sec-head">
 <div class="sec-num">✎</div>
 <div>
@@ -1144,9 +1260,51 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 <b>Zincir 4 — Rûm 17–27</b>
 <div class="zincir">Tespih (namaz) → yaratma kudreti → insandaki deliller (eş, dil, renk, uyku) → tabiattaki deliller (şimşek, yağmur, gök-yer) → <u>yeniden diriliş</u></div>
 </div>
+
+<h3>🧩 Üniteyi Birleştir</h3>
+<div class="birlestir">
+<b class="baslik">Dört zincir arasındaki bağ</b>
+<div class="zincirler">
+<div><b>1 — İnsan:</b> Yaratılış → akıl/irade/ilim → halife+emanet → mükellef</div>
+<div><b>2 — Bilgi:</b> Duyu → Akıl → Tefekkür → Marifet → Vahiy → Doğru bilgi</div>
+<div><b>3 — İletişim:</b> Allah'ı tanıma → iman → ibadet → dua → tövbe → güzel ahlak</div>
+<div><b>4 — Rûm 17-27:</b> Tespih → yaratma kudreti → evrendeki deliller → yeniden diriliş</div>
+</div>
+<div class="soru">Bu dört zincir birbirinden bağımsız değil, tek bir hikâyenin parçaları: <b>mükellef</b> olan insan (Zincir 1), <b>doğru bilgiye</b> ulaşıp (Zincir 2) Allah'ı tanır ve O'nunla <b>iletişim</b> kurar (Zincir 3); bu iletişimin temelini de evrendeki ve kendisindeki <b>delilleri</b> okuması oluşturur (Zincir 4). Sence bu dört zincirden biri eksik olsaydı (örneğin insan "doğru bilgiye" hiç ulaşamasaydı) diğer üçü nasıl etkilenirdi? Tartış.</div>
+</div>
+
+<h3>📊 Öz Değerlendirme — Bu üniteyi ne kadar öğrendim?</h3>
+<div class="ozdeger">
+<h4>1.1 — İnsan ve İnsanın Yaratılışı</h4>
+<label><input type="checkbox"/> Fıtrat, halifelik ve emanet kavramlarını kendi cümlelerimle açıklayabiliyorum.</label>
+<label><input type="checkbox"/> Yaratılış aşamalarını (Mü'minûn 23/12-14) sırasıyla anlatabiliyorum.</label>
+<label><input type="checkbox"/> "Emanet" ayetini (Ahzâb 33/72) günlük hayattan bir örnekle ilişkilendirebiliyorum.</label>
+<label><input type="checkbox"/> Bir örnek olaydan insanın sorumluluğuna dair çıkarım yapabiliyorum.</label>
+</div>
+<div class="ozdeger">
+<h4>1.2 — Doğruyu Arayan Bir Varlık Olarak İnsan</h4>
+<label><input type="checkbox"/> Duyu, akıl ve vahiy kaynaklarını ve sınırlarını açıklayabiliyorum.</label>
+<label><input type="checkbox"/> Bir bilginin hangi kaynaktan geldiğini (duyu/akıl/vahiy) bir örnek üzerinden ayırt edebiliyorum.</label>
+<label><input type="checkbox"/> Fıtrat ile mükellefiyet arasındaki bağı yorumlayabiliyorum.</label>
+<label><input type="checkbox"/> Sosyal medyada gördüğüm bir bilgiyi doğrulama adımlarını uygulayabiliyorum.</label>
+</div>
+<div class="ozdeger">
+<h4>1.3 — İbadet ve Dua Eden Bir Varlık Olarak İnsan</h4>
+<label><input type="checkbox"/> İbadet, dua ve tövbe kavramlarını birbirinden ayırt edebiliyorum.</label>
+<label><input type="checkbox"/> Esmâ-i hüsnâdan öğrendiğim isimleri uygun durumlarla eşleştirebiliyorum.</label>
+<label><input type="checkbox"/> Namazın yapısını (övgü→acizlik→yardım→hidayet) açıklayabiliyorum.</label>
+<label><input type="checkbox"/> Kulluk bilincinin günlük ahlaka nasıl yansıdığını örnekleyebiliyorum.</label>
+</div>
+<div class="ozdeger">
+<h4>1.4 — Kur'an'dan Mesajlar: Rûm 17-27</h4>
+<label><input type="checkbox"/> Enfüsî ve âfâkî delilleri örnekleriyle ayırt edebiliyorum.</label>
+<label><input type="checkbox"/> Ayetlerdeki delillerin ahiret inancıyla ilişkisini açıklayabiliyorum.</label>
+<label><input type="checkbox"/> Rûm 30/22'nin "çeşitlilik" mesajını yanlış yorumlardan (üstünlük iddiası) ayırt edebiliyorum.</label>
+<label><input type="checkbox"/> Verilen bir ayetten hangi delil türüne ait olduğu sonucunu çıkarabiliyorum.</label>
+</div>
 </section>
 <!-- ============ TEST ============ -->
-<section id="test">
+<section id="test" data-tab="dene">
 <div class="sec-head">
 <div class="sec-num">?</div>
 <div>
@@ -1392,6 +1550,33 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--ink2);font-
 </footer>
 </div>
 <script>
+/* ---------- SEKME GEZİNMESİ ---------- */
+function sekmeAc(ad){
+  document.querySelectorAll('[data-tab]').forEach(function(el){
+    el.classList.toggle('panel-aktif', el.getAttribute('data-tab') === ad);
+  });
+  document.querySelectorAll('.sekme-btn').forEach(function(b){
+    b.classList.toggle('aktif', b.getAttribute('data-git') === ad);
+  });
+  document.querySelector('.wrap').scrollIntoView({behavior:'smooth', block:'start'});
+}
+document.querySelectorAll('.sekme-btn').forEach(function(b){
+  b.addEventListener('click', function(){ sekmeAc(b.getAttribute('data-git')); });
+});
+sekmeAc('hedef');
+
+/* ---------- ÖZ DEĞERLENDİRME (tarayıcıda hatırlanır) ---------- */
+(function(){
+  var kutular = document.querySelectorAll('.ozdeger input[type="checkbox"]');
+  kutular.forEach(function(kutu, i){
+    var anahtar = 'u1-ozdeger-' + i;
+    kutu.checked = localStorage.getItem(anahtar) === '1';
+    kutu.addEventListener('change', function(){
+      localStorage.setItem(anahtar, kutu.checked ? '1' : '0');
+    });
+  });
+})();
+
 function kontrolEt(){
   var qs = document.querySelectorAll('.quiz-q');
   var dogru = 0, bos = 0;
