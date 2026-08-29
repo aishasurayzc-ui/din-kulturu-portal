@@ -2874,6 +2874,20 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
+  /* Portal köprüsü: din-kulturu-Nsinif-1unite/ klasöründeki ayrı sayfalardan
+     "?oyun=sN-uM" ile gelindiyse, ilgili sınıf sekmesini açıp doğrudan o
+     ünitenin oyun ekranına atla. Parametre yoksa hiçbir şey yapmaz. */
+  (function(){
+    const parametre = new URLSearchParams(location.search).get('oyun');
+    if(!parametre) return;
+    const eslesme = /^s(\d)-u(\d+)$/.exec(parametre);
+    if(!eslesme) return;
+    const sid = 's'+eslesme[1], no = parseInt(eslesme[2],10);
+    if(typeof sinifGoster==='function') sinifGoster(sid);
+    if(typeof icerikGoster==='function') icerikGoster(sid,'oyun');
+    if(typeof window.oyunMerkeziUnite==='function') window.oyunMerkeziUnite(sid, no);
+  })();
+
   /* Görünürlük gözlemcisi en son kurulur — bu noktada sınıf kartları,
      öneriler ve tüm dinamik içerik zaten DOM'da olduğu için hiçbir
      .belirir öğesi gözlemcinin dışında kalmaz. */

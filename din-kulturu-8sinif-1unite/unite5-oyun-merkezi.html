@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="../ortak/oyun-merkezi.css">
 
 <body>
+<div id="portalNav" data-sinif="8" data-unite="5" data-asama="oyun"></div>
+<link rel="stylesheet" href="../ortak/portal-nav.css">
+<script src="../ortak/portal-nav.js"></script>
 
 
 
@@ -830,7 +833,9 @@ const QB85_SORULAR = [
   {soru:"Kur'an kaç sureden oluşur?", secenekler:["114","104","30","99"], dogru:0},
   {soru:"Kur'an kolay okunması için kaç cüze ayrılmıştır?", secenekler:["30","10","40","7"], dogru:0},
   {soru:"Kur'an'ın iki kapak arasında toplanmış hâline ne denir?", secenekler:["Mushaf","Cüz","Hadis","Kıssa"], dogru:0},
-  {soru:"Kur'an'ı baştan sona ezberleyen kişiye ne denir?", secenekler:["Hafız","Hatip","Müezzin","Kâtip"], dogru:0}
+  {soru:"Kur'an'ı baştan sona ezberleyen kişiye ne denir?", secenekler:["Hafız","Hatip","Müezzin","Kâtip"], dogru:0},
+  {soru:"\"Bismillâhirrahmânirrahîm\" sözünün adı nedir?", secenekler:["Besmele","Hatim","Kıraat","Mukabele"], dogru:0},
+  {soru:"Kur'an'ın başka bir dile yapılan tercümesine ne denir?", secenekler:["Meal","Tefsir","Kıraat","Tecvit"], dogru:0}
 ];
 function qb85Baslat(){ ikiliOyunBaslat({onek:'qb85', sorular:QB85_SORULAR}); }
 
@@ -843,7 +848,10 @@ const MM85_CIFTLER = [
   {metin1:"Mushaf", metin2:"Kur'an'ın iki kapak arasındaki hâli"},
   {metin1:"Hafız", metin2:"Kur'an'ı ezberleyen kişi"},
   {metin1:"Kıssa", metin2:"Geçmiş peygamberlerin ibretli anlatımı"},
-  {metin1:"Muamelat", metin2:"İnsanlar arası ilişkileri düzenleyen konular"}
+  {metin1:"Muamelat", metin2:"İnsanlar arası ilişkileri düzenleyen konular"},
+  {metin1:"Tefsir", metin2:"Kur'an ayetlerinin anlamını açıklayan ilim dalı"},
+  {metin1:"Meal", metin2:"Kur'an'ın başka bir dile yapılan tercümesi"},
+  {metin1:"Hatim", metin2:"Kur'an'ın baştan sona okunup bitirilmesi"}
 ];
 function mm85Baslat(){ ikiliHafizaBaslat({onek:'mm85', ciftler:MM85_CIFTLER}); }
 
@@ -862,7 +870,8 @@ const SQ85_SORULAR = [
   {soru:"İhlâs suresi kaç ayettir?", secenekler:["Dört","Yedi","Üç","Beş"], dogru:0},
   {soru:"İlk inen ayetin ilk kelimesi nedir?", secenekler:["Oku!","Dinle!","Yaz!","Sus!"], dogru:0},
   {soru:"Hz. Nuh'un gemisi hangi dağa oturmuştur?", secenekler:["Cûdi","Sina","Uhud","Hira"], dogru:0},
-  {soru:"İlk vahiy hangi gecede gelmiştir?", secenekler:["Kadir Gecesi","Regaib Gecesi","Miraç Gecesi","Berat Gecesi"], dogru:0}
+  {soru:"İlk vahiy hangi gecede gelmiştir?", secenekler:["Kadir Gecesi","Regaib Gecesi","Miraç Gecesi","Berat Gecesi"], dogru:0},
+  {soru:"Kur'an harflerini doğru mahreçlerinden okuma ilmine ne denir?", secenekler:["Tecvit","Tefsir","Meal","Hatim"], dogru:0}
 ];
 function sq85Baslat(){ ikiliOyunBaslat({onek:'sq85', sorular:SQ85_SORULAR, sureSN:8}); }
 
@@ -873,7 +882,9 @@ const MYB85_SORULAR = [
   {soru:"Onaylama yoluyla oluşan sünnete ne denir?", secenekler:["Takrirî sünnet","Kavlî sünnet","Fiilî sünnet","Manevi sünnet"], dogru:0, bonus:true},
   {soru:"'Hidayet' kelimesi ne anlama gelir?", secenekler:["Doğru yolu gösterme","Gizleme","Ölçme","Uyarma"], dogru:0},
   {soru:"Kur'an'ın 'mübin' olması ne demektir?", secenekler:["Apaçık olması","Anlaşılmaz olması","Sadece âlimlere hitap etmesi","Şiir olması"], dogru:0, bonus:true},
-  {soru:"'Samed' kelimesi ne anlama gelir?", secenekler:["Hiçbir şeye muhtaç olmayan","Çok bağışlayan","Çok bilen","Her şeyi gören"], dogru:0}
+  {soru:"'Samed' kelimesi ne anlama gelir?", secenekler:["Hiçbir şeye muhtaç olmayan","Çok bağışlayan","Çok bilen","Her şeyi gören"], dogru:0},
+  {soru:"Kur'an-ı Kerim'i usulüne uygun, güzel sesle okuma sanatına ne denir?", secenekler:["Kıraat","Hatim","Mukabele","Meal"], dogru:0, bonus:true},
+  {soru:"Ramazanda birinin okuyup diğerlerinin mushaftan takip etmesine ne denir?", secenekler:["Mukabele","Hatim","Besmele","Kıraat"], dogru:0}
 ];
 function myb85Baslat(){ ikiliOyunBaslat({onek:'myb85', sorular:MYB85_SORULAR}); }
 
@@ -886,7 +897,10 @@ const CC85_CIFTLER = [
   {metin1:"Takrirî sünnet", metin2:"Onaylamayla oluşan sünnet"},
   {metin1:"İnanç", metin2:"Allah, melek, kitap, peygamber, ahiret, kader"},
   {metin1:"İbadet", metin2:"Namaz, oruç, zekât, hac"},
-  {metin1:"Ahlak", metin2:"Doğruluk, adalet, merhamet, sabır"}
+  {metin1:"Ahlak", metin2:"Doğruluk, adalet, merhamet, sabır"},
+  {metin1:"Hz. Yusuf kıssası", metin2:"İffet, dürüstlük ve merhameti öğretir"},
+  {metin1:"Ashab-ı Kehf kıssası", metin2:"Haktan dönmemeyi ve tevekkülü öğretir"},
+  {metin1:"Ashab-ı Fil kıssası", metin2:"Allah'ın dinine tuzak kuranları cezalandırdığını öğretir"}
 ];
 function cc85Baslat(){ ikiliHafizaBaslat({onek:'cc85', ciftler:CC85_CIFTLER}); }
 
@@ -896,7 +910,8 @@ const ESC85_SORULAR = [
   {soru:"Vahyin 23 yılda indirilmesinin faydası nedir?", secenekler:["Ezber ve uygulamanın kolaylaşması","Kitabın kısalması","Ayetlerin unutulması","Surelerin azalması"], dogru:0},
   {soru:"Sünnet olmasaydı Müslümanlar hangi konuda zorlanırdı?", secenekler:["Namazın uygulama ayrıntılarında","Allah'ın varlığına inanmakta","Kur'an'ın Arapça olduğunu bilmekte","Ramazan adını öğrenmekte"], dogru:0},
   {soru:"Kur'an kıssalarının temel amacı nedir?", secenekler:["İbret alıp doğru yolu bulmak","Tarih ezberletmek","Milletleri karşılaştırmak","Edebî yarış yapmak"], dogru:0},
-  {soru:"Hz. Nuh kavmini kaç yıl tevhide davet etmiştir?", secenekler:["950 yıl","23 yıl","40 yıl","100 yıl"], dogru:0}
+  {soru:"Hz. Nuh kavmini kaç yıl tevhide davet etmiştir?", secenekler:["950 yıl","23 yıl","40 yıl","100 yıl"], dogru:0},
+  {soru:"Hz. Eyyüb (as) kıssası öncelikle hangi erdemi öğretir?", secenekler:["Musibetlere sabretmeyi","Ticarette kazanmayı","Savaşta kararlılığı","Yalnız yaşamayı"], dogru:0}
 ];
 function esc85Baslat(){ ikiliOyunBaslat({onek:'esc85', sorular:ESC85_SORULAR}); }
 
@@ -907,7 +922,8 @@ const KR85_SORULAR = [
   {soru:"Hz. Nuh'un gemisine kimler alınmıştır?", secenekler:["İman edenler ve her canlıdan bir çift","Sadece kendi ailesi","Sadece zenginler","Bütün kavmi"], dogru:0},
   {soru:"Hz. Nuh kıssasının temel dersi nedir?", secenekler:["Hakkı anlatmada sabır ve kararlılık","Zenginliğin önemi","İnsanlardan uzak durmak","Kolay yoldan sonuç almak"], dogru:0},
   {soru:"Kur'an'ın bozulmadan ulaşması nasıl gerçekleşmiştir?", secenekler:["Hem yazı hem hafızlarla korunarak","Sadece bir kişinin hafızasıyla","Sadece sözlü aktarımla","Sadece tercümelerle"], dogru:0},
-  {soru:"Sünnete niçin başvurulur?", secenekler:["Kur'an'ın nasıl yaşandığını göstermesi","Kur'an'dan üstün olması","Kur'an'ın eksik olması","Daha kısa olması"], dogru:0}
+  {soru:"Sünnete niçin başvurulur?", secenekler:["Kur'an'ın nasıl yaşandığını göstermesi","Kur'an'dan üstün olması","Kur'an'ın eksik olması","Daha kısa olması"], dogru:0},
+  {soru:"Hz. Yakub (as) kıssasının verdiği temel ders nedir?", secenekler:["Ağır imtihana rağmen Allah'ın rahmetinden ümit kesmemek","Zenginliğin önemi","Yalnız yaşamanın erdemi","Ticarette risk almamak"], dogru:0}
 ];
 function kr85Baslat(){ ikiliOyunBaslat({onek:'kr85', sorular:KR85_SORULAR}); }
 
@@ -917,7 +933,8 @@ const LG85_SORULAR = [
   {soru:"İpucu 1: Bir kavramdır. İpucu 2: Hz. Peygamber'in sözü, davranışı ve onayıdır. İpucu 3: İslam'ın ikinci kaynağıdır. Bu nedir?", secenekler:["Sünnet","Vahiy","Kıssa","Mushaf"], dogru:0},
   {soru:"İpucu 1: Bir kavramdır. İpucu 2: Allah'ın bir ve tek olduğuna inanmaktır. İpucu 3: İhlâs suresi bunu anlatır. Bu nedir?", secenekler:["Tevhit","Kıssa","Muamelat","Hidayet"], dogru:0},
   {soru:"İpucu 1: Bir peygamberdir. İpucu 2: Kavmini tufandan önce uyarmıştır. İpucu 3: Gemi yapmıştır. Bu kimdir?", secenekler:["Hz. Nuh","Hz. Yunus","Hz. Salih","Hz. Şit"], dogru:0},
-  {soru:"İpucu 1: Bir kişidir. İpucu 2: Kur'an'ı baştan sona ezberler. İpucu 3: Hafızasında Kur'an vardır. Bu kimdir?", secenekler:["Hafız","Hatip","Müezzin","Kâtip"], dogru:0}
+  {soru:"İpucu 1: Bir kişidir. İpucu 2: Kur'an'ı baştan sona ezberler. İpucu 3: Hafızasında Kur'an vardır. Bu kimdir?", secenekler:["Hafız","Hatip","Müezzin","Kâtip"], dogru:0},
+  {soru:"İpucu 1: Bir kavramdır. İpucu 2: Kur'an ayetlerinin anlamını açıklar. İpucu 3: Bir ilim dalıdır. Bu nedir?", secenekler:["Tefsir","Meal","Kıraat","Hatim"], dogru:0}
 ];
 function lg85Baslat(){ ikiliOyunBaslat({onek:'lg85', sorular:LG85_SORULAR}); }
 
@@ -928,7 +945,8 @@ const MC85_SORULAR = [
   {soru:"Görev: Doğruluk, adalet ve sabır hangi ana konuya girer?", secenekler:["Ahlak","Muamelat","İnanç","Kıssalar"], dogru:0},
   {soru:"Görev: Kur'an'ın belli millete değil herkese hitap etmesi hangi özelliğidir?", secenekler:["Evrensel olması","Yerel olması","Geçici olması","Sınırlı olması"], dogru:0},
   {soru:"Görev: 'Kur'an'ı biz indirdik, onu koruyacak olan da biziz' ayeti neyi bildirir?", secenekler:["Korunmuş olmasını","Kısa olmasını","Sadece Araplara ait olmasını","Sonradan yazılmasını"], dogru:0},
-  {soru:"Görev: Kur'an'ın 'Hiç düşünmez misiniz?' gibi sorular sorması neyi gösterir?", secenekler:["Akıl yürütmeye çağırdığını","Susturmak istediğini","Cevapsız bıraktığını","Ezberletmeyi amaçladığını"], dogru:0}
+  {soru:"Görev: Kur'an'ın 'Hiç düşünmez misiniz?' gibi sorular sorması neyi gösterir?", secenekler:["Akıl yürütmeye çağırdığını","Susturmak istediğini","Cevapsız bıraktığını","Ezberletmeyi amaçladığını"], dogru:0},
+  {soru:"Görev: İki Bahçe Sahibi kıssası öncelikle neyi öğretir?", secenekler:["Zenginliğin insanı inkâra sevk etmemesi gerektiğini","Tarımın önemini","Ticaret ortaklığını","Komşuluk kurallarını"], dogru:0}
 ];
 function mc85Baslat(){ ikiliOyunBaslat({onek:'mc85', sorular:MC85_SORULAR}); }
 
@@ -938,7 +956,8 @@ const DC85_SORULAR = [
   {soru:"'Kur'an bütün insanlığa hitap eder, evrenseldir.' Bu görüş doğru mudur?", secenekler:["Doğru","Yanlış"], dogru:0},
   {soru:"'Kıssalar sadece tarih bilgisi vermek içindir.' Bu görüş doğru mudur?", secenekler:["Yanlış","Doğru"], dogru:0},
   {soru:"'İhlâs suresi tevhit inancını anlatır.' Bu görüş doğru mudur?", secenekler:["Doğru","Yanlış"], dogru:0},
-  {soru:"'Kur'an sadece yazıyla korunmuş, hafızlar rol oynamamıştır.' Bu görüş doğru mudur?", secenekler:["Yanlış","Doğru"], dogru:0}
+  {soru:"'Kur'an sadece yazıyla korunmuş, hafızlar rol oynamamıştır.' Bu görüş doğru mudur?", secenekler:["Yanlış","Doğru"], dogru:0},
+  {soru:"'Meal, Kur'an'ın aslındaki bütün ince anlamları eksiksiz yansıtma iddiasındadır.' Bu görüş doğru mudur?", secenekler:["Yanlış","Doğru"], dogru:0}
 ];
 function dc85Baslat(){ ikiliOyunBaslat({onek:'dc85', sorular:DC85_SORULAR}); }
 
@@ -951,7 +970,9 @@ const FM85_SORULAR = [
   {soru:"İhlâs suresi yedi ayettir.", secenekler:["Yanlış","Doğru"], dogru:0},
   {soru:"Sünnet, Kur'an'ın uygulanmasını gösterir.", secenekler:["Doğru","Yanlış"], dogru:0},
   {soru:"Kur'an sadece belirli bir millete hitap eder.", secenekler:["Yanlış","Doğru"], dogru:0},
-  {soru:"Mushaf, Kur'an'ın iki kapak arasındaki hâlidir.", secenekler:["Doğru","Yanlış"], dogru:0}
+  {soru:"Mushaf, Kur'an'ın iki kapak arasındaki hâlidir.", secenekler:["Doğru","Yanlış"], dogru:0},
+  {soru:"Hatim, Kur'an'ın baştan sona okunup bitirilmesidir.", secenekler:["Doğru","Yanlış"], dogru:0},
+  {soru:"Ashab-ı Fil kıssası bir ticaret kervanını anlatır.", secenekler:["Yanlış","Doğru"], dogru:0}
 ];
 function fm85Baslat(){ ikiliOyunBaslat({onek:'fm85', sorular:FM85_SORULAR}); }
 
@@ -960,7 +981,9 @@ const CB85_SORULAR = [
   {cevap:"VAHIY", ipuclari:["Bir kavramdır.","Allah'tan gelir.","Peygambere özeldir.","Kur'an'ın kaynağıdır."]},
   {cevap:"TEVHIT", ipuclari:["Bir inanç esasıdır.","Allah'ın birliğidir.","İhlâs suresinde anlatılır.","Hz. Nuh'un davetidir."]},
   {cevap:"HAFIZ", ipuclari:["Bir kişidir.","Kur'an'ı ezberler.","Baştan sona bilir.","Hafızasında Kur'an vardır."]},
-  {cevap:"MUSHAF", ipuclari:["Bir kavramdır.","İki kapak arasındadır.","Kur'an'ın toplanmış hâlidir.","Yazılı bir kitaptır."]}
+  {cevap:"MUSHAF", ipuclari:["Bir kavramdır.","İki kapak arasındadır.","Kur'an'ın toplanmış hâlidir.","Yazılı bir kitaptır."]},
+  {cevap:"BESMELE", ipuclari:["Bir sözdür.","Kur'an okumaya başlarken söylenir.","\"Bismillâhirrahmânirrahîm\" ifadesidir.","Önemli bir işe başlarken de söylenir."]},
+  {cevap:"TEFSİR", ipuclari:["Bir ilim dalıdır.","Kur'an ayetlerini açıklar.","Anlamları ayrıntılı yorumlar.","Hükümleri de içerir."]}
 ];
 function cb85Baslat(){ ikiliIpucuBaslat({onek:'cb85', sorular:CB85_SORULAR}); }
 
@@ -969,7 +992,9 @@ const PZ85_SORULAR = [
   {cevap:"SUNNET", ipuclari:["Bir kavramdır.","Hz. Peygamber'e aittir.","Söz, davranış ve onayları içerir.","İslam'ın ikinci kaynağıdır."]},
   {cevap:"HADIS", ipuclari:["Bir kavramdır.","Rivayettir.","Hz. Peygamber'in sözlerini nakleder.","Sünnetle ilişkilidir."]},
   {cevap:"KISSA", ipuclari:["Bir anlatı türüdür.","Kur'an'da geçer.","Geçmiş peygamberleri anlatır.","İbret içindir."]},
-  {cevap:"NUH", ipuclari:["Bir peygamberdir.","Gemi yapmıştır.","Kavmini tevhide çağırmıştır.","Tufandan kurtulmuştur."]}
+  {cevap:"NUH", ipuclari:["Bir peygamberdir.","Gemi yapmıştır.","Kavmini tevhide çağırmıştır.","Tufandan kurtulmuştur."]},
+  {cevap:"YUSUF", ipuclari:["Bir peygamberdir.","Kardeşleri tarafından kuyuya atılmıştır.","İffet ve dürüstlükle bilinir.","Mısır'a vezir olmuştur."]},
+  {cevap:"MEAL", ipuclari:["Bir kavramdır.","Kur'an ile ilgilidir.","Başka bir dile tercümedir.","Tüm ince anlamları yansıttığı iddia edilmez."]}
 ];
 function pz85Baslat(){ ikiliIpucuBaslat({onek:'pz85', sorular:PZ85_SORULAR}); }
 
@@ -979,7 +1004,8 @@ const TH85_SORULAR = [
   {soru:"Surelerin içindeki numaralandırılmış cümlelere ne denir?", secenekler:["Ayet","Cüz","Sure","Hadis"], dogru:0},
   {soru:"'Lem yelid ve lem yûled' ayeti ne anlatır?", secenekler:["Allah'ın doğmadığını ve doğurulmadığını","Allah'ın her şeyi bildiğini","Allah'ın bağışlayıcı olduğunu","Allah'ın göklerin sahibi olduğunu"], dogru:0},
   {soru:"'Ve lem yekün lehû küfüven ehad' ayeti ne anlatır?", secenekler:["Onun hiçbir dengi olmadığını","Onun merhametli olduğunu","Onun her şeye gücü yettiğini","Onun rızık verdiğini"], dogru:0},
-  {soru:"Kur'an'ın hidayet rehberi olması ne demektir?", secenekler:["İnsanları doğru yola iletmesi","Uzun olması","Arapça olması","Otuz cüz olması"], dogru:0}
+  {soru:"Kur'an'ın hidayet rehberi olması ne demektir?", secenekler:["İnsanları doğru yola iletmesi","Uzun olması","Arapça olması","Otuz cüz olması"], dogru:0},
+  {soru:"Hz. Musa (as) kıssası öncelikle hangi konuya örnektir?", secenekler:["Allah'ın sevdiği kulunu düşmanının yanında bile koruması","Ticarette başarı","Yalnız yaşamanın erdemi","Zenginliğin önemi"], dogru:0}
 ];
 function th85Baslat(){ ikiliOyunBaslat({onek:'th85', sorular:TH85_SORULAR}); }
 
@@ -990,7 +1016,8 @@ const SB85_SORULAR = [
   {soru:"Hz. Nuh kıssasından çıkarılacak en önemli ders nedir?", secenekler:["Sabır ve kararlılığın önemi","Zenginliğin önemi","Gücün önemi","Hızın önemi"], dogru:0},
   {soru:"Kur'an'ın evrensel olmasının anlamı nedir?", secenekler:["Bütün insanlığa hitap etmesi","Sadece Araplara hitap etmesi","Sadece geçmişe ait olması","Sadece bir bölgeye hitap etmesi"], dogru:0},
   {soru:"Tevhit inancının hayattaki yansıması nedir?", secenekler:["Sadece Allah'a kulluk bilinci","Çok tanrıcılık","Kayıtsızlık","Bencillik"], dogru:0},
-  {soru:"Kur'an'ın korunmuşluğunun kanıtı nedir?", secenekler:["Hem yazı hem hafızla korunması","Sadece tercümelerle yayılması","Sadece sözle aktarılması","Sadece bir nüshada olması"], dogru:0}
+  {soru:"Kur'an'ın korunmuşluğunun kanıtı nedir?", secenekler:["Hem yazı hem hafızla korunması","Sadece tercümelerle yayılması","Sadece sözle aktarılması","Sadece bir nüshada olması"], dogru:0},
+  {soru:"Hz. Davud ve Hz. Süleyman kıssalarının ortak dersi nedir?", secenekler:["Servet ve gücün kölesi olmadan iyi bir hükümdar olunabileceği","Zenginlikten kaçınmak gerektiği","Savaşın kazandırdıkları","Yalnız yönetmenin gerekliliği"], dogru:0}
 ];
 function sb85Baslat(){ ikiliOyunBaslat({onek:'sb85', sorular:SB85_SORULAR}); }
 
@@ -1003,7 +1030,8 @@ const FC85_SORULAR = [
   {soru:"Hz. Peygamber'in sözlerine ne denir?", secenekler:["Hadis","Ayet","Cüz","Sure"], dogru:0},
   {soru:"Allah'ın birliğine inanmaya ne denir?", secenekler:["Tevhit","Kıssa","Muamelat","Hidayet"], dogru:0},
   {soru:"İhlâs suresi kaç ayettir?", secenekler:["Dört","Yedi","Üç","Beş"], dogru:0},
-  {soru:"Hz. Nuh'un gemisi hangi dağa oturmuştur?", secenekler:["Cûdi","Sina","Uhud","Hira"], dogru:0}
+  {soru:"Hz. Nuh'un gemisi hangi dağa oturmuştur?", secenekler:["Cûdi","Sina","Uhud","Hira"], dogru:0},
+  {soru:"Kur'an'ı baştan sona okuyup bitirmeye ne denir?", secenekler:["Hatim","Besmele","Tefsir","Meal"], dogru:0}
 ];
 function fc85Baslat(){ ikiliOyunBaslat({onek:'fc85', sorular:FC85_SORULAR, sureSN:5}); }
 
@@ -1014,7 +1042,8 @@ const SV85_SORULAR = [
   {soru:"Kur'an'ı ezberleyene ne denir?", secenekler:["Hafız","Hatip","Müezzin","Kâtip"], dogru:0},
   {soru:"Allah'ın birliğine inanmaya ne denir?", secenekler:["Tevhit","Kıssa","Muamelat","Hidayet"], dogru:0},
   {soru:"Hz. Nuh'un gemisi hangi dağa oturmuştur?", secenekler:["Cûdi","Sina","Uhud","Hira"], dogru:0},
-  {soru:"İhlâs suresi kaç ayettir?", secenekler:["Dört","Yedi","Üç","Beş"], dogru:0}
+  {soru:"İhlâs suresi kaç ayettir?", secenekler:["Dört","Yedi","Üç","Beş"], dogru:0},
+  {soru:"\"Bismillâhirrahmânirrahîm\" sözünün adı nedir?", secenekler:["Besmele","Hatim","Kıraat","Mukabele"], dogru:0}
 ];
 function sv85Baslat(){ ikiliHayattaBaslat({onek:'sv85', sorular:SV85_SORULAR, can:3}); }
 
@@ -1024,7 +1053,8 @@ const DM85_SORULAR = [
   {soru:"Bir arkadaşın Kur'an'ın sadece Araplara hitap ettiğini söylüyor. Ne dersin?", secenekler:["Kur'an evrenseldir, herkese hitap eder derim","Ona katılırım","Sessiz kalırım","Konuyu değiştiririm"], dogru:0},
   {soru:"Zor bir durumda Hz. Nuh'un sabrından ne öğrenebilirsin?", secenekler:["Zorluklara rağmen kararlı olmayı","Hemen vazgeçmeyi","Kaçmayı","Öfkelenmeyi"], dogru:0},
   {soru:"Kur'an okurken anlamını da öğrenmek istiyorsun. Ne yapmalısın?", secenekler:["Meal ve tefsirlere başvurmalıyım","Sadece ezber yapmalıyım","Hiç önemsememeliyim","Başkasına sormamalıyım"], dogru:0},
-  {soru:"Bir hadisin doğruluğundan emin değilsin. Ne yapmalısın?", secenekler:["Güvenilir kaynaklardan araştırmalıyım","Hemen paylaşmalıyım","Görmezden gelmeliyim","Uydurmalıyım"], dogru:0}
+  {soru:"Bir hadisin doğruluğundan emin değilsin. Ne yapmalısın?", secenekler:["Güvenilir kaynaklardan araştırmalıyım","Hemen paylaşmalıyım","Görmezden gelmeliyim","Uydurmalıyım"], dogru:0},
+  {soru:"Bir arkadaşın bir ayetin anlamını merak ediyor. Ona ne önerirsin?", secenekler:["Güvenilir bir meal veya tefsire bakmasını","Anlamını tahmin etmesini","Önemsememesini","Kendi yorumunu uydurmasını"], dogru:0}
 ];
 function dm85Baslat(){ ikiliOyunBaslat({onek:'dm85', sorular:DM85_SORULAR}); }
 
@@ -1049,7 +1079,9 @@ const CA85_SORULAR = [
   {soru:"Kur'an'ın belli millete değil herkese hitap etmesi hangi özelliğidir?", secenekler:["Evrensel olması","Yerel olması","Geçici olması","Sınırlı olması"], dogru:0},
   {soru:"Hz. Nuh'un gemisi hangi dağa oturmuştur?", secenekler:["Cûdi","Sina","Uhud","Hira"], dogru:0},
   {soru:"'Samed' kelimesi ne anlama gelir?", secenekler:["Hiçbir şeye muhtaç olmayan","Çok bağışlayan","Çok bilen","Her şeyi gören"], dogru:0},
-  {soru:"Kur'an'ın 23 yılda indirilmesinin faydası nedir?", secenekler:["Ezber ve uygulamanın kolaylaşması","Kitabın kısalması","Ayetlerin unutulması","Surelerin azalması"], dogru:0}
+  {soru:"Kur'an'ın 23 yılda indirilmesinin faydası nedir?", secenekler:["Ezber ve uygulamanın kolaylaşması","Kitabın kısalması","Ayetlerin unutulması","Surelerin azalması"], dogru:0},
+  {soru:"Kur'an-ı Kerim'i usulüne uygun, güzel sesle okuma sanatına ne denir?", secenekler:["Kıraat","Hatim","Mukabele","Meal"], dogru:0},
+  {soru:"Ashab-ı Kehf kıssası öncelikle hangi konuda örnek gösterilir?", secenekler:["Zor şartlarda haktan dönmemek","Ticarette kazanç","Savaşta üstünlük","Uzun ömürlü olmak"], dogru:0}
 ];
 function ca85Baslat(){ ikiliOyunBaslat({onek:'ca85', sorular:CA85_SORULAR}); }
 
@@ -1057,6 +1089,8 @@ const TD85_KARTLAR = [
   {kelime:"Vahiy", yasakli:["bilgi","Allah","peygamber","mesaj","indirmek","ilahi mesaj"]},
   {kelime:"Mucize", yasakli:["olağanüstü","benzersiz","güç","kanıt","insanüstü","olağanüstü olay"]},
   {kelime:"İ'caz", yasakli:["mucize","benzersizlik","Kur'an","eşsiz","güç","mucizevi anlatım"]},
+  {kelime:"Tefsir", yasakli:["açıklama","Kur'an","ayet","yorum","ilim","anlam"]},
+  {kelime:"Meal", yasakli:["tercüme","dil","Kur'an","çeviri","anlam","aktarım"]},
   {kelime:"Hafız", yasakli:["ezber","Kur'an","bilen","koruyan","tamamı","ezberci"]},
   {kelime:"Furkan", yasakli:["ayırt","doğru","yanlış","isim","Kur'an","ayırt edici"]},
   {kelime:"Mekki Ayet", yasakli:["Mekke","önce","hicret","indirilen","dönem","ilk dönem"]},
@@ -1098,6 +1132,12 @@ const BC85_KATEGORILER = [
     {soru:"Kur'an'ı doğru ve güzel okuma kurallarına ne denir?", secenekler:["Tecvid","Tefsir","Fıkıh","Kelam"], dogru:"Tecvid"},
     {soru:"Kur'an-ı Kerim'in tamamını ezberleyen kişiye ne denir?", secenekler:["Hafız","İmam","Müezzin","Vaiz"], dogru:"Hafız"},
     {soru:"Kur'an'ın mesajının tüm insanlığa yönelik olmasına ne denir?", secenekler:["Evrensellik","Yerellik","Sınırlılık","Özgüllük"], dogru:"Evrensellik"}
+  ]},
+  {ad:"Kıssalardan Hisseler", ikon:"📜", sorular:[
+    {soru:"Hz. Yusuf (as) kıssası öncelikle hangi erdemleri öğretir?", secenekler:["İffet, dürüstlük ve merhamet","Zenginlik ve güç","Yalnızlık","Savaşçılık"], dogru:"İffet, dürüstlük ve merhamet"},
+    {soru:"Ashab-ı Kehf kıssası hangi konuda örnek gösterilir?", secenekler:["Zor şartlarda haktan dönmemek","Ticarette kazanç","Uzun ömür","Savaş taktikleri"], dogru:"Zor şartlarda haktan dönmemek"},
+    {soru:"Hz. Yunus (as) kıssasının temel mesajı nedir?", secenekler:["Hatanın farkına varıp tövbe etmek","Sabrın gereksizliği","Duanın önemsizliği","Yalnız yaşamanın erdemi"], dogru:"Hatanın farkına varıp tövbe etmek"},
+    {soru:"Ashab-ı Fil kıssası neyi anlatır?", secenekler:["Allah'ın, dinine tuzak kuranları cezalandırdığını","Bir ticaret kervanını","Bir barış antlaşmasını","Fillerin evcilleştirilmesini"], dogru:"Allah'ın, dinine tuzak kuranları cezalandırdığını"}
   ]}
 ];
 function bc85Baslat(){ ikiliCarkBaslat({onek:'bc85', kategoriler:BC85_KATEGORILER, turSayisi:8, sureSN:12}); }
@@ -1159,6 +1199,22 @@ const konuTekrariSorulari85 = [
   {zorluk:"zor", soru:"Kur'an-ı Kerim'in bozulmadan günümüze ulaşması hangi yollarla gerçekleşmiştir?", secenekler:["Hem yazıyla kayıt altına alınması hem de hafızlar tarafından ezberlenmesiyle","Sadece bir kişinin hafızasıyla","Sadece sözlü aktarımla","Sadece tercümelerle"], dogru:0, aciklama:"Kur'an hem yazıyla hem ezberle korunmuştur."},
   {zorluk:"zor", soru:"Bir Müslüman Kur'an-ı Kerim'i doğru anlamak için niçin sünnete başvurur?", secenekler:["Sünnet, Kur'an'ın nasıl yaşandığını gösteren ilk ve en güvenilir örnektir","Sünnet Kur'an'dan daha üstün olduğu için","Kur'an eksik olduğu için","Sünnet daha kısa olduğu için"], dogru:0, aciklama:"Sünnet, Kur'an'ın hayata geçirilmiş hâlidir."},
   {zorluk:"zor", soru:"\"Şüphesiz bu Kur'an insanları en doğru yola iletir.\" mealindeki ayet Kur'an'ın hangi özelliğini vurgular?", secenekler:["Yol gösterici (hidayet rehberi) olmasını","Uzun olmasını","Arapça olmasını","Otuz cüz olmasını"], dogru:0, aciklama:"Bu ayet Kur'an'ın hidayet rehberi olduğunu vurgular."},
+
+  {zorluk:"kolay", soru:"\"Bismillâhirrahmânirrahîm\" sözünün adı nedir?", secenekler:["Besmele","Hatim","Kıraat","Mukabele"], dogru:0, aciklama:"Bu söze besmele denir."},
+  {zorluk:"kolay", soru:"Kur'an-ı Kerim'i baştan sona okuyup bitirmeye ne denir?", secenekler:["Hatim","Besmele","Tefsir","Meal"], dogru:0, aciklama:"Baştan sona okuyup bitirmeye hatim denir."},
+  {zorluk:"kolay", soru:"Kur'an'ın başka bir dile yapılan tercümesine ne denir?", secenekler:["Meal","Tefsir","Kıraat","Tecvit"], dogru:0, aciklama:"Bu tercümeye meal denir."},
+  {zorluk:"kolay", soru:"Kur'an harflerini doğru mahreçlerinden okuma ilmine ne denir?", secenekler:["Tecvit","Tefsir","Meal","Hatim"], dogru:0, aciklama:"Bu ilme tecvit denir."},
+  {zorluk:"kolay", soru:"Kur'an ayetlerinin anlamını ayrıntılı açıklayan ilim dalına ne denir?", secenekler:["Tefsir","Meal","Kıraat","Mukabele"], dogru:0, aciklama:"Bu ilim dalına tefsir denir."},
+  {zorluk:"kolay", soru:"Biri Kur'an okurken diğerlerinin mushaftan takip ederek dinlemesine ne denir?", secenekler:["Mukabele","Hatim","Besmele","Tecvit"], dogru:0, aciklama:"Bu geleneğe mukabele denir; özellikle ramazanda yapılır."},
+  {zorluk:"orta", soru:"Kur'an-ı Kerim'i usulüne uygun, güzel bir sesle okuma bilgisi ve sanatına ne denir?", secenekler:["Kıraat","Tefsir","Meal","Hatim"], dogru:0, aciklama:"Bu sanata kıraat denir."},
+  {zorluk:"orta", soru:"Habil ile Kabil kıssası öncelikle hangi konuda ibret verir?", secenekler:["Kıskançlık ve şeytanın vesveselerine uymanın sonuçları","Zenginliğin faydaları","Ticaretin önemi","Savaş taktikleri"], dogru:0, aciklama:"Kıssa, kıskançlığa ve vesveseye kapılmanın sonuçlarını öğretir."},
+  {zorluk:"orta", soru:"Hz. Eyyüb (as) kıssasının temel dersi nedir?", secenekler:["Hastalık ve musibetlere sabretmek","Zenginlikten kaçınmak","Yalnız yaşamak","Ticareti bırakmak"], dogru:0, aciklama:"Hz. Eyyüb kıssası sabrı öğretir."},
+  {zorluk:"orta", soru:"Hz. Yusuf (as) kıssası öncelikle hangi erdemleri öğretir?", secenekler:["İffet, dürüstlük ve merhamet","Cesaret ve savaşçılık","Zenginlik ve güç","Yalnızlık ve inziva"], dogru:0, aciklama:"Hz. Yusuf kıssası iffet, dürüstlük ve merhameti öğretir."},
+  {zorluk:"orta", soru:"Ashab-ı Kehf kıssası hangi konuda örnek gösterilir?", secenekler:["Zor şartlarda haktan dönmemek","Ticarette kazanç sağlamak","Savaşta üstünlük kurmak","Uzun ömürlü olmak"], dogru:0, aciklama:"Ashab-ı Kehf, haktan dönmemenin ve tevekkülün örneğidir."},
+  {zorluk:"orta", soru:"Hz. Yunus (as) kıssasının verdiği temel mesaj nedir?", secenekler:["Hatanın farkına varıp tövbe etmenin güzel sonuçlar vereceği","Sabrın hiçbir faydası olmadığı","Peygamberlerin hata yapamayacağı","Duanın gereksiz olduğu"], dogru:0, aciklama:"Kıssa, tövbenin güzel sonuçlar verdiğini öğretir."},
+  {zorluk:"zor", soru:"İki Bahçe Sahibi kıssası öncelikle neyi öğretir?", secenekler:["Zenginliğin insanı inkâra sevk etmemesi gerektiğini","Tarımın önemini","Komşuluk ilişkilerini","Ticaret ortaklığının zararlarını"], dogru:0, aciklama:"Kıssa, servetin şükrünü unutmamak gerektiğini, gerçek sahibin Allah olduğunu öğretir."},
+  {zorluk:"zor", soru:"Ashab-ı Fil kıssası neyi anlatır?", secenekler:["Allah'ın, dinine tuzak kuranları cezalandırdığını","Fillerin evcilleştirilmesini","Bir ticaret kervanının yolculuğunu","Bir barış antlaşmasını"], dogru:0, aciklama:"Kıssa, Kâbe'ye saldıran ordunun Allah'ın (cc) izniyle cezalandırılmasını anlatır."},
+  {zorluk:"zor", soru:"Hz. İbrahim (as) kıssasının merkezinde hangi imtihan yer alır?", secenekler:["Can ve evlatla imtihan edilmesi","Ticarette aldatılması","Uzun bir yolculuğa çıkması","Bir savaşı kaybetmesi"], dogru:0, aciklama:"Hz. İbrahim, canı ve evladıyla imtihan edilerek Allah'a bağlılığını göstermiştir."},
 ];
 let kt85rIndex = 0, kt85rPuan = 0, kt85rSiraliSorular = [], kt85rKilit = false;
 
@@ -1284,6 +1340,26 @@ const kelimeHavuzu85 = [
   {kelime:"HAFIZ", anlam:"Kur'an-ı Kerim'i baştan sona ezberleyen kişi"},
   {kelime:"AKIL", anlam:"Kur'an-ı Kerim'in defalarca kullanılmasını istediği, doğruyu yanlıştan ayırma yetisi"},
   {kelime:"EVRENSEL", anlam:"Kur'an-ı Kerim'in belli bir millete değil bütün insanlığa hitap etmesi özelliği"},
+  {kelime:"BESMELE", anlam:"\"Bismillâhirrahmânirrahîm\" sözünün adı; Kur'an okumaya ve önemli bir işe başlarken söylenir"},
+  {kelime:"KIRAAT", anlam:"Kur'an-ı Kerim'i usulüne uygun, güzel bir sesle okuma bilgisi ve sanatı"},
+  {kelime:"TECVİT", anlam:"Kur'an harflerini doğru mahreçlerinden ve kurallarına uygun okuma ilmi"},
+  {kelime:"TEFSİR", anlam:"Kur'an ayetlerinin anlamlarını ve hükümlerini ayrıntılı biçimde açıklayan ilim dalı"},
+  {kelime:"MEAL", anlam:"Kur'an-ı Kerim'in, aslındaki ince anlamları tam yansıtma iddiası olmadan başka bir dile yapılan tercümesi"},
+  {kelime:"HATİM", anlam:"Kur'an-ı Kerim'in baştan sona okunup bitirilmesi"},
+  {kelime:"MUKABELE", anlam:"Biri Kur'an okurken diğerlerinin mushaftan takip ederek dinlemesi; ramazana özgü bir gelenek"},
+  {kelime:"ADEM", anlam:"Samimi bir tövbenin affedilmeye vesile olacağını öğreten kıssanın kahramanı"},
+  {kelime:"HABİL", anlam:"Kıskançlık ve şeytanın vesveselerine uymanın sonuçlarını öğreten kıssada haksızlığa uğrayan kişi"},
+  {kelime:"İBRAHİM", anlam:"Can ve evlatla imtihanı, Allah'a bağlılığı anlatan kıssanın kahramanı"},
+  {kelime:"İSMAİL", anlam:"İlahi emirler karşısında teslimiyeti ve tevekkülü öğreten kıssanın kahramanı"},
+  {kelime:"EYYÜP", anlam:"Hastalık ve musibetlere sabretmeyi öğreten kıssanın kahramanı"},
+  {kelime:"YAKUB", anlam:"Ağır imtihana rağmen Allah'ın rahmetinden ümit kesmemeyi öğreten kıssanın kahramanı"},
+  {kelime:"YUSUF", anlam:"İffeti, dürüstlüğü ve merhameti öğreten kıssanın kahramanı"},
+  {kelime:"DAVUD", anlam:"Servet ve gücün kölesi olmadan iyi bir hükümdar olunabileceğini öğreten kıssanın kahramanlarından biri"},
+  {kelime:"SÜLEYMAN", anlam:"Servet ve gücün kölesi olmadan iyi bir hükümdar olunabileceğini öğreten kıssanın kahramanlarından biri"},
+  {kelime:"KEHF", anlam:"En zor şartlarda bile haktan dönmemeyi öğreten Ashab-ı Kehf kıssasının geçtiği mağara"},
+  {kelime:"YUNUS", anlam:"Hatanın farkına varıp tövbe etmenin güzel sonuçlar vereceğini öğreten kıssanın kahramanı"},
+  {kelime:"LUT", anlam:"Ahlaksız davranışların cezayı gerektireceğini haber veren kıssanın kahramanı"},
+  {kelime:"FİL", anlam:"Allah'ın dinine tuzak kuranları nasıl cezalandırdığını öğreten Ashab-ı Fil kıssasının adını aldığı hayvan"},
 ];
 function ku85AnlamBul(kelime){
   const bulunan = kelimeHavuzu85.find(x=>x.kelime===kelime);
@@ -1600,6 +1676,7 @@ const bz85Tuslar = [
   {simge:"TEVHİT", renk:"#d62828"}, {simge:"HİDAYET", renk:"#7b2cbf"}, {simge:"MÜBİN", renk:"#0077b6"},
   {simge:"KISSA", renk:"#e76f51"}, {simge:"İHLAS", renk:"#2d6a4f"}, {simge:"NUH", renk:"#9d4edd"},
   {simge:"TUFAN", renk:"#457b9d"}, {simge:"SAMED", renk:"#c9184a"}, {simge:"EHAD", renk:"#e09f3e"},
+  {simge:"BESMELE", renk:"#264653"}, {simge:"TEFSİR", renk:"#f77f00"},
 ];
 let bz85Sira = [], bz85KullaniciIndex = 0, bz85Seviye = 0, bz85Oynatiliyor = false;
 
@@ -1710,6 +1787,10 @@ const kelimeAvi85Listesi = [
   {kelime:"SAMED", anlam:"Hiçbir şeye muhtaç olmayan anlamında Allah'ın sıfatı"},
   {kelime:"EHAD", anlam:"Bir, tek anlamına gelen kelime"},
   {kelime:"HAFIZ", anlam:"Kur'an-ı Kerim'i baştan sona ezberleyen kişi"},
+  {kelime:"BESMELE", anlam:"Kur'an okumaya başlarken söylenen \"Bismillâhirrahmânirrahîm\" sözü"},
+  {kelime:"TEFSİR", anlam:"Kur'an ayetlerinin anlamını ayrıntılı açıklayan ilim dalı"},
+  {kelime:"MEAL", anlam:"Kur'an'ın başka bir dile yapılan tercümesi"},
+  {kelime:"YUSUF", anlam:"İffeti, dürüstlüğü ve merhameti öğreten kıssanın kahramanı"},
 ];
 const ka85SatirSayisi = 14, ka85SutunSayisi = 14;
 const ka85AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
@@ -1957,7 +2038,7 @@ const merdiven85Zinciri = [
   {kelime:"TUFAN", anlam:"Hz. Nuh'un (as) inkârda direnen kavminin helak olduğu büyük su felaketi"},
   {kelime:"NUH", anlam:"Kavmini uzun yıllar tevhide davet eden, gemiyle kurtulan peygamber"},
 ];
-const merdiven85Havuz = ["VAHİY","SÜNNET","MUSHAF","SURE","AYET","CÜZ","HİRA","ALAK","KADİR","İNANÇ","İBADET","AHLAK","MUAMELAT","KISSA","MÜBİN","GEMİ","CUDİ","SABIR","İHLAS","SAMED","EHAD","KAVLİ","FİİLİ","HADİS","HAFIZ","AKIL","EVRENSEL"];
+const merdiven85Havuz = ["VAHİY","SÜNNET","MUSHAF","SURE","AYET","CÜZ","HİRA","ALAK","KADİR","İNANÇ","İBADET","AHLAK","MUAMELAT","KISSA","MÜBİN","GEMİ","CUDİ","SABIR","İHLAS","SAMED","EHAD","KAVLİ","FİİLİ","HADİS","HAFIZ","AKIL","EVRENSEL","BESMELE","KIRAAT","TECVİT","TEFSİR","MEAL","HATİM","MUKABELE","YUSUF","MUSA","YUNUS","LUT"];
 let merdiven85Index = 0;
 
 function merdiven85Baslat(){
@@ -2338,6 +2419,8 @@ const ks85KelimeListesi = [
   {kelime:"SAMED", anlam:"Hiçbir şeye muhtaç olmayan anlamında Allah'ın sıfatı"},
   {kelime:"KADİR", anlam:"İlk vahyin indiği mübarek gecenin adı"},
   {kelime:"AKIL", anlam:"Kur'an'ın kullanılmasını istediği, doğruyu yanlıştan ayırma yetisi"},
+  {kelime:"MEAL", anlam:"Kur'an'ın başka bir dile yapılan tercümesi"},
+  {kelime:"HATİM", anlam:"Kur'an-ı Kerim'in baştan sona okunup bitirilmesi"},
 ];
 const ks85AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
 let ks85IzgaraVeri = [];
@@ -2557,6 +2640,9 @@ const dilDedektifi85Listesi = [
   {dogru:"Kur'an-ı Kerim yol gösterici ve açıklayıcıdır; insanı düşünmeye ve akıl yürütmeye çağırır.", yanlislar:["Kur'an-ı Kerim insanın aklını kullanmasını istemez.","Kur'an-ı Kerim yalnızca ezberlenmek için indirilmiştir.","Kur'an-ı Kerim yalnızca belli bir millete hitap eder."]},
   {dogru:"Hz. Nuh (as) kavmini uzun yıllar sabırla tevhide davet etmiştir.", yanlislar:["Hz. Nuh (as) kavmini putlara tapmaya çağırmıştır.","Hz. Nuh (as) daveti kısa sürede bırakıp vazgeçmiştir.","Hz. Nuh (as) kavmine hiç uyarıda bulunmamıştır."]},
   {dogru:"İhlâs suresi dört ayette Allah'ın (cc) bir, tek ve eşsiz olduğunu bildirir.", yanlislar:["İhlâs suresi namaz vakitlerini sıralar.","İhlâs suresi Hz. Nuh'un gemisini anlatır.","İhlâs suresi zekâtın miktarını belirler."]},
+  {dogru:"Tefsir, Kur'an ayetlerinin anlamını ve hükümlerini ayrıntılı biçimde açıklayan ilim dalıdır.", yanlislar:["Tefsir, Kur'an'ın başka bir dile yapılan kısa tercümesidir.","Tefsir, Kur'an'ı ezberleme yöntemidir.","Tefsir, sadece namaz sûrelerini içeren bir kitaptır."]},
+  {dogru:"Meal, Kur'an'ın aslındaki bütün ince anlamları tam yansıtma iddiası olmadan yapılan tercümesidir.", yanlislar:["Meal, Kur'an'ın Arapça aslından farksız bir kopyasıdır.","Meal, sadece hadislerin tercümesi için kullanılan bir terimdir.","Meal, Kur'an'ı ezbere okuma usulüdür."]},
+  {dogru:"Ashab-ı Kehf kıssası, en zor şartlarda bile haktan dönmemeyi ve tevekkülü öğretir.", yanlislar:["Ashab-ı Kehf kıssası bir ticaret kervanını anlatır.","Ashab-ı Kehf kıssası zenginliğin önemini vurgular.","Ashab-ı Kehf kıssasında haktan vazgeçilmesi övülür."]},
 ];
 let ddl85Index = 0, ddl85Puan = 0, ddl85Sira = [];
 
@@ -2679,6 +2765,8 @@ const semantikOdalar85 = [
   {kategori:"HZ. NUH KISSASININ KAVRAMLARI (Tufan, Gemi, Cûdi gibi)", kelimeler:["TUFAN","GEMİ","CUDİ","MÜBİN"], oddKelime:"MÜBİN"},
   {kategori:"İHLÂS SURESİNİN KAVRAMLARI (Tevhit, Samed, Ehad gibi)", kelimeler:["TEVHİT","SAMED","EHAD","ALAK"], oddKelime:"ALAK"},
   {kategori:"KUR'AN'IN TEMEL ÖZELLİKLERİ (Hidayet, Mübin, Evrensel gibi)", kelimeler:["HİDAYET","MÜBİN","EVRENSEL","GEMİ"], oddKelime:"GEMİ"},
+  {kategori:"KUR'AN OKUMA TERİMLERİ (Kıraat, Tecvit, Tefsir gibi)", kelimeler:["KIRAAT","TECVİT","TEFSİR","TUFAN"], oddKelime:"TUFAN"},
+  {kategori:"KISSA KAHRAMANLARI (Yusuf, Musa, Yunus gibi)", kelimeler:["YUSUF","MUSA","YUNUS","MÜBİN"], oddKelime:"MÜBİN"},
 ];
 let sz85OdaIndex = 0, sz85Can = 3;
 
@@ -2748,6 +2836,9 @@ const celiskiListesi85 = [
   {kelime:"İhlâs suresi", anlam1:"Kur'an-ı Kerim'in 112. suresidir", anlam2:"Dört ayette Allah'ın birliğini anlatır", celiskiVarMi:false},
   {kelime:"Takrirî sünnet", anlam1:"Hz. Peygamber'in bir davranışa itiraz etmeyip onay vermesiyle oluşur", anlam2:"Sünnet çeşitlerinden biridir", celiskiVarMi:false},
   {kelime:"Hafız", anlam1:"Kur'an-ı Kerim'i baştan sona ezberleyen kişidir", anlam2:"Kur'an'ın nesilden nesile korunmasına katkı sağlar", celiskiVarMi:false},
+  {kelime:"Tefsir", anlam1:"Kur'an ayetlerinin anlamını ayrıntılı açıklayan ilim dalıdır", anlam2:"Kur'an'ın kısaca başka bir dile çevrilmesidir", celiskiVarMi:true},
+  {kelime:"Meal", anlam1:"Kur'an'ın başka bir dile yapılan tercümesidir", anlam2:"Aslındaki bütün ince anlamları tam yansıttığı iddia edilmez", celiskiVarMi:false},
+  {kelime:"Hz. Yusuf", anlam1:"İffeti, dürüstlüğü ve merhameti öğreten kıssanın kahramanıdır", anlam2:"Zenginlik ve güç düşkünlüğüyle bilinen bir kişidir", celiskiVarMi:true},
 ];
 let ca85Index = 0, ca85Puan = 0, ca85Sira = [], ca85Kilit = false;
 
@@ -2815,6 +2906,12 @@ const lab85IfadeHavuzu = [
   {kelime:"Hz. Nuh", anlam:"Kavmini uzun yıllar tevhide davet eden peygamber"},
   {kelime:"Tufan", anlam:"İnkârda direnen kavmin helak olduğu su felaketi"},
   {kelime:"Cûdi", anlam:"Hz. Nuh'un gemisinin oturduğu dağ"},
+  {kelime:"Besmele", anlam:"Kur'an okumaya başlarken söylenen söz"},
+  {kelime:"Tefsir", anlam:"Kur'an ayetlerinin anlamını açıklayan ilim dalı"},
+  {kelime:"Meal", anlam:"Kur'an'ın başka bir dile yapılan tercümesi"},
+  {kelime:"Hatim", anlam:"Kur'an'ın baştan sona okunup bitirilmesi"},
+  {kelime:"Hz. Yusuf", anlam:"İffeti ve dürüstlüğü öğreten kıssanın kahramanı"},
+  {kelime:"Ashab-ı Kehf", anlam:"Haktan dönmemeyi ve tevekkülü öğreten kıssanın kahramanları"},
 ];
 let lab85Hucreler = [], lab85HucreElemanlari = [], lab85OyuncuKonum = {r:0,c:0}, lab85Toplananlar = {};
 let lab85HamleSayisi = 0, lab85ToplananSayisi = 0, lab85Saniye = 0, lab85Zamanlayici = null, lab85Bitti = false;
