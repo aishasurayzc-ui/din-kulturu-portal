@@ -37,8 +37,13 @@ var UNITE_SAYISI = {4:6, 5:5, 6:5, 7:5, 8:5};
 var YENI_MOTOR_DESTEKLI = {
   4:[1,2,3,4,5], 5:[1,2,3,4,5], 6:[1,2,3,4,5], 7:[1,2,3,4,5], 8:[1,2,3,4,5]
 };
-var ASAMA_SIRASI = ['hub','ogren','oyun','olcme'];
-var ASAMA_ETIKET = {hub:'📖 Ünite', ogren:'🧠 Öğren', oyun:'🎮 Oyun', olcme:'📝 Ölç'};
+/* Aşama çubuğunda gösterilen 5 durak (gezinme amaçlı). 'etkinlik' ve 'oyun'
+   ikisi de aynı hedefe (yeni oyun motoruna, farklı formla) gider — ayrı bir
+   fiziksel "etkinlik" sayfası yoktur, bu yüzden ziyaret takibi (ASAMA_TAKIP)
+   sadece gerçekten var olan sayfa türlerini (hub/ogren/oyun/olcme) sayar. */
+var ASAMA_SIRASI = ['hub','ogren','etkinlik','oyun','olcme'];
+var ASAMA_TAKIP = ['hub','ogren','oyun','olcme'];
+var ASAMA_ETIKET = {hub:'📖 Ünite', ogren:'🧠 Öğren', etkinlik:'🎨 Etkinlik', oyun:'🎮 Oyun', olcme:'📝 Pekiştir/Test'};
 
 /* ————— localStorage yardımcıları (güvenli, sessiz başarısız olur) ————— */
 var LS_TAMAMLANAN = 'dkab_tamamlanan';
@@ -61,7 +66,7 @@ function tamamlandiIsaretle(sinif,unite){
 }
 
 function ziyaretIsaretle(sinif,unite,asama){
-  if(ASAMA_SIRASI.indexOf(asama)<0) return;
+  if(ASAMA_TAKIP.indexOf(asama)<0) return;
   var tumu = nesneOku(LS_ZIYARET), gid = id(sinif,unite);
   tumu[gid] = tumu[gid] || {};
   tumu[gid][asama] = true;
@@ -93,9 +98,15 @@ function dosyaAdi(unite, tur){
   return 'index.html';
 }
 
-function oyunHedefi(sinif, unite){
+/* mod: 'etkinlik' -> yeni motorda Öğretmen Modu (görev bazlı) formu açılır;
+   'oyun' (veya boş) -> klasik Etkinlik/Oyun Oluştur formu açılır. Yeni motor
+   bu ünite için veri içermiyorsa (örn. 4. sınıf 6. ünite) her ikisi de aynı
+   eski oyun-merkezi.html sayfasına düşer — orada ayrım yoktur. */
+function oyunHedefi(sinif, unite, mod){
   if(YENI_MOTOR_DESTEKLI[sinif] && YENI_MOTOR_DESTEKLI[sinif].indexOf(unite)>=0){
-    return '../din-kulturu-tum-siniflar.html?oyun=s'+sinif+'-u'+unite;
+    var url = '../din-kulturu-tum-siniflar.html?oyun=s'+sinif+'-u'+unite;
+    if(mod==='etkinlik' || mod==='oyun') url += '&mod='+mod;
+    return url;
   }
   return dosyaAdi(unite,'oyun');
 }
@@ -127,12 +138,23 @@ function kirintiHtml(sinif, unite, asama){
   return h;
 }
 
+function cubukHedefi(sinif, unite, a){
+  if(a==='etkinlik') return oyunHedefi(sinif,unite,'etkinlik');
+  if(a==='oyun') return oyunHedefi(sinif,unite,'oyun');
+  return dosyaAdi(unite,a);
+}
 function cubukHtml(sinif, unite, asama){
   if(asama==='sinif') return '';
+  /* eski sayfalarda tek 'oyun' asaması vardı; yeni çubukta 'etkinlik' de
+     ayrı bir durak olduğu için eşdeğer kabul edilir (ikisi de aynı adımı
+     temsil eder). */
+  var esdegerAsama = asama==='oyun' ? 'etkinlik' : asama;
   var suankiIndex = ASAMA_SIRASI.indexOf(asama);
+  if(suankiIndex<0) suankiIndex = ASAMA_SIRASI.indexOf(esdegerAsama);
   var parcalar = ASAMA_SIRASI.map(function(a, i){
-    var hedef = (a==='oyun') ? oyunHedefi(sinif,unite) : dosyaAdi(unite,a);
-    var durum = i===suankiIndex ? 'aktif' : (i<suankiIndex ? 'tamam' : '');
+    var hedef = cubukHedefi(sinif,unite,a);
+    var buradaMi = (a===asama) || (a==='etkinlik' && asama==='oyun');
+    var durum = buradaMi ? 'aktif' : (i<suankiIndex ? 'tamam' : '');
     return '<a class="pn-adim '+durum+'" href="'+hedef+'">'+
       (durum==='tamam'?'✓ ':'')+ASAMA_ETIKET[a]+'</a>';
   });
@@ -154,6 +176,15 @@ function sureSecimiHtml(sinif,unite){
     }).join('')+'</div>';
 }
 
+function konuAksiyonlariHtml(sinif, unite){
+  return '<div class="pn-alt-baslik">🎯 Bu Konuyu Öğrendin mi?</div>'+
+    '<div class="pn-aksiyon-satir">'+
+      '<a class="pn-aksiyon" href="'+oyunHedefi(sinif,unite,'etkinlik')+'">🎨 Etkinliğe Geç</a>'+
+      '<a class="pn-aksiyon" href="'+oyunHedefi(sinif,unite,'oyun')+'">🎮 Bu Konuyla Oyna</a>'+
+      '<a class="pn-aksiyon" href="'+dosyaAdi(unite,'olcme')+'">🧠 Pekiştir</a>'+
+      '<a class="pn-aksiyon" href="'+dosyaAdi(unite,'olcme')+'">📝 Kendini Dene</a>'+
+    '</div>';
+}
 function altBarHtml(sinif, unite, asama){
   var sonrakiUnite = unite < UNITE_SAYISI[sinif] ? unite+1 : null;
   var ustEk = '', ic = '';
@@ -161,7 +192,7 @@ function altBarHtml(sinif, unite, asama){
     ustEk = sureSecimiHtml(sinif,unite);
     ic = '<a class="pn-buyuk" href="'+dosyaAdi(unite,'ogren')+'">▶️ Derse Başla</a>';
   } else if(asama==='ogren'){
-    ic = '<a class="pn-buyuk" href="'+oyunHedefi(sinif,unite)+'">🎯 Şimdi Uygula — 🎮 Oyuna Geç</a>';
+    return '<div class="pn-alt">'+konuAksiyonlariHtml(sinif,unite)+'</div>';
   } else if(asama==='oyun'){
     ic = '<a class="pn-buyuk" href="'+dosyaAdi(unite,'olcme')+'">🧠 Pekiştir — 📝 Kendini Dene</a>';
   } else if(asama==='olcme'){
@@ -183,7 +214,7 @@ function altBarHtml(sinif, unite, asama){
 
 function raporHtml(sinif, unite, tamamMi){
   var d = ziyaretDurumu(sinif,unite);
-  var satirlar = ASAMA_SIRASI.map(function(a){
+  var satirlar = ASAMA_TAKIP.map(function(a){
     return '<span class="pn-rapor-oge'+(d[a]?' pn-rapor-oge-ok':'')+'">'+(d[a]?'✓':'○')+' '+ASAMA_ETIKET[a]+'</span>';
   }).join('');
   return '<div class="pn-rapor"><div class="pn-alt-baslik">📊 Ünite Raporu — '+kacis(uniteAdi(sinif,unite))+'</div>'+

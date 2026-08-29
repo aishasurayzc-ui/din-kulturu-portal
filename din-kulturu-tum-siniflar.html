@@ -2875,17 +2875,21 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
   /* Portal köprüsü: din-kulturu-Nsinif-1unite/ klasöründeki ayrı sayfalardan
-     "?oyun=sN-uM" ile gelindiyse, ilgili sınıf sekmesini açıp doğrudan o
-     ünitenin oyun ekranına atla. Parametre yoksa hiçbir şey yapmaz. */
+     "?oyun=sN-uM" (+ isteğe bağlı "&mod=etkinlik" veya "&mod=oyun") ile
+     gelindiyse, ilgili sınıf sekmesini açıp doğrudan o ünitenin oyun
+     ekranına — mod belirtilmişse ilgili forma — atla. Parametre yoksa
+     hiçbir şey yapmaz. */
   (function(){
-    const parametre = new URLSearchParams(location.search).get('oyun');
+    const parametreler = new URLSearchParams(location.search);
+    const parametre = parametreler.get('oyun');
     if(!parametre) return;
     const eslesme = /^s(\d)-u(\d+)$/.exec(parametre);
     if(!eslesme) return;
     const sid = 's'+eslesme[1], no = parseInt(eslesme[2],10);
+    const mod = parametreler.get('mod');
     if(typeof sinifGoster==='function') sinifGoster(sid);
     if(typeof icerikGoster==='function') icerikGoster(sid,'oyun');
-    if(typeof window.oyunMerkeziUnite==='function') window.oyunMerkeziUnite(sid, no);
+    if(typeof window.oyunMerkeziUnite==='function') window.oyunMerkeziUnite(sid, no, mod);
   })();
 
   /* Görünürlük gözlemcisi en son kurulur — bu noktada sınıf kartları,
@@ -3808,12 +3812,17 @@ document.addEventListener('keydown', function(e){
 });
 
 /* Ünite kartındaki "🎮 Etkinlik" düğmesi: sekmeyi açar ve doğrudan
-   o ünitenin oyun listesine gider. */
-window.oyunMerkeziUnite = function(sid, no){
+   o ünitenin oyun listesine gider. `mod` verilirse ('etkinlik' -> Öğretmen
+   Modu formu, 'oyun' -> klasik Etkinlik Oluştur formu) ilgili formu da
+   otomatik açar — din-kulturu-Nsinif-1unite/ sayfalarındaki "Etkinlik" ve
+   "Oyun" butonları bu ayrımı kullanır. */
+window.oyunMerkeziUnite = function(sid, no, mod){
   var k=yuva(sid); if(!k) return;
   tahtaKur();
   k.dataset.hazir='1';
   unitePaneli(sid, no);
+  if(mod==='etkinlik' && typeof ogretmenFormCiz==='function') ogretmenFormCiz(sid);
+  else if(mod==='oyun' && typeof formCiz==='function') formCiz(sid);
   var kutu=document.getElementById('ip-'+sid+'-oyun');
   if(kutu){
     var ust = kutu.getBoundingClientRect().top + window.pageYOffset - 90;
