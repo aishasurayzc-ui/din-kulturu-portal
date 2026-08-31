@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>LGS Hazırlık Merkezi — Din Kültürü ve Ahlak Bilgisi</title>
+<meta name="description" content="8. sınıf LGS Din Kültürü ve Ahlak Bilgisi hazırlık merkezi: dashboard, konu anlatımı, kazanım testleri, deneme merkezi, çalışma koçu, rozetler ve performans analizi.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block">
+<link rel="stylesheet" href="../assets/sinav-merkezi.css">
+</head>
+<body>
+  <nav class="sm-topbar">
+    <a href="../index.html"><span class="msi" aria-hidden="true">arrow_back</span> Sınav Merkezi</a>
+    <a href="../../din-kulturu-tum-siniflar.html"><span class="msi" aria-hidden="true">home</span> Ana Portal</a>
+    <button type="button" class="sm-tema-btn" onclick="smTemaDegistir()"><span class="msi" aria-hidden="true">dark_mode</span> Koyu Tema</button>
+  </nav>
+
+  <section class="sm-hero" style="--vurgu:var(--lgs)">
+    <span class="sm-hero-blob sm-hero-blob-1" aria-hidden="true"></span>
+    <span class="sm-hero-blob sm-hero-blob-2" aria-hidden="true"></span>
+    <div class="sm-hero-ic">
+      <div class="sm-hero-ikon" aria-hidden="true"><span class="msi">school</span></div>
+      <h1>LGS Hazırlık Merkezi</h1>
+      <p>8. sınıf Din Kültürü ve Ahlak Bilgisi LGS hazırlığın tek yerde.</p>
+    </div>
+    <svg class="sm-hero-dalga" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z"></path></svg>
+  </section>
+
+  <main class="sm-sarmal" style="--vurgu:var(--lgs)">
+
+    <!-- DURUM ŞERİDİ: Dashboard özeti + Geri Sayım — kart değil, ana ekranın üstünde sabit -->
+    <div class="lgs-durum-seridi">
+      <div class="lgs-durum-kutu" id="lgsDashboard"></div>
+      <div class="lgs-durum-kutu sm-arac-kart" id="lgsGeriSayim" style="margin:0">
+        <div class="sm-hedef-satir">
+          <span>Sınav tarihin:</span>
+          <input type="date" class="sm-geri-sayim-girdi">
+          <button type="button" class="sm-btn sm-geri-sayim-kaydet">Kaydet</button>
+        </div>
+        <div class="sm-geri-sayim-sonuc"></div>
+      </div>
+    </div>
+
+    <!-- ANA MENÜ: yalnızca 4 kart -->
+    <div class="lgs-ana-menu" data-lgs-menu>
+      <button type="button" class="lgs-kart" data-lgs-git="konular">
+        <span class="lgs-kart-ikon" aria-hidden="true">📚</span>
+        <b>Konular</b>
+        <span>Konu anlatımı, kazanım testleri ve oyunlarla çalışın.</span>
+      </button>
+      <button type="button" class="lgs-kart" data-lgs-git="denemeler">
+        <span class="lgs-kart-ikon" aria-hidden="true">🧪</span>
+        <b>Denemeler</b>
+        <span>Deneme çözün, günlük ve haftalık planınızı takip edin.</span>
+      </button>
+      <button type="button" class="lgs-kart" data-lgs-git="cikmis-sorular">
+        <span class="lgs-kart-ikon" aria-hidden="true">📝</span>
+        <b>Çıkmış Sorular</b>
+        <span>Geçmiş yıl sorularını ve günün sorusunu inceleyin.</span>
+      </button>
+      <button type="button" class="lgs-kart" data-lgs-git="sinav-analizi">
+        <span class="lgs-kart-ikon" aria-hidden="true">📊</span>
+        <b>Sınav Analizi</b>
+        <span>Sınavların konu ve kazanım analizlerini inceleyin.</span>
+      </button>
+    </div>
+
+    <!-- DETAY: bir kart seçilince açılır -->
+    <div class="lgs-detay" data-lgs-detay hidden>
+      <button type="button" class="lgs-geri" data-lgs-geri><span class="msi" aria-hidden="true">arrow_back</span> LGS Hazırlık</button>
+
+      <!-- 📚 KONULAR -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="konular" hidden>
+        <nav class="sm-sekme-satir" id="lgsKonularSekme" role="tablist" aria-label="Konular">
+          <button type="button" data-sekme="konu-anlatimlari" aria-selected="true">Konu Anlatımları</button>
+          <button type="button" data-sekme="konu-ozetleri" aria-selected="false">Konu Özetleri</button>
+          <button type="button" data-sekme="kazanim-testleri" aria-selected="false">Kazanım Testleri</button>
+          <button type="button" data-sekme="konu-testleri" aria-selected="false">Konu Testleri</button>
+          <button type="button" data-sekme="oyun-merkezi" aria-selected="false">Oyun Merkezi</button>
+          <button type="button" data-sekme="favoriler" aria-selected="false">Favorilerim</button>
+        </nav>
+        <div id="lgsKonularPaneller">
+          <section class="sm-panel" data-panel="konu-anlatimlari">
+            <div class="sm-link-izgara" id="lgsKonuAnlatimlari">
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/index.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">balance</span></span><span><b>1. Ünite</b><span>Kader İnancı</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">volunteer_activism</span></span><span><b>2. Ünite</b><span>Zekât ve Sadaka</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">diversity_3</span></span><span><b>3. Ünite</b><span>Din ve Hayat</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">star</span></span><span><b>4. Ünite</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">auto_stories</span></span><span><b>5. Ünite</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="konu-ozetleri" hidden>
+            <div class="sm-link-izgara" id="lgsKonuOzetleri">
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/index.html#ozet8"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>1. Ünite Özeti</b><span>Kader İnancı</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2.html#ozet82"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>2. Ünite Özeti</b><span>Zekât ve Sadaka</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3.html#ozet83"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>3. Ünite Özeti</b><span>Din ve Hayat</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4.html#ozet84"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>4. Ünite Özeti</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5.html#ozet85"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>5. Ünite Özeti</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="kazanim-testleri" hidden>
+            <div class="sm-kazanim-izgara" id="lgsKazanimTestleri"></div>
+          </section>
+          <section class="sm-panel" data-panel="konu-testleri" hidden>
+            <div class="sm-yakinda"><span class="msi" aria-hidden="true">quiz</span><h3>Konu Testleri hazırlanıyor</h3><p>Bu arada Kazanım Testleri'ndeki testleri deneyebilirsin.</p></div>
+          </section>
+          <section class="sm-panel" data-panel="oyun-merkezi" hidden>
+            <div class="sm-oyun-izgara" id="lgsOyunMerkezi">
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>1. Ünite Oyunları</b><span>Kader İnancı</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>2. Ünite Oyunları</b><span>Zekât ve Sadaka</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>3. Ünite Oyunları</b><span>Din ve Hayat</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>4. Ünite Oyunları</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>5. Ünite Oyunları</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="favoriler" hidden>
+            <div id="lgsFavoriler"></div>
+          </section>
+        </div>
+      </div>
+
+      <!-- 🧪 DENEMELER -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="denemeler" hidden>
+        <nav class="sm-sekme-satir" id="lgsDenemelerSekme" role="tablist" aria-label="Denemeler">
+          <button type="button" data-sekme="deneme-merkezi" aria-selected="true">Deneme Merkezi</button>
+          <button type="button" data-sekme="gunluk-program" aria-selected="false">Günlük Program</button>
+          <button type="button" data-sekme="calisma-plani" aria-selected="false">Çalışma Planı</button>
+        </nav>
+        <div id="lgsDenemelerPaneller">
+          <section class="sm-panel" data-panel="deneme-merkezi">
+            <div id="lgsDenemeMerkezi">
+              <div class="sm-deneme-secim-alani">
+                <div class="sm-deneme-sure-secim">
+                  <button type="button" data-sureli="0" aria-pressed="true">Süresiz</button>
+                  <button type="button" data-sureli="1" aria-pressed="false">Süreli (40 sn/soru)</button>
+                </div>
+                <div class="sm-deneme-izgara" style="margin-top:16px;">
+                  <div class="sm-deneme-kart" data-boyut="10"><span class="msi" aria-hidden="true">bolt</span><h4>Mini Deneme</h4><span>10 soru</span></div>
+                  <div class="sm-deneme-kart" data-boyut="20"><span class="msi" aria-hidden="true">quiz</span><h4>20 Soru</h4><span>Orta yoğunluk</span></div>
+                  <div class="sm-deneme-kart" data-boyut="40"><span class="msi" aria-hidden="true">library_books</span><h4>40 Soru</h4><span>Yoğun tekrar</span></div>
+                  <div class="sm-deneme-kart" data-boyut="52"><span class="msi" aria-hidden="true">workspace_premium</span><h4>Tam Deneme</h4><span>Tüm soru havuzu (52 soru)</span></div>
+                </div>
+              </div>
+              <div class="sm-deneme-oyun-alani" hidden></div>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="gunluk-program" hidden>
+            <div class="sm-checklist" id="lgsGunlukProgram"></div>
+          </section>
+          <section class="sm-panel" data-panel="calisma-plani" hidden>
+            <div class="sm-plan-izgara" id="lgsCalismaPlani" style="margin-bottom:20px"></div>
+            <div class="sm-arac-kart" id="lgsGunlukHedef">
+              <div class="sm-hedef-satir">
+                <span>Günlük hedefim:</span>
+                <input type="number" class="sm-hedef-girdi" min="1" max="100" value="10">
+                <span>soru</span>
+              </div>
+              <div class="sm-ilerleme-dis"><div class="sm-ilerleme-ic" style="width:0%"></div></div>
+              <p class="sm-hedef-metin">Bugün: 0 / 10 soru</p>
+              <button type="button" class="sm-btn sm-hedef-artir"><span class="msi" aria-hidden="true">add</span> 1 Soru Çözdüm</button>
+              <button type="button" class="sm-btn sm-btn-ikincil sm-hedef-sifirla">Bugünü Sıfırla</button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- 📝 ÇIKMIŞ SORULAR -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="cikmis-sorular" hidden>
+        <nav class="sm-sekme-satir" id="lgsSorularSekme" role="tablist" aria-label="Çıkmış Sorular">
+          <button type="button" data-sekme="cikmis-sorular" aria-selected="true">Çıkmış Sorular</button>
+          <button type="button" data-sekme="yeni-nesil" aria-selected="false">Yeni Nesil Sorular</button>
+          <button type="button" data-sekme="gunun-sorusu" aria-selected="false">Günün Sorusu</button>
+        </nav>
+        <div id="lgsSorularPaneller">
+          <section class="sm-panel" data-panel="cikmis-sorular">
+            <p class="sm-panel-aciklama">Soru Laboratuvarı — her soru sadece gösterilmiyor, analiz ediliyor. Şimdilik 2026 sınavının 10 sorusu işlendi; diğer yıllar zamanla eklenecek.</p>
+            <div id="lgsSoruLab"></div>
+          </section>
+          <section class="sm-panel" data-panel="yeni-nesil" hidden>
+            <div class="sm-yakinda"><span class="msi" aria-hidden="true">auto_awesome</span><h3>Yeni Nesil Sorular hazırlanıyor</h3><p>Senaryo/metin temelli, çok adımlı soru tipleri hazırlanıyor.</p></div>
+          </section>
+          <section class="sm-panel" data-panel="gunun-sorusu" hidden>
+            <div class="sm-gunun-sorusu" id="lgsGununSorusu"></div>
+          </section>
+        </div>
+      </div>
+
+      <!-- 📊 SINAV ANALİZİ -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="sinav-analizi" hidden>
+        <nav class="sm-sekme-satir" id="lgsAnalizSekme" role="tablist" aria-label="Sınav Analizi">
+          <button type="button" data-sekme="sinav-analizi" aria-selected="true">Analiz</button>
+          <button type="button" data-sekme="performans" aria-selected="false">Performans</button>
+          <button type="button" data-sekme="istatistikler" aria-selected="false">İstatistikler</button>
+          <button type="button" data-sekme="rozet-sistemi" aria-selected="false">Rozetler</button>
+          <button type="button" data-sekme="ai-koc" aria-selected="false">Çalışma Koçu</button>
+        </nav>
+        <div id="lgsAnalizPaneller">
+          <section class="sm-panel" data-panel="sinav-analizi">
+            <div class="sm-analiz" id="lgsSinavAnalizi">
+              <div class="sm-analiz-baslik">
+                <p class="sm-panel-aciklama">2021–2026 LGS Din Kültürü sınavlarının konu, kazanım ve soru eğilimlerini inceleyin.</p>
+              </div>
+              <div class="sm-analiz-menu" data-analiz-menu>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="yillar"><span class="sm-analiz-kart-ikon" aria-hidden="true">📅</span><b>Yıllara Göre</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="konular"><span class="sm-analiz-kart-ikon" aria-hidden="true">📚</span><b>Konulara Göre</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="kazanimlar"><span class="sm-analiz-kart-ikon" aria-hidden="true">🎯</span><b>Kazanımlara Göre</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="egilimler"><span class="sm-analiz-kart-ikon" aria-hidden="true">📈</span><b>Soru Eğilimleri</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="oneriler"><span class="sm-analiz-kart-ikon" aria-hidden="true">⭐</span><b>Çalışma Önerileri</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="ara"><span class="sm-analiz-kart-ikon" aria-hidden="true">🔍</span><b>Ara</b></button>
+              </div>
+              <div class="sm-analiz-detay-alani" data-analiz-detay hidden>
+                <button type="button" class="sm-analiz-geri" data-analiz-geri><span class="msi" aria-hidden="true">arrow_back</span> Sınav Analizi</button>
+                <div data-analiz-icerik></div>
+              </div>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="performans" hidden>
+            <div id="lgsYanlisAnaliz" style="margin-bottom:24px;"></div>
+            <div id="lgsPerformansGrafik"></div>
+          </section>
+          <section class="sm-panel" data-panel="istatistikler" hidden>
+            <div id="lgsIstatistikler"></div>
+          </section>
+          <section class="sm-panel" data-panel="rozet-sistemi" hidden>
+            <div class="sm-rozet-izgara" id="lgsRozetler"></div>
+          </section>
+          <section class="sm-panel" data-panel="ai-koc" hidden>
+            <div class="sm-koc-kart">
+              <div class="sm-koc-baslik">
+                <div class="sm-koc-avatar"><span class="msi" aria-hidden="true">smart_toy</span></div>
+                <div><b>Çalışma Koçun</b><span>Verilerine göre güncellenir</span></div>
+              </div>
+              <div id="lgsKoc"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../assets/sinav-merkezi.js"></script>
+  <script>
+/* ======================================================================
+   LGS 8. SINIF DKAB — SORU HAVUZU (sayfaya özel gerçek içerik)
+   MEB DKAB Öğretim Programı 8. sınıf üniteleri temel alınarak hazırlanmış
+   PRATİK sorulardır; gerçek geçmiş LGS soruları DEĞİLDİR ve öğretmen
+   onayından geçmeden yayına alınmamalıdır.
+====================================================================== */
+const LGS_UNITE_ADLARI = {
+  unite1:"Kader İnancı", unite2:"Zekât ve Sadaka", unite3:"Din ve Hayat",
+  unite4:"Hz. Muhammed'in Örnekliği", unite5:"Kur'an-ı Kerim ve Özellikleri"
+};
+const LGS_KAZANIMLAR = [
+  {id:'k1a', uniteId:'unite1', uniteAd:'1. Ünite · Kader İnancı', baslik:'Kader ve Kaza İnancı', zorluklar:['kolay','orta']},
+  {id:'k1b', uniteId:'unite1', uniteAd:'1. Ünite · Kader İnancı', baslik:"İnsanın İradesi ve Kader", zorluklar:['orta']},
+  {id:'k1c', uniteId:'unite1', uniteAd:'1. Ünite · Kader İnancı', baslik:'Kaderle İlgili Kavramlar ve Hz. Musa (as)', zorluklar:['kolay','orta']},
+  {id:'k2a', uniteId:'unite2', uniteAd:'2. Ünite · Zekât ve Sadaka', baslik:'Zekât ve Sadaka İbadeti', zorluklar:['kolay','orta']},
+  {id:'k2b', uniteId:'unite2', uniteAd:'2. Ünite · Zekât ve Sadaka', baslik:'Toplumsal Faydalar, Hz. Şuayb (as) ve Maun Suresi', zorluklar:['orta','zor']},
+  {id:'k3a', uniteId:'unite3', uniteAd:'3. Ünite · Din ve Hayat', baslik:'Dinin Gayesi: Zarûrât-ı Hamse', zorluklar:['orta','zor']},
+  {id:'k3b', uniteId:'unite3', uniteAd:'3. Ünite · Din ve Hayat', baslik:'Helal-Haram Kazanç ve Hz. Yusuf (as)', zorluklar:['kolay','orta','zor']},
+  {id:'k4a', uniteId:'unite4', uniteAd:"4. Ünite · Hz. Muhammed'in Örnekliği", baslik:'Doğruluk, Güvenilirlik ve Merhamet', zorluklar:['kolay','orta']},
+  {id:'k4b', uniteId:'unite4', uniteAd:"4. Ünite · Hz. Muhammed'in Örnekliği", baslik:'İstişare, Cesaret ve İnsana Değer Verme', zorluklar:['orta','zor']},
+  {id:'k5a', uniteId:'unite5', uniteAd:"5. Ünite · Kur'an-ı Kerim", baslik:"Kur'an-ı Kerim ve Sünnet", zorluklar:['kolay','orta']},
+  {id:'k5b', uniteId:'unite5', uniteAd:"5. Ünite · Kur'an-ı Kerim", baslik:"Kur'an'ın Konuları, Özellikleri ve Hz. Nuh (as)", zorluklar:['orta','zor']}
+];
+const LGS_SORU_HAVUZU = [
+  {uniteId:'unite1', kazanimId:'k1a', zorluk:'kolay', soru:"Allah'ın ezelde (öncesizlikte) olacak her şeyi bilip takdir etmesine ne denir?", secenekler:["Kader","Kaza","Sadaka","Zekât"], dogru:"Kader", aciklama:"Kader, Allah'ın ezeli ilmiyle her şeyi bilip takdir etmesidir."},
+  {uniteId:'unite1', kazanimId:'k1a', zorluk:'kolay', soru:"Allah'ın ezelde takdir ettiği şeylerin zamanı gelince gerçekleşmesine ne denir?", secenekler:["Kaza","Kader","İnfak","İstişare"], dogru:"Kaza", aciklama:"Kaza, takdir edilenin fiilen gerçekleşmesidir."},
+  {uniteId:'unite1', kazanimId:'k1a', zorluk:'orta', soru:"Kader ve kaza inancı İslam'ın hangi temel esaslarından biridir?", secenekler:["İman esaslarından biridir","İbadet esaslarından biridir","Sadece bir gelenektir","Tasavvufi bir görüştür"], dogru:"İman esaslarından biridir", aciklama:"Kader ve kaza, altı iman esasından biridir."},
+  {uniteId:'unite1', kazanimId:'k1a', zorluk:'zor', soru:"Aşağıdakilerden hangisi kader inancıyla çelişir?", secenekler:["Her şeyin kendiliğinden, tesadüfen oluştuğuna inanmak","Allah'ın ilminin sonsuz olduğuna inanmak","Çalışmanın ve tedbir almanın önemine inanmak","Sonucu Allah'a havale etmek (tevekkül)"], dogru:"Her şeyin kendiliğinden, tesadüfen oluştuğuna inanmak", aciklama:"Kader inancı, her şeyin Allah'ın ilim ve takdiriyle olduğunu kabul eder; tesadüf fikriyle çelişir."},
+  {uniteId:'unite1', kazanimId:'k1b', zorluk:'kolay', soru:"İnsana, iyi ile kötüyü, doğru ile yanlışı seçme gücü veren özelliğe ne denir?", secenekler:["İrade","Kader","Kaza","Tevekkül"], dogru:"İrade", aciklama:"İrade, insanın seçim yapabilme gücüdür."},
+  {uniteId:'unite1', kazanimId:'k1b', zorluk:'orta', soru:"'Kaderimde varmış' diyerek sorumluluktan kaçmak dinî açıdan nasıl değerlendirilir?", secenekler:["Yanlıştır; insan kendi seçimlerinden sorumludur","Doğrudur; insanın hiçbir sorumluluğu yoktur","Kader inancının gereğidir","Sadece büyükler için geçerlidir"], dogru:"Yanlıştır; insan kendi seçimlerinden sorumludur", aciklama:"İnsan, iradesiyle yaptığı seçimlerden sorumludur; kaderi bahane etmek doğru değildir."},
+  {uniteId:'unite1', kazanimId:'k1b', zorluk:'kolay', soru:"Bir işi yapmadan önce gerekli tedbirleri alıp sonucu Allah'a bırakmaya ne denir?", secenekler:["Tevekkül","Kaza","İrade","İnfak"], dogru:"Tevekkül", aciklama:"Tevekkül, çalışıp tedbir aldıktan sonra sonucu Allah'a bırakmaktır."},
+  {uniteId:'unite1', kazanimId:'k1b', zorluk:'orta', soru:"Kader inancı insanı çalışma ve tedbir almaktan alıkoyar mı?", secenekler:["Hayır, tam tersine önce çalışıp tedbir almak gerekir","Evet, çünkü her şey zaten önceden belirlenmiştir","Sadece ibadetlerde geçerlidir","Kader inancının bununla ilgisi yoktur"], dogru:"Hayır, tam tersine önce çalışıp tedbir almak gerekir", aciklama:"Doğru kader anlayışı, çalışıp tedbir almayı dışlamaz; tevekkül çabadan sonra gelir."},
+  {uniteId:'unite1', kazanimId:'k1c', zorluk:'orta', soru:"Hz. Musa'nın (as) mucizelerinden biri aşağıdakilerden hangisidir?", secenekler:["Asasının yılana dönüşmesi","Ateşin içinde yanmadan çıkması","Deveden su çıkarması","Balığın karnından kurtulması"], dogru:"Asasının yılana dönüşmesi", aciklama:"Hz. Musa'nın (as) asası, Allah'ın izniyle yılana dönüşmüştür."},
+  {uniteId:'unite1', kazanimId:'k1c', zorluk:'orta', soru:"Hz. Musa (as) hangi kavme peygamber olarak gönderilmiştir?", secenekler:["İsrailoğullarına","Ad kavmine","Semud kavmine","Medyen halkına"], dogru:"İsrailoğullarına", aciklama:"Hz. Musa (as), İsrailoğullarını Firavun'un zulmünden kurtarmakla görevlendirilmiştir."},
+  {uniteId:'unite1', kazanimId:'k1c', zorluk:'kolay', soru:"'Ecel' kavramı ne anlama gelir?", secenekler:["Her canlı için belirlenmiş yaşam süresinin sonu","Kişinin rızkı","Kişinin kaderi","Bir duanın adı"], dogru:"Her canlı için belirlenmiş yaşam süresinin sonu", aciklama:"Ecel, her canlının ölüm anı için belirlenmiş vakittir."},
+  {uniteId:'unite1', kazanimId:'k1c', zorluk:'kolay', soru:"'Rızık' kavramı ne anlama gelir?", secenekler:["Allah'ın canlılara verdiği nimet ve geçim kaynakları","Kişinin ölüm anı","Kişinin kaderi","Bir ibadet çeşidi"], dogru:"Allah'ın canlılara verdiği nimet ve geçim kaynakları", aciklama:"Rızık, Allah'ın canlılara verdiği her türlü nimet ve geçim kaynağıdır."},
+
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'kolay', soru:"Belirli bir mal varlığına sahip her Müslümanın yılda bir kez vermekle yükümlü olduğu ibadete ne denir?", secenekler:["Zekât","Sadaka","İnfak","Fitre"], dogru:"Zekât", aciklama:"Zekât, nisap miktarına ulaşan mal üzerinden yılda bir kez verilen farz bir ibadettir."},
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'orta', soru:"Zekâtın farz olması için gereken asgari mal miktarına ne denir?", secenekler:["Nisap","Kaza","İrade","Rükün"], dogru:"Nisap", aciklama:"Nisap, zekâtın farz olması için gereken asgari mal/servet miktarıdır."},
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'orta', soru:"Zekât, İslam'ın beş temel şartından (ibadetinden) kaçıncısıdır?", secenekler:["Üçüncüsü","Birincisi","İkincisi","Beşincisi"], dogru:"Üçüncüsü", aciklama:"İslam'ın şartları sırasıyla: kelime-i şehadet, namaz, zekât, oruç, hac."},
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'kolay', soru:"Zorunlu olmayıp gönüllü olarak yapılan bağışa ne denir?", secenekler:["Sadaka","Zekât","Fitre","Nisap"], dogru:"Sadaka", aciklama:"Sadaka, gönüllülük esasına dayanan, miktarı belirlenmemiş bir bağıştır."},
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'orta', soru:"Genel olarak mal, bilgi, emek gibi imkânları başkalarıyla paylaşmaya ne denir?", secenekler:["İnfak","Nisap","Kaza","Tevekkül"], dogru:"İnfak", aciklama:"İnfak, sahip olunan imkânları Allah rızası için başkalarıyla paylaşmaktır."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'orta', soru:"Zekât ve sadakanın toplumsal faydalarından biri aşağıdakilerden hangisidir?", secenekler:["Zengin ile fakir arasındaki uçurumu azaltması","Sadece zengini daha zengin yapması","Toplumda kıskançlığı artırması","Hiçbir sosyal etkisinin olmaması"], dogru:"Zengin ile fakir arasındaki uçurumu azaltması", aciklama:"Zekât ve sadaka, gelir dağılımındaki dengesizliği azaltarak toplumsal dayanışmayı güçlendirir."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'orta', soru:"Hz. Şuayb (as) kavmini özellikle hangi konuda uyarmıştır?", secenekler:["Ölçü ve tartıda hile yapmamaları konusunda","Namazı terk etmemeleri konusunda","Oruç tutmaları konusunda","Hacca gitmeleri konusunda"], dogru:"Ölçü ve tartıda hile yapmamaları konusunda", aciklama:"Hz. Şuayb (as), kavmini ticarette dürüst olmaya, ölçü ve tartıda hile yapmamaya çağırmıştır."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'orta', soru:"Maun Suresi'nde eleştirilen tutumlardan biri aşağıdakilerden hangisidir?", secenekler:["Yetimi itip kakmak","Namaz kılmak","Oruç tutmak","Zekât vermek"], dogru:"Yetimi itip kakmak", aciklama:"Maun Suresi, yetimi itip kakan ve yoksulu doyurmayı teşvik etmeyen kişiyi eleştirir."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'zor', soru:"Maun Suresi'ne göre 'dini yalanlayan' kişinin özelliklerinden biri nedir?", secenekler:["Yoksulu doyurmaya teşvik etmemek","Çok namaz kılmak","Çok oruç tutmak","Çok zekât vermek"], dogru:"Yoksulu doyurmaya teşvik etmemek", aciklama:"Sure, dini yalanlayanı yetime ve yoksula duyarsız kalan kişi olarak tanımlar."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'kolay', soru:"İslam dini paylaşma ve yardımlaşmaya neden önem verir?", secenekler:["Toplumsal dayanışmayı güçlendirmek için","Sadece zenginleri memnun etmek için","Fakirleri tembelliğe alıştırmak için","Hiçbir amacı yoktur"], dogru:"Toplumsal dayanışmayı güçlendirmek için", aciklama:"Paylaşma ve yardımlaşma, toplumdaki dayanışma ve kardeşlik bağlarını güçlendirir."},
+
+  {uniteId:'unite3', kazanimId:'k3a', zorluk:'zor', soru:"İslam dininin korumayı amaçladığı beş temel değere ne denir?", secenekler:["Zarûrât-ı Hamse","Erkân-ı İslam","Esmaülhüsna","Şartlar-ı Nübüvvet"], dogru:"Zarûrât-ı Hamse", aciklama:"Zarûrât-ı Hamse; din, can, akıl, nesil ve malın korunmasını ifade eder."},
+  {uniteId:'unite3', kazanimId:'k3a', zorluk:'orta', soru:"Aşağıdakilerden hangisi Zarûrât-ı Hamse'den (dinin korumayı amaçladığı beş temel değerden) biri değildir?", secenekler:["Şöhret","Can","Akıl","Mal"], dogru:"Şöhret", aciklama:"Zarûrât-ı Hamse: din, can, akıl, nesil, mal — şöhret bunlardan biri değildir."},
+  {uniteId:'unite3', kazanimId:'k3a', zorluk:'orta', soru:"Zarûrât-ı Hamse'den 'aklı korumak' ilkesi özellikle hangi konuyla ilişkilendirilir?", secenekler:["Sarhoş edici maddelerden uzak durmak","Sadece okumayı sevmek","Sadece matematik öğrenmek","Hiçbir ilişkisi yoktur"], dogru:"Sarhoş edici maddelerden uzak durmak", aciklama:"Aklın korunması ilkesi, aklı zedeleyen alkol/uyuşturucu gibi maddelerden uzak durmayı gerektirir."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'kolay', soru:"Emek harcamadan, haksız yollarla elde edilen kazanca ne denir?", secenekler:["Haram kazanç","Helal kazanç","Sadaka","Zekât"], dogru:"Haram kazanç", aciklama:"Haram kazanç, dinen izin verilmeyen, haksız yollarla elde edilen kazançtır."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'orta', soru:"Dinde yeri olmadığı hâlde dine mal edilen yanlış inanış ve uygulamalara ne denir?", secenekler:["Hurafe","Sünnet","Farz","Vacip"], dogru:"Hurafe", aciklama:"Hurafe, dinî bir dayanağı olmayan, sonradan dine mal edilmiş yanlış inanışlardır."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'orta', soru:"Fal, büyü gibi uygulamalara inanmak dinî açıdan nasıl değerlendirilir?", secenekler:["İslam'a aykırı, yanlış bir inanıştır","İslam'ın gerekli gördüğü bir uygulamadır","Farz-ı kifayedir","Sünnet-i müekkededir"], dogru:"İslam'a aykırı, yanlış bir inanıştır", aciklama:"Fal ve büyü gibi uygulamalar tevhit inancıyla bağdaşmaz, İslam'a aykırıdır."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'orta', soru:"Hz. Yusuf'un (as) kıssasında öne çıkan erdemlerden biri aşağıdakilerden hangisidir?", secenekler:["Sabır ve iffet","Cimrilik","Yalan söylemek","Kibirlenmek"], dogru:"Sabır ve iffet", aciklama:"Hz. Yusuf (as) kıssası, zorluklar karşısında sabrı ve iffeti örnekler."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'zor', soru:"Asr Suresi'ne göre insan hangi durumda hüsrandan (ziyandan) kurtulur?", secenekler:["İman edip iyi işler yapan, birbirine hakkı ve sabrı tavsiye eden","Sadece namaz kılan","Sadece oruç tutan","Hiçbir şart yoktur"], dogru:"İman edip iyi işler yapan, birbirine hakkı ve sabrı tavsiye eden", aciklama:"Asr Suresi'ne göre kurtuluş; iman, salih amel, hakkı ve sabrı tavsiye etmekle mümkündür."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'orta', soru:"Din toplumsal bir olgu olarak insan hayatını hangi açılardan etkiler?", secenekler:["Birey ve toplum ilişkilerini düzenler","Sadece bireysel ibadetlerle sınırlıdır","Toplumla hiçbir ilgisi yoktur","Sadece ahiretle ilgilidir"], dogru:"Birey ve toplum ilişkilerini düzenler", aciklama:"Din, hem bireyin iç dünyasını hem de toplumsal ilişkileri düzenleyen kapsamlı bir olgudur."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'kolay', soru:"Bir Müslümanın ticarette dürüst davranması, doğru tartıp ölçmesi hangi ilkeyle ilgilidir?", secenekler:["Helal kazanç ilkesiyle","Kader inancıyla","Zekât ile","Kaza ile"], dogru:"Helal kazanç ilkesiyle", aciklama:"Dürüst ticaret, helal kazanç ilkesinin doğal bir sonucudur."},
+
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'kolay', soru:"Hz. Muhammed'in (sav) 'güvenilir' anlamına gelen ve peygamberlik öncesinde de bilinen lakabı nedir?", secenekler:["El-Emin","El-Kerim","El-Hakîm","El-Vedûd"], dogru:"El-Emin", aciklama:"Hz. Muhammed (sav), peygamberlikten önce de doğruluğu ve güvenilirliğiyle 'El-Emin' olarak tanınıyordu."},
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'orta', soru:"Hz. Muhammed'in (sav) doğruluk ve güvenilirlik örnekliği en çok hangi olayda görülür?", secenekler:["Emanetleri sahiplerine eksiksiz teslim etmesinde","Savaşlarda","Ticaret yapmamasında","Hiçbirinde"], dogru:"Emanetleri sahiplerine eksiksiz teslim etmesinde", aciklama:"Hicret sırasında bile kendisine bırakılan emanetleri sahiplerine ulaştırması meşhurdur."},
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'orta', soru:"Hz. Muhammed'in (sav) düşmanlarını bile affettiği en bilinen örnek hangisidir?", secenekler:["Mekke'nin fethinde genel af ilan etmesi","Bedir Savaşı'nda","Hicret sırasında","Veda Hutbesi'nde"], dogru:"Mekke'nin fethinde genel af ilan etmesi", aciklama:"Mekke'nin fethinde kendisine yıllarca eziyet edenleri affetmesi, merhametinin en bilinen örneğidir."},
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'kolay', soru:"Hz. Muhammed (sav) merhamet örnekliğini en çok kimlere karşı göstermiştir?", secenekler:["Yetimlere, yoksullara ve zayıflara","Sadece akrabalarına","Sadece Mekkelilere","Sadece savaşçılara"], dogru:"Yetimlere, yoksullara ve zayıflara", aciklama:"Hz. Muhammed (sav), özellikle toplumun en zayıf ve korunmasız kesimlerine karşı büyük bir merhamet göstermiştir."},
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'orta', soru:"Hz. Muhammed (sav) insanlara değer verme konusunda nasıl davranmıştır?", secenekler:["Zengin-fakir, köle-hür ayrımı yapmadan herkese eşit davranmıştır","Sadece zenginlere değer vermiştir","Sadece akrabalarına değer vermiştir","Kimseye değer vermemiştir"], dogru:"Zengin-fakir, köle-hür ayrımı yapmadan herkese eşit davranmıştır", aciklama:"Hz. Muhammed (sav), insanlar arasında ayrım yapmadan herkese eşit ve saygılı davranmıştır."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'kolay', soru:"Hz. Muhammed'in (sav) önemli kararlar alırken sahabesine danışmasına ne denir?", secenekler:["İstişare","Kaza","Tevekkül","İnfak"], dogru:"İstişare", aciklama:"İstişare, karar almadan önce ilgili kişilerin görüşünü almaktır."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'orta', soru:"İstişare (danışma) yönteminin faydalarından biri aşağıdakilerden hangisidir?", secenekler:["Farklı görüşlerden yararlanarak daha isabetli karar almak","Kararı geciktirmek","Sorumluluğu başkasına atmak","Hiçbir faydası yoktur"], dogru:"Farklı görüşlerden yararlanarak daha isabetli karar almak", aciklama:"İstişare, farklı bakış açılarından yararlanarak daha sağlıklı kararlar almayı sağlar."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'orta', soru:"Hz. Muhammed'in (sav) cesaret ve kararlılık örnekliği en çok hangi dönemde görülür?", secenekler:["Mekke döneminde zorluklara rağmen tebliğe devam etmesinde","Sadece Medine'de","Sadece çocukluğunda","Hiçbir dönemde"], dogru:"Mekke döneminde zorluklara rağmen tebliğe devam etmesinde", aciklama:"Mekke döneminde ağır baskılara rağmen tebliğden vazgeçmemesi cesaretinin en önemli göstergesidir."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'zor', soru:"Kureyş Suresi'nde Kureyş kabilesine hatırlatılan nimetlerden biri aşağıdakilerden hangisidir?", secenekler:["Kışın ve yazın güvenli ticaret yolculukları yapabilmeleri","Savaşlarda galip gelmeleri","Zengin olmaları","Kâbe'yi inşa etmeleri"], dogru:"Kışın ve yazın güvenli ticaret yolculukları yapabilmeleri", aciklama:"Kureyş Suresi, kışın Yemen'e yazın Şam'a yapılan güvenli ticaret seyahatlerini bir nimet olarak hatırlatır."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'zor', soru:"'Üsve-i hasene' kavramı ne anlama gelir?", secenekler:["Güzel örnek, örnek alınacak davranış","Bir dua çeşidi","Bir sure adı","Bir ibadet şekli"], dogru:"Güzel örnek, örnek alınacak davranış", aciklama:"Üsve-i hasene, Kur'an'da Hz. Muhammed (sav) için kullanılan 'güzel örnek' anlamındaki bir ifadedir."},
+
+  {uniteId:'unite5', kazanimId:'k5a', zorluk:'kolay', soru:"İslam dininin temel kaynağı aşağıdakilerden hangisidir?", secenekler:["Kur'an-ı Kerim","Sadece hadisler","Sadece örf ve adetler","Sadece akıl"], dogru:"Kur'an-ı Kerim", aciklama:"Kur'an-ı Kerim, İslam'ın en temel ve birinci kaynağıdır."},
+  {uniteId:'unite5', kazanimId:'k5a', zorluk:'kolay', soru:"Hz. Muhammed'in (sav) söz, fiil ve onaylarına ne denir?", secenekler:["Sünnet","Kader","Kaza","İcma"], dogru:"Sünnet", aciklama:"Sünnet, Hz. Peygamberin söz, davranış ve onaylarının bütünüdür."},
+  {uniteId:'unite5', kazanimId:'k5a', zorluk:'orta', soru:"İslam'ın ikinci temel kaynağı olarak Kur'an'ı açıklayan ve tamamlayan kaynak hangisidir?", secenekler:["Sünnet","Örf","Kıyas","Gelenek"], dogru:"Sünnet", aciklama:"Sünnet, Kur'an'ı açıklayan ve uygulamalı hâle getiren ikinci temel kaynaktır."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Kur'an-ı Kerim'in ana konularından biri değildir?", secenekler:["Modern bilim formülleri","İman esasları","İbadetler","Ahlaki ilkeler"], dogru:"Modern bilim formülleri", aciklama:"Kur'an'ın ana konuları iman, ibadet, ahlak ve kıssalardır; bir bilim ders kitabı değildir."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Kur'an-ı Kerim'in temel özelliklerinden biri aşağıdakilerden hangisidir?", secenekler:["Son ilahi kitap olması","Sadece Araplara indirilmiş olması","Sonradan değiştirilmiş olması","Belirli bir bölgeyle sınırlı olması"], dogru:"Son ilahi kitap olması", aciklama:"Kur'an-ı Kerim, Allah tarafından gönderilen son ilahi kitaptır."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Kur'an-ı Kerim yaklaşık kaç yılda tamamlanarak indirilmiştir?", secenekler:["23 yıl","10 yıl","40 yıl","5 yıl"], dogru:"23 yıl", aciklama:"Kur'an-ı Kerim, yaklaşık 23 yıllık bir sürede parça parça indirilmiştir."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Hz. Nuh'un (as) kıssasında öne çıkan temel tema nedir?", secenekler:["Sabır ve tevhide (Allah'ın birliğine) davet","Zenginlik","Savaş","Ticaret"], dogru:"Sabır ve tevhide (Allah'ın birliğine) davet", aciklama:"Hz. Nuh (as) kıssası, uzun yıllar süren sabırlı bir tevhit mücadelesini anlatır."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'zor', soru:"Hz. Nuh (as) kavmini kaç yıl İslam'a (tevhide) davet ettiği bildirilir?", secenekler:["950 yıl","10 yıl","100 yıl","500 yıl"], dogru:"950 yıl", aciklama:"Kur'an'da Hz. Nuh'un (as) kavmini 950 yıl boyunca tevhide davet ettiği bildirilir."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'kolay', soru:"İhlas Suresi'nin temel konusu nedir?", secenekler:["Allah'ın (cc) birliği ve eşsizliği (tevhit)","Zekât","Namaz vakitleri","Hac ibadeti"], dogru:"Allah'ın (cc) birliği ve eşsizliği (tevhit)", aciklama:"İhlas Suresi, Allah'ın birliğini ve eşsizliğini özlü bir şekilde anlatır."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Kur'an-ı Kerim'in Hz. Muhammed'e (sav) indirilmeye başladığı gece hangisidir?", secenekler:["Kadir Gecesi","Berat Gecesi","Miraç Gecesi","Regaib Gecesi"], dogru:"Kadir Gecesi", aciklama:"Kur'an-ı Kerim'in indirilmeye başladığı gece Kadir Gecesi'dir."}
+];
+
+/* ======================================================================
+   SORU LABORATUVARI — gerçek 2026 LGS sorularının pedagojik analizi
+   Sorular ../../desktop kaynağındaki resmi kitapçık fotoğraflarından
+   birebir transkribe edilmiştir. "dogruSik" ve çeldirici/hata analizi
+   alan bilgisine dayalı öneridir, resmi cevap anahtarı DEĞİLDİR —
+   yayına almadan önce öğretmen onayından geçmelidir.
+====================================================================== */
+const LGS_LAB_SORULAR = [
+  {
+    yil:2026, no:1,
+    soru:"İmam Gazali, Hz. Muhammed'i (sav) örnek almak ile onun davranışlarını taklit etmeyi birbirinden ayırmış ve bunu şöyle açıklamıştır: \"Bir peygambere duyulan saygı, onun getirdiği ilkeleri benimseyip uygulamaktır yoksa o bağdaş kurarak oturduğu için bağdaş kurmak, o sedirde oturduğu için sedirde oturmak değildir.\" Bu metinde \"sünnet\" ile ilgili aşağıdakilerden hangisi vurgulanmaktadır?",
+    secenekler:["A) Kur'an-ı Kerim'in anlaşılmasında önemli bir role sahiptir.","B) Müslümanları birleştiren bir unsurdur.","C) İslam dininin temel kaynakları arasında yer alır.","D) Hz. Peygamber'in ahlakının özümsenmesidir."],
+    dogruSik:"D",
+    kazanimAciklama:"Kur'an-ı Kerim ve Özellikleri ünitesinin 'Kur'an-ı Kerim ve Sünnet' kazanımını ölçüyor — sünnetin ne olduğunu ve nasıl uygulanması gerektiğini kavrama.",
+    mebAmac:"MEB burada ezberlenmiş bir tanımı değil, bir alimin örneğiyle 'sünnete uymak' ile 'şekli taklit etmek' arasındaki farkı ayırt etme becerisini ölçüyor — öğrencinin metni yorumlayarak kavramın özünü çıkarabilmesini istiyor.",
+    guecluCeldirici:"C",
+    celdiriciAciklama:"'İslam dininin temel kaynakları arasında yer alır' doğru bir bilgi olduğu için öğrenci bunu 'doğru bilgi = doğru cevap' mantığıyla seçebilir; oysa soru genel doğru bir bilgiyi değil, metnin asıl vurgusunu (özümseme vs taklit farkı) soruyor.",
+    hataNedeni:"Öğrenciler metni tam okumadan, seçenekler arasında 'genel olarak doğru' bir cümle arayıp işaretliyor. Burada 'doğru bilgi' ile 'metnin vurguladığı bilgi' karıştırılıyor.",
+    zorlukNedeni:"Soru doğrudan bilgi sormuyor, bir örnek olay üzerinden çıkarım istiyor; 'özümsemek' ile 'taklit etmek' arasındaki ince ayrımı fark etmek soyut düşünme gerektiriyor.",
+    bugunNasil:"Bugün muhtemelen bir sosyal medya senaryosu (birinin bir influencer'ın tarzını taklit edip ilkelerini benimsememesi) üzerinden aynı ayrım sorulurdu.",
+    benzerSoru:"Bir öğretmenin 'Sınıfın en başarılı öğrencisini örnek almak, onun oturduğu sırada oturmak değil, çalışma disiplinini benimsemektir' demesi üzerinden aynı kazanımı ölçen özgün bir soru yazılabilir.",
+    dna:{yorum:"Yüksek", kavram:"Orta", gunlukHayat:"Düşük", ayetHadis:"Yok", cikarim:true},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/unite5.html#ozet85"
+  },
+  {
+    yil:2026, no:2,
+    soru:"I. İnsanların birbirine karşı görev ve sorumluluklarını hatırlatmaktadır. II. Allah'ın birliğini ve varlıklar üzerindeki mutlak hâkimiyetini konu edinmektedir. III. Yûsuf suresinde yer almaktadır. IV. Vakit namazlarından sonra genellikle okunmaktadır. Numaralanmış bilgilerden hangileri Ayetelkürsi ile ilgilidir?",
+    secenekler:["A) I ve II","B) I ve III","C) II ve IV","D) III ve IV"],
+    dogruSik:"C",
+    kazanimAciklama:"Temel bilgi düzeyinde bir soru — Ayetelkürsi'nin içeriğini ve nerede/ne zaman okunduğunu bilme.",
+    mebAmac:"MEB çoklu-doğruluk (I-IV) formatıyla, öğrencinin yanlış bilgiyi (Yûsuf suresinde geçtiği iddiası) doğru bilgiden (Bakara suresinde geçmesi) ayırt edip etmediğini, ezber bilgiyle gerçek bilgiyi karıştırıp karıştırmadığını ölçüyor.",
+    guecluCeldirici:"B",
+    celdiriciAciklama:"B şıkkı (I ve III), öğrenciyi 'I doğru, III de tanıdık geliyor' diye yanıltabilir; oysa III (Yûsuf suresinde yer alması) yanlıştır — Ayetelkürsi Bakara suresindedir. Bir doğru bir yanlış önermeyi birleştiren şıklar en tehlikeli çeldiricilerdir.",
+    hataNedeni:"Öğrenciler genelde sadece 'II ve IV doğru mu' diye kontrol edip diğer şıkları elemeden seçim yapıyor; her roma rakamının tek tek doğruluğu ayrı kontrol edilmeli.",
+    zorlukNedeni:"4 önermeden 2'sinin doğru 2'sinin yanlış olması, her önermenin ayrı ayrı değerlendirilmesini gerektiriyor — kısayoldan cevap bulmayı cezalandıran bir format.",
+    bugunNasil:"Format aynı kalırdı; Ayetelkürsi'nin metni/yeri sabit bir bilgidir, güncel bağlam gerektirmiyor.",
+    benzerSoru:"İhlas Suresi hakkında dört önerme (konusu, nerede geçtiği, ne zaman okunduğu, uzunluğu) verilip hangilerinin doğru olduğu sorulabilir.",
+    dna:{yorum:"Orta", kavram:"Orta", gunlukHayat:"Düşük", ayetHadis:"Yüksek", cikarim:false},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/index.html#ozet8"
+  },
+  {
+    yil:2026, no:3,
+    soru:"İslam, evliliği kadın ve erkeğin sevgi ve dayanışma içinde hayatlarını birleştirdiği özel bir kurum olarak görür. Kur'an'da eşlerin birbirleri için huzur kaynağı olduğu ifade edilerek evliliğin iki insanı koruyan, tamamlayan ve güçlendiren bir birliktelik olduğu anlatılır. Eşler, evliliğin içinde birbirlerinin eksikliklerini tamamlar, sorumlulukları paylaşır ve yaşamın zorluklarını beraber çözerler. Bu nedenle evlilik sadece iki kişinin birlikteliğinden ibaret olmayıp, güçlü bir aile kurarak yaşamı daha anlamlı ve düzenli hâle getirme adımı olarak kabul edilir. Bu metinden \"evlilik\" ile ilgili aşağıdakilerin hangisine ulaşılamaz?",
+    secenekler:["A) Kültürel değerleri gelecek nesillere aktaran bir kurumdur.","B) Ortak sorumluluk bilinciyle hareket etmektir.","C) Saygı ve güvene dayalı bir birlikteliktir.","D) Hayatı güzelleştirme çabasıdır."],
+    dogruSik:"A",
+    kazanimAciklama:"Din ve Hayat ünitesi kapsamında ailenin/evliliğin İslam'daki yerini ve işlevini kavrama.",
+    mebAmac:"MEB, metinde açıkça yazmayan bir bilgiyi (kültürel değerlerin nesillere aktarımı) diğer üç doğru çıkarımdan ayırt etme becerisini ölçüyor — 'metinde var mı yok mu' ayrımını genel doğru bir bilgiyle karıştırmadan yapabilme.",
+    guecluCeldirici:"D",
+    celdiriciAciklama:"'Hayatı güzelleştirme çabasıdır' ifadesi metindeki 'yaşamı daha anlamlı ve düzenli hâle getirme' cümlesine çok yakın durduğu için öğrenci bunu da 'ulaşılamaz' sanıp yanlış işaretleyebilir; oysa bu metinde açıkça var.",
+    hataNedeni:"'Ulaşılamaz' tipi sorularda öğrenciler genelde en soyut görünen şıkkı yanlış seçiyor; A şıkkı (kültürel aktarım) somut bir kavram gibi durmadığı için gözden kaçabiliyor, oysa metinde hiç geçmeyen odur.",
+    zorlukNedeni:"Dört şıkkın da makul görünmesi, öğrencinin metne geri dönüp her cümleyi tek tek eşleştirmesini zorunlu kılıyor — zaman baskısı altında zorlaşıyor.",
+    bugunNasil:"Muhtemelen aynı kalırdı; aile/evlilik teması müfredatta sabit, güncel bir olay bağlamına ihtiyaç duymuyor.",
+    benzerSoru:"Komşuluk ilişkileri hakkında bir metin verilip, metinde geçmeyen ama 'genel doğru' bir bilginin (ör. 'komşuluk hukuku kanunla düzenlenir') bulunması istenebilir.",
+    dna:{yorum:"Yüksek", kavram:"Orta", gunlukHayat:"Yüksek", ayetHadis:"Yok", cikarim:true},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/unite3.html#ozet83"
+  },
+  {
+    yil:2026, no:4,
+    soru:"Kişinin zekât verebileceği yakınları aşağıdakilerin hangisinde doğru verilmiştir?",
+    secenekler:["A) Amcası - Halası - Kardeşi - Teyzesi","B) Çocuğu - Dedesi - Halası - Kardeşi","C) Annesi - Çocuğu - Dayısı - Teyzesi","D) Babası - Amcası - Dayısı - Ninesi"],
+    dogruSik:"A",
+    kazanimAciklama:"Zekât ve Sadaka ünitesi — zekâtın kimlere verilip verilemeyeceğini (nafaka yükümlülüğü olan yakınlar hariç) bilme.",
+    mebAmac:"MEB, ezbere 'zekât akrabaya verilmez' bilgisini değil, HANGİ akrabaya verilip hangisine verilemeyeceğinin ayrımını (nafaka yükümlülüğü çerçevesi) — kuralın uygulanma mantığını anlamayı ölçüyor.",
+    guecluCeldirici:"D",
+    celdiriciAciklama:"D şıkkında 'Amcası' ve 'Dayısı' listede olduğu için şık kısmen doğru sanılabilir; ama aynı şıkta 'Babası' ve 'Ninesi' de var — bunlar nafaka yükümlülüğü olan doğrudan üst soy olduğu için zekât verilemez.",
+    hataNedeni:"Öğrenciler genelde şıktaki ilk isme bakıp karar veriyor; oysa şıkkın doğru olması için içindeki dört ismin de uygun olması gerekiyor — dikkatli okuma gerektiren bir format.",
+    zorlukNedeni:"Fıkhi bir kural (nafaka yükümlülüğü olanlara zekât verilmez) dört farklı akraba kombinasyonuna uygulanmalı; kuralı ezberlemek değil, her isim için ayrı ayrı uygulamak gerekiyor.",
+    bugunNasil:"Muhtemelen bir aile şeceresi görseli eklenerek daha görsel bir soru hâline getirilirdi.",
+    benzerSoru:"Bir kişinin zekâtını kime veremeyeceği (eşi, çocuğu, annesi) ile kime verebileceği (yeğeni, dayısı) karışık listelenip doğru kombinasyonun seçilmesi istenebilir.",
+    dna:{yorum:"Orta", kavram:"Yüksek", gunlukHayat:"Yüksek", ayetHadis:"Yok", cikarim:true},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/unite2.html#ozet82"
+  },
+  {
+    yil:2026, no:5,
+    soru:"Hz. Muhammed (sav) Mekke'yi fethettiğinde endişeyle kendisini bekleyen Kureyşlilere \"Şimdi size ne yapacağımı düşünüyorsunuz?\" diye sordu. Onlar \"Bize iyi davranacağını umuyoruz.\" dediler. Bunun üzerine Hz. Peygamber \"Ben de size Yusuf Peygamber'in kardeşlerine dediğini diyorum, 'Bugün artık yaptıklarınızdan dolayı sizi kınayacak değilim. Allah sizi bağışlasın. Şüphesiz O, merhametlilerin en merhametlisidir.' Haydi gidin!\" diyerek onları serbest bıraktı. Bu olaydan Hz. Muhammed (sav) ile ilgili, I. Söz ve davranışları birbiriyle tutarlıdır. II. Kanaatkâr bir yaşamı benimsemiştir. III. Affedici bir kişiliğe sahiptir. yargılarından hangilerine ulaşılır?",
+    secenekler:["A) Yalnız I","B) Yalnız II","C) I ve III","D) II ve III"],
+    dogruSik:"C",
+    kazanimAciklama:"Hz. Muhammed'in Örnekliği ünitesi — Hz. Peygamber'in ahlaki tutarlılığını ve affediciliğini kavrama.",
+    mebAmac:"MEB, üç önermeden hangilerinin metinden gerçekten çıkarılabileceğini, hangisinin metinle ilgisi olmayan bir genelleme olduğunu ayırt etmeyi ölçüyor — özellikle 'kanaatkâr yaşam' önermesinin metinle alakasız olduğunu fark etme.",
+    guecluCeldirici:"D",
+    celdiriciAciklama:"D (II ve III) şıkkı, öğrencinin III'ü (affedicilik) doğru bulup yanına yanlışlıkla II'yi (kanaatkârlık) de doğru sayması durumunda seçilir; oysa metin hiç kanaat/zenginlik konusuna değinmiyor.",
+    hataNedeni:"Metinde geçmeyen ama 'Hz. Muhammed hakkında genel olarak doğru olan' bir bilgi (kanaatkârlık) metinle ilişkilendirilerek yanlış seçiliyor — 'genel doğru bilgi' ile 'bu metinden çıkan bilgi' karıştırılıyor.",
+    zorlukNedeni:"Üç önermeden ikisinin doğru birinin metinle ilgisiz olması, öğrencinin her önermeyi tek tek metinle eşleştirmesini gerektiriyor.",
+    bugunNasil:"Benzer bir affetme/hoşgörü teması güncel bir haber veya sosyal medya olayı üzerinden kurgulanabilirdi.",
+    benzerSoru:"Hz. Muhammed'in bir borçluya süre tanıması hakkında bir metin verilip, metinden çıkarılabilecek ve çıkarılamayacak önermeler karıştırılarak sorulabilir.",
+    dna:{yorum:"Orta", kavram:"Orta", gunlukHayat:"Düşük", ayetHadis:"Yok", cikarim:true},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/unite4.html#ozet84"
+  },
+  {
+    yil:2026, no:6,
+    soru:"I. \"İçinizden sadece zulmedenlere erişmekle kalmayacak olan bir fitneden sakının...\" (Enfâl suresi, 25. ayet) II. \"Bilin ki Allah, ölmüş toprağa yeniden hayat verir...\" (Hadîd suresi, 17. ayet) III. \"Denizde yelkenlerini bayraklar gibi açarak süzülüp giden gemiler de Allah'ın kudretinin delillerindendir...\" (Şûrâ suresi, 32-33. ayetler) IV. \"Sizi topraktan yaratması Allah'ın varlığının delillerindendir. Sonra bir de baktınız ki çoğalarak yeryüzüne dağılmış insan topluluğusunuz.\" (Rûm suresi, 20. ayet) Numaralanmış ayetler aşağıdakilerin hangisinde, ilgili olduğu evrenin yasalarıyla doğru eşleştirilmiştir? (Fiziksel / Biyolojik / Toplumsal sırasıyla)",
+    secenekler:["A) I ve II / III / IV","B) III / II ve IV / I","C) I ve III / II / IV","D) II / III / I ve IV"],
+    dogruSik:"B",
+    kazanimAciklama:"Kader İnancı ünitesi — evrendeki fiziksel, biyolojik ve toplumsal yasaların ayet örnekleriyle ilişkilendirilmesi.",
+    mebAmac:"MEB, dört farklı ayeti doğru kategoriye yerleştirme becerisini ölçüyor — kavramları ezberlemekten çok, soyut bir ayet metnini somut bir kategoriye uygulayabilmeyi (transfer) gerektiriyor.",
+    guecluCeldirici:"A",
+    celdiriciAciklama:"A şıkkında I ve II birlikte 'fiziksel' kategoriye konmuş; oysa I (fitne/zulüm uyarısı) toplumsal bir önermedir, fiziksel değildir. Öğrenci 'ayet=soyut/dini konu' diye düşünüp kategorizasyonu atlayabiliyor.",
+    hataNedeni:"Öğrenciler ayetleri konu/tema olarak değil, sadece 'dini bir ayet' olarak okuyup kategorileri karıştırıyor; her ayetin hangi yasa türüne örnek olduğu ayrı ayrı analiz edilmeli.",
+    zorlukNedeni:"4 ayeti aynı anda 3 kategoriye doğru dağıtmak gerektiği için, tek bir yanlış eşleştirme tüm şıkkı geçersiz kılıyor — yüksek hassasiyetli bir soru.",
+    bugunNasil:"Tablo/eşleştirme formatı korunur ama ayet sayısı azaltılıp bilişsel yük düşürülebilir; ya da sürükle-bırak formatına dönüştürülebilirdi.",
+    benzerSoru:"Dört farklı ayet verilip hangisinin 'ahiret', hangisinin 'ibadet', hangisinin 'ahlak' konusuyla ilgili olduğunun eşleştirilmesi istenebilir.",
+    dna:{yorum:"Yüksek", kavram:"Yüksek", gunlukHayat:"Düşük", ayetHadis:"Yüksek", cikarim:true},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/index.html#ozet8"
+  },
+  {
+    yil:2026, no:7,
+    soru:"Abdest, arınmanın bir adımıdır. Çünkü insan bilir temizlenmek için suyun yeterli olmadığını. Ellerini yıkar, akıttığını düşünerek günahlarını. Ağzını temizler âdeta kötü sözden, dedikodudan ve yalandan uzaklaştığını ifade edercesine. Yüzünü yıkar bütün benliğiyle kötülüklerden ve yanlış düşüncelerden temizlendiğini göstermek için. Ayaklarını yıkar bir daha yanlış yollara sapmayacağına söz verircesine. Bu metinde \"abdest\" ile ilgili asıl anlatılmak istenen aşağıdakilerden hangisidir?",
+    secenekler:["A) Belirli bir düzene göre alınması gerekir.","B) Namaz ibadetini yerine getirebilmek için şarttır.","C) Beden temizliğine ve sağlıklı bir hayata yönlendirir.","D) Hatalardan uzaklaştırıp erdemli davranışlarda bulunma bilinci kazandırır."],
+    dogruSik:"D",
+    kazanimAciklama:"İbadetlerin sembolik/manevi anlamını kavrama — Din ve Hayat ünitesi kapsamında ibadetin ahlaki boyutu.",
+    mebAmac:"MEB, abdestin fiziksel bir eylem olmanın ötesinde sembolik bir anlam taşıdığını (temizlenme = kötülüklerden arınma) kavrayıp kavramadığını ölçüyor — metaforu çözme becerisi.",
+    guecluCeldirici:"C",
+    celdiriciAciklama:"'Beden temizliğine ve sağlıklı hayata yönlendirir' mantıklı ve doğru bir genel bilgi olduğu için seçilebilir; ama metin hiç sağlık/hijyenden bahsetmiyor, tamamen manevi/ahlaki bir anlatım kullanıyor.",
+    hataNedeni:"Metnin mecazi dilini (akıttığını düşünerek, ifade edercesine, söz verircesine) fark etmeyip günlük/literal anlamda okuyan öğrenciler 'temizlik=hijyen' gibi yüzeysel bir sonuca varıyor.",
+    zorlukNedeni:"Soru, metnin mecazi anlatımını çözmeyi gerektiriyor; edebi okuma becerisi ile dini bilgi aynı anda test ediliyor.",
+    bugunNasil:"Aynı sembolik anlatım korunurdu; bu tip 'metaforu çöz' soruları MEB'in yeni nesil soru stratejisinde artan bir eğilim.",
+    benzerSoru:"Oruç ibadetinin sembolik anlamını (açlığı hissederek yoksulu anlama) anlatan bir metin verilip aynı kazanım ölçülebilir.",
+    dna:{yorum:"Yüksek", kavram:"Orta", gunlukHayat:"Orta", ayetHadis:"Yok", cikarim:true},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/unite3.html#ozet83"
+  },
+  {
+    yil:2026, no:8,
+    soru:"Hz. Muhammed'in (sav) aşağıdaki davranışlarından hangisi \"takrirî sünnet\"e örnektir?",
+    secenekler:["A) \"Bizi yedirip içiren, ihtiyaçlarımızı gideren, bize barınacak yuva veren Allah'a hamdolsun.\" diyerek dua etmesi","B) Ağız ve diş temizliğine önem vermesi, insanlara bunu tavsiye etmesi","C) Kendisinin tercih etmediği bazı yiyecekleri yiyen sahabeleri gördüğünde müdahale etmeyip onların davranışını onaylaması","D) Bir topluluğun yanından geçerken eliyle onları selamlaması"],
+    dogruSik:"C",
+    kazanimAciklama:"Kur'an-ı Kerim ve Sünnet kazanımı — sünnet türlerini (kavli/fiili/takrirî) ayırt etme.",
+    mebAmac:"MEB, 'takrirî sünnet' tanımını ezbere bilmekle yetinmeyip dört farklı davranış örneğinden hangisinin bu tanıma uyduğunu tespit etme (uygulama/transfer) becerisini ölçüyor.",
+    guecluCeldirici:"A",
+    celdiriciAciklama:"A (dua etmesi) da bir davranış olduğu için takrirî sanılabilir; ama bu Hz. Peygamber'in kendi sözü/fiilidir (kavli sünnet), başkasının davranışını onaylaması değildir.",
+    hataNedeni:"Öğrenciler 'takrirî' kelimesini 'Peygamber'in yaptığı herhangi bir şey' gibi genel bir kavramla karıştırıyor; takrirî sünnetin ayırt edici özelliği başkasının davranışına sessiz onay vermesidir.",
+    zorlukNedeni:"Dört şıkkın da 'Hz. Peygamber'in bir davranışı' olması, sadece doğru tanımı (takrirî = başkasının fiiline onay) net bilenlerin doğru seçim yapabilmesini sağlıyor.",
+    bugunNasil:"Format aynı kalırdı; sünnet türleri sabit bir fıkıh/kelam konusu, güncel bağlam gerektirmiyor.",
+    benzerSoru:"Hz. Peygamber'in bir sahabenin farklı bir ibadet şeklini görüp müdahale etmemesi üzerinden yeni bir takrirî sünnet örneği kurgulanabilir.",
+    dna:{yorum:"Orta", kavram:"Yüksek", gunlukHayat:"Düşük", ayetHadis:"Yok", cikarim:true},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/unite5.html#ozet85"
+  },
+  {
+    yil:2026, no:9,
+    soru:"Hz. Peygamber, temel ihtiyaçlar dışında kalan ve belirli bir miktara ulaşan altın, gümüş, küçükbaş ve büyükbaş hayvanlar, toprak ürünleri gibi mallardan zekât verilmesini istedi. Uzun zaman Müslümanlar bu mallar üzerinden zekâtlarını verdiler. Daha sonraları ortaya çıkan nakit para ve değerli taşlar gibi uygulama ve gelişmeler karşısında İslam âlimleri bu mallardan da zekât verilmesi gerektiği görüşünü benimsediler. Bunların nisabının belirlenmesinde ise altının nisabına denk gelen değerin esas alınmasını uygun gördüler. Bu metinden aşağıdakilerin hangisine ulaşılamaz?",
+    secenekler:["A) Zekât verilebilmesi için malın edinilmesi üzerinden bir yıl geçmesi gerekir.","B) Âlimler, zekâtın işlevselliğine katkıda bulunmuşlardır.","C) Hangi mallardan zekât verileceği sünnet ile belirlenmiştir.","D) Zekât verilecek mallarda belirli şartlar aranır."],
+    dogruSik:"A",
+    kazanimAciklama:"Zekât ve Sadaka ünitesi — zekâta tabi malların zaman içinde nasıl genişlediğini (içtihat) ve nisap mantığını kavrama.",
+    mebAmac:"MEB, metinde açıkça yazmayan bir fıkhi detayı (bir yıl geçme şartı — havelân-ı havl) diğer, metinde gerçekten geçen bilgilerden ayırt etmeyi ölçüyor.",
+    guecluCeldirici:"C",
+    celdiriciAciklama:"'Hangi mallardan zekât verileceği sünnet ile belirlenmiştir' metindeki 'Hz. Peygamber istedi' cümlesiyle örtüştüğü için doğru sanılabilir; ama metnin devamı âlimlerin içtihatla yeni mallar eklediğini anlatıyor, yani belirleme sadece sünnetle sınırlı kalmamış.",
+    hataNedeni:"Öğrenciler metnin ilk cümlesini okuyup karar veriyor, metnin devamındaki 'daha sonraları... âlimler... görüş bildirdiler' kısmını cevaba dahil etmiyor.",
+    zorlukNedeni:"Metin iki aşamalı bir tarihsel süreç anlatıyor (önce sünnet, sonra içtihat) — öğrencinin bu iki aşamayı ayırt edip her şıkkı ayrı ayrı test etmesi gerekiyor.",
+    bugunNasil:"Muhtemelen 'kripto para zekâta tabi midir?' gibi güncel bir örnekle zenginleştirilip aynı içtihat mantığı sorulurdu.",
+    benzerSoru:"Günümüzde dijital varlıkların zekâta tabi olup olmadığı tartışmasından yola çıkarak aynı 'içtihat' kazanımını ölçen bir soru yazılabilir.",
+    dna:{yorum:"Yüksek", kavram:"Yüksek", gunlukHayat:"Orta", ayetHadis:"Yok", cikarim:true},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/unite2.html#ozet82"
+  },
+  {
+    yil:2026, no:10,
+    soru:"Hz. Peygamber, Müslümanların yanı sıra Medine'de yaşayan Yahudiler ve müşriklerle toplumu yeniden düzenleyen bir sistem oluşturmaya karar verdi. Bu amaçla grupların birbirleriyle ilişkilerini, adli ve idari yapılarını, fertlerin sahip olduğu din ve vicdan hürriyetlerini, hak ve sorumluluklarını belirleyen \"Medine Sözleşmesi\" olarak anılan metni hazırlattı. Böylece Medine'de bir şehir devleti kurmanın adımını atmış oldu. Bu metne göre, Hz. Muhammed'in (sav) öncelikle aşağıdakilerden hangisini amaçladığı söylenebilir?",
+    secenekler:["A) Ekonomik dengeyi sağlamayı","B) Sosyal birliği ve adaleti tesis etmeyi","C) Medine'yi dinin merkezi olarak öne çıkarmayı","D) Şehri dış tehditlere karşı korumayı"],
+    dogruSik:"B",
+    kazanimAciklama:"Hz. Muhammed'in Örnekliği ünitesi — Hz. Peygamber'in Medine'de kurduğu toplumsal düzenin amacını kavrama.",
+    mebAmac:"MEB, dört seçenekten metnin bütününü en iyi özetleyen (öncelikli amaç) olanı seçme becerisini ölçüyor — metindeki tek tek detayları değil, ana fikri yakalama.",
+    guecluCeldirici:"D",
+    celdiriciAciklama:"'Şehri dış tehditlere karşı korumak' metinde geçen 'idari yapı' ve 'sistem kurma' ifadeleriyle dolaylı ilişkilendirilip seçilebilir; ama metin doğrudan güvenlik/savunmadan değil, hak-sorumluluk ve toplumsal düzenden bahsediyor.",
+    hataNedeni:"'Devlet kurma' ifadesi öğrencilerde otomatik 'güvenlik/savunma' çağrışımı yapıyor; oysa metnin vurgusu sosyal adalet ve birlikte yaşama kurallarıdır.",
+    zorlukNedeni:"Dört şık da 'devlet kurmayla' ilgili makul görünüyor; öğrencinin metindeki anahtar kelimeleri (din-vicdan hürriyeti, hak-sorumluluk, adli-idari yapı) ayırt edip doğru vurguyu bulması gerekiyor.",
+    bugunNasil:"Aynı kalırdı; Medine Sözleşmesi tarihsel bir olgu, güncel bağlam gerektirmiyor, ama karşılaştırmalı bir 'modern anayasa' vurgusu eklenebilirdi.",
+    benzerSoru:"Hz. Ömer döneminde farklı din mensuplarına tanınan haklar üzerinden benzer bir 'öncelikli amaç' sorusu kurgulanabilir.",
+    dna:{yorum:"Yüksek", kavram:"Yüksek", gunlukHayat:"Orta", ayetHadis:"Yok", cikarim:true},
+    ilgiliKonuHref:"../../din-kulturu-8sinif-1unite/unite4.html#ozet84"
+  }
+];
+
+/* ======================================================================
+   BAŞLATMA
+====================================================================== */
+smYanlisAnalizKur('lgs', 'lgsYanlisAnaliz');
+smCalismaPlaniKur('lgs', 'lgsCalismaPlani');
+smGunlukHedefKur('lgs', 'lgsGunlukHedef');
+
+smDashboardKur('lgs', 'lgsDashboard');
+smGeriSayimKur('lgs', 'lgsGeriSayim');
+smSinavAnaliziKur('lgs', 'lgsSinavAnalizi', LGS_KAZANIMLAR, LGS_SORU_HAVUZU, LGS_UNITE_ADLARI);
+smSoruLaboratuvariKur('lgs', 'lgsSoruLab', LGS_LAB_SORULAR, function(tip){
+  if(tip === 'kazanim') lgsKartaGit('konular', 'kazanim-testleri');
+  else if(tip === 'deneme') lgsKartaGit('denemeler', 'deneme-merkezi');
+});
+smGununSorusuKur('lgs', 'lgsGununSorusu', LGS_SORU_HAVUZU);
+smKazanimTestleriKur('lgs', 'lgsKazanimTestleri', LGS_KAZANIMLAR, LGS_SORU_HAVUZU);
+smDenemeMerkeziKur('lgs', 'lgsDenemeMerkezi', LGS_SORU_HAVUZU);
+smKocKur('lgs', 'lgsKoc', LGS_UNITE_ADLARI);
+smGunlukProgramKur('lgs', 'lgsGunlukProgram');
+smRozetKur('lgs', 'lgsRozetler');
+smIstatistiklerKur('lgs', 'lgsIstatistikler', LGS_UNITE_ADLARI);
+smPerformansGrafikKur('lgs', 'lgsPerformansGrafik', LGS_UNITE_ADLARI);
+smFavorilerPaneliKur('lgs', 'lgsFavoriler');
+smFavoriYildizlariEkle('lgs', '#lgsKonuAnlatimlari, #lgsKonuOzetleri, #lgsOyunMerkezi');
+smSonKonuTakibiKur('lgs', '#lgsKonuAnlatimlari, #lgsKonuOzetleri');
+
+/* Kartın içindeki alt sekmeler — her kart kendi paneller kapsayıcısına bağlı */
+smSekmeKur('#lgsKonularSekme', '#lgsKonularPaneller');
+smSekmeKur('#lgsDenemelerSekme', '#lgsDenemelerPaneller');
+smSekmeKur('#lgsSorularSekme', '#lgsSorularPaneller');
+smSekmeKur('#lgsAnalizSekme', '#lgsAnalizPaneller');
+
+/* Alt sekme değiştirildiğinde ilgili paneli GERÇEK, güncel veriyle yeniden çiz */
+function lgsSekmeYenile(navId, harita){
+  const nav = document.getElementById(navId);
+  if(!nav) return;
+  nav.addEventListener('click', function(e){
+    const btn = e.target.closest('button[data-sekme]');
+    if(!btn) return;
+    if(harita[btn.dataset.sekme]) harita[btn.dataset.sekme]();
+  });
+}
+lgsSekmeYenile('lgsKonularSekme', {
+  'kazanim-testleri': function(){ smKazanimTestleriKur('lgs','lgsKazanimTestleri', LGS_KAZANIMLAR, LGS_SORU_HAVUZU); },
+  'favoriler': function(){ smFavorilerPaneliKur('lgs','lgsFavoriler'); }
+});
+lgsSekmeYenile('lgsDenemelerSekme', {
+  'gunluk-program': function(){ smGunlukProgramKur('lgs','lgsGunlukProgram'); }
+});
+lgsSekmeYenile('lgsAnalizSekme', {
+  'performans': function(){ smYanlisAnalizKur('lgs','lgsYanlisAnaliz'); smPerformansGrafikKur('lgs','lgsPerformansGrafik', LGS_UNITE_ADLARI); },
+  'istatistikler': function(){ smIstatistiklerKur('lgs','lgsIstatistikler', LGS_UNITE_ADLARI); },
+  'rozet-sistemi': function(){ smRozetKur('lgs','lgsRozetler'); },
+  'ai-koc': function(){ smKocKur('lgs','lgsKoc', LGS_UNITE_ADLARI); }
+});
+
+/* Soru Laboratuvarı "Benzer sorular çöz" / "Mini test çöz" butonları için:
+   önce ilgili karta geç, sonra o kartın içindeki alt sekmeye tıkla. */
+function lgsKartaGit(kartId, sekmeId){
+  const kartBtn = document.querySelector('[data-lgs-git="'+kartId+'"]');
+  if(kartBtn) kartBtn.click();
+  if(sekmeId){
+    const sekmeBtn = document.querySelector('.lgs-kart-icerik[data-lgs-icerik="'+kartId+'"] button[data-sekme="'+sekmeId+'"]');
+    if(sekmeBtn) sekmeBtn.click();
+  }
+}
+
+/* ANA MENÜ ↔ DETAY geçişi (4 kart) */
+(function(){
+  const menu = document.querySelector('[data-lgs-menu]');
+  const detay = document.querySelector('[data-lgs-detay]');
+  const geriBtn = document.querySelector('[data-lgs-geri]');
+  const icerikler = document.querySelectorAll('[data-lgs-icerik]');
+
+  menu.addEventListener('click', function(e){
+    const btn = e.target.closest('[data-lgs-git]');
+    if(!btn) return;
+    menu.hidden = true;
+    detay.hidden = false;
+    icerikler.forEach(function(el){ el.hidden = (el.dataset.lgsIcerik !== btn.dataset.lgsGit); });
+  });
+  geriBtn.addEventListener('click', function(){
+    detay.hidden = true;
+    menu.hidden = false;
+    smDashboardKur('lgs', 'lgsDashboard');
+  });
+})();
+  </script>
+</body>
+</html>

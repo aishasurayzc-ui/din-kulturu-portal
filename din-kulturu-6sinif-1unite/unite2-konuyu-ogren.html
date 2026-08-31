@@ -114,6 +114,24 @@
     background:white; border-radius:14px; padding:18px; margin-top:16px;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
   }
+  .ozet-kapak-gorsel{ margin:0 0 16px; }
+  .ozet-kapak-gorsel img{ display:block; width:100%; max-height:280px; object-fit:cover; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,.16); }
+  .ozet-kapak-gorsel figcaption{ margin-top:6px; font-size:.78em; color:#8a94a3; text-align:right; }
+  .ab-rozet{ display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#fef3c7,#fdba74); font-size:1em; margin-right:5px; vertical-align:-9px; box-shadow:0 2px 6px rgba(0,0,0,.12); }
+  .ab-ikon{ display:inline-flex; align-items:center; justify-content:center; vertical-align:-19px; margin-right:5px; width:54px; height:54px; }
+  .ab-ikon svg, .ab-ikon img{ display:block; width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .konu-illustrasyon{
+    float:right; width:150px; height:150px; margin:2px 0 14px 20px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:42% 58% 53% 47%/48% 42% 58% 52%;
+    box-shadow:0 6px 18px rgba(0,0,0,.14);
+    overflow:hidden;
+    animation:konuIllYuzme 3.4s ease-in-out infinite;
+  }
+  .konu-illustrasyon img, .konu-illustrasyon svg{ width:100%; height:100%; object-fit:cover; }
+  @keyframes konuIllYuzme{ 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-7px) rotate(2deg); } }
+  @media (prefers-reduced-motion: reduce){ .konu-illustrasyon{ animation:none; } }
+  @media(max-width:560px){ .konu-illustrasyon{ float:none; margin:0 auto 14px; width:130px; height:130px; } }
   button.eylem{
     display:block; margin:16px auto; padding:12px 24px; font-size:1em;
     background:var(--yesil); color:white; border:none; border-radius:24px;
@@ -748,6 +766,202 @@
   display:none !important;
 }
 </style>
+
+<style id="konuAnlatimStil">
+/* ======================================================================
+   KONU ANLATIMI GÖRSEL KATMANI (additive)
+   Bütün seçiciler "ka-" / "kai-" ön ekli; sayfanın mevcut stilleriyle
+   çakışmaz. Hiçbir mevcut kural değiştirilmedi.
+====================================================================== */
+  .ka-svg{ display:block; width:100%; height:100%; }
+  .kai-f{ animation:kaiF 4.4s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiF{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-5px) } }
+  .kai-p{ animation:kaiP 3.6s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiP{ 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.07) } }
+  .kai-t{ animation:kaiT 3.2s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiT{ 0%,100%{ opacity:1 } 50%{ opacity:.55 } }
+  .kai-g{ animation:kaiG .7s cubic-bezier(.2,.8,.3,1) both; transform-origin:50px 50px; }
+  @keyframes kaiG{ from{ opacity:0; transform:translateY(10px) scale(.92) } to{ opacity:1; transform:none } }
+  .kai-bl{ animation:kaiB 9s ease-in-out infinite; }
+  @keyframes kaiB{ 0%,100%{ transform:translate(0,0) } 50%{ transform:translate(6px,-5px) } }
+  @media (prefers-reduced-motion: reduce){
+    .kai-f,.kai-p,.kai-t,.kai-g,.kai-bl{ animation:none !important; }
+  }
+
+  /* ——— ünite hero ——— */
+  .ka-hero{
+    max-width:1000px; margin:22px auto 6px; padding:0 16px;
+  }
+  .ka-hero-ic{
+    background:#fff; border:1px solid #e4e9ef; border-radius:22px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(16,24,40,.08);
+  }
+  .ka-hero-gorsel{ aspect-ratio:1200/340; overflow:hidden; }
+  .ka-hero-metin{ padding:18px 22px 22px; }
+  .ka-ust-etiket{
+    display:inline-block; font-size:.74em; font-weight:900; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--mavi,#2a6f97); background:var(--acikgri,#f1f5f9);
+    padding:5px 12px; border-radius:999px; margin-bottom:10px;
+  }
+  .ka-hero-metin h2{ margin:0 0 6px; font-size:1.45em; line-height:1.25; color:var(--navy,#1E3A8A); }
+  .ka-hero-metin > p{ margin:0 0 14px; color:#5b6570; font-size:1em; line-height:1.55; }
+  .ka-icindekiler{ display:flex; flex-wrap:wrap; gap:8px; }
+  .ka-ic-baslik{
+    width:100%; font-size:.76em; font-weight:900; letter-spacing:.1em;
+    text-transform:uppercase; color:#8a94a3; margin-bottom:2px;
+  }
+  .ka-ic-link{
+    display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+    background:var(--acikgri,#f1f5f9); color:#22333b; border:1px solid #e4e9ef;
+    border-radius:999px; padding:7px 14px; font-size:.86em; font-weight:700;
+    transition:background .18s ease, color .18s ease, transform .18s ease;
+  }
+  .ka-ic-link:hover{ background:var(--mavi,#2a6f97); color:#fff; transform:translateY(-2px); }
+  .ka-ic-link b{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:20px; height:20px; border-radius:50%; background:#fff; color:var(--mavi,#2a6f97);
+    font-size:.8em; border:1px solid #e4e9ef;
+  }
+  .ka-ic-link:hover b{ background:rgba(255,255,255,.25); color:#fff; border-color:transparent; }
+
+  /* ——— konu başlığı afişi ——— */
+  .ka-konu{ margin:26px 0 14px; scroll-margin-top:16px; }
+  .ka-konu-gorsel{
+    position:relative; aspect-ratio:900/240; overflow:hidden;
+    border-radius:18px 18px 0 0; border:1px solid #e4e9ef; border-bottom:0;
+  }
+  /* ——— FOTOĞRAF KATMANI ———
+     Konu afişinde önce GERÇEK FOTOĞRAF denenir. Fotoğraf yoksa (dosya
+     bulunamazsa) img kendini kaldırır ve altındaki illüstrasyon görünür.
+     Böylece klasöre fotoğraf eklemek yeterlidir; kod değişmez. */
+  .ka-foto-sar{ position:absolute; inset:0; z-index:1; }
+  .ka-foto{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ka-foto-kunye{
+    position:absolute; right:8px; top:8px; z-index:3;
+    background:rgba(12,22,38,.55); color:#fff; font-size:10.5px; font-weight:700;
+    padding:3px 9px; border-radius:999px; letter-spacing:.01em;
+    max-width:70%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  /* Görsel ve başlık birlikte: başlık afişin üstünde okunur bir şeritte durur. */
+  .ka-konu-yazi{
+    position:absolute; left:0; right:0; bottom:0; z-index:2; padding:14px 16px 12px;
+    background:linear-gradient(to top, rgba(12,22,38,.78), rgba(12,22,38,.42) 55%, rgba(12,22,38,0));
+    color:#fff;
+  }
+  .ka-konu-yazi .ka-konu-ust{
+    display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.12em;
+    text-transform:uppercase; background:rgba(255,255,255,.22); padding:3px 10px; border-radius:999px;
+  }
+  .ka-konu-yazi h4{
+    margin:6px 0 0; font-size:clamp(1.02em, 2.4vw, 1.35em); line-height:1.25;
+    font-weight:900; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.35);
+  }
+  .ka-konu-alt{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+    background:#fff; border:1px solid #e4e9ef; border-top:0; border-radius:0 0 18px 18px;
+    padding:11px 16px;
+  }
+  .ka-no{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:30px; height:30px; padding:0 9px; border-radius:999px;
+    background:var(--mavi,#2a6f97); color:#fff; font-weight:900; font-size:.82em;
+  }
+  .ka-giris{ font-size:.95em; color:#5b6570; line-height:1.5; flex:1; min-width:180px; }
+  .ka-yukari{
+    margin-left:auto; font-size:.8em; font-weight:800; text-decoration:none;
+    color:var(--mavi,#2a6f97); white-space:nowrap;
+  }
+  .ka-yukari:hover{ text-decoration:underline; }
+
+  /* ==================================================================
+     ÖĞRETİCİ BLOKLAR — süreç, kavram haritası, karşılaştırma, zaman
+     çizgisi, günlük hayat, düşün-cevapla, aklında kalsın.
+     Metin HTML olarak yazılır (SVG içine gömülmez); böylece telefonda
+     da okunur kalır, ekran okuyucu okuyabilir ve arama motoru görür.
+     ================================================================== */
+  .ka-blok{
+    background:#fff; border:1px solid #e4e9ef; border-radius:16px;
+    padding:15px 17px; margin:16px 0;
+  }
+  .ka-blok-bas{
+    display:flex; align-items:center; gap:8px; margin:0 0 12px;
+    font-size:1em; font-weight:900; color:var(--navy,#1E3A8A);
+    letter-spacing:.01em;
+  }
+  .ka-blok-bas .ka-rozet{
+    font-size:.68em; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--acikgri,#f1f5f9); color:#5b6570; padding:3px 9px; border-radius:999px;
+  }
+  .ka-blok-alt{ margin:0 0 11px; font-size:.94em; color:#5b6570; line-height:1.5; }
+
+  /* — ALT BAŞLIK KARTLARI: her alt başlığın kendi görseli var — */
+  .ka-alt-izgara{ display:grid; gap:11px; }
+  @media(min-width:640px){ .ka-alt-izgara{ grid-template-columns:1fr 1fr; } }
+  @media(min-width:1080px){ .ka-alt-izgara{ grid-template-columns:1fr 1fr 1fr; } }
+  .ka-alt-kart{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--acikgri,#f1f5f9); border:1px solid #e4e9ef; border-radius:14px;
+    padding:11px 13px; position:relative;
+    animation:kaAlt .55s cubic-bezier(.2,.8,.3,1) both; animation-delay:var(--gecikme,0s);
+  }
+  @keyframes kaAlt{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:none } }
+  .ka-alt-gorsel{ flex:0 0 82px; width:82px; border-radius:11px; overflow:hidden; }
+  .ka-alt-govde{ display:block; min-width:0; }
+  .ka-alt-govde b{ display:block; font-size:.96em; color:var(--navy,#1E3A8A); line-height:1.3; }
+  /* Açıklama satırı — numara rozetini kapsamaz (aksi hâlde rozet blok
+     olup satırın tamamına yayılıyor ve başlığı örtüyordu). */
+  .ka-alt-govde > span:not(.ka-alt-no){ display:block; font-size:.86em; color:#5b6570; line-height:1.5; margin-top:2px; }
+  .ka-alt-no{
+    display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.06em;
+    background:var(--mavi,#2a6f97); color:#fff; padding:2px 9px; border-radius:999px;
+    margin-bottom:5px;
+  }
+  /* kavram haritası merkezi */
+  .ka-kh-merkez{
+    display:block; width:max-content; max-width:100%; margin:0 auto;
+    background:var(--mavi,#2a6f97); color:#fff; font-weight:900;
+    padding:9px 20px; border-radius:999px; text-align:center; font-size:.98em;
+  }
+  .ka-kh-cizgi{ display:block; width:2px; height:16px; background:#cfd8e3; margin:0 auto 11px; }
+
+  /* karşılaştırma */
+  .ka-krs{ display:grid; gap:12px; }
+  @media(min-width:660px){ .ka-krs{ grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); } }
+  .ka-krs-sut{
+    background:var(--acikgri,#f1f5f9); border:1px solid #e4e9ef; border-radius:14px; padding:12px 13px;
+  }
+  .ka-krs-sut h5{
+    margin:0 0 9px; font-size:.96em; font-weight:900; color:var(--navy,#1E3A8A);
+    padding-bottom:6px; border-bottom:2px solid #dfe6ee;
+  }
+  .ka-krs-satir{
+    display:flex; gap:10px; align-items:center; padding:6px 0; font-size:.9em; line-height:1.45;
+    animation:kaAlt .55s cubic-bezier(.2,.8,.3,1) both; animation-delay:var(--gecikme,0s);
+  }
+  .ka-krs-ikon{ flex:0 0 54px; width:54px; border-radius:9px; overflow:hidden; }
+
+  @media (prefers-reduced-motion: reduce){
+    .ka-alt-kart, .ka-krs-satir{ animation:none !important; }
+  }
+
+  /* — günlük hayat sahnesi — */
+  .ka-gunluk{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .ka-gunluk-gorsel{ flex:0 0 86px; width:86px; height:86px; border-radius:50%; overflow:hidden; }
+  .ka-gunluk p{ flex:1; min-width:180px; margin:0; font-size:.96em; line-height:1.6; }
+
+  /* — düşün ve cevapla / aklında kalsın — */
+  .ka-dusun{ background:#f4f1fb; border-color:#ddd4f2; }
+  .ka-dusun p{ margin:0; font-size:.98em; line-height:1.6; }
+  .ka-aklinda{ background:#eef7f1; border-color:#cfe6da; }
+  .ka-aklinda ul{ margin:0; padding-left:20px; }
+  .ka-aklinda li{ font-size:.95em; line-height:1.55; margin-bottom:5px; }
+  .ka-aklinda li:last-child{ margin-bottom:0; }
+
+  /* Mevcut yuvarlak konu illüstrasyonu: artık her bölümde farklı görsel. */
+  .konu-illustrasyon > .ka-svg{ border-radius:50%; }
+  /* Başlık rozetleri: aynı karikatürün 40 kez tekrarı yerine konuya özel motif. */
+  .ab-ikon > .ka-svg{ border-radius:50%; }
+</style>
 </head>
 <body>
 <div id="portalNav" data-sinif="6" data-unite="2" data-asama="ogren"></div>
@@ -778,19 +992,64 @@
 
 </div>
 
+<section class="ka-hero" id="ka-hero"><div class="ka-hero-ic"><div class="ka-hero-gorsel"><svg class="ka-svg" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="1200" height="340" rx="34" fill="#f3eefb"/><g class="kai-bl" opacity=".85"><ellipse cx="255" cy="117" rx="240" ry="116" fill="#e0d3f5"/><ellipse cx="916" cy="227" rx="288" ry="102" fill="#e0d3f5" opacity=".75"/></g><path d="M0 286 Q 600 238 1200 292" stroke="#b498e2" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(64,52) scale(1.920)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><path d="M66 14 A38 38 0 1 0 66 86 A30 30 0 1 1 66 14 Z" fill="#6f4aa8"/>
+<path d="M74 34 L79 45 L91 46 L82 54 L85 66 L74 59 L63 66 L66 54 L57 46 L69 45 Z" fill="#b498e2"/></g></g></g><g transform="translate(326,34) scale(1.180)"><g class="kai-g" style="animation-delay:0.12s"><g class="kai-p"><path d="M38 26 H62 L58 34 H42 Z" fill="#4d3079"/>
+<path d="M34 34 H66 L70 70 A20 20 0 0 1 30 70 Z" fill="#6f4aa8"/>
+<rect x="40" y="44" width="20" height="26" rx="6" fill="#b498e2"/>
+<path d="M50 12 V26" stroke="#4d3079" stroke-width="3.4" stroke-linecap="round"/>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#4d3079"/></g></g></g><g transform="translate(846,46) scale(1.580)"><g class="kai-g" style="animation-delay:0.24s"><g class="kai-t"><rect x="10" y="60" width="80" height="10" rx="4" fill="#6f4aa8"/>
+<path d="M20 70 V88 M80 70 V88" stroke="#4d3079" stroke-width="6" stroke-linecap="round"/>
+<ellipse cx="36" cy="54" rx="14" ry="6" fill="#fff" stroke="#4d3079" stroke-width="2.6"/>
+<path d="M62 40 h14 v14 a7 7 0 0 1-14 0Z" fill="#b498e2" stroke="#4d3079" stroke-width="2.6"/>
+<circle cx="50" cy="48" r="6" fill="#b498e2"/></g></g></g><g transform="translate(1042,108) scale(1.000)"><g class="kai-g" style="animation-delay:0.36s"><g class="kai-f"><rect x="14" y="22" width="72" height="64" rx="9" fill="#fff" stroke="#6f4aa8" stroke-width="3.4"/>
+<path d="M14 40 H86" stroke="#6f4aa8" stroke-width="3.4"/>
+<rect x="14" y="22" width="72" height="18" rx="9" fill="#6f4aa8"/>
+<path d="M32 14 V26 M68 14 V26" stroke="#4d3079" stroke-width="5" stroke-linecap="round"/>
+<g fill="#b498e2"><rect x="24" y="48" width="12" height="10" rx="3"/><rect x="44" y="48" width="12" height="10" rx="3"/><rect x="64" y="48" width="12" height="10" rx="3"/><rect x="24" y="64" width="12" height="10" rx="3"/></g>
+<rect x="44" y="64" width="12" height="10" rx="3" fill="#6f4aa8"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">6. Sınıf · 2. Ünite</span><h2>🌙 Ramazan ve Oruç</h2><p>Ramazan, oruç ve paylaşma</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 4 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Oruç ve Kur'an Ayı Ramazan</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Oruç İbadeti</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Oruç İbadetinin İnsana Kazandırdıkları</a><a class="ka-ic-link" href="#ka-konu-4"><b>4</b>Bir Dua Öğreniyorum: İftar Duası</a></div></div></div></section>
 <main>
-<section id="ozet62" class="egitim-icerik">
+<section id="ozet62" class="aktif egitim-icerik">
   <h2>📖 2. Ünite Konu Özeti: Ramazan ve Oruç</h2>
+  <figure class="ozet-kapak-gorsel">
+    <img src="../din-kulturu-slayt-gorseller/optimized/nightsky1_orta.jpg" alt="Yıldızlarla dolu gece gökyüzü" loading="lazy" width="1100" height="733">
+    <figcaption>Fotoğraf: Andy from Pittsburgh (CC BY 2.0) — Wikimedia Commons</figcaption>
+  </figure>
 
   <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ Oruç ve Kur'an Ayı Ramazan</h3>
+    <div class="ka-konu" id="ka-konu-1"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#ecf0fa"/><g class="kai-bl" opacity=".85"><ellipse cx="206" cy="98" rx="180" ry="82" fill="#d3dcf3"/><ellipse cx="667" cy="164" rx="216" ry="72" fill="#d3dcf3" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#8ea6e0" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(66,26) scale(1.800)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><path d="M38 26 H62 L58 34 H42 Z" fill="#1e3266"/>
+<path d="M34 34 H66 L70 70 A20 20 0 0 1 30 70 Z" fill="#2f4a8f"/>
+<rect x="40" y="44" width="20" height="26" rx="6" fill="#8ea6e0"/>
+<path d="M50 12 V26" stroke="#1e3266" stroke-width="3.4" stroke-linecap="round"/>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#1e3266"/></g></g></g><g transform="translate(716,52) scale(1.240)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-t"><path d="M66 14 A38 38 0 1 0 66 86 A30 30 0 1 1 66 14 Z" fill="#2f4a8f"/>
+<path d="M74 34 L79 45 L91 46 L82 54 L85 66 L74 59 L63 66 L66 54 L57 46 L69 45 Z" fill="#8ea6e0"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s6-u2-0.jpg" alt="Oruç ve Kur'an Ayı Ramazan" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 1</span><h4>Oruç ve Kur'an Ayı Ramazan</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 1</span><span class="ka-giris">Ramazan: oruç ve Kur’an ayı</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#d3dcf3"/><g transform="translate(14,14) scale(0.92)"><path d="M38 26 H62 L58 34 H42 Z" fill="#1e3266"/>
+<path d="M34 34 H66 L70 70 A20 20 0 0 1 30 70 Z" fill="#2f4a8f"/>
+<rect x="40" y="44" width="20" height="26" rx="6" fill="#8ea6e0"/>
+<path d="M50 12 V26" stroke="#1e3266" stroke-width="3.4" stroke-linecap="round"/>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#1e3266"/></g></svg></span><span class="ab-rozet">1️⃣</span> Oruç ve Kur'an Ayı Ramazan</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#ecf0fa"/><circle cx="70" cy="70" r="58" fill="#d3dcf3" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M66 14 A38 38 0 1 0 66 86 A30 30 0 1 1 66 14 Z" fill="#2f4a8f"/>
+<path d="M74 34 L79 45 L91 46 L82 54 L85 66 L74 59 L63 66 L66 54 L57 46 L69 45 Z" fill="#8ea6e0"/></g></g></svg></div>
     <p>Allah'a saygı, sevgi ve bağlılığı göstermek, O'nun hoşnutluğunu kazanmak niyetiyle ortaya konulan tutum ve davranışlara <b>ibadet</b> denir. <b>Oruç</b>, Allah'ın rızasını kazanmak amacıyla tan yerinin ağarmaya başlamasından güneş batıncaya kadar yeme içmeden ve bazı bedensel isteklerden uzak durmaktır.</p>
     <p><b>Ramazan</b>, hicri takvimin dokuzuncu ayıdır. Bu ayda oruç tutmak farzdır. Kur'an-ı Kerim'in indirilmeye başlandığı <b>Kadir Gecesi</b> de bu aydadır; Kadir Gecesi bin aydan daha hayırlıdır. Hz. Peygamber, inanarak ve karşılığını Allah'tan bekleyerek Kadir Gecesi'ni ibadetle geçirenlerin geçmiş günahlarının affedileceğini müjdelemiştir.</p>
     <div class="aciklama">Hz. Muhammed (sav), ashabıyla ramazan ayında Kur'an-ı Kerim'i daha fazla okumuştur; kendisi ve <b>Cebrail</b> (as) o zamana kadar inen ayetleri karşılıklı okumuşlardır. Bu nedenle ramazana hem oruç hem Kur'an ayı denir.</div>
     <div class="aciklama">📖 Orucun farz olduğu Kur'an-ı Kerim'de şöyle bildirilir: "Ey iman edenler! Oruç sizden önce gelip geçmiş ümmetlere farz kılındığı gibi size de farz kılındı." (Bakara suresi, 183. ayet) Ayet, orucun amacının sadece aç kalmak değil, insanı kötülüklerden sakınma bilincine (takvaya) ulaştırmak olduğunu da hatırlatır.</div>
 
   <div class="kutu-panel kutu-kazanim">
-    <h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
+    
+<div class="ka-ogretim"><div class="ka-blok ka-kavram-haritasi"><h4 class="ka-blok-bas">🗺️ Kavram Haritası<span class="ka-rozet">Kavram ilişkisi</span></h4><p class="ka-blok-alt">Bu konunun alt başlıkları ve aralarındaki ilişki</p><div class="ka-kh-merkez">Ramazan ayı neden özeldir?</div><span class="ka-kh-cizgi"></span><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#ecf0fa"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#d3dcf3" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#d3dcf3" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M18 82 L50 54 L82 82" stroke="#1e3266" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M30 84 L70 84" stroke="#1e3266" stroke-width="5" stroke-linecap="round"/>
+<path d="M14 52 Q50 40 50 58 Q50 40 86 52 L86 30 Q50 18 50 36 Q50 18 14 30 Z" fill="#fff" stroke="#2f4a8f" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M50 36 V58" stroke="#2f4a8f" stroke-width="3"/></g></g></svg></span><span class="ka-alt-govde"><b>Kur’an ayı</b><span>Kur’an bu ayda indirilmeye başladı</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#ecf0fa"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#d3dcf3" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#d3dcf3" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M26 14 H74 L52 50 L74 86 H26 L48 50 Z" fill="#fff" stroke="#2f4a8f" stroke-width="3.6" stroke-linejoin="round"/>
+<path d="M32 20 H68 L52 46 Z" fill="#8ea6e0"/>
+<path d="M36 80 H64 L50 62 Z" fill="#2f4a8f"/>
+<rect x="20" y="8" width="60" height="8" rx="4" fill="#1e3266"/><rect x="20" y="84" width="60" height="8" rx="4" fill="#1e3266"/></g></g></svg></span><span class="ka-alt-govde"><b>Oruç ayı</b><span>Oruç bu ayda farzdır</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#ecf0fa"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#d3dcf3" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#d3dcf3" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><rect x="18" y="44" width="64" height="42" rx="7" fill="#2f4a8f"/>
+<rect x="14" y="34" width="72" height="16" rx="6" fill="#1e3266"/>
+<rect x="44" y="34" width="12" height="52" fill="#8ea6e0"/>
+<path d="M50 34 Q36 20 44 16 Q52 14 50 34 Q64 20 56 16 Q48 14 50 34Z" fill="#8ea6e0"/></g></g></svg></span><span class="ka-alt-govde"><b>Paylaşma</b><span>İftar, fitre ve sadaka</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#ecf0fa"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#d3dcf3" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#d3dcf3" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M50 12 L61 39 L90 41 L67 59 L75 87 L50 71 L25 87 L33 59 L10 41 L39 39 Z" fill="#8ea6e0" stroke="#2f4a8f" stroke-width="3.4" stroke-linejoin="round"/></g></g></svg></span><span class="ka-alt-govde"><b>Kadir Gecesi</b><span>Bin aydan hayırlı gece</span></span></div></div></div><div class="ka-blok ka-gunluk-hayat"><h4 class="ka-blok-bas">🏠 Günlük Hayattan</h4><div class="ka-gunluk"><span class="ka-gunluk-gorsel"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#ecf0fa"/><circle cx="70" cy="70" r="58" fill="#d3dcf3" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><rect x="10" y="60" width="80" height="10" rx="4" fill="#2f4a8f"/>
+<path d="M20 70 V88 M80 70 V88" stroke="#1e3266" stroke-width="6" stroke-linecap="round"/>
+<ellipse cx="36" cy="54" rx="14" ry="6" fill="#fff" stroke="#1e3266" stroke-width="2.6"/>
+<path d="M62 40 h14 v14 a7 7 0 0 1-14 0Z" fill="#8ea6e0" stroke="#1e3266" stroke-width="2.6"/>
+<circle cx="50" cy="48" r="6" fill="#8ea6e0"/></g></g></svg></span><p>İftar sofrasında komşuyu çağırmak, Ramazan’ın paylaşma yönünü hayata geçirmektir.</p></div></div><div class="ka-blok ka-dusun-cevapla ka-dusun"><h4 class="ka-blok-bas">🤔 Sıra Sende<span class="ka-rozet">Düşün ve cevapla</span></h4><p>Ramazan’ın hangi özelliği sence toplumu en çok birleştirir?</p></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Ramazan, Kur’an’ın indirilmeye başladığı aydır.</li><li>Oruç bu ayda farz kılınmıştır.</li></ul></div></div>
+<h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
     <p class="kazanim-kaynak">Kaynak: Türkiye Yüzyılı Maarif Modeli DKAB Öğretim Programı (2024) — 2. Ünite: Ramazan ve Oruç</p>
     <ul>
       <li><b>DKAB.6.2.1</b> — Ramazan ayının oruç ve Kur'an ayı olduğunu çözümler.</li>
@@ -826,7 +1085,24 @@
 
 
   <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Oruç İbadeti</h3>
+    <div class="ka-konu" id="ka-konu-2"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#f3eefb"/><g class="kai-bl" opacity=".85"><ellipse cx="210" cy="91" rx="180" ry="82" fill="#e0d3f5"/><ellipse cx="711" cy="166" rx="216" ry="72" fill="#e0d3f5" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#b498e2" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(48,44) scale(1.580)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><path d="M26 14 H74 L52 50 L74 86 H26 L48 50 Z" fill="#fff" stroke="#6f4aa8" stroke-width="3.6" stroke-linejoin="round"/>
+<path d="M32 20 H68 L52 46 Z" fill="#b498e2"/>
+<path d="M36 80 H64 L50 62 Z" fill="#6f4aa8"/>
+<rect x="20" y="8" width="60" height="8" rx="4" fill="#4d3079"/><rect x="20" y="84" width="60" height="8" rx="4" fill="#4d3079"/></g></g></g><g transform="translate(664,24) scale(1.520)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><rect x="14" y="22" width="72" height="64" rx="9" fill="#fff" stroke="#6f4aa8" stroke-width="3.4"/>
+<path d="M14 40 H86" stroke="#6f4aa8" stroke-width="3.4"/>
+<rect x="14" y="22" width="72" height="18" rx="9" fill="#6f4aa8"/>
+<path d="M32 14 V26 M68 14 V26" stroke="#4d3079" stroke-width="5" stroke-linecap="round"/>
+<g fill="#b498e2"><rect x="24" y="48" width="12" height="10" rx="3"/><rect x="44" y="48" width="12" height="10" rx="3"/><rect x="64" y="48" width="12" height="10" rx="3"/><rect x="24" y="64" width="12" height="10" rx="3"/></g>
+<rect x="44" y="64" width="12" height="10" rx="3" fill="#6f4aa8"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s6-u2-1.jpg" alt="Oruç İbadeti" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 2</span><h4>Oruç İbadeti</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 2</span><span class="ka-giris">Oruç ibadeti ve şartları</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#e0d3f5"/><g transform="translate(14,14) scale(0.92)"><path d="M26 14 H74 L52 50 L74 86 H26 L48 50 Z" fill="#fff" stroke="#6f4aa8" stroke-width="3.6" stroke-linejoin="round"/>
+<path d="M32 20 H68 L52 46 Z" fill="#b498e2"/>
+<path d="M36 80 H64 L50 62 Z" fill="#6f4aa8"/>
+<rect x="20" y="8" width="60" height="8" rx="4" fill="#4d3079"/><rect x="20" y="84" width="60" height="8" rx="4" fill="#4d3079"/></g></svg></span><span class="ab-rozet">2️⃣</span> Oruç İbadeti</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f3eefb"/><circle cx="70" cy="70" r="58" fill="#e0d3f5" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><rect x="14" y="22" width="72" height="64" rx="9" fill="#fff" stroke="#6f4aa8" stroke-width="3.4"/>
+<path d="M14 40 H86" stroke="#6f4aa8" stroke-width="3.4"/>
+<rect x="14" y="22" width="72" height="18" rx="9" fill="#6f4aa8"/>
+<path d="M32 14 V26 M68 14 V26" stroke="#4d3079" stroke-width="5" stroke-linecap="round"/>
+<g fill="#b498e2"><rect x="24" y="48" width="12" height="10" rx="3"/><rect x="44" y="48" width="12" height="10" rx="3"/><rect x="64" y="48" width="12" height="10" rx="3"/><rect x="24" y="64" width="12" height="10" rx="3"/></g>
+<rect x="44" y="64" width="12" height="10" rx="3" fill="#6f4aa8"/></g></g></svg></div>
     <p><b>Sahur</b>: Oruç tutmak için imsaktan önce yenilen yemek vaktidir. <b>İmsak</b>: Oruca başlama vaktidir. <b>İftar</b>: Oruç tutan kimsenin akşam ezanı vaktinde yiyip içmeye başlamasıdır. <b>Teravih</b>: Ramazanda yatsı namazından sonra kılınan (genellikle yirmi rekât) sünnet namazdır. <b>Mukabele</b>: Bir kişinin Kur'an okuması, diğerlerinin takip etmesidir. <b>Fitre</b>: Sağlıklı Müslümanların vermekle yükümlü olduğu vacip sadakadır. Fitre, belirli bir mal miktarına (nisap) ulaşma şartı aranmaksızın gücü yeten her Müslüman için geçerlidir; oysa <b>zekât</b>, yılda bir kez, nisap miktarınca mala sahip olanların vermekle yükümlü olduğu ayrı bir ibadettir. <b>İmsakiye</b>: Oruca başlama, iftar ve namaz vakitlerini gösteren çizelgedir.</p>
     <p><b>Orucun farz olmasının şartları</b>: Müslüman olmak, akıl sağlığının yerinde olması, ergenlik çağına ulaşmış olmak ve bedence oruca elverişli/sağlıklı olmaktır. Yolcu olmak, hastalık ve kadınlarda hayız/nifas hâli, oruç tutmaya geçici olarak engel oluşturan mazeretlerdendir; bu durumdaki kişiler tutamadıkları orucu daha sonra kaza ederler.</p>
     <p>Oruca başlamadan önce <b>niyet</b> etmek gerekir. Oruçlu, yalandan ve kötü söz/davranıştan kaçınmalıdır. İftarı hurma veya suyla, vaktinde açmak; sahura ise imsake yakın bir saatte kalkmak, Hz. Peygamber'in tavsiye ettiği ve bereketli kabul edilen bir davranış biçimidir (sahur adabı). <b>Orucu bozan durumlar</b>: bilerek yiyip içmek, güneşin battığını zannederek iftar etmek, yağmur/kar yutmak, isteyerek kusmak. <b>Orucu bozmayan durumlar</b>: unutarak yiyip içmek, banyo yapmak, koku sürmek, ağız çalkalamak.</p>
@@ -844,8 +1120,29 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Oruç İbadetinin İnsana Kazandırdıkları</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-surec-semasi"><h4 class="ka-blok-bas">🔄 Adım Adım<span class="ka-rozet">Süreç şeması</span></h4><p class="ka-blok-alt">Bir oruç günü</p><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f3eefb"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#e0d3f5" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#e0d3f5" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><rect x="10" y="60" width="80" height="10" rx="4" fill="#6f4aa8"/>
+<path d="M20 70 V88 M80 70 V88" stroke="#4d3079" stroke-width="6" stroke-linecap="round"/>
+<ellipse cx="36" cy="54" rx="14" ry="6" fill="#fff" stroke="#4d3079" stroke-width="2.6"/>
+<path d="M62 40 h14 v14 a7 7 0 0 1-14 0Z" fill="#b498e2" stroke="#4d3079" stroke-width="2.6"/>
+<circle cx="50" cy="48" r="6" fill="#b498e2"/></g></g></svg></span><span class="ka-alt-govde"><span class="ka-alt-no">1</span><b>Sahur</b><span>İmsaktan önce yemek</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f3eefb"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#e0d3f5" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#e0d3f5" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><circle cx="50" cy="50" r="15" fill="#6f4aa8"/>
+<g stroke="#4d3079" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#b498e2"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#b498e2"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#b498e2"/></g></g></svg></span><span class="ka-alt-govde"><span class="ka-alt-no">2</span><b>İmsak</b><span>Oruç başlar</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f3eefb"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#e0d3f5" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#e0d3f5" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><rect x="12" y="70" width="24" height="18" rx="4" fill="#b498e2"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#6f4aa8"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#4d3079"/>
+<circle cx="76" cy="20" r="7" fill="#b498e2"/></g></g></svg></span><span class="ka-alt-govde"><span class="ka-alt-no">3</span><b>Gün boyu</b><span>Yeme-içmeden ve kötü sözden uzak durmak</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f3eefb"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#e0d3f5" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#e0d3f5" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><rect x="41" y="34" width="18" height="52" rx="5" fill="#6f4aa8"/>
+<path d="M50 8 L60 30 H40 Z" fill="#b498e2"/>
+<rect x="35" y="44" width="30" height="7" rx="3" fill="#4d3079"/>
+<rect x="44" y="60" width="12" height="16" rx="5" fill="#f3eefb"/></g></g></svg></span><span class="ka-alt-govde"><span class="ka-alt-no">4</span><b>İftar</b><span>Akşam ezanıyla açmak</span></span></div></div></div><div class="ka-blok ka-dusun-cevapla ka-dusun"><h4 class="ka-blok-bas">🤔 Sıra Sende<span class="ka-rozet">Düşün ve cevapla</span></h4><p>Oruç yalnızca aç kalmak mıdır? Cevabını gerekçesiyle yaz.</p></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Oruç, niyetle başlayıp iftarla tamamlanır.</li><li>Oruç bedeni değil iradeyi de terbiye eder.</li></ul></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-3"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#eaf7ee"/><g class="kai-bl" opacity=".85"><ellipse cx="214" cy="79" rx="180" ry="82" fill="#cdeed8"/><ellipse cx="672" cy="147" rx="216" ry="72" fill="#cdeed8" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#8fd6a6" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(56,34) scale(1.720)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><path d="M50 84 C22 64 10 50 10 36 A20 20 0 0 1 50 28 A20 20 0 0 1 90 36 C90 50 78 64 50 84 Z" fill="#3f8f5f"/><circle cx="70" cy="38" r="6" fill="#fff" opacity=".45"/></g></g></g><g transform="translate(700,40) scale(1.360)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-f"><circle cx="26" cy="34" r="11" fill="#3f8f5f"/><path d="M12 78 V60 A14 14 0 0 1 40 60 V78 Z" fill="#3f8f5f"/>
+<circle cx="74" cy="34" r="11" fill="#8fd6a6"/><path d="M60 78 V60 A14 14 0 0 1 88 60 V78 Z" fill="#8fd6a6"/>
+<circle cx="50" cy="26" r="13" fill="#2a6b43"/><path d="M33 82 V60 A17 17 0 0 1 67 60 V82 Z" fill="#2a6b43"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s6-u2-2.jpg" alt="Oruç İbadetinin İnsana Kazandırdıkları" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 3</span><h4>Oruç İbadetinin İnsana Kazandırdıkları</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 3</span><span class="ka-giris">Orucun insana kazandırdıkları</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#cdeed8"/><g transform="translate(14,14) scale(0.92)"><path d="M50 84 C22 64 10 50 10 36 A20 20 0 0 1 50 28 A20 20 0 0 1 90 36 C90 50 78 64 50 84 Z" fill="#3f8f5f"/><circle cx="70" cy="38" r="6" fill="#fff" opacity=".45"/></g></svg></span><span class="ab-rozet">3️⃣</span> Oruç İbadetinin İnsana Kazandırdıkları</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#eaf7ee"/><circle cx="70" cy="70" r="58" fill="#cdeed8" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-t"><circle cx="26" cy="34" r="11" fill="#3f8f5f"/><path d="M12 78 V60 A14 14 0 0 1 40 60 V78 Z" fill="#3f8f5f"/>
+<circle cx="74" cy="34" r="11" fill="#8fd6a6"/><path d="M60 78 V60 A14 14 0 0 1 88 60 V78 Z" fill="#8fd6a6"/>
+<circle cx="50" cy="26" r="13" fill="#2a6b43"/><path d="M33 82 V60 A17 17 0 0 1 67 60 V82 Z" fill="#2a6b43"/></g></g></svg></div>
     <p>Oruç; <b>sabır</b>, yardımseverlik, cömertlik, dayanışma ve <b>şükür</b> gibi ahlaki değerleri kazandırır. Hz. Peygamber "Oruç sabrın yarısıdır." buyurmuştur. Oruç, hücrelerin yenilenmesine katkı sağlayarak sağlık açısından da faydalıdır. Ramazanda okunan mukabeleler, kılınan teravih namazları ve edilen <b>tövbe</b>ler insanı manevi yönden temizler.</p>
   </div>
   <div class="zb-kutu zb-dusun">
@@ -863,8 +1160,47 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Bir Dua Öğreniyorum: İftar Duası</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-kavram-haritasi"><h4 class="ka-blok-bas">🗺️ Kavram Haritası<span class="ka-rozet">Kavram ilişkisi</span></h4><p class="ka-blok-alt">Bu konunun alt başlıkları ve aralarındaki ilişki</p><div class="ka-kh-merkez">Oruç insana ne kazandırır?</div><span class="ka-kh-cizgi"></span><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#3f8f5f"/>
+<g stroke="#2a6b43" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#8fd6a6"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#8fd6a6"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#8fd6a6"/></g></g></svg></span><span class="ka-alt-govde"><b>İrade</b><span>İstediğini erteleyebilmek</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><rect x="12" y="70" width="24" height="18" rx="4" fill="#8fd6a6"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#3f8f5f"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#2a6b43"/>
+<circle cx="76" cy="20" r="7" fill="#8fd6a6"/></g></g></svg></span><span class="ka-alt-govde"><b>Empati</b><span>Açın hâlini anlamak</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><path d="M26 14 H74 L52 50 L74 86 H26 L48 50 Z" fill="#fff" stroke="#3f8f5f" stroke-width="3.6" stroke-linejoin="round"/>
+<path d="M32 20 H68 L52 46 Z" fill="#8fd6a6"/>
+<path d="M36 80 H64 L50 62 Z" fill="#3f8f5f"/>
+<rect x="20" y="8" width="60" height="8" rx="4" fill="#2a6b43"/><rect x="20" y="84" width="60" height="8" rx="4" fill="#2a6b43"/></g></g></svg></span><span class="ka-alt-govde"><b>Sabır</b><span>Zorluğa dayanmak</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><ellipse cx="50" cy="66" rx="38" ry="14" fill="#fff" stroke="#3f8f5f" stroke-width="3.4"/>
+<ellipse cx="50" cy="63" rx="26" ry="9" fill="#8fd6a6"/>
+<circle cx="42" cy="60" r="5" fill="#3f8f5f"/><circle cx="56" cy="62" r="4" fill="#2a6b43"/>
+<path d="M18 34 V52 M14 34 V44 M22 34 V44" stroke="#2a6b43" stroke-width="3" stroke-linecap="round"/>
+<path d="M82 34 q-6 8 0 18" stroke="#2a6b43" stroke-width="3.4" fill="none" stroke-linecap="round"/></g></g></svg></span><span class="ka-alt-govde"><b>Şükür</b><span>Nimetin değerini bilmek</span></span></div></div></div><div class="ka-blok ka-gunluk-hayat"><h4 class="ka-blok-bas">🏠 Günlük Hayattan</h4><div class="ka-gunluk"><span class="ka-gunluk-gorsel"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#eaf7ee"/><circle cx="70" cy="70" r="58" fill="#cdeed8" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M12 76 Q26 58 42 60 L62 62 Q72 63 72 70 Q72 77 62 77 L46 76" fill="#8fd6a6" stroke="#2a6b43" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="66" cy="40" r="13" fill="#3f8f5f"/><path d="M60 40 H72 M66 34 V46" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+<path d="M50 26 L54 18 M78 26 L74 18" stroke="#3f8f5f" stroke-width="3" stroke-linecap="round" opacity=".6"/></g></g></svg></span><p>Bir gün aç kalan kişi, her gün aç kalanın ne hissettiğini daha iyi anlar.</p></div></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Oruç sabrı ve iradeyi güçlendirir.</li><li>Orucun asıl amacı takva ve güzel ahlaktır.</li></ul></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-4"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#fff7e8"/><g class="kai-bl" opacity=".85"><ellipse cx="185" cy="79" rx="180" ry="82" fill="#ffe9c2"/><ellipse cx="678" cy="161" rx="216" ry="72" fill="#ffe9c2" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#f6c453" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(56,34) scale(1.720)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><rect x="10" y="60" width="80" height="10" rx="4" fill="#e08a1e"/>
+<path d="M20 70 V88 M80 70 V88" stroke="#b25f06" stroke-width="6" stroke-linecap="round"/>
+<ellipse cx="36" cy="54" rx="14" ry="6" fill="#fff" stroke="#b25f06" stroke-width="2.6"/>
+<path d="M62 40 h14 v14 a7 7 0 0 1-14 0Z" fill="#f6c453" stroke="#b25f06" stroke-width="2.6"/>
+<circle cx="50" cy="48" r="6" fill="#f6c453"/></g></g></g><g transform="translate(700,40) scale(1.360)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><path d="M14 86 Q10 56 20 42 Q26 34 32 40 Q36 52 40 60 Q46 72 46 86 Z" fill="#f6c453" stroke="#b25f06" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M86 86 Q90 56 80 42 Q74 34 68 40 Q64 52 60 60 Q54 72 54 86 Z" fill="#f6c453" stroke="#b25f06" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M24 52 V70 M32 56 V72" stroke="#b25f06" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+<path d="M76 52 V70 M68 56 V72" stroke="#b25f06" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+<circle cx="50" cy="22" r="8" fill="#e08a1e"/>
+<g stroke="#e08a1e" stroke-width="3.2" stroke-linecap="round">
+<path d="M50 4 V12"/><path d="M34 10 L38 17"/><path d="M66 10 L62 17"/></g></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/optimized/crescent2_orta.jpg" alt="Hilal" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"><span class="ka-foto-kunye">Fotoğraf: Bilinmeyen — Kamu malı · Wikimedia Commons</span></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 4</span><h4>Bir Dua Öğreniyorum: İftar Duası</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 4</span><span class="ka-giris">İftar duası</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#ffe9c2"/><g transform="translate(14,14) scale(0.92)"><rect x="10" y="60" width="80" height="10" rx="4" fill="#e08a1e"/>
+<path d="M20 70 V88 M80 70 V88" stroke="#b25f06" stroke-width="6" stroke-linecap="round"/>
+<ellipse cx="36" cy="54" rx="14" ry="6" fill="#fff" stroke="#b25f06" stroke-width="2.6"/>
+<path d="M62 40 h14 v14 a7 7 0 0 1-14 0Z" fill="#f6c453" stroke="#b25f06" stroke-width="2.6"/>
+<circle cx="50" cy="48" r="6" fill="#f6c453"/></g></svg></span><span class="ab-rozet">4️⃣</span> Bir Dua Öğreniyorum: İftar Duası</h3>
+<div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fff7e8"/><circle cx="70" cy="70" r="58" fill="#ffe9c2" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M14 86 Q10 56 20 42 Q26 34 32 40 Q36 52 40 60 Q46 72 46 86 Z" fill="#f6c453" stroke="#b25f06" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M86 86 Q90 56 80 42 Q74 34 68 40 Q64 52 60 60 Q54 72 54 86 Z" fill="#f6c453" stroke="#b25f06" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M24 52 V70 M32 56 V72" stroke="#b25f06" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+<path d="M76 52 V70 M68 56 V72" stroke="#b25f06" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+<circle cx="50" cy="22" r="8" fill="#e08a1e"/>
+<g stroke="#e08a1e" stroke-width="3.2" stroke-linecap="round">
+<path d="M50 4 V12"/><path d="M34 10 L38 17"/><path d="M66 10 L62 17"/></g></g></g></svg></div>
     <p>Oruç açılırken <b>dua</b> etmek sünnettir. İftar duasında Yüce Allah'a olan inanç, güven ve bağlılık dile getirilir; nimetlere şükretmenin önemi hatırlatılır.</p>
     <div class="aciklama"><b>Allâhümme leke sumtü ve bike âmentü ve aleyke tevekkeltü ve alâ rızkıke eftartü</b><br>"Allah'ım! Senin rızan için oruç tuttum, sana inandım, sana güvendim. Senin rızkınla orucumu açtım."</div>
   </div>
@@ -910,6 +1246,8 @@
 </section>
 
 <section id="slayt" class="egitim-icerik">
+
+<div class="ka-ogretim"><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>İftar duası orucun açılışında okunur.</li><li>Duada oruç tutma niyeti ve şükür dile getirilir.</li></ul></div></div>
 <h2>🖥️ Ünite Sunumu</h2>
 
   <div class="sunum-sarmal">

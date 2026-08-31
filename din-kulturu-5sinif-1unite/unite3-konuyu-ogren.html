@@ -114,6 +114,42 @@
     background:white; border-radius:14px; padding:18px; margin-top:16px;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
   }
+  /* Konu özeti kapak görseli: gerçek, lisanslı bir fotoğraf (Wikimedia
+     Commons, CC0/CC BY/Public domain) — uydurma/üretilmiş görsel değil. */
+  .ozet-kapak-gorsel{ margin:0 0 16px; }
+  .ozet-kapak-gorsel img{
+    display:block; width:100%; max-height:280px; object-fit:cover;
+    border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,.16);
+  }
+  .ozet-kapak-gorsel figcaption{ margin-top:6px; font-size:.78em; color:#8a94a3; text-align:right; }
+  .ab-rozet{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:32px; height:32px; border-radius:50%;
+    background:linear-gradient(135deg,#fef3c7,#fdba74);
+    font-size:1em; margin-right:5px; vertical-align:-9px;
+    box-shadow:0 2px 6px rgba(0,0,0,.12);
+  }
+  /* Alt başlık ikonu: konuya göre eşleşen, neşeli/renkli küçük illüstrasyon
+     (fotoğraf değil, elle çizilmiş basit ikon — bkz. IKON kütüphanesi). */
+  .ab-ikon{ display:inline-flex; align-items:center; justify-content:center; vertical-align:-19px; margin-right:5px; width:54px; height:54px; }
+  .ab-ikon svg{ display:block; width:100%; height:100%; }
+  /* Büyük konu illustrasyonu: paragrafin yanına sağa yaslanan,
+     pastel "sticker" arkaplanlı neseli ikon (kullanıcının "karikatür/eğlenceli
+     görsel, daha büyük" isteği üzerine). Ayni IKON kütüphanesini kullanır. */
+  .konu-illustrasyon{
+    float:right; width:150px; height:150px; margin:2px 0 14px 20px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:42% 58% 53% 47%/48% 42% 58% 52%;
+    box-shadow:0 6px 18px rgba(0,0,0,.14);
+    animation:konuIllYuzme 3.4s ease-in-out infinite;
+  }
+  @keyframes konuIllYuzme{ 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-7px) rotate(2deg); } }
+  @media (prefers-reduced-motion: reduce){ .konu-illustrasyon{ animation:none; } }
+  @media(max-width:560px){ .konu-illustrasyon{ float:none; margin:0 auto 14px; width:130px; height:130px; } }
+  /* Gercek karikatur gorseller (Pixabay, ucretsiz/atifsiz lisans) icin img boyutlandirma. */
+  .ab-ikon img{ width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .konu-illustrasyon{ overflow:hidden; }
+  .konu-illustrasyon img, .konu-illustrasyon svg{ width:100%; height:100%; object-fit:cover; }
   button.eylem{
     display:block; margin:16px auto; padding:12px 24px; font-size:1em;
     background:var(--yesil); color:white; border:none; border-radius:24px;
@@ -718,6 +754,202 @@
 }
 </style>
 
+
+<style id="konuAnlatimStil">
+/* ======================================================================
+   KONU ANLATIMI GÖRSEL KATMANI (additive)
+   Bütün seçiciler "ka-" / "kai-" ön ekli; sayfanın mevcut stilleriyle
+   çakışmaz. Hiçbir mevcut kural değiştirilmedi.
+====================================================================== */
+  .ka-svg{ display:block; width:100%; height:100%; }
+  .kai-f{ animation:kaiF 4.4s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiF{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-5px) } }
+  .kai-p{ animation:kaiP 3.6s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiP{ 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.07) } }
+  .kai-t{ animation:kaiT 3.2s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiT{ 0%,100%{ opacity:1 } 50%{ opacity:.55 } }
+  .kai-g{ animation:kaiG .7s cubic-bezier(.2,.8,.3,1) both; transform-origin:50px 50px; }
+  @keyframes kaiG{ from{ opacity:0; transform:translateY(10px) scale(.92) } to{ opacity:1; transform:none } }
+  .kai-bl{ animation:kaiB 9s ease-in-out infinite; }
+  @keyframes kaiB{ 0%,100%{ transform:translate(0,0) } 50%{ transform:translate(6px,-5px) } }
+  @media (prefers-reduced-motion: reduce){
+    .kai-f,.kai-p,.kai-t,.kai-g,.kai-bl{ animation:none !important; }
+  }
+
+  /* ——— ünite hero ——— */
+  .ka-hero{
+    max-width:1000px; margin:22px auto 6px; padding:0 16px;
+  }
+  .ka-hero-ic{
+    background:#fff; border:1px solid #e4e9ef; border-radius:22px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(16,24,40,.08);
+  }
+  .ka-hero-gorsel{ aspect-ratio:1200/340; overflow:hidden; }
+  .ka-hero-metin{ padding:18px 22px 22px; }
+  .ka-ust-etiket{
+    display:inline-block; font-size:.74em; font-weight:900; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--mavi,#2a6f97); background:var(--acikgri,#f1f5f9);
+    padding:5px 12px; border-radius:999px; margin-bottom:10px;
+  }
+  .ka-hero-metin h2{ margin:0 0 6px; font-size:1.45em; line-height:1.25; color:var(--navy,#1E3A8A); }
+  .ka-hero-metin > p{ margin:0 0 14px; color:#5b6570; font-size:1em; line-height:1.55; }
+  .ka-icindekiler{ display:flex; flex-wrap:wrap; gap:8px; }
+  .ka-ic-baslik{
+    width:100%; font-size:.76em; font-weight:900; letter-spacing:.1em;
+    text-transform:uppercase; color:#8a94a3; margin-bottom:2px;
+  }
+  .ka-ic-link{
+    display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+    background:var(--acikgri,#f1f5f9); color:#22333b; border:1px solid #e4e9ef;
+    border-radius:999px; padding:7px 14px; font-size:.86em; font-weight:700;
+    transition:background .18s ease, color .18s ease, transform .18s ease;
+  }
+  .ka-ic-link:hover{ background:var(--mavi,#2a6f97); color:#fff; transform:translateY(-2px); }
+  .ka-ic-link b{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:20px; height:20px; border-radius:50%; background:#fff; color:var(--mavi,#2a6f97);
+    font-size:.8em; border:1px solid #e4e9ef;
+  }
+  .ka-ic-link:hover b{ background:rgba(255,255,255,.25); color:#fff; border-color:transparent; }
+
+  /* ——— konu başlığı afişi ——— */
+  .ka-konu{ margin:26px 0 14px; scroll-margin-top:16px; }
+  .ka-konu-gorsel{
+    position:relative; aspect-ratio:900/240; overflow:hidden;
+    border-radius:18px 18px 0 0; border:1px solid #e4e9ef; border-bottom:0;
+  }
+  /* ——— FOTOĞRAF KATMANI ———
+     Konu afişinde önce GERÇEK FOTOĞRAF denenir. Fotoğraf yoksa (dosya
+     bulunamazsa) img kendini kaldırır ve altındaki illüstrasyon görünür.
+     Böylece klasöre fotoğraf eklemek yeterlidir; kod değişmez. */
+  .ka-foto-sar{ position:absolute; inset:0; z-index:1; }
+  .ka-foto{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ka-foto-kunye{
+    position:absolute; right:8px; top:8px; z-index:3;
+    background:rgba(12,22,38,.55); color:#fff; font-size:10.5px; font-weight:700;
+    padding:3px 9px; border-radius:999px; letter-spacing:.01em;
+    max-width:70%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  /* Görsel ve başlık birlikte: başlık afişin üstünde okunur bir şeritte durur. */
+  .ka-konu-yazi{
+    position:absolute; left:0; right:0; bottom:0; z-index:2; padding:14px 16px 12px;
+    background:linear-gradient(to top, rgba(12,22,38,.78), rgba(12,22,38,.42) 55%, rgba(12,22,38,0));
+    color:#fff;
+  }
+  .ka-konu-yazi .ka-konu-ust{
+    display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.12em;
+    text-transform:uppercase; background:rgba(255,255,255,.22); padding:3px 10px; border-radius:999px;
+  }
+  .ka-konu-yazi h4{
+    margin:6px 0 0; font-size:clamp(1.02em, 2.4vw, 1.35em); line-height:1.25;
+    font-weight:900; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.35);
+  }
+  .ka-konu-alt{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+    background:#fff; border:1px solid #e4e9ef; border-top:0; border-radius:0 0 18px 18px;
+    padding:11px 16px;
+  }
+  .ka-no{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:30px; height:30px; padding:0 9px; border-radius:999px;
+    background:var(--mavi,#2a6f97); color:#fff; font-weight:900; font-size:.82em;
+  }
+  .ka-giris{ font-size:.95em; color:#5b6570; line-height:1.5; flex:1; min-width:180px; }
+  .ka-yukari{
+    margin-left:auto; font-size:.8em; font-weight:800; text-decoration:none;
+    color:var(--mavi,#2a6f97); white-space:nowrap;
+  }
+  .ka-yukari:hover{ text-decoration:underline; }
+
+  /* ==================================================================
+     ÖĞRETİCİ BLOKLAR — süreç, kavram haritası, karşılaştırma, zaman
+     çizgisi, günlük hayat, düşün-cevapla, aklında kalsın.
+     Metin HTML olarak yazılır (SVG içine gömülmez); böylece telefonda
+     da okunur kalır, ekran okuyucu okuyabilir ve arama motoru görür.
+     ================================================================== */
+  .ka-blok{
+    background:#fff; border:1px solid #e4e9ef; border-radius:16px;
+    padding:15px 17px; margin:16px 0;
+  }
+  .ka-blok-bas{
+    display:flex; align-items:center; gap:8px; margin:0 0 12px;
+    font-size:1em; font-weight:900; color:var(--navy,#1E3A8A);
+    letter-spacing:.01em;
+  }
+  .ka-blok-bas .ka-rozet{
+    font-size:.68em; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--acikgri,#f1f5f9); color:#5b6570; padding:3px 9px; border-radius:999px;
+  }
+  .ka-blok-alt{ margin:0 0 11px; font-size:.94em; color:#5b6570; line-height:1.5; }
+
+  /* — ALT BAŞLIK KARTLARI: her alt başlığın kendi görseli var — */
+  .ka-alt-izgara{ display:grid; gap:11px; }
+  @media(min-width:640px){ .ka-alt-izgara{ grid-template-columns:1fr 1fr; } }
+  @media(min-width:1080px){ .ka-alt-izgara{ grid-template-columns:1fr 1fr 1fr; } }
+  .ka-alt-kart{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--acikgri,#f1f5f9); border:1px solid #e4e9ef; border-radius:14px;
+    padding:11px 13px; position:relative;
+    animation:kaAlt .55s cubic-bezier(.2,.8,.3,1) both; animation-delay:var(--gecikme,0s);
+  }
+  @keyframes kaAlt{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:none } }
+  .ka-alt-gorsel{ flex:0 0 82px; width:82px; border-radius:11px; overflow:hidden; }
+  .ka-alt-govde{ display:block; min-width:0; }
+  .ka-alt-govde b{ display:block; font-size:.96em; color:var(--navy,#1E3A8A); line-height:1.3; }
+  /* Açıklama satırı — numara rozetini kapsamaz (aksi hâlde rozet blok
+     olup satırın tamamına yayılıyor ve başlığı örtüyordu). */
+  .ka-alt-govde > span:not(.ka-alt-no){ display:block; font-size:.86em; color:#5b6570; line-height:1.5; margin-top:2px; }
+  .ka-alt-no{
+    display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.06em;
+    background:var(--mavi,#2a6f97); color:#fff; padding:2px 9px; border-radius:999px;
+    margin-bottom:5px;
+  }
+  /* kavram haritası merkezi */
+  .ka-kh-merkez{
+    display:block; width:max-content; max-width:100%; margin:0 auto;
+    background:var(--mavi,#2a6f97); color:#fff; font-weight:900;
+    padding:9px 20px; border-radius:999px; text-align:center; font-size:.98em;
+  }
+  .ka-kh-cizgi{ display:block; width:2px; height:16px; background:#cfd8e3; margin:0 auto 11px; }
+
+  /* karşılaştırma */
+  .ka-krs{ display:grid; gap:12px; }
+  @media(min-width:660px){ .ka-krs{ grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); } }
+  .ka-krs-sut{
+    background:var(--acikgri,#f1f5f9); border:1px solid #e4e9ef; border-radius:14px; padding:12px 13px;
+  }
+  .ka-krs-sut h5{
+    margin:0 0 9px; font-size:.96em; font-weight:900; color:var(--navy,#1E3A8A);
+    padding-bottom:6px; border-bottom:2px solid #dfe6ee;
+  }
+  .ka-krs-satir{
+    display:flex; gap:10px; align-items:center; padding:6px 0; font-size:.9em; line-height:1.45;
+    animation:kaAlt .55s cubic-bezier(.2,.8,.3,1) both; animation-delay:var(--gecikme,0s);
+  }
+  .ka-krs-ikon{ flex:0 0 54px; width:54px; border-radius:9px; overflow:hidden; }
+
+  @media (prefers-reduced-motion: reduce){
+    .ka-alt-kart, .ka-krs-satir{ animation:none !important; }
+  }
+
+  /* — günlük hayat sahnesi — */
+  .ka-gunluk{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .ka-gunluk-gorsel{ flex:0 0 86px; width:86px; height:86px; border-radius:50%; overflow:hidden; }
+  .ka-gunluk p{ flex:1; min-width:180px; margin:0; font-size:.96em; line-height:1.6; }
+
+  /* — düşün ve cevapla / aklında kalsın — */
+  .ka-dusun{ background:#f4f1fb; border-color:#ddd4f2; }
+  .ka-dusun p{ margin:0; font-size:.98em; line-height:1.6; }
+  .ka-aklinda{ background:#eef7f1; border-color:#cfe6da; }
+  .ka-aklinda ul{ margin:0; padding-left:20px; }
+  .ka-aklinda li{ font-size:.95em; line-height:1.55; margin-bottom:5px; }
+  .ka-aklinda li:last-child{ margin-bottom:0; }
+
+  /* Mevcut yuvarlak konu illüstrasyonu: artık her bölümde farklı görsel. */
+  .konu-illustrasyon > .ka-svg{ border-radius:50%; }
+  /* Başlık rozetleri: aynı karikatürün 40 kez tekrarı yerine konuya özel motif. */
+  .ab-ikon > .ka-svg{ border-radius:50%; }
+</style>
 </head>
 <body>
 <div id="portalNav" data-sinif="5" data-unite="3" data-asama="ogren"></div>
@@ -748,17 +980,56 @@
 
 </div>
 
+<section class="ka-hero" id="ka-hero"><div class="ka-hero-ic"><div class="ka-hero-gorsel"><svg class="ka-svg" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="1200" height="340" rx="34" fill="#e6f7f8"/><g class="kai-bl" opacity=".85"><ellipse cx="251" cy="115" rx="240" ry="116" fill="#c6ecef"/><ellipse cx="929" cy="225" rx="288" ry="102" fill="#c6ecef" opacity=".75"/></g><path d="M0 286 Q 600 238 1200 292" stroke="#6fd3de" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(64,52) scale(1.920)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><path d="M18 82 L50 54 L82 82" stroke="#0b6272" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M30 84 L70 84" stroke="#0b6272" stroke-width="5" stroke-linecap="round"/>
+<path d="M14 52 Q50 40 50 58 Q50 40 86 52 L86 30 Q50 18 50 36 Q50 18 14 30 Z" fill="#fff" stroke="#12869a" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M50 36 V58" stroke="#12869a" stroke-width="3"/></g></g></g><g transform="translate(326,34) scale(1.180)"><g class="kai-g" style="animation-delay:0.12s"><g class="kai-t"><circle cx="50" cy="50" r="15" fill="#6fd3de"/><circle cx="50" cy="50" r="9" fill="#fff"/>
+<g stroke="#12869a" stroke-width="4.5" stroke-linecap="round">
+<path d="M50 8 V24"/><path d="M50 76 V92"/><path d="M8 50 H24"/><path d="M76 50 H92"/>
+<path d="M20 20 L31 31"/><path d="M69 69 L80 80"/><path d="M80 20 L69 31"/><path d="M31 69 L20 80"/></g></g></g></g><g transform="translate(846,46) scale(1.580)"><g class="kai-g" style="animation-delay:0.24s"><g class="kai-f"><rect x="16" y="20" width="52" height="66" rx="6" fill="#fff" stroke="#12869a" stroke-width="3" transform="rotate(-8 42 53)"/>
+<rect x="30" y="16" width="52" height="66" rx="6" fill="#fff" stroke="#0b6272" stroke-width="3"/>
+<path d="M40 32 H72 M40 44 H72 M40 56 H64" stroke="#6fd3de" stroke-width="3.4" stroke-linecap="round"/></g></g></g><g transform="translate(1042,108) scale(1.000)"><g class="kai-g" style="animation-delay:0.36s"><g class="kai-p"><path d="M50 12 L84 24 V52 Q84 76 50 90 Q16 76 16 52 V24 Z" fill="#12869a"/>
+<path d="M50 24 L74 32 V52 Q74 68 50 78 Q26 68 26 52 V32 Z" fill="#e6f7f8"/>
+<path d="M38 50 L47 59 L64 40" stroke="#12869a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">5. Sınıf · 3. Ünite</span><h2>📖 Kur'an-ı Kerim</h2><p>Kur’an’ın gönderilişi, korunması ve okunması</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 4 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Kur'an-ı Kerim'in İç Düzeni</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Kur'an-ı Kerim'in Temel Özellikleri</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Kur'an-ı Kerim'in Ana Konuları</a><a class="ka-ic-link" href="#ka-konu-4"><b>4</b>Bir Sure Öğreniyorum: Kevser Suresi</a></div></div></div></section>
 <main>
 <section id="ozet3" class="aktif">
   <h2>📖 3. Ünite Konu Özeti: Kur'an-ı Kerim</h2>
 
+  <figure class="ozet-kapak-gorsel">
+    <img src="../din-kulturu-slayt-gorseller/optimized/quran1_orta.jpg" alt="Nesih hatla yazılmış bir Kur'an-ı Kerim sayfası" loading="lazy" width="1100" height="1908">
+    <figcaption>Fotoğraf: Zayno'l-‘Abedin Esfahani (Kamu malı) — Wikimedia Commons</figcaption>
+  </figure>
+
   <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ Kur'an-ı Kerim'in İç Düzeni</h3>
+    <div class="ka-konu" id="ka-konu-1"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#eaf4fd"/><g class="kai-bl" opacity=".85"><ellipse cx="180" cy="86" rx="180" ry="82" fill="#cfe6fb"/><ellipse cx="694" cy="156" rx="216" ry="72" fill="#cfe6fb" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#7cc4f0" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(56,34) scale(1.720)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><rect x="16" y="20" width="52" height="66" rx="6" fill="#fff" stroke="#2a6f97" stroke-width="3" transform="rotate(-8 42 53)"/>
+<rect x="30" y="16" width="52" height="66" rx="6" fill="#fff" stroke="#1b4f6e" stroke-width="3"/>
+<path d="M40 32 H72 M40 44 H72 M40 56 H64" stroke="#7cc4f0" stroke-width="3.4" stroke-linecap="round"/></g></g></g><g transform="translate(700,40) scale(1.360)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><circle cx="50" cy="50" r="15" fill="#2a6f97"/>
+<g stroke="#1b4f6e" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#7cc4f0"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#7cc4f0"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#7cc4f0"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s5-u3-0.jpg" alt="Kur'an-ı Kerim'in İç Düzeni" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 1</span><h4>Kur'an-ı Kerim'in İç Düzeni</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 1</span><span class="ka-giris">Sure, ayet, cüz: Kur’an’ın iç düzeni</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#cfe6fb"/><g transform="translate(14,14) scale(0.92)"><rect x="16" y="20" width="52" height="66" rx="6" fill="#fff" stroke="#2a6f97" stroke-width="3" transform="rotate(-8 42 53)"/>
+<rect x="30" y="16" width="52" height="66" rx="6" fill="#fff" stroke="#1b4f6e" stroke-width="3"/>
+<path d="M40 32 H72 M40 44 H72 M40 56 H64" stroke="#7cc4f0" stroke-width="3.4" stroke-linecap="round"/></g></svg></span><span class="ab-rozet">1️⃣</span> Kur'an-ı Kerim'in İç Düzeni</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#eaf4fd"/><circle cx="70" cy="70" r="58" fill="#cfe6fb" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#2a6f97"/>
+<g stroke="#1b4f6e" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#7cc4f0"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#7cc4f0"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#7cc4f0"/></g></g></svg></div>
     <p><b>Kur'an-ı Kerim</b>, Allah'ın (cc) peygamberler aracılığıyla insanlara gönderdiği vahyi bildiren son kitaptır. 610 yılı ramazan ayında indirilmeye başlanmış, vahiy meleği <b>Cebrail</b> tarafından Hz. Muhammed'e (sav) bildirilmiştir; tamamlanması <b>23 yıl</b> sürmüştür. Dili Arapçadır.</p>
     <div class="aciklama"><b>Ayet:</b> "Doğrusu kitabı biz indirdik, onun koruyucusu elbette biziz."</div>
 
   <div class="kutu-panel kutu-kazanim">
-    <h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
+    
+<div class="ka-ogretim"><div class="ka-blok ka-kavram-haritasi"><h4 class="ka-blok-bas">🗺️ Kavram Haritası<span class="ka-rozet">Kavram ilişkisi</span></h4><p class="ka-blok-alt">Bu konunun alt başlıkları ve aralarındaki ilişki</p><div class="ka-kh-merkez">Kur’an’ın iç düzeni</div><span class="ka-kh-cizgi"></span><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf4fd"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cfe6fb" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cfe6fb" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><rect x="12" y="70" width="24" height="18" rx="4" fill="#7cc4f0"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#2a6f97"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#1b4f6e"/>
+<circle cx="76" cy="20" r="7" fill="#7cc4f0"/></g></g></svg></span><span class="ka-alt-govde"><b>Ayet</b><span>En küçük bölüm</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf4fd"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cfe6fb" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cfe6fb" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M50 12 C68 38 78 50 78 62 A28 28 0 0 1 22 62 C22 50 32 38 50 12 Z" fill="#7cc4f0" stroke="#2a6f97" stroke-width="3.4"/><path d="M38 62 A12 12 0 0 0 50 74" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/></g></g></svg></span><span class="ka-alt-govde"><b>Sure</b><span>Ayetlerden oluşur</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf4fd"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cfe6fb" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cfe6fb" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><path d="M24 62 A28 28 0 1 1 42 82" stroke="#2a6f97" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M42 70 L44 88 L26 84 Z" fill="#2a6f97"/>
+<circle cx="50" cy="50" r="12" fill="#7cc4f0"/></g></g></svg></span><span class="ka-alt-govde"><b>Cüz</b><span>Otuz eşit bölüm</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf4fd"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cfe6fb" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cfe6fb" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><rect x="22" y="16" width="56" height="70" rx="7" fill="#2a6f97"/>
+<rect x="29" y="16" width="49" height="70" rx="6" fill="#fff" stroke="#1b4f6e" stroke-width="3"/>
+<path d="M40 34 H68 M40 46 H68 M40 58 H60" stroke="#7cc4f0" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="53" cy="72" r="6" fill="#2a6f97" opacity=".35"/></g></g></svg></span><span class="ka-alt-govde"><b>Mushaf</b><span>Kitap hâline getirilmiş Kur’an</span></span></div></div></div><div class="ka-blok ka-dusun-cevapla ka-dusun"><h4 class="ka-blok-bas">🤔 Sıra Sende<span class="ka-rozet">Düşün ve cevapla</span></h4><p>Kur’an’ın cüzlere ayrılması ne işe yarar?</p></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Kur’an 114 sureden oluşur.</li><li>Kur’an 30 cüze ayrılmıştır.</li></ul></div></div>
+<h3 style="color:#5b21b6">🎯 MEB Kazanımları</h3>
     <p class="kazanim-kaynak">Kaynak: Türkiye Yüzyılı Maarif Modeli DKAB Öğretim Programı (2024) — 3. Ünite: Kur'an-ı Kerim</p>
     <ul>
       <li><b>DKAB.5.3.1</b> — Kur'an-ı Kerim'in iç düzenini çözümler.</li>
@@ -794,7 +1065,18 @@
 
 
   <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Kur'an-ı Kerim'in Temel Özellikleri</h3>
+    <div class="ka-konu" id="ka-konu-2"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#e6f7f8"/><g class="kai-bl" opacity=".85"><ellipse cx="198" cy="83" rx="180" ry="82" fill="#c6ecef"/><ellipse cx="695" cy="147" rx="216" ry="72" fill="#c6ecef" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#6fd3de" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(66,26) scale(1.800)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><path d="M50 12 L84 24 V52 Q84 76 50 90 Q16 76 16 52 V24 Z" fill="#12869a"/>
+<path d="M50 24 L74 32 V52 Q74 68 50 78 Q26 68 26 52 V32 Z" fill="#e6f7f8"/>
+<path d="M38 50 L47 59 L64 40" stroke="#12869a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></g><g transform="translate(716,52) scale(1.240)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><rect x="22" y="16" width="56" height="70" rx="7" fill="#12869a"/>
+<rect x="29" y="16" width="49" height="70" rx="6" fill="#fff" stroke="#0b6272" stroke-width="3"/>
+<path d="M40 34 H68 M40 46 H68 M40 58 H60" stroke="#6fd3de" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="53" cy="72" r="6" fill="#12869a" opacity=".35"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/optimized/quran1_orta.jpg" alt="Nesih hattıyla yazılmış Kur’an sayfası" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"><span class="ka-foto-kunye">Fotoğraf: Zeynelâbidîn İsfahânî — Kamu malı · Wikimedia Commons</span></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 2</span><h4>Kur'an-ı Kerim'in Temel Özellikleri</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 2</span><span class="ka-giris">Kur’an’ın temel özellikleri</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#c6ecef"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L84 24 V52 Q84 76 50 90 Q16 76 16 52 V24 Z" fill="#12869a"/>
+<path d="M50 24 L74 32 V52 Q74 68 50 78 Q26 68 26 52 V32 Z" fill="#e6f7f8"/>
+<path d="M38 50 L47 59 L64 40" stroke="#12869a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></span><span class="ab-rozet">2️⃣</span> Kur'an-ı Kerim'in Temel Özellikleri</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#e6f7f8"/><circle cx="70" cy="70" r="58" fill="#c6ecef" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-t"><rect x="22" y="16" width="56" height="70" rx="7" fill="#12869a"/>
+<rect x="29" y="16" width="49" height="70" rx="6" fill="#fff" stroke="#0b6272" stroke-width="3"/>
+<path d="M40 34 H68 M40 46 H68 M40 58 H60" stroke="#6fd3de" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="53" cy="72" r="6" fill="#12869a" opacity=".35"/></g></g></svg></div>
     <ul>
       <li><b>İyiye, doğruya ve güzele yönlendirir</b> — "...İyilik edin. Şüphesiz Allah iyilik edenleri sever."</li>
       <li><b>Kötülüklerden sakındırır</b> — "Sizden, hayra çağıran, iyiliği emreden ve kötülükten meneden bir topluluk bulunsun..."</li>
@@ -816,8 +1098,35 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Kur'an-ı Kerim'in Ana Konuları</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-karsilastirma-semasi"><h4 class="ka-blok-bas">⚖️ Karşılaştırma<span class="ka-rozet">Karşılaştırma görseli</span></h4><p class="ka-blok-alt">Kur’an’ı özel kılan</p><div class="ka-krs"><div class="ka-krs-sut"><h5>Korunmuşluk</h5><div class="ka-krs-satir" style="--gecikme:0.00s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#e6f7f8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#c6ecef" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#c6ecef" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#12869a"/>
+<g stroke="#0b6272" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#6fd3de"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#6fd3de"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#6fd3de"/></g></g></svg></span><span>Bugüne kadar değişmedi</span></div><div class="ka-krs-satir" style="--gecikme:0.06s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#e6f7f8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#c6ecef" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#c6ecef" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><rect x="12" y="70" width="24" height="18" rx="4" fill="#6fd3de"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#12869a"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#0b6272"/>
+<circle cx="76" cy="20" r="7" fill="#6fd3de"/></g></g></svg></span><span>Hem yazıyla hem ezberle korundu</span></div></div><div class="ka-krs-sut"><h5>Kapsam</h5><div class="ka-krs-satir" style="--gecikme:0.24s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#e6f7f8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#c6ecef" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#c6ecef" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M24 62 A28 28 0 1 1 42 82" stroke="#12869a" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M42 70 L44 88 L26 84 Z" fill="#12869a"/>
+<circle cx="50" cy="50" r="12" fill="#6fd3de"/></g></g></svg></span><span>Bütün insanlığa gönderildi</span></div><div class="ka-krs-satir" style="--gecikme:0.30s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#e6f7f8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#c6ecef" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#c6ecef" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M28 88 V40 A22 22 0 0 1 72 40 V88 Z" fill="#12869a"/>
+<path d="M36 88 V44 A14 14 0 0 1 64 44 V88 Z" fill="#e6f7f8"/>
+<path d="M44 74 H56 M42 80 H58" stroke="#6fd3de" stroke-width="3" stroke-linecap="round"/>
+<circle cx="50" cy="56" r="6" fill="#6fd3de"/></g></g></svg></span><span>İnanç, ibadet ve ahlakı içerir</span></div></div></div></div><div class="ka-blok ka-dusun-cevapla ka-dusun"><h4 class="ka-blok-bas">🤔 Sıra Sende<span class="ka-rozet">Düşün ve cevapla</span></h4><p>Kur’an’ın hiç değişmeden gelmesi neden önemlidir?</p></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Kur’an son ilahi kitaptır.</li><li>İndirildiği günden beri değişmemiştir.</li></ul></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-3"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#fff7e8"/><g class="kai-bl" opacity=".85"><ellipse cx="205" cy="90" rx="180" ry="82" fill="#ffe9c2"/><ellipse cx="687" cy="166" rx="216" ry="72" fill="#ffe9c2" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#f6c453" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(56,34) scale(1.720)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#e08a1e"/>
+<g stroke="#b25f06" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#f6c453"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#f6c453"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#f6c453"/></g></g></g><g transform="translate(700,40) scale(1.360)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><path d="M6 74 Q50 60 50 78 Q50 60 94 74 L94 26 Q50 12 50 30 Q50 12 6 26 Z" fill="#fff" stroke="#b25f06" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M50 30 V78" stroke="#b25f06" stroke-width="3.5"/>
+<path d="M16 36 H42 M16 46 H42 M16 56 H38 M58 36 H84 M58 46 H84 M58 56 H80" stroke="#f6c453" stroke-width="3" stroke-linecap="round"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s5-u3-2.jpg" alt="Kur'an-ı Kerim'in Ana Konuları" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 3</span><h4>Kur'an-ı Kerim'in Ana Konuları</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 3</span><span class="ka-giris">Kur’an’ın ana konuları</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#ffe9c2"/><g transform="translate(14,14) scale(0.92)"><circle cx="50" cy="50" r="15" fill="#e08a1e"/>
+<g stroke="#b25f06" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#f6c453"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#f6c453"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#f6c453"/></g></svg></span><span class="ab-rozet">3️⃣</span> Kur'an-ı Kerim'in Ana Konuları</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fff7e8"/><circle cx="70" cy="70" r="58" fill="#ffe9c2" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M6 74 Q50 60 50 78 Q50 60 94 74 L94 26 Q50 12 50 30 Q50 12 6 26 Z" fill="#fff" stroke="#b25f06" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M50 30 V78" stroke="#b25f06" stroke-width="3.5"/>
+<path d="M16 36 H42 M16 46 H42 M16 56 H38 M58 36 H84 M58 46 H84 M58 56 H80" stroke="#f6c453" stroke-width="3" stroke-linecap="round"/></g></g></svg></div>
     <p>Kur'an-ı Kerim, hem kişisel hayatımızı hem de birlikte yaşadığımız toplumu ilgilendiren her konuya değinen ilahi bir rehberdir. Bu geniş içeriği daha kolay incelemek için ana konular şu başlıklar altında toplanır:</p>
     <ul>
       <li><b>İnanç</b> — Allah'ın (cc) bildirdiği esasları tereddütsüz kabul etmek. İslam'ın altı temel inanç esası vardır.</li>
@@ -842,8 +1151,27 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Bir Sure Öğreniyorum: Kevser Suresi</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-kavram-haritasi"><h4 class="ka-blok-bas">🗺️ Kavram Haritası<span class="ka-rozet">Kavram ilişkisi</span></h4><p class="ka-blok-alt">Bu konunun alt başlıkları ve aralarındaki ilişki</p><div class="ka-kh-merkez">Kur’an’ın ana konuları</div><span class="ka-kh-cizgi"></span><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fff7e8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#ffe9c2" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#ffe9c2" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#f6c453"/><circle cx="50" cy="50" r="9" fill="#fff"/>
+<g stroke="#e08a1e" stroke-width="4.5" stroke-linecap="round">
+<path d="M50 8 V24"/><path d="M50 76 V92"/><path d="M8 50 H24"/><path d="M76 50 H92"/>
+<path d="M20 20 L31 31"/><path d="M69 69 L80 80"/><path d="M80 20 L69 31"/><path d="M31 69 L20 80"/></g></g></g></svg></span><span class="ka-alt-govde"><b>İnanç</b><span>Allah, melek, ahiret</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fff7e8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#ffe9c2" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#ffe9c2" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M28 88 V40 A22 22 0 0 1 72 40 V88 Z" fill="#e08a1e"/>
+<path d="M36 88 V44 A14 14 0 0 1 64 44 V88 Z" fill="#fff7e8"/>
+<path d="M44 74 H56 M42 80 H58" stroke="#f6c453" stroke-width="3" stroke-linecap="round"/>
+<circle cx="50" cy="56" r="6" fill="#f6c453"/></g></g></svg></span><span class="ka-alt-govde"><b>İbadet</b><span>Namaz, oruç, zekât</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fff7e8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#ffe9c2" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#ffe9c2" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><circle cx="50" cy="50" r="34" fill="#e08a1e"/><path d="M32 52 L45 65 L70 38" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></svg></span><span class="ka-alt-govde"><b>Ahlak</b><span>Doğruluk, adalet, merhamet</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fff7e8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#ffe9c2" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#ffe9c2" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><circle cx="26" cy="34" r="11" fill="#e08a1e"/><path d="M12 78 V60 A14 14 0 0 1 40 60 V78 Z" fill="#e08a1e"/>
+<circle cx="74" cy="34" r="11" fill="#f6c453"/><path d="M60 78 V60 A14 14 0 0 1 88 60 V78 Z" fill="#f6c453"/>
+<circle cx="50" cy="26" r="13" fill="#b25f06"/><path d="M33 82 V60 A17 17 0 0 1 67 60 V82 Z" fill="#b25f06"/></g></g></svg></span><span class="ka-alt-govde"><b>Kıssalar</b><span>Geçmiş toplumlardan dersler</span></span></div></div></div><div class="ka-blok ka-gunluk-hayat"><h4 class="ka-blok-bas">🏠 Günlük Hayattan</h4><div class="ka-gunluk"><span class="ka-gunluk-gorsel"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fff7e8"/><circle cx="70" cy="70" r="58" fill="#ffe9c2" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M6 74 Q50 60 50 78 Q50 60 94 74 L94 26 Q50 12 50 30 Q50 12 6 26 Z" fill="#fff" stroke="#b25f06" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M50 30 V78" stroke="#b25f06" stroke-width="3.5"/>
+<path d="M16 36 H42 M16 46 H42 M16 56 H38 M58 36 H84 M58 46 H84 M58 56 H80" stroke="#f6c453" stroke-width="3" stroke-linecap="round"/></g></g></svg></span><p>Kur’an’daki bir kıssayı okumak, geçmişte yaşananlardan bugün için ders çıkarmaktır.</p></div></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Kur’an dört ana konu etrafında ilerler.</li><li>Kıssalar ibret almak için anlatılır.</li></ul></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-4"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#f3eefb"/><g class="kai-bl" opacity=".85"><ellipse cx="181" cy="77" rx="180" ry="82" fill="#e0d3f5"/><ellipse cx="720" cy="153" rx="216" ry="72" fill="#e0d3f5" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#b498e2" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(48,44) scale(1.580)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><path d="M18 82 L50 54 L82 82" stroke="#4d3079" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M30 84 L70 84" stroke="#4d3079" stroke-width="5" stroke-linecap="round"/>
+<path d="M14 52 Q50 40 50 58 Q50 40 86 52 L86 30 Q50 18 50 36 Q50 18 14 30 Z" fill="#fff" stroke="#6f4aa8" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M50 36 V58" stroke="#6f4aa8" stroke-width="3"/></g></g></g><g transform="translate(664,24) scale(1.520)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-t"><circle cx="50" cy="50" r="34" fill="none" stroke="#b498e2" stroke-width="3"/><circle cx="84.0" cy="50.0" r="5.4" fill="#6f4aa8"/><circle cx="79.44484291381993" cy="67.0000360523285" r="5.4" fill="#6f4aa8"/><circle cx="66.99992789526655" cy="79.44490535824048" r="5.4" fill="#6f4aa8"/><circle cx="49.99987511102649" cy="83.99999999977064" r="5.4" fill="#6f4aa8"/><circle cx="32.999855790838936" cy="79.4447804690021" r="5.4" fill="#6f4aa8"/><circle cx="20.555032197736274" cy="66.99981973797524" r="5.4" fill="#6f4aa8"/><circle cx="16.00000000091749" cy="49.99975022205299" r="5.4" fill="#6f4aa8"/><circle cx="20.555281976213003" cy="32.999747634235746" r="5.4" fill="#6f4aa8"/><circle cx="33.00028841954544" cy="20.554969754110303" r="5.4" fill="#6f4aa8"/><circle cx="50.00037466692053" cy="16.000000002064347" r="5.4" fill="#6f4aa8"/><circle cx="67.0003605221381" cy="20.555344421825396" r="5.4" fill="#6f4aa8"/><circle cx="79.44509268911838" cy="33.0003965772955" r="5.4" fill="#6f4aa8"/><path d="M50 84 V94" stroke="#4d3079" stroke-width="3.4"/><circle cx="50" cy="96" r="4" fill="#4d3079"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s5-u3-3.jpg" alt="Bir Sure Öğreniyorum: Kevser Suresi" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 4</span><h4>Bir Sure Öğreniyorum: Kevser Suresi</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 4</span><span class="ka-giris">Kevser suresi ve anlamı</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#e0d3f5"/><g transform="translate(14,14) scale(0.92)"><path d="M18 82 L50 54 L82 82" stroke="#4d3079" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M30 84 L70 84" stroke="#4d3079" stroke-width="5" stroke-linecap="round"/>
+<path d="M14 52 Q50 40 50 58 Q50 40 86 52 L86 30 Q50 18 50 36 Q50 18 14 30 Z" fill="#fff" stroke="#6f4aa8" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M50 36 V58" stroke="#6f4aa8" stroke-width="3"/></g></svg></span><span class="ab-rozet">4️⃣</span> Bir Sure Öğreniyorum: Kevser Suresi</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f3eefb"/><circle cx="70" cy="70" r="58" fill="#e0d3f5" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-t"><circle cx="50" cy="50" r="34" fill="none" stroke="#b498e2" stroke-width="3"/><circle cx="84.0" cy="50.0" r="5.4" fill="#6f4aa8"/><circle cx="79.44484291381993" cy="67.0000360523285" r="5.4" fill="#6f4aa8"/><circle cx="66.99992789526655" cy="79.44490535824048" r="5.4" fill="#6f4aa8"/><circle cx="49.99987511102649" cy="83.99999999977064" r="5.4" fill="#6f4aa8"/><circle cx="32.999855790838936" cy="79.4447804690021" r="5.4" fill="#6f4aa8"/><circle cx="20.555032197736274" cy="66.99981973797524" r="5.4" fill="#6f4aa8"/><circle cx="16.00000000091749" cy="49.99975022205299" r="5.4" fill="#6f4aa8"/><circle cx="20.555281976213003" cy="32.999747634235746" r="5.4" fill="#6f4aa8"/><circle cx="33.00028841954544" cy="20.554969754110303" r="5.4" fill="#6f4aa8"/><circle cx="50.00037466692053" cy="16.000000002064347" r="5.4" fill="#6f4aa8"/><circle cx="67.0003605221381" cy="20.555344421825396" r="5.4" fill="#6f4aa8"/><circle cx="79.44509268911838" cy="33.0003965772955" r="5.4" fill="#6f4aa8"/><path d="M50 84 V94" stroke="#4d3079" stroke-width="3.4"/><circle cx="50" cy="96" r="4" fill="#4d3079"/></g></g></svg></div>
     <p><b>Kevser suresi</b>, üç ayetten oluşur ve Kur'an-ı Kerim'in en kısa suresidir. "Kevser" kelimesi bolluk, bereket, maddi ve manevi çokluk anlamına gelir. Cahiliye Dönemi'nde Hz. Muhammed'in (sav) oğlu Kasım'ın küçük yaşta vefatı üzerine müşrikler onu "<b>ebter</b>" (nesli kesik) diyerek üzdüler. Bunun üzerine Yüce Allah, Kevser suresini indirdi; Hz. Peygamber'in soyu kızı Hz. Fatıma'nın çocukları Hz. Hasan ve Hz. Hüseyin ile devam etmiştir.</p>
     <table style="width:100%; border-collapse:collapse; margin-top:10px;">
       <tr style="background:#eaf4fb;"><th style="text-align:left; padding:6px; border-bottom:1px solid var(--acik);">Okunuşu</th><th style="text-align:left; padding:6px; border-bottom:1px solid var(--acik);">Anlamı</th></tr>
@@ -894,6 +1222,8 @@
 </section>
 
 <section id="slayt">
+
+<div class="ka-ogretim"><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Kevser suresi üç ayetten oluşur.</li><li>Surede verilen nimete karşı ibadet emredilir.</li></ul></div></div>
 <h2>🖥️ Ünite Sunumu</h2>
 
   <div class="sunum-sarmal">

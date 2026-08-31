@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deneme Sınavı — Kader İnancı (LGS DKAB)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+:root{
+  --navy:#1E3A8A; --turkuaz:#06B6D4; --sari:#f4a261; --yesil:#40916c;
+  --bg:#f7f4ec; --acikgri:#f1f5f9; --metin:#22333b; --metin-ikincil:#5d6b7a;
+  --yuzey:#ffffff; --kenar:#e2e8f0;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px;
+  --radius-s:8px; --radius-m:14px; --radius-l:20px;
+  --shadow-1:0 1px 3px rgba(30,58,138,.08); --shadow-2:0 8px 24px rgba(30,58,138,.10);
+  --motion:.2s ease;
+}
+:root[data-tema="dark"]{
+  --bg:#111826; --acikgri:#1a2333; --metin:#e7ecf3; --metin-ikincil:#9aa7b8;
+  --yuzey:#1c2536; --kenar:#2b3750;
+  --shadow-1:0 1px 3px rgba(0,0,0,.3); --shadow-2:0 8px 24px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--metin);transition:background var(--motion),color var(--motion);}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;z-index:100;}
+.skip-link:focus{left:0;}
+.ust-serit{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:var(--yuzey);border-bottom:1px solid var(--kenar);position:sticky;top:0;z-index:20;}
+.marka{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--navy);font-weight:800;font-size:1.05rem;}
+.marka .material-symbols-outlined{font-size:22px;}
+#temaDugme{border:1px solid var(--kenar);background:var(--acikgri);color:var(--metin);border-radius:999px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.cs-hero{padding:var(--sp-7) var(--sp-5) var(--sp-5);text-align:center;max-width:760px;margin:0 auto;}
+.cs-hero h1{margin:0 0 8px;font-size:1.9rem;font-weight:800;color:var(--navy);}
+.cs-hero p{margin:0;color:var(--metin-ikincil);font-size:1rem;line-height:1.55;}
+.geri-link{display:inline-flex;align-items:center;gap:4px;margin-bottom:14px;color:var(--turkuaz);text-decoration:none;font-weight:700;font-size:.85rem;}
+main{max-width:920px;margin:0 auto;padding:0 var(--sp-5) var(--sp-7);}
+.test-secici{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:var(--sp-6);position:sticky;top:70px;background:var(--bg);padding:10px 0;z-index:10;}
+.yil-pil{border:1px solid var(--kenar);background:var(--yuzey);color:var(--metin);padding:8px 16px;border-radius:999px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all var(--motion);}
+.yil-pil:hover{border-color:var(--navy);}
+.yil-pil.aktif{background:var(--navy);color:#fff;border-color:var(--navy);}
+.test-baslik{display:flex;align-items:center;gap:10px;color:var(--navy);font-size:1.2rem;margin:0 0 var(--sp-4);}
+.yil-etiket{font-size:.75rem;font-weight:700;background:var(--acikgri);color:var(--metin-ikincil);padding:3px 10px;border-radius:999px;}
+.soru-karti{background:var(--yuzey);border:1px solid var(--kenar);border-radius:var(--radius-m);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-1);}
+.soru-ust{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.soru-no{background:var(--navy);color:#fff;font-weight:800;font-size:.85rem;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.soru-tema{font-size:.75rem;font-weight:700;color:var(--turkuaz);background:rgba(6,182,212,.1);padding:3px 10px;border-radius:999px;}
+.soru-metin{font-size:.95rem;line-height:1.6;margin:0 0 10px;white-space:pre-line;}
+.secenekler{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.secenek{font-size:.88rem;line-height:1.45;padding:8px 12px;background:var(--acikgri);border-radius:var(--radius-s);cursor:pointer;border:2px solid transparent;transition:all var(--motion);}
+.secenek:hover{border-color:var(--turkuaz);}
+.secenek b{color:var(--navy);margin-right:4px;}
+.soru-karti.cevaplandi .secenek{cursor:default;}
+.soru-karti.cevaplandi .secenek:hover{border-color:transparent;}
+.secenek.dogru-cevap{background:rgba(64,145,108,.15);border-color:var(--yesil);}
+.secenek.dogru-cevap b{color:var(--yesil);}
+.secenek.yanlis-secim{background:rgba(220,38,38,.1);border-color:#dc2626;}
+.secenek.yanlis-secim b{color:#dc2626;}
+.cevap-etiketi{display:none;margin-top:10px;font-size:.82rem;font-weight:700;padding:6px 10px;border-radius:var(--radius-s);}
+.cevap-etiketi.gorunur{display:inline-block;}
+.cevap-etiketi.dogru-mesaj{background:rgba(64,145,108,.15);color:var(--yesil);}
+.cevap-etiketi.yanlis-mesaj{background:rgba(220,38,38,.1);color:#dc2626;}
+@media (max-width:600px){.secenekler{grid-template-columns:1fr;}.test-secici{position:static;}}
+footer{text-align:center;padding:var(--sp-6) var(--sp-5);color:var(--metin-ikincil);font-size:.82rem;border-top:1px solid var(--kenar);margin-top:var(--sp-6);}
+footer a{color:var(--navy);text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+<a href="#ana-icerik" class="skip-link">İçeriğe geç</a>
+<nav class="ust-serit">
+  <a class="marka" href="din-kulturu-tum-siniflar.html"><span class="material-symbols-outlined">mosque</span> DKAB Portal</a>
+  <button id="temaDugme" aria-label="Tema değiştir"><span class="material-symbols-outlined">dark_mode</span></button>
+</nav>
+
+<header class="cs-hero">
+  <a class="geri-link" href="deneme-sinavlari.html">← Tüm deneme sınavları</a>
+  <h1>🕋 Deneme Sınavı: Kader İnancı</h1>
+  <p>Bu ünite için hazırlanmış 5 ayrı deneme sınavı, her biri 20 soru. Gerçek LGS'de çıkmış sorulara benzer formatta hazırlanmış özgün deneme sorularıdır. Bir şıkka tıklayarak cevabını görebilirsin.</p>
+</header>
+
+<main id="ana-icerik">
+  <div class="test-secici" id="testSecici"></div>
+  <div id="soruAlani"></div>
+</main>
+
+<footer>
+  <a href="deneme-sinavlari.html">← Tüm deneme sınavlarına dön</a>
+  <p style="margin-top:10px;">Bu sayfadaki sorular, gerçek LGS DKAB sorularının formatı ve konu kapsamı örnek alınarak hazırlanmış özgün deneme sorularıdır.</p>
+</footer>
+
+<script>
+const guvenliOku=(k,v)=>{try{return localStorage.getItem(k)??v;}catch(e){return v;}};
+const guvenliYaz=(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}};
+(function(){
+  const tema=guvenliOku('dkab_tema','light');
+  document.documentElement.setAttribute('data-tema',tema);
+})();
+document.getElementById('temaDugme').addEventListener('click',()=>{
+  const su=document.documentElement.getAttribute('data-tema')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-tema',su);
+  guvenliYaz('dkab_tema',su);
+});
+
+const TESTLER = [
+  {
+    "baslik": "Deneme 1",
+    "sorular": [
+      {"tema": "Kader Tanımı", "metin": "Yüce Allah, sonsuz ilmiyle geçmişte, şimdiki zamanda ve gelecekte var olan her şeyi ezelden bilmekte ve bunları bir plan hâlinde takdir etmektedir.\nBu metinde tanımlanan kavram aşağıdakilerden hangisidir?", "secenekler": ["Kaza", "Kader", "Tevekkül", "Rıza"], "dogru": 1},
+      {"tema": "Kaza Tanımı", "metin": "Ezelde ilim ve iradesiyle takdir ettiği şeyleri Allah'ın belirlenen zaman gelince yaratıp meydana getirmesine ne ad verilir?", "secenekler": ["Kader", "Kaza", "Ecel", "Rızık"], "dogru": 1},
+      {"tema": "Kader-Kaza İlişkisi", "metin": "Bir mimarın bir binanın planını çizmesi kadere, o planın uygulanarak binanın inşa edilmesi ise kazaya benzetilebilir.\nBu benzetmeyle asıl anlatılmak istenen aşağıdakilerden hangisidir?", "secenekler": ["Kader ve kaza birbirinden bağımsız iki kavramdır.", "İnsan, hayatının planını kendisi çizer.", "Kader tasarı, kaza ise bu tasarının gerçekleşmesidir.", "Kaza, kaderden önce gerçekleşen bir olaydır."], "dogru": 2},
+      {"tema": "Allah'ın İlim Sıfatı", "metin": "\"Gaybın anahtarları O'nun katındadır, onları O'ndan başkası bilmez. O, karada ve denizde olanı da bilir...\" (En'âm suresi, 59. ayet)\nBu ayette Allah'ın hangi sıfatı vurgulanmaktadır?", "secenekler": ["İrade", "Kudret", "İlim", "Basar"], "dogru": 2},
+      {"tema": "Allah'ın İrade Sıfatı", "metin": "Evrende hiçbir şey tesadüfen olmaz; her varlık belirli bir ölçü, düzen ve amaç doğrultusunda var olur. Bir çekirdeğin ağaca dönüşmesinden gezegenlerin yörüngesinde hareket etmesine kadar her şey bir dilemenin sonucudur.\nBu metinde Allah'ın hangi sıfatına vurgu yapılmaktadır?", "secenekler": ["İrade", "Kelam", "Semi", "Vücud"], "dogru": 0},
+      {"tema": "Allah'ın Kudret Sıfatı", "metin": "Gökleri ve yeri yoktan var eden, insanı en güzel şekilde yaratan, sonsuz güç sahibi olan Allah, dilediği her şeyi yapmaya muktedirdir.\nBu metinde vurgulanan sıfat aşağıdakilerden hangisidir?", "secenekler": ["Kudret", "Kelam", "Vahdaniyet", "Kıdem"], "dogru": 0},
+      {"tema": "Yaratma Sıfatı (Hâlık)", "metin": "Yeri göğü, canlı cansız bütün varlıkları örneksiz ve maddesiz olarak var eden, hiçbir yardımcıya ihtiyaç duymadan yoktan yaratan Allah'a verilen isimlerden biri aşağıdakilerden hangisidir?", "secenekler": ["Hâlık", "Rezzâk", "Vekîl", "Hafîz"], "dogru": 0},
+      {"tema": "İnsanın İradesi", "metin": "İnsanın yürüyeceği yönü, okuyacağı kitabı, söyleyeceği sözü seçme gücüne sahip olması, ona verilen sınırlı seçme yetkisini gösterir.\nBu metinde sözü edilen kavram aşağıdakilerden hangisidir?", "secenekler": ["Külli irade", "Cüzi irade", "Kaza", "Rıza"], "dogru": 1},
+      {"tema": "Sorumluluk", "metin": "Elif, sınav için düzenli çalışmadığı hâlde başarısız olunca \"Zaten kaderimde başarısızlık varmış.\" diyerek kendini avutmuştur.\nElif'in bu tutumu aşağıdakilerden hangisiyle bağdaşmaz?", "secenekler": ["İnsanın yaptıklarından sorumlu tutulması", "Kaderin ezelde takdir edilmiş olması", "Allah'ın her şeyi bilmesi", "Rızkın Allah tarafından verilmesi"], "dogru": 0},
+      {"tema": "Hesap Verme", "metin": "\"Kim zerre miktarı hayır yapmışsa onu görür. Kim de zerre miktarı şer işlemişse onu görür.\" (Zilzâl suresi, 7-8. ayetler)\nBu ayetlerden aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["İnsan yaptığı en küçük işlerden bile hesaba çekilecektir.", "İnsanın kaderi doğduğunda belirlenmiştir.", "Rızık Allah tarafından taksim edilmiştir.", "Dua kaderi değiştirebilir."], "dogru": 0},
+      {"tema": "Tevekkül", "metin": "Bir çiftçi tarlasını sürer, tohumu eker, gerekli bakımı yapar; ardından ürünün bereketli olması için Allah'a dua ederek sonucu O'na bırakır.\nBu davranış aşağıdaki kavramlardan hangisiyle açıklanabilir?", "secenekler": ["Kaza", "Tevekkül", "Cebir", "İrade-i Külliye"], "dogru": 1},
+      {"tema": "Yanlış Tevekkül", "metin": "Bazı kişiler hiçbir tedbir almadan, çalışıp çabalamadan sonucu beklemeyi tevekkül zannederler.\nBu tür bir anlayış için aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Doğru tevekkül anlayışını yansıtır.", "Peygamberimizin devesini bağlayıp öyle tevekkül et sözüyle örtüşür.", "Sebeplere başvurmadan sonucu beklemek gerçek tevekkül değildir.", "Kaderi inkâr etmenin bir sonucudur."], "dogru": 2},
+      {"tema": "Sebat ve Azim", "metin": "Bir bilim insanı yıllarca süren başarısız denemelerin ardından pes etmeyip çalışmalarına devam etmiş ve sonunda önemli bir buluşa imza atmıştır.\nBu bilim insanının davranışı aşağıdaki kavramlardan hangisiyle ilişkilendirilebilir?", "secenekler": ["Kadere teslimiyet", "Sebat ve azim", "Rıza", "Cebir anlayışı"], "dogru": 1},
+      {"tema": "Sabır", "metin": "Hz. Muhammed (sav) şöyle buyurmuştur: \"Mümin kişinin durumu ne hayret vericidir! Çünkü onun bütün işleri hayırdır. Bu durum sadece mümine özgüdür: Sevinecek olsa şükreder, bu onun için hayır olur; bir zarara uğrarsa sabreder, bu da onun için hayır olur.\"\nBu hadisten hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Mümin, yalnızca nimet karşısında sorumludur.", "Musibetler mümin için bir kayıptan ibarettir.", "Mümin, hem nimet hem de sıkıntı karşısında olumlu bir tutum sergiler.", "Sabır yalnızca maddi zararlar için gereklidir."], "dogru": 2},
+      {"tema": "Rızık", "metin": "\"Yeryüzünde hiçbir canlı yoktur ki rızkı Allah'a ait olmasın...\" (Hûd suresi, 6. ayet)\nBu ayetten aşağıdaki yargılardan hangisi çıkarılabilir?", "secenekler": ["İnsan çalışmasa da rızkı kendiliğinden gelir.", "Rızkı yaratan ve veren Allah'tır.", "Rızık yalnızca insanlara özgü bir nimettir.", "Rızık kazanmak için çalışmaya gerek yoktur."], "dogru": 1},
+      {"tema": "Ecel", "metin": "\"Her ümmetin bir eceli vardır. Onların eceli geldiği zaman ne bir an geri bırakılırlar ne de öne alınırlar.\" (A'râf suresi, 34. ayet)\nBu ayette vurgulanan husus aşağıdakilerden hangisidir?", "secenekler": ["Ecelin insanın iradesiyle değiştirilebileceği", "Ecelin belirlenmiş bir zamanı olduğu ve değişmeyeceği", "Ölümün yalnızca ihtiyarlıkta gerçekleştiği", "Ecelin insana önceden haber verildiği"], "dogru": 1},
+      {"tema": "Kaderi Bahane Etme", "metin": "Sınavına çalışmayan bir öğrenci düşük not alınca \"Kaderimde bu vardı, ben ne yapabilirim ki?\" diyerek kendini haklı çıkarmaya çalışmıştır.\nBu öğrencinin tutumuyla ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Kaderi kendi eksikliğine bahane etmektedir.", "Doğru bir tevekkül örneği sergilemektedir.", "Sebep-sonuç ilişkisini doğru kurmuştur.", "İradesini sorumlu bir şekilde kullanmıştır."], "dogru": 0},
+      {"tema": "Ayetel Kürsi", "metin": "\"Allah, kendisinden başka hiçbir ilah olmayandır. Diridir, kayyumdur (varlıkları ayakta tutandır). O'nu ne bir uyuklama tutabilir ne de bir uyku...\" (Bakara suresi, 255. ayet)\nBu ayetten hareketle,\nI. Allah, ölümsüz ve sonsuz hayat sahibidir.\nII. Allah, tüm varlıkları koruyup gözetmektedir.\nIII. İnsan, kaderini değiştirme gücüne sahiptir.\nIV. Allah, uyku ve gaflet gibi eksikliklerden münezzehtir.\nyargılarından hangileri çıkarılabilir?", "secenekler": ["I, II ve III", "I, II ve IV", "II, III ve IV", "I, III ve IV"], "dogru": 1},
+      {"tema": "Kader-İrade İlişkisi", "metin": "İnsanın doğduğu aile, ana dili ve fiziksel özellikleri onun iradesi dışında gerçekleşirken; mesleği, arkadaş çevresi ve alışkanlıkları onun tercihleriyle şekillenir.\nBu metinden hareketle,\nI. İnsanın bazı özellikleri kendi seçimi dışında belirlenir.\nII. İnsan, hayatının bazı yönlerini kendi iradesiyle şekillendirebilir.\nIII. İnsan hiçbir konuda seçim özgürlüğüne sahip değildir.\nIV. İnsanın tercihleri sorumluluğunu ortadan kaldırır.\nyargılarından hangileri doğrudur?", "secenekler": ["I ve II", "II ve III", "III ve IV", "I ve IV"], "dogru": 0},
+      {"tema": "Kıssa - Tedbir ve Kader", "metin": "Hz. Ömer, veba salgınının görüldüğü bir bölgeye girmekten vazgeçip geri dönünce bir sahabi \"Allah'ın kaderinden mi kaçıyorsun?\" diye sormuş, Hz. Ömer de \"Allah'ın kaderinden yine Allah'ın kaderine sığınıyorum.\" diye cevap vermiştir.\nBu kıssadan hareketle aşağıdakilerden hangisine ulaşılabilir?", "secenekler": ["Tedbir almak, kadere iman ile çelişmez.", "Kadere iman eden kişi hiçbir tedbir almamalıdır.", "Salgın hastalıklardan korunmak kadere aykırıdır.", "İnsan, kaderin gerçekleşmesini engelleyebilir."], "dogru": 0}
+    ]
+  },
+  {
+    "baslik": "Deneme 2",
+    "sorular": [
+      {"tema": "Kader Tanımı", "metin": "\"Yeryüzünde vuku bulan ve sizin başınıza gelen herhangi bir musibet yoktur ki biz onu yaratmadan önce bir kitapta yazılmış olmasın...\" (Hadîd suresi, 22. ayet)\nBu ayette vurgulanan kavram aşağıdakilerden hangisidir?", "secenekler": ["Tevekkül", "Kader", "Rıza", "Sabır"], "dogru": 1},
+      {"tema": "Kaza-Kader Farkı", "metin": "Ahmet'in doğuştan mavi gözlü olması ile üniversitede hangi bölümü okuyacağına karar vermesi arasında önemli bir fark vardır.\nBu iki durum arasındaki temel fark aşağıdakilerden hangisiyle açıklanabilir?", "secenekler": ["Birincisi Allah'ın takdiriyle, ikincisi insanın iradesiyle gerçekleşir.", "Her iki durum da tamamen insanın iradesiyle gerçekleşir.", "Her iki durum da insanın iradesi dışında gerçekleşir.", "Birincisi sonradan, ikincisi ezelde belirlenmiştir."], "dogru": 0},
+      {"tema": "Allah'ın İlim Sıfatı", "metin": "\"De ki: Göklerde ve yerde gaybı Allah'tan başka kimse bilmez...\" (Neml suresi, 65. ayet)\nBu ayetten hareketle aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Gelecekle ilgili bilgi yalnızca Allah'a aittir.", "İnsan, gaybı bilme konusunda Allah'la ortaktır.", "Melekler gaybı bilme konusunda yetkilendirilmiştir.", "Gayb bilgisi zamanla insanlara da verilecektir."], "dogru": 0},
+      {"tema": "Allah'ın İrade Sıfatı", "metin": "Güneşin doğuşu, mevsimlerin birbirini takip etmesi, gök cisimlerinin yörüngelerinde hareket etmesi belirli bir düzen ve ölçüye göre gerçekleşmektedir.\nBu düzenlilik, Allah'ın hangi sıfatının bir göstergesidir?", "secenekler": ["Kelam", "İrade", "Basar", "Semi"], "dogru": 1},
+      {"tema": "Sorumluluk ve Özgür İrade", "metin": "İnsan, iyi ile kötüyü, doğru ile yanlışı ayırt edebilecek akla ve seçim yapabilecek iradeye sahip kılınmıştır. Bu nedenle yaptığı tercihlerden sorumlu tutulur.\nBu metinde vurgulanan husus aşağıdakilerden hangisidir?", "secenekler": ["İnsanın sorumluluğu, akıl ve irade sahibi olmasından kaynaklanır.", "İnsan, hiçbir konuda seçim yapma hakkına sahip değildir.", "Sorumluluk yalnızca yetişkinlere aittir.", "İnsanın tercihleri Allah tarafından zorla belirlenir."], "dogru": 0},
+      {"tema": "Hesap Verme", "metin": "\"Kıyamet günü için adalet terazileri kurarız. Hiç kimseye zerre kadar haksızlık edilmez...\" (Enbiyâ suresi, 47. ayet)\nBu ayetten aşağıdakilerden hangisi çıkarılamaz?", "secenekler": ["İnsan, yaptıklarının karşılığını görecektir.", "Ahirette adaletli bir hesaplaşma olacaktır.", "Kimseye haksızlık yapılmayacaktır.", "Herkesin kaderi doğuştan aynı şekilde belirlenmiştir."], "dogru": 3},
+      {"tema": "Tevekkül", "metin": "Sınavına aylarca düzenli çalışan Zeynep, sınav sabahı \"Elimden geleni yaptım, sonucu Allah'a bırakıyorum.\" diyerek sakin bir şekilde sınava girmiştir.\nZeynep'in bu tutumu aşağıdaki kavramlardan hangisini örneklendirmektedir?", "secenekler": ["Kaderi bahane etme", "Doğru tevekkül anlayışı", "Sorumluluktan kaçma", "Cebir anlayışı"], "dogru": 1},
+      {"tema": "Yanlış Tevekkül", "metin": "Bir sahabi devesini bağlamadan mescide girmek isteyince Hz. Peygamber ona \"Devesini bağla, sonra tevekkül et.\" buyurmuştur.\nBu hadisten hareketle aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Tevekkül, tedbiri terk etmeyi gerektirir.", "Gerçek tevekkül, gerekli tedbirler alındıktan sonra Allah'a güvenmektir.", "Tedbir almak, Allah'a güvenmemek anlamına gelir.", "Peygamberimiz tedbir almayı gereksiz görmüştür."], "dogru": 1},
+      {"tema": "Sebat ve Azim", "metin": "\"... Bir şeye azmettiğin zaman artık Allah'a tevekkül et...\" (Âl-i İmrân suresi, 159. ayet)\nBu ayetten hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Azim ve tevekkül birbirini tamamlayan kavramlardır.", "Tevekkül, azimden önce gelmelidir.", "Azim gösteren kişinin tevekküle ihtiyacı yoktur.", "Tevekkül eden kişinin azim göstermesi gerekmez."], "dogru": 0},
+      {"tema": "Sabır", "metin": "Ailesini kaybeden bir kişi, üzüntüsünü Allah'a sığınarak ve sabrederek aşmaya çalışmış, hayata küsmemiştir.\nBu kişinin davranışı Kur'an'da geçen hangi ilkeyle örtüşmektedir?", "secenekler": ["\"Sabredenlerle beraber olun.\" ilkesiyle", "Kaderi inkâr etme tutumuyla", "Tevekkülü terk etme tutumuyla", "Sorumluluktan kaçma ilkesiyle"], "dogru": 0},
+      {"tema": "Rızık", "metin": "Rızkın Allah tarafından takdir edilmiş olması, insanın çalışıp kazanma çabasından muaf olduğu anlamına gelmez.\nBu metinde vurgulanan husus aşağıdakilerden hangisidir?", "secenekler": ["Rızık konusunda çaba göstermeye gerek yoktur.", "Rızkı takdir eden Allah olsa da insan çalışmakla sorumludur.", "Rızık yalnızca duayla elde edilir.", "Çalışmak, rızkı garanti eder."], "dogru": 1},
+      {"tema": "Ecel", "metin": "\"Her canlı ölümü tadacaktır...\" (Âl-i İmrân suresi, 185. ayet)\nBu ayetten hareketle aşağıdaki yargılardan hangisine ulaşılamaz?", "secenekler": ["Ölüm, her canlı için kaçınılmaz bir gerçektir.", "Ecel, Allah tarafından belirlenmiştir.", "İnsan tedbir alarak eceli tamamen erteleyebilir.", "Ölüm, dünya hayatının bir parçasıdır."], "dogru": 2},
+      {"tema": "Kaderi Bahane Etme", "metin": "Trafik kurallarına uymadan hızlı araç kullanan bir sürücü kaza yapınca \"Zaten kazam varmış, kaderimde bu varmış.\" diyerek kendini sorumluluktan kurtarmaya çalışmıştır.\nBu sürücünün tutumu için aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Kendi ihmalini kadere yükleyerek sorumluluktan kaçmaktadır.", "Kader inancını doğru bir şekilde yaşamaktadır.", "Tedbir almanın kaderi değiştireceğini kabul etmektedir.", "Sorumluluğunu tam olarak yerine getirmiştir."], "dogru": 0},
+      {"tema": "Ayetel Kürsi", "metin": "\"... O'nun kürsüsü, gökleri ve yeri kaplamıştır. Onları koruyup gözetmek O'na güç gelmez. O, yücedir, büyüktür.\" (Bakara suresi, 255. ayet)\nBu ayetten hareketle,\nI. Allah'ın hükümranlığı bütün evreni kapsamaktadır.\nII. Allah, evreni yönetmekte zorlanmamaktadır.\nIII. İnsan, Allah'ın bilgisi dışında hareket edebilir.\nIV. Allah'ın kudreti sınırsızdır.\nyargılarından hangileri doğrudur?", "secenekler": ["I, II ve III", "I, II ve IV", "II, III ve IV", "I, III ve IV"], "dogru": 1},
+      {"tema": "Kader-İrade İlişkisi", "metin": "Aşağıda bazı durumlar verilmiştir:\n- Bir bebeğin hangi ailede dünyaya geleceği\n- Bir öğrencinin hangi dersi seçeceği\n- Bir insanın boyu ve göz rengi\n- Bir kişinin arkadaşlarına karşı tutumu\nBu durumlardan hangileri insanın iradesi dışında gerçekleşir?", "secenekler": ["Yalnızca 1. ve 2.", "Yalnızca 1. ve 3.", "Yalnızca 2. ve 4.", "Yalnızca 3. ve 4."], "dogru": 1},
+      {"tema": "Kıssa - Sabır", "metin": "Hz. Yusuf, kardeşleri tarafından kuyuya atılıp köle olarak satılmasına, yıllarca zindanda kalmasına rağmen sabretmiş, Allah'a olan güvenini kaybetmemiş ve sonunda Mısır'a vezir olmuştur.\nBu kıssadan hareketle aşağıdakilerden hangisine ulaşılabilir?", "secenekler": ["Zorluklar karşısında sabreden ve Allah'a güvenen kişi, hikmetli bir sonuca ulaşabilir.", "Kadere iman eden kişi hiçbir zorlukla karşılaşmaz.", "Sabır, yalnızca maddi kayıplar için gereklidir.", "Zindana atılmak, Allah'ın insanı terk ettiği anlamına gelir."], "dogru": 0},
+      {"tema": "Dua ve Kader", "metin": "\"Rabbiniz şöyle buyurdu: Bana dua edin, size icabet edeyim...\" (Mü'min suresi, 60. ayet)\nBu ayetten hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Dua etmek, kadere iman ile çelişmez ve sonucu Allah'tan istemektir.", "Dua, yalnızca sıkıntılı zamanlarda yapılmalıdır.", "Kadere iman eden kişinin dua etmesine gerek yoktur.", "Dua eden herkesin isteği kesinlikle gerçekleşir."], "dogru": 0},
+      {"tema": "Allah'ın Kudret Sıfatı", "metin": "Milyonlarca farklı canlı türünün, her birinin kendine özgü yapısıyla var edilmesi, hiçbir canlının bir diğerinin tıpatıp aynısı olmaması Allah'ın hangi sıfatının bir tezahürüdür?", "secenekler": ["Kudret", "Kelam", "Semi", "Basar"], "dogru": 0},
+      {"tema": "Kader-Çevre İlişkisi", "metin": "İnsanın doğduğu coğrafya, ailesinin sosyoekonomik durumu gibi etkenler onun hayatını şekillendirse de bu durum, insanın kendi tercihleriyle gelişim gösteremeyeceği anlamına gelmez.\nBu metinde vurgulanan husus aşağıdakilerden hangisidir?", "secenekler": ["Çevresel etkenler, insanın iradesini tamamen ortadan kaldırır.", "İnsan, doğuştan gelen şartlara rağmen iradesiyle gelişim gösterebilir.", "İnsanın geleceği, tamamen doğduğu çevre tarafından belirlenir.", "Sosyoekonomik durum, insanın sorumluluğunu ortadan kaldırır."], "dogru": 1},
+      {"tema": "Kader İnancının Faydası", "metin": "Kadere iman eden bir kişi, başına gelen sıkıntılar karşısında ümitsizliğe kapılmaz; elde ettiği başarılarda ise kibirlenmez, bunun bir lütuf olduğunu bilir.\nBu metinde kader inancının bireye kazandırdığı hangi özellik vurgulanmaktadır?", "secenekler": ["Ruhsal denge ve tevazu", "Sorumluluktan kaçma", "Çalışmayı gereksiz görme", "Geleceği önceden bilme"], "dogru": 0}
+    ]
+  },
+  {
+    "baslik": "Deneme 3",
+    "sorular": [
+      {"tema": "Kader'in Unsurları", "metin": "Kadere iman, Allah'ın ezelî ilmi, iradesi ve kudretiyle her şeyi belirli bir ölçüyle takdir ettiğine inanmayı gerektirir.\nBu tanımda kaderin hangi sıfatlarla ilişkilendirildiği vurgulanmaktadır?", "secenekler": ["İlim, irade ve kudret", "Yalnızca kudret", "Yalnızca irade", "Kelam ve basar"], "dogru": 0},
+      {"tema": "Kaza'nın Gerçekleşmesi", "metin": "Bir tohumun toprağa ekilmesinden sonra filizlenip büyümesi, kaderde takdir edilenin zamanı gelince kazâ olarak gerçekleşmesine örnek gösterilebilir.\nBu örnekte vurgulanan husus aşağıdakilerden hangisidir?", "secenekler": ["Kader ile kaza aynı anda gerçekleşen kavramlardır.", "Kaderde takdir edilen şey, zamanı gelince kaza ile gerçekleşir.", "Kaza, kaderden bağımsız olarak meydana gelir.", "Bitkilerin büyümesi insan iradesine bağlıdır."], "dogru": 1},
+      {"tema": "Allah'ın İlim Sıfatı", "metin": "\"... O, göklerin ve yerin gaybını bilendir. O, kalplerin özünü de bilir.\" (Fâtır suresi, 38. ayet)\nBu ayetten hareketle aşağıdaki yargılardan hangisine ulaşılamaz?", "secenekler": ["Allah, insanların içinden geçenleri de bilmektedir.", "Allah'ın ilmi sınırsızdır.", "Allah, yalnızca görünen davranışları bilir.", "Allah'ın bilgisi gökleri ve yeri kapsamaktadır."], "dogru": 2},
+      {"tema": "Allah'ın Kudret Sıfatı", "metin": "\"İlkin sizi yaratıp yeniden diriltecek olan da O'dur. Bu, O'nun için pek kolaydır.\" (Rûm suresi, 27. ayet)\nBu ayette Allah'ın hangi sıfatı vurgulanmaktadır?", "secenekler": ["Kudret", "Semi", "Kelam", "İrade"], "dogru": 0},
+      {"tema": "İrade-i Cüziyye", "metin": "İnsana verilen sınırlı seçme gücü sayesinde birey, iyilik ile kötülük arasında tercih yapabilir; bu tercih onu sorumlu kılar.\nBu metinde açıklanan kavram aşağıdakilerden hangisidir?", "secenekler": ["İrade-i külliye", "İrade-i cüziyye", "Kaza", "Rıza"], "dogru": 1},
+      {"tema": "Mükellefiyet", "metin": "İslam dininde akıl sağlığı yerinde olan ve belli bir olgunluğa (büluğa) ermiş kişi, dinî ve ahlaki sorumluluklardan mesul tutulur.\nBu metinde vurgulanan kavram aşağıdakilerden hangisidir?", "secenekler": ["Kaza", "Tevekkül", "Mükellefiyet", "Rıza"], "dogru": 2},
+      {"tema": "Kıssa - Tevekkül", "metin": "Hz. İbrahim, ateşe atılmak üzereyken Cebrail'in \"Bir isteğin var mı?\" sorusuna \"Senden isteğim yok, Allah benim hâlimi biliyor.\" diyerek cevap vermiş ve sonucu Allah'a bırakmıştır.\nBu kıssadan hareketle aşağıdakilerden hangisine ulaşılabilir?", "secenekler": ["Gerçek tevekkül, en zor anlarda bile Allah'a güvenmeyi gerektirir.", "Tevekkül, yalnızca kolay durumlarda gösterilen bir tutumdur.", "Hz. İbrahim, meleklerden yardım istemiştir.", "Tevekkül eden kişi hiçbir zorlukla karşılaşmaz."], "dogru": 0},
+      {"tema": "Sebat", "metin": "Müslümanlar, Hendek Savaşı'nda sayıca üstün düşman karşısında hendek kazarak tedbir almış, zorlu şartlara rağmen mücadeleden vazgeçmemiştir.\nBu olaydan hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Zorluk karşısında tedbir almak ve sebat göstermek önemlidir.", "Tedbir almak, Allah'a güvenmemek anlamına gelir.", "Sayıca üstünlük tek başına zaferi garanti eder.", "Sabretmek, hiçbir çaba göstermemeyi gerektirir."], "dogru": 0},
+      {"tema": "Sabır", "metin": "Hz. Eyyub, uzun süre hastalıkla imtihan edilmesine rağmen Allah'a olan güvenini ve şükrünü kaybetmemiş, sabrıyla örnek bir tutum sergilemiştir.\nBu kıssada öne çıkan temel erdem aşağıdakilerden hangisidir?", "secenekler": ["Sabır", "Cesaret", "Cömertlik", "Adalet"], "dogru": 0},
+      {"tema": "Rızık ve Kanaat", "metin": "Elindeki nimetlere şükreden ve gereğinden fazlasını istemeyen bir kişinin bu tutumu, kader inancıyla nasıl ilişkilendirilebilir?", "secenekler": ["Rızkın Allah'tan geldiğine inanarak kanaatkâr olmasıyla", "Çalışmayı gereksiz görmesiyle", "Geleceği bilme iddiasında bulunmasıyla", "Sorumluluktan kaçmasıyla"], "dogru": 0},
+      {"tema": "Ecel", "metin": "Bir depremde hayatını kaybeden kişilerin bu olayı önceden bilememesi, ecel konusunda aşağıdakilerden hangisini göstermektedir?", "secenekler": ["Ecelin zamanının insanlar tarafından bilinmediğini", "Ecelin insan iradesiyle belirlendiğini", "Doğal afetlerin kaderle ilgisi olmadığını", "Ölümün yalnızca yaşlılıkta gerçekleştiğini"], "dogru": 0},
+      {"tema": "Kaderi Bahane Etme", "metin": "Düzenli sağlık kontrollerini ihmal eden bir kişi hastalandığında \"Kaderimde varmış, kontrole gitsem de gitmesem de olurdu.\" diyerek kendini haklı çıkarmaya çalışmıştır.\nBu kişinin tutumuyla ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Sağlığını korumak için gerekli tedbirleri almadığı hâlde sorumluluğu kadere yüklemektedir.", "Kader inancını doğru bir biçimde yaşamaktadır.", "Sebeplere başvurmanın önemini kavramıştır.", "Tevekkülün gereğini yerine getirmiştir."], "dogru": 0},
+      {"tema": "Ayetel Kürsi", "metin": "\"... Göklerdeki ve yerdeki her şey O'nundur. İzni olmadan O'nun katında kim şefaat edebilir?\" (Bakara suresi, 255. ayet)\nBu ayetten hareketle aşağıdakilerden hangisi çıkarılabilir?", "secenekler": ["Göklerin ve yerin tek sahibi ve hâkimi Allah'tır.", "Şefaat, Allah'ın izni olmadan da gerçekleşebilir.", "Yeryüzündeki varlıklar kendi başlarına hareket eder.", "Gökler ve yer, farklı güçler tarafından yönetilir."], "dogru": 0},
+      {"tema": "Kader-İrade İlişkisi", "metin": "Bir öğrenci; ailesini, doğduğu yeri ve doğuştan gelen yeteneklerini seçme imkânı bulamamış; ancak hangi mesleği seçeceğine, kimlerle arkadaşlık edeceğine ve nasıl bir insan olacağına kendi iradesiyle karar vermiştir.\nBu metinden hareketle,\nI. İnsanın bazı özellikleri onun tercihi dışında gerçekleşir.\nII. İnsan, hayatının bütününde tamamen özgürdür.\nIII. İnsan, ahlaki kişiliğini kendi seçimleriyle şekillendirebilir.\nIV. Doğuştan gelen özellikler insanın sorumluluğunu artırır.\nyargılarından hangileri doğrudur?", "secenekler": ["I ve II", "I ve III", "II ve IV", "III ve IV"], "dogru": 1},
+      {"tema": "Sorumluluk ve Adalet", "metin": "\"Kim kendine yazık ediyorsa günahı sadece kendisinedir. Hiçbir günahkâr başka birinin günah yükünü çekmez...\" (Fâtır suresi, 18. ayet)\nBu ayetten hareketle,\nI. Herkes kendi eylemlerinden sorumludur.\nII. İnsan, başkasının hatalarından dolayı hesaba çekilmez.\nIII. Kader inancı bireysel sorumluluğu ortadan kaldırır.\nIV. Sorumluluk, insanın iradeli davranışlarıyla ilgilidir.\nyargılarından hangileri doğrudur?", "secenekler": ["I, II ve III", "I, II ve IV", "II, III ve IV", "I, III ve IV"], "dogru": 1},
+      {"tema": "Tevekkül ve Tedbir", "metin": "Bir doktor, bulaşıcı bir hastalıkla mücadele ederken hem gerekli hijyen kurallarına uyar hem de hastalarının iyileşmesi için Allah'a dua eder.\nBu doktorun tutumu aşağıdaki kavramlardan hangisiyle örtüşmektedir?", "secenekler": ["Doğru tevekkül anlayışı", "Kaderi inkâr etme", "Sorumluluktan kaçma", "Cebir anlayışı"], "dogru": 0},
+      {"tema": "Allah'ın Yaratıcılığı", "metin": "Evrendeki her varlığı kusursuz bir uyum ve denge içinde, birbirine zıt düşmeyecek şekilde var eden Allah'a nispet edilen isim aşağıdakilerden hangisidir?", "secenekler": ["Bâri", "Vekîl", "Hafîz", "Rezzâk"], "dogru": 0},
+      {"tema": "Kader İnancının Faydası", "metin": "Kadere inanan bir kişi, elde edemediği bir şey için aşırı üzüntüye kapılmaz, kaybettiği bir şey için \"Nasip değilmiş.\" diyerek ruhsal dengesini korur.\nBu metinde kader inancının hangi yönü vurgulanmaktadır?", "secenekler": ["Bireye moral ve psikolojik denge kazandırması", "Bireyi çalışmaktan alıkoyması", "Bireyin sorumluluğunu azaltması", "Bireyi geleceği bilme yanılgısına sürüklemesi"], "dogru": 0},
+      {"tema": "Sebep-Sonuç İlişkisi", "metin": "Allah, evrende bir sebep-sonuç ilişkisi (âdetullah) yaratmıştır; ateş yakar, su söndürür. İnsan da bu yasalara uyarak sonuç elde etmeye çalışır.\nBu metinden hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Sonuç elde etmek için sebeplere başvurmak gerekir.", "Sebep-sonuç ilişkisi insan iradesiyle değiştirilebilir.", "Allah'ın koyduğu yasalar zamanla geçersiz hâle gelir.", "Sebeplere başvurmak, tevekküle aykırıdır."], "dogru": 0},
+      {"tema": "Kader ve Kaza", "metin": "Bir sürücü, trafik kurallarına tam olarak uyduğu hâlde karşıdan gelen bir aracın kurallara uymaması sonucu kazaya karışmıştır.\nBu durum, kader ve kaza kavramlarıyla ilgili aşağıdakilerden hangisini örneklendirir?", "secenekler": ["İnsanın alacağı tüm tedbirlere rağmen başkalarının hatalarından etkilenebileceğini", "Trafik kazalarının insan iradesiyle hiçbir ilgisi olmadığını", "Tedbir almanın hiçbir faydası olmadığını", "Kaderin yalnızca kötü olayları kapsadığını"], "dogru": 0}
+    ]
+  },
+  {
+    "baslik": "Deneme 4",
+    "sorular": [
+      {"tema": "Kader Tanımı", "metin": "İslam inanç esaslarından biri olan kadere iman, Allah'ın her şeyi ezelî ilmiyle bilip takdir ettiğine, hiçbir şeyin O'nun bilgisi dışında gerçekleşmeyeceğine inanmaktır.\nBu metinde kader inancıyla ilgili aşağıdakilerden hangisi vurgulanmaktadır?", "secenekler": ["Kader inancının iman esaslarından biri olduğu", "Kader inancının yalnızca geçmişle ilgili olduğu", "Kader inancının insanın sorumluluğunu kaldırdığı", "Kader inancının Allah'ın bilgisiyle ilgisi olmadığı"], "dogru": 0},
+      {"tema": "Kaza", "metin": "Bir öğrencinin doğum tarihi kaderde belirlenmişken, o tarihte dünyaya gelmesi kazâ olarak nitelendirilir.\nBu örnekten hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Kader, takdir edilenin fiilen gerçekleşmesidir.", "Kaza, takdir edilen şeyin belirlenen zamanda meydana gelmesidir.", "Kader ve kaza birbirinin zıddıdır.", "Kaza, kaderden önce gerçekleşir."], "dogru": 1},
+      {"tema": "Allah'ın Semi ve Basar Sıfatları", "metin": "\"... Şüphesiz Allah hakkıyla işitendir, hakkıyla görendir.\" (Hac suresi, 61. ayet)\nBu ayette Allah'ın hangi sıfatlarına değinilmektedir?", "secenekler": ["Semi ve Basar", "İlim ve İrade", "Kudret ve Kelam", "Vücud ve Kıdem"], "dogru": 0},
+      {"tema": "Allah'ın Basar Sıfatı", "metin": "İnsanın gizli veya açık, karanlıkta veya aydınlıkta yaptığı hiçbir davranışın Allah'ın bilgisi ve görmesi dışında kalmayacağına inanmak, Allah'ın hangi sıfatıyla ilgilidir?", "secenekler": ["Basar", "Kelam", "Vahdaniyet", "Beka"], "dogru": 0},
+      {"tema": "İnsanın Seçme Özgürlüğü", "metin": "İnsan; doğacağı ülkeyi, ailesini, cinsiyetini seçemez. Ancak eğitimini, mesleğini, arkadaşlarını, ahlaki tutumunu kendi iradesiyle belirleyebilir.\nBu metinden hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["İnsanın özgürlüğü sınırsızdır.", "İnsanın iradesi bazı alanlarda sınırlı, bazı alanlarda ise etkilidir.", "İnsan, hiçbir konuda seçim yapamaz.", "İnsanın doğduğu aile, onun iradesiyle belirlenir."], "dogru": 1},
+      {"tema": "Sorumluluk ve Vicdan", "metin": "Yalan söyleyen bir kişi, kimse görmese bile içinde bir rahatsızlık duyar; bu durum insanın davranışlarından sorumlu olduğunun bir göstergesidir.\nBu metinde vicdanla ilişkilendirilen kavram aşağıdakilerden hangisidir?", "secenekler": ["Rızık", "Sorumluluk", "Kaza", "Ecel"], "dogru": 1},
+      {"tema": "Tevekkül", "metin": "Bir öğrenci, üniversite sınavına aylarca planlı bir şekilde hazırlanmış; sınav günü elinden geleni yaptığını düşünerek sonucu endişeyle değil, gönül rahatlığıyla beklemiştir.\nBu öğrencinin tutumu aşağıdaki kavramlardan hangisiyle açıklanır?", "secenekler": ["Tevekkül", "Kaderi bahane etme", "Cebir", "Rıza olmadan teslimiyet"], "dogru": 0},
+      {"tema": "Sebat", "metin": "Bir sporcu, geçirdiği sakatlığın ardından defalarca yeniden sahalara dönmeyi denemiş, yılmadan çalışmaya devam ederek başarıya ulaşmıştır.\nBu sporcunun sergilediği tutum aşağıdakilerden hangisiyle adlandırılır?", "secenekler": ["Sebat", "Kadere teslimiyet", "Rıza", "Tevekkülü terk etme"], "dogru": 0},
+      {"tema": "Sabır", "metin": "Matematik dersinde zorlanan bir öğrenci, hemen pes etmek yerine düzenli olarak çalışmaya devam etmiş ve zamanla başarısını artırmıştır.\nBu öğrencinin davranışı ile ilgili olarak aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Sabır ve azim göstererek hedefine ulaşmaya çalışmıştır.", "Kaderine razı olup çalışmayı bırakmıştır.", "Başarısızlığı kadere bağlayarak pes etmiştir.", "Sorumluluğunu öğretmenine yüklemiştir."], "dogru": 0},
+      {"tema": "Rızık ve Emek", "metin": "\"İnsan için ancak çalıştığının karşılığı vardır.\" (Necm suresi, 39. ayet)\nBu ayetten hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Rızık, insanın hiçbir çabası olmadan kendiliğinden gelir.", "İnsanın elde ettiği sonuçlar, gösterdiği çabayla ilişkilidir.", "Çalışmak, rızkı kesin olarak garanti eder.", "Rızık yalnızca duayla kazanılır."], "dogru": 1},
+      {"tema": "Ecel", "metin": "\"Hiç kimse yarın ne kazanacağını bilemez. Hiç kimse hangi yerde öleceğini de bilemez...\" (Lokmân suresi, 34. ayet)\nBu ayetten hareketle aşağıdaki yargılardan hangisine ulaşılabilir?", "secenekler": ["Ecelin zamanı ve yeri insanlar tarafından bilinmez.", "İnsan, öleceği yeri önceden tahmin edebilir.", "Ecel, insanın yaşam tarzına göre kesin olarak hesaplanabilir.", "Ölüm yalnızca belirli yerlerde gerçekleşir."], "dogru": 0},
+      {"tema": "Kaderi Bahane Etme", "metin": "İş başvurularına özensiz hazırlanan bir kişi, iş bulamayınca \"Nasipte yokmuş, ne yapayım.\" diyerek kendi eksikliklerini görmezden gelmiştir.\nBu kişinin tutumuyla ilgili aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Kendi ihmalini kadere bağlayarak sorumluluktan kaçmaktadır.", "Rızkın Allah'tan geldiğini doğru bir şekilde kavramıştır.", "Gerekli çabayı göstermiş ancak başarısız olmuştur.", "Tevekkülün gereğini yerine getirmiştir."], "dogru": 0},
+      {"tema": "Ayetel Kürsi", "metin": "\"Allah... O'nu ne bir uyuklama tutabilir ne de bir uyku. Göklerdeki her şey, yerdeki her şey O'nundur...\" (Bakara suresi, 255. ayet)\nBu ayetten hareketle,\nI. Allah, gaflete düşmekten münezzehtir.\nII. Göklerdeki ve yerdeki tüm varlıklar Allah'a aittir.\nIII. Allah, evreni yönetmekte zaman zaman yardıma ihtiyaç duyar.\nIV. Allah'ın mülkü sınırsızdır.\nyargılarından hangileri doğrudur?", "secenekler": ["I, II ve III", "I, II ve IV", "II, III ve IV", "I, III ve IV"], "dogru": 1},
+      {"tema": "Kader-Sorumluluk İlişkisi", "metin": "Bir kişi, hem çalışıp gerekli tedbirleri alan hem de sonucu Allah'a bırakan dengeli bir tutum sergilerse hem dünyevi hem uhrevi açıdan doğru bir yol izlemiş olur.\nBu metinden hareketle,\nI. Çaba göstermeden sonucu beklemek doğru bir tevekkül değildir.\nII. Tedbir almak, kadere iman ile çelişmez.\nIII. Sonucu Allah'a bırakmak, çaba göstermeyi gereksiz kılar.\nIV. Denge, hem çalışmayı hem güvenmeyi içerir.\nyargılarından hangileri doğrudur?", "secenekler": ["I, II ve III", "I, II ve IV", "II, III ve IV", "I, III ve IV"], "dogru": 1},
+      {"tema": "Kıssa - Hikmet", "metin": "Kur'an'da anlatılan bir kıssada Hz. Musa, bilge bir kulla yolculuk yapar. Bu kulun görünürde anlaşılması güç davranışlarının aslında bir hikmete dayandığı sonradan ortaya çıkar.\nBu kıssadan hareketle aşağıdakilerden hangisine ulaşılabilir?", "secenekler": ["Bazı olayların hikmeti, insan aklıyla o an tam olarak kavranamayabilir.", "Allah'ın takdirinde hiçbir hikmet yoktur.", "İnsan, her olayın sebebini anında anlayabilir.", "Hz. Musa, tüm olayların hikmetini baştan bilmiştir."], "dogru": 0},
+      {"tema": "Allah'a Güven ve Umut", "metin": "\"... Allah'ın rahmetinden ümit kesmeyin. Şüphesiz kâfirler topluluğundan başkası Allah'ın rahmetinden ümidini kesmez.\" (Yûsuf suresi, 87. ayet)\nBu ayetten hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Mümin, zorluklar karşısında dahi umudunu kaybetmemelidir.", "Ümit kesmek, imanın bir gereğidir.", "Zorluklar karşısında ümitsizliğe düşmek doğaldır.", "Rahmetten ümit kesmemek yalnızca kâfirlere özgüdür."], "dogru": 0},
+      {"tema": "Kader İnancı ve Ahlak", "metin": "Kadere iman eden bir kişi, başarılı bir arkadaşını kıskanmak yerine, herkesin nasibinin farklı olduğunu düşünerek hoşgörülü davranabilir.\nBu metinde kader inancının hangi olumlu etkisi vurgulanmaktadır?", "secenekler": ["Bireyler arası kıskançlık ve haset duygusunun azalmasına katkı sağlaması", "Bireyin çalışma isteğini azaltması", "Bireyin başarısızlığını mazur göstermesi", "Bireyin sorumluluk duygusunu zayıflatması"], "dogru": 0},
+      {"tema": "Allah'ın Rezzâk İsmi", "metin": "Bütün canlıların rızkını yaratan, onlara ihtiyaçları olan şeyleri ulaştıran Allah'a nispet edilen isim aşağıdakilerden hangisidir?", "secenekler": ["Rezzâk", "Hâlık", "Vekîl", "Hafîz"], "dogru": 0},
+      {"tema": "Çaba ve Değişim", "metin": "\"Şüphesiz Allah, bir topluluk kendi durumlarını değiştirmedikçe onların durumunu değiştirmez.\" (Ra'd suresi, 11. ayet)\nBu ayetten hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Toplumların ve bireylerin durumu, kendi çabalarıyla da ilişkilidir.", "İnsanın çabası, sonucu etkilemez.", "Değişim yalnızca Allah'ın müdahalesiyle gerçekleşir, insanın rolü yoktur.", "Toplumlar, hiçbir çaba göstermeden gelişebilir."], "dogru": 0},
+      {"tema": "Kader İnancının Amacı", "metin": "Kader inancı, insanı tembelliğe sevk etmek için değil; aksine ona güven, huzur ve doğru bir sorumluluk bilinci kazandırmak için vardır.\nBu metinde vurgulanan husus aşağıdakilerden hangisidir?", "secenekler": ["Kader inancının amacının insanı pasifleştirmek olduğu", "Kader inancının insana güven ve sorumluluk bilinci kazandırdığı", "Kader inancının yalnızca teorik bir bilgi olduğu", "Kader inancının insanın çabasını gereksiz kıldığı"], "dogru": 1}
+    ]
+  },
+  {
+    "baslik": "Deneme 5",
+    "sorular": [
+      {"tema": "Kadere İmanın Gerekliliği", "metin": "İman esaslarından biri olan kadere iman, bir Müslümanın hem dünya hem de ahiret hayatına yön veren temel inançlardan biridir.\nBu metne göre kadere iman aşağıdakilerden hangisiyle nitelendirilebilir?", "secenekler": ["İslam'ın temel inanç esaslarından biridir.", "Yalnızca bazı âlimlerin kabul ettiği bir görüştür.", "Sadece dünya hayatıyla ilgili bir inançtır.", "İmanla doğrudan bir ilgisi yoktur."], "dogru": 0},
+      {"tema": "Kader-Kaza Örneklendirme", "metin": "Bir öğrencinin doğuştan zeki olması kaderiyle ilgiliyken, bu zekâsını kullanarak sınavı kazanması hem kaderi hem de kendi çabasını birlikte içerir.\nBu örnekten hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["İnsanın doğuştan getirdiği özellikler ile kendi çabası bir arada sonuç doğurur.", "İnsanın çabası, sonucu hiçbir şekilde etkilemez.", "Doğuştan gelen özellikler, insanın çabasını gereksiz kılar.", "Kader yalnızca olumsuz olayları kapsar."], "dogru": 0},
+      {"tema": "Allah'ın Habîr İsmi", "metin": "Her şeyden haberdar olan, hiçbir şey kendisinden gizli kalmayan Allah'a nispet edilen isim aşağıdakilerden hangisidir?", "secenekler": ["Habîr", "Vekîl", "Kayyûm", "Kadîr"], "dogru": 0},
+      {"tema": "Allah'ın Kayyûm İsmi", "metin": "\"... O, Hayy ve Kayyûm'dur...\" (Bakara suresi, 255. ayet)\nBu ayette geçen 'Kayyûm' ismi Allah'ın hangi özelliğini ifade eder?", "secenekler": ["Bütün varlıkları ayakta tutan, onların varlığını devam ettiren olduğunu", "Zamanla değişime uğradığını", "Yardıma ihtiyaç duyduğunu", "Sadece geçmişle ilgilendiğini"], "dogru": 0},
+      {"tema": "İnsanın İradesi ve Allah'ın Dilemesi", "metin": "İnsan bir fiili işlemeyi diler ve o yönde irade gösterirse, Allah da o fiilin yaratılmasını diler ve fiil meydana gelir. Fiilin gerçekleşmesinde hem insanın tercihi hem Allah'ın yaratması vardır.\nBu metinden hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["İnsanın fiilleri tamamen kendi yaratmasıdır.", "İnsanın tercihi ile Allah'ın yaratması bir arada bulunur.", "Allah'ın yaratması, insanın iradesini geçersiz kılar.", "İnsanın iradesi, sonucu belirlemede hiçbir rol oynamaz."], "dogru": 1},
+      {"tema": "Toplumsal Sorumluluk", "metin": "Bir toplumda bireyler, yalnızca kendi davranışlarından değil, çevrelerindeki haksızlıklara sessiz kalmalarından da bir ölçüde sorumlu tutulabilir.\nBu metinde vurgulanan husus aşağıdakilerden hangisidir?", "secenekler": ["Sorumluluğun yalnızca bireysel davranışlarla sınırlı olduğu", "Sorumluluğun, kişinin çevresindeki olaylara duyarlılığını da kapsayabileceği", "Toplumsal olaylarda bireyin hiçbir sorumluluğu olmadığı", "Haksızlıklara sessiz kalmanın erdemli bir davranış olduğu"], "dogru": 1},
+      {"tema": "Tevekkül", "metin": "Ameliyat öncesi bir doktor, hastasının tedavisi için gerekli tüm tıbbi bilgi ve tecrübesini kullanır; ardından iyileşmesi için Allah'a dua eder.\nBu doktorun tutumu aşağıdaki kavramlardan hangisiyle açıklanabilir?", "secenekler": ["Tevekkül", "Kadere teslimiyet ve çabasızlık", "Kaderi bahane etme", "Cebir anlayışı"], "dogru": 0},
+      {"tema": "Sebat", "metin": "Göçmen kuşlar, binlerce kilometrelik yorucu yolculuklarına rağmen hedeflerine ulaşana kadar yılmadan yollarına devam ederler.\nBu örnek, insan hayatında hangi kavramla ilişkilendirilebilir?", "secenekler": ["Sebat ve azim", "Kadere teslimiyet", "Rıza", "Tevekkülü terk etme"], "dogru": 0},
+      {"tema": "Sabır", "metin": "Uzun süredir tedavi gören bir hasta, zorlu süreç boyunca şikâyet etmek yerine hem tedaviye devam etmiş hem de manevi olarak güçlü kalmaya çalışmıştır.\nBu hastanın tutumu aşağıdaki kavramlardan hangisiyle ilişkilendirilir?", "secenekler": ["Sabır", "Kaderi inkâr", "Sorumluluktan kaçma", "Ümitsizlik"], "dogru": 0},
+      {"tema": "Rızık ve İsraf", "metin": "\"... Yiyin için fakat israf etmeyin. Çünkü Allah israf edenleri sevmez.\" (A'râf suresi, 31. ayet)\nBu ayetten hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Verilen rızkı kullanırken ölçülü davranmak gerekir.", "Rızkı istediği gibi tüketmek insanın hakkıdır.", "İsraf etmek, kader inancının bir gereğidir.", "Rızık konusunda herhangi bir sınırlama yoktur."], "dogru": 0},
+      {"tema": "Ecel", "metin": "Ecel, yalnızca ileri yaşta gerçekleşen bir durum değildir; bazen genç yaşta, bazen de hiç beklenmedik bir anda gerçekleşebilir.\nBu metinden hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Ecelin gerçekleşme zamanı insanın yaşıyla doğru orantılıdır.", "Ecel her yaşta gerçekleşebilir ve zamanı insan tarafından bilinmez.", "Ecel yalnızca yaşlılık döneminde gerçekleşir.", "İnsan, eceliyle ilgili kesin bilgiye sahip olabilir."], "dogru": 1},
+      {"tema": "Kaderi Bahane Etme", "metin": "Ödevlerini düzenli yapmayan bir öğrenci, sınavdan düşük not alınca \"Zaten alnımda başarısızlık yazılıydı.\" diyerek durumu kadere bağlamıştır.\nBu öğrencinin tutumu için aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Kendi ihmalini fark etmeyip sorumluluğu kadere yüklemektedir.", "Kader inancını doğru bir şekilde özümsemiştir.", "Sınav başarısızlığının nedenini doğru tespit etmiştir.", "Gerekli çabayı göstermiş ancak sonuç alamamıştır."], "dogru": 0},
+      {"tema": "Ayetel Kürsi", "metin": "Ayetel Kürsi olarak bilinen ayet, Allah'ın varlığı, birliği, sonsuz ilmi, kudreti ve evrendeki her şeyi kuşatan hükümranlığından bahseder.\nBu bilgiden hareketle,\nI. Ayetel Kürsi, Allah'ın sıfatlarından söz eder.\nII. Ayetel Kürsi, Bakara suresinde yer alır.\nIII. Ayetel Kürsi'de kader konusuna hiç değinilmez.\nIV. Ayetel Kürsi, Allah'ın birliğine vurgu yapar.\nyargılarından hangileri doğrudur?", "secenekler": ["I, II ve III", "I, II ve IV", "II, III ve IV", "I, III ve IV"], "dogru": 1},
+      {"tema": "Kader ve Özgür İrade", "metin": "İslam inancına göre insan, davranışlarından sorumlu tutulacak kadar özgür; ancak her şeyi kendi başına yaratacak kadar mutlak güce sahip değildir.\nBu metinden hareketle,\nI. İnsanın iradesi sınırsızdır.\nII. İnsan, seçimlerinden sorumludur.\nIII. Yaratma gücü yalnızca Allah'a aittir.\nIV. İnsan, hiçbir konuda özgür değildir.\nyargılarından hangileri doğrudur?", "secenekler": ["I ve IV", "II ve III", "I ve III", "III ve IV"], "dogru": 1},
+      {"tema": "Kıssa - Tedbir ve Tevekkül", "metin": "Hz. Nuh, kavmini uyardıktan sonra Allah'ın emriyle bir gemi inşa etmiş; hem gerekli tedbiri almış hem de sonucu Allah'a havale etmiştir.\nBu kıssadan hareketle aşağıdakilerden hangisine ulaşılabilir?", "secenekler": ["Tedbir almak ile Allah'a güvenmek bir arada olabilir.", "Hz. Nuh, hiçbir tedbir almadan sonucu beklemiştir.", "Gemi yapmak, tevekküle aykırı bir davranıştır.", "Kadere iman eden kişi hiçbir hazırlık yapmamalıdır."], "dogru": 0},
+      {"tema": "Kader İnancı ve Kararlılık", "metin": "Kadere inanan bir sporcu, karşılaştığı yenilgiler karşısında yılmaz; çünkü her denemenin bir sonraki başarı için bir basamak olduğuna inanır.\nBu metinde kader inancının hangi olumlu katkısı vurgulanmaktadır?", "secenekler": ["Bireye zorluklar karşısında direnç ve motivasyon kazandırması", "Bireyi çabadan alıkoyması", "Bireyin başarısızlığını normalleştirerek çalışmayı bırakmasına neden olması", "Bireyin rekabetten kaçınmasına yol açması"], "dogru": 0},
+      {"tema": "Allah'ın Vekîl İsmi", "metin": "İşlerini kendisine havale eden, güvenip dayanan kullarının işlerini en güzel şekilde sonuçlandıran Allah'a nispet edilen isim aşağıdakilerden hangisidir?", "secenekler": ["Vekîl", "Hafîz", "Bâri", "Kayyûm"], "dogru": 0},
+      {"tema": "Kader-Adalet İlişkisi", "metin": "Allah'ın insanlara farklı imkânlar ve yetenekler vermesi, O'nun adaletsiz olduğu anlamına gelmez; çünkü her insan kendi imkânları ölçüsünde sorumlu tutulur.\nBu metinden hareketle aşağıdakilerden hangisi söylenebilir?", "secenekler": ["Sorumluluk, kişinin sahip olduğu imkân ve yetenekle orantılıdır.", "Herkes, aynı ölçüde sorumlu tutulur.", "Farklı imkânlara sahip olmak, Allah'ın adaletsizliğinin göstergesidir.", "İmkânı az olan kişi hiçbir şeyden sorumlu değildir."], "dogru": 0},
+      {"tema": "Kader ve Şükür", "metin": "Nimete kavuşan bir kişinin bunu kendi üstünlüğüne değil, Allah'ın bir lütfuna bağlayarak şükretmesi, kader inancının hangi yönüyle ilişkilidir?", "secenekler": ["İnsanın sahip olduklarının Allah'ın takdiriyle geldiğinin bilincinde olmasıyla", "İnsanın çabasının hiçbir öneminin olmamasıyla", "İnsanın kendi başarısını yüceltmesiyle", "Kader inancının şükürle ilgisinin bulunmamasıyla"], "dogru": 0},
+      {"tema": "Kader İnancının Genel Değerlendirmesi", "metin": "Kader inancı; insanı çaresizliğe değil, umuda; tembelliğe değil, sorumlu bir çabaya; kibre değil, tevazuya yönlendiren dengeli bir inanç esasıdır.\nBu metinde vurgulanmak istenen asıl husus aşağıdakilerden hangisidir?", "secenekler": ["Kader inancının insana dengeli bir bakış açısı kazandırdığı", "Kader inancının insanı pasif bir tutuma sevk ettiği", "Kader inancının yalnızca teorik bir konu olduğu", "Kader inancının insanın çabasını değersizleştirdiği"], "dogru": 0}
+    ]
+  }
+];
+
+let aktifTest = 0;
+function testleriRenderEt(){
+  const secici = document.getElementById('testSecici');
+  secici.innerHTML = TESTLER.map((t,i)=>`<button class="yil-pil ${i===aktifTest?'aktif':''}" data-i="${i}">${t.baslik}</button>`).join('');
+  secici.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    aktifTest=parseInt(b.dataset.i);
+    testleriRenderEt();
+    soruAlaniniRenderEt();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+}
+function soruAlaniniRenderEt(){
+  const alan = document.getElementById('soruAlani');
+  const test = TESTLER[aktifTest];
+  const harfler=['A','B','C','D'];
+  alan.innerHTML = `<h2 class="test-baslik">${test.baslik} <span class="yil-etiket">20 Soru</span></h2>` + test.sorular.map((s,i)=>`
+    <div class="soru-karti" data-dogru="${s.dogru}">
+      <div class="soru-ust"><span class="soru-no">${i+1}</span><span class="soru-tema">${s.tema}</span></div>
+      <p class="soru-metin"></p>
+      <div class="secenekler">
+        ${s.secenekler.map((sec,j)=>`<div class="secenek" data-index="${j}"><b>${harfler[j]})</b> <span></span></div>`).join('')}
+      </div>
+      <div class="cevap-etiketi"></div>
+    </div>
+  `).join('');
+  const kartlar = alan.querySelectorAll('.soru-karti');
+  kartlar.forEach((kart,i)=>{
+    kart.querySelector('.soru-metin').textContent = test.sorular[i].metin;
+    kart.querySelectorAll('.secenek span').forEach((span,j)=>{
+      span.textContent = test.sorular[i].secenekler[j];
+    });
+    kart.addEventListener('click', e=>{
+      const secenek = e.target.closest('.secenek');
+      if(!secenek || kart.classList.contains('cevaplandi')) return;
+      const dogruIndex = parseInt(kart.dataset.dogru);
+      const secilenIndex = parseInt(secenek.dataset.index);
+      kart.classList.add('cevaplandi');
+      const secenekler = kart.querySelectorAll('.secenek');
+      secenekler[dogruIndex].classList.add('dogru-cevap');
+      const etiket = kart.querySelector('.cevap-etiketi');
+      if(secilenIndex===dogruIndex){
+        etiket.textContent='✓ Doğru cevap!';
+        etiket.classList.add('gorunur','dogru-mesaj');
+      } else {
+        secenek.classList.add('yanlis-secim');
+        etiket.textContent=`✗ Yanlış. Doğru cevap: ${harfler[dogruIndex]}`;
+        etiket.classList.add('gorunur','yanlis-mesaj');
+      }
+    });
+  });
+}
+testleriRenderEt();
+soruAlaniniRenderEt();
+</script>
+</body>
+</html>

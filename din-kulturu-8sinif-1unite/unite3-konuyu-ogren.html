@@ -114,6 +114,24 @@
     background:white; border-radius:14px; padding:18px; margin-top:16px;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
   }
+  .ozet-kapak-gorsel{ margin:0 0 16px; }
+  .ozet-kapak-gorsel img{ display:block; width:100%; max-height:280px; object-fit:cover; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,.16); }
+  .ozet-kapak-gorsel figcaption{ margin-top:6px; font-size:.78em; color:#8a94a3; text-align:right; }
+  .ab-rozet{ display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#fef3c7,#fdba74); font-size:1em; margin-right:5px; vertical-align:-9px; box-shadow:0 2px 6px rgba(0,0,0,.12); }
+  .ab-ikon{ display:inline-flex; align-items:center; justify-content:center; vertical-align:-19px; margin-right:5px; width:54px; height:54px; }
+  .ab-ikon svg, .ab-ikon img{ display:block; width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .konu-illustrasyon{
+    float:right; width:150px; height:150px; margin:2px 0 14px 20px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:42% 58% 53% 47%/48% 42% 58% 52%;
+    box-shadow:0 6px 18px rgba(0,0,0,.14);
+    overflow:hidden;
+    animation:konuIllYuzme 3.4s ease-in-out infinite;
+  }
+  .konu-illustrasyon img, .konu-illustrasyon svg{ width:100%; height:100%; object-fit:cover; }
+  @keyframes konuIllYuzme{ 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-7px) rotate(2deg); } }
+  @media (prefers-reduced-motion: reduce){ .konu-illustrasyon{ animation:none; } }
+  @media(max-width:560px){ .konu-illustrasyon{ float:none; margin:0 auto 14px; width:130px; height:130px; } }
   button.eylem{
     display:block; margin:16px auto; padding:12px 24px; font-size:1em;
     background:var(--yesil); color:white; border:none; border-radius:24px;
@@ -748,6 +766,202 @@
   display:none !important;
 }
 </style>
+
+<style id="konuAnlatimStil">
+/* ======================================================================
+   KONU ANLATIMI GÖRSEL KATMANI (additive)
+   Bütün seçiciler "ka-" / "kai-" ön ekli; sayfanın mevcut stilleriyle
+   çakışmaz. Hiçbir mevcut kural değiştirilmedi.
+====================================================================== */
+  .ka-svg{ display:block; width:100%; height:100%; }
+  .kai-f{ animation:kaiF 4.4s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiF{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-5px) } }
+  .kai-p{ animation:kaiP 3.6s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiP{ 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.07) } }
+  .kai-t{ animation:kaiT 3.2s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiT{ 0%,100%{ opacity:1 } 50%{ opacity:.55 } }
+  .kai-g{ animation:kaiG .7s cubic-bezier(.2,.8,.3,1) both; transform-origin:50px 50px; }
+  @keyframes kaiG{ from{ opacity:0; transform:translateY(10px) scale(.92) } to{ opacity:1; transform:none } }
+  .kai-bl{ animation:kaiB 9s ease-in-out infinite; }
+  @keyframes kaiB{ 0%,100%{ transform:translate(0,0) } 50%{ transform:translate(6px,-5px) } }
+  @media (prefers-reduced-motion: reduce){
+    .kai-f,.kai-p,.kai-t,.kai-g,.kai-bl{ animation:none !important; }
+  }
+
+  /* ——— ünite hero ——— */
+  .ka-hero{
+    max-width:1000px; margin:22px auto 6px; padding:0 16px;
+  }
+  .ka-hero-ic{
+    background:#fff; border:1px solid #e4e9ef; border-radius:22px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(16,24,40,.08);
+  }
+  .ka-hero-gorsel{ aspect-ratio:1200/340; overflow:hidden; }
+  .ka-hero-metin{ padding:18px 22px 22px; }
+  .ka-ust-etiket{
+    display:inline-block; font-size:.74em; font-weight:900; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--mavi,#2a6f97); background:var(--acikgri,#f1f5f9);
+    padding:5px 12px; border-radius:999px; margin-bottom:10px;
+  }
+  .ka-hero-metin h2{ margin:0 0 6px; font-size:1.45em; line-height:1.25; color:var(--navy,#1E3A8A); }
+  .ka-hero-metin > p{ margin:0 0 14px; color:#5b6570; font-size:1em; line-height:1.55; }
+  .ka-icindekiler{ display:flex; flex-wrap:wrap; gap:8px; }
+  .ka-ic-baslik{
+    width:100%; font-size:.76em; font-weight:900; letter-spacing:.1em;
+    text-transform:uppercase; color:#8a94a3; margin-bottom:2px;
+  }
+  .ka-ic-link{
+    display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+    background:var(--acikgri,#f1f5f9); color:#22333b; border:1px solid #e4e9ef;
+    border-radius:999px; padding:7px 14px; font-size:.86em; font-weight:700;
+    transition:background .18s ease, color .18s ease, transform .18s ease;
+  }
+  .ka-ic-link:hover{ background:var(--mavi,#2a6f97); color:#fff; transform:translateY(-2px); }
+  .ka-ic-link b{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:20px; height:20px; border-radius:50%; background:#fff; color:var(--mavi,#2a6f97);
+    font-size:.8em; border:1px solid #e4e9ef;
+  }
+  .ka-ic-link:hover b{ background:rgba(255,255,255,.25); color:#fff; border-color:transparent; }
+
+  /* ——— konu başlığı afişi ——— */
+  .ka-konu{ margin:26px 0 14px; scroll-margin-top:16px; }
+  .ka-konu-gorsel{
+    position:relative; aspect-ratio:900/240; overflow:hidden;
+    border-radius:18px 18px 0 0; border:1px solid #e4e9ef; border-bottom:0;
+  }
+  /* ——— FOTOĞRAF KATMANI ———
+     Konu afişinde önce GERÇEK FOTOĞRAF denenir. Fotoğraf yoksa (dosya
+     bulunamazsa) img kendini kaldırır ve altındaki illüstrasyon görünür.
+     Böylece klasöre fotoğraf eklemek yeterlidir; kod değişmez. */
+  .ka-foto-sar{ position:absolute; inset:0; z-index:1; }
+  .ka-foto{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ka-foto-kunye{
+    position:absolute; right:8px; top:8px; z-index:3;
+    background:rgba(12,22,38,.55); color:#fff; font-size:10.5px; font-weight:700;
+    padding:3px 9px; border-radius:999px; letter-spacing:.01em;
+    max-width:70%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  /* Görsel ve başlık birlikte: başlık afişin üstünde okunur bir şeritte durur. */
+  .ka-konu-yazi{
+    position:absolute; left:0; right:0; bottom:0; z-index:2; padding:14px 16px 12px;
+    background:linear-gradient(to top, rgba(12,22,38,.78), rgba(12,22,38,.42) 55%, rgba(12,22,38,0));
+    color:#fff;
+  }
+  .ka-konu-yazi .ka-konu-ust{
+    display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.12em;
+    text-transform:uppercase; background:rgba(255,255,255,.22); padding:3px 10px; border-radius:999px;
+  }
+  .ka-konu-yazi h4{
+    margin:6px 0 0; font-size:clamp(1.02em, 2.4vw, 1.35em); line-height:1.25;
+    font-weight:900; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.35);
+  }
+  .ka-konu-alt{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+    background:#fff; border:1px solid #e4e9ef; border-top:0; border-radius:0 0 18px 18px;
+    padding:11px 16px;
+  }
+  .ka-no{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:30px; height:30px; padding:0 9px; border-radius:999px;
+    background:var(--mavi,#2a6f97); color:#fff; font-weight:900; font-size:.82em;
+  }
+  .ka-giris{ font-size:.95em; color:#5b6570; line-height:1.5; flex:1; min-width:180px; }
+  .ka-yukari{
+    margin-left:auto; font-size:.8em; font-weight:800; text-decoration:none;
+    color:var(--mavi,#2a6f97); white-space:nowrap;
+  }
+  .ka-yukari:hover{ text-decoration:underline; }
+
+  /* ==================================================================
+     ÖĞRETİCİ BLOKLAR — süreç, kavram haritası, karşılaştırma, zaman
+     çizgisi, günlük hayat, düşün-cevapla, aklında kalsın.
+     Metin HTML olarak yazılır (SVG içine gömülmez); böylece telefonda
+     da okunur kalır, ekran okuyucu okuyabilir ve arama motoru görür.
+     ================================================================== */
+  .ka-blok{
+    background:#fff; border:1px solid #e4e9ef; border-radius:16px;
+    padding:15px 17px; margin:16px 0;
+  }
+  .ka-blok-bas{
+    display:flex; align-items:center; gap:8px; margin:0 0 12px;
+    font-size:1em; font-weight:900; color:var(--navy,#1E3A8A);
+    letter-spacing:.01em;
+  }
+  .ka-blok-bas .ka-rozet{
+    font-size:.68em; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--acikgri,#f1f5f9); color:#5b6570; padding:3px 9px; border-radius:999px;
+  }
+  .ka-blok-alt{ margin:0 0 11px; font-size:.94em; color:#5b6570; line-height:1.5; }
+
+  /* — ALT BAŞLIK KARTLARI: her alt başlığın kendi görseli var — */
+  .ka-alt-izgara{ display:grid; gap:11px; }
+  @media(min-width:640px){ .ka-alt-izgara{ grid-template-columns:1fr 1fr; } }
+  @media(min-width:1080px){ .ka-alt-izgara{ grid-template-columns:1fr 1fr 1fr; } }
+  .ka-alt-kart{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--acikgri,#f1f5f9); border:1px solid #e4e9ef; border-radius:14px;
+    padding:11px 13px; position:relative;
+    animation:kaAlt .55s cubic-bezier(.2,.8,.3,1) both; animation-delay:var(--gecikme,0s);
+  }
+  @keyframes kaAlt{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:none } }
+  .ka-alt-gorsel{ flex:0 0 82px; width:82px; border-radius:11px; overflow:hidden; }
+  .ka-alt-govde{ display:block; min-width:0; }
+  .ka-alt-govde b{ display:block; font-size:.96em; color:var(--navy,#1E3A8A); line-height:1.3; }
+  /* Açıklama satırı — numara rozetini kapsamaz (aksi hâlde rozet blok
+     olup satırın tamamına yayılıyor ve başlığı örtüyordu). */
+  .ka-alt-govde > span:not(.ka-alt-no){ display:block; font-size:.86em; color:#5b6570; line-height:1.5; margin-top:2px; }
+  .ka-alt-no{
+    display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.06em;
+    background:var(--mavi,#2a6f97); color:#fff; padding:2px 9px; border-radius:999px;
+    margin-bottom:5px;
+  }
+  /* kavram haritası merkezi */
+  .ka-kh-merkez{
+    display:block; width:max-content; max-width:100%; margin:0 auto;
+    background:var(--mavi,#2a6f97); color:#fff; font-weight:900;
+    padding:9px 20px; border-radius:999px; text-align:center; font-size:.98em;
+  }
+  .ka-kh-cizgi{ display:block; width:2px; height:16px; background:#cfd8e3; margin:0 auto 11px; }
+
+  /* karşılaştırma */
+  .ka-krs{ display:grid; gap:12px; }
+  @media(min-width:660px){ .ka-krs{ grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); } }
+  .ka-krs-sut{
+    background:var(--acikgri,#f1f5f9); border:1px solid #e4e9ef; border-radius:14px; padding:12px 13px;
+  }
+  .ka-krs-sut h5{
+    margin:0 0 9px; font-size:.96em; font-weight:900; color:var(--navy,#1E3A8A);
+    padding-bottom:6px; border-bottom:2px solid #dfe6ee;
+  }
+  .ka-krs-satir{
+    display:flex; gap:10px; align-items:center; padding:6px 0; font-size:.9em; line-height:1.45;
+    animation:kaAlt .55s cubic-bezier(.2,.8,.3,1) both; animation-delay:var(--gecikme,0s);
+  }
+  .ka-krs-ikon{ flex:0 0 54px; width:54px; border-radius:9px; overflow:hidden; }
+
+  @media (prefers-reduced-motion: reduce){
+    .ka-alt-kart, .ka-krs-satir{ animation:none !important; }
+  }
+
+  /* — günlük hayat sahnesi — */
+  .ka-gunluk{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .ka-gunluk-gorsel{ flex:0 0 86px; width:86px; height:86px; border-radius:50%; overflow:hidden; }
+  .ka-gunluk p{ flex:1; min-width:180px; margin:0; font-size:.96em; line-height:1.6; }
+
+  /* — düşün ve cevapla / aklında kalsın — */
+  .ka-dusun{ background:#f4f1fb; border-color:#ddd4f2; }
+  .ka-dusun p{ margin:0; font-size:.98em; line-height:1.6; }
+  .ka-aklinda{ background:#eef7f1; border-color:#cfe6da; }
+  .ka-aklinda ul{ margin:0; padding-left:20px; }
+  .ka-aklinda li{ font-size:.95em; line-height:1.55; margin-bottom:5px; }
+  .ka-aklinda li:last-child{ margin-bottom:0; }
+
+  /* Mevcut yuvarlak konu illüstrasyonu: artık her bölümde farklı görsel. */
+  .konu-illustrasyon > .ka-svg{ border-radius:50%; }
+  /* Başlık rozetleri: aynı karikatürün 40 kez tekrarı yerine konuya özel motif. */
+  .ab-ikon > .ka-svg{ border-radius:50%; }
+</style>
 </head>
 <body>
 <div id="portalNav" data-sinif="8" data-unite="3" data-asama="ogren"></div>
@@ -778,12 +992,42 @@
 
 </div>
 
+<section class="ka-hero" id="ka-hero"><div class="ka-hero-ic"><div class="ka-hero-gorsel"><svg class="ka-svg" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="1200" height="340" rx="34" fill="#fdf0ea"/><g class="kai-bl" opacity=".85"><ellipse cx="272" cy="119" rx="240" ry="116" fill="#f8dccd"/><ellipse cx="922" cy="226" rx="288" ry="102" fill="#f8dccd" opacity=".75"/></g><path d="M0 286 Q 600 238 1200 292" stroke="#eda285" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(64,52) scale(1.920)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-t"><circle cx="30" cy="32" r="12" fill="#c2603a"/><path d="M16 82 V60 A14 14 0 0 1 44 60 V82 Z" fill="#c2603a"/>
+<circle cx="62" cy="34" r="11" fill="#8f4224"/><path d="M49 82 V60 A13 13 0 0 1 75 60 V82 Z" fill="#8f4224"/>
+<circle cx="84" cy="50" r="8" fill="#eda285"/><path d="M75 82 V68 A9 9 0 0 1 93 68 V82 Z" fill="#eda285"/></g></g></g><g transform="translate(326,34) scale(1.180)"><g class="kai-g" style="animation-delay:0.12s"><g class="kai-f"><circle cx="50" cy="50" r="36" fill="#eda285" stroke="#c2603a" stroke-width="3.4"/>
+<path d="M22 50 Q36 30 50 50 Q64 70 78 50" stroke="#8f4224" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M22 64 Q36 44 50 64 Q64 84 78 64" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>
+<circle cx="50" cy="30" r="5" fill="#fff"/></g></g></g><g transform="translate(846,46) scale(1.580)"><g class="kai-g" style="animation-delay:0.24s"><g class="kai-p"><path d="M26 14 V90" stroke="#8f4224" stroke-width="6" stroke-linecap="round"/>
+<path d="M30 18 H84 L74 36 L84 54 H30 Z" fill="#c2603a"/>
+<path d="M56 26 A10 10 0 1 0 56 46 A8 8 0 1 1 56 26Z" fill="#fff"/>
+<path d="M68 32 L70 37 L75 37 L71 40 L72 45 L68 42 L64 45 L65 40 L61 37 L66 37Z" fill="#fff"/></g></g></g><g transform="translate(1042,108) scale(1.000)"><g class="kai-g" style="animation-delay:0.36s"><g class="kai-f"><rect x="10" y="26" width="12" height="34" rx="4" fill="#8f4224"/>
+<path d="M16 30 H62 Q70 30 70 40 V50" stroke="#c2603a" stroke-width="9" fill="none" stroke-linecap="round"/>
+<rect x="4" y="18" width="24" height="9" rx="4" fill="#c2603a"/>
+<path d="M70 56 q-5 9 0 13 a6.5 6.5 0 0 0 0-13Z" fill="#eda285"/>
+<path d="M70 76 q-4 7 0 10 a5 5 0 0 0 0-10Z" fill="#eda285" opacity=".7"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">8. Sınıf · 3. Ünite</span><h2>⏳ Din ve Hayat</h2><p>Dinin hayatın her alanındaki karşılığı</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 6 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Din Toplumsal Bir Olgudur</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Helal Kazanç ve Haram Kazanç Yolları</a><a class="ka-ic-link" href="#ka-konu-4"><b>4</b>Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Tahrif</a><a class="ka-ic-link" href="#ka-konu-5"><b>5</b>Bir Peygamber Tanıyorum: Hz. Yusuf (as)</a><a class="ka-ic-link" href="#ka-konu-6"><b>6</b>Bir Sure Tanıyorum: Asr Suresi ve Anlamı</a></div></div></div></section>
 <main>
-<section id="ozet83" class="egitim-icerik">
+<section id="ozet83" class="aktif egitim-icerik">
   <h2>📖 3. Ünite Konu Özeti: Din ve Hayat</h2>
+  <figure class="ozet-kapak-gorsel">
+    <img src="../din-kulturu-slayt-gorseller/optimized/mosquehall1_orta.jpg" alt="Bir caminin iç mekânı, ibadet salonu" loading="lazy" width="1100" height="825">
+    <figcaption>Fotoğraf: Paul Livingstone (CC BY 2.0) — Wikimedia Commons</figcaption>
+  </figure>
 
   <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)</h3>
+    <div class="ka-konu" id="ka-konu-1"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#ecf0fa"/><g class="kai-bl" opacity=".85"><ellipse cx="219" cy="94" rx="180" ry="82" fill="#d3dcf3"/><ellipse cx="668" cy="155" rx="216" ry="72" fill="#d3dcf3" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#8ea6e0" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(66,26) scale(1.800)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><path d="M50 12 L84 24 V52 Q84 76 50 90 Q16 76 16 52 V24 Z" fill="#2f4a8f"/>
+<path d="M50 24 L74 32 V52 Q74 68 50 78 Q26 68 26 52 V32 Z" fill="#ecf0fa"/>
+<path d="M38 50 L47 59 L64 40" stroke="#2f4a8f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></g><g transform="translate(716,52) scale(1.240)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#2f4a8f"/>
+<g stroke="#1e3266" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#8ea6e0"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#8ea6e0"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#8ea6e0"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-0.jpg" alt="Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 1</span><h4>Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 1</span><span class="ka-giris">Dinin gayesi: zarûrât-ı hamse</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#d3dcf3"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L84 24 V52 Q84 76 50 90 Q16 76 16 52 V24 Z" fill="#2f4a8f"/>
+<path d="M50 24 L74 32 V52 Q74 68 50 78 Q26 68 26 52 V32 Z" fill="#ecf0fa"/>
+<path d="M38 50 L47 59 L64 40" stroke="#2f4a8f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></span><span class="ab-rozet">1️⃣</span> Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)</h3>
+<div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#ecf0fa"/><circle cx="70" cy="70" r="58" fill="#d3dcf3" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><circle cx="50" cy="50" r="15" fill="#2f4a8f"/>
+<g stroke="#1e3266" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#8ea6e0"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#8ea6e0"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#8ea6e0"/></g></g></svg></div>
     <p class="ko-giris">Bir oyunun kuralları neden vardır? Kurallar oyunu bozmak için mi, yoksa herkesin güvenle oynayabilmesi için mi konur?</p>
     <p class="ko-amac">🎯 Bu bölümde: Dinin neyi amaçladığını ve korumayı hedeflediği beş temel değeri öğreneceğiz.</p>
     <p>Dinin <b>gayesi</b>, insanın hem dünyada hem ahirette mutlu olmasını sağlamaktır. Bu yüzden dinin emirleri ve yasakları rastgele değildir; hepsi insanın iyiliğini gözetir. İslam âlimleri, dinin korumayı amaçladığı beş temel değeri <b>zarûrât-ı hamse</b> (beş zorunlu değer) diye adlandırmıştır. "Zarûrât" zorunlu, vazgeçilmez şeyler; "hamse" ise beş demektir.</p>
@@ -840,8 +1084,31 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Din Toplumsal Bir Olgudur</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-kavram-haritasi"><h4 class="ka-blok-bas">🗺️ Kavram Haritası<span class="ka-rozet">Kavram ilişkisi</span></h4><p class="ka-blok-alt">Bu konunun alt başlıkları ve aralarındaki ilişki</p><div class="ka-kh-merkez">Zarûrât-ı hamse — korunan beş temel değer</div><span class="ka-kh-cizgi"></span><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#ecf0fa"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#d3dcf3" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#d3dcf3" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M50 16 V80" stroke="#1e3266" stroke-width="5" stroke-linecap="round"/>
+<path d="M20 30 H80" stroke="#1e3266" stroke-width="5" stroke-linecap="round"/>
+<circle cx="50" cy="16" r="5" fill="#2f4a8f"/>
+<path d="M20 30 L10 50 H30 Z" fill="#2f4a8f"/><path d="M80 30 L70 50 H90 Z" fill="#2f4a8f"/>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#1e3266"/></g></g></svg></span><span class="ka-alt-govde"><b>Can</b><span>Yaşama hakkı</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#ecf0fa"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#d3dcf3" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#d3dcf3" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M50 84 C22 64 10 50 10 36 A20 20 0 0 1 50 28 A20 20 0 0 1 90 36 C90 50 78 64 50 84 Z" fill="#2f4a8f"/><circle cx="70" cy="38" r="6" fill="#fff" opacity=".45"/></g></g></svg></span><span class="ka-alt-govde"><b>Akıl</b><span>Sağlıklı düşünme</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#ecf0fa"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#d3dcf3" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#d3dcf3" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><circle cx="30" cy="32" r="12" fill="#2f4a8f"/><path d="M16 82 V60 A14 14 0 0 1 44 60 V82 Z" fill="#2f4a8f"/>
+<circle cx="62" cy="34" r="11" fill="#1e3266"/><path d="M49 82 V60 A13 13 0 0 1 75 60 V82 Z" fill="#1e3266"/>
+<circle cx="84" cy="50" r="8" fill="#8ea6e0"/><path d="M75 82 V68 A9 9 0 0 1 93 68 V82 Z" fill="#8ea6e0"/></g></g></svg></span><span class="ka-alt-govde"><b>Nesil</b><span>Aile ve gelecek kuşak</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#ecf0fa"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#d3dcf3" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#d3dcf3" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M30 34 Q50 24 70 34 L80 60 A30 30 0 0 1 20 60 Z" fill="#2f4a8f"/>
+<path d="M34 34 Q50 44 66 34" stroke="#1e3266" stroke-width="3.4" fill="none"/>
+<circle cx="50" cy="60" r="12" fill="#8ea6e0"/><path d="M44 60 H56 M50 54 V66" stroke="#1e3266" stroke-width="3" stroke-linecap="round"/>
+<path d="M40 26 Q50 14 60 26" stroke="#1e3266" stroke-width="4" fill="none" stroke-linecap="round"/></g></g></svg></span><span class="ka-alt-govde"><b>Mal</b><span>Emek ve mülkiyet</span></span></div><div class="ka-alt-kart" style="--gecikme:0.24s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#ecf0fa"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#d3dcf3" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#d3dcf3" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M66 14 A38 38 0 1 0 66 86 A30 30 0 1 1 66 14 Z" fill="#2f4a8f"/>
+<path d="M74 34 L79 45 L91 46 L82 54 L85 66 L74 59 L63 66 L66 54 L57 46 L69 45 Z" fill="#8ea6e0"/></g></g></svg></span><span class="ka-alt-govde"><b>Din</b><span>İnanç özgürlüğü</span></span></div></div></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-2"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#fdeef1"/><g class="kai-bl" opacity=".85"><ellipse cx="206" cy="85" rx="180" ry="82" fill="#f8d6de"/><ellipse cx="688" cy="145" rx="216" ry="72" fill="#f8d6de" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#f0a0b4" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(56,34) scale(1.720)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><circle cx="26" cy="34" r="11" fill="#c04a68"/><path d="M12 78 V60 A14 14 0 0 1 40 60 V78 Z" fill="#c04a68"/>
+<circle cx="74" cy="34" r="11" fill="#f0a0b4"/><path d="M60 78 V60 A14 14 0 0 1 88 60 V78 Z" fill="#f0a0b4"/>
+<circle cx="50" cy="26" r="13" fill="#8f3049"/><path d="M33 82 V60 A17 17 0 0 1 67 60 V82 Z" fill="#8f3049"/></g></g></g><g transform="translate(700,40) scale(1.360)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-t"><path d="M14 52 L50 22 L86 52 Z" fill="#c04a68"/>
+<rect x="24" y="52" width="52" height="34" rx="5" fill="#fff" stroke="#8f3049" stroke-width="3.2"/>
+<rect x="42" y="64" width="16" height="22" rx="3" fill="#f0a0b4"/>
+<rect x="60" y="58" width="12" height="12" rx="3" fill="#f0a0b4" opacity=".7"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/optimized/geo3_orta.jpg" alt="16 köşeli geometrik desen" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"><span class="ka-foto-kunye">Fotoğraf: Jim Joel — CC BY-SA 4.0 · Wikimedia Commons</span></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 2</span><h4>Din Toplumsal Bir Olgudur</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 2</span><span class="ka-giris">Din toplumsal bir olgudur</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f8d6de"/><g transform="translate(14,14) scale(0.92)"><circle cx="26" cy="34" r="11" fill="#c04a68"/><path d="M12 78 V60 A14 14 0 0 1 40 60 V78 Z" fill="#c04a68"/>
+<circle cx="74" cy="34" r="11" fill="#f0a0b4"/><path d="M60 78 V60 A14 14 0 0 1 88 60 V78 Z" fill="#f0a0b4"/>
+<circle cx="50" cy="26" r="13" fill="#8f3049"/><path d="M33 82 V60 A17 17 0 0 1 67 60 V82 Z" fill="#8f3049"/></g></svg></span><span class="ab-rozet">2️⃣</span> Din Toplumsal Bir Olgudur</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fdeef1"/><circle cx="70" cy="70" r="58" fill="#f8d6de" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-t"><path d="M14 52 L50 22 L86 52 Z" fill="#c04a68"/>
+<rect x="24" y="52" width="52" height="34" rx="5" fill="#fff" stroke="#8f3049" stroke-width="3.2"/>
+<rect x="42" y="64" width="16" height="22" rx="3" fill="#f0a0b4"/>
+<rect x="60" y="58" width="12" height="12" rx="3" fill="#f0a0b4" opacity=".7"/></g></g></svg></div>
     <p class="ko-giris">İbadetler sadece "seninle Allah arasında" bir şey olsaydı, neden çoğu ibadet insanı başkalarıyla bir araya getiriyor?</p>
     <p class="ko-amac">🎯 Bu bölümde: Dinin sosyal hayattaki yerini ve ibadetlerin topluma kattıklarını öğreneceğiz.</p>
     <p>Din, sadece kişinin iç dünyasında yaşadığı bir duygu değildir; aynı zamanda <b>toplumsal bir olgudur</b>. İnsanları bir araya getirir, aralarında ortak değerler oluşturur ve birlikte yaşamayı kolaylaştırır. Bunu en açık şekilde ibadetlerde görürüz.</p>
@@ -892,8 +1159,39 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Helal Kazanç ve Haram Kazanç Yolları</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-kavram-haritasi"><h4 class="ka-blok-bas">🗺️ Kavram Haritası<span class="ka-rozet">Kavram ilişkisi</span></h4><p class="ka-blok-alt">Bu konunun alt başlıkları ve aralarındaki ilişki</p><div class="ka-kh-merkez">Dinin toplumsal işlevleri</div><span class="ka-kh-cizgi"></span><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdeef1"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8d6de" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8d6de" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#c04a68"/>
+<g stroke="#8f3049" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#f0a0b4"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#f0a0b4"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#f0a0b4"/></g></g></svg></span><span class="ka-alt-govde"><b>Birleştirme</b><span>Ortak değerler</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdeef1"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8d6de" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8d6de" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M30 34 Q50 24 70 34 L80 60 A30 30 0 0 1 20 60 Z" fill="#c04a68"/>
+<path d="M34 34 Q50 44 66 34" stroke="#8f3049" stroke-width="3.4" fill="none"/>
+<circle cx="50" cy="60" r="12" fill="#f0a0b4"/><path d="M44 60 H56 M50 54 V66" stroke="#8f3049" stroke-width="3" stroke-linecap="round"/>
+<path d="M40 26 Q50 14 60 26" stroke="#8f3049" stroke-width="4" fill="none" stroke-linecap="round"/></g></g></svg></span><span class="ka-alt-govde"><b>Yardımlaşma</b><span>Zekât, sadaka, vakıf</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdeef1"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8d6de" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8d6de" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><path d="M50 16 V80" stroke="#8f3049" stroke-width="5" stroke-linecap="round"/>
+<path d="M20 30 H80" stroke="#8f3049" stroke-width="5" stroke-linecap="round"/>
+<circle cx="50" cy="16" r="5" fill="#c04a68"/>
+<path d="M20 30 L10 50 H30 Z" fill="#c04a68"/><path d="M80 30 L70 50 H90 Z" fill="#c04a68"/>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#8f3049"/></g></g></svg></span><span class="ka-alt-govde"><b>Ahlak</b><span>Ortak davranış ölçüsü</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdeef1"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8d6de" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8d6de" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><rect x="12" y="70" width="24" height="18" rx="4" fill="#f0a0b4"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#c04a68"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#8f3049"/>
+<circle cx="76" cy="20" r="7" fill="#f0a0b4"/></g></g></svg></span><span class="ka-alt-govde"><b>Kimlik</b><span>Kültürel aidiyet</span></span></div></div></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-3"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#eaf7ee"/><g class="kai-bl" opacity=".85"><ellipse cx="190" cy="94" rx="180" ry="82" fill="#cdeed8"/><ellipse cx="710" cy="151" rx="216" ry="72" fill="#cdeed8" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#8fd6a6" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(56,34) scale(1.720)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><path d="M50 16 V80" stroke="#2a6b43" stroke-width="5" stroke-linecap="round"/>
+<path d="M20 30 H80" stroke="#2a6b43" stroke-width="5" stroke-linecap="round"/>
+<circle cx="50" cy="16" r="5" fill="#3f8f5f"/>
+<path d="M20 30 L10 50 H30 Z" fill="#3f8f5f"/><path d="M80 30 L70 50 H90 Z" fill="#3f8f5f"/>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#2a6b43"/></g></g></g><g transform="translate(700,40) scale(1.360)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><path d="M30 34 Q50 24 70 34 L80 60 A30 30 0 0 1 20 60 Z" fill="#3f8f5f"/>
+<path d="M34 34 Q50 44 66 34" stroke="#2a6b43" stroke-width="3.4" fill="none"/>
+<circle cx="50" cy="60" r="12" fill="#8fd6a6"/><path d="M44 60 H56 M50 54 V66" stroke="#2a6b43" stroke-width="3" stroke-linecap="round"/>
+<path d="M40 26 Q50 14 60 26" stroke="#2a6b43" stroke-width="4" fill="none" stroke-linecap="round"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-2.jpg" alt="Helal Kazanç ve Haram Kazanç Yolları" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 3</span><h4>Helal Kazanç ve Haram Kazanç Yolları</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 3</span><span class="ka-giris">Helal kazanç ve haram kazanç yolları</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#cdeed8"/><g transform="translate(14,14) scale(0.92)"><path d="M50 16 V80" stroke="#2a6b43" stroke-width="5" stroke-linecap="round"/>
+<path d="M20 30 H80" stroke="#2a6b43" stroke-width="5" stroke-linecap="round"/>
+<circle cx="50" cy="16" r="5" fill="#3f8f5f"/>
+<path d="M20 30 L10 50 H30 Z" fill="#3f8f5f"/><path d="M80 30 L70 50 H90 Z" fill="#3f8f5f"/>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#2a6b43"/></g></svg></span><span class="ab-rozet">3️⃣</span> Helal Kazanç ve Haram Kazanç Yolları</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#eaf7ee"/><circle cx="70" cy="70" r="58" fill="#cdeed8" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M30 34 Q50 24 70 34 L80 60 A30 30 0 0 1 20 60 Z" fill="#3f8f5f"/>
+<path d="M34 34 Q50 44 66 34" stroke="#2a6b43" stroke-width="3.4" fill="none"/>
+<circle cx="50" cy="60" r="12" fill="#8fd6a6"/><path d="M44 60 H56 M50 54 V66" stroke="#2a6b43" stroke-width="3" stroke-linecap="round"/>
+<path d="M40 26 Q50 14 60 26" stroke="#2a6b43" stroke-width="4" fill="none" stroke-linecap="round"/></g></g></svg></div>
     <p class="ko-giris">Bir sınavda kopya çekerek alınan 100 ile çalışarak alınan 70... Hangisi gerçekten senin?</p>
     <p class="ko-amac">🎯 Bu bölümde: Helal kazancın önemini ve yasaklanan haksız kazanç yollarını öğreneceğiz.</p>
     <p>İslam, <b>emek karşılığı</b> elde edilen kazancı esas alır. Çalışmak, üretmek ve alın teri dökmek değerlidir. <b>Helal kazanç</b>, hem kazanma yolunun hem de kazanılan şeyin meşru olmasıdır. Bu ilke, zarûrât-ı hamsedeki <b>malın korunması</b> değerinin doğrudan bir sonucudur: herkesin malı güvende olmalı, kimse başkasının hakkını yiyerek zengin olmamalıdır.</p>
@@ -937,8 +1235,33 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">4️⃣ Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Tahrif</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-karsilastirma-semasi"><h4 class="ka-blok-bas">⚖️ Karşılaştırma<span class="ka-rozet">Karşılaştırma görseli</span></h4><p class="ka-blok-alt">Helâl ve haram kazanç</p><div class="ka-krs"><div class="ka-krs-sut"><h5>Helâl kazanç</h5><div class="ka-krs-satir" style="--gecikme:0.00s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#3f8f5f"/>
+<g stroke="#2a6b43" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#8fd6a6"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#8fd6a6"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#8fd6a6"/></g></g></svg></span><span>Emek</span></div><div class="ka-krs-satir" style="--gecikme:0.06s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><circle cx="50" cy="50" r="34" fill="#3f8f5f"/><path d="M32 52 L45 65 L70 38" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></svg></span><span>Dürüst ticaret</span></div><div class="ka-krs-satir" style="--gecikme:0.12s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><rect x="12" y="70" width="24" height="18" rx="4" fill="#8fd6a6"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#3f8f5f"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#2a6b43"/>
+<circle cx="76" cy="20" r="7" fill="#8fd6a6"/></g></g></svg></span><span>Adil ücret</span></div></div><div class="ka-krs-sut"><h5>Haram kazanç</h5><div class="ka-krs-satir" style="--gecikme:0.24s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M50 12 L92 84 H8 Z" fill="#3f8f5f" stroke="#2a6b43" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M50 38 V60" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="50" cy="72" r="4.4" fill="#fff"/></g></g></svg></span><span>Faiz</span></div><div class="ka-krs-satir" style="--gecikme:0.30s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M24 62 A28 28 0 1 1 42 82" stroke="#3f8f5f" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M42 70 L44 88 L26 84 Z" fill="#3f8f5f"/>
+<circle cx="50" cy="50" r="12" fill="#8fd6a6"/></g></g></svg></span><span>Hile ve aldatma</span></div><div class="ka-krs-satir" style="--gecikme:0.36s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><path d="M14 92 L40 34 H60 L86 92 Z" fill="#8fd6a6"/>
+<path d="M50 40 V48 M50 56 V66 M50 74 V86" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+<path d="M40 34 H60" stroke="#3f8f5f" stroke-width="4" stroke-linecap="round"/>
+<circle cx="50" cy="22" r="9" fill="#3f8f5f"/>
+<path d="M43 22 L48 27 L58 17" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></svg></span><span>Rüşvet</span></div><div class="ka-krs-satir" style="--gecikme:0.42s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf7ee"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cdeed8" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cdeed8" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M8 74 Q50 30 92 74" stroke="#3f8f5f" stroke-width="7" fill="none" stroke-linecap="round"/>
+<path d="M8 78 H92" stroke="#2a6b43" stroke-width="6" stroke-linecap="round"/>
+<g stroke="#8fd6a6" stroke-width="4" stroke-linecap="round"><path d="M26 60 V78"/><path d="M42 50 V78"/><path d="M58 50 V78"/><path d="M74 60 V78"/></g></g></g></svg></span><span>Kumar</span></div></div></div></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-4"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#fdf0ea"/><g class="kai-bl" opacity=".85"><ellipse cx="200" cy="80" rx="180" ry="82" fill="#f8dccd"/><ellipse cx="684" cy="162" rx="216" ry="72" fill="#f8dccd" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#eda285" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(48,44) scale(1.580)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><path d="M50 12 L92 84 H8 Z" fill="#c2603a" stroke="#8f4224" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M50 38 V60" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="50" cy="72" r="4.4" fill="#fff"/></g></g></g><g transform="translate(664,24) scale(1.520)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><path d="M6 74 Q50 60 50 78 Q50 60 94 74 L94 26 Q50 12 50 30 Q50 12 6 26 Z" fill="#fff" stroke="#8f4224" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M50 30 V78" stroke="#8f4224" stroke-width="3.5"/>
+<path d="M16 36 H42 M16 46 H42 M16 56 H38 M58 36 H84 M58 46 H84 M58 56 H80" stroke="#eda285" stroke-width="3" stroke-linecap="round"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-3.jpg" alt="Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Tahrif" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 4</span><h4>Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Tahrif</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 4</span><span class="ka-giris">Bidat, hurafe ve tahrif</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f8dccd"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L92 84 H8 Z" fill="#c2603a" stroke="#8f4224" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M50 38 V60" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="50" cy="72" r="4.4" fill="#fff"/></g></svg></span><span class="ab-rozet">4️⃣</span> Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Tahrif</h3>
+<div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fdf0ea"/><circle cx="70" cy="70" r="58" fill="#f8dccd" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M6 74 Q50 60 50 78 Q50 60 94 74 L94 26 Q50 12 50 30 Q50 12 6 26 Z" fill="#fff" stroke="#8f4224" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M50 30 V78" stroke="#8f4224" stroke-width="3.5"/>
+<path d="M16 36 H42 M16 46 H42 M16 56 H38 M58 36 H84 M58 46 H84 M58 56 H80" stroke="#eda285" stroke-width="3" stroke-linecap="round"/></g></g></svg></div>
     <p class="ko-giris">"Herkes böyle yapıyor" demek, bir davranışın dinden olduğunu kanıtlar mı?</p>
     <p class="ko-amac">🎯 Bu bölümde: Bidat, hurafe ve tahrif kavramlarını ve dini doğru kaynaklardan öğrenmenin önemini kavrayacağız.</p>
     <p>Zamanla, dinin aslında olmayan bazı inanış ve davranışlar dine karışabilir. Bunları üç kavramla adlandırırız.</p>
@@ -986,8 +1309,36 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">5️⃣ Bir Peygamber Tanıyorum: Hz. Yusuf (as)</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-karsilastirma-semasi"><h4 class="ka-blok-bas">⚖️ Karşılaştırma<span class="ka-rozet">Karşılaştırma görseli</span></h4><p class="ka-blok-alt">Yanlış dinî bilgi türleri</p><div class="ka-krs"><div class="ka-krs-sut"><h5>Kavram</h5><div class="ka-krs-satir" style="--gecikme:0.00s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdf0ea"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8dccd" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8dccd" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#c2603a"/>
+<g stroke="#8f4224" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#eda285"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#eda285"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#eda285"/></g></g></svg></span><span>Bidat: sonradan uydurulan uygulama</span></div><div class="ka-krs-satir" style="--gecikme:0.06s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdf0ea"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8dccd" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8dccd" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M50 84 C22 64 10 50 10 36 A20 20 0 0 1 50 28 A20 20 0 0 1 90 36 C90 50 78 64 50 84 Z" fill="#c2603a"/><circle cx="70" cy="38" r="6" fill="#fff" opacity=".45"/></g></g></svg></span><span>Hurafe: dine mal edilen asılsız inanış</span></div><div class="ka-krs-satir" style="--gecikme:0.12s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdf0ea"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8dccd" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8dccd" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><rect x="12" y="70" width="24" height="18" rx="4" fill="#eda285"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#c2603a"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#8f4224"/>
+<circle cx="76" cy="20" r="7" fill="#eda285"/></g></g></svg></span><span>Tahrif: bir metni değiştirmek</span></div></div><div class="ka-krs-sut"><h5>Korunma yolu</h5><div class="ka-krs-satir" style="--gecikme:0.24s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdf0ea"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8dccd" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8dccd" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M24 62 A28 28 0 1 1 42 82" stroke="#c2603a" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M42 70 L44 88 L26 84 Z" fill="#c2603a"/>
+<circle cx="50" cy="50" r="12" fill="#eda285"/></g></g></svg></span><span>Kaynağı doğrulamak</span></div><div class="ka-krs-satir" style="--gecikme:0.30s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdf0ea"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8dccd" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8dccd" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M18 82 L50 54 L82 82" stroke="#8f4224" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M30 84 L70 84" stroke="#8f4224" stroke-width="5" stroke-linecap="round"/>
+<path d="M14 52 Q50 40 50 58 Q50 40 86 52 L86 30 Q50 18 50 36 Q50 18 14 30 Z" fill="#fff" stroke="#c2603a" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M50 36 V58" stroke="#c2603a" stroke-width="3"/></g></g></svg></span><span>Kur’an ve sahih sünnete başvurmak</span></div><div class="ka-krs-satir" style="--gecikme:0.36s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#fdf0ea"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#f8dccd" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#f8dccd" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><rect x="16" y="44" width="68" height="42" rx="7" fill="#c2603a"/>
+<path d="M16 54 H84" stroke="#8f4224" stroke-width="4"/>
+<path d="M20 44 A30 14 0 0 1 80 44 Z" fill="#8f4224"/>
+<rect x="42" y="52" width="16" height="18" rx="4" fill="#eda285"/>
+<circle cx="50" cy="60" r="3" fill="#8f4224"/></g></g></svg></span><span>Güvenilir âlimlere danışmak</span></div></div></div></div><div class="ka-blok ka-gunluk-hayat"><h4 class="ka-blok-bas">🏠 Günlük Hayattan</h4><div class="ka-gunluk"><span class="ka-gunluk-gorsel"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fdf0ea"/><circle cx="70" cy="70" r="58" fill="#f8dccd" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M50 12 L92 84 H8 Z" fill="#c2603a" stroke="#8f4224" stroke-width="3.4" stroke-linejoin="round"/>
+<path d="M50 38 V60" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="50" cy="72" r="4.4" fill="#fff"/></g></g></svg></span><p>Sosyal medyada gördüğü bir “hadis”i kaynağına bakmadan paylaşmak, hurafenin yayılma yoludur.</p></div></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-5"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#f7f1e8"/><g class="kai-bl" opacity=".85"><ellipse cx="204" cy="84" rx="180" ry="82" fill="#ecdfcc"/><ellipse cx="665" cy="161" rx="216" ry="72" fill="#ecdfcc" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#d9b183" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(66,26) scale(1.800)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><path d="M50 12 L61 39 L90 41 L67 59 L75 87 L50 71 L25 87 L33 59 L10 41 L39 39 Z" fill="#d9b183" stroke="#a3703c" stroke-width="3.4" stroke-linejoin="round"/></g></g></g><g transform="translate(716,52) scale(1.240)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-f"><rect x="16" y="44" width="68" height="42" rx="7" fill="#a3703c"/>
+<path d="M16 54 H84" stroke="#7a5127" stroke-width="4"/>
+<path d="M20 44 A30 14 0 0 1 80 44 Z" fill="#7a5127"/>
+<rect x="42" y="52" width="16" height="18" rx="4" fill="#d9b183"/>
+<circle cx="50" cy="60" r="3" fill="#7a5127"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-4.jpg" alt="Bir Peygamber Tanıyorum: Hz. Yusuf (as)" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 5</span><h4>Bir Peygamber Tanıyorum: Hz. Yusuf (as)</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 5</span><span class="ka-giris">Hz. Yusuf (as) ve sabrı</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#ecdfcc"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L61 39 L90 41 L67 59 L75 87 L50 71 L25 87 L33 59 L10 41 L39 39 Z" fill="#d9b183" stroke="#a3703c" stroke-width="3.4" stroke-linejoin="round"/></g></svg></span><span class="ab-rozet">5️⃣</span> Bir Peygamber Tanıyorum: Hz. Yusuf (as)</h3>
+<div class="konu-illustrasyon" style="background:#f7e3d0"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f7f1e8"/><circle cx="70" cy="70" r="58" fill="#ecdfcc" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><rect x="16" y="44" width="68" height="42" rx="7" fill="#a3703c"/>
+<path d="M16 54 H84" stroke="#7a5127" stroke-width="4"/>
+<path d="M20 44 A30 14 0 0 1 80 44 Z" fill="#7a5127"/>
+<rect x="42" y="52" width="16" height="18" rx="4" fill="#d9b183"/>
+<circle cx="50" cy="60" r="3" fill="#7a5127"/></g></g></svg></div>
     <p class="ko-giris">Sana en büyük haksızlığı yapan kişi bir gün senden yardım istese, ne yapardın?</p>
     <p class="ko-amac">🎯 Bu bölümde: Hz. Yusuf'un (as) kıssasını ve bize öğrettiği değerleri kavrayacağız.</p>
     <p><b>Hz. Yusuf'un</b> hayatı, Kur'an-ı Kerim'de <b>Yûsuf suresi</b>nde baştan sona bir bütün hâlinde anlatılır. Kur'an bu kıssayı <b>"ahsenü'l-kasas"</b>, yani "kıssaların en güzeli" diye niteler.</p>
@@ -1014,8 +1365,34 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">6️⃣ Bir Sure Tanıyorum: Asr Suresi ve Anlamı</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-surec-semasi"><h4 class="ka-blok-bas">🔄 Adım Adım<span class="ka-rozet">Süreç şeması</span></h4><p class="ka-blok-alt">Hz. Yusuf (as) kıssasının akışı</p><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f7f1e8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#ecdfcc" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#ecdfcc" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M50 12 C68 38 78 50 78 62 A28 28 0 0 1 22 62 C22 50 32 38 50 12 Z" fill="#d9b183" stroke="#a3703c" stroke-width="3.4"/><path d="M38 62 A12 12 0 0 0 50 74" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/></g></g></svg></span><span class="ka-alt-govde"><span class="ka-alt-no">1</span><b>Rüya</b><span>Yusuf’un gördüğü rüya</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f7f1e8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#ecdfcc" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#ecdfcc" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><circle cx="50" cy="50" r="15" fill="#a3703c"/>
+<g stroke="#7a5127" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#d9b183"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#d9b183"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#d9b183"/></g></g></svg></span><span class="ka-alt-govde"><span class="ka-alt-no">2</span><b>Kuyu</b><span>Kardeşlerinin bıraktığı imtihan</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f7f1e8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#ecdfcc" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#ecdfcc" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><path d="M50 16 V80" stroke="#7a5127" stroke-width="5" stroke-linecap="round"/>
+<path d="M20 30 H80" stroke="#7a5127" stroke-width="5" stroke-linecap="round"/>
+<circle cx="50" cy="16" r="5" fill="#a3703c"/>
+<path d="M20 30 L10 50 H30 Z" fill="#a3703c"/><path d="M80 30 L70 50 H90 Z" fill="#a3703c"/>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#7a5127"/></g></g></svg></span><span class="ka-alt-govde"><span class="ka-alt-no">3</span><b>İftira ve zindan</b><span>Haksızlığa sabır</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f7f1e8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#ecdfcc" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#ecdfcc" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><rect x="12" y="70" width="24" height="18" rx="4" fill="#d9b183"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#a3703c"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#7a5127"/>
+<circle cx="76" cy="20" r="7" fill="#d9b183"/></g></g></svg></span><span class="ka-alt-govde"><span class="ka-alt-no">4</span><b>Yönetim</b><span>Ülke ekonomisini yönetmesi</span></span></div><div class="ka-alt-kart" style="--gecikme:0.24s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f7f1e8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#ecdfcc" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#ecdfcc" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><path d="M50 84 C22 64 10 50 10 36 A20 20 0 0 1 50 28 A20 20 0 0 1 90 36 C90 50 78 64 50 84 Z" fill="#a3703c"/><circle cx="70" cy="38" r="6" fill="#fff" opacity=".45"/></g></g></svg></span><span class="ka-alt-govde"><span class="ka-alt-no">5</span><b>Af</b><span>Kardeşlerini bağışlaması</span></span></div></div></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-6"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#f3eefb"/><g class="kai-bl" opacity=".85"><ellipse cx="205" cy="81" rx="180" ry="82" fill="#e0d3f5"/><ellipse cx="713" cy="158" rx="216" ry="72" fill="#e0d3f5" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#b498e2" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(56,34) scale(1.720)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><circle cx="50" cy="52" r="34" fill="#fff" stroke="#6f4aa8" stroke-width="4"/>
+<path d="M50 32 V52 L64 62" stroke="#4d3079" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+<circle cx="50" cy="52" r="3.4" fill="#6f4aa8"/>
+<path d="M50 12 V20" stroke="#6f4aa8" stroke-width="4" stroke-linecap="round"/></g></g></g><g transform="translate(700,40) scale(1.360)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><rect x="8" y="20" width="84" height="58" rx="10" fill="#fff" stroke="#6f4aa8" stroke-width="3.4"/>
+<rect x="14" y="26" width="72" height="46" rx="7" fill="none" stroke="#b498e2" stroke-width="2.4"/>
+<path d="M24 58 Q34 34 46 50 Q56 64 64 44 Q70 30 78 42" stroke="#4d3079" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+<circle cx="34" cy="62" r="2.6" fill="#4d3079"/><circle cx="58" cy="62" r="2.6" fill="#4d3079"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-5.jpg" alt="Bir Sure Tanıyorum: Asr Suresi ve Anlamı" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 6</span><h4>Bir Sure Tanıyorum: Asr Suresi ve Anlamı</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 6</span><span class="ka-giris">Asr suresi ve anlamı</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#e0d3f5"/><g transform="translate(14,14) scale(0.92)"><circle cx="50" cy="52" r="34" fill="#fff" stroke="#6f4aa8" stroke-width="4"/>
+<path d="M50 32 V52 L64 62" stroke="#4d3079" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+<circle cx="50" cy="52" r="3.4" fill="#6f4aa8"/>
+<path d="M50 12 V20" stroke="#6f4aa8" stroke-width="4" stroke-linecap="round"/></g></svg></span><span class="ab-rozet">6️⃣</span> Bir Sure Tanıyorum: Asr Suresi ve Anlamı</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f3eefb"/><circle cx="70" cy="70" r="58" fill="#e0d3f5" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><rect x="8" y="20" width="84" height="58" rx="10" fill="#fff" stroke="#6f4aa8" stroke-width="3.4"/>
+<rect x="14" y="26" width="72" height="46" rx="7" fill="none" stroke="#b498e2" stroke-width="2.4"/>
+<path d="M24 58 Q34 34 46 50 Q56 64 64 44 Q70 30 78 42" stroke="#4d3079" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+<circle cx="34" cy="62" r="2.6" fill="#4d3079"/><circle cx="58" cy="62" r="2.6" fill="#4d3079"/></g></g></svg></div>
     <p class="ko-giris">Dün bu saatte ne yapıyordun? Geçen zamanı geri getirmenin bir yolu var mı?</p>
     <p class="ko-amac">🎯 Bu bölümde: Asr suresini ve verdiği dört maddelik kurtuluş reçetesini öğreneceğiz.</p>
     <p><b>Asr suresi</b>, Kur'an-ı Kerim'in 103. suresidir; Mekke'de inmiştir ve yalnızca <b>üç ayettir</b>. "Asr" kelimesi zaman, çağ ve ikindi vakti anlamlarına gelir. Sure adını, ilk ayetteki bu yeminden alır.</p>

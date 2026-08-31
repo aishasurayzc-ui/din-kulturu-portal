@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>LGS Hazırlık Merkezi — Din Kültürü ve Ahlak Bilgisi</title>
+<meta name="description" content="8. sınıf LGS Din Kültürü ve Ahlak Bilgisi hazırlık merkezi: dashboard, konu anlatımı, kazanım testleri, deneme merkezi, çalışma koçu, rozetler ve performans analizi.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block">
+<link rel="stylesheet" href="../assets/sinav-merkezi.css">
+</head>
+<body>
+  <nav class="sm-topbar">
+    <a href="../index.html"><span class="msi" aria-hidden="true">arrow_back</span> Sınav Merkezi</a>
+    <a href="../../din-kulturu-tum-siniflar.html"><span class="msi" aria-hidden="true">home</span> Ana Portal</a>
+    <button type="button" class="sm-tema-btn" onclick="smTemaDegistir()"><span class="msi" aria-hidden="true">dark_mode</span> Koyu Tema</button>
+  </nav>
+
+  <section class="sm-hero" style="--vurgu:var(--lgs)">
+    <span class="sm-hero-blob sm-hero-blob-1" aria-hidden="true"></span>
+    <span class="sm-hero-blob sm-hero-blob-2" aria-hidden="true"></span>
+    <div class="sm-hero-ic">
+      <div class="sm-hero-ikon" aria-hidden="true"><span class="msi">school</span></div>
+      <h1>LGS Hazırlık Merkezi</h1>
+      <p>8. sınıf Din Kültürü ve Ahlak Bilgisi LGS hazırlığın tek yerde.</p>
+    </div>
+    <svg class="sm-hero-dalga" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z"></path></svg>
+  </section>
+
+  <main class="sm-sarmal" style="--vurgu:var(--lgs)">
+
+    <!-- DURUM ŞERİDİ: Dashboard özeti + Geri Sayım — kart değil, ana ekranın üstünde sabit -->
+    <div class="lgs-durum-seridi">
+      <div class="lgs-durum-kutu" id="lgsDashboard"></div>
+      <div class="lgs-durum-kutu sm-arac-kart" id="lgsGeriSayim" style="margin:0">
+        <div class="sm-hedef-satir">
+          <span>Sınav tarihin:</span>
+          <input type="date" class="sm-geri-sayim-girdi">
+          <button type="button" class="sm-btn sm-geri-sayim-kaydet">Kaydet</button>
+        </div>
+        <div class="sm-geri-sayim-sonuc"></div>
+      </div>
+    </div>
+
+    <!-- ANA MENÜ: yalnızca 4 kart -->
+    <div class="lgs-ana-menu" data-lgs-menu>
+      <button type="button" class="lgs-kart" data-lgs-git="konular">
+        <span class="lgs-kart-ikon" aria-hidden="true">📚</span>
+        <b>Konular</b>
+        <span>Konu anlatımı, kazanım testleri ve oyunlarla çalışın.</span>
+      </button>
+      <button type="button" class="lgs-kart" data-lgs-git="denemeler">
+        <span class="lgs-kart-ikon" aria-hidden="true">🧪</span>
+        <b>Denemeler</b>
+        <span>Deneme çözün, günlük ve haftalık planınızı takip edin.</span>
+      </button>
+      <button type="button" class="lgs-kart" data-lgs-git="cikmis-sorular">
+        <span class="lgs-kart-ikon" aria-hidden="true">📝</span>
+        <b>Çıkmış Sorular</b>
+        <span>Geçmiş yıl sorularını ve günün sorusunu inceleyin.</span>
+      </button>
+      <button type="button" class="lgs-kart" data-lgs-git="sinav-analizi">
+        <span class="lgs-kart-ikon" aria-hidden="true">📊</span>
+        <b>Sınav Analizi</b>
+        <span>Sınavların konu ve kazanım analizlerini inceleyin.</span>
+      </button>
+    </div>
+
+    <!-- DETAY: bir kart seçilince açılır -->
+    <div class="lgs-detay" data-lgs-detay hidden>
+      <button type="button" class="lgs-geri" data-lgs-geri><span class="msi" aria-hidden="true">arrow_back</span> LGS Hazırlık</button>
+
+      <!-- 📚 KONULAR -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="konular" hidden>
+        <nav class="sm-sekme-satir" id="lgsKonularSekme" role="tablist" aria-label="Konular">
+          <button type="button" data-sekme="konu-anlatimlari" aria-selected="true">Konu Anlatımları</button>
+          <button type="button" data-sekme="konu-ozetleri" aria-selected="false">Konu Özetleri</button>
+          <button type="button" data-sekme="kazanim-testleri" aria-selected="false">Kazanım Testleri</button>
+          <button type="button" data-sekme="konu-testleri" aria-selected="false">Konu Testleri</button>
+          <button type="button" data-sekme="oyun-merkezi" aria-selected="false">Oyun Merkezi</button>
+          <button type="button" data-sekme="favoriler" aria-selected="false">Favorilerim</button>
+        </nav>
+        <div id="lgsKonularPaneller">
+          <section class="sm-panel" data-panel="konu-anlatimlari">
+            <div class="sm-link-izgara" id="lgsKonuAnlatimlari">
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/index.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">balance</span></span><span><b>1. Ünite</b><span>Kader İnancı</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">volunteer_activism</span></span><span><b>2. Ünite</b><span>Zekât ve Sadaka</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">diversity_3</span></span><span><b>3. Ünite</b><span>Din ve Hayat</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">star</span></span><span><b>4. Ünite</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">auto_stories</span></span><span><b>5. Ünite</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="konu-ozetleri" hidden>
+            <div class="sm-link-izgara" id="lgsKonuOzetleri">
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/index.html#ozet8"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>1. Ünite Özeti</b><span>Kader İnancı</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2.html#ozet82"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>2. Ünite Özeti</b><span>Zekât ve Sadaka</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3.html#ozet83"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>3. Ünite Özeti</b><span>Din ve Hayat</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4.html#ozet84"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>4. Ünite Özeti</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5.html#ozet85"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">description</span></span><span><b>5. Ünite Özeti</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="kazanim-testleri" hidden>
+            <div class="sm-kazanim-izgara" id="lgsKazanimTestleri"></div>
+          </section>
+          <section class="sm-panel" data-panel="konu-testleri" hidden>
+            <div class="sm-yakinda"><span class="msi" aria-hidden="true">quiz</span><h3>Konu Testleri hazırlanıyor</h3><p>Bu arada Kazanım Testleri'ndeki testleri deneyebilirsin.</p></div>
+          </section>
+          <section class="sm-panel" data-panel="oyun-merkezi" hidden>
+            <div class="sm-oyun-izgara" id="lgsOyunMerkezi">
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>1. Ünite Oyunları</b><span>Kader İnancı</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite2-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>2. Ünite Oyunları</b><span>Zekât ve Sadaka</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite3-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>3. Ünite Oyunları</b><span>Din ve Hayat</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite4-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>4. Ünite Oyunları</b><span>Hz. Muhammed'in Örnekliği</span></span></a>
+              <a class="sm-link-kart" href="../../din-kulturu-8sinif-1unite/unite5-oyun-merkezi.html"><span class="sm-link-ikon" aria-hidden="true"><span class="msi">stadia_controller</span></span><span><b>5. Ünite Oyunları</b><span>Kur'an-ı Kerim ve Özellikleri</span></span></a>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="favoriler" hidden>
+            <div id="lgsFavoriler"></div>
+          </section>
+        </div>
+      </div>
+
+      <!-- 🧪 DENEMELER -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="denemeler" hidden>
+        <nav class="sm-sekme-satir" id="lgsDenemelerSekme" role="tablist" aria-label="Denemeler">
+          <button type="button" data-sekme="deneme-merkezi" aria-selected="true">Deneme Merkezi</button>
+          <button type="button" data-sekme="gunluk-program" aria-selected="false">Günlük Program</button>
+          <button type="button" data-sekme="calisma-plani" aria-selected="false">Çalışma Planı</button>
+        </nav>
+        <div id="lgsDenemelerPaneller">
+          <section class="sm-panel" data-panel="deneme-merkezi">
+            <div id="lgsDenemeMerkezi">
+              <div class="sm-deneme-secim-alani">
+                <div class="sm-deneme-sure-secim">
+                  <button type="button" data-sureli="0" aria-pressed="true">Süresiz</button>
+                  <button type="button" data-sureli="1" aria-pressed="false">Süreli (40 sn/soru)</button>
+                </div>
+                <div class="sm-deneme-izgara" style="margin-top:16px;">
+                  <div class="sm-deneme-kart" data-boyut="10"><span class="msi" aria-hidden="true">bolt</span><h4>Mini Deneme</h4><span>10 soru</span></div>
+                  <div class="sm-deneme-kart" data-boyut="20"><span class="msi" aria-hidden="true">quiz</span><h4>20 Soru</h4><span>Orta yoğunluk</span></div>
+                  <div class="sm-deneme-kart" data-boyut="40"><span class="msi" aria-hidden="true">library_books</span><h4>40 Soru</h4><span>Yoğun tekrar</span></div>
+                  <div class="sm-deneme-kart" data-boyut="52"><span class="msi" aria-hidden="true">workspace_premium</span><h4>Tam Deneme</h4><span>Tüm soru havuzu (52 soru)</span></div>
+                </div>
+              </div>
+              <div class="sm-deneme-oyun-alani" hidden></div>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="gunluk-program" hidden>
+            <div class="sm-checklist" id="lgsGunlukProgram"></div>
+          </section>
+          <section class="sm-panel" data-panel="calisma-plani" hidden>
+            <div class="sm-plan-izgara" id="lgsCalismaPlani" style="margin-bottom:20px"></div>
+            <div class="sm-arac-kart" id="lgsGunlukHedef">
+              <div class="sm-hedef-satir">
+                <span>Günlük hedefim:</span>
+                <input type="number" class="sm-hedef-girdi" min="1" max="100" value="10">
+                <span>soru</span>
+              </div>
+              <div class="sm-ilerleme-dis"><div class="sm-ilerleme-ic" style="width:0%"></div></div>
+              <p class="sm-hedef-metin">Bugün: 0 / 10 soru</p>
+              <button type="button" class="sm-btn sm-hedef-artir"><span class="msi" aria-hidden="true">add</span> 1 Soru Çözdüm</button>
+              <button type="button" class="sm-btn sm-btn-ikincil sm-hedef-sifirla">Bugünü Sıfırla</button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- 📝 ÇIKMIŞ SORULAR -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="cikmis-sorular" hidden>
+        <nav class="sm-sekme-satir" id="lgsSorularSekme" role="tablist" aria-label="Çıkmış Sorular">
+          <button type="button" data-sekme="cikmis-sorular" aria-selected="true">Çıkmış Sorular</button>
+          <button type="button" data-sekme="yeni-nesil" aria-selected="false">Yeni Nesil Sorular</button>
+          <button type="button" data-sekme="gunun-sorusu" aria-selected="false">Günün Sorusu</button>
+        </nav>
+        <div id="lgsSorularPaneller">
+          <section class="sm-panel" data-panel="cikmis-sorular">
+            <div class="sm-yakinda"><span class="msi" aria-hidden="true">history</span><h3>Çıkmış Sorular hazırlanıyor</h3><p>Gerçek geçmiş sınav sorusu uydurulamaz; bu arada Deneme Merkezi ve Kazanım Testleri'ni çözebilirsin.</p></div>
+          </section>
+          <section class="sm-panel" data-panel="yeni-nesil" hidden>
+            <div class="sm-yakinda"><span class="msi" aria-hidden="true">auto_awesome</span><h3>Yeni Nesil Sorular hazırlanıyor</h3><p>Senaryo/metin temelli, çok adımlı soru tipleri hazırlanıyor.</p></div>
+          </section>
+          <section class="sm-panel" data-panel="gunun-sorusu" hidden>
+            <div class="sm-gunun-sorusu" id="lgsGununSorusu"></div>
+          </section>
+        </div>
+      </div>
+
+      <!-- 📊 SINAV ANALİZİ -->
+      <div class="lgs-kart-icerik" data-lgs-icerik="sinav-analizi" hidden>
+        <nav class="sm-sekme-satir" id="lgsAnalizSekme" role="tablist" aria-label="Sınav Analizi">
+          <button type="button" data-sekme="sinav-analizi" aria-selected="true">Analiz</button>
+          <button type="button" data-sekme="performans" aria-selected="false">Performans</button>
+          <button type="button" data-sekme="istatistikler" aria-selected="false">İstatistikler</button>
+          <button type="button" data-sekme="rozet-sistemi" aria-selected="false">Rozetler</button>
+          <button type="button" data-sekme="ai-koc" aria-selected="false">Çalışma Koçu</button>
+        </nav>
+        <div id="lgsAnalizPaneller">
+          <section class="sm-panel" data-panel="sinav-analizi">
+            <div class="sm-analiz" id="lgsSinavAnalizi">
+              <div class="sm-analiz-baslik">
+                <p class="sm-panel-aciklama">2021–2026 LGS Din Kültürü sınavlarının konu, kazanım ve soru eğilimlerini inceleyin.</p>
+              </div>
+              <div class="sm-analiz-menu" data-analiz-menu>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="yillar"><span class="sm-analiz-kart-ikon" aria-hidden="true">📅</span><b>Yıllara Göre</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="konular"><span class="sm-analiz-kart-ikon" aria-hidden="true">📚</span><b>Konulara Göre</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="kazanimlar"><span class="sm-analiz-kart-ikon" aria-hidden="true">🎯</span><b>Kazanımlara Göre</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="egilimler"><span class="sm-analiz-kart-ikon" aria-hidden="true">📈</span><b>Soru Eğilimleri</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="oneriler"><span class="sm-analiz-kart-ikon" aria-hidden="true">⭐</span><b>Çalışma Önerileri</b></button>
+                <button type="button" class="sm-analiz-kart" data-analiz-git="ara"><span class="sm-analiz-kart-ikon" aria-hidden="true">🔍</span><b>Ara</b></button>
+              </div>
+              <div class="sm-analiz-detay-alani" data-analiz-detay hidden>
+                <button type="button" class="sm-analiz-geri" data-analiz-geri><span class="msi" aria-hidden="true">arrow_back</span> Sınav Analizi</button>
+                <div data-analiz-icerik></div>
+              </div>
+            </div>
+          </section>
+          <section class="sm-panel" data-panel="performans" hidden>
+            <div id="lgsYanlisAnaliz" style="margin-bottom:24px;"></div>
+            <div id="lgsPerformansGrafik"></div>
+          </section>
+          <section class="sm-panel" data-panel="istatistikler" hidden>
+            <div id="lgsIstatistikler"></div>
+          </section>
+          <section class="sm-panel" data-panel="rozet-sistemi" hidden>
+            <div class="sm-rozet-izgara" id="lgsRozetler"></div>
+          </section>
+          <section class="sm-panel" data-panel="ai-koc" hidden>
+            <div class="sm-koc-kart">
+              <div class="sm-koc-baslik">
+                <div class="sm-koc-avatar"><span class="msi" aria-hidden="true">smart_toy</span></div>
+                <div><b>Çalışma Koçun</b><span>Verilerine göre güncellenir</span></div>
+              </div>
+              <div id="lgsKoc"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../assets/sinav-merkezi.js"></script>
+  <script>
+/* ======================================================================
+   LGS 8. SINIF DKAB — SORU HAVUZU (sayfaya özel gerçek içerik)
+   MEB DKAB Öğretim Programı 8. sınıf üniteleri temel alınarak hazırlanmış
+   PRATİK sorulardır; gerçek geçmiş LGS soruları DEĞİLDİR ve öğretmen
+   onayından geçmeden yayına alınmamalıdır.
+====================================================================== */
+const LGS_UNITE_ADLARI = {
+  unite1:"Kader İnancı", unite2:"Zekât ve Sadaka", unite3:"Din ve Hayat",
+  unite4:"Hz. Muhammed'in Örnekliği", unite5:"Kur'an-ı Kerim ve Özellikleri"
+};
+const LGS_KAZANIMLAR = [
+  {id:'k1a', uniteId:'unite1', uniteAd:'1. Ünite · Kader İnancı', baslik:'Kader ve Kaza İnancı', zorluklar:['kolay','orta']},
+  {id:'k1b', uniteId:'unite1', uniteAd:'1. Ünite · Kader İnancı', baslik:"İnsanın İradesi ve Kader", zorluklar:['orta']},
+  {id:'k1c', uniteId:'unite1', uniteAd:'1. Ünite · Kader İnancı', baslik:'Kaderle İlgili Kavramlar ve Hz. Musa (as)', zorluklar:['kolay','orta']},
+  {id:'k2a', uniteId:'unite2', uniteAd:'2. Ünite · Zekât ve Sadaka', baslik:'Zekât ve Sadaka İbadeti', zorluklar:['kolay','orta']},
+  {id:'k2b', uniteId:'unite2', uniteAd:'2. Ünite · Zekât ve Sadaka', baslik:'Toplumsal Faydalar, Hz. Şuayb (as) ve Maun Suresi', zorluklar:['orta','zor']},
+  {id:'k3a', uniteId:'unite3', uniteAd:'3. Ünite · Din ve Hayat', baslik:'Dinin Gayesi: Zarûrât-ı Hamse', zorluklar:['orta','zor']},
+  {id:'k3b', uniteId:'unite3', uniteAd:'3. Ünite · Din ve Hayat', baslik:'Helal-Haram Kazanç ve Hz. Yusuf (as)', zorluklar:['kolay','orta','zor']},
+  {id:'k4a', uniteId:'unite4', uniteAd:"4. Ünite · Hz. Muhammed'in Örnekliği", baslik:'Doğruluk, Güvenilirlik ve Merhamet', zorluklar:['kolay','orta']},
+  {id:'k4b', uniteId:'unite4', uniteAd:"4. Ünite · Hz. Muhammed'in Örnekliği", baslik:'İstişare, Cesaret ve İnsana Değer Verme', zorluklar:['orta','zor']},
+  {id:'k5a', uniteId:'unite5', uniteAd:"5. Ünite · Kur'an-ı Kerim", baslik:"Kur'an-ı Kerim ve Sünnet", zorluklar:['kolay','orta']},
+  {id:'k5b', uniteId:'unite5', uniteAd:"5. Ünite · Kur'an-ı Kerim", baslik:"Kur'an'ın Konuları, Özellikleri ve Hz. Nuh (as)", zorluklar:['orta','zor']}
+];
+const LGS_SORU_HAVUZU = [
+  {uniteId:'unite1', kazanimId:'k1a', zorluk:'kolay', soru:"Allah'ın ezelde (öncesizlikte) olacak her şeyi bilip takdir etmesine ne denir?", secenekler:["Kader","Kaza","Sadaka","Zekât"], dogru:"Kader", aciklama:"Kader, Allah'ın ezeli ilmiyle her şeyi bilip takdir etmesidir."},
+  {uniteId:'unite1', kazanimId:'k1a', zorluk:'kolay', soru:"Allah'ın ezelde takdir ettiği şeylerin zamanı gelince gerçekleşmesine ne denir?", secenekler:["Kaza","Kader","İnfak","İstişare"], dogru:"Kaza", aciklama:"Kaza, takdir edilenin fiilen gerçekleşmesidir."},
+  {uniteId:'unite1', kazanimId:'k1a', zorluk:'orta', soru:"Kader ve kaza inancı İslam'ın hangi temel esaslarından biridir?", secenekler:["İman esaslarından biridir","İbadet esaslarından biridir","Sadece bir gelenektir","Tasavvufi bir görüştür"], dogru:"İman esaslarından biridir", aciklama:"Kader ve kaza, altı iman esasından biridir."},
+  {uniteId:'unite1', kazanimId:'k1a', zorluk:'zor', soru:"Aşağıdakilerden hangisi kader inancıyla çelişir?", secenekler:["Her şeyin kendiliğinden, tesadüfen oluştuğuna inanmak","Allah'ın ilminin sonsuz olduğuna inanmak","Çalışmanın ve tedbir almanın önemine inanmak","Sonucu Allah'a havale etmek (tevekkül)"], dogru:"Her şeyin kendiliğinden, tesadüfen oluştuğuna inanmak", aciklama:"Kader inancı, her şeyin Allah'ın ilim ve takdiriyle olduğunu kabul eder; tesadüf fikriyle çelişir."},
+  {uniteId:'unite1', kazanimId:'k1b', zorluk:'kolay', soru:"İnsana, iyi ile kötüyü, doğru ile yanlışı seçme gücü veren özelliğe ne denir?", secenekler:["İrade","Kader","Kaza","Tevekkül"], dogru:"İrade", aciklama:"İrade, insanın seçim yapabilme gücüdür."},
+  {uniteId:'unite1', kazanimId:'k1b', zorluk:'orta', soru:"'Kaderimde varmış' diyerek sorumluluktan kaçmak dinî açıdan nasıl değerlendirilir?", secenekler:["Yanlıştır; insan kendi seçimlerinden sorumludur","Doğrudur; insanın hiçbir sorumluluğu yoktur","Kader inancının gereğidir","Sadece büyükler için geçerlidir"], dogru:"Yanlıştır; insan kendi seçimlerinden sorumludur", aciklama:"İnsan, iradesiyle yaptığı seçimlerden sorumludur; kaderi bahane etmek doğru değildir."},
+  {uniteId:'unite1', kazanimId:'k1b', zorluk:'kolay', soru:"Bir işi yapmadan önce gerekli tedbirleri alıp sonucu Allah'a bırakmaya ne denir?", secenekler:["Tevekkül","Kaza","İrade","İnfak"], dogru:"Tevekkül", aciklama:"Tevekkül, çalışıp tedbir aldıktan sonra sonucu Allah'a bırakmaktır."},
+  {uniteId:'unite1', kazanimId:'k1b', zorluk:'orta', soru:"Kader inancı insanı çalışma ve tedbir almaktan alıkoyar mı?", secenekler:["Hayır, tam tersine önce çalışıp tedbir almak gerekir","Evet, çünkü her şey zaten önceden belirlenmiştir","Sadece ibadetlerde geçerlidir","Kader inancının bununla ilgisi yoktur"], dogru:"Hayır, tam tersine önce çalışıp tedbir almak gerekir", aciklama:"Doğru kader anlayışı, çalışıp tedbir almayı dışlamaz; tevekkül çabadan sonra gelir."},
+  {uniteId:'unite1', kazanimId:'k1c', zorluk:'orta', soru:"Hz. Musa'nın (as) mucizelerinden biri aşağıdakilerden hangisidir?", secenekler:["Asasının yılana dönüşmesi","Ateşin içinde yanmadan çıkması","Deveden su çıkarması","Balığın karnından kurtulması"], dogru:"Asasının yılana dönüşmesi", aciklama:"Hz. Musa'nın (as) asası, Allah'ın izniyle yılana dönüşmüştür."},
+  {uniteId:'unite1', kazanimId:'k1c', zorluk:'orta', soru:"Hz. Musa (as) hangi kavme peygamber olarak gönderilmiştir?", secenekler:["İsrailoğullarına","Ad kavmine","Semud kavmine","Medyen halkına"], dogru:"İsrailoğullarına", aciklama:"Hz. Musa (as), İsrailoğullarını Firavun'un zulmünden kurtarmakla görevlendirilmiştir."},
+  {uniteId:'unite1', kazanimId:'k1c', zorluk:'kolay', soru:"'Ecel' kavramı ne anlama gelir?", secenekler:["Her canlı için belirlenmiş yaşam süresinin sonu","Kişinin rızkı","Kişinin kaderi","Bir duanın adı"], dogru:"Her canlı için belirlenmiş yaşam süresinin sonu", aciklama:"Ecel, her canlının ölüm anı için belirlenmiş vakittir."},
+  {uniteId:'unite1', kazanimId:'k1c', zorluk:'kolay', soru:"'Rızık' kavramı ne anlama gelir?", secenekler:["Allah'ın canlılara verdiği nimet ve geçim kaynakları","Kişinin ölüm anı","Kişinin kaderi","Bir ibadet çeşidi"], dogru:"Allah'ın canlılara verdiği nimet ve geçim kaynakları", aciklama:"Rızık, Allah'ın canlılara verdiği her türlü nimet ve geçim kaynağıdır."},
+
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'kolay', soru:"Belirli bir mal varlığına sahip her Müslümanın yılda bir kez vermekle yükümlü olduğu ibadete ne denir?", secenekler:["Zekât","Sadaka","İnfak","Fitre"], dogru:"Zekât", aciklama:"Zekât, nisap miktarına ulaşan mal üzerinden yılda bir kez verilen farz bir ibadettir."},
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'orta', soru:"Zekâtın farz olması için gereken asgari mal miktarına ne denir?", secenekler:["Nisap","Kaza","İrade","Rükün"], dogru:"Nisap", aciklama:"Nisap, zekâtın farz olması için gereken asgari mal/servet miktarıdır."},
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'orta', soru:"Zekât, İslam'ın beş temel şartından (ibadetinden) kaçıncısıdır?", secenekler:["Üçüncüsü","Birincisi","İkincisi","Beşincisi"], dogru:"Üçüncüsü", aciklama:"İslam'ın şartları sırasıyla: kelime-i şehadet, namaz, zekât, oruç, hac."},
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'kolay', soru:"Zorunlu olmayıp gönüllü olarak yapılan bağışa ne denir?", secenekler:["Sadaka","Zekât","Fitre","Nisap"], dogru:"Sadaka", aciklama:"Sadaka, gönüllülük esasına dayanan, miktarı belirlenmemiş bir bağıştır."},
+  {uniteId:'unite2', kazanimId:'k2a', zorluk:'orta', soru:"Genel olarak mal, bilgi, emek gibi imkânları başkalarıyla paylaşmaya ne denir?", secenekler:["İnfak","Nisap","Kaza","Tevekkül"], dogru:"İnfak", aciklama:"İnfak, sahip olunan imkânları Allah rızası için başkalarıyla paylaşmaktır."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'orta', soru:"Zekât ve sadakanın toplumsal faydalarından biri aşağıdakilerden hangisidir?", secenekler:["Zengin ile fakir arasındaki uçurumu azaltması","Sadece zengini daha zengin yapması","Toplumda kıskançlığı artırması","Hiçbir sosyal etkisinin olmaması"], dogru:"Zengin ile fakir arasındaki uçurumu azaltması", aciklama:"Zekât ve sadaka, gelir dağılımındaki dengesizliği azaltarak toplumsal dayanışmayı güçlendirir."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'orta', soru:"Hz. Şuayb (as) kavmini özellikle hangi konuda uyarmıştır?", secenekler:["Ölçü ve tartıda hile yapmamaları konusunda","Namazı terk etmemeleri konusunda","Oruç tutmaları konusunda","Hacca gitmeleri konusunda"], dogru:"Ölçü ve tartıda hile yapmamaları konusunda", aciklama:"Hz. Şuayb (as), kavmini ticarette dürüst olmaya, ölçü ve tartıda hile yapmamaya çağırmıştır."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'orta', soru:"Maun Suresi'nde eleştirilen tutumlardan biri aşağıdakilerden hangisidir?", secenekler:["Yetimi itip kakmak","Namaz kılmak","Oruç tutmak","Zekât vermek"], dogru:"Yetimi itip kakmak", aciklama:"Maun Suresi, yetimi itip kakan ve yoksulu doyurmayı teşvik etmeyen kişiyi eleştirir."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'zor', soru:"Maun Suresi'ne göre 'dini yalanlayan' kişinin özelliklerinden biri nedir?", secenekler:["Yoksulu doyurmaya teşvik etmemek","Çok namaz kılmak","Çok oruç tutmak","Çok zekât vermek"], dogru:"Yoksulu doyurmaya teşvik etmemek", aciklama:"Sure, dini yalanlayanı yetime ve yoksula duyarsız kalan kişi olarak tanımlar."},
+  {uniteId:'unite2', kazanimId:'k2b', zorluk:'kolay', soru:"İslam dini paylaşma ve yardımlaşmaya neden önem verir?", secenekler:["Toplumsal dayanışmayı güçlendirmek için","Sadece zenginleri memnun etmek için","Fakirleri tembelliğe alıştırmak için","Hiçbir amacı yoktur"], dogru:"Toplumsal dayanışmayı güçlendirmek için", aciklama:"Paylaşma ve yardımlaşma, toplumdaki dayanışma ve kardeşlik bağlarını güçlendirir."},
+
+  {uniteId:'unite3', kazanimId:'k3a', zorluk:'zor', soru:"İslam dininin korumayı amaçladığı beş temel değere ne denir?", secenekler:["Zarûrât-ı Hamse","Erkân-ı İslam","Esmaülhüsna","Şartlar-ı Nübüvvet"], dogru:"Zarûrât-ı Hamse", aciklama:"Zarûrât-ı Hamse; din, can, akıl, nesil ve malın korunmasını ifade eder."},
+  {uniteId:'unite3', kazanimId:'k3a', zorluk:'orta', soru:"Aşağıdakilerden hangisi Zarûrât-ı Hamse'den (dinin korumayı amaçladığı beş temel değerden) biri değildir?", secenekler:["Şöhret","Can","Akıl","Mal"], dogru:"Şöhret", aciklama:"Zarûrât-ı Hamse: din, can, akıl, nesil, mal — şöhret bunlardan biri değildir."},
+  {uniteId:'unite3', kazanimId:'k3a', zorluk:'orta', soru:"Zarûrât-ı Hamse'den 'aklı korumak' ilkesi özellikle hangi konuyla ilişkilendirilir?", secenekler:["Sarhoş edici maddelerden uzak durmak","Sadece okumayı sevmek","Sadece matematik öğrenmek","Hiçbir ilişkisi yoktur"], dogru:"Sarhoş edici maddelerden uzak durmak", aciklama:"Aklın korunması ilkesi, aklı zedeleyen alkol/uyuşturucu gibi maddelerden uzak durmayı gerektirir."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'kolay', soru:"Emek harcamadan, haksız yollarla elde edilen kazanca ne denir?", secenekler:["Haram kazanç","Helal kazanç","Sadaka","Zekât"], dogru:"Haram kazanç", aciklama:"Haram kazanç, dinen izin verilmeyen, haksız yollarla elde edilen kazançtır."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'orta', soru:"Dinde yeri olmadığı hâlde dine mal edilen yanlış inanış ve uygulamalara ne denir?", secenekler:["Hurafe","Sünnet","Farz","Vacip"], dogru:"Hurafe", aciklama:"Hurafe, dinî bir dayanağı olmayan, sonradan dine mal edilmiş yanlış inanışlardır."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'orta', soru:"Fal, büyü gibi uygulamalara inanmak dinî açıdan nasıl değerlendirilir?", secenekler:["İslam'a aykırı, yanlış bir inanıştır","İslam'ın gerekli gördüğü bir uygulamadır","Farz-ı kifayedir","Sünnet-i müekkededir"], dogru:"İslam'a aykırı, yanlış bir inanıştır", aciklama:"Fal ve büyü gibi uygulamalar tevhit inancıyla bağdaşmaz, İslam'a aykırıdır."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'orta', soru:"Hz. Yusuf'un (as) kıssasında öne çıkan erdemlerden biri aşağıdakilerden hangisidir?", secenekler:["Sabır ve iffet","Cimrilik","Yalan söylemek","Kibirlenmek"], dogru:"Sabır ve iffet", aciklama:"Hz. Yusuf (as) kıssası, zorluklar karşısında sabrı ve iffeti örnekler."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'zor', soru:"Asr Suresi'ne göre insan hangi durumda hüsrandan (ziyandan) kurtulur?", secenekler:["İman edip iyi işler yapan, birbirine hakkı ve sabrı tavsiye eden","Sadece namaz kılan","Sadece oruç tutan","Hiçbir şart yoktur"], dogru:"İman edip iyi işler yapan, birbirine hakkı ve sabrı tavsiye eden", aciklama:"Asr Suresi'ne göre kurtuluş; iman, salih amel, hakkı ve sabrı tavsiye etmekle mümkündür."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'orta', soru:"Din toplumsal bir olgu olarak insan hayatını hangi açılardan etkiler?", secenekler:["Birey ve toplum ilişkilerini düzenler","Sadece bireysel ibadetlerle sınırlıdır","Toplumla hiçbir ilgisi yoktur","Sadece ahiretle ilgilidir"], dogru:"Birey ve toplum ilişkilerini düzenler", aciklama:"Din, hem bireyin iç dünyasını hem de toplumsal ilişkileri düzenleyen kapsamlı bir olgudur."},
+  {uniteId:'unite3', kazanimId:'k3b', zorluk:'kolay', soru:"Bir Müslümanın ticarette dürüst davranması, doğru tartıp ölçmesi hangi ilkeyle ilgilidir?", secenekler:["Helal kazanç ilkesiyle","Kader inancıyla","Zekât ile","Kaza ile"], dogru:"Helal kazanç ilkesiyle", aciklama:"Dürüst ticaret, helal kazanç ilkesinin doğal bir sonucudur."},
+
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'kolay', soru:"Hz. Muhammed'in (sav) 'güvenilir' anlamına gelen ve peygamberlik öncesinde de bilinen lakabı nedir?", secenekler:["El-Emin","El-Kerim","El-Hakîm","El-Vedûd"], dogru:"El-Emin", aciklama:"Hz. Muhammed (sav), peygamberlikten önce de doğruluğu ve güvenilirliğiyle 'El-Emin' olarak tanınıyordu."},
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'orta', soru:"Hz. Muhammed'in (sav) doğruluk ve güvenilirlik örnekliği en çok hangi olayda görülür?", secenekler:["Emanetleri sahiplerine eksiksiz teslim etmesinde","Savaşlarda","Ticaret yapmamasında","Hiçbirinde"], dogru:"Emanetleri sahiplerine eksiksiz teslim etmesinde", aciklama:"Hicret sırasında bile kendisine bırakılan emanetleri sahiplerine ulaştırması meşhurdur."},
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'orta', soru:"Hz. Muhammed'in (sav) düşmanlarını bile affettiği en bilinen örnek hangisidir?", secenekler:["Mekke'nin fethinde genel af ilan etmesi","Bedir Savaşı'nda","Hicret sırasında","Veda Hutbesi'nde"], dogru:"Mekke'nin fethinde genel af ilan etmesi", aciklama:"Mekke'nin fethinde kendisine yıllarca eziyet edenleri affetmesi, merhametinin en bilinen örneğidir."},
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'kolay', soru:"Hz. Muhammed (sav) merhamet örnekliğini en çok kimlere karşı göstermiştir?", secenekler:["Yetimlere, yoksullara ve zayıflara","Sadece akrabalarına","Sadece Mekkelilere","Sadece savaşçılara"], dogru:"Yetimlere, yoksullara ve zayıflara", aciklama:"Hz. Muhammed (sav), özellikle toplumun en zayıf ve korunmasız kesimlerine karşı büyük bir merhamet göstermiştir."},
+  {uniteId:'unite4', kazanimId:'k4a', zorluk:'orta', soru:"Hz. Muhammed (sav) insanlara değer verme konusunda nasıl davranmıştır?", secenekler:["Zengin-fakir, köle-hür ayrımı yapmadan herkese eşit davranmıştır","Sadece zenginlere değer vermiştir","Sadece akrabalarına değer vermiştir","Kimseye değer vermemiştir"], dogru:"Zengin-fakir, köle-hür ayrımı yapmadan herkese eşit davranmıştır", aciklama:"Hz. Muhammed (sav), insanlar arasında ayrım yapmadan herkese eşit ve saygılı davranmıştır."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'kolay', soru:"Hz. Muhammed'in (sav) önemli kararlar alırken sahabesine danışmasına ne denir?", secenekler:["İstişare","Kaza","Tevekkül","İnfak"], dogru:"İstişare", aciklama:"İstişare, karar almadan önce ilgili kişilerin görüşünü almaktır."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'orta', soru:"İstişare (danışma) yönteminin faydalarından biri aşağıdakilerden hangisidir?", secenekler:["Farklı görüşlerden yararlanarak daha isabetli karar almak","Kararı geciktirmek","Sorumluluğu başkasına atmak","Hiçbir faydası yoktur"], dogru:"Farklı görüşlerden yararlanarak daha isabetli karar almak", aciklama:"İstişare, farklı bakış açılarından yararlanarak daha sağlıklı kararlar almayı sağlar."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'orta', soru:"Hz. Muhammed'in (sav) cesaret ve kararlılık örnekliği en çok hangi dönemde görülür?", secenekler:["Mekke döneminde zorluklara rağmen tebliğe devam etmesinde","Sadece Medine'de","Sadece çocukluğunda","Hiçbir dönemde"], dogru:"Mekke döneminde zorluklara rağmen tebliğe devam etmesinde", aciklama:"Mekke döneminde ağır baskılara rağmen tebliğden vazgeçmemesi cesaretinin en önemli göstergesidir."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'zor', soru:"Kureyş Suresi'nde Kureyş kabilesine hatırlatılan nimetlerden biri aşağıdakilerden hangisidir?", secenekler:["Kışın ve yazın güvenli ticaret yolculukları yapabilmeleri","Savaşlarda galip gelmeleri","Zengin olmaları","Kâbe'yi inşa etmeleri"], dogru:"Kışın ve yazın güvenli ticaret yolculukları yapabilmeleri", aciklama:"Kureyş Suresi, kışın Yemen'e yazın Şam'a yapılan güvenli ticaret seyahatlerini bir nimet olarak hatırlatır."},
+  {uniteId:'unite4', kazanimId:'k4b', zorluk:'zor', soru:"'Üsve-i hasene' kavramı ne anlama gelir?", secenekler:["Güzel örnek, örnek alınacak davranış","Bir dua çeşidi","Bir sure adı","Bir ibadet şekli"], dogru:"Güzel örnek, örnek alınacak davranış", aciklama:"Üsve-i hasene, Kur'an'da Hz. Muhammed (sav) için kullanılan 'güzel örnek' anlamındaki bir ifadedir."},
+
+  {uniteId:'unite5', kazanimId:'k5a', zorluk:'kolay', soru:"İslam dininin temel kaynağı aşağıdakilerden hangisidir?", secenekler:["Kur'an-ı Kerim","Sadece hadisler","Sadece örf ve adetler","Sadece akıl"], dogru:"Kur'an-ı Kerim", aciklama:"Kur'an-ı Kerim, İslam'ın en temel ve birinci kaynağıdır."},
+  {uniteId:'unite5', kazanimId:'k5a', zorluk:'kolay', soru:"Hz. Muhammed'in (sav) söz, fiil ve onaylarına ne denir?", secenekler:["Sünnet","Kader","Kaza","İcma"], dogru:"Sünnet", aciklama:"Sünnet, Hz. Peygamberin söz, davranış ve onaylarının bütünüdür."},
+  {uniteId:'unite5', kazanimId:'k5a', zorluk:'orta', soru:"İslam'ın ikinci temel kaynağı olarak Kur'an'ı açıklayan ve tamamlayan kaynak hangisidir?", secenekler:["Sünnet","Örf","Kıyas","Gelenek"], dogru:"Sünnet", aciklama:"Sünnet, Kur'an'ı açıklayan ve uygulamalı hâle getiren ikinci temel kaynaktır."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Kur'an-ı Kerim'in ana konularından biri değildir?", secenekler:["Modern bilim formülleri","İman esasları","İbadetler","Ahlaki ilkeler"], dogru:"Modern bilim formülleri", aciklama:"Kur'an'ın ana konuları iman, ibadet, ahlak ve kıssalardır; bir bilim ders kitabı değildir."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Kur'an-ı Kerim'in temel özelliklerinden biri aşağıdakilerden hangisidir?", secenekler:["Son ilahi kitap olması","Sadece Araplara indirilmiş olması","Sonradan değiştirilmiş olması","Belirli bir bölgeyle sınırlı olması"], dogru:"Son ilahi kitap olması", aciklama:"Kur'an-ı Kerim, Allah tarafından gönderilen son ilahi kitaptır."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Kur'an-ı Kerim yaklaşık kaç yılda tamamlanarak indirilmiştir?", secenekler:["23 yıl","10 yıl","40 yıl","5 yıl"], dogru:"23 yıl", aciklama:"Kur'an-ı Kerim, yaklaşık 23 yıllık bir sürede parça parça indirilmiştir."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Hz. Nuh'un (as) kıssasında öne çıkan temel tema nedir?", secenekler:["Sabır ve tevhide (Allah'ın birliğine) davet","Zenginlik","Savaş","Ticaret"], dogru:"Sabır ve tevhide (Allah'ın birliğine) davet", aciklama:"Hz. Nuh (as) kıssası, uzun yıllar süren sabırlı bir tevhit mücadelesini anlatır."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'zor', soru:"Hz. Nuh (as) kavmini kaç yıl İslam'a (tevhide) davet ettiği bildirilir?", secenekler:["950 yıl","10 yıl","100 yıl","500 yıl"], dogru:"950 yıl", aciklama:"Kur'an'da Hz. Nuh'un (as) kavmini 950 yıl boyunca tevhide davet ettiği bildirilir."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'kolay', soru:"İhlas Suresi'nin temel konusu nedir?", secenekler:["Allah'ın (cc) birliği ve eşsizliği (tevhit)","Zekât","Namaz vakitleri","Hac ibadeti"], dogru:"Allah'ın (cc) birliği ve eşsizliği (tevhit)", aciklama:"İhlas Suresi, Allah'ın birliğini ve eşsizliğini özlü bir şekilde anlatır."},
+  {uniteId:'unite5', kazanimId:'k5b', zorluk:'orta', soru:"Kur'an-ı Kerim'in Hz. Muhammed'e (sav) indirilmeye başladığı gece hangisidir?", secenekler:["Kadir Gecesi","Berat Gecesi","Miraç Gecesi","Regaib Gecesi"], dogru:"Kadir Gecesi", aciklama:"Kur'an-ı Kerim'in indirilmeye başladığı gece Kadir Gecesi'dir."}
+];
+
+/* ======================================================================
+   BAŞLATMA
+====================================================================== */
+smYanlisAnalizKur('lgs', 'lgsYanlisAnaliz');
+smCalismaPlaniKur('lgs', 'lgsCalismaPlani');
+smGunlukHedefKur('lgs', 'lgsGunlukHedef');
+
+smDashboardKur('lgs', 'lgsDashboard');
+smGeriSayimKur('lgs', 'lgsGeriSayim');
+smSinavAnaliziKur('lgs', 'lgsSinavAnalizi', LGS_KAZANIMLAR, LGS_SORU_HAVUZU, LGS_UNITE_ADLARI);
+smGununSorusuKur('lgs', 'lgsGununSorusu', LGS_SORU_HAVUZU);
+smKazanimTestleriKur('lgs', 'lgsKazanimTestleri', LGS_KAZANIMLAR, LGS_SORU_HAVUZU);
+smDenemeMerkeziKur('lgs', 'lgsDenemeMerkezi', LGS_SORU_HAVUZU);
+smKocKur('lgs', 'lgsKoc', LGS_UNITE_ADLARI);
+smGunlukProgramKur('lgs', 'lgsGunlukProgram');
+smRozetKur('lgs', 'lgsRozetler');
+smIstatistiklerKur('lgs', 'lgsIstatistikler', LGS_UNITE_ADLARI);
+smPerformansGrafikKur('lgs', 'lgsPerformansGrafik', LGS_UNITE_ADLARI);
+smFavorilerPaneliKur('lgs', 'lgsFavoriler');
+smFavoriYildizlariEkle('lgs', '#lgsKonuAnlatimlari, #lgsKonuOzetleri, #lgsOyunMerkezi');
+smSonKonuTakibiKur('lgs', '#lgsKonuAnlatimlari, #lgsKonuOzetleri');
+
+/* Kartın içindeki alt sekmeler — her kart kendi paneller kapsayıcısına bağlı */
+smSekmeKur('#lgsKonularSekme', '#lgsKonularPaneller');
+smSekmeKur('#lgsDenemelerSekme', '#lgsDenemelerPaneller');
+smSekmeKur('#lgsSorularSekme', '#lgsSorularPaneller');
+smSekmeKur('#lgsAnalizSekme', '#lgsAnalizPaneller');
+
+/* Alt sekme değiştirildiğinde ilgili paneli GERÇEK, güncel veriyle yeniden çiz */
+function lgsSekmeYenile(navId, harita){
+  const nav = document.getElementById(navId);
+  if(!nav) return;
+  nav.addEventListener('click', function(e){
+    const btn = e.target.closest('button[data-sekme]');
+    if(!btn) return;
+    if(harita[btn.dataset.sekme]) harita[btn.dataset.sekme]();
+  });
+}
+lgsSekmeYenile('lgsKonularSekme', {
+  'kazanim-testleri': function(){ smKazanimTestleriKur('lgs','lgsKazanimTestleri', LGS_KAZANIMLAR, LGS_SORU_HAVUZU); },
+  'favoriler': function(){ smFavorilerPaneliKur('lgs','lgsFavoriler'); }
+});
+lgsSekmeYenile('lgsDenemelerSekme', {
+  'gunluk-program': function(){ smGunlukProgramKur('lgs','lgsGunlukProgram'); }
+});
+lgsSekmeYenile('lgsAnalizSekme', {
+  'performans': function(){ smYanlisAnalizKur('lgs','lgsYanlisAnaliz'); smPerformansGrafikKur('lgs','lgsPerformansGrafik', LGS_UNITE_ADLARI); },
+  'istatistikler': function(){ smIstatistiklerKur('lgs','lgsIstatistikler', LGS_UNITE_ADLARI); },
+  'rozet-sistemi': function(){ smRozetKur('lgs','lgsRozetler'); },
+  'ai-koc': function(){ smKocKur('lgs','lgsKoc', LGS_UNITE_ADLARI); }
+});
+
+/* ANA MENÜ ↔ DETAY geçişi (4 kart) */
+(function(){
+  const menu = document.querySelector('[data-lgs-menu]');
+  const detay = document.querySelector('[data-lgs-detay]');
+  const geriBtn = document.querySelector('[data-lgs-geri]');
+  const icerikler = document.querySelectorAll('[data-lgs-icerik]');
+
+  menu.addEventListener('click', function(e){
+    const btn = e.target.closest('[data-lgs-git]');
+    if(!btn) return;
+    menu.hidden = true;
+    detay.hidden = false;
+    icerikler.forEach(function(el){ el.hidden = (el.dataset.lgsIcerik !== btn.dataset.lgsGit); });
+  });
+  geriBtn.addEventListener('click', function(){
+    detay.hidden = true;
+    menu.hidden = false;
+    smDashboardKur('lgs', 'lgsDashboard');
+  });
+})();
+  </script>
+</body>
+</html>

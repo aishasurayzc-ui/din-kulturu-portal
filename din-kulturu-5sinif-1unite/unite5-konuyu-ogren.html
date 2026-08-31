@@ -114,6 +114,24 @@
     background:white; border-radius:14px; padding:18px; margin-top:16px;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
   }
+  .ozet-kapak-gorsel{ margin:0 0 16px; }
+  .ozet-kapak-gorsel img{ display:block; width:100%; max-height:280px; object-fit:cover; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,.16); }
+  .ozet-kapak-gorsel figcaption{ margin-top:6px; font-size:.78em; color:#8a94a3; text-align:right; }
+  .ab-rozet{ display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#fef3c7,#fdba74); font-size:1em; margin-right:5px; vertical-align:-9px; box-shadow:0 2px 6px rgba(0,0,0,.12); }
+  .ab-ikon{ display:inline-flex; align-items:center; justify-content:center; vertical-align:-19px; margin-right:5px; width:54px; height:54px; }
+  .ab-ikon svg, .ab-ikon img{ display:block; width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .konu-illustrasyon{
+    float:right; width:150px; height:150px; margin:2px 0 14px 20px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:42% 58% 53% 47%/48% 42% 58% 52%;
+    box-shadow:0 6px 18px rgba(0,0,0,.14);
+    overflow:hidden;
+    animation:konuIllYuzme 3.4s ease-in-out infinite;
+  }
+  .konu-illustrasyon img, .konu-illustrasyon svg{ width:100%; height:100%; object-fit:cover; }
+  @keyframes konuIllYuzme{ 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-7px) rotate(2deg); } }
+  @media (prefers-reduced-motion: reduce){ .konu-illustrasyon{ animation:none; } }
+  @media(max-width:560px){ .konu-illustrasyon{ float:none; margin:0 auto 14px; width:130px; height:130px; } }
   button.eylem{
     display:block; margin:16px auto; padding:12px 24px; font-size:1em;
     background:var(--yesil); color:white; border:none; border-radius:24px;
@@ -718,6 +736,202 @@
 }
 </style>
 
+
+<style id="konuAnlatimStil">
+/* ======================================================================
+   KONU ANLATIMI GÖRSEL KATMANI (additive)
+   Bütün seçiciler "ka-" / "kai-" ön ekli; sayfanın mevcut stilleriyle
+   çakışmaz. Hiçbir mevcut kural değiştirilmedi.
+====================================================================== */
+  .ka-svg{ display:block; width:100%; height:100%; }
+  .kai-f{ animation:kaiF 4.4s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiF{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-5px) } }
+  .kai-p{ animation:kaiP 3.6s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiP{ 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.07) } }
+  .kai-t{ animation:kaiT 3.2s ease-in-out infinite; transform-origin:50px 50px; }
+  @keyframes kaiT{ 0%,100%{ opacity:1 } 50%{ opacity:.55 } }
+  .kai-g{ animation:kaiG .7s cubic-bezier(.2,.8,.3,1) both; transform-origin:50px 50px; }
+  @keyframes kaiG{ from{ opacity:0; transform:translateY(10px) scale(.92) } to{ opacity:1; transform:none } }
+  .kai-bl{ animation:kaiB 9s ease-in-out infinite; }
+  @keyframes kaiB{ 0%,100%{ transform:translate(0,0) } 50%{ transform:translate(6px,-5px) } }
+  @media (prefers-reduced-motion: reduce){
+    .kai-f,.kai-p,.kai-t,.kai-g,.kai-bl{ animation:none !important; }
+  }
+
+  /* ——— ünite hero ——— */
+  .ka-hero{
+    max-width:1000px; margin:22px auto 6px; padding:0 16px;
+  }
+  .ka-hero-ic{
+    background:#fff; border:1px solid #e4e9ef; border-radius:22px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(16,24,40,.08);
+  }
+  .ka-hero-gorsel{ aspect-ratio:1200/340; overflow:hidden; }
+  .ka-hero-metin{ padding:18px 22px 22px; }
+  .ka-ust-etiket{
+    display:inline-block; font-size:.74em; font-weight:900; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--mavi,#2a6f97); background:var(--acikgri,#f1f5f9);
+    padding:5px 12px; border-radius:999px; margin-bottom:10px;
+  }
+  .ka-hero-metin h2{ margin:0 0 6px; font-size:1.45em; line-height:1.25; color:var(--navy,#1E3A8A); }
+  .ka-hero-metin > p{ margin:0 0 14px; color:#5b6570; font-size:1em; line-height:1.55; }
+  .ka-icindekiler{ display:flex; flex-wrap:wrap; gap:8px; }
+  .ka-ic-baslik{
+    width:100%; font-size:.76em; font-weight:900; letter-spacing:.1em;
+    text-transform:uppercase; color:#8a94a3; margin-bottom:2px;
+  }
+  .ka-ic-link{
+    display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+    background:var(--acikgri,#f1f5f9); color:#22333b; border:1px solid #e4e9ef;
+    border-radius:999px; padding:7px 14px; font-size:.86em; font-weight:700;
+    transition:background .18s ease, color .18s ease, transform .18s ease;
+  }
+  .ka-ic-link:hover{ background:var(--mavi,#2a6f97); color:#fff; transform:translateY(-2px); }
+  .ka-ic-link b{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:20px; height:20px; border-radius:50%; background:#fff; color:var(--mavi,#2a6f97);
+    font-size:.8em; border:1px solid #e4e9ef;
+  }
+  .ka-ic-link:hover b{ background:rgba(255,255,255,.25); color:#fff; border-color:transparent; }
+
+  /* ——— konu başlığı afişi ——— */
+  .ka-konu{ margin:26px 0 14px; scroll-margin-top:16px; }
+  .ka-konu-gorsel{
+    position:relative; aspect-ratio:900/240; overflow:hidden;
+    border-radius:18px 18px 0 0; border:1px solid #e4e9ef; border-bottom:0;
+  }
+  /* ——— FOTOĞRAF KATMANI ———
+     Konu afişinde önce GERÇEK FOTOĞRAF denenir. Fotoğraf yoksa (dosya
+     bulunamazsa) img kendini kaldırır ve altındaki illüstrasyon görünür.
+     Böylece klasöre fotoğraf eklemek yeterlidir; kod değişmez. */
+  .ka-foto-sar{ position:absolute; inset:0; z-index:1; }
+  .ka-foto{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ka-foto-kunye{
+    position:absolute; right:8px; top:8px; z-index:3;
+    background:rgba(12,22,38,.55); color:#fff; font-size:10.5px; font-weight:700;
+    padding:3px 9px; border-radius:999px; letter-spacing:.01em;
+    max-width:70%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  /* Görsel ve başlık birlikte: başlık afişin üstünde okunur bir şeritte durur. */
+  .ka-konu-yazi{
+    position:absolute; left:0; right:0; bottom:0; z-index:2; padding:14px 16px 12px;
+    background:linear-gradient(to top, rgba(12,22,38,.78), rgba(12,22,38,.42) 55%, rgba(12,22,38,0));
+    color:#fff;
+  }
+  .ka-konu-yazi .ka-konu-ust{
+    display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.12em;
+    text-transform:uppercase; background:rgba(255,255,255,.22); padding:3px 10px; border-radius:999px;
+  }
+  .ka-konu-yazi h4{
+    margin:6px 0 0; font-size:clamp(1.02em, 2.4vw, 1.35em); line-height:1.25;
+    font-weight:900; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.35);
+  }
+  .ka-konu-alt{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+    background:#fff; border:1px solid #e4e9ef; border-top:0; border-radius:0 0 18px 18px;
+    padding:11px 16px;
+  }
+  .ka-no{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:30px; height:30px; padding:0 9px; border-radius:999px;
+    background:var(--mavi,#2a6f97); color:#fff; font-weight:900; font-size:.82em;
+  }
+  .ka-giris{ font-size:.95em; color:#5b6570; line-height:1.5; flex:1; min-width:180px; }
+  .ka-yukari{
+    margin-left:auto; font-size:.8em; font-weight:800; text-decoration:none;
+    color:var(--mavi,#2a6f97); white-space:nowrap;
+  }
+  .ka-yukari:hover{ text-decoration:underline; }
+
+  /* ==================================================================
+     ÖĞRETİCİ BLOKLAR — süreç, kavram haritası, karşılaştırma, zaman
+     çizgisi, günlük hayat, düşün-cevapla, aklında kalsın.
+     Metin HTML olarak yazılır (SVG içine gömülmez); böylece telefonda
+     da okunur kalır, ekran okuyucu okuyabilir ve arama motoru görür.
+     ================================================================== */
+  .ka-blok{
+    background:#fff; border:1px solid #e4e9ef; border-radius:16px;
+    padding:15px 17px; margin:16px 0;
+  }
+  .ka-blok-bas{
+    display:flex; align-items:center; gap:8px; margin:0 0 12px;
+    font-size:1em; font-weight:900; color:var(--navy,#1E3A8A);
+    letter-spacing:.01em;
+  }
+  .ka-blok-bas .ka-rozet{
+    font-size:.68em; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--acikgri,#f1f5f9); color:#5b6570; padding:3px 9px; border-radius:999px;
+  }
+  .ka-blok-alt{ margin:0 0 11px; font-size:.94em; color:#5b6570; line-height:1.5; }
+
+  /* — ALT BAŞLIK KARTLARI: her alt başlığın kendi görseli var — */
+  .ka-alt-izgara{ display:grid; gap:11px; }
+  @media(min-width:640px){ .ka-alt-izgara{ grid-template-columns:1fr 1fr; } }
+  @media(min-width:1080px){ .ka-alt-izgara{ grid-template-columns:1fr 1fr 1fr; } }
+  .ka-alt-kart{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--acikgri,#f1f5f9); border:1px solid #e4e9ef; border-radius:14px;
+    padding:11px 13px; position:relative;
+    animation:kaAlt .55s cubic-bezier(.2,.8,.3,1) both; animation-delay:var(--gecikme,0s);
+  }
+  @keyframes kaAlt{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:none } }
+  .ka-alt-gorsel{ flex:0 0 82px; width:82px; border-radius:11px; overflow:hidden; }
+  .ka-alt-govde{ display:block; min-width:0; }
+  .ka-alt-govde b{ display:block; font-size:.96em; color:var(--navy,#1E3A8A); line-height:1.3; }
+  /* Açıklama satırı — numara rozetini kapsamaz (aksi hâlde rozet blok
+     olup satırın tamamına yayılıyor ve başlığı örtüyordu). */
+  .ka-alt-govde > span:not(.ka-alt-no){ display:block; font-size:.86em; color:#5b6570; line-height:1.5; margin-top:2px; }
+  .ka-alt-no{
+    display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.06em;
+    background:var(--mavi,#2a6f97); color:#fff; padding:2px 9px; border-radius:999px;
+    margin-bottom:5px;
+  }
+  /* kavram haritası merkezi */
+  .ka-kh-merkez{
+    display:block; width:max-content; max-width:100%; margin:0 auto;
+    background:var(--mavi,#2a6f97); color:#fff; font-weight:900;
+    padding:9px 20px; border-radius:999px; text-align:center; font-size:.98em;
+  }
+  .ka-kh-cizgi{ display:block; width:2px; height:16px; background:#cfd8e3; margin:0 auto 11px; }
+
+  /* karşılaştırma */
+  .ka-krs{ display:grid; gap:12px; }
+  @media(min-width:660px){ .ka-krs{ grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); } }
+  .ka-krs-sut{
+    background:var(--acikgri,#f1f5f9); border:1px solid #e4e9ef; border-radius:14px; padding:12px 13px;
+  }
+  .ka-krs-sut h5{
+    margin:0 0 9px; font-size:.96em; font-weight:900; color:var(--navy,#1E3A8A);
+    padding-bottom:6px; border-bottom:2px solid #dfe6ee;
+  }
+  .ka-krs-satir{
+    display:flex; gap:10px; align-items:center; padding:6px 0; font-size:.9em; line-height:1.45;
+    animation:kaAlt .55s cubic-bezier(.2,.8,.3,1) both; animation-delay:var(--gecikme,0s);
+  }
+  .ka-krs-ikon{ flex:0 0 54px; width:54px; border-radius:9px; overflow:hidden; }
+
+  @media (prefers-reduced-motion: reduce){
+    .ka-alt-kart, .ka-krs-satir{ animation:none !important; }
+  }
+
+  /* — günlük hayat sahnesi — */
+  .ka-gunluk{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .ka-gunluk-gorsel{ flex:0 0 86px; width:86px; height:86px; border-radius:50%; overflow:hidden; }
+  .ka-gunluk p{ flex:1; min-width:180px; margin:0; font-size:.96em; line-height:1.6; }
+
+  /* — düşün ve cevapla / aklında kalsın — */
+  .ka-dusun{ background:#f4f1fb; border-color:#ddd4f2; }
+  .ka-dusun p{ margin:0; font-size:.98em; line-height:1.6; }
+  .ka-aklinda{ background:#eef7f1; border-color:#cfe6da; }
+  .ka-aklinda ul{ margin:0; padding-left:20px; }
+  .ka-aklinda li{ font-size:.95em; line-height:1.55; margin-bottom:5px; }
+  .ka-aklinda li:last-child{ margin-bottom:0; }
+
+  /* Mevcut yuvarlak konu illüstrasyonu: artık her bölümde farklı görsel. */
+  .konu-illustrasyon > .ka-svg{ border-radius:50%; }
+  /* Başlık rozetleri: aynı karikatürün 40 kez tekrarı yerine konuya özel motif. */
+  .ab-ikon > .ka-svg{ border-radius:50%; }
+</style>
 </head>
 <body>
 <div id="portalNav" data-sinif="5" data-unite="5" data-asama="ogren"></div>
@@ -748,12 +962,48 @@
 
 </div>
 
+<section class="ka-hero" id="ka-hero"><div class="ka-hero-ic"><div class="ka-hero-gorsel"><svg class="ka-svg" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="1200" height="340" rx="34" fill="#f3eefb"/><g class="kai-bl" opacity=".85"><ellipse cx="262" cy="115" rx="240" ry="116" fill="#e0d3f5"/><ellipse cx="935" cy="232" rx="288" ry="102" fill="#e0d3f5" opacity=".75"/></g><path d="M0 286 Q 600 238 1200 292" stroke="#b498e2" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(64,52) scale(1.920)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-t"><rect x="10" y="80" width="80" height="10" rx="3" fill="#4d3079"/>
+<path d="M28 80 V54 A22 22 0 0 1 72 54 V80 Z" fill="#6f4aa8"/>
+<path d="M50 20 V32" stroke="#4d3079" stroke-width="3.4" stroke-linecap="round"/><circle cx="50" cy="18" r="4" fill="#b498e2"/>
+<g fill="#4d3079"><rect x="14" y="40" width="9" height="40" rx="3"/><rect x="77" y="40" width="9" height="40" rx="3"/></g>
+<path d="M18.5 30 L23 40 H14 Z" fill="#b498e2"/><path d="M81.5 30 L86 40 H77 Z" fill="#b498e2"/>
+<path d="M44 80 V64 A6 6 0 0 1 56 64 V80 Z" fill="#f3eefb"/></g></g></g><g transform="translate(326,34) scale(1.180)"><g class="kai-g" style="animation-delay:0.12s"><g class="kai-f"><rect x="41" y="34" width="18" height="52" rx="5" fill="#6f4aa8"/>
+<path d="M50 8 L60 30 H40 Z" fill="#b498e2"/>
+<rect x="35" y="44" width="30" height="7" rx="3" fill="#4d3079"/>
+<rect x="44" y="60" width="12" height="16" rx="5" fill="#f3eefb"/></g></g></g><g transform="translate(846,46) scale(1.580)"><g class="kai-g" style="animation-delay:0.24s"><g class="kai-p"><circle cx="50" cy="50" r="36" fill="#b498e2" stroke="#6f4aa8" stroke-width="3.4"/>
+<path d="M22 50 Q36 30 50 50 Q64 70 78 50" stroke="#4d3079" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M22 64 Q36 44 50 64 Q64 84 78 64" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>
+<circle cx="50" cy="30" r="5" fill="#fff"/></g></g></g><g transform="translate(1042,108) scale(1.000)"><g class="kai-g" style="animation-delay:0.36s"><g class="kai-f"><rect x="8" y="20" width="84" height="58" rx="10" fill="#fff" stroke="#6f4aa8" stroke-width="3.4"/>
+<rect x="14" y="26" width="72" height="46" rx="7" fill="none" stroke="#b498e2" stroke-width="2.4"/>
+<path d="M24 58 Q34 34 46 50 Q56 64 64 44 Q70 30 78 42" stroke="#4d3079" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+<circle cx="34" cy="62" r="2.6" fill="#4d3079"/><circle cx="58" cy="62" r="2.6" fill="#4d3079"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">5. Sınıf · 5. Ünite</span><h2>🕌 Mimarimizde Dinî Motifler</h2><p>Mimarimizdeki ve sanatımızdaki dinî motifler</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 3 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Dinin Mimarimize Etkisi</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Camileri Tanıyalım</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Kültürümüzden Cami Örnekleri</a></div></div></div></section>
 <main>
 <section id="ozet5" class="aktif">
   <h2>📖 5. Ünite Konu Özeti: Mimarimizde Dinî Motifler</h2>
+  <figure class="ozet-kapak-gorsel">
+    <img src="../din-kulturu-slayt-gorseller/optimized/geo1_orta.jpg" alt="İslam geometrik desenleri, bir cami mimarisinden" loading="lazy" width="1100" height="1100">
+    <figcaption>Fotoğraf: Petar Milošević (CC BY-SA 4.0) — Wikimedia Commons</figcaption>
+  </figure>
 
   <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">1️⃣ Dinin Mimarimize Etkisi</h3>
+    <div class="ka-konu" id="ka-konu-1"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#f3eefb"/><g class="kai-bl" opacity=".85"><ellipse cx="209" cy="77" rx="180" ry="82" fill="#e0d3f5"/><ellipse cx="678" cy="155" rx="216" ry="72" fill="#e0d3f5" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#b498e2" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(66,26) scale(1.800)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><rect x="10" y="80" width="80" height="10" rx="3" fill="#4d3079"/>
+<path d="M28 80 V54 A22 22 0 0 1 72 54 V80 Z" fill="#6f4aa8"/>
+<path d="M50 20 V32" stroke="#4d3079" stroke-width="3.4" stroke-linecap="round"/><circle cx="50" cy="18" r="4" fill="#b498e2"/>
+<g fill="#4d3079"><rect x="14" y="40" width="9" height="40" rx="3"/><rect x="77" y="40" width="9" height="40" rx="3"/></g>
+<path d="M18.5 30 L23 40 H14 Z" fill="#b498e2"/><path d="M81.5 30 L86 40 H77 Z" fill="#b498e2"/>
+<path d="M44 80 V64 A6 6 0 0 1 56 64 V80 Z" fill="#f3eefb"/></g></g></g><g transform="translate(716,52) scale(1.240)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-f"><circle cx="50" cy="50" r="36" fill="#b498e2" stroke="#6f4aa8" stroke-width="3.4"/>
+<path d="M22 50 Q36 30 50 50 Q64 70 78 50" stroke="#4d3079" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M22 64 Q36 44 50 64 Q64 84 78 64" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>
+<circle cx="50" cy="30" r="5" fill="#fff"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/optimized/geo1_orta.jpg" alt="Cami süslemesinde geometrik desen" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"><span class="ka-foto-kunye">Fotoğraf: Petar Milošević — CC BY-SA 4.0 · Wikimedia Commons</span></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 1</span><h4>Dinin Mimarimize Etkisi</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 1</span><span class="ka-giris">Dinin mimarimize etkisi</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#e0d3f5"/><g transform="translate(14,14) scale(0.92)"><rect x="10" y="80" width="80" height="10" rx="3" fill="#4d3079"/>
+<path d="M28 80 V54 A22 22 0 0 1 72 54 V80 Z" fill="#6f4aa8"/>
+<path d="M50 20 V32" stroke="#4d3079" stroke-width="3.4" stroke-linecap="round"/><circle cx="50" cy="18" r="4" fill="#b498e2"/>
+<g fill="#4d3079"><rect x="14" y="40" width="9" height="40" rx="3"/><rect x="77" y="40" width="9" height="40" rx="3"/></g>
+<path d="M18.5 30 L23 40 H14 Z" fill="#b498e2"/><path d="M81.5 30 L86 40 H77 Z" fill="#b498e2"/>
+<path d="M44 80 V64 A6 6 0 0 1 56 64 V80 Z" fill="#f3eefb"/></g></svg></span><span class="ab-rozet">1️⃣</span> Dinin Mimarimize Etkisi</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f3eefb"/><circle cx="70" cy="70" r="58" fill="#e0d3f5" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><circle cx="50" cy="50" r="36" fill="#b498e2" stroke="#6f4aa8" stroke-width="3.4"/>
+<path d="M22 50 Q36 30 50 50 Q64 70 78 50" stroke="#4d3079" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M22 64 Q36 44 50 64 Q64 84 78 64" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>
+<circle cx="50" cy="30" r="5" fill="#fff"/></g></g></svg></div>
     <p>İnsanlar var oldukları günden beri inandıkları değerleri yaşadıkları mekânlara da yansıtmışlardır. İslam dininde ibadet etme ihtiyacı, Müslümanların bir araya gelip namaz kılabileceği özel mekânlar inşa etmesine yol açmıştır. Bu mekânlara <b>cami</b> ya da genellikle daha küçük ölçekli olanlarına <b>mescit</b> denir. <b>Mimari</b>, yapıları amacına uygun, sağlam ve güzel bir biçimde tasarlayıp inşa etme sanatıdır; din, mimariyi hem biçim hem de anlam bakımından derinden etkilemiştir.</p>
     <p>İslam mimarisinde temel amaç, gösteriş değil; sadelik, işlevsellik ve güzellik arasında bir denge kurmaktır. Cami, öncelikle toplu ibadetin rahatça yapılabileceği geniş ve ışıklı bir mekân olarak tasarlanır; bunun yanında hat sanatı, çini ve tezhip gibi süslemelerle de güzelleştirilir. Böylece mimari, sadece işlevsel bir yapı değil, aynı zamanda toplumun inanç ve değerlerinin somut bir yansıması hâline gelir.</p>
     <p>Dinin mimariye etkisi, her dönem ve bölgede aynı biçimde ortaya çıkmamıştır. Selçuklu Dönemi'nde taş işçiliğine önem verilmiş, Osmanlı Dönemi'nde kubbeli ve merkezi planlı büyük camiler yaygınlaşmış, Anadolu'nun bazı bölgelerinde ise (örneğin Karadeniz'de) ahşap malzemeyle sade camiler inşa edilmiştir. Bu çeşitlilik, dinin evrensel mesajının farklı kültür ve coğrafyalarda özgün biçimlerde yorumlanabildiğini gösterir.</p>
@@ -770,8 +1020,41 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">2️⃣ Camileri Tanıyalım</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-kavram-haritasi"><h4 class="ka-blok-bas">🗺️ Kavram Haritası<span class="ka-rozet">Kavram ilişkisi</span></h4><p class="ka-blok-alt">Bu konunun alt başlıkları ve aralarındaki ilişki</p><div class="ka-kh-merkez">Dinin mimarimize etkisi</div><span class="ka-kh-cizgi"></span><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f3eefb"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#e0d3f5" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#e0d3f5" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><circle cx="50" cy="50" r="15" fill="#6f4aa8"/>
+<g stroke="#4d3079" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#b498e2"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#b498e2"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#b498e2"/></g></g></svg></span><span class="ka-alt-govde"><b>Cami</b><span>İbadet mekânı</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f3eefb"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#e0d3f5" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#e0d3f5" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><rect x="12" y="70" width="24" height="18" rx="4" fill="#b498e2"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#6f4aa8"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#4d3079"/>
+<circle cx="76" cy="20" r="7" fill="#b498e2"/></g></g></svg></span><span class="ka-alt-govde"><b>Medrese</b><span>Eğitim yapısı</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f3eefb"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#e0d3f5" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#e0d3f5" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><path d="M22 88 V38 A28 28 0 0 1 78 38 V88 Z" fill="#6f4aa8"/>
+<rect x="34" y="52" width="32" height="22" rx="5" fill="#f3eefb"/>
+<path d="M50 60 v10" stroke="#b498e2" stroke-width="4" stroke-linecap="round"/>
+<rect x="14" y="88" width="72" height="8" rx="3" fill="#4d3079"/>
+<circle cx="50" cy="30" r="6" fill="#b498e2"/></g></g></svg></span><span class="ka-alt-govde"><b>Çeşme</b><span>Hayır eseri</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f3eefb"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#e0d3f5" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#e0d3f5" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M20 74 V52 A30 30 0 0 1 80 52 V74 Z" fill="#6f4aa8"/>
+<path d="M50 8 V22" stroke="#4d3079" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="8" r="5" fill="#b498e2"/>
+<rect x="14" y="74" width="72" height="12" rx="4" fill="#4d3079"/>
+<path d="M42 86 V64 A8 8 0 0 1 58 64 V86 Z" fill="#f3eefb"/></g></g></svg></span><span class="ka-alt-govde"><b>Külliye</b><span>Hepsi bir arada</span></span></div></div></div><div class="ka-blok ka-gunluk-hayat"><h4 class="ka-blok-bas">🏠 Günlük Hayattan</h4><div class="ka-gunluk"><span class="ka-gunluk-gorsel"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f3eefb"/><circle cx="70" cy="70" r="58" fill="#e0d3f5" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M22 88 V38 A28 28 0 0 1 78 38 V88 Z" fill="#6f4aa8"/>
+<rect x="34" y="52" width="32" height="22" rx="5" fill="#f3eefb"/>
+<path d="M50 60 v10" stroke="#b498e2" stroke-width="4" stroke-linecap="round"/>
+<rect x="14" y="88" width="72" height="8" rx="3" fill="#4d3079"/>
+<circle cx="50" cy="30" r="6" fill="#b498e2"/></g></g></svg></span><p>Mahalle çeşmesi, geçmişte “sadaka-i cariye” niyetiyle yapılan bir hayır eseriydi.</p></div></div><div class="ka-blok ka-dusun-cevapla ka-dusun"><h4 class="ka-blok-bas">🤔 Sıra Sende<span class="ka-rozet">Düşün ve cevapla</span></h4><p>Yaşadığın yerdeki bir dinî yapıyı düşün: hangi ihtiyaç için yapılmış olabilir?</p></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Dinî inanç mimariyi doğrudan etkilemiştir.</li><li>Külliyeler ibadet, eğitim ve hizmeti bir araya getirir.</li></ul></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-2"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#eaf4fd"/><g class="kai-bl" opacity=".85"><ellipse cx="190" cy="87" rx="180" ry="82" fill="#cfe6fb"/><ellipse cx="664" cy="160" rx="216" ry="72" fill="#cfe6fb" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#7cc4f0" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(48,44) scale(1.580)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><path d="M20 74 V52 A30 30 0 0 1 80 52 V74 Z" fill="#2a6f97"/>
+<path d="M50 8 V22" stroke="#1b4f6e" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="8" r="5" fill="#7cc4f0"/>
+<rect x="14" y="74" width="72" height="12" rx="4" fill="#1b4f6e"/>
+<path d="M42 86 V64 A8 8 0 0 1 58 64 V86 Z" fill="#eaf4fd"/></g></g></g><g transform="translate(664,24) scale(1.520)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><path d="M24 86 V44 A26 26 0 0 1 76 44 V86 Z" fill="#2a6f97"/>
+<path d="M34 86 V48 A16 16 0 0 1 66 48 V86 Z" fill="#eaf4fd"/>
+<path d="M42 86 V56 A8 8 0 0 1 58 56 V86 Z" fill="#7cc4f0"/>
+<rect x="18" y="86" width="64" height="8" rx="3" fill="#1b4f6e"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s5-u5-1.jpg" alt="Camileri Tanıyalım" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 2</span><h4>Camileri Tanıyalım</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 2</span><span class="ka-giris">Caminin bölümleri</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#cfe6fb"/><g transform="translate(14,14) scale(0.92)"><path d="M20 74 V52 A30 30 0 0 1 80 52 V74 Z" fill="#2a6f97"/>
+<path d="M50 8 V22" stroke="#1b4f6e" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="8" r="5" fill="#7cc4f0"/>
+<rect x="14" y="74" width="72" height="12" rx="4" fill="#1b4f6e"/>
+<path d="M42 86 V64 A8 8 0 0 1 58 64 V86 Z" fill="#eaf4fd"/></g></svg></span><span class="ab-rozet">2️⃣</span> Camileri Tanıyalım</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#eaf4fd"/><circle cx="70" cy="70" r="58" fill="#cfe6fb" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M24 86 V44 A26 26 0 0 1 76 44 V86 Z" fill="#2a6f97"/>
+<path d="M34 86 V48 A16 16 0 0 1 66 48 V86 Z" fill="#eaf4fd"/>
+<path d="M42 86 V56 A8 8 0 0 1 58 56 V86 Z" fill="#7cc4f0"/>
+<rect x="18" y="86" width="64" height="8" rx="3" fill="#1b4f6e"/></g></g></svg></div>
     <p>Bir caminin bölümleri iç ve dış bölümler olarak ikiye ayrılabilir. İç bölümlerin başında, imamın namaz kıldırdığı yeri ve kıble yönünü gösteren duvardaki girintili bölüm olan <b>mihrap</b> gelir. Hutbenin okunduğu, merdiven basamaklı yüksek kürsüye <b>minber</b>; müezzinin ya da cemaatin bir bölümünün namaz kıldığı, yükseltilmiş özel bölüme ise <b>mahfil</b> denir. Cemaate dinî bilgiler anlatmak için kullanılan yükseltilmiş kürsüye de <b>vaaz kürsüsü</b> adı verilir.</p>
     <p>Caminin dış bölümlerinin en belirgini, müezzinin ezan okuduğu ince ve uzun kule olan <b>minare</b>dir; müezzinin ezan okumak için minarede çıktığı balkon biçimindeki bölüme <b>şerefe</b> denir. Caminin üzerini örten yarım küre biçimindeki büyük çatıya <b>kubbe</b>, caminin dış bahçesine, yani ana girişten önceki açık alana <b>avlu</b> (bir başka adıyla <b>harim</b>) denir. Avluda abdest almak için kullanılan musluklu havuza <b>şadırvan</b>; camiye girmeden önceki, namaza yetişemeyenlerin kıldığı kapalı veya yarı açık alana ise <b>son cemaat yeri</b> denir. Caminin süslemeli ana giriş kapısına <b>taç kapı</b>, kubbe ya da minarenin tepesindeki hilal biçimli madeni süse de <b>alem</b> denir.</p>
     <p>Bazı camiler tek başına değil, çevresinde başka yapılarla birlikte inşa edilir. Cami ile birlikte medrese, hamam, aşevi, kütüphane gibi yapılardan oluşan sosyal ve dinî yapılar topluluğuna <b>külliye</b> denir. Külliyeler, sadece ibadet değil; eğitim, sağlık ve sosyal yardım gibi ihtiyaçları da karşılayarak toplumun günlük hayatının merkezinde yer almıştır.</p>
@@ -789,8 +1072,37 @@
 
 
 
-  <div class="kutu-panel">
-    <h3 style="color:var(--mavi)">3️⃣ Kültürümüzden Cami Örnekleri</h3>
+  
+<div class="ka-ogretim"><div class="ka-blok ka-kavram-haritasi"><h4 class="ka-blok-bas">🗺️ Kavram Haritası<span class="ka-rozet">Kavram ilişkisi</span></h4><p class="ka-blok-alt">Bu konunun alt başlıkları ve aralarındaki ilişki</p><div class="ka-kh-merkez">Caminin bölümleri</div><span class="ka-kh-cizgi"></span><div class="ka-alt-izgara"><div class="ka-alt-kart" style="--gecikme:0.00s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf4fd"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cfe6fb" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cfe6fb" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><rect x="41" y="34" width="18" height="52" rx="5" fill="#2a6f97"/>
+<path d="M50 8 L60 30 H40 Z" fill="#7cc4f0"/>
+<rect x="35" y="44" width="30" height="7" rx="3" fill="#1b4f6e"/>
+<rect x="44" y="60" width="12" height="16" rx="5" fill="#eaf4fd"/></g></g></svg></span><span class="ka-alt-govde"><b>Minare</b><span>Ezan okunan yer</span></span></div><div class="ka-alt-kart" style="--gecikme:0.06s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf4fd"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cfe6fb" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cfe6fb" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><circle cx="50" cy="50" r="15" fill="#2a6f97"/>
+<g stroke="#1b4f6e" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
+<rect x="34" y="4" width="32" height="16" rx="6" fill="#7cc4f0"/>
+<rect x="2" y="70" width="32" height="16" rx="6" fill="#7cc4f0"/>
+<rect x="66" y="70" width="32" height="16" rx="6" fill="#7cc4f0"/></g></g></svg></span><span class="ka-alt-govde"><b>Kubbe</b><span>Ana örtü</span></span></div><div class="ka-alt-kart" style="--gecikme:0.12s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf4fd"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cfe6fb" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cfe6fb" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><rect x="12" y="70" width="24" height="18" rx="4" fill="#7cc4f0"/>
+<rect x="38" y="52" width="24" height="36" rx="4" fill="#2a6f97"/>
+<rect x="64" y="32" width="24" height="56" rx="4" fill="#1b4f6e"/>
+<circle cx="76" cy="20" r="7" fill="#7cc4f0"/></g></g></svg></span><span class="ka-alt-govde"><b>Mihrap</b><span>Kıble yönü</span></span></div><div class="ka-alt-kart" style="--gecikme:0.18s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#eaf4fd"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#cfe6fb" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#cfe6fb" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-f"><path d="M24 62 A28 28 0 1 1 42 82" stroke="#2a6f97" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M42 70 L44 88 L26 84 Z" fill="#2a6f97"/>
+<circle cx="50" cy="50" r="12" fill="#7cc4f0"/></g></g></svg></span><span class="ka-alt-govde"><b>Minber</b><span>Hutbe okunan yer</span></span></div></div></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Mihrap kıble yönünü gösterir.</li><li>Minber cuma hutbesi için kullanılır.</li></ul></div></div>
+<div class="kutu-panel">
+    <div class="ka-konu" id="ka-konu-3"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#e6f7f8"/><g class="kai-bl" opacity=".85"><ellipse cx="210" cy="97" rx="180" ry="82" fill="#c6ecef"/><ellipse cx="703" cy="149" rx="216" ry="72" fill="#c6ecef" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#6fd3de" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(48,44) scale(1.580)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><rect x="41" y="34" width="18" height="52" rx="5" fill="#12869a"/>
+<path d="M50 8 L60 30 H40 Z" fill="#6fd3de"/>
+<rect x="35" y="44" width="30" height="7" rx="3" fill="#0b6272"/>
+<rect x="44" y="60" width="12" height="16" rx="5" fill="#e6f7f8"/></g></g></g><g transform="translate(664,24) scale(1.520)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><path d="M22 88 V38 A28 28 0 0 1 78 38 V88 Z" fill="#12869a"/>
+<rect x="34" y="52" width="32" height="22" rx="5" fill="#e6f7f8"/>
+<path d="M50 60 v10" stroke="#6fd3de" stroke-width="4" stroke-linecap="round"/>
+<rect x="14" y="88" width="72" height="8" rx="3" fill="#0b6272"/>
+<circle cx="50" cy="30" r="6" fill="#6fd3de"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/optimized/suleymaniye1_orta.jpg" alt="Süleymaniye Camii, İstanbul" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"><span class="ka-foto-kunye">Fotoğraf: Mattias Hill — CC BY-SA 4.0 · Wikimedia Commons</span></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 3</span><h4>Kültürümüzden Cami Örnekleri</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 3</span><span class="ka-giris">Kültürümüzden cami örnekleri</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#c6ecef"/><g transform="translate(14,14) scale(0.92)"><rect x="41" y="34" width="18" height="52" rx="5" fill="#12869a"/>
+<path d="M50 8 L60 30 H40 Z" fill="#6fd3de"/>
+<rect x="35" y="44" width="30" height="7" rx="3" fill="#0b6272"/>
+<rect x="44" y="60" width="12" height="16" rx="5" fill="#e6f7f8"/></g></svg></span><span class="ab-rozet">3️⃣</span> Kültürümüzden Cami Örnekleri</h3>
+<div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#e6f7f8"/><circle cx="70" cy="70" r="58" fill="#c6ecef" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M22 88 V38 A28 28 0 0 1 78 38 V88 Z" fill="#12869a"/>
+<rect x="34" y="52" width="32" height="22" rx="5" fill="#e6f7f8"/>
+<path d="M50 60 v10" stroke="#6fd3de" stroke-width="4" stroke-linecap="round"/>
+<rect x="14" y="88" width="72" height="8" rx="3" fill="#0b6272"/>
+<circle cx="50" cy="30" r="6" fill="#6fd3de"/></g></g></svg></div>
     <p>Kültürümüzde pek çok değerli cami örneği vardır. Osmanlı Dönemi'nin en büyük mimarı kabul edilen <b>Mimar Sinan</b>, yüzlerce eser inşa etmiştir. Mimar Sinan'ın ustalık eseri kabul edilen <b>Selimiye Camii</b>, Edirne'dedir; <b>Süleymaniye Camii</b> ise Mimar Sinan tarafından İstanbul'da inşa edilmiş, külliye olarak da tasarlanmış büyük bir camidir. İstanbul'daki <b>Sultanahmet Camii</b>, iç mekânındaki mavi İznik çinileri nedeniyle halk arasında "Mavi Cami" olarak da bilinir.</p>
     <p>Cami mimarisi bölgeden bölgeye ve dönemden döneme farklılık gösterebilir. Bursa'da bulunan <b>Ulu Cami</b>, çok kubbeli mimarisiyle bilinen erken dönem bir Osmanlı camisidir. Selçuklu Dönemi taş işçiliğinin en güzel örneklerinden sayılan <b>Divriği Ulu Camii</b> ise Sivas'ın Divriği ilçesindedir ve özellikle taç kapısındaki eşsiz oymacılığıyla dünya mirası listesinde yer alır. Anadolu'nun bazı bölgelerinde, özellikle Karadeniz'de, taş yerine ahşap direklerin kullanıldığı sade camiler de görülür.</p>
     <p>Camiler yalnızca taş ve kubbeden ibaret değildir; birçok sanat dalı bir araya gelerek onları güzelleştirir. Ayet ve duaların estetik biçimde yazılmasını sağlayan güzel yazı yazma sanatına <b>hat sanatı</b>; elyazması ve süslemelerde altın varak ve boya kullanılarak yapılan bezeme sanatına <b>tezhip</b> denir. Renkli sırlı seramik karolarla yapılan duvar kaplamalarına <b>çini</b>, duvar ve tavanların elle boyanarak süslenmesine <b>kalem işi</b>, ahşabın oyularak süslenmesine ise <b>oymacılık</b> adı verilir.</p>
@@ -845,6 +1157,11 @@
 </section>
 
 <section id="slayt">
+
+<div class="ka-ogretim"><div class="ka-blok ka-gunluk-hayat"><h4 class="ka-blok-bas">🏠 Günlük Hayattan</h4><div class="ka-gunluk"><span class="ka-gunluk-gorsel"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#e6f7f8"/><circle cx="70" cy="70" r="58" fill="#c6ecef" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M20 74 V52 A30 30 0 0 1 80 52 V74 Z" fill="#12869a"/>
+<path d="M50 8 V22" stroke="#0b6272" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="8" r="5" fill="#6fd3de"/>
+<rect x="14" y="74" width="72" height="12" rx="4" fill="#0b6272"/>
+<path d="M42 86 V64 A8 8 0 0 1 58 64 V86 Z" fill="#e6f7f8"/></g></g></svg></span><p>Selimiye ya da Süleymaniye gibi camiler, hem ibadet hem de sanat eseridir.</p></div></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Kültürümüzde birçok cami sanat eseri niteliğindedir.</li><li>Mimar Sinan bu eserlerin en önemli ustasıdır.</li></ul></div></div>
 <h2>🖥️ Ünite Sunumu</h2>
 
   <div class="sunum-sarmal">

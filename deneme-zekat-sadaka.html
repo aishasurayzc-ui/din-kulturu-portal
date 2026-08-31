@@ -51,14 +51,17 @@ main{max-width:920px;margin:0 auto;padding:0 var(--sp-5) var(--sp-7);}
 .secenek b{color:var(--navy);margin-right:4px;}
 .soru-karti.cevaplandi .secenek{cursor:default;}
 .soru-karti.cevaplandi .secenek:hover{border-color:transparent;}
-.secenek.dogru-cevap{background:rgba(64,145,108,.15);border-color:var(--yesil);}
-.secenek.dogru-cevap b{color:var(--yesil);}
-.secenek.yanlis-secim{background:rgba(220,38,38,.1);border-color:#dc2626;}
-.secenek.yanlis-secim b{color:#dc2626;}
-.cevap-etiketi{display:none;margin-top:10px;font-size:.82rem;font-weight:700;padding:6px 10px;border-radius:var(--radius-s);}
-.cevap-etiketi.gorunur{display:inline-block;}
-.cevap-etiketi.dogru-mesaj{background:rgba(64,145,108,.15);color:var(--yesil);}
-.cevap-etiketi.yanlis-mesaj{background:rgba(220,38,38,.1);color:#dc2626;}
+.secenek.secili{background:rgba(30,58,138,.08);border-color:var(--navy);}
+.secenek.secili b{color:var(--navy);}
+.cevap-anahtari{margin-top:var(--sp-6);background:var(--yuzey);border:1px solid var(--kenar);border-radius:var(--radius-l);box-shadow:var(--shadow-1);overflow:hidden;}
+.ca-baslik-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 20px;background:transparent;border:none;font-family:inherit;font-size:1rem;font-weight:800;color:var(--navy);cursor:pointer;text-align:left;}
+.ca-baslik-btn .msi{transition:transform var(--motion);}
+.ca-baslik-btn[aria-expanded="true"] .msi{transform:rotate(180deg);}
+.ca-icerik{display:none;padding:0 20px 20px;}
+.ca-icerik.acik{display:block;}
+.ca-izgara{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px;}
+.ca-madde{background:var(--acikgri);border-radius:var(--radius-s);padding:6px 4px;text-align:center;font-size:.85rem;font-weight:700;}
+.ca-madde b{color:var(--yesil);}
 @media (max-width:600px){.secenekler{grid-template-columns:1fr;}.test-secici{position:static;}}
 footer{text-align:center;padding:var(--sp-6) var(--sp-5);color:var(--metin-ikincil);font-size:.82rem;border-top:1px solid var(--kenar);margin-top:var(--sp-6);}
 footer a{color:var(--navy);text-decoration:none;font-weight:700;}
@@ -74,7 +77,7 @@ footer a{color:var(--navy);text-decoration:none;font-weight:700;}
 <header class="cs-hero">
   <a class="geri-link" href="deneme-sinavlari.html">← Tüm deneme sınavları</a>
   <h1>🤲 Deneme Sınavı: Zekât ve Sadaka</h1>
-  <p>Bu ünite için hazırlanmış 5 ayrı deneme sınavı, her biri 20 soru. Gerçek LGS'de çıkmış sorulara benzer formatta hazırlanmış özgün deneme sorularıdır. Bir şıkka tıklayarak cevabını görebilirsin.</p>
+  <p>Bu ünite için hazırlanmış 5 ayrı deneme sınavı, her biri 20 soru. Gerçek LGS'de çıkmış sorulara benzer formatta hazırlanmış özgün deneme sorularıdır. Şıkları işaretleyerek testi tamamla; doğru cevapları görmek için sayfanın altındaki "Cevap Anahtarı"na tıkla.</p>
 </header>
 
 <main id="ana-icerik">
@@ -250,9 +253,20 @@ function soruAlaniniRenderEt(){
       <div class="secenekler">
         ${s.secenekler.map((sec,j)=>`<div class="secenek" data-index="${j}"><b>${harfler[j]})</b> <span></span></div>`).join('')}
       </div>
-      <div class="cevap-etiketi"></div>
     </div>
-  `).join('');
+  `).join('') + `
+    <div class="cevap-anahtari">
+      <button type="button" class="ca-baslik-btn" id="caBtn" aria-expanded="false" aria-controls="caIcerik">
+        <span>📋 Cevap Anahtarı — ${test.baslik}</span>
+        <span class="msi material-symbols-outlined" aria-hidden="true">expand_more</span>
+      </button>
+      <div class="ca-icerik" id="caIcerik">
+        <div class="ca-izgara">
+          ${test.sorular.map((s,i)=>`<div class="ca-madde">${i+1}) <b>${harfler[s.dogru]}</b></div>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
   const kartlar = alan.querySelectorAll('.soru-karti');
   kartlar.forEach((kart,i)=>{
     kart.querySelector('.soru-metin').textContent = test.sorular[i].metin;
@@ -262,22 +276,18 @@ function soruAlaniniRenderEt(){
     kart.addEventListener('click', e=>{
       const secenek = e.target.closest('.secenek');
       if(!secenek || kart.classList.contains('cevaplandi')) return;
-      const dogruIndex = parseInt(kart.dataset.dogru);
-      const secilenIndex = parseInt(secenek.dataset.index);
       kart.classList.add('cevaplandi');
-      const secenekler = kart.querySelectorAll('.secenek');
-      secenekler[dogruIndex].classList.add('dogru-cevap');
-      const etiket = kart.querySelector('.cevap-etiketi');
-      if(secilenIndex===dogruIndex){
-        etiket.textContent='✓ Doğru cevap!';
-        etiket.classList.add('gorunur','dogru-mesaj');
-      } else {
-        secenek.classList.add('yanlis-secim');
-        etiket.textContent=`✗ Yanlış. Doğru cevap: ${harfler[dogruIndex]}`;
-        etiket.classList.add('gorunur','yanlis-mesaj');
-      }
+      secenek.classList.add('secili');
     });
   });
+  const caBtn = document.getElementById('caBtn');
+  const caIcerik = document.getElementById('caIcerik');
+  if(caBtn && caIcerik){
+    caBtn.addEventListener('click', ()=>{
+      const acik = caIcerik.classList.toggle('acik');
+      caBtn.setAttribute('aria-expanded', acik?'true':'false');
+    });
+  }
 }
 testleriRenderEt();
 soruAlaniniRenderEt();
