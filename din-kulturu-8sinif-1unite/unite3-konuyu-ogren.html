@@ -962,8 +962,131 @@
   /* Başlık rozetleri: aynı karikatürün 40 kez tekrarı yerine konuya özel motif. */
   .ab-ikon > .ka-svg{ border-radius:50%; }
 </style>
+
+<style id="kf-katman-stil">
+.ka-foto-kunye{ position:absolute; right:8px; bottom:8px; z-index:3; font-size:.64em;
+  color:#fff; background:rgba(16,28,45,.55); border-radius:14px; padding:3px 9px;
+  max-width:88%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.kf-alt-img{ display:block; width:100%; aspect-ratio:4/3; object-fit:cover;
+  border-radius:14px; background:#eef2f7; }
+.ka-alt-gorsel.kf-alt-dolu{ line-height:0; }
+@media(max-width:560px){ .kf-alt-img{ aspect-ratio:16/9; } }
+@media print{ .ka-foto-kunye{ display:none; } }
+</style>
+
+<style id="dd-stil">
+.dd-ders{
+  --dd-ana:#1e5aa8; --dd-acik:#eef4fb; --dd-kenar:#d9e4f0; --dd-metin:#1c2530;
+  --dd-yumusak:#5d6e82; --dd-yes:#137a4a; --dd-kir:#b3261e; --dd-r:16px;
+  margin:18px 0 26px; border:1px solid var(--dd-kenar); border-radius:var(--dd-r);
+  background:#fff; overflow:hidden; box-shadow:0 1px 3px rgba(16,24,40,.06);
+}
+/* 4. sınıf: daha sıcak, daha renkli, daha büyük punto */
+.dd-ders.dd-s4{ --dd-ana:#c2410c; --dd-acik:#fff5ec; --dd-kenar:#f0dcc9; font-size:1.03em; }
+/* 8. sınıf: daha modern, daha akademik */
+.dd-ders.dd-s8{ --dd-ana:#1e5aa8; --dd-acik:#eef4fb; --dd-kenar:#d9e4f0; }
+
+.dd-ust{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:12px 16px; background:var(--dd-acik); border-bottom:1px solid var(--dd-kenar);
+}
+.dd-etiket{ font-size:.72em; font-weight:900; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--dd-ana); }
+.dd-ust h4{ margin:0; font-size:1.02em; font-weight:800; color:var(--dd-metin); }
+.dd-cubuk{ flex:1 1 90px; height:6px; min-width:70px; border-radius:99px;
+  background:#fff; border:1px solid var(--dd-kenar); overflow:hidden; }
+.dd-cubuk i{ display:block; height:100%; width:0; background:var(--dd-ana);
+  transition:width .45s ease; }
+.dd-sayac{ font-size:.76em; font-weight:800; color:var(--dd-yumusak); white-space:nowrap; }
+
+.dd-adimlar{ list-style:none; margin:0; padding:0; }
+.dd-adim{ padding:15px 16px; border-top:1px solid #eef2f7; }
+.dd-adim:first-child{ border-top:0; padding-top:14px; }
+.dd-bas{ display:flex; align-items:center; gap:9px; margin:0 0 8px; }
+.dd-rozet{
+  flex:0 0 auto; width:26px; height:26px; border-radius:9px; display:inline-flex;
+  align-items:center; justify-content:center; font-size:.72em; font-weight:900;
+  background:var(--dd-acik); color:var(--dd-ana); border:1px solid var(--dd-kenar);
+}
+.dd-bas h5{ margin:0; font-size:.82em; font-weight:900; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--dd-ana); }
+.dd-adim p{ margin:0 0 6px; line-height:1.62; color:var(--dd-metin); }
+.dd-adim p:last-child{ margin-bottom:0; }
+
+/* 01 GÖR — fotoğraf konu anlatımının ana görseli, ikon değil */
+.dd-foto{ margin:0 0 9px; position:relative; display:block; overflow:hidden;
+  border-radius:12px; background:#eef2f7; }
+.dd-foto img.dd-img{ display:block; width:100%; height:100%; aspect-ratio:16/9;
+  object-fit:cover; }
+.dd-s4 .dd-foto img.dd-img{ aspect-ratio:3/2; }
+@media (max-width:640px){
+  .dd-foto img.dd-img, .dd-s4 .dd-foto img.dd-img{ aspect-ratio:4/3; }
+}
+.dd-kunye{
+  position:absolute; right:7px; bottom:7px; z-index:2; pointer-events:none;
+  font-size:10px; line-height:1.55; color:#fff; background:rgba(10,17,26,.55);
+  border-radius:10px; padding:2px 8px; max-width:88%;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.dd-altyazi{ font-size:.87em; color:var(--dd-yumusak); }
+
+/* 02 KEŞFET / 06 DÜŞÜN — açık uçlu sorular */
+.dd-merak, .dd-dusun{
+  margin:0; padding:11px 14px; border-left:3px solid var(--dd-ana);
+  background:var(--dd-acik); border-radius:0 10px 10px 0; font-weight:600;
+}
+.dd-ipucu{ display:block; margin-top:7px; font-size:.85em; color:var(--dd-yumusak); font-weight:400; }
+
+/* 04 AYET / DELİL */
+.dd-delil{ margin:0; padding:12px 15px; background:#f7fbf8; border:1px solid #d8ecdf;
+  border-radius:12px; }
+.dd-delil-metin{ margin:0 0 6px; font-style:italic; line-height:1.66; }
+.dd-delil-kaynak{ margin:0 0 7px; font-size:.83em; font-weight:800; color:var(--dd-yes); }
+.dd-delil-bag{ margin:0; font-size:.88em; color:#3c5548; }
+
+/* 05 GÜNLÜK HAYAT */
+.dd-gunluk{ margin:0; padding:11px 14px; background:#fffaf0; border:1px solid #f0e2c8;
+  border-radius:12px; }
+
+/* 07 MİNİ KONTROL */
+.dd-soru{ margin:0 0 10px; font-weight:700; }
+.dd-secenekler{ display:grid; gap:7px; }
+.dd-sec{
+  display:flex; align-items:flex-start; gap:9px; width:100%; text-align:left;
+  padding:10px 13px; border:1.5px solid var(--dd-kenar); border-radius:11px;
+  background:#fff; cursor:pointer; font:inherit; font-size:.95em; color:var(--dd-metin);
+  transition:border-color .15s ease, background .15s ease;
+}
+.dd-sec:hover:not([disabled]){ border-color:var(--dd-ana); background:var(--dd-acik); }
+.dd-sec[disabled]{ cursor:default; }
+.dd-harf{ flex:0 0 auto; width:22px; height:22px; border-radius:7px; font-size:.78em;
+  font-weight:900; display:inline-flex; align-items:center; justify-content:center;
+  background:var(--dd-acik); color:var(--dd-ana); border:1px solid var(--dd-kenar); }
+.dd-sec.dd-dogru{ border-color:var(--dd-yes); background:#f2fbf6; }
+.dd-sec.dd-dogru .dd-harf{ background:var(--dd-yes); color:#fff; border-color:var(--dd-yes); }
+.dd-sec.dd-yanlis{ border-color:var(--dd-kir); background:#fdf4f3; }
+.dd-sec.dd-yanlis .dd-harf{ background:var(--dd-kir); color:#fff; border-color:var(--dd-kir); }
+.dd-geri{ margin-top:10px; padding:10px 13px; border-radius:11px; font-size:.92em;
+  line-height:1.6; display:none; }
+.dd-geri.dd-ac{ display:block; }
+.dd-geri.dd-iyi{ background:#f2fbf6; border:1px solid #cfe8db; color:#14603f; }
+.dd-geri.dd-kotu{ background:#fdf4f3; border:1px solid #f2ccc6; color:#8c2018; }
+
+@media (max-width:420px){
+  .dd-adim{ padding:13px 13px; }
+  .dd-bas h5{ font-size:.78em; }
+}
+@media (prefers-reduced-motion: reduce){
+  .dd-cubuk i{ transition:none; }
+}
+@media print{
+  .dd-ders{ break-inside:avoid; }
+  .dd-kunye{ display:none; }
+  .dd-geri{ display:block; }
+}
+</style>
 </head>
-<body>
+<body data-kf-on="s8-u3">
 <div id="portalNav" data-sinif="8" data-unite="3" data-asama="ogren"></div>
 <link rel="stylesheet" href="../ortak/portal-nav.css">
 <script src="../ortak/portal-nav.js"></script>
@@ -1022,7 +1145,7 @@
 <rect x="2" y="70" width="32" height="16" rx="6" fill="#8ea6e0"/>
 <rect x="66" y="70" width="32" height="16" rx="6" fill="#8ea6e0"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-0.jpg" alt="Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 1</span><h4>Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 1</span><span class="ka-giris">Dinin gayesi: zarûrât-ı hamse</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#d3dcf3"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L84 24 V52 Q84 76 50 90 Q16 76 16 52 V24 Z" fill="#2f4a8f"/>
 <path d="M50 24 L74 32 V52 Q74 68 50 78 Q26 68 26 52 V32 Z" fill="#ecf0fa"/>
-<path d="M38 50 L47 59 L64 40" stroke="#2f4a8f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></span><span class="ab-rozet">1️⃣</span> Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)</h3>
+<path d="M38 50 L47 59 L64 40" stroke="#2f4a8f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></span><span class="ab-rozet">1️⃣</span> Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)</h3><div class="dd-ders dd-s8" id="s8-u3-ders-1"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Dinin Gayesi: Zarûrât-ı Hamse (Beş Temel Değer)</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/An%C4%B1tkabir%2C%20Ankara%2C%20Turqu%C3%ADa%2C%202024-10-03%2C%20DD%2003.jpg?width=1600" alt="Ankara’da Anıtkabir" loading="lazy" decoding="async" style="object-position:center 55%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Diego Delso — CC BY-SA 4.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Anıtkabir. Ortak değerler, bir toplumu ayakta tutan temel taşlardır.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Bir toplumun korumak zorunda olduğu en temel şeyler sence nelerdir?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p><b>Zarûrât-ı hamse</b>, dinin korumayı amaçladığı beş temel değerdir: <b>can, akıl, din, nesil ve mal</b>.</p><p>Dinin bütün emir ve yasakları bu beş değeri korumaya yöneliktir. Bu yüzden din, hayatı kolaylaştırmayı hedefler.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“…Kim bir cana kıymamış ya da yeryüzünde bozgunculuk yapmamış olan bir kimseyi öldürürse, sanki bütün insanları öldürmüş gibidir…”</p><p class="dd-delil-kaynak">— Maide suresi, 32. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet, canın korunmasını insanlığın tamamıyla eş tutar. Bu, “can” değerinin ne kadar merkezde olduğunu gösterir.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Trafik kurallarına uymak canı, uyuşturucudan uzak durmak aklı, emaneti korumak malı korumaktır — beş değer günlük hayatta böyle yaşanır.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Beş temel değerden biri korunmazsa diğerleri de zarar görür mü? Bir örnekle düşün.<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Zarûrât-ı hamse aşağıdakilerden hangisini kapsamaz?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Canın korunması</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Neslin korunması</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Aklın korunması</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Servet biriktirme hedefi</span></button></div><p class="dd-geri" data-dd-aciklama="Beş temel değer can, akıl, din, nesil ve maldır; “servet biriktirme hedefi” bunlardan değildir."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#ecf0fa"/><circle cx="70" cy="70" r="58" fill="#d3dcf3" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><circle cx="50" cy="50" r="15" fill="#2f4a8f"/>
 <g stroke="#1e3266" stroke-width="3"><path d="M50 35 V16"/><path d="M36 58 L18 74"/><path d="M64 58 L82 74"/></g>
 <rect x="34" y="4" width="32" height="16" rx="6" fill="#8ea6e0"/>
@@ -1104,7 +1227,7 @@
 <rect x="42" y="64" width="16" height="22" rx="3" fill="#f0a0b4"/>
 <rect x="60" y="58" width="12" height="12" rx="3" fill="#f0a0b4" opacity=".7"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/optimized/geo3_orta.jpg" alt="16 köşeli geometrik desen" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"><span class="ka-foto-kunye">Fotoğraf: Jim Joel — CC BY-SA 4.0 · Wikimedia Commons</span></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 2</span><h4>Din Toplumsal Bir Olgudur</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 2</span><span class="ka-giris">Din toplumsal bir olgudur</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f8d6de"/><g transform="translate(14,14) scale(0.92)"><circle cx="26" cy="34" r="11" fill="#c04a68"/><path d="M12 78 V60 A14 14 0 0 1 40 60 V78 Z" fill="#c04a68"/>
 <circle cx="74" cy="34" r="11" fill="#f0a0b4"/><path d="M60 78 V60 A14 14 0 0 1 88 60 V78 Z" fill="#f0a0b4"/>
-<circle cx="50" cy="26" r="13" fill="#8f3049"/><path d="M33 82 V60 A17 17 0 0 1 67 60 V82 Z" fill="#8f3049"/></g></svg></span><span class="ab-rozet">2️⃣</span> Din Toplumsal Bir Olgudur</h3>
+<circle cx="50" cy="26" r="13" fill="#8f3049"/><path d="M33 82 V60 A17 17 0 0 1 67 60 V82 Z" fill="#8f3049"/></g></svg></span><span class="ab-rozet">2️⃣</span> Din Toplumsal Bir Olgudur</h3><div class="dd-ders dd-s8" id="s8-u3-ders-2"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Din Toplumsal Bir Olgudur</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Children%20volunteers%20helping%20plant%20a%20pollinator%20garden.jpg?width=1600" alt="Bahçe eken çocuk gönüllüler" loading="lazy" decoding="async" style="object-position:center 45%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Lafferty Chuck / U.S. Fish and Wildlife Service — Kamu malı · Wikimedia Commons</span></figure><p class="dd-altyazi">Birlikte bahçe eken gönüllü çocuklar. Din, tek başına değil toplum içinde yaşanır.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">İbadetlerin çoğu neden topluca yapılır?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Din yalnızca bireysel bir tercih değildir; toplumsal hayatı da düzenler. Bayramlar, cuma namazı, cenaze ve yardımlaşma bunun örnekleridir.</p><p>Din; dil, sanat, mimari ve gelenek üzerinden kültürü de biçimlendirir. Bu yüzden dine <b>toplumsal bir olgu</b> denir.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Ey insanlar! Şüphe yok ki biz sizi bir erkek ve bir dişiden yarattık ve birbirinizi tanımanız için sizi boylara ayırdık…”</p><p class="dd-delil-kaynak">— Hucurat suresi, 13. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet farklılığı bir zenginlik olarak sunar ve insanları tanışmaya çağırır. Bu, dinin toplumsal yönünün temelidir.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Bayram sabahı komşuların birbirini ziyaret etmesi, mahalledeki cenazeye herkesin koşması dinin toplumsal yüzüdür.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Farklı inançtan insanların bir arada barış içinde yaşaması için neye ihtiyaç vardır?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Hucurat suresi 13. ayet farklılıkları nasıl değerlendirir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Bir ayrılık sebebi olarak</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Tanışmak için bir vesile olarak</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Bir eksiklik olarak</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Bir üstünlük ölçüsü olarak</span></button></div><p class="dd-geri" data-dd-aciklama="Ayet, farklılıkların birbirimizi tanımamız için olduğunu bildirir."></p></li></ol></div>
 <div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fdeef1"/><circle cx="70" cy="70" r="58" fill="#f8d6de" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-t"><path d="M14 52 L50 22 L86 52 Z" fill="#c04a68"/>
 <rect x="24" y="52" width="52" height="34" rx="5" fill="#fff" stroke="#8f3049" stroke-width="3.2"/>
 <rect x="42" y="64" width="16" height="22" rx="3" fill="#f0a0b4"/>
@@ -1187,7 +1310,7 @@
 <path d="M20 30 H80" stroke="#2a6b43" stroke-width="5" stroke-linecap="round"/>
 <circle cx="50" cy="16" r="5" fill="#3f8f5f"/>
 <path d="M20 30 L10 50 H30 Z" fill="#3f8f5f"/><path d="M80 30 L70 50 H90 Z" fill="#3f8f5f"/>
-<rect x="34" y="80" width="32" height="8" rx="3" fill="#2a6b43"/></g></svg></span><span class="ab-rozet">3️⃣</span> Helal Kazanç ve Haram Kazanç Yolları</h3>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#2a6b43"/></g></svg></span><span class="ab-rozet">3️⃣</span> Helal Kazanç ve Haram Kazanç Yolları</h3><div class="dd-ders dd-s8" id="s8-u3-ders-3"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Helal Kazanç ve Haram Kazanç Yolları</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Wheat%20harvest%20on%20field.jpg?width=1600" alt="Hasat zamanı buğday tarlası" loading="lazy" decoding="async" style="object-position:center" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: U.S. Department of Agriculture — Kamu malı · Wikimedia Commons</span></figure><p class="dd-altyazi">Hasat zamanı buğday tarlası. Helal kazanç, emeğin karşılığıdır.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Emek harcamadan kazanılan bir para sana ne hissettirir?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p><b>Helal kazanç</b>, emek verilerek ve kimsenin hakkı yenmeden elde edilen kazançtır.</p><p><b>Haram kazanç</b> ise hile, faiz, kumar, rüşvet, hırsızlık gibi yollarla elde edilendir. Bunlar hem kişiye hem topluma zarar verir.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Ey iman edenler! Mallarınızı aranızda haksız yollarla yemeyin…”</p><p class="dd-delil-kaynak">— Nisâ suresi, 29. ayet (meali özetlenmiştir)</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet ölçüyü net koyar: kazanç, karşılıklı rıza ve hak edişe dayanmalıdır.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Ödevini kopyalayarak yüksek not almak da bir tür “hak edilmemiş kazançtır”. Ölçü aynıdır: emek var mı, hak yenmiş mi?</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Kolay ama haksız bir kazanç ile zor ama helal bir kazanç arasında seçim yaparken insanı hangi düşünce güçlü tutar?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Aşağıdakilerden hangisi haram kazanç yollarından biridir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Faiz</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Çiftçilik</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Ücretli çalışma</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Ticaret</span></button></div><p class="dd-geri" data-dd-aciklama="Faiz haram kazanç yollarındandır; diğerleri emeğe dayalı helal kazançtır."></p></li></ol></div>
 <div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#eaf7ee"/><circle cx="70" cy="70" r="58" fill="#cdeed8" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M30 34 Q50 24 70 34 L80 60 A30 30 0 0 1 20 60 Z" fill="#3f8f5f"/>
 <path d="M34 34 Q50 44 66 34" stroke="#2a6b43" stroke-width="3.4" fill="none"/>
 <circle cx="50" cy="60" r="12" fill="#8fd6a6"/><path d="M44 60 H56 M50 54 V66" stroke="#2a6b43" stroke-width="3" stroke-linecap="round"/>
@@ -1258,7 +1381,7 @@
 <path d="M50 38 V60" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="50" cy="72" r="4.4" fill="#fff"/></g></g></g><g transform="translate(664,24) scale(1.520)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><path d="M6 74 Q50 60 50 78 Q50 60 94 74 L94 26 Q50 12 50 30 Q50 12 6 26 Z" fill="#fff" stroke="#8f4224" stroke-width="3.5" stroke-linejoin="round"/>
 <path d="M50 30 V78" stroke="#8f4224" stroke-width="3.5"/>
 <path d="M16 36 H42 M16 46 H42 M16 56 H38 M58 36 H84 M58 46 H84 M58 56 H80" stroke="#eda285" stroke-width="3" stroke-linecap="round"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-3.jpg" alt="Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Tahrif" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 4</span><h4>Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Tahrif</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 4</span><span class="ka-giris">Bidat, hurafe ve tahrif</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f8dccd"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L92 84 H8 Z" fill="#c2603a" stroke="#8f4224" stroke-width="3.4" stroke-linejoin="round"/>
-<path d="M50 38 V60" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="50" cy="72" r="4.4" fill="#fff"/></g></svg></span><span class="ab-rozet">4️⃣</span> Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Tahrif</h3>
+<path d="M50 38 V60" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="50" cy="72" r="4.4" fill="#fff"/></g></svg></span><span class="ab-rozet">4️⃣</span> Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Tahrif</h3><div class="dd-ders dd-s8" id="s8-u3-ders-4"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Yanlış Dinî Bilgi ve Uygulamalar: Bidat, Hurafe, Batıl İnanç</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Bound%20Manuscript%20of%20Hadith%20with%20Persian%20Translations%20by%20Jami%20MET%20DP-15520-002.jpg?width=1600" alt="Farsça tercümeli el yazması hadis mecmuası" loading="lazy" decoding="async" style="object-position:center 30%" onerror="ddFotoHata(this)"><span class="dd-kunye">Hat: Şah Mahmud Nişâbûrî — CC0 (Metropolitan Museum) · Wikimedia Commons</span></figure><p class="dd-altyazi">El yazması bir hadis mecmuası. Doğru bilgi, kaynağı belli olan bilgidir.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Duyduğun bir bilginin doğru olup olmadığını nasıl kontrol edersin?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p><b>Bidat</b>: dinde sonradan ortaya çıkarılan, aslı olmayan uygulama. <b>Hurafe</b>: akla ve dine aykırı, kaynaksız inanış. <b>Batıl inanç</b>: gerçekle ilgisi olmayan kabul.</p><p>Bunlardan korunmanın yolu, bilgiyi <b>Kur’an ve sahih sünnet</b>ten öğrenmek ve kaynağı sorgulamaktır.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Hakkında kesin bilgi sahibi olmadığın şeyin peşine düşme. Çünkü kulak, göz ve kalp, bunların hepsi ondan sorumludur.”</p><p class="dd-delil-kaynak">— İsra suresi, 36. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet doğrudan bilgi sorumluluğundan söz eder: bilmediğimiz şeyin arkasından gitmek bizi sorumlu kılar.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Sosyal medyada gördüğün bir “dinî bilgi”yi paylaşmadan önce kaynağını sormak, ayetin istediği tam olarak budur.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Bir bilginin “çok yayılmış olması” onu doğru yapar mı? Neden?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">“Hurafe” kavramı neyi ifade eder?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>İslam hukukunun bir dalını</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Kur’an’da geçen bir ibadeti</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Peygamberimizin sünnetini</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Akla ve dine aykırı, kaynaksız inanışı</span></button></div><p class="dd-geri" data-dd-aciklama="Hurafe, akla ve dine aykırı, sağlam kaynağı olmayan inanışlardır."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fdf0ea"/><circle cx="70" cy="70" r="58" fill="#f8dccd" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M6 74 Q50 60 50 78 Q50 60 94 74 L94 26 Q50 12 50 30 Q50 12 6 26 Z" fill="#fff" stroke="#8f4224" stroke-width="3.5" stroke-linejoin="round"/>
 <path d="M50 30 V78" stroke="#8f4224" stroke-width="3.5"/>
 <path d="M16 36 H42 M16 46 H42 M16 56 H38 M58 36 H84 M58 46 H84 M58 56 H80" stroke="#eda285" stroke-width="3" stroke-linecap="round"/></g></g></svg></div>
@@ -1333,7 +1456,7 @@
 <path d="M16 54 H84" stroke="#7a5127" stroke-width="4"/>
 <path d="M20 44 A30 14 0 0 1 80 44 Z" fill="#7a5127"/>
 <rect x="42" y="52" width="16" height="18" rx="4" fill="#d9b183"/>
-<circle cx="50" cy="60" r="3" fill="#7a5127"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-4.jpg" alt="Bir Peygamber Tanıyorum: Hz. Yusuf (as)" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 5</span><h4>Bir Peygamber Tanıyorum: Hz. Yusuf (as)</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 5</span><span class="ka-giris">Hz. Yusuf (as) ve sabrı</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#ecdfcc"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L61 39 L90 41 L67 59 L75 87 L50 71 L25 87 L33 59 L10 41 L39 39 Z" fill="#d9b183" stroke="#a3703c" stroke-width="3.4" stroke-linejoin="round"/></g></svg></span><span class="ab-rozet">5️⃣</span> Bir Peygamber Tanıyorum: Hz. Yusuf (as)</h3>
+<circle cx="50" cy="60" r="3" fill="#7a5127"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-4.jpg" alt="Bir Peygamber Tanıyorum: Hz. Yusuf (as)" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 5</span><h4>Bir Peygamber Tanıyorum: Hz. Yusuf (as)</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 5</span><span class="ka-giris">Hz. Yusuf (as) ve sabrı</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#ecdfcc"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L61 39 L90 41 L67 59 L75 87 L50 71 L25 87 L33 59 L10 41 L39 39 Z" fill="#d9b183" stroke="#a3703c" stroke-width="3.4" stroke-linejoin="round"/></g></svg></span><span class="ab-rozet">5️⃣</span> Bir Peygamber Tanıyorum: Hz. Yusuf (as)</h3><div class="dd-ders dd-s8" id="s8-u3-ders-5"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Bir Peygamber Tanıyorum: Hz. Yusuf (as)</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Wheat%20harvest%20in%20Egypt.jpg?width=1600" alt="Mısır’da buğday hasadı" loading="lazy" decoding="async" style="object-position:center 55%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Doaa Adel — CC BY-SA 4.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Mısır’da buğday hasadı. Hz. Yusuf’un kıssasında kıtlık ve ambarlar önemli bir yer tutar.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Sana haksızlık eden birini affedebilir miydin? Bunu zorlaştıran ne olurdu?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Hz. Yusuf (as), kardeşlerinin kıskançlığı yüzünden kuyuya atılmış, köle olarak satılmış, iftiraya uğrayıp hapse girmiştir.</p><p>Sonunda Mısır’da yönetici olmuş ve kendisine kötülük eden kardeşlerini <b>affetmiştir</b>. Kıssası sabır ve affetmenin en güçlü örneğidir.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“(Yusuf) dedi ki: ‘Bugün size kınama yok. Allah sizi bağışlasın. O, merhametlilerin en merhametlisidir.’”</p><p class="dd-delil-kaynak">— Yûsuf suresi, 92. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet, gücü eline geçirdiğinde intikam almayan bir insanın sözüdür. Affetmenin zirvesi burasıdır.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Sana kötü davranan bir arkadaşınla barışmak, onu okulda yalnız bırakmamak — affetmenin öğrenci hâli budur.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Affetmek zayıflık mıdır, güç müdür? Hz. Yusuf’un durumunu düşünerek cevapla.<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Hz. Yusuf (as) kıssasının öne çıkan mesajı nedir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Ölçü ve tartıda dürüstlük</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Ateşe atılma ve tevekkül</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Tufan ve sabır</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Sabır ve affedicilik</span></button></div><p class="dd-geri" data-dd-aciklama="Hz. Yusuf kıssası özellikle sabır ve affedicilik üzerinedir."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#f7e3d0"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f7f1e8"/><circle cx="70" cy="70" r="58" fill="#ecdfcc" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><rect x="16" y="44" width="68" height="42" rx="7" fill="#a3703c"/>
 <path d="M16 54 H84" stroke="#7a5127" stroke-width="4"/>
 <path d="M20 44 A30 14 0 0 1 80 44 Z" fill="#7a5127"/>
@@ -1388,7 +1511,7 @@
 <circle cx="34" cy="62" r="2.6" fill="#4d3079"/><circle cx="58" cy="62" r="2.6" fill="#4d3079"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u3-5.jpg" alt="Bir Sure Tanıyorum: Asr Suresi ve Anlamı" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 6</span><h4>Bir Sure Tanıyorum: Asr Suresi ve Anlamı</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 6</span><span class="ka-giris">Asr suresi ve anlamı</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#e0d3f5"/><g transform="translate(14,14) scale(0.92)"><circle cx="50" cy="52" r="34" fill="#fff" stroke="#6f4aa8" stroke-width="4"/>
 <path d="M50 32 V52 L64 62" stroke="#4d3079" stroke-width="4.4" fill="none" stroke-linecap="round"/>
 <circle cx="50" cy="52" r="3.4" fill="#6f4aa8"/>
-<path d="M50 12 V20" stroke="#6f4aa8" stroke-width="4" stroke-linecap="round"/></g></svg></span><span class="ab-rozet">6️⃣</span> Bir Sure Tanıyorum: Asr Suresi ve Anlamı</h3>
+<path d="M50 12 V20" stroke="#6f4aa8" stroke-width="4" stroke-linecap="round"/></g></svg></span><span class="ab-rozet">6️⃣</span> Bir Sure Tanıyorum: Asr Suresi ve Anlamı</h3><div class="dd-ders dd-s8" id="s8-u3-ders-6"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Bir Sure Tanıyorum: Asr Suresi ve Anlamı</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Growth%20Rings%20tree%20rings%2001.jpg?width=1600" alt="Kesilmiş bir ağaç gövdesindeki yaş halkaları" loading="lazy" decoding="async" style="object-position:center" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Vijayanrajapuram — CC BY-SA 4.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Ağaç gövdesindeki yaş halkaları. Her halka geçen bir yılın kaydıdır — zaman görünür hâle gelir.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Bugün geçen zamanın ne kadarını gerçekten değerlendirdin?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p><b>Asr suresi</b> üç ayettir ve zamana yemin ederek başlar. İnsanın zarar içinde olduğunu, dört şeyin bundan kurtardığını söyler.</p><p>Bunlar: <b>iman etmek</b>, <b>salih amel işlemek</b>, <b>hakkı tavsiye etmek</b> ve <b>sabrı tavsiye etmek</b>.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Asra yemin olsun ki insan gerçekten ziyandadır. Ancak iman edenler, salih ameller işleyenler, birbirlerine hakkı ve sabrı tavsiye edenler başka.”</p><p class="dd-delil-kaynak">— Asr suresi, 1-3. ayetler</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Sure zamanı bir sermaye gibi görür. Kurtuluşun şartlarını da tek tek sayar.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Ders çalışmak yerine saatlerce ekran başında kalmak, surenin uyardığı “zamanı ziyan etme” hâlinin en tanıdık örneğidir.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Zamanını en çok neye harcıyorsun? Asr suresine göre bunu değiştirmek ister miydin?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Asr suresine göre ziyandan kurtulmanın şartlarından biri DEĞİLDİR:</p><div class="dd-secenekler"><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Çok mal biriktirmek</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>İman etmek</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Salih amel işlemek</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Sabrı tavsiye etmek</span></button></div><p class="dd-geri" data-dd-aciklama="Sure iman, salih amel, hakkı ve sabrı tavsiyeyi sayar; mal biriktirmeyi değil."></p></li></ol></div>
 <div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f3eefb"/><circle cx="70" cy="70" r="58" fill="#e0d3f5" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><rect x="8" y="20" width="84" height="58" rx="10" fill="#fff" stroke="#6f4aa8" stroke-width="3.4"/>
 <rect x="14" y="26" width="72" height="46" rx="7" fill="none" stroke="#b498e2" stroke-width="2.4"/>
 <path d="M24 58 Q34 34 46 50 Q56 64 64 44 Q70 30 78 42" stroke="#4d3079" stroke-width="4.4" fill="none" stroke-linecap="round"/>
@@ -4421,6 +4544,144 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ogrBaslat);
   else ogrBaslat();
+})();
+</script>
+
+<script id="kf-katman-betik">
+/* KONU_FOTOGRAFLARI — mevcut KONU_GORSELLERI sistemine PARALEL veri katmanı.
+   Mevcut veri silinmedi; bu katman yalnızca eklenir. */
+window.KONU_FOTOGRAFLARI = Object.assign(window.KONU_FOTOGRAFLARI || {}, {"s8-u3-4": {"alt": "Eski bir taş kuyu", "credit": "Fotoğraf: Jeanne Griffin — CC BY-SA 4.0", "source": "Wikimedia Commons", "uzak": "https://commons.wikimedia.org/wiki/Special:FilePath/Old%20stone%20well%20Forza%20d%27Agro%202017.jpg?width=1600"}, "s8-u3-sanat": {"alt": "Topkapı Sarayı’nda lacivert İznik çinileri", "credit": "Fotoğraf: Jorge Láscar — CC BY 2.0", "source": "Wikimedia Commons", "uzak": "https://commons.wikimedia.org/wiki/Special:FilePath/Cobalt%20blue%20Iznik%20tiles%20-%20Topkapi%20Palace%20%288394640224%29.jpg?width=1600"}, "s8-u3-vatan": {"alt": "Ankara’da Anıtkabir", "credit": "Fotoğraf: Diego Delso — CC BY-SA 4.0", "source": "Wikimedia Commons", "uzak": "https://commons.wikimedia.org/wiki/Special:FilePath/An%C4%B1tkabir%2C%20Ankara%2C%20Turqu%C3%ADa%2C%202024-10-03%2C%20DD%2003.jpg?width=1600"}});
+
+/* Fotoğraf yüklenemezse mevcut illüstrasyon/SVG devreye girer. */
+window.kfHata = window.kfHata || function(img){
+  if(img.dataset.uzak && !img.dataset.uzakDenendi){
+    img.dataset.uzakDenendi = '1';
+    img.src = img.dataset.uzak;
+    return;
+  }
+  var sar = img.closest('.ka-foto-sar');
+  img.remove();
+  if(sar) sar.remove();
+};
+
+function kfSlug(t){
+  var h = {'ç':'c','ğ':'g','ı':'i','İ':'i','ö':'o','ş':'s','ü':'u',
+           'Ç':'c','Ğ':'g','Ö':'o','Ş':'s','Ü':'u'};
+  return (t||'').replace(/[çğıİöşüÇĞÖŞÜ]/g, function(k){ return h[k]; })
+                .toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  var V = window.KONU_FOTOGRAFLARI || {};
+
+  /* 1) Konu afişi yuvaları: doğrulanmış fotoğraf varsa DOĞRUDAN onu koy.
+        Eski sistemin inline onerror'ı kutuyu silmeden önce devre dışı bırakılır. */
+  document.querySelectorAll('.ka-foto').forEach(function(img){
+    var m = (img.getAttribute('src') || '').match(/konu\/([a-z0-9\-]+)\.jpg$/);
+    if(!m) return;
+    var f = V[m[1]];
+    if(!f || !f.uzak) return;
+    img.removeAttribute('onerror');          /* yarışı bitir: kutu artık silinmiyor */
+    img.onerror = function(){ kfHata(img); };
+    if(f.alt) img.alt = f.alt;
+    img.src = f.uzak;                        /* hata beklemeden doğrudan fotoğraf */
+    var sar = img.closest('.ka-foto-sar');
+    if(sar && f.credit && !sar.querySelector('.ka-foto-kunye')){
+      var k = document.createElement('span');
+      k.className = 'ka-foto-kunye';
+      k.textContent = f.credit + ' · ' + f.source;
+      sar.appendChild(k);
+    }
+  });
+
+  /* 2) Alt başlık kartları: başlık metninden anahtar üretilir */
+  var on = (document.body.dataset.kfOn || '');
+  document.querySelectorAll('.ka-alt-kart').forEach(function(kart){
+    var bas = kart.querySelector('b');
+    if(!bas) return;
+    var f = V[on + '-alt-' + kfSlug(bas.textContent)];
+    if(!f || !f.uzak) return;
+    var kap = kart.querySelector('.ka-alt-gorsel');
+    if(!kap) return;
+    var svg = kap.querySelector('svg');
+    var img = document.createElement('img');
+    img.className = 'kf-alt-img';
+    img.src = f.uzak; img.alt = f.alt || ''; img.loading = 'lazy'; img.decoding = 'async';
+    if(f.credit) img.title = f.credit + ' · ' + f.source;
+    img.addEventListener('error', function(){
+      img.remove(); if(svg) svg.style.display = '';
+      kap.classList.remove('kf-alt-dolu');
+    }, {once:true});
+    img.addEventListener('load', function(){
+      if(svg) svg.style.display = 'none';
+      kap.classList.add('kf-alt-dolu');
+    }, {once:true});
+    kap.appendChild(img);
+  });
+});
+</script>
+
+<script id="dd-betik">
+/* Dijital Ders — mini kontrol soruları ve ilerleme çubuğu.
+   Sayfadaki mevcut JS'e dokunmaz; yalnızca dd* adları kullanılır. */
+(function(){
+  function ddIlerle(ders){
+    var t = ders.querySelectorAll('.dd-adim').length;
+    var y = ders.querySelectorAll('.dd-adim.dd-bitti').length;
+    var c = ders.querySelector('.dd-cubuk i');
+    var s = ders.querySelector('.dd-sayac');
+    if(c) c.style.width = (t ? Math.round(y * 100 / t) : 0) + '%';
+    if(s) s.textContent = y + '/' + t + ' adım';
+  }
+
+  window.ddCevap = function(btn){
+    var kutu = btn.closest('.dd-adim');
+    if(!kutu || kutu.dataset.ddYanit) return;
+    kutu.dataset.ddYanit = '1';
+    var dogruMu = btn.dataset.ddDogru === '1';
+    kutu.querySelectorAll('.dd-sec').forEach(function(b){
+      b.disabled = true;
+      if(b.dataset.ddDogru === '1') b.classList.add('dd-dogru');
+    });
+    if(!dogruMu) btn.classList.add('dd-yanlis');
+    var geri = kutu.querySelector('.dd-geri');
+    if(geri){
+      geri.classList.add('dd-ac', dogruMu ? 'dd-iyi' : 'dd-kotu');
+      geri.textContent = (dogruMu ? '✓ Doğru. ' : '✗ Doğru cevap işaretlendi. ')
+                       + (geri.dataset.ddAciklama || '');
+    }
+    kutu.classList.add('dd-bitti');
+    ddIlerle(kutu.closest('.dd-ders'));
+  };
+
+  /* Okunan adımlar görünür oldukça ilerleme çubuğu dolar. */
+  function ddGozle(){
+    if(!('IntersectionObserver' in window)) return;
+    var g = new IntersectionObserver(function(kayitlar){
+      kayitlar.forEach(function(k){
+        if(!k.isIntersecting) return;
+        var a = k.target;
+        if(a.classList.contains('dd-kontrol')) return;   /* soru cevaplanınca dolar */
+        a.classList.add('dd-bitti');
+        ddIlerle(a.closest('.dd-ders'));
+        g.unobserve(a);
+      });
+    }, {threshold: 0.55});
+    document.querySelectorAll('.dd-ders .dd-adim').forEach(function(a){ g.observe(a); });
+  }
+
+  /* Fotoğraf yüklenemezse: mevcut SVG illüstrasyonu yedek olarak devreye girer. */
+  window.ddFotoHata = function(img){
+    var yuva = img.closest('.dd-foto'); if(!yuva) return;
+    var kalip = yuva.querySelector('template.dd-yedek');
+    if(kalip) yuva.appendChild(kalip.content.cloneNode(true));
+    img.remove();
+    var k = yuva.querySelector('.dd-kunye'); if(k) k.remove();
+  };
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', ddGozle);
+  } else { ddGozle(); }
 })();
 </script>
 </body>

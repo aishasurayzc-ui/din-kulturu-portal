@@ -1271,58 +1271,6 @@
     .kg-izgara{ grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:10px; }
   }
 </style>
-
-<style id="kf-portal-stil">
-/* GERÇEK FOTOĞRAF katmanı — fotoğraf ana görsel, SVG yedek.
-   Mevcut .uk-gorsel / .uk-hero / .kg-gorsel kuralları olduğu gibi duruyor. */
-.kf-yuva{ position:relative; display:block; overflow:hidden; }
-.uk-hero.kf-yuva{ position:absolute; inset:0; }
-.uk-gorsel-foto, .kg-gorsel-foto{
-  width:100%; height:100%; object-fit:cover; display:block; background:#e9eef4;
-}
-/* Fotoğraf varken gradient ana görsel gibi görünmesin. */
-.uk-gorsel:has(.kf-yuva){ background:#0e1722; }
-.uk-gorsel:has(.kf-yuva) .uk-gorsel-numara{ background:rgba(8,14,22,.5); }
-.kf-kunye{
-  position:absolute; right:6px; bottom:5px; z-index:2; pointer-events:none;
-  font-size:10px; line-height:1.5; color:#fff; background:rgba(10,17,26,.5);
-  border-radius:10px; padding:2px 8px; max-width:88%;
-  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-}
-/* Küçük konu kartlarında künye fotoğrafı bastırmasın. */
-.kg-gorsel .kf-kunye{ font-size:9px; padding:1px 6px; max-width:76%; opacity:.9; }
-@media (max-width:420px){ .kf-kunye{ font-size:9px; padding:1px 6px; max-width:80%; } }
-@media print{ .kf-kunye{ display:none; } }
-</style>
-
-<script id="kf-portal-betik">
-/* Fotoğraf → SVG geri düşüşü. Fotoğraf yüklenemezse yedek SVG DOM'a konur;
-   hiçbir durumda kırık görsel simgesi görünmez. */
-window.kfPortalHata = function(img){
-  var yuva = img.closest('.kf-yuva'); if(!yuva) return;
-  var kalip = yuva.querySelector('template.kf-yedek');
-  var ust = yuva.parentNode;
-  if(kalip && ust) ust.insertBefore(kalip.content.cloneNode(true), yuva);
-  yuva.remove();
-};
-function kfKacir(t){
-  return String(t == null ? '' : t)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
-}
-/* GERÇEK <img> üretir. Fotoğraf SVG içine gömülmez, gradient ile taklit
-   edilmez; yedek SVG <template> içinde bekler. */
-function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
-  return '<span class="'+sarSinif+' kf-yuva">'+
-    '<img class="'+imgSinif+'" src="'+kfKacir(g.foto)+'" alt="'+kfKacir(g.fotoAlt||etiket||'')+'"'+
-      ' loading="lazy" decoding="async" style="object-position:'+kfKacir(g.fotoPoz||'center')+'"'+
-      ' onerror="kfPortalHata(this)">'+
-    (g.fotoKunye ? '<span class="kf-kunye" title="'+kfKacir(g.fotoKunye)+' · Wikimedia Commons">'+
-        kfKacir(String(g.fotoKunye).replace(/^Fotoğraf:\s*/,''))+'</span>' : '')+
-    '<template class="kf-yedek">'+yedekHtml+'</template>'+
-  '</span>';
-}
-</script>
 </head>
 <body>
 
@@ -2154,13 +2102,6 @@ function uniteDerinBaglantilarHtml(sinif, href, index){
     ? '<button type="button" class="uk-derin-link oy-giris" data-oy="uniteac" data-sinif="'+sinif.id+'" data-no="'+(index+1)+'">'+
         '<span class="msi" aria-hidden="true">sports_esports</span>Etkinlik &amp; Oyun</button>'
     : '';
-  /* Konu Testleri (kt-*) girişi: şimdilik yalnızca gerçekten kt-bolum
-     içeren üniteler için (8. sınıf 2. ünite / Zekât ve Sadaka →#ktz1).
-     Başka üniteye yayılınca buraya yeni satır eklenir, var olanlar
-     değişmez. */
-  const testGirisi = (sinif.id==='s8' && index===1)
-    ? '<a class="uk-derin-link" href="'+ogrenSayfasi(sinif.id, href)+'#ktz1"><span class="msi" aria-hidden="true">quiz</span>Konu Testleri</a>'
-    : '';
   return '<div class="uk-derin-baglantilar">'+baglantilar.map(function(b){
     /* Her çapa, gerçekte hangi sayfada duruyorsa oraya gider: ozet/slayt →
        konu anlatımı, oyun-gruplari → oyun merkezi, yazili → değerlendirme. */
@@ -2169,7 +2110,7 @@ function uniteDerinBaglantilarHtml(sinif, href, index){
     else if(b.anchor==='oyun-gruplari') hedef = uniteSayfasi(sinif.id, href, 'oyun-merkezi');
     else if(b.anchor==='yazili') hedef = uniteSayfasi(sinif.id, href, 'degerlendirme');
     return '<a class="uk-derin-link" href="'+hedef+'#'+b.anchor+'"><span class="msi" aria-hidden="true">'+b.ikon+'</span>'+b.etiket+'</a>';
-  }).join('')+oyunGirisi+testGirisi+'</div>';
+  }).join('')+oyunGirisi+'</div>';
 }
 
 /* ============================================================
@@ -2403,15 +2344,9 @@ document.addEventListener('DOMContentLoaded', function(){
    sınıflarda mevcut tema SVG'si (hiçbir şey kaybolmaz). */
 function uniteKapakHtml(sinif, index, unite){
   const g = (window.KONU_GORSELLERI||{})[sinif.id+'-u'+(index+1)+'-hero'];
-  /* Yedek katman: önce mevcut hero SVG'si, o da yoksa tema SVG'si.
-     Hiçbiri silinmedi — yalnızca fotoğrafın arkasına alındı. */
-  const svgYedek = (g && (g.kapak || g.ic))
-    ? '<span class="uk-hero" role="img" aria-label="'+unite.baslik+' ünitesi görseli">'+
-      '<svg class="kg-svg" viewBox="'+(g.kapakKutu||g.kutu)+'" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'+(g.kapak||g.ic)+'</svg></span>'
-    : '<span class="uk-gorsel-svg" aria-hidden="true">'+uniteTemaSvg(unite.baslik)+'</span>';
-  /* ANA GÖRSEL = GERÇEK FOTOĞRAF */
-  if(g && g.foto) return kfFotoHtml(g, 'uk-gorsel-foto', 'uk-hero', svgYedek, unite.baslik+' ünitesi');
-  return svgYedek;
+  if(g) return '<span class="uk-hero" role="img" aria-label="'+unite.baslik+' ünitesi görseli">'+
+    '<svg class="kg-svg" viewBox="'+(g.kapakKutu||g.kutu)+'" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'+(g.kapak||g.ic)+'</svg></span>';
+  return '<span class="uk-gorsel-svg" aria-hidden="true">'+uniteTemaSvg(unite.baslik)+'</span>';
 }
 
 /* Alt konu başlıkları: düz liste yerine GÖRSEL KART. Her alt konunun kendi
@@ -2445,11 +2380,8 @@ function uniteKonuListesiHtml(sinif, href, index){
       '<div class="kg-izgara">'+konular.map(function(kn,i){
         const g = G[anahtar+'-'+i];
         return '<a class="kg-kart" href="'+konuHedefi(sinif, href, sonek, i)+'">'+
-          (g ? (function(){
-                 const svgYedek = '<span class="kg-gorsel" role="img" aria-label="'+kn+' konusunun görseli">'+
-                   '<svg class="kg-svg" viewBox="'+g.kutu+'" aria-hidden="true">'+g.ic+'</svg></span>';
-                 return g.foto ? kfFotoHtml(g, 'kg-gorsel-foto', 'kg-gorsel', svgYedek, kn) : svgYedek;
-               })() : '')+
+          (g ? '<span class="kg-gorsel" role="img" aria-label="'+kn+' konusunun görseli">'+
+                 '<svg class="kg-svg" viewBox="'+g.kutu+'" aria-hidden="true">'+g.ic+'</svg></span>' : '')+
           '<span class="kg-govde">'+
             '<span class="kg-no">Konu '+(i+1)+'</span>'+
             '<span class="kg-baslik">'+kn+'</span>'+
@@ -4755,212 +4687,6 @@ window.KONU_GORSELLERI = {"s4-u1-hero":{"yol":"assets/konu-gorselleri/4sinif/u1/
   var kaydir = 15 % (uygun.length || 1);
   var sirali = uygun.slice(kaydir).concat(uygun.slice(0, kaydir));
   V.kutuphane['s4-u6'] = sirali.slice(0, 8).map(function(m){ return m.id; });
-})();
-
-
-/* GERÇEK FOTOĞRAF katmanı: mevcut kayıtlar korunur, yalnızca
-   foto / fotoAlt / fotoKunye / fotoPoz alanları eklenir.
-   `foto` varsa fotoğraf kullanılır; `yol`+`ic` (SVG) yedeğe iner. */
-(function(){
-  var F = {
-  "s8-u1-hero": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/ESO%20-%20Milky%20Way.jpg?width=2000",
-    "fotoAlt": "Samanyolu galaksisinin gökyüzündeki panoramik görünümü",
-    "fotoKunye": "Fotoğraf: ESO / S. Brunier — CC BY 4.0",
-    "fotoPoz": "center 40%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:ESO_-_Milky_Way.jpg",
-    "fotoKonu": "Ünite kapağı · Kader İnancı"
-  },
-  "s8-u1-0": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Maize%20seeds%20germination.jpg?width=1600",
-    "fotoAlt": "Çimlenmekte olan mısır tohumları",
-    "fotoKunye": "Fotoğraf: TheMbgold (MBart) — CC BY-SA 4.0",
-    "fotoPoz": "center",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Maize_seeds_germination.jpg",
-    "fotoKonu": "Kader ve kaza kavramları"
-  },
-  "s8-u1-1": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/International%20Space%20Station%20star%20trails%20-%20JSC2012E039800.jpg?width=1600",
-    "fotoAlt": "Gece gökyüzünde yıldız izleri",
-    "fotoKunye": "Fotoğraf: NASA / Don Pettit — Kamu malı",
-    "fotoPoz": "center",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:International_Space_Station_star_trails_-_JSC2012E039800.jpg",
-    "fotoKonu": "Evrendeki yasalar"
-  },
-  "s8-u1-2": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Two%20roads%20diverged%20in%20a%20wood.jpg?width=1600",
-    "fotoAlt": "Ormanda ikiye ayrılan bir patika",
-    "fotoKunye": "Fotoğraf: Tim Green — CC BY 2.0",
-    "fotoPoz": "center 45%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Two_roads_diverged_in_a_wood.jpg",
-    "fotoKonu": "İnsanın iradesi ve sorumluluğu"
-  },
-  "s8-u1-3": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Growth%20Rings%20tree%20rings%2001.jpg?width=1600",
-    "fotoAlt": "Kesilmiş bir ağaç gövdesindeki yaş halkaları",
-    "fotoKunye": "Fotoğraf: Vijayanrajapuram — CC BY-SA 4.0",
-    "fotoPoz": "center",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Growth_Rings_tree_rings_01.jpg",
-    "fotoKonu": "Ecel ve ömür"
-  },
-  "s8-u1-4": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Wheat%20harvest%20in%20Egypt.jpg?width=1600",
-    "fotoAlt": "Mısır’da buğday hasadı",
-    "fotoKunye": "Fotoğraf: Doaa Adel — CC BY-SA 4.0",
-    "fotoPoz": "center 55%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Wheat_harvest_in_Egypt.jpg",
-    "fotoKonu": "Rızık"
-  },
-  "s8-u1-5": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Women%20Farmers%20Sowing%20in%20Karnataka%2C%20India.jpg?width=1600",
-    "fotoAlt": "Tarlaya tohum eken çiftçiler",
-    "fotoKunye": "Fotoğraf: Vraj Acharya, WELL Labs — CC BY-SA 4.0",
-    "fotoPoz": "center 45%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Women_Farmers_Sowing_in_Karnataka,_India.jpg",
-    "fotoKonu": "Tevekkül"
-  },
-  "s4-u1-0": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Bread%20oven%20%285101489218%29.jpg?width=1600",
-    "fotoAlt": "Fırında ekmek pişiren usta",
-    "fotoKunye": "Fotoğraf: Julien Menichini — CC BY 2.0",
-    "fotoPoz": "center 40%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Bread_oven_(5101489218).jpg",
-    "fotoKonu": "Besmele ve anlamı"
-  },
-  "s4-u1-2": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Outdoor%20market%20fruit%20and%20vegetable%20stall%20Market%20Place%20Romford%20London%2001.jpg?width=1600",
-    "fotoAlt": "Pazarda meyve ve sebze tezgâhı",
-    "fotoKunye": "Fotoğraf: Acabashi — CC BY-SA 4.0",
-    "fotoPoz": "center",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Outdoor_market_fruit_and_vegetable_stall_Market_Place_Romford_London_01.jpg",
-    "fotoKonu": "Elhamdülillah ve şükür"
-  },
-  "s4-u2-hero": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Pilgrims%20begin%20this%20year%27s%20Hajj%20rituals%20with%20a%20circumambulation%20of%20the%20Kaaba%20%282025%29.jpg?width=1600",
-    "fotoAlt": "Kâbe’yi tavaf eden hacılar",
-    "fotoKunye": "Fotoğraf: Bilinmeyen — CC BY-SA 4.0",
-    "fotoPoz": "center 40%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Pilgrims_begin_this_year%27s_Hajj_rituals_with_a_circumambulation_of_the_Kaaba_(2025).jpg",
-    "fotoKonu": "Ünite kapağı · İslam’ı Tanıyorum"
-  },
-  "s4-u4-hero": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Outsideofmasjedolnabi6.JPG?width=1600",
-    "fotoAlt": "Medine’de Mescid-i Nebevî’nin dış görünümü",
-    "fotoKunye": "Fotoğraf: Mardetanha — CC BY-SA 3.0",
-    "fotoPoz": "center 45%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Outsideofmasjedolnabi6.JPG",
-    "fotoKonu": "Ünite kapağı · Hz. Muhammed’i Tanıyorum"
-  },
-  "s4-u5-hero": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Urban%20trees%20in%20early%20spring%2C%20in%20city%20Amsterdam.jpg?width=1600",
-    "fotoAlt": "Şehir içinde bahar ağaçları",
-    "fotoKunye": "Fotoğraf: Fons Heijnsbroek — CC0",
-    "fotoPoz": "center 45%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Urban_trees_in_early_spring,_in_city_Amsterdam.jpg",
-    "fotoKonu": "Ünite kapağı · Temizlik"
-  },
-  "s4-u5-0": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Lavage%20de%20mains%20%C3%A0%20l%27eau%20au%20robinet%20dans%20un%20laboratoire%20au%20B%C3%A9nin.jpg?width=1600",
-    "fotoAlt": "Musluğun altında yıkanan eller",
-    "fotoKunye": "Fotoğraf: Adoscam — CC BY-SA 4.0",
-    "fotoPoz": "center 40%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Lavage_de_mains_%C3%A0_l%27eau_au_robinet_dans_un_laboratoire_au_B%C3%A9nin.jpg",
-    "fotoKonu": "Beden temizliği"
-  },
-  "s4-u5-1": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Drying%20laundry%2C%20Umag%2C%20Istria%2C%20Croatia.jpg?width=1600",
-    "fotoAlt": "Güneşte kuruyan çamaşırlar",
-    "fotoKunye": "Fotoğraf: Michal Klajban — CC BY-SA 4.0",
-    "fotoPoz": "center",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Drying_laundry,_Umag,_Istria,_Croatia.jpg",
-    "fotoKonu": "Elbise temizliği"
-  },
-  "s4-u5-2": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Children%20cleaning%20their%20classrooms.jpg?width=1600",
-    "fotoAlt": "Sınıflarını temizleyen çocuklar",
-    "fotoKunye": "Fotoğraf: IsoldeB — CC BY-SA 4.0",
-    "fotoPoz": "center 40%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Children_cleaning_their_classrooms.jpg",
-    "fotoKonu": "Çevre temizliği"
-  },
-  "s4-u5-3": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/K%C3%BCtahya%20Ulu%20Cami%20%C5%9Fad%C4%B1rvan%209036.jpg?width=1600",
-    "fotoAlt": "Cami avlusundaki şadırvan",
-    "fotoKunye": "Fotoğraf: Dosseman — CC BY-SA 4.0",
-    "fotoPoz": "center 45%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:K%C3%BCtahya_Ulu_Cami_%C5%9Fad%C4%B1rvan_9036.jpg",
-    "fotoKonu": "Abdest"
-  },
-  "s8-u2-hero": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Antique-Scale-for-Herbs.jpg?width=1600",
-    "fotoAlt": "Antika terazi ve tartı ağırlıkları",
-    "fotoKunye": "Fotoğraf: GabrielleMerk — CC BY-SA 4.0",
-    "fotoPoz": "center 40%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Antique-Scale-for-Herbs.jpg",
-    "fotoKonu": "Ünite kapağı · Zekât ve Sadaka"
-  },
-  "s8-u2-3": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Ready%20Food%20Box%20Distribution%20Program%20.jpg?width=1600",
-    "fotoAlt": "Gıda kolisi dağıtımı",
-    "fotoKunye": "Fotoğraf: One Sky Family Foundation — CC BY-SA 4.0",
-    "fotoPoz": "center 40%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Ready_Food_Box_Distribution_Program_.jpg",
-    "fotoKonu": "Sadaka ve türleri"
-  },
-  "s4-u2-3": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Folio%20Blue%20Quran%20Met%202004.88.jpg?width=1600",
-    "fotoAlt": "Mavi Kur’an’dan altın hatlı bir sayfa",
-    "fotoKunye": "Metropolitan Museum of Art — CC BY 2.5",
-    "fotoPoz": "center",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Folio_Blue_Quran_Met_2004.88.jpg",
-    "fotoKonu": "Kur’an-ı Kerim’i tanıyalım"
-  },
-  "s4-u2-5": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Great%20Mosque%20of%20Kairouan%2C%20prayer%20hall.jpg?width=1600",
-    "fotoAlt": "Kayrevan Ulu Cami’nin sütunlu ibadet salonu",
-    "fotoKunye": "Fotoğraf: Dennis G. Jarvis — CC BY-SA 2.0",
-    "fotoPoz": "center 45%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Great_Mosque_of_Kairouan,_prayer_hall.jpg",
-    "fotoKonu": "Cami ve ibadet"
-  },
-  "s4-u3-2": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Teachers%20helping%20students%20cross%20the%20raod.jpg?width=1600",
-    "fotoAlt": "Öğrencilerin karşıdan karşıya geçmesine yardım eden öğretmenler",
-    "fotoKunye": "Fotoğraf: Minette Lontsie — CC BY-SA 4.0",
-    "fotoPoz": "center 40%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Teachers_helping_students_cross_the_raod.jpg",
-    "fotoKonu": "Paylaşma ve yardımlaşma"
-  },
-  "s8-u3-1": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Cobalt%20blue%20Iznik%20tiles%20-%20Topkapi%20Palace%20%288394640224%29.jpg?width=1600",
-    "fotoAlt": "Topkapı Sarayı’nda lacivert İznik çinileri",
-    "fotoKunye": "Fotoğraf: Jorge Láscar — CC BY 2.0",
-    "fotoPoz": "center",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Cobalt_blue_Iznik_tiles_-_Topkapi_Palace_(8394640224).jpg",
-    "fotoKonu": "Din, kültür ve sanat"
-  },
-  "s8-u3-5": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/An%C4%B1tkabir%2C%20Ankara%2C%20Turqu%C3%ADa%2C%202024-10-03%2C%20DD%2003.jpg?width=1600",
-    "fotoAlt": "Ankara’da Anıtkabir",
-    "fotoKunye": "Fotoğraf: Diego Delso — CC BY-SA 4.0",
-    "fotoPoz": "center 55%",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:An%C4%B1tkabir,_Ankara,_Turqu%C3%ADa,_2024-10-03,_DD_03.jpg",
-    "fotoKonu": "Vatan sevgisi"
-  },
-  "s8-u5-hero": {
-    "foto": "https://commons.wikimedia.org/wiki/Special:FilePath/Illuminated%20double-page.%20Zarin%20Qalam%27s%20Qur%27an%20%28CBL%20Is%201438%2C%20ff.124b-125a%29.jpg?width=1600",
-    "fotoAlt": "Tezhipli çift sayfalı Kur’an-ı Kerim",
-    "fotoKunye": "Chester Beatty Library — Kamu malı",
-    "fotoPoz": "center",
-    "fotoKaynak": "https://commons.wikimedia.org/wiki/File:Illuminated_double-page._Zarin_Qalam%27s_Qur%27an_(CBL_Is_1438,_ff.124b-125a).jpg",
-    "fotoKonu": "Ünite kapağı · Kur’an-ı Kerim"
-  }
-};
-  var G = window.KONU_GORSELLERI || (window.KONU_GORSELLERI = {});
-  Object.keys(F).forEach(function(k){
-    if(!G[k]) G[k] = {};
-    Object.keys(F[k]).forEach(function(a){ G[k][a] = F[k][a]; });
-  });
 })();
 </script>
 

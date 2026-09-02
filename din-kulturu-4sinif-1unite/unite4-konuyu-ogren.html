@@ -950,8 +950,133 @@
   /* Başlık rozetleri: aynı karikatürün 40 kez tekrarı yerine konuya özel motif. */
   .ab-ikon > .ka-svg{ border-radius:50%; }
 </style>
+
+
+<style id="kf-katman-stil">
+.ka-foto-kunye{ position:absolute; right:8px; bottom:8px; z-index:3; font-size:.64em;
+  color:#fff; background:rgba(16,28,45,.55); border-radius:14px; padding:3px 9px;
+  max-width:88%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.kf-alt-img{ display:block; width:100%; aspect-ratio:4/3; object-fit:cover;
+  border-radius:14px; background:#eef2f7; }
+.ka-alt-gorsel.kf-alt-dolu{ line-height:0; }
+@media(max-width:560px){ .kf-alt-img{ aspect-ratio:16/9; } }
+@media print{ .ka-foto-kunye{ display:none; } }
+</style>
+
+
+<style id="dd-stil">
+.dd-ders{
+  --dd-ana:#1e5aa8; --dd-acik:#eef4fb; --dd-kenar:#d9e4f0; --dd-metin:#1c2530;
+  --dd-yumusak:#5d6e82; --dd-yes:#137a4a; --dd-kir:#b3261e; --dd-r:16px;
+  margin:18px 0 26px; border:1px solid var(--dd-kenar); border-radius:var(--dd-r);
+  background:#fff; overflow:hidden; box-shadow:0 1px 3px rgba(16,24,40,.06);
+}
+/* 4. sınıf: daha sıcak, daha renkli, daha büyük punto */
+.dd-ders.dd-s4{ --dd-ana:#c2410c; --dd-acik:#fff5ec; --dd-kenar:#f0dcc9; font-size:1.03em; }
+/* 8. sınıf: daha modern, daha akademik */
+.dd-ders.dd-s8{ --dd-ana:#1e5aa8; --dd-acik:#eef4fb; --dd-kenar:#d9e4f0; }
+
+.dd-ust{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:12px 16px; background:var(--dd-acik); border-bottom:1px solid var(--dd-kenar);
+}
+.dd-etiket{ font-size:.72em; font-weight:900; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--dd-ana); }
+.dd-ust h4{ margin:0; font-size:1.02em; font-weight:800; color:var(--dd-metin); }
+.dd-cubuk{ flex:1 1 90px; height:6px; min-width:70px; border-radius:99px;
+  background:#fff; border:1px solid var(--dd-kenar); overflow:hidden; }
+.dd-cubuk i{ display:block; height:100%; width:0; background:var(--dd-ana);
+  transition:width .45s ease; }
+.dd-sayac{ font-size:.76em; font-weight:800; color:var(--dd-yumusak); white-space:nowrap; }
+
+.dd-adimlar{ list-style:none; margin:0; padding:0; }
+.dd-adim{ padding:15px 16px; border-top:1px solid #eef2f7; }
+.dd-adim:first-child{ border-top:0; padding-top:14px; }
+.dd-bas{ display:flex; align-items:center; gap:9px; margin:0 0 8px; }
+.dd-rozet{
+  flex:0 0 auto; width:26px; height:26px; border-radius:9px; display:inline-flex;
+  align-items:center; justify-content:center; font-size:.72em; font-weight:900;
+  background:var(--dd-acik); color:var(--dd-ana); border:1px solid var(--dd-kenar);
+}
+.dd-bas h5{ margin:0; font-size:.82em; font-weight:900; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--dd-ana); }
+.dd-adim p{ margin:0 0 6px; line-height:1.62; color:var(--dd-metin); }
+.dd-adim p:last-child{ margin-bottom:0; }
+
+/* 01 GÖR — fotoğraf konu anlatımının ana görseli, ikon değil */
+.dd-foto{ margin:0 0 9px; position:relative; display:block; overflow:hidden;
+  border-radius:12px; background:#eef2f7; }
+.dd-foto img.dd-img{ display:block; width:100%; height:100%; aspect-ratio:16/9;
+  object-fit:cover; }
+.dd-s4 .dd-foto img.dd-img{ aspect-ratio:3/2; }
+@media (max-width:640px){
+  .dd-foto img.dd-img, .dd-s4 .dd-foto img.dd-img{ aspect-ratio:4/3; }
+}
+.dd-kunye{
+  position:absolute; right:7px; bottom:7px; z-index:2; pointer-events:none;
+  font-size:10px; line-height:1.55; color:#fff; background:rgba(10,17,26,.55);
+  border-radius:10px; padding:2px 8px; max-width:88%;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.dd-altyazi{ font-size:.87em; color:var(--dd-yumusak); }
+
+/* 02 KEŞFET / 06 DÜŞÜN — açık uçlu sorular */
+.dd-merak, .dd-dusun{
+  margin:0; padding:11px 14px; border-left:3px solid var(--dd-ana);
+  background:var(--dd-acik); border-radius:0 10px 10px 0; font-weight:600;
+}
+.dd-ipucu{ display:block; margin-top:7px; font-size:.85em; color:var(--dd-yumusak); font-weight:400; }
+
+/* 04 AYET / DELİL */
+.dd-delil{ margin:0; padding:12px 15px; background:#f7fbf8; border:1px solid #d8ecdf;
+  border-radius:12px; }
+.dd-delil-metin{ margin:0 0 6px; font-style:italic; line-height:1.66; }
+.dd-delil-kaynak{ margin:0 0 7px; font-size:.83em; font-weight:800; color:var(--dd-yes); }
+.dd-delil-bag{ margin:0; font-size:.88em; color:#3c5548; }
+
+/* 05 GÜNLÜK HAYAT */
+.dd-gunluk{ margin:0; padding:11px 14px; background:#fffaf0; border:1px solid #f0e2c8;
+  border-radius:12px; }
+
+/* 07 MİNİ KONTROL */
+.dd-soru{ margin:0 0 10px; font-weight:700; }
+.dd-secenekler{ display:grid; gap:7px; }
+.dd-sec{
+  display:flex; align-items:flex-start; gap:9px; width:100%; text-align:left;
+  padding:10px 13px; border:1.5px solid var(--dd-kenar); border-radius:11px;
+  background:#fff; cursor:pointer; font:inherit; font-size:.95em; color:var(--dd-metin);
+  transition:border-color .15s ease, background .15s ease;
+}
+.dd-sec:hover:not([disabled]){ border-color:var(--dd-ana); background:var(--dd-acik); }
+.dd-sec[disabled]{ cursor:default; }
+.dd-harf{ flex:0 0 auto; width:22px; height:22px; border-radius:7px; font-size:.78em;
+  font-weight:900; display:inline-flex; align-items:center; justify-content:center;
+  background:var(--dd-acik); color:var(--dd-ana); border:1px solid var(--dd-kenar); }
+.dd-sec.dd-dogru{ border-color:var(--dd-yes); background:#f2fbf6; }
+.dd-sec.dd-dogru .dd-harf{ background:var(--dd-yes); color:#fff; border-color:var(--dd-yes); }
+.dd-sec.dd-yanlis{ border-color:var(--dd-kir); background:#fdf4f3; }
+.dd-sec.dd-yanlis .dd-harf{ background:var(--dd-kir); color:#fff; border-color:var(--dd-kir); }
+.dd-geri{ margin-top:10px; padding:10px 13px; border-radius:11px; font-size:.92em;
+  line-height:1.6; display:none; }
+.dd-geri.dd-ac{ display:block; }
+.dd-geri.dd-iyi{ background:#f2fbf6; border:1px solid #cfe8db; color:#14603f; }
+.dd-geri.dd-kotu{ background:#fdf4f3; border:1px solid #f2ccc6; color:#8c2018; }
+
+@media (max-width:420px){
+  .dd-adim{ padding:13px 13px; }
+  .dd-bas h5{ font-size:.78em; }
+}
+@media (prefers-reduced-motion: reduce){
+  .dd-cubuk i{ transition:none; }
+}
+@media print{
+  .dd-ders{ break-inside:avoid; }
+  .dd-kunye{ display:none; }
+  .dd-geri{ display:block; }
+}
+</style>
 </head>
-<body>
+<body data-kf-on="s4-u4">
 <div id="portalNav" data-sinif="4" data-unite="4" data-asama="ogren"></div>
 <link rel="stylesheet" href="../ortak/portal-nav.css">
 <script src="../ortak/portal-nav.js"></script>
@@ -1015,7 +1140,7 @@
 <path d="M46 30 L46 82" stroke="#7a5127" stroke-width="3.4"/>
 <path d="M38 82 V60 A8 8 0 0 1 54 60 V82 Z" fill="#4d3116"/>
 <rect x="6" y="82" width="88" height="8" rx="4" fill="#7a5127" opacity=".55"/>
-<circle cx="80" cy="24" r="8" fill="#d9b183"/></g></svg></span><span class="ab-rozet">1️⃣</span> Hz. Muhammed'in (sav) Doğduğu Çevre</h3>
+<circle cx="80" cy="24" r="8" fill="#d9b183"/></g></svg></span><span class="ab-rozet">1️⃣</span> Hz. Muhammed'in (sav) Doğduğu Çevre</h3><div class="dd-ders dd-s4" id="s4-u4-ders-1"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Hz. Muhammed’in (sav) Doğduğu Çevre</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Masjid%20al-Haram%2C%20Tawaf%2020092012%201130PM%20%288008466944%29.jpg?width=1600" alt="Mescid-i Haram’da tavaf eden kalabalık" loading="lazy" decoding="async" style="object-position:center 40%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Basheer Olakara — CC BY 2.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Mekke’de Mescid-i Haram ve tavaf eden kalabalık. Hz. Muhammed bu şehirde doğdu.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Bir insanın doğduğu şehir, onun hayatını nasıl etkiler sence?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Hz. Muhammed (sav) 571 yılında <b>Mekke</b>’de doğdu. Mekke o dönemde bir ticaret ve inanç merkeziydi; Kâbe buradaydı.</p><p>Ancak toplumda putperestlik, haksızlık ve eşitsizlik yaygındı. Peygamberimiz böyle bir ortamda doğdu ve büyüdü.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Andolsun, Allah’ın Resulünde sizin için güzel bir örnek vardır.”</p><p class="dd-delil-kaynak">— Ahzab suresi, 21. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet, onun hayatının bizim için örnek olduğunu bildirir. Bu yüzden doğduğu çevreyi de bilmek, örnekliği anlamayı kolaylaştırır.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Senin yaşadığın mahalle de davranışlarını etkiler. İyi bir çevre iyi alışkanlıklar, kötü bir çevre kötü alışkanlıklar kazandırabilir.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Zor bir çevrede doğru kalabilmek için insanın nelere ihtiyacı vardır?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Hz. Muhammed (sav) hangi şehirde doğmuştur?</p><div class="dd-secenekler"><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Mekke</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Taif</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Kudüs</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Medine</span></button></div><p class="dd-geri" data-dd-aciklama="Peygamberimiz 571 yılında Mekke’de doğmuştur."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#f7e3d0"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f7f1e8"/><circle cx="70" cy="70" r="58" fill="#ecdfcc" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M50 88 V44" stroke="#4d3116" stroke-width="7" stroke-linecap="round"/>
 <path d="M50 44 Q28 34 14 44 Q30 24 50 44Z" fill="#a3703c"/>
 <path d="M50 44 Q72 34 86 44 Q70 24 50 44Z" fill="#a3703c"/>
@@ -1073,7 +1198,7 @@
 <rect x="60" y="58" width="12" height="12" rx="3" fill="#f0a0b4" opacity=".7"/></g></g></g><g transform="translate(664,24) scale(1.520)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><path d="M50 84 C22 64 10 50 10 36 A20 20 0 0 1 50 28 A20 20 0 0 1 90 36 C90 50 78 64 50 84 Z" fill="#c04a68"/><circle cx="70" cy="38" r="6" fill="#fff" opacity=".45"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s4-u4-1.jpg" alt="Hz. Muhammed'in (sav) Ailesi" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 2</span><h4>Hz. Muhammed'in (sav) Ailesi</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 2</span><span class="ka-giris">Ailesi ve yakınları</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f8d6de"/><g transform="translate(14,14) scale(0.92)"><path d="M14 52 L50 22 L86 52 Z" fill="#c04a68"/>
 <rect x="24" y="52" width="52" height="34" rx="5" fill="#fff" stroke="#8f3049" stroke-width="3.2"/>
 <rect x="42" y="64" width="16" height="22" rx="3" fill="#f0a0b4"/>
-<rect x="60" y="58" width="12" height="12" rx="3" fill="#f0a0b4" opacity=".7"/></g></svg></span><span class="ab-rozet">2️⃣</span> Hz. Muhammed'in (sav) Ailesi</h3>
+<rect x="60" y="58" width="12" height="12" rx="3" fill="#f0a0b4" opacity=".7"/></g></svg></span><span class="ab-rozet">2️⃣</span> Hz. Muhammed'in (sav) Ailesi</h3><div class="dd-ders dd-s4" id="s4-u4-ders-2"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Hz. Muhammed’in (sav) Ailesi</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><p class="dd-altyazi">Bu konunun görseli, mevcut illüstrasyonla gösterilmektedir.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Ailende sana en çok kim destek olur? Onun yokluğunu düşünebiliyor musun?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Hz. Muhammed’in (sav) babası <b>Abdullah</b>, o doğmadan önce vefat etti. Annesi <b>Âmine</b>’yi altı yaşındayken kaybetti.</p><p>Önce dedesi <b>Abdülmuttalib</b>, sonra amcası <b>Ebû Tâlib</b> ona baktı. Sütannesi <b>Halime</b>’nin yanında da bir süre kaldı.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Andolsun, Allah’ın Resulünde sizin için güzel bir örnek vardır.”</p><p class="dd-delil-kaynak">— Ahzab suresi, 21. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Zorluklarla dolu bir çocukluk yaşamasına rağmen güzel ahlakını koruması, ayetin söylediği örnekliğin bir parçasıdır.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Ailende biri hastalandığında ya da uzağa gittiğinde onun eksikliğini hissedersin. Peygamberimiz bu duyguyu çok küçük yaşta yaşadı.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Zor bir çocukluk geçiren biri, sence nasıl merhametli bir insan olabilir?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Hz. Muhammed’in (sav) annesinin adı nedir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Fatıma</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Âmine</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Halime</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Hatice</span></button></div><p class="dd-geri" data-dd-aciklama="Peygamberimizin annesi Âmine, sütannesi ise Halime’dir."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#f7e3d0"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fdeef1"/><circle cx="70" cy="70" r="58" fill="#f8d6de" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M50 84 C22 64 10 50 10 36 A20 20 0 0 1 50 28 A20 20 0 0 1 90 36 C90 50 78 64 50 84 Z" fill="#c04a68"/><circle cx="70" cy="38" r="6" fill="#fff" opacity=".45"/></g></g></svg></div>
     <ul>
       <li><b>Babası:</b> Abdullah — Hz. Muhammed (sav) doğmadan önce Medine'de vefat etmiştir.</li>
@@ -1114,7 +1239,7 @@
 <path d="M50 44 Q28 34 14 44 Q30 24 50 44Z" fill="#79883a"/>
 <path d="M50 44 Q72 34 86 44 Q70 24 50 44Z" fill="#79883a"/>
 <path d="M50 44 Q44 22 50 10 Q58 24 50 44Z" fill="#bcc97f"/>
-<circle cx="44" cy="46" r="3.4" fill="#bcc97f"/><circle cx="56" cy="48" r="3.4" fill="#bcc97f"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s4-u4-2.jpg" alt="Doğumu, Çocukluk ve Gençlik Yılları" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 3</span><h4>Doğumu, Çocukluk ve Gençlik Yılları</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 3</span><span class="ka-giris">Doğumu, çocukluk ve gençlik yılları</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#e5ebc9"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L61 39 L90 41 L67 59 L75 87 L50 71 L25 87 L33 59 L10 41 L39 39 Z" fill="#bcc97f" stroke="#79883a" stroke-width="3.4" stroke-linejoin="round"/></g></svg></span><span class="ab-rozet">3️⃣</span> Doğumu, Çocukluk ve Gençlik Yılları</h3>
+<circle cx="44" cy="46" r="3.4" fill="#bcc97f"/><circle cx="56" cy="48" r="3.4" fill="#bcc97f"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s4-u4-2.jpg" alt="Doğumu, Çocukluk ve Gençlik Yılları" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 3</span><h4>Doğumu, Çocukluk ve Gençlik Yılları</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 3</span><span class="ka-giris">Doğumu, çocukluk ve gençlik yılları</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#e5ebc9"/><g transform="translate(14,14) scale(0.92)"><path d="M50 12 L61 39 L90 41 L67 59 L75 87 L50 71 L25 87 L33 59 L10 41 L39 39 Z" fill="#bcc97f" stroke="#79883a" stroke-width="3.4" stroke-linejoin="round"/></g></svg></span><span class="ab-rozet">3️⃣</span> Doğumu, Çocukluk ve Gençlik Yılları</h3><div class="dd-ders dd-s4" id="s4-u4-ders-3"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Doğumu, Çocukluk ve Gençlik Yılları</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Hira%20Cave.jpg?width=1600" alt="Mekke yakınındaki Nur Dağı’nda Hira Mağarası’nın girişi" loading="lazy" decoding="async" style="object-position:center 45%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: saudipics — CC BY-SA 4.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Mekke yakınındaki Nur Dağı’nda Hira Mağarası. Peygamberimiz gençliğinde buraya çekilip düşünürdü.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Çocukken kazandığın bir alışkanlık bugün hâlâ sende var mı?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Peygamberimiz çocukluğunda çobanlık yaptı, gençliğinde ticaretle uğraştı. Doğruluğu ve güvenilirliği sebebiyle ona <b>el-Emîn</b> (güvenilir) denildi.</p><p>Haksızlığa karşı kurulan <b>Hılfü’l-Fudûl</b> topluluğuna genç yaşta katıldı.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Sen elbette yüce bir ahlak üzeresin.”</p><p class="dd-delil-kaynak">— Kalem suresi, 4. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet, onun güzel ahlakının peygamberlikten önce de bilindiğini anlamamıza yardım eder.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Ödünç aldığın kalemi zamanında geri vermek, sözünü tutmak — “güvenilir” denilen insan böyle davranan insandır.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Sana “güvenilir” denilmesi için insanların hangi davranışlarını görmesi gerekir?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Hz. Muhammed’e (sav) gençliğinde verilen “el-Emîn” lakabı ne anlama gelir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Zengin</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Cesur</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Güvenilir</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Bilgili</span></button></div><p class="dd-geri" data-dd-aciklama="“El-Emîn”, güvenilir demektir."></p></li></ol></div>
 <div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f4f6e8"/><circle cx="70" cy="70" r="58" fill="#e5ebc9" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-f"><path d="M50 88 V44" stroke="#333c12" stroke-width="7" stroke-linecap="round"/>
 <path d="M50 44 Q28 34 14 44 Q30 24 50 44Z" fill="#79883a"/>
 <path d="M50 44 Q72 34 86 44 Q70 24 50 44Z" fill="#79883a"/>
@@ -1169,7 +1294,7 @@
 <rect x="26" y="44" width="48" height="8" fill="#eda285"/>
 <rect x="60" y="56" width="10" height="26" rx="2" fill="#eda285" opacity=".85"/>
 <rect x="18" y="82" width="64" height="9" rx="3" fill="#8f4224"/>
-<circle cx="50" cy="20" r="4" fill="#c2603a" opacity=".5"/></g></svg></span><span class="ab-rozet">4️⃣</span> Mekke ve Medine Yılları</h3>
+<circle cx="50" cy="20" r="4" fill="#c2603a" opacity=".5"/></g></svg></span><span class="ab-rozet">4️⃣</span> Mekke ve Medine Yılları</h3><div class="dd-ders dd-s4" id="s4-u4-ders-4"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Mekke ve Medine Yılları</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Outsideofmasjedolnabi6.JPG?width=1600" alt="Medine’de Mescid-i Nebevî’nin dış görünümü" loading="lazy" decoding="async" style="object-position:center 55%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Mardetanha — CC BY-SA 3.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Medine’de Mescid-i Nebevî. Hicretten sonra Peygamberimizin hayatı bu şehirde geçti.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Bir insanın yaşadığı şehirden ayrılmak zorunda kalması ne kadar zordur?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Peygamberimiz Mekke’de 13 yıl İslam’ı anlattı; büyük baskılar gördü. Sonra <b>Medine</b>’ye <b>hicret</b> etti.</p><p>Medine’de mescit yapıldı, Mekkeli ve Medineli Müslümanlar kardeş ilan edildi. Burada bir toplum kuruldu.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Sen elbette yüce bir ahlak üzeresin.”</p><p class="dd-delil-kaynak">— Kalem suresi, 4. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Zor yıllarda bile ahlakını bozmaması, ayetin övdüğü yüce ahlakın göstergesidir.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Yeni bir okula geçtiğinde tanımadığın insanlarla iyi geçinmeye çalışırsın. Hicret de böyle büyük bir yeniden başlangıçtı.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Bir yerden ayrılmak zorunda kalan bir arkadaşına nasıl yardım ederdin?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Hz. Muhammed’in (sav) Mekke’den Medine’ye göç etmesine ne ad verilir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Hac</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Hicret</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Umre</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Tavaf</span></button></div><p class="dd-geri" data-dd-aciklama="Mekke’den Medine’ye yapılan bu göçe hicret denir."></p></li></ol></div>
 <div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fdf0ea"/><circle cx="70" cy="70" r="58" fill="#f8dccd" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-t"><path d="M14 92 L40 34 H60 L86 92 Z" fill="#eda285"/>
 <path d="M50 40 V48 M50 56 V66 M50 74 V86" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
 <path d="M40 34 H60" stroke="#c2603a" stroke-width="4" stroke-linecap="round"/>
@@ -1225,7 +1350,7 @@
 <path d="M50 4 V12"/><path d="M34 10 L38 17"/><path d="M66 10 L62 17"/></g></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s4-u4-4.jpg" alt="Bir Dua Tanıyorum: Salli ve Barik Duaları" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 5</span><h4>Bir Dua Tanıyorum: Salli ve Barik Duaları</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 5</span><span class="ka-giris">Salli ve Barik duaları</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#e0d3f5"/><g transform="translate(14,14) scale(0.92)"><rect x="8" y="20" width="84" height="58" rx="10" fill="#fff" stroke="#6f4aa8" stroke-width="3.4"/>
 <rect x="14" y="26" width="72" height="46" rx="7" fill="none" stroke="#b498e2" stroke-width="2.4"/>
 <path d="M24 58 Q34 34 46 50 Q56 64 64 44 Q70 30 78 42" stroke="#4d3079" stroke-width="4.4" fill="none" stroke-linecap="round"/>
-<circle cx="34" cy="62" r="2.6" fill="#4d3079"/><circle cx="58" cy="62" r="2.6" fill="#4d3079"/></g></svg></span><span class="ab-rozet">5️⃣</span> Bir Dua Tanıyorum: Salli ve Barik Duaları</h3>
+<circle cx="34" cy="62" r="2.6" fill="#4d3079"/><circle cx="58" cy="62" r="2.6" fill="#4d3079"/></g></svg></span><span class="ab-rozet">5️⃣</span> Bir Dua Tanıyorum: Salli ve Barik Duaları</h3><div class="dd-ders dd-s4" id="s4-u4-ders-5"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Bir Dua Tanıyorum: Salli ve Barik Duaları</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tile%20with%20Undulating%20Vine%20Scrolls%20-%20Bursa%20%28Turkey%29%20-%2015th%20century%20-%20MET%20-%20Inventory%20number%201998.246.jpg?width=1600" alt="15. yüzyıl Bursa çinisinde kıvrım dallı bezeme" loading="lazy" decoding="async" style="object-position:center" onerror="ddFotoHata(this)"><span class="dd-kunye">Metropolitan Museum of Art — CC0 · Wikimedia Commons</span></figure><p class="dd-altyazi">15. yüzyıl Bursa çinisinde bitkisel bezeme. Bu dualar da yüzyıllardır okunup yazılmıştır.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Sevdiğin biri için dua etmek sana nasıl hissettirir?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p><b>Salli</b> ve <b>Barik</b> duaları, namazın son oturuşunda okunur. Bu dualarda Hz. Muhammed’e ve ailesine hayır dua ederiz.</p><p>Dualarda Hz. İbrahim ve ailesi de anılır; böylece peygamberler arasındaki bağ hatırlanır.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Allah’ım! Hz. İbrahim’e ve ailesine rahmet ettiğin gibi Hz. Muhammed ve ailesine de rahmet eyle.” / “Allah’ım! Hz. İbrahim’i ve ailesini mübarek kıldığın gibi Hz. Muhammed ve ailesini de mübarek kıl.”</p><p class="dd-delil-kaynak">— Salli ve Barik dualarının anlamı</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> İki duanın kendi metni budur. Her ikisinde de Hz. İbrahim ve ailesi anılır; böylece peygamberler arasındaki bağ hatırlatılır.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Adı anıldığında “sallallahu aleyhi ve sellem” demek, bu duaların günlük hayattaki kısa hâlidir.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Örnek aldığın bir insan için ne yapmak istersin?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Salli ve Barik duaları namazın hangi bölümünde okunur?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Rükûda</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Secdede</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Namaza başlarken</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Son oturuşta</span></button></div><p class="dd-geri" data-dd-aciklama="Bu dualar namazın son oturuşunda okunur."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#f7e3d0"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f3eefb"/><circle cx="70" cy="70" r="58" fill="#e0d3f5" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-t"><path d="M14 86 Q10 56 20 42 Q26 34 32 40 Q36 52 40 60 Q46 72 46 86 Z" fill="#b498e2" stroke="#4d3079" stroke-width="3.2" stroke-linejoin="round"/>
 <path d="M86 86 Q90 56 80 42 Q74 34 68 40 Q64 52 60 60 Q54 72 54 86 Z" fill="#b498e2" stroke="#4d3079" stroke-width="3.2" stroke-linejoin="round"/>
 <path d="M24 52 V70 M32 56 V72" stroke="#4d3079" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
@@ -4260,6 +4385,146 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ogrBaslat);
   else ogrBaslat();
+})();
+</script>
+
+
+<script id="kf-katman-betik">
+/* KONU_FOTOGRAFLARI — mevcut KONU_GORSELLERI sistemine PARALEL veri katmanı.
+   Mevcut veri silinmedi; bu katman yalnızca eklenir. */
+window.KONU_FOTOGRAFLARI = Object.assign(window.KONU_FOTOGRAFLARI || {}, {"s4-u4-3": {"alt": "Medine’de Mescid-i Nebevî’nin dış görünümü", "credit": "Fotoğraf: Mardetanha — CC BY-SA 3.0", "source": "Wikimedia Commons", "uzak": "https://commons.wikimedia.org/wiki/Special:FilePath/Outsideofmasjedolnabi6.JPG?width=1600"}});
+
+/* Fotoğraf yüklenemezse mevcut illüstrasyon/SVG devreye girer. */
+window.kfHata = window.kfHata || function(img){
+  if(img.dataset.uzak && !img.dataset.uzakDenendi){
+    img.dataset.uzakDenendi = '1';
+    img.src = img.dataset.uzak;
+    return;
+  }
+  var sar = img.closest('.ka-foto-sar');
+  img.remove();
+  if(sar) sar.remove();
+};
+
+function kfSlug(t){
+  var h = {'ç':'c','ğ':'g','ı':'i','İ':'i','ö':'o','ş':'s','ü':'u',
+           'Ç':'c','Ğ':'g','Ö':'o','Ş':'s','Ü':'u'};
+  return (t||'').replace(/[çğıİöşüÇĞÖŞÜ]/g, function(k){ return h[k]; })
+                .toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  var V = window.KONU_FOTOGRAFLARI || {};
+
+  /* 1) Konu afişi yuvaları: doğrulanmış fotoğraf varsa DOĞRUDAN onu koy.
+        Eski sistemin inline onerror'ı kutuyu silmeden önce devre dışı bırakılır. */
+  document.querySelectorAll('.ka-foto').forEach(function(img){
+    var m = (img.getAttribute('src') || '').match(/konu\/([a-z0-9\-]+)\.jpg$/);
+    if(!m) return;
+    var f = V[m[1]];
+    if(!f || !f.uzak) return;
+    img.removeAttribute('onerror');          /* yarışı bitir: kutu artık silinmiyor */
+    img.onerror = function(){ kfHata(img); };
+    if(f.alt) img.alt = f.alt;
+    img.src = f.uzak;                        /* hata beklemeden doğrudan fotoğraf */
+    var sar = img.closest('.ka-foto-sar');
+    if(sar && f.credit && !sar.querySelector('.ka-foto-kunye')){
+      var k = document.createElement('span');
+      k.className = 'ka-foto-kunye';
+      k.textContent = f.credit + ' · ' + f.source;
+      sar.appendChild(k);
+    }
+  });
+
+  /* 2) Alt başlık kartları: başlık metninden anahtar üretilir */
+  var on = (document.body.dataset.kfOn || '');
+  document.querySelectorAll('.ka-alt-kart').forEach(function(kart){
+    var bas = kart.querySelector('b');
+    if(!bas) return;
+    var f = V[on + '-alt-' + kfSlug(bas.textContent)];
+    if(!f || !f.uzak) return;
+    var kap = kart.querySelector('.ka-alt-gorsel');
+    if(!kap) return;
+    var svg = kap.querySelector('svg');
+    var img = document.createElement('img');
+    img.className = 'kf-alt-img';
+    img.src = f.uzak; img.alt = f.alt || ''; img.loading = 'lazy'; img.decoding = 'async';
+    if(f.credit) img.title = f.credit + ' · ' + f.source;
+    img.addEventListener('error', function(){
+      img.remove(); if(svg) svg.style.display = '';
+      kap.classList.remove('kf-alt-dolu');
+    }, {once:true});
+    img.addEventListener('load', function(){
+      if(svg) svg.style.display = 'none';
+      kap.classList.add('kf-alt-dolu');
+    }, {once:true});
+    kap.appendChild(img);
+  });
+});
+</script>
+
+
+<script id="dd-betik">
+/* Dijital Ders — mini kontrol soruları ve ilerleme çubuğu.
+   Sayfadaki mevcut JS'e dokunmaz; yalnızca dd* adları kullanılır. */
+(function(){
+  function ddIlerle(ders){
+    var t = ders.querySelectorAll('.dd-adim').length;
+    var y = ders.querySelectorAll('.dd-adim.dd-bitti').length;
+    var c = ders.querySelector('.dd-cubuk i');
+    var s = ders.querySelector('.dd-sayac');
+    if(c) c.style.width = (t ? Math.round(y * 100 / t) : 0) + '%';
+    if(s) s.textContent = y + '/' + t + ' adım';
+  }
+
+  window.ddCevap = function(btn){
+    var kutu = btn.closest('.dd-adim');
+    if(!kutu || kutu.dataset.ddYanit) return;
+    kutu.dataset.ddYanit = '1';
+    var dogruMu = btn.dataset.ddDogru === '1';
+    kutu.querySelectorAll('.dd-sec').forEach(function(b){
+      b.disabled = true;
+      if(b.dataset.ddDogru === '1') b.classList.add('dd-dogru');
+    });
+    if(!dogruMu) btn.classList.add('dd-yanlis');
+    var geri = kutu.querySelector('.dd-geri');
+    if(geri){
+      geri.classList.add('dd-ac', dogruMu ? 'dd-iyi' : 'dd-kotu');
+      geri.textContent = (dogruMu ? '✓ Doğru. ' : '✗ Doğru cevap işaretlendi. ')
+                       + (geri.dataset.ddAciklama || '');
+    }
+    kutu.classList.add('dd-bitti');
+    ddIlerle(kutu.closest('.dd-ders'));
+  };
+
+  /* Okunan adımlar görünür oldukça ilerleme çubuğu dolar. */
+  function ddGozle(){
+    if(!('IntersectionObserver' in window)) return;
+    var g = new IntersectionObserver(function(kayitlar){
+      kayitlar.forEach(function(k){
+        if(!k.isIntersecting) return;
+        var a = k.target;
+        if(a.classList.contains('dd-kontrol')) return;   /* soru cevaplanınca dolar */
+        a.classList.add('dd-bitti');
+        ddIlerle(a.closest('.dd-ders'));
+        g.unobserve(a);
+      });
+    }, {threshold: 0.55});
+    document.querySelectorAll('.dd-ders .dd-adim').forEach(function(a){ g.observe(a); });
+  }
+
+  /* Fotoğraf yüklenemezse: mevcut SVG illüstrasyonu yedek olarak devreye girer. */
+  window.ddFotoHata = function(img){
+    var yuva = img.closest('.dd-foto'); if(!yuva) return;
+    var kalip = yuva.querySelector('template.dd-yedek');
+    if(kalip) yuva.appendChild(kalip.content.cloneNode(true));
+    img.remove();
+    var k = yuva.querySelector('.dd-kunye'); if(k) k.remove();
+  };
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', ddGozle);
+  } else { ddGozle(); }
 })();
 </script>
 </body>

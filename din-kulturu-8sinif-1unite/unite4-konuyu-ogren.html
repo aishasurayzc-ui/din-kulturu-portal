@@ -962,6 +962,118 @@
   /* Başlık rozetleri: aynı karikatürün 40 kez tekrarı yerine konuya özel motif. */
   .ab-ikon > .ka-svg{ border-radius:50%; }
 </style>
+
+<style id="dd-stil">
+.dd-ders{
+  --dd-ana:#1e5aa8; --dd-acik:#eef4fb; --dd-kenar:#d9e4f0; --dd-metin:#1c2530;
+  --dd-yumusak:#5d6e82; --dd-yes:#137a4a; --dd-kir:#b3261e; --dd-r:16px;
+  margin:18px 0 26px; border:1px solid var(--dd-kenar); border-radius:var(--dd-r);
+  background:#fff; overflow:hidden; box-shadow:0 1px 3px rgba(16,24,40,.06);
+}
+/* 4. sınıf: daha sıcak, daha renkli, daha büyük punto */
+.dd-ders.dd-s4{ --dd-ana:#c2410c; --dd-acik:#fff5ec; --dd-kenar:#f0dcc9; font-size:1.03em; }
+/* 8. sınıf: daha modern, daha akademik */
+.dd-ders.dd-s8{ --dd-ana:#1e5aa8; --dd-acik:#eef4fb; --dd-kenar:#d9e4f0; }
+
+.dd-ust{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:12px 16px; background:var(--dd-acik); border-bottom:1px solid var(--dd-kenar);
+}
+.dd-etiket{ font-size:.72em; font-weight:900; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--dd-ana); }
+.dd-ust h4{ margin:0; font-size:1.02em; font-weight:800; color:var(--dd-metin); }
+.dd-cubuk{ flex:1 1 90px; height:6px; min-width:70px; border-radius:99px;
+  background:#fff; border:1px solid var(--dd-kenar); overflow:hidden; }
+.dd-cubuk i{ display:block; height:100%; width:0; background:var(--dd-ana);
+  transition:width .45s ease; }
+.dd-sayac{ font-size:.76em; font-weight:800; color:var(--dd-yumusak); white-space:nowrap; }
+
+.dd-adimlar{ list-style:none; margin:0; padding:0; }
+.dd-adim{ padding:15px 16px; border-top:1px solid #eef2f7; }
+.dd-adim:first-child{ border-top:0; padding-top:14px; }
+.dd-bas{ display:flex; align-items:center; gap:9px; margin:0 0 8px; }
+.dd-rozet{
+  flex:0 0 auto; width:26px; height:26px; border-radius:9px; display:inline-flex;
+  align-items:center; justify-content:center; font-size:.72em; font-weight:900;
+  background:var(--dd-acik); color:var(--dd-ana); border:1px solid var(--dd-kenar);
+}
+.dd-bas h5{ margin:0; font-size:.82em; font-weight:900; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--dd-ana); }
+.dd-adim p{ margin:0 0 6px; line-height:1.62; color:var(--dd-metin); }
+.dd-adim p:last-child{ margin-bottom:0; }
+
+/* 01 GÖR — fotoğraf konu anlatımının ana görseli, ikon değil */
+.dd-foto{ margin:0 0 9px; position:relative; display:block; overflow:hidden;
+  border-radius:12px; background:#eef2f7; }
+.dd-foto img.dd-img{ display:block; width:100%; height:100%; aspect-ratio:16/9;
+  object-fit:cover; }
+.dd-s4 .dd-foto img.dd-img{ aspect-ratio:3/2; }
+@media (max-width:640px){
+  .dd-foto img.dd-img, .dd-s4 .dd-foto img.dd-img{ aspect-ratio:4/3; }
+}
+.dd-kunye{
+  position:absolute; right:7px; bottom:7px; z-index:2; pointer-events:none;
+  font-size:10px; line-height:1.55; color:#fff; background:rgba(10,17,26,.55);
+  border-radius:10px; padding:2px 8px; max-width:88%;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.dd-altyazi{ font-size:.87em; color:var(--dd-yumusak); }
+
+/* 02 KEŞFET / 06 DÜŞÜN — açık uçlu sorular */
+.dd-merak, .dd-dusun{
+  margin:0; padding:11px 14px; border-left:3px solid var(--dd-ana);
+  background:var(--dd-acik); border-radius:0 10px 10px 0; font-weight:600;
+}
+.dd-ipucu{ display:block; margin-top:7px; font-size:.85em; color:var(--dd-yumusak); font-weight:400; }
+
+/* 04 AYET / DELİL */
+.dd-delil{ margin:0; padding:12px 15px; background:#f7fbf8; border:1px solid #d8ecdf;
+  border-radius:12px; }
+.dd-delil-metin{ margin:0 0 6px; font-style:italic; line-height:1.66; }
+.dd-delil-kaynak{ margin:0 0 7px; font-size:.83em; font-weight:800; color:var(--dd-yes); }
+.dd-delil-bag{ margin:0; font-size:.88em; color:#3c5548; }
+
+/* 05 GÜNLÜK HAYAT */
+.dd-gunluk{ margin:0; padding:11px 14px; background:#fffaf0; border:1px solid #f0e2c8;
+  border-radius:12px; }
+
+/* 07 MİNİ KONTROL */
+.dd-soru{ margin:0 0 10px; font-weight:700; }
+.dd-secenekler{ display:grid; gap:7px; }
+.dd-sec{
+  display:flex; align-items:flex-start; gap:9px; width:100%; text-align:left;
+  padding:10px 13px; border:1.5px solid var(--dd-kenar); border-radius:11px;
+  background:#fff; cursor:pointer; font:inherit; font-size:.95em; color:var(--dd-metin);
+  transition:border-color .15s ease, background .15s ease;
+}
+.dd-sec:hover:not([disabled]){ border-color:var(--dd-ana); background:var(--dd-acik); }
+.dd-sec[disabled]{ cursor:default; }
+.dd-harf{ flex:0 0 auto; width:22px; height:22px; border-radius:7px; font-size:.78em;
+  font-weight:900; display:inline-flex; align-items:center; justify-content:center;
+  background:var(--dd-acik); color:var(--dd-ana); border:1px solid var(--dd-kenar); }
+.dd-sec.dd-dogru{ border-color:var(--dd-yes); background:#f2fbf6; }
+.dd-sec.dd-dogru .dd-harf{ background:var(--dd-yes); color:#fff; border-color:var(--dd-yes); }
+.dd-sec.dd-yanlis{ border-color:var(--dd-kir); background:#fdf4f3; }
+.dd-sec.dd-yanlis .dd-harf{ background:var(--dd-kir); color:#fff; border-color:var(--dd-kir); }
+.dd-geri{ margin-top:10px; padding:10px 13px; border-radius:11px; font-size:.92em;
+  line-height:1.6; display:none; }
+.dd-geri.dd-ac{ display:block; }
+.dd-geri.dd-iyi{ background:#f2fbf6; border:1px solid #cfe8db; color:#14603f; }
+.dd-geri.dd-kotu{ background:#fdf4f3; border:1px solid #f2ccc6; color:#8c2018; }
+
+@media (max-width:420px){
+  .dd-adim{ padding:13px 13px; }
+  .dd-bas h5{ font-size:.78em; }
+}
+@media (prefers-reduced-motion: reduce){
+  .dd-cubuk i{ transition:none; }
+}
+@media print{
+  .dd-ders{ break-inside:avoid; }
+  .dd-kunye{ display:none; }
+  .dd-geri{ display:block; }
+}
+</style>
 </head>
 <body>
 <div id="portalNav" data-sinif="8" data-unite="4" data-asama="ogren"></div>
@@ -1018,7 +1130,7 @@
 <path d="M16 54 H84" stroke="#556224" stroke-width="4"/>
 <path d="M20 44 A30 14 0 0 1 80 44 Z" fill="#556224"/>
 <rect x="42" y="52" width="16" height="18" rx="4" fill="#bcc97f"/>
-<circle cx="50" cy="60" r="3" fill="#556224"/></g></svg></span><span class="ab-rozet">1️⃣</span> Doğruluğu ve Güvenilirliği: "El-Emin"</h3>
+<circle cx="50" cy="60" r="3" fill="#556224"/></g></svg></span><span class="ab-rozet">1️⃣</span> Doğruluğu ve Güvenilirliği: "El-Emin"</h3><div class="dd-ders dd-s8" id="s8-u4-ders-1"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Doğruluğu ve Güvenilirliği: “El-Emin”</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Outsideofmasjedolnabi6.JPG?width=1600" alt="Medine’de Mescid-i Nebevî’nin dış görünümü" loading="lazy" decoding="async" style="object-position:center 55%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Mardetanha — CC BY-SA 3.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Medine’de Mescid-i Nebevî. Güvenilirliğiyle tanınan bir insanın kurduğu şehir.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">İnsanlar sana bir sır emanet eder mi? Neden?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Hz. Muhammed (sav), peygamberlikten önce de <b>el-Emîn</b> (güvenilir) diye anılıyordu. Ona düşmanları bile emanetlerini bırakıyordu.</p><p>Doğruluk yalnızca yalan söylememek değil; sözünde durmak, emaneti korumak ve tutarlı olmaktır.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Andolsun, Allah’ın Resulü’nde sizin için; Allah’a ve ahiret gününe kavuşmayı uman, Allah’ı çok zikreden kimseler için güzel bir örnek vardır.”</p><p class="dd-delil-kaynak">— Ahzab suresi, 21. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet örnekliği genel bir ifadeyle bildirir; “el-Emîn” lakabı ise bu örnekliğin somut ve herkesçe kabul edilmiş hâlidir.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Ödünç aldığın kitabı zamanında ve zarar vermeden geri vermek, güvenilirliğin öğrenci hayatındaki karşılığıdır.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Bir kez bozulan güven yeniden kazanılabilir mi? Bunun için ne gerekir?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Hz. Muhammed’e (sav) “el-Emîn” denilmesinin sebebi nedir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Doğruluğu ve güvenilirliği</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Cesareti</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Zenginliği</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Şairliği</span></button></div><p class="dd-geri" data-dd-aciklama="“El-Emîn” lakabı, onun doğruluğu ve güvenilirliği sebebiyle verilmiştir."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#f4f6e8"/><circle cx="70" cy="70" r="58" fill="#e5ebc9" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-t"><circle cx="50" cy="50" r="34" fill="#79883a"/><path d="M32 52 L45 65 L70 38" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></svg></div>
     <p class="ko-giris">Sınıfta bir sır saklaman gerekse, arkadaşların bu işi kime emanet ederdi? Peki neden ona?</p>
     <p class="ko-amac">🎯 Bu bölümde: Hz. Muhammed'in doğruluğunu ve güvenilirliğini, peygamberlerin ortak özellikleriyle birlikte öğreneceğiz.</p>
@@ -1087,7 +1199,7 @@
 <path d="M22 62 Q6 56 8 70 Q16 72 24 68 Z" fill="#8f3049"/>
 <g stroke="#8f3049" stroke-width="4" stroke-linecap="round"><path d="M40 76 V88"/><path d="M54 76 V88"/></g></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u4-1.jpg" alt="Merhameti ve Affediciliği" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 2</span><h4>Merhameti ve Affediciliği</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 2</span><span class="ka-giris">Merhameti ve affediciliği</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f8d6de"/><g transform="translate(14,14) scale(0.92)"><path d="M10 62 Q26 46 42 52" stroke="#8f3049" stroke-width="8" fill="none" stroke-linecap="round"/>
 <path d="M90 62 Q74 46 58 52" stroke="#8f3049" stroke-width="8" fill="none" stroke-linecap="round"/>
-<path d="M50 74 C32 60 24 50 24 40 A13 13 0 0 1 50 34 A13 13 0 0 1 76 40 C76 50 68 60 50 74 Z" fill="#c04a68"/></g></svg></span><span class="ab-rozet">2️⃣</span> Merhameti ve Affediciliği</h3>
+<path d="M50 74 C32 60 24 50 24 40 A13 13 0 0 1 50 34 A13 13 0 0 1 76 40 C76 50 68 60 50 74 Z" fill="#c04a68"/></g></svg></span><span class="ab-rozet">2️⃣</span> Merhameti ve Affediciliği</h3><div class="dd-ders dd-s8" id="s8-u4-ders-2"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Merhameti ve Affediciliği</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cat%20outside%20Gazi%20Husrev-Bey%20Mosque%20%286086909198%29.jpg?width=1600" alt="Cami avlusunda bir kedi" loading="lazy" decoding="async" style="object-position:center 40%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Jennifer Boyer — CC BY 2.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Cami avlusuna uzanmış bir kedi. Merhamet en çok sessiz canlılara davranışta görünür.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Sana kötülük eden birini affetmek için hangi duyguyu yenmen gerekir?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Hz. Muhammed (sav) çocuklara, yaşlılara, hayvanlara ve hatta kendisine kötülük edenlere merhametle davrandı.</p><p>Mekke’nin fethinde, yıllarca kendisine eziyet edenleri affetti. Merhamet onun ahlakının merkezindeydi.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Merhamet edenlere Rahman olan Allah da merhamet eder. Siz yerdekilere merhamet edin ki göktekiler de size merhamet etsin.”</p><p class="dd-delil-kaynak">— Hz. Peygamber (sav) (Tirmizi, Birr, 16)</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Hadis merhameti karşılıklı bir döngü olarak anlatır: verdiğin merhamet sana döner.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Sınıfta dışlanan bir arkadaşının yanına oturmak, sokak hayvanına su bırakmak bu merhametin bugünkü hâlidir.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Merhametli olmak, haksızlığa göz yummak mıdır? İkisini nasıl ayırırsın?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Tirmizi’de geçen hadise göre merhametin karşılığı nedir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Allah’ın merhametine ulaşmak</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>İnsanların övgüsünü kazanmak</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Dünyada zenginleşmek</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Uzun ömürlü olmak</span></button></div><p class="dd-geri" data-dd-aciklama="Hadis, merhamet edenlerin Allah’ın merhametine kavuşacağını bildirir."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fdeef1"/><circle cx="70" cy="70" r="58" fill="#f8d6de" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><ellipse cx="46" cy="58" rx="26" ry="18" fill="#c04a68"/>
 <circle cx="70" cy="44" r="12" fill="#c04a68"/>
 <path d="M80 44 L94 48 L80 52 Z" fill="#f0a0b4"/>
@@ -1161,7 +1273,7 @@
 <path d="M22 36 H72 M22 48 H62" stroke="#6fd3de" stroke-width="4" stroke-linecap="round"/></g></g></g><g transform="translate(664,24) scale(1.520)"><g class="kai-g" style="animation-delay:0.10s"><g class="kai-p"><circle cx="26" cy="34" r="11" fill="#12869a"/><path d="M12 78 V60 A14 14 0 0 1 40 60 V78 Z" fill="#12869a"/>
 <circle cx="74" cy="34" r="11" fill="#6fd3de"/><path d="M60 78 V60 A14 14 0 0 1 88 60 V78 Z" fill="#6fd3de"/>
 <circle cx="50" cy="26" r="13" fill="#0b6272"/><path d="M33 82 V60 A17 17 0 0 1 67 60 V82 Z" fill="#0b6272"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u4-2.jpg" alt="İstişareye Verdiği Önem" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 3</span><h4>İstişareye Verdiği Önem</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 3</span><span class="ka-giris">İstişareye verdiği önem</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#c6ecef"/><g transform="translate(14,14) scale(0.92)"><path d="M14 20 H86 A8 8 0 0 1 94 28 V62 A8 8 0 0 1 86 70 H46 L28 86 V70 H14 A8 8 0 0 1 6 62 V28 A8 8 0 0 1 14 20 Z" fill="#fff" stroke="#12869a" stroke-width="3.4" stroke-linejoin="round"/>
-<path d="M22 36 H72 M22 48 H62" stroke="#6fd3de" stroke-width="4" stroke-linecap="round"/></g></svg></span><span class="ab-rozet">3️⃣</span> İstişareye Verdiği Önem</h3>
+<path d="M22 36 H72 M22 48 H62" stroke="#6fd3de" stroke-width="4" stroke-linecap="round"/></g></svg></span><span class="ab-rozet">3️⃣</span> İstişareye Verdiği Önem</h3><div class="dd-ders dd-s8" id="s8-u4-ders-3"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>İstişareye Verdiği Önem</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Children%20volunteers%20helping%20plant%20a%20pollinator%20garden.jpg?width=1600" alt="Bahçe eken çocuk gönüllüler" loading="lazy" decoding="async" style="object-position:center 45%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Lafferty Chuck / U.S. Fish and Wildlife Service — Kamu malı · Wikimedia Commons</span></figure><p class="dd-altyazi">Birlikte bahçe eken gönüllüler. Ortak akılla yapılan iş, tek başına yapılandan sağlam olur.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Önemli bir karar vermeden önce kime danışırsın?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p><b>İstişare</b>, bir konuda karar vermeden önce bilenlere danışmaktır. Hz. Muhammed (sav) peygamber olduğu hâlde arkadaşlarına danışırdı.</p><p>Hendek Savaşı’nda hendek kazma fikri istişare sonucu benimsenmiştir. İstişare, kararı ortak ve daha sağlam kılar.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“…Onları affet, onlar için Allah’tan bağışlanma dile, iş hakkında onlara danış. Karar verince de artık Allah’a dayanıp güven.”</p><p class="dd-delil-kaynak">— Âl-i İmrân suresi, 159. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet sırayı açıkça verir: önce danış, sonra karar ver, sonra tevekkül et.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Sınıf başkanı seçilirken herkesin fikrini almak, proje ödevinde grup arkadaşlarına danışmak istişarenin okul hâlidir.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Danıştıktan sonra kendi kararından vazgeçmek zayıflık mıdır? Neden?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Âl-i İmrân 159. ayete göre karar verdikten sonra ne yapılmalıdır?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Kararı tekrar tartışmaya açmak</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Allah’a güvenmek (tevekkül)</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Herkesten yeniden onay almak</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Kararı ertelemek</span></button></div><p class="dd-geri" data-dd-aciklama="Ayet, karar verildikten sonra Allah’a dayanıp güvenmeyi bildirir."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#e6f7f8"/><circle cx="70" cy="70" r="58" fill="#c6ecef" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><circle cx="26" cy="34" r="11" fill="#12869a"/><path d="M12 78 V60 A14 14 0 0 1 40 60 V78 Z" fill="#12869a"/>
 <circle cx="74" cy="34" r="11" fill="#6fd3de"/><path d="M60 78 V60 A14 14 0 0 1 88 60 V78 Z" fill="#6fd3de"/>
 <circle cx="50" cy="26" r="13" fill="#0b6272"/><path d="M33 82 V60 A17 17 0 0 1 67 60 V82 Z" fill="#0b6272"/></g></g></svg></div>
@@ -1231,7 +1343,7 @@
 <path d="M38 50 L47 59 L64 40" stroke="#c2603a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u4-3.jpg" alt="Cesareti ve Kararlılığı" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 4</span><h4>Cesareti ve Kararlılığı</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 4</span><span class="ka-giris">Cesareti ve kararlılığı</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f8dccd"/><g transform="translate(14,14) scale(0.92)"><path d="M6 84 L36 34 L54 62 L68 42 L94 84 Z" fill="#c2603a"/>
 <path d="M36 34 L46 50 H26 Z" fill="#fff" opacity=".85"/>
 <path d="M68 42 L76 54 H60 Z" fill="#fff" opacity=".6"/>
-<rect x="4" y="84" width="92" height="8" rx="4" fill="#8f4224"/></g></svg></span><span class="ab-rozet">4️⃣</span> Cesareti ve Kararlılığı</h3>
+<rect x="4" y="84" width="92" height="8" rx="4" fill="#8f4224"/></g></svg></span><span class="ab-rozet">4️⃣</span> Cesareti ve Kararlılığı</h3><div class="dd-ders dd-s8" id="s8-u4-ders-4"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Cesareti ve Kararlılığı</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Starry%20night%20at%20Mount%20Everest.jpg?width=1600" alt="Dağların üzerinde yıldızlı gece" loading="lazy" decoding="async" style="object-position:center" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Matt Wier — CC BY-SA 3.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Dağların üzerinde yıldızlı bir gece. Hicret yolculuğu da böyle bir gecede başladı.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Cesaret korkusuzluk mudur, yoksa korkuya rağmen doğru olanı yapmak mıdır?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Hz. Muhammed (sav) en zor şartlarda bile tebliğinden vazgeçmedi. Boykot yıllarında, Taif’te ve hicret yolculuğunda kararlılığını korudu.</p><p>Onun cesareti öfkeli değil, sabırlı bir cesaretti: hedefi bırakmadan, ölçüyü kaçırmadan.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“…Hani onlar mağarada bulunuyorlardı. Hani arkadaşına, ‘Üzülme, çünkü Allah bizimle beraberdir.’ diyordu…”</p><p class="dd-delil-kaynak">— Tevbe suresi, 40. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet, en tehlikeli anda söylenmiş bir cümleyi aktarır. Cesaretin kaynağı burada açıkça görülür: Allah’a güven.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Sınıfta yanlış bir şaka yapıldığında “bu doğru değil” diyebilmek, kararlılığın bugünkü karşılığıdır.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Kalabalığa karşı doğruyu söylemek için insanın nelere ihtiyacı vardır?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Tevbe suresi 40. ayette geçen “Üzülme, çünkü Allah bizimle beraberdir.” sözü hangi olayda söylenmiştir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Veda Hutbesi’nde</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Hicret sırasında mağarada</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Hendek Savaşı’nda</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Mekke’nin fethinde</span></button></div><p class="dd-geri" data-dd-aciklama="Bu söz, hicret sırasında Sevr Mağarası’nda söylenmiştir."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fdf0ea"/><circle cx="70" cy="70" r="58" fill="#f8dccd" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M50 12 L84 24 V52 Q84 76 50 90 Q16 76 16 52 V24 Z" fill="#c2603a"/>
 <path d="M50 24 L74 32 V52 Q74 68 50 78 Q26 68 26 52 V32 Z" fill="#fdf0ea"/>
 <path d="M38 50 L47 59 L64 40" stroke="#c2603a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></svg></div>
@@ -1289,7 +1401,7 @@
 <path d="M20 30 H80" stroke="#1e3266" stroke-width="5" stroke-linecap="round"/>
 <circle cx="50" cy="16" r="5" fill="#2f4a8f"/>
 <path d="M20 30 L10 50 H30 Z" fill="#2f4a8f"/><path d="M80 30 L70 50 H90 Z" fill="#2f4a8f"/>
-<rect x="34" y="80" width="32" height="8" rx="3" fill="#1e3266"/></g></svg></span><span class="ab-rozet">5️⃣</span> İnsanlara Verdiği Değer ve Hakkı Gözetmesi</h3>
+<rect x="34" y="80" width="32" height="8" rx="3" fill="#1e3266"/></g></svg></span><span class="ab-rozet">5️⃣</span> İnsanlara Verdiği Değer ve Hakkı Gözetmesi</h3><div class="dd-ders dd-s8" id="s8-u4-ders-5"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>İnsanlara Verdiği Değer ve Hakkı Gözetmesi</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Antique-Scale-for-Herbs.jpg?width=1600" alt="Antika terazi ve tartı ağırlıkları" loading="lazy" decoding="async" style="object-position:center" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: GabrielleMerk — CC BY-SA 4.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Antika bir terazi. Hakkı gözetmek, herkese payını eksiksiz vermektir.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Bir insanın değerini belirleyen şey nedir?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p>Hz. Muhammed (sav) insanlar arasında zengin-yoksul, köle-hür ayrımı yapmadı. Veda Hutbesi’nde bunu açıkça ilan etti.</p><p>Hakkı gözetmek; adaletli davranmak, kimsenin emeğini ve payını eksiltmemektir.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Ey insanlar! Şüphe yok ki biz sizi bir erkek ve bir dişiden yarattık ve birbirinizi tanımanız için sizi boylara ayırdık…”</p><p class="dd-delil-kaynak">— Hucurat suresi, 13. ayet</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet üstünlüğün soyda değil takvada olduğunu bildirir. Veda Hutbesi bu ayetin uygulamaya geçmiş hâlidir.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Grup ödevinde herkesin katkısını adıyla söylemek, sıradaki kişinin hakkını atlamamak hakkı gözetmektir.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Bir sınıfta herkesin “eşit değerde” olması pratikte nasıl görünür?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Hucurat suresi 13. ayete göre insanlar arasındaki üstünlük ölçüsü nedir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Zenginlik</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Yaşadığı şehir</span></button><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Takva (Allah’a karşı sorumluluk bilinci)</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>Soy ve kabile</span></button></div><p class="dd-geri" data-dd-aciklama="Ayet, üstünlüğün soyda değil takvada olduğunu bildirir."></p></li></ol></div>
 <div class="konu-illustrasyon" style="background:#fde0e6"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#ecf0fa"/><circle cx="70" cy="70" r="58" fill="#d3dcf3" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M50 84 C22 64 10 50 10 36 A20 20 0 0 1 50 28 A20 20 0 0 1 90 36 C90 50 78 64 50 84 Z" fill="#2f4a8f"/><circle cx="70" cy="38" r="6" fill="#fff" opacity=".45"/></g></g></svg></div>
     <p class="ko-giris">Bir insanın değerini onun parası, mesleği ya da rengi mi belirler? Peki neyi belirler?</p>
     <p class="ko-amac">🎯 Bu bölümde: Hz. Muhammed'in insana verdiği değeri ve hakkı gözetmedeki hassasiyetini öğreneceğiz.</p>
@@ -1346,7 +1458,7 @@
 <path d="M43 22 L48 27 L58 17" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></g></svg><span class="ka-foto-sar"><img class="ka-foto" src="../din-kulturu-slayt-gorseller/konu/s8-u4-5.jpg" alt="Bir Sure Tanıyorum: Kureyş Suresi ve Anlamı" loading="lazy" decoding="async" onerror="this.closest('.ka-foto-sar').remove()"></span><div class="ka-konu-yazi"><span class="ka-konu-ust">Konu 6</span><h4>Bir Sure Tanıyorum: Kureyş Suresi ve Anlamı</h4></div></div><div class="ka-konu-alt"><span class="ka-no">KONU 6</span><span class="ka-giris">Kureyş suresi ve anlamı</span><a class="ka-yukari" href="#ka-hero">↑ Konu listesi</a></div></div><h3 style="color:var(--mavi)"><span class="ab-ikon"><svg class="ka-svg" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#ffe9c2"/><g transform="translate(14,14) scale(0.92)"><rect x="8" y="20" width="84" height="58" rx="10" fill="#fff" stroke="#e08a1e" stroke-width="3.4"/>
 <rect x="14" y="26" width="72" height="46" rx="7" fill="none" stroke="#f6c453" stroke-width="2.4"/>
 <path d="M24 58 Q34 34 46 50 Q56 64 64 44 Q70 30 78 42" stroke="#b25f06" stroke-width="4.4" fill="none" stroke-linecap="round"/>
-<circle cx="34" cy="62" r="2.6" fill="#b25f06"/><circle cx="58" cy="62" r="2.6" fill="#b25f06"/></g></svg></span><span class="ab-rozet">6️⃣</span> Bir Sure Tanıyorum: Kureyş Suresi ve Anlamı</h3>
+<circle cx="34" cy="62" r="2.6" fill="#b25f06"/><circle cx="58" cy="62" r="2.6" fill="#b25f06"/></g></svg></span><span class="ab-rozet">6️⃣</span> Bir Sure Tanıyorum: Kureyş Suresi ve Anlamı</h3><div class="dd-ders dd-s8" id="s8-u4-ders-6"><div class="dd-ust"><span class="dd-etiket">Dijital Ders</span><h4>Bir Sure Tanıyorum: Kureyş Suresi ve Anlamı</h4><span class="dd-cubuk"><i></i></span><span class="dd-sayac">0/7 adım</span></div><ol class="dd-adimlar"><li class="dd-adim dd-gor"><div class="dd-bas"><span class="dd-rozet">01</span><h5>📸 Gör</h5></div><figure class="dd-foto"><img class="dd-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Masjid%20al-Haram%2C%20Tawaf%2020092012%201130PM%20%288008466944%29.jpg?width=1600" alt="Mescid-i Haram’da tavaf eden kalabalık" loading="lazy" decoding="async" style="object-position:center 40%" onerror="ddFotoHata(this)"><span class="dd-kunye">Fotoğraf: Basheer Olakara — CC BY 2.0 · Wikimedia Commons</span></figure><p class="dd-altyazi">Mekke’de Mescid-i Haram. Kureyş suresi, bu şehrin güvenliğinden ve ticaretinden söz eder.</p></li><li class="dd-adim dd-kesfet"><div class="dd-bas"><span class="dd-rozet">02</span><h5>💡 Keşfet</h5></div><p class="dd-merak">Güvenlik ve yiyecek — bunlar sende varken fark eder misin?</p></li><li class="dd-adim dd-ogren"><div class="dd-bas"><span class="dd-rozet">03</span><h5>📖 Öğren</h5></div><p><b>Kureyş suresi</b> dört ayettir. Mekkelilerin yaz ve kış yaptıkları ticaret yolculuklarından söz eder.</p><p>Sure, sahip oldukları güvenlik ve bolluğun kaynağını hatırlatır ve Kâbe’nin Rabbine kulluk etmeye çağırır.</p></li><li class="dd-adim dd-ayet"><div class="dd-bas"><span class="dd-rozet">04</span><h5>📜 Ayet / Delil</h5></div><div class="dd-delil"><p class="dd-delil-metin">“Öyleyse şu evin (Kâbe’nin) Rabbine kulluk etsinler. O ki, kendilerini açlıktan doyurmuş ve her türlü korkudan emin kılmıştır.”</p><p class="dd-delil-kaynak">— Kureyş suresi, 3-4. ayetler</p><p class="dd-delil-bag"><b>Konuyla bağlantısı:</b> Ayet iki temel nimeti sayar: doymak ve güvende olmak. Sure bunların şükrünü ister.</p></div></li><li class="dd-adim dd-gunlukadim"><div class="dd-bas"><span class="dd-rozet">05</span><h5>🌍 Günlük Hayat</h5></div><p class="dd-gunluk">Karnı tok ve güvende olan bir insanın bunu fark etmesi zordur; sure tam da bu farkındalığı istiyor.</p></li><li class="dd-adim dd-dusunadim"><div class="dd-bas"><span class="dd-rozet">06</span><h5>🧠 Düşün</h5></div><p class="dd-dusun">Sende olan ama kıymetini fark etmediğin bir nimet nedir?<span class="dd-ipucu">Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.</span></p></li><li class="dd-adim dd-kontrol"><div class="dd-bas"><span class="dd-rozet">07</span><h5>🎯 Mini Kontrol</h5></div><p class="dd-soru">Kureyş suresinde hatırlatılan iki temel nimet nedir?</p><div class="dd-secenekler"><button type="button" class="dd-sec" data-dd-dogru="1" onclick="ddCevap(this)"><span class="dd-harf">A</span><span>Açlıktan doyurulmak ve korkudan emin kılınmak</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">B</span><span>Zenginlik ve şöhret</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">C</span><span>Uzun ömür ve sağlık</span></button><button type="button" class="dd-sec" onclick="ddCevap(this)"><span class="dd-harf">D</span><span>İlim ve hikmet</span></button></div><p class="dd-geri" data-dd-aciklama="Sure, doyurulmayı ve güvenliği iki temel nimet olarak anar."></p></li></ol></div>
 <div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#fff7e8"/><circle cx="70" cy="70" r="58" fill="#ffe9c2" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><path d="M14 92 L40 34 H60 L86 92 Z" fill="#f6c453"/>
 <path d="M50 40 V48 M50 56 V66 M50 74 V86" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
 <path d="M40 34 H60" stroke="#e08a1e" stroke-width="4" stroke-linecap="round"/>
@@ -4383,6 +4495,70 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ogrBaslat);
   else ogrBaslat();
+})();
+</script>
+
+<script id="dd-betik">
+/* Dijital Ders — mini kontrol soruları ve ilerleme çubuğu.
+   Sayfadaki mevcut JS'e dokunmaz; yalnızca dd* adları kullanılır. */
+(function(){
+  function ddIlerle(ders){
+    var t = ders.querySelectorAll('.dd-adim').length;
+    var y = ders.querySelectorAll('.dd-adim.dd-bitti').length;
+    var c = ders.querySelector('.dd-cubuk i');
+    var s = ders.querySelector('.dd-sayac');
+    if(c) c.style.width = (t ? Math.round(y * 100 / t) : 0) + '%';
+    if(s) s.textContent = y + '/' + t + ' adım';
+  }
+
+  window.ddCevap = function(btn){
+    var kutu = btn.closest('.dd-adim');
+    if(!kutu || kutu.dataset.ddYanit) return;
+    kutu.dataset.ddYanit = '1';
+    var dogruMu = btn.dataset.ddDogru === '1';
+    kutu.querySelectorAll('.dd-sec').forEach(function(b){
+      b.disabled = true;
+      if(b.dataset.ddDogru === '1') b.classList.add('dd-dogru');
+    });
+    if(!dogruMu) btn.classList.add('dd-yanlis');
+    var geri = kutu.querySelector('.dd-geri');
+    if(geri){
+      geri.classList.add('dd-ac', dogruMu ? 'dd-iyi' : 'dd-kotu');
+      geri.textContent = (dogruMu ? '✓ Doğru. ' : '✗ Doğru cevap işaretlendi. ')
+                       + (geri.dataset.ddAciklama || '');
+    }
+    kutu.classList.add('dd-bitti');
+    ddIlerle(kutu.closest('.dd-ders'));
+  };
+
+  /* Okunan adımlar görünür oldukça ilerleme çubuğu dolar. */
+  function ddGozle(){
+    if(!('IntersectionObserver' in window)) return;
+    var g = new IntersectionObserver(function(kayitlar){
+      kayitlar.forEach(function(k){
+        if(!k.isIntersecting) return;
+        var a = k.target;
+        if(a.classList.contains('dd-kontrol')) return;   /* soru cevaplanınca dolar */
+        a.classList.add('dd-bitti');
+        ddIlerle(a.closest('.dd-ders'));
+        g.unobserve(a);
+      });
+    }, {threshold: 0.55});
+    document.querySelectorAll('.dd-ders .dd-adim').forEach(function(a){ g.observe(a); });
+  }
+
+  /* Fotoğraf yüklenemezse: mevcut SVG illüstrasyonu yedek olarak devreye girer. */
+  window.ddFotoHata = function(img){
+    var yuva = img.closest('.dd-foto'); if(!yuva) return;
+    var kalip = yuva.querySelector('template.dd-yedek');
+    if(kalip) yuva.appendChild(kalip.content.cloneNode(true));
+    img.remove();
+    var k = yuva.querySelector('.dd-kunye'); if(k) k.remove();
+  };
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', ddGozle);
+  } else { ddGozle(); }
 })();
 </script>
 </body>
