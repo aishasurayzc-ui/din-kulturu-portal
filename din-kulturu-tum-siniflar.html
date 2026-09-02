@@ -2102,6 +2102,13 @@ function uniteDerinBaglantilarHtml(sinif, href, index){
     ? '<button type="button" class="uk-derin-link oy-giris" data-oy="uniteac" data-sinif="'+sinif.id+'" data-no="'+(index+1)+'">'+
         '<span class="msi" aria-hidden="true">sports_esports</span>Etkinlik &amp; Oyun</button>'
     : '';
+  /* Konu Testleri (kt-*) girişi: şimdilik yalnızca gerçekten kt-bolum
+     içeren üniteler için (8. sınıf 2. ünite / Zekât ve Sadaka →#ktz1).
+     Başka üniteye yayılınca buraya yeni satır eklenir, var olanlar
+     değişmez. */
+  const testGirisi = (sinif.id==='s8' && index===1)
+    ? '<a class="uk-derin-link" href="'+ogrenSayfasi(sinif.id, href)+'#ktz1"><span class="msi" aria-hidden="true">quiz</span>Konu Testleri</a>'
+    : '';
   return '<div class="uk-derin-baglantilar">'+baglantilar.map(function(b){
     /* Her çapa, gerçekte hangi sayfada duruyorsa oraya gider: ozet/slayt →
        konu anlatımı, oyun-gruplari → oyun merkezi, yazili → değerlendirme. */
@@ -2110,7 +2117,7 @@ function uniteDerinBaglantilarHtml(sinif, href, index){
     else if(b.anchor==='oyun-gruplari') hedef = uniteSayfasi(sinif.id, href, 'oyun-merkezi');
     else if(b.anchor==='yazili') hedef = uniteSayfasi(sinif.id, href, 'degerlendirme');
     return '<a class="uk-derin-link" href="'+hedef+'#'+b.anchor+'"><span class="msi" aria-hidden="true">'+b.ikon+'</span>'+b.etiket+'</a>';
-  }).join('')+oyunGirisi+'</div>';
+  }).join('')+oyunGirisi+testGirisi+'</div>';
 }
 
 /* ============================================================
