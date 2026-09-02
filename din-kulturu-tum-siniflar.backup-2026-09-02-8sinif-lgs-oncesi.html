@@ -1434,7 +1434,7 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
     <a class="yol-secim-kart yol-secim-kart--sinav belirir" style="--i:1" href="sinav-merkezi/index.html">
       <span class="yol-secim-ikon" aria-hidden="true"><span class="msi">target</span></span>
       <h3>🎯 Sınav Merkezi</h3>
-      <p>TYT · AYT · YKS için konu anlatımı, denemeler, çalışma planı ve performans takibi. (LGS artık 8. sınıfının içinde — 🎯 LGS Hazırlık sekmesi.)</p>
+      <p>LGS ve YKS (TYT/AYT) için konu anlatımı, denemeler, çalışma planı ve performans takibi.</p>
       <span class="yol-secim-btn">İncele <span class="msi" aria-hidden="true">arrow_forward</span></span>
     </a>
     <!-- Mevcut sınıf-içi "Etkinlik ve Oyun Merkezi" motoruna (V verisi,
@@ -1703,7 +1703,7 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
         <li><a href="din-kulturu-10sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 10. Sınıf (Yakında)</a></li>
         <li><a href="din-kulturu-11sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 11. Sınıf (Yakında)</a></li>
         <li><a href="din-kulturu-12sinif-1unite/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> 12. Sınıf (Yakında)</a></li>
-        <li><a href="sinav-merkezi/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> Sınav Merkezi (TYT · AYT · YKS)</a></li>
+        <li><a href="sinav-merkezi/index.html"><span class="msi" aria-hidden="true">arrow_right_alt</span> Sınav Merkezi (LGS · TYT · AYT)</a></li>
         <li><a href="#favorilerimPanel"><span class="msi" aria-hidden="true">arrow_right_alt</span> Favorilerim</a></li>
       </ul>
     </div>
@@ -2173,14 +2173,6 @@ function uniteDerinBaglantilarHtml(sinif, href, index){
   const testGirisi = (sinif.id==='s8' && index===1)
     ? '<a class="uk-derin-link" href="'+ogrenSayfasi(sinif.id, href)+'#ktz1"><span class="msi" aria-hidden="true">quiz</span>Konu Testleri</a>'
     : '';
-  /* 🎯 LGS Soruları: 8. sınıfın 5 ünitesinin tamamı için, gerçek
-     LGS_KAZANIMLAR verisindeki uniteId alanına göre filtrelenmiş halde
-     sinav-merkezi/lgs-hazirlik/index.html'e gider (bkz. o dosyadaki yeni
-     URLSearchParams okuma bloğu). Ünite sırası SINIFLAR'daki s8 dizisiyle
-     birebir aynı olduğundan index+1 = uniteN eşleşmesi güvenlidir. */
-  const lgsGirisi = (sinif.id==='s8')
-    ? '<a class="uk-derin-link" href="sinav-merkezi/lgs-hazirlik/index.html?kart=konular&sekme=kazanim-testleri&unite=unite'+(index+1)+'"><span class="msi" aria-hidden="true">target</span>🎯 LGS Soruları</a>'
-    : '';
   return '<div class="uk-derin-baglantilar">'+baglantilar.map(function(b){
     /* Her çapa, gerçekte hangi sayfada duruyorsa oraya gider: ozet/slayt →
        konu anlatımı, oyun-gruplari → oyun merkezi, yazili → değerlendirme. */
@@ -2189,7 +2181,7 @@ function uniteDerinBaglantilarHtml(sinif, href, index){
     else if(b.anchor==='oyun-gruplari') hedef = uniteSayfasi(sinif.id, href, 'oyun-merkezi');
     else if(b.anchor==='yazili') hedef = uniteSayfasi(sinif.id, href, 'degerlendirme');
     return '<a class="uk-derin-link" href="'+hedef+'#'+b.anchor+'"><span class="msi" aria-hidden="true">'+b.ikon+'</span>'+b.etiket+'</a>';
-  }).join('')+oyunGirisi+testGirisi+lgsGirisi+'</div>';
+  }).join('')+oyunGirisi+testGirisi+'</div>';
 }
 
 /* ============================================================
@@ -2604,12 +2596,6 @@ function sinifPaneliHtml(sinif){
         (OYUN_SINIFLARI.indexOf(sinif.id)>=0
           ? '<button type="button" role="tab" aria-selected="false" id="ib-'+sinif.id+'-oyun" data-sinif="'+sinif.id+'" data-tur="oyun"><span class="msi" aria-hidden="true">sports_esports</span> Etkinlik &amp; Oyun</button>'
           : '')+
-        /* LGS Hazırlık yalnızca 8. sınıfta: LGS doğrudan 8. sınıf öğrencisinin
-           sınav hazırlığı olduğundan ayrı bir "sınıf" gibi değil, buradaki
-           altıncı sekme olarak sunulur. Diğer sınıflar (4-7, 9) etkilenmez. */
-        (sinif.id==='s8'
-          ? '<button type="button" role="tab" aria-selected="false" id="ib-'+sinif.id+'-lgs" data-sinif="'+sinif.id+'" data-tur="lgs"><span class="msi" aria-hidden="true">target</span> 🎯 LGS Hazırlık</button>'
-          : '')+
       '</div>'+
       '<div class="icerik-panel aktif" id="ip-'+sinif.id+'-unite" role="tabpanel" aria-labelledby="ib-'+sinif.id+'-unite">'+
         '<div class="unite-izgara">'+uniteKartlari+'</div>'+
@@ -2628,35 +2614,7 @@ function sinifPaneliHtml(sinif){
             '<div class="oy-yuva" id="oy-'+sinif.id+'"></div>'+
           '</div>'
         : '')+
-      (sinif.id==='s8'
-        ? '<div class="icerik-panel" id="ip-'+sinif.id+'-lgs" role="tabpanel" aria-labelledby="ib-'+sinif.id+'-lgs">'+
-            lgsPanelHtml(sinif)+
-          '</div>'
-        : '')+
     '</section>'
-  );
-}
-
-/* 8. sınıfın "🎯 LGS Hazırlık" sekmesi — sinav-merkezi/lgs-hazirlik/index.html
-   kendi ana menüsündeki gerçek 4 kartı (Konular/Denemeler/Çıkmış Sorular/
-   Sınav Analizi) burada aynı isim ve içerikle tekrar gösterir; yeni bir LGS
-   veri/sayfa sistemi kurmaz, sadece o sayfaya (ilgili karta) yönlendirir. */
-function lgsPanelHtml(sinif){
-  var kartlar = [
-    {ikon:'📚', baslik:'Konular', aciklama:'Konu anlatımı, kazanım testleri ve oyunlarla çalış.', kart:'konular'},
-    {ikon:'🧪', baslik:'Denemeler', aciklama:'Deneme çöz, günlük ve haftalık planını takip et.', kart:'denemeler'},
-    {ikon:'📝', baslik:'Çıkmış Sorular', aciklama:'Geçmiş yıl sorularını ve günün sorusunu incele.', kart:'cikmis-sorular'},
-    {ikon:'📊', baslik:'Sınav Analizi', aciklama:'Konu/kazanım analizini ve performansını incele.', kart:'sinav-analizi'}
-  ];
-  var izgara = kartlar.map(function(k){
-    return '<a class="yazili-kart belirir" href="sinav-merkezi/lgs-hazirlik/index.html?kart='+k.kart+'">'+
-      '<span class="yk-ikon" aria-hidden="true">'+k.ikon+'</span>'+
-      '<h3>'+k.baslik+'</h3><p>'+k.aciklama+'</p>'+
-    '</a>';
-  }).join('');
-  return (
-    '<p class="au-aciklama">LGS Hazırlık, 8. sınıf müfredatınla aynı yerde — her kart gerçek LGS Hazırlık Merkezi’ne götürür, ayrı bir sayfa/veri seti değildir.</p>'+
-    '<div class="yazili-izgara">'+izgara+'</div>'
   );
 }
 
@@ -2715,7 +2673,7 @@ function sayfayiOlustur(){
           '<span class="msi ssp-ikon" aria-hidden="true">quiz</span>'+
         '</span>'+
       '</span>'+
-      '<span class="ssp-slogan"><b style="color:inherit;font-weight:900">📚 Sınav Merkezi</b><br>TYT · AYT · YKS</span>'+
+      '<span class="ssp-slogan"><b style="color:inherit;font-weight:900">📚 Sınav Merkezi</b><br>LGS · TYT · AYT</span>'+
     '</a>';
 
   const alan = document.getElementById('sinifAlani');
@@ -2784,11 +2742,7 @@ function sinifGoster(id){
 }
 
 function icerikGoster(sinifId, tur){
-  /* 'lgs' yalnızca 8. sınıfta var (bkz. sinifPaneliHtml); diğer sınıflarda
-     ilgili panel/düğme elemanı bulunamayacağından döngü zaten sessizce
-     atlıyor — 'oyun' için de aynı desen (OYUN_SINIFLARI'na göre koşullu)
-     kullanılıyor. */
-  ['unite','yazili','acik','calisma','oyun','lgs'].forEach(function(t){
+  ['unite','yazili','acik','calisma','oyun'].forEach(function(t){
     const panel = document.getElementById('ip-'+sinifId+'-'+t);
     const dugme = document.getElementById('ib-'+sinifId+'-'+t);
     if(!panel || !dugme) return;   /* o sınıfta bu sekme yoksa sessizce geç */

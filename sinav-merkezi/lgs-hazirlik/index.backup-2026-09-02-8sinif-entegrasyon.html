@@ -576,32 +576,6 @@ function lgsKartaGit(kartId, sekmeId){
     menu.hidden = false;
   });
 })();
-
-/* 8. sınıf ünite kartlarındaki "🎯 LGS Soruları" bağlantısı buraya
-   ?kart=konular&sekme=kazanim-testleri&unite=uniteN şeklinde gelir.
-   Var olan lgsKartaGit()/smKazanimTestleriKur() üzerine kurulu, ek veri
-   kopyalamaz; yalnızca gerçek LGS_KAZANIMLAR içindeki uniteId alanına göre
-   filtreler. Parametre yoksa hiçbir şey değişmez (normal ana menü açılır). */
-(function(){
-  var q = new URLSearchParams(location.search);
-  var kart = q.get('kart'), sekme = q.get('sekme'), unite = q.get('unite');
-  if(!kart) return;
-  lgsKartaGit(kart, sekme);
-  if(unite && kart==='konular' && sekme==='kazanim-testleri'){
-    smKazanimTestleriKur('lgs', 'lgsKazanimTestleri', LGS_KAZANIMLAR, LGS_SORU_HAVUZU, unite);
-    var izgara = document.getElementById('lgsKazanimTestleri');
-    if(izgara && !document.getElementById('lgsUniteFiltreNotu')){
-      var not = document.createElement('p');
-      not.id = 'lgsUniteFiltreNotu';
-      not.className = 'sm-panel-bilgi';
-      not.style.cssText = 'margin:0 0 12px;';
-      var ad = (LGS_UNITE_ADLARI && LGS_UNITE_ADLARI[unite]) || unite;
-      not.innerHTML = 'Yalnızca <b>'+ad+'</b> ünitesinin kazanımları gösteriliyor. '+
-        '<a href="?kart=konular&sekme=kazanim-testleri">Tüm kazanımları göster</a>';
-      izgara.parentNode.insertBefore(not, izgara);
-    }
-  }
-})();
   </script>
 </body>
 </html>

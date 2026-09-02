@@ -849,15 +849,10 @@ function smKazanimYuzdeOku(modul, kazanimId){
   return enIyi;
 }
 const SM_ZORLUK_ETIKET = {kolay:'Kolay', orta:'Orta', zor:'Zor', 'yeni-nesil':'Yeni Nesil'};
-function smKazanimTestleriKur(modul, kokId, kazanimlar, soruHavuzu, filtreUniteId){
+function smKazanimTestleriKur(modul, kokId, kazanimlar, soruHavuzu){
   const kok = document.getElementById(kokId);
   if(!kok) return;
-  /* filtreUniteId opsiyoneldir (geriye dönük uyumlu): verilirse yalnızca o
-     ünitenin kazanımları listelenir. Şu an yalnızca LGS Hazırlık sayfası
-     (8. sınıf ünite kartlarındaki "LGS Soruları" bağlantısı) bunu kullanır;
-     TYT/AYT/YKS çağrıları bu parametreyi hiç geçmediği için etkilenmez. */
-  const gosterilecek = filtreUniteId ? kazanimlar.filter(function(k){ return k.uniteId===filtreUniteId; }) : kazanimlar;
-  kok.innerHTML = gosterilecek.map(function(k){
+  kok.innerHTML = kazanimlar.map(function(k){
     const yuzde = smKazanimYuzdeOku(modul, k.id);
     const cipler = k.zorluklar.map(function(z){ return '<span class="sm-zorluk-cip '+z+'">'+(SM_ZORLUK_ETIKET[z]||z)+'</span>'; }).join('');
     return '<div class="sm-kazanim-kart">' +
@@ -878,7 +873,7 @@ function smKazanimTestleriKur(modul, kokId, kazanimlar, soruHavuzu, filtreUniteI
       kart.classList.add('sm-deneme-oyun-alani');
       smDenemeCalistir(modul, kart, smSoruSecimi(havuz, Math.min(5, havuz.length)), false, function(){
         kart.classList.remove('sm-deneme-oyun-alani');
-        smKazanimTestleriKur(modul, kokId, kazanimlar, soruHavuzu, filtreUniteId);
+        smKazanimTestleriKur(modul, kokId, kazanimlar, soruHavuzu);
       }, {kazanimId:kazanimId});
     });
   });
