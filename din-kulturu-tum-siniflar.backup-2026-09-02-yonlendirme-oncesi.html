@@ -2047,29 +2047,17 @@ function yaziliMevcutListesi(sinif){
    gönderildiği tarihi yansıtır (uydurma bir tarih değildir). */
 const SON_GUNCELLEME = '23 Tem 2026';
 
-/* ogrenSayfasi()/uniteSayfasi() bu sabiti kullanır (bkz. fonksiyon
-   tanımları aşağıda). TUM_KONULAR kendi konuHref'ini üretirken bu
-   fonksiyonları hemen (eager) çağırdığından, const'lar hoist olmadığı
-   için bu satır TUM_KONULAR'dan önce durmak zorunda. */
-const OGREN_SAYFALI = ['s4','s5','s6','s7','s8'];
-
 /* Arama/filtre için düz (flat) indeksler — SINIFLAR ile YAZILI_DESEN'den
    bir kez üretilir, sayfa çalışırken tekrar hesaplanmaz. Arama bu
    indekslerde çalışır; sayfadaki sınıf sekmelerine/kartlara dokunmaz,
    böylece sonuçlar arama kutusunun hemen altında bağımsız gösterilebilir. */
 const TUM_KONULAR = SINIFLAR.flatMap(function(s){
   return s.uniteler.map(function(u,i){
-    const href = s.klasor+'/'+u.dosya;
-    const sonek = (s.sonekler && s.sonekler[i] != null) ? s.sonekler[i] : '';
     return {
       tur:'unite', id:s.id+'-u'+(i+1), sinif:s,
-      href:href, ikon:u.ikon, baslik:u.baslik,
+      href:s.klasor+'/'+u.dosya, ikon:u.ikon, baslik:u.baslik,
       altBilgi:s.ad+' · '+(i+1)+'. Ünite',
-      arama: kucult(s.ad+' '+(i+1)+'. ünite '+u.baslik),
-      /* href = ünitenin menü sayfası (arama sonucu "ünite" kartı için doğru
-         hedef). onerilerRender gibi doğrudan KONU anlatımına gitmesi gereken
-         yerler için ayrı bir alan: gerçek konu-anlatım sayfası + özet çapası. */
-      konuHref: (s.konuCapa ? href+'#'+s.konuCapa+'1' : ogrenSayfasi(s.id, href)+'#ozet'+sonek)
+      arama: kucult(s.ad+' '+(i+1)+'. ünite '+u.baslik)
     };
   });
 });
@@ -2376,10 +2364,8 @@ function yaziliKartHtml(sinif, yazili, index){
    o sayfaya yönlendirilir (daha önce index.html'de karşılığı olmadığı için
    bu bağlantılar sayfanın başına düşüyordu). Diğer bağlantılar değişmez. */
 /* Bu sayfalar yalnızca 4-8. sınıf klasörlerinde var. 9. sınıfın yapısı
-   farklı (#harita, #k1..#k4 bölümleri) — orada adres değiştirilmez.
-   (OGREN_SAYFALI artık daha yukarıda, TUM_KONULAR'dan önce tanımlı —
-   TUM_KONULAR kendi konuHref'ini üretirken ogrenSayfasi() çağırıyor ve
-   const'lar hoist olmadığı için tanım sırası önemli.) */
+   farklı (#harita, #k1..#k4 bölümleri) — orada adres değiştirilmez. */
+const OGREN_SAYFALI = ['s4','s5','s6','s7','s8'];
 function ogrenSayfasi(sinifId, href){
   if(OGREN_SAYFALI.indexOf(sinifId) < 0) return href;
   return href.replace(/index\.html$/, 'konuyu-ogren.html')
@@ -2497,10 +2483,6 @@ function uniteRozetlerHtml(sinif, index){
 function calismaKartHtml(sinif, unite, index){
   const href = sinif.klasor+'/'+unite.dosya;
   const sonek = (sinif.sonekler && sinif.sonekler[index] != null) ? sinif.sonekler[index] : '';
-  /* Bu üç link daha önce doğrudan href+'#anchor' üretiyordu; href her zaman
-     ünitenin MENÜ sayfasıdır (index.html/uniteN.html), oysa yazılı/oyun/özet
-     anchor'ları ayrı sayfalardadır (bkz. uniteDerinBaglantilarHtml). Aynı
-     ogrenSayfasi/uniteSayfasi yönlendirmesi burada da kullanılır. */
   return (
     '<article class="ck-kart">'+
       '<header class="ck-ust">'+
@@ -2508,9 +2490,9 @@ function calismaKartHtml(sinif, unite, index){
         '<span class="ck-metin"><b>'+unite.baslik+'</b><span>'+(index+1)+'. Ünite</span></span>'+
       '</header>'+
       '<div class="ck-linkler">'+
-        '<a href="'+uniteSayfasi(sinif.id, href, 'degerlendirme')+'#yazili"><span class="msi" aria-hidden="true">edit_document</span> Yazılıya hazırlık çalışma kâğıdı</a>'+
-        '<a href="'+uniteSayfasi(sinif.id, href, 'oyun-merkezi')+'#oyun-gruplari"><span class="msi" aria-hidden="true">sports_esports</span> Etkinlik ve oyunlar</a>'+
-        '<a href="'+ogrenSayfasi(sinif.id, href)+'#ozet'+sonek+'"><span class="msi" aria-hidden="true">menu_book</span> Konu özeti</a>'+
+        '<a href="'+href+'#yazili"><span class="msi" aria-hidden="true">edit_document</span> Yazılıya hazırlık çalışma kâğıdı</a>'+
+        '<a href="'+href+'#oyun-gruplari"><span class="msi" aria-hidden="true">sports_esports</span> Etkinlik ve oyunlar</a>'+
+        '<a href="'+href+'#ozet'+sonek+'"><span class="msi" aria-hidden="true">menu_book</span> Konu özeti</a>'+
       '</div>'+
     '</article>'
   );
@@ -2684,10 +2666,7 @@ function sayfayiOlustur(){
   /* Yeni eklenenler: gerçek commit geçmişine göre, en son eklenen ortak
      özellik tüm sınıflara entegre edilen "Yazılı Sınavlar" bölümüdür (12 Tem 2026). */
   document.getElementById('yeniListe').innerHTML = SINIFLAR.filter(function(s){ return yaziliMevcutListesi(s).length > 0; }).map(function(s){
-    /* Sabit 'yazili1.html' varsayımı 9. sınıfta kırıktı (o klasörde yalnızca
-       yazili1_klasik.html var, sadeceKlasik:true). Gerçekten var olan ilk
-       yazılı dosyası, aynı doğrulanmış listeden alınır. */
-    return '<a class="yeni-kart" href="'+s.klasor+'/'+yaziliMevcutListesi(s)[0].dosya+'">'+
+    return '<a class="yeni-kart" href="'+s.klasor+'/yazili1.html">'+
       '<span class="yeni-etiket">YENİ</span>'+
       '<span class="yk-baslik">'+s.ad+' — Yazılı Sınavlar</span>'+
       '<span class="yk-tarih">12 Tem 2026</span>'+
@@ -2844,7 +2823,7 @@ function onerilerRender(){
   if(adaylar.length===0){ bolum.hidden = true; return; }
   bolum.hidden = false;
   kapsayici.innerHTML = adaylar.slice(0,8).map(function(k,i){
-    return '<a class="oneri-kart belirir" style="--i:'+(i%6)+'" href="'+k.konuHref+'">'+
+    return '<a class="oneri-kart belirir" style="--i:'+(i%6)+'" href="'+k.href+'">'+
       '<span class="oneri-ikon" aria-hidden="true">'+(metinIcinKucukGlyph(k.baslik)||k.ikon)+'</span>'+
       '<span class="oneri-sinif">'+k.altBilgi+'</span>'+
       '<span class="oneri-baslik">'+k.baslik+'</span>'+
