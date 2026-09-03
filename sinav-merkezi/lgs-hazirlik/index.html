@@ -24,6 +24,11 @@
 
   <main class="sm-sarmal" style="--vurgu:var(--lgs)">
 
+    <!-- Ana gösterge: tamamen gerçek localStorage verisinden (smerkez_lgs_*)
+         üretilir; hiçbir sabit/örnek sayı yoktur. Veri yoksa ilgili bölüm
+         hiç gösterilmez (bkz. lgsAnaGostergeKur). -->
+    <div id="lgsAnaGosterge"></div>
+
     <!-- ANA MENÜ: yalnızca 4 kart -->
     <div class="lgs-ana-menu" data-lgs-menu>
       <button type="button" class="lgs-kart" data-lgs-git="konular">
@@ -584,6 +589,84 @@ function lgsKartaGit(kartId, sekmeId){
     menu.hidden = false;
   });
 })();
+
+/* Ana gösterge (📊 Bugünkü Durumun / 🎯 Öncelikli Çalışma / 📝 Son Çözdüğün).
+   Var olan smDashboardKur ile aynı localStorage kaynağını (smerkez_lgs_*)
+   okur, kendi veri seti tutmaz; sadece ünite bazında kırılım ekler (bu
+   kırılım zaten her deneme kaydının uniteSonuclari alanında gerçekten
+   duruyordu, sadece hiçbir yerde toplanıp gösterilmiyordu). */
+function lgsAnaGostergeKur(){
+  var kok = document.getElementById('lgsAnaGosterge');
+  if(!kok) return;
+  var sonuclar = smOku('smerkez_lgs_test_sonuclari') || [];
+  if(!sonuclar.length){
+    kok.innerHTML = '<p class="sm-panel-bilgi" style="margin:0 0 18px">Henüz hiç soru çözmedin. Aşağıdaki kartlardan birine tıklayıp başlayabilirsin — durumun burada gerçek zamanlı görünecek.</p>';
+    return;
+  }
+  var toplamSoru = sonuclar.reduce(function(t,s){ return t+s.boyut; }, 0);
+  var toplamDogru = sonuclar.reduce(function(t,s){ return t+s.dogru; }, 0);
+  var toplamYanlis = sonuclar.reduce(function(t,s){ return t+s.yanlis; }, 0);
+  var basari = toplamSoru ? Math.round(toplamDogru/toplamSoru*100) : 0;
+
+  var eksikSayisi = 0;
+  (LGS_KAZANIMLAR||[]).forEach(function(k){
+    if(smKazanimYuzdeOku('lgs', k.id) < 50) eksikSayisi++;
+  });
+
+  var kartlar =
+    '<div class="sm-dash-kart"><span class="msi" aria-hidden="true">percent</span><b>%'+basari+'</b><span>Genel Başarı</span></div>'+
+    '<div class="sm-dash-kart"><span class="msi" aria-hidden="true">quiz</span><b>'+toplamSoru+'</b><span>Soru Çözüldü</span></div>'+
+    '<div class="sm-dash-kart"><span class="msi" aria-hidden="true">close</span><b>'+toplamYanlis+'</b><span>Yanlış</span></div>'+
+    '<div class="sm-dash-kart"><span class="msi" aria-hidden="true">school</span><b>'+eksikSayisi+'</b><span>%50 Altı Kazanım</span></div>';
+
+  /* Öncelikli çalışma: her denemenin GERÇEK uniteSonuclari kırılımından
+     ünite başına toplam doğru/toplam soru biriktirilir, en düşük yüzdeli
+     ünite (en az 3 soru çözülmüş olması şartıyla) önerilir. */
+  var uniteToplam = {};
+  sonuclar.forEach(function(s){
+    if(!s.uniteSonuclari) return;
+    Object.keys(s.uniteSonuclari).forEach(function(uid){
+      var u = s.uniteSonuclari[uid];
+      if(!uniteToplam[uid]) uniteToplam[uid] = {dogru:0, toplam:0};
+      uniteToplam[uid].dogru += u.dogru;
+      uniteToplam[uid].toplam += (u.dogru+u.yanlis+u.bos);
+    });
+  });
+  var oncelikli = null;
+  Object.keys(uniteToplam).forEach(function(uid){
+    var t = uniteToplam[uid];
+    if(t.toplam < 3) return;
+    var yuzde = Math.round(t.dogru/t.toplam*100);
+    if(!oncelikli || yuzde < oncelikli.yuzde) oncelikli = {uid:uid, yuzde:yuzde, ad:(LGS_UNITE_ADLARI[uid]||uid)};
+  });
+  var oncelikliHtml = oncelikli ? (
+    '<h3 style="margin:20px 0 8px;font-size:1em">🎯 Öncelikli Çalışma</h3>'+
+    '<div class="sm-kazanim-kart"><div class="sm-kazanim-unite">'+oncelikli.ad+'</div>'+
+    '<div class="sm-ilerleme-dis"><div class="sm-ilerleme-ic" style="width:'+oncelikli.yuzde+'%"></div></div>'+
+    '<div class="sm-kazanim-yuzde">%'+oncelikli.yuzde+' başarı</div>'+
+    '<a class="sm-btn" style="margin-top:10px;display:block;text-align:center;text-decoration:none;box-sizing:border-box" href="?kart=konular&sekme=kazanim-testleri&unite='+oncelikli.uid+'">Konuyu Tekrar Et</a></div>'
+  ) : '';
+
+  /* Son çözdüğün: kazanım testinden geldiyse gerçek kazanım/ünite adı
+     gösterilir; genel bir denemeden geldiyse (kazanimId yok) "Genel
+     Deneme" olarak gösterilir — uydurma bir sınav adı (ör. "2025 LGS")
+     kullanılmaz, çünkü sistemde gerçek/tarihli geçmiş sınav kaydı yoktur. */
+  var son = sonuclar[sonuclar.length-1];
+  var baslikMetni = 'Genel Deneme';
+  if(son.kazanimId){
+    var kz = (LGS_KAZANIMLAR||[]).find(function(k){ return k.id===son.kazanimId; });
+    if(kz) baslikMetni = kz.baslik;
+  }
+  var sonHtml =
+    '<h3 style="margin:20px 0 8px;font-size:1em">📝 Son Çözdüğün</h3>'+
+    '<div class="sm-dash-son"><span class="msi" aria-hidden="true">assignment_turned_in</span><div><b>'+baslikMetni+'</b><span>'+son.dogru+' / '+son.boyut+' doğru</span></div></div>'+
+    (son.yanlisSorular && son.yanlisSorular.length
+      ? '<a class="sm-btn" style="margin-top:8px;display:inline-block;text-decoration:none" href="?kart=konular&sekme=favoriler">Hatalarımı İncele</a>'
+      : '');
+
+  kok.innerHTML = '<div class="sm-dash-izgara">'+kartlar+'</div>' + oncelikliHtml + sonHtml;
+}
+lgsAnaGostergeKur();
 
 /* 8. sınıf ünite kartlarındaki "🎯 LGS Soruları" bağlantısı buraya
    ?kart=konular&sekme=kazanim-testleri&unite=uniteN şeklinde gelir.
