@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zor Deneme Sınavı — Zekât ve Sadaka (LGS DKAB)</title>
+<style>
+:root{
+  --navy:#1E3A8A; --turkuaz:#06B6D4; --sari:#f4a261; --yesil:#40916c;
+  --bg:#f7f4ec; --acikgri:#f1f5f9; --metin:#22333b; --metin-ikincil:#5d6b7a;
+  --yuzey:#ffffff; --kenar:#e2e8f0;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px;
+  --radius-s:8px; --radius-m:14px; --radius-l:20px;
+  --shadow-1:0 1px 3px rgba(30,58,138,.08); --shadow-2:0 8px 24px rgba(30,58,138,.10);
+  --motion:.2s ease;
+}
+:root[data-tema="dark"]{
+  --bg:#111826; --acikgri:#1a2333; --metin:#e7ecf3; --metin-ikincil:#9aa7b8;
+  --yuzey:#1c2536; --kenar:#2b3750;
+  --shadow-1:0 1px 3px rgba(0,0,0,.3); --shadow-2:0 8px 24px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--metin);transition:background var(--motion),color var(--motion);}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;z-index:100;}
+.skip-link:focus{left:0;}
+.ust-serit{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:var(--yuzey);border-bottom:1px solid var(--kenar);position:sticky;top:0;z-index:20;}
+.marka{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--navy);font-weight:800;font-size:1.05rem;}
+#temaDugme{border:1px solid var(--kenar);background:var(--acikgri);color:var(--metin);border-radius:999px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.cs-hero{padding:var(--sp-7) var(--sp-5) var(--sp-5);text-align:center;max-width:760px;margin:0 auto;}
+.zor-rozet{background:linear-gradient(135deg,#dc2626,#f97316);color:#fff;font-weight:800;font-size:.75rem;padding:4px 12px;border-radius:999px;letter-spacing:.5px;vertical-align:middle;}
+.cs-hero h1{margin:0 0 8px;font-size:1.9rem;font-weight:800;color:var(--navy);display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
+.cs-hero p{margin:0;color:var(--metin-ikincil);font-size:1rem;line-height:1.55;}
+.geri-link{display:inline-flex;align-items:center;gap:4px;margin-bottom:14px;color:var(--turkuaz);text-decoration:none;font-weight:700;font-size:.85rem;}
+main{max-width:920px;margin:0 auto;padding:0 var(--sp-5) var(--sp-7);}
+.test-secici{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:var(--sp-6);position:sticky;top:70px;background:var(--bg);padding:10px 0;z-index:10;}
+.yil-pil{border:1px solid var(--kenar);background:var(--yuzey);color:var(--metin);padding:8px 16px;border-radius:999px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all var(--motion);}
+.yil-pil:hover{border-color:#dc2626;}
+.yil-pil.aktif{background:linear-gradient(135deg,#dc2626,#f97316);color:#fff;border-color:transparent;}
+.test-baslik{display:flex;align-items:center;gap:10px;color:var(--navy);font-size:1.2rem;margin:0 0 var(--sp-4);}
+.yil-etiket{font-size:.75rem;font-weight:700;background:var(--acikgri);color:var(--metin-ikincil);padding:3px 10px;border-radius:999px;}
+.soru-karti{background:var(--yuzey);border:1px solid var(--kenar);border-radius:var(--radius-m);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-1);}
+.soru-ust{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.soru-no{background:var(--navy);color:#fff;font-weight:800;font-size:.85rem;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.soru-tema{font-size:.75rem;font-weight:700;color:var(--turkuaz);background:rgba(6,182,212,.1);padding:3px 10px;border-radius:999px;}
+.soru-metin{font-size:.95rem;line-height:1.6;margin:0 0 10px;white-space:pre-line;}
+.secenekler{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.secenek{font-size:.88rem;line-height:1.45;padding:8px 12px;background:var(--acikgri);border-radius:var(--radius-s);cursor:pointer;border:2px solid transparent;transition:all var(--motion);}
+.secenek:hover{border-color:var(--turkuaz);}
+.secenek b{color:var(--navy);margin-right:4px;}
+.soru-karti.cevaplandi .secenek{cursor:default;}
+.soru-karti.cevaplandi .secenek:hover{border-color:transparent;}
+.secenek.dogru-cevap{background:rgba(64,145,108,.15);border-color:var(--yesil);}
+.secenek.dogru-cevap b{color:var(--yesil);}
+.secenek.yanlis-secim{background:rgba(220,38,38,.1);border-color:#dc2626;}
+.secenek.yanlis-secim b{color:#dc2626;}
+.cevap-etiketi{display:none;margin-top:10px;font-size:.82rem;font-weight:700;padding:6px 10px;border-radius:var(--radius-s);}
+.cevap-etiketi.gorunur{display:inline-block;}
+.cevap-etiketi.dogru-mesaj{background:rgba(64,145,108,.15);color:var(--yesil);}
+.cevap-etiketi.yanlis-mesaj{background:rgba(220,38,38,.1);color:#dc2626;}
+.analiz-paneli{background:linear-gradient(135deg,rgba(220,38,38,.06),rgba(249,115,22,.06));border:1px solid var(--kenar);border-radius:var(--radius-l);padding:var(--sp-5);margin-top:var(--sp-5);}
+.analiz-paneli h3{margin:0 0 4px;color:var(--navy);font-size:1.1rem;}
+.analiz-skor{font-size:2rem;font-weight:800;color:#dc2626;margin:6px 0 16px;}
+.analiz-skor span{font-size:1rem;font-weight:700;color:var(--metin-ikincil);}
+.analiz-konu-satir{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.85rem;}
+.analiz-konu-ad{flex:0 0 180px;color:var(--metin);font-weight:700;}
+.analiz-bar-arka{flex:1;height:10px;background:var(--acikgri);border-radius:999px;overflow:hidden;}
+.analiz-bar-dolu{height:100%;background:linear-gradient(90deg,var(--yesil),#8fd19e);border-radius:999px;}
+.analiz-oran{flex:0 0 46px;text-align:right;font-weight:800;color:var(--metin-ikincil);}
+.tekrar-btn{margin-top:16px;background:var(--navy);color:#fff;border:none;padding:10px 20px;border-radius:999px;font-weight:700;font-size:.88rem;cursor:pointer;}
+.tekrar-btn:hover{background:#16296b;}
+@media (max-width:600px){.secenekler{grid-template-columns:1fr;}.test-secici{position:static;}.analiz-konu-ad{flex-basis:120px;font-size:.78rem;}}
+footer{text-align:center;padding:var(--sp-6) var(--sp-5);color:var(--metin-ikincil);font-size:.82rem;border-top:1px solid var(--kenar);margin-top:var(--sp-6);}
+footer a{color:var(--navy);text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+<a href="#ana-icerik" class="skip-link">İçeriğe geç</a>
+<nav class="ust-serit">
+  <a class="marka" href="../din-kulturu-tum-siniflar.html">🕌 DKAB Portal</a>
+  <button id="temaDugme" aria-label="Tema değiştir">🌙</button>
+</nav>
+
+<header class="cs-hero">
+  <a class="geri-link" href="zor-deneme-sinavlari.html">← Zor Seviye ana sayfa</a>
+  <h1>🤲 Zor Deneme: Zekât ve Sadaka <span class="zor-rozet">ZOR SEVİYE</span></h1>
+  <p>Bu ünite için hazırlanmış 6 ayrı deneme, toplam 57 soru — konu içeriği, Osmanlı'da paylaşma/yardımlaşma kurumları (vakıf, imaret, ahilik, sadaka taşı, sebil, lonca), karşılaştırmalı/çıkarımsal sorular, haber yorumlama ve güncel örnekleri kapsar. Bir şıkka tıklayarak cevabını görebilir, testi bitirdiğinde konu bazlı başarı analizini inceleyebilirsin.</p>
+</header>
+
+<main id="ana-icerik">
+  <div class="test-secici" id="testSecici"></div>
+  <div id="soruAlani"></div>
+</main>
+
+<footer>
+  <a href="zor-deneme-sinavlari.html">← Zor Seviye ana sayfaya dön</a>
+  <p style="margin-top:10px;">Bu sayfadaki sorular, gerçek LGS DKAB sorularının formatı ve konu kapsamı örnek alınarak hazırlanmış, standart seviyenin üzerinde özgün deneme sorularıdır.</p>
+</footer>
+
+<script>
+const guvenliOku=(k,v)=>{try{return localStorage.getItem(k)??v;}catch(e){return v;}};
+const guvenliYaz=(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}};
+(function(){
+  const tema=guvenliOku('dkab_tema','light');
+  document.documentElement.setAttribute('data-tema',tema);
+  document.getElementById('temaDugme').textContent = tema==='dark' ? '☀️' : '🌙';
+})();
+document.getElementById('temaDugme').addEventListener('click',()=>{
+  const su=document.documentElement.getAttribute('data-tema')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-tema',su);
+  guvenliYaz('dkab_tema',su);
+  document.getElementById('temaDugme').textContent = su==='dark' ? '☀️' : '🌙';
+});
+
+const TESTLER = [{"baslik":"Deneme 1","sorular":[{"tema":"Yardımlaşma Temelleri","metin":"Yardımlaşma ve paylaşma davranışının insanın yaratılışında var olan hangi duygudan kaynaklandığı konuda anlatılır?","secenekler":["Kıskançlık","Merhamet","Korku","Gurur"],"dogru":1},{"tema":"Yardımlaşma Temelleri","metin":"Ayet “Onların (zenginlerin) mallarında, muhtaç ve yoksullar için hak vardır.” (Zariyat suresi, 19. ayet)\nBu ayette vurgulanan temel düşünce aşağıdakilerden hangisidir?","secenekler":["Zenginlerin malında ihtiyaç sahiplerinin bir hakkı vardır","Zengin olmak başlı başına bir günahtır","Herkesin mal varlığı eşit olmalıdır","Yoksullar çalışmaktan muaf tutulmalıdır"],"dogru":0},{"tema":"Yardımlaşma Temelleri","metin":"Konuya göre yardımlaşmaya öncelikle kimden başlanmalıdır?","secenekler":["Uzak şehirlerdeki tanımadığımız kişilerden","Yakın çevreden (aile, akraba, komşu, yetim, yolcu)","Sadece devlet kurumlarından","Rastgele seçilen kişilerden"],"dogru":1},{"tema":"Yardımlaşma Temelleri","metin":"Bir grup öğrenci, sınavda kopya çekebilmek için birbirine yardım ediyor. Bu davranış İslam'ın yardımlaşma anlayışına uyar mı?","secenekler":["Evet, çünkü arkadaşlar birbirine her konuda yardım etmelidir","Hayır; çünkü yardımlaşma iyilik ve takva üzere olmalıdır, günah ve haksızlıkta yardımlaşılmaz","Evet, çünkü sonuçta bir paylaşımdır","Bu durumun yardımlaşma kavramıyla hiçbir ilgisi yoktur"],"dogru":1},{"tema":"Yardımlaşma Temelleri","metin":"Hadis “Her kim Müslüman kardeşinin bir ihtiyacını giderirse, Allah da onun bir ihtiyacını giderir.” (Hadis-i Şerif)\nBu hadise göre, kardeşinin ihtiyacını gideren kişinin ihtiyacını kim giderir?","secenekler":["Komşuları","Devlet","Allah","Kendisi zamanla giderir"],"dogru":2},{"tema":"Yardımlaşma Temelleri","metin":"“Sadaka taşı” geleneğinde yardım eden ile yardım edilenin birbirini görmemesinin temel amacı nedir?","secenekler":["Yardımı gizli tutarak vergi ödememek","Yardım edilen kişiyi mahcup etmemek, izzetini/onurunu korumak","Yardımlaşma süresini kısaltmak","Taşın daha az yıpranmasını sağlamak"],"dogru":1},{"tema":"Yardımlaşma Temelleri","metin":"Aşağıdakilerden hangisi zekât ile sadaka arasındaki temel farkı doğru ifade eder?","secenekler":["Zekât gönüllü, sadaka ise farzdır","Zekât farz ve belirli bir oranda verilir; sadaka gönüllü olup miktarı belirli değildir","Zekât ve sadaka tamamen aynı ibadettir","Sadaka yalnızca Ramazan ayında verilir"],"dogru":1},{"tema":"Yardımlaşma Temelleri","metin":"Fitre hangi zaman diliminde ve nasıl verilir?","secenekler":["Yılın herhangi bir zamanında, tamamen gönüllü olarak","Ramazan ayında (bayramdan önce), kişi başına belirlenen bir miktarda","Sadece hac mevsiminde","Kurban Bayramı'nda, kurban yerine"],"dogru":1},{"tema":"Yardımlaşma Temelleri","metin":"Bir öğrencinin ihtiyacı olan arkadaşına kendi kitabını vermesi hangi kavrama örnektir?","secenekler":["Sadece bir ödünç verme işlemi","İnfak","Zekât (farz ibadet)","Fitre"],"dogru":1},{"tema":"Yardımlaşma Temelleri","metin":"Bir kişi sadece kendi ailesine yardım edip komşusuna veya çevresindeki diğer ihtiyaç sahiplerine hiç yardım etmiyor. Bu durum, konuda anlatılan öncelik sırası ilkesiyle nasıl açıklanır?","secenekler":["Doğrudur; İslam'a göre sadece aileye yardım yeterlidir","Yakın çevreden başlamak, yardımı SADECE aileyle sınırlamak anlamına gelmez; imkân oldukça diğer ihtiyaç sahiplerine de genişletilmelidir","Bu durumun öncelik sırası ilkesiyle hiçbir ilgisi yoktur","Yardımlaşma zaten zorunlu bir davranış değildir"],"dogru":1}]},{"baslik":"Deneme 2","sorular":[{"tema":"Osmanlı Kurumları (Tanım)","metin":"Bir kişinin mal varlığının bir kısmını veya tamamını, geliri kalıcı olarak hayır işlerinde kullanılmak üzere bağışlamasına ne denir?","secenekler":["Zekât","Vakıf","Fitre","Zimem"],"dogru":1},{"tema":"Osmanlı Kurumları (Tanım)","metin":"Osmanlı'da ihtiyaç sahiplerine ve yolculara genellikle ücretsiz yemek dağıtılan hayır kurumuna ne ad verilir?","secenekler":["İmarethane","Sebil","Lonca","Medrese"],"dogru":0},{"tema":"Osmanlı Kurumları (Tanım)","metin":"Esnaf ve zanaatkârları dürüstlük, kaliteli üretim ve dayanışma ilkeleri etrafında bir araya getiren, Anadolu'da Osmanlı öncesinde de köklü bir geçmişi olan teşkilata ne denir?","secenekler":["Lonca","Vakıf","Ahilik","Divan"],"dogru":2},{"tema":"Osmanlı Kurumları (Tanım)","metin":"Yardım eden ile yardım edilenin birbirini görmeden, kimse mahcup olmadan yardımlaşmasını sağlayan geleneksel uygulamaya ne ad verilir?","secenekler":["Sebil","Sadaka taşı","Zimem defteri","İmarethane"],"dogru":1},{"tema":"Osmanlı Kurumları (Tanım)","metin":"Yolculara ve halka ücretsiz su dağıtmak amacıyla yaptırılan yapıya ne ad verilir?","secenekler":["Sebil","Vakıf","Lonca","Han"],"dogru":0},{"tema":"Osmanlı Kurumları (Tanım)","metin":"Osmanlı şehirlerinde belirli bir meslek dalındaki esnafın bir araya gelerek oluşturduğu, üretim ve fiyat düzenini de belli ölçüde denetleyen mesleki teşkilata ne denir?","secenekler":["Divan","Lonca","Vakıf","Sebil"],"dogru":1},{"tema":"Osmanlı Kurumları (Tanım)","metin":"Esnafın, o an ödeme gücü olmayan müşterilerine verdiği veresiye malların/borçların kaydını tuttuğu deftere ne ad verilir?","secenekler":["Zimem defteri","Vakfiye","Ferman","Kadı sicili"],"dogru":0},{"tema":"Osmanlı Kurumları (Tanım)","metin":"Aşağıdakilerden hangisi Osmanlı'da vakıflar aracılığıyla topluma sunulan hizmetlerden biri DEĞİLDİR?","secenekler":["Çeşme ve köprü yapımı","Kütüphane ve medrese işletilmesi","Hastane (darüşşifa) hizmeti","Askerlerin maaşlarının belirlenmesi"],"dogru":3},{"tema":"Osmanlı Kurumları (Tanım)","metin":"Ahilik teşkilatının esnafa kazandırmaya çalıştığı değerler arasında aşağıdakilerden HANGİSİ YER ALMAZ?","secenekler":["Dürüst tartıp ölçme","Haksız kazançtan kaçınma","Mesleki dayanışma ve yardımlaşma","Rakip esnafı iş yapamaz hâle getirme"],"dogru":3},{"tema":"Osmanlı Kurumları (Tanım)","metin":"Vakıf, imarethane, sebil, sadaka taşı, lonca ve zimem defteri gibi uygulamaların ortak amacı nedir?","secenekler":["Devletin vergi gelirini artırmak","Toplumsal yardımlaşma ve dayanışmayı kurumsallaştırmak","Sadece zenginleri bir araya getirmek","Serbest ticareti tamamen yasaklamak"],"dogru":1}]},{"baslik":"Deneme 3","sorular":[{"tema":"Karşılaştırma / Çıkarım","metin":"Zimem defteri uygulaması ile günümüzdeki kredi kartı sistemi arasındaki temel fark nedir?","secenekler":["Zimem defteri faizsizdir, karşılıklı güvene ve ahlaki sorumluluğa dayanır","Zimem defteri sadece zenginler tarafından kullanılırdı","Kredi kartı da zimem defteri gibi dinî bir kurumdur","İkisi arasında hiçbir fark yoktur"],"dogru":0},{"tema":"Karşılaştırma / Çıkarım","metin":"Lonca teşkilatının Ahilik ile ilişkisi nasıl açıklanabilir?","secenekler":["Lonca, Ahilik'in Osmanlı döneminde kurumsallaşmış bir devamı niteliğindedir","Lonca ve Ahilik birbiriyle hiç ilişkisi olmayan, bağımsız kurumlardır","Lonca, Ahilik anlayışının tam karşıtı bir yapıdır","Ahilik, loncaların bir alt birimidir"],"dogru":0},{"tema":"Karşılaştırma / Çıkarım","metin":"İmarethaneler ile günümüzdeki “aşevi / toplum mutfağı” uygulamaları arasında nasıl bir paralellik kurulabilir?","secenekler":["İkisi de ihtiyaç sahiplerine karşılıksız yemek sağlama amacı taşır","İmarethaneler yalnızca askerlere hizmet veren kurumlardı","Aşevlerinin imarethanelerle hiçbir benzerliği yoktur","İmarethaneler ücretli lokanta işletmeleriydi"],"dogru":0},{"tema":"Karşılaştırma / Çıkarım","metin":"Bir Osmanlı esnafının, parası olmayan bir müşteriye ihtiyacı olan malı verip bunu zimem defterine yazması hangi değere doğrudan örnektir?","secenekler":["Ticari kârı artırma çabası","Güvene dayalı yardımlaşma","Vergi kaçırma yöntemi","Rekabeti engelleme taktiği"],"dogru":1},{"tema":"Karşılaştırma / Çıkarım","metin":"Aşağıdakilerden hangisi vakıf kurumuna değil, Ahilik teşkilatına ait bir özelliktir?","secenekler":["Bir kişinin mülkünü kalıcı olarak bağışlaması","Esnafın meslek ahlakını ve üretim kalitesini denetlemesi","Gelirinin cami veya medrese gibi hizmetlere aktarılması","Bir vakfiye (kuruluş belgesi) ile resmî olarak tesis edilmesi"],"dogru":1},{"tema":"Karşılaştırma / Çıkarım","metin":"Sebil ile sadaka taşı arasındaki en belirgin fark nedir?","secenekler":["Sebil su dağıtımına yöneliktir; sadaka taşı ise genellikle para/erzak gibi yardımların bırakıldığı bir uygulamadır","İkisi tamamen aynı işlevi görür, aralarında fark yoktur","Sebil özel mülktür, sadaka taşı ise kamu malıdır","Sebil yalnızca cami avlularında bulunur"],"dogru":0},{"tema":"Karşılaştırma / Çıkarım","metin":"Vakıf, imarethane, sebil gibi kurumların Osmanlı şehirlerinde yaygın olması toplumda öncelikle neyi sağlamıştır?","secenekler":["İhtiyaç sahiplerinin kendini güvende ve toplumun bir parçası hissetmesini","Zenginlerin daha da zenginleşmesini","Şehirler arasında yardım kurumu sayısı yarışını","Ticaretin tamamen durmasını"],"dogru":0},{"tema":"Karşılaştırma / Çıkarım","metin":"Bu kurumların (vakıf, imarethane, sebil, sadaka taşı, lonca, zimem defteri) ortak olarak beslendiği temel İslami ilkeler nelerdir?","secenekler":["Sadece namaz ve oruç ibadetleri","İnfak, sadaka ve kardeşlik/yardımlaşma bilinci","Yalnızca hac ibadetiyle ilgili kurallar","Bu kurumların dinî bir ilkeyle ilgisi yoktur"],"dogru":1},{"tema":"Karşılaştırma / Çıkarım","metin":"I. Bir tüccarın kazancının bir kısmını vakfa bağışlaması. II. Bir esnafın müşterisine veresiye mal verip zimem defterine yazması.\nYukarıdaki iki davranışın ortak yönü nedir?","secenekler":["İkisi de bir yardımlaşma/dayanışma biçimidir","İkisi de dinen zorunlu birer ibadettir","İkisi de sadece ticari bir işlemdir, dinle ilgisi yoktur","İkisi de dinen yasaklanmış davranışlardır"],"dogru":0},{"tema":"Karşılaştırma / Çıkarım","metin":"Osmanlı toplumunda dayanışma kurumlarının çok yönlü olması (dinî-vakıf, meslekî-lonca/Ahilik, bireysel-sadaka taşı/zimem) öncelikle neyi göstermektedir?","secenekler":["Yardımlaşmanın yalnızca dinî bir mesele olduğunu","Yardımlaşma ve dayanışmanın toplumun her alanına (din, meslek, günlük hayat) nüfuz ettiğini","Osmanlı'da yardımlaşmanın önemsiz görüldüğünü","Bu kurumların birbiriyle çeliştiğini"],"dogru":1}]},{"baslik":"Deneme 4","sorular":[{"tema":"Haber Yorumu","metin":"Haber Bir ilçede bir grup esnaf, kış aylarında ihtiyaç sahibi ailelere kömür ve gıda kolisi dağıttı.\nBu haberde anlatılan davranış öncelikle hangi kavramla ilişkilendirilebilir?","secenekler":["Rekabet","Yardımlaşma ve dayanışma","Sadece ticaret","Vergi toplama"],"dogru":1},{"tema":"Haber Yorumu","metin":"Haber Bir mahallede kurulan “iyilik dolabı” sayesinde ihtiyacı olan herkes istediği kıyafeti ücretsiz alabiliyor, imkânı olan da bağışlıyor.\nBu modern uygulama, konuda öğrenilen hangi geleneksel Osmanlı uygulamasına en çok benzetilebilir?","secenekler":["Sadaka taşı","Divan toplantısı","Kadı sicili","Tımar sistemi"],"dogru":0},{"tema":"Haber Yorumu","metin":"Haber Bir öğrenci, burs bulamayan arkadaşlarına destek olmak için bağış kampanyası başlattı; toplanan parayla üç öğrencinin kitap masrafı karşılandı.\nBu haberdeki davranış, konuda geçen “infak” kavramıyla nasıl ilişkilendirilebilir?","secenekler":["İnfak yalnızca parayla ilgilidir, bu örnekle ilgisi yoktur","Bu, tam olarak bir infak örneğidir; imkânın ihtiyaç sahibiyle paylaşılmasıdır","İnfak yalnızca zekât anlamına gelir","Bu bir infak değil, bir borç işlemidir"],"dogru":1},{"tema":"Haber Yorumu","metin":"Haber Deprem sonrası bir şehirde esnaf mağazalarını geçici barınak olarak açtı, market sahipleri ihtiyaç sahiplerine ücretsiz erzak dağıttı.\nBu haber, İslam'ın hangi öğretisiyle doğrudan örtüşür?","secenekler":["Yardımlaşmanın yalnızca akrabalar arasında olması gerektiği","Zor zamanlarda toplumsal dayanışmanın ve paylaşmanın önemi","Ticaretin böyle durumlarda tamamen durdurulması gerektiği","Herkesin yalnızca kendi başının çaresine bakması gerektiği"],"dogru":1},{"tema":"Haber Yorumu","metin":"Haber Bir kahvehanede oturan yaşlı bir müşterinin hesabını, kim olduğunu belli etmeden başka bir müşteri gizlice ödedi.\nBu davranış, konuda anlatılan hangi ilkeyle örtüşür?","secenekler":["Yardımı gizli yaparak karşı tarafı mahcup etmeme","Yardımı herkese açıkça duyurma","Sadece akrabaya yardım etme","Yardımın karşılığını isteme"],"dogru":0},{"tema":"Haber Yorumu","metin":"Haber Bir sivil toplum kuruluşu, kırsal bölgelerdeki köylere içme suyu kuyusu açma projesi başlattı.\nBu proje, Osmanlı döneminde hangi kurumun işlevine benzer bir hizmet sunmaktadır?","secenekler":["Lonca","Sebil","Zimem defteri","Divan"],"dogru":1},{"tema":"Haber Yorumu","metin":"Haber Bir apartmanda oturanlar, ihtiyacı olan komşularına anonim şekilde market alışverişi bırakan bir “dayanışma rafı” kurdu.\nBu uygulamanın temel amacı nedir?","secenekler":["Yardımı görünür kılıp övgü almak","İhtiyaç sahibini mahcup etmeden yardımlaşmayı sürdürmek","Market masraflarını komşular arasında paylaştırmak","Apartman yönetim kurallarını değiştirmek"],"dogru":1},{"tema":"Haber Yorumu","metin":"Haber Bir meslek odası, üyelerinden haksız kazanç elde ettiği tespit edilen bir esnafı uyararak müşteri haklarını korudu.\nBu haberdeki denetim mekanizması, konuda geçen hangi tarihî kuruma benzer?","secenekler":["Ahilik / Lonca","İmarethane","Sadaka taşı","Zimem defteri"],"dogru":0},{"tema":"Haber Yorumu","metin":"Haber Bir hayır kurumu, bağışlanan gelirle her yıl aynı okula burs vermeye devam ediyor; bu düzenleme kurucusunun vasiyetiyle kalıcı hâle getirilmiş.\nBu uygulama en çok hangi Osmanlı kurumuna benzemektedir?","secenekler":["Vakıf","Lonca","Zimem defteri","Sebil"],"dogru":0},{"tema":"Haber Yorumu","metin":"Haber Bir belediye, ihtiyaç sahibi vatandaşlar için sıcak yemek dağıtan bir merkez açtı.\nBu merkez, işlevi bakımından Osmanlı'daki hangi kuruma benzemektedir?","secenekler":["İmarethane","Divan","Kadı sicili","Tımar sistemi"],"dogru":0}]},{"baslik":"Deneme 5","sorular":[{"tema":"Güncel Örnek","metin":"Haber Milli bir yüzücü, kazandığı madalya sonrası aldığı ödülün bir kısmını depremzede çocukların eğitim masrafları için bağışladı.\nBu davranış hangi kavramla ilişkilendirilebilir?","secenekler":["İnfak","Kaza","Nisap","Zimem"],"dogru":0},{"tema":"Güncel Örnek","metin":"Haber Ünlü bir basketbolcu, engelli çocuklara spor imkânı sağlamak için kendi adına bir hayır kuruluşu kurdu.\nBu sporcunun yaptığı bağış, hangi genel İslami ilkeyle örtüşür?","secenekler":["İnfak","Kaza","Nisap","Riya"],"dogru":0},{"tema":"Güncel Örnek","metin":"Haber Bir milli sporcu, bağış çağrısı yaptığını duyurmadan, görüntü almadan sessizce bağışını yaptı.\nBu davranış, konuda anlatılan hangi ilkeye daha uygundur?","secenekler":["Yardımı gösteriş yapmadan, gizlice yapma","Yardımı büyük bir törenle herkese duyurma","Yardımdan tamamen vazgeçme","Yardımı yalnızca parayla sınırlama"],"dogru":0},{"tema":"Güncel Örnek","metin":"Haber Tanınmış bir sanatçı, verdiği bir konserin gelirinin tamamını bir öğrenci yurduna bağışladı.\nBu davranış aşağıdaki kavramlardan hangisiyle en çok örtüşür?","secenekler":["Zekât (farz ibadet)","Sadaka / infak (gönüllü bağış)","Fitre","Nisap"],"dogru":1},{"tema":"Güncel Örnek","metin":"Haber Bir futbol takımı, taraftarlarından topladığı bağışlarla bir okula kütüphane kurdu.\nBu uygulama, konuda geçen hangi kuruma en çok benzer?","secenekler":["Vakıf","Zimem defteri","Sebil","Lonca"],"dogru":0},{"tema":"Güncel Örnek","metin":"Haber Bir milli güreşçi, antrenman gelirinin bir kısmını her ay düzenli olarak bir yetimhaneye bağışlıyor.\nBu sporcunun düzenli olarak yaptığı bu bağış, farz olan zekâttan farklı olarak en çok hangi kavrama örnektir?","secenekler":["Sürekli/gönüllü sadaka","Zekât","Fitre","Nisap"],"dogru":0},{"tema":"Güncel Örnek","metin":"Haber Bir ünlü, deprem bölgesine kendi imkânlarıyla konteyner okul yaptırdı.\nBu davranış, Osmanlı'daki hangi kurumun temel mantığıyla örtüşür?","secenekler":["Vakıf (kalıcı hayır kurumu oluşturma)","Zimem defteri","Sebil","Kadı sicili"],"dogru":0},{"tema":"Güncel Örnek","metin":"Haber Bir sporcu elde ettiği bir geliri açıklamadan, ihtiyaç sahibi bir aileye doğrudan ulaştırdı; bu yardımı kimse öğrenmedi.\nBu davranış, konuda anlatılan hangi geleneksel uygulamanın ruhuna en çok benzer?","secenekler":["Sadaka taşı (gizli, mahcup etmeden yardım)","Lonca denetimi","Zimem defteri","Divan kararı"],"dogru":0},{"tema":"Güncel Örnek","metin":"Haber Milli bir sporcu takımı, kazandıkları turnuva sonrası ödül parasını kendi aralarında bölüşmek yerine bir hayır kurumuna bağışlamayı tercih etti.\nBu tercih, konuda öğrenilen hangi ilkeyi yansıtır?","secenekler":["Kişisel çıkarı önceleme","İmkânı, kendi ihtiyacının ötesinde başkalarıyla paylaşma","Zekâtı erteleme","Yardımlaşmadan tamamen kaçınma"],"dogru":1},{"tema":"Güncel Örnek","metin":"Haber Bir sporcunun bağış yaptığı haberi çıkınca bazı kişiler “Bunu sadece gösteriş için yapıyor” diye eleştirdi.\nKonuda anlatılan yardımlaşma anlayışına göre, bir yardımın makbul sayılması için niyetin nasıl olması beklenir?","secenekler":["Sadece başkalarına gösterilmek için yapılmalıdır","İyilik ve Allah rızası gözetilerek, gösterişten uzak yapılmalıdır","Niyetin hiçbir önemi yoktur","Yalnızca yardımın maddi büyüklüğü önemlidir"],"dogru":1}]},{"baslik":"Deneme 6","sorular":[{"tema":"Osmanlı Kurumları (Paragraf)","metin":"Osmanlı toplumunda vakıflar, insanların sahip oldukları mal veya gelirlerin belirli bir hayır amacıyla toplumun yararına kullanılmasını sağlayan kurumlardı. Bir kişi veya aile, sahip olduğu bir dükkânın gelirini öğrencilerin ihtiyaçlarının karşılanması, yoksullara yemek verilmesi, çeşme yapılması veya bir sağlık kuruluşunun giderlerinin karşılanması için vakfedebilirdi. Böylece kişinin sahip olduğu imkân, yalnızca kendi yararına değil, toplumun farklı kesimlerinin ihtiyaçlarını karşılamak için de kullanılabiliyordu. Parçaya göre vakıfların Osmanlı toplumundaki yardımlaşma anlayışına katkısı aşağıdakilerden hangisiyle en doğru açıklanabilir?","secenekler":["Toplumdaki ekonomik farklılıkların tamamen ortadan kaldırılması","Kişisel imkânların toplumun ortak ihtiyaçları için kullanılmasına imkân sağlaması","Devletin bütün sosyal hizmetleri tek başına yürütmesini sağlaması","Yardımların yalnızca vakıf kuran kişinin yakınlarına ulaştırılması"],"dogru":1},{"tema":"Osmanlı Kurumları (Paragraf)","metin":"Osmanlı şehirlerinde bulunan imarethanelerde ihtiyaç sahiplerine ücretsiz yemek dağıtılırdı. Bu hizmetlerden yoksulların yanı sıra yolcular, öğrenciler ve bazı durumlarda bölgedeki diğer insanlar da yararlanabilirdi. İmarethanelerin giderleri çoğunlukla vakıfların gelirleriyle karşılanırdı. Böylece toplumdaki ekonomik imkânları sınırlı insanların temel ihtiyaçlarından biri olan beslenme konusunda desteklenmesi amaçlanırdı. İmarethanelerin varlığı Osmanlı toplumunda aşağıdaki anlayışlardan hangisinin gelişmesine daha çok katkı sağlamıştır?","secenekler":["Toplumsal dayanışma","Bireysel rekabet","Tüketim alışkanlığı","Ekonomik ayrıcalık"],"dogru":0},{"tema":"Osmanlı Kurumları (Paragraf)","metin":"Osmanlı şehirlerinde esnaf ve zanaatkârlar arasında etkili olan Ahilik anlayışı, meslek sahibi olmanın yanında dürüstlük, dayanışma, paylaşma ve ihtiyaç sahibine destek olma gibi değerleri de önemserdi. Ahilik teşkilatında esnafın yalnızca kendi kazancını düşünmesi yerine meslektaşlarına ve topluma karşı sorumluluk taşıması gerektiği kabul edilirdi. Bu anlayış, ekonomik hayat ile ahlaki değerlerin birlikte yürütülmesine katkı sağladı. Bu parçaya göre Ahilik anlayışının ekonomik hayata getirdiği temel yaklaşım aşağıdakilerden hangisidir?","secenekler":["Kazancın, toplumsal sorumluluklardan bağımsız değerlendirilmesi","Meslek sahibi olmanın yalnızca maddi kazanç elde etmek için görülmesi","Ticari faaliyetlerin dürüstlük ve dayanışma gibi değerlerle birlikte yürütülmesi","Esnaf arasındaki rekabetin mümkün olduğunca artırılması"],"dogru":2},{"tema":"Osmanlı Kurumları (Paragraf)","metin":"Osmanlı döneminde bazı mahallelerde bulunan sadaka taşları, yardım etmek isteyen kişilerin paralarını bıraktıkları ve ihtiyaç sahiplerinin de ihtiyaçları kadarını alabildiği yapılardı. Yardım yapan kişinin kimliği çoğu zaman bilinmez, yardım alan kişinin de kimseye başvurmak zorunda kalmadan ihtiyacını karşılaması mümkün olurdu. Böylece yardım yapılırken iki tarafın da mahcup edilmemesine önem verilirdi. Sadaka taşlarının kullanım biçimi dikkate alındığında aşağıdaki sonuçlardan hangisine ulaşılabilir?","secenekler":["Yardım alan kişilerin kimliklerinin toplum tarafından bilinmesi amaçlanmıştır.","Yardımlaşmada ihtiyaç sahibinin onurunun korunmasına önem verilmiştir.","Yardım yapmanın yalnızca varlıklı kişilerin sorumluluğu olduğu kabul edilmiştir.","Yardımların belirli bir karşılık alınarak yapılması esas alınmıştır."],"dogru":1},{"tema":"Osmanlı Kurumları (Paragraf)","metin":"Osmanlı şehirlerinde özellikle insanların yoğun olarak bulunduğu yerlerde sebil adı verilen yapılardan ücretsiz su dağıtılırdı. Bazı sebillerde hayır sahiplerinin vakfettiği gelirlerle halka su veya başka içecekler sunulurdu. Bu uygulama, insanların günlük ve temel ihtiyaçlarından birinin karşılanmasına yönelik bir hayır hizmeti olarak görülürdü. Sebillerin şehir hayatındaki işlevi aşağıdaki değerlerden hangisiyle öncelikle ilişkilendirilebilir?","secenekler":["Yardımseverlik","Rekabet","İsraf","Gösteriş"],"dogru":0},{"tema":"Osmanlı Kurumları (Paragraf)","metin":"Osmanlı'da esnaf ve zanaatkârların oluşturduğu loncalar, mesleki düzenin yanında üyeleri arasındaki dayanışmanın da gelişmesine katkı sağlıyordu. Esnafın zor durumda kaldığı dönemlerde birbirlerine destek olmaları, mesleğe yeni başlayanların yetiştirilmesi ve ihtiyaç sahiplerine yardım edilmesi bu dayanışmanın örnekleri arasında yer alıyordu. Loncalardaki dayanışma anlayışı aşağıdakilerden hangisini göstermektedir?","secenekler":["Ekonomik ilişkilerin yalnızca bireysel çıkarlara dayandığını","Meslek grupları arasında yardımlaşma ve sorumluluk anlayışının bulunduğunu","Esnafların birbirleriyle hiçbir şekilde iş birliği yapmadığını","Yardımlaşmanın sadece dinî bayramlarda gerçekleştirildiğini"],"dogru":1},{"tema":"Osmanlı Kurumları (Paragraf)","metin":"Osmanlı döneminde bazı vakıflar yalnızca yoksullara yardım etmekle sınırlı kalmamış; okul, hastane, çeşme, yol, köprü, kütüphane ve imarethane gibi toplumun ortak kullanımına yönelik hizmetlerin kurulmasına ve sürdürülmesine de katkıda bulunmuştur. Bu nedenle vakıflar, toplumun farklı ihtiyaçlarına cevap veren önemli sosyal dayanışma kurumları hâline gelmiştir. Bu bilgilerden hareketle vakıflarla ilgili aşağıdakilerden hangisine ulaşılabilir?","secenekler":["Vakıfların yalnızca bireysel ihtiyaçları karşılamak amacıyla kurulduğuna","Vakıf faaliyetlerinin toplumun farklı kesimlerinin ortak ihtiyaçlarına yönelik olabildiğine","Vakıfların yalnızca eğitim alanında hizmet verdiğine","Vakıf hizmetlerinden sadece vakfı kuran kişilerin yararlandığına"],"dogru":1}]}];
+
+let aktifTest = 0;
+function testleriRenderEt(){
+  const secici = document.getElementById('testSecici');
+  secici.innerHTML = TESTLER.map((t,i)=>`<button class="yil-pil${i===aktifTest?' aktif':''}" data-index="${i}">${t.baslik}</button>`).join('');
+  secici.querySelectorAll('.yil-pil').forEach(pil=>{
+    pil.addEventListener('click', ()=>{
+      aktifTest = parseInt(pil.dataset.index);
+      testleriRenderEt();
+      soruAlaniniRenderEt();
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+}
+function soruAlaniniRenderEt(){
+  const alan = document.getElementById('soruAlani');
+  const test = TESTLER[aktifTest];
+  const harfler=['A','B','C','D'];
+  alan.innerHTML = `<h2 class="test-baslik">${test.baslik} <span class="yil-etiket">${test.sorular.length} Soru</span></h2>` + test.sorular.map((s,i)=>`
+    <div class="soru-karti" data-dogru="${s.dogru}" data-tema="${s.tema}">
+      <div class="soru-ust"><span class="soru-no">${i+1}</span><span class="soru-tema">${s.tema}</span></div>
+      <p class="soru-metin"></p>
+      <div class="secenekler">
+        ${s.secenekler.map((sec,j)=>`<div class="secenek" data-index="${j}"><b>${harfler[j]})</b> <span></span></div>`).join('')}
+      </div>
+      <div class="cevap-etiketi"></div>
+    </div>
+  `).join('') + '<div id="analizAlani"></div>';
+  const kartlar = alan.querySelectorAll('.soru-karti');
+  kartlar.forEach((kart,i)=>{
+    kart.querySelector('.soru-metin').textContent = test.sorular[i].metin;
+    kart.querySelectorAll('.secenek span').forEach((span,j)=>{
+      span.textContent = test.sorular[i].secenekler[j];
+    });
+    kart.addEventListener('click', e=>{
+      const secenek = e.target.closest('.secenek');
+      if(!secenek || kart.classList.contains('cevaplandi')) return;
+      const dogruIndex = parseInt(kart.dataset.dogru);
+      const secilenIndex = parseInt(secenek.dataset.index);
+      kart.classList.add('cevaplandi');
+      const secenekler = kart.querySelectorAll('.secenek');
+      secenekler[dogruIndex].classList.add('dogru-cevap');
+      const etiket = kart.querySelector('.cevap-etiketi');
+      if(secilenIndex===dogruIndex){
+        etiket.textContent='✓ Doğru cevap!';
+        etiket.classList.add('gorunur','dogru-mesaj');
+      } else {
+        secenek.classList.add('yanlis-secim');
+        etiket.textContent=`✗ Yanlış. Doğru cevap: ${harfler[dogruIndex]}`;
+        etiket.classList.add('gorunur','yanlis-mesaj');
+      }
+      sonuclariKontrolEt();
+    });
+  });
+}
+function sonuclariKontrolEt(){
+  const alan = document.getElementById('soruAlani');
+  const kartlar = alan.querySelectorAll('.soru-karti');
+  const hepsiCevaplandi = [...kartlar].every(k=>k.classList.contains('cevaplandi'));
+  const analizAlani = document.getElementById('analizAlani');
+  if(!hepsiCevaplandi){ analizAlani.innerHTML=''; return; }
+  let dogruSayisi = 0;
+  const temaPerf = {};
+  kartlar.forEach(kart=>{
+    const tema = kart.dataset.tema;
+    if(!temaPerf[tema]) temaPerf[tema] = {dogru:0, toplam:0};
+    temaPerf[tema].toplam++;
+    const yanlisVar = kart.querySelector('.secenek.yanlis-secim');
+    if(!yanlisVar){ dogruSayisi++; temaPerf[tema].dogru++; }
+  });
+  const yuzde = Math.round((dogruSayisi/kartlar.length)*100);
+  const konuSatirlari = Object.entries(temaPerf).map(([tema,p])=>{
+    const oran = Math.round((p.dogru/p.toplam)*100);
+    return `<div class="analiz-konu-satir">
+      <span class="analiz-konu-ad">${tema}</span>
+      <span class="analiz-bar-arka"><span class="analiz-bar-dolu" style="width:${oran}%"></span></span>
+      <span class="analiz-oran">${p.dogru}/${p.toplam}</span>
+    </div>`;
+  }).join('');
+  analizAlani.innerHTML = `<div class="analiz-paneli">
+    <h3>📊 Test Sonucu</h3>
+    <div class="analiz-skor">${dogruSayisi}/${kartlar.length} <span>(%${yuzde} başarı)</span></div>
+    ${konuSatirlari}
+    <button class="tekrar-btn" id="tekrarBtn">↻ Bu testi tekrar çöz</button>
+  </div>`;
+  document.getElementById('tekrarBtn').addEventListener('click', ()=>{
+    soruAlaniniRenderEt();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+}
+testleriRenderEt();
+soruAlaniniRenderEt();
+</script>
+</body>
+</html>
