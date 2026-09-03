@@ -489,6 +489,19 @@
   .oneri-sinif{ font-size:.72em; font-weight:800; color:var(--vurgu-metin); text-transform:uppercase; letter-spacing:.5px; }
   .oneri-baslik{ font-size:.95em; font-weight:800; line-height:1.35; }
 
+  /* ===== LGS Hazırlık sekmesindeki 4 mod kartı — .yazili-kart'tan kasıtlı
+     olarak ayrı: o class'ın kendi tıklama-izleme mantığı (.yk-metin > b
+     bekler) ve yatay (flex row) düzeni bu kartların içeriğiyle uyuşmuyordu. */
+  .lgs-mod-kart{
+    display:flex; flex-direction:column; gap:8px; text-decoration:none; color:var(--metin);
+    background:var(--yuzey); border:1px solid var(--kenar); border-left:4px solid var(--sari);
+    border-radius:var(--r-lg); padding:16px; transition:transform var(--dur) var(--ease-spring), box-shadow var(--dur);
+  }
+  .lgs-mod-kart:hover{ transform:translateY(-6px); box-shadow:var(--golge-lg); }
+  .lgs-mod-kart .yk-ikon{ font-size:1.8em; }
+  .lgs-mod-kart h3{ margin:0; font-size:1em; }
+  .lgs-mod-kart p{ margin:0; font-size:.85em; color:var(--metin-ikincil); }
+
   /* ===== İlerleme dashboard (dairesel grafik + rozetler + motivasyon) ===== */
   .ilerleme-panel{ max-width:var(--genislik); margin:var(--sp-8) auto 0; padding:0 var(--gutter); }
   .ilerleme-kutu{
@@ -2649,7 +2662,7 @@ function lgsPanelHtml(sinif){
     {ikon:'📊', baslik:'Sınav Analizi', aciklama:'Konu/kazanım analizini ve performansını incele.', kart:'sinav-analizi'}
   ];
   var izgara = kartlar.map(function(k){
-    return '<a class="yazili-kart belirir" href="sinav-merkezi/lgs-hazirlik/index.html?kart='+k.kart+'">'+
+    return '<a class="lgs-mod-kart belirir" href="sinav-merkezi/lgs-hazirlik/index.html?kart='+k.kart+'">'+
       '<span class="yk-ikon" aria-hidden="true">'+k.ikon+'</span>'+
       '<h3>'+k.baslik+'</h3><p>'+k.aciklama+'</p>'+
     '</a>';
@@ -3261,11 +3274,15 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     const yaziliLink = e.target.closest('.yazili-kart');
     if(yaziliLink){
-      kaydetSonYazili({
-        href: yaziliLink.getAttribute('href'),
-        baslik: yaziliLink.querySelector('.yk-metin b').textContent,
-        tur: yaziliLink.querySelector('.yk-metin span').textContent
-      });
+      /* .yk-metin > b/span yalnızca gerçek yazılı kartlarında var; başka bir
+         amaçla .yazili-kart'a benzer bir kart eklenirse (bkz. lgs-mod-kart'ın
+         neden ayrı bir class olduğu) burada sessizce atlanır, hata fırlatıp
+         linkin geri kalan davranışını bozmaz. */
+      const baslikEl = yaziliLink.querySelector('.yk-metin b');
+      const turEl = yaziliLink.querySelector('.yk-metin span');
+      if(baslikEl && turEl){
+        kaydetSonYazili({ href: yaziliLink.getAttribute('href'), baslik: baslikEl.textContent, tur: turEl.textContent });
+      }
     }
   });
   document.querySelectorAll('.icerik-sekme').forEach(function(nav){ oklaGezinmeEkle(nav, 'button[role="tab"]'); });
