@@ -3,7 +3,7 @@
    Sayfaların kendi mevcut tasarımına dokunmaz; sadece üstte bir kırıntı/
    aşama çubuğu, sayfa sonunda bir "sıradaki aşama" kutusu ekler.
 ====================================================================== */
-#portalNav{ font-family:'Nunito',system-ui,sans-serif; }
+#portalNav{ font-family:'Nunito',system-ui,sans-serif; display:contents; }
 #portalNav:not(.pn-hazir){ display:none; }
 
 .pn-mod-satir{ display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end;
@@ -15,12 +15,34 @@
 .pn-pill-kucuk{ padding:4px 10px; font-size:11px; }
 .pn-pill-secili{ background:#2a6f97; color:#fff; border-color:#2a6f97; }
 
-.pn-kirinti{ display:flex; flex-wrap:wrap; align-items:center; gap:6px;
-  background:#eef2f7; border-bottom:1px solid #dbe3ec; padding:10px 16px;
-  font-size:13.5px; font-weight:700; }
-.pn-kirinti a{ color:#2a6f97; text-decoration:none; }
-.pn-kirinti a:hover{ text-decoration:underline; }
-.pn-ok{ color:#94a3b8; font-weight:400; }
+.pn-kirinti{ position:static; z-index:60;
+  background:linear-gradient(180deg,#ffffff 0%,#f2f6fb 100%);
+  border-bottom:2px solid #2a6f97; box-shadow:0 2px 8px rgba(15,40,70,.10);
+  padding:9px 16px; font-size:14px; font-weight:800; }
+/* Yapışkanlık yalnızca geniş ekranda: dar ekranda şerit sarmalanıp
+   ekranın tepesinde çok yer kaplıyor. */
+@media (min-width:720px){
+  .pn-kirinti{ position:sticky; top:0; }
+}
+/* Sayfaların kendi "nav{justify-content:center}" kuralı kırıntıyı bazı
+   sayfalarda ortalıyordu; hizalama burada açıkça sabitleniyor. */
+.pn-kirinti{ justify-content:flex-start; }
+.pn-yol{ list-style:none; margin:0; padding:0;
+  display:flex; flex-wrap:wrap; align-items:center; gap:4px 6px;
+  justify-content:flex-start; }
+.pn-yol > li{ display:flex; align-items:center; gap:6px; min-width:0; }
+.pn-kirinti a{ color:#2a6f97; text-decoration:none;
+  border-radius:8px; padding:3px 8px; }
+.pn-kirinti a:hover{ background:#e2edf6; text-decoration:underline; }
+.pn-kirinti a:focus-visible{ outline:3px solid #f0a202; outline-offset:1px; }
+.pn-simdi{ background:#2a6f97; color:#fff; border-radius:999px;
+  padding:4px 13px; font-weight:900; letter-spacing:.005em;
+  min-width:0; max-width:100%; overflow:hidden;
+  text-overflow:ellipsis; white-space:nowrap; }
+.pn-ok{ color:#9fb3c6; font-weight:400; }
+@media (prefers-reduced-motion:no-preference){
+  .pn-kirinti{ transition:box-shadow .2s ease; }
+}
 .pn-kilit-rozet{ margin-left:4px; }
 
 .pn-cubuk{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
@@ -48,6 +70,8 @@
 .pn-aksiyon{ display:inline-block; background:#fff; border:2px solid #2a6f97; color:#2a6f97;
   text-decoration:none; font-weight:900; font-size:14px; padding:11px 18px; border-radius:999px; }
 .pn-aksiyon:hover{ background:#2a6f97; color:#fff; }
+.pn-aksiyon-sinav{ border-color:#b4531f; color:#b4531f; }
+.pn-aksiyon-sinav:hover{ background:#b4531f; color:#fff; }
 
 .pn-sure-satir{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center;
   margin-bottom:16px; }
@@ -62,6 +86,9 @@
 
 @media (max-width:520px){
   .pn-kirinti, .pn-cubuk{ font-size:12px; }
+  .pn-kirinti{ padding:7px 10px; }
+  .pn-kirinti a{ padding:2px 5px; }
+  .pn-simdi{ padding:3px 10px; white-space:normal; overflow:visible; }
   .pn-adim{ padding:6px 10px; font-size:12px; }
   .pn-buyuk{ font-size:14px; padding:11px 20px; }
 }

@@ -959,6 +959,78 @@
   <div id="bc1YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="bc1Baslat()">🎡 Çarkı Başlat</button>
 </section>
+
+<!-- ══ 4/1 yeni oyunlar (eklenti) ══ -->
+
+<section id="u41yakala">
+  <h2>⚡ Doğru İfadeyi Yakala</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Günlük bir durumu okuyup ona uygun dinî ifadeyi hızla fark etmek.</div>
+  <div class="aciklama">Her durumda dört seçenekten doğru olanı seç. Yanlışta oyun bitmez, doğru cevabı ve nedenini görürsün.</div>
+  <div class="u41o" id="u41yakala-alan" data-u41o="u41yakala">
+    <p class="u41o-sayac" role="status" aria-live="polite"></p>
+    <div class="u41o-govde"></div>
+    <div class="u41o-alt">
+      <button type="button" class="u41o-btn" data-u41o-eylem="sonraki">Sonraki ➡</button>
+      <button type="button" class="u41o-btn u41o-btn-ikincil" data-u41o-eylem="bastan">↺ Baştan</button>
+    </div>
+  </div>
+</section>
+
+<section id="u41hangi">
+  <h2>🧭 Hangi Durumda?</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Bir ifadenin hangi durumda söylendiğini ayırt etmek.</div>
+  <div class="aciklama">Üç durumdan ifadeye uyanı seç.</div>
+  <div class="u41o" id="u41hangi-alan" data-u41o="u41hangi">
+    <p class="u41o-sayac" role="status" aria-live="polite"></p>
+    <div class="u41o-govde"></div>
+    <div class="u41o-alt">
+      <button type="button" class="u41o-btn" data-u41o-eylem="sonraki">Sonraki ➡</button>
+      <button type="button" class="u41o-btn u41o-btn-ikincil" data-u41o-eylem="bastan">↺ Baştan</button>
+    </div>
+  </div>
+</section>
+
+<section id="u41hafiza">
+  <h2>🃏 İfade Hafızası</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İfade ile anlamını eşleştirerek anlamı kalıcı hâle getirmek.</div>
+  <div class="aciklama">Kartlara dokun, ifadeyi anlamıyla eşleştir. Tüm çiftleri bul.</div>
+  <div class="u41o" id="u41hafiza-alan" data-u41o="u41hafiza">
+    <p class="u41o-sayac" role="status" aria-live="polite"></p>
+    <div class="u41o-govde"></div>
+    <div class="u41o-alt">
+      <button type="button" class="u41o-btn" data-u41o-eylem="sonraki">Sonraki ➡</button>
+      <button type="button" class="u41o-btn u41o-btn-ikincil" data-u41o-eylem="bastan">↺ Baştan</button>
+    </div>
+  </div>
+</section>
+
+<section id="u41dedektif">
+  <h2>🕵️ Dinî İfade Dedektifi</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İpuçlarından yola çıkarak duruma uygun ifadeyi bulmak.</div>
+  <div class="aciklama">Önce sahneyi oku. Zorlanırsan ipucu aç. Sonra ifadeyi seç.</div>
+  <div class="u41o" id="u41dedektif-alan" data-u41o="u41dedektif">
+    <p class="u41o-sayac" role="status" aria-live="polite"></p>
+    <div class="u41o-govde"></div>
+    <div class="u41o-alt">
+      <button type="button" class="u41o-btn" data-u41o-eylem="sonraki">Sonraki ➡</button>
+      <button type="button" class="u41o-btn u41o-btn-ikincil" data-u41o-eylem="bastan">↺ Baştan</button>
+    </div>
+  </div>
+</section>
+
+<section id="u41dusunmu">
+  <h2>🤔 Doğru mu, Düşün mü?</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: İfadelerin doğru kullanımını ayırt etmek ve nedenini açıklamak.</div>
+  <div class="aciklama">Cümleyi oku, “Doğru” ya da “Yanlış” de. Her cevaptan sonra kısa bir açıklama görürsün.</div>
+  <div class="u41o" id="u41dusunmu-alan" data-u41o="u41dusunmu">
+    <p class="u41o-sayac" role="status" aria-live="polite"></p>
+    <div class="u41o-govde"></div>
+    <div class="u41o-alt">
+      <button type="button" class="u41o-btn" data-u41o-eylem="sonraki">Sonraki ➡</button>
+      <button type="button" class="u41o-btn u41o-btn-ikincil" data-u41o-eylem="bastan">↺ Baştan</button>
+    </div>
+  </div>
+</section>
 </main>
 
 
@@ -1016,7 +1088,12 @@ const OYUN_LISTESI = [
   {id:'dm1', kategori:'ikikisilik', ikon:'🤔', baslik:'Doğru Kararı Ver', aciklama:'Verilen senaryoda en doğru kararı seçerek puan kazan.'},
   {id:'ca1', kategori:'ikikisilik', ikon:'🏆', baslik:'Şampiyonlar Arenası', aciklama:'20 soruluk final turnuvası — en yüksek puan şampiyon olur!'},
   {id:'tabuduellosu1', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan ifadeyi arkadaşına anlat.'},
-  {id:'bilgicarki1', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
+  {id:'bilgicarki1', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'},
+  {id:'u41yakala', kategori:'yarisma', ikon:'⚡', baslik:'Doğru İfadeyi Yakala', aciklama:'Durum belirir, doğru dinî ifadeyi hızlıca seç.'},
+  {id:'u41hangi', kategori:'mantik', ikon:'🧭', baslik:'Hangi Durumda?', aciklama:'İfadeyi oku, hangi durumda söylendiğini bul.'},
+  {id:'u41hafiza', kategori:'ezber', ikon:'🃏', baslik:'İfade Hafızası', aciklama:'İfadeyi anlamıyla eşleştir, kartları aç.'},
+  {id:'u41dedektif', kategori:'mantik', ikon:'🕵️', baslik:'Dinî İfade Dedektifi', aciklama:'İpuçlarını oku, sahnede hangi ifadenin söyleneceğini bul.'},
+  {id:'u41dusunmu', kategori:'yarisma', ikon:'🤔', baslik:'Doğru mu, Düşün mü?', aciklama:'Cümle doğru mu yanlış mı? Karar ver, nedenini öğren.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '', 'index.html');
 
@@ -4782,5 +4859,328 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
 </script>
 
+<style id="u41o-stil">
+/* ══ 4. sınıf 1. ünite — yeni oyunların stili (eklenti) ══
+   Ad alanı u41o-. Oyun merkezinin mevcut stillerine dokunmaz. */
+.u41o{ font-family:'Nunito',system-ui,-apple-system,sans-serif;
+  max-width:760px; margin:14px auto 0; }
+.u41o-sayac{ display:inline-block; font-size:13.5px; font-weight:900; color:#1d7a5f;
+  background:#e8f5ef; border-radius:999px; padding:5px 14px; margin:0 0 14px; }
+.u41o-govde{ min-height:120px; }
+.u41o-soru{ font-size:17px; font-weight:800; line-height:1.5; color:#25405c;
+  margin:0 0 14px; }
+.u41o-sahne{ font-size:16px; line-height:1.6; color:#3b352c; margin:0 0 12px;
+  background:#fff8ed; border:1px solid #f0ddbd; border-radius:12px; padding:13px 15px; }
+.u41o-ipuclari{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; }
+.u41o-ipucu-btn{ font:inherit; font-size:13.5px; font-weight:800; cursor:pointer;
+  background:#fff; color:#b45309; border:2px solid #e9c890; border-radius:999px;
+  padding:8px 15px; min-height:42px; }
+.u41o-ipucu-btn:hover{ background:#b45309; color:#fff; border-color:#b45309; }
+.u41o-ipucu{ font-size:14px; line-height:1.5; color:#7a5a22; margin:0;
+  background:#fdf3e1; border-radius:10px; padding:9px 12px; flex:1 1 220px; }
+
+.u41o-secenekler{ display:grid; gap:10px;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); }
+.u41o-secenekler.u41o-dikey{ grid-template-columns:1fr; }
+.u41o-secenek{ font:inherit; font-size:15.5px; font-weight:800; cursor:pointer;
+  background:#fff; color:#25405c; border:2px solid #cfd9e4; border-radius:12px;
+  padding:13px 15px; min-height:50px; text-align:left; }
+.u41o-secenek:hover:not([disabled]){ border-color:#2a6f97; background:#f0f7fd; }
+.u41o-secenek:focus-visible{ outline:3px solid #f0a202; outline-offset:2px; }
+.u41o-secenek[disabled]{ cursor:default; }
+.u41o-secenek.u41o-genis{ text-align:center; font-size:17px; }
+.u41o-dogru{ background:#e4f6ec !important; border-color:#2f9e63 !important;
+  color:#1c6640 !important; }
+.u41o-yanlis{ background:#fdeeee !important; border-color:#d98a8a !important;
+  color:#8f3a3a !important; }
+.u41o-geri{ margin:13px 0 0; font-size:15px; font-weight:800; }
+.u41o-geri.u41o-iyi{ color:#1c6640; }
+.u41o-geri.u41o-dene{ color:#9a5b1f; }
+.u41o-aciklama{ margin:8px 0 0; font-size:14.5px; line-height:1.55; color:#2c5a3f;
+  background:#eef8f2; border-radius:10px; padding:10px 13px; }
+.u41o-bitis{ font-size:18px; font-weight:900; color:#1c6640; text-align:center;
+  background:#e4f6ec; border-radius:14px; padding:22px 16px; margin:0; }
+
+.u41o-hafiza{ display:grid; gap:9px;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); }
+.u41o-hkart{ font:inherit; font-size:13.5px; font-weight:800; cursor:pointer;
+  min-height:76px; padding:9px 8px; line-height:1.35;
+  background:#2a6f97; color:#fff; border:2px solid #23597a; border-radius:12px; }
+.u41o-hkart.u41o-acik{ background:#fff; color:#25405c; border-color:#cfd9e4; }
+.u41o-hkart.u41o-eslesti{ background:#e4f6ec; color:#1c6640; border-color:#2f9e63;
+  cursor:default; }
+.u41o-hkart:focus-visible{ outline:3px solid #f0a202; outline-offset:2px; }
+
+.u41o-alt{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.u41o-btn{ font:inherit; font-size:15px; font-weight:900; cursor:pointer;
+  background:#2a6f97; color:#fff; border:2px solid #2a6f97; border-radius:999px;
+  padding:12px 24px; min-height:48px; }
+.u41o-btn:hover:not([disabled]){ background:#1f5676; border-color:#1f5676; }
+.u41o-btn[disabled]{ opacity:.45; cursor:default; }
+.u41o-btn-ikincil{ background:#fff; color:#4a5568; border-color:#cbd5e0; }
+.u41o-btn-ikincil:hover{ background:#4a5568; color:#fff; border-color:#4a5568; }
+
+@media (max-width:520px){
+  .u41o-secenekler{ grid-template-columns:1fr; }
+  .u41o-hafiza{ grid-template-columns:repeat(2,1fr); }
+  .u41o-btn{ flex:1 1 100%; }
+}
+
+</style>
+<script id="u41o-veri">
+window.U41_OYUN = {"yakala": [{"durum": "Yemeğe başlarken ne söyleriz?", "dogru": "Bismillah", "yanlislar": ["Elhamdülillah", "Maşallah", "Âmin"]}, {"durum": "Yeni bir kitap okumaya başlarken ne deriz?", "dogru": "Bismillah", "yanlislar": ["İnşallah", "Sübhanallah", "Estağfirullah"]}, {"durum": "Yemeği bitirince ne söyleriz?", "dogru": "Elhamdülillah", "yanlislar": ["Bismillah", "Maşallah", "Âmin"]}, {"durum": "Sınavı geçtiğini öğrenince ne deriz?", "dogru": "Elhamdülillah", "yanlislar": ["Allahu Ekber", "İnşallah", "Sübhanallah"]}, {"durum": "Ezan okunurken hangi ifade duyulur?", "dogru": "Allahu Ekber", "yanlislar": ["Bismillah", "Estağfirullah", "Âmin"]}, {"durum": "Namaza dururken ilk söylenen ifade nedir?", "dogru": "Allahu Ekber", "yanlislar": ["Elhamdülillah", "Maşallah", "İnşallah"]}, {"durum": "Yanlışlıkla arkadaşına kırıcı söz söyleyince ne demeliyiz?", "dogru": "Estağfirullah", "yanlislar": ["Maşallah", "Âmin", "Bismillah"]}, {"durum": "Bir hata yaptığını fark edince ne söyleriz?", "dogru": "Estağfirullah", "yanlislar": ["Sübhanallah", "İnşallah", "Elhamdülillah"]}, {"durum": "Arkadaşının güzel çizdiği resmi görünce ne deriz?", "dogru": "Maşallah", "yanlislar": ["Estağfirullah", "Âmin", "Bismillah"]}, {"durum": "Kardeşinin aldığı yüksek notu görünce ne söyleriz?", "dogru": "Maşallah", "yanlislar": ["Sübhanallah", "İnşallah", "Elhamdülillah"]}, {"durum": "Yarın pikniğe gideceğiz derken sona ne ekleriz?", "dogru": "İnşallah", "yanlislar": ["Maşallah", "Bismillah", "Âmin"]}, {"durum": "Gelecekteki bir planımızdan bahsederken ne ekleriz?", "dogru": "İnşallah", "yanlislar": ["Estağfirullah", "Allahu Ekber", "Elhamdülillah"]}, {"durum": "Gökyüzündeki yıldızları görünce hayranlıkla ne deriz?", "dogru": "Sübhanallah", "yanlislar": ["Maşallah", "Bismillah", "Âmin"]}, {"durum": "Dua bittikten sonra hep birlikte ne söyleriz?", "dogru": "Âmin", "yanlislar": ["Elhamdülillah", "Estağfirullah", "İnşallah"]}], "hangi": [{"ifade": "Bismillah", "durumlar": ["Bir işi bitirdikten sonra söyleriz.", "Yola çıkmadan önce arabaya binerken söyleriz.", "Güzel bir haber duyunca söyleriz."], "dogruIndex": 1}, {"ifade": "Elhamdülillah", "durumlar": ["Bir işe başlarken söyleriz.", "Hata yaptığımızda söyleriz.", "Hastalıktan iyileştiğimizde şükrederek söyleriz."], "dogruIndex": 2}, {"ifade": "Allahu Ekber", "durumlar": ["Kitap okumaya başlarken söyleriz.", "Dua bitince söyleriz.", "Bayram namazına dururken tekbir getirirken söyleriz."], "dogruIndex": 2}, {"ifade": "Estağfirullah", "durumlar": ["Sözümüzle birini üzdüğümüzü anlayınca söyleriz.", "Güzel bir manzara görünce söyleriz.", "Yemeğe başlarken söyleriz."], "dogruIndex": 0}, {"ifade": "Maşallah", "durumlar": ["Bir işe başlarken söyleriz.", "Komşumuzun bahçesindeki güzel çiçekleri görünce söyleriz.", "Hata yaptığımızda söyleriz."], "dogruIndex": 1}, {"ifade": "İnşallah", "durumlar": ["Yarın gezmeye gideceğiz derken sona ekleriz.", "Yemek yerken söyleriz.", "Bir hata yaptığımızda söyleriz."], "dogruIndex": 0}, {"ifade": "Sübhanallah", "durumlar": ["Yemek yerken söyleriz.", "Denizin ve dağların güzelliği karşısında hayranlıkla söyleriz.", "Sınavı kazanınca söyleriz."], "dogruIndex": 1}, {"ifade": "Âmin", "durumlar": ["İş bitince söyleriz.", "Hata yapınca söyleriz.", "Öğretmenimiz dua ederken sonunda hep birlikte söyleriz."], "dogruIndex": 2}, {"ifade": "Bismillah", "durumlar": ["Bir işe, bir yemeğe başlarken söyleriz.", "Ödevimizi bitirince söyleriz.", "Güzel bir şey görünce söyleriz."], "dogruIndex": 0}, {"ifade": "İnşallah", "durumlar": ["Namaza başlarken söyleriz.", "Yemek bitince söyleriz.", "Gelecek hafta doktora gideceğim, dediğimizde ekleriz."], "dogruIndex": 2}], "hafiza": [{"ifade": "Bismillah", "anlam": "Allah'ın adıyla başlarım demektir."}, {"ifade": "Elhamdülillah", "anlam": "Allah'a hamd ve şükür ederim demektir."}, {"ifade": "Allahu Ekber", "anlam": "Allah en büyüktür demektir."}, {"ifade": "Estağfirullah", "anlam": "Allah'tan bağışlanma dilerim demektir."}, {"ifade": "Maşallah", "anlam": "Allah nasip etti, ne güzel demektir."}, {"ifade": "İnşallah", "anlam": "Allah izin verirse demektir."}, {"ifade": "Sübhanallah", "anlam": "Allah her türlü eksiklikten uzaktır demektir."}, {"ifade": "Âmin", "anlam": "Allah'ım, kabul et demektir."}], "dedektif": [{"metin": "Ayşe sofraya oturdu. Kaşığını eline aldı ama bir şey söylemeden yemeğe başlamak istemedi.", "ipuclari": ["Bu ifade bir işe başlarken söylenir.", "Yemekten önce, kitaptan önce söyleriz.", "Anlamı: Allah'ın adıyla başlarım."], "cevap": "Bismillah"}, {"metin": "Ali hastaydı, günlerce yatakta kaldı. Bugün doktor 'artık iyisin' dedi. Ali'nin yüzü sevinçle gülümsedi.", "ipuclari": ["Bu ifade bir nimete kavuşunca söylenir.", "Şükür anlamı taşır.", "Anlamı: Allah'a hamd olsun."], "cevap": "Elhamdülillah"}, {"metin": "Camiden sesler yükseliyor, herkes namaza hazırlanıyor. İmam eller kulaklara kalkınca bu sözle namaza başladı.", "ipuclari": ["Bu ifade Allah'ın büyüklüğünü anlatır.", "Ezanda ve namazda sıkça duyulur.", "Anlamı: Allah en büyüktür."], "cevap": "Allahu Ekber"}, {"metin": "Mert, arkadaşına kırıcı bir söz söyledi. Sonra pişman oldu, arkadaşının üzgün yüzünü gördü.", "ipuclari": ["Bu ifade bir hata sonrası söylenir.", "Pişmanlık ve bağışlanma dileği içerir.", "Anlamı: Allah'tan bağışlanma dilerim."], "cevap": "Estağfirullah"}, {"metin": "Zeynep'in annesi, kızının çizdiği resme baktı. Renkler o kadar güzeldi ki hayran kaldı.", "ipuclari": ["Bu ifade beğenirken, hayranlığımızı belirtirken söylenir.", "Nazardan korunmak için de söylenir.", "Anlamı: Allah nasip etti."], "cevap": "Maşallah"}, {"metin": "Emre, hafta sonu dedesini ziyaret etmeyi planlıyor. Ama havanın nasıl olacağını bilmiyor.", "ipuclari": ["Bu ifade gelecekteki bir plan için söylenir.", "Allah'ın izniyle olur anlamındadır.", "Anlamı: Allah izin verirse."], "cevap": "İnşallah"}, {"metin": "Aile, dağ başında kamp kurdu. Gece gökyüzüne baktıklarında sayısız yıldız gördüler.", "ipuclari": ["Bu ifade Allah'ın yarattıklarına hayranlık duyunca söylenir.", "Allah'ı eksikliklerden tenzih ederiz.", "Anlamı: Allah her türlü eksiklikten uzaktır."], "cevap": "Sübhanallah"}, {"metin": "Öğretmen, ders bitmeden önce sınıfça dua etmeyi önerdi. Dua sona ererken herkes bir ağızdan aynı sözü söyledi.", "ipuclari": ["Bu ifade bir duanın sonunda söylenir.", "Duanın kabul olması dileğiyle söylenir.", "Anlamı: Allah'ım, kabul et."], "cevap": "Âmin"}], "dusunmu": [{"ifade": "Yemeğe başlarken 'Bismillah' deriz.", "ifadeDogruMu": true, "aciklama": "Doğru, bir işe başlarken Bismillah deriz."}, {"ifade": "Bir nimete kavuştuğumuzda 'Elhamdülillah' deriz.", "ifadeDogruMu": true, "aciklama": "Doğru, şükrederken Elhamdülillah deriz."}, {"ifade": "Dua bittikten sonra hep birlikte 'Âmin' deriz.", "ifadeDogruMu": true, "aciklama": "Doğru, duanın sonunda Âmin denir."}, {"ifade": "Güzel ve beğendiğimiz bir şey görünce 'Maşallah' deriz.", "ifadeDogruMu": true, "aciklama": "Doğru, hayranlığımızı Maşallah diyerek belirtiriz."}, {"ifade": "Gelecekle ilgili bir planımızdan bahsederken 'İnşallah' ekleriz.", "ifadeDogruMu": true, "aciklama": "Doğru, gelecek planlar için İnşallah deriz."}, {"ifade": "Yanlış bir şey söylediğimizi fark edince 'Estağfirullah' deriz.", "ifadeDogruMu": true, "aciklama": "Doğru, pişmanlığımızı Estağfirullah diyerek gösteririz."}, {"ifade": "Yemeği bitirdikten sonra 'Bismillah' deriz.", "ifadeDogruMu": false, "aciklama": "Yanlış, yemek bitince Elhamdülillah denir, Bismillah başlarken denir."}, {"ifade": "Namaza başlarken 'Estağfirullah' deriz.", "ifadeDogruMu": false, "aciklama": "Yanlış, namaza başlarken Allahu Ekber denir."}, {"ifade": "Bir hata yaptığımızda 'Maşallah' deriz.", "ifadeDogruMu": false, "aciklama": "Yanlış, hatadan sonra Estağfirullah denir, Maşallah beğenirken denir."}, {"ifade": "Dua ederken duanın başında 'Âmin' deriz.", "ifadeDogruMu": false, "aciklama": "Yanlış, Âmin duanın sonunda söylenir, başında değil."}, {"ifade": "Yıldızlı gökyüzünü hayranlıkla izlerken 'İnşallah' deriz.", "ifadeDogruMu": false, "aciklama": "Yanlış, hayranlık anında Sübhanallah denir, İnşallah gelecek için kullanılır."}, {"ifade": "Güzel bir haber alınca sevinip 'Sübhanallah' deriz.", "ifadeDogruMu": false, "aciklama": "Yanlış, sevinip şükrederken Elhamdülillah denir."}]};
+</script>
+<script id="u41o-betik">
+/* ══ 4. sınıf 1. ünite — beş yeni oyun (eklenti) ══
+   Mevcut oyun motorunun üzerine kurulur: menüyü ve bölüm açma/kapamayı
+   portalın kendi OYUN_LISTESI + goster() düzeni yapar. Burada yalnızca
+   bu beş bölümün iç davranışı vardır. Global ad kirletmez. */
+(function(){
+  "use strict";
+  var V = window.U41_OYUN;
+  if(!V) return;
+
+  function karistir(d){
+    var a = d.slice();
+    for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1));
+      var t=a[i]; a[i]=a[j]; a[j]=t; }
+    return a;
+  }
+  function el(etiket, sinif, metin){
+    var e = document.createElement(etiket);
+    if(sinif) e.className = sinif;
+    if(metin != null) e.textContent = metin;
+    return e;
+  }
+
+  /* ── her oyun: durum nesnesi + ciz() ── */
+  var OYUNLAR = {};
+
+  /* 1) Doğru İfadeyi Yakala ───────────────────────────── */
+  OYUNLAR.u41yakala = {
+    hazirla: function(){ return { sira: karistir(V.yakala), i: 0, dogru: 0 }; },
+    toplam: function(d){ return d.sira.length; },
+    ciz: function(d, govde, bitti){
+      var s = d.sira[d.i];
+      govde.appendChild(el('p','u41o-soru', s.durum));
+      var kutu = el('div','u41o-secenekler');
+      karistir([s.dogru].concat(s.yanlislar)).forEach(function(se){
+        var b = el('button','u41o-secenek', se);
+        b.type = 'button';
+        b.onclick = function(){
+          if(kutu.dataset.kilit) return;
+          kutu.dataset.kilit = '1';
+          kutu.querySelectorAll('.u41o-secenek').forEach(function(x){
+            if(x.textContent === s.dogru) x.classList.add('u41o-dogru');
+            x.disabled = true;
+          });
+          if(se === s.dogru){ b.classList.add('u41o-dogru'); d.dogru++; }
+          else b.classList.add('u41o-yanlis');
+          govde.appendChild(el('p','u41o-geri ' + (se===s.dogru?'u41o-iyi':'u41o-dene'),
+            se===s.dogru ? 'Doğru. Bu durumda "'+s.dogru+'" denir.'
+                         : 'Bir daha düşün: bu durumda "'+s.dogru+'" denir.'));
+          bitti();
+        };
+        kutu.appendChild(b);
+      });
+      govde.appendChild(kutu);
+    }
+  };
+
+  /* 2) Hangi Durumda? ─────────────────────────────────── */
+  OYUNLAR.u41hangi = {
+    hazirla: function(){ return { sira: karistir(V.hangi), i: 0, dogru: 0 }; },
+    toplam: function(d){ return d.sira.length; },
+    ciz: function(d, govde, bitti){
+      var s = d.sira[d.i];
+      govde.appendChild(el('p','u41o-soru', '"'+s.ifade+'" hangi durumda söylenir?'));
+      var kutu = el('div','u41o-secenekler u41o-dikey');
+      s.durumlar.forEach(function(t, idx){
+        var b = el('button','u41o-secenek', t);
+        b.type = 'button';
+        b.onclick = function(){
+          if(kutu.dataset.kilit) return;
+          kutu.dataset.kilit = '1';
+          var btns = kutu.querySelectorAll('.u41o-secenek');
+          btns[s.dogruIndex].classList.add('u41o-dogru');
+          btns.forEach(function(x){ x.disabled = true; });
+          if(idx === s.dogruIndex) d.dogru++; else b.classList.add('u41o-yanlis');
+          govde.appendChild(el('p','u41o-geri ' + (idx===s.dogruIndex?'u41o-iyi':'u41o-dene'),
+            idx===s.dogruIndex ? 'Doğru düşündün.' : 'Yeşil olan durum daha uygun.'));
+          bitti();
+        };
+        kutu.appendChild(b);
+      });
+      govde.appendChild(kutu);
+    }
+  };
+
+  /* 3) İfade Hafızası (eşleştirme) ─────────────────────── */
+  OYUNLAR.u41hafiza = {
+    tekEkran: true,
+    hazirla: function(){
+      var kartlar = [];
+      V.hafiza.forEach(function(p, i){
+        kartlar.push({ e: i, metin: p.ifade, tip: 'i' });
+        kartlar.push({ e: i, metin: p.anlam, tip: 'a' });
+      });
+      return { kartlar: karistir(kartlar), acik: [], bulunan: 0 };
+    },
+    toplam: function(){ return V.hafiza.length; },
+    ciz: function(d, govde, bitti){
+      var izgara = el('div','u41o-hafiza');
+      d.kartlar.forEach(function(k, idx){
+        var b = el('button','u41o-hkart', '?');
+        b.type = 'button';
+        b.setAttribute('aria-label','Kapalı kart');
+        b.onclick = function(){
+          if(b.classList.contains('u41o-acik') || d.acik.length === 2) return;
+          b.textContent = k.metin; b.classList.add('u41o-acik');
+          b.setAttribute('aria-label', k.metin);
+          d.acik.push({ b: b, k: k });
+          if(d.acik.length === 2){
+            var a = d.acik[0], c = d.acik[1];
+            if(a.k.e === c.k.e && a.k.tip !== c.k.tip){
+              a.b.classList.add('u41o-eslesti'); c.b.classList.add('u41o-eslesti');
+              a.b.disabled = true; c.b.disabled = true;
+              d.bulunan++; d.acik = []; bitti();
+            } else {
+              setTimeout(function(){
+                [a,c].forEach(function(x){
+                  x.b.textContent = '?'; x.b.classList.remove('u41o-acik');
+                  x.b.setAttribute('aria-label','Kapalı kart');
+                });
+                d.acik = [];
+              }, 850);
+            }
+          }
+        };
+        izgara.appendChild(b);
+      });
+      govde.appendChild(izgara);
+    }
+  };
+
+  /* 4) Dinî İfade Dedektifi ───────────────────────────── */
+  OYUNLAR.u41dedektif = {
+    hazirla: function(){
+      var hepsi = V.dedektif.map(function(x){ return x.cevap; });
+      return { sira: karistir(V.dedektif), i: 0, dogru: 0, havuz: hepsi };
+    },
+    toplam: function(d){ return d.sira.length; },
+    ciz: function(d, govde, bitti){
+      var s = d.sira[d.i];
+      govde.appendChild(el('p','u41o-sahne', s.metin));
+      var ip = el('div','u41o-ipuclari');
+      s.ipuclari.forEach(function(t, n){
+        var b = el('button','u41o-ipucu-btn', 'İpucu ' + (n+1));
+        b.type = 'button';
+        b.onclick = function(){ b.replaceWith(el('p','u41o-ipucu', t)); };
+        ip.appendChild(b);
+      });
+      govde.appendChild(ip);
+      var secenekler = [s.cevap];
+      karistir(d.havuz).forEach(function(c){
+        if(secenekler.length < 4 && secenekler.indexOf(c) < 0) secenekler.push(c);
+      });
+      var kutu = el('div','u41o-secenekler');
+      karistir(secenekler).forEach(function(c){
+        var b = el('button','u41o-secenek', c);
+        b.type = 'button';
+        b.onclick = function(){
+          if(kutu.dataset.kilit) return;
+          kutu.dataset.kilit = '1';
+          kutu.querySelectorAll('.u41o-secenek').forEach(function(x){
+            if(x.textContent === s.cevap) x.classList.add('u41o-dogru');
+            x.disabled = true;
+          });
+          if(c === s.cevap) d.dogru++; else b.classList.add('u41o-yanlis');
+          govde.appendChild(el('p','u41o-geri ' + (c===s.cevap?'u41o-iyi':'u41o-dene'),
+            c===s.cevap ? 'Dedektiflik tamam.' : 'Doğrusu: ' + s.cevap));
+          bitti();
+        };
+        kutu.appendChild(b);
+      });
+      govde.appendChild(kutu);
+    }
+  };
+
+  /* 5) Doğru mu, Düşün mü? ────────────────────────────── */
+  OYUNLAR.u41dusunmu = {
+    hazirla: function(){ return { sira: karistir(V.dusunmu), i: 0, dogru: 0 }; },
+    toplam: function(d){ return d.sira.length; },
+    ciz: function(d, govde, bitti){
+      var s = d.sira[d.i];
+      govde.appendChild(el('p','u41o-soru', s.ifade));
+      var kutu = el('div','u41o-secenekler');
+      [['Doğru', true], ['Yanlış', false]].forEach(function(par){
+        var b = el('button','u41o-secenek u41o-genis', par[0]);
+        b.type = 'button';
+        b.onclick = function(){
+          if(kutu.dataset.kilit) return;
+          kutu.dataset.kilit = '1';
+          kutu.querySelectorAll('.u41o-secenek').forEach(function(x){ x.disabled = true; });
+          var doruMu = (par[1] === s.ifadeDogruMu);
+          b.classList.add(doruMu ? 'u41o-dogru' : 'u41o-yanlis');
+          if(doruMu) d.dogru++;
+          govde.appendChild(el('p','u41o-geri ' + (doruMu?'u41o-iyi':'u41o-dene'),
+            doruMu ? 'Doğru düşündün.' : 'Bir daha bak.'));
+          govde.appendChild(el('p','u41o-aciklama', s.aciklama));
+          bitti();
+        };
+        kutu.appendChild(b);
+      });
+      govde.appendChild(kutu);
+    }
+  };
+
+  /* ── ortak çerçeve ── */
+  document.querySelectorAll('[data-u41o]').forEach(function(alan){
+    var ad = alan.dataset.u41o;
+    var oyun = OYUNLAR[ad];
+    if(!oyun) return;
+    var govde = alan.querySelector('.u41o-govde');
+    var sayac = alan.querySelector('.u41o-sayac');
+    var btnSonraki = alan.querySelector('[data-u41o-eylem="sonraki"]');
+    var btnBastan = alan.querySelector('[data-u41o-eylem="bastan"]');
+    var d;
+
+    function sayacYaz(){
+      if(!sayac) return;
+      if(oyun.tekEkran){
+        sayac.textContent = 'Bulunan çift: ' + d.bulunan + ' / ' + oyun.toplam(d);
+      } else {
+        sayac.textContent = 'Soru ' + (d.i + 1) + ' / ' + oyun.toplam(d) +
+          '  ·  Doğru: ' + d.dogru;
+      }
+    }
+    function bitti(){
+      sayacYaz();
+      if(!oyun.tekEkran) btnSonraki.disabled = false;
+    }
+    function ciz(){
+      govde.textContent = '';
+      if(!oyun.tekEkran && d.i >= oyun.toplam(d)){
+        govde.appendChild(el('p','u41o-bitis',
+          'Bitti. ' + oyun.toplam(d) + ' sorudan ' + d.dogru + ' doğru.'));
+        btnSonraki.disabled = true;
+        return;
+      }
+      oyun.ciz(d, govde, bitti);
+      if(!oyun.tekEkran) btnSonraki.disabled = true;
+      sayacYaz();
+    }
+    function bastan(){ d = oyun.hazirla(); ciz(); }
+
+    if(btnSonraki){
+      if(oyun.tekEkran) btnSonraki.style.display = 'none';
+      btnSonraki.addEventListener('click', function(){ d.i++; ciz(); });
+    }
+    if(btnBastan) btnBastan.addEventListener('click', bastan);
+    bastan();
+  });
+})();
+
+</script>
 </body>
 </html>

@@ -43,7 +43,7 @@ var YENI_MOTOR_DESTEKLI = {
    sadece gerçekten var olan sayfa türlerini (hub/ogren/oyun/olcme) sayar. */
 var ASAMA_SIRASI = ['hub','ogren','etkinlik','oyun','olcme'];
 var ASAMA_TAKIP = ['hub','ogren','oyun','olcme'];
-var ASAMA_ETIKET = {hub:'📖 Ünite', ogren:'🧠 Öğren', etkinlik:'🎨 Etkinlik', oyun:'🎮 Oyun', olcme:'📝 Pekiştir/Test'};
+var ASAMA_ETIKET = {hub:'📖 Ünite', ogren:'🧠 Öğren', etkinlik:'🎨 Sınıf İçi Etkinlik', oyun:'🎮 Dijital Oyun', olcme:'📝 Pekiştir/Test'};
 
 /* ————— localStorage yardımcıları (güvenli, sessiz başarısız olur) ————— */
 var LS_TAMAMLANAN = 'dkab_tamamlanan';
@@ -127,20 +127,47 @@ function modSatiriHtml(){
   return h;
 }
 
+/* Kırıntıda gösterilen "şu an neredesiniz" etiketleri. Aşama çubuğundaki
+   (ASAMA_ETIKET) kısa adlardan ayrıdır: kırıntıda tam ad kullanılır. */
+var KIRINTI_ASAMA = {
+  ogren:    '🧠 Konuyu Öğren',
+  etkinlik: '🎨 Sınıf İçi Etkinlik',
+  oyun:     '🎮 Dijital Oyunlar',
+  olcme:    '📝 Ölçme & Değerlendirme'
+};
+
 function kirintiHtml(sinif, unite, asama){
+  var uAd = kacis(uniteAdi(sinif, unite));
+  var suAn = KIRINTI_ASAMA[asama] || '';
+
   var h = '<nav class="pn-kirinti" aria-label="Sayfa yolu">'+
-    '<a href="../din-kulturu-tum-siniflar.html">🏠 Ana Sayfa</a><span class="pn-ok">›</span>'+
-    '<a href="index.html">📚 '+sinif+'. Sınıf</a>';
+    '<ol class="pn-yol">'+
+      '<li><a href="../din-kulturu-tum-siniflar.html">🏠 Ana Sayfa</a></li>'+
+      '<li><span class="pn-ok" aria-hidden="true">›</span>'+
+        (asama==='sinif'
+          ? '<span class="pn-simdi" aria-current="page">📚 '+sinif+'. Sınıf</span>'
+          : '<a href="index.html">📚 '+sinif+'. Sınıf</a>')+'</li>';
+
   if(asama!=='sinif'){
-    h += '<span class="pn-ok">›</span><a href="'+dosyaAdi(unite,'hub')+'">📖 '+kacis(uniteAdi(sinif,unite))+'</a>';
+    h += '<li><span class="pn-ok" aria-hidden="true">›</span>'+
+      (asama==='hub'
+        ? '<span class="pn-simdi" aria-current="page">📖 '+unite+'. Ünite · '+uAd+'</span>'
+        : '<a href="'+dosyaAdi(unite,'hub')+'">📖 '+unite+'. Ünite · '+uAd+'</a>')+'</li>';
   }
-  h += '</nav>';
+  if(suAn){
+    h += '<li><span class="pn-ok" aria-hidden="true">›</span>'+
+      '<span class="pn-simdi" aria-current="page">'+suAn+'</span></li>';
+  }
+  h += '</ol></nav>';
   return h;
 }
 
 function cubukHedefi(sinif, unite, a){
+  /* İki ayrı durak, iki ayrı kanonik sahip:
+       etkinlik → sınıf içi etkinlik motoru (portal)
+       oyun     → dijital Oyun Merkezi sayfası */
   if(a==='etkinlik') return oyunHedefi(sinif,unite,'etkinlik');
-  if(a==='oyun') return oyunHedefi(sinif,unite,'oyun');
+  if(a==='oyun') return dosyaAdi(unite,'oyun')+'#oyun-gruplari';
   return dosyaAdi(unite,a);
 }
 function cubukHtml(sinif, unite, asama){
@@ -176,13 +203,35 @@ function sureSecimiHtml(sinif,unite){
     }).join('')+'</div>';
 }
 
+/* Konu öğrenme sayfasının sonundaki çıkışlar. Her içerik türü için
+   YALNIZCA BİR çıkış vardır:
+     • Etkinlik & Oyun  → oyun motoru (etkinlik/oyun aynı kanonik sayfanın
+                          iki modu, mod parametresiyle ayrılır)
+     • Ölçme & Değerlendirme → degerlendirme sayfası
+     • LGS ile Pekiştir → yalnızca 8. sınıfta, kanonik LGS merkezine
+                          sınıf+ünite bağlamı korunarak gider.
+   Daha önce "🧠 Pekiştir" ve "📝 Kendini Dene" butonlarının ikisi de aynı
+   URL'e gidiyordu; tek çıkışa indirildi. */
+function sinavCagrisiHtml(sinif, unite){
+  if(sinif !== 8) return '';
+  return '<a class="pn-aksiyon pn-aksiyon-sinav" href="../sinav-merkezi/lgs-hazirlik/index.html'+
+    '?kart=konular&sekme=kazanim-testleri&unite=unite'+unite+'">🎯 LGS ile Pekiştir</a>';
+}
 function konuAksiyonlariHtml(sinif, unite){
+  /* Sınıf içi etkinlik ile dijital oyun AYRI iki çalışma alanıdır:
+     • Sınıf İçi Etkinlik → öğretmenin sınıfta yürüttüğü, ekransız
+       etkinlikler (Sıcak Sandalye, Tahta Yarışı…). Portaldaki etkinlik
+       motoru açar.
+     • Dijital Oyunlar → öğrencinin ekranda tek başına oynadığı oyunlar
+       (Kelime Avı, Çengel Bulmaca, Nonogram…). Oyun Merkezi sayfasıdır.
+     Eskiden iki buton da etkinlik motorunu açıyordu ve dijital oyunlara
+     buradan hiç yol yoktu. */
   return '<div class="pn-alt-baslik">🎯 Bu Konuyu Öğrendin mi?</div>'+
     '<div class="pn-aksiyon-satir">'+
-      '<a class="pn-aksiyon" href="'+oyunHedefi(sinif,unite,'etkinlik')+'">🎨 Etkinliğe Geç</a>'+
-      '<a class="pn-aksiyon" href="'+oyunHedefi(sinif,unite,'oyun')+'">🎮 Bu Konuyla Oyna</a>'+
-      '<a class="pn-aksiyon" href="'+dosyaAdi(unite,'olcme')+'">🧠 Pekiştir</a>'+
-      '<a class="pn-aksiyon" href="'+dosyaAdi(unite,'olcme')+'">📝 Kendini Dene</a>'+
+      '<a class="pn-aksiyon" href="'+dosyaAdi(unite,'oyun')+'#oyun-gruplari">🎮 Dijital Oyunlar</a>'+
+      '<a class="pn-aksiyon" href="'+oyunHedefi(sinif,unite,'etkinlik')+'">🎨 Sınıf İçi Etkinlik</a>'+
+      '<a class="pn-aksiyon" href="'+dosyaAdi(unite,'olcme')+'">📝 Öğrenmeni Değerlendir</a>'+
+      sinavCagrisiHtml(sinif, unite)+
     '</div>';
 }
 function altBarHtml(sinif, unite, asama){
@@ -194,7 +243,7 @@ function altBarHtml(sinif, unite, asama){
   } else if(asama==='ogren'){
     return '<div class="pn-alt">'+konuAksiyonlariHtml(sinif,unite)+'</div>';
   } else if(asama==='oyun'){
-    ic = '<a class="pn-buyuk" href="'+dosyaAdi(unite,'olcme')+'">🧠 Pekiştir — 📝 Kendini Dene</a>';
+    ic = '<a class="pn-buyuk" href="'+dosyaAdi(unite,'olcme')+'">📝 Öğrenmeni Değerlendir</a>';
   } else if(asama==='olcme'){
     var tamamMi = tamamlandiMi(sinif,unite);
     ustEk = raporHtml(sinif,unite,tamamMi);
