@@ -791,6 +791,10 @@
     <div class="mega-kart-ikon">📝</div><h3>Değerlendirme</h3>
     <p>Testler ve değerlendirme soruları.</p>
   </div>
+  <div class="mega-kart" onclick="window.location.href='../sinav-merkezi/lgs-hazirlik/index.html?kart=konular&amp;sekme=kazanim-testleri&amp;unite=unite1'">
+    <div class="mega-kart-ikon">🎯</div><h3>LGS ile Pekiştir</h3>
+    <p>Bu ünitenin kazanım testleri ve çıkmış sorular.</p>
+  </div>
 </div>
 
 </div>
@@ -2748,7 +2752,9 @@ function labirent8Hareket(dr, dc){
 }
 document.addEventListener('keydown', (e)=>{
   const aktifBolum = document.getElementById('labirent8');
-  if(!aktifBolum.classList.contains('aktif')) return;
+  /* Bu bölüm yalnızca oyun merkezinde var; burada bulunmadığı için her
+     tuş basımında hata veriyordu. */
+  if(!aktifBolum || !aktifBolum.classList.contains('aktif')) return;
   const etiket = document.activeElement ? document.activeElement.tagName : '';
   if(etiket==='INPUT' || etiket==='TEXTAREA') return;
   if(e.key==='ArrowUp'){ e.preventDefault(); labirent8Hareket(-1,0); }
@@ -2760,15 +2766,19 @@ document.addEventListener('keydown', (e)=>{
 // =====================================================================
 // BAŞLANGIÇ
 // =====================================================================
-bz8IzgaraOlustur();
-kelimeAvi8Olustur();
-cengel8Olustur();
-merdiven8Baslat();
-sifre8Olustur();
-ks8Olustur();
-nonogram8Olustur();
-istatistikleriGuncelleGoster();
-sonucIzlemeBaslat();
+/* Bu 9 kurulum, oyun merkezinden gelen ortak koddur. Bu sayfada
+   oyunların HTML kapları bulunmadığı için ilki hata veriyor ve betiğin
+   geri kalanını (aşağıdaki const UNITE_KIMLIK dâhil) durduruyordu.
+   Çağrılar aynen korundu, yalnızca her biri ayrı ayrı güvenceye alındı. */
+[bz8IzgaraOlustur,
+ kelimeAvi8Olustur,
+ cengel8Olustur,
+ merdiven8Baslat,
+ sifre8Olustur,
+ ks8Olustur,
+ nonogram8Olustur,
+ istatistikleriGuncelleGoster,
+ sonucIzlemeBaslat].forEach(function(kur){ try{ kur(); }catch(e){} });
 
 // =====================================================================
 // EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — AYETELKÜRSİ
