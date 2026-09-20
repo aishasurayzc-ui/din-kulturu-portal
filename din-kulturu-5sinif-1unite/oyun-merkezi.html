@@ -8,6 +8,299 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../ortak/oyun-merkezi.css">
+<!-- 🪐 LEGO Evreni oyunu — EK -->
+<style>
+/* ======================================================================
+   🧱 LEGO EVRENİ — 5. Sınıf / 1. Ünite / 1. Konu (Evrendeki düzen ve ölçü)
+   Portalın tasarım token'larını KULLANIR, yeniden tanımlamaz. Dosya tek
+   başına açıldığında da çalışsın diye her token'ın yanında yedek değer var.
+   Sınıf adları "lg-" ön ekiyle kapsüllenmiştir; portalın mevcut CSS'i ile
+   çakışmaz.
+====================================================================== */
+.lg-kok{
+  --lg-mavi:var(--mavi,#2a6f97);
+  --lg-acik:var(--acik,#a9d6e5);
+  --lg-yesil:var(--yesil,#40916c);
+  --lg-kirmizi:var(--kirmizi,#d62828);
+  --lg-sari:var(--sari,#f4a261);
+  --lg-turkuaz:var(--turkuaz,#06B6D4);
+  --lg-mor:var(--mor,#7c3aed);
+  --lg-navy:var(--navy,#1E3A8A);
+  --lg-bg:var(--bg,#f7f4ec);
+  --lg-yuzey:var(--yuzey,#ffffff);
+  --lg-kenar:var(--kenar,#e2e8f0);
+  --lg-metin:var(--metin,#22333b);
+  --lg-metin2:var(--metin-ikincil,#5d6b7a);
+  --lg-r-sm:var(--r-sm,10px);
+  --lg-r-md:var(--r-md,14px);
+  --lg-r-lg:var(--r-lg,18px);
+  --lg-r-xl:var(--r-xl,24px);
+  --lg-r-pill:var(--r-pill,999px);
+  --lg-golge:var(--golge,0 4px 14px rgba(15,23,42,.08),0 1px 3px rgba(15,23,42,.06));
+  --lg-golge-lg:var(--golge-lg,0 20px 40px -12px rgba(15,23,42,.18),0 4px 12px rgba(15,23,42,.06));
+  --lg-ease:var(--ease-out,cubic-bezier(.16,1,.3,1));
+  --lg-spring:var(--ease-spring,cubic-bezier(.2,.8,.3,1.25));
+  --lg-hucre:54px;
+  font-family:var(--yazi,"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif);
+  color:var(--lg-metin);
+}
+/* dosya tek başına açıldığında sayfa zemini */
+
+.lg-kok *,.lg-kok *::before,.lg-kok *::after{box-sizing:border-box}
+/* Portalda .msi zaten tanımlı; bu kural yalnız oyun kapsamında ve portaldaki
+   tanımla birebir aynıdır — dosya tek başına açıldığında da ikonlar görünsün. */
+.lg-kok .msi{
+  font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;font-size:20px;
+  line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;
+  word-wrap:normal;direction:ltr;vertical-align:middle;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';
+}
+.lg-sarmal{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:24px 48px}
+
+/* ---------- başlık ---------- */
+.lg-ust{
+  background:linear-gradient(135deg,var(--lg-navy),var(--lg-mavi) 55%,var(--lg-turkuaz));
+  color:#fff;border-radius:var(--lg-r-xl);padding:22px 24px;box-shadow:var(--lg-golge-lg);
+  position:relative;overflow:hidden
+}
+.lg-ust::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;
+  background-image:radial-gradient(circle at 12px 12px,#fff 5px,transparent 5.5px);
+  background-size:34px 34px
+}
+.lg-ust h1{margin:0;font-size:clamp(1.35rem,4.6vw,2rem);font-weight:900;letter-spacing:-.01em;position:relative}
+.lg-ust p{margin:8px 0 0;font-size:.98rem;opacity:.94;max-width:58ch;position:relative}
+.lg-rozetler{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;position:relative}
+.lg-rozet{
+  display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.34);border-radius:var(--lg-r-pill);
+  padding:5px 12px;font-size:.82rem;font-weight:800
+}
+
+/* ---------- durum çubuğu ---------- */
+.lg-durum{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  background:var(--lg-yuzey);border:1px solid var(--lg-kenar);border-radius:var(--lg-r-lg);
+  padding:12px 16px;margin-top:16px;box-shadow:var(--lg-golge)
+}
+.lg-adimlar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lg-adim{
+  width:34px;height:34px;border-radius:var(--lg-r-pill);display:grid;place-items:center;
+  font-weight:900;font-size:.9rem;background:var(--lg-bg);color:var(--lg-metin2);
+  border:2px solid var(--lg-kenar);transition:all .3s var(--lg-spring)
+}
+.lg-adim[data-durum="aktif"]{background:var(--lg-mavi);color:#fff;border-color:var(--lg-mavi);transform:scale(1.12)}
+.lg-adim[data-durum="bitti"]{background:var(--lg-yesil);color:#fff;border-color:var(--lg-yesil)}
+.lg-adim-yazi{font-weight:800;color:var(--lg-metin2);font-size:.9rem}
+.lg-sag{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.lg-puan{
+  display:inline-flex;align-items:center;gap:7px;background:var(--lg-sari);color:#3b2a12;
+  border-radius:var(--lg-r-pill);padding:7px 15px;font-weight:900;font-size:.95rem;
+  box-shadow:0 3px 0 rgba(0,0,0,.12)
+}
+.lg-puan span{font-variant-numeric:tabular-nums}
+.lg-ses{
+  border:2px solid var(--lg-kenar);background:var(--lg-yuzey);color:var(--lg-metin2);
+  border-radius:var(--lg-r-pill);width:40px;height:40px;display:grid;place-items:center;cursor:pointer
+}
+.lg-ses:hover{border-color:var(--lg-mavi);color:var(--lg-mavi)}
+.lg-ilerleme{height:8px;border-radius:var(--lg-r-pill);background:var(--lg-kenar);overflow:hidden;margin-top:12px}
+.lg-ilerleme i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--lg-turkuaz),var(--lg-yesil));transition:width .5s var(--lg-ease)}
+
+/* ---------- sahne ---------- */
+.lg-sahne{
+  background:var(--lg-yuzey);border:1px solid var(--lg-kenar);border-radius:var(--lg-r-xl);
+  padding:20px;margin-top:16px;box-shadow:var(--lg-golge)
+}
+.lg-sahne h2{margin:0;font-size:1.22rem;font-weight:900;color:var(--lg-navy);display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.lg-sahne .lg-alt{margin:7px 0 0;color:var(--lg-metin2);font-size:.96rem}
+.lg-gorev{
+  margin-top:14px;background:color-mix(in srgb,var(--lg-acik) 34%,#fff);
+  border:1px dashed var(--lg-mavi);border-radius:var(--lg-r-md);padding:11px 14px;
+  font-weight:700;font-size:.95rem;color:var(--lg-navy)
+}
+
+/* ---------- LEGO tahtası ---------- */
+.lg-oyunalani{display:grid;gap:18px;margin-top:18px;grid-template-columns:minmax(0,1fr)}
+.lg-tepsi-ic{overflow-x:auto}
+.lg-tahta-kutu{
+  background:
+    radial-gradient(circle at 13px 13px, rgba(15,23,42,.10) 6.4px, rgba(15,23,42,.03) 7px, rgba(0,0,0,0) 7.6px) 0 0/26px 26px,
+    radial-gradient(circle at 13px 11px, rgba(255,255,255,.55) 6px, rgba(0,0,0,0) 6.6px) 0 0/26px 26px,
+    linear-gradient(180deg,color-mix(in srgb,var(--lg-acik) 40%,#fff),var(--lg-bg));
+  border:2px solid var(--lg-kenar);border-radius:var(--lg-r-lg);padding:16px;overflow-x:auto;
+  box-shadow:inset 0 2px 8px rgba(15,23,42,.08)
+}
+.lg-tahta{position:relative;margin:0 auto;touch-action:none}
+.lg-yuva,.lg-tugla{
+  position:absolute;border-radius:7px;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:.72rem;text-align:center;line-height:1.12;padding:2px 4px
+}
+.lg-yuva{
+  border:2px dashed color-mix(in srgb,var(--lg-navy) 30%,transparent);
+  background:rgba(255,255,255,.34);color:color-mix(in srgb,var(--lg-navy) 62%,transparent);
+  box-shadow:inset 0 2px 5px rgba(15,23,42,.10);
+  cursor:pointer;transition:transform .2s var(--lg-spring),background .2s,border-color .2s
+}
+.lg-yuva:hover,.lg-yuva.lg-hedef{background:color-mix(in srgb,var(--lg-sari) 40%,#fff);border-color:var(--lg-sari);transform:scale(1.04)}
+.lg-yuva:focus-visible,.lg-tugla:focus-visible{outline:3px solid var(--lg-mor);outline-offset:3px}
+.lg-yuva.lg-dolu{border-style:solid;border-color:transparent;background:transparent;cursor:default}
+.lg-yuva.lg-dolu:hover{transform:none}
+
+/* ===== Gerçekçi LEGO tuğlası =====
+   Gövde: üstten aydınlık → alta doğru koyulaşan dikey gradyan, sol kenarda
+   ince ışık, sağ kenarda gölge. Altta 5px'lik "kalınlık" yüzeyi.
+   ::before = silindirik çıkıntılar (stud), ::after = çıkıntı parlaması. */
+.lg-tugla{
+  color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5);cursor:grab;border:0;font-family:inherit;
+  border-radius:4px;
+  background:
+    linear-gradient(180deg,
+      rgba(255,255,255,.40) 0,
+      rgba(255,255,255,.14) 13%,
+      rgba(255,255,255,0) 40%,
+      rgba(0,0,0,.08) 68%,
+      rgba(0,0,0,.30) 100%),
+    linear-gradient(90deg,
+      rgba(255,255,255,.20) 0, rgba(255,255,255,0) 8%,
+      rgba(0,0,0,0) 92%, rgba(0,0,0,.24) 100%),
+    var(--t);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 0 -2px 4px rgba(0,0,0,.28),
+    0 5px 0 color-mix(in srgb,var(--t) 56%,#000),
+    0 10px 15px rgba(15,23,42,.30);
+  transition:transform .18s var(--lg-spring),box-shadow .18s
+}
+.lg-tugla::before{
+  content:"";position:absolute;left:4px;right:4px;top:-8px;height:12px;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 13px 7.6px, color-mix(in srgb,var(--t) 72%,#000) 8.2px, rgba(0,0,0,0) 8.7px),
+    radial-gradient(circle at 13px 6.4px, color-mix(in srgb,var(--t) 88%,#000) 8.1px, rgba(0,0,0,0) 8.6px),
+    radial-gradient(circle at 13px 5.6px, color-mix(in srgb,var(--t) 92%,#fff) 7.9px, rgba(0,0,0,0) 8.4px);
+  background-size:26px 12px;background-repeat:repeat-x;background-position:center bottom;
+}
+.lg-tugla::after{
+  content:"";position:absolute;left:4px;right:4px;top:-8px;height:12px;pointer-events:none;
+  background-image:radial-gradient(ellipse 4.4px 2.5px at 10.2px 3.4px, rgba(255,255,255,.72), rgba(255,255,255,0) 72%);
+  background-size:26px 12px;background-repeat:repeat-x;background-position:center bottom;
+}
+/* --- yuvarlak gezegen parçaları --- */
+.lg-tugla.lg-yuvarlak,.lg-yuva.lg-yuvarlak{border-radius:50%}
+.lg-tugla.lg-yuvarlak{
+  background:
+    radial-gradient(circle at 33% 27%, rgba(255,255,255,.58), rgba(255,255,255,0) 44%),
+    radial-gradient(circle at 72% 78%, rgba(0,0,0,.40), rgba(0,0,0,0) 58%),
+    var(--t);
+  box-shadow:
+    inset 0 -5px 12px rgba(0,0,0,.30),
+    inset 0 4px 10px rgba(255,255,255,.26),
+    0 7px 16px rgba(15,23,42,.32);
+}
+.lg-tugla.lg-yuvarlak::before,.lg-tugla.lg-yuvarlak::after{
+  left:50%;right:auto;transform:translateX(-50%);
+  width:var(--sw,26px);background-size:var(--sw,26px) 12px;background-position:center bottom
+}
+.lg-halka{
+  position:absolute;left:50%;top:50%;width:178%;height:30%;
+  transform:translate(-50%,-50%) rotate(-17deg);border-radius:50%;
+  border:5px solid color-mix(in srgb,var(--t) 62%,#fff);
+  border-left-color:transparent;border-right-color:transparent;
+  pointer-events:none;box-shadow:0 1px 0 rgba(0,0,0,.18)
+}
+.lg-ad{
+  position:absolute;left:50%;top:calc(100% + 7px);transform:translateX(-50%);
+  white-space:nowrap;font-size:11.5px;font-weight:800;color:var(--lg-navy);opacity:.85;pointer-events:none
+}
+.lg-tahta--uzay{overflow:hidden;border-radius:var(--lg-r-md)}
+.lg-yorunge{position:absolute;inset:0;pointer-events:none}
+.lg-tugla{touch-action:none}
+.lg-tugla:hover{transform:translateY(-3px)}
+.lg-tugla.lg-secili{transform:translateY(-4px) scale(1.04);box-shadow:0 0 0 4px var(--lg-mor),inset 0 3px 0 rgba(255,255,255,.42),inset 0 -6px 0 rgba(0,0,0,.22),0 8px 16px rgba(15,23,42,.3)}
+.lg-tugla.lg-surukleniyor{cursor:grabbing;z-index:60;transform:scale(1.06) rotate(-2deg);pointer-events:none}
+.lg-tugla.lg-yerlesti{cursor:default}
+@keyframes lg-tak{0%{transform:translateY(-14px) scale(1.1)}55%{transform:translateY(3px) scale(.97)}100%{transform:translateY(0) scale(1)}}
+.lg-tak{animation:lg-tak .38s var(--lg-spring)}
+@keyframes lg-titre{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px) rotate(-3deg)}45%{transform:translateX(6px) rotate(3deg)}70%{transform:translateX(-4px)}}
+.lg-titre{animation:lg-titre .45s ease}
+
+/* parça tepsisi */
+.lg-tepsi{
+  background:var(--lg-bg);border:2px solid var(--lg-kenar);border-radius:var(--lg-r-lg);
+  padding:14px;min-height:130px
+}
+.lg-tepsi h3{margin:0 0 4px;font-size:.96rem;font-weight:900;color:var(--lg-navy)}
+.lg-tepsi p{margin:0 0 12px;font-size:.8rem;color:var(--lg-metin2)}
+.lg-tepsi-ic{position:relative;display:flex;flex-wrap:wrap;gap:16px 12px;padding-top:9px;align-items:flex-start}
+.lg-tepsi .lg-tugla{position:relative}
+
+/* geri bildirim */
+.lg-mesaj{
+  margin-top:14px;border-radius:var(--lg-r-md);padding:12px 15px;font-weight:800;font-size:.95rem;
+  display:flex;gap:9px;align-items:flex-start;min-height:48px;border:2px solid transparent
+}
+.lg-mesaj[data-tip="bos"]{background:var(--lg-bg);color:var(--lg-metin2);font-weight:700}
+.lg-mesaj[data-tip="dogru"]{background:color-mix(in srgb,var(--lg-yesil) 15%,#fff);border-color:var(--lg-yesil);color:#14532d}
+.lg-mesaj[data-tip="yanlis"]{background:color-mix(in srgb,var(--lg-sari) 26%,#fff);border-color:var(--lg-sari);color:#7c3d0a}
+.lg-mesaj[data-tip="bilgi"]{background:color-mix(in srgb,var(--lg-acik) 38%,#fff);border-color:var(--lg-mavi);color:var(--lg-navy)}
+
+/* soru kartları */
+.lg-secenekler{display:grid;gap:10px;margin-top:16px}
+.lg-secenek{
+  display:flex;gap:12px;align-items:center;width:100%;text-align:left;cursor:pointer;
+  background:var(--lg-yuzey);border:2px solid var(--lg-kenar);border-radius:var(--lg-r-md);
+  padding:13px 15px;font-family:inherit;font-size:1rem;font-weight:700;color:var(--lg-metin);
+  transition:transform .18s var(--lg-spring),border-color .18s,background .18s
+}
+.lg-secenek:hover:not(:disabled){border-color:var(--lg-mavi);transform:translateX(4px)}
+.lg-secenek:focus-visible{outline:3px solid var(--lg-mor);outline-offset:2px}
+.lg-secenek b{
+  flex:0 0 auto;width:30px;height:30px;border-radius:var(--lg-r-pill);display:grid;place-items:center;
+  background:var(--lg-bg);color:var(--lg-navy);font-weight:900
+}
+.lg-secenek[data-sonuc="dogru"]{border-color:var(--lg-yesil);background:color-mix(in srgb,var(--lg-yesil) 13%,#fff)}
+.lg-secenek[data-sonuc="dogru"] b{background:var(--lg-yesil);color:#fff}
+.lg-secenek[data-sonuc="yanlis"]{border-color:var(--lg-sari);background:color-mix(in srgb,var(--lg-sari) 18%,#fff)}
+.lg-secenek:disabled{cursor:default;opacity:.92}
+
+/* düğmeler */
+.lg-dugmeler{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.lg-btn{
+  font-family:inherit;font-weight:900;font-size:.98rem;cursor:pointer;border:0;
+  border-radius:var(--lg-r-btn,14px);padding:12px 22px;display:inline-flex;align-items:center;gap:8px;
+  background:var(--lg-mavi);color:#fff;box-shadow:0 4px 0 color-mix(in srgb,var(--lg-mavi) 70%,#000);
+  transition:transform .15s var(--lg-spring),box-shadow .15s
+}
+.lg-btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 color-mix(in srgb,var(--lg-mavi) 70%,#000)}
+.lg-btn:active{transform:translateY(2px);box-shadow:0 2px 0 color-mix(in srgb,var(--lg-mavi) 70%,#000)}
+.lg-btn:focus-visible{outline:3px solid var(--lg-mor);outline-offset:3px}
+.lg-btn--ikincil{background:var(--lg-yuzey);color:var(--lg-navy);border:2px solid var(--lg-kenar);box-shadow:none}
+.lg-btn--ikincil:hover{border-color:var(--lg-mavi);box-shadow:none}
+.lg-btn--yesil{background:var(--lg-yesil);box-shadow:0 4px 0 color-mix(in srgb,var(--lg-yesil) 70%,#000)}
+.lg-btn--yesil:hover,.lg-btn--yesil:active{box-shadow:0 6px 0 color-mix(in srgb,var(--lg-yesil) 70%,#000)}
+.lg-btn[hidden]{display:none}
+
+/* evren sahnesi */
+.lg-evren{width:100%;max-width:560px;margin:16px auto 0;display:block;height:auto}
+
+/* final */
+.lg-final{text-align:center;padding:10px 4px}
+.lg-final h2{justify-content:center;font-size:1.5rem}
+.lg-final .lg-ozet{
+  margin:16px auto 0;max-width:62ch;background:color-mix(in srgb,var(--lg-acik) 30%,#fff);
+  border:2px solid var(--lg-mavi);border-radius:var(--lg-r-lg);padding:16px 18px;
+  font-size:1.02rem;font-weight:700;color:var(--lg-navy);line-height:1.6
+}
+.lg-final .lg-not{margin-top:12px;font-size:.92rem;color:var(--lg-metin2);font-weight:600}
+#lgKonfeti{position:fixed;inset:0;pointer-events:none;z-index:9999}
+
+.lg-gizli{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){
+  .lg-kok *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+@media(max-width:520px){ .lg-kok{--lg-hucre:40px} }
+
+</style>
+
 
 <body>
 <div id="portalNav" data-sinif="5" data-unite="1" data-asama="oyun"></div>
@@ -978,6 +1271,50 @@
   <div id="skup1YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="skup1Baslat()">🏆 Finali Başlat</button>
 </section>
+<section id="legoevreni1">
+<h2>🪐 LEGO Evreni — Gezegenleri Birleştir, Düzeni Keşfet!</h2>
+<div class="oyun-amaci">🎯 Bu oyunun amacı: Parçaların belirli bir düzen ve ölçüyle bir araya geldiğini keşfetmek.</div>
+<div class="lg-kok" id="legoEvreni">
+<div class="lg-sarmal">
+
+  <header class="lg-ust">
+    <h1>🪐 LEGO Evreni — Gezegenleri Birleştir, Düzeni Keşfet!</h1>
+    <p>Önce Güneş Sistemi'ni, Dünya'yı ve insan vücudunu LEGO parçalarıyla kur. Sonra parçaların neden tam olarak o yerlere ve o ölçüde oturduğunu birlikte düşünelim.</p>
+    <div class="lg-rozetler">
+      <span class="lg-rozet">5. Sınıf</span>
+      <span class="lg-rozet">1. Ünite · Allah İnancı</span>
+      <span class="lg-rozet">1. Konu · Evrendeki düzen ve ölçü</span>
+      <span class="lg-rozet">30 parça · 3 yapı</span>
+    </div>
+  </header>
+
+  <div class="lg-durum">
+    <div class="lg-adimlar" role="group" aria-label="Bölüm ilerlemesi">
+      <span class="lg-adim" id="lgAdim1" data-durum="aktif">1</span>
+      <span class="lg-adim" id="lgAdim2">2</span>
+      <span class="lg-adim" id="lgAdim3">3</span>
+      <span class="lg-adim" id="lgAdim4">4</span>
+      <span class="lg-adim-yazi" id="lgAdimYazi">Bölüm 1 / 4</span>
+    </div>
+    <div class="lg-sag">
+      <span class="lg-puan">⭐ Puan: <span id="lgPuan">0</span></span>
+      <button type="button" class="lg-ses" id="lgSes" aria-pressed="true" title="Sesi aç / kapat">
+        <span id="lgSesIkon">🔊</span>
+        <span class="lg-gizli">Ses açık</span>
+      </button>
+    </div>
+  </div>
+  <div class="lg-ilerleme" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" aria-label="Oyun ilerlemesi"><i id="lgIlerleme"></i></div>
+
+  <main class="lg-sahne" id="lgSahne" tabindex="-1"></main>
+
+  <p class="lg-gizli" aria-live="polite" id="lgCanli"></p>
+</div>
+</div>
+
+<canvas id="lgKonfeti" aria-hidden="true"></canvas>
+</section>
+
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -1004,6 +1341,7 @@ const OYUN_LISTESI = [
   {id:'semantiklabirent', kategori:'mantik', ikon:'🧠', baslik:'Semantik Labirent', aciklama:'Anlam ilişkilerini takip ederek ilerle.'},
   {id:'celiskiavi', kategori:'mantik', ikon:'🕵️‍♂️', baslik:'Çelişki Avı', aciklama:'Metindeki çelişkiyi bul.'},
   {id:'labirent', kategori:'macera', ikon:'🌀', baslik:'Labirent', aciklama:'Doğru yolu bulup labirentten çık.'},
+  {id:'legoevreni', kategori:'macera', ikon:'🪐', baslik:'LEGO Evreni', aciklama:'Güneş Sistemini, Dünya’yı ve insan vücudunu LEGO parçalarıyla kur; düzeni ve ölçüyü keşfet.'},
   {id:'ezsira', kategori:'ezber', ikon:'1️⃣', baslik:'Sırala Bakalım', aciklama:'Parçaları doğru sıraya diz.'},
   {id:'ezbosluk', kategori:'ezber', ikon:'2️⃣', baslik:'Boşluk Doldur', aciklama:'Cümledeki boşlukları doğru doldur.'},
   {id:'ezeslestir', kategori:'ezber', ikon:'3️⃣', baslik:'Anlam Eşleştir', aciklama:'Kavramları doğru anlamlarıyla eşleştir.'},
@@ -3647,6 +3985,848 @@ function zbTekrarHatirlatmaKontrol(){
 }
 document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
+
+</script>
+
+<script>
+(function(){
+"use strict";
+
+/* ===================================================================
+   VERİ — modeller, parçalar ve sorular
+=================================================================== */
+var RENK = {
+  /* portal paleti */
+  kirmizi:'#d62828', sari:'#f4a261', mavi:'#2a6f97', acik:'#a9d6e5',
+  yesil:'#40916c', kahve:'#8d6e4a', turkuaz:'#06B6D4', mor:'#7c3aed',
+  gri:'#64748b', altin:'#e0a83c', navy:'#1E3A8A',
+  /* gezegen tonları (temsilî) */
+  gunes:'#e0a83c', merkur:'#8d8d8d', venus:'#d99a4e', dunya:'#2a6f97',
+  mars:'#c1440e', jupiter:'#b98a5e', saturn:'#cfa963', uranus:'#4aa8bd',
+  neptun:'#3b5bdb',
+  /* insan vücudu */
+  ten:'#d99a63', yuz:'#e8b07a', tisort:'#2a6f97', pantolon:'#3d5a80', ayakkabi:'#22333b',
+  /* dünya katmanları */
+  cekirdek:'#f4a261', discek:'#e07a3c', manto:'#c1440e', kabuk:'#8d6e4a',
+  okyanus:'#06B6D4', kara:'#40916c', atmosfer:'#7ab8d4', bulut:'#9fc6d8'
+};
+
+/* x,y: ızgara konumu · w,h: ızgara genişlik/yükseklik */
+var MODELLER = [
+  /* 1) GÜNEŞ SİSTEMİ — dairesel gezegenler, gerçek yerleşime benzer.
+        Konumlar piksel (px:true); çap farkları büyüklüğü temsil eder. */
+  { ad:'GÜNEŞ SİSTEMİ', tip:'uzay', gen:1190, yuk:320, gunes:[124,150],
+    ipucu:'Güneş solda. Gezegenleri Güneş’e yakınlıklarına göre yörüngelerine yerleştir.',
+    parcalar:[
+      {id:'gunes',  ad:'GÜNEŞ',  px:true, yuvarlak:true, x:14,  y:40,  w:220,h:220, renk:RENK.gunes},
+      {id:'merkur', ad:'Merkür', px:true, yuvarlak:true, x:268, y:130, w:40, h:40,  renk:RENK.merkur},
+      {id:'venus',  ad:'Venüs',  px:true, yuvarlak:true, x:342, y:121, w:58, h:58,  renk:RENK.venus},
+      {id:'dunya',  ad:'Dünya',  px:true, yuvarlak:true, x:434, y:118, w:64, h:64,  renk:RENK.dunya},
+      {id:'mars',   ad:'Mars',   px:true, yuvarlak:true, x:532, y:125, w:50, h:50,  renk:RENK.mars},
+      {id:'jupiter',ad:'Jüpiter',px:true, yuvarlak:true, x:616, y:85,  w:130,h:130, renk:RENK.jupiter},
+      {id:'saturn', ad:'Satürn', px:true, yuvarlak:true, halka:true, x:814, y:95, w:110, h:110, renk:RENK.saturn},
+      {id:'uranus', ad:'Uranüs', px:true, yuvarlak:true, x:992, y:115, w:70, h:70,  renk:RENK.uranus},
+      {id:'neptun', ad:'Neptün', px:true, yuvarlak:true, x:1096,y:117, w:66, h:66,  renk:RENK.neptun}
+  ]},
+  /* 3) İNSAN VÜCUDU — 13 parça. Her uzuv kendi yerinde olmalı. */
+  { ad:'İNSAN VÜCUDU', kolon:7, satir:9,
+    ipucu:'En üstte baş, en altta ayaklar. Yukarıdan aşağıya doğru düşün.',
+    parcalar:[
+      {id:'bas',   ad:'Baş',      x:2,y:0,w:3,h:1, renk:RENK.ten},
+      {id:'yuz',   ad:'Yüz',      x:2,y:1,w:3,h:1, renk:RENK.yuz},
+      {id:'boyun', ad:'Boyun',    x:3,y:2,w:1,h:1, renk:RENK.ten},
+      {id:'skol',  ad:'Sol kol',  x:0,y:3,w:2,h:1, renk:RENK.tisort},
+      {id:'govde', ad:'Gövde',    x:2,y:3,w:3,h:2, renk:RENK.tisort},
+      {id:'gkol',  ad:'Sağ kol',  x:5,y:3,w:2,h:1, renk:RENK.tisort},
+      {id:'sel',   ad:'Sol el',   x:0,y:4,w:1,h:1, renk:RENK.ten},
+      {id:'gel',   ad:'Sağ el',   x:6,y:4,w:1,h:1, renk:RENK.ten},
+      {id:'karin', ad:'Karın',    x:2,y:5,w:3,h:1, renk:RENK.pantolon},
+      {id:'sbacak',ad:'Sol bacak',x:2,y:6,w:1,h:2, renk:RENK.pantolon},
+      {id:'gbacak',ad:'Sağ bacak',x:4,y:6,w:1,h:2, renk:RENK.pantolon},
+      {id:'sayak', ad:'Sol ayak', x:1,y:8,w:2,h:1, renk:RENK.ayakkabi},
+      {id:'gayak', ad:'Sağ ayak', x:4,y:8,w:2,h:1, renk:RENK.ayakkabi}
+  ]},
+  /* 2) DÜNYA — 8 parça. Dıştan içe katmanlar. */
+  { ad:'DÜNYA', kolon:8, satir:7,
+    ipucu:'En üstte atmosfer, en altta iç çekirdek. Dıştan içe doğru düşün.',
+    parcalar:[
+      {id:'atm',   ad:'Atmosfer',      x:0,y:0,w:8,h:1, renk:RENK.atmosfer},
+      {id:'bulut', ad:'Bulutlar',      x:2,y:1,w:4,h:1, renk:RENK.bulut},
+      {id:'kara',  ad:'Kara',          x:0,y:2,w:3,h:1, renk:RENK.kara},
+      {id:'okyanus',ad:'Okyanus',      x:3,y:2,w:5,h:1, renk:RENK.okyanus},
+      {id:'kabuk', ad:'Yer kabuğu',    x:0,y:3,w:8,h:1, renk:RENK.kabuk},
+      {id:'manto', ad:'Manto',         x:0,y:4,w:8,h:1, renk:RENK.manto},
+      {id:'dcek',  ad:'Dış çekirdek',  x:1,y:5,w:6,h:1, renk:RENK.discek},
+      {id:'icek',  ad:'İç çekirdek',   x:2,y:6,w:4,h:1, renk:RENK.cekirdek}
+  ]}
+];
+
+/* 4. aşamadaki büyük yapı: yalnız son parça eksik */
+var SON_MODEL = {
+  ad:'EVREN', kolon:6, satir:4,
+  hazir:[
+    {ad:'Yıldızlar',  x:0,y:0,w:6,h:1, renk:RENK.navy},
+    {ad:'Güneş',      x:0,y:1,w:2,h:1, renk:RENK.gunes},
+    {ad:'Gezegenler', x:2,y:1,w:4,h:1, renk:RENK.jupiter},
+    {ad:'Dünya',      x:0,y:2,w:2,h:1, renk:RENK.dunya},
+    {ad:'Ay',         x:2,y:2,w:2,h:1, renk:RENK.merkur},
+    {ad:'Yörüngeler', x:4,y:2,w:2,h:1, renk:RENK.turkuaz}
+  ],
+  eksik:{id:'duzen', ad:'DÜZEN', x:0,y:3,w:6,h:1, renk:RENK.mor}
+};
+
+var SORU2 = {
+  metin:'Bir parçayı çıkardığımızda ne oldu?',
+  secenekler:[
+    {harf:'A', metin:'Hiçbir şey değişmedi.'},
+    {harf:'B', metin:'Yapının düzeni bozuldu.'},
+    {harf:'C', metin:'Yapı daha güzel oldu.'}
+  ],
+  dogru:'B',
+  aciklama:'Bir yapının parçaları belirli bir düzene göre bir araya gelir. Parçaların yeri ve ölçüsü önemlidir.'
+};
+var SORU3 = {
+  metin:'LEGO parçalarının belirli bir düzene göre birleşmesi gibi, evrende de birçok şey belirli bir düzen ve ölçü içindedir. Buna ne denir?',
+  secenekler:[
+    {harf:'A', metin:'Evrendeki düzen ve ölçü'},
+    {harf:'B', metin:'Rastgelelik'},
+    {harf:'C', metin:'Karışıklık'}
+  ],
+  dogru:'A',
+  aciklama:'Güneş, Dünya, Ay, su, bitkiler ve canlılar birbirine uyumlu bir ölçü içinde bulunur. Bu uyuma evrendeki düzen ve ölçü denir.'
+};
+
+/* ===================================================================
+   DURUM
+=================================================================== */
+var durum = { bolum:1, puan:0, modelSira:0, ses:true, secili:null };
+
+var $ = function(s){ return document.querySelector(s); };
+var sahne   = $('#lgSahne');
+var canli   = $('#lgCanli');
+var puanEl  = $('#lgPuan');
+
+function canliSoyle(t){ canli.textContent = t; }
+function puanEkle(n){
+  durum.puan += n;
+  puanEl.textContent = durum.puan;
+  puanEl.parentElement.animate(
+    [{transform:'scale(1)'},{transform:'scale(1.16)'},{transform:'scale(1)'}],
+    {duration:340, easing:'cubic-bezier(.2,.8,.3,1.25)'}
+  );
+}
+function ilerlemeGuncelle(){
+  for(var i=1;i<=4;i++){
+    var el = document.getElementById('lgAdim'+i);
+    if(i < durum.bolum) el.setAttribute('data-durum','bitti');
+    else if(i === durum.bolum) el.setAttribute('data-durum','aktif');
+    else el.removeAttribute('data-durum');
+  }
+  $('#lgAdimYazi').textContent = 'Bölüm ' + Math.min(durum.bolum,4) + ' / 4';
+  var oran = ((durum.bolum-1)/4)*100;
+  $('#lgIlerleme').style.width = oran + '%';
+  var pb = document.querySelector('.lg-ilerleme');
+  pb.setAttribute('aria-valuenow', durum.bolum-1);
+}
+
+/* ---------- ses: kısa "tak" tıkırtısı (dosyasız, WebAudio) ---------- */
+var sesCtx = null;
+function tik(tip){
+  if(!durum.ses) return;
+  try{
+    if(!sesCtx) sesCtx = new (window.AudioContext||window.webkitAudioContext)();
+    var t = sesCtx.currentTime;
+    var o = sesCtx.createOscillator(), g = sesCtx.createGain();
+    o.connect(g); g.connect(sesCtx.destination);
+    if(tip === 'yanlis'){ o.type='sine'; o.frequency.setValueAtTime(180,t); o.frequency.exponentialRampToValueAtTime(110,t+.16); }
+    else if(tip === 'basari'){ o.type='triangle'; o.frequency.setValueAtTime(520,t); o.frequency.setValueAtTime(700,t+.09); o.frequency.setValueAtTime(880,t+.18); }
+    else { o.type='square'; o.frequency.setValueAtTime(420,t); o.frequency.exponentialRampToValueAtTime(260,t+.07); }
+    g.gain.setValueAtTime(.0001,t);
+    g.gain.exponentialRampToValueAtTime(tip==='basari'?.14:.09, t+.01);
+    g.gain.exponentialRampToValueAtTime(.0001, t + (tip==='basari'?.32:.14));
+    o.start(t); o.stop(t + (tip==='basari'?.34:.16));
+  }catch(e){ /* ses desteklenmiyorsa oyun aksamaz */ }
+}
+$('#lgSes').addEventListener('click', function(){
+  durum.ses = !durum.ses;
+  this.setAttribute('aria-pressed', String(durum.ses));
+  $('#lgSesIkon').textContent = durum.ses ? '🔊' : '🔇';
+  this.querySelector('.lg-gizli').textContent = durum.ses ? 'Ses açık' : 'Ses kapalı';
+  if(durum.ses) tik('tak');
+});
+
+/* ---------- ızgara yardımcıları ---------- */
+function hucre(){
+  var v = getComputedStyle(document.getElementById('legoEvreni')).getPropertyValue('--lg-hucre');
+  return parseInt(v,10) || 54;
+}
+var OLCEK = 1;   /* piksel tabanlı modellerde mobil küçültme */
+function konumla(el,p,c){
+  if(p.px){
+    el.style.left   = (p.x*OLCEK) + 'px';
+    el.style.top    = (p.y*OLCEK) + 'px';
+    el.style.width  = (p.w*OLCEK) + 'px';
+    el.style.height = (p.h*OLCEK) + 'px';
+    el.style.zIndex = String(20 + Math.round(p.w));
+    el.style.setProperty('--sw', Math.max(11, Math.min(26, p.w*OLCEK*0.46)) + 'px');
+  } else {
+    el.style.left   = (p.x*c) + 'px';
+    el.style.top    = (p.y*c) + 'px';
+    el.style.zIndex = String(40 - (p.y||0));
+    el.style.width  = (p.w*c - 6) + 'px';
+    el.style.height = (p.h*c - 6) + 'px';
+  }
+}
+/* Tepsideki parçalar ızgara ölçeğinde değil, okunur sabit boyutta gösterilir;
+   gerçek oran tahtadaki yuvada görünür (ölçü fikri orada öğretilir). */
+function tepsiTugla(p){
+  var el = document.createElement('button');
+  el.type = 'button';
+  el.className = 'lg-tugla';
+  el.style.setProperty('--t', p.renk);
+  if(!p.yuvarlak) el.textContent = p.ad;
+  el.setAttribute('aria-label', p.ad + ' parçası. Seçmek için Enter.');
+  el.style.position = 'relative';
+  el.style.width  = Math.max(84, Math.min(240, p.w*24 + 60)) + 'px';
+  el.style.height = '46px';
+  el.style.fontSize = '.8rem';
+  return el;
+}
+function tuglaYap(p,c,etkilesimli){
+  var el = document.createElement(etkilesimli ? 'button' : 'div');
+  el.className = 'lg-tugla' + (p.yuvarlak ? ' lg-yuvarlak' : '');
+  el.style.setProperty('--t', p.renk);
+  if(p.yuvarlak){
+    if(p.halka){ var h=document.createElement('span'); h.className='lg-halka'; el.appendChild(h); }
+  } else {
+    el.textContent = p.ad;
+  }
+  if(etkilesimli){ el.type='button'; el.setAttribute('aria-label', p.ad + ' parçası. Seçmek için Enter.'); }
+  if(!p.px){
+    el.style.width=(p.w*c-6)+'px'; el.style.height=(p.h*c-6)+'px';
+    if(p.w*c-6 < 78) el.style.fontSize='.6rem';
+  }
+  return el;
+}
+/* Bırakılan noktanın altında yuva yoksa, yakındaki en uygun BOŞ yuvayı bulur.
+   Küçük parçalarda (Merkür gibi) tam üstüne bırakmak zor olduğu için gerekli. */
+function hedefYuva(x,y,kapsayici,tuglaEl){
+  function uygun(sl){ return sl && !sl.classList.contains('lg-dolu') && !sl.disabled; }
+  /* 1) İmlecin tam altındaki yuva */
+  var el = document.elementFromPoint(x,y);
+  var yv = (el && el.closest) ? el.closest('.lg-yuva') : null;
+  if(uygun(yv)) return yv;
+
+  /* 2) Sürüklenen parçanın MERKEZİ hangi yuvanın içinde? (kullanıcı imleçle
+        değil parçayla nişan alır) */
+  var mx = x, my = y;
+  if(tuglaEl){ var br = tuglaEl.getBoundingClientRect(); mx = br.left + br.width/2; my = br.top + br.height/2; }
+  var liste = (kapsayici || document).querySelectorAll('.lg-yuva');
+  var i, sl, r;
+  for(i=0;i<liste.length;i++){
+    sl = liste[i]; if(!uygun(sl)) continue;
+    r = sl.getBoundingClientRect();
+    if(mx>=r.left && mx<=r.right && my>=r.top && my<=r.bottom) return sl;
+  }
+  /* 2b) En çok örtüşen boş yuva (parça yuvanın üstüne binmişse) */
+  if(tuglaEl){
+    var brr = tuglaEl.getBoundingClientRect(), enO=null, enA=0;
+    for(i=0;i<liste.length;i++){
+      sl = liste[i]; if(!uygun(sl)) continue;
+      r = sl.getBoundingClientRect();
+      var w = Math.min(brr.right,r.right) - Math.max(brr.left,r.left);
+      var h = Math.min(brr.bottom,r.bottom) - Math.max(brr.top,r.top);
+      if(w>0 && h>0){
+        var alan = w*h;
+        if(alan > enA){ enA = alan; enO = sl; }
+      }
+    }
+    if(enO){
+      var rr = enO.getBoundingClientRect();
+      var esik = 0.28 * Math.min(brr.width*brr.height, rr.width*rr.height);
+      if(enA >= esik) return enO;
+    }
+  }
+
+  /* 3) Kıl payı kaçırmalar için küçük tolerans */
+  var en=null, enM=1e9;
+  for(i=0;i<liste.length;i++){
+    sl = liste[i]; if(!uygun(sl)) continue;
+    r = sl.getBoundingClientRect();
+    var cx=r.left+r.width/2, cy=r.top+r.height/2;
+    var d=Math.sqrt(Math.pow(mx-cx,2)+Math.pow(my-cy,2));
+    if(d < Math.max(r.width,r.height)/2 + 24 && d < enM){ enM=d; en=sl; }
+  }
+  return en;
+}
+
+function karistir(a){
+  var d = a.slice();
+  for(var i=d.length-1;i>0;i--){ var j = Math.floor(Math.random()*(i+1)); var t=d[i]; d[i]=d[j]; d[j]=t; }
+  return d;
+}
+function mesajYaz(tip, metin){
+  var m = $('#lgMesaj');
+  if(!m) return;
+  m.setAttribute('data-tip', tip);
+  m.innerHTML = metin;
+  canliSoyle(m.textContent);
+}
+
+/* ===================================================================
+   BÖLÜM 1 — LEGO'yu tamamla (sürükle-bırak + seç-yerleştir)
+=================================================================== */
+function yorungeSVG(model){
+  var o = OLCEK, gx = model.gunes[0]*o, gy = model.gunes[1]*o;
+  var yollar = model.parcalar.filter(function(p){ return p.id !== 'gunes'; }).map(function(p){
+    var cx = (p.x + p.w/2)*o, cy = (p.y + p.h/2)*o;
+    var r  = Math.sqrt(Math.pow(cx-gx,2) + Math.pow(cy-gy,2));
+    return '<ellipse cx="'+gx.toFixed(1)+'" cy="'+gy.toFixed(1)+'" rx="'+r.toFixed(1)+'" ry="'+(r*0.62).toFixed(1)+'" '+
+           'fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 7" opacity=".38"/>';
+  }).join('');
+  return '<svg class="lg-yorunge" viewBox="0 0 '+(model.gen*o)+' '+(model.yuk*o)+'" aria-hidden="true" '+
+         'style="color:var(--lg-navy)">'+yollar+'</svg>';
+}
+
+function bolum1(){
+  var model = MODELLER[durum.modelSira];
+  var c = hucre();
+  durum.secili = null;
+
+  sahne.innerHTML =
+    '<h2>🪐 Bölüm 1 — LEGO\'yu Tamamla <span style="font-size:.78rem;font-weight:800;color:var(--lg-metin2)">('+(durum.modelSira+1)+'/'+MODELLER.length+' · '+model.ad+')</span></h2>'+
+    '<p class="lg-alt">Parçalar karışık geldi. Her parçayı kendi yerine yerleştir. Yuvanın genişliği parçanın büyüklüğünü gösterir.</p>'+
+    '<div class="lg-gorev">🎯 Görev: <b>'+model.ad+'</b> yapısını kur. Parçayı sürükleyebilir ya da <b>önce parçaya, sonra boş yere tıklayabilirsin</b>.<br>💡 '+model.ipucu+'</div>'+
+    '<div class="lg-oyunalani">'+
+      '<div class="lg-tahta-kutu"><div class="lg-tahta" id="lgTahta"></div></div>'+
+      '<div class="lg-tepsi"><h3>🧱 Parça kutusu</h3><p>Kalan parça: <b id="lgKalan">'+model.parcalar.length+'</b> — parçalar karışık dizildi. Bir parçayı sürükleyip yaklaştırman yeter, kendiliğinden oturur.</p><div class="lg-tepsi-ic" id="lgTepsi"></div></div>'+
+    '</div>'+
+    '<div class="lg-mesaj" data-tip="bos" id="lgMesaj">👆 Bir parça seç ve yerine koy.</div>'+
+    '<div class="lg-dugmeler"><button type="button" class="lg-btn lg-btn--yesil" id="lgIleri" hidden>Devam et ➡️</button></div>';
+
+  var tahta = $('#lgTahta'), tepsi = $('#lgTepsi');
+  if(model.tip === 'uzay'){
+    OLCEK = Math.min(1.15, Math.max(0.46, (tahta.parentElement.clientWidth - 34) / model.gen));
+    tahta.classList.add('lg-tahta--uzay');
+    tahta.style.width  = (model.gen*OLCEK) + 'px';
+    tahta.style.height = (model.yuk*OLCEK) + 'px';
+    tahta.insertAdjacentHTML('beforeend', yorungeSVG(model));
+  } else {
+    tahta.classList.remove('lg-tahta--uzay');
+    tahta.style.width  = (model.kolon*c) + 'px';
+    tahta.style.height = (model.satir*c) + 'px';
+  }
+
+  model.parcalar.forEach(function(p){
+    var y = document.createElement('button');
+    y.type = 'button';
+    y.className = 'lg-yuva' + (p.yuvarlak ? ' lg-yuvarlak' : '');
+    y.dataset.id = p.id;
+    if(p.yuvarlak){ y.innerHTML = p.w >= 150 ? '' : '<span class="lg-ad">'+p.ad+'</span>'; }
+    else { y.textContent = p.ad; }
+    y.setAttribute('aria-label', p.ad + ' için boş yer');
+    konumla(y,p,c);
+    tahta.appendChild(y);
+  });
+
+  karistir(model.parcalar).forEach(function(p){
+    var t = tepsiTugla(p);
+    t.dataset.id = p.id;
+    tepsi.appendChild(t);
+    surukleBagla(t, p);
+  });
+
+  var kalan = model.parcalar.length;
+
+  function yerlestir(tugla, yuva, p){
+    if(yuva.dataset.id !== p.id){
+      tik('yanlis');
+      tugla.classList.add('lg-titre');
+      setTimeout(function(){ tugla.classList.remove('lg-titre'); }, 470);
+      mesajYaz('yanlis','🔍 Bir kez daha düşün. Bu parça buraya tam uymuyor. 🔍');
+      return false;
+    }
+    tik('tak');
+    yuva.classList.add('lg-dolu');
+    if(!yuva.querySelector('.lg-ad')) yuva.textContent = '';   /* gezegen adı altta kalsın */
+    yuva.disabled = true;
+    yuva.setAttribute('aria-label', p.ad + ' yerleşti');
+    var yeni = tuglaYap(p, c, false);
+    yeni.classList.add('lg-tak','lg-yerlesti');
+    yeni.style.position = 'absolute';
+    konumla(yeni,p,c);
+    tahta.appendChild(yeni);
+    tugla.remove();
+    durum.secili = null;
+    kalan--;
+    $('#lgKalan').textContent = kalan;
+    puanEkle(10);
+    mesajYaz('dogru','🎉 Harika! Parça doğru yere geldi. 👏');
+    if(kalan === 0) modelBitti();
+    return true;
+  }
+
+  function modelBitti(){
+    tik('basari');
+    puanEkle(20);
+    if(durum.modelSira < MODELLER.length - 1){
+      mesajYaz('bilgi','✅ <b>'+model.ad+'</b> tamamlandı! Şimdi sıradaki yapıyı kuralım.');
+      var b = $('#lgIleri'); b.hidden = false; b.textContent = 'Sıradaki yapı';
+      b.onclick = function(){ durum.modelSira++; bolum1(); sahne.focus(); };
+    } else {
+      mesajYaz('bilgi','✅ Bütün parçalar yerine oturdu. Şimdi küçük bir deney yapalım…');
+      konfeti(40);
+      var b2 = $('#lgIleri'); b2.hidden = false;
+      b2.onclick = function(){ durum.bolum = 2; ilerlemeGuncelle(); bolum2(); sahne.focus(); };
+    }
+  }
+
+  /* --- sürükleme (fare + dokunmatik, Pointer Events) --- */
+  function surukleBagla(tugla, p){
+    var bas = null, tasindi = false, yerAl = null;
+
+    tugla.addEventListener('pointerdown', function(e){
+      if(tugla.classList.contains('lg-yerlesti')) return;
+      bas = {x:e.clientX, y:e.clientY};
+      tasindi = false;
+      var r = tugla.getBoundingClientRect();
+      yerAl = {dx:e.clientX - r.left, dy:e.clientY - r.top, w:r.width, h:r.height};
+      tugla.setPointerCapture(e.pointerId);
+    });
+
+    tugla.addEventListener('pointermove', function(e){
+      if(!bas) return;
+      var mx = e.clientX - bas.x, my = e.clientY - bas.y;
+      if(!tasindi && Math.abs(mx)+Math.abs(my) < 8) return;
+      if(!tasindi){
+        tasindi = true;
+        tugla.classList.add('lg-surukleniyor');
+        tugla.style.position = 'fixed';
+        tugla.style.zIndex = '999';
+        tugla.style.width = yerAl.w + 'px';
+        tugla.style.height = yerAl.h + 'px';
+      }
+      tugla.style.left = (e.clientX - yerAl.dx) + 'px';
+      tugla.style.top  = (e.clientY - yerAl.dy) + 'px';
+      var alt = hedefYuva(e.clientX, e.clientY, tahta, tugla);
+      document.querySelectorAll('.lg-hedef').forEach(function(n){ n.classList.remove('lg-hedef'); });
+      if(alt) alt.classList.add('lg-hedef');
+    });
+
+    function birak(e){
+      if(!bas) return;
+      var tasindiYerel = tasindi;
+      bas = null; tasindi = false;
+      document.querySelectorAll('.lg-hedef').forEach(function(n){ n.classList.remove('lg-hedef'); });
+      if(!tasindiYerel){ sec(tugla); return; }
+      var alt = hedefYuva(e.clientX, e.clientY, tahta, tugla);
+      tugla.classList.remove('lg-surukleniyor');
+      tugla.style.position = ''; tugla.style.left = ''; tugla.style.top = ''; tugla.style.zIndex = '';
+      if(alt){
+        yerlestir(tugla, alt, p);
+      } else {
+        tugla.classList.add('lg-titre');
+        setTimeout(function(){ tugla.classList.remove('lg-titre'); }, 470);
+      }
+    }
+    tugla.addEventListener('pointerup', birak);
+    tugla.addEventListener('pointercancel', function(){
+      bas=null; tasindi=false;
+      tugla.classList.remove('lg-surukleniyor');
+      tugla.style.position=''; tugla.style.left=''; tugla.style.top=''; tugla.style.zIndex='';
+    });
+    tugla.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sec(tugla); }
+    });
+  }
+
+  function sec(tugla){
+    if(durum.secili === tugla){
+      tugla.classList.remove('lg-secili'); durum.secili = null;
+      mesajYaz('bos','👆 Seçim kaldırıldı.');
+      return;
+    }
+    if(durum.secili) durum.secili.classList.remove('lg-secili');
+    durum.secili = tugla;
+    tugla.classList.add('lg-secili');
+    mesajYaz('bilgi','👆 <b>'+tugla.textContent+'</b> seçildi. Şimdi tahtada yerini seç.');
+  }
+
+  tahta.addEventListener('click', function(e){
+    var y = e.target.closest('.lg-yuva');
+    if(!y || y.classList.contains('lg-dolu') || y.disabled) return;
+    if(!durum.secili){
+      mesajYaz('bos','ℹ️ Önce kutudan bir parça seç.');
+      return;
+    }
+    var id = durum.secili.dataset.id;
+    var p = model.parcalar.filter(function(q){ return q.id === id; })[0];
+    yerlestir(durum.secili, y, p);
+  });
+}
+
+/* ===================================================================
+   BÖLÜM 2 — Eksik parça
+=================================================================== */
+function bolum2(){
+  var model = MODELLER[0], c = hucre();
+  sahne.innerHTML =
+    '<h2>🔎 Bölüm 2 — Eksik Parça</h2>'+
+    '<p class="lg-alt">Kurduğun Güneş Sistemi\'nden bir gezegeni çıkarıyoruz. Dikkatle bak.</p>'+
+    '<div class="lg-oyunalani" style="grid-template-columns:minmax(0,1fr)">'+
+      '<div class="lg-tahta-kutu"><div class="lg-tahta" id="lgTahta2"></div></div>'+
+    '</div>'+
+    '<div class="lg-mesaj" data-tip="bos" id="lgMesaj">⏳ Parça çıkarılıyor…</div>'+
+    '<div id="lgSoruAlan"></div>';
+
+  var tahta = $('#lgTahta2');
+  if(model.tip === 'uzay'){
+    OLCEK = Math.min(1.15, Math.max(0.46, (tahta.parentElement.clientWidth - 34) / model.gen));
+    tahta.classList.add('lg-tahta--uzay');
+    tahta.style.width  = (model.gen*OLCEK) + 'px';
+    tahta.style.height = (model.yuk*OLCEK) + 'px';
+    tahta.insertAdjacentHTML('beforeend', yorungeSVG(model));
+  } else {
+    tahta.style.width  = (model.kolon*c) + 'px';
+    tahta.style.height = (model.satir*c) + 'px';
+  }
+
+  var cikacak = 'dunya';
+  model.parcalar.forEach(function(p){
+    if(p.id === cikacak){
+      var y = document.createElement('div');
+      y.className = 'lg-yuva' + (p.yuvarlak ? ' lg-yuvarlak' : '');
+      y.innerHTML = '<b style="font-size:1.4rem">?</b><span class="lg-ad">'+p.ad+'</span>';
+      konumla(y,p,c);
+      y.id = 'lgBosluk';
+      y.style.opacity = '0';
+      tahta.appendChild(y);
+    }
+    var t = tuglaYap(p,c,false);
+    t.style.position = 'absolute';
+    konumla(t,p,c);
+    if(p.id === cikacak) t.id = 'lgCikan';
+    tahta.appendChild(t);
+    if(p.yuvarlak && p.id !== cikacak && p.w < 150){
+      var ad = document.createElement('span');
+      ad.className = 'lg-ad'; ad.textContent = p.ad;
+      ad.style.position='absolute';
+      ad.style.left = ((p.x + p.w/2)*OLCEK) + 'px';
+      ad.style.top  = ((p.y + p.h)*OLCEK + 7) + 'px';
+      ad.style.transform = 'translateX(-50%)';
+      tahta.appendChild(ad);
+    }
+  });
+
+  setTimeout(function(){
+    var cik = $('#lgCikan');
+    if(cik){
+      cik.animate(
+        [{transform:'translate(0,0) rotate(0)',opacity:1},
+         {transform:'translate(120px,-90px) rotate(22deg)',opacity:0}],
+        {duration:750, easing:'cubic-bezier(.16,1,.3,1)', fill:'forwards'}
+      ).onfinish = function(){
+        cik.remove();
+        var b = $('#lgBosluk');
+        if(b) b.style.opacity = '1';
+        tik('yanlis');
+        mesajYaz('yanlis','⚠️ <b>Dünya</b> yapıdan çıktı. Sıra bozuldu, yerinde bir boşluk kaldı. Şimdi yapıya bak…');
+        soruGoster(SORU2, $('#lgSoruAlan'), function(){
+          durum.bolum = 3; ilerlemeGuncelle(); bolum3(); sahne.focus();
+        });
+      };
+    }
+  }, 900);
+}
+
+/* ===================================================================
+   BÖLÜM 3 — Evreni düşün
+=================================================================== */
+function evrenSVG(){
+  return ''+
+  '<svg class="lg-evren" viewBox="0 0 560 300" role="img" aria-label="Güneş, Dünya, Ay, bitkiler, su, hayvan ve insanların düzenli biçimde yer aldığı evren kompozisyonu">'+
+    '<defs><linearGradient id="lgGok" x1="0" y1="0" x2="0" y2="1">'+
+      '<stop offset="0" stop-color="#a9d6e5"/><stop offset="1" stop-color="#eaf6fb"/></linearGradient></defs>'+
+    '<rect x="0" y="0" width="560" height="214" rx="18" fill="url(#lgGok)"/>'+
+    '<circle cx="476" cy="56" r="30" fill="#e0a83c"/>'+
+    '<g stroke="#e0a83c" stroke-width="4" stroke-linecap="round">'+
+      '<line x1="476" y1="10" x2="476" y2="0"/><line x1="522" y1="56" x2="534" y2="56"/>'+
+      '<line x1="510" y1="22" x2="518" y2="14"/><line x1="510" y1="90" x2="518" y2="98"/></g>'+
+    '<ellipse cx="196" cy="118" rx="118" ry="50" fill="none" stroke="#2a6f97" stroke-width="2" stroke-dasharray="7 7" opacity=".55"/>'+
+    '<circle cx="196" cy="118" r="42" fill="#2a6f97"/>'+
+    '<path d="M164 104 q22 -10 40 2 t28 -4 v28 q-20 12 -40 2 t-28 6 z" fill="#40916c"/>'+
+    '<circle cx="314" cy="118" r="17" fill="#94a3b8"/>'+
+    '<circle cx="308" cy="112" r="4.5" fill="#64748b"/><circle cx="320" cy="124" r="3.5" fill="#64748b"/>'+
+    '<rect x="0" y="206" width="560" height="94" rx="18" fill="#cbb994" opacity=".5"/>'+
+    '<path d="M0 232 q40 -14 80 0 t80 0 v68 H0 z" fill="#06B6D4" opacity=".75"/>'+
+    '<g fill="#40916c">'+
+      '<rect x="228" y="252" width="9" height="34" rx="4" fill="#8d6e4a"/><circle cx="232" cy="244" r="20"/>'+
+      '<rect x="292" y="262" width="7" height="24" rx="3" fill="#8d6e4a"/><circle cx="295" cy="256" r="15"/></g>'+
+    '<g fill="#8d6e4a">'+
+      '<ellipse cx="370" cy="268" rx="24" ry="14"/><circle cx="392" cy="260" r="9"/>'+
+      '<rect x="352" y="278" width="5" height="12" rx="2.5"/><rect x="364" y="279" width="5" height="11" rx="2.5"/>'+
+      '<rect x="376" y="279" width="5" height="11" rx="2.5"/><rect x="384" y="278" width="5" height="12" rx="2.5"/></g>'+
+    '<g fill="#1E3A8A">'+
+      '<circle cx="466" cy="246" r="10"/><rect x="459" y="260" width="14" height="30" rx="7"/>'+
+      '<circle cx="500" cy="252" r="8"/><rect x="494" y="264" width="12" height="26" rx="6"/></g>'+
+    '<g font-family="Nunito,sans-serif" font-size="12" font-weight="800" fill="#1E3A8A">'+
+      '<text x="476" y="104" text-anchor="middle">Güneş</text>'+
+      '<text x="196" y="178" text-anchor="middle">Dünya</text>'+
+      '<text x="314" y="152" text-anchor="middle">Ay</text>'+
+      '<text x="56" y="286" text-anchor="middle" fill="#0e5c6b">Su</text>'+
+      '<text x="250" y="298" text-anchor="middle">Bitkiler</text>'+
+      '<text x="374" y="298" text-anchor="middle">Hayvanlar</text>'+
+      '<text x="482" y="298" text-anchor="middle">İnsanlar</text></g>'+
+  '</svg>';
+}
+
+function bolum3(){
+  sahne.innerHTML =
+    '<h2>🌍 Bölüm 3 — Evreni Düşün</h2>'+
+    '<p class="lg-alt">Gezegenleri sıraya dizdiğin gibi, evrendeki varlıklar da birbirine uyumlu bir yerleşim ve ölçü içinde.</p>'+
+    evrenSVG()+
+    '<div class="lg-mesaj" data-tip="bilgi" id="lgMesaj">👀 Güneş, Dünya, Ay, su, bitkiler, hayvanlar ve insanlar… Hepsi belirli bir yerde ve belirli bir ölçüde.</div>'+
+    '<div id="lgSoruAlan"></div>';
+  soruGoster(SORU3, $('#lgSoruAlan'), function(){
+    durum.bolum = 4; ilerlemeGuncelle(); bolum4(); sahne.focus();
+  });
+}
+
+/* ===================================================================
+   Ortak soru bileşeni
+=================================================================== */
+function soruGoster(soru, kap, bitince){
+  var cevaplandi = false;
+  kap.innerHTML =
+    '<div class="lg-gorev" style="margin-top:18px">❓ '+soru.metin+'</div>'+
+    '<div class="lg-secenekler" id="lgSecenekler" role="group" aria-label="Seçenekler">'+
+      soru.secenekler.map(function(s){
+        return '<button type="button" class="lg-secenek" data-harf="'+s.harf+'"><b>'+s.harf+'</b><span>'+s.metin+'</span></button>';
+      }).join('')+
+    '</div>'+
+    '<div class="lg-mesaj" data-tip="bos" id="lgSoruMesaj">❓ Bir seçenek işaretle. Yanlışta tekrar deneyebilirsin.</div>'+
+    '<div class="lg-dugmeler"><button type="button" class="lg-btn lg-btn--yesil" id="lgSoruIleri" hidden>Devam et ➡️</button></div>';
+
+  var mesaj = kap.querySelector('#lgSoruMesaj');
+  kap.querySelectorAll('.lg-secenek').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(cevaplandi) return;
+      if(btn.dataset.harf === soru.dogru){
+        cevaplandi = true;
+        btn.setAttribute('data-sonuc','dogru');
+        kap.querySelectorAll('.lg-secenek').forEach(function(b){ b.disabled = true; });
+        tik('basari');
+        puanEkle(25);
+        mesaj.setAttribute('data-tip','dogru');
+        mesaj.innerHTML = '🎉 Doğru! 👏 '+soru.aciklama;
+        canliSoyle('Doğru. ' + soru.aciklama);
+        var ileri = kap.querySelector('#lgSoruIleri');
+        ileri.hidden = false;
+        ileri.onclick = bitince;
+        ileri.focus();
+      } else {
+        btn.setAttribute('data-sonuc','yanlis');
+        tik('yanlis');
+        mesaj.setAttribute('data-tip','yanlis');
+        mesaj.innerHTML = '🔍 Bir kez daha düşün. 🔍 Yapıya tekrar bak, başka bir seçeneği dene.';
+        canliSoyle('Bir kez daha düşün.');
+        setTimeout(function(){ btn.removeAttribute('data-sonuc'); }, 1400);
+      }
+    });
+  });
+}
+
+/* ===================================================================
+   BÖLÜM 4 — Son LEGO
+=================================================================== */
+function bolum4(){
+  var c = hucre();
+  durum.secili = null;
+  sahne.innerHTML =
+    '<h2>🧩 Bölüm 4 — Son LEGO</h2>'+
+    '<p class="lg-alt">Yıldızlar, Güneş, gezegenler, Dünya, Ay ve yörüngeler yerinde. Geriye tek bir parça kaldı.</p>'+
+    '<div class="lg-gorev">🎯 Görev: <b>DÜZEN</b> parçasını en alttaki boşluğa yerleştir ve yapıyı tamamla.</div>'+
+    '<div class="lg-oyunalani">'+
+      '<div class="lg-tahta-kutu"><div class="lg-tahta" id="lgTahta4"></div></div>'+
+      '<div class="lg-tepsi"><h3>Son parça</h3><p>Sürükle ya da seçip yerine tıkla.</p><div class="lg-tepsi-ic" id="lgTepsi4"></div></div>'+
+    '</div>'+
+    '<div class="lg-mesaj" data-tip="bos" id="lgMesaj">🧩 Son parçayı yerine koy.</div>';
+
+  var tahta = $('#lgTahta4');
+  tahta.style.width  = (SON_MODEL.kolon*c) + 'px';
+  tahta.style.height = (SON_MODEL.satir*c) + 'px';
+
+  SON_MODEL.hazir.forEach(function(p){
+    var t = tuglaYap(p,c,false);
+    t.style.position = 'absolute';
+    konumla(t,p,c);
+    tahta.appendChild(t);
+  });
+
+  var p = SON_MODEL.eksik;
+  var yuva = document.createElement('button');
+  yuva.type = 'button';
+  yuva.className = 'lg-yuva';
+  yuva.textContent = 'son parça buraya';
+  yuva.setAttribute('aria-label','Son parçanın yeri');
+  konumla(yuva,p,c);
+  tahta.appendChild(yuva);
+
+  var tugla = tuglaYap(p,c,true);
+  tugla.style.width = Math.min(p.w*c-6, 200) + 'px';
+  tugla.style.fontSize = '.95rem';
+  $('#lgTepsi4').appendChild(tugla);
+
+  function tamamla(){
+    tik('basari');
+    yuva.classList.add('lg-dolu');
+    yuva.textContent = '';
+    yuva.disabled = true;
+    var yeni = tuglaYap(p,c,false);
+    yeni.classList.add('lg-tak');
+    yeni.style.position = 'absolute';
+    yeni.style.fontSize = '.95rem';
+    konumla(yeni,p,c);
+    tahta.appendChild(yeni);
+    tugla.remove();
+    puanEkle(30);
+    setTimeout(final, 620);
+  }
+
+  /* sürükle */
+  var bas=null, tasindi=false, yerAl=null;
+  tugla.addEventListener('pointerdown', function(e){
+    bas={x:e.clientX,y:e.clientY}; tasindi=false;
+    var r=tugla.getBoundingClientRect();
+    yerAl={dx:e.clientX-r.left, dy:e.clientY-r.top, w:r.width, h:r.height};
+    tugla.setPointerCapture(e.pointerId);
+  });
+  tugla.addEventListener('pointermove', function(e){
+    if(!bas) return;
+    if(!tasindi && Math.abs(e.clientX-bas.x)+Math.abs(e.clientY-bas.y) < 8) return;
+    if(!tasindi){
+      tasindi=true;
+      tugla.classList.add('lg-surukleniyor');
+      tugla.style.position='fixed'; tugla.style.zIndex='999';
+      tugla.style.width=yerAl.w+'px'; tugla.style.height=yerAl.h+'px';
+    }
+    tugla.style.left=(e.clientX-yerAl.dx)+'px';
+    tugla.style.top =(e.clientY-yerAl.dy)+'px';
+    var alt=hedefYuva(e.clientX,e.clientY,tahta,tugla);
+    yuva.classList.toggle('lg-hedef', alt===yuva);
+  });
+  tugla.addEventListener('pointerup', function(e){
+    if(!bas) return;
+    var t=tasindi; bas=null; tasindi=false;
+    yuva.classList.remove('lg-hedef');
+    if(!t){ tugla.classList.toggle('lg-secili'); durum.secili = tugla.classList.contains('lg-secili') ? tugla : null;
+      mesajYaz('bilgi','👆 <b>DÜZEN</b> parçası seçildi. Şimdi boşluğa tıkla.'); return; }
+    var alt=hedefYuva(e.clientX,e.clientY,tahta,tugla);
+    tugla.classList.remove('lg-surukleniyor');
+    tugla.style.position=''; tugla.style.left=''; tugla.style.top=''; tugla.style.zIndex='';
+    if(alt===yuva) tamamla();
+    else{
+      tik('yanlis');
+      tugla.classList.add('lg-titre');
+      setTimeout(function(){ tugla.classList.remove('lg-titre'); },470);
+      mesajYaz('yanlis','🔍 Bir kez daha düşün. Bu parça buraya tam uymuyor. 🔍');
+    }
+  });
+  tugla.addEventListener('keydown', function(e){
+    if(e.key==='Enter'||e.key===' '){
+      e.preventDefault();
+      tugla.classList.toggle('lg-secili');
+      durum.secili = tugla.classList.contains('lg-secili') ? tugla : null;
+      mesajYaz('bilgi','👆 <b>DÜZEN</b> parçası seçildi. Şimdi boşluğa tıkla ya da Enter\'a bas.');
+    }
+  });
+  yuva.addEventListener('click', function(){
+    if(durum.secili === tugla) tamamla();
+    else mesajYaz('bos','ℹ️ Önce <b>DÜZEN</b> parçasını seç.');
+  });
+}
+
+/* ===================================================================
+   FİNAL
+=================================================================== */
+function final(){
+  durum.bolum = 5;
+  ilerlemeGuncelle();
+  $('#lgIlerleme').style.width = '100%';
+  document.querySelector('.lg-ilerleme').setAttribute('aria-valuenow','4');
+  $('#lgAdimYazi').textContent = 'Bölüm 4 / 4 · Tamamlandı';
+  konfeti(160);
+  tik('basari');
+
+  sahne.innerHTML =
+    '<div class="lg-final">'+
+      '<h2>🎉 EVRENİN LEGO YAPBOZUNU TAMAMLADIN!</h2>'+
+      '<div class="lg-ozet">Bir LEGO yapısında bile parçaların belirli bir düzen içinde olması gerekir.<br>Evrende de varlıklar arasında <b>düzen ve ölçü</b> vardır.</div>'+
+      '<p class="lg-not">Toplam puanın: <b>'+durum.puan+'</b> · Bölüm 4 / 4</p>'+
+      '<div class="lg-dugmeler" style="justify-content:center">'+
+        '<button type="button" class="lg-btn" id="lgTekrar">🔁 Yeniden oyna</button>'+
+      '</div>'+
+    '</div>';
+  canliSoyle('Oyun tamamlandı. Toplam puan ' + durum.puan);
+  $('#lgTekrar').onclick = function(){
+    durum = { bolum:1, puan:0, modelSira:0, ses:durum.ses, secili:null };
+    puanEl.textContent = '0';
+    ilerlemeGuncelle();
+    bolum1();
+    sahne.focus();
+  };
+}
+
+/* ===================================================================
+   KONFETİ
+=================================================================== */
+var kf = document.getElementById('lgKonfeti'), kctx = kf.getContext('2d'), parcalar = [], kfCalisiyor = false;
+function kfBoyut(){ kf.width = innerWidth; kf.height = innerHeight; }
+addEventListener('resize', kfBoyut); kfBoyut();
+function konfeti(adet){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var renkler = ['#d62828','#f4a261','#2a6f97','#40916c','#7c3aed','#06B6D4','#e0a83c'];
+  for(var i=0;i<adet;i++){
+    parcalar.push({
+      x: Math.random()*kf.width,
+      y: -20 - Math.random()*kf.height*.4,
+      w: 6+Math.random()*8, h: 8+Math.random()*10,
+      vy: 2+Math.random()*3.4, vx: -1.4+Math.random()*2.8,
+      a: Math.random()*Math.PI, va: -.16+Math.random()*.32,
+      r: renkler[Math.floor(Math.random()*renkler.length)]
+    });
+  }
+  if(!kfCalisiyor){ kfCalisiyor = true; requestAnimationFrame(kfCiz); }
+}
+function kfCiz(){
+  kctx.clearRect(0,0,kf.width,kf.height);
+  for(var i=parcalar.length-1;i>=0;i--){
+    var p = parcalar[i];
+    p.x += p.vx; p.y += p.vy; p.a += p.va;
+    kctx.save(); kctx.translate(p.x,p.y); kctx.rotate(p.a);
+    kctx.fillStyle = p.r; kctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+    kctx.restore();
+    if(p.y > kf.height + 30) parcalar.splice(i,1);
+  }
+  if(parcalar.length) requestAnimationFrame(kfCiz);
+  else { kfCalisiyor = false; kctx.clearRect(0,0,kf.width,kf.height); }
+}
+
+/* ===================================================================
+   BAŞLAT
+=================================================================== */
+ilerlemeGuncelle();
+bolum1();
+
+/* ekran döndüğünde ızgarayı yeniden ölç */
+var ebat = innerWidth;
+addEventListener('resize', function(){
+  if(Math.abs(innerWidth - ebat) < 60) return;
+  ebat = innerWidth;
+  if(durum.bolum === 1) bolum1();
+  else if(durum.bolum === 4) bolum4();
+});
+})();
 
 </script>
 
