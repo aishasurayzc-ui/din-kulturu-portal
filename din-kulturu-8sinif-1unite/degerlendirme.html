@@ -1064,21 +1064,22 @@ function kt8rSoruGoster(){
   document.getElementById('kt8rSonuc').textContent = '';
   const kutu = document.getElementById('kt8rSecenekler');
   kutu.innerHTML = '';
-  oge.secenekler.forEach((sec,i)=>{
+  const karisikSecenekler = karistir(oge.secenekler.map((sec,i)=>({sec, dogruMu:i===oge.dogru})));
+  karisikSecenekler.forEach(secenek=>{
     const btn = document.createElement('div');
     btn.className = 'merdiven-secenek';
-    btn.textContent = sec;
+    btn.textContent = secenek.sec;
     btn.onclick = ()=>{
       if(kt8rKilit) return;
       kt8rKilit = true;
       const tumBtn = kutu.querySelectorAll('.merdiven-secenek');
-      if(i===oge.dogru){
+      if(secenek.dogruMu){
         btn.classList.add('dogru');
         kt8rPuan++;
         document.getElementById('kt8rPuan').textContent = kt8rPuan;
       } else {
         btn.classList.add('yanlis');
-        tumBtn[oge.dogru].classList.add('dogru');
+        karisikSecenekler.forEach((s,idx)=>{ if(s.dogruMu) tumBtn[idx].classList.add('dogru'); });
         kt8rZayifKaydet(oge.soru);
       }
       const aciklamaKutu = document.getElementById('kt8rAciklama');

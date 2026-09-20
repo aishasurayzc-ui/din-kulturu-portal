@@ -750,6 +750,85 @@
 .kesif-giris-rozet{ position:absolute; top:10px; right:10px; background:#137a4a; color:#fff;
   font-size:.62em; font-weight:900; letter-spacing:.09em; padding:3px 9px; border-radius:20px; }
 </style>
+
+<style id="ub-stil">
+/* ════ Ünite başlangıç akışı — 4. ve 8. sınıfta ORTAK mimari ════
+   Yalnızca .ub-* seçicileri; mevcut hiçbir kuralı ezmez.
+   Renk/sıcaklık farkı --ub-* değişkenleriyle sınıfa göre ayarlanır. */
+/* Bu kutu 4. sınıfta display:grid, 8. sınıfta display:flex olarak
+   açılıyor (.oyun-grubu.aktif). display'e DOKUNULMAZ — yoksa kutu
+   kapalıyken de görünür. Bunun yerine iki düzende de tek sütun
+   davranışı sağlanır. */
+#kat-anamenu.ub-akis{
+  flex-direction:column; align-items:stretch; gap:0;
+  grid-template-columns:1fr !important;
+  max-width:860px; padding:22px 16px 30px;
+}
+#kat-anamenu.ub-akis > *{ grid-column:1 / -1; width:100%; min-width:0; }
+.ub-kapak{ text-align:center; margin:0 0 22px; }
+.ub-etiket{ margin:0 0 6px; font-size:11.5px; font-weight:900;
+  letter-spacing:.16em; color:var(--ub-soluk); }
+.ub-ad{ margin:0 0 8px; font-size:clamp(22px,3.4vw,30px); font-weight:900;
+  line-height:1.18; color:var(--ub-koyu); letter-spacing:-.01em;
+  /* sayfaların h2'sinden gelen alt çizgi/dolgu bu başlıkta istenmiyor */
+  border:0; padding:0; background:none; }
+.ub-cumle{ margin:0 auto; max-width:430px; font-size:14.5px; line-height:1.6;
+  color:var(--ub-soluk); }
+
+.ub-yol{ list-style:none; margin:0; padding:0; display:grid; gap:12px;
+  grid-template-columns:repeat(4,1fr); }
+.ub-adim{ display:flex; flex-direction:column; align-items:flex-start;
+  gap:2px; height:100%; padding:18px 16px 16px;
+  background:#fff; border:1px solid var(--ub-cizgi);
+  border-radius:var(--ub-yuvarlak); text-decoration:none; color:inherit;
+  box-shadow:0 1px 3px rgba(20,45,75,.06);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.ub-adim:hover{ transform:translateY(-3px); border-color:var(--ub-vurgu);
+  box-shadow:0 10px 22px rgba(20,45,75,.12); }
+.ub-adim:focus-visible{ outline:3px solid var(--ub-vurgu); outline-offset:3px; }
+.ub-no{ display:inline-grid; place-items:center; width:26px; height:26px;
+  margin:0 0 10px; border-radius:9px; font-size:12.5px; font-weight:900;
+  color:var(--ub-vurgu); background:var(--ub-yumusak); }
+.ub-ikon{ font-size:19px; line-height:1; margin:0 0 7px; }
+.ub-adim b{ font-size:15.5px; font-weight:900; line-height:1.25;
+  color:var(--ub-koyu); }
+.ub-adim span{ font-size:12.5px; line-height:1.45; color:var(--ub-soluk); }
+
+.ub-ekstra{ display:flex; flex-wrap:wrap; align-items:center; gap:9px;
+  margin:18px 0 0; padding:14px 2px 0; border-top:1px solid var(--ub-cizgi); }
+.ub-ekstra-bas{ font-size:11px; font-weight:900; letter-spacing:.13em;
+  color:var(--ub-soluk); margin-right:2px; }
+.ub-ek{ display:inline-flex; align-items:center; gap:7px;
+  padding:9px 15px; min-height:42px; border-radius:999px;
+  font-size:13px; font-weight:800; text-decoration:none;
+  color:var(--ub-vurgu); background:#fff;
+  border:1px solid var(--ub-cizgi); }
+.ub-ek:hover{ border-color:var(--ub-vurgu); background:var(--ub-yumusak); }
+.ub-ek:focus-visible{ outline:3px solid var(--ub-vurgu); outline-offset:2px; }
+
+@media (max-width:860px){ .ub-yol{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:430px){
+  .ub-yol{ grid-template-columns:1fr; gap:10px; }
+  .ub-adim{ flex-direction:row; align-items:center; gap:13px;
+    padding:14px 15px; }
+  .ub-no{ margin:0; flex:0 0 auto; }
+  .ub-ikon{ display:none; }
+  .ub-adim > div{ min-width:0; }
+  #kat-anamenu.ub-akis{ padding:18px 14px 24px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .ub-adim:hover{ transform:none; }
+}
+
+</style>
+
+<style id="ub-palet">
+#kat-anamenu.ub-akis{
+  --ub-koyu:#12306b; --ub-soluk:#5b6570; --ub-cizgi:#dde6f2;
+  --ub-vurgu:#2f5fae; --ub-yumusak:#eef3fb; --ub-yuvarlak:14px;
+}
+.ub-adim b{ letter-spacing:-.005em; }
+</style>
 </head>
 <body>
 <div id="portalNav" data-sinif="8" data-unite="1" data-asama="hub"></div>
@@ -773,28 +852,9 @@
 
 <div id="oyun-gruplari" role="navigation" aria-label="Ünite bölümleri menüsü">
 
-<div class="oyun-grubu mega-menu aktif" id="kat-anamenu">
-  <div class="mega-kart kesif-giris-kart" onclick="window.location.href='konuyu-ogren.html?v=3#kesif-motor'">
-        <span class="kesif-giris-rozet">YENİ</span>
-        <div class="mega-kart-ikon">🚀</div><h3>Keşif Modu</h3>
-        <p>Okumadan önce tahmin et. 6 konu · 48 adım · 420 XP</p>
-      </div>
-      <div class="mega-kart" onclick="window.location.href='konuyu-ogren.html'">
-    <div class="mega-kart-ikon">📖</div><h3>Konuyu Öğren</h3>
-    <p>Konu anlatımları, sunular ve kavramlar.</p>
-  </div>
-  <div class="mega-kart" onclick="window.location.href='oyun-merkezi.html'">
-    <div class="mega-kart-ikon">🎮</div><h3>Oyunlar</h3>
-    <p>Konuyu eğlenerek pekiştir.</p>
-  </div>
-  <div class="mega-kart" onclick="window.location.href='degerlendirme.html'">
-    <div class="mega-kart-ikon">📝</div><h3>Değerlendirme</h3>
-    <p>Testler ve değerlendirme soruları.</p>
-  </div>
-  <div class="mega-kart" onclick="window.location.href='../sinav-merkezi/lgs-hazirlik/index.html?kart=konular&amp;sekme=kazanim-testleri&amp;unite=unite1'">
-    <div class="mega-kart-ikon">🎯</div><h3>LGS ile Pekiştir</h3>
-    <p>Bu ünitenin kazanım testleri ve çıkmış sorular.</p>
-  </div>
+<div class="oyun-grubu mega-menu aktif ub-akis" id="kat-anamenu">
+  <div class="ub-kapak"><p class="ub-etiket">8. SINIF · 1. ÜNİTE</p><h2 class="ub-ad">Kader İnancı</h2><p class="ub-cumle">Kader, seçim, sorumluluk ve tevekkül arasındaki ilişkiyi keşfet.</p></div>
+  <ol class="ub-yol" aria-label="Ünite yol haritası"><li><a class="ub-adim" href="konuyu-ogren.html"><span class="ub-no" aria-hidden="true">1</span><span class="ub-ikon" aria-hidden="true">📖</span><div><b>Öğren</b><br><span>Konu anlatımı, sunu ve kavramlar</span></div></a></li><li><a class="ub-adim" href="konuyu-ogren.html#yg-etkinlik"><span class="ub-no" aria-hidden="true">2</span><span class="ub-ikon" aria-hidden="true">🧭</span><div><b>Uygula</b><br><span>Sürükle-bırak etkinlikleri</span></div></a></li><li><a class="ub-adim" href="oyun-merkezi.html"><span class="ub-no" aria-hidden="true">3</span><span class="ub-ikon" aria-hidden="true">🎮</span><div><b>Oyna</b><br><span>Oyun merkezi</span></div></a></li><li><a class="ub-adim" href="degerlendirme.html"><span class="ub-no" aria-hidden="true">4</span><span class="ub-ikon" aria-hidden="true">📝</span><div><b>Kendini Dene</b><br><span>Testler ve değerlendirme</span></div></a></li></ol><div class="ub-ekstra"><span class="ub-ekstra-bas">AYRICA</span><a class="ub-ek" href="konuyu-ogren.html?v=3#kesif-motor"><span aria-hidden="true">🚀</span>Keşif Modu</a><a class="ub-ek" href="../sinav-merkezi/lgs-hazirlik/index.html?kart=konular&amp;sekme=kazanim-testleri&amp;unite=unite1"><span aria-hidden="true">🎯</span>LGS ile Pekiştir</a></div>
 </div>
 
 </div>

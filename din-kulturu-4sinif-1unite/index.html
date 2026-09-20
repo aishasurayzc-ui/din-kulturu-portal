@@ -1045,6 +1045,117 @@
   display:none !important;
 }
 </style>
+
+<style id="ub-stil">
+/* ════ Ünite başlangıç akışı — 4. ve 8. sınıfta ORTAK mimari ════
+   Yalnızca .ub-* seçicileri; mevcut hiçbir kuralı ezmez.
+   Renk/sıcaklık farkı --ub-* değişkenleriyle sınıfa göre ayarlanır. */
+/* Bu kutu 4. sınıfta display:grid, 8. sınıfta display:flex olarak
+   açılıyor (.oyun-grubu.aktif). display'e DOKUNULMAZ — yoksa kutu
+   kapalıyken de görünür. Bunun yerine iki düzende de tek sütun
+   davranışı sağlanır. */
+#kat-anamenu.ub-akis{
+  flex-direction:column; align-items:stretch; gap:0;
+  grid-template-columns:1fr !important;
+  max-width:860px; padding:22px 16px 30px;
+}
+#kat-anamenu.ub-akis > *{ grid-column:1 / -1; width:100%; min-width:0; }
+.ub-kapak{ text-align:center; margin:0 0 22px; }
+.ub-etiket{ margin:0 0 6px; font-size:11.5px; font-weight:900;
+  letter-spacing:.16em; color:var(--ub-soluk); }
+.ub-ad{ margin:0 0 8px; font-size:clamp(22px,3.4vw,30px); font-weight:900;
+  line-height:1.18; color:var(--ub-koyu); letter-spacing:-.01em;
+  /* sayfaların h2'sinden gelen alt çizgi/dolgu bu başlıkta istenmiyor */
+  border:0; padding:0; background:none; }
+.ub-cumle{ margin:0 auto; max-width:430px; font-size:14.5px; line-height:1.6;
+  color:var(--ub-soluk); }
+
+.ub-yol{ list-style:none; margin:0; padding:0; display:grid; gap:12px;
+  grid-template-columns:repeat(4,1fr); }
+.ub-adim{ display:flex; flex-direction:column; align-items:flex-start;
+  gap:2px; height:100%; padding:18px 16px 16px;
+  background:#fff; border:1px solid var(--ub-cizgi);
+  border-radius:var(--ub-yuvarlak); text-decoration:none; color:inherit;
+  box-shadow:0 1px 3px rgba(20,45,75,.06);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.ub-adim:hover{ transform:translateY(-3px); border-color:var(--ub-vurgu);
+  box-shadow:0 10px 22px rgba(20,45,75,.12); }
+.ub-adim:focus-visible{ outline:3px solid var(--ub-vurgu); outline-offset:3px; }
+.ub-no{ display:inline-grid; place-items:center; width:26px; height:26px;
+  margin:0 0 10px; border-radius:9px; font-size:12.5px; font-weight:900;
+  color:var(--ub-vurgu); background:var(--ub-yumusak); }
+.ub-ikon{ font-size:19px; line-height:1; margin:0 0 7px; }
+.ub-adim b{ font-size:15.5px; font-weight:900; line-height:1.25;
+  color:var(--ub-koyu); }
+.ub-adim span{ font-size:12.5px; line-height:1.45; color:var(--ub-soluk); }
+
+.ub-ekstra{ display:flex; flex-wrap:wrap; align-items:center; gap:9px;
+  margin:18px 0 0; padding:14px 2px 0; border-top:1px solid var(--ub-cizgi); }
+.ub-ekstra-bas{ font-size:11px; font-weight:900; letter-spacing:.13em;
+  color:var(--ub-soluk); margin-right:2px; }
+.ub-ek{ display:inline-flex; align-items:center; gap:7px;
+  padding:9px 15px; min-height:42px; border-radius:999px;
+  font-size:13px; font-weight:800; text-decoration:none;
+  color:var(--ub-vurgu); background:#fff;
+  border:1px solid var(--ub-cizgi); }
+.ub-ek:hover{ border-color:var(--ub-vurgu); background:var(--ub-yumusak); }
+.ub-ek:focus-visible{ outline:3px solid var(--ub-vurgu); outline-offset:2px; }
+
+@media (max-width:860px){ .ub-yol{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:430px){
+  .ub-yol{ grid-template-columns:1fr; gap:10px; }
+  .ub-adim{ flex-direction:row; align-items:center; gap:13px;
+    padding:14px 15px; }
+  .ub-no{ margin:0; flex:0 0 auto; }
+  .ub-ikon{ display:none; }
+  .ub-adim > div{ min-width:0; }
+  #kat-anamenu.ub-akis{ padding:18px 14px 24px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .ub-adim:hover{ transform:none; }
+}
+
+</style>
+
+<style id="ub-palet">
+#kat-anamenu.ub-akis{
+  --ub-koyu:#1b3b5f; --ub-soluk:#5d7286; --ub-cizgi:#d9e6f0;
+  --ub-vurgu:#0f7d8c; --ub-yumusak:#e4f5f7; --ub-yuvarlak:20px;
+}
+.ub-ad{ letter-spacing:0; }
+.ub-adim{ border-width:2px; }
+
+/* ── Koyu tema ──
+   Yalnızca 4. sınıf sayfasında koyu tema var (temaDegistir + 
+   prefers-color-scheme). Sayfanın kendi belirteçleri kullanılır.
+   8. sınıfın koyu teması olmadığı için bu blok oraya konmaz. */
+:root[data-theme="dark"] .ub-adim,
+:root[data-theme="dark"] .ub-ek{
+  background:var(--color-surface,#1b2530);
+  border-color:var(--color-border,#2c3947); }
+:root[data-theme="dark"] .ub-ad{ color:var(--color-text,#e7ecf1); }
+:root[data-theme="dark"] .ub-adim b{ color:var(--color-text,#e7ecf1); }
+:root[data-theme="dark"] .ub-etiket,
+:root[data-theme="dark"] .ub-cumle,
+:root[data-theme="dark"] .ub-adim span,
+:root[data-theme="dark"] .ub-ekstra-bas{ color:var(--color-text-muted,#9aa7b4); }
+:root[data-theme="dark"] .ub-no{ background:var(--color-surface-alt,#222e3a); }
+:root[data-theme="dark"] .ub-ekstra{ border-top-color:var(--color-border,#2c3947); }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .ub-adim,
+  :root:not([data-theme="light"]) .ub-ek{
+    background:var(--color-surface,#1b2530);
+    border-color:var(--color-border,#2c3947); }
+  :root:not([data-theme="light"]) .ub-ad,
+  :root:not([data-theme="light"]) .ub-adim b{ color:var(--color-text,#e7ecf1); }
+  :root:not([data-theme="light"]) .ub-etiket,
+  :root:not([data-theme="light"]) .ub-cumle,
+  :root:not([data-theme="light"]) .ub-adim span,
+  :root:not([data-theme="light"]) .ub-ekstra-bas{ color:var(--color-text-muted,#9aa7b4); }
+  :root:not([data-theme="light"]) .ub-no{ background:var(--color-surface-alt,#222e3a); }
+  :root:not([data-theme="light"]) .ub-ekstra{ border-top-color:var(--color-border,#2c3947); }
+}
+</style>
 </head>
 <body>
 <div id="portalNav" data-sinif="4" data-unite="1" data-asama="hub"></div>
@@ -1072,19 +1183,9 @@
 
 <div id="oyun-gruplari" role="navigation" aria-label="Ünite bölümleri menüsü">
 
-<div class="oyun-grubu mega-menu aktif" id="kat-anamenu">
-  <div class="mega-kart" onclick="window.location.href='konuyu-ogren.html'">
-    <div class="mega-kart-ikon">📖</div><h3>Konuyu Öğren</h3>
-    <p>Konu anlatımları, sunular ve kavramlar.</p>
-  </div>
-  <div class="mega-kart" onclick="window.location.href='oyun-merkezi.html'">
-    <div class="mega-kart-ikon">🎮</div><h3>Oyunlar</h3>
-    <p>Konuyu eğlenerek pekiştir.</p>
-  </div>
-  <div class="mega-kart" onclick="window.location.href='degerlendirme.html'">
-    <div class="mega-kart-ikon">📝</div><h3>Değerlendirme</h3>
-    <p>Testler ve değerlendirme soruları.</p>
-  </div>
+<div class="oyun-grubu mega-menu aktif ub-akis" id="kat-anamenu">
+  <div class="ub-kapak"><p class="ub-etiket">4. SINIF · 1. ÜNİTE</p><h2 class="ub-ad">Günlük Hayattaki Dinî İfadeler</h2><p class="ub-cumle">Günlük hayatımızda kullandığımız dinî ifadeleri keşfet.</p></div>
+  <ol class="ub-yol" aria-label="Ünite yol haritası"><li><a class="ub-adim" href="konuyu-ogren.html"><span class="ub-no" aria-hidden="true">1</span><span class="ub-ikon" aria-hidden="true">📖</span><div><b>Öğren</b><br><span>Altı konu, sunular ve kavramlar</span></div></a></li><li><a class="ub-adim" href="konuyu-ogren.html#u41-etkinlikler"><span class="ub-no" aria-hidden="true">2</span><span class="ub-ikon" aria-hidden="true">🎨</span><div><b>Uygula</b><br><span>Sınıf içi etkinlikler</span></div></a></li><li><a class="ub-adim" href="oyun-merkezi.html"><span class="ub-no" aria-hidden="true">3</span><span class="ub-ikon" aria-hidden="true">🎮</span><div><b>Oyna</b><br><span>Oyun merkezi</span></div></a></li><li><a class="ub-adim" href="degerlendirme.html"><span class="ub-no" aria-hidden="true">4</span><span class="ub-ikon" aria-hidden="true">📝</span><div><b>Kendini Dene</b><br><span>Testler ve değerlendirme</span></div></a></li></ol>
 </div>
 
 </div>

@@ -886,7 +886,7 @@
     padding:15px 17px; margin:16px 0;
   }
   .ka-blok-bas{
-    display:flex; align-items:center; gap:8px; margin:0 0 12px;
+    display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0 0 12px;
     font-size:1em; font-weight:900; color:var(--navy,#1E3A8A);
     letter-spacing:.01em;
   }
@@ -908,7 +908,7 @@
   }
   @keyframes kaAlt{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:none } }
   .ka-alt-gorsel{ flex:0 0 82px; width:82px; border-radius:11px; overflow:hidden; }
-  .ka-alt-govde{ display:block; min-width:0; }
+  .ka-alt-govde{ display:block; min-width:0; overflow-wrap:anywhere; }
   .ka-alt-govde b{ display:block; font-size:.96em; color:var(--navy,#1E3A8A); line-height:1.3; }
   /* Açıklama satırı — numara rozetini kapsamaz (aksi hâlde rozet blok
      olup satırın tamamına yayılıyor ve başlığı örtüyordu). */
@@ -928,7 +928,7 @@
 
   /* karşılaştırma */
   .ka-krs{ display:grid; gap:12px; }
-  @media(min-width:660px){ .ka-krs{ grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); } }
+  @media(min-width:660px){ .ka-krs{ grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); } }
   .ka-krs-sut{
     background:var(--acikgri,#f1f5f9); border:1px solid #e4e9ef; border-radius:14px; padding:12px 13px;
   }
@@ -1113,6 +1113,7 @@
 
 <div class="oyun-grubu omg-tekli-menu aktif" id="kat-unite2-ogren">
   <button class="geri-btn" onclick="window.location.href='unite2.html'">◀ Ana Menüye Dön</button>
+  <button onclick="goster('kilcik-ozet2', event)">🐟 Balık Kılçığı</button>
   <button onclick="goster('ozet2', event)" class="aktif">📗 Konu Özeti</button>
   <button onclick="goster('slayt', event)">🖥️ Ünite Sunumu</button>
 </div>
@@ -1408,6 +1409,10 @@
     <p class="zb-cevap-not" id="zbNot_hayatta_4-2"></p>
   </div>
 
+</section>
+
+<section id="kilcik-ozet2" class="egitim-icerik">
+<div class="kutu-panel bk-panel" id="bk-etkinlik"><header class="bk-bas"><span class="bk-bas-rozet" aria-hidden="true">🐟</span><div class="bk-bas-yazi"><h4>Balık Kılçığı — Üniteyi Topla</h4><span class="bk-bas-alt">Her parçayı ait olduğu konunun kılçığına yerleştir.</span></div><span class="bk-sayac" id="bkSayac">0 / 0</span></header><div class="bk-govde"><p class="bk-yonerge">Balığın başı bu ünitenin adı. Her kılçık bir konu. Aşağıdaki parçalar ünitenin özet cümleleri — her birini ait olduğu konunun kılçığına yerleştir. Parçaya dokun, sonra kılçığa dokun.</p><div class="bk-diyagram" id="bkDiyagram"></div><p class="bk-havuz-bas">YERLEŞTİRİLECEK PARÇALAR</p><ul class="bk-havuz" id="bkHavuz" aria-label="Yerleştirilecek parçalar"></ul><p class="bk-canli" id="bkCanli" role="status" aria-live="polite"></p><div class="bk-sonuc" id="bkSonuc" hidden><h5>Kılçık tamamlandı.</h5><p id="bkSonucMetin"></p></div><div class="bk-araclar"><button type="button" class="bk-btn" id="bkYeni">🔄 Yeniden Karıştır</button><span class="bk-ipuc">Parçalar her seferinde farklı sırayla gelir.</span></div></div></div>
 </section>
 
 <section id="slayt" class="egitim-icerik">
@@ -3589,7 +3594,9 @@ function labirent2Hareket(dr, dc){
 }
 document.addEventListener('keydown', (e)=>{
   const aktifBolum = document.getElementById('labirent2');
-  if(!aktifBolum.classList.contains('aktif')) return;
+  /* Bu bölüm yalnızca oyun merkezinde var; burada bulunmadığı için
+     her tuş basımında hata veriyordu. */
+  if(!aktifBolum || !aktifBolum.classList.contains('aktif')) return;
   const etiket = document.activeElement ? document.activeElement.tagName : '';
   if(etiket==='INPUT' || etiket==='TEXTAREA') return;
   if(e.key==='ArrowUp'){ e.preventDefault(); labirent2Hareket(-1,0); }
@@ -3601,15 +3608,19 @@ document.addEventListener('keydown', (e)=>{
 // =====================================================================
 // BAŞLANGIÇ
 // =====================================================================
-bz2IzgaraOlustur();
-kelimeAvi2Olustur();
-cengel2Olustur();
-merdiven2Baslat();
-sifre2Olustur();
-ks2Olustur();
-nonogram2Olustur();
-istatistikleriGuncelleGoster();
-sonucIzlemeBaslat();
+/* Bu kurulumlar oyun merkezinden gelen ortak koddur. Bu sayfada oyunların
+   HTML kapları bulunmadığı için ilki hata veriyor ve betiğin geri kalanını
+   (aşağıdaki const UNITE_KIMLIK dâhil) durduruyordu. Çağrılar aynen korundu,
+   yalnızca her biri ayrı ayrı güvenceye alındı. */
+[bz2IzgaraOlustur,
+ kelimeAvi2Olustur,
+ cengel2Olustur,
+ merdiven2Baslat,
+ sifre2Olustur,
+ ks2Olustur,
+ nonogram2Olustur,
+ istatistikleriGuncelleGoster,
+ sonucIzlemeBaslat].forEach(function(kur){ try{ kur(); }catch(e){} });
 
 // =====================================================================
 // EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — ÂMENTÜ DUASI
@@ -4574,6 +4585,400 @@ document.addEventListener('DOMContentLoaded', function(){
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', ddGozle);
   } else { ddGozle(); }
+})();
+</script>
+<script id="dd-foto-hata">
+window.ddFotoHata = window.ddFotoHata || function(img){
+  try{ img.style.display='none';
+       var f = img.closest ? img.closest('figure') : null;
+       if(f) f.classList.add('dd-foto-yok'); }catch(e){}
+};
+</script>
+<style id="bk-dar-tablo">
+@media (max-width:400px){ .kutu-panel > table{ display:block; width:100%; overflow-x:auto; } }
+</style>
+
+<style id="bk-stil">
+/* ════ Balık Kılçığı — üniteyi tek şemada toplama etkinliği ════
+   Yalnızca .bk-* seçicileri. Mevcut hiçbir kuralı ezmez. */
+#bk-etkinlik{
+  --bk-koyu:var(--bk-p-koyu,#12306b); --bk-vurgu:var(--bk-p-vurgu,#2f5fae);
+  --bk-yumusak:var(--bk-p-yumusak,#eef3fb); --bk-cizgi:var(--bk-p-cizgi,#dde6f2);
+  --bk-kagit:var(--bk-p-kagit,#f7fafd); --bk-yuzey:var(--bk-p-yuzey,#fff);
+  --bk-soluk:var(--bk-p-soluk,#5b6570); --bk-metin:var(--bk-p-metin,#1b2b3a);
+  --bk-dolu-zemin:var(--bk-p-dolu-zemin,#f1faf5);
+  --bk-dolu-cizgi:var(--bk-p-dolu-cizgi,#b9dfc9);
+  --bk-dolu2-zemin:var(--bk-p-dolu2-zemin,#fffdf7);
+  --bk-dolu2-cizgi:var(--bk-p-dolu2-cizgi,#ecdcb6);
+  --bk-bos:var(--bk-p-bos,#94a3b0);
+  --bk-baslik:var(--bk-p-baslik,var(--bk-koyu));
+  padding:0 !important; overflow:hidden;
+}
+.bk-bas{ display:flex; align-items:center; gap:12px; padding:15px 18px;
+  background:linear-gradient(135deg,var(--bk-koyu),var(--bk-vurgu)); color:#fff; }
+.bk-bas-rozet{ flex:0 0 auto; width:38px; height:38px; border-radius:11px;
+  display:grid; place-items:center; font-size:19px; background:rgba(255,255,255,.15); }
+.bk-bas-yazi{ flex:1 1 auto; min-width:0; }
+.bk-bas-yazi h4{ margin:0; font-size:16px; font-weight:900; color:#fff; line-height:1.25; }
+.bk-bas-alt{ display:block; margin-top:2px; font-size:12.5px; color:#d7e4f6; line-height:1.35; }
+.bk-sayac{ flex:0 0 auto; font-size:12px; font-weight:900; letter-spacing:.06em;
+  background:rgba(255,255,255,.16); border-radius:999px; padding:5px 12px; }
+
+.bk-govde{ padding:18px; background:var(--bk-kagit); }
+.bk-yonerge{ margin:0 0 16px; font-size:14.5px; line-height:1.6; color:var(--bk-metin); }
+
+/* ── kılçık şeması (gerçek balık kılçığı) ───────────────────────────
+   Üstte ve altta dallar, ortada omurga; dalları omurgaya bağlayan eğik
+   kemikler JS ile SVG olarak çizilir (.bk-iskelet). */
+.bk-diyagram{ position:relative; margin:0 0 18px; --bk-kafa-alan:210px; }
+.bk-iskelet{ position:absolute; inset:0; width:100%; height:100%;
+  pointer-events:none; overflow:visible; }
+.bk-sira{ position:relative; z-index:1; display:grid; gap:10px;
+  grid-template-columns:repeat(var(--bk-sutun,3),1fr); align-items:end;
+  /* Balığın başı sağda durur; dallar onun üstüne binmesin diye yer bırakılır. */
+  padding-right:calc(var(--bk-kafa-alan) + 14px); }
+.bk-sira-alt{ align-items:start; }
+.bk-dal{ position:relative; display:flex; flex-direction:column; gap:6px;
+  width:100%; text-align:left; font:inherit; cursor:pointer;
+  background:var(--bk-yuzey); border:1.5px solid var(--bk-cizgi);
+  border-radius:12px; padding:10px 12px; color:inherit;
+  border-top:4px solid var(--bk-renk,var(--bk-vurgu));
+  transition:border-color .15s, box-shadow .15s, background .15s; }
+.bk-sira-alt .bk-dal{ border-top:1.5px solid var(--bk-cizgi);
+  border-bottom:4px solid var(--bk-renk,var(--bk-vurgu)); }
+.bk-dal:hover, .bk-dal.bk-hedef{ box-shadow:0 0 0 3px var(--bk-yumusak); }
+.bk-dal:focus-visible{ outline:3px solid var(--bk-vurgu); outline-offset:2px; }
+.bk-dal[aria-disabled="true"]{ cursor:default; opacity:.85; }
+.bk-dal-ad{ font-size:12.5px; font-weight:900; line-height:1.3;
+  color:var(--bk-renk,var(--bk-baslik)); }
+.bk-yuva{ list-style:none; margin:0; padding:0; display:grid; gap:5px; }
+.bk-yuva li{ font-size:11.5px; line-height:1.4; border-radius:8px;
+  padding:6px 8px; border:1px dashed var(--bk-cizgi); color:var(--bk-bos);
+  min-height:28px; }
+.bk-yuva li.bk-dolu{ border-style:solid; border-color:var(--bk-dolu-cizgi);
+  background:var(--bk-dolu-zemin); color:var(--bk-metin); font-weight:600;
+  animation:bkYerles .26s ease both; }
+.bk-yuva li.bk-dolu-ikinci{ border-color:var(--bk-dolu2-cizgi); background:var(--bk-dolu2-zemin); }
+@keyframes bkYerles{ from{ opacity:0; transform:translateY(-5px); } }
+
+/* omurga: solda kuyruk, sağda balığın başı */
+.bk-omurga{ position:relative; z-index:1; display:flex; align-items:center;
+  gap:0; margin:22px 0; padding:0; }
+.bk-kuyruk{ flex:0 0 auto; width:26px; height:34px;
+  background:var(--bk-koyu);
+  clip-path:polygon(0 0, 100% 42%, 100% 58%, 0 100%, 26% 50%); }
+.bk-cizgi{ flex:1 1 auto; height:7px; border-radius:4px;
+  background:var(--bk-koyu); }
+.bk-kafa{ flex:0 0 auto; position:relative;
+  width:var(--bk-kafa-alan); min-height:58px; box-sizing:border-box;
+  display:inline-flex; align-items:center; gap:7px;
+  padding:11px 46px 11px 16px; font-size:13px; font-weight:900;
+  color:#fff; line-height:1.25; background:var(--bk-koyu);
+  clip-path:polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%);
+  border-radius:16px 0 0 16px; }
+.bk-kafa::after{ content:""; position:absolute; top:14px; right:34px;
+  width:8px; height:8px; border-radius:50%; background:#fff; }
+
+@media (max-width:760px){
+  .bk-sira{ grid-template-columns:1fr; padding-right:0; }
+  .bk-kafa{ width:auto; min-height:0; }
+  .bk-sira-alt{ margin-top:10px; }
+  .bk-iskelet{ display:none; }
+  .bk-omurga{ margin:14px 0; }
+  .bk-kafa{ max-width:100%; }
+  .bk-dal{ border-top:1.5px solid var(--bk-cizgi);
+    border-left:5px solid var(--bk-renk,var(--bk-vurgu)); }
+  .bk-sira-alt .bk-dal{ border-bottom:1.5px solid var(--bk-cizgi);
+    border-left:5px solid var(--bk-renk,var(--bk-vurgu)); }
+}
+
+/* ── kart havuzu ── */
+.bk-havuz-bas{ margin:0 0 8px; font-size:12px; font-weight:900;
+  letter-spacing:.1em; color:var(--bk-soluk); }
+.bk-havuz{ list-style:none; margin:0 0 14px; padding:0; display:grid; gap:8px;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); }
+.bk-kart{ width:100%; text-align:left; font:inherit; font-size:12.5px;
+  line-height:1.45; cursor:pointer; color:var(--bk-metin);
+  background:var(--bk-yuzey); border:1.5px solid var(--bk-cizgi); border-radius:11px;
+  padding:10px 12px; min-height:44px;
+  transition:border-color .14s, box-shadow .14s, transform .14s; }
+.bk-kart:hover{ border-color:var(--bk-vurgu); }
+.bk-kart[aria-pressed="true"]{ border-color:var(--bk-vurgu);
+  background:var(--bk-yumusak); box-shadow:0 0 0 3px rgba(47,95,174,.14); }
+.bk-kart:focus-visible{ outline:3px solid var(--bk-vurgu); outline-offset:2px; }
+.bk-kart.bk-sarsil{ animation:bkSarsil .32s ease; }
+@keyframes bkSarsil{ 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)}
+  55%{transform:translateX(5px)} 80%{transform:translateX(-3px)} }
+.bk-kart.bk-suruklenen{ opacity:.45; }
+
+.bk-canli{ margin:0 0 14px; min-height:1.2em; font-size:13.5px; font-weight:700;
+  color:var(--bk-soluk); }
+.bk-araclar{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.bk-btn{ font:inherit; font-size:14px; font-weight:900; cursor:pointer; border:0;
+  border-radius:11px; padding:11px 19px; min-height:44px; color:#fff;
+  background:linear-gradient(135deg,var(--bk-koyu),var(--bk-vurgu)); }
+.bk-btn:hover{ filter:brightness(1.08); }
+.bk-btn:focus-visible{ outline:3px solid var(--bk-koyu); outline-offset:2px; }
+.bk-ipuc{ font-size:12px; font-weight:700; color:var(--bk-soluk); }
+
+.bk-sonuc{ margin:0 0 14px; border:1px solid var(--bk-cizgi); border-radius:12px;
+  background:var(--bk-yuzey); padding:14px 16px; }
+.bk-sonuc[hidden]{ display:none; }
+.bk-sonuc h5{ margin:0 0 5px; font-size:15px; font-weight:900; color:var(--bk-baslik); }
+.bk-sonuc p{ margin:0; font-size:13.5px; line-height:1.55; color:var(--bk-soluk); }
+
+@media (max-width:760px){
+  .bk-havuz{ grid-template-columns:1fr; }
+  .bk-govde{ padding:14px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .bk-kart.bk-sarsil{ animation:none; }
+  .bk-yuva li.bk-dolu{ animation:none; }
+}
+@media print{ .bk-havuz, .bk-araclar{ display:none; } }
+</style>
+<style id="bk-palet">#bk-etkinlik{ --bk-p-koyu:#0d5f6b; --bk-p-vurgu:#0f7d8c; --bk-p-yumusak:#e4f5f7; --bk-p-cizgi:#cfe6ea; --bk-p-kagit:#f5fbfc; }</style><style id="bk-palet-koyu">
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) #bk-etkinlik{
+    --bk-p-koyu:#0a4a54; --bk-p-vurgu:#17808f;
+    --bk-p-yumusak:#173b43; --bk-p-cizgi:#2c3947;
+    --bk-p-kagit:#161f28; --bk-p-yuzey:#1b2530;
+    --bk-p-metin:#e7ecf1; --bk-p-soluk:#9aa7b4; --bk-p-bos:#6a7684;
+    --bk-p-dolu-zemin:#16352a; --bk-p-dolu-cizgi:#2f7a55;
+    --bk-p-dolu2-zemin:#332c1c; --bk-p-dolu2-cizgi:#7a6330;
+    --bk-p-baslik:#7fd4e0;
+  }
+}
+:root[data-theme="dark"] #bk-etkinlik{
+  --bk-p-koyu:#0a4a54; --bk-p-vurgu:#17808f;
+  --bk-p-yumusak:#173b43; --bk-p-cizgi:#2c3947;
+  --bk-p-kagit:#161f28; --bk-p-yuzey:#1b2530;
+  --bk-p-metin:#e7ecf1; --bk-p-soluk:#9aa7b4; --bk-p-bos:#6a7684;
+  --bk-p-dolu-zemin:#16352a; --bk-p-dolu-cizgi:#2f7a55;
+  --bk-p-dolu2-zemin:#332c1c; --bk-p-dolu2-cizgi:#7a6330;
+  --bk-p-baslik:#7fd4e0;
+}
+</style>
+
+<script id="bk-js">
+/* ════ Balık Kılçığı ════  tek IIFE; global ad alanına hiçbir şey bırakmaz. */
+(function(){
+  'use strict';
+  var VERI = {"ozet_id": "ozet2", "unite": "İslam'ı Tanıyalım", "ikon": "🕋", "kilciklar": [{"ad": "İslam'ın İnanç Esasları (İmanın Şartları)", "ogeler": ["İmanın esasları altı tanedir.", "Bunların tamamına inanmak bir bütündür."]}, {"ad": "İslam'ın Şartları", "ogeler": ["İslam’ın şartları beştir.", "Namaz günlük, oruç yıllık, hac ise ömürde bir kez farzdır."]}, {"ad": "Kur'an-ı Kerim", "ogeler": ["Kur’an-ı Kerim İslam’ın kutsal kitabıdır.", "Hz. Muhammed’e 23 yılda indirilmiştir."]}, {"ad": "Bir Dua Tanıyorum: Âmentü Duası ve Anlamı", "ogeler": ["Âmentü duası ve anlamı"]}]};
+  var kok = document.getElementById('bk-etkinlik');
+  if(!kok) return;
+
+  var diyagram = document.getElementById('bkDiyagram');
+  var havuz    = document.getElementById('bkHavuz');
+  var canli    = document.getElementById('bkCanli');
+  var sayac    = document.getElementById('bkSayac');
+  var sonuc    = document.getElementById('bkSonuc');
+  var sonucMet = document.getElementById('bkSonucMetin');
+
+  var TOPLAM = 0;
+  VERI.kilciklar.forEach(function(k){ TOPLAM += k.ogeler.length; });
+
+  var secili = null, durum = [], yerlesen = 0, ilkDogru = 0;
+  var masaustu = false;
+  try{ masaustu = window.matchMedia('(pointer:fine)').matches; }catch(e){}
+
+  /* Her kılçığın kendi rengi — şemayı okunur kılar. */
+  var RENKLER = ['#c92a2a','#1c3f94','#1d7a3a','#d9880a','#6741a5','#0b7285'];
+
+  /* ── eğik kemikleri çizer ─────────────────────────────────────────────
+     Dalları omurgaya bağlayan çapraz kemikler + üzerlerindeki küçük
+     çıkıntılar. Ölçüler gerçek yerleşimden okunur, bu yüzden sütun sayısı
+     ya da yazı uzunluğu değişse de doğru yere çizilir. */
+  function ciz(){
+    var svg = document.getElementById('bkIskelet');
+    var omurga = diyagram.querySelector('.bk-omurga');
+    if(!svg || !omurga) return;
+    if(diyagram.clientWidth < 560){ svg.innerHTML=''; return; }
+
+    var d = diyagram.getBoundingClientRect();
+    var o = omurga.getBoundingClientRect();
+    var cizgi = omurga.querySelector('.bk-cizgi').getBoundingClientRect();
+    var sy = o.top - d.top + o.height/2;
+    var solSinir  = cizgi.left  - d.left + 10;
+    var sagSinir  = cizgi.right - d.left - 10;
+
+    svg.setAttribute('viewBox', '0 0 ' + Math.round(d.width) + ' ' + Math.round(d.height));
+    svg.setAttribute('preserveAspectRatio', 'none');
+
+    var p = '';
+    diyagram.querySelectorAll('.bk-dal').forEach(function(el){
+      var r = el.getBoundingClientRect();
+      var ustMu = !el.parentNode.classList.contains('bk-sira-alt');
+      var x1 = r.left - d.left + r.width * 0.5;
+      var y1 = ustMu ? (r.bottom - d.top - 2) : (r.top - d.top + 2);
+      var x2 = Math.max(solSinir, Math.min(sagSinir, x1 + 58));
+      var y2 = sy;
+      var renk = el.style.getPropertyValue('--bk-renk') || '#334';
+
+      p += '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+renk+
+           '" stroke-width="5" stroke-linecap="round" opacity=".92"/>';
+
+      /* kemik üzerindeki küçük çıkıntılar */
+      var dx = x2 - x1, dy = y2 - y1;
+      [0.3, 0.52, 0.74].forEach(function(t){
+        var mx = x1 + dx*t, my = y1 + dy*t;
+        p += '<line x1="'+mx+'" y1="'+my+'" x2="'+(mx - 15)+'" y2="'+my+
+             '" stroke="'+renk+'" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>';
+      });
+    });
+    svg.innerHTML = p;
+  }
+
+  var cizZaman = null;
+  function cizGecikmeli(){ clearTimeout(cizZaman); cizZaman = setTimeout(ciz, 60); }
+  window.addEventListener('resize', cizGecikmeli);
+  try{ new ResizeObserver(cizGecikmeli).observe(diyagram); }catch(e){}
+  /* Sekme ilk açıldığında ölçüler 0 olabilir — görünür olunca yeniden çiz. */
+  try{ new IntersectionObserver(function(g){
+        g.forEach(function(x){ if(x.isIntersecting) cizGecikmeli(); });
+      }).observe(diyagram); }catch(e){}
+
+  function kacis(x){ return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function karistir(d){ d=d.slice();
+    for(var i=d.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1));
+      var t=d[i]; d[i]=d[j]; d[j]=t; } return d; }
+
+  function kur(){
+    secili = null; yerlesen = 0; ilkDogru = 0;
+    durum = [];
+    VERI.kilciklar.forEach(function(k, ki){
+      k.ogeler.forEach(function(o, oi){
+        durum.push({ metin:o, dal:ki, yuva:oi, bitti:false, deneme:0 });
+      });
+    });
+
+    /* ── şema ── */
+    var ust = [], alt = [];
+    VERI.kilciklar.forEach(function(k, i){ (i % 2 ? alt : ust).push(i); });
+    function sira(dizi, sinif){
+      if(!dizi.length) return '';
+      return '<div class="bk-sira '+sinif+'" style="--bk-sutun:'+dizi.length+'">' +
+        dizi.map(function(i){
+          var k = VERI.kilciklar[i];
+          return '<button type="button" class="bk-dal" data-dal="'+i+'" ' +
+            'style="--bk-renk:'+RENKLER[i % RENKLER.length]+'" ' +
+            'aria-label="'+kacis(k.ad)+' kılçığına yerleştir">' +
+            '<span class="bk-dal-ad">'+kacis(k.ad)+'</span>' +
+            '<ul class="bk-yuva">' +
+              k.ogeler.map(function(_, j){
+                return '<li id="bkY-'+i+'-'+j+'"></li>'; }).join('') +
+            '</ul></button>';
+        }).join('') + '</div>';
+    }
+    diyagram.innerHTML =
+      '<svg class="bk-iskelet" id="bkIskelet" aria-hidden="true"></svg>' +
+      sira(ust, '') +
+      '<div class="bk-omurga"><span class="bk-kuyruk" aria-hidden="true"></span>' +
+      '<span class="bk-cizgi" aria-hidden="true"></span>' +
+      '<span class="bk-kafa">'+kacis(VERI.ikon)+' '+kacis(VERI.unite)+'</span></div>' +
+      sira(alt, 'bk-sira-alt');
+    ciz();
+
+    /* ── kartlar ── */
+    havuz.innerHTML = karistir(durum.map(function(_, i){ return i; }))
+      .map(function(i){
+        return '<li><button type="button" class="bk-kart" data-i="'+i+'" ' +
+          'aria-pressed="false"'+(masaustu?' draggable="true"':'')+'>' +
+          kacis(durum[i].metin) + '</button></li>'; }).join('');
+
+    bagla();
+    sonuc.hidden = true;
+    canli.textContent = '';
+    sayacGuncelle();
+  }
+
+  function bagla(){
+    havuz.querySelectorAll('.bk-kart').forEach(function(b){
+      b.addEventListener('click', function(){ sec(b); });
+      if(masaustu){
+        b.addEventListener('dragstart', function(ev){
+          sec(b, true);
+          try{ ev.dataTransfer.setData('text/plain', b.dataset.i);
+               ev.dataTransfer.effectAllowed='move'; }catch(e){}
+          b.classList.add('bk-suruklenen');
+        });
+        b.addEventListener('dragend', function(){ b.classList.remove('bk-suruklenen'); });
+      }
+    });
+    diyagram.querySelectorAll('.bk-dal').forEach(function(d){
+      d.addEventListener('click', function(){ birak(+d.dataset.dal); });
+      if(masaustu){
+        d.addEventListener('dragover', function(ev){
+          if(secili===null) return; ev.preventDefault();
+          d.classList.add('bk-hedef');
+        });
+        d.addEventListener('dragleave', function(){ d.classList.remove('bk-hedef'); });
+        d.addEventListener('drop', function(ev){
+          ev.preventDefault(); d.classList.remove('bk-hedef');
+          birak(+d.dataset.dal);
+        });
+      }
+    });
+  }
+
+  function sec(btn, sessiz){
+    var i = +btn.dataset.i;
+    havuz.querySelectorAll('.bk-kart').forEach(function(b){
+      b.setAttribute('aria-pressed', b===btn ? 'true' : 'false'); });
+    secili = i;
+    if(!sessiz) duyur('Seçildi. Şimdi bu parçanın ait olduğu kılçığa dokun.', 'acik');
+  }
+
+  function birak(dalIndex){
+    if(secili === null){
+      duyur('Önce aşağıdan bir parça seç, sonra kılçığa dokun.', 'acik');
+      return;
+    }
+    var d = durum[secili];
+    var btn = havuz.querySelector('.bk-kart[data-i="'+secili+'"]');
+    if(!d || d.bitti || !btn) return;
+
+    if(dalIndex === d.dal){
+      d.bitti = true;
+      if(d.deneme === 0) ilkDogru++;
+      yerlesen++;
+      var yuva = document.getElementById('bkY-'+d.dal+'-'+d.yuva);
+      if(yuva){
+        yuva.textContent = d.metin;
+        yuva.className = d.deneme === 0 ? 'bk-dolu' : 'bk-dolu bk-dolu-ikinci';
+      }
+      var li = btn.parentNode; if(li) li.remove();
+      secili = null;
+      duyur('✓ Doğru yer. ' + VERI.kilciklar[d.dal].ad, 'dogru');
+      sayacGuncelle();
+      if(yerlesen === TOPLAM) bitir();
+    }else{
+      d.deneme++;
+      btn.classList.remove('bk-sarsil'); void btn.offsetWidth;
+      btn.classList.add('bk-sarsil');
+      duyur('✕ Bu parça başka bir kılçığa ait. Konu başlıklarını bir daha oku.', 'yanlis');
+    }
+  }
+
+  function duyur(m, t){
+    canli.textContent = m;
+    canli.style.color = t==='dogru' ? '#1d6f4a' : (t==='yanlis' ? '#8a3a1f' : '#5b6570');
+  }
+  function sayacGuncelle(){ sayac.textContent = yerlesen + ' / ' + TOPLAM; }
+
+  function bitir(){
+    var m;
+    if(ilkDogru === TOPLAM) m = 'Ünitenin bütün parçalarını ilk denemede doğru kılçığa yerleştirdin.';
+    else if(ilkDogru >= TOPLAM * 0.7) m = 'Üniteyi büyük ölçüde doğru topladın; birkaç parçayı yeniden düşün.';
+    else m = 'Şema tamam. Konu başlıklarını okuyup bir kez daha dene.';
+    sonucMet.textContent = 'İlk denemede doğru: ' + ilkDogru + ' / ' + TOPLAM + '. ' + m;
+    sonuc.hidden = false;
+    duyur('Şema tamamlandı.', 'acik');
+  }
+
+  document.getElementById('bkYeni').addEventListener('click', kur);
+  kur();
 })();
 </script>
 </body>
