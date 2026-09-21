@@ -4700,11 +4700,25 @@ function olcuyuKesfet(){
 /* ===================================================================
    BÖLÜM 2 — Eksik parça
 =================================================================== */
-function bolum2(){
-  var model = MODELLER[0], c = hucre();
+/* Bölüm 2 artık tek bir yapıyla (Güneş Sistemi) sınırlı değil — kurulan
+   6 yapının HER BİRİNDEN sırayla bir parça çıkarılır. Her adımda o
+   yapının kendi bilimsel açıklaması gösterilir. */
+var BOLUM2_SIRA = [
+  { modelIndex:0, cikacak:'dunya'   },
+  { modelIndex:1, cikacak:'skol'    },
+  { modelIndex:2, cikacak:'atm'     },
+  { modelIndex:3, cikacak:'yaz'     },
+  { modelIndex:4, cikacak:'yagis'   },
+  { modelIndex:5, cikacak:'tavsan'  }
+];
+
+function bolum2(adim){
+  adim = adim || 0;
+  var giris = BOLUM2_SIRA[adim];
+  var model = MODELLER[giris.modelIndex], c = hucre();
   sahne.innerHTML =
-    '<h2>🔎 Bölüm 2 — Eksik Parça</h2>'+
-    '<p class="lg-alt">Kurduğun Güneş Sistemi\'nden bir gezegeni çıkarıyoruz. Dikkatle bak.</p>'+
+    '<h2>🔎 Bölüm 2 — Eksik Parça <span style="font-size:.78rem;font-weight:800;color:var(--lg-metin2)">('+(adim+1)+'/'+BOLUM2_SIRA.length+' · '+model.ad+')</span></h2>'+
+    '<p class="lg-alt">Kurduğun <b>'+model.ad+'</b> yapısından bir parçayı çıkarıyoruz. Dikkatle bak.</p>'+
     '<div class="lg-oyunalani" style="grid-template-columns:minmax(0,1fr)">'+
       '<div class="lg-tahta-kutu"><div class="lg-tahta" id="lgTahta2"></div></div>'+
     '</div>'+
@@ -4713,18 +4727,19 @@ function bolum2(){
     '<div id="lgSoruAlan"></div>';
 
   var tahta = $('#lgTahta2');
-  if(model.tip === 'uzay'){
+  if(model.tip === 'uzay' || model.tip === 'dongu'){
     OLCEK = Math.min(1.15, Math.max(0.46, (tahta.parentElement.clientWidth - 34) / model.gen));
     tahta.classList.add('lg-tahta--uzay');
     tahta.style.width  = (model.gen*OLCEK) + 'px';
     tahta.style.height = (model.yuk*OLCEK) + 'px';
-    tahta.insertAdjacentHTML('beforeend', yorungeSVG(model));
+    tahta.insertAdjacentHTML('beforeend', model.tip === 'uzay' ? yorungeSVG(model) : dongusSVG(model));
   } else {
+    tahta.classList.remove('lg-tahta--uzay');
     tahta.style.width  = (model.kolon*c) + 'px';
     tahta.style.height = (model.satir*c) + 'px';
   }
 
-  var cikacak = 'dunya';
+  var cikacak = giris.cikacak;
   var cikanParca = null;
   model.parcalar.forEach(function(p){
     if(p.id === cikacak){
@@ -4756,10 +4771,12 @@ function bolum2(){
         var b = $('#lgBosluk');
         if(b) b.style.opacity = '1';
         tik('yanlis');
-        mesajYaz('yanlis','⚠️ <b>Dünya</b> yapıdan çıktı. Sıra bozuldu, yerinde bir boşluk kaldı. Şimdi yapıya bak…');
+        mesajYaz('yanlis','⚠️ <b>'+cikanParca.ad+'</b> yapıdan çıktı. Sıra bozuldu, yerinde bir boşluk kaldı. Şimdi yapıya bak…');
         bilimGoster('lgBilimPanel2', cikanParca);
         soruGoster(SORU2, $('#lgSoruAlan'), function(){
-          durum.bolum = 3; ilerlemeGuncelle(); bolum3(); sahne.focus();
+          var sonrakiAdim = adim + 1;
+          if(sonrakiAdim < BOLUM2_SIRA.length){ bolum2(sonrakiAdim); sahne.focus(); }
+          else { durum.bolum = 3; ilerlemeGuncelle(); bolum3(); sahne.focus(); }
         });
       };
     }
