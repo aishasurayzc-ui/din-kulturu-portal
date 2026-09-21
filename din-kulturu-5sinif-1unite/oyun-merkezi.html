@@ -1284,7 +1284,7 @@
       <span class="lg-rozet">5. Sınıf</span>
       <span class="lg-rozet">1. Ünite · Allah İnancı</span>
       <span class="lg-rozet">1. Konu · Evrendeki Düzen ve Ölçü</span>
-      <span class="lg-rozet">38 parça · 5 yapı</span>
+      <span class="lg-rozet">42 parça · 6 yapı</span>
     </div>
   </header>
 
@@ -4012,7 +4012,9 @@ var RENK = {
   /* mevsimler */
   ilkbahar:'#8bc34a', yaz:'#f9c74f', sonbahar:'#bb6b1c', kis:'#5aa9c4',
   /* su döngüsü */
-  buharlasma:'#cdeef2', yagis:'#3d7fc4'
+  buharlasma:'#cdeef2', yagis:'#3d7fc4',
+  /* besin zinciri */
+  bitki:'#5a9e3d', tavsan:'#c9a27a', tilki:'#d9713c'
 };
 
 /* x,y: ızgara konumu · w,h: ızgara genişlik/yükseklik */
@@ -4081,6 +4083,19 @@ var MODELLER = [
       {id:'bulut2',     ad:'Bulut',      px:true, yuvarlak:true, x:215, y:115, w:70, h:70, renk:RENK.bulut},
       {id:'yagis',      ad:'Yağış',      px:true, yuvarlak:true, x:115, y:177, w:70, h:70, renk:RENK.yagis},
       {id:'deniz',      ad:'Deniz',      px:true, yuvarlak:true, x:15,  y:115, w:70, h:70, renk:RENK.okyanus}
+  ]},
+  /* 6) BESİN ZİNCİRİ — bir "zincir" döngü değil, sıradır: Güneş'ten
+        başlayıp enerjinin aktarıldığı sırayla ilerler. Güneş Sistemi'yle
+        BİREBİR aynı çizim tekniği: gerçek bir "gunes" parçası olduğu
+        için yorungeSVG() her durağa kendi yörünge çizgisini otomatik
+        çizer, yeni kod gerekmez. */
+  { ad:'BESİN ZİNCİRİ', tip:'uzay', gen:600, yuk:200, gunes:[69,100],
+    ipucu:'Enerji hep aynı sırayla akar: önce Güneş, sonra üretici (bitki), sonra tüketiciler. Sıra bozulmaz.',
+    parcalar:[
+      {id:'gunes',  ad:'Güneş', px:true, yuvarlak:true, x:14,  y:45, w:110, h:110, renk:RENK.gunes},
+      {id:'bitki',  ad:'Bitki', px:true, yuvarlak:true, x:180, y:65, w:70,  h:70,  renk:RENK.bitki},
+      {id:'tavsan', ad:'Tavşan',px:true, yuvarlak:true, x:320, y:60, w:80,  h:80,  renk:RENK.tavsan},
+      {id:'tilki',  ad:'Tilki', px:true, yuvarlak:true, x:470, y:55, w:90,  h:90,  renk:RENK.tilki}
   ]}
 ];
 
