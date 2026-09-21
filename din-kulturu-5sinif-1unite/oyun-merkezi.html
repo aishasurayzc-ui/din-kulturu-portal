@@ -243,6 +243,19 @@
 .lg-mesaj[data-tip="yanlis"]{background:color-mix(in srgb,var(--lg-sari) 26%,#fff);border-color:var(--lg-sari);color:#7c3d0a}
 .lg-mesaj[data-tip="bilgi"]{background:color-mix(in srgb,var(--lg-acik) 38%,#fff);border-color:var(--lg-mavi);color:var(--lg-navy)}
 
+/* bilimsel açıklama kartı — parçaya tıklanınca açılır */
+.lg-bilim-kart{
+  margin-top:12px;background:#fff;border:2px solid var(--lg-mavi);border-radius:var(--lg-r-lg);
+  padding:14px 16px;animation:lg-bilim-gir .25s var(--lg-ease)
+}
+@keyframes lg-bilim-gir{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+.lg-bilim-ust{font-weight:900;color:var(--lg-navy);margin-bottom:8px;font-size:.98rem}
+.lg-bilim-satir{margin:0 0 9px;font-size:.92rem;line-height:1.5;color:var(--lg-metin)}
+.lg-bilim-satir:last-child{margin-bottom:0}
+.lg-bilim-etiket{display:block;font-weight:800;font-size:.8rem;letter-spacing:.02em;color:var(--lg-mavi);margin-bottom:2px}
+.lg-tugla.lg-yerlesti{cursor:pointer}
+.lg-tugla.lg-yerlesti:hover{filter:brightness(1.06)}
+
 /* soru kartları */
 .lg-secenekler{display:grid;gap:10px;margin-top:16px}
 .lg-secenek{
@@ -4035,65 +4048,65 @@ var MODELLER = [
   { ad:'GÜNEŞ SİSTEMİ', tip:'uzay', gen:1190, yuk:320, gunes:[124,150],
     ipucu:'Güneş solda. Gezegenleri Güneş’e yakınlıklarına göre yörüngelerine yerleştir.',
     parcalar:[
-      {id:'gunes',  ad:'GÜNEŞ',  px:true, yuvarlak:true, x:14,  y:40,  w:220,h:220, renk:RENK.gunes},
-      {id:'merkur', ad:'Merkür', px:true, yuvarlak:true, x:268, y:130, w:40, h:40,  renk:RENK.merkur},
-      {id:'venus',  ad:'Venüs',  px:true, yuvarlak:true, x:342, y:121, w:58, h:58,  renk:RENK.venus},
-      {id:'dunya',  ad:'Dünya',  px:true, yuvarlak:true, x:434, y:118, w:64, h:64,  renk:RENK.dunya},
-      {id:'mars',   ad:'Mars',   px:true, yuvarlak:true, x:532, y:125, w:50, h:50,  renk:RENK.mars},
-      {id:'jupiter',ad:'Jüpiter',px:true, yuvarlak:true, x:616, y:85,  w:130,h:130, renk:RENK.jupiter},
-      {id:'saturn', ad:'Satürn', px:true, yuvarlak:true, halka:true, x:814, y:95, w:110, h:110, renk:RENK.saturn},
-      {id:'uranus', ad:'Uranüs', px:true, yuvarlak:true, x:992, y:115, w:70, h:70,  renk:RENK.uranus},
-      {id:'neptun', ad:'Neptün', px:true, yuvarlak:true, x:1096,y:117, w:66, h:66,  renk:RENK.neptun}
+      {id:'gunes',  ad:'GÜNEŞ',  px:true, yuvarlak:true, x:14,  y:40,  w:220,h:220, renk:RENK.gunes, bilim:{temsil:'Güneş Sistemi\'nin merkezindeki yıldızı ve sistemin ana enerji kaynağını temsil eder.', rol:'Güneş, Güneş Sistemi\'nin merkezindeki yıldızdır. Sistemin temel ışık ve enerji kaynağıdır ve büyük kütlesi nedeniyle gezegenlerin hareketlerinde belirleyici kütleçekim etkisine sahiptir.', sonuc:'Güneş çıkarıldı → temel enerji ve kütleçekim kaynağı ortadan kalktı.', zaman:'Kütleçekimsel değişim çok hızlı gerçekleşir; ışığın ulaşmasıyla ilgili etkiler ise mesafeye bağlı olarak ortaya çıkar.'}},
+      {id:'merkur', ad:'Merkür', px:true, yuvarlak:true, x:268, y:130, w:40, h:40,  renk:RENK.merkur, bilim:{temsil:'Güneş\'e en yakın, en küçük ve en hızlı hareket eden gezegeni temsil eder.', rol:'Güneş\'e yakınlığı nedeniyle güçlü bir kütleçekim etkisi altındadır ve kısa sürede tam tur atar.', sonuc:'Merkür çıkarıldı → sistemin iç bölgesindeki kütle dağılımı ve kütleçekimsel ilişkilerinden biri değişti.', zaman:'Merkür\'ün kendi hareketiyle ilgili değişim hemen ortaya çıkar; diğer gezegenlere etkisi çok küçüktür.'}},
+      {id:'venus',  ad:'Venüs',  px:true, yuvarlak:true, x:342, y:121, w:58, h:58,  renk:RENK.venus, bilim:{temsil:'Boyut olarak Dünya\'ya en çok benzeyen, yoğun atmosferiyle bilinen gezegeni temsil eder.', rol:'Kütlesiyle Güneş Sistemi\'ndeki kütleçekimsel ilişkilere katkıda bulunur.', sonuc:'Venüs çıkarıldı → sistemin kütle dağılımı ve kütleçekimsel ilişkilerinden biri değişti.', zaman:'Yörüngesel etkiler hemen belirgin olmayabilir, zamanla fark edilebilir.'}},
+      {id:'dunya',  ad:'Dünya',  px:true, yuvarlak:true, x:434, y:118, w:64, h:64,  renk:RENK.dunya, bilim:{temsil:'Güneş Sistemi\'nde yaşamın bulunduğu gezegeni temsil eder.', rol:'Dünya, Güneş Sistemi\'nde yaşamın bulunduğu gezegendir.', sonuc:'Dünya çıkarıldı → Dünya\'ya ait fiziksel ve yaşam sistemleri ortadan kalktı.', zaman:'Çıkarılan unsur doğrudan Dünya\'nın kendisi olduğu için sonuç doğrudandır.'}},
+      {id:'mars',   ad:'Mars',   px:true, yuvarlak:true, x:532, y:125, w:50, h:50,  renk:RENK.mars, bilim:{temsil:'Kızıl rengiyle bilinen, Dünya\'dan bir sonraki gezegeni temsil eder.', rol:'Kütlesiyle sistemin kütleçekimsel dengesine katkı sağlar.', sonuc:'Mars çıkarıldı → sistemin kütle dağılımı ve kütleçekimsel ilişkilerinden biri değişti.', zaman:'Bazı yörüngesel etkiler hemen fark edilmeyebilir, zamanla ortaya çıkabilir.'}},
+      {id:'jupiter',ad:'Jüpiter',px:true, yuvarlak:true, x:616, y:85,  w:130,h:130, renk:RENK.jupiter, bilim:{temsil:'Güneş Sistemi\'nin en büyük ve en kütleli gezegenini temsil eder.', rol:'Büyük kütlesi nedeniyle diğer gezegenlerin yörüngeleri üzerinde belirgin bir kütleçekim etkisine sahiptir.', sonuc:'Jüpiter çıkarıldı → sistemin kütle dağılımı önemli ölçüde değişir ve bazı gezegenlerin yörüngesel ilişkileri etkilenir.', zaman:'Kütlesi büyük olduğu için etkisi diğer gezegenlere göre daha belirgin olabilir; yörüngesel değişiklikler zaman içinde ortaya çıkar.'}},
+      {id:'saturn', ad:'Satürn', px:true, yuvarlak:true, halka:true, x:814, y:95, w:110, h:110, renk:RENK.saturn, bilim:{temsil:'Halkalarıyla bilinen, Güneş Sistemi\'nin ikinci büyük gezegenini temsil eder.', rol:'Büyük kütlesi nedeniyle Güneş Sistemi\'ndeki kütleçekimsel etkileşimlere katkıda bulunur.', sonuc:'Satürn\'ün diğer gök cisimleriyle olan kütleçekimsel etkileri ortadan kalkar. Sistemin kütle dağılımı değişir.', zaman:'Bazı yörüngesel değişiklikler hemen fark edilmez; uzun zaman içinde ortaya çıkabilir.'}},
+      {id:'uranus', ad:'Uranüs', px:true, yuvarlak:true, x:992, y:115, w:70, h:70,  renk:RENK.uranus, bilim:{temsil:'Yan yatık ekseniyle bilinen, buz devi olarak adlandırılan gezegeni temsil eder.', rol:'Kütlesiyle sistemin dış bölgesindeki kütleçekimsel ilişkilere katkıda bulunur.', sonuc:'Uranüs çıkarıldı → sistemin dış bölgesindeki kütle dağılımı ve kütleçekimsel ilişkilerinden biri değişti.', zaman:'Yörüngesel etkiler hemen belirgin olmayabilir, zamanla fark edilebilir.'}},
+      {id:'neptun', ad:'Neptün', px:true, yuvarlak:true, x:1096,y:117, w:66, h:66,  renk:RENK.neptun, bilim:{temsil:'Güneş\'ten en uzak, buz devi gezegeni temsil eder.', rol:'Kütlesiyle sistemin en dış bölgesindeki kütleçekimsel ilişkilere katkıda bulunur.', sonuc:'Neptün çıkarıldı → sistemin en dış bölgesindeki kütle dağılımı ve kütleçekimsel ilişkilerinden biri değişti.', zaman:'Uzaklığı nedeniyle etkisi diğer gezegenlere göre daha sınırlıdır; değişim zaman içinde fark edilebilir.'}}
   ]},
   /* 3) İNSAN VÜCUDU — 13 parça. Her uzuv kendi yerinde olmalı. */
   { ad:'İNSAN VÜCUDU', kolon:7, satir:9,
     ipucu:'En üstte baş, en altta ayaklar. Yukarıdan aşağıya doğru düşün.',
     parcalar:[
-      {id:'bas',   ad:'Baş',      x:2,y:0,w:3,h:1, renk:RENK.ten},
-      {id:'yuz',   ad:'Yüz',      x:2,y:1,w:3,h:1, renk:RENK.yuz},
-      {id:'boyun', ad:'Boyun',    x:3,y:2,w:1,h:1, renk:RENK.ten},
-      {id:'skol',  ad:'Sol kol',  x:0,y:3,w:2,h:1, renk:RENK.tisort},
-      {id:'govde', ad:'Gövde',    x:2,y:3,w:3,h:2, renk:RENK.tisort},
-      {id:'gkol',  ad:'Sağ kol',  x:5,y:3,w:2,h:1, renk:RENK.tisort},
-      {id:'sel',   ad:'Sol el',   x:0,y:4,w:1,h:1, renk:RENK.ten},
-      {id:'gel',   ad:'Sağ el',   x:6,y:4,w:1,h:1, renk:RENK.ten},
-      {id:'karin', ad:'Karın',    x:2,y:5,w:3,h:1, renk:RENK.pantolon},
-      {id:'sbacak',ad:'Sol bacak',x:2,y:6,w:1,h:2, renk:RENK.pantolon},
-      {id:'gbacak',ad:'Sağ bacak',x:4,y:6,w:1,h:2, renk:RENK.pantolon},
-      {id:'sayak', ad:'Sol ayak', x:1,y:8,w:2,h:1, renk:RENK.ayakkabi},
-      {id:'gayak', ad:'Sağ ayak', x:4,y:8,w:2,h:1, renk:RENK.ayakkabi}
+      {id:'bas',   ad:'Baş',      x:2,y:0,w:3,h:1, renk:RENK.ten, bilim:{temsil:'Vücudun en üstünde yer alan, beyni barındıran bölgeyi temsil eder.', rol:'Beyin ve duyu organları burada bulunur; vücudun kumanda merkezidir.', sonuc:'Baş çıkarıldı → vücudun kumanda ve algı merkeziyle ilgili bağlantı koptu.', zaman:'Bu tür bir eksiklik doğrudan ve anında fark edilir.'}},
+      {id:'yuz',   ad:'Yüz',      x:2,y:1,w:3,h:1, renk:RENK.yuz, bilim:{temsil:'Görme, koklama, tatma gibi duyuların toplandığı bölgeyi temsil eder.', rol:'Göz, burun ve ağız gibi duyu organlarını taşır, çevreyi algılamayı sağlar.', sonuc:'Yüz çıkarıldı → duyu organlarıyla ilgili bir bağlantı koptu.', zaman:'Etki doğrudan ve hemen fark edilir.'}},
+      {id:'boyun', ad:'Boyun',    x:3,y:2,w:1,h:1, renk:RENK.ten, bilim:{temsil:'Baş ile gövdeyi birbirine bağlayan bölgeyi temsil eder.', rol:'Baş ile gövde arasında bağlantı sağlar; kan ve sinir bağlantılarının geçtiği bir köprüdür.', sonuc:'Boyun çıkarıldı → baş ile gövde arasındaki bağlantı koptu.', zaman:'Bağlantı kaybı anında ortaya çıkar.'}},
+      {id:'skol',  ad:'Sol kol',  x:0,y:3,w:2,h:1, renk:RENK.tisort, bilim:{temsil:'Vücudun sol tarafındaki kolu temsil eder.', rol:'Eli gövdeye bağlar, tutma ve hareket etme işlevine katkı sağlar.', sonuc:'Kol çıkarıldı → gövde ile el arasındaki bağlantı koptu, hareket işlevi etkilendi.', zaman:'Etki, hareket denendiğinde hemen fark edilir.'}},
+      {id:'govde', ad:'Gövde',    x:2,y:3,w:3,h:2, renk:RENK.tisort, bilim:{temsil:'Baş, kollar ve bacakların bağlı olduğu ana yapı bölümünü temsil eder.', rol:'Diğer birçok parçayı birbirine bağlayan taşıyıcı ana yapıdır; iç organları barındırır.', sonuc:'Gövde çıkarıldı → yapının taşıyıcı ana bağlantısı ortadan kalktı, diğer parçalar birbirine bağlanamaz.', zaman:'Bu tür bir eksiklik yapıyı anında etkiler.'}},
+      {id:'gkol',  ad:'Sağ kol',  x:5,y:3,w:2,h:1, renk:RENK.tisort, bilim:{temsil:'Vücudun sağ tarafındaki kolu temsil eder.', rol:'Eli gövdeye bağlar, tutma ve hareket etme işlevine katkı sağlar.', sonuc:'Kol çıkarıldı → gövde ile el arasındaki bağlantı koptu, hareket işlevi etkilendi.', zaman:'Etki, hareket denendiğinde hemen fark edilir.'}},
+      {id:'sel',   ad:'Sol el',   x:0,y:4,w:1,h:1, renk:RENK.ten, bilim:{temsil:'Kolun ucunda yer alan, tutma işlevini sağlayan bölümü temsil eder.', rol:'Nesneleri tutma ve ince hareketleri yapma işlevine katkı sağlar.', sonuc:'El çıkarıldı → tutma işleviyle ilgili bir bağlantı koptu.', zaman:'Etki hemen fark edilir.'}},
+      {id:'gel',   ad:'Sağ el',   x:6,y:4,w:1,h:1, renk:RENK.ten, bilim:{temsil:'Kolun ucunda yer alan, tutma işlevini sağlayan bölümü temsil eder.', rol:'Nesneleri tutma ve ince hareketleri yapma işlevine katkı sağlar.', sonuc:'El çıkarıldı → tutma işleviyle ilgili bir bağlantı koptu.', zaman:'Etki hemen fark edilir.'}},
+      {id:'karin', ad:'Karın',    x:2,y:5,w:3,h:1, renk:RENK.pantolon, bilim:{temsil:'Gövdenin alt kısmında yer alan, birçok iç organı barındıran bölgeyi temsil eder.', rol:'Sindirim gibi süreçlerin gerçekleştiği organları barındırır, üst ve alt vücudu birbirine bağlar.', sonuc:'Karın çıkarıldı → üst ve alt vücut arasındaki bağlantı koptu.', zaman:'Etki doğrudan ve anında ortaya çıkar.'}},
+      {id:'sbacak',ad:'Sol bacak',x:2,y:6,w:1,h:2, renk:RENK.pantolon, bilim:{temsil:'Vücudu ayakta tutan ve hareketi sağlayan bacağı temsil eder.', rol:'Vücudun ağırlığını taşır ve yürüme, koşma gibi hareketlere katkı sağlar.', sonuc:'Bacak çıkarıldı → vücudu taşıyan destek noktalarından biri ortadan kalktı, denge etkilendi.', zaman:'Denge kaybı hemen fark edilir.'}},
+      {id:'gbacak',ad:'Sağ bacak',x:4,y:6,w:1,h:2, renk:RENK.pantolon, bilim:{temsil:'Vücudu ayakta tutan ve hareketi sağlayan bacağı temsil eder.', rol:'Vücudun ağırlığını taşır ve yürüme, koşma gibi hareketlere katkı sağlar.', sonuc:'Bacak çıkarıldı → vücudu taşıyan destek noktalarından biri ortadan kalktı, denge etkilendi.', zaman:'Denge kaybı hemen fark edilir.'}},
+      {id:'sayak', ad:'Sol ayak', x:1,y:8,w:2,h:1, renk:RENK.ayakkabi, bilim:{temsil:'Bacağın ucunda yer alan, yere temas eden bölümü temsil eder.', rol:'Vücudun yere basmasını ve dengede durmasını sağlar.', sonuc:'Ayak çıkarıldı → vücudun yere temas noktası ve dengesi etkilendi.', zaman:'Etki hemen fark edilir.'}},
+      {id:'gayak', ad:'Sağ ayak', x:4,y:8,w:2,h:1, renk:RENK.ayakkabi, bilim:{temsil:'Bacağın ucunda yer alan, yere temas eden bölümü temsil eder.', rol:'Vücudun yere basmasını ve dengede durmasını sağlar.', sonuc:'Ayak çıkarıldı → vücudun yere temas noktası ve dengesi etkilendi.', zaman:'Etki hemen fark edilir.'}}
   ]},
   /* 2) DÜNYA — 8 parça. Dıştan içe katmanlar. */
   { ad:'DÜNYA', kolon:8, satir:7,
     ipucu:'En üstte atmosfer, en altta iç çekirdek. Dıştan içe doğru düşün.',
     parcalar:[
-      {id:'atm',   ad:'Atmosfer',      x:0,y:0,w:8,h:1, renk:RENK.atmosfer},
-      {id:'bulut', ad:'Bulutlar',      x:2,y:1,w:4,h:1, renk:RENK.bulut},
-      {id:'kara',  ad:'Kara',          x:0,y:2,w:3,h:1, renk:RENK.kara},
-      {id:'okyanus',ad:'Okyanus',      x:3,y:2,w:5,h:1, renk:RENK.okyanus},
-      {id:'kabuk', ad:'Yer kabuğu',    x:0,y:3,w:8,h:1, renk:RENK.kabuk},
-      {id:'manto', ad:'Manto',         x:0,y:4,w:8,h:1, renk:RENK.manto},
-      {id:'dcek',  ad:'Dış çekirdek',  x:1,y:5,w:6,h:1, renk:RENK.discek},
-      {id:'icek',  ad:'İç çekirdek',   x:2,y:6,w:4,h:1, renk:RENK.cekirdek}
+      {id:'atm',   ad:'Atmosfer',      x:0,y:0,w:8,h:1, renk:RENK.atmosfer, bilim:{temsil:'Dünya\'yı saran gaz tabakasını temsil eder.', rol:'Canlıların soluduğu havayı içerir, Dünya\'yı zararlı ışınlardan korur ve sıcaklığı dengeler.', sonuc:'Atmosfer çıkarıldı → Dünya\'yı koruyan ve yaşamı destekleyen gaz tabakası ortadan kalktı.', zaman:'Etkisi çok hızlı ve belirgin şekilde ortaya çıkar.'}},
+      {id:'bulut', ad:'Bulutlar',      x:2,y:1,w:4,h:1, renk:RENK.bulut, bilim:{temsil:'Atmosferde su buharının yoğunlaşmasıyla oluşan yapıyı temsil eder.', rol:'Yağışın oluşmasına ve suyun döngüsüne katkı sağlar.', sonuc:'Bulutlar çıkarıldı → yağış sürecine katkı sağlayan bir bağlantı zayıfladı.', zaman:'Etkisi zamanla, yağış döngüsünde fark edilir.'}},
+      {id:'kara',  ad:'Kara',          x:0,y:2,w:3,h:1, renk:RENK.kara, bilim:{temsil:'Dünya yüzeyindeki kara parçalarını temsil eder.', rol:'Birçok canlının yaşam alanıdır ve yer kabuğunun yüzeyde görünen kısmıdır.', sonuc:'Kara çıkarıldı → kara canlılarının yaşam alanıyla ilgili bir bağlantı koptu.', zaman:'Etki hemen fark edilir, ancak yayılma süreci zaman alabilir.'}},
+      {id:'okyanus',ad:'Okyanus',      x:3,y:2,w:5,h:1, renk:RENK.okyanus, bilim:{temsil:'Dünya yüzeyinin büyük bölümünü kaplayan su kütlesini temsil eder.', rol:'Su döngüsüne, iklime ve deniz canlılarının yaşamına katkı sağlar.', sonuc:'Okyanus çıkarıldı → su döngüsü ve deniz yaşamıyla ilgili bir bağlantı koptu.', zaman:'Bazı etkiler hemen, iklimle ilgili etkiler zamanla ortaya çıkar.'}},
+      {id:'kabuk', ad:'Yer kabuğu',    x:0,y:3,w:8,h:1, renk:RENK.kabuk, bilim:{temsil:'Dünya\'nın en dış katı tabakasını temsil eder.', rol:'Kara ve okyanusların üzerinde bulunduğu, canlıların yaşadığı katı yüzeyi oluşturur.', sonuc:'Yer kabuğu çıkarıldı → üzerindeki kara, okyanus gibi katmanların dayanağı ortadan kalktı.', zaman:'Etki yapısal olarak hemen ortaya çıkar.'}},
+      {id:'manto', ad:'Manto',         x:0,y:4,w:8,h:1, renk:RENK.manto, bilim:{temsil:'Yer kabuğunun altında yer alan, yarı katı-akışkan tabakayı temsil eder.', rol:'Yer kabuğunu destekler ve iç ısının taşınmasına katkı sağlar.', sonuc:'Manto çıkarıldı → yer kabuğu ile çekirdek arasındaki bağlantı koptu.', zaman:'Etki yapısal olarak hemen ortaya çıkar.'}},
+      {id:'dcek',  ad:'Dış çekirdek',  x:1,y:5,w:6,h:1, renk:RENK.discek, bilim:{temsil:'Dünya\'nın iç kısmında yer alan, sıvı hâldeki tabakayı temsil eder.', rol:'Dünya\'nın manyetik alanının oluşmasına katkı sağladığı düşünülür.', sonuc:'Dış çekirdek çıkarıldı → manto ile iç çekirdek arasındaki bağlantı koptu.', zaman:'Etki yapısal olarak hemen ortaya çıkar.'}},
+      {id:'icek',  ad:'İç çekirdek',   x:2,y:6,w:4,h:1, renk:RENK.cekirdek, bilim:{temsil:'Dünya\'nın en merkezindeki katı tabakayı temsil eder.', rol:'Dünya\'nın merkezinde yer alır, diğer katmanların dayandığı en iç yapıdır.', sonuc:'İç çekirdek çıkarıldı → Dünya\'nın merkezindeki yapı taşı ortadan kalktı.', zaman:'Etki yapısal olarak hemen ortaya çıkar.'}}
   ]},
   /* 4) MEVSİMLER — Güneş Sistemi ile aynı görsel dil: yuvarlak parçalar,
         tek bir kapalı halka (yörünge) üzerinde, saat yönünde dizilir. */
   { ad:'MEVSİMLER', tip:'dongu', gen:300, yuk:260, gunes:[150,150], dongurad:100,
     ipucu:'Mevsimler hep aynı sırayla, bir döngü hâlinde gelir: İlkbahar → Yaz → Sonbahar → Kış → yine İlkbahar…',
     parcalar:[
-      {id:'ilkbahar', ad:'İlkbahar', px:true, yuvarlak:true, x:115, y:53,  w:70, h:70, renk:RENK.ilkbahar},
-      {id:'yaz',      ad:'Yaz',      px:true, yuvarlak:true, x:215, y:115, w:70, h:70, renk:RENK.yaz},
-      {id:'sonbahar', ad:'Sonbahar', px:true, yuvarlak:true, x:115, y:177, w:70, h:70, renk:RENK.sonbahar},
-      {id:'kis',      ad:'Kış',      px:true, yuvarlak:true, x:15,  y:115, w:70, h:70, renk:RENK.kis}
+      {id:'ilkbahar', ad:'İlkbahar', px:true, yuvarlak:true, x:115, y:53,  w:70, h:70, renk:RENK.ilkbahar, bilim:{temsil:'Kışın ardından gelen, doğanın canlandığı mevsimi temsil eder.', rol:'Mevsim döngüsünde kış ile yaz arasındaki geçişi sağlar.', sonuc:'İlkbahar çıkarıldı → mevsim döngüsündeki sıralı geçişlerden biri eksik kaldı.', zaman:'Döngüdeki bu boşluk hemen fark edilir.'}},
+      {id:'yaz',      ad:'Yaz',      px:true, yuvarlak:true, x:215, y:115, w:70, h:70, renk:RENK.yaz, bilim:{temsil:'Yılın en sıcak mevsimini temsil eder.', rol:'Mevsim döngüsünde ilkbahar ile sonbahar arasındaki geçişi sağlar.', sonuc:'Yaz çıkarıldı → mevsim döngüsündeki sıralı geçişlerden biri eksik kaldı.', zaman:'Döngüdeki bu boşluk hemen fark edilir.'}},
+      {id:'sonbahar', ad:'Sonbahar', px:true, yuvarlak:true, x:115, y:177, w:70, h:70, renk:RENK.sonbahar, bilim:{temsil:'Yaz ile kış arasındaki geçiş mevsimini temsil eder.', rol:'Mevsim döngüsünde sıcaklığın azalmaya başladığı dönemi oluşturur.', sonuc:'Sonbahar çıkarıldı → mevsim döngüsündeki sıralı geçişlerden biri eksik kaldı.', zaman:'Döngüdeki bu boşluk hemen fark edilir.'}},
+      {id:'kis',      ad:'Kış',      px:true, yuvarlak:true, x:15,  y:115, w:70, h:70, renk:RENK.kis, bilim:{temsil:'Yılın en soğuk mevsimini temsil eder.', rol:'Mevsim döngüsünde sonbahar ile ilkbahar arasındaki geçişi sağlar.', sonuc:'Kış çıkarıldı → mevsim döngüsündeki sıralı geçişlerden biri eksik kaldı.', zaman:'Döngüdeki bu boşluk hemen fark edilir.'}}
   ]},
   /* 5) SU DÖNGÜSÜ — aynı halka düzeni. */
   { ad:'SU DÖNGÜSÜ', tip:'dongu', gen:300, yuk:260, gunes:[150,150], dongurad:100,
     ipucu:'Su da hep aynı döngüde dolaşır: Buharlaşma → Bulut → Yağış → Deniz → yine Buharlaşma…',
     parcalar:[
-      {id:'buharlasma', ad:'Buharlaşma', px:true, yuvarlak:true, x:115, y:53,  w:70, h:70, renk:RENK.buharlasma},
-      {id:'bulut2',     ad:'Bulut',      px:true, yuvarlak:true, x:215, y:115, w:70, h:70, renk:RENK.bulut},
-      {id:'yagis',      ad:'Yağış',      px:true, yuvarlak:true, x:115, y:177, w:70, h:70, renk:RENK.yagis},
-      {id:'deniz',      ad:'Deniz',      px:true, yuvarlak:true, x:15,  y:115, w:70, h:70, renk:RENK.okyanus}
+      {id:'buharlasma', ad:'Buharlaşma', px:true, yuvarlak:true, x:115, y:53,  w:70, h:70, renk:RENK.buharlasma, bilim:{temsil:'Suyun ısınarak buhara dönüştüğü süreci temsil eder.', rol:'Sıvı sudan bulut oluşumuna geçişi başlatan basamaktır.', sonuc:'Buharlaşma çıkarıldı → su döngüsündeki bulut oluşumuna giden bağlantı koptu.', zaman:'Döngüdeki bu kopukluk döngü tekrar işlemeye çalışıldığında fark edilir.'}},
+      {id:'bulut2',     ad:'Bulut',      px:true, yuvarlak:true, x:215, y:115, w:70, h:70, renk:RENK.bulut, bilim:{temsil:'Buharlaşan suyun yoğunlaşmasıyla oluşan yapıyı temsil eder.', rol:'Buharlaşma ile yağış arasındaki geçişi sağlar.', sonuc:'Bulut çıkarıldı → buharlaşan suyun yağışa dönüşmesini sağlayan bağlantı koptu.', zaman:'Etki döngü işlerken fark edilir.'}},
+      {id:'yagis',      ad:'Yağış',      px:true, yuvarlak:true, x:115, y:177, w:70, h:70, renk:RENK.yagis, bilim:{temsil:'Bulutlardaki suyun yeryüzüne dönmesini temsil eder.', rol:'Bulut ile deniz/göl arasındaki geçişi sağlar, suyun yeniden yeryüzüne ulaşmasını sağlar.', sonuc:'Yağış çıkarıldı → suyun yeryüzüne dönmesini sağlayan bağlantı koptu.', zaman:'Etki döngü işlerken fark edilir.'}},
+      {id:'deniz',      ad:'Deniz',      px:true, yuvarlak:true, x:15,  y:115, w:70, h:70, renk:RENK.okyanus, bilim:{temsil:'Suyun toplandığı ve yeniden buharlaşmaya hazırlandığı kaynağı temsil eder.', rol:'Döngünün başlangıç ve bitiş noktasıdır; buharlaşmanın kaynağıdır.', sonuc:'Deniz çıkarıldı → döngünün başladığı su kaynağı ortadan kalktı.', zaman:'Etki döngü yeniden başlarken fark edilir.'}}
   ]},
   /* 6) BESİN ZİNCİRİ — bir "zincir" döngü değil, sıradır: Güneş'ten
         başlayıp enerjinin aktarıldığı sırayla ilerler. Güneş Sistemi'yle
@@ -4103,10 +4116,10 @@ var MODELLER = [
   { ad:'BESİN ZİNCİRİ', tip:'uzay', gen:600, yuk:200, gunes:[69,100],
     ipucu:'Enerji hep aynı sırayla akar: önce Güneş, sonra üretici (bitki), sonra tüketiciler. Sıra bozulmaz.',
     parcalar:[
-      {id:'gunes',  ad:'Güneş', px:true, yuvarlak:true, x:14,  y:45, w:110, h:110, renk:RENK.gunes},
-      {id:'bitki',  ad:'Bitki', px:true, yuvarlak:true, x:180, y:65, w:70,  h:70,  renk:RENK.bitki},
-      {id:'tavsan', ad:'Tavşan',px:true, yuvarlak:true, x:320, y:60, w:80,  h:80,  renk:RENK.tavsan},
-      {id:'tilki',  ad:'Tilki', px:true, yuvarlak:true, x:470, y:55, w:90,  h:90,  renk:RENK.tilki}
+      {id:'gunes',  ad:'Güneş', px:true, yuvarlak:true, x:14,  y:45, w:110, h:110, renk:RENK.gunes, bilim:{temsil:'Besin zincirindeki enerjinin asıl kaynağını temsil eder.', rol:'Bitkilerin fotosentez yapabilmesi için gerekli enerjiyi sağlar.', sonuc:'Güneş çıkarıldı → besin zincirinin temel enerji kaynağı ortadan kalktı.', zaman:'Bitkilerin enerji üretimi hemen etkilenir; zincirdeki diğer canlılara etkisi zamanla ortaya çıkar.'}},
+      {id:'bitki',  ad:'Bitki', px:true, yuvarlak:true, x:180, y:65, w:70,  h:70,  renk:RENK.bitki, bilim:{temsil:'Besin zincirinin ilk basamağı olan üreticiyi temsil eder.', rol:'Güneş enerjisini kullanarak kendi besinini üretir ve otçul hayvanlara besin kaynağı olur.', sonuc:'Bitki çıkarıldı → tavşanın besin kaynağı ortadan kalktı, bitki ile tavşan arasındaki beslenme ilişkisi sona erdi.', zaman:'Tavşanın besin bulma zorluğu zamanla ortaya çıkabilir.'}},
+      {id:'tavsan', ad:'Tavşan',px:true, yuvarlak:true, x:320, y:60, w:80,  h:80,  renk:RENK.tavsan, bilim:{temsil:'Bitkiyle beslenen bir tüketiciyi (otçul) temsil eder.', rol:'Bitkiden aldığı enerjiyi tilki gibi etçillere aktaran ara basamaktır.', sonuc:'Tavşan çıkarıldığında tilkinin bu besin kaynağı ortadan kalkar. Bitki ile tavşan arasındaki beslenme ilişkisi de sona erer. Diğer canlıların sayısındaki değişiklikler ise ekosistemin koşullarına bağlı olarak zaman içinde ortaya çıkabilir.', zaman:'Tilkinin besin kaynağı kaybı hemen ortaya çıkar; ekosistemdeki diğer değişiklikler zaman içinde gerçekleşebilir.'}},
+      {id:'tilki',  ad:'Tilki', px:true, yuvarlak:true, x:470, y:55, w:90,  h:90,  renk:RENK.tilki, bilim:{temsil:'Besin zincirinde tavşanla beslenen bir etçili temsil eder.', rol:'Tavşan gibi otçul hayvanlarla beslenerek besin zincirinin üst basamağında yer alır.', sonuc:'Tilki çıkarıldı → tavşan üzerindeki avcı baskısı azalır; bu durum zamanla tavşan sayısını etkileyebilir.', zaman:'Etki hemen değil, zaman içinde ortaya çıkar.'}}
   ]}
 ];
 
@@ -4114,14 +4127,42 @@ var MODELLER = [
 var SON_MODEL = {
   ad:'EVREN', kolon:6, satir:4,
   hazir:[
-    {ad:'Yıldızlar',  x:0,y:0,w:6,h:1, renk:RENK.navy},
-    {ad:'Güneş',      x:0,y:1,w:2,h:1, renk:RENK.gunes},
-    {ad:'Gezegenler', x:2,y:1,w:4,h:1, renk:RENK.jupiter},
-    {ad:'Dünya',      x:0,y:2,w:2,h:1, renk:RENK.dunya},
-    {ad:'Ay',         x:2,y:2,w:2,h:1, renk:RENK.merkur},
-    {ad:'Yörüngeler', x:4,y:2,w:2,h:1, renk:RENK.turkuaz}
+    {ad:'Yıldızlar',  x:0,y:0,w:6,h:1, renk:RENK.navy,
+      bilim:{temsil:'Gece gökyüzünde görünen, kendi ışığını yayan gök cisimlerini temsil eder.',
+        rol:'Evrendeki büyük yapıların (galaksiler, sistemler) temel yapı taşlarındandır.',
+        sonuc:'Yıldızlar çıkarıldı → evrenin ışık ve enerji kaynaklarından biri eksik kaldı.',
+        zaman:'Etkisi kavramsal olarak hemen, gerçek evrende ise çok uzun sürelerde ortaya çıkar.'}},
+    {ad:'Güneş',      x:0,y:1,w:2,h:1, renk:RENK.gunes,
+      bilim:{temsil:'Bu küçük evren modelindeki ana enerji kaynağını temsil eder.',
+        rol:'Gezegenlere ışık ve enerji sağlar, sistemin merkezini oluşturur.',
+        sonuc:'Güneş çıkarıldı → modeldeki temel enerji kaynağı ortadan kalktı.',
+        zaman:'Etki modelde hemen fark edilir.'}},
+    {ad:'Gezegenler', x:2,y:1,w:4,h:1, renk:RENK.jupiter,
+      bilim:{temsil:'Güneş\'in çevresinde dönen gök cisimlerini temsil eder.',
+        rol:'Güneş ile kütleçekimsel ilişki içinde belirli yörüngelerde hareket ederler.',
+        sonuc:'Gezegenler çıkarıldı → Güneş ile aralarındaki kütleçekimsel ilişkilerden biri eksik kaldı.',
+        zaman:'Etki modelde hemen fark edilir.'}},
+    {ad:'Dünya',      x:0,y:2,w:2,h:1, renk:RENK.dunya,
+      bilim:{temsil:'Bu modelde yaşamın bulunduğu gezegeni temsil eder.',
+        rol:'Ay ile kütleçekimsel ilişki içindedir ve yaşamı barındırır.',
+        sonuc:'Dünya çıkarıldı → modeldeki yaşam alanı ve Ay ile olan ilişki ortadan kalktı.',
+        zaman:'Etki modelde hemen fark edilir.'}},
+    {ad:'Ay',         x:2,y:2,w:2,h:1, renk:RENK.merkur,
+      bilim:{temsil:'Dünya\'nın çevresinde dönen doğal uyduyu temsil eder.',
+        rol:'Dünya ile kütleçekimsel etkileşim içindedir.',
+        sonuc:'Ay çıkarıldı → Dünya ile arasındaki kütleçekimsel ilişki ortadan kalktı.',
+        zaman:'Bazı etkiler zamanla ortaya çıkar.'}},
+    {ad:'Yörüngeler', x:4,y:2,w:2,h:1, renk:RENK.turkuaz,
+      bilim:{temsil:'Gök cisimlerinin izlediği düzenli yolları temsil eder.',
+        rol:'Gezegenlerin ve Ay\'ın hareketinin belirli bir düzende gerçekleşmesini sağlar.',
+        sonuc:'Yörüngeler çıkarıldı → hareketin belirli bir düzende gerçekleşmesini sağlayan bağlantı ortadan kalktı.',
+        zaman:'Etki modelde hemen fark edilir.'}}
   ],
-  eksik:{id:'duzen', ad:'DÜZEN', x:0,y:3,w:6,h:1, renk:RENK.mor}
+  eksik:{id:'duzen', ad:'DÜZEN', x:0,y:3,w:6,h:1, renk:RENK.mor,
+    bilim:{temsil:'Tüm bu parçaların birbiriyle uyumlu bir şekilde bir araya gelmesini temsil eder.',
+      rol:'Parçalar arasındaki ilişkilerin belirli bir ölçü ve uyum içinde olmasını sağlar.',
+      sonuc:'Düzen parçası yerine konmadan yapı tamamlanmış sayılmaz; parçalar arasındaki ilişki eksik kalır.',
+      zaman:'Etki yapı tamamlanana kadar sürer.'}}
 };
 
 var SORU2 = {
@@ -4339,6 +4380,31 @@ function mesajYaz(tip, metin){
 }
 
 /* ===================================================================
+   BİLİMSEL AÇIKLAMA SİSTEMİ — her LEGO parçasının 4 aşamalı cevabı.
+   "Bir parça çıkarıldı, düzen bozuldu" gibi yüzeysel bir cevap yerine:
+   1) Bu parça neyi temsil ediyor? 2) Sistemdeki rolü ne? 3) Çıkarılırsa
+   bilimsel olarak ne değişir? 4) Değişiklik hemen mi, zamanla mı olur?
+   Veri her parçanın kendi tanımında p.bilim olarak durur; bu fonksiyon
+   yalnızca görüntüler, hiçbir oyun mekaniğini değiştirmez. */
+function bilimKartHtml(p){
+  if(!p || !p.bilim) return '';
+  var b = p.bilim;
+  return '<div class="lg-bilim-kart">'+
+    '<div class="lg-bilim-ust">🔬 <b>'+p.ad+'</b> — Bilimsel İnceleme</div>'+
+    '<p class="lg-bilim-satir"><span class="lg-bilim-etiket">🧩 Neyi temsil ediyor?</span>'+b.temsil+'</p>'+
+    '<p class="lg-bilim-satir"><span class="lg-bilim-etiket">⚙️ Sistemdeki rolü</span>'+b.rol+'</p>'+
+    '<p class="lg-bilim-satir"><span class="lg-bilim-etiket">🔬 Çıkarılırsa ne değişir?</span>'+b.sonuc+'</p>'+
+    '<p class="lg-bilim-satir"><span class="lg-bilim-etiket">⏱️ Ne zaman ortaya çıkar?</span>'+b.zaman+'</p>'+
+  '</div>';
+}
+function bilimGoster(kapId, p){
+  var kap = $('#'+kapId);
+  if(!kap || !p || !p.bilim) return;
+  kap.innerHTML = bilimKartHtml(p);
+  kap.hidden = false;
+}
+
+/* ===================================================================
    BÖLÜM 1 — LEGO'yu tamamla (sürükle-bırak + seç-yerleştir)
 =================================================================== */
 function yorungeSVG(model){
@@ -4369,13 +4435,14 @@ function bolum1(){
 
   sahne.innerHTML =
     '<h2>🪐 Bölüm 1 — LEGO\'yu Tamamla <span style="font-size:.78rem;font-weight:800;color:var(--lg-metin2)">('+(durum.modelSira+1)+'/'+MODELLER.length+' · '+model.ad+')</span></h2>'+
-    '<p class="lg-alt">Parçalar karışık geldi. Her parçayı kendi yerine yerleştir. Yuvanın genişliği parçanın büyüklüğünü gösterir.</p>'+
+    '<p class="lg-alt">Parçalar karışık geldi. Her parçayı kendi yerine yerleştir. Yuvanın genişliği parçanın büyüklüğünü gösterir. Yerine oturan bir parçaya tıklarsan onun hakkında bilimsel bir açıklama okuyabilirsin.</p>'+
     '<div class="lg-gorev">🎯 Görev: <b>'+model.ad+'</b> yapısını kur. Parçayı sürükleyebilir ya da <b>önce parçaya, sonra boş yere tıklayabilirsin</b>.<br>💡 '+model.ipucu+'</div>'+
     '<div class="lg-oyunalani">'+
       '<div class="lg-tahta-kutu"><div class="lg-tahta" id="lgTahta"></div></div>'+
       '<div class="lg-tepsi"><h3>🧱 Parça kutusu</h3><p>Kalan parça: <b id="lgKalan">'+model.parcalar.length+'</b> — parçalar karışık dizildi. Bir parçayı sürükleyip yaklaştırman yeter, kendiliğinden oturur.</p><div class="lg-tepsi-ic" id="lgTepsi"></div></div>'+
     '</div>'+
     '<div class="lg-mesaj" data-tip="bos" id="lgMesaj">👆 Bir parça seç ve yerine koy.</div>'+
+    '<div id="lgBilimPanel" hidden></div>'+
     '<div class="lg-dugmeler">'+
       '<button type="button" class="lg-btn lg-btn--yesil" id="lgIleri" hidden>Devam et ➡️</button>'+
       '<button type="button" class="lg-btn lg-btn--ikincil" id="lgAtla">⏭️ '+(durum.modelSira < MODELLER.length - 1 ? 'Sonraki Yapıya Geç' : 'Bölüm 2\'ye Geç')+'</button>'+
@@ -4437,13 +4504,19 @@ function bolum1(){
     yeni.classList.add('lg-tak','lg-yerlesti');
     yeni.style.position = 'absolute';
     konumla(yeni,p,c);
+    if(p.bilim){
+      yeni.setAttribute('role','button'); yeni.setAttribute('tabindex','0');
+      yeni.setAttribute('aria-label', p.ad + ' — bilimsel açıklamayı görmek için Enter\'a bas.');
+      yeni.onclick = function(){ bilimGoster('lgBilimPanel', p); };
+      yeni.onkeydown = function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); yeni.click(); } };
+    }
     tahta.appendChild(yeni);
     tugla.remove();
     durum.secili = null;
     kalan--;
     $('#lgKalan').textContent = kalan;
     puanEkle(10);
-    mesajYaz('dogru','🧩 Parça yerine oturdu!');
+    mesajYaz('dogru','🧩 Parça yerine oturdu! Üzerine tıklayarak bilimsel açıklamasını okuyabilirsin.');
     if(kalan === 0) modelBitti();
     return true;
   }
@@ -4636,6 +4709,7 @@ function bolum2(){
       '<div class="lg-tahta-kutu"><div class="lg-tahta" id="lgTahta2"></div></div>'+
     '</div>'+
     '<div class="lg-mesaj" data-tip="bos" id="lgMesaj">⏳ Parça çıkarılıyor…</div>'+
+    '<div id="lgBilimPanel2" hidden></div>'+
     '<div id="lgSoruAlan"></div>';
 
   var tahta = $('#lgTahta2');
@@ -4651,8 +4725,10 @@ function bolum2(){
   }
 
   var cikacak = 'dunya';
+  var cikanParca = null;
   model.parcalar.forEach(function(p){
     if(p.id === cikacak){
+      cikanParca = p;
       var y = document.createElement('div');
       y.className = 'lg-yuva' + (p.yuvarlak ? ' lg-yuvarlak' : '');
       y.innerHTML = '<b style="font-size:1.4rem">?</b><span class="lg-ad">'+p.ad+'</span>';
@@ -4681,6 +4757,7 @@ function bolum2(){
         if(b) b.style.opacity = '1';
         tik('yanlis');
         mesajYaz('yanlis','⚠️ <b>Dünya</b> yapıdan çıktı. Sıra bozuldu, yerinde bir boşluk kaldı. Şimdi yapıya bak…');
+        bilimGoster('lgBilimPanel2', cikanParca);
         soruGoster(SORU2, $('#lgSoruAlan'), function(){
           durum.bolum = 3; ilerlemeGuncelle(); bolum3(); sahne.focus();
         });
@@ -4794,13 +4871,14 @@ function bolum4(){
   durum.secili = null;
   sahne.innerHTML =
     '<h2>🧩 Bölüm 4 — Son LEGO</h2>'+
-    '<p class="lg-alt">Yıldızlar, Güneş, gezegenler, Dünya, Ay ve yörüngeler yerinde. Geriye tek bir parça kaldı.</p>'+
+    '<p class="lg-alt">Yıldızlar, Güneş, gezegenler, Dünya, Ay ve yörüngeler yerinde. Geriye tek bir parça kaldı. Yerindeki parçalara tıklayarak bilimsel açıklamalarını okuyabilirsin.</p>'+
     '<div class="lg-gorev">🎯 Görev: <b>DÜZEN</b> parçasını en alttaki boşluğa yerleştir ve yapıyı tamamla.</div>'+
     '<div class="lg-oyunalani">'+
       '<div class="lg-tahta-kutu"><div class="lg-tahta" id="lgTahta4"></div></div>'+
       '<div class="lg-tepsi"><h3>Son parça</h3><p>Sürükle ya da seçip yerine tıkla.</p><div class="lg-tepsi-ic" id="lgTepsi4"></div></div>'+
     '</div>'+
-    '<div class="lg-mesaj" data-tip="bos" id="lgMesaj">🧩 Son parçayı yerine koy.</div>';
+    '<div class="lg-mesaj" data-tip="bos" id="lgMesaj">🧩 Son parçayı yerine koy.</div>'+
+    '<div id="lgBilimPanel4" hidden></div>';
 
   var tahta = $('#lgTahta4');
   tahta.style.width  = (SON_MODEL.kolon*c) + 'px';
@@ -4810,6 +4888,12 @@ function bolum4(){
     var t = tuglaYap(p,c,false);
     t.style.position = 'absolute';
     konumla(t,p,c);
+    if(p.bilim){
+      t.setAttribute('role','button'); t.setAttribute('tabindex','0');
+      t.setAttribute('aria-label', p.ad + ' — bilimsel açıklamayı görmek için Enter\'a bas.');
+      t.onclick = function(){ bilimGoster('lgBilimPanel4', p); };
+      t.onkeydown = function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); t.click(); } };
+    }
     tahta.appendChild(t);
   });
 
@@ -4837,9 +4921,16 @@ function bolum4(){
     yeni.style.position = 'absolute';
     yeni.style.fontSize = '.95rem';
     konumla(yeni,p,c);
+    if(p.bilim){
+      yeni.setAttribute('role','button'); yeni.setAttribute('tabindex','0');
+      yeni.setAttribute('aria-label', p.ad + ' — bilimsel açıklamayı görmek için Enter\'a bas.');
+      yeni.onclick = function(){ bilimGoster('lgBilimPanel4', p); };
+      yeni.onkeydown = function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); yeni.click(); } };
+    }
     tahta.appendChild(yeni);
     tugla.remove();
     puanEkle(30);
+    bilimGoster('lgBilimPanel4', p);
     setTimeout(final, 620);
   }
 
@@ -4914,7 +5005,13 @@ function final(){
       '<div class="lg-rozet-kazanildi">⭐ Düzen Kaşifi rozetini kazandın!</div>'+
       '<div class="lg-ozet">LEGO parçaları belirli bir ölçü ve düzene göre birleşti.<br>Evreni düşündüğümüzde de varlıklar arasında <b>düzen, uyum ve ölçü</b> olduğunu fark ederiz.<br>Bu konuya <b>🌌 Evrendeki Düzen ve Ölçü</b> diyoruz.</div>'+
       '<p class="lg-not">⭐ Düzeni fark ettin! Toplam puanın: <b>'+durum.puan+'</b> · Bölüm 4 / 4</p>'+
-      '<div class="lg-ogretmen-notu">👩‍🏫 <b>Öğretmen notu:</b> LEGO bir insan yapımıdır. Evren ise çok daha büyük ve karmaşık bir düzene sahiptir. Bu etkinlik bize sadece düzen ve ölçü fikrini düşünmemiz için bir örnek sunar.</div>'+
+      '<div class="lg-bilim-kart" style="text-align:left;max-width:62ch;margin:16px auto 0">'+
+        '<div class="lg-bilim-ust">🔬 Bilimsel düşünmek</div>'+
+        '<p class="lg-bilim-satir">Bir sistem yalnızca parçalardan oluşmaz. Parçalar arasındaki ilişkiler de önemlidir.</p>'+
+        '<p class="lg-bilim-satir">LEGO modelinde bunu destek, bağlantı ve denge üzerinden gördün. Doğada ise canlılar, cansız varlıklar ve fiziksel süreçler arasında farklı ilişkiler bulunur.</p>'+
+        '<p class="lg-bilim-satir">Bilimsel düşünmek; <b>"Ne değişti?"</b> kadar <b>"Neden değişti?"</b> ve <b>"Bu değişiklik ne zaman ortaya çıkar?"</b> sorularını da sormaktır.</p>'+
+      '</div>'+
+      '<div class="lg-ogretmen-notu">👩‍🏫 <b>Öğretmen notu:</b> LEGO bir insan yapımıdır. Evren ise çok daha büyük ve karmaşık bir düzene sahiptir. LEGO modeli evrenin birebir bilimsel modeli değildir; çocukların düzen, ölçü, denge, ilişki ve sistem kavramlarını somut olarak düşünmelerine yardımcı olan bir eğitim benzetmesidir.</div>'+
       '<div class="lg-dugmeler" style="justify-content:center">'+
         '<button type="button" class="lg-btn" id="lgTekrar">🔁 Yeniden oyna</button>'+
       '</div>'+
