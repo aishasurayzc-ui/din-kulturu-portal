@@ -4184,7 +4184,7 @@ function tepsiTugla(p){
   el.type = 'button';
   el.className = 'lg-tugla';
   el.style.setProperty('--t', p.renk);
-  if(!p.yuvarlak) el.textContent = p.ad;
+  el.textContent = p.ad;
   el.setAttribute('aria-label', p.ad + ' parçası. Seçmek için Enter.');
   el.style.position = 'relative';
   el.style.width  = Math.max(84, Math.min(240, p.w*24 + 60)) + 'px';
@@ -4198,6 +4198,9 @@ function tuglaYap(p,c,etkilesimli){
   el.style.setProperty('--t', p.renk);
   if(p.yuvarlak){
     if(p.halka){ var h=document.createElement('span'); h.className='lg-halka'; el.appendChild(h); }
+    var ad=document.createElement('span'); ad.textContent=p.ad;
+    ad.style.fontSize = Math.max(7, Math.min(15, p.w*OLCEK*0.13)) + 'px';
+    el.appendChild(ad);
   } else {
     el.textContent = p.ad;
   }
@@ -4322,8 +4325,7 @@ function bolum1(){
     y.type = 'button';
     y.className = 'lg-yuva' + (p.yuvarlak ? ' lg-yuvarlak' : '');
     y.dataset.id = p.id;
-    if(p.yuvarlak){ y.innerHTML = p.w >= 150 ? '' : '<span class="lg-ad">'+p.ad+'</span>'; }
-    else { y.textContent = p.ad; }
+    if(!p.yuvarlak){ y.textContent = p.ad; }
     y.setAttribute('aria-label', p.ad + ' için boş yer');
     konumla(y,p,c);
     tahta.appendChild(y);
@@ -4348,7 +4350,7 @@ function bolum1(){
     }
     tik('tak');
     yuva.classList.add('lg-dolu');
-    if(!yuva.querySelector('.lg-ad')) yuva.textContent = '';   /* gezegen adı altta kalsın */
+    yuva.textContent = '';   /* isim artık üstüne konan parçanın kendi üzerinde yazıyor */
     yuva.disabled = true;
     yuva.setAttribute('aria-label', p.ad + ' yerleşti');
     var yeni = tuglaYap(p, c, false);
@@ -4507,15 +4509,6 @@ function bolum2(){
     konumla(t,p,c);
     if(p.id === cikacak) t.id = 'lgCikan';
     tahta.appendChild(t);
-    if(p.yuvarlak && p.id !== cikacak && p.w < 150){
-      var ad = document.createElement('span');
-      ad.className = 'lg-ad'; ad.textContent = p.ad;
-      ad.style.position='absolute';
-      ad.style.left = ((p.x + p.w/2)*OLCEK) + 'px';
-      ad.style.top  = ((p.y + p.h)*OLCEK + 7) + 'px';
-      ad.style.transform = 'translateX(-50%)';
-      tahta.appendChild(ad);
-    }
   });
 
   setTimeout(function(){
