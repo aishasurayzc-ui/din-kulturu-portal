@@ -291,6 +291,17 @@
   font-size:1.02rem;font-weight:700;color:var(--lg-navy);line-height:1.6
 }
 .lg-final .lg-not{margin-top:12px;font-size:.92rem;color:var(--lg-metin2);font-weight:600}
+.lg-final .lg-rozet-kazanildi{
+  display:inline-flex;align-items:center;gap:8px;margin:12px auto 0;
+  background:var(--lg-sari);color:#3b2a12;font-weight:900;font-size:1rem;
+  padding:9px 20px;border-radius:var(--lg-r-pill);box-shadow:0 4px 0 rgba(0,0,0,.12)
+}
+.lg-final .lg-ogretmen-notu{
+  text-align:left;max-width:62ch;margin:18px auto 0;background:var(--lg-bg);
+  border:1px dashed var(--lg-kenar);border-radius:var(--lg-r-lg);padding:13px 16px;
+  font-size:.9rem;line-height:1.55;color:var(--lg-metin2)
+}
+.lg-final .lg-ogretmen-notu b{color:var(--lg-navy)}
 #lgKonfeti{position:fixed;inset:0;pointer-events:none;z-index:9999}
 
 .lg-gizli{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -4414,7 +4425,7 @@ function bolum1(){
       tik('yanlis');
       tugla.classList.add('lg-titre');
       setTimeout(function(){ tugla.classList.remove('lg-titre'); }, 470);
-      mesajYaz('yanlis','🔍 Bir kez daha düşün. Bu parça buraya tam uymuyor. 🔍');
+      mesajYaz('yanlis','🔍 Bu parça buraya tam uymadı. Ölçüsünü ve yerini tekrar düşün.');
       return false;
     }
     tik('tak');
@@ -4432,7 +4443,7 @@ function bolum1(){
     kalan--;
     $('#lgKalan').textContent = kalan;
     puanEkle(10);
-    mesajYaz('dogru','🎉 Harika! Parça doğru yere geldi. 👏');
+    mesajYaz('dogru','🧩 Parça yerine oturdu!');
     if(kalan === 0) modelBitti();
     return true;
   }
@@ -4447,8 +4458,8 @@ function bolum1(){
     } else {
       mesajYaz('bilgi','✅ Bütün parçalar yerine oturdu. Şimdi küçük bir deney yapalım…');
       konfeti(40);
-      var b2 = $('#lgIleri'); b2.hidden = false;
-      b2.onclick = function(){ durum.bolum = 2; ilerlemeGuncelle(); bolum2(); sahne.focus(); };
+      var b2 = $('#lgIleri'); b2.hidden = false; b2.textContent = 'Devam et ➡️';
+      b2.onclick = function(){ olcuyuKesfet(); sahne.focus(); };
     }
   }
 
@@ -4534,6 +4545,83 @@ function bolum1(){
     var p = model.parcalar.filter(function(q){ return q.id === id; })[0];
     yerlestir(durum.secili, y, p);
   });
+}
+
+/* ===================================================================
+   ÖLÇÜYÜ KEŞFET — Bölüm 1'in kapanışı: aynı yere sığabilecek küçük/
+   orta/büyük üç parçadan yalnızca ölçüsü uygun olanın oturduğunu
+   gösteren kısa bir ara oyun (hâlâ Bölüm 1 içinde sayılır, üstteki
+   4 bölümlük ilerleme çubuğu değişmez).
+=================================================================== */
+function olcuyuKesfet(){
+  durum.secili = null;
+  var dogruId = 'orta', hedefBoy = 74, tahtaG = 220, tahtaY = 190;
+  sahne.innerHTML =
+    '<h2>📏 Ölçüyü Keşfet</h2>'+
+    '<p class="lg-alt">Aynı boşluğa küçük, orta ve büyük parça sığabilir mi? Sırayla dene.</p>'+
+    '<div class="lg-gorev">🎯 Görev: Bu boşluğa uyan TEK parçayı bul ve yerine koy.</div>'+
+    '<div class="lg-oyunalani" style="grid-template-columns:minmax(0,1fr)">'+
+      '<div class="lg-tahta-kutu"><div class="lg-tahta" id="lgOlcuTahta" style="width:'+tahtaG+'px;height:'+tahtaY+'px;position:relative;margin:0 auto"></div></div>'+
+    '</div>'+
+    '<div class="lg-tepsi" style="margin-top:14px"><h3>🧱 Parça kutusu</h3><div class="lg-tepsi-ic" id="lgOlcuTepsi" style="justify-content:center"></div></div>'+
+    '<div class="lg-mesaj" data-tip="bos" id="lgMesaj">👆 Bir parçayı seç, boşluğa uyup uymadığına bak.</div>'+
+    '<div id="lgSoruAlan"></div>';
+
+  var tahta = $('#lgOlcuTahta'), tepsi = $('#lgOlcuTepsi');
+  var yuva = document.createElement('div');
+  yuva.className = 'lg-yuva';
+  yuva.style.position = 'absolute';
+  yuva.style.left = ((tahtaG - hedefBoy)/2) + 'px';
+  yuva.style.top  = ((tahtaY - hedefBoy)/2) + 'px';
+  yuva.style.width = hedefBoy + 'px';
+  yuva.style.height = hedefBoy + 'px';
+  yuva.setAttribute('aria-label', 'Boşluk');
+  tahta.appendChild(yuva);
+
+  [
+    {id:'kucuk', ad:'Küçük', w:42, h:42},
+    {id:'orta',  ad:'Orta',  w:74, h:74},
+    {id:'buyuk', ad:'Büyük', w:108,h:108}
+  ].forEach(function(p){
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'lg-tugla';
+    btn.style.setProperty('--t', RENK.mor);
+    btn.style.position = 'relative';
+    btn.style.width = p.w + 'px'; btn.style.height = p.h + 'px';
+    btn.textContent = p.ad;
+    btn.setAttribute('aria-label', p.ad + ' parça');
+    btn.onclick = function(){
+      if(btn.disabled) return;
+      if(p.id === dogruId){
+        tik('tak'); puanEkle(10);
+        tepsi.querySelectorAll('button').forEach(function(b){ b.disabled = true; });
+        btn.remove();
+        yuva.classList.add('lg-dolu');
+        mesajYaz('dogru','🧩 Parça yerine oturdu! Sadece doğru ölçüdeki parça sığdı.');
+        setTimeout(olcuSoru, 700);
+      } else {
+        tik('yanlis');
+        btn.classList.add('lg-titre');
+        setTimeout(function(){ btn.classList.remove('lg-titre'); }, 470);
+        mesajYaz('yanlis','🔍 Bu parça buraya tam uymadı. Ölçüsünü ve yerini tekrar düşün.');
+      }
+    };
+    tepsi.appendChild(btn);
+  });
+
+  function olcuSoru(){
+    soruGoster({
+      metin:'Her parça her yere uyabilir mi?',
+      secenekler:[
+        {harf:'A', metin:'Evet'},
+        {harf:'B', metin:'Hayır, parçaların yeri ve ölçüsü önemlidir.'}
+      ],
+      dogru:'B',
+      aciklama:'LEGO parçalarında ölçü ve uyum önemli olduğu gibi, evrendeki varlıklar arasında da bir düzen ve ölçü vardır.'
+    }, $('#lgSoruAlan'), function(){
+      durum.bolum = 2; ilerlemeGuncelle(); bolum2(); sahne.focus();
+    });
+  }
 }
 
 /* ===================================================================
@@ -4678,7 +4766,7 @@ function soruGoster(soru, kap, bitince){
         btn.setAttribute('data-sonuc','dogru');
         kap.querySelectorAll('.lg-secenek').forEach(function(b){ b.disabled = true; });
         tik('basari');
-        puanEkle(25);
+        puanEkle(20);
         mesaj.setAttribute('data-tip','dogru');
         mesaj.innerHTML = '🎉 Doğru! 👏 '+soru.aciklama;
         canliSoyle('Doğru. ' + soru.aciklama);
@@ -4791,7 +4879,7 @@ function bolum4(){
       tik('yanlis');
       tugla.classList.add('lg-titre');
       setTimeout(function(){ tugla.classList.remove('lg-titre'); },470);
-      mesajYaz('yanlis','🔍 Bir kez daha düşün. Bu parça buraya tam uymuyor. 🔍');
+      mesajYaz('yanlis','🔍 Bu parça buraya tam uymadı. Ölçüsünü ve yerini tekrar düşün.');
     }
   });
   tugla.addEventListener('keydown', function(e){
@@ -4822,9 +4910,11 @@ function final(){
 
   sahne.innerHTML =
     '<div class="lg-final">'+
-      '<h2>🎉 EVRENİN LEGO YAPBOZUNU TAMAMLADIN!</h2>'+
-      '<div class="lg-ozet">Bir LEGO yapısında bile parçaların belirli bir düzen içinde olması gerekir.<br>Evrende de varlıklar arasında <b>düzen ve ölçü</b> vardır.</div>'+
-      '<p class="lg-not">Toplam puanın: <b>'+durum.puan+'</b> · Bölüm 4 / 4</p>'+
+      '<h2>🎉 LEGO EVRENİNİ TAMAMLADIN!</h2>'+
+      '<div class="lg-rozet-kazanildi">⭐ Düzen Kaşifi rozetini kazandın!</div>'+
+      '<div class="lg-ozet">LEGO parçaları belirli bir ölçü ve düzene göre birleşti.<br>Evreni düşündüğümüzde de varlıklar arasında <b>düzen, uyum ve ölçü</b> olduğunu fark ederiz.<br>Bu konuya <b>🌌 Evrendeki Düzen ve Ölçü</b> diyoruz.</div>'+
+      '<p class="lg-not">⭐ Düzeni fark ettin! Toplam puanın: <b>'+durum.puan+'</b> · Bölüm 4 / 4</p>'+
+      '<div class="lg-ogretmen-notu">👩‍🏫 <b>Öğretmen notu:</b> LEGO bir insan yapımıdır. Evren ise çok daha büyük ve karmaşık bir düzene sahiptir. Bu etkinlik bize sadece düzen ve ölçü fikrini düşünmemiz için bir örnek sunar.</div>'+
       '<div class="lg-dugmeler" style="justify-content:center">'+
         '<button type="button" class="lg-btn" id="lgTekrar">🔁 Yeniden oyna</button>'+
       '</div>'+
