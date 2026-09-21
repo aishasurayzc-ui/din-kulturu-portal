@@ -410,6 +410,27 @@ function oyunMerkeziOlustur(oyunListesi, suffix, anaSayfaHref){
 
   konteyner.innerHTML = html;
   sesButonlariniGuncelle();
+
+  /* Doğrudan bir oyuna bağlantı: konu anlatımı gibi başka bir sayfadan
+     "oyun-merkezi.html#<oyunId><suffix>" ile gelindiyse, o oyunu otomatik
+     açar ve görünür alana kaydırır. Eşleşme yoksa hiçbir şey değişmez
+     (varsayılan ilk kategori/sekme açık kalır). */
+  const dogrudanHash = (location.hash || '').slice(1);
+  if(dogrudanHash){
+    const eslesen = oyunListesi.find(o => (o.id + suffix) === dogrudanHash);
+    if(eslesen){
+      const katEl = document.getElementById('kat-' + eslesen.kategori + suffix);
+      if(katEl){
+        document.querySelectorAll('.oyun-grubu').forEach(g=>g.classList.remove('aktif'));
+        katEl.classList.add('aktif');
+      }
+      goster(dogrudanHash);
+      setTimeout(() => {
+        const hedef = document.getElementById(dogrudanHash);
+        if(hedef) hedef.scrollIntoView({behavior:'smooth', block:'start'});
+      }, 60);
+    }
+  }
 }
 
 /* ======================================================================
