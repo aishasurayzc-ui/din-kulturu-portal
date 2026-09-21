@@ -4184,7 +4184,7 @@ function tepsiTugla(p){
   el.type = 'button';
   el.className = 'lg-tugla';
   el.style.setProperty('--t', p.renk);
-  el.textContent = p.ad;
+  if(p.yuvarlak) el.textContent = p.ad;
   el.setAttribute('aria-label', p.ad + ' parçası. Seçmek için Enter.');
   el.style.position = 'relative';
   el.style.width  = Math.max(84, Math.min(240, p.w*24 + 60)) + 'px';
@@ -4201,9 +4201,8 @@ function tuglaYap(p,c,etkilesimli){
     var ad=document.createElement('span'); ad.textContent=p.ad;
     ad.style.fontSize = Math.max(7, Math.min(15, p.w*OLCEK*0.13)) + 'px';
     el.appendChild(ad);
-  } else {
-    el.textContent = p.ad;
   }
+  if(!p.yuvarlak) el.setAttribute('aria-label', p.ad);
   if(etkilesimli){ el.type='button'; el.setAttribute('aria-label', p.ad + ' parçası. Seçmek için Enter.'); }
   if(!p.px){
     el.style.width=(p.w*c-6)+'px'; el.style.height=(p.h*c-6)+'px';
