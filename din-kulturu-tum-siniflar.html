@@ -2605,8 +2605,21 @@ function uniteSayfasi(sinifId, href, ek){
 
 /* Bir alt konu kartının gideceği adres. 9. sınıfta sayfa içindeki gerçek
    bölüm çapaları (#k1..#k4) kullanılır; diğerlerinde ünite özeti. */
+/* 5. sınıf 1. ünitenin (Allah İnancı) alt konu listesi, konuyu-ogren.html
+   dosyasının kendi "Konu 1..3" bölümleriyle birebir örtüşmüyor — bazı
+   başlıkların (sıfatlar, Allah-insan ilişkisi, dua) ayrı bir anlatım
+   bölümü yok, oyun merkezinde işleniyor. Bu eşleştirme, aynı ünitenin
+   kendi index.html'indeki "u51-kart" listesiyle birebir aynıdır.
+   null = ayrı bölüm yok → oyun merkezine yönlendirilir. */
+var S5_U1_KONU_HEDEF = ['ka-konu-2', 'ka-konu-1', 'ka-konu-3', null, null, null];
+
 function konuHedefi(sinif, href, sonek, i){
-  if(sinif.konuCapa) return href + '#' + sinif.konuCapa + (i+1);
+  if(sinif.id === 's5' && sonek === '1' && i < S5_U1_KONU_HEDEF.length){
+    var capa = S5_U1_KONU_HEDEF[i];
+    if(capa) return ogrenSayfasi(sinif.id, href) + '#' + capa;
+    return uniteSayfasi(sinif.id, href, 'oyun-merkezi') + '#oyun-gruplari';
+  }
+  if(sinif.konuCapa) return ogrenSayfasi(sinif.id, href) + '#' + sinif.konuCapa + (i+1);
   return ogrenSayfasi(sinif.id, href) + '#ozet' + sonek;
 }
 
