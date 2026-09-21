@@ -4063,23 +4063,24 @@ var MODELLER = [
       {id:'dcek',  ad:'Dış çekirdek',  x:1,y:5,w:6,h:1, renk:RENK.discek},
       {id:'icek',  ad:'İç çekirdek',   x:2,y:6,w:4,h:1, renk:RENK.cekirdek}
   ]},
-  /* 4) MEVSİMLER — 4 parça, döngü hâlinde (saat yönünde) dizilir. */
-  { ad:'MEVSİMLER', kolon:2, satir:2,
+  /* 4) MEVSİMLER — Güneş Sistemi ile aynı görsel dil: yuvarlak parçalar,
+        tek bir kapalı halka (yörünge) üzerinde, saat yönünde dizilir. */
+  { ad:'MEVSİMLER', tip:'dongu', gen:300, yuk:260, gunes:[150,150], dongurad:100,
     ipucu:'Mevsimler hep aynı sırayla, bir döngü hâlinde gelir: İlkbahar → Yaz → Sonbahar → Kış → yine İlkbahar…',
     parcalar:[
-      {id:'ilkbahar', ad:'İlkbahar', x:0,y:0,w:1,h:1, renk:RENK.ilkbahar},
-      {id:'yaz',      ad:'Yaz',      x:1,y:0,w:1,h:1, renk:RENK.yaz},
-      {id:'sonbahar', ad:'Sonbahar', x:1,y:1,w:1,h:1, renk:RENK.sonbahar},
-      {id:'kis',      ad:'Kış',      x:0,y:1,w:1,h:1, renk:RENK.kis}
+      {id:'ilkbahar', ad:'İlkbahar', px:true, yuvarlak:true, x:115, y:53,  w:70, h:70, renk:RENK.ilkbahar},
+      {id:'yaz',      ad:'Yaz',      px:true, yuvarlak:true, x:215, y:115, w:70, h:70, renk:RENK.yaz},
+      {id:'sonbahar', ad:'Sonbahar', px:true, yuvarlak:true, x:115, y:177, w:70, h:70, renk:RENK.sonbahar},
+      {id:'kis',      ad:'Kış',      px:true, yuvarlak:true, x:15,  y:115, w:70, h:70, renk:RENK.kis}
   ]},
-  /* 5) SU DÖNGÜSÜ — 4 parça, döngü hâlinde (saat yönünde) dizilir. */
-  { ad:'SU DÖNGÜSÜ', kolon:2, satir:2,
+  /* 5) SU DÖNGÜSÜ — aynı halka düzeni. */
+  { ad:'SU DÖNGÜSÜ', tip:'dongu', gen:300, yuk:260, gunes:[150,150], dongurad:100,
     ipucu:'Su da hep aynı döngüde dolaşır: Buharlaşma → Bulut → Yağış → Deniz → yine Buharlaşma…',
     parcalar:[
-      {id:'buharlasma', ad:'Buharlaşma', x:0,y:0,w:1,h:1, renk:RENK.buharlasma},
-      {id:'bulut2',     ad:'Bulut',      x:1,y:0,w:1,h:1, renk:RENK.bulut},
-      {id:'yagis',      ad:'Yağış',      x:1,y:1,w:1,h:1, renk:RENK.yagis},
-      {id:'deniz',      ad:'Deniz',      x:0,y:1,w:1,h:1, renk:RENK.okyanus}
+      {id:'buharlasma', ad:'Buharlaşma', px:true, yuvarlak:true, x:115, y:53,  w:70, h:70, renk:RENK.buharlasma},
+      {id:'bulut2',     ad:'Bulut',      px:true, yuvarlak:true, x:215, y:115, w:70, h:70, renk:RENK.bulut},
+      {id:'yagis',      ad:'Yağış',      px:true, yuvarlak:true, x:115, y:177, w:70, h:70, renk:RENK.yagis},
+      {id:'deniz',      ad:'Deniz',      px:true, yuvarlak:true, x:15,  y:115, w:70, h:70, renk:RENK.okyanus}
   ]}
 ];
 
@@ -4325,6 +4326,15 @@ function yorungeSVG(model){
   return '<svg class="lg-yorunge" viewBox="0 0 '+(model.gen*o)+' '+(model.yuk*o)+'" aria-hidden="true" '+
          'style="color:var(--lg-navy)">'+yollar+'</svg>';
 }
+/* Mevsimler/Su Döngüsü gibi "başı sonu birleşen" döngü modelleri için:
+   güneş sistemindeki yörünge çizgisiyle aynı görsel dilde, TEK bir
+   kapalı halka çizer (parçalar zaten bu halkanın üzerine yerleştirilir). */
+function dongusSVG(model){
+  var o = OLCEK, gx = model.gunes[0]*o, gy = model.gunes[1]*o, r = (model.dongurad||100)*o;
+  return '<svg class="lg-yorunge" viewBox="0 0 '+(model.gen*o)+' '+(model.yuk*o)+'" aria-hidden="true" '+
+         'style="color:var(--lg-navy)"><ellipse cx="'+gx.toFixed(1)+'" cy="'+gy.toFixed(1)+'" rx="'+r.toFixed(1)+'" ry="'+(r*0.62).toFixed(1)+'" '+
+         'fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 7" opacity=".38"/></svg>';
+}
 
 function bolum1(){
   var model = MODELLER[durum.modelSira];
@@ -4353,12 +4363,12 @@ function bolum1(){
   };
 
   var tahta = $('#lgTahta'), tepsi = $('#lgTepsi');
-  if(model.tip === 'uzay'){
+  if(model.tip === 'uzay' || model.tip === 'dongu'){
     OLCEK = Math.min(1.15, Math.max(0.46, (tahta.parentElement.clientWidth - 34) / model.gen));
     tahta.classList.add('lg-tahta--uzay');
     tahta.style.width  = (model.gen*OLCEK) + 'px';
     tahta.style.height = (model.yuk*OLCEK) + 'px';
-    tahta.insertAdjacentHTML('beforeend', yorungeSVG(model));
+    tahta.insertAdjacentHTML('beforeend', model.tip === 'uzay' ? yorungeSVG(model) : dongusSVG(model));
   } else {
     tahta.classList.remove('lg-tahta--uzay');
     tahta.style.width  = (model.kolon*c) + 'px';
