@@ -4137,12 +4137,25 @@ function puanEkle(n){
     {duration:340, easing:'cubic-bezier(.2,.8,.3,1.25)'}
   );
 }
+/* Bölüm adımları serbestçe tıklanabilir: bir bölümü bitirmek şart
+   değil, istediğin bölüme doğrudan geçebilirsin. */
+function bolumaGec(n){
+  durum.bolum = n; ilerlemeGuncelle();
+  ({1:bolum1,2:bolum2,3:bolum3,4:bolum4})[n]();
+  sahne.focus();
+}
 function ilerlemeGuncelle(){
   for(var i=1;i<=4;i++){
     var el = document.getElementById('lgAdim'+i);
     if(i < durum.bolum) el.setAttribute('data-durum','bitti');
     else if(i === durum.bolum) el.setAttribute('data-durum','aktif');
     else el.removeAttribute('data-durum');
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.style.cursor = 'pointer';
+    el.setAttribute('aria-label', 'Bölüm ' + i + '\'e git');
+    el.onclick = (function(n){ return function(){ bolumaGec(n); }; })(i);
+    el.onkeydown = function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); this.click(); } };
   }
   $('#lgAdimYazi').textContent = 'Bölüm ' + Math.min(durum.bolum,4) + ' / 4';
   var oran = ((durum.bolum-1)/4)*100;
@@ -4327,7 +4340,17 @@ function bolum1(){
       '<div class="lg-tepsi"><h3>🧱 Parça kutusu</h3><p>Kalan parça: <b id="lgKalan">'+model.parcalar.length+'</b> — parçalar karışık dizildi. Bir parçayı sürükleyip yaklaştırman yeter, kendiliğinden oturur.</p><div class="lg-tepsi-ic" id="lgTepsi"></div></div>'+
     '</div>'+
     '<div class="lg-mesaj" data-tip="bos" id="lgMesaj">👆 Bir parça seç ve yerine koy.</div>'+
-    '<div class="lg-dugmeler"><button type="button" class="lg-btn lg-btn--yesil" id="lgIleri" hidden>Devam et ➡️</button></div>';
+    '<div class="lg-dugmeler">'+
+      '<button type="button" class="lg-btn lg-btn--yesil" id="lgIleri" hidden>Devam et ➡️</button>'+
+      '<button type="button" class="lg-btn lg-btn--ikincil" id="lgAtla">⏭️ '+(durum.modelSira < MODELLER.length - 1 ? 'Sonraki Yapıya Geç' : 'Bölüm 2\'ye Geç')+'</button>'+
+    '</div>';
+
+  var atlaBtn = $('#lgAtla');
+  atlaBtn.onclick = function(){
+    if(durum.modelSira < MODELLER.length - 1){ durum.modelSira++; bolum1(); }
+    else { durum.bolum = 2; ilerlemeGuncelle(); bolum2(); }
+    sahne.focus();
+  };
 
   var tahta = $('#lgTahta'), tepsi = $('#lgTepsi');
   if(model.tip === 'uzay'){
