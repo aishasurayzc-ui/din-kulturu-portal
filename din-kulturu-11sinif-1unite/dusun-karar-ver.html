@@ -294,6 +294,21 @@
   .olcut-liste input{margin-top:5px; accent-color:var(--vurgu);}
   .sonraki{display:flex; justify-content:flex-end; margin-top:6px;}
   .sonraki a{font-weight:800; text-decoration:none; font-size:.92em;}
+  figure.gorsel{margin:0;} figure.gorsel img{display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; border-radius:12px; background:var(--yuzey2);}
+  figure.gorsel figcaption{font-size:.72em; color:var(--soluk); margin-top:5px;} figure.gorsel figcaption a{color:inherit;}
+  .gd{display:grid; gap:18px; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); align-items:center;}
+  .gd-etiket{display:inline-block; font-size:.72em; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--altin); margin-bottom:4px;}
+  .kavram-ayir{display:grid; grid-template-columns:1fr auto; gap:8px 12px; align-items:center; padding:8px 0; border-top:1px solid var(--cizgi);}
+  .kavram-ayir:first-child{border-top:none;}
+  .kavram-ayir select{font:inherit; padding:6px 8px; border-radius:8px; border:1px solid var(--vurgu); background:var(--yuzey); color:var(--metin);}
+  .kavram-ayir select.dogru{background:var(--dogru-bg); border-color:var(--dogru);} .kavram-ayir select.yanlis{background:var(--yanlis-bg); border-color:var(--yanlis);}
+  .kavram-ayir .gb{grid-column:1/-1; font-size:.88em; color:var(--soluk);}
+  .duvar-ikili{display:grid; gap:12px; grid-template-columns:1fr 1fr;}
+  .duvar-not{border-radius:12px; padding:12px 14px; background:var(--altin-acik); border-left:4px solid var(--altin);}
+  .duvar-not.simdi{background:var(--vurgu-cok-acik); border-left-color:var(--vurgu);}
+  .duvar-not b{display:block; font-size:.74em; letter-spacing:.06em; text-transform:uppercase; margin-bottom:4px;}
+  .duvar-not p{margin:0; white-space:pre-wrap;}
+  @media (max-width:760px){ .gd{grid-template-columns:1fr;} .duvar-ikili{grid-template-columns:1fr;} .kavram-ayir{grid-template-columns:1fr;} }
   .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
 
   @media (max-width:600px){
@@ -356,8 +371,14 @@
 
 <!-- ===================== 3. ÇABA VE SONUÇ ===================== -->
 <section class="blok" id="caba">
-  <div class="bolum-bas"><span class="no">Etkinlik 3</span><h2>Çok Çalıştı Ama Başarısız Oldu</h2></div>
+  <div class="bolum-bas"><span class="no">Etkinlik 3</span><h2>Peki Ya Sonuç İstediğimiz Gibi Olmazsa?</h2></div>
   <p class="alt-bilgi">Ünitenin en zor sorusu: Çok çalıştığı hâlde başarısız olan bir insanı nasıl açıklayacağız?</p>
+  <div class="kart gd">
+    <figure class="gorsel"><img src="gorseller/sinav-salonunda-ogrenci.jpg" width="1200" height="1600" loading="lazy" style="object-position:center 35%" alt="Sınav salonunda masasında oturan, önündeki kâğıda bakan düşünceli bir genç; arkada başka öğrenciler."><figcaption>Fotoğraf: Magharebia · <a href="https://commons.wikimedia.org/wiki/File:Report_du_bac_en_Tunisie_apr%C3%A8s_des_fuites_(7402769072).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> · CC BY 2.0</figcaption></figure>
+    <div><span class="gd-etiket">Gör ve Düşün</span><h3 style="margin:0 0 8px;font-size:1.08em">Bu öğrencinin yüzüne bak. Sınav bitti ama sonuç henüz belli değil.</h3>
+    <p style="margin:0 0 6px">Şu anda onun elinde olan bir şey kaldı mı? Aylarca çalışmışsa ve sonuç kötü gelirse, bu çalışmanın boşa gittiği anlamına mı gelir?</p>
+    <p class="ornek" style="margin:0">Aşağıdaki adımlarda bu soruyu Deniz’in hikâyesi üzerinden parça parça çözeceksin: <b>çaba, tercih, tedbir, sonuç, sorumluluk ve kader</b>i birbirinden ayırarak.</p></div>
+  </div>
 
   <div class="kart">
     <div class="olay"><b>Olay</b>Deniz bir yıl boyunca üniversite sınavına hazırlandı: her gün düzenli çalıştı, deneme sınavlarına girdi, dershaneye gitti. Sınav sonucu hedeflediği bölüme yetmedi. Deniz şöyle diyor: <i>“Bu kadar çalıştım, demek ki kaderimde yokmuş. Çalışmanın bir anlamı yokmuş.”</i></div>
@@ -378,8 +399,16 @@
     <div class="sonuc" id="cabaSonuc" aria-live="polite"></div>
   </div>
 
+  <div class="kart" id="cabaKavram">
+    <h3 style="font-size:1.02em;margin:0 0 4px">Adım 3 · Kavramları ayır</h3>
+    <p class="gorev">Deniz’in hikâyesindeki her cümle hangi kavramı anlatıyor? <b>Çaba, tercih, tedbir, sonuç, sorumluluk, kader</b>: Her kavram bir kez kullanılır.</p>
+    <div id="cabaKavramListe"></div>
+    <div class="dugmeler"><button class="btn" type="button" id="cabaKavramKontrol">Kontrol et</button></div>
+    <div class="sonuc" id="cabaKavramSonuc" aria-live="polite"></div>
+  </div>
+
   <div class="kart gizli" id="cabaModel">
-    <h3 style="font-size:1.02em;margin:0 0 6px">Adım 3 · Neden–sonuç modelini kur</h3>
+    <h3 style="font-size:1.02em;margin:0 0 6px">Adım 4 · Neden–sonuç modelini kur</h3>
     <div class="model" aria-label="Çaba ve sonuç modeli">
       <div class="satir"><span class="parca">Tercih<small>hedef, yöntem</small></span><span class="isaret">+</span><span class="parca">Çaba<small>düzenli emek</small></span><span class="isaret">+</span><span class="parca">Tedbir<small>sağlık, analiz, B planı</small></span><span class="isaret">=</span><span class="parca">İnsanın sorumluluğu<small>Bakara 286: gücü ölçüsünde</small></span></div>
       <div class="satir"><span class="parca">İnsanın sorumluluğu</span><span class="isaret">+</span><span class="parca dis">İnsanın elinde olmayanlar<small>soruların zorluğu, rekabet, beklenmedik olaylar</small></span><span class="isaret">→</span><span class="parca sonuc">Sonuç<small>Allah’ın takdiriyle gerçekleşir (kaza)</small></span></div>
@@ -391,7 +420,7 @@
   </div>
 
   <div class="kart gizli" id="cabaMektup">
-    <h3 style="font-size:1.02em;margin:0 0 4px">Adım 4 · Deniz’e ne söylerdin?</h3>
+    <h3 style="font-size:1.02em;margin:0 0 4px">Adım 5 · Deniz’e ne söylerdin?</h3>
     <p class="gorev">Deniz’e 4-5 cümlelik bir mesaj yaz. Kader, çaba, sorumluluk ve teslimiyet kavramlarından en az üçünü kullan.</p>
     <div data-yazi="caba-mektup" data-min="60" data-dugme="Güçlü bir cevabın ölçütlerini göster"></div>
     <div class="acilan gizli" id="cabaMektupGb">
@@ -428,7 +457,7 @@
 <!-- ===================== 6. OYUNLAR ===================== -->
 <section class="blok" id="oyun">
   <div class="bolum-bas"><span class="no">Oyunlar</span><h2>Ayrıştır, Sırala, Fark Et</h2></div>
-  <p class="alt-bilgi">Üç kısa kavram oyunu. Her cevaptan sonra nedenini oku; puan değil, gerekçe önemli.</p>
+  <p class="alt-bilgi">İki kısa kavram oyunu (“Kader mi, tercih mi?” oyunu <a href="index.html#kader-tercih">ünite sayfasında</a>). Her cevaptan sonra nedenini oku; puan değil, gerekçe önemli.</p>
   <div class="sekme" id="oyunSekme" role="tablist" aria-label="Oyun seç"></div>
   <div class="kart" id="oyunAlan" aria-live="polite"></div>
 </section>
@@ -449,11 +478,28 @@
 
 <!-- ===================== 9. ÜNİTE SONU ===================== -->
 <section class="blok" id="son">
-  <div class="bolum-bas"><span class="no">Ünite Sonu</span><h2>Kavram Haritası ve Öz Değerlendirme</h2></div>
+  <div class="bolum-bas"><span class="no">Ünite Sonu</span><h2>Kavram Haritası, Düşünce Duvarı ve Öz Değerlendirme</h2></div>
   <p class="alt-bilgi">Bir kavrama dokun: tanımı, gerçek hayattan örneği ve diğer kavramlarla bağlantısı açılır. Sütunlar üç alanı ayırır: Allah’ın takdiri, insanın alanı, sonuç ve tutum.</p>
   <div class="harita-kap" id="haritaKap"></div>
   <p class="kaydir-ipucu">Dar ekranda haritayı yana kaydırabilirsin. Klavye ile: Tab ile kavramlar arasında gezin, Enter ile aç.</p>
   <div class="kart harita-panel" id="haritaPanel" aria-live="polite"></div>
+
+  <div class="kart" id="duvar">
+    <span class="gd-etiket">Düşünce Duvarı</span>
+    <h3 style="margin:0 0 10px">Bu ünite sende neyi değiştirdi?</h3>
+    <p style="font-weight:800;margin:0 0 6px">1. Bu üniteyi öğrenmeden önce kader hakkında ne düşünüyordun?</p>
+    <div id="duvarOnceGoster" class="duvar-not gizli" style="margin-bottom:6px"><b>Ünitenin başında şunu yazmıştın</b><p id="duvarOnceMetin"></p></div>
+    <div id="duvarOnceYaz"><div data-yazi="once" data-min="1" data-dugme="-"></div></div>
+    <p style="font-weight:800;margin:14px 0 6px">2. Şimdi ne düşünüyorsun?</p>
+    <div data-yazi="simdi" data-min="1" data-dugme="-"></div>
+    <fieldset class="secim-grubu" id="duvarDegisti" style="margin-top:14px"><legend>3. Fikrin değişti mi?</legend><div class="secenekler yatay">
+      <label><input type="radio" name="duvarDegisti" value="Evet"> Evet</label><label><input type="radio" name="duvarDegisti" value="Kısmen"> Kısmen</label><label><input type="radio" name="duvarDegisti" value="Hayır, ama derinleşti"> Hayır, ama derinleşti</label></div></fieldset>
+    <p style="font-weight:800;margin:14px 0 6px">4. En çok hangi kavram kafanı düşündürdü? Neden?</p>
+    <div class="cipler" id="duvarKavram" role="group" aria-label="Kavram seç"></div>
+    <div data-yazi="kavram-neden" data-min="1" data-dugme="-"></div>
+    <div class="dugmeler"><button class="btn" type="button" id="duvarOlustur">Duvarımı oluştur</button></div>
+    <div id="duvarSonuc" aria-live="polite"></div>
+  </div>
 
   <div class="kart">
     <h3 style="margin:0 0 4px">Kendini Değerlendir</h3>
@@ -856,23 +902,6 @@ var LAB_DUZEY = { iyi:'Yerine getirildi', riskli:'Kısmen yerine getirildi', kad
 
 /* ================= 6. OYUNLAR ================= */
 var OYUN_AYRISTIR = [
-  { ad:'Ben seçtim / Başıma geldi', kovalar:['Ben seçtim','Başıma geldi','İkisi birden'],
-    son:'“Başıma geldi” dediğin olaylarda bile, onlar karşısındaki tutumun senin seçimindir. Kader ile irade çoğu olayda iç içedir.',
-    ogeler:[
-      ['Hangi ailede doğduğum',1,'İnsanın seçimi değildir; Allah’ın takdiridir.'],
-      ['Arkadaşlarıma nasıl davrandığım',0,'Davranış iradeye bağlıdır.'],
-      ['Yaşadığım şehirde deprem olması',1,'Doğa olayının zamanı ve şiddeti insanın elinde değildir.'],
-      ['Oturduğum binanın depreme dayanıklı olup olmaması',2,'Deprem insanın elinde değildir; binanın yapımı, denetimi ve seçimi ise insan tercihidir.'],
-      ['Sosyal medyada paylaştığım bir gönderi',0,'Paylaşmak tamamen benim kararımdır.'],
-      ['Gönderimin kaç kişiye ulaştığı',2,'İlk paylaşım benim tercihim; yayılma başkalarının tercihlerine de bağlıdır.'],
-      ['Sınavdaki soruların zorluğu',1,'Sınavı hazırlayanın ve koşulların belirlediği, benim seçmediğim bir etken.'],
-      ['Sınava nasıl hazırlandığım',0,'Yöntem ve süre benim tercihimdir.'],
-      ['Genetik bir hastalığa yatkın olmak',1,'İnsanın seçimi değildir; imtihanın bir parçası olabilir.'],
-      ['Sigaraya başlamak',0,'Baskı olsa bile başlama kararı kişinindir.'],
-      ['Trafikte dikkatsiz bir sürücünün bana çarpması',1,'O sürücünün tercihi; benim açımdan başıma gelen bir olay.'],
-      ['Sınav kaygısı yaşamam',2,'Kaygı tamamen seçilmez; ama yönetimi kısmen elimdedir.'],
-      ['Bir kayıp karşısında nasıl tepki verdiğim',0,'Olay başıma gelir; tepki ve tutum benim seçimimdir (sabır, rıza).']
-    ] },
   { ad:'Tevekkül mü, kadercilik mi?', kovalar:['Doğru tevekkül','Kadercilik (yanlış kader anlayışı)'],
     son:'Doğru tevekkülün iki şartı var: tedbir ve Allah’a güven. Birini atlayan cümle kaderciliğe ya da kendine aşırı güvene kayar.',
     ogeler:[
@@ -1187,6 +1216,56 @@ var OZDEG = [
     if(gel.length) h+='<p>Tekrar etmen önerilen yerler:</p><ul>'+gel.map(function(o){ return '<li><a href="'+o[1]+'">'+o[2]+'</a>: '+o[0]+'</li>'; }).join('')+'</ul>';
     else if(!bos) h+='<p>Ünitenin temel düşünme becerilerinde kendine güveniyorsun. Son adım olarak dönem yazılısını dene.</p>';
     $('#ozdegSonuc').innerHTML=h+'</div>';
+  });
+})();
+
+/* ================= Etkinlik 3: kavramları ayır ================= */
+var CABA_KAVRAM = [
+  ['Deniz, sayısal bir bölümü hedeflemeye karar verdi.','Tercih','Hedefi seçmek iradenin bir tercihidir.'],
+  ['Bir yıl boyunca her gün düzenli çalıştı.','Çaba','Seçilen hedef için emek harcamak.'],
+  ['Uyku düzenine dikkat etti, denemelerle eksiklerini izledi.','Tedbir','Riskleri azaltmak ve hatayı erken görmek tedbirdir.'],
+  ['Puanı hedeflediği bölüme yetmedi.','Sonuç','Birçok sebebin birleşimi; insanın tam kontrolünde değil.'],
+  ['Soruların zorluğu ve o yılki rekabet onun elinde değildi; Allah bunların hepsini bilir ve takdir eder.','Kader','İnsanın seçmediği etkenler ve her şeyi kuşatan ilahi takdir.'],
+  ['Gücünün yettiğini yapıp yapmadığından ve bundan sonra ne yapacağından hesap verir.','Sorumluluk','Sorumluluk sonuca değil; tercih, çaba ve tedbire bakar (Bakara 286).']
+];
+(function(){
+  var SECENEK=['Tercih','Çaba','Tedbir','Sonuç','Sorumluluk','Kader'];
+  $('#cabaKavramListe').innerHTML=CABA_KAVRAM.map(function(c,i){
+    return '<div class="kavram-ayir"><span>'+c[0]+'</span><select data-ck="'+i+'" aria-label="Kavram seç: '+c[0]+'"><option value="">seçiniz</option>'+SECENEK.map(function(s){ return '<option>'+s+'</option>'; }).join('')+'</select><span class="gb" data-ckgb="'+i+'"></span></div>';
+  }).join('');
+  $('#cabaKavramKontrol').addEventListener('click',function(){
+    var d=0, bos=0;
+    $$('#cabaKavramListe select').forEach(function(s){
+      var i=+s.getAttribute('data-ck'), c=CABA_KAVRAM[i]; s.classList.remove('dogru','yanlis');
+      if(!s.value){ bos++; $('[data-ckgb="'+i+'"]').textContent=''; return; }
+      var ok=s.value===c[1]; if(ok) d++; s.classList.add(ok?'dogru':'yanlis');
+      $('[data-ckgb="'+i+'"]').textContent=(ok?'':'Beklenen: '+c[1]+'. ')+c[2];
+    });
+    $('#cabaKavramSonuc').textContent = bos ? bos+' cümle boş kaldı.' : d+' / 6 doğru. Dikkat: “Sonuç” ile “Sorumluluk” aynı yerde durmaz; sorumluluk sonuçtan önceki halkalara bakar.';
+  });
+})();
+
+/* ================= Düşünce Duvarı ================= */
+(function(){
+  var KAV=['Kader','Kaza','Cüz’î irade','Küllî irade','Kesb','Tercih','Tedbir','Tevekkül','Teslimiyet','Sorumluluk','Ömür–ecel','Özgürlük'];
+  var secKav=oku('duvar-kavram');
+  $('#duvarKavram').innerHTML=KAV.map(function(k){ return '<button type="button" class="kutu-btn'+(k===secKav?' sec':'')+'" aria-pressed="'+(k===secKav)+'">'+k+'</button>'; }).join('');
+  $('#duvarKavram').addEventListener('click',function(e){
+    var b=e.target.closest('.kutu-btn'); if(!b) return;
+    $$('#duvarKavram .kutu-btn').forEach(function(x){ x.classList.toggle('sec',x===b); x.setAttribute('aria-pressed',String(x===b)); });
+    secKav=b.textContent; yaz('duvar-kavram',secKav);
+  });
+  var onceMetin=oku('y-once');
+  if(onceMetin.trim()){ $('#duvarOnceMetin').textContent=onceMetin; $('#duvarOnceGoster').classList.remove('gizli'); $('#duvarOnceYaz').classList.add('gizli'); }
+  var dg=oku('duvar-degisti'); if(dg){ var r=$('#duvarDegisti input[value="'+dg+'"]'); if(r) r.checked=true; }
+  $('#duvarDegisti').addEventListener('change',function(e){ yaz('duvar-degisti',e.target.value); });
+  function kac(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+  $('#duvarOlustur').addEventListener('click',function(){
+    var once=oku('y-once').trim(), simdi=oku('y-simdi').trim(), neden=oku('y-kavram-neden').trim(), deg=oku('duvar-degisti');
+    if(!once && !simdi){ $('#duvarSonuc').innerHTML='<p class="gorev" style="margin-top:10px">Önce en az ilk iki soruyu cevapla.</p>'; return; }
+    $('#duvarSonuc').innerHTML='<div class="duvar-ikili" style="margin-top:14px"><div class="duvar-not"><b>Önce</b><p>'+kac(once||'—')+'</p></div><div class="duvar-not simdi"><b>Şimdi</b><p>'+kac(simdi||'—')+'</p></div></div>'+
+      '<p style="margin:10px 0 0"><b>Fikrim değişti mi?</b> '+kac(deg||'—')+(secKav?' · <b>Beni en çok düşündüren kavram:</b> '+kac(secKav):'')+(neden?' · '+kac(neden):'')+'</p>'+
+      '<p class="ornek" style="margin:6px 0 0">Duvarın yalnızca bu cihazda saklanır. İstersen sınıfta paylaş: Başkalarının “önce” ve “şimdi”si seninkinden farklı olabilir.</p>';
   });
 })();
 
