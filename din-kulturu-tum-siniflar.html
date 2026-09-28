@@ -2718,16 +2718,22 @@ function uniteSayfasi(sinifId, href, ek){
 /* Bir alt konu kartının gideceği adres. 9. sınıfta sayfa içindeki gerçek
    bölüm çapaları (#k1..#k4) kullanılır; diğerlerinde ünite özeti. */
 /* 5. sınıf 1. ünitenin (Allah İnancı) alt konu listesi, konuyu-ogren.html
-   dosyasının kendi "Konu 1..3" bölümleriyle birebir örtüşmüyor — bazı
+   dosyasının kendi "Konu 1..4" bölümleriyle birebir örtüşmüyor — bazı
    başlıkların (sıfatlar, Allah-insan ilişkisi, dua) ayrı bir anlatım
-   bölümü yok, oyun merkezinde işleniyor. Bu eşleştirme, aynı ünitenin
-   kendi index.html'indeki "u51-kart" listesiyle birebir aynıdır.
+   bölümü yok; bunlar en yakın anlatıma bağlanır. İlk 3 hedef, aynı
+   ünitenin kendi index.html'indeki "u51-kart" listesiyle aynıdır.
+   "dosya.html#capa" biçimindeki hedef, aynı klasördeki başka bir sayfaya
+   gider (tevhit-ve-sirk.html: Tevhit–Şirk keşif sayfası): 4. alt konu →
+   "Yaratılmış mı, Yaratıcı mı?", 5. → "Her yardım istemek şirk
+   değildir"; 6. (Dua) → konuyu-ogren.html İhlas suresi bölümü.
    null = ayrı bölüm yok → oyun merkezine yönlendirilir. */
-var S5_U1_KONU_HEDEF = ['ka-konu-2', 'ka-konu-1', 'ka-konu-3', null, null, null];
+var S5_U1_KONU_HEDEF = ['ka-konu-2', 'ka-konu-1', 'ka-konu-3',
+  'tevhit-ve-sirk.html#tv-yaratilmis', 'tevhit-ve-sirk.html#tv-yardim', 'ka-konu-4'];
 
 function konuHedefi(sinif, href, sonek, i){
   if(sinif.id === 's5' && sonek === '1' && i < S5_U1_KONU_HEDEF.length){
     var capa = S5_U1_KONU_HEDEF[i];
+    if(capa && capa.indexOf('.html#') > 0) return href.replace(/[^\/]*$/, capa);
     if(capa) return ogrenSayfasi(sinif.id, href) + '#' + capa;
     return uniteSayfasi(sinif.id, href, 'oyun-merkezi') + '#oyun-gruplari';
   }
