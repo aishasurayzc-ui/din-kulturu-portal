@@ -1418,6 +1418,19 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
   display:inline-block; font-size:.92em; line-height:1.3; padding:3px 9px;
   border:1px solid var(--kenar); border-radius:999px; background:var(--acikgri);
 }
+/* Resmî MEB verisi (ortak/meb-program.js) */
+.oc-resmi-bas{ display:flex; gap:6px; align-items:flex-start; margin:6px 0 4px; font-size:.8em; line-height:1.45; }
+.oc-resmi-bas .msi{ font-size:1.25em; color:var(--vurgu-metin); }
+.oc-resmi-bas a{ color:var(--vurgu-metin); }
+.oc-portal-not{ margin:4px 0 6px; padding:6px 9px; font-size:.8em; line-height:1.45; border-left:3px solid var(--kenar); background:var(--acikgri); border-radius:0 6px 6px 0; }
+.oc-cikti-liste{ margin:0; display:grid; gap:8px; list-style:none; padding-left:0; }
+.oc-surec{ margin:3px 0 0; padding-left:1.1em; font-size:.94em; opacity:.85; list-style:none; }
+.oc-yasanti{ margin-top:4px; font-size:.94em; }
+.oc-yasanti > summary{ cursor:pointer; font-weight:700; color:var(--vurgu-metin); }
+.oc-yasanti p, .oc-p{ margin:4px 0 0; }
+.unite-kart--hazirlaniyor{ border:2px dashed var(--kenar); box-shadow:none; }
+.unite-kart--hazirlaniyor .uk-govde{ padding-top:var(--sp-4,18px); }
+.uk-hazirlaniyor-not{ margin:6px 0 0; font-size:.86em; opacity:.75; }
 
 
 /* Öğretmen Paneli */
@@ -1834,6 +1847,8 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
 <button class="yukari-buton" id="yukariBtn" type="button" aria-label="Sayfa başına dön"><span class="msi" aria-hidden="true">arrow_upward</span></button>
 <div class="toast-alani" id="toastAlani" aria-live="polite" aria-atomic="true"></div>
 
+<!-- Resmî MEB (TYMM) DKAB program verisi + portal eşleştirmesi → window.ACADEMIC -->
+<script src="ortak/meb-program.js"></script>
 <script>
 /* ======================================================================
    BÖLÜM 1 — VERİ MODELİ
@@ -2488,8 +2503,55 @@ function metinIcinKucukGlyph(metin){
    Yeni akademik alanlar eklemek isteyen için hazır veri yapısı:
      ACADEMIC['s8-u1'] = { ogrenmeCiktisi:'', kavramlar:[], beceriler:[],
                            degerler:[], etkinlikler:[], olcme:[] }
-   Mevcut V / ALT_KONULAR / OYUN_VERI yapıları değiştirilmedi; bu tablo EKtir. */
+   Mevcut V / ALT_KONULAR / OYUN_VERI yapıları değiştirilmedi; bu tablo EKtir.
+
+   GÜNCELLEME (2026-09-28): ACADEMIC artık ortak/meb-program.js tarafından
+   resmî TYMM program sayfalarından alınan metinlerle doldurulur
+   (ACADEMIC[anahtar].meb). Bu dosyada yine hiçbir kazanım üretilmez;
+   resmî metin ile portal notu (ACADEMIC[anahtar].not) ayrı gösterilir. */
 window.ACADEMIC = window.ACADEMIC || {};
+
+function ocKacis(s){
+  return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* Resmî MEB verisi (ACADEMIC[anahtar].meb) için Öğrenme Çerçevesi gövdesi. */
+function ocResmiHtml(ek){
+  const u = ek.meb, e = ocKacis;
+  const cipler = a => (a && a.length) ? '<span class="oc-etiketler">'+a.map(x=>'<span class="oc-cip">'+e(x)+'</span>').join('')+'</span>' : '';
+  const ciktilar = '<ol class="oc-cikti-liste">'+u.ogrenmeCiktilari.map(function(c){
+      const uyg = (u.uygulamalar||[]).filter(x=>x.kod===c.kod)[0];
+      return '<li><b>'+e(c.kod)+'.</b> '+e(c.ad)+
+        '<ul class="oc-surec">'+c.surec.map(s=>'<li>'+e(s)+'</li>').join('')+'</ul>'+
+        (uyg ? '<details class="oc-yasanti"><summary>Öğrenme-öğretme uygulaması</summary><p>'+e(uyg.metin)+'</p></details>' : '')+
+      '</li>';
+    }).join('')+'</ol>';
+  const paragraflar = a => (a && a.length) ? a.map(p=>'<p class="oc-p">'+e(p)+'</p>').join('') : '';
+  const beceri = (u.alanBecerileri||[]).concat(u.kavramsalBeceriler||[]);
+  const farklilastirma = (u.zenginlestirme.length||u.destekleme.length)
+    ? (u.zenginlestirme.length ? '<p class="oc-p"><b>Zenginleştirme:</b> '+u.zenginlestirme.map(e).join(' ')+'</p>' : '')+
+      (u.destekleme.length ? '<p class="oc-p"><b>Destekleme:</b> '+u.destekleme.map(e).join(' ')+'</p>' : '')
+    : '';
+  return (
+    '<p class="oc-resmi-bas"><span class="msi" aria-hidden="true">verified</span>'+
+      '<span>Resmî program: <b>'+ek.sinifNo+'. Sınıf '+u.no+'. Ünite — '+e(u.ad)+'</b>'+
+      (u.dersSaati ? ' · '+u.dersSaati+' ders saati' : '')+
+      ' · <a href="'+e(u.kaynak)+'" target="_blank" rel="noopener">MEB TYMM</a></span></p>'+
+    (ek.not ? '<p class="oc-portal-not"><b>Portal notu:</b> '+e(ek.not)+'</p>' : '')+
+    '<dl class="oc-liste">'+
+      ocSatir('Öğrenme çıktıları ve süreç bileşenleri', ciktilar, '')+
+      ocSatir('Anahtar kavramlar', cipler(u.anahtarKavramlar), '')+
+      ocSatir('Beceriler', cipler(beceri), '')+
+      ocSatir('Eğilimler', cipler(u.egilimler), '')+
+      ocSatir('Değerler', cipler(u.degerler), '')+
+      ocSatir('Okuryazarlık becerileri', cipler(u.okuryazarlik), '')+
+      ocSatir('Sosyal-duygusal öğrenme', cipler(u.sdb), '')+
+      (u.disiplinlerArasi ? ocSatir('Disiplinler arası ilişkiler', e(u.disiplinlerArasi), '') : '')+
+      ocSatir('Ölçme ve değerlendirme', paragraflar(u.olcmeDegerlendirme), '')+
+      (farklilastirma ? ocSatir('Farklılaştırma', farklilastirma, '') : '')+
+    '</dl>'
+  );
+}
 
 const OC_BEKLIYOR = 'Bu alan içerik geliştirme aşamasındadır.';
 
@@ -2534,11 +2596,24 @@ function ogrenmeCercevesiHtml(sinif, index, unite){
   const olcme = ek.olcme && ek.olcme.length ? liste(ek.olcme)
       : 'Yazılı sınavlar ve açık uçlu sorular bu sınıfın sekmelerinde yer alır.';
 
+  if(ek.meb){
+    return (
+     '<details class="oc-cerceve">'+
+       '<summary><span class="msi" aria-hidden="true">account_tree</span>'+
+         '<span>Öğrenme Çerçevesi (MEB)</span>'+
+         '<span class="msi oc-ok" aria-hidden="true">expand_more</span></summary>'+
+       ocResmiHtml(ek)+
+       (konular.length ? '<dl class="oc-liste">'+ocSatir('Bu sayfadaki konular', kavramHtml, 'Portalın kendi konu başlıklarıdır.')+'</dl>' : '')+
+     '</details>'
+    );
+  }
+
   return (
    '<details class="oc-cerceve">'+
      '<summary><span class="msi" aria-hidden="true">account_tree</span>'+
        '<span>Öğrenme Çerçevesi</span>'+
        '<span class="msi oc-ok" aria-hidden="true">expand_more</span></summary>'+
+     (ek.not ? '<p class="oc-portal-not"><b>Portal notu:</b> '+ocKacis(ek.not)+'</p>' : '')+
      '<dl class="oc-liste">'+
        ocSatir('Öğrenme çıktısı', cikti, ciktiNot)+
        ocSatir('Kavramsal çerçeve', kavramHtml, konular.length ? 'Ünitenin konu başlıklarından oluşturulmuştur.' : '')+
@@ -2559,8 +2634,15 @@ function ogrenmeCercevesiHtml(sinif, index, unite){
 var S5_RENK = ['--turkuaz','--mavi','--yesil','--sari','--mor'];
 var S5_SLOGAN = ['Evreni keşfet','Huzuru hisset','Bilgiyle buluş','Hikâyeyle yolculuk','Sanatı keşfet'];
 
-function uniteKartHtml(sinif, unite, index){
+/* mebBilgi (isteğe bağlı): { no, ad, ek } — kartın MEB programındaki yeri.
+   Yalnızca GÖRÜNEN numara/etiketi değiştirir; id, bağlantı, ilerleme kaydı
+   ve oyun/görsel anahtarları hâlâ portal sırasından (index) hesaplanır. */
+function uniteKartHtml(sinif, unite, index, mebBilgi){
   const id = sinif.id+'-u'+(index+1);
+  const gorunenNo = mebBilgi && mebBilgi.no ? mebBilgi.no : index+1;
+  const etiketMetni = !mebBilgi ? (index+1)+'. Ünite'
+    : mebBilgi.ek ? 'Ek içerik · önceki program'
+    : mebBilgi.no+'. Ünite'+(mebBilgi.ad && mebBilgi.ad.toLocaleLowerCase('tr') !== unite.baslik.toLocaleLowerCase('tr') ? ' · MEB: '+mebBilgi.ad : '');
   const href = sinif.klasor+'/'+unite.dosya;
   const sureTahmini = 15 + (index % 3)*5; /* ~15-25 dk arası tahmini süre */
   const es5 = sinif.id === 's5';
@@ -2568,9 +2650,9 @@ function uniteKartHtml(sinif, unite, index){
   return (
     '<div class="unite-kart belirir'+(es5?' unite-kart--s5':'')+'" style="--vurgu:var('+vurguVar+');--i:'+(index%6)+'">'+
       '<a class="uk-link" href="'+ogrenSayfasi(sinif.id, href)+'">'+
-        '<div class="uk-gorsel">'+uniteKapakHtml(sinif, index, unite)+'<span class="uk-gorsel-numara" aria-hidden="true">'+String(index+1).padStart(2,'0')+'</span><span class="uk-ikon-rozet"><span class="msi" aria-hidden="true">'+unite.msi+'</span></span></div>'+
+        '<div class="uk-gorsel">'+uniteKapakHtml(sinif, index, unite)+'<span class="uk-gorsel-numara" aria-hidden="true">'+(mebBilgi && mebBilgi.ek ? '+' : String(gorunenNo).padStart(2,'0'))+'</span><span class="uk-ikon-rozet"><span class="msi" aria-hidden="true">'+unite.msi+'</span></span></div>'+
         '<div class="uk-govde">'+
-          '<p class="uk-etiket">'+(index+1)+'. Ünite</p>'+
+          '<p class="uk-etiket">'+etiketMetni+'</p>'+
           '<h3 class="uk-baslik">'+unite.baslik+'</h3>'+
           (es5 ? '<p class="uk-slogan">'+S5_SLOGAN[index % S5_SLOGAN.length]+'</p>' : '')+
           uniteRozetlerHtml(sinif,index)+
@@ -2829,8 +2911,63 @@ function acikUcluPanelHtml(sinif){
   );
 }
 
+/* MEB ünitesi olup portalda henüz sayfası olmayan ünite için kart.
+   Yalnızca resmî ünite adı ve resmî öğrenme çerçevesi gösterilir; içerik üretilmez. */
+function mebHazirlaniyorKartHtml(sinif, u){
+  const ek = { meb:u, sinifNo:sinif.id.slice(1), not:'' };
+  return (
+    '<div class="unite-kart unite-kart--hazirlaniyor belirir" style="--vurgu:var('+sinif.vurgu+');--i:'+((u.no-1)%6)+'">'+
+      '<div class="uk-govde">'+
+        '<p class="uk-etiket">'+u.no+'. Ünite · Hazırlanıyor</p>'+
+        '<h3 class="uk-baslik">'+ocKacis(u.ad)+'</h3>'+
+        '<p class="uk-hazirlaniyor-not">Bu ünitenin konu anlatımı, etkinlikleri ve testleri hazırlanıyor. Aşağıda MEB programındaki öğrenme çerçevesi yer alır.</p>'+
+      '</div>'+
+      '<details class="oc-cerceve">'+
+        '<summary><span class="msi" aria-hidden="true">account_tree</span><span>Öğrenme Çerçevesi (MEB)</span>'+
+        '<span class="msi oc-ok" aria-hidden="true">expand_more</span></summary>'+
+        ocResmiHtml(ek)+
+      '</details>'+
+    '</div>'
+  );
+}
+
+/* Ünite kartlarını MEB programındaki sıraya göre dizer (ortak/meb-program.js →
+   MEB_ESLESTIRME). Eşleştirme yoksa null döner ve eski portal sırası kullanılır. */
+function mebSiraliUniteKartlari(sinif){
+  const E = window.MEB_ESLESTIRME && window.MEB_ESLESTIRME[sinif.id];
+  const P = window.MEB_PROGRAM && window.MEB_PROGRAM.siniflar[sinif.id];
+  if(!E || !P || E.siralamaYok || !sinif.uniteler.length) return null;
+  const kullanilan = {};
+  let html = '';
+  E.sira.forEach(function(g){
+    const u = P.filter(x=>x.no===g.meb)[0];
+    if(!u) return;
+    const sayfalar = g.portal.filter(p=>sinif.uniteler[p-1]);
+    if(!sayfalar.length){ html += mebHazirlaniyorKartHtml(sinif, u); return; }
+    sayfalar.forEach(function(p){
+      kullanilan[p] = true;
+      html += uniteKartHtml(sinif, sinif.uniteler[p-1], p-1, { no:u.no, ad:u.ad });
+    });
+  });
+  /* Eşleşmeyen sayfalar silinmez: "ek içerik" olarak sona eklenir. */
+  sinif.uniteler.forEach(function(un,i){
+    if(!kullanilan[i+1]) html += uniteKartHtml(sinif, un, i, { ek:true });
+  });
+  return html;
+}
+
+/* Sınıfın görünen ünite sayısı: MEB sıralaması uygulanan sınıflarda resmî ünite sayısı. */
+function mebUniteSayisi(sinif){
+  const E = window.MEB_ESLESTIRME && window.MEB_ESLESTIRME[sinif.id];
+  const P = window.MEB_PROGRAM && window.MEB_PROGRAM.siniflar[sinif.id];
+  return (E && P && !E.siralamaYok && sinif.uniteler.length) ? P.length : sinif.uniteler.length;
+}
+
 function sinifPaneliHtml(sinif){
-  const uniteKartlari = sinif.uniteler.length
+  const mebKartlari = mebSiraliUniteKartlari(sinif);
+  const mebSayisi = mebUniteSayisi(sinif);
+  const uniteKartlari = mebKartlari ? mebKartlari
+    : sinif.uniteler.length
     ? sinif.uniteler.map(function(u,i){ return uniteKartHtml(sinif,u,i); }).join('')
     : '<p class="bos-mesaj">Bu sınıf için içerikler (üniteler, konu anlatımı, slaytlar, etkinlikler, oyunlar, testler) hazırlanıyor. Yayınlandığında burada görünecektir.</p>';
   const mevcutYazililar = yaziliMevcutListesi(sinif);
@@ -2840,7 +2977,7 @@ function sinifPaneliHtml(sinif){
   }
   return (
     '<section class="sinif-panel" id="'+sinif.id+'" role="tabpanel" aria-labelledby="btn-'+sinif.id+'" style="--vurgu:var('+sinif.vurgu+')">'+
-      '<div class="sinif-baslik"><h2>'+sinif.ikon+' '+sinif.ad+' Din Kültürü ve Ahlak Bilgisi</h2><span class="sayac">'+sinif.uniteler.length+' Ünite</span></div>'+
+      '<div class="sinif-baslik"><h2>'+sinif.ikon+' '+sinif.ad+' Din Kültürü ve Ahlak Bilgisi</h2><span class="sayac">'+(mebSayisi || sinif.uniteler.length)+' Ünite</span></div>'+
       '<div class="icerik-sekme" role="tablist" aria-label="'+sinif.ad+' içerik türü">'+
         '<button type="button" role="tab" aria-selected="true" id="ib-'+sinif.id+'-unite" data-sinif="'+sinif.id+'" data-tur="unite"><span class="msi" aria-hidden="true">menu_book</span> Üniteler</button>'+
         '<button type="button" role="tab" aria-selected="false" id="ib-'+sinif.id+'-yazili" data-sinif="'+sinif.id+'" data-tur="yazili"><span class="msi" aria-hidden="true">edit_document</span> Yazılı Sınavlar</button>'+
@@ -2937,7 +3074,7 @@ function sayfayiOlustur(){
       '</span>'+
       '<span class="ssp-slogan">'+s.slogan+'</span>'+
       '<span class="ssp-meta">'+
-        '<span class="ssp-meta-satir"><span class="msi" aria-hidden="true">menu_book</span>'+s.uniteler.length+' Ünite</span>'+
+        '<span class="ssp-meta-satir"><span class="msi" aria-hidden="true">menu_book</span>'+mebUniteSayisi(s)+' Ünite</span>'+
         '<span class="ssp-meta-satir"><span class="msi" aria-hidden="true">edit_document</span>'+yaziliMevcutListesi(s).length+' Yazılı</span>'+
         '<span class="ssp-meta-satir"><span class="msi" aria-hidden="true">update</span>'+SON_GUNCELLEME+'</span>'+
       '</span>'+
@@ -3024,7 +3161,7 @@ function sinifGoster(id){
   gostergeGuncelle();
   const sinif = SINIFLAR.find(function(s){ return s.id===id; });
   const bilgi = document.getElementById('sinifSekmeBilgi');
-  if(sinif && bilgi) bilgi.textContent = sinif.uniteler.length + ' Ünite · ' + sinif.ad + ' Din Kültürü ve Ahlak Bilgisi';
+  if(sinif && bilgi) bilgi.textContent = mebUniteSayisi(sinif) + ' Ünite · ' + sinif.ad + ' Din Kültürü ve Ahlak Bilgisi';
   if(btn.scrollIntoView) btn.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
 }
 
