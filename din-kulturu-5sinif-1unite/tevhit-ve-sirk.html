@@ -1216,6 +1216,45 @@
     .tv-adim{ animation:none !important; }
     .tv-sec, .tv-kutu, .tv-oyun-cubuk i{ transition:none !important; }
   }
+  /* — çıkarım (metin çözümleme) kartları: Oku → Anla → İpucu → Çıkarım → Kavram → Gerekçe — */
+  .tv-yol-kutu h3{ color:#3b2a6b; }
+  .tv-yol{ display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 0; padding:0; list-style:none; counter-reset:tvy; }
+  .tv-yol li{ counter-increment:tvy; background:#fff; border:1px solid #ddd4f2; border-radius:999px; padding:5px 12px; font-weight:800; font-size:.88em; color:#3b2a6b; }
+  .tv-yol li::before{ content:counter(tvy) " · "; color:#5b21b6; }
+  .tv-cikarim{ background:#fffdf6; border:1px solid #efe3c2; border-radius:18px; padding:14px 16px; margin:14px 0; }
+  .tv-ck-baslik{ font-weight:900; color:#5a3d00; margin:0 0 8px !important; font-size:.95em !important; }
+  .tv-ck-metin{ background:#fff; border:1px solid #efe3c2; border-radius:14px; padding:12px 14px; }
+  .tv-ck-metin .tv-ayet-metin{ line-height:1.85; }
+  .tv-ck-metin .tv-ayet-kaynak{ margin-bottom:0 !important; }
+  .tv-parca{ border-radius:6px; padding:1px 2px; transition:background .15s; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+  .tv-cikarim.tv-dokun-modu .tv-parca{ cursor:pointer; background:#fff3cd; box-shadow:inset 0 -2px 0 #f4c95d; }
+  .tv-cikarim.tv-dokun-modu .tv-parca:hover{ background:#ffe69c; }
+  .tv-parca:focus-visible{ outline:3px solid var(--mavi); outline-offset:1px; }
+  .tv-cikarim .tv-parca.tv-parca-iz{ background:#dbeafe; box-shadow:inset 0 -2px 0 var(--mavi); }
+  .tv-cikarim .tv-parca.tv-parca-kanit{ background:#d8f3dc; box-shadow:inset 0 -2px 0 var(--yesil); }
+  .tv-cikarim .tv-parca.tv-parca-yanlis{ background:#ffe3e3; box-shadow:inset 0 -2px 0 var(--kirmizi); }
+  .tv-ck-asama{ background:#f4f1fb; border:1px solid #ddd4f2; border-radius:16px; padding:12px 14px; margin:12px 0 0; }
+  .tv-ck-asama:focus{ outline:none; }
+  .tv-ck-asama textarea{
+    width:100%; min-height:64px; resize:vertical; font:inherit; font-size:.95em; box-sizing:border-box;
+    border:1px solid #cfc3ea; border-radius:10px; padding:9px 11px; background:#fff; margin:0;
+  }
+  .tv-ck-cerceve{ background:#fff; border:2px dashed #b7a6e0; border-radius:14px; padding:10px 12px; line-height:1.75 !important; }
+  .tv-ck-cerceve mark{ background:#d8f3dc; color:inherit; border-radius:4px; padding:0 3px; }
+  .tv-ck-not{ font-size:.86em !important; color:#5b6472; margin:6px 0 8px !important; }
+  .tv-neden{ margin-top:12px; padding-top:12px; border-top:2px dashed #ddd4f2; }
+  .tv-oyun-iz{ margin-top:12px; background:#fff; border:2px dashed #cfd8e3; border-radius:14px; padding:12px; }
+  .tv-oyun-iz .tv-geri{ background:var(--acikgri); }
+  @media (prefers-reduced-motion: reduce){ .tv-parca{ transition:none !important; } }
+  .tv-iki-kavram{ margin:14px 0 4px; }
+  .tv-ck-asama .tv-kutular{ margin-top:4px; }
+  /* — 50 soru: ayet ve hadis avcısı — */
+  .tv-avci-metin{ display:block; text-align:left; font-size:1.04em; font-weight:700; line-height:1.7; background:#fffdf6; border-color:#efe3c2; color:#3d2b00; }
+  .tv-avci-tur{ display:inline-block; font-size:.72em; font-weight:900; letter-spacing:.08em; background:#f4a261; color:#fff; padding:2px 10px; border-radius:999px; margin-bottom:6px; }
+  .tv-avci-yazi{ display:block; }
+  .tv-avci-kaynak{ display:block; margin-top:6px; font-size:.8em; font-weight:700; color:#8a6d2b; }
+  .tv-avci-soru{ text-align:center; font-size:1.1em !important; }
+  #tvAvci .tv-kutular{ grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr)); }
 </style>
 </head>
 <body>
@@ -1240,27 +1279,47 @@
 <section class="ka-hero" id="tv-ust"><div class="ka-hero-ic"><div class="ka-hero-metin">
   <span class="ka-ust-etiket">Konu 2 · Allah'ın Varlığı ve Birliği</span>
   <h2>Keşif Yolculuğu: Tevhit ve Şirk</h2>
-  <p>Bu sayfada cevaplar hazır verilmiyor. Önce sen düşüneceksin, seçeceksin; sonra kavramı birlikte bulacağız.</p>
+  <p>Bu sayfada cevaplar hazır verilmiyor. Her metni sen çözeceksin: Önce anlayacak, ipucunu bulacak, sonuç çıkaracaksın. Kavramın adı en sonda gelecek.</p>
   <div class="ka-icindekiler">
-    <span class="ka-ic-baslik">14 adım</span>
+    <span class="ka-ic-baslik">15 adım</span>
     <a class="ka-ic-link" href="#tv-merak"><b>1</b>Merak Et</a>
     <a class="ka-ic-link" href="#tv-kumanda"><b>2</b>Tek Kumanda</a>
     <a class="ka-ic-link" href="#tv-gemi"><b>3</b>Bir Gemi, Bir Kaptan</a>
     <a class="ka-ic-link" href="#tv-yaratilmis"><b>4</b>Yaratılmış mı?</a>
     <a class="ka-ic-link" href="#tv-gunes"><b>5</b>Güneş Tanrı Olabilir mi?</a>
     <a class="ka-ic-link" href="#tv-tac"><b>6</b>Yanlış Taç</a>
-    <a class="ka-ic-link" href="#tv-sirk"><b>7</b>Şirk</a>
+    <a class="ka-ic-link" href="#tv-sirk"><b>7</b>Bir Sinek Bile</a>
     <a class="ka-ic-link" href="#tv-yardim"><b>8</b>Yardım İstemek</a>
     <a class="ka-ic-link" href="#tv-karsilastir"><b>9</b>Tevhit ve Şirk</a>
     <a class="ka-ic-link" href="#tv-oyun"><b>10</b>Oyun</a>
     <a class="ka-ic-link" href="#tv-pencere"><b>11</b>Tek Güneş</a>
     <a class="ka-ic-link" href="#tv-harita"><b>12</b>Kavram Haritası</a>
-    <a class="ka-ic-link" href="#tv-ayet"><b>13</b>Ayetler</a>
-    <a class="ka-ic-link" href="#tv-dusun"><b>14</b>Düşün ve Cevapla</a>
+    <a class="ka-ic-link" href="#tv-ayet"><b>13</b>Metin Dedektifi</a>
+    <a class="ka-ic-link" href="#tv-avci"><b>14</b>50 Soru: Tevhit mi, Şirk mi?</a>
+    <a class="ka-ic-link" href="#tv-dusun"><b>15</b>Düşün ve Cevapla</a>
   </div>
 </div></div></section>
 
 <main class="tv-ana">
+
+<!-- ============ DÜŞÜNME YOLU ============ -->
+<div class="tv-sonuc tv-yol-kutu">
+  <h3>🧭 Her metinde bu yolu izleyeceksin</h3>
+  <ol class="tv-yol">
+    <li>Metni oku</li>
+    <li>Ne anlattığını kendi cümlenle düşün</li>
+    <li>İpucunu fark et</li>
+    <li>Çıkarım yap</li>
+    <li>Kavramı belirle</li>
+    <li>Nedenini açıkla</li>
+  </ol>
+  <p style="margin:10px 0 0">Hedefin şu cümleyi kurabilmek: <b>“Bu …’dir; çünkü metinde … vurgulanıyor ve bundan … sonucunu çıkarıyorum.”</b></p>
+</div>
+<div class="tv-karsi tv-iki-kavram">
+  <div class="tv-kavram tv-kavram-tevhit"><h3>🟢 TEVHİT</h3><p>Allah'ın bir olduğuna, eşi ve ortağı bulunmadığına inanmak; ibadeti yalnızca O'na yapmak.</p></div>
+  <div class="tv-kavram tv-kavram-sirk"><h3>🔴 ŞİRK</h3><p>Allah'a ortak koşmak; yalnızca Allah'a ait olanı (yaratmak, rızık vermek, ibadet edilmek…) başka bir varlığa vermek.</p></div>
+</div>
+<p class="tv-ck-not" style="text-align:center">Her ayet ve hadiste sana soracağım: <b>Bu metin TEVHİDİ mi anlatıyor, ŞİRKİ mi?</b> Cevabını metindeki ipucuyla kanıtlayacaksın.</p>
 
 <!-- ============ 1. MERAK ET ============ -->
 <article class="tv-adim" id="tv-merak">
@@ -1278,14 +1337,35 @@
     <details class="tv-ipucu"><summary>🎮 İki oyuncu aynı karakteri iki ayrı kolla yönetirse ne olur?</summary>
       <p>Biri sağa, öteki sola basar. Karakter bir o yana bir bu yana gider, bölümü bitiremez.</p></details>
   </div>
-  <div class="tv-soru" data-ac="tv-merak-sonra">
+  <div class="tv-soru" data-ac="tv-merak-kart">
     <p class="tv-soru-metin">Peki sence evrendeki bu düzen bize ne anlatıyor?</p>
     <div class="tv-secenekler">
       <button type="button" class="tv-sec" data-d="a">Her şey kendi kendine oluyor.</button>
       <button type="button" class="tv-sec" data-d="b" data-dogru>Bu düzeni kuran ve yöneten biri var.</button>
       <button type="button" class="tv-sec" data-d="c">Düzen tesadüfen oluşmuş.</button>
     </div>
-    <p class="tv-geri" aria-live="polite" data-evet="Harika bir keşif! Düzen varsa, onu kuran da vardır." data-hayir="Bir daha düşün: Hiç kendi kendine düzenlenen bir oda gördün mü? Düzen varsa, onu kuran da vardır."></p>
+    <p class="tv-geri" aria-live="polite" data-evet="Güzel düşündün! Düzen varsa, onu kuran da vardır." data-hayir="Bir daha düşün: Hiç kendi kendine düzenlenen bir oda gördün mü? Düzen varsa, onu kuran da vardır."></p>
+    <div class="tv-neden">
+      <p class="tv-soru-metin">🔎 Bunu hangi ipucundan çıkardın?</p>
+      <div class="tv-secenekler">
+        <button type="button" class="tv-sec" data-geri="Sıcaklık bir özelliktir, düzen değildir. Hangi ipucu “hep aynı şekilde” olmayı anlatıyordu?">Güneş'in çok sıcak olması</button>
+        <button type="button" class="tv-sec" data-dogru data-geri="Evet! Hiç şaşmayan bir düzen, onu kuranı düşündürür.">Güneş'in hiç şaşmadan her gün doğup batması</button>
+        <button type="button" class="tv-sec" data-geri="Karanlık tek başına düzen göstermez. Gece ile gündüzün nasıl sırayla geldiğini düşün.">Gecenin karanlık olması</button>
+      </div>
+      <p class="tv-geri" aria-live="polite"></p>
+    </div>
+  </div>
+  <div class="tv-kart-alan" id="tv-merak-kart">
+    <p>Şimdi aynı soruyu Kur'an-ı Kerim'den bir ayetle düşünelim. Ayet sana cevabı söylemeyecek; sen bulacaksın.</p>
+    <div class="tv-cikarim" data-kart="mulk" data-tur="Ayet" data-ac="tv-merak-sonra">
+    <p class="tv-ck-baslik">📜 Ayet: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca">O, yedi göğü tabaka tabaka yaratandır.</span> <span class="tv-parca">Rahmân'ın yaratışında</span> <span class="tv-parca" data-anlam data-kavram>hiçbir uyumsuzluk göremezsin.</span> <span class="tv-parca">Bir kere daha bak!</span> <span class="tv-parca" data-anlam data-kavram>Hiçbir çatlak (ve düzensizlik) görüyor musun?</span>”</p>
+      <p class="tv-ayet-kaynak">(Mülk suresi, 3. ayet)</p>
+    </div>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
+  </div>
   </div>
   <div class="tv-sonuc tv-sonra" id="tv-merak-sonra">
     <h3>🔎 Keşfettiğimiz iki fikir</h3>
@@ -1311,7 +1391,7 @@
     <text x="40" y="84" font-size="15" font-weight="800" fill="#2d6a4f" font-family="Nunito,sans-serif">Kanal 5!</text>
     <text x="400" y="56" font-size="15" font-weight="800" fill="#b5541f" font-family="Nunito,sans-serif">Sesi kapat!</text>
   </svg>
-  <div class="tv-soru" data-ac="tv-kumanda-sonra">
+  <div class="tv-soru" data-ac="tv-kumanda-kart">
     <p class="tv-soru-metin">Televizyonu aynı anda iki farklı kişi, iki farklı komutla yönetmeye çalışsaydı ne olurdu?</p>
     <div class="tv-secenekler">
       <button type="button" class="tv-sec" data-d="a">Her şey daha düzenli olurdu.</button>
@@ -1319,11 +1399,31 @@
       <button type="button" class="tv-sec" data-d="c">Televizyon iki kat iyi çalışırdı.</button>
     </div>
     <p class="tv-geri" aria-live="polite" data-evet="Doğru! Biri kanal değiştirir, öteki sesi kapatır. Ortaya karışıklık çıkar." data-hayir="Bir daha düşün: Biri “Kanal 5!”, öteki “Sesi kapat!” derse ekranda ne olur? Karışıklık çıkar, düzen bozulur."></p>
+    <div class="tv-neden">
+      <p class="tv-soru-metin">🔎 Bunu hangi ipucundan çıkardın?</p>
+      <div class="tv-secenekler">
+        <button type="button" class="tv-sec" data-geri="Renk düzeni etkiler mi? Kumandaların ne söylediğine bak.">Kumandaların farklı renkte olması</button>
+        <button type="button" class="tv-sec" data-geri="Büyüklük değil, kaç kişinin yönettiği önemli.">Televizyonun büyük olması</button>
+        <button type="button" class="tv-sec" data-dogru data-geri="Aynen! Tek ekran, iki farklı emir: Karışıklık kaçınılmaz.">İki kumandanın aynı anda iki farklı komut vermesi</button>
+      </div>
+      <p class="tv-geri" aria-live="polite"></p>
+    </div>
+  </div>
+  <div class="tv-kart-alan" id="tv-kumanda-kart">
+    <div class="tv-uyari"><span aria-hidden="true">⚠️</span><p style="margin:0"><b>Dikkat:</b> Bu örnek Allah'ı televizyona veya kumandaya benzetmek için değildir. Allah hiçbir şeye benzemez. Bu örnek sadece <b>düzen ve yönetim</b> fikrini anlamamıza yardımcı olur.</p></div>
+    <p>Kumandadan çıkardığın fikri şimdi bir ayette ara:</p>
+    <div class="tv-cikarim" data-kart="enbiya" data-tur="Ayet" data-ac="tv-kumanda-sonra">
+    <p class="tv-ck-baslik">📜 Ayet: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca">Eğer yerde ve gökte</span> <span class="tv-parca" data-kavram>Allah'tan başka ilâhlar olsaydı,</span> <span class="tv-parca">kesinlikle ikisinin de</span> <span class="tv-parca" data-anlam data-kavram>düzeni bozulurdu…</span>”</p>
+      <p class="tv-ayet-kaynak">(Enbiyâ suresi, 22. ayet)</p>
+    </div>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
+  </div>
   </div>
   <div class="tv-sonra" id="tv-kumanda-sonra">
-    <div class="tv-uyari"><span aria-hidden="true">⚠️</span><p style="margin:0"><b>Dikkat:</b> Bu örnek Allah'ı televizyona veya kumandaya benzetmek için değildir. Allah hiçbir şeye benzemez. Bu örnek sadece <b>düzen ve yönetim</b> fikrini anlamamıza yardımcı olur.</p></div>
-    <p>Evrende de her şey düzenli işliyor: Güneş doğuyor, mevsimler sırayla geliyor, yağmur yağıyor, tohumlar filizleniyor. Bu düzen bize <b>tek bir yaratıcıyı</b> düşündürür.</p>
-    <p>İslam inancında Allah birdir ve ortağı yoktur. Buna <b>tevhit</b> denir.</p>
+    <p>Senin çıkardığın sonuç şuydu: Evrende düzen bozulmuyor; demek ki yaratan ve yöneten <b>tek</b>tir. İslam inancında bu sonucun bir adı vardır: <b>tevhit</b>.</p>
     <div class="tv-kavram tv-kavram-tevhit">
       <h3>🟢 TEVHİT</h3>
       <p>Allah'ın bir ve tek olduğuna, eşi ve ortağı bulunmadığına inanmaktır.</p>
@@ -1348,7 +1448,7 @@
     <text x="60" y="98" font-size="15" font-weight="800" fill="#2d6a4f" font-family="Nunito,sans-serif">Batıya!</text>
     <text x="430" y="98" font-size="15" font-weight="800" fill="#b5541f" font-family="Nunito,sans-serif">Doğuya!</text>
   </svg>
-  <div class="tv-soru" data-ac="tv-gemi-sonra">
+  <div class="tv-soru" data-ac="tv-gemi-kart">
     <p class="tv-soru-metin">Gemiyi iki kaptan aynı anda farklı yönlere götürmeye çalışırsa ne olur?</p>
     <div class="tv-secenekler">
       <button type="button" class="tv-sec" data-d="a">Gemi daha hızlı gider.</button>
@@ -1356,11 +1456,31 @@
       <button type="button" class="tv-sec" data-d="c">Hiçbir şey olmaz.</button>
     </div>
     <p class="tv-geri" aria-live="polite" data-evet="Aynen öyle! Biri “Batıya!”, öteki “Doğuya!” derse gemi olduğu yerde döner durur." data-hayir="Bir daha düşün: Dümeni biri sağa, öteki sola çevirirse gemi nereye gider? Yolunu bulamaz."></p>
+    <div class="tv-neden">
+      <p class="tv-soru-metin">🔎 Bunu hangi ipucundan çıkardın?</p>
+      <div class="tv-secenekler">
+        <button type="button" class="tv-sec" data-dogru data-geri="Doğru ipucu! İki ayrı emir, tek bir yol olamaz.">Birinin “Batıya!”, ötekinin “Doğuya!” demesi</button>
+        <button type="button" class="tv-sec" data-geri="Dalga her gemide olur. Karışıklığın asıl sebebi kaptanların sözlerinde.">Denizin dalgalı olması</button>
+        <button type="button" class="tv-sec" data-geri="Yelkenin rengi geminin yönünü belirlemez. Kimin ne dediğine bak.">Yelkenin beyaz olması</button>
+      </div>
+      <p class="tv-geri" aria-live="polite"></p>
+    </div>
+  </div>
+  <div class="tv-kart-alan" id="tv-gemi-kart">
+    <div class="tv-uyari"><span aria-hidden="true">⚠️</span><p style="margin:0"><b>Dikkat:</b> “Allah geminin kaptanıdır.” demiyoruz. Bu yalnızca bir <b>benzetmedir</b>. Allah hiçbir varlığa benzemez. Benzetmeyi sadece “Yöneten iki tane olsaydı düzen bozulurdu.” fikrini anlamak için kullandık.</p></div>
+    <p>Şimdi gökyüzüne bakan bir ayeti oku. Güneş ile Ay bir gemi gibi yol alıyor. Onları kim yönetiyor olabilir?</p>
+    <div class="tv-cikarim" data-kart="yasin" data-tur="Ayet" data-ac="tv-gemi-sonra">
+    <p class="tv-ck-baslik">📜 Ayet: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca" data-anlam data-kavram>Ne güneş aya yetişebilir,</span> <span class="tv-parca" data-anlam>ne de gece gündüzü geçebilir.</span> <span class="tv-parca">Her biri</span> <span class="tv-parca" data-anlam data-kavram>bir yörüngede yüzmektedir.</span>”</p>
+      <p class="tv-ayet-kaynak">(Yâsîn suresi, 40. ayet)</p>
+    </div>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
+  </div>
   </div>
   <div class="tv-sonra" id="tv-gemi-sonra">
-    <p>Şimdi evrene bakalım: Güneş, Ay, Dünya ve milyonlarca yıldız birbirine çarpmadan yolunda gidiyor. Çok uzun zamandır bu düzen hiç bozulmadı.</p>
-    <div class="tv-uyari"><span aria-hidden="true">⚠️</span><p style="margin:0"><b>Dikkat:</b> “Allah geminin kaptanıdır.” demiyoruz. Bu yalnızca bir <b>benzetmedir</b>. Allah hiçbir varlığa benzemez. Benzetmeyi sadece “Yöneten iki tane olsaydı düzen bozulurdu.” fikrini anlamak için kullandık.</p></div>
-    <p>Kur'an-ı Kerim de bize bunu hatırlatır: <b>“Eğer yerde ve gökte Allah'tan başka ilahlar olsaydı kesinlikle ikisinin de düzeni bozulurdu...”</b> (Enbiya suresi, 22. ayet). Bu ayeti 13. adımda birlikte inceleyeceğiz.</p>
+    <p>Güneş, Ay, Dünya ve milyonlarca yıldız birbirine çarpmadan yolunda gidiyor. Çok uzun zamandır bu düzen hiç bozulmadı. Senin çıkarımın da bunu gösterdi: <b>Bu yolları belirleyen tektir.</b></p>
   </div>
 </article>
 
@@ -1387,13 +1507,34 @@
       <p class="tv-geri" aria-live="polite" data-evet="Evet! Ağaç küçücük bir tohumdan büyüdü." data-hayir="Ağaç küçücük bir tohumdan büyüdü; o da yaratılmıştır."></p></div>
   </div>
   <div class="tv-sonra" id="tv-yaratilmis-sonra">
-    <div class="tv-soru" data-ac="tv-yaratilmis-sonuc">
+    <div class="tv-soru" data-ac="tv-yaratilmis-kart">
       <p class="tv-soru-metin">Yaratılan bir varlık, kendisini yaratan olabilir mi?</p>
       <div class="tv-secenekler">
         <button type="button" class="tv-sec">Evet, olabilir.</button>
         <button type="button" class="tv-sec" data-dogru>Hayır, olamaz.</button>
       </div>
       <p class="tv-geri" aria-live="polite" data-evet="Çok doğru! Bir resim kendi kendini çizemez. Resmin var olması için bir ressam gerekir." data-hayir="Şöyle düşün: Bir resim kendi kendini çizebilir mi? Hayır. Resmin var olması için bir ressam gerekir."></p>
+      <div class="tv-neden">
+        <p class="tv-soru-metin">🔎 Bunu hangi düşünceden çıkardın?</p>
+        <div class="tv-secenekler">
+          <button type="button" class="tv-sec" data-geri="Güneş yaratılmıştır ama çok büyüktür. Büyüklük değil, “yokken var olmak” önemli.">Yaratılmış varlıklar küçüktür.</button>
+          <button type="button" class="tv-sec" data-dogru data-geri="İşte asıl ipucu bu! Yok olan bir şey, kendini var edecek güce sahip olamaz.">Yaratılmış olan bir zaman yoktu; yokken kendini var edemez.</button>
+          <button type="button" class="tv-sec" data-geri="Konuşan insan da yaratılmıştır. Asıl ipucu “bir zaman yoktu” fikrinde.">Yaratılmış varlıklar konuşamaz.</button>
+        </div>
+        <p class="tv-geri" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="tv-kart-alan" id="tv-yaratilmis-kart">
+      <p>Hz. İbrahim de gökyüzüne bakarak aynı soruyu düşünmüştü. Kur'an-ı Kerim onun düşünme yolculuğunu anlatır. Hz. İbrahim bu sözleri, kavmine gökteki varlıkların ilah olamayacağını göstermek için söylemiştir.</p>
+      <div class="tv-cikarim" data-kart="enam" data-tur="Ayet" data-ac="tv-yaratilmis-sonuc">
+    <p class="tv-ck-baslik">📜 Ayet: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca">Üzerine gece karanlığı basınca,</span> <span class="tv-parca">bir yıldız gördü.</span> <span class="tv-parca">“İşte Rabbim!” dedi.</span> <span class="tv-parca" data-anlam>Yıldız batınca da,</span> <span class="tv-parca" data-anlam data-kavram>“Ben öyle batanları sevmem” dedi.</span> <span class="tv-parca">(…)</span> <span class="tv-parca">Güneşi doğarken görünce de,</span> <span class="tv-parca">“İşte benim Rabbim! Bu daha büyük” dedi.</span> <span class="tv-parca" data-anlam data-kavram>O da batınca…</span>”</p>
+      <p class="tv-ayet-kaynak">(En'âm suresi, 76 ve 78. ayetlerden, kısaltılarak)</p>
+    </div>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
+  </div>
     </div>
     <div class="tv-sonuc tv-sonra" id="tv-yaratilmis-sonuc">
       <h3>✅ Sonuç</h3>
@@ -1416,7 +1557,7 @@
     <p class="tv-geri" aria-live="polite" data-evet="Cevabını seçtin. Şimdi 4 ipucuyla birlikte kontrol edelim!"></p>
   </div>
   <div class="tv-sonra" id="tv-gunes-ipucu">
-    <div class="tv-grup" data-ac="tv-gunes-sonuc">
+    <div class="tv-grup" data-ac="tv-gunes-kart">
       <div class="tv-soru"><p class="tv-soru-metin"><span class="tv-ipucu-no">İPUCU 1</span>Güneş yaratılmış mıdır?</p>
         <div class="tv-secenekler"><button type="button" class="tv-sec" data-dogru>Evet</button><button type="button" class="tv-sec">Hayır</button></div>
         <p class="tv-geri" aria-live="polite" data-evet="Evet. Güneş bir zaman yoktu, sonradan var edildi." data-hayir="Güneş bir zaman yoktu, sonradan var edildi. Yani Güneş yaratılmıştır."></p></div>
@@ -1429,6 +1570,18 @@
       <div class="tv-soru"><p class="tv-soru-metin"><span class="tv-ipucu-no">İPUCU 4</span>Güneş sonsuz ve yaratılmamış mıdır?</p>
         <div class="tv-secenekler"><button type="button" class="tv-sec">Evet</button><button type="button" class="tv-sec" data-dogru>Hayır</button></div>
         <p class="tv-geri" aria-live="polite" data-evet="Hayır. Güneş'in bir başlangıcı vardır; o yaratılmıştır." data-hayir="Güneş'in bir başlangıcı vardır. Yani sonsuz değildir, yaratılmıştır."></p></div>
+    </div>
+    <div class="tv-kart-alan" id="tv-gunes-kart">
+      <p>Dört ipucunu topladın. Şimdi Güneş'ten söz eden bir ayeti çözümle:</p>
+      <div class="tv-cikarim" data-kart="fussilet" data-tur="Ayet" data-ac="tv-gunes-sonuc">
+    <p class="tv-ck-baslik">📜 Ayet: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca">Gece, gündüz, güneş ve ay</span> <span class="tv-parca" data-anlam data-kavram>Allah'ın varlığının delillerindendir.</span> <span class="tv-parca">Güneşe ve aya secde etmeyin.</span> <span class="tv-parca">Eğer gerçekten Allah'a kulluk ediyorsanız,</span> <span class="tv-parca" data-kavram>onları yaratan Allah'a secde edin.</span>”</p>
+      <p class="tv-ayet-kaynak">(Fussilet suresi, 37. ayet)</p>
+    </div>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
+  </div>
     </div>
     <div class="tv-sonuc tv-sonra" id="tv-gunes-sonuc">
       <h3>☀️ Sonuç</h3>
@@ -1455,46 +1608,80 @@
     <text x="70" y="142" font-size="20" font-weight="800" fill="#8a5a00" font-family="Nunito,sans-serif">kralım!”</text>
   </svg>
   <p>Bir ülkenin gerçek bir kralı var. Herkes onu tanıyor. Bir gün biri çıkıyor, bir taç takıyor ve bağırıyor: <b>“Ben de kralım!”</b></p>
-  <div class="tv-soru" data-ac="tv-tac-sonra">
+  <div class="tv-soru" data-ac="tv-tac-kart">
     <p class="tv-soru-metin">Gerçek krala ait olan yetkiyi, kral olmayan bir kişiye vermek doğru mudur?</p>
     <div class="tv-secenekler">
       <button type="button" class="tv-sec">Doğrudur.</button>
       <button type="button" class="tv-sec" data-dogru>Doğru değildir.</button>
     </div>
     <p class="tv-geri" aria-live="polite" data-evet="Doğru düşündün! Taç takmak kimseyi gerçek kral yapmaz. Ona ait olmayan yetkiyi vermek haksızlıktır." data-hayir="Bir daha düşün: Taç takmak birini gerçek kral yapar mı? Ona ait olmayan yetkiyi vermek doğru olmaz."></p>
+    <div class="tv-neden">
+      <p class="tv-soru-metin">🔎 Bunu hangi ipucundan çıkardın?</p>
+      <div class="tv-secenekler">
+        <button type="button" class="tv-sec" data-geri="Tacın rengi kimseyi kral yapmaz. Taç takan kişinin gerçekte ne olduğuna bak.">Tacın renkli olması</button>
+        <button type="button" class="tv-sec" data-geri="Bu doğru ama asıl sorun, taç takanın gerçek yetkisinin olmaması.">Gerçek kralın herkes tarafından tanınması</button>
+        <button type="button" class="tv-sec" data-dogru data-geri="Evet! Görünüş değişti ama gerçek değişmedi: O kişi kral değil.">Taç takan kişinin gerçek kral olmaması, sadece öyle görünmesi</button>
+      </div>
+      <p class="tv-geri" aria-live="polite"></p>
+    </div>
+  </div>
+  <div class="tv-kart-alan" id="tv-tac-kart">
+    <div class="tv-uyari"><span aria-hidden="true">⚠️</span><p style="margin:0"><b>Dikkat:</b> Allah'ı bir krala benzetmiyoruz. Bu yalnızca bir fikri anlamamıza yardımcı olan bir <b>benzetmedir</b>.</p></div>
+    <p>“Yanlış taç” fikrini bir ayette bulabilir misin?</p>
+    <div class="tv-cikarim" data-kart="rad" data-tur="Ayet" data-ac="tv-tac-sonra">
+    <p class="tv-ck-baslik">📜 Ayet: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca">De ki: “Göklerin ve yerin Rabbi kimdir?”</span> <span class="tv-parca" data-kavram>“Allah'tır” de.</span> <span class="tv-parca">De ki: “O'nu bırakıp da</span> <span class="tv-parca" data-anlam data-kavram>kendilerine (bile) bir faydası ve zararı olmayan</span> <span class="tv-parca">dostlar (mabutlar) mı edindiniz?”…</span>”</p>
+      <p class="tv-ayet-kaynak">(Ra'd suresi, 16. ayet)</p>
+    </div>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
+  </div>
   </div>
   <div class="tv-sonra" id="tv-tac-sonra">
-    <div class="tv-uyari"><span aria-hidden="true">⚠️</span><p style="margin:0"><b>Dikkat:</b> Allah'ı bir krala benzetmiyoruz. Bu yalnızca <b>şirk kavramını anlamamıza yardımcı olan bir benzetmedir.</b></p></div>
-    <div class="tv-sonuc"><h3>👑 Buradan ne öğrendik?</h3><p><b>Allah'ın ilahlığında ortağı yoktur.</b> Sadece Allah'a ait olan bir özelliği başka bir varlığa vermek, “yanlış taç” takmaya benzer. Bunun bir adı var. Bir sonraki adımda öğreneceğiz.</p></div>
+    <div class="tv-sonuc"><h3>👑 Buradan ne çıkardık?</h3><p><b>Allah'ın ilahlığında ortağı yoktur.</b> Sadece Allah'a ait olan bir özelliği başka bir varlığa vermek, “yanlış taç” takmaya benzer. Bunun bir adı var. Bir sonraki adımda o adı bir ayetten sen çıkaracaksın.</p></div>
   </div>
 </article>
 
-<!-- ============ 7. ŞİRK ============ -->
+<!-- ============ 7. BİR SİNEK BİLE (ŞİRK) ============ -->
 <article class="tv-adim" id="tv-sirk">
-  <div class="tv-adim-bas"><span class="tv-adim-no">7</span><h2><small>Kavram</small>Şirk Nedir? 🔴</h2></div>
-  <div class="tv-kavram tv-kavram-sirk">
-    <h3>🔴 ŞİRK</h3>
-    <p><span class="tv-kisa">Allah'a ortak koşmaya şirk denir.</span></p>
-    <p>Allah'a ait olan ilahlık özelliklerinde başka bir varlığı Allah'a ortak kabul etmek şirktir.</p>
+  <div class="tv-adim-bas"><span class="tv-adim-no">7</span><h2><small>Misal</small>Bir Sinek Bile Yaratamazlar 🪰</h2></div>
+  <p>Kur'an-ı Kerim bazen bir örnek verir ve “Şimdi ona iyi kulak verin.” der. Bu örneği dikkatle oku.</p>
+  <div class="tv-cikarim" data-kart="hac" data-tur="Ayet" data-ac="tv-sirk-sonra">
+    <p class="tv-ck-baslik">📜 Ayet: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca">Ey insanlar! Size bir örnek verildi. Şimdi ona iyi kulak verin.</span> <span class="tv-parca">Sizin Allah'tan başka taptıklarınız</span> <span class="tv-parca" data-anlam data-kavram>bir sinek dahi yaratamazlar,</span> <span class="tv-parca">hepsi bunun için toplansalar bile.</span> <span class="tv-parca">Eğer sinek onlardan bir şey kapsa,</span> <span class="tv-parca" data-anlam data-kavram>bunu ondan kurtaramazlar.</span> <span class="tv-parca" data-anlam data-kavram>İsteyen de âciz, istenen de.</span>”</p>
+      <p class="tv-ayet-kaynak">(Hac suresi, 73. ayet)</p>
+    </div>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
   </div>
-  <p><b>“İlahlık özellikleri” ne demek?</b> Sadece Allah'ta olan özellikler demek. Örneğin:</p>
-  <div class="tv-sonuc" style="background:#fff5f5;border-color:#f5c2c2">
-    <ul style="margin:0;padding-left:20px">
-      <li>Her şeyi <b>yoktan yaratmak</b></li>
-      <li>Her şeyi <b>bilmek</b>, her şeyi <b>görmek ve işitmek</b></li>
-      <li>Her şeye <b>gücü yetmek</b></li>
-      <li><b>Başlangıcı ve sonu olmamak</b></li>
-      <li><b>İbadet edilmeye</b> layık olmak</li>
-    </ul>
+  <div class="tv-sonra" id="tv-sirk-sonra">
+    <p>Ayette eleştirilen davranışı buldun: Allah'a ait olan ilahlığı, bir sinek bile yaratamayan varlıklara vermek. Bu davranışın adı <b>şirk</b>tir.</p>
+    <div class="tv-kavram tv-kavram-sirk">
+      <h3>🔴 ŞİRK</h3>
+      <p><span class="tv-kisa">Allah'a ortak koşmaya şirk denir.</span></p>
+      <p>Allah'a ait olan ilahlık özelliklerinde başka bir varlığı Allah'a ortak kabul etmek şirktir.</p>
+    </div>
+    <p><b>“İlahlık özellikleri” ne demek?</b> Sadece Allah'ta olan özellikler demek. Örneğin:</p>
+    <div class="tv-sonuc" style="background:#fff5f5;border-color:#f5c2c2">
+      <ul style="margin:0;padding-left:20px">
+        <li>Her şeyi <b>yoktan yaratmak</b></li>
+        <li>Her şeyi <b>bilmek</b>, her şeyi <b>görmek ve işitmek</b></li>
+        <li>Her şeye <b>gücü yetmek</b></li>
+        <li><b>Başlangıcı ve sonu olmamak</b></li>
+        <li><b>İbadet edilmeye</b> layık olmak</li>
+      </ul>
+    </div>
+    <p>Bu özellikleri Güneş'e, bir taşa, bir heykele ya da bir insana vermek; onlara ibadet etmek şirktir. Tıpkı gerçek krala ait tacı başkasına takmak gibi.</p>
   </div>
-  <p>Bu özellikleri Güneş'e, bir taşa, bir heykele ya da bir insana vermek; onlara ibadet etmek şirktir. Tıpkı gerçek krala ait tacı başkasına takmak gibi.</p>
 </article>
 
 <!-- ============ 8. HER YARDIM İSTEMEK ŞİRK DEĞİLDİR ============ -->
 <article class="tv-adim" id="tv-yardim">
-  <div class="tv-adim-bas"><span class="tv-adim-no">8</span><h2><small>Çok önemli ayrım</small>Her Yardım İstemek Şirk Değildir 🤝</h2></div>
+  <div class="tv-adim-bas"><span class="tv-adim-no">8</span><h2><small>Çok önemli ayrım</small>Yardım İstemek Şirk midir? 🤝</h2></div>
   <p>Bazı arkadaşlar şöyle düşünebilir: “Allah'tan başkasından yardım istersem şirk mi olur?” Gel, birlikte bakalım. Her örnek için seç:</p>
-  <div class="tv-yardim-izgara tv-grup" data-ac="tv-yardim-sonra">
+  <div class="tv-yardim-izgara tv-grup" data-ac="tv-yardim-kart1">
     <div class="tv-soru"><p class="tv-soru-metin">🎒 “Anne, çantamı taşımama yardım eder misin?”</p>
       <div class="tv-secenekler"><button type="button" class="tv-sec">Şirktir</button><button type="button" class="tv-sec" data-dogru>Şirk değildir</button></div>
       <p class="tv-geri" aria-live="polite" data-evet="Doğru! Annenin çanta taşımaya gücü yeter." data-hayir="Şirk değildir. Annenin çanta taşımaya gücü yeter; bu günlük bir yardımdır."></p></div>
@@ -1505,14 +1692,38 @@
       <div class="tv-secenekler"><button type="button" class="tv-sec">Şirktir</button><button type="button" class="tv-sec" data-dogru>Şirk değildir</button></div>
       <p class="tv-geri" aria-live="polite" data-evet="Doğru! Doktor bu işi öğrenmiştir, tedavi eder. İyileşmeyi ise Allah'tan dileriz." data-hayir="Şirk değildir. Doktor bu işi öğrenmiştir, tedavi eder. İyileşmeyi ise Allah'tan dileriz."></p></div>
   </div>
+  <div class="tv-kart-alan" id="tv-yardim-kart1">
+    <p>Ama bir dakika! Her namazda okuduğumuz bir ayet var. Önce onu çözümle; sonra bu cevaplarını bir daha düşün.</p>
+    <div class="tv-cikarim" data-kart="fatiha" data-tur="Ayet" data-ac="tv-yardim-kart2">
+    <p class="tv-ck-baslik">📜 Ayet: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca">(Allahım!)</span> <span class="tv-parca" data-kavram>Yalnız</span> <span class="tv-parca" data-anlam>sana ibadet ederiz</span> <span class="tv-parca">ve</span> <span class="tv-parca" data-kavram>yalnız</span> <span class="tv-parca" data-anlam>senden yardım dileriz.</span>”</p>
+      <p class="tv-ayet-kaynak">(Fâtiha suresi, 5. ayet)</p>
+    </div>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
+  </div>
+  </div>
+  <div class="tv-kart-alan" id="tv-yardim-kart2">
+    <p>Şimdi Peygamberimizin bir sözünü oku. İki metni yan yana düşününce ne çıkıyor?</p>
+    <div class="tv-cikarim" data-kart="muslim" data-tur="Hadis" data-ac="tv-yardim-sonra">
+    <p class="tv-ck-baslik">📜 Hadis: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca">Kul,</span> <span class="tv-parca" data-anlam data-kavram>kardeşinin yardımında olduğu sürece,</span> <span class="tv-parca" data-anlam>Allah da onun yardımcısı olur.</span>”</p>
+      <p class="tv-ayet-kaynak">(Müslim, Zikir, 38; Ebû Dâvûd, Edeb, 60)</p>
+    </div>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
+  </div>
+  </div>
   <div class="tv-sonra" id="tv-yardim-sonra">
     <div class="tv-sonuc">
-      <h3>🤝 Neden şirk değil?</h3>
-      <p>Çünkü <b>insanlar, güçlerinin yettiği işlerde birbirlerine yardım edebilir.</b> Annen çantanı taşıyabilir, arkadaşın kalemini verebilir, doktor ilaç yazabilir. Bunlar insanın yapabileceği işlerdir.</p>
+      <h3>🤝 İki metinden çıkardığın sonuç</h3>
+      <p><b>İnsanlar, güçlerinin yettiği işlerde birbirlerine yardım edebilir.</b> Annen çantanı taşıyabilir, arkadaşın kalemini verebilir, doktor ilaç yazabilir. Bunlar insanın yapabileceği işlerdir; Peygamberimiz bu yardımlaşmayı över.</p>
     </div>
     <div class="tv-sonuc" style="background:#fff5f5;border-color:#f5c2c2">
       <h3 style="color:#9d0208">🔴 Peki fark nerede?</h3>
-      <p><b>Ancak Allah'a ait ilahlık özelliklerini başka bir varlığa vermek farklıdır.</b></p>
+      <p><b>Allah'a ait ilahlık özelliklerini başka bir varlığa vermek farklıdır.</b></p>
       <p>Bir insandan, bir taştan ya da Güneş'ten “Beni yarat!”, “Her şeyi bil!”, “Sana ibadet edeyim!” gibi yalnızca Allah'a ait şeyleri beklemek şirktir.</p>
       <p style="margin:0"><b>Kısaca:</b> Çanta taşımak ✔ insanın işi. Yaratmak ✘ yalnızca Allah'ın işi.</p>
     </div>
@@ -1522,28 +1733,49 @@
 <!-- ============ 9. KARŞILAŞTIRMA ============ -->
 <article class="tv-adim" id="tv-karsilastir">
   <div class="tv-adim-bas"><span class="tv-adim-no">9</span><h2><small>Karşılaştır</small>Tevhit ve Şirk Yan Yana ⚖️</h2></div>
-  <div class="tv-karsi">
-    <div class="tv-kavram tv-kavram-tevhit">
-      <h3>🟢 TEVHİT</h3>
-      <ul><li>Allah birdir.</li><li>Allah'ın ortağı yoktur.</li><li>Yaratıcı Allah'tır.</li><li>İbadet yalnız Allah'a yapılır.</li></ul>
+  <p>Tabloyu açmadan önce kendin düşün:</p>
+  <div class="tv-soru" data-ac="tv-karsilastir-sonra">
+    <p class="tv-soru-metin">“Evreni yaratan ve yöneten birdir; ibadet yalnızca O'na yapılır.” Bu düşüncenin karşıtı hangi davranıştır?</p>
+    <div class="tv-secenekler">
+      <button type="button" class="tv-sec">Arkadaşından yardım istemek</button>
+      <button type="button" class="tv-sec" data-dogru>Yaratılmış bir varlığa ilahlık verip ona ibadet etmek</button>
+      <button type="button" class="tv-sec">Evrendeki düzeni incelemek</button>
     </div>
-    <div class="tv-kavram tv-kavram-sirk">
-      <h3>🔴 ŞİRK</h3>
-      <ul><li>Allah'a ortak koşmaktır.</li><li>Allah'ın ilahlığında başka bir varlığı ortak kabul etmektir.</li></ul>
+    <p class="tv-geri" aria-live="polite" data-evet="Doğru! Bu davranış, ibadeti Allah'tan başkasına yöneltir." data-hayir="Bir daha düşün: Yardım istemek ve düzeni incelemek ibadeti başkasına yöneltir mi? Karşıt olan davranış, ibadeti Allah'tan başkasına yöneltendir."></p>
+    <div class="tv-neden">
+      <p class="tv-soru-metin">🔎 Bunu hangi ipucundan çıkardın?</p>
+      <div class="tv-secenekler">
+        <button type="button" class="tv-sec" data-geri="Kelime tekrarına değil, anlama bak. Cümledeki “yalnızca” kelimesi neyi sınırlıyor?">Cümlede “Allah” kelimesinin geçmemesi</button>
+        <button type="button" class="tv-sec" data-dogru data-geri="Evet! “Yalnızca O'na” sözünün tam tersi, ibadeti başkasına yöneltmektir.">Cümledeki “ibadet yalnızca O'na yapılır” ifadesi</button>
+        <button type="button" class="tv-sec" data-geri="Uzunluk bir ipucu değildir. Cümlenin neyi yasakladığına bak.">Seçeneğin daha uzun yazılmış olması</button>
+      </div>
+      <p class="tv-geri" aria-live="polite"></p>
     </div>
   </div>
-  <div class="tv-hatirla">
-    <div class="tv-h-t">TEVHİT = Allah birdir.</div>
-    <div class="tv-h-s">ŞİRK = Allah'a ortak koşmaktır.</div>
+  <div class="tv-sonra" id="tv-karsilastir-sonra">
+    <div class="tv-karsi">
+      <div class="tv-kavram tv-kavram-tevhit">
+        <h3>🟢 TEVHİT</h3>
+        <ul><li>Allah birdir.</li><li>Allah'ın ortağı yoktur.</li><li>Yaratıcı Allah'tır.</li><li>İbadet yalnız Allah'a yapılır.</li></ul>
+      </div>
+      <div class="tv-kavram tv-kavram-sirk">
+        <h3>🔴 ŞİRK</h3>
+        <ul><li>Allah'a ortak koşmaktır.</li><li>Allah'ın ilahlığında başka bir varlığı ortak kabul etmektir.</li></ul>
+      </div>
+    </div>
+    <div class="tv-hatirla">
+      <div class="tv-h-t">TEVHİT = Allah birdir.</div>
+      <div class="tv-h-s">ŞİRK = Allah'a ortak koşmaktır.</div>
+    </div>
   </div>
 </article>
 
 <!-- ============ 10. OYUN ============ -->
 <article class="tv-adim" id="tv-oyun">
   <div class="tv-adim-bas"><span class="tv-adim-no">10</span><h2><small>Oyun</small>Tevhit mi, Şirk mi? 🎮</h2></div>
-  <p>Her cümleyi oku ve doğru kutuyu seç. Dikkat: Bazı cümleler ne tevhit ne şirk; sadece <b>günlük bir yardım</b>!</p>
+  <p>Her durumu oku ve doğru kutuyu seç. Sonra sana soracağım: <b>Bunu hangi ipucundan çıkardın?</b> Dikkat: Bazı durumlar ne tevhit ne şirk; sadece <b>günlük bir yardım</b>!</p>
   <div class="tv-oyun" id="tvOyun">
-    <div class="tv-oyun-ust"><span id="tvOyunSira">1 / 15</span><span id="tvOyunPuan">⭐ 0 puan</span></div>
+    <div class="tv-oyun-ust"><span id="tvOyunSira">1 / 15</span><span id="tvOyunPuan">⭐ 0 · 🔎 0</span></div>
     <div class="tv-oyun-cubuk" aria-hidden="true"><i id="tvOyunCubuk"></i></div>
     <div class="tv-durum" id="tvOyunDurum" aria-live="polite">Oyun yükleniyor…</div>
     <div class="tv-kutular" role="group" aria-label="Seçenekler">
@@ -1553,7 +1785,12 @@
     </div>
     <div class="tv-oyun-geri">
       <p class="tv-geri" id="tvOyunGeri" aria-live="polite" hidden></p>
-      <button type="button" class="tv-ileri" id="tvOyunIleri" hidden>Sonraki cümle →</button>
+      <div class="tv-oyun-iz" id="tvOyunIz" hidden>
+        <p class="tv-soru-metin">🔎 Bunu hangi ipucundan çıkardın?</p>
+        <div class="tv-secenekler" id="tvOyunIzSec"></div>
+        <p class="tv-geri" id="tvOyunIzGeri" aria-live="polite" hidden></p>
+      </div>
+      <button type="button" class="tv-ileri" id="tvOyunIleri" hidden>Sonraki durum →</button>
     </div>
     <div class="tv-oyun-son" id="tvOyunSon" hidden>
       <span class="tv-yildiz" aria-hidden="true">🏆</span>
@@ -1586,6 +1823,15 @@
     <p class="tv-soru-metin">Yüzlerce pencereden ışık geliyor diye yüzlerce güneş mi var?</p>
     <div class="tv-secenekler"><button type="button" class="tv-sec">Evet</button><button type="button" class="tv-sec" data-dogru>Hayır</button></div>
     <p class="tv-geri" aria-live="polite" data-evet="Doğru! Pencere çok ama Güneş tektir." data-hayir="Gökyüzüne bak: Kaç Güneş var? Pencere çok ama Güneş tektir."></p>
+    <div class="tv-neden">
+      <p class="tv-soru-metin">🔎 Bunu hangi ipucundan çıkardın?</p>
+      <div class="tv-secenekler">
+        <button type="button" class="tv-sec" data-geri="Kat sayısı güneşin sayısını değiştirmez. Işığın nereden geldiğine bak.">Apartmanın çok katlı olması</button>
+        <button type="button" class="tv-sec" data-dogru data-geri="Tam olarak bu! Işık alan çok, ışığın kaynağı tek.">Işık çok pencereye düşse de hepsinin aynı kaynaktan gelmesi</button>
+        <button type="button" class="tv-sec" data-geri="Renk bir ipucu değil. Işık çizgilerinin nereden çıktığına bak.">Pencerelerin sarı görünmesi</button>
+      </div>
+      <p class="tv-geri" aria-live="polite"></p>
+    </div>
   </div>
   <div class="tv-sonra" id="tv-pencere-2">
     <div class="tv-soru" data-ac="tv-pencere-sonuc">
@@ -1613,43 +1859,75 @@
   </div>
 </article>
 
-<!-- ============ 13. AYETLER ============ -->
+<!-- ============ 13. METİN DEDEKTİFİ ============ -->
 <article class="tv-adim" id="tv-ayet">
-  <div class="tv-adim-bas"><span class="tv-adim-no">13</span><h2><small>Ayet desteği</small>Ayetler Ne Anlatıyor? 📖</h2></div>
-
-  <div class="tv-ayet">
-    <p class="tv-ayet-metin">İhlas Suresi</p>
-    <p class="tv-ayet-kaynak">(İhlas suresi, 1-4. ayetler)</p>
-    <h3>Bu ayet bize ne anlatıyor?</h3>
-    <div class="tv-ayet-satir">
-      <div><b>1. “De ki: O, Allah'tır, tektir.”</b><br>Allah birdir. O'nun gibi ikinci bir ilah yoktur.</div>
-      <div><b>2. “Allah Samed'dir. (Hiçbir şeye muhtaç olmayandır.)”</b><br>Allah hiçbir şeye ihtiyaç duymaz. Her şey O'na muhtaçtır; Güneş de, insan da.</div>
-      <div><b>3. “O, doğurmamış ve doğmamıştır.”</b><br>Allah'ın başlangıcı yoktur. Güneş gibi sonradan var olmamıştır; O yaratılmamıştır.</div>
-      <div><b>4. “O'nun hiçbir dengi (eşi, benzeri) yoktur.”</b><br>Hiçbir şey Allah'a eş veya ortak olamaz. Hiçbir şey O'na benzemez.</div>
+  <div class="tv-adim-bas"><span class="tv-adim-no">13</span><h2><small>Sıra sende</small>Metin Dedektifi 🕵️</h2></div>
+  <p>Artık dedektif sensin! Aşağıdaki iki metinde kavramın adı geçmiyor. Altı aşamayı kendin yürüt ve gerekçeni yaz.</p>
+  <div class="tv-cikarim" data-kart="bakara" data-tur="Ayet">
+    <p class="tv-ck-baslik">📜 Ayet: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ayet-metin">“<span class="tv-parca">Kullarım, beni senden sorarlarsa,</span> <span class="tv-parca" data-anlam data-kavram>(bilsinler ki), gerçekten ben (onlara çok) yakınım.</span> <span class="tv-parca" data-kavram>Bana dua edince,</span> <span class="tv-parca" data-anlam>dua edenin duasına cevap veririm…</span>”</p>
+      <p class="tv-ayet-kaynak">(Bakara suresi, 186. ayet)</p>
     </div>
-    <p class="tv-bag">🟢 <b>Tevhit bağlantısı:</b> İhlas suresi tevhidi en kısa yoldan anlatır: Allah birdir, kimseye muhtaç değildir, yaratılmamıştır, eşi ve ortağı yoktur. Allah'a ortak koşmak (şirk) bu ayetlere uymaz.</p>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
   </div>
-
-  <div class="tv-ayet">
-    <p class="tv-ayet-metin">“Eğer yerde ve gökte Allah'tan başka ilahlar olsaydı kesinlikle ikisinin de düzeni bozulurdu...”</p>
-    <p class="tv-ayet-kaynak">(Enbiya suresi, 22. ayet)</p>
-    <h3>Bu ayet bize ne anlatıyor?</h3>
-    <div class="tv-ayet-satir">
-      <div>İki kaptanlı gemiyi ve iki kişinin yönettiği televizyonu hatırla. Yöneten birden fazla olsaydı düzen bozulurdu. Evrende düzen hiç bozulmuyor. Bu, evreni yaratan ve yönetenin <b>tek</b> olduğunu gösterir.</div>
+  <div class="tv-cikarim" data-kart="tirmizi" data-tur="Hadis">
+    <p class="tv-ck-baslik">📜 Hadis: Oku ve çözümle</p>
+    <div class="tv-ck-metin">
+      <p class="tv-ck-not">Peygamberimiz bu sözleri henüz çocuk yaştaki İbn Abbas’a söylemiştir.</p>
+      <p class="tv-ayet-metin">“<span class="tv-parca" data-kavram>Bir şey istediğinde Allah'tan iste!</span> <span class="tv-parca" data-kavram>Yardıma muhtaç olduğunda Allah'tan yardım dile!</span> <span class="tv-parca">Şunu bil ki bütün insanlar sana fayda vermek için toplansa</span> <span class="tv-parca" data-anlam data-kavram>Allah'ın takdiri dışında sana fayda veremezler…</span>”</p>
+      <p class="tv-ayet-kaynak">(Tirmizî, Sıfatü'l-kıyâme, 59)</p>
     </div>
-    <p class="tv-bag">🟢 <b>Tevhit bağlantısı:</b> Evrendeki düzen, Allah'ın bir olduğunu hatırlatır. Başka ilahlar olduğunu düşünmek şirktir.</p>
+    <div class="tv-ck-akis"></div>
+    <noscript><p class="tv-ck-not">Bu çözümleme etkinliği için tarayıcında JavaScript açık olmalı.</p></noscript>
   </div>
 </article>
 
-<!-- ============ 14. DÜŞÜN VE CEVAPLA ============ -->
+<!-- ============ 14. 50 SORU: TEVHİT Mİ, ŞİRK Mİ? ============ -->
+<article class="tv-adim" id="tv-avci">
+  <div class="tv-adim-bas"><span class="tv-adim-no">14</span><h2><small>50 soru</small>Ayet ve Hadis Avcısı: Tevhit mi, Şirk mi? 🏹</h2></div>
+  <p>Her soruda bir ayet ya da hadis var. Oku ve karar ver: <b>Bu metin TEVHİDİ mi anlatıyor, ŞİRKİ mi?</b> Sonra kararını hangi ipucuna dayandırdığını göster.</p>
+  <div class="tv-uyari"><span aria-hidden="true">💡</span><p style="margin:0"><b>Dikkat:</b> Bazı ayetler, Allah'tan başkasına tapan insanları anlatır ve bu davranışın yanlış olduğunu gösterir. Metin böyle bir davranışı anlatıyorsa cevabın <b>ŞİRK</b> olur.</p></div>
+  <div class="tv-oyun" id="tvAvci">
+    <div class="tv-oyun-ust"><span id="tvAvciSira">1 / 50</span><span id="tvAvciPuan">⭐ 0 · 🔎 0</span></div>
+    <div class="tv-oyun-cubuk" aria-hidden="true"><i id="tvAvciCubuk"></i></div>
+    <div class="tv-durum tv-avci-metin" id="tvAvciMetin" aria-live="polite">Sorular yükleniyor…</div>
+    <p class="tv-soru-metin tv-avci-soru" id="tvAvciSoru">Bu metin neyi anlatıyor?</p>
+    <div class="tv-kutular" role="group" aria-label="Seçenekler" id="tvAvciKutular">
+      <button type="button" class="tv-kutu tv-kutu-t" data-k="t">🟢 TEVHİT</button>
+      <button type="button" class="tv-kutu tv-kutu-s" data-k="s">🔴 ŞİRK</button>
+    </div>
+    <div class="tv-oyun-geri">
+      <p class="tv-geri" id="tvAvciGeri" aria-live="polite" hidden></p>
+      <div class="tv-oyun-iz" id="tvAvciIz" hidden>
+        <p class="tv-soru-metin">🔎 Bunu hangi ipucundan çıkardın?</p>
+        <div class="tv-secenekler" id="tvAvciIzSec"></div>
+        <p class="tv-geri" id="tvAvciIzGeri" aria-live="polite" hidden></p>
+      </div>
+      <button type="button" class="tv-ileri" id="tvAvciIleri" hidden>Sonraki soru →</button>
+    </div>
+    <div class="tv-oyun-son" id="tvAvciSon" hidden>
+      <span class="tv-yildiz" aria-hidden="true">🏆</span>
+      <p id="tvAvciSonMetin"></p>
+      <button type="button" class="tv-ileri" id="tvAvciYanlis" hidden>🔁 Yanlış yaptıklarımı tekrar çöz</button>
+      <button type="button" class="tv-ileri" id="tvAvciTekrar">🔄 50 soruyu baştan çöz</button>
+    </div>
+    <noscript><p>Bu etkinlik için tarayıcında JavaScript açık olmalı.</p></noscript>
+  </div>
+  <p class="tv-kayit-not">📖 Ayet mealleri: Diyanet İşleri Başkanlığı Kur'an-ı Kerim Meali. Hadisler: Diyanet, Hadislerle İslâm.</p>
+</article>
+
+<!-- ============ 15. DÜŞÜN VE CEVAPLA ============ -->
 <article class="tv-adim" id="tv-dusun">
-  <div class="tv-adim-bas"><span class="tv-adim-no">14</span><h2><small>Sıra sende</small>Düşün ve Cevapla ✍️</h2></div>
+  <div class="tv-adim-bas"><span class="tv-adim-no">15</span><h2><small>Sıra sende</small>Düşün ve Cevapla ✍️</h2></div>
+  <p>Her cevabında bir <b>ipucu</b> göster ve <b>“çünkü”</b> ile açıkla.</p>
   <ol class="tv-dusun-liste">
-    <li><label for="tvDusun1">Güneş çok güçlü olduğu hâlde neden Tanrı değildir?</label><textarea id="tvDusun1" data-kayit="1" placeholder="Cevabını buraya yazabilirsin..."></textarea></li>
-    <li><label for="tvDusun2">Bir şeyin yaratılmış olduğunu nasıl anlayabiliriz?</label><textarea id="tvDusun2" data-kayit="2" placeholder="Cevabını buraya yazabilirsin..."></textarea></li>
-    <li><label for="tvDusun3">Allah'ın bir olması neden önemlidir?</label><textarea id="tvDusun3" data-kayit="3" placeholder="Cevabını buraya yazabilirsin..."></textarea></li>
-    <li><label for="tvDusun4">İnsanlardan yardım istemek ile Allah'a ortak koşmak arasındaki fark nedir?</label><textarea id="tvDusun4" data-kayit="4" placeholder="Cevabını buraya yazabilirsin..."></textarea></li>
-    <li><label for="tvDusun5">Sence Allah'ın ortağı olsaydı evrende nasıl bir durum ortaya çıkardı? <span class="tv-acik-uclu">Açık uçlu</span></label><textarea id="tvDusun5" data-kayit="5" placeholder="Doğru ya da yanlış cevabı yok. Hayal et ve yaz..."></textarea></li>
+    <li><label for="tvDusun1">Güneş çok güçlü olduğu hâlde neden ilah değildir? Cevabını “çünkü” ile kur ve dayandığın ipucunu yaz.</label><textarea id="tvDusun1" data-kayit="c1" placeholder="Güneş ilah değildir; çünkü..."></textarea></li>
+    <li><label for="tvDusun2">Bir şeyin yaratılmış olduğunu hangi ipuçlarından anlayabiliriz? En az iki ipucu yaz.</label><textarea id="tvDusun2" data-kayit="c2" placeholder="1. ipucu: ... 2. ipucu: ..."></textarea></li>
+    <li><label for="tvDusun3">Annenden yardım istemek ile bir taştan dilek dilemek arasındaki farkı açıkla. Hangisi şirktir, hangisi değildir? Neden?</label><textarea id="tvDusun3" data-kayit="c3" placeholder="Annemden yardım istemek ...; çünkü ... Taştan dilek dilemek ...; çünkü ..."></textarea></li>
+    <li><label for="tvDusun4">Bu sayfada çözümlediğin metinlerden birini seç ve cümleyi tamamla: “Bu metin … fikrine işaret ediyor; çünkü metinde … vurgulanıyor ve bundan … sonucunu çıkarıyorum.”</label><textarea id="tvDusun4" data-kayit="c4" placeholder="Seçtiğim metin: ... Bu metin ... fikrine işaret ediyor; çünkü ..."></textarea></li>
+    <li><label for="tvDusun5">Sence Allah'ın ortağı olsaydı evrende nasıl bir durum ortaya çıkardı? Hangi ipucuna dayanarak böyle düşündün? <span class="tv-acik-uclu">Açık uçlu</span></label><textarea id="tvDusun5" data-kayit="c5" placeholder="Doğru ya da yanlış cevabı yok. Hayal et, ipucunu göster ve yaz..."></textarea></li>
   </ol>
   <p class="tv-kayit-not">💾 Yazdıkların yalnızca bu cihazda saklanır.</p>
 
@@ -1661,6 +1939,7 @@
       <li>Allah yaratandır; Güneş, Ay, Dünya, insan ve ağaç yaratılmıştır.</li>
       <li>Güçlü ya da büyük olmak, bir varlığı ilah yapmaz.</li>
       <li>İnsanlardan güçlerinin yettiği işlerde yardım istemek şirk değildir.</li>
+      <li><b>Düşünme yolun:</b> Oku → Anla → İpucunu bul → Çıkarım yap → Kavramı belirle → Nedenini açıkla.</li>
     </ul>
   </div>
   <div class="tv-son-dugmeler">
@@ -1678,11 +1957,16 @@
   function $(s, k){ return (k||document).querySelector(s); }
   function $$(s, k){ return Array.prototype.slice.call((k||document).querySelectorAll(s)); }
   function ac(id){ var el = id && document.getElementById(id); if(el) el.hidden = false; }
+  function karistir(d){ d = d.slice(); for(var i=d.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=d[i]; d[i]=d[j]; d[j]=t; } return d; }
+  function kacis(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function oku(a){ try { return localStorage.getItem(a) || ''; } catch(e){ return ''; } }
+  function yaz(a, v){ try { localStorage.setItem(a, v); } catch(e){} }
 
   /* Önce düşün, sonra kavram: "sonra" bölümleri JS varsa gizlenir,
      JS yoksa (veya hata olursa) içerik baştan görünür kalır. */
   $$('.tv-sonra').forEach(function(el){ el.hidden = true; });
   $$('.tv-soru .tv-geri').forEach(function(el){ el.hidden = true; });
+  $$('.tv-neden').forEach(function(el){ el.hidden = true; });
 
   function grupKontrol(soru){
     var grup = soru.parentElement && soru.parentElement.closest('.tv-grup');
@@ -1690,11 +1974,41 @@
     var hepsi = $$('.tv-soru', grup).every(function(s){ return s.dataset.cevaplandi === '1'; });
     if(hepsi) ac(grup.dataset.ac);
   }
+  function soruBitti(soru){
+    soru.dataset.cevaplandi = '1';
+    ac(soru.dataset.ac);
+    grupKontrol(soru);
+  }
+
+  /* Yeniden denenebilen seçim: yanlışta ipucu verir, doğruda kilitlenir. */
+  function denemeli(dugmeler, geri, bitti){
+    dugmeler.forEach(function(b){
+      b.addEventListener('click', function(){
+        var dogruMu = b.hasAttribute('data-dogru') || b.dataset.dogru === '1';
+        var not = b.dataset.geri || '';
+        if(dogruMu){
+          dugmeler.forEach(function(x){ x.disabled = true; });
+          b.classList.add('tv-dogru');
+          geri.className = 'tv-geri tv-dogru';
+          geri.textContent = '✅ ' + (not || 'Doğru!');
+        } else {
+          b.disabled = true;
+          b.classList.add('tv-yanlis');
+          geri.className = 'tv-geri tv-yanlis';
+          geri.textContent = '💡 ' + (not || 'Bir daha düşün.') + ' Başka bir seçenek dene.';
+        }
+        geri.hidden = false;
+        if(dogruMu && bitti) bitti();
+      });
+    });
+  }
 
   $$('.tv-soru').forEach(function(soru){
-    var dugmeler = $$('.tv-secenekler > .tv-sec', soru);
-    var geri = $('.tv-geri', soru);
+    var dugmeler = $$(':scope > .tv-secenekler > .tv-sec', soru);
+    var geri = $(':scope > .tv-geri', soru);
+    var neden = $(':scope > .tv-neden', soru);
     var serbest = soru.hasAttribute('data-serbest');
+    if(neden) denemeli($$('.tv-sec', neden), $('.tv-geri', neden), function(){ soruBitti(soru); });
     dugmeler.forEach(function(b){
       b.addEventListener('click', function(){
         var dogruMu = b.hasAttribute('data-dogru');
@@ -1709,54 +2023,592 @@
           geri.classList.add(serbest || dogruMu ? 'tv-dogru' : 'tv-yanlis');
           geri.hidden = false;
         }
-        soru.dataset.cevaplandi = '1';
-        ac(soru.dataset.ac);
-        grupKontrol(soru);
+        /* Doğru ya da yanlış: öğrenci her durumda ipucunu göstermeli. */
+        if(neden){ neden.hidden = false; return; }
+        soruBitti(soru);
       });
     });
   });
 
-  /* ——— Tevhit mi, Şirk mi? oyunu ——— */
+  /* ——— Metin çözümleme kartları: Oku → Anla → İpucu → Çıkarım → Kavram → Gerekçe ——— */
+  var KARTLAR = {
+    mulk:{
+      anlam:["Bu metin sana ne anlatıyor? Senin düşüncene en yakın açıklama hangisi?",[
+        ["Gökyüzü çok büyüktür, sonu görünmez.",0,"Metin büyüklükten söz etmiyor. “Uyumsuzluk” ve “çatlak” kelimelerine dikkat et."],
+        ["Yaratılan her şey birbiriyle uyum içindedir; dikkatle bakan kişi bir bozukluk bulamaz.",1,"Evet, metnin anlattığı bu."],
+        ["İnsanlar gökyüzüne bakmamalıdır.",0,"Tam tersi! Metin “Bir kere daha bak!” diyor."]]],
+      iz:["Bu anlamı metnin hangi ifadesinden anladın? Metinde bir ifadeye dokun.","Bu ifade metnin konusunu söylüyor ama uyumu anlatmıyor. Uyumdan ya da bozukluktan söz eden yere bak."],
+      cik:["Her şey bu kadar uyumluysa, bu uyum hakkında hangi sonucu çıkarırsın?",[
+        ["Bu uyum tesadüfen oluşmuştur.",0,"Bir yapbozun parçalarını havaya atsan kendiliğinden resim olur mu?"],
+        ["Bu uyumu tek bir yaratıcı kurmuştur; hepsi aynı ölçüyle yaratılmıştır.",1,"Güzel çıkarım!"],
+        ["Her göğü ayrı biri yapmıştır.",0,"Farklı ustalar farklı ölçüyle çalışsaydı parçalar birbirine bu kadar uyar mıydı?"]]],
+      kav:["Buradan hangi inanç ilkesi çıkarılabilir?",[
+        ["Evren kendi kendini yönetir.",0,"Metin “yaratandır” diyor. Kendi kendini yaratan bir şeyden söz ediyor mu?"],
+        ["Her varlığın ayrı bir yaratıcısı vardır.",0,"Ayrı yaratıcılar olsaydı “hiçbir uyumsuzluk” olmaması mümkün müydü?"],
+        ["Evreni yaratan ve yöneten birdir.",1,"Evet! Bu ilkeye bir sonraki adımda bir ad vereceğiz."]]],
+      kanit:"Seni “tek yaratıcı” sonucuna götüren ifadeyi bul: Uyumdan ya da bozukluk olmamasından söz eden yer.",
+      f:["Allah'ın tek yaratıcı olması","yaratılışta hiçbir uyumsuzluk olmadığı","bu uyumu tek bir yaratıcının kurduğu"]
+    },
+    enbiya:{
+      anlam:["Bu ayet ne anlatıyor? Senin düşüncene en yakın açıklama hangisi?",[
+        ["Yer ve gök çok geniştir.",0,"Metin genişlikten söz etmiyor; “olsaydı… bozulurdu” diye bir koşul kuruyor."],
+        ["Yerde ve gökte birçok ilah vardır.",0,"Dikkat: Metin “olsaydı” diyor. Yani böyle bir şeyin olmadığını anlatıyor."],
+        ["Birden fazla ilah olsaydı yerin ve göğün düzeni bozulurdu.",1,"Evet, ayet bir “eğer… olsaydı” cümlesi kuruyor."]]],
+      iz:["Metin bir “eğer… olsaydı” cümlesi. Sonucu, yani “ne olurdu” kısmını anlatan ifadeye dokun.","Bu ifade koşulu anlatıyor. Peki koşul gerçekleşseydi ne olurdu? O kısmı bul."],
+      cik:["Bugün yerde ve gökte düzen bozulmadığına göre ne sonucunu çıkarırsın?",[
+        ["Yöneten birden fazla değildir; yaratan ve yöneten tektir.",1,"Harika çıkarım! Sonuç (bozulma) yoksa, koşul (birden çok ilah) da yoktur."],
+        ["Düzen bir gün mutlaka bozulacaktır.",0,"Metin gelecekten değil, bir koşulun sonucundan söz ediyor. Koşul gerçekleşmediyse ne olur?"],
+        ["İlahlar anlaşarak düzeni korur.",0,"Kumandayı hatırla: İki kişi olunca iki ayrı yönetim olur. Ayet ise “kesinlikle bozulurdu” diyor."]]],
+      kav:["Bu metinde Allah'ın hangi özelliği vurgulanmaktadır?",[
+        ["Merhameti: Allah çok bağışlayıcıdır.",0,"Merhamet Allah'ın güzel bir özelliği ama bu metinde merhametle ilgili bir ifade var mı?"],
+        ["Birliği: Allah'ın eşi ve ortağı yoktur.",1,"Doğru! Metin “kaç ilah?” sorusu etrafında dönüyor."],
+        ["Her şeyi işitmesi.",0,"Metinde işitmekle ilgili bir ipucu yok. Metin ilahların sayısından söz ediyor."]]],
+      kanit:"Allah'ın birliğini düşündüren ifade, “kaç ilah?” sorusuyla ilgili olmalı.",
+      f:["Allah'ın birliği","birden fazla ilah olsaydı düzenin bozulacağı","bozulmayan düzenin, yaratan ve yönetenin tek olduğunu gösterdiği"]
+    },
+    yasin:{
+      anlam:["Bu ayet gökteki varlıklar hakkında ne anlatıyor?",[
+        ["Güneş, Ay'dan daha hızlıdır.",0,"Metin bir yarış anlatmıyor; “Ne güneş aya yetişebilir” diyor. Yani her biri kendi yolunda."],
+        ["Güneş, Ay, gece ve gündüz birbirine karışmadan kendi yolunda gider.",1,"Evet, metnin anlattığı bu."],
+        ["Gece bazen gündüzü geçer.",0,"Metinde tam tersi yazıyor: “…ne de gece gündüzü geçebilir.”"]]],
+      iz:["Her varlığın kendine ait bir yolu olduğunu gösteren ifadeye dokun.","Bu ifade tek başına “yol” fikrini vermiyor. Birbirine karışmamayı ya da yörüngeyi anlatan yeri bul."],
+      cik:["Her biri kendi yolundan hiç çıkmıyorsa, bu yolu kim belirlemiş olabilir?",[
+        ["Her gök cismi yolunu kendisi seçmiştir.",0,"Güneş'in aklı ve isteği var mı? Kendi yolunu seçebilir mi?"],
+        ["Yollar zamanla kendiliğinden oluşmuştur.",0,"Gemiyi hatırla: Kaptansız bir gemi yolunu kendiliğinden bulur mu?"],
+        ["Hepsinin yolunu belirleyen, onların üstünde tek bir yöneticidir.",1,"Doğru çıkarım!"]]],
+      kav:["Buradan hangi inanç ilkesi çıkarılabilir?",[
+        ["Evreni tek bir irade yönetir; Güneş ve Ay yönetilen varlıklardır.",1,"Evet! Güneş ve Ay yöneten değil, yönetilendir."],
+        ["Güneş ve Ay evreni yönetir.",0,"Metinde onlar “yüzen”, yani yol alan varlıklar. Yöneten değil, yönetilen konumdalar."],
+        ["Her gök cisminin ayrı bir yöneticisi vardır.",0,"Ayrı yöneticiler olsaydı yollar birbirine karışmaz mıydı? Metin karışma olmadığını söylüyor."]]],
+      kanit:"Güneş'in ve Ay'ın kendilerine belirlenen bir yolda gittiğini gösteren ifadeyi bul.",
+      f:["evrenin tek bir yöneticisi olması","her varlığın kendisine belirlenen yoldan çıkmadığı","bu yolları belirleyenin tek olduğu"]
+    },
+    enam:{
+      anlam:["Hz. İbrahim'in yıldıza ve Güneş'e bakışında ne oluyor?",[
+        ["Hz. İbrahim yıldızları saymayı öğreniyor.",0,"Metinde sayma yok. Yıldıza ne olduğuna dikkat et."],
+        ["Güneş yıldızdan küçük olduğu için seçilmiyor.",0,"Metin tersini söylüyor: “Bu daha büyük.” Ama büyüklük de yetmiyor. Neden?"],
+        ["Parlak ve büyük olanlara bakıyor; ama hepsinin battığını, kaybolduğunu görüyor.",1,"Evet, metnin anlattığı bu."]]],
+      iz:["Yıldızın ve Güneş'in başına gelen ortak şeyi gösteren ifadeye dokun.","Bu ifade olayın başlangıcını anlatıyor. Yıldıza ve Güneş'e sonra ne oldu?"],
+      cik:["Batan, yani bir görünüp bir kaybolan bir varlık hakkında ne söyleyebiliriz?",[
+        ["Değişen, kaybolan bir varlık kendi kendine var olamaz; o da yaratılmıştır.",1,"Çok güzel çıkarım!"],
+        ["Her gün yeniden doğduğu için ölümsüzdür.",0,"Her gün batıp doğmak, onun bir düzene bağlı olduğunu gösterir. Kendi isteğiyle mi batıyor?"],
+        ["Büyük olan varlık batsa da ilah olabilir.",0,"Hz. İbrahim “Bu daha büyük” dedikten sonra Güneş de batınca ne oldu? Büyüklük yetti mi?"]]],
+      kav:["Bu metinden hangi inanç ilkesi çıkarılabilir?",[
+        ["Parlayan her şeye saygı gösterilmelidir.",0,"Metin parlaklığın yetmediğini gösteriyor. Hz. İbrahim parlak yıldızı da bıraktı."],
+        ["Yaratılmış ve değişen hiçbir şey ilah olamaz; ilah, hiç kaybolmayan Yaratıcı'dır.",1,"Evet! Hz. İbrahim'in vardığı sonuç da budur."],
+        ["Geceleri gökyüzüne bakmak yanlıştır.",0,"Hz. İbrahim gökyüzüne baktı ve düşündü. Bakmak değil, bakınca çıkardığımız sonuç önemli."]]],
+      kanit:"Hz. İbrahim'in “Bu ilah olamaz.” sonucuna vardığı anı gösteren ifadeyi bul.",
+      f:["yaratılmış olanın ilah olamaması","yıldızın da Güneş'in de battığı, yani değiştiği","değişen bir varlığın yaratılmış olduğu ve ilah olamayacağı"]
+    },
+    fussilet:{
+      anlam:["Bu ayet Güneş ve Ay hakkında ne söylüyor?",[
+        ["Güneş ve Ay önemsiz varlıklardır.",0,"Metin onları önemsiz saymıyor; tam tersine Allah'ın delili sayıyor."],
+        ["Güneş ve Ay, Allah'ı gösteren işaretlerdir; secde onlara değil, onları yaratana yapılır.",1,"Evet, metnin anlattığı bu."],
+        ["Güneş ve Ay, Allah'ın yardımcılarıdır.",0,"Metin onlara “delil”, yani işaret diyor. Bir işaret, gösterdiği şeyle aynı mıdır?"]]],
+      iz:["Güneş ile Ay'ın ne olduğunu anlatan ifadeye dokun.","Bu ifade ne yapmamız gerektiğini söylüyor. Güneş'in ve Ay'ın NE olduğunu anlatan yeri bul."],
+      cik:["Bir tabela bir şehri gösterir ama kendisi şehir değildir. Buna göre Güneş için hangi sonuç çıkar?",[
+        ["Güneş en büyük ilahtır.",0,"Tabela şehir olabilir mi? Metin Güneş'e “delil”, yani işaret diyor."],
+        ["Güneş'e teşekkür etmeliyiz.",0,"Metin kime yönelmemiz gerektiğini söylüyor: “onları yaratan Allah'a”."],
+        ["Güneş, Yaratıcı'yı gösteren bir işarettir; kendisi yaratıcı değildir.",1,"Harika çıkarım!"]]],
+      kav:["Güneşe secde etmek hangi davranışa örnektir?",[
+        ["Yaratılmış bir varlığa ilahlık vermek",1,"Doğru! Ayet bu yüzden “secde etmeyin” diyor."],
+        ["Doğayı sevmek",0,"Doğayı sevmek güzeldir; ama metin secde etmekten, yani ibadetten söz ediyor."],
+        ["Güneş ışığından yararlanmak",0,"Güneş ışığından yararlanmak doğaldır. Sorun, ona ibadet etmektir."]]],
+      kanit:"İbadetin kime yapılması gerektiğini ya da Güneş'in ne olduğunu gösteren ifadeyi bul.",
+      f:["ibadetin yalnızca Yaratıcı'ya yapılması","Güneş ile Ay'ın yalnızca birer delil, yani işaret olduğu","secdenin onlara değil, onları yaratana yapılması gerektiği"]
+    },
+    rad:{
+      anlam:["Bu ayetteki soru neyi sorguluyor?",[
+        ["İnsanların hiç arkadaşı olmaması gerektiğini.",0,"Metin arkadaşlığı yasaklamıyor. Buradaki “dost”, Allah'ın yerine konan varlıklar. “O'nu bırakıp da” ifadesine dikkat et."],
+        ["Göklerin ve yerin kime ait olduğunun bilinmediğini.",0,"Metin cevabı zaten veriyor: “Allah'tır.”"],
+        ["Göklerin ve yerin Rabbi Allah iken, kendine bile faydası olmayan varlıklara yönelmenin yanlışlığını.",1,"Evet, ayetteki soru bunu sorguluyor."]]],
+      iz:["Allah'ın yerine konan varlıkların gücünü anlatan ifadeye dokun.","Bu ifade soruyu soruyor. O varlıkların neye gücü yetmediğini anlatan yeri bul."],
+      cik:["Kendine bile yardım edemeyen bir varlıktan her şeyi beklemek neye benzer?",[
+        ["Güçlü bir arkadaştan yardım istemeye.",0,"Güçlü arkadaşın gerçekten bir şey yapabilir. Metindeki varlıklar kendilerine bile fayda veremiyor."],
+        ["Taç takmış ama gerçek yetkisi olmayan birine kral gibi davranmaya; boşuna beklemektir.",1,"Tam olarak! İşte “yanlış taç”."],
+        ["Akıllıca bir karar vermeye.",0,"Kendine bile faydası olmayandan fayda beklemek akıllıca olabilir mi?"]]],
+      kav:["Bu metinde Allah'ın hangi özelliği vurgulanmaktadır?",[
+        ["Göklerde yaşaması",0,"Allah bir yere sığmaz. Metin “Rabbi”, yani sahibi ve yöneticisi diyor; “orada oturan” demiyor."],
+        ["İnsanlara dost vermesi",0,"Metindeki “dostlar”, Allah'ın yerine konan varlıklar. Metin onları eleştiriyor."],
+        ["Göklerin ve yerin tek Rabbi olması; fayda ve zararın O'nun elinde olması",1,"Doğru!"]]],
+      kanit:"Gerçek yetkinin kimde olduğunu ya da diğerlerinin güçsüzlüğünü gösteren ifadeyi bul.",
+      f:["fayda ve zararın yalnızca Allah'ın elinde olması","Allah'ın yerine konan varlıkların kendilerine bile fayda veremediği","o varlıklardan bir şey beklemenin boşuna olduğu"]
+    },
+    hac:{
+      anlam:["Bu örnek ne anlatıyor?",[
+        ["Birlikte çalışınca her şey yapılabilir.",0,"Metin tersini söylüyor: “hepsi bunun için toplansalar bile” yaratamazlar."],
+        ["Allah'tan başka tapılan varlıklar bir araya gelse bile küçücük bir sinek bile yaratamaz.",1,"Evet, örneğin anlattığı bu."],
+        ["Sinekler çok tehlikeli canlılardır.",0,"Sinek burada bir örnek. Metin sineklerden değil, “taptıklarınız”dan söz ediyor."]]],
+      iz:["Tapılan bu varlıkların güçsüzlüğünü gösteren bir ifadeye dokun.","Bu ifade kimden söz edildiğini söylüyor. Onların neyi YAPAMADIĞINI anlatan yeri bul."],
+      cik:["Bir sinek bile yaratamayan bir varlığa ibadet etmek hakkında ne söyleyebiliriz?",[
+        ["Sinek yaratmak önemsiz bir iştir.",0,"Küçücük bir sineği bile yaratmak ancak Allah'ın işidir. Metin “dahi” diyerek bunu vurguluyor."],
+        ["Onlar bir araya gelirse güçlenir, ibadet edilebilir.",0,"Metin “hepsi bunun için toplansalar bile” diyor. Toplanmak da işe yaramıyor."],
+        ["Ona ibadet etmek, Allah'a ait bir hakkı güçsüz bir varlığa vermektir.",1,"Çok güzel çıkarım!"]]],
+      kav:["Bu ayette eleştirilen davranış hangisidir?",[
+        ["İnsanlardan yardım istemek",0,"Ayet insanlardan yardım istemekten söz etmiyor. “Taptıklarınız” kelimesine dikkat et."],
+        ["Allah'a ait ilahlığı başka varlıklara vermek, onları Allah'a ortak kılmak",1,"Doğru! Şimdi bu davranışın adını öğrenebilirsin."],
+        ["Doğadaki canlıları incelemek",0,"Canlıları incelemek güzeldir. Metin incelemekten değil, tapmaktan söz ediyor."]]],
+      kanit:"Tapılan varlıkların ilah olamayacağını en açık gösteren ifadeyi bul.",
+      f:["Allah'a ortak koşmanın yanlışlığı","Allah'tan başka tapılanların bir sinek bile yaratamadığı","yaratamayan bir varlığın ilah olamayacağı ve ona ibadet edilemeyeceği"]
+    },
+    fatiha:{
+      anlam:["Her namazda okunan bu ayet ne söylüyor?",[
+        ["İbadet de, asıl yardımın dilenmesi de yalnızca Allah'a yönelir.",1,"Evet, ayetin söylediği bu."],
+        ["İnsanlar birbirine hiç yardım etmemelidir.",0,"Metin insanlar arasındaki yardımdan söz etmiyor; Allah'a sesleniyor: “sana”, “senden”."],
+        ["Sadece zor zamanlarda dua edilir.",0,"Metinde “zor zaman” diye bir ifade var mı?"]]],
+      iz:["Ayette Allah'a yöneltilen iki şeyi anlatan ifadelerden birine dokun.","Bu kelime önemli ama önce Allah'a yöneltilen iki şeyi (ne yapıyoruz?) bul."],
+      cik:["Ayet “yalnız senden yardım dileriz” diyor. Peki annenden çantanı taşımasını istemek bu ayete aykırı mı?",[
+        ["Evet. Artık kimseden yardım istememeliyim.",0,"8. adımdaki örnekleri hatırla. Bir sonraki metin de bu konuda ipucu verecek."],
+        ["Hayır. Annemin gücü çanta taşımaya yeter; ama hayatı, sağlığı ve her şeyi asıl veren Allah'tır. Ayet bu yardımdan söz ediyor.",1,"Çok ince bir çıkarım yaptın!"],
+        ["Bu ayet sadece eski insanlar için söylenmiştir.",0,"Bu ayeti bugün de her namazda okuyoruz. Ayet herkese sesleniyor."]]],
+      kav:["Bu ayetin karşıtı olan davranış hangisidir?",[
+        ["Arkadaşımdan kalem istemek",0,"Kalem vermek arkadaşının gücü yeten bir iş. Ayetin karşıtı bu olamaz."],
+        ["Öğretmenime anlamadığım konuyu sormak",0,"Konuyu anlatmak öğretmeninin gücü yeten bir iş. Ayetin karşıtı bu olamaz."],
+        ["Yalnız Allah'ın verebileceği bir şeyi bir taştan, bir heykelden ya da bir nesneden beklemek",1,"Doğru! Bu, ayetteki “yalnız” sözüne ters düşer."]]],
+      kanit:"Ayette iki kez tekrar edilen ve “başkası değil” anlamı veren kelimeyi bul.",
+      f:["tevhit, yani ibadetin ve asıl yardımın yalnız Allah'a yönelmesi","ibadetin ve yardımın tek bir adrese yöneldiği","Allah'a ait olanı başkasından beklemememiz gerektiği"]
+    },
+    muslim:{
+      anlam:["Bu hadis insanlar arasındaki yardım hakkında ne söylüyor?",[
+        ["Yardım istemek ayıptır.",0,"Hadis yardımı ayıplamıyor; tam tersine yardım edeni övüyor."],
+        ["Yardım yalnızca aynı evdeki kardeşlere yapılır.",0,"Buradaki “kardeş” yalnızca ailedeki kardeşi değil, başka insanları da anlatır."],
+        ["Başkasına yardım eden kişiye Allah da yardım eder; insanların yardımlaşması güzel bir davranıştır.",1,"Evet, hadisin anlattığı bu."]]],
+      iz:["İnsanların birbirine yardımını anlatan ifadeye dokun.","Bu ifade kimden söz edildiğini söylüyor. Yardımın nasıl olduğunu anlatan yeri bul."],
+      cik:["Fâtiha'daki ayetle bu hadisi birlikte düşün. Hangi sonuç çıkar?",[
+        ["İki metin birbirine zıttır.",0,"Hadisin sonuna bak: “Allah da onun yardımcısı olur.” Yardımın asıl kaynağı yine kim?"],
+        ["İnsanların güç yettiği işlerde yardımlaşması güzeldir; ama asıl yardımın kaynağı yine Allah'tır.",1,"Harika! İki metni birleştirdin."],
+        ["İnsanlardan yardım istemek şirktir.",0,"Öyle olsaydı Peygamberimiz yardımlaşmayı över miydi?"]]],
+      kav:["Buna göre arkadaşından kalem istemek hangi gruba girer?",[
+        ["Şirktir.",0,"Arkadaşına Allah'a ait bir özellik mi veriyorsun, yoksa sadece gücü yeten bir şeyi mi istiyorsun?"],
+        ["Şirk değildir; insanın gücü yeten günlük bir yardımdır.",1,"Doğru!"],
+        ["İbadettir.",0,"Kalem istemek bir ibadet değildir; günlük bir yardımlaşmadır."]]],
+      kanit:"İnsanlar arasındaki yardımın güzel görüldüğünü gösteren ifadeyi bul.",
+      f:["günlük yardımlaşmanın şirk olmaması","insanların birbirine yardım etmesinin övüldüğü","gücü yeten birinden yardım istemenin Allah'a ortak koşmak olmadığı"]
+    },
+    bakara:{
+      anlam:["Allah bu ayette kullarına ne söylüyor?",[
+        ["Allah'a ulaşmak için uzun bir yol gitmek gerekir.",0,"Metin tam tersini söylüyor. Mesafeyi anlatan kelimeye dikkat et."],
+        ["Dualar önce başka birine iletilmelidir.",0,"Metinde “Bana dua edince” yazıyor. Arada biri var mı?"],
+        ["Allah kullarına çok yakındır; dua edenin duasına cevap verir.",1,"Evet, ayetin söylediği bu."]]],
+      iz:["Allah ile kul arasındaki mesafeyi ya da duanın karşılığını anlatan ifadeye dokun.","Bu ifade bir soruyu başlatıyor. Allah'ın cevabını anlatan yeri bul."],
+      cik:["Allah bu kadar yakın ve duaya cevap veriyorsa, dileklerimizi kime söylemeliyiz?",[
+        ["Önce uğurlu sayılan bir nesneye, sonra Allah'a.",0,"Bir nesnenin duayı duyduğunu gösteren bir ipucu var mı? Ayet “Bana dua edince” diyor."],
+        ["Doğrudan Allah'a; bir taşa, bir nesneye ya da bir uğura değil.",1,"Doğru çıkarım!"],
+        ["Dua etmeye gerek yoktur.",0,"Ayet dua edenin duasına cevap verildiğini söylüyor. Dua boşuna olur mu?"]]],
+      kav:["Buradan hangi inanç ilkesi çıkarılabilir?",[
+        ["Dua yalnızca camide yapılır.",0,"Metinde yer ile ilgili bir ifade yok. Allah her yerde duayı işitir."],
+        ["Dua bir ibadettir ve yalnızca Allah'a yapılır.",1,"Evet! Bu, tevhidin bir parçasıdır."],
+        ["Dua yalnızca büyükler içindir.",0,"Ayet “kullarım” diyor; çocuk, büyük herkes dua edebilir."]]],
+      kanit:"Duanın kime yapılacağını ya da Allah'ın yakınlığını gösteren ifadeyi bul.",
+      f:["tevhit, yani duanın yalnızca Allah'a yapılması","Allah'ın kullarına çok yakın olduğu ve duaya cevap verdiği","dileğimizi aracısız olarak Allah'a söylememiz gerektiği"]
+    },
+    tirmizi:{
+      anlam:["Peygamberimiz çocuk yaştaki İbn Abbas'a ne öğütlüyor?",[
+        ["İnsanlardan uzak durmasını.",0,"Hadis insanlardan uzak durmayı söylemiyor; onların faydasının kaynağını gösteriyor."],
+        ["İstek ve yardım için asıl Allah'a yönelmesini; insanların verdiği faydanın bile Allah'ın takdiriyle olduğunu.",1,"Evet, hadisin öğüdü bu."],
+        ["Hiçbir şey istememesini.",0,"Hadis “iste” diyor! Sorun istemekte değil, kimden istediğinde."]]],
+      iz:["İnsanların verdiği faydanın da kaynağını gösteren ifadeye dokun.","Bu ifade önemli bir öğüt. Ama insanların faydasının nereden geldiğini anlatan yer başka."],
+      cik:["Doktor ilaç verdi ve iyileştin. Bu hadise göre iyileşmeyi asıl kim verdi?",[
+        ["Sadece doktor; Allah'ın bununla ilgisi yok.",0,"Hadis, bütün insanlar toplansa bile Allah'ın takdiri dışında fayda veremeyeceklerini söylüyor."],
+        ["Doktor bir sebeptir; şifayı veren Allah'tır. Doktora teşekkür ederim, Allah'a şükrederim.",1,"Mükemmel çıkarım!"],
+        ["İlaç; o yüzden ilaca dua etmeliyim.",0,"İlaç da doktor da birer sebeptir. Dua ise yalnızca Allah'a yapılır."]]],
+      kav:["Bu hadisin karşıtı hangi düşüncedir?",[
+        ["Hasta olunca doktora gitmek",0,"Doktora gitmek bir sebebe sarılmaktır; hadise ters değildir."],
+        ["Yardım eden arkadaşa teşekkür etmek",0,"Teşekkür etmek güzel bir davranıştır; hadise ters değildir."],
+        ["Fayda ve zararı, Allah'tan bağımsız olarak bir varlığın elinde görmek",1,"Doğru! Bu düşünce insanı şirke götürür."]]],
+      kanit:"Faydanın asıl sahibini gösteren ya da “kimden isteyeceğini” söyleyen ifadeyi bul.",
+      f:["tevhit, yani fayda ve zararın asıl sahibinin Allah olması","insanların Allah'ın takdiri dışında fayda veremeyeceği","insanların yardımını bir sebep, asıl yardımı ise Allah'tan bilmemiz gerektiği"]
+    }
+  };
+
+  /* Her kartın “Tevhit mi, Şirk mi?” cevabı: [doğru, özel soru (yoksa genel soru), yanlış seçenek ipuçları] */
+  var TS_AD = {t:'🟢 TEVHİT', s:'🔴 ŞİRK', y:'🤝 ŞİRK DEĞİL (günlük yardım)'};
+  var TS_CUMLE = {t:'TEVHİDİ anlatıyor', s:'ŞİRKİ anlatıyor ve yanlışlığını gösteriyor', y:'şirk olmayan günlük yardımlaşmayı anlatıyor'};
+  var TS = {
+    mulk:['t',null,{s:"Metinde Allah'tan başkasına yönelen biri var mı? Metin yaratılıştaki kusursuz uyumu anlatıyor.",y:"Metinde insanların birbirinden yardım istemesi yok; göklerin yaratılışı anlatılıyor."}],
+    enbiya:['t',null,{s:"Dikkat! Ayet “başka ilâhlar olsaydı” diyor; yani olmadıklarını, Allah'ın bir olduğunu anlatıyor.",y:"Metinde günlük bir yardım yok; ilahların sayısından söz ediliyor."}],
+    yasin:['t',null,{s:"Ayette Güneş'e ya da Ay'a tapan biri var mı? Onların belirlenmiş yolda giden, yönetilen varlıklar olduğu anlatılıyor.",y:"Metinde insanlar arası yardım yok; gökteki düzen anlatılıyor."}],
+    enam:['t',"Hz. İbrahim'in vardığı sonuç TEVHİT mi, ŞİRK mi?",{s:"Hz. İbrahim batan varlıkları ilah olarak kabul etmedi, onları bıraktı. Bu, ortak koşmak mı, yoksa ortak koşmayı reddetmek mi?",y:"Metinde yardım isteme yok; ilahın kim olabileceği sorgulanıyor."}],
+    fussilet:['s',"Ayette YASAKLANAN davranış, yani güneşe ve aya secde etmek, TEVHİT mi, ŞİRK mi?",{t:"Ayet bu davranışı yasaklıyor. Yaratılmış bir varlığa secde etmek Allah'ın birliğine uygun olur mu?",y:"Secde bir ibadettir, günlük bir yardım değildir."}],
+    rad:['s',"Ayette eleştirilen davranış, yani Allah'ı bırakıp başka ‘dostlar’ edinmek, TEVHİT mi, ŞİRK mi?",{t:"Ayet bu davranışı eleştiriyor: “O'nu bırakıp da…” Allah'ı bırakıp başkasına yönelmek birlik inancına uygun mu?",y:"Buradaki “dostlar” arkadaş değil, tapılan varlıklar (mabutlar). Bu günlük yardım değil."}],
+    hac:['s',"Ayette anlatılan davranış, yani Allah'tan başka varlıklara tapmak, TEVHİT mi, ŞİRK mi?",{t:"Ayet “Allah'tan başka taptıklarınız” diyor. Allah'tan başkasına tapmak birlik inancına uygun mu?",y:"Tapmak bir ibadettir, günlük yardım değildir."}],
+    fatiha:['t',null,{s:"Ayette “yalnız” kelimesi iki kez geçiyor. Allah'a ortak koşan biri “yalnız sana” der mi?",y:"Ayet insanlardan değil, Allah'tan yardım dilemekten söz ediyor."}],
+    muslim:['y',"Hadiste anlatılan davranış, yani insanların birbirine yardım etmesi, TEVHİT mi, ŞİRK mi, yoksa ŞİRK OLMAYAN günlük yardım mı?",{t:"Yardımlaşma güzel bir davranış; ama hadis burada Allah'ın birliğini değil, insanlar arasındaki yardımı anlatıyor.",s:"Hadis yardımlaşmayı övüyor. Peygamberimiz şirki över mi? Kardeşine yardım eden, ona Allah'a ait bir özellik vermiyor."}],
+    bakara:['t',null,{s:"Ayette Allah'tan başkasına dua eden biri var mı? Allah “Bana dua edince” diyor.",y:"Ayet insanlardan değil, Allah'tan dilemekten söz ediyor."}],
+    tirmizi:['t',null,{s:"Hadis “Allah'tan iste” diyor. Bu, ortak koşmaya mı çağırıyor, yoksa yalnız Allah'a yönelmeye mi?",y:"Hadis, insanların faydasının bile Allah'ın takdiriyle olduğunu anlatıyor; asıl konu yardımın kaynağının Allah olması."}]
+  };
+
+  function kartKur(kart){
+    var d = KARTLAR[kart.dataset.kart];
+    var akis = $('.tv-ck-akis', kart);
+    if(!d || !akis) return;
+    var anahtar = 'tevhitSirk5_ck_' + kart.dataset.kart + '_';
+    var parcalar = $$('.tv-parca', kart);
+    var mod = null, modGeri = null, modHata = '', modBitti = null;
+    var anlamIzi = '', kanitIzi = '';
+
+    function asama(no, baslik){
+      var el = document.createElement('div');
+      el.className = 'tv-ck-asama';
+      el.setAttribute('tabindex', '-1');
+      el.innerHTML = '<p class="tv-soru-metin"><span class="tv-ipucu-no">AŞAMA ' + no + '</span>' + kacis(baslik) + '</p>';
+      akis.appendChild(el);
+      return el;
+    }
+    function odakla(el){ try { el.focus({preventScroll:true}); } catch(e){} }
+    function geriEkle(el){
+      var g = document.createElement('p');
+      g.className = 'tv-geri'; g.setAttribute('aria-live', 'polite'); g.hidden = true;
+      el.appendChild(g);
+      return g;
+    }
+    function secim(no, veri, sonra){
+      var el = asama(no, veri[0]);
+      var kutu = document.createElement('div');
+      kutu.className = 'tv-secenekler';
+      karistir(veri[1]).forEach(function(o){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'tv-sec'; b.textContent = o[0];
+        b.dataset.geri = o[2]; if(o[1]) b.dataset.dogru = '1';
+        kutu.appendChild(b);
+      });
+      el.appendChild(kutu);
+      denemeli($$('.tv-sec', kutu), geriEkle(el), sonra);
+      odakla(el);
+    }
+    function dokun(no, baslik, ozellik, hata, sonra){
+      var el = asama(no, baslik);
+      var not = document.createElement('p');
+      not.className = 'tv-ck-not';
+      not.textContent = '👆 Yukarıdaki metinde sarı renkli ifadelerden birine dokun.';
+      el.appendChild(not);
+      mod = ozellik; modGeri = geriEkle(el); modHata = hata; modBitti = sonra;
+      parcalar.forEach(function(p){
+        p.classList.remove('tv-parca-yanlis');
+        p.setAttribute('role', 'button'); p.setAttribute('tabindex', '0');
+      });
+      kart.classList.add('tv-dokun-modu');
+      odakla(el);
+    }
+    function parcaSec(p){
+      if(!mod) return;
+      var metin = p.textContent.trim();
+      if(p.hasAttribute(mod)){
+        var bitti = modBitti;
+        p.classList.add(mod === 'data-anlam' ? 'tv-parca-iz' : 'tv-parca-kanit');
+        modGeri.className = 'tv-geri tv-dogru';
+        modGeri.textContent = '✅ Güzel ipucu: “' + metin + '”';
+        modGeri.hidden = false;
+        mod = null;
+        kart.classList.remove('tv-dokun-modu');
+        parcalar.forEach(function(x){ x.removeAttribute('role'); x.removeAttribute('tabindex'); x.classList.remove('tv-parca-yanlis'); });
+        bitti(metin);
+      } else {
+        p.classList.add('tv-parca-yanlis');
+        modGeri.className = 'tv-geri tv-yanlis';
+        modGeri.textContent = '💡 “' + metin + '” — ' + modHata;
+        modGeri.hidden = false;
+      }
+    }
+    parcalar.forEach(function(p){
+      p.addEventListener('click', function(){ parcaSec(p); });
+      p.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); parcaSec(p); }
+      });
+    });
+
+    /* AŞAMA 1: Oku ve kendi cümlenle düşün */
+    var a1 = asama(1, 'Metni dikkatlice oku. Sence ne anlatıyor? Önce kendi cümlenle düşün.');
+    var t1 = document.createElement('textarea');
+    t1.placeholder = 'Bence bu metin şunu anlatıyor... (istersen yaz)';
+    t1.setAttribute('aria-label', 'Metnin ne anlattığını kendi cümlenle yaz');
+    t1.value = oku(anahtar + 'kendi');
+    t1.addEventListener('input', function(){ yaz(anahtar + 'kendi', t1.value); });
+    var b1 = document.createElement('button');
+    b1.type = 'button'; b1.className = 'tv-ileri'; b1.textContent = '💭 Düşündüm, devam';
+    a1.appendChild(t1); a1.appendChild(b1);
+    b1.addEventListener('click', function(){
+      b1.disabled = true; b1.hidden = true;
+      /* AŞAMA 2: Anlam */
+      secim(2, d.anlam, function(){
+        /* AŞAMA 3: İpucunu fark et */
+        dokun(3, d.iz[0], 'data-anlam', d.iz[1], function(iz){
+          anlamIzi = iz;
+          /* AŞAMA 4: Çıkarım */
+          secim(4, d.cik, function(){
+            /* AŞAMA 4: İlke */
+            secim('4 · İLKE', d.kav, function(){
+             /* AŞAMA 5: Tevhit mi, Şirk mi? */
+             tsSor(function(){
+              /* AŞAMA 6: Bunu hangi ipucundan çıkardın? + gerekçe */
+              dokun('5 · KANIT', 'Bunu hangi ipucundan çıkardın? Metinde dokun.', 'data-kavram', d.kanit, function(iz){
+                kanitIzi = iz;
+                gerekce();
+              });
+             });
+            });
+          });
+        });
+      });
+    });
+
+    function tsSor(sonra){
+      var t = TS[kart.dataset.kart];
+      var tur = kart.dataset.tur === 'Hadis' ? 'hadis' : 'ayet';
+      var el = asama(5, t[1] || ('Bu ' + tur + ' TEVHİDİ mi anlatıyor, ŞİRKİ mi?'));
+      var kutu = document.createElement('div');
+      kutu.className = 'tv-kutular'; kutu.setAttribute('role', 'group');
+      [['t','🟢 TEVHİT'],['s','🔴 ŞİRK'],['y','🤝 ŞİRK DEĞİL<br><small>günlük yardım</small>']].forEach(function(o){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'tv-kutu tv-kutu-' + o[0]; b.dataset.k = o[0]; b.innerHTML = o[1];
+        kutu.appendChild(b);
+      });
+      el.appendChild(kutu);
+      var g = geriEkle(el);
+      $$('.tv-kutu', kutu).forEach(function(b){
+        b.addEventListener('click', function(){
+          if(b.dataset.k === t[0]){
+            $$('.tv-kutu', kutu).forEach(function(x){ x.disabled = true; });
+            b.classList.add('tv-isaret');
+            g.className = 'tv-geri tv-dogru';
+            g.textContent = '✅ Doğru: ' + TS_AD[t[0]] + '. Şimdi bunu metinden kanıtla!';
+            g.hidden = false;
+            sonra();
+          } else {
+            b.disabled = true;
+            g.className = 'tv-geri tv-yanlis';
+            g.textContent = '💡 ' + t[2][b.dataset.k] + ' Tekrar dene.';
+            g.hidden = false;
+          }
+        });
+      });
+      odakla(el);
+    }
+
+    function gerekce(){
+      var el = asama('6 · GEREKÇE', 'Şimdi nedenini açıkla: Gerekçeni kur.');
+      var cerceve = document.createElement('p');
+      cerceve.className = 'tv-ck-cerceve';
+      cerceve.innerHTML = 'Bu metin <b>' + TS_CUMLE[TS[kart.dataset.kart][0]] + '</b>; çünkü metinde <mark>“' + kacis(kanitIzi) +
+        '”</mark> ifadesiyle <b>' + kacis(d.f[1]) + '</b> vurgulanıyor ve bundan <b>' + kacis(d.f[2]) + '</b> sonucunu çıkarıyorum.' +
+        '<br><small>Metindeki ilke: ' + kacis(d.f[0]) + '</small>';
+      var soru = document.createElement('p');
+      soru.className = 'tv-ck-not';
+      soru.textContent = '✍️ Bu cümleyi kendi kelimelerinle yaz. İpucunu ve “çünkü” kelimesini kullanmayı unutma.';
+      var t = document.createElement('textarea');
+      t.placeholder = 'Bu metin ... fikrine işaret ediyor; çünkü metinde ...';
+      t.setAttribute('aria-label', 'Gerekçeni kendi cümlenle yaz');
+      t.value = oku(anahtar + 'gerekce');
+      t.addEventListener('input', function(){ yaz(anahtar + 'gerekce', t.value); });
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tv-ileri'; b.textContent = '✅ Gerekçemi yazdım';
+      el.appendChild(cerceve); el.appendChild(soru); el.appendChild(t); el.appendChild(b);
+      var g = geriEkle(el);
+      b.addEventListener('click', function(){
+        var v = t.value.trim();
+        if(v.length < 20){
+          g.className = 'tv-geri tv-yanlis';
+          g.textContent = '💡 Biraz daha yaz: Metindeki ipucunu ve “çünkü” ile başlayan bir açıklama ekle.';
+          g.hidden = false; t.focus(); return;
+        }
+        b.disabled = true; b.hidden = true;
+        g.className = 'tv-geri tv-dogru';
+        g.textContent = '🎉 Çıkarımı tamamladın! Kavramı ezberlemedin; metinden kendin buldun.' +
+          (anlamIzi && anlamIzi !== kanitIzi ? ' Kullandığın ipuçları: “' + anlamIzi + '” ve “' + kanitIzi + '”.' : '');
+        g.hidden = false;
+        ac(kart.dataset.ac);
+      });
+      odakla(el);
+    }
+  }
+  $$('.tv-cikarim').forEach(kartKur);
+
+  /* ——— 50 soru: Ayet ve Hadis Avcısı — Tevhit mi, Şirk mi? ——— */
+  var AVCI = [{"k": "Âl-i İmrân suresi, 26. ayet", "m": "De ki: “Ey mülkün sahibi olan Allah’ım! Sen mülkü dilediğine verirsin. Dilediğinden de mülkü çeker alırsın. Dilediğini aziz edersin, dilediğini zelil edersin. Hayır senin elindedir. Şüphesiz sen her şeye hakkıyla gücü yetensin.”", "c": "t", "iz": [["Hayır senin elindedir", 1], ["mülkün sahibi olan Allah’ım", 1], ["De ki", 0]], "a": "Mülkü veren de alan da, her iyiliği elinde tutan da yalnızca Allah'tır. Bu gücü başka kimseye vermemek tevhittir."}, {"k": "En'âm suresi, 17. ayet", "m": "Şayet Allah sana bir zarar dokundursa, bunu O’ndan başka giderecek yoktur. Fakat sana bir hayır dokunduracak olsa onu da kimse gideremez. Bil ki O, her şeye hakkıyla gücü yetendir.", "c": "t", "iz": [["bunu O’ndan başka giderecek yoktur", 1], ["her şeye hakkıyla gücü yetendir", 1], ["Bil ki", 0]], "a": "Zararı giderecek de iyiliği verecek de yalnızca Allah'tır. O'ndan başka böyle bir güç yoktur."}, {"k": "En'âm suresi, 59. ayet", "m": "Gaybın anahtarları yalnızca O’nun katındadır. Onları ancak O bilir. Karada ve denizde olanı da bilir. Hiçbir yaprak düşmez ki onu bilmesin.…", "c": "t", "iz": [["Onları ancak O bilir", 1], ["Hiçbir yaprak düşmez ki onu bilmesin", 1], ["Karada ve denizde", 0]], "a": "Gizliyi bilen yalnızca Allah'tır; düşen bir yaprağı bile bilir. Her şeyi bilmek yalnız O'na aittir."}, {"k": "En'âm suresi, 101. ayet", "m": "O, gökleri ve yeri örnekleri yokken yaratandır. O’nun bir eşi olmadığı hâlde, nasıl bir çocuğu olabilir? Hâlbuki her şeyi O yarattı. O, her şeyi hakkıyla bilendir.", "c": "t", "iz": [["O’nun bir eşi olmadığı hâlde, nasıl bir çocuğu olabilir?", 1], ["her şeyi O yarattı", 1], ["örnekleri yokken", 0]], "a": "Allah'ın eşi ve çocuğu yoktur; her şeyi O yaratmıştır. Allah'ı bir ve eşsiz bilmek tevhittir."}, {"k": "En'âm suresi, 162. ayet", "m": "Ey Muhammed! De ki: “Şüphesiz benim namazım da, diğer ibadetlerim de, yaşamam da, ölümüm de âlemlerin Rabbi Allah içindir.”", "c": "t", "iz": [["âlemlerin Rabbi Allah içindir", 1], ["Ey Muhammed!", 0], ["De ki", 0]], "a": "Namaz, ibadet, hayat ve ölüm yalnızca Allah içindir. Her şeyi yalnız Allah'a yöneltmek tevhittir."}, {"k": "A'râf suresi, 54. ayet", "m": "Şüphesiz sizin Rabbiniz, gökleri ve yeri altı gün içinde (altı evrede) yaratan … güneşi, ayı ve bütün yıldızları da buyruğuna tabi olarak yaratan Allah’tır. Dikkat edin, yaratmak da, emretmek de yalnız O’na mahsustur.…", "c": "t", "iz": [["yaratmak da, emretmek de yalnız O’na mahsustur", 1], ["buyruğuna tabi olarak", 1], ["altı gün içinde", 0]], "a": "Güneş, Ay ve yıldızlar Allah'ın buyruğuna uyar. Yaratmak da yönetmek de yalnız Allah'a aittir."}, {"k": "Yûnus suresi, 31. ayet", "m": "De ki: “Sizi gökten ve yerden kim rızıklandırıyor? Ya da işitme ve görme yetisi üzerinde kim mutlak hâkimdir? Ölüden diriyi, diriden ölüyü kim çıkarıyor? İşleri kim yürütüyor?” “Allah” diyecekler.…", "c": "t", "iz": [["“Allah” diyecekler", 1], ["İşleri kim yürütüyor?", 1], ["gökten ve yerden", 0]], "a": "Rızık veren, görmeyi-işitmeyi veren, işleri yürüten kim? Cevap tek: Allah."}, {"k": "Hûd suresi, 6. ayet", "m": "Yeryüzünde hiçbir canlı yoktur ki, rızkı Allah’a ait olmasın. Her birinin (dünyada) duracakları yeri de, (öldükten sonra) emaneten konulacakları yeri de O bilir.…", "c": "t", "iz": [["rızkı Allah’a ait olmasın", 1], ["O bilir", 1], ["Yeryüzünde", 0]], "a": "Karıncadan file her canlının rızkını veren Allah'tır. Rızkı başkasından beklememek tevhittir."}, {"k": "İbrâhîm suresi, 32. ayet", "m": "Allah, gökleri ve yeri yaratan, gökten yağmur indiren ve onunla size rızık olarak türlü meyveler çıkaran, emri gereğince denizde yüzmek üzere gemileri emrinize veren, nehirleri de hizmetinize sunandır.", "c": "t", "iz": [["gökten yağmur indiren", 1], ["gökleri ve yeri yaratan", 1], ["denizde yüzmek üzere", 0]], "a": "Yağmuru indiren, meyveleri çıkaran, gökleri yaratan Allah'tır. Bunları yalnız O'na vermek tevhittir."}, {"k": "Nahl suresi, 53. ayet", "m": "Size ulaşan her nimet Allah’tandır. Sonra size bir sıkıntı ve zarar dokunduğu zaman yalnız O’na yalvarır yakarırsınız.", "c": "t", "iz": [["Size ulaşan her nimet Allah’tandır", 1], ["yalnız O’na yalvarır yakarırsınız", 1], ["bir sıkıntı ve zarar", 0]], "a": "Her nimet Allah'tandır; sıkıntıda da yalnız O'na yalvarılır."}, {"k": "Nahl suresi, 78. ayet", "m": "Allah, sizi analarınızın karnından, siz hiçbir şey bilmez durumda iken çıkardı. Şükredesiniz diye size kulaklar, gözler ve kalpler verdi.", "c": "t", "iz": [["size kulaklar, gözler ve kalpler verdi", 1], ["Allah, sizi analarınızın karnından", 1], ["hiçbir şey bilmez durumda iken", 0]], "a": "Bizi var eden, görmeyi, işitmeyi, düşünmeyi veren Allah'tır. Verene şükretmek ve O'nu tek bilmek tevhittir."}, {"k": "Mü'minûn suresi, 91. ayet", "m": "Allah, hiçbir çocuk edinmemiştir. O’nunla birlikte başka hiçbir ilâh yoktur. Öyle olsaydı, her ilâh kendi yarattığını alır götürür ve mutlaka birbirlerine üstün gelmeye çalışırlardı.…", "c": "t", "iz": [["her ilâh kendi yarattığını alır götürür", 1], ["O’nunla birlikte başka hiçbir ilâh yoktur", 1], ["mutlaka", 0]], "a": "Birden çok ilah olsaydı her biri kendi tarafını çekerdi. Evrende böyle bir kavga yok; Allah birdir."}, {"k": "Rûm suresi, 22. ayet", "m": "Göklerin ve yerin yaratılması, dillerinizin ve renklerinizin farklı olması da O’nun (varlığının ve kudretinin) delillerindendir.…", "c": "t", "iz": [["O’nun (varlığının ve kudretinin) delillerindendir", 1], ["dillerinizin ve renklerinizin", 0], ["farklı olması", 0]], "a": "Farklı diller, farklı renkler ve gökler; hepsi tek bir Yaratıcı'yı gösteren işaretlerdir."}, {"k": "Fâtır suresi, 3. ayet", "m": "Ey insanlar! Allah’ın size olan nimetini hatırlayın. Allah’tan başka size göklerden ve yerden rızık veren bir yaratıcı var mı?…", "c": "t", "iz": [["Allah’tan başka size göklerden ve yerden rızık veren bir yaratıcı var mı?", 1], ["Ey insanlar!", 0], ["hatırlayın", 0]], "a": "Soru cevabını içinde taşıyor: Allah'tan başka rızık veren bir yaratıcı yok."}, {"k": "Fâtır suresi, 15. ayet", "m": "Ey insanlar! Siz Allah’a muhtaçsınız. Allah ise her bakımdan sınırsız zengin olandır, övülmeye hakkıyla lâyık olandır.", "c": "t", "iz": [["Siz Allah’a muhtaçsınız", 1], ["her bakımdan sınırsız zengin olandır", 1], ["Ey insanlar!", 0]], "a": "Herkes Allah'a muhtaç; Allah ise hiçbir şeye muhtaç değil. O'nun dengi yoktur."}, {"k": "Şûrâ suresi, 11. ayet", "m": "O, gökleri ve yeri yaratandır. Size kendinizden eşler, hayvanlardan da (kendilerine) eşler yaratmıştır.… O’nun benzeri hiçbir şey yoktur. O, hakkıyla işitendir, hakkıyla görendir.", "c": "t", "iz": [["O’nun benzeri hiçbir şey yoktur", 1], ["hayvanlardan da", 0], ["Size kendinizden", 0]], "a": "Allah'ın benzeri yoktur; hiçbir şey O'na denk olamaz."}, {"k": "Rahmân suresi, 26-27. ayetler", "m": "Yer üzerinde bulunan her canlı yok olacaktır. Ancak azamet ve ikram sahibi Rabbinin zâtı bâki kalacaktır.", "c": "t", "iz": [["Rabbinin zâtı bâki kalacaktır", 1], ["her canlı yok olacaktır", 1], ["Yer üzerinde", 0]], "a": "Her şey yok olacak, yalnızca Allah kalıcıdır. Sonu olmayan tek varlık O'dur."}, {"k": "Mülk suresi, 1. ayet", "m": "Hükümranlık elinde olan Allah, yücedir. O, her şeye hakkıyla gücü yetendir.", "c": "t", "iz": [["Hükümranlık elinde olan Allah", 1], ["her şeye hakkıyla gücü yetendir", 1], ["yücedir", 0]], "a": "Her şeyin yönetimi Allah'ın elindedir ve O'nun gücü her şeye yeter."}, {"k": "Nâs suresi, 1-6. ayetler", "m": "De ki: “Cinlerden ve insanlardan; insanların kalplerine vesvese veren sinsi vesvesecinin kötülüğünden, insanların Rabbine, insanların Melik’ine, insanların İlâh’ına sığınırım.”", "c": "t", "iz": [["insanların Rabbine, insanların Melik’ine, insanların İlâh’ına sığınırım", 1], ["Cinlerden ve insanlardan", 0], ["sinsi vesvesecinin", 0]], "a": "Kötülükten korunmak için yalnızca Rab, Melik ve İlah olan Allah'a sığınılır."}, {"k": "Yâsîn suresi, 82. ayet", "m": "Bir şeyi dilediği zaman, O’nun emri o şeye ancak “Ol!” demektir. O da hemen oluverir.", "c": "t", "iz": [["O’nun emri o şeye ancak “Ol!” demektir", 1], ["O da hemen oluverir", 1], ["Bir şeyi", 0]], "a": "Allah bir şeyin olmasını dileyince “Ol!” der, o da olur. Böyle bir güç yalnızca Allah'ındır."}, {"k": "Bakara suresi, 107. ayet", "m": "Bilmez misin ki, göklerin ve yerin hükümranlığı Allah’ındır. Sizin için Allah’tan başka ne bir dost, ne de bir yardımcı vardır.", "c": "t", "iz": [["göklerin ve yerin hükümranlığı Allah’ındır", 1], ["Allah’tan başka ne bir dost, ne de bir yardımcı vardır", 1], ["Bilmez misin ki", 0]], "a": "Göklerin ve yerin sahibi Allah'tır; O'ndan başka gerçek dost ve yardımcı yoktur."}, {"k": "Âl-i İmrân suresi, 160. ayet", "m": "Allah size yardım ederse, sizi yenecek yoktur. Eğer sizi yardımsız bırakırsa, ondan sonra size kim yardım edebilir? Mü’minler, ancak Allah’a tevekkül etsinler.", "c": "t", "iz": [["Allah size yardım ederse, sizi yenecek yoktur", 1], ["ancak Allah’a tevekkül etsinler", 1], ["Mü’minler", 0]], "a": "Asıl yardım Allah'tandır; güvenilecek olan yalnızca O'dur."}, {"k": "Zümer suresi, 62. ayet", "m": "Allah, her şeyin yaratıcısıdır. O, her şeye vekildir.", "c": "t", "iz": [["her şeyin yaratıcısıdır", 1], ["her şeye vekildir", 1], ["O,", 0]], "a": "Her şeyi yaratan da her şeyi yöneten de Allah'tır."}, {"k": "Buhârî, Küsûf, 13 (hadis)", "m": "“Güneş ve ay hiç kimsenin ölümünden ya da hayatından dolayı tutulmazlar. Lâkin onlar Allah’ın âyetlerinden iki âyettir. Siz, onların tutulduklarını gördüğünüz zaman hemen namaz kılın.”", "c": "t", "iz": [["Allah’ın âyetlerinden iki âyettir", 1], ["hemen namaz kılın", 1], ["tutulduklarını gördüğünüz zaman", 0]], "a": "Güneş ve Ay kimse için tutulmaz; onlar Allah'ın işaretleridir. Tutulma olunca Allah'a yönelip namaz kılınır."}, {"k": "Tirmizî, Zühd, 33 (hadis)", "m": "“Eğer siz gereği gibi Allah’a tevekkül etmiş olsaydınız, tıpkı sabahleyin kursakları boş olarak çıkıp (akşam) doymuş bir şekilde dönen kuşların rızıklandırıldığı gibi sizler de rızıklandırılırdınız.”", "c": "t", "iz": [["gereği gibi Allah’a tevekkül etmiş olsaydınız", 1], ["kuşların rızıklandırıldığı gibi", 1], ["sabahleyin", 0]], "a": "Kuşlar sabah aç çıkar, çalışır, akşam tok döner; rızkı veren Allah'tır. Allah'a güvenmek tevhittir."}, {"k": "Yûnus suresi, 18. ayet", "m": "Allah’ı bırakıp, kendilerine ne zarar, ne de fayda verebilecek şeylere tapıyorlar ve “İşte bunlar Allah katında bizim şefaatçılarımızdır” diyorlar.…", "c": "s", "iz": [["ne zarar, ne de fayda verebilecek şeylere tapıyorlar", 1], ["Allah’ı bırakıp", 1], ["diyorlar", 0]], "a": "Fayda da zarar da veremeyen şeylere tapmak, Allah'a ait olanı onlara vermektir."}, {"k": "Yûnus suresi, 106. ayet", "m": "Allah’ı bırakıp da sana ne fayda ve ne de zarar verebilecek olan şeylere yalvarma. Eğer böyle yaparsan, şüphesiz ki sen zâlimlerden olursun.", "c": "s", "iz": [["şeylere yalvarma", 1], ["zâlimlerden olursun", 1], ["Eğer böyle yaparsan", 0]], "a": "Ayet, fayda ve zarar veremeyen şeylere yalvarmayı yasaklıyor. Yasaklanan bu davranış şirktir."}, {"k": "Nahl suresi, 73. ayet", "m": "Allah’ı bırakıp da, kendilerine göklerden ve yerden hiçbir rızık sağlayamayan ve buna gücü de yetmeyen şeylere tapıyorlar.", "c": "s", "iz": [["hiçbir rızık sağlayamayan", 1], ["şeylere tapıyorlar", 1], ["göklerden ve yerden", 0]], "a": "Rızık veremeyen şeylere tapmak şirktir; rızkı veren yalnız Allah'tır."}, {"k": "Furkân suresi, 3. ayet", "m": "(İnkâr edenler), Allah’ı bırakıp hiçbir şey yaratmayan ve zaten kendileri yaratılmış olan, üstelik kendilerine fayda ve zararları dokunmayan, öldürmeye, yaşatmaya ve ölüleri diriltip kabirden çıkarmaya güçleri yetmeyen ilâhlar edindiler.", "c": "s", "iz": [["kendileri yaratılmış olan", 1], ["ilâhlar edindiler", 1], ["kabirden çıkarmaya", 0]], "a": "Yaratılmış, hiçbir şey yaratamayan varlıkları ilah edinmek şirktir."}, {"k": "Furkân suresi, 43. ayet", "m": "Kendi nefsinin arzusunu kendisine ilâh edineni gördün mü? Ona sen mi vekil olacaksın?", "c": "s", "iz": [["nefsinin arzusunu kendisine ilâh edineni", 1], ["gördün mü?", 0], ["vekil olacaksın?", 0]], "a": "Kendi isteklerini Allah'ın emrinin önüne koyan, onları ilah gibi yapmış olur. Ayet bu davranışı eleştiriyor."}, {"k": "Ankebût suresi, 17. ayet", "m": "“Siz, Allah’ı bırakarak ancak putlara tapıyorsunuz ve yalan uyduruyorsunuz. Allah’ı bırakarak taptıklarınızın size hiçbir rızık vermeye güçleri yetmez.…”", "c": "s", "iz": [["putlara tapıyorsunuz", 1], ["hiçbir rızık vermeye güçleri yetmez", 1], ["yalan uyduruyorsunuz", 0]], "a": "Putlara tapmak ve rızık veremeyen şeylerden rızık beklemek şirktir."}, {"k": "Ankebût suresi, 41. ayet", "m": "Allah’tan başkalarını dost edinenlerin durumu, kendine bir ev edinen örümceğin durumu gibidir. Evlerin en dayanıksızı ise şüphesiz örümcek evidir. Keşke bilselerdi!", "c": "s", "iz": [["Allah’tan başkalarını dost edinenlerin", 1], ["Evlerin en dayanıksızı", 1], ["Keşke bilselerdi!", 0]], "a": "Allah'tan başkasına dayanmak, örümcek ağından eve güvenmek gibidir. Ayet bu davranışı eleştiriyor."}, {"k": "Meryem suresi, 42. ayet", "m": "Hani babasına şöyle demişti: “Babacığım! İşitmeyen, görmeyen ve sana bir faydası olmayan şeylere niçin tapıyorsun?”", "c": "s", "iz": [["İşitmeyen, görmeyen", 1], ["niçin tapıyorsun?", 1], ["Babacığım!", 0]], "a": "Hz. İbrahim, işitmeyen ve görmeyen şeylere tapan babasını uyarıyor. Anlatılan davranış şirktir."}, {"k": "Enbiyâ suresi, 52. ayet", "m": "Hani o, babasına ve kavmine, “Ne bu tapınıp durduğunuz heykeller?” demişti.", "c": "s", "iz": [["tapınıp durduğunuz heykeller", 1], ["babasına ve kavmine", 0], ["demişti", 0]], "a": "Heykellere tapmak şirktir; Hz. İbrahim kavmini bu yüzden sorguluyor."}, {"k": "Enbiyâ suresi, 66. ayet", "m": "İbrahim, şöyle dedi: “Öyle ise siz, (hâlâ) Allah’ı bırakıp da, size hiçbir fayda, hiçbir zarar veremeyecek şeylere mi tapacaksınız?”", "c": "s", "iz": [["hiçbir fayda, hiçbir zarar veremeyecek şeylere mi tapacaksınız?", 1], ["Allah’ı bırakıp da", 1], ["İbrahim, şöyle dedi", 0]], "a": "Fayda ve zarar veremeyen şeylere tapmak şirktir. Hz. İbrahim bunu sorguluyor."}, {"k": "Şuarâ suresi, 72-73. ayetler", "m": "İbrahim, dedi ki: “Onlara yalvardığınızda sizi işitiyorlar mı?” “Yahut size fayda veya zararları dokunur mu?”", "c": "s", "iz": [["sizi işitiyorlar mı?", 1], ["fayda veya zararları dokunur mu?", 1], ["İbrahim, dedi ki", 0]], "a": "İşitmeyen, fayda ve zarar veremeyen şeylere yalvarmak şirktir."}, {"k": "A'râf suresi, 138. ayet", "m": "İsrailoğullarını denizden geçirdik. Derken, kendilerine ait putlara tapan bir kavme rastladılar. İsrailoğulları, “Ey Mûsâ! Onların kendilerine ait ilâhları (putları) olduğu gibi sen de bize ait bir ilâh yapsana” dediler. Mûsa şöyle dedi: “Şüphesiz siz cahillik eden bir kavimsiniz.”", "c": "s", "iz": [["bize ait bir ilâh yapsana", 1], ["putlara tapan bir kavme", 1], ["denizden geçirdik", 0]], "a": "Eliyle bir ilah “yapmak” istemek şirktir; Hz. Mûsâ bu isteği cahillik olarak gördü."}, {"k": "A'râf suresi, 148. ayet", "m": "Mûsâ’nın kavmi onun (Tur’a gitmesinin) ardından, ziynet eşyalarından, böğürmesi olan bir buzağı heykeli (yaparak ilâh) edindiler. Onun kendileriyle konuşmadığını ve onlara hiçbir yol göstermediğini görmediler mi?…", "c": "s", "iz": [["bir buzağı heykeli (yaparak ilâh) edindiler", 1], ["kendileriyle konuşmadığını", 1], ["ziynet eşyalarından", 0]], "a": "Konuşamayan, yol gösteremeyen bir buzağı heykelini ilah edinmek şirktir."}, {"k": "A'râf suresi, 194. ayet", "m": "Allah’ı bırakıp tapındıklarınızın hepsi sizin gibi (yaratılmış) kullardır. Eğer doğru söyleyenler iseniz, haydi hemen onları çağırın da size cevap versinler (duanıza icabet etsinler).", "c": "s", "iz": [["sizin gibi (yaratılmış) kullardır", 1], ["size cevap versinler", 1], ["Eğer doğru söyleyenler iseniz", 0]], "a": "Allah'tan başka tapılanlar da yaratılmış kullardır, dualara cevap veremez. Onlara tapmak şirktir."}, {"k": "Neml suresi, 24. ayet", "m": "“Onun ve kavminin, Allah’ı bırakıp güneşe taptıklarını gördüm. Şeytan, onlara yaptıklarını süslü göstermiş ve böylece onları yoldan çıkarmış. Bu yüzden de onlar doğru yolu bulamıyorlar.”", "c": "s", "iz": [["güneşe taptıklarını", 1], ["doğru yolu bulamıyorlar", 1], ["Onun ve kavminin", 0]], "a": "Güneşe tapmak, yaratılmış bir varlığı ilah yerine koymaktır. (Bunu Hz. Süleyman'a hüdhüd kuşu anlatıyor.)"}, {"k": "Zümer suresi, 3. ayet", "m": "…O’nu bırakıp da başka dostlar edinenler, “Biz onlara sadece, bizi Allah’a daha çok yaklaştırsınlar diye ibadet ediyoruz” diyorlar.…", "c": "s", "iz": [["bizi Allah’a daha çok yaklaştırsınlar diye ibadet ediyoruz", 1], ["O’nu bırakıp da başka dostlar edinenler", 1], ["diyorlar", 0]], "a": "“Bizi Allah'a yaklaştırsınlar” diye bile olsa Allah'tan başkasına ibadet etmek şirktir. İbadet yalnız Allah'a yapılır."}, {"k": "Ahkâf suresi, 5. ayet", "m": "Kim, Allah’ı bırakıp da, kıyamet gününe kadar kendisine cevap veremeyecek şeylere tapandan daha sapıktır? Oysa onlar, bunların tapınmalarından habersizdirler.", "c": "s", "iz": [["kendisine cevap veremeyecek şeylere tapandan", 1], ["tapınmalarından habersizdirler", 1], ["kıyamet gününe kadar", 0]], "a": "Cevap veremeyen, duaları duymayan şeylere tapmak şirktir."}, {"k": "Fâtır suresi, 13-14. ayetler", "m": "…Allah’ı bırakıp da ibadet ettikleriniz, bir çekirdek zarına bile hükmedemezler. Eğer onları çağırsanız, çağrınızı duymazlar. Duysalar bile çağrınıza karşılık veremezler.…", "c": "s", "iz": [["bir çekirdek zarına bile hükmedemezler", 1], ["çağrınızı duymazlar", 1], ["Eğer onları çağırsanız", 0]], "a": "Bir çekirdek zarına bile sahip olmayan şeylere ibadet etmek şirktir."}, {"k": "Nûh suresi, 23. ayet", "m": "“Şöyle dediler: ‘Sakın ilâhlarınızı bırakmayın. Hele hele Vedd’i, Süvâ’ı, Yeğûs’u, Ye’ûk’u ve Nesr’i hiç bırakmayın.”", "c": "s", "iz": [["Sakın ilâhlarınızı bırakmayın", 1], ["Vedd’i, Süvâ’ı, Yeğûs’u", 1], ["Şöyle dediler", 0]], "a": "Hz. Nûh'un kavmi, Vedd ve Süvâ gibi putlarını bırakmamakta direndi. Putlara bağlanmak şirktir."}, {"k": "Sâffât suresi, 95-96. ayetler", "m": "İbrahim, şöyle dedi: “Yonttuğunuz putlara mı tapıyorsunuz?” “Oysa Allah sizi de, yaptığınız şeyleri de yaratmıştır.”", "c": "s", "iz": [["Yonttuğunuz putlara mı tapıyorsunuz?", 1], ["yaptığınız şeyleri de yaratmıştır", 1], ["İbrahim, şöyle dedi", 0]], "a": "Kendi yonttukları putlara tapmak şirktir. Hz. İbrahim, putları da onları yapanları da Allah'ın yarattığını hatırlatıyor."}, {"k": "Kasas suresi, 38. ayet", "m": "Firavun, “Ey ileri gelenler! Sizin benden başka bir ilâhınız olduğunu bilmiyorum.…” dedi.", "c": "s", "iz": [["Sizin benden başka bir ilâhınız olduğunu bilmiyorum", 1], ["Ey ileri gelenler!", 0], ["dedi", 0]], "a": "Firavun kendini ilah ilan etti. Allah'a ait ilahlığı kendine vermek şirktir."}, {"k": "Yûsuf suresi, 40. ayet", "m": "“Siz Allah’ı bırakıp; sadece sizin ve atalarınızın taktığı birtakım isimlere (düzmece ilâhlara) tapıyorsunuz. Allah, onlar hakkında hiçbir delil indirmemiştir.…”", "c": "s", "iz": [["birtakım isimlere (düzmece ilâhlara) tapıyorsunuz", 1], ["hiçbir delil indirmemiştir", 1], ["atalarınızın", 0]], "a": "Hz. Yûsuf zindandaki arkadaşlarına, uydurma ilahlara tapmanın yanlış olduğunu anlatıyor."}, {"k": "İsrâ suresi, 56. ayet", "m": "De ki: “Onu bırakıp da ilâh diye ileri sürdüklerinizi çağırın. Onlar, başınızdaki sıkıntıyı ne kaldırabilirler ne de değiştirebilirler.”", "c": "s", "iz": [["ilâh diye ileri sürdüklerinizi", 1], ["ne kaldırabilirler ne de değiştirebilirler", 1], ["De ki", 0]], "a": "İlah sanılanlar bir sıkıntıyı bile kaldıramaz. Onlara ilah demek şirktir."}, {"k": "Yâsîn suresi, 74-75. ayetler", "m": "Belki kendilerine yardım edilir diye Allah’ı bırakıp da ilâhlar edindiler. Onlar, ilâhlar için (hizmete) hazır asker oldukları hâlde, ilâhlar onlara yardım edemezler.", "c": "s", "iz": [["Allah’ı bırakıp da ilâhlar edindiler", 1], ["ilâhlar onlara yardım edemezler", 1], ["hazır asker", 0]], "a": "Yardım umuduyla Allah'tan başka ilahlar edinmek şirktir; o ilahlar yardım edemez."}, {"k": "Hac suresi, 12. ayet", "m": "O, Allah’ı bırakır da kendine ne zarar, ne de fayda veren şeylere tapar. Bu da derin sapıklığın ta kendisidir.", "c": "s", "iz": [["ne zarar, ne de fayda veren şeylere tapar", 1], ["derin sapıklığın", 1], ["Bu da", 0]], "a": "Zarar da fayda da veremeyen şeylere tapmak şirktir; ayet buna “derin sapıklık” diyor."}];
+  (function(){
+    var kok = document.getElementById('tvAvci');
+    if(!kok || !AVCI.length) return;
+    var metinEl = $('#tvAvciMetin'), siraEl = $('#tvAvciSira'), puanEl = $('#tvAvciPuan'), cubuk = $('#tvAvciCubuk'),
+        geri = $('#tvAvciGeri'), ileri = $('#tvAvciIleri'), izKutu = $('#tvAvciIz'), izSec = $('#tvAvciIzSec'),
+        izGeri = $('#tvAvciIzGeri'), son = $('#tvAvciSon'), sonMetin = $('#tvAvciSonMetin'), soruEl = $('#tvAvciSoru'),
+        yanlisBtn = $('#tvAvciYanlis'), kutular = $$('.tv-kutu', kok);
+    var ADI = {t:'🟢 TEVHİT', s:'🔴 ŞİRK'}, CUMLE = {t:'TEVHİDİ anlatıyor', s:'ŞİRKİ anlatıyor ve yanlışlığını gösteriyor'};
+    var liste, sira, puan, izPuan, yanlislar;
+    function puanYaz(){ puanEl.textContent = '⭐ ' + puan + ' · 🔎 ' + izPuan; }
+    function goster(){
+      var d = liste[sira];
+      metinEl.innerHTML = '<span class="tv-avci-tur">' + (/hadis/.test(d.k) ? '📜 HADİS' : '📖 AYET') + '</span>' +
+        '<span class="tv-avci-yazi">' + kacis(d.m) + '</span><span class="tv-avci-kaynak">(' + kacis(d.k.replace(' (hadis)', '')) + ')</span>';
+      siraEl.textContent = (sira+1) + ' / ' + liste.length;
+      cubuk.style.width = (sira / liste.length * 100) + '%';
+      puanYaz();
+      kutular.forEach(function(k){ k.disabled = false; k.hidden = false; k.classList.remove('tv-isaret'); });
+      soruEl.hidden = false; metinEl.hidden = false;
+      geri.hidden = true; ileri.hidden = true; izKutu.hidden = true; izGeri.hidden = true;
+    }
+    function basla(yeniListe){
+      liste = karistir(yeniListe); sira = 0; puan = 0; izPuan = 0; yanlislar = [];
+      son.hidden = true; goster();
+    }
+    kutular.forEach(function(k){
+      k.addEventListener('click', function(){
+        var d = liste[sira], dogru = k.dataset.k === d.c;
+        if(dogru) puan++; else yanlislar.push(d);
+        kutular.forEach(function(x){ x.disabled = true; if(x.dataset.k === d.c) x.classList.add('tv-isaret'); });
+        geri.className = 'tv-geri ' + (dogru ? 'tv-dogru' : 'tv-yanlis');
+        geri.textContent = dogru ? '✅ Doğru karar! Şimdi kanıtla…' : '💡 Doğru cevap: ' + ADI[d.c] + '. Şimdi bunu gösteren ipucunu bul.';
+        geri.hidden = false; puanYaz();
+        izSec.innerHTML = ''; izGeri.hidden = true;
+        var ilk = true;
+        karistir(d.iz).forEach(function(o){
+          var b = document.createElement('button');
+          b.type = 'button'; b.className = 'tv-sec'; b.textContent = '“' + o[0] + '”';
+          b.addEventListener('click', function(){
+            if(o[1]){
+              if(ilk){ izPuan++; puanYaz(); }
+              $$('.tv-sec', izSec).forEach(function(x){ x.disabled = true; });
+              b.classList.add('tv-dogru');
+              izGeri.className = 'tv-geri tv-dogru';
+              izGeri.innerHTML = '✅ Bu metin <b>' + CUMLE[d.c] + '</b>; çünkü metinde <b>“' + kacis(o[0]) + '”</b> ifadesi geçiyor. ' + kacis(d.a);
+              ileri.textContent = sira < liste.length-1 ? 'Sonraki soru →' : 'Sonucu gör →';
+              ileri.hidden = false; ileri.focus();
+            } else {
+              ilk = false;
+              b.disabled = true; b.classList.add('tv-yanlis');
+              izGeri.className = 'tv-geri tv-yanlis';
+              izGeri.textContent = '💡 Bu ifade metinde geçiyor ama seni sonuca götüren ipucu değil. Kim neye yöneliyor, neyi yapabiliyor ya da yapamıyor? Tekrar bak.';
+            }
+            izGeri.hidden = false;
+          });
+          izSec.appendChild(b);
+        });
+        izKutu.hidden = false;
+        var ilkB = $('.tv-sec', izSec); if(ilkB) ilkB.focus();
+      });
+    });
+    ileri.addEventListener('click', function(){
+      sira++;
+      if(sira < liste.length){ goster(); try { metinEl.scrollIntoView({block:'nearest'}); } catch(e){} return; }
+      cubuk.style.width = '100%';
+      metinEl.hidden = true; soruEl.hidden = true; geri.hidden = true; ileri.hidden = true; izKutu.hidden = true;
+      kutular.forEach(function(k){ k.hidden = true; });
+      var oran = (puan + izPuan) / (liste.length * 2);
+      sonMetin.textContent = liste.length + ' sorunun ' + puan + ' tanesinde doğru karar verdin; ' + izPuan + ' tanesinde ilk denemede doğru ipucunu buldun. ' +
+        (oran >= .9 ? 'Muhteşem! Sadece cevabı değil, nedenini de biliyorsun.' :
+         oran >= .6 ? 'Güzel! Yanlış yaptıklarını bir daha çözebilirsin.' :
+         'Sayfanın başındaki TEVHİT ve ŞİRK kutularını bir daha okuyup yanlışlarını tekrar çöz.');
+      yanlisBtn.hidden = !yanlislar.length;
+      yanlisBtn.textContent = '🔁 Yanlış yaptığım ' + yanlislar.length + ' soruyu tekrar çöz';
+      son.hidden = false;
+      (yanlislar.length ? yanlisBtn : $('#tvAvciTekrar')).focus();
+    });
+    yanlisBtn.addEventListener('click', function(){ basla(yanlislar.slice()); });
+    $('#tvAvciTekrar').addEventListener('click', function(){ basla(AVCI); });
+    basla(AVCI);
+  })();
+
+  /* ——— Tevhit mi, Şirk mi? oyunu: önce sınıflandır, sonra ipucunu göster ——— */
   var DURUMLAR = [
-    {m:"Allah birdir.", c:'t', a:"Bu, tevhidin ta kendisidir."},
-    {m:"Allah'ın ortağı vardır.", c:'s', a:"Allah'a ortak koşmak şirktir. Allah'ın ortağı yoktur."},
-    {m:"Güneş Allah tarafından yaratılmıştır.", c:'t', a:"Güneş yaratılmıştır, yaratan Allah'tır. Bu tevhide uygundur."},
-    {m:"Güneş ilah olabilir.", c:'s', a:"Güneş yaratılmış bir varlıktır. Ona ilahlık vermek şirktir."},
-    {m:"Allah yaratandır.", c:'t', a:"Yaratıcı yalnızca Allah'tır. Bu tevhittir."},
-    {m:"Bir insan Allah'ın sahip olduğu ilahî özelliklere sahiptir.", c:'s', a:"Allah'a ait ilahî özellikleri bir insana vermek şirktir."},
-    {m:"Arkadaşımdan kalem istedim.", c:'y', a:"Arkadaşının buna gücü yeter. Bu günlük bir yardımdır, şirk değildir."},
-    {m:"Annemden çantamı taşımama yardım etmesini istedim.", c:'y', a:"Annenin buna gücü yeter. Bu günlük bir yardımdır, şirk değildir."},
-    {m:"İbadet yalnızca Allah'a yapılır.", c:'t', a:"İbadet edilmeye layık olan yalnızca Allah'tır. Bu tevhittir."},
-    {m:"Bir taşa dua edip ondan dileklerimi yerine getirmesini istemek.", c:'s', a:"Taş yaratılmıştır, dua ve ibadet yalnızca Allah'a yapılır. Bu şirktir."},
-    {m:"Doktordan hastalığımın tedavisi için yardım istedim.", c:'y', a:"Doktor bu işi öğrenmiştir. Tedavi olmak şirk değildir; iyileşmeyi Allah'tan dileriz."},
-    {m:"Evrende çok canlı var, demek ki çok yaratıcı var.", c:'s', a:"Pencereler çok ama Güneş tek! Varlıklar çok, yaratıcı birdir. Birden çok yaratıcı düşünmek şirktir."},
-    {m:"Hiçbir şey Allah'a denk ve benzer değildir.", c:'t', a:"İhlas suresi de böyle der: O'nun hiçbir dengi yoktur. Bu tevhittir."},
-    {m:"Öğretmenimden anlamadığım konuyu tekrar anlatmasını istedim.", c:'y', a:"Öğretmeninin buna gücü yeter. Bu günlük bir yardımdır, şirk değildir."},
-    {m:"Allah evreni yönetmek için bir yardımcıya muhtaçtır.", c:'s', a:"Allah Samed'dir, hiçbir şeye muhtaç değildir. O'na yardımcı ortak düşünmek şirktir."}
+    {m:"Zeynep bahçede filizlenen tohumu görünce “Bunu ne ben yapabilirim ne de toprak kendi kendine yapabilir; her şeyi var eden O'dur.” dedi.", c:'t',
+     iz:[["her şeyi var eden O'dur",1],["filizlenen tohumu görünce",0],["Zeynep bahçede",0]],
+     a:"Zeynep yaratmayı ne kendine ne de toprağa veriyor; yalnızca Allah'a veriyor. Allah'ı tek yaratıcı bilmek tevhittir."},
+    {m:"Emre sınava çok çalıştı. Sonra “Ben elimden geleni yaptım, gerisi için Allah'a dua ediyorum.” dedi.", c:'t',
+     iz:[["gerisi için Allah'a dua ediyorum",1],["sınava çok çalıştı",0],["Emre",0]],
+     a:"Emre hem çalıştı hem de sonucu Allah'tan diledi. Duasını yalnızca Allah'a yöneltmesi tevhide uygundur."},
+    {m:"Deniz, gece binlerce yıldız görünce “Bu kadar çok yıldız var ama hepsini yaratan tek.” diye düşündü.", c:'t',
+     iz:[["hepsini yaratan tek",1],["binlerce yıldız görünce",0],["gece",0]],
+     a:"Varlıklar çok ama yaratıcı tek. 11. adımdaki pencereleri hatırla. Bu tevhittir."},
+    {m:"Kerem, “Güneş de Ay da kendilerine verilen görevi yapıyor; onlara bu görevi veren başkası.” dedi.", c:'t',
+     iz:[["onlara bu görevi veren başkası",1],["kendilerine verilen görevi yapıyor",1],["Güneş de Ay da",0]],
+     a:"Kerem, Güneş'i ve Ay'ı yöneten değil, yönetilen varlıklar olarak görüyor. Asıl yöneteni Allah bilmek tevhittir."},
+    {m:"Namaz kılan Ayşe, secdeye varınca “Başımı yalnızca Senin için yere koyarım.” diye düşündü.", c:'t',
+     iz:[["yalnızca Senin için",1],["secdeye varınca",0],["Namaz kılan Ayşe",0]],
+     a:"Secde bir ibadettir ve Ayşe onu yalnızca Allah'a yöneltiyor. İbadeti yalnız Allah'a yapmak tevhittir."},
+    {m:"Eski bir kavim, tahtadan kendi yaptıkları bir heykelin önünde eğilip ondan yağmur istiyordu.", c:'s',
+     iz:[["tahtadan kendi yaptıkları",1],["ondan yağmur istiyordu",1],["Eski bir kavim",0]],
+     a:"Kendi elleriyle yaptıkları bir heykel bir sinek bile yaratamaz; yağmuru ise ancak Allah yağdırır. Allah'a ait olanı heykelden beklemek şirktir."},
+    {m:"Bir adam “Bu dağın ruhu hastalığımı iyileştirir.” diyerek dağa kurban adadı.", c:'s',
+     iz:[["hastalığımı iyileştirir",1],["dağa kurban adadı",1],["Bir adam",0]],
+     a:"Şifayı veren Allah'tır; kurban da yalnızca Allah için kesilen bir ibadettir. İkisini bir dağa yöneltmek şirktir."},
+    {m:"Bir kral halkına “Ben hiç ölmeyeceğim, bana tapın!” diye emir verdi.", c:'s',
+     iz:[["bana tapın",1],["Ben hiç ölmeyeceğim",1],["halkına",0]],
+     a:"Kral, yalnızca Allah'a ait olan ölümsüzlüğü ve ibadeti kendisi için istiyor. Bu, yanlış taç takmaktır: şirktir."},
+    {m:"Biri “Allah evreni yönetirken yorulur, bu yüzden yardımcıları vardır.” diyor.", c:'s',
+     iz:[["yorulur",1],["yardımcıları vardır",1],["evreni",0]],
+     a:"Allah hiçbir şeye muhtaç değildir ve yorulmaz. O'na yardımcı ortaklar düşünmek şirktir."},
+    {m:"Bir grup insan, sabah Güneş doğarken ona dönüp “Bize hayat veren sensin!” diyerek secde ediyordu.", c:'s',
+     iz:[["Bize hayat veren sensin",1],["secde ediyordu",1],["sabah",0]],
+     a:"Güneş, Yaratıcı'yı gösteren bir işarettir; hayatı veren Allah'tır. Güneşe secde etmek şirktir."},
+    {m:"Elif'in bisiklet zinciri çıkınca, komşuları Hasan Amca'dan zinciri takmasını rica etti.", c:'y',
+     iz:[["zinciri takmasını rica etti",1],["bisiklet zinciri çıkınca",0],["Elif'in",0]],
+     a:"Hasan Amca'nın zincir takmaya gücü yeter. Bu günlük bir yardımdır, şirk değildir."},
+    {m:"Mert, denizde zorlanan bir çocuğu görünce cankurtarana “Koş, yardım et!” diye seslendi.", c:'y',
+     iz:[["cankurtarana “Koş, yardım et!”",1],["denizde zorlanan bir çocuğu",0],["Mert",0]],
+     a:"Cankurtaran bu iş için eğitim almıştır; yüzebilir, kurtarabilir. Gücü yeten birinden yardım istemek şirk değildir."},
+    {m:"Selin, anlamadığı matematik sorusunu ablasından anlatmasını istedi.", c:'y',
+     iz:[["ablasından anlatmasını istedi",1],["matematik sorusunu",0],["anlamadığı",0]],
+     a:"Ablası konuyu anlatabilir; bu, insanın yapabileceği bir iştir. Şirk değildir."},
+    {m:"Can, ateşi çıkan dedesini doktora götürdü; doktor ilaç yazdı.", c:'y',
+     iz:[["doktor ilaç yazdı",1],["ateşi çıkan",0],["dedesini",0]],
+     a:"Doktor bir sebeptir; tedavi eder. Şifayı ise Allah'tan dileriz. Doktora gitmek şirk değildir."},
+    {m:"İtfaiyeciler yangındaki kediyi kurtarınca Zehra onlara teşekkür etti.", c:'y',
+     iz:[["İtfaiyeciler kediyi kurtarınca",1],["yangındaki",0],["Zehra",0]],
+     a:"İtfaiyecilerin kurtarmaya gücü yeter. Onlara teşekkür etmek güzel bir davranıştır; şirk değildir."}
   ];
   var AD = {t:'🟢 Tevhit', s:'🔴 Şirk', y:'🤝 Şirk değil (günlük yardım)'};
   var kok = document.getElementById('tvOyun');
   if(!kok) return;
   var durumEl = $('#tvOyunDurum'), siraEl = $('#tvOyunSira'), puanEl = $('#tvOyunPuan'),
       cubuk = $('#tvOyunCubuk'), geri = $('#tvOyunGeri'), ileri = $('#tvOyunIleri'),
+      izKutu = $('#tvOyunIz'), izSec = $('#tvOyunIzSec'), izGeri = $('#tvOyunIzGeri'),
       son = $('#tvOyunSon'), sonMetin = $('#tvOyunSonMetin'), kutular = $$('.tv-kutu', kok);
-  var sira, puan, liste;
+  var sira, puan, izPuan, liste;
 
-  function karistir(d){ d = d.slice(); for(var i=d.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=d[i]; d[i]=d[j]; d[j]=t; } return d; }
+  function puanYaz(){ puanEl.textContent = '⭐ ' + puan + ' · 🔎 ' + izPuan; }
   function goster(){
     var d = liste[sira];
-    durumEl.textContent = '“' + d.m + '”';
+    durumEl.textContent = d.m;
     siraEl.textContent = (sira+1) + ' / ' + liste.length;
-    puanEl.textContent = '⭐ ' + puan + ' puan';
+    puanYaz();
     cubuk.style.width = (sira / liste.length * 100) + '%';
     kutular.forEach(function(k){ k.disabled = false; k.classList.remove('tv-isaret'); });
-    geri.hidden = true; ileri.hidden = true;
+    geri.hidden = true; ileri.hidden = true; izKutu.hidden = true; izGeri.hidden = true;
   }
   function basla(){
-    liste = karistir(DURUMLAR); sira = 0; puan = 0;
+    liste = karistir(DURUMLAR); sira = 0; puan = 0; izPuan = 0;
     son.hidden = true; durumEl.hidden = false;
     kutular.forEach(function(k){ k.hidden = false; });
     goster();
+  }
+  function izSor(d){
+    izSec.innerHTML = '';
+    var ilkDeneme = true;
+    karistir(d.iz).forEach(function(o){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tv-sec'; b.textContent = '“' + o[0] + '”';
+      b.addEventListener('click', function(){
+        if(o[1]){
+          if(ilkDeneme) izPuan++;
+          $$('.tv-sec', izSec).forEach(function(x){ x.disabled = true; });
+          b.classList.add('tv-dogru');
+          izGeri.className = 'tv-geri tv-dogru';
+          izGeri.textContent = '✅ İpucu: “' + o[0] + '”. ' + d.a;
+          puanYaz();
+          ileri.textContent = sira < liste.length-1 ? 'Sonraki durum →' : 'Sonucu gör →';
+          ileri.hidden = false;
+          ileri.focus();
+        } else {
+          ilkDeneme = false;
+          b.disabled = true; b.classList.add('tv-yanlis');
+          izGeri.className = 'tv-geri tv-yanlis';
+          izGeri.textContent = '💡 Bu ifade durumu anlatıyor ama seni kavrama götüren ipucu değil. Kişi ne yapıyor, kimden ne bekliyor? Tekrar bak.';
+        }
+        izGeri.hidden = false;
+      });
+      izSec.appendChild(b);
+    });
+    izKutu.hidden = false;
+    var ilk = $('.tv-sec', izSec); if(ilk) ilk.focus();
   }
   kutular.forEach(function(k){
     k.addEventListener('click', function(){
@@ -1764,25 +2616,23 @@
       if(dogru) puan++;
       kutular.forEach(function(x){ x.disabled = true; if(x.dataset.k === d.c) x.classList.add('tv-isaret'); });
       geri.className = 'tv-geri ' + (dogru ? 'tv-dogru' : 'tv-yanlis');
-      geri.textContent = (dogru ? '✅ Doğru! ' : '💡 Doğru cevap: ' + AD[d.c] + '. ') + d.a;
+      geri.textContent = dogru ? '✅ Doğru kutu! Ama asıl soru şimdi geliyor…' : '💡 Doğru kutu: ' + AD[d.c] + '. Şimdi bunu gösteren ipucunu bul.';
       geri.hidden = false;
-      puanEl.textContent = '⭐ ' + puan + ' puan';
-      ileri.textContent = sira < liste.length-1 ? 'Sonraki cümle →' : 'Sonucu gör →';
-      ileri.hidden = false;
-      ileri.focus();
+      puanYaz();
+      izSor(d);
     });
   });
   ileri.addEventListener('click', function(){
     sira++;
     if(sira < liste.length){ goster(); return; }
     cubuk.style.width = '100%';
-    durumEl.hidden = true; geri.hidden = true; ileri.hidden = true;
+    durumEl.hidden = true; geri.hidden = true; ileri.hidden = true; izKutu.hidden = true;
     kutular.forEach(function(k){ k.hidden = true; });
-    var oran = puan / liste.length;
-    sonMetin.textContent = liste.length + ' cümlenin ' + puan + ' tanesini doğru ayırdın. ' +
-      (oran >= .9 ? 'Muhteşem! Tevhit ve şirki çok iyi ayırt ediyorsun.' :
-       oran >= .6 ? 'Güzel! Yanlış yaptıklarının açıklamalarını bir daha okuyabilirsin.' :
-       '8. adımdaki “Her yardım istemek şirk değildir” bölümüne bir daha bakıp tekrar dene.');
+    var oran = (puan + izPuan) / (liste.length * 2);
+    sonMetin.textContent = liste.length + ' durumun ' + puan + ' tanesini doğru kutuya koydun; ' + izPuan + ' tanesinde ilk denemede doğru ipucunu buldun. ' +
+      (oran >= .9 ? 'Muhteşem! Sadece cevabı değil, nedenini de biliyorsun.' :
+       oran >= .6 ? 'Güzel! İpucunu bulamadığın durumların açıklamalarını bir daha okuyabilirsin.' :
+       '8. adımdaki “Yardım İstemek Şirk midir?” bölümüne bir daha bakıp tekrar dene.');
     son.hidden = false;
     $('#tvOyunTekrar').focus();
   });
