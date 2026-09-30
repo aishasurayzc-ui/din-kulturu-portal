@@ -1491,6 +1491,49 @@
     background:#fff; border:1px solid #e4e9ef; border-radius:14px; padding:9px 12px; margin:0 0 10px;
     font-weight:900; font-size:.9em; color:var(--navy); box-shadow:0 4px 12px rgba(16,24,40,.06);
   }
+
+  /* — davranış → kavram şeması (sıfatlar) — */
+  .pk-davranis-sema{ display:grid; gap:8px; grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); margin:10px 0 12px; }
+  .pk-davranis-sema div{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:2px;
+    background:#fff; border:2px solid var(--pk-renk); border-radius:14px; padding:10px 8px; }
+  .pk-davranis-sema span{ font-size:.72em; font-weight:900; letter-spacing:.04em; color:#4b5563; line-height:1.35; }
+  .pk-davranis-sema i{ font-style:normal; color:#8a94a3; }
+  .pk-davranis-sema b{ color:#fff; background:var(--pk-renk); border-radius:999px; padding:3px 12px; font-size:.95em; letter-spacing:.06em; }
+
+  /* — doğru mu? neden? — */
+  .pk-dyn-liste{ display:grid; gap:10px; }
+  .pk-dyn-karar{ display:flex; gap:8px; flex-wrap:wrap; }
+  .pk-dyn-neden{ margin-top:10px; padding-top:10px; border-top:1px dashed #cfc3ea; }
+  .pk-dyn-soru{ font-weight:900; margin:0 0 8px !important; color:#5b21b6; }
+  .pk-dyn-sec{ display:flex; flex-direction:column; gap:6px; }
+  .pk-dyn-sec .pk-sec{ text-align:left; border-radius:14px; }
+
+  /* — büyük resim testi — */
+  .pk-brt-havuz{ display:flex; flex-wrap:wrap; gap:8px; min-height:52px; padding:10px; margin:8px 0 14px;
+    border:2px dashed #cfd8e3; border-radius:14px; background:var(--acikgri); }
+  .pk-brt-cip{ font:inherit; font-weight:900; font-size:.93em; cursor:grab; min-height:44px; padding:8px 14px;
+    border-radius:12px; border:2px solid var(--navy); background:#fff; color:var(--navy); }
+  .pk-brt-cip.pk-secik{ background:var(--navy); color:#fff; }
+  .pk-brt-cip:focus-visible, .pk-brt-yuva:focus-visible{ outline:3px solid var(--sari); outline-offset:2px; }
+  .pk-brt{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .pk-brt-satir{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; width:100%; }
+  .pk-brt-yuva{ display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center; cursor:pointer;
+    min-width:min(100%,200px); max-width:260px; padding:9px 12px; border-radius:14px; border:2px dashed #9fb3c8; background:#fff; }
+  .pk-brt-yuva small{ font-size:.76em; font-weight:700; color:#5b6570; line-height:1.4; }
+  .pk-brt-bos{ font-weight:900; font-size:1.02em; color:#8a94a3; }
+  .pk-brt-yan{ border-color:#f1cf8f; background:#fffaf0; }
+  .pk-brt-cift{ flex-wrap:wrap; }
+  .pk-brt-uzerinde{ border-color:var(--mavi); background:#eaf4fb; }
+  .pk-brt-dolu{ border-style:solid; border-color:var(--yesil); background:#f3fbf5; cursor:default; }
+  .pk-brt-dolu .pk-brt-bos{ color:#1b4332; }
+  .pk-brt-hata{ border-color:var(--kirmizi); background:#ffe3e3; }
+  .pk-brt-metin{ width:100%; min-height:90px; resize:vertical; font:inherit; font-size:.96em;
+    border:1px solid #cfc3ea; border-radius:10px; padding:9px 11px; background:#fff; }
+  .pk-brt-sonuc{ list-style:none; padding:0; margin:12px 0 0; display:grid; gap:6px; }
+  .pk-brt-sonuc li{ background:#fff; border:1px solid #e4e9ef; border-left:4px solid #cfd8e3; border-radius:10px; padding:8px 11px; font-size:.94em; }
+  .pk-brt-sonuc li.pk-dogru{ border-left-color:var(--yesil); }
+  .pk-brt-sonuc li.pk-yanlis{ border-left-color:var(--sari); }
+  .pk-brt-sonuc li.pk-brt-ozet{ font-weight:900; background:#eef2ff; border-left-color:var(--navy); }
 </style>
 </head>
 <body>
@@ -1544,10 +1587,11 @@
     <a class="ka-ic-link" href="#pk-bul"><b>14</b>Kavramı Bul</a>
     <a class="ka-ic-link" href="#pk-eslestir"><b>15</b>Eşleştir</a>
     <a class="ka-ic-link" href="#pk-sirala"><b>16</b>Sırala</a>
-    <a class="ka-ic-link" href="#pk-dy"><b>17</b>Doğru mu, Yanlış mı?</a>
+    <a class="ka-ic-link" href="#pk-dy"><b>17</b>Doğru mu? Neden?</a>
     <a class="ka-ic-link" href="#pk-buyuk-resim"><b>18</b>Büyük Resim</a>
-    <a class="ka-ic-link" href="#pk-kontrol"><b>19</b>Kontrol Et</a>
-    <a class="ka-ic-link" href="#pk-anlat"><b>20</b>Kendi Cümlelerinle</a>
+    <a class="ka-ic-link" href="#pk-br-test"><b>19</b>Haritayı Sen Kur</a>
+    <a class="ka-ic-link" href="#pk-kontrol"><b>20</b>Kontrol Et</a>
+    <a class="ka-ic-link" href="#pk-anlat"><b>21</b>Kendi Cümlelerinle</a>
   </div>
 </div></div></section>
 
@@ -1589,14 +1633,14 @@
   <div class="pk-adim-bas"><span class="pk-adim-no">2</span><h2><small>Kavram</small>Peygamber Nedir? 📯</h2></div>
   <div class="pk-omurga" aria-label="Ana omurgada bu adım: PEYGAMBER"><span>ALLAH</span><i aria-hidden="true">›</i><span>VAHİY</span><i aria-hidden="true">›</i><span class="pk-om-aktif">PEYGAMBER</span><i aria-hidden="true">›</i><span>TEBLİĞ</span><i aria-hidden="true">›</i><span>İNSANLAR</span><i aria-hidden="true">›</i><span>TEVHİT + GÜZEL AHLAK</span></div>
   <div class="pk-kavram-giris">
-    <span class="pk-etiket pk-etiket-gercek">1 · Gerçek kavram</span>
+    <span class="pk-etiket pk-etiket-gercek">1 · Dinî olarak gerçek anlamı</span>
     <p><b>Peygamber</b> kelimesi Farsçadır ve “haber getiren” anlamına gelir.</p>
     <p>Peygamber; Allah'ın emir, yasak ve öğütlerini insanlara bildirmekle görevli kişidir. Peygamberlerin en önemli özelliği Allah'tan <b>vahiy</b> almalarıdır.</p>
   </div>
   <div class="pk-metafor">
     <span class="pk-ikon" aria-hidden="true">🤝</span>
     <div class="pk-metafor-govde">
-      <span class="pk-etiket">2 · Günlük hayattan benzetme · Güvenilir elçi</span>
+      <span class="pk-etiket">2 · Günlük hayatta nasıl anlarım? · Güvenilir elçi</span>
       <p>Bir ülkenin halkına ulaştırılması gereken çok önemli bir mesajı olduğunu düşün. Bu mesajı herkesin güvendiği bir <b>elçi</b> götürür.</p>
       <p>Elçi mesajı kendi isteğine göre değiştirmez. Kendisine verilen mesajı <b>olduğu gibi, doğru şekilde</b> ulaştırır.</p>
     </div>
@@ -1628,14 +1672,14 @@
   <div class="pk-adim-bas"><span class="pk-adim-no">3</span><h2><small>Kavram</small>Vahiy 📜</h2></div>
   <div class="pk-omurga" aria-label="Ana omurgada bu adım: ALLAH, VAHİY"><span class="pk-om-aktif">ALLAH</span><i aria-hidden="true">›</i><span class="pk-om-aktif">VAHİY</span><i aria-hidden="true">›</i><span>PEYGAMBER</span><i aria-hidden="true">›</i><span>TEBLİĞ</span><i aria-hidden="true">›</i><span>İNSANLAR</span><i aria-hidden="true">›</i><span>TEVHİT + GÜZEL AHLAK</span></div>
   <div class="pk-kavram-giris">
-    <span class="pk-etiket pk-etiket-gercek">1 · Gerçek kavram</span>
+    <span class="pk-etiket pk-etiket-gercek">1 · Dinî olarak gerçek anlamı</span>
     <p><b>Vahiy</b>, Yüce Allah'ın emir ve hükümlerini peygamberlere bildirmesidir.</p>
     <p>Allah, insanların akılla çözemeyeceği konularda doğru bilgiye ulaşmaları için vahiy göndermiştir. Vahyin amacı, insanları doğru yola yönlendirerek dünya ve ahiret mutluluğunu sağlamaktır.</p>
   </div>
   <div class="pk-metafor">
     <span class="pk-ikon" aria-hidden="true">🗂️</span>
     <div class="pk-metafor-govde">
-      <span class="pk-etiket">2 · Günlük hayattan benzetme · Görev mesajı</span>
+      <span class="pk-etiket">2 · Günlük hayatta nasıl anlarım? · Görev mesajı</span>
       <p>Bir kurtarma ekibine, ne yapacağını anlatan bir <b>görev mesajı</b> verildiğini düşün. Ekip ne yapacağını bu mesajdan öğrenir.</p>
     </div>
   </div>
@@ -1668,13 +1712,13 @@
   <div class="pk-adim-bas"><span class="pk-adim-no">4</span><h2><small>Kavram</small>Tebliğ 📨</h2></div>
   <div class="pk-omurga" aria-label="Ana omurgada bu adım: PEYGAMBER, TEBLİĞ, İNSANLAR"><span>ALLAH</span><i aria-hidden="true">›</i><span>VAHİY</span><i aria-hidden="true">›</i><span class="pk-om-aktif">PEYGAMBER</span><i aria-hidden="true">›</i><span class="pk-om-aktif">TEBLİĞ</span><i aria-hidden="true">›</i><span class="pk-om-aktif">İNSANLAR</span><i aria-hidden="true">›</i><span>TEVHİT + GÜZEL AHLAK</span></div>
   <div class="pk-kavram-giris">
-    <span class="pk-etiket pk-etiket-gercek">1 · Gerçek kavram</span>
+    <span class="pk-etiket pk-etiket-gercek">1 · Dinî olarak gerçek anlamı</span>
     <p><b>Tebliğ</b>, peygamberin Allah'tan aldığı vahyi insanlara <b>eksiksiz</b> ulaştırmasıdır.</p>
   </div>
   <div class="pk-metafor">
     <span class="pk-ikon" aria-hidden="true">🏫</span>
     <div class="pk-metafor-govde">
-      <span class="pk-etiket">2 · Günlük hayattan benzetme · Emanet edilen duyuru</span>
+      <span class="pk-etiket">2 · Günlük hayatta nasıl anlarım? · Emanet edilen duyuru</span>
       <p>Öğretmen bir öğrenciye şöyle der: <b>“Sınıfa duyur: Yarın gezi var. Saat 9'da okulda olun, kimliğinizi getirin.”</b></p>
       <p>Öğrenci bu duyuruyu hiçbir şeyi eklemeden, çıkarmadan ve değiştirmeden sınıfa ulaştırır.</p>
     </div>
@@ -1700,6 +1744,34 @@
 <article class="pk-adim" id="pk-vahiy-teblig">
   <div class="pk-adim-bas"><span class="pk-adim-no">5</span><h2><small>Karıştırma!</small>Vahiy ve Tebliğ Aynı Şey Değildir ⚖️</h2></div>
   <div class="pk-omurga" aria-label="Ana omurgada bu adım: VAHİY, TEBLİĞ"><span>ALLAH</span><i aria-hidden="true">›</i><span class="pk-om-aktif">VAHİY</span><i aria-hidden="true">›</i><span>PEYGAMBER</span><i aria-hidden="true">›</i><span class="pk-om-aktif">TEBLİĞ</span><i aria-hidden="true">›</i><span>İNSANLAR</span><i aria-hidden="true">›</i><span>TEVHİT + GÜZEL AHLAK</span></div>
+  <div class="pk-akis pk-akis-dikey" role="list" aria-label="Allah, vahiy, peygamber, tebliğ, insanlar">
+    <div class="pk-dugum pk-d-ana" role="listitem">ALLAH</div><span class="pk-ok" aria-hidden="true">↓</span>
+    <div class="pk-dugum pk-d-vahiy" role="listitem">VAHİY<small>Allah'tan peygambere</small></div><span class="pk-ok" aria-hidden="true">↓</span>
+    <div class="pk-dugum pk-d-peygamber" role="listitem">PEYGAMBER</div><span class="pk-ok" aria-hidden="true">↓</span>
+    <div class="pk-dugum" role="listitem">TEBLİĞ<small>peygamberden insanlara</small></div><span class="pk-ok" aria-hidden="true">↓</span>
+    <div class="pk-dugum pk-d-insan" role="listitem">İNSANLAR</div>
+  </div>
+  <div class="pk-soru" data-ac="pk-vt-0">
+    <p class="pk-soru-metin">Soru 1: Vahiy nedir?</p>
+    <div class="pk-secenekler">
+      <button type="button" class="pk-sec" data-dogru>Allah'ın peygambere bildirdiği ilahi mesaj</button>
+      <button type="button" class="pk-sec">Peygamberin insanlara verdiği öğüt</button>
+      <button type="button" class="pk-sec">Peygamberin kendi düşüncesi</button>
+    </div>
+    <p class="pk-geri" aria-live="polite" data-evet="Doğru! VAHİY = Allah'tan peygambere." data-hayir="Vahiy, Allah'ın peygambere bildirdiği ilahi mesajdır. VAHİY = Allah'tan peygambere."></p>
+  </div>
+  <div class="pk-sonra" id="pk-vt-0">
+    <div class="pk-soru" data-ac="pk-vt-1">
+      <p class="pk-soru-metin">Soru 2: Peygamber aldığı mesajı insanlara ulaştırdığında buna ne denir?</p>
+      <div class="pk-secenekler">
+        <button type="button" class="pk-sec">Vahiy</button>
+        <button type="button" class="pk-sec" data-dogru>Tebliğ</button>
+        <button type="button" class="pk-sec">Mucize</button>
+      </div>
+      <p class="pk-geri" aria-live="polite" data-evet="Doğru! TEBLİĞ = Peygamberden insanlara." data-hayir="Peygamberin mesajı insanlara ulaştırmasına tebliğ denir. TEBLİĞ = Peygamberden insanlara."></p>
+    </div>
+  </div>
+  <div class="pk-sonra" id="pk-vt-1">
   <div class="pk-ikili-kart">
     <div class="pk-ik pk-ik-vahiy">
       <small>ALLAH → PEYGAMBER</small>
@@ -1734,6 +1806,7 @@
     </div>
     <p class="pk-hatirla pk-sonra" id="pk-vt-son"><span aria-hidden="true">⚖️</span><span><small>Bunu şöyle hatırla</small>Vahiy Allah'tan peygambere gelir. Tebliğ peygamberden insanlara gider.</span></p>
   </div>
+  </div>
 </article>
 
 <!-- ============ 6. NEBİ VE RESUL ============ -->
@@ -1741,7 +1814,7 @@
   <div class="pk-adim-bas"><span class="pk-adim-no">6</span><h2><small>Kavram</small>Nebi ve Resul 🏷️</h2></div>
   <div class="pk-omurga" aria-label="Ana omurgada bu adım: PEYGAMBER"><span>ALLAH</span><i aria-hidden="true">›</i><span>VAHİY</span><i aria-hidden="true">›</i><span class="pk-om-aktif">PEYGAMBER</span><i aria-hidden="true">›</i><span>TEBLİĞ</span><i aria-hidden="true">›</i><span>İNSANLAR</span><i aria-hidden="true">›</i><span>TEVHİT + GÜZEL AHLAK</span></div>
   <div class="pk-kavram-giris">
-    <span class="pk-etiket pk-etiket-gercek">1 · Gerçek kavram</span>
+    <span class="pk-etiket pk-etiket-gercek">1 · Dinî olarak gerçek anlamı</span>
     <p>Kur'an-ı Kerim peygamberler için iki kelime kullanır:</p>
   </div>
   <div class="pk-ikili">
@@ -1749,18 +1822,18 @@
     <div class="pk-terim pk-terim-resul"><b>RESUL</b><span>Elçi</span><span style="font-weight:600;font-size:.9em">Allah'ın mesajını insanlara ulaştırmak üzere gönderilen elçi / peygamber</span></div>
   </div>
   <div class="pk-kavram pk-kavram-tevhit" style="text-align:center">
-    <p style="margin:0;font-weight:900;font-size:1.05em">Bunlar iki farklı peygamber türü değildir. Peygamberlik kavramını farklı yönleriyle anlamamıza yardımcı olan kavramlardır.</p>
+    <p style="margin:0;font-weight:900;font-size:1.05em">Bunları iki farklı peygamber türü gibi düşünmemeliyiz. Nebi ve resul kavramları peygamberliği farklı yönleriyle anlamamıza yardımcı olur.</p>
   </div>
   <div class="pk-metafor">
     <span class="pk-ikon" aria-hidden="true">🙋</span>
     <div class="pk-metafor-govde">
-      <span class="pk-etiket">2 · Günlük hayattan benzetme · Sınıf başkanı</span>
+      <span class="pk-etiket">2 · Günlük hayatta nasıl anlarım? · Sınıf başkanı</span>
       <p>Sınıf başkanı, okul müdürlüğünden önemli bir <b>haberi öğrenir</b>. Aynı zamanda bu haberi sınıfa ulaştırmak için <b>görevlendirilmiştir</b>.</p>
       <p>Haberi öğrenen de, ulaştırmakla görevlendirilen de <b>aynı kişidir</b>. Sadece onu iki farklı yönüyle anlatıyoruz.</p>
     </div>
   </div>
   <div class="pk-uyari"><span aria-hidden="true">⚠️</span><p style="margin:0"><b>Dikkat:</b> Bu sadece anlamamıza yardımcı olan bir benzetmedir. Vahiy, günlük hayattaki bir mesajlaşma değildir.</p></div>
-  <p class="pk-donus"><b>3 · Gerçek kavrama dönüş:</b> “Nebi” kelimesi peygamberin Allah'tan vahiy alan yönünü, “resul” kelimesi ise Allah'ın mesajını insanlara ulaştırmak üzere gönderilmiş olmasını anlatır. İkisi de peygamberliği anlatır.</p>
+  <p class="pk-donus"><b>3 · Gerçek kavrama dönüş:</b> Nebi ve resul, aynı peygamberlik görevini farklı yönlerden anlatan iki kelimedir. “Nebi alır, resul götürür” gibi kesin bir formül <b>yoktur</b>; Kur'an aynı peygamber için iki kelimeyi birlikte kullanabilir.</p>
   <div class="pk-ornek"><span class="pk-etiket pk-etiket-ornek">Kısa örnek</span>
     <p>Kur'an'da Hz. İsmail için “O, bir resul, bir nebi idi.” denir (Meryem suresi, 54. ayet). Yani iki kelime <b>aynı peygamber</b> için birlikte kullanılır.</p></div>
   <div class="pk-ornek"><span class="pk-etiket pk-etiket-ornek">Bilgi notu</span>
@@ -1783,7 +1856,29 @@
       </div>
       <p class="pk-geri" aria-live="polite" data-evet="Doğru tespit! Bunlar iki ayrı peygamber türü değildir; peygamberliği farklı yönleriyle anlatan kavramlardır. Hz. İsmail için ikisi birlikte kullanılır." data-hayir="Dikkat: Bunlar iki ayrı peygamber türü değildir. Aynı peygamber için ikisi birlikte kullanılabilir; Hz. İsmail örneğini hatırla."></p>
     </div>
-    <p class="pk-hatirla pk-sonra" id="pk-resul-son"><span aria-hidden="true">🏷️</span><span><small>Bunu şöyle hatırla</small>Nebi = Haber veren · Resul = Elçi · İkisi de peygamberliği anlatır.</span></p>
+    <div class="pk-sonra" id="pk-resul-son">
+    <p style="margin:14px 0 6px;font-weight:900;color:var(--navy)">🔗 Kavramsal ilişki: Nebi ve resul nasıl ilişkilidir?</p>
+    <div class="pk-soru" data-ac="pk-resul-3">
+      <p class="pk-soru-metin">Kur'an'da Hz. İsmail için “O, bir resul, bir nebi idi.” denmesi neyi gösterir?</p>
+      <div class="pk-secenekler">
+        <button type="button" class="pk-sec" data-dogru>İki kavram aynı peygamber için birlikte kullanılabilir.</button>
+        <button type="button" class="pk-sec">Hz. İsmail iki farklı peygamber türüne aynı anda aitti.</button>
+        <button type="button" class="pk-sec">Nebi ile resul zıt anlamlı kelimelerdir.</button>
+      </div>
+      <p class="pk-geri" aria-live="polite" data-evet="Doğru! Nebi ve resul, aynı peygamberliği farklı yönleriyle anlatır." data-hayir="Ayet, iki kavramın aynı peygamber için birlikte kullanılabildiğini gösterir. Bunlar iki ayrı tür ya da zıt kelimeler değildir."></p>
+    </div>
+    <div class="pk-sonra" id="pk-resul-3">
+      <div class="pk-soru" data-ac="pk-resul-4">
+        <p class="pk-soru-metin">Bir arkadaşın “Nebiler sadece vahiy alır, resuller sadece götürür.” diyor. Ona ne söylersin?</p>
+        <div class="pk-secenekler">
+          <button type="button" class="pk-sec">Haklısın, kural tam olarak budur.</button>
+          <button type="button" class="pk-sec" data-dogru>Bu kesin bir formül değil; iki kavram peygamberliği farklı yönleriyle anlatır.</button>
+        </div>
+        <p class="pk-geri" aria-live="polite" data-evet="Harika! Kesin ve mekanik bir ayrım yapmak yanlış bir resim oluşturur." data-hayir="Dikkat: Bu kesin bir formül değildir. Nebi ve resul, aynı peygamberliği farklı yönleriyle anlatır."></p>
+      </div>
+      <p class="pk-hatirla pk-sonra" id="pk-resul-4"><span aria-hidden="true">🏷️</span><span><small>Bunu şöyle hatırla</small>Nebi = Haber veren · Resul = Elçi · İkisi de peygamberliği anlatır.</span></p>
+    </div>
+    </div>
   </div>
   <details class="pk-bagla"><summary>Nebi ve resul kavramlarını neden birbirinden tamamen farklı iki kişi gibi düşünmemeliyiz?</summary>
     <p>Çünkü ikisi de aynı peygamberlik görevini anlatır. Aynı peygamber için ikisi birlikte kullanılabilir. İki ayrı insan türü gibi düşünürsek “biri sadece alır, öteki sadece taşır” gibi yanlış bir resim oluşur.</p></details>
@@ -1844,6 +1939,14 @@
   <div class="pk-adim-bas"><span class="pk-adim-no">8</span><h2><small>Peygamberlerin ortak özellikleri</small>Peygamberin 5 Güven Kalkanı 🛡️</h2></div>
   <div class="pk-omurga" aria-label="Ana omurgada bu adım: PEYGAMBER"><span>ALLAH</span><i aria-hidden="true">›</i><span>VAHİY</span><i aria-hidden="true">›</i><span class="pk-om-aktif">PEYGAMBER</span><i aria-hidden="true">›</i><span>TEBLİĞ</span><i aria-hidden="true">›</i><span>İNSANLAR</span><i aria-hidden="true">›</i><span>TEVHİT + GÜZEL AHLAK</span></div>
   <p>Bir mesaja güvenmek için onu getirene güvenmemiz gerekir. Peygamberlerin 5 ortak özelliği vardır. Her kartı sırayla oku: <b>günlük örnek → davranış → kavram → dinî anlam → neden?</b></p>
+  <div class="pk-davranis-sema" role="list" aria-label="Davranıştan kavrama">
+    <div role="listitem" style="--pk-renk:#1d4ed8"><span>DOĞRU KONUŞUYOR</span><i aria-hidden="true">↓</i><b>SIDK</b></div>
+    <div role="listitem" style="--pk-renk:#0f766e"><span>GÜVENİLİYOR</span><i aria-hidden="true">↓</i><b>EMANET</b></div>
+    <div role="listitem" style="--pk-renk:#7c3aed"><span>AKILLI VE ANLAYIŞLI</span><i aria-hidden="true">↓</i><b>FETANET</b></div>
+    <div role="listitem" style="--pk-renk:#b91c1c"><span>ALLAH'IN KORUMASIYLA GÜNAHLARDAN KORUNMUŞ</span><i aria-hidden="true">↓</i><b>İSMET</b></div>
+    <div role="listitem" style="--pk-renk:#b45309"><span>ALLAH'IN MESAJINI İNSANLARA ULAŞTIRIYOR</span><i aria-hidden="true">↓</i><b>TEBLİĞ</b></div>
+  </div>
+  <p>Bu şema sadece özet. Asıl öğrenme aşağıdaki kartlarda:</p>
   <div class="pk-kalkan-bant" aria-hidden="true">
     <span style="--pk-renk:#1d4ed8">🧭 Sıdk</span><span style="--pk-renk:#0f766e">🔐 Emanet</span><span style="--pk-renk:#7c3aed">🧠 Fetanet</span><span style="--pk-renk:#b91c1c">🛡️ İsmet</span><span style="--pk-renk:#b45309">📨 Tebliğ</span>
   </div>
@@ -1856,7 +1959,7 @@
         <li data-n="4"><small>Dinî anlam</small><b>Doğru sözlü olmak.</b> Peygamber hiçbir zaman yalan söylemez.</li>
       </ol>
       <p class="pk-kart-neyi">🧭 Hatırlama ipucu: <b>doğruluk pusulası</b> — hep doğru yönü gösterir.</p>
-      <details><summary>5 · Neden? Peygamberin doğru sözlü olması neden önemlidir?</summary><p>Yalan söyleyen birinin getirdiği habere güvenilmez. Hz. Muhammed (sav) Mekkelilere “Size bu dağın arkasında düşman var desem inanır mısınız?” diye sorduğunda “Evet, senin yalan söylediğini hiç görmedik.” demişlerdi.</p></details>
+      <details><summary>5 · Neden peygamber için bu özellik önemlidir?</summary><p>Yalan söyleyen birinin getirdiği habere güvenilmez. Hz. Muhammed (sav) Mekkelilere “Size bu dağın arkasında düşman var desem inanır mısınız?” diye sorduğunda “Evet, senin yalan söylediğini hiç görmedik.” demişlerdi.</p></details>
     </div>
     <div class="pk-kart" style="--pk-renk:#0f766e">
       <ol class="pk-basamak">
@@ -1866,7 +1969,7 @@
         <li data-n="4"><small>Dinî anlam</small><b>Güvenilir olmak.</b> Peygamberler, insanların gönül rahatlığıyla güvenebileceği kişilerdir.</li>
       </ol>
       <p class="pk-kart-neyi">🔐 Hatırlama ipucu: <b>güvenli kasa</b> — koyduğun şey kaybolmaz.</p>
-      <details><summary>5 · Neden? Peygamberlerin güvenilir olması neden önemlidir?</summary><p>Güvenmediğimiz birinin getirdiği mesajı dinlemeyiz. Hz. Muhammed (sav), peygamberliğinden önce de <b>el-Emin</b> (güvenilir) diye tanınırdı; insanlar değerli eşyalarını ona emanet ederdi.</p></details>
+      <details><summary>5 · Neden peygamber için bu özellik önemlidir?</summary><p>Güvenmediğimiz birinin getirdiği mesajı dinlemeyiz. Hz. Muhammed (sav), peygamberliğinden önce de <b>el-Emin</b> (güvenilir) diye tanınırdı; insanlar değerli eşyalarını ona emanet ederdi.</p></details>
     </div>
     <div class="pk-kart" style="--pk-renk:#7c3aed">
       <ol class="pk-basamak">
@@ -1876,7 +1979,7 @@
         <li data-n="4"><small>Dinî anlam</small><b>Akıllı ve anlayışlı olmak.</b> Peygamberler akıllı, zeki ve anlayışlıdır.</li>
       </ol>
       <p class="pk-kart-neyi">🧠 Hatırlama ipucu: <b>problem çözen zihin</b>.</p>
-      <details><summary>5 · Neden? Peygamberin akıllı ve anlayışlı olması neden önemlidir?</summary><p>Vahyi doğru anlamak, insanlara anlatmak ve sorunları çözmek için. Kâbe onarılırken Hacerülesved'i yerine kimin koyacağı tartışıldı. Hz. Muhammed (sav) taşı bir örtünün üzerine koydu, her kabileden birine örtünün ucundan tutturdu ve taşı birlikte taşıdılar. Böylece kavga önlendi.</p></details>
+      <details><summary>5 · Neden peygamber için bu özellik önemlidir?</summary><p>Vahyi doğru anlamak, insanlara anlatmak ve sorunları çözmek için. Kâbe onarılırken Hacerülesved'i yerine kimin koyacağı tartışıldı. Hz. Muhammed (sav) taşı bir örtünün üzerine koydu, her kabileden birine örtünün ucundan tutturdu ve taşı birlikte taşıdılar. Böylece kavga önlendi.</p></details>
     </div>
     <div class="pk-kart" style="--pk-renk:#b91c1c">
       <ol class="pk-basamak">
@@ -1886,7 +1989,7 @@
         <li data-n="4"><small>Dinî anlam</small><b>Allah'ın korumasıyla günahlardan korunmuş olmak.</b></li>
       </ol>
       <p class="pk-kart-neyi">🛡️ Hatırlama ipucu: <b>koruyucu kalkan</b>. Fark: İnsanlar kötülükten uzak durmaya çalışır; peygamberler ise <b>Allah'ın korumasıyla</b> günahlardan korunmuşlardır.</p>
-      <details><summary>5 · Neden? Peygamberlerin günahlardan korunmuş olması neden önemlidir?</summary><p>Bu yüzden peygamberlerin davranışlarını güvenle örnek alabiliriz.</p></details>
+      <details><summary>5 · Neden peygamber için bu özellik önemlidir?</summary><p>Bu yüzden peygamberlerin davranışlarını güvenle örnek alabiliriz.</p></details>
     </div>
     <div class="pk-kart" style="--pk-renk:#b45309">
       <ol class="pk-basamak">
@@ -1896,10 +1999,10 @@
         <li data-n="4"><small>Dinî anlam</small><b>Allah'ın mesajını insanlara ulaştırmak.</b> Peygamberler Allah'tan aldıkları vahyi eksiksiz ulaştırırlar.</li>
       </ol>
       <p class="pk-kart-neyi">📨 Hatırlama ipucu: <b>güvenilir haberci</b>. Tebliğ hem bir <b>görev</b> (7. adım) hem de bir <b>özelliktir</b>.</p>
-      <details><summary>5 · Neden? Mesajın eksiksiz ulaşması neden önemlidir?</summary><p>Eksik ya da değişmiş bir mesaj, insanları yanlış yola götürür. Peygamber vahyin tamamını insanlara ulaştırır.</p></details>
+      <details><summary>5 · Neden peygamber için bu özellik önemlidir?</summary><p>Eksik ya da değişmiş bir mesaj, insanları yanlış yola götürür. Peygamber vahyin tamamını insanlara ulaştırır.</p></details>
     </div>
   </div>
-  <div class="pk-uyari"><span aria-hidden="true">⚠️</span><p style="margin:0"><b>Dikkat:</b> Pusula, kasa, kalkan sadece <b>hatırlama ipuçlarıdır</b>. Sınavda ve konuşurken gerçek kavramları kullan: <b>Sıdk, Emanet, Fetanet, İsmet, Tebliğ.</b></p></div>
+  <div class="pk-uyari"><span aria-hidden="true">⚠️</span><p style="margin:0"><b>Dikkat:</b> Pusula, kasa, kalkan, postacı sadece <b>hatırlama ipuçlarıdır</b>. Bu yalnızca anlamamıza yardımcı olan bir benzetmedir. Peygamberlik ve vahiy günlük hayattaki postacılık gibi değildir. Sınavda ve konuşurken gerçek kavramları kullan: <b>Sıdk, Emanet, Fetanet, İsmet, Tebliğ.</b></p></div>
   <p class="pk-hatirla"><span aria-hidden="true">🛡️</span><span><small>Bunu şöyle hatırla</small>Doğru · Güvenilir · Akıllı · Korunmuş · Eksiksiz ulaştıran</span></p>
   <details class="pk-bagla"><summary>Peygamberin güvenilir olması, verdiği mesajın anlaşılması ve kabul edilmesi açısından neden önemlidir?</summary>
     <p>İnsanlar mesaja, onu getirene güvendikleri ölçüde kulak verir. Doğru sözlü, güvenilir ve söylediğini yaşayan birinin getirdiği mesaj hem daha kolay kabul edilir hem de yanlış anlaşılmaz.</p></details>
@@ -1910,14 +2013,14 @@
   <div class="pk-adim-bas"><span class="pk-adim-no">9</span><h2><small>Kavram</small>Mucize ✨</h2></div>
   <div class="pk-omurga" aria-label="Ana omurgada bu adım: ALLAH, PEYGAMBER"><span class="pk-om-aktif">ALLAH</span><i aria-hidden="true">›</i><span>VAHİY</span><i aria-hidden="true">›</i><span class="pk-om-aktif">PEYGAMBER</span><i aria-hidden="true">›</i><span>TEBLİĞ</span><i aria-hidden="true">›</i><span>İNSANLAR</span><i aria-hidden="true">›</i><span>TEVHİT + GÜZEL AHLAK</span></div>
   <div class="pk-kavram-giris">
-    <span class="pk-etiket pk-etiket-gercek">1 · Gerçek kavram</span>
+    <span class="pk-etiket pk-etiket-gercek">1 · Dinî olarak gerçek anlamı</span>
     <p><b>Mucize</b>, peygamberlerin peygamber olduklarını destekleyen ve <b>Allah'ın izniyle</b> gerçekleşen olağanüstü olaylardır.</p>
     <p>Peygamberler, kendilerine inanmayanlara peygamberliklerini ispat etmek için Allah'ın izniyle mucize göstermişlerdir.</p>
   </div>
   <div class="pk-metafor">
     <span class="pk-ikon" aria-hidden="true">🔏</span>
     <div class="pk-metafor-govde">
-      <span class="pk-etiket">2 · Günlük hayattan benzetme · Mühür</span>
+      <span class="pk-etiket">2 · Günlük hayatta nasıl anlarım? · Mühür</span>
       <p>Eskiden önemli mektuplar <b>mühürlenirdi</b>. Mühür, mektubun gerçekten sahibinden geldiğini gösterirdi. Mührü, mektubu taşıyan kişi değil, mektubun sahibi basardı.</p>
     </div>
   </div>
@@ -1971,7 +2074,7 @@
     <div class="pk-dugum pk-d-insan" role="listitem">İLAHİ KİTAP</div>
   </div>
   <div class="pk-kavram-giris">
-    <span class="pk-etiket pk-etiket-gercek">1 · Gerçek kavram</span>
+    <span class="pk-etiket pk-etiket-gercek">1 · Dinî olarak gerçek anlamı</span>
     <p><b>İlahi kitaplar</b>, insanların dünya ve ahirette mutlu olabilmesi için Allah'ın peygamberleri aracılığıyla gönderdiği kitaplardır. Peygamberlere vahiy meleği <b>Cebrail</b> aracılığıyla ulaşmıştır.</p>
   </div>
   <p>Dört büyük ilahi kitap, gönderiliş sırasıyla:</p>
@@ -2073,13 +2176,13 @@
   <div class="pk-adim-bas"><span class="pk-adim-no">13</span><h2><small>Tevhit bağlantısı</small>Bütün Peygamberlerin Ortak Çağrısı 🔔</h2></div>
   <div class="pk-omurga" aria-label="Ana omurgada bu adım: İNSANLAR, TEVHİT + GÜZEL AHLAK"><span>ALLAH</span><i aria-hidden="true">›</i><span>VAHİY</span><i aria-hidden="true">›</i><span>PEYGAMBER</span><i aria-hidden="true">›</i><span>TEBLİĞ</span><i aria-hidden="true">›</i><span class="pk-om-aktif">İNSANLAR</span><i aria-hidden="true">›</i><span class="pk-om-aktif">TEVHİT + GÜZEL AHLAK</span></div>
   <div class="pk-kavram-giris">
-    <span class="pk-etiket pk-etiket-gercek">1 · Gerçek kavram</span>
+    <span class="pk-etiket pk-etiket-gercek">1 · Dinî olarak gerçek anlamı</span>
     <p>Bütün peygamberler insanları <b>tevhide</b> çağırmıştır: Allah birdir, ortağı yoktur; yalnızca O'na kulluk edilir.</p>
   </div>
   <div class="pk-metafor">
     <span class="pk-ikon" aria-hidden="true">🔔</span>
     <div class="pk-metafor-govde">
-      <span class="pk-etiket">2 · Günlük hayattan benzetme · İki zil sistemi</span>
+      <span class="pk-etiket">2 · Günlük hayatta nasıl anlarım? · İki zil sistemi</span>
       <p>Bir okulda aynı anda iki farklı zil sistemi olduğunu düşün. Biri “Ders başladı!”, öteki “Teneffüs!” diye çalıyor.</p>
     </div>
   </div>
@@ -2135,7 +2238,7 @@
     <div class="pk-secenekler">
       <button type="button" class="pk-sec">A) Fetanet</button><button type="button" class="pk-sec" data-dogru>B) Tebliğ</button><button type="button" class="pk-sec">C) İsmet</button><button type="button" class="pk-sec">D) Sıdk</button>
     </div>
-    <p class="pk-geri" aria-live="polite" data-evet="Doğru! Güvenilir haberci: Tebliğ, vahyi eksiksiz ulaştırmaktır." data-hayir="Güvenilir haberciyi hatırla: Mesajı eksiksiz ulaştırmak Tebliğ'dir."></p>
+    <p class="pk-geri" aria-live="polite" data-evet="Doğru! Güvenilir haberci: Tebliğ, vahyi eksiksiz ulaştırmaktır. Ama unutma: Bu yalnızca bir benzetmedir; peygamberlik ve vahiy postacılık gibi değildir." data-hayir="Güvenilir haberciyi hatırla: Mesajı eksiksiz ulaştırmak Tebliğ'dir."></p>
   </div>
   <div class="pk-soru" data-dusun>
     <p class="pk-soru-metin">5. Bir kalkan, onu taşıyanı gelen oklardan korur. Peygamberlerin günahlardan korunmuş olmasını hangi kavram anlatır?</p>
@@ -2209,6 +2312,10 @@
   <div class="pk-soru"><p class="pk-soru-metin">6. Tebliğ, Allah'ın peygambere mesaj bildirmesidir.</p>
     <div class="pk-secenekler"><button type="button" class="pk-sec">Doğru</button><button type="button" class="pk-sec" data-dogru>Yanlış</button></div>
     <p class="pk-geri" aria-live="polite" data-evet="Doğru tespit! Bu vahyin tanımıdır. Tebliğ, peygamberin mesajı insanlara ulaştırmasıdır." data-hayir="Yanlış: Allah'ın peygambere bildirmesi VAHİY'dir. Tebliğ, peygamberin onu insanlara ulaştırmasıdır."></p></div>
+  <h3 style="margin:22px 0 6px;font-size:1.05em;color:var(--navy)">Doğru mu? Neden? 🔎</h3>
+  <p>Bu sefer sadece işaretlemek yetmez: Önce <b>doğru mu, yanlış mı</b> karar ver, sonra <b>nedenini</b> seç.</p>
+  <div id="pkDyNeden" class="pk-dyn-liste"></div>
+  <noscript><p>Bu etkinlik için tarayıcında JavaScript açık olmalı.</p></noscript>
 </article>
 
 <!-- ============ 18. BÜYÜK RESİM ============ -->
@@ -2244,9 +2351,46 @@
   </div>
 </article>
 
-<!-- ============ 19. KONTROL ET ============ -->
+<!-- ============ 19. BÜYÜK RESİM TESTİ ============ -->
+<article class="pk-adim" id="pk-br-test">
+  <div class="pk-adim-bas"><span class="pk-adim-no">19</span><h2><small>Büyük resim testi</small>Haritayı Sen Kur 🧩</h2></div>
+  <p>Kavramları <b>sürükleyip</b> doğru kutuya bırak. (Dokunmatik ekranda: önce kavrama, sonra kutuya dokun.) Her kutudaki ipucu, kavramın diğerleriyle ilişkisini anlatır.</p>
+  <div class="pk-brt-havuz" id="pkBrtHavuz" aria-label="Yerleştirilecek kavramlar"></div>
+  <div class="pk-brt" id="pkBrt">
+    <div class="pk-brt-yuva" data-k="Allah"><small>Mesajın sahibi; insanlara rehberlik eder</small><span class="pk-brt-bos">?</span></div>
+    <span class="pk-ok" aria-hidden="true">↓</span>
+    <div class="pk-brt-yuva" data-k="Vahiy"><small>Allah'tan peygambere gelen ilahi mesaj</small><span class="pk-brt-bos">?</span></div>
+    <span class="pk-ok" aria-hidden="true">↓</span>
+    <div class="pk-brt-satir">
+      <div class="pk-brt-yuva" data-k="Peygamber"><small>Vahyi alan ve insanlara bildirmekle görevli kişi</small><span class="pk-brt-bos">?</span></div>
+      <div class="pk-brt-yuva pk-brt-yan" data-k="Mucize"><small>Peygamberliği destekleyen, Allah'ın izniyle olan olağanüstü olay</small><span class="pk-brt-bos">?</span></div>
+    </div>
+    <div class="pk-br-cift pk-brt-cift"><small>AYNI PEYGAMBERLİĞİN İKİ YÖNÜ</small>
+      <div class="pk-brt-yuva" data-k="Nebi"><small>“Haber veren”: vahiy alan peygamber</small><span class="pk-brt-bos">?</span></div>
+      <div class="pk-brt-yuva" data-k="Resul"><small>“Elçi”: mesajı ulaştırmak üzere gönderilen</small><span class="pk-brt-bos">?</span></div>
+    </div>
+    <span class="pk-ok" aria-hidden="true">↓</span>
+    <div class="pk-brt-satir">
+      <div class="pk-brt-yuva" data-k="Tebliğ"><small>Peygamberin mesajı insanlara ulaştırması</small><span class="pk-brt-bos">?</span></div>
+      <div class="pk-brt-yuva pk-brt-yan" data-k="İlahi kitap"><small>Vahyin kitap hâlinde insanlara ulaşması</small><span class="pk-brt-bos">?</span></div>
+    </div>
+    <span class="pk-ok" aria-hidden="true">↓</span>
+    <div class="pk-brt-yuva" data-k="İnsan"><small>Mesajı alan; inanç, ibadet ve güzel ahlaka çağrılan</small><span class="pk-brt-bos">?</span></div>
+  </div>
+  <p class="pk-geri" id="pkBrtGeri" aria-live="polite" hidden></p>
+  <div class="pk-sonra" id="pkBrtAnlat">
+    <div class="pk-kavram pk-kavram-tevhit" style="text-align:center"><p style="margin:0;font-weight:900;font-size:1.1em">Haritayı tamamladın. Şimdi kendi cümlenle anlat.</p></div>
+    <label for="pkBrtMetin" style="display:block;font-weight:800;margin:10px 0 6px">Allah'tan insanlara uzanan zinciri kendi cümlelerinle yaz. <b>Vahiy</b>, <b>peygamber</b> ve <b>tebliğ</b> kavramlarını kullan.</label>
+    <textarea id="pkBrtMetin" class="pk-brt-metin" placeholder="Örneğin: Allah ... "></textarea>
+    <button type="button" class="pk-ileri" id="pkBrtKontrol">✔ Cevabımı kontrol et</button>
+    <ul class="pk-brt-sonuc" id="pkBrtSonuc" aria-live="polite" hidden></ul>
+  </div>
+  <button type="button" class="pk-ileri" id="pkBrtTekrar" hidden>🔄 Haritayı yeniden kur</button>
+</article>
+
+<!-- ============ 20. KONTROL ET ============ -->
 <article class="pk-adim" id="pk-kontrol">
-  <div class="pk-adim-bas"><span class="pk-adim-no">19</span><h2><small>Ölçme</small>Kontrol Et 📝</h2></div>
+  <div class="pk-adim-bas"><span class="pk-adim-no">20</span><h2><small>Ölçme</small>Kontrol Et 📝</h2></div>
   <p>Sorular dört türde: <span class="pk-tur pk-tur-bilgi">Bilgi</span><span class="pk-tur pk-tur-iliski">Kavram ilişkisi</span><span class="pk-tur pk-tur-dusunme">Düşünme</span><span class="pk-tur pk-tur-yanilgi">Yanlış anlama</span></p>
   <div class="pk-kontrol-skor" id="pkKontrolSkor" aria-live="polite">✅ 0 doğru · 0 / 15 cevaplandı</div>
 
@@ -2300,9 +2444,9 @@
     <p class="pk-geri" aria-live="polite" data-evet="Doğru tespit! İlahi kitaplar Allah'ın vahiy yoluyla gönderdiği kitaplardır." data-hayir="Ece yanılıyor: İlahi kitaplar insan sözü değil; Allah'ın peygamberleri aracılığıyla gönderdiği kitaplardır."></p></div>
 </article>
 
-<!-- ============ 20. KENDİ CÜMLELERİNLE ============ -->
+<!-- ============ 21. KENDİ CÜMLELERİNLE ============ -->
 <article class="pk-adim" id="pk-anlat">
-  <div class="pk-adim-bas"><span class="pk-adim-no">20</span><h2><small>Sıra sende</small>Kendi Cümlelerinle Anlat ✍️</h2></div>
+  <div class="pk-adim-bas"><span class="pk-adim-no">21</span><h2><small>Sıra sende</small>Kendi Cümlelerinle Anlat ✍️</h2></div>
   <p>Ezberlediğin tanımları değil, <b>anladığını</b> yaz. Benzetmelerden yararlanabilirsin; ama sonunda gerçek kavramı kullan.</p>
   <ol class="pk-dusun-liste">
     <li><label for="pkAnlat1">Peygamber kimdir? Bir arkadaşına nasıl anlatırdın?</label><textarea id="pkAnlat1" data-kayit="1" placeholder="Cevabını buraya yazabilirsin..."></textarea></li>
@@ -2511,6 +2655,126 @@
       brSayac.textContent = n + ' / ' + brDugmeler.length + ' kart gezildi' + (n === brDugmeler.length ? ' · 🏆 Büyük resim tamam!' : '');
     });
   });
+
+  /* ——— Doğru mu? Neden? (önce karar, sonra gerekçe) ——— */
+  var DYN = [
+    {k:'Vahiy', m:'Vahiy, peygamberin kendi düşüncesidir.', d:false, n:['Çünkü vahiy Allah\'tandır; Allah\'ın peygambere bildirdiği ilahi mesajdır.','Çünkü vahiy meleklerin düşüncesidir.','Çünkü vahiy insanların ortak kararıdır.'], ok:0},
+    {k:'Tebliğ', m:'Tebliğ ile vahiy aynı şeydir.', d:false, n:['Çünkü tebliğ mucizenin diğer adıdır.','Çünkü vahiy Allah\'tan peygambere gelir; tebliğ peygamberden insanlara gider.','Çünkü tebliğ sadece kitap yazmaktır.'], ok:1},
+    {k:'Nebi', m:'Nebi ve resul iki farklı peygamber türüdür.', d:false, n:['Çünkü nebi ve resul, peygamberliği farklı yönleriyle anlatan kavramlardır; aynı peygamber için birlikte kullanılabilir.','Çünkü nebi diye bir kavram yoktur.','Çünkü resuller peygamber değildir.'], ok:0},
+    {k:'Resul', m:'“Resul” kelimesi elçi anlamına gelir.', d:true, n:['Çünkü resul, Allah\'ın mesajını insanlara ulaştırmak üzere gönderilen elçi/peygamberdir.','Çünkü resul, kitap demektir.','Çünkü resul yalnızca melekler için kullanılır.'], ok:0},
+    {k:'Mucize', m:'Mucize, peygamberin kendi gücüyle yaptığı bir iştir.', d:false, n:['Çünkü mucize bir sihir numarasıdır.','Çünkü mucizeyi herkes yapabilir.','Çünkü mucize, Allah\'ın izniyle gerçekleşen olağanüstü olaydır; peygamberin kendi gücü değildir.'], ok:2},
+    {k:'Sıdk', m:'Peygamberler gerektiğinde yalan söyleyebilir.', d:false, n:['Çünkü peygamberler sıdk sahibidir; hiçbir zaman yalan söylemezler.','Çünkü peygamberler hiç konuşmaz.','Çünkü yalan sadece şaka olursa söylenir.'], ok:0},
+    {k:'Emanet', m:'Emanet, peygamberlerin güvenilir olmasıdır.', d:true, n:['Çünkü emanet, peygamberlerin zengin olmasıdır.','Çünkü insanlar peygamberlere gönül rahatlığıyla güvenebilir; bu da mesajlarına güvenilmesini sağlar.','Çünkü emanet bir kitabın adıdır.'], ok:1},
+    {k:'Fetanet', m:'Fetanet, peygamberlerin akıllı ve anlayışlı olmasıdır.', d:true, n:['Çünkü fetanet, çok yemek yemektir.','Çünkü fetanet, mucize göstermektir.','Çünkü peygamberler vahyi doğru anlamak ve anlatmak için akıllı ve anlayışlıdır.'], ok:2},
+    {k:'İsmet', m:'İsmet, peygamberlerin kendi güçleriyle günahtan uzak durmasıdır.', d:false, n:['Çünkü ismet, Allah\'ın korumasıyla günahlardan korunmuş olmaktır.','Çünkü ismet, peygamberlerin hiç konuşmamasıdır.','Çünkü ismet, bir mucizenin adıdır.'], ok:0}
+  ];
+  var dynKok = $('#pkDyNeden');
+  if(dynKok) DYN.forEach(function(s, i){
+    var kutu = document.createElement('div'); kutu.className = 'pk-soru pk-dyn';
+    kutu.innerHTML = '<p class="pk-soru-metin"><span class="pk-tur pk-tur-yanilgi">' + s.k + '</span>' + s.m + '</p>' +
+      '<div class="pk-dyn-karar"><button type="button" class="pk-sec" data-d="1">Doğru</button><button type="button" class="pk-sec" data-d="0">Yanlış</button></div>' +
+      '<p class="pk-geri" aria-live="polite" hidden></p><div class="pk-dyn-neden" hidden><p class="pk-dyn-soru"></p><div class="pk-dyn-sec"></div><p class="pk-geri" aria-live="polite" hidden></p></div>';
+    var karar = $$('.pk-dyn-karar .pk-sec', kutu), g1 = $('.pk-dyn-karar + .pk-geri', kutu), nd = $('.pk-dyn-neden', kutu), g2 = $('.pk-dyn-neden .pk-geri', kutu);
+    karar.forEach(function(b){
+      b.addEventListener('click', function(){
+        var dogru = (b.dataset.d === '1') === s.d;
+        karar.forEach(function(x){ x.disabled = true; if((x.dataset.d === '1') === s.d) x.classList.add('pk-dogru'); });
+        if(!dogru) b.classList.add('pk-yanlis');
+        g1.className = 'pk-geri ' + (dogru ? 'pk-dogru' : 'pk-yanlis');
+        g1.textContent = (dogru ? '✅ Doğru karar! ' : '💡 Bu ifade aslında ') + (s.d ? 'DOĞRU.' : 'YANLIŞ.') ;
+        g1.hidden = false;
+        $('.pk-dyn-soru', nd).textContent = s.d ? 'Bu ifade neden doğrudur?' : 'Bu ifade neden yanlıştır?';
+        var sec = $('.pk-dyn-sec', nd);
+        s.n.forEach(function(metin, j){
+          var nb = document.createElement('button'); nb.type = 'button'; nb.className = 'pk-sec'; nb.textContent = metin;
+          nb.addEventListener('click', function(){
+            $$('.pk-sec', sec).forEach(function(x, t){ x.disabled = true; if(t === s.ok) x.classList.add('pk-dogru'); });
+            if(j !== s.ok) nb.classList.add('pk-yanlis');
+            g2.className = 'pk-geri ' + (j === s.ok ? 'pk-dogru' : 'pk-yanlis');
+            g2.textContent = j === s.ok ? '✅ Gerekçen doğru!' : '💡 Doğru gerekçe: ' + s.n[s.ok];
+            g2.hidden = false;
+            kutu.dataset.cevaplandi = '1';
+          });
+          sec.appendChild(nb);
+        });
+        nd.hidden = false;
+      });
+    });
+    dynKok.appendChild(kutu);
+  });
+
+  /* ——— Büyük Resim Testi: sürükle-bırak (+ dokun-yerleştir yedeği) ——— */
+  var brtHavuz = $('#pkBrtHavuz'), brtGeri = $('#pkBrtGeri'), brtTekrar = $('#pkBrtTekrar');
+  var brtYuvalar = $$('#pkBrt .pk-brt-yuva');
+  var brtSecili = null;
+  function brtYaz(sinif, metin){ brtGeri.className = 'pk-geri' + (sinif ? ' ' + sinif : ''); brtGeri.textContent = metin; brtGeri.hidden = false; }
+  function brtYerlestir(cip, yuva){
+    if(!cip || !yuva || yuva.classList.contains('pk-brt-dolu')) return;
+    if(cip.dataset.k === yuva.dataset.k){
+      $('.pk-brt-bos', yuva).textContent = cip.dataset.k;
+      yuva.classList.add('pk-brt-dolu');
+      cip.remove(); brtSecili = null;
+      var kalan = $$('#pkBrtHavuz .pk-brt-cip').length;
+      brtYaz('pk-dogru', kalan ? '✅ Doğru yer! ' + kalan + ' kavram kaldı.' : '🏆 Harita tamam!');
+      if(!kalan){ ac('pkBrtAnlat'); brtTekrar.hidden = false; }
+    } else {
+      yuva.classList.add('pk-brt-hata'); setTimeout(function(){ yuva.classList.remove('pk-brt-hata'); }, 700);
+      brtYaz('pk-yanlis', '💡 “' + cip.dataset.k + '” buraya ait değil. Kutudaki ipucunu tekrar oku.');
+    }
+  }
+  function brtKur(){
+    if(!brtHavuz) return;
+    brtHavuz.innerHTML = ''; brtGeri.hidden = true; brtTekrar.hidden = true; brtSecili = null;
+    var anlat = $('#pkBrtAnlat'); if(anlat) anlat.hidden = true;
+    brtYuvalar.forEach(function(y){ y.classList.remove('pk-brt-dolu'); $('.pk-brt-bos', y).textContent = '?'; });
+    karistir(brtYuvalar.map(function(y){ return y.dataset.k; })).forEach(function(k){
+      var c = document.createElement('button'); c.type = 'button'; c.className = 'pk-brt-cip'; c.textContent = k; c.dataset.k = k; c.draggable = true;
+      c.addEventListener('dragstart', function(e){ brtSecili = c; try{ e.dataTransfer.setData('text/plain', k); }catch(_){ } });
+      c.addEventListener('click', function(){
+        $$('#pkBrtHavuz .pk-brt-cip').forEach(function(x){ x.classList.remove('pk-secik'); });
+        c.classList.add('pk-secik'); brtSecili = c;
+        brtYaz('', '👉 Şimdi “' + k + '” için doğru kutuya dokun.');
+      });
+      brtHavuz.appendChild(c);
+    });
+  }
+  brtYuvalar.forEach(function(y){
+    y.tabIndex = 0; y.setAttribute('role', 'button');
+    y.addEventListener('dragover', function(e){ e.preventDefault(); y.classList.add('pk-brt-uzerinde'); });
+    y.addEventListener('dragleave', function(){ y.classList.remove('pk-brt-uzerinde'); });
+    y.addEventListener('drop', function(e){ e.preventDefault(); y.classList.remove('pk-brt-uzerinde'); brtYerlestir(brtSecili, y); });
+    y.addEventListener('click', function(){ if(brtSecili) brtYerlestir(brtSecili, y); });
+    y.addEventListener('keydown', function(e){ if((e.key === 'Enter' || e.key === ' ') && brtSecili){ e.preventDefault(); brtYerlestir(brtSecili, y); } });
+  });
+  if(brtTekrar) brtTekrar.addEventListener('click', brtKur);
+  brtKur();
+
+  /* Kendi cümlesiyle anlatım: basit kavram-ilişki kontrolü */
+  var brtKontrol = $('#pkBrtKontrol');
+  if(brtKontrol) brtKontrol.addEventListener('click', function(){
+    var t = ($('#pkBrtMetin').value || '').toLocaleLowerCase('tr');
+    var ilk = function(liste){ var m = -1; liste.forEach(function(k){ var i = t.indexOf(k); if(i > -1 && (m < 0 || i < m)) m = i; }); return m; };
+    var iAllah = ilk(['allah']), iVahiy = ilk(['vahiy','vahy']), iPey = ilk(['peygamber','nebi','resul','elçi']), iTeb = ilk(['tebliğ','teblig','ulaştır','bildir']), iIns = ilk(['insan']);
+    var yanilgi = /peygamberin kendi (düşünce|fikri|sözü)|vahiy ile tebliğ aynı|vahiy ve tebliğ aynı/.test(t);
+    var maddeler = [
+      [iVahiy > -1, '“Vahiy” kavramını kullandın.'],
+      [iPey > -1, '“Peygamber” kavramını kullandın.'],
+      [iTeb > -1, 'Tebliğ (mesajı insanlara ulaştırma) fikrine yer verdin.'],
+      [iAllah > -1 && iVahiy > -1, 'Vahyin Allah\'tan geldiğini belirttin.'],
+      [iVahiy > -1 && iTeb > -1 && iVahiy < iTeb, 'Sıra doğru: önce vahiy (Allah → peygamber), sonra tebliğ (peygamber → insanlar).'],
+      [iIns > -1, 'Mesajın insanlara ulaştığını söyledin.'],
+      [!yanilgi, 'Bir yanlış anlama (ör. “vahiy peygamberin kendi düşüncesidir”) yok.']
+    ];
+    var puan = maddeler.filter(function(m){ return m[0]; }).length;
+    var ul = $('#pkBrtSonuc');
+    ul.innerHTML = maddeler.map(function(m){ return '<li class="' + (m[0] ? 'pk-dogru' : 'pk-yanlis') + '">' + (m[0] ? '✅ ' : '⬜ ') + m[1] + '</li>'; }).join('') +
+      '<li class="pk-brt-ozet">' + (puan === maddeler.length ? '🏆 Harika! Vahiy, peygamber ve tebliğ ilişkisini doğru kurdun.' :
+        puan >= 4 ? '👍 İyi gidiyorsun. Eksik kalan maddeleri ekleyerek cümleni geliştir.' :
+        '💡 İpucu: “Allah, vahyi peygambere bildirir; peygamber de onu insanlara tebliğ eder.” yapısını kendi kelimelerinle kurmayı dene.') + '</li>';
+    ul.hidden = false;
+    try { localStorage.setItem('peygamberlik6_brt', $('#pkBrtMetin').value); } catch(e){}
+  });
+  try { var eski = localStorage.getItem('peygamberlik6_brt'); if(eski && $('#pkBrtMetin')) $('#pkBrtMetin').value = eski; } catch(e){}
 })();
 
 /* Kendi cümlelerinle: cevaplar yalnızca bu cihazda saklanır. */
