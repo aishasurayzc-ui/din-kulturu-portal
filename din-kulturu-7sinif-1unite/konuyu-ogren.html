@@ -1085,6 +1085,54 @@
     .ah-sec, .ah-alan, .ah-cubuk i{ transition:none !important; }
   }
 </style>
+<style id="ahiretAsamaStil">
+/* ======================================================================
+   AHİRETİN AŞAMALARI — yolculuk haritası (additive, "as-" önekli)
+   JavaScript gerekmez: her durak bir <details>.
+====================================================================== */
+  .as-harita{ clear:both; }
+  .as-yol{ list-style:none; margin:4px 0 0; padding:0; position:relative; }
+  .as-yol::before{ content:""; position:absolute; left:27px; top:28px; bottom:60px; width:4px; border-radius:4px;
+    background:linear-gradient(180deg,#40916c 0%,#6f4aa8 22%,#2f4a8f 45%,#12869a 70%,#1E3A8A 100%); opacity:.35; }
+  .as-durak{ position:relative; margin:0 0 10px; animation:asGir .5s cubic-bezier(.2,.8,.3,1) both; animation-delay:calc(var(--s,0) * 70ms); }
+  @keyframes asGir{ from{ opacity:0; transform:translateY(8px) } to{ opacity:1; transform:none } }
+  .as-durak details{ margin:0; }
+  .as-durak summary{ list-style:none; cursor:pointer; display:flex; align-items:center; gap:12px; padding:6px 10px 6px 0; border-radius:16px; min-height:58px; }
+  .as-durak summary::-webkit-details-marker{ display:none; }
+  .as-durak summary:hover .as-kart, .as-durak details[open] .as-kart{ border-color:var(--r); box-shadow:0 6px 16px rgba(16,24,40,.08); }
+  .as-durak summary:focus-visible{ outline:3px solid var(--sari,#f4a261); outline-offset:2px; }
+  .as-ikon{ position:relative; z-index:1; flex:0 0 58px; width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:1.7em; background:#fff; border:4px solid var(--r); box-shadow:0 4px 10px rgba(16,24,40,.12); }
+  .as-kart{ flex:1; background:#fff; border:2px solid #e4e9ef; border-radius:16px; padding:9px 14px; transition:border-color .15s, box-shadow .15s; }
+  .as-ad{ display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; font-weight:900; letter-spacing:.05em; color:var(--r); font-size:1.02em; }
+  .as-ad small{ font-size:.72em; letter-spacing:.06em; font-weight:800; color:#8a94a3; }
+  .as-kisa{ display:block; font-size:.93em; color:#374151; line-height:1.45; margin-top:2px; }
+  .as-ac{ font-size:.75em; font-weight:800; color:#8a94a3; white-space:nowrap; align-self:flex-start; margin-top:4px; }
+  .as-ac::after{ content:"+ Daha fazla"; }
+  details[open] .as-ac::after{ content:"− Kapat"; }
+  .as-detay{ margin:6px 0 4px 70px; padding:10px 14px; border-radius:14px; background:var(--a); font-size:.93em; line-height:1.55; color:#22333b; }
+  .as-burada{ display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.06em; background:#40916c; color:#fff; border-radius:999px; padding:2px 8px; }
+  .as-son{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); margin-left:70px; }
+  .as-son .as-durak{ margin:0; }
+  .as-son summary{ padding-right:0; }
+  .as-son .as-ikon{ flex-basis:50px; width:50px; height:50px; font-size:1.45em; }
+  .as-catal{ margin:0 0 6px 70px; font-size:.8em; font-weight:800; color:#8a94a3; }
+  .as-alt{ margin:12px 0 0; display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:.92em; }
+  .as-alt a{ font-weight:900; color:#0b6272; }
+  @media (max-width:520px){
+    .as-harita{ padding:13px 9px; }
+    .as-yol::before{ left:18px; }
+    .as-durak summary{ gap:8px; padding-right:0; }
+    .as-ikon{ flex-basis:40px; width:40px; height:40px; font-size:1.15em; border-width:3px; }
+    .as-kart{ padding:8px 10px; }
+    .as-ad{ font-size:.95em; }
+    .as-burada{ white-space:nowrap; }
+    .as-detay{ margin-left:0; }
+    .as-son, .as-catal{ margin-left:0; }
+    .as-ac{ display:none; }
+  }
+  @media (prefers-reduced-motion: reduce){ .as-durak{ animation:none !important; } }
+</style>
 </head>
 <body>
 <div id="portalNav" data-sinif="7" data-unite="1" data-asama="ogren"></div>
@@ -1228,6 +1276,27 @@
 <rect x="64" y="32" width="24" height="56" rx="4" fill="#0b6272"/>
 <circle cx="76" cy="20" r="7" fill="#6fd3de"/></g></g></svg></div>
     <p><b>Ömür</b>, Allah'ın her insana bahşettiği yaşama süresidir; bu sürenin sona erdiği an ise <b>ecel</b> olarak adlandırılır ve her canlı için kesin bir sondur. <b>Ahiret</b>, dünya yaşamından sonraki hayattır; imanın şartlarından biridir. Aşamaları sırasıyla: Ölüm → <b>Berzah</b> (kabir hayatı, sadece insanlar için geçerlidir) → <b>Kıyamet</b> (evrenin yok olması, İsrafil'in ilk üflemesi) → Diriliş/<b>Baas</b> (İsrafil'in ikinci üflemesi) → <b>Haşir</b>/<b>Mahşer</b> (toplanma) → Hesap günü, kişinin dünyada yaptığı her şeyin kaydedildiği <b>amel defteri</b> kendisine verilir ve <b>Mizan</b>'da iyilikler ile kötülükler tartılır → <b>Sırat</b> (cennetle cehennem arasında uzanan, herkesin geçmek zorunda olduğu köprü) → <b>Cennet</b> veya <b>Cehennem</b>.</p>
+<div class="ka-blok as-harita" id="as-harita">
+  <h4 class="ka-blok-bas">🗺️ Ahiretin Aşamaları — Yolculuk Haritası<span class="ka-rozet">Görsel</span></h4>
+  <p class="ka-blok-alt">Yukarıdan aşağıya doğru ilerle. Bir durağa dokunursan daha fazla bilgi açılır.</p>
+  <ol class="as-yol" aria-label="Ahiretin aşamaları, sırasıyla">
+    <li class="as-durak" style="--r:#40916c;--a:#eef7f1;--s:0"><details><summary><span class="as-ikon" aria-hidden="true">🌱</span><span class="as-kart"><span class="as-ad">DÜNYA HAYATI<small>IMTIHAN YERI</small> <span class="as-burada">BURADAYIZ</span></span><span class="as-kisa">Şu an buradayız. Yaptığımız iyilikler ve kötülükler bu hayatta şekillenir.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay"><b>Ömür</b>, Allah’ın her insana verdiği yaşama süresidir. Dünya hayatı geçicidir ama bu süre içinde yaptıklarımız ahirette karşımıza çıkar.</p></details></li>
+    <li class="as-durak" style="--r:#5b6570;--a:#f1f5f9;--s:1"><details><summary><span class="as-ikon" aria-hidden="true">🕯️</span><span class="as-kart"><span class="as-ad">ÖLÜM<small>ECEL GELIR</small></span><span class="as-kisa">Ömür sona erer; ruh bedenden ayrılır.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Ömrün sona erdiği ana <b>ecel</b> denir. Ölümün zamanını yalnızca Allah bilir. Ölüm bir yok oluş değil, yeni bir hayata geçiştir.</p></details></li>
+    <li class="as-durak" style="--r:#6f4aa8;--a:#f3eefb;--s:2"><details><summary><span class="as-ikon" aria-hidden="true">🪦</span><span class="as-kart"><span class="as-ad">BERZAH<small>KABIR HAYATI</small></span><span class="as-kisa">Ölümden kıyamete kadar süren kabir hayatı.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">“Berzah” ara, engel demektir: Dünya ile ahiret arasındaki bekleme âlemidir. Kabirdeki sorgu bu dönemde olur.</p></details></li>
+    <li class="as-durak" style="--r:#2f4a8f;--a:#ecf0fa;--s:3"><details><summary><span class="as-ikon" aria-hidden="true">🌪️</span><span class="as-kart"><span class="as-ad">KIYAMET<small>SÛRA ILK ÜFLEYIŞ</small></span><span class="as-kisa">İsrafil sûra ilk kez üfler; evrenin düzeni bozulur, her şey sona erer.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Kıyametin ne zaman kopacağını Allah’tan başka kimse bilmez.</p></details></li>
+    <li class="as-durak" style="--r:#c9740b;--a:#fff6e8;--s:4"><details><summary><span class="as-ikon" aria-hidden="true">🌅</span><span class="as-kart"><span class="as-ad">DİRİLİŞ (BA‘S)<small>SÛRA IKINCI ÜFLEYIŞ</small></span><span class="as-kisa">İsrafil sûra ikinci kez üfler; bütün insanlar yeniden diriltilir.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">İnsanı ilk kez yaratan Allah, onu yeniden diriltmeye de kadirdir.</p></details></li>
+    <li class="as-durak" style="--r:#0891a8;--a:#e6f7f8;--s:5"><details><summary><span class="as-ikon" aria-hidden="true">👥</span><span class="as-kart"><span class="as-ad">HAŞİR<small>MAHŞERDE TOPLANMA</small></span><span class="as-kisa">Diriltilen insanlar hesap için büyük bir meydanda toplanır.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Toplanmaya <b>haşir</b>, insanların toplandığı yere <b>mahşer</b> denir.</p></details></li>
+    <li class="as-durak" style="--r:#12869a;--a:#e6f7f8;--s:6"><details><summary><span class="as-ikon" aria-hidden="true">⚖️</span><span class="as-kart"><span class="as-ad">HESAP · MİZAN<small>AMEL DEFTERI VE TERAZI</small></span><span class="as-kisa">Herkese amel defteri verilir; iyilikler ve kötülükler adaletle tartılır.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Kimseye haksızlık edilmez: Zerre kadar iyilik de kötülük de karşılığını bulur. Konu 3’ün sonundaki “Ahiret Neden Önemli?” bölümünde bunu düşüneceğiz.</p></details></li>
+    <li class="as-durak" style="--r:#1E3A8A;--a:#eef2ff;--s:7"><details><summary><span class="as-ikon" aria-hidden="true">🌉</span><span class="as-kart"><span class="as-ad">SIRAT<small>KÖPRÜ</small></span><span class="as-kisa">Herkesin geçmek zorunda olduğu köprü.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Dünyada iman edip iyi işler yapanlar sırattan kolayca geçer.</p></details></li>
+    <li class="as-durak" style="--s:8"><p class="as-catal">↙ Yolun sonu iki yurttan birine çıkar ↘</p>
+      <div class="as-son">
+      <div class="as-durak" style="--r:#40916c;--a:#eef7f1;--s:9"><details open><summary><span class="as-ikon" aria-hidden="true">🌳</span><span class="as-kart"><span class="as-ad">CENNET</span><span class="as-kisa">İman edip iyi işler yapanların sonsuz mutluluk yurdu.</span></span></summary></details></div>
+      <div class="as-durak" style="--r:#b91c1c;--a:#fff1f1;--s:10"><details open><summary><span class="as-ikon" aria-hidden="true">🔥</span><span class="as-kart"><span class="as-ad">CEHENNEM</span><span class="as-kisa">İnkâr eden ve kötülükte ısrar edenlerin ceza yeri.</span></span></summary></details></div>
+      </div></li>
+  </ol>
+  <p class="as-alt">🔗 Bu yolculuk bugünkü davranışlarımızı neden etkiler? <a href="#ah-neden">Ahiret Neden Önemli? bölümüne git →</a></p>
+</div>
+
   </div>
   <div class="zb-kutu zb-merak">
     <p class="zb-baslik">🤔 Merak Ettin mi?</p>
