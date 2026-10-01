@@ -932,6 +932,159 @@
   /* Başlık rozetleri: aynı karikatürün 40 kez tekrarı yerine konuya özel motif. */
   .ab-ikon > .ka-svg{ border-radius:50%; }
 </style>
+<style id="ahiretNedenStil">
+/* ======================================================================
+   AHİRET NEDEN ÖNEMLİ? — deneyimsel bölüm (additive)
+   Bütün seçiciler "ah-" ön eklidir; sayfanın mevcut kurallarına dokunmaz.
+   Renkler sayfanın kendi değişkenlerinden (--navy, --mavi, --yesil…) gelir.
+====================================================================== */
+  .ah-bolum{ border-top:5px solid #12869a; }
+  .ah-bolum [hidden]{ display:none !important; }
+  .ah-bas{ display:flex; gap:14px; align-items:center; margin:0 0 6px; }
+  .ah-bas-ikon{ flex:0 0 58px; width:58px; height:58px; border-radius:18px; display:flex; align-items:center; justify-content:center;
+    font-size:1.9em; background:linear-gradient(135deg,#e6f7f8,#c6ecef); box-shadow:0 4px 12px rgba(18,134,154,.18); }
+  .ah-bas h3{ margin:0; font-size:1.45em; color:var(--navy,#1E3A8A); line-height:1.2; }
+  .ah-bas h3 small{ display:block; font-size:.5em; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#12869a; margin-bottom:3px; }
+  .ah-alt{ font-size:1.08em; font-weight:800; color:#0b6272; background:#e6f7f8; border-radius:14px; padding:10px 14px; margin:10px 0 14px; }
+
+  /* — ilerleme — */
+  .ah-ilerleme{ display:flex; flex-wrap:wrap; gap:6px; margin:0 0 6px; }
+  .ah-ilerleme a{ display:inline-flex; align-items:center; gap:5px; min-height:36px; padding:5px 11px; border-radius:999px; text-decoration:none;
+    font-weight:800; font-size:.82em; color:#5b6570; background:var(--acikgri,#f1f5f9); border:2px solid transparent; }
+  .ah-ilerleme a.ah-acik{ color:#0b6272; border-color:#c6ecef; background:#fff; }
+  .ah-ilerleme a.ah-bitti{ color:#fff; background:#12869a; }
+  .ah-ilerleme a[aria-disabled="true"]{ pointer-events:none; opacity:.55; }
+  .ah-cubuk{ height:8px; border-radius:999px; background:#e2e8f0; overflow:hidden; margin:4px 0 16px; }
+  .ah-cubuk i{ display:block; height:100%; width:0; background:linear-gradient(90deg,#12869a,var(--yesil,#40916c)); transition:width .4s ease; }
+
+  /* — adım kartı — */
+  .ah-adim{ background:#fff; border:1px solid #e4e9ef; border-radius:20px; padding:18px 18px 20px; margin:16px 0;
+    box-shadow:0 6px 18px rgba(16,24,40,.06); scroll-margin-top:14px; animation:ahGir .5s cubic-bezier(.2,.8,.3,1) both; }
+  @keyframes ahGir{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:none } }
+  .ah-adim-bas{ display:flex; align-items:center; gap:12px; margin:0 0 12px; }
+  .ah-adim-no{ flex:0 0 44px; width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.45em;
+    background:#e6f7f8; }
+  .ah-adim-bas h4{ margin:0; font-size:1.15em; color:var(--navy,#1E3A8A); line-height:1.25; }
+  .ah-adim-bas h4 small{ display:block; font-size:.66em; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#8a94a3; }
+  .ah-adim p{ line-height:1.6; }
+
+  /* — senaryo / büyük kart — */
+  .ah-sahne{ background:linear-gradient(135deg,#0b6272,#12869a); color:#fff; border-radius:18px; padding:18px 20px; margin:0 0 14px; }
+  .ah-sahne p{ margin:0 0 4px; font-size:1.08em; font-weight:700; }
+  .ah-sahne p:last-child{ margin:0; }
+  .ah-sahne .ah-sahne-ikon{ font-size:2.2em; display:block; margin-bottom:6px; }
+  .ah-buyuk-soru{ text-align:center; font-size:1.2em; font-weight:900; color:var(--navy,#1E3A8A); background:#f4f1fb; border:2px dashed #b498e2;
+    border-radius:18px; padding:18px 16px; margin:0 0 14px; line-height:1.45; }
+
+  /* — seçenek düğmeleri — */
+  .ah-secenekler{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr)); margin:8px 0; }
+  .ah-sec{ font:inherit; font-weight:800; font-size:.98em; text-align:left; cursor:pointer; min-height:52px; padding:11px 14px; border-radius:16px;
+    background:#fff; color:#22333b; border:2px solid #cfd8e3; transition:transform .15s, border-color .15s, background .15s; }
+  .ah-sec:hover:not(:disabled){ transform:translateY(-2px); border-color:#12869a; }
+  .ah-sec:focus-visible, .ah-kopru-btn:focus-visible, .ah-alan:focus-visible, .ah-ileri:focus-visible{ outline:3px solid var(--sari,#f4a261); outline-offset:2px; }
+  .ah-sec:disabled{ cursor:default; }
+  .ah-sec.ah-secili{ background:#e6f7f8; border-color:#12869a; }
+  .ah-sec.ah-dogru{ background:#d8f3dc; border-color:var(--yesil,#40916c); }
+  .ah-sec.ah-tekrar{ background:#fff4e5; border-color:var(--sari,#f4a261); }
+  .ah-sec[aria-pressed="true"]{ background:#e6f7f8; border-color:#12869a; }
+  .ah-soru{ background:var(--acikgri,#f1f5f9); border-radius:16px; padding:14px 16px; margin:12px 0; }
+  .ah-soru-metin{ font-weight:900; margin:0 0 8px !important; color:#22333b; }
+
+  /* — geri bildirim (düşünmeye yönelten) — */
+  .ah-gb{ margin:10px 0 0 !important; padding:10px 14px; border-radius:14px; background:#fff; border-left:5px solid #12869a; line-height:1.55; }
+  .ah-gb.ah-gb-ipucu{ border-left-color:var(--sari,#f4a261); background:#fffaf0; }
+  .ah-gb.ah-gb-guclu{ border-left-color:var(--yesil,#40916c); background:#f3fbf5; }
+  .ah-bag{ background:#eef7f1; border:2px solid #cfe6da; border-radius:16px; padding:14px 16px; margin:14px 0 0; font-weight:800; color:#1b4332; line-height:1.55; }
+  .ah-bag b{ color:#0b6272; }
+
+  /* — görünmeyen hesap kartları — */
+  .ah-olaylar{ display:grid; gap:12px; }
+  .ah-olay{ border:2px solid #e4e9ef; border-radius:18px; padding:14px; background:#fff; }
+  .ah-olay-bas{ display:flex; align-items:center; gap:10px; font-weight:900; font-size:1.05em; margin:0 0 4px; }
+  .ah-olay-bas span{ font-size:1.6em; }
+  .ah-olay .ah-secenekler{ grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); }
+  .ah-olay .ah-sec{ text-align:center; }
+
+  /* — ahiret olmasaydı: 4 alan — */
+  .ah-alanlar{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); }
+  .ah-alan{ font:inherit; cursor:pointer; border:2px solid #cfd8e3; background:#fff; border-radius:18px; padding:16px 10px; text-align:center;
+    font-weight:900; letter-spacing:.06em; color:var(--navy,#1E3A8A); min-height:96px; transition:transform .15s, border-color .15s; }
+  .ah-alan span{ display:block; font-size:2em; margin-bottom:4px; letter-spacing:0; }
+  .ah-alan:hover{ transform:translateY(-2px); border-color:#12869a; }
+  .ah-alan[aria-expanded="true"]{ border-color:#12869a; background:#e6f7f8; }
+  .ah-alan.ah-alan-bitti::after{ content:"✓ düşündün"; display:block; font-size:.7em; letter-spacing:.04em; color:var(--yesil,#40916c); margin-top:4px; }
+  .ah-alan-ic{ margin-top:12px; }
+
+  /* — iki aynı insan — */
+  .ah-ikili{ display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); margin:10px 0; }
+  .ah-kisi{ border-radius:18px; padding:14px 16px; border:2px solid #e4e9ef; background:#fff; }
+  .ah-kisi-a{ border-color:#f5c2c2; background:#fff8f8; }
+  .ah-kisi-b{ border-color:#c6ecef; background:#f5fcfd; }
+  .ah-kisi-bas{ display:flex; align-items:center; gap:10px; font-weight:900; margin:0 0 6px; }
+  .ah-kisi-bas span{ font-size:2em; }
+  .ah-kisi q{ display:block; font-style:italic; font-weight:700; color:#374151; margin:0 0 8px; }
+  .ah-karar{ margin:8px 0 0; padding:8px 12px; border-radius:12px; background:#fff; border:1px dashed #cfd8e3; font-weight:800; }
+
+  /* — köprü — */
+  .ah-kopru{ display:flex; flex-direction:column; align-items:center; gap:0; margin:8px 0; }
+  .ah-kopru-btn{ font:inherit; cursor:pointer; width:min(100%,360px); min-height:52px; border-radius:16px; border:2px solid #12869a; background:#fff;
+    color:#0b6272; font-weight:900; letter-spacing:.08em; font-size:1.02em; transition:background .15s, color .15s; }
+  .ah-kopru-btn[aria-expanded="true"]{ background:#12869a; color:#fff; }
+  .ah-kopru-btn.ah-son{ border-color:var(--navy,#1E3A8A); color:var(--navy,#1E3A8A); }
+  .ah-kopru-btn.ah-son[aria-expanded="true"]{ background:var(--navy,#1E3A8A); color:#fff; }
+  .ah-kopru-ac{ width:min(100%,360px); background:#e6f7f8; border-radius:0 0 14px 14px; margin:-6px 0 0; padding:12px 14px 10px; font-size:.95em; line-height:1.55; }
+  .ah-ok{ font-size:1.3em; color:#8a94a3; line-height:1.4; }
+  .ah-vurgu{ text-align:center; font-size:1.06em; font-weight:900; color:#fff; background:linear-gradient(135deg,var(--navy,#1E3A8A),#12869a);
+    border-radius:18px; padding:16px 18px; margin:14px 0 0; line-height:1.5; }
+
+  /* — ayet — */
+  .ah-ayet{ background:#fffdf6; border:1px solid #efe3c2; border-radius:18px; padding:16px 18px; margin:12px 0; }
+  .ah-ayet-metin{ font-size:1.1em !important; font-weight:800; color:#5a3d00; margin:0 0 4px !important; line-height:1.6 !important; }
+  .ah-ayet-kaynak{ font-size:.82em !important; color:#8a6d2b; margin:0 0 6px !important; }
+  .ah-asama{ font-size:.7em; font-weight:900; letter-spacing:.08em; background:var(--sari,#f4a261); color:#5a3000; padding:2px 9px; border-radius:999px; margin-right:6px; vertical-align:2px; }
+  .ah-zincir{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:12px 0 0; font-size:.85em; font-weight:800; }
+  .ah-zincir span{ background:#fff; border:1px solid #efe3c2; border-radius:999px; padding:4px 10px; color:#5a3d00; }
+  .ah-zincir i{ font-style:normal; color:#b08a3c; }
+  .ah-ciplar{ display:flex; flex-wrap:wrap; gap:8px; margin:6px 0; }
+  .ah-ciplar .ah-sec{ min-height:44px; padding:8px 14px; border-radius:999px; font-size:.92em; }
+
+  /* — yazı alanı ve düğmeler — */
+  .ah-yazi{ width:100%; box-sizing:border-box; min-height:74px; resize:vertical; font:inherit; font-size:.97em; padding:10px 12px; border-radius:12px;
+    border:2px solid #cfd8e3; background:#fff; margin:6px 0 0; }
+  .ah-yazi:focus{ border-color:#12869a; outline:none; }
+  .ah-ileri{ font:inherit; font-weight:900; cursor:pointer; margin-top:12px; min-height:48px; padding:11px 22px; border-radius:999px; border:0;
+    background:#12869a; color:#fff; box-shadow:0 4px 10px rgba(18,134,154,.25); }
+  .ah-ileri:disabled{ opacity:.5; cursor:default; }
+  .ah-ileri.ah-ikincil{ background:#fff; color:#0b6272; border:2px solid #12869a; box-shadow:none; }
+  .ah-not{ font-size:.82em !important; color:#6b7280; margin:6px 0 0 !important; }
+
+  /* — benim kararım — */
+  .ah-durumlar{ display:grid; gap:12px; }
+  .ah-durum{ border:2px solid #e4e9ef; border-radius:18px; padding:14px; background:#fff; }
+
+  /* — final cümle — */
+  .ah-final{ background:linear-gradient(135deg,#f4f1fb,#e6f7f8); border-radius:20px; padding:18px; }
+  .ah-final-kalip{ font-size:1.12em; font-weight:900; color:var(--navy,#1E3A8A); margin:0 0 6px !important; }
+  .ah-ornek-dusunce{ background:#fff; border-radius:16px; border:2px dashed #12869a; padding:14px 16px; margin:12px 0 0; }
+  .ah-ornek-dusunce small{ display:block; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#12869a; margin-bottom:4px; font-size:.72em; }
+  .ah-akis{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; margin:14px 0 0; }
+  .ah-akis span{ background:#12869a; color:#fff; font-weight:900; border-radius:999px; padding:8px 14px; font-size:.9em; letter-spacing:.04em; }
+  .ah-akis span:last-child{ background:var(--yesil,#40916c); }
+  .ah-akis i{ font-style:normal; font-weight:900; color:#12869a; }
+
+  @media (max-width:520px){
+    .ah-bolum{ padding:14px; }
+    .ah-ilerleme{ flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+    .ah-ilerleme a{ flex:0 0 auto; }
+    .ah-adim{ padding:14px 12px 16px; border-radius:16px; }
+    .ah-bas h3{ font-size:1.2em; }
+    .ah-buyuk-soru{ font-size:1.05em; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ah-adim{ animation:none !important; }
+    .ah-sec, .ah-alan, .ah-cubuk i{ transition:none !important; }
+  }
+</style>
 </head>
 <body>
 <div id="portalNav" data-sinif="7" data-unite="1" data-asama="ogren"></div>
@@ -974,7 +1127,7 @@
 <path d="M20 20 L31 31"/><path d="M69 69 L80 80"/><path d="M80 20 L69 31"/><path d="M31 69 L20 80"/></g></g></g></g><g transform="translate(1042,108) scale(1.000)"><g class="kai-g" style="animation-delay:0.36s"><g class="kai-t"><rect x="12" y="70" width="24" height="18" rx="4" fill="#b498e2"/>
 <rect x="38" y="52" width="24" height="36" rx="4" fill="#6f4aa8"/>
 <rect x="64" y="32" width="24" height="56" rx="4" fill="#4d3079"/>
-<circle cx="76" cy="20" r="7" fill="#b498e2"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">7. Sınıf · 1. Ünite</span><h2>👼 Melek ve Ahiret İnancı</h2><p>Melek, cin, şeytan ve ahiret inancı</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 4 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Görülen ve Görülemeyen Varlıklar</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Melekler ve Özellikleri</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Dünya ve Ahiret Hayatı, Ahiretin Aşamaları</a><a class="ka-ic-link" href="#ka-konu-4"><b>4</b>Ahiret İnancının Etkisi ve Hz. İsa (as)</a></div></div></div></section>
+<circle cx="76" cy="20" r="7" fill="#b498e2"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">7. Sınıf · 1. Ünite</span><h2>👼 Melek ve Ahiret İnancı</h2><p>Melek, cin, şeytan ve ahiret inancı</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 4 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Görülen ve Görülemeyen Varlıklar</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Melekler ve Özellikleri</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Dünya ve Ahiret Hayatı, Ahiretin Aşamaları</a><a class="ka-ic-link" href="#ah-neden"><b>★</b>Ahiret Neden Önemli?</a><a class="ka-ic-link" href="#ka-konu-4"><b>4</b>Ahiret İnancının Etkisi ve Hz. İsa (as)</a></div></div></div></section>
 <main>
 <section id="ozet7" class="aktif">
   <h2>📖 1. Ünite Konu Özeti: Melek ve Ahiret İnancı</h2>
@@ -1112,6 +1265,206 @@
 <path d="M38 50 L47 59 L64 40" stroke="#12869a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></svg></span><span>Muska ve büyüyle korunma</span></div><div class="ka-krs-satir" style="--gecikme:0.36s"><span class="ka-krs-ikon"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#e6f7f8"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#c6ecef" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#c6ecef" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-t"><path d="M8 74 Q50 30 92 74" stroke="#12869a" stroke-width="7" fill="none" stroke-linecap="round"/>
 <path d="M8 78 H92" stroke="#0b6272" stroke-width="6" stroke-linecap="round"/>
 <g stroke="#6fd3de" stroke-width="4" stroke-linecap="round"><path d="M26 60 V78"/><path d="M42 50 V78"/><path d="M58 50 V78"/><path d="M74 60 V78"/></g></g></g></svg></span><span>İnsanın iradesini elinden aldığı düşüncesi</span></div></div></div></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Cinler ateşten yaratılmış, akıl ve irade sahibi varlıklardır.</li><li>Şeytan insanı zorlayamaz, yalnızca kötülüğü süslü gösterir.</li></ul></div></div>
+<!-- ============ AHİRET NEDEN ÖNEMLİ? (deneyimsel bölüm · ahiretNedenStil / ahiretNedenScript) ============ -->
+<div class="kutu-panel ah-bolum" id="ah-neden">
+  <div class="ah-bas">
+    <span class="ah-bas-ikon" aria-hidden="true">⚖️</span>
+    <h3><small>Konu 3'ten sonra · Düşünme yolculuğu</small>Ahiret Neden Önemli?</h3>
+  </div>
+  <p class="ah-alt">Bugün yaptıklarımızın yarın bir karşılığı olsaydı, davranışlarımız değişir miydi?</p>
+
+  <div class="ah-ilerleme" id="ahIlerleme" role="navigation" aria-label="Bölümün adımları">
+    <a href="#ah-1"><span aria-hidden="true">🎥</span>1 Kamera Yoksa?</a>
+    <a href="#ah-2"><span aria-hidden="true">👁️</span>2 Görünmeyen Hesap</a>
+    <a href="#ah-3"><span aria-hidden="true">🤔</span>3 Ahiret Olmasaydı?</a>
+    <a href="#ah-4"><span aria-hidden="true">👥</span>4 İki Aynı İnsan</a>
+    <a href="#ah-5"><span aria-hidden="true">🌉</span>5 Köprü</a>
+    <a href="#ah-6"><span aria-hidden="true">📖</span>6 Ayetten Hayata</a>
+    <a href="#ah-7"><span aria-hidden="true">✍️</span>7 Benim Kararım</a>
+    <a href="#ah-8"><span aria-hidden="true">💡</span>8 Benim Cümlem</a>
+  </div>
+  <div class="ah-cubuk" aria-hidden="true"><i id="ahCubuk"></i></div>
+  <noscript><p class="ah-not">Bu bölümdeki etkinlikler için tarayıcında JavaScript açık olmalı.</p></noscript>
+
+  <!-- 1. KAMERA YOKSA? -->
+  <div class="ah-adim" id="ah-1" data-adim="1">
+    <div class="ah-adim-bas"><span class="ah-adim-no" aria-hidden="true">🎥</span><h4><small>Adım 1 · Somutlaştır</small>Kamera Yoksa?</h4></div>
+    <div class="ah-sahne">
+      <span class="ah-sahne-ikon" aria-hidden="true">💵</span>
+      <p>Okul koridorunda yerde 500 TL buldun.</p>
+      <p>Etrafta kimse yok. Kamera da yok.</p>
+      <p>Parayı kimse görmedi.</p>
+    </div>
+    <div class="ah-soru" data-tek="kamera">
+      <p class="ah-soru-metin">Ne yaparsın?</p>
+      <div class="ah-secenekler">
+        <button type="button" class="ah-sec" data-v="a">A) Parayı alırım.</button>
+        <button type="button" class="ah-sec" data-v="b">B) Sahibine ulaştırmaya çalışırım.</button>
+      </div>
+      <p class="ah-gb" aria-live="polite" hidden>Kararını not ettim. Doğru ya da yanlış demeden önce, birlikte biraz düşünelim.</p>
+    </div>
+    <div class="ah-kamera-sorular" hidden>
+      <div class="ah-soru" data-dusun>
+        <p class="ah-soru-metin">🔎 Kararını verirken seni kim denetliyordu?</p>
+        <div class="ah-secenekler">
+          <button type="button" class="ah-sec" data-gb="İnsanlardan kimse yoktu, doğru. Peki kimse görmeyince kararın önemsiz mi oldu? Para yine de birine ait.">Hiç kimse</button>
+          <button type="button" class="ah-sec" data-gb="Vicdan içimizdeki bir uyarıcıdır. Peki vicdanını susturursan, senin dışında bu olayı bilen biri kalır mı?">Kendi vicdanım</button>
+          <button type="button" class="ah-sec" data-gb="Burada önemli olan şu: İnsanlar görmese de Allah her şeyi bilir. Yani sorumluluk, görenler gidince bitmiyor.">Allah</button>
+        </div>
+        <p class="ah-gb" aria-live="polite" hidden></p>
+      </div>
+      <div class="ah-soru" data-dusun>
+        <p class="ah-soru-metin">🔎 Kimse görmese de doğru davranmak mümkün mü?</p>
+        <div class="ah-secenekler">
+          <button type="button" class="ah-sec" data-gb="Evet; doğru davranmak için birinin bizi izlemesi gerekmez. Peki insana bu gücü veren düşünce ne olabilir?">Evet</button>
+          <button type="button" class="ah-sec" data-gb="İnsanlar izlendiklerinde daha dikkatli olur, bu doğru. Ama dürüstlük yalnızca kamera varken mi değerlidir?">Hayır</button>
+          <button type="button" class="ah-sec" data-gb="Dürüst bir cevap! Bu sorunun cevabını sonraki adımlarda birlikte arayacağız.">Emin değilim</button>
+        </div>
+        <p class="ah-gb" aria-live="polite" hidden></p>
+      </div>
+      <div class="ah-soru" data-dusun>
+        <p class="ah-soru-metin">🔎 İnsan sadece başkaları gördüğü için mi sorumludur?</p>
+        <div class="ah-secenekler">
+          <button type="button" class="ah-sec" data-gb="Öyle olsaydı, kimsenin görmediği her yerde her şey serbest olurdu. Sence bir davranışın doğru ya da yanlış olması, onu kimin gördüğüne mi bağlı?">Evet, görülmezse sorumluluk yok.</button>
+          <button type="button" class="ah-sec" data-gb="Burada önemli olan, kimsenin görmemesine rağmen sorumluluğun devam etmesidir. Davranışı sen yaptın; sorumluluğu da sende.">Hayır, görülmese de sorumluyum.</button>
+        </div>
+        <p class="ah-gb" aria-live="polite" hidden></p>
+      </div>
+    </div>
+    <div class="ah-kamera-bag" hidden>
+      <p class="ah-bag">🔗 <b>Bağlantı:</b> Ahiret inancı, insanın yalnızca insanlar tarafından görülen davranışlarından değil, Allah tarafından bilinen ve değerlendirilen <b>bütün</b> davranışlarından sorumlu olduğunu hatırlatır.</p>
+      <p class="ah-gb ah-gb-ipucu" id="ahKameraHatir" hidden></p>
+      <button type="button" class="ah-ileri" data-sonraki="2">Sonraki adım: Görünmeyen Hesap →</button>
+    </div>
+  </div>
+
+  <!-- 2. GÖRÜNMEYEN HESAP -->
+  <div class="ah-adim" id="ah-2" data-adim="2">
+    <div class="ah-adim-bas"><span class="ah-adim-no" aria-hidden="true">👁️</span><h4><small>Adım 2 · Fark et</small>Görünmeyen Hesap</h4></div>
+    <p>Bir öğrencinin günlük hayatından 5 olay. Her birinde kendine sor: <b>Kimse görmese ne olurdu?</b></p>
+    <div class="ah-olaylar" id="ahOlaylar"></div>
+    <div class="ah-olay-ozet" hidden>
+      <p class="ah-bag" id="ahOlayOzet"></p>
+      <button type="button" class="ah-ileri" data-sonraki="3">Sonraki adım: Ahiret Olmasaydı? →</button>
+    </div>
+  </div>
+
+  <!-- 3. AHİRET OLMASAYDI? -->
+  <div class="ah-adim" id="ah-3" data-adim="3">
+    <div class="ah-adim-bas"><span class="ah-adim-no" aria-hidden="true">🤔</span><h4><small>Adım 3 · Düşünme deneyi</small>Ahiret Olmasaydı?</h4></div>
+    <p class="ah-buyuk-soru">Eğer insan yaptığı hiçbir davranışın hesabını vermeyecek olsaydı, sence insanların davranışlarında neler değişebilirdi?</p>
+    <p>Bir alana dokun, örneği oku ve <b>önce kendin</b> düşün.</p>
+    <div class="ah-alanlar" id="ahAlanlar"></div>
+    <div class="ah-alan-ic" id="ahAlanIc" hidden></div>
+    <div class="ah-alan-ozet" hidden>
+      <p class="ah-bag">🔗 Dört alanda da ortak bir şey var: Hesap verme düşüncesi ortadan kalkınca, doğru davranmanın tek sebebi “yakalanmamak” olurdu. Ahiret inancı bu sebebi <b>sorumluluğa</b> dönüştürür.</p>
+      <button type="button" class="ah-ileri" data-sonraki="4">Sonraki adım: İki Aynı İnsan →</button>
+    </div>
+  </div>
+
+  <!-- 4. İKİ AYNI İNSAN -->
+  <div class="ah-adim" id="ah-4" data-adim="4">
+    <div class="ah-adim-bas"><span class="ah-adim-no" aria-hidden="true">👥</span><h4><small>Adım 4 · Karşılaştır</small>İki Aynı İnsan</h4></div>
+    <div class="ah-sahne">
+      <span class="ah-sahne-ikon" aria-hidden="true">🎧</span>
+      <p>Teneffüs. Sınıfta kimse yok. Arkadaşının yeni kulaklığı sırasının üstünde duruyor.</p>
+      <p>İzinsiz kullanma fırsatı var.</p>
+    </div>
+    <div class="ah-ikili">
+      <div class="ah-kisi ah-kisi-a">
+        <p class="ah-kisi-bas"><span aria-hidden="true">🙍</span>Öğrenci A</p>
+        <q>Kimse görmüyorsa yaptığımın önemi yok.</q>
+        <p class="ah-soru-metin">Sence Öğrenci A ne yapar?</p>
+        <div class="ah-secenekler" data-tahmin="a">
+          <button type="button" class="ah-sec" data-v="kullanir">Kulaklığı kullanır</button>
+          <button type="button" class="ah-sec" data-v="kullanmaz">Kullanmaz</button>
+        </div>
+        <p class="ah-karar" hidden>🙍 “Nasılsa kimse görmüyor.” deyip kulaklığı kullanır.</p>
+      </div>
+      <div class="ah-kisi ah-kisi-b">
+        <p class="ah-kisi-bas"><span aria-hidden="true">🧑</span>Öğrenci B</p>
+        <q>Kimse görmese de yaptıklarımın bir karşılığı olduğuna inanıyorum.</q>
+        <p class="ah-soru-metin">Sence Öğrenci B ne yapar?</p>
+        <div class="ah-secenekler" data-tahmin="b">
+          <button type="button" class="ah-sec" data-v="kullanir">Kulaklığı kullanır</button>
+          <button type="button" class="ah-sec" data-v="kullanmaz">Kullanmaz</button>
+        </div>
+        <p class="ah-karar" hidden>🧑 “İzin almadan kullanmak arkadaşımın hakkını çiğnemek olur; kimse görmese de.” deyip dokunmaz.</p>
+      </div>
+    </div>
+    <div class="ah-ikili-soru" hidden>
+      <p class="ah-gb">İki öğrencinin durumu, ortamı ve fırsatı <b>aynı</b>. Kararları ise farklı.</p>
+      <div class="ah-soru" data-coktan>
+        <p class="ah-soru-metin">🔎 Aralarındaki davranış farkını oluşturan düşünce nedir?</p>
+        <div class="ah-secenekler">
+          <button type="button" class="ah-sec" data-gb="İkisinin de durumu aynı; ikisi de aynı şeyi yapabilecek durumda. Fark zekâda değil. Cümlelerine tekrar bak.">Birinin daha zeki olması</button>
+          <button type="button" class="ah-sec" data-gb="Sınıfta kamera yok; ikisi de bunu biliyor. Öyleyse fark kameradan korkmak olamaz. Öğrenci B'nin cümlesine bak.">Birinin kameradan korkması</button>
+          <button type="button" class="ah-sec" data-dogru data-gb="Burada önemli olan şu: Fırsat aynı, ortam aynı; değişen tek şey düşünce. “Yaptıklarımın bir karşılığı var” düşüncesi, kimse görmese de davranışı değiştiriyor. Ahiret inancı sorumluluk bilincini böyle etkiler.">Birinin, yaptıklarının bir karşılığı olduğuna inanması</button>
+          <button type="button" class="ah-sec" data-gb="Arkadaşını sevmek güzel; ama Öğrenci B kararını neye dayandırıyor? Kendi cümlesini oku.">Birinin arkadaşını daha çok sevmesi</button>
+        </div>
+        <p class="ah-gb" aria-live="polite" hidden></p>
+      </div>
+      <div class="ah-ikili-son" hidden>
+        <button type="button" class="ah-ileri" data-sonraki="5">Sonraki adım: Dünya ve Ahiret Köprüsü →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. KÖPRÜ -->
+  <div class="ah-adim" id="ah-5" data-adim="5">
+    <div class="ah-adim-bas"><span class="ah-adim-no" aria-hidden="true">🌉</span><h4><small>Adım 5 · Bağlantı kur</small>Dünya Hayatı + Ahiret Hayatı Köprüsü</h4></div>
+    <p>Her kutuya dokun. Bugünden ahirete uzanan köprüyü adım adım kur.</p>
+    <div class="ah-kopru" id="ahKopru"></div>
+    <div class="ah-kopru-son" hidden>
+      <p class="ah-vurgu">Ahiret inancı dünyayı bırakmak anlamına gelmez. Tam tersine, dünya hayatındaki davranışların sorumluluğunu daha bilinçli taşımayı sağlar.</p>
+      <div class="ah-soru" data-coktan>
+        <p class="ah-soru-metin">🔎 Bu köprüye göre ahirete inanan biri dünya hayatına nasıl bakar?</p>
+        <div class="ah-secenekler">
+          <button type="button" class="ah-sec" data-gb="Köprüye tekrar bak: Ahirete giden yol “bugün”den ve “davranış”tan geçiyor. Dünya önemsiz olsaydı köprü nereden başlardı?">Dünyayı önemsemez, sadece ahireti bekler.</button>
+          <button type="button" class="ah-sec" data-dogru data-gb="Evet. Köprünün her basamağı dünyada atılıyor. Ahirete inanmak, bugünü daha dikkatli ve anlamlı yaşamayı sağlar.">Dünyadaki her davranışını daha dikkatli yapar.</button>
+          <button type="button" class="ah-sec" data-gb="Ahiret uzak görünebilir; ama köprü bugünkü tercihinle başlıyor. Uzak olması bugünkü davranışı önemsiz yapar mı?">Ahiret uzak olduğu için bugünü umursamaz.</button>
+        </div>
+        <p class="ah-gb" aria-live="polite" hidden></p>
+      </div>
+      <div class="ah-kopru-ileri" hidden><button type="button" class="ah-ileri" data-sonraki="6">Sonraki adım: Ayetten Hayata →</button></div>
+    </div>
+  </div>
+
+  <!-- 6. AYETTEN HAYATA -->
+  <div class="ah-adim" id="ah-6" data-adim="6">
+    <div class="ah-adim-bas"><span class="ah-adim-no" aria-hidden="true">📖</span><h4><small>Adım 6 · Ayet → Anlam → Çıkarım → Günlük hayat</small>Ayetten Hayata</h4></div>
+    <p>Ayeti oku. Sana “Bu ayet hangi kavram?” diye sormayacağım; ayetin <b>davranışlarımız</b> hakkında ne söylediğini birlikte bulacağız.</p>
+    <div id="ahAyetler"></div>
+    <div class="ah-ayet-son" hidden><button type="button" class="ah-ileri" data-sonraki="7">Sonraki adım: Benim Kararım →</button></div>
+  </div>
+
+  <!-- 7. BENİM KARARIM -->
+  <div class="ah-adim" id="ah-7" data-adim="7">
+    <div class="ah-adim-bas"><span class="ah-adim-no" aria-hidden="true">✍️</span><h4><small>Adım 7 · Final etkinliği</small>Benim Kararım</h4></div>
+    <p>Dört durum var. Her birinde kararını ver, sonra kısa bir gerekçe yaz. Burada not yok; dürüst düşünce var.</p>
+    <div class="ah-durumlar" id="ahDurumlar"></div>
+    <div class="ah-durum-son" hidden><button type="button" class="ah-ileri" data-sonraki="8">Son adım: Benim Cümlem →</button></div>
+  </div>
+
+  <!-- 8. BENİM CÜMLEM -->
+  <div class="ah-adim" id="ah-8" data-adim="8">
+    <div class="ah-adim-bas"><span class="ah-adim-no" aria-hidden="true">💡</span><h4><small>Adım 8 · Tek cümlelik çıkarım</small>Benim Cümlem</h4></div>
+    <div class="ah-final">
+      <p class="ah-final-kalip">“Ahiret hayatına inanmak benim için önemlidir çünkü …”</p>
+      <label for="ahFinalYazi" class="ah-not" style="display:block">Cümleyi kendi düşüncenle tamamla. Yaptığın etkinliklerden yararlanabilirsin.</label>
+      <textarea id="ahFinalYazi" class="ah-yazi" placeholder="Ahiret hayatına inanmak benim için önemlidir çünkü ..."></textarea>
+      <button type="button" class="ah-ileri" id="ahFinalBtn">Cümlemi tamamladım</button>
+      <p class="ah-gb" id="ahFinalGb" aria-live="polite" hidden></p>
+      <div id="ahFinalOrnek" hidden>
+        <div class="ah-ornek-dusunce"><small>Örnek bir düşünce</small>“Ahiret inancı, yaptığım davranışların sorumluluğunu hatırlatır; bu yüzden kimse görmese bile doğru davranmaya çalışırım.”</div>
+        <p class="ah-gb">Kendi cümlenle karşılaştır: Seninki farklı olabilir; önemli olan, cümlende bir <b>bağlantı</b> kurman.</p>
+        <div class="ah-akis" aria-label="Ahiret inancı, sorumluluk, ahlaki davranış"><span>AHİRET İNANCI</span><i aria-hidden="true">→</i><span>SORUMLULUK</span><i aria-hidden="true">→</i><span>AHLÂKİ DAVRANIŞ</span></div>
+      </div>
+      <p class="ah-not">💾 Yazdıkların yalnızca bu cihazda saklanır.</p>
+    </div>
+  </div>
+</div>
+
 <div class="kutu-panel">
     <div class="ka-konu" id="ka-konu-4"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#eaf4fd"/><g class="kai-bl" opacity=".85"><ellipse cx="211" cy="94" rx="180" ry="82" fill="#cfe6fb"/><ellipse cx="662" cy="145" rx="216" ry="72" fill="#cfe6fb" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#7cc4f0" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(66,26) scale(1.800)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><path d="M50 16 V80" stroke="#1b4f6e" stroke-width="5" stroke-linecap="round"/>
 <path d="M20 30 H80" stroke="#1b4f6e" stroke-width="5" stroke-linecap="round"/>
@@ -4149,6 +4502,379 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ogrBaslat);
   else ogrBaslat();
+})();
+</script>
+<script id="ahiretNedenScript">
+/* AHİRET NEDEN ÖNEMLİ? — adım adım düşünme yolculuğu (yalnızca #ah-neden içinde çalışır) */
+(function(){
+  'use strict';
+  var kok = document.getElementById('ah-neden');
+  if(!kok) return;
+  function $(s, k){ return (k||kok).querySelector(s); }
+  function $$(s, k){ return Array.prototype.slice.call((k||kok).querySelectorAll(s)); }
+  function kacis(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function oku(a){ try { return localStorage.getItem('ahiret7_' + a) || ''; } catch(e){ return ''; } }
+  function yaz(a, v){ try { localStorage.setItem('ahiret7_' + a, v); } catch(e){} }
+  function goster(el){ if(el) el.hidden = false; }
+  function gbYaz(el, metin, tur){ el.className = 'ah-gb' + (tur ? ' ' + tur : ''); el.innerHTML = metin; el.hidden = false; }
+
+  /* ——— İlerleme: adımlar sırayla açılır ——— */
+  var ADIM_SAYI = 8, acik = 1, biten = {};
+  var adimlar = $$('.ah-adim'), linkler = $$('#ahIlerleme a'), cubuk = $('#ahCubuk');
+  function ilerlemeCiz(){
+    adimlar.forEach(function(a){ a.hidden = +a.dataset.adim > acik; });
+    linkler.forEach(function(l, i){
+      var n = i + 1;
+      l.classList.toggle('ah-acik', n <= acik);
+      l.classList.toggle('ah-bitti', !!biten[n]);
+      if(n > acik) l.setAttribute('aria-disabled', 'true'); else l.removeAttribute('aria-disabled');
+    });
+    var sayi = Object.keys(biten).length;
+    cubuk.style.width = (sayi / ADIM_SAYI * 100) + '%';
+  }
+  function bitir(n){ biten[n] = true; ilerlemeCiz(); }
+  function ac(n){
+    if(n > acik) acik = n;
+    ilerlemeCiz();
+    var hedef = document.getElementById('ah-' + n);
+    if(hedef){ try { hedef.scrollIntoView({behavior:'smooth', block:'start'}); } catch(e){} var b = $('button', hedef); if(b) try { b.focus({preventScroll:true}); } catch(e){} }
+  }
+  $$('[data-sonraki]').forEach(function(b){ b.addEventListener('click', function(){ ac(+b.dataset.sonraki); }); });
+
+  /* Düşünme sorusu: her seçenek geçerli; seçilen seçeneğe göre düşündüren geri bildirim. */
+  function dusunSorusu(soru, bitti){
+    var dugmeler = $$('.ah-secenekler > .ah-sec', soru), gb = $(':scope > .ah-gb', soru);
+    dugmeler.forEach(function(b){
+      b.addEventListener('click', function(){
+        dugmeler.forEach(function(x){ x.disabled = true; });
+        b.classList.add('ah-secili');
+        gbYaz(gb, '💭 ' + kacis(b.dataset.gb));
+        if(bitti) bitti(b);
+      });
+    });
+  }
+  /* Çıkarım sorusu: yanlış seçenekte ipucu verir, öğrenci yeniden dener. */
+  function cikarimSorusu(soru, bitti){
+    var dugmeler = $$('.ah-secenekler > .ah-sec', soru), gb = $(':scope > .ah-gb', soru);
+    dugmeler.forEach(function(b){
+      b.addEventListener('click', function(){
+        if(b.hasAttribute('data-dogru')){
+          dugmeler.forEach(function(x){ x.disabled = true; });
+          b.classList.add('ah-dogru');
+          gbYaz(gb, '✔ ' + kacis(b.dataset.gb), 'ah-gb-guclu');
+          if(bitti) bitti();
+        } else {
+          b.disabled = true; b.classList.add('ah-tekrar');
+          gbYaz(gb, '💡 ' + kacis(b.dataset.gb) + ' Bir daha düşün.', 'ah-gb-ipucu');
+        }
+      });
+    });
+  }
+
+  /* ——— 1. KAMERA YOKSA? ——— */
+  var kameraSecim = '';
+  (function(){
+    var soru = $('[data-tek="kamera"]'), dugmeler = $$('.ah-sec', soru);
+    dugmeler.forEach(function(b){
+      b.addEventListener('click', function(){
+        kameraSecim = b.dataset.v;
+        dugmeler.forEach(function(x){ x.disabled = true; });
+        b.classList.add('ah-secili');
+        goster($('.ah-gb', soru));
+        goster($('.ah-kamera-sorular'));
+        var ilk = $('.ah-kamera-sorular .ah-sec'); if(ilk) ilk.focus();
+      });
+    });
+    var sorular = $$('.ah-kamera-sorular [data-dusun]'), cevap = 0;
+    sorular.forEach(function(s, i){
+      if(i > 0) s.hidden = true;
+      dusunSorusu(s, function(){
+        cevap++;
+        if(sorular[i+1]) goster(sorular[i+1]);
+        if(cevap === sorular.length){
+          goster($('.ah-kamera-bag'));
+          var h = $('#ahKameraHatir');
+          gbYaz(h, kameraSecim === 'a'
+            ? '🔁 İlk kararın: “Parayı alırım.” Şimdi bu soruları düşündükten sonra aynı kararı verir miydin? Cevabını içinden ver; burada not yok.'
+            : '🔁 İlk kararın: “Sahibine ulaştırmaya çalışırım.” Kimse görmezken bu kararı vermeni sağlayan düşünce neydi? Onu aklında tut.', 'ah-gb-ipucu');
+          bitir(1);
+        }
+      });
+    });
+  })();
+
+  /* ——— 2. GÖRÜNMEYEN HESAP ——— */
+  var OLAYLAR = [
+    {i:'🤫', m:'Arkadaşının sırrını başkalarına anlatmak',
+     g:['Belki kimse kimden duyulduğunu bilmeyecek. Ama sır yine de yayıldı; arkadaşının güveni yine de kırıldı. Davranış görülmeyince yok mu olur?',
+        'Evet, bir gün ortaya çıkabilir. Peki hiç ortaya çıkmasaydı, sırrı yaymak daha mı doğru olurdu?',
+        'Burada önemli olan şu: Emanet edilen bir sırrı kimin yaydığını insanlar bilmese de Allah bilir. Sorumluluk, kimse görmese de devam eder.']},
+    {i:'📝', m:'Sınavda kopya çekmek',
+     g:['Öğretmen görmese bile not haksız yere alınmış olur. Görülmemek, haksızlığı ortadan kaldırır mı?',
+        'Arkadaşların fark edebilir, doğru. Peki kimse fark etmeseydi, emek vermeden alınan not senin hakkın olur muydu?',
+        'Burada önemli olan şu: Kopya, kimse görmese de Allah tarafından bilinir. Ahiret inancı “yakalanmamayı” değil, “doğru olanı” önemsetir.']},
+    {i:'👵', m:'Yaşlı birine yardım etmek',
+     g:['Kimse görmese bile o yaşlı insan yardım aldı. Bir iyiliğin değeri, onu gören birinin olmasına mı bağlı?',
+        'Belki görenler takdir eder. Peki kimse görmeseydi, yardım etmeye değmez miydi?',
+        'Burada önemli olan şu: Kimsenin görmediği iyilik de boşa gitmez. Allah bilir ve karşılığını verir.']},
+    {i:'💬', m:'İnternette birine hakaret etmek',
+     g:['Takma adla yazınca kimse kim olduğunu bilmeyebilir. Ama o sözler karşıdaki insanı yine de üzer. Ekranın arkasında olmak sorumluluğu kaldırır mı?',
+        'Ekran görüntüleri kalır, evet. Peki iz bırakmasaydı, hakaret etmek daha mı az yanlış olurdu?',
+        'Burada önemli olan şu: Sanal dünyada söylenen söz de bir sözdür. Ahiret inancı, adımızı gizlediğimiz yerlerde bile sorumluluğu hatırlatır.']},
+    {i:'🧃', m:'Kimse görmeden yerdeki çöpü almak',
+     g:['Kimse görmese de koridor temizlendi. Yapılan iyilik, görülmediği için küçülür mü?',
+        'Belki birisi görüp örnek alır. Peki kimse görmeseydi, bu davranışın yine de bir değeri olmaz mıydı?',
+        'Burada önemli olan şu: “Zerre” kadar bir iyilik bile karşılıksız kalmaz. Gizli yapılan iyilik, sorumluluğun içeriden geldiğini gösterir.']}
+  ];
+  var SECENEK = [['k','🙈 Kimse görmüyor.'],['i','👥 İnsanlar görebilir.'],['a','🤲 Allah biliyor.']];
+  (function(){
+    var kap = $('#ahOlaylar'), cevap = 0, allahSay = 0;
+    OLAYLAR.forEach(function(o, n){
+      var kart = document.createElement('div');
+      kart.className = 'ah-olay';
+      kart.innerHTML = '<p class="ah-olay-bas"><span aria-hidden="true">' + o.i + '</span>' + kacis(o.m) + '</p>' +
+        '<p class="ah-soru-metin">Kimse görmese ne olurdu?</p><div class="ah-secenekler">' +
+        SECENEK.map(function(s, j){ return '<button type="button" class="ah-sec" data-j="' + j + '">' + s[1] + '</button>'; }).join('') +
+        '</div><p class="ah-gb" aria-live="polite" hidden></p>';
+      kap.appendChild(kart);
+      var dugmeler = $$('.ah-sec', kart), gb = $('.ah-gb', kart);
+      dugmeler.forEach(function(b){
+        b.addEventListener('click', function(){
+          var j = +b.dataset.j;
+          dugmeler.forEach(function(x){ x.disabled = true; });
+          b.classList.add('ah-secili');
+          gbYaz(gb, '💭 ' + kacis(o.g[j]), j === 2 ? 'ah-gb-guclu' : '');
+          cevap++; if(j === 2) allahSay++;
+          if(cevap === OLAYLAR.length){
+            $('#ahOlayOzet').innerHTML = '🔗 Fark ettin mi? Bu beş olayın hepsinde insanlar görebilir de, görmeyebilir de. <b>Her olayda değişmeyen tek şey: Allah’ın bilmesi.</b> ' +
+              (allahSay === OLAYLAR.length ? 'Sen de her olayda bunu seçtin. ' : 'Sen ' + allahSay + ' olayda “Allah biliyor” dedin; diğerlerini bu gözle bir daha düşünebilirsin. ') +
+              'Ahiret inancı, insanın bu <b>görünmeyen sorumluluğunu</b> hatırlatır: İyi ya da kötü, gizli ya da açık her davranış hesapta yer alır.';
+            goster($('.ah-olay-ozet'));
+            bitir(2);
+          }
+        });
+      });
+    });
+  })();
+
+  /* ——— 3. AHİRET OLMASAYDI? ——— */
+  var ALANLAR = [
+    {k:'durustluk', i:'⚖️', ad:'DÜRÜSTLÜK', ornek:'Kimse kopya çektiğini öğrenmeyecek.', soru:'Peki yine de kopya çekmemek neden anlamlı olabilir?',
+     ipucu:'Bir davranışın değeri, onu kimin gördüğüne mi bağlı, yoksa davranışın kendisine mi? Yakalanmamak, bir şeyi doğru yapar mı?'},
+    {k:'adalet', i:'🏛️', ad:'ADALET', ornek:'Takım seçerken bir arkadaşını haksız yere dışarıda bıraktın. Kimse fark etmedi.', soru:'Kimse bilmediği için bu haksızlık “olmamış” sayılır mı?',
+     ipucu:'Haksızlığa uğrayan arkadaşın üzüldü mü? Bir gün her hakkın sahibine verileceğine inanan biri, bu durumda nasıl davranırdı?'},
+    {k:'yardim', i:'🤝', ad:'YARDIMLAŞMA', ornek:'Yolda zor durumda birini gördün. Yardım etsen kimse bilmeyecek, kimse teşekkür etmeyecek.', soru:'Yardım etmenin yine de bir değeri var mı?',
+     ipucu:'İyilik yalnızca alkış alınca mı değerlidir? Hiçbir iyiliğin karşılıksız kalmayacağına inanmak insanı nasıl etkiler?'},
+    {k:'sorumluluk', i:'🎒', ad:'SORUMLULUK', ornek:'Grup ödevinde senin kısmını yapmasan da öğretmen kimin eksik bıraktığını anlamayacak.', soru:'Görevini yapmak yine de neden önemli olabilir?',
+     ipucu:'Arkadaşların senin yapmadığın işi üstlenmek zorunda kalırsa ne olur? “Bu benim görevimdi” diyebilmek, birinin bizi kontrol etmesine mi bağlı?'}
+  ];
+  (function(){
+    var kap = $('#ahAlanlar'), ic = $('#ahAlanIc'), biten3 = {};
+    ALANLAR.forEach(function(a){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'ah-alan'; b.dataset.k = a.k;
+      b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'ahAlanIc');
+      b.innerHTML = '<span aria-hidden="true">' + a.i + '</span>' + a.ad;
+      kap.appendChild(b);
+      b.addEventListener('click', function(){
+        $$('.ah-alan', kap).forEach(function(x){ x.setAttribute('aria-expanded', x === b ? 'true' : 'false'); });
+        var kayit = oku('alan_' + a.k);
+        ic.innerHTML = '<div class="ah-soru"><p class="ah-soru-metin">' + a.i + ' ' + a.ad + '</p>' +
+          '<p style="margin:0 0 4px"><b>' + kacis(a.ornek) + '</b></p><p style="margin:0">' + kacis(a.soru) + '</p>' +
+          '<textarea class="ah-yazi" aria-label="' + a.ad + ' için düşüncen" placeholder="Önce kendi düşünceni yaz...">' + kacis(kayit) + '</textarea>' +
+          '<button type="button" class="ah-ileri ah-ikincil">Düşündüm, bir ipucu ver</button>' +
+          '<p class="ah-gb" aria-live="polite" hidden></p></div>';
+        ic.hidden = false;
+        var t = $('textarea', ic), btn = $('button', ic), gb = $('.ah-gb', ic);
+        t.addEventListener('input', function(){ yaz('alan_' + a.k, t.value); });
+        btn.addEventListener('click', function(){
+          if(t.value.trim().length < 10){ gbYaz(gb, '✏️ Önce birkaç kelimeyle kendi düşünceni yaz. İpucu, düşüncenin yerine geçmesin.', 'ah-gb-ipucu'); t.focus(); return; }
+          gbYaz(gb, '💭 <b>Düşünme ipucu:</b> ' + kacis(a.ipucu), 'ah-gb-guclu');
+          biten3[a.k] = true; b.classList.add('ah-alan-bitti');
+          if(Object.keys(biten3).length === ALANLAR.length){ goster($('.ah-alan-ozet')); bitir(3); }
+        });
+        t.focus();
+      });
+    });
+  })();
+
+  /* ——— 4. İKİ AYNI İNSAN ——— */
+  (function(){
+    var tahmin = {};
+    $$('[data-tahmin]').forEach(function(grup){
+      var dugmeler = $$('.ah-sec', grup);
+      dugmeler.forEach(function(b){
+        b.addEventListener('click', function(){
+          dugmeler.forEach(function(x){ x.disabled = true; });
+          b.classList.add('ah-secili');
+          tahmin[grup.dataset.tahmin] = b.dataset.v;
+          goster(grup.parentNode.querySelector('.ah-karar'));
+          if(tahmin.a && tahmin.b) goster($('.ah-ikili-soru'));
+        });
+      });
+    });
+    cikarimSorusu($('.ah-ikili-soru [data-coktan]'), function(){ goster($('.ah-ikili-son')); bitir(4); });
+  })();
+
+  /* ——— 5. KÖPRÜ ——— */
+  var KOPRU = [
+    ['BUGÜN', 'Şu an yaşadığın gün. Dünya hayatı, insana verilmiş bir fırsat ve emanettir.'],
+    ['TERCİH', 'Her gün onlarca seçim yaparsın: Ne söyleyeceğin, nasıl davranacağın… Allah insana seçme gücü (irade) vermiştir.'],
+    ['DAVRANIŞ', 'Seçimlerin davranışa dönüşür. Küçük ya da büyük, görülen ya da görülmeyen her davranış önemlidir.'],
+    ['SORUMLULUK', 'Kendi seçtiğin davranışın sonucunu üstlenirsin. Sorumluluk, kimse görmediğinde de devam eder.'],
+    ['HESAP', 'Ahirette her insan yaptıklarının hesabını verir. Bu, Allah’ın adaletinin gereğidir: İyilik de kötülük de karşılıksız kalmaz.'],
+    ['AHİRET', 'Dünya hayatından sonraki sonsuz hayat. Dünyada yapılanların karşılığı burada görülür.']
+  ];
+  (function(){
+    var kap = $('#ahKopru'), acilan = {};
+    KOPRU.forEach(function(k, i){
+      if(i > 0){ var ok = document.createElement('span'); ok.className = 'ah-ok'; ok.setAttribute('aria-hidden', 'true'); ok.textContent = '↓'; kap.appendChild(ok); }
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'ah-kopru-btn' + (i === KOPRU.length - 1 ? ' ah-son' : '');
+      b.textContent = k[0]; b.setAttribute('aria-expanded', 'false');
+      var p = document.createElement('p'); p.className = 'ah-kopru-ac'; p.textContent = k[1]; p.hidden = true; p.id = 'ahKopru' + i;
+      b.setAttribute('aria-controls', p.id);
+      kap.appendChild(b); kap.appendChild(p);
+      b.addEventListener('click', function(){
+        var acilsin = p.hidden; p.hidden = !acilsin; b.setAttribute('aria-expanded', acilsin ? 'true' : 'false');
+        acilan[i] = true;
+        if(Object.keys(acilan).length === KOPRU.length) goster($('.ah-kopru-son'));
+      });
+    });
+    cikarimSorusu($('.ah-kopru-son [data-coktan]'), function(){ goster($('.ah-kopru-ileri')); bitir(5); });
+  })();
+
+  /* ——— 6. AYETTEN HAYATA (Ayet → Anlam → Çıkarım → Günlük hayat → Ahiret inancı) ——— */
+  var AYETLER = [
+    {m:'Artık kim zerre ağırlığınca bir hayır işlerse, onun mükâfatını görecektir. Kim de zerre ağırlığınca bir kötülük işlerse, onun cezasını görecektir.',
+     k:'Zilzâl suresi, 7-8. ayetler',
+     anlam:[['Sadece büyük iyilikler ve büyük kötülükler önemlidir.',0,'Ayet “zerre ağırlığınca” diyor. Zerre ne kadar büyüktür?'],
+            ['En küçük iyiliğin ve kötülüğün bile bir karşılığı vardır.',1,'Evet. “Zerre” en küçük parça demektir; ayet hiçbir davranışın kaybolmadığını anlatıyor.'],
+            ['İnsanların davranışları zamanla unutulup gider.',0,'Ayet “görecektir” diyor. Unutulan bir şey görülür mü?']],
+     cikarim:[['Ahirete inanan kişi küçük davranışlarını da önemser.',1,'Evet. “Küçük” diye bir davranış yoktur; bu düşünce insanı her an daha dikkatli yapar.'],
+              ['Ahirete inanan kişi sadece büyük günahlardan kaçar.',0,'Ayet büyük-küçük ayrımı yapıyor mu? “Zerre” kelimesini hatırla.'],
+              ['Ahiret inancının günlük davranışlarla ilgisi yoktur.',0,'Ayet “kim … işlerse” diyerek doğrudan davranışlardan söz ediyor.']],
+     hayat:['Küçük bir yalan söylemek','Yerdeki çöpü almak','Birine gülümsemek','Kimsenin görmediği küçük bir haksızlık']},
+    {m:'İnsan hiçbir söz söylemez ki onun yanında (yaptıklarını) gözetleyen (ve kaydeden) hazır bir melek bulunmasın.',
+     k:'Kâf suresi, 18. ayet',
+     anlam:[['Sadece yüksek sesle söylenen sözler önemlidir.',0,'Ayet “hiçbir söz” diyor. Fısıltıyla söylenen bir söz de söz değil mi?'],
+            ['Söylediğimiz her söz kaydedilir; hiçbir sözümüz kaybolmaz.',1,'Evet. Konu 2’de öğrendiğin melekleri hatırla: Sözlerimiz de kayda geçer.'],
+            ['Melekler yalnızca iyi sözleri yazar.',0,'Ayet iyi-kötü ayrımı yapıyor mu? “Hiçbir söz” ifadesine dikkat et.']],
+     cikarim:[['Sözler davranış sayılmaz; sadece yaptıklarımız önemlidir.',0,'Ayet özellikle “söz”den söz ediyor. Bir söz birini incitebilir mi?'],
+              ['Ahirete inanan kişi sözlerine de dikkat eder; çünkü sözler de hesabın bir parçasıdır.',1,'Evet. Sözlerimiz de davranışımızdır ve sorumluluğu vardır.'],
+              ['Kimse duymadıysa söylenen söz önemsizdir.',0,'Ayete göre insan duymasa da sözü kaydeden biri var.']],
+     hayat:['Arkadaşın arkasından konuşmak','İnternete yorum yazmak','Birine teşekkür etmek','Söz verip tutmamak']}
+  ];
+  (function(){
+    var kap = $('#ahAyetler'), bitenAyet = 0;
+    AYETLER.forEach(function(a, n){
+      var kart = document.createElement('div');
+      kart.className = 'ah-ayet';
+      kart.innerHTML = '<p class="ah-ayet-metin">“' + kacis(a.m) + '”</p><p class="ah-ayet-kaynak">(' + kacis(a.k) + ')</p>' +
+        '<div class="ah-soru" data-s="anlam"><p class="ah-soru-metin"><span class="ah-asama">ANLAM</span>Bu ayette insanın davranışlarıyla ilgili hangi düşünce öne çıkıyor?</p></div>' +
+        '<div class="ah-soru" data-s="cikarim" hidden><p class="ah-soru-metin"><span class="ah-asama">ÇIKARIM</span>Bu ayetten ahiret inancının insan davranışlarına etkisi hakkında hangi sonuç çıkarılabilir?</p></div>' +
+        '<div class="ah-soru" data-s="hayat" hidden><p class="ah-soru-metin"><span class="ah-asama">GÜNLÜK HAYAT</span>Bu düşünce günlük hayatımızdaki hangi davranışları etkileyebilir? Uygun olanların hepsini seç.</p>' +
+          '<div class="ah-ciplar">' + a.hayat.map(function(h){ return '<button type="button" class="ah-sec" aria-pressed="false">' + kacis(h) + '</button>'; }).join('') + '</div>' +
+          '<button type="button" class="ah-ileri ah-ikincil" data-kontrol>Seçimimi kontrol et</button><p class="ah-gb" aria-live="polite" hidden></p></div>' +
+        '<div class="ah-zincir" hidden aria-label="Ayetten ahiret inancına giden yol"><span>AYET</span><i>→</i><span>ANLAM</span><i>→</i><span>ÇIKARIM</span><i>→</i><span>GÜNLÜK HAYAT</span><i>→</i><span>AHİRET İNANCI</span></div>';
+      kap.appendChild(kart);
+      [['anlam','cikarim'],['cikarim','hayat']].forEach(function(cift){
+        var soru = $('[data-s="' + cift[0] + '"]', kart);
+        var div = document.createElement('div'); div.className = 'ah-secenekler';
+        a[cift[0]].forEach(function(o){
+          var b = document.createElement('button'); b.type = 'button'; b.className = 'ah-sec'; b.textContent = o[0];
+          b.dataset.gb = o[2]; if(o[1]) b.setAttribute('data-dogru', '');
+          div.appendChild(b);
+        });
+        var gb = document.createElement('p'); gb.className = 'ah-gb'; gb.setAttribute('aria-live', 'polite'); gb.hidden = true;
+        soru.appendChild(div); soru.appendChild(gb);
+        cikarimSorusu(soru, function(){ goster($('[data-s="' + cift[1] + '"]', kart)); });
+      });
+      var hs = $('[data-s="hayat"]', kart), ciplar = $$('.ah-ciplar .ah-sec', hs), hgb = $(':scope > .ah-gb', hs);
+      ciplar.forEach(function(c){ c.addEventListener('click', function(){ c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); }); });
+      $('[data-kontrol]', hs).addEventListener('click', function(){
+        var secilmeyen = ciplar.filter(function(c){ return c.getAttribute('aria-pressed') !== 'true'; });
+        if(secilmeyen.length === ciplar.length){ gbYaz(hgb, '✏️ En az bir davranış seç.', 'ah-gb-ipucu'); return; }
+        if(secilmeyen.length){
+          gbYaz(hgb, '💡 Seçmediğin “' + kacis(secilmeyen[0].textContent) + '” da günlük hayatta yaptığımız bir davranış değil mi? Ayet ' +
+            (n === 0 ? '“zerre ağırlığınca” diyordu.' : '“hiçbir söz” diyordu.') + ' Bir daha bak.', 'ah-gb-ipucu');
+          return;
+        }
+        ciplar.forEach(function(c){ c.disabled = true; c.classList.add('ah-dogru'); });
+        this.disabled = true;
+        gbYaz(hgb, '✔ Hepsi! Fark ettin mi? Seçtiklerinin çoğu “küçük” sayılan, kimsenin dikkat etmeyebileceği davranışlar. ' +
+          '<b>Ahiret inancı</b>, bu küçük davranışları da önemli kılar.', 'ah-gb-guclu');
+        goster($('.ah-zincir', kart));
+        bitenAyet++;
+        if(bitenAyet === AYETLER.length){ goster($('.ah-ayet-son')); bitir(6); }
+      });
+    });
+  })();
+
+  /* ——— 7. BENİM KARARIM ——— */
+  var DURUMLAR = [
+    {i:'🗣️', m:'Arkadaşın hakkında kötü bir şey söyleme fırsatın var ama o yanında değil.', a:'Söylerim, nasılsa duymaz.', b:'Söylemem; arkasından konuşmak da bir davranıştır.'},
+    {i:'📝', m:'Sınavda öğretmen görmeden kopya çekebilirsin.', a:'Kopya çekerim.', b:'Çekmem, kendi bildiğimle yaparım.'},
+    {i:'💰', m:'Yerde para buldun.', a:'Cebime koyarım.', b:'Sahibini bulmaya çalışırım ya da öğretmene teslim ederim.'},
+    {i:'🤝', m:'Bir arkadaşın senden yardım istedi ama kimse seni zorlamıyor.', a:'Yardım etmem, zorunda değilim.', b:'Yardım ederim, zorunlu olmasa da.'}
+  ];
+  (function(){
+    var kap = $('#ahDurumlar'), tamam = {};
+    DURUMLAR.forEach(function(d, n){
+      var kart = document.createElement('div');
+      kart.className = 'ah-durum';
+      kart.innerHTML = '<p class="ah-olay-bas"><span aria-hidden="true">' + d.i + '</span>' + kacis(d.m) + '</p>' +
+        '<div class="ah-secenekler"><button type="button" class="ah-sec" data-v="a">' + kacis(d.a) + '</button><button type="button" class="ah-sec" data-v="b">' + kacis(d.b) + '</button></div>' +
+        '<div class="ah-gerekce" hidden><p class="ah-soru-metin" style="margin-top:10px !important">🔎 Bu davranışının ahiret inancıyla bağlantısı nedir?</p>' +
+        '<textarea class="ah-yazi" aria-label="Gerekçen" placeholder="Kısa gerekçeni yaz..."></textarea>' +
+        '<button type="button" class="ah-ileri ah-ikincil">Gerekçemi kaydet</button><p class="ah-gb" aria-live="polite" hidden></p></div>';
+      kap.appendChild(kart);
+      var secim = '', dugmeler = $$('.ah-secenekler .ah-sec', kart), g = $('.ah-gerekce', kart), t = $('textarea', kart), gb = $('.ah-gb', kart);
+      t.value = oku('karar_' + n);
+      t.addEventListener('input', function(){ yaz('karar_' + n, t.value); });
+      dugmeler.forEach(function(b){
+        b.addEventListener('click', function(){
+          secim = b.dataset.v;
+          dugmeler.forEach(function(x){ x.classList.toggle('ah-secili', x === b); });
+          g.hidden = false; t.focus();
+        });
+      });
+      $('.ah-gerekce .ah-ileri', kart).addEventListener('click', function(){
+        if(t.value.trim().length < 15){ gbYaz(gb, '✏️ Biraz daha yaz: Kararını ahiret inancıyla nasıl ilişkilendiriyorsun?', 'ah-gb-ipucu'); t.focus(); return; }
+        gbYaz(gb, secim === 'a'
+          ? '💭 Dürüstçe yazdığın için teşekkürler. Bir düşün: Zilzâl suresindeki “zerre ağırlığınca” ifadesine göre bu kararın nasıl bir karşılık bulur? Kararını değiştirmek istersen seçenekler hâlâ açık.'
+          : '💭 Burada önemli olan şu: Kimse görmeden ya da zorlamadan verdiğin bu karar, sorumluluğun dışarıdan değil <b>içeriden</b> geldiğini gösteriyor.',
+          secim === 'a' ? 'ah-gb-ipucu' : 'ah-gb-guclu');
+        tamam[n] = true;
+        if(Object.keys(tamam).length === DURUMLAR.length){ goster($('.ah-durum-son')); bitir(7); }
+      });
+    });
+  })();
+
+  /* ——— 8. BENİM CÜMLEM ——— */
+  (function(){
+    var t = $('#ahFinalYazi'), gb = $('#ahFinalGb');
+    t.value = oku('final');
+    t.addEventListener('input', function(){ yaz('final', t.value); });
+    $('#ahFinalBtn').addEventListener('click', function(){
+      var v = t.value.trim();
+      if(v.length < 20){ gbYaz(gb, '✏️ Cümleni biraz daha geliştir. “… çünkü” kısmında kendi düşünceni anlat.', 'ah-gb-ipucu'); t.focus(); return; }
+      var s = v.toLocaleLowerCase('tr');
+      var izler = [];
+      if(/sorumlu/.test(s)) izler.push('sorumluluk');
+      if(/görme|görmese|gizli|kimse/.test(s)) izler.push('kimse görmese bile');
+      if(/karşılı|hesap|mükâfat|mukafat|ceza/.test(s)) izler.push('davranışların karşılığı');
+      if(/davran|dikkat|doğru/.test(s)) izler.push('davranış');
+      gbYaz(gb, izler.length
+        ? '✔ Cümlende <b>' + izler.join('</b>, <b>') + '</b> düşüncesi var. Bu, ahiret inancını kendi davranışlarına bağladığını gösteriyor.'
+        : '💭 Cümleni yazdın. Şimdi kendine sor: Cümlemde ahiret inancını <b>davranışlarıma</b> bağladım mı? Aşağıdaki örnekle karşılaştırabilirsin.',
+        izler.length ? 'ah-gb-guclu' : 'ah-gb-ipucu');
+      goster($('#ahFinalOrnek'));
+      bitir(8);
+    });
+  })();
+
+  ilerlemeCiz();
 })();
 </script>
 </body>
