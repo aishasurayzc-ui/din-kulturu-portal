@@ -1135,36 +1135,57 @@
 </style>
 <style id="ayetAsamaTestStil">
 /* ======================================================================
-   TEKRAR TESTİ: AYET → AHİRET AŞAMASI (additive, "at-" önekli)
+   TEKRAR TESTİ: METİN → AHİRET AŞAMASI (additive, "at-" önekli)
 ====================================================================== */
   .at-test{ clear:both; border-top:4px solid #c9740b; }
-  .at-skor{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
-  .at-skor span{ font-weight:900; font-size:.86em; background:#fff6e8; color:#8a4b00; border-radius:999px; padding:5px 12px; }
-  .at-kart{ border:2px solid #efe3c2; background:#fffdf6; border-radius:18px; padding:14px 16px; margin:0 0 12px; }
+  .at-kart{ border:2px solid #efe3c2; background:#fffdf6; border-radius:18px; padding:14px 16px; margin:0 0 12px; scroll-margin-top:140px; }
   .at-kart.at-tamam{ border-color:#cfe6da; background:#f6fbf8; }
-  .at-no{ font-size:.72em; font-weight:900; letter-spacing:.08em; color:#8a6d2b; }
-  .at-metin{ font-size:1.05em !important; font-weight:800; color:#5a3d00; line-height:1.6 !important; margin:4px 0 2px !important; }
+  .at-kart.at-hadis{ border-color:#e0d3f5; background:#fbf9ff; }
+  .at-kart.at-hadis.at-tamam{ border-color:#cfe6da; background:#f6fbf8; }
+  .at-no{ display:inline-block; font-size:.7em; font-weight:900; letter-spacing:.08em; color:#fff; background:#c9740b; border-radius:999px; padding:2px 9px; }
+  .at-hadis .at-no{ background:#6f4aa8; }
+  .at-metin{ font-size:1.05em !important; font-weight:800; color:#5a3d00; line-height:1.6 !important; margin:6px 0 2px !important; }
+  .at-hadis .at-metin{ color:#3b2a6b; }
   .at-kaynak{ font-size:.8em !important; color:#8a6d2b; margin:0 0 10px !important; }
   .at-soru{ font-weight:900; margin:8px 0 6px !important; color:#22333b; }
   .at-duraklar, .at-izler{ display:flex; flex-wrap:wrap; gap:7px; }
-  .at-sec{ font:inherit; font-weight:800; font-size:.9em; cursor:pointer; min-height:42px; padding:7px 13px; border-radius:999px;
+  .at-sec{ font:inherit; font-weight:800; font-size:.9em; cursor:pointer; min-height:46px; padding:8px 13px; border-radius:999px;
     background:#fff; color:#22333b; border:2px solid #cfd8e3; transition:transform .15s, border-color .15s; }
   .at-izler .at-sec{ border-radius:14px; text-align:left; }
   .at-sec:hover:not(:disabled){ transform:translateY(-2px); border-color:#c9740b; }
-  .at-sec:focus-visible{ outline:3px solid var(--sari,#f4a261); outline-offset:2px; }
+  .at-sec:focus-visible, .at-git:focus-visible, .at-btn:focus-visible, .at-zor a:focus-visible{ outline:3px solid var(--navy,#1E3A8A); outline-offset:2px; }
   .at-sec:disabled{ cursor:default; }
   .at-sec.at-dogru{ background:#d8f3dc; border-color:var(--yesil,#40916c); }
   .at-sec.at-yanlis{ background:#fff4e5; border-color:var(--sari,#f4a261); opacity:.8; }
   .at-gb{ margin:8px 0 0 !important; padding:9px 13px; border-radius:12px; background:#fff; border-left:5px solid #12869a; line-height:1.55; font-size:.95em; }
   .at-gb.at-ipucu{ border-left-color:var(--sari,#f4a261); background:#fffaf0; }
   .at-gb.at-guclu{ border-left-color:var(--yesil,#40916c); background:#f3fbf5; }
-  .at-son{ text-align:center; background:linear-gradient(135deg,#fff6e8,#e6f7f8); border-radius:18px; padding:16px; }
+  .at-sonraki{ font:inherit; font-weight:900; cursor:pointer; margin-top:10px; min-height:46px; padding:9px 18px; border-radius:999px;
+    border:2px solid #c9740b; background:#fff; color:#8a4b00; }
+  /* — alt sabit ilerleme çubuğu (başparmakla erişilir) — */
+  .at-alt{ position:sticky; bottom:8px; z-index:6; margin:4px 0 0; display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px;
+    background:#fff; border:2px solid #efe3c2; border-radius:18px; padding:8px 10px 8px 14px; box-shadow:0 8px 22px rgba(16,24,40,.14); }
+  .at-alt-bilgi{ flex:1 1 180px; min-width:0; }
+  .at-alt-ust{ display:flex; flex-wrap:wrap; gap:4px 10px; font-weight:900; font-size:.84em; color:#8a4b00; }
+  .at-alt-ust span:last-child{ color:#5b6570; font-weight:800; }
+  .at-cubuk{ height:7px; border-radius:999px; background:#f1e6cf; overflow:hidden; margin-top:5px; }
+  .at-cubuk i{ display:block; height:100%; width:0; background:linear-gradient(90deg,#c9740b,var(--yesil,#40916c)); transition:width .35s ease; }
+  .at-git{ font:inherit; font-weight:900; cursor:pointer; min-height:46px; padding:8px 16px; border-radius:999px; border:0; background:#c9740b; color:#fff; white-space:nowrap; }
+  .at-git[hidden]{ display:none; }
+  /* — sonuç — */
+  .at-son{ text-align:center; background:linear-gradient(135deg,#fff6e8,#e6f7f8); border-radius:18px; padding:16px; margin-bottom:12px; }
   .at-son p{ font-weight:900; margin:0 0 10px; }
+  .at-zor{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:0 0 12px; }
+  .at-zor a{ display:inline-flex; align-items:center; min-height:44px; padding:6px 14px; border-radius:999px; background:#fff; border:2px solid #c9740b;
+    color:#8a4b00; font-weight:900; text-decoration:none; }
   .at-btn{ font:inherit; font-weight:900; cursor:pointer; min-height:46px; padding:10px 20px; border-radius:999px; border:0; background:#c9740b; color:#fff; }
-  .at-btn:focus-visible{ outline:3px solid var(--navy,#1E3A8A); outline-offset:2px; }
-  @media (max-width:520px){ .at-test{ padding:13px 10px; } .at-kart{ padding:12px; }
-    .at-duraklar{ display:grid; grid-template-columns:1fr 1fr; gap:6px; } .at-duraklar .at-sec{ padding:7px 8px; font-size:.86em; } }
-  @media (prefers-reduced-motion: reduce){ .at-sec{ transition:none !important; } }
+  .as-durak.as-isaret .as-kart{ border-color:#c9740b !important; box-shadow:0 0 0 4px rgba(201,116,11,.2) !important; }
+  @media (max-width:520px){
+    .at-test{ padding:13px 10px; } .at-kart{ padding:12px; }
+    .at-duraklar{ display:grid; grid-template-columns:1fr 1fr; gap:6px; } .at-duraklar .at-sec{ padding:7px 8px; font-size:.86em; }
+    .at-alt{ bottom:6px; padding:8px; } .at-git{ flex:1 1 100%; }
+  }
+  @media (prefers-reduced-motion: reduce){ .at-sec, .at-cubuk i{ transition:none !important; } }
 </style>
 </head>
 <body>
@@ -1314,28 +1335,34 @@
   <p class="ka-blok-alt">Yukarıdan aşağıya doğru ilerle. Bir durağa dokunursan daha fazla bilgi açılır.</p>
   <ol class="as-yol" aria-label="Ahiretin aşamaları, sırasıyla">
     <li class="as-durak" style="--r:#40916c;--a:#eef7f1;--s:0"><details><summary><span class="as-ikon" aria-hidden="true">🌱</span><span class="as-kart"><span class="as-ad">DÜNYA HAYATI<small>IMTIHAN YERI</small> <span class="as-burada">BURADAYIZ</span></span><span class="as-kisa">Şu an buradayız. Yaptığımız iyilikler ve kötülükler bu hayatta şekillenir.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay"><b>Ömür</b>, Allah’ın her insana verdiği yaşama süresidir. Dünya hayatı geçicidir ama bu süre içinde yaptıklarımız ahirette karşımıza çıkar.</p></details></li>
-    <li class="as-durak" style="--r:#5b6570;--a:#f1f5f9;--s:1"><details><summary><span class="as-ikon" aria-hidden="true">🕯️</span><span class="as-kart"><span class="as-ad">ÖLÜM<small>ECEL GELIR</small></span><span class="as-kisa">Ömür sona erer; ruh bedenden ayrılır.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Ömrün sona erdiği ana <b>ecel</b> denir. Ölümün zamanını yalnızca Allah bilir. Ölüm bir yok oluş değil, yeni bir hayata geçiştir.</p></details></li>
-    <li class="as-durak" style="--r:#6f4aa8;--a:#f3eefb;--s:2"><details><summary><span class="as-ikon" aria-hidden="true">🪦</span><span class="as-kart"><span class="as-ad">BERZAH<small>KABIR HAYATI</small></span><span class="as-kisa">Ölümden kıyamete kadar süren kabir hayatı.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">“Berzah” ara, engel demektir: Dünya ile ahiret arasındaki bekleme âlemidir. Kabirdeki sorgu bu dönemde olur.</p></details></li>
-    <li class="as-durak" style="--r:#2f4a8f;--a:#ecf0fa;--s:3"><details><summary><span class="as-ikon" aria-hidden="true">🌪️</span><span class="as-kart"><span class="as-ad">KIYAMET<small>SÛRA ILK ÜFLEYIŞ</small></span><span class="as-kisa">İsrafil sûra ilk kez üfler; evrenin düzeni bozulur, her şey sona erer.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Kıyametin ne zaman kopacağını Allah’tan başka kimse bilmez.</p></details></li>
-    <li class="as-durak" style="--r:#c9740b;--a:#fff6e8;--s:4"><details><summary><span class="as-ikon" aria-hidden="true">🌅</span><span class="as-kart"><span class="as-ad">DİRİLİŞ (BA‘S)<small>SÛRA IKINCI ÜFLEYIŞ</small></span><span class="as-kisa">İsrafil sûra ikinci kez üfler; bütün insanlar yeniden diriltilir.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">İnsanı ilk kez yaratan Allah, onu yeniden diriltmeye de kadirdir.</p></details></li>
-    <li class="as-durak" style="--r:#0891a8;--a:#e6f7f8;--s:5"><details><summary><span class="as-ikon" aria-hidden="true">👥</span><span class="as-kart"><span class="as-ad">HAŞİR<small>MAHŞERDE TOPLANMA</small></span><span class="as-kisa">Diriltilen insanlar hesap için büyük bir meydanda toplanır.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Toplanmaya <b>haşir</b>, insanların toplandığı yere <b>mahşer</b> denir.</p></details></li>
-    <li class="as-durak" style="--r:#12869a;--a:#e6f7f8;--s:6"><details><summary><span class="as-ikon" aria-hidden="true">⚖️</span><span class="as-kart"><span class="as-ad">HESAP · MİZAN<small>AMEL DEFTERI VE TERAZI</small></span><span class="as-kisa">Herkese amel defteri verilir; iyilikler ve kötülükler adaletle tartılır.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Kimseye haksızlık edilmez: Zerre kadar iyilik de kötülük de karşılığını bulur. Konu 3’ün sonundaki “Ahiret Neden Önemli?” bölümünde bunu düşüneceğiz.</p></details></li>
-    <li class="as-durak" style="--r:#1E3A8A;--a:#eef2ff;--s:7"><details><summary><span class="as-ikon" aria-hidden="true">🌉</span><span class="as-kart"><span class="as-ad">SIRAT<small>KÖPRÜ</small></span><span class="as-kisa">Herkesin geçmek zorunda olduğu köprü.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Dünyada iman edip iyi işler yapanlar sırattan kolayca geçer.</p></details></li>
+    <li id="as-d-olum" class="as-durak" style="--r:#5b6570;--a:#f1f5f9;--s:1"><details><summary><span class="as-ikon" aria-hidden="true">🕯️</span><span class="as-kart"><span class="as-ad">ÖLÜM<small>ECEL GELIR</small></span><span class="as-kisa">Ömür sona erer; ruh bedenden ayrılır.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Ömrün sona erdiği ana <b>ecel</b> denir. Ölümün zamanını yalnızca Allah bilir. Ölüm bir yok oluş değil, yeni bir hayata geçiştir.</p></details></li>
+    <li id="as-d-berzah" class="as-durak" style="--r:#6f4aa8;--a:#f3eefb;--s:2"><details><summary><span class="as-ikon" aria-hidden="true">🪦</span><span class="as-kart"><span class="as-ad">BERZAH<small>KABIR HAYATI</small></span><span class="as-kisa">Ölümden kıyamete kadar süren kabir hayatı.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">“Berzah” ara, engel demektir: Dünya ile ahiret arasındaki bekleme âlemidir. Kabirdeki sorgu bu dönemde olur.</p></details></li>
+    <li id="as-d-kiyamet" class="as-durak" style="--r:#2f4a8f;--a:#ecf0fa;--s:3"><details><summary><span class="as-ikon" aria-hidden="true">🌪️</span><span class="as-kart"><span class="as-ad">KIYAMET<small>SÛRA ILK ÜFLEYIŞ</small></span><span class="as-kisa">İsrafil sûra ilk kez üfler; evrenin düzeni bozulur, her şey sona erer.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Kıyametin ne zaman kopacağını Allah’tan başka kimse bilmez.</p></details></li>
+    <li id="as-d-dirilis" class="as-durak" style="--r:#c9740b;--a:#fff6e8;--s:4"><details><summary><span class="as-ikon" aria-hidden="true">🌅</span><span class="as-kart"><span class="as-ad">DİRİLİŞ (BA‘S)<small>SÛRA IKINCI ÜFLEYIŞ</small></span><span class="as-kisa">İsrafil sûra ikinci kez üfler; bütün insanlar yeniden diriltilir.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">İnsanı ilk kez yaratan Allah, onu yeniden diriltmeye de kadirdir.</p></details></li>
+    <li id="as-d-hasir" class="as-durak" style="--r:#0891a8;--a:#e6f7f8;--s:5"><details><summary><span class="as-ikon" aria-hidden="true">👥</span><span class="as-kart"><span class="as-ad">HAŞİR<small>MAHŞERDE TOPLANMA</small></span><span class="as-kisa">Diriltilen insanlar hesap için büyük bir meydanda toplanır.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Toplanmaya <b>haşir</b>, insanların toplandığı yere <b>mahşer</b> denir.</p></details></li>
+    <li id="as-d-hesap" class="as-durak" style="--r:#12869a;--a:#e6f7f8;--s:6"><details><summary><span class="as-ikon" aria-hidden="true">⚖️</span><span class="as-kart"><span class="as-ad">HESAP · MİZAN<small>AMEL DEFTERI VE TERAZI</small></span><span class="as-kisa">Herkese amel defteri verilir; iyilikler ve kötülükler adaletle tartılır.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Kimseye haksızlık edilmez: Zerre kadar iyilik de kötülük de karşılığını bulur. Konu 3’ün sonundaki “Ahiret Neden Önemli?” bölümünde bunu düşüneceğiz.</p></details></li>
+    <li id="as-d-sirat" class="as-durak" style="--r:#1E3A8A;--a:#eef2ff;--s:7"><details><summary><span class="as-ikon" aria-hidden="true">🌉</span><span class="as-kart"><span class="as-ad">SIRAT<small>KÖPRÜ</small></span><span class="as-kisa">Herkesin geçmek zorunda olduğu köprü.</span></span><span class="as-ac" aria-hidden="true"></span></summary><p class="as-detay">Dünyada iman edip iyi işler yapanlar sırattan kolayca geçer.</p></details></li>
     <li class="as-durak" style="--s:8"><p class="as-catal">↙ Yolun sonu iki yurttan birine çıkar ↘</p>
       <div class="as-son">
-      <div class="as-durak" style="--r:#40916c;--a:#eef7f1;--s:9"><details open><summary><span class="as-ikon" aria-hidden="true">🌳</span><span class="as-kart"><span class="as-ad">CENNET</span><span class="as-kisa">İman edip iyi işler yapanların sonsuz mutluluk yurdu.</span></span></summary></details></div>
-      <div class="as-durak" style="--r:#b91c1c;--a:#fff1f1;--s:10"><details open><summary><span class="as-ikon" aria-hidden="true">🔥</span><span class="as-kart"><span class="as-ad">CEHENNEM</span><span class="as-kisa">İnkâr eden ve kötülükte ısrar edenlerin ceza yeri.</span></span></summary></details></div>
+      <div id="as-d-cennet" class="as-durak" style="--r:#40916c;--a:#eef7f1;--s:9"><details open><summary><span class="as-ikon" aria-hidden="true">🌳</span><span class="as-kart"><span class="as-ad">CENNET</span><span class="as-kisa">İman edip iyi işler yapanların sonsuz mutluluk yurdu.</span></span></summary></details></div>
+      <div id="as-d-cehennem" class="as-durak" style="--r:#b91c1c;--a:#fff1f1;--s:10"><details open><summary><span class="as-ikon" aria-hidden="true">🔥</span><span class="as-kart"><span class="as-ad">CEHENNEM</span><span class="as-kisa">İnkâr eden ve kötülükte ısrar edenlerin ceza yeri.</span></span></summary></details></div>
       </div></li>
   </ol>
   <p class="as-alt">🔗 Bu yolculuk bugünkü davranışlarımızı neden etkiler? <a href="#ah-neden">Ahiret Neden Önemli? bölümüne git →</a></p>
 </div>
 <div class="ka-blok at-test" id="at-test">
-  <h4 class="ka-blok-bas">🔁 Tekrar Testi: Bu Ayet Hangi Aşamayı Anlatıyor?<span class="ka-rozet">9 ayet</span></h4>
-  <p class="ka-blok-alt">Ayetlerin çoğunda aşamanın adı geçmiyor; geçen kelimeler de seni yanıltabilir. Ayetin ne anlattığına bak, doğru durağı seç; sonra hangi ipucundan çıkardığını göster.</p>
-  <div class="at-skor" aria-live="polite"><span id="atSkor">✅ 0 / 9 ayet eşleşti · ⭐ 0 ilk denemede</span><span id="atIz">🔎 0 ipucu ilk seferde</span></div>
+  <h4 class="ka-blok-bas">🔁 Tekrar Testi: Bu Metin Hangi Aşamayı Anlatıyor?<span class="ka-rozet">9 ayet · 1 hadis</span></h4>
+  <p class="ka-blok-alt">Metinlerin çoğunda aşamanın adı geçmiyor; geçen kelimeler de seni yanıltabilir. Metnin ne anlattığına bak, doğru durağı seç; sonra hangi ipucundan çıkardığını göster.</p>
+  <div class="at-son" id="atSon" hidden><p id="atSonMetin"></p><div class="at-zor" id="atZor"></div><button type="button" class="at-btn" id="atTekrar">🔄 Testi karıştırıp yeniden çöz</button></div>
   <div id="atKartlar"><noscript><p class="ka-blok-alt">Bu test için tarayıcında JavaScript açık olmalı.</p></noscript></div>
-  <div class="at-son" id="atSon" hidden><p id="atSonMetin"></p><button type="button" class="at-btn" id="atTekrar">🔄 Testi karıştırıp yeniden çöz</button></div>
-  <p class="ka-blok-alt" style="margin:10px 0 0">📖 Mealler: Diyanet İşleri Başkanlığı Kur'an-ı Kerim Meali.</p>
+  <div class="at-alt" role="status" aria-live="polite">
+    <div class="at-alt-bilgi">
+      <div class="at-alt-ust"><span id="atSkor">✅ 0 / 10</span><span id="atIz">⭐ 0 ilk denemede · 🔎 0 ipucu</span></div>
+      <div class="at-cubuk" aria-hidden="true"><i id="atCubuk"></i></div>
+    </div>
+    <button type="button" class="at-git" id="atGit">Sıradakine git ↓</button>
+  </div>
+  <p class="ka-blok-alt" style="margin:10px 0 0">📖 Mealler: Diyanet İşleri Başkanlığı Kur'an-ı Kerim Meali. Hadis: Diyanet, Hadislerle İslâm.</p>
 </div>
 
   </div>
@@ -4988,29 +5015,67 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 })();
 </script>
 <script id="ayetAsamaTestScript">
-/* Tekrar testi: ayet → ahiret aşaması (önce eşleştir, sonra ipucunu göster) */
+/* Tekrar testi: metin → ahiret aşaması (önce eşleştir, sonra ipucunu göster) */
 (function(){
   'use strict';
   var kok = document.getElementById('at-test'); if(!kok) return;
-  var AYETLER = [{"m": "Can boğaza geldiğinde, onu geri döndürsenize! Oysa siz o zaman bakıp durursunuz.", "k": "Vâkıa suresi, 83-84. ayetler", "d": "olum", "h": "Ayet bir insanın son anlarını anlatıyor. Ömrün bittiği an hangi durak?", "iz": [["“Can boğaza geldiğinde”: insanın son anları", 1], ["Evrenin düzeninin bozulması", 0], ["İnsanların bir yerde toplanması", 0]], "a": "Canın boğaza gelmesi, ömrün sona erdiği anı, yani ölümü anlatır."}, {"m": "(…) Onların arkasında, tekrar dirilecekleri güne kadar (devam edecek, dönmelerine engel) bir perde (…) vardır.", "k": "Mü'minûn suresi, 100. ayet (kısaltılarak)", "d": "berzah", "h": "Ayet ölümden SONRA ama tekrar dirilecekleri günden ÖNCE süren bir dönemi anlatıyor.", "iz": [["“Tekrar dirilecekleri güne kadar” süren bir perde", 1], ["Amellerin bir kitapta yazılı olması", 0], ["Güneşin dürülmesi", 0]], "a": "Ölümle diriliş arasında, dünyaya dönmeye engel olan bir perde: Bu, berzah yani kabir hayatıdır."}, {"m": "Güneş, dürüldüğü zaman, / Yıldızlar, bulanıp söndüğü zaman, / Dağlar, yürütüldüğü zaman, …", "k": "Tekvîr suresi, 1-3. ayetler", "d": "kiyamet", "h": "Ayet insanlardan değil; Güneş'ten, yıldızlardan ve dağlardan söz ediyor. Evrenin düzeni bozulunca hangi aşama başlar?", "iz": [["Güneşin, yıldızların ve dağların düzeninin bozulması", 1], ["İnsanların kabirlerden çıkması", 0], ["İyiliklerin tartılması", 0]], "a": "Güneşin dürülmesi, yıldızların sönmesi, dağların yürütülmesi: Evrenin düzeni bozuluyor. Bu, kıyamettir."}, {"m": "Sûra üfürülür. Bir de bakarsın, kabirlerden çıkmış, Rablerine doğru akın akın gitmektedirler.", "k": "Yâsîn suresi, 51. ayet", "d": "dirilis", "h": "Sûra hem kıyamette hem dirilişte üflenir. Bu ayette insanlara ne oluyor?", "iz": [["“Kabirlerden çıkmış” insanlar", 1], ["Can boğaza gelmesi", 0], ["Ateşin yüreklere işlemesi", 0]], "a": "Sûra üfürülmesi tek başına yetmez; asıl ipucu insanların kabirlerden çıkmasıdır. Bu, diriliştir (ba's)."}, {"m": "Dağları yürüteceğimiz ve senin yeryüzünü çırılçıplak göreceğin günü bir hatırla. Biz onları mahşerde toplarız da içlerinden hiçbirini bırakmayız.", "k": "Kehf suresi, 47. ayet", "d": "hasir", "h": "Ayetin başı kıyameti hatırlatıyor. Ama ayetin asıl anlattığı ne: İnsanlara ne yapılıyor?", "iz": [["“Toplarız da içlerinden hiçbirini bırakmayız”", 1], ["“Dağları yürüteceğimiz” ifadesi", 0], ["Altın tepsiler ve kadehler", 0]], "a": "Dağların yürütülmesi kıyameti hatırlatır; ama ayetin vurgusu insanların hiç kimse eksik kalmadan toplanmasıdır. Bu, haşirdir."}, {"m": "Kitap ortaya konur. Suçluları, kitabın içindekilerden korkuya kapılmış görürsün. “Eyvah bize! Bu nasıl bir kitaptır ki küçük, büyük hiçbir şey bırakmadan hepsini sayıp dökmüş!” derler. Onlar bütün yaptıklarını karşılarında bulurlar. Senin Rabbin hiç kimseye zulmetmez.", "k": "Kehf suresi, 49. ayet", "d": "hesap", "h": "Ayetteki “kitap” ne yazıyor? Küçük büyük her şeyin yazılı olduğu bu kitap hangi aşamada ortaya konur?", "iz": [["Küçük büyük her şeyi sayan ve ortaya konan kitap", 1], ["Kabirlerden çıkış", 0], ["Güneşin dürülmesi", 0]], "a": "Her şeyin yazılı olduğu kitap amel defteridir. İnsan yaptıklarının hesabını bu defterle verir."}, {"m": "Kıyamet günü için adalet terazileri kuracağız. Öyle ki hiçbir kimseye zerre kadar zulmedilmeyecek. (Yapılan iş) bir hardal tanesi ağırlığınca da olsa, onu getirip ortaya koyacağız. Hesap görücü olarak biz yeteriz.", "k": "Enbiyâ suresi, 47. ayet", "d": "hesap", "h": "Ayette “kıyamet günü” kelimesi geçiyor; ama o gün ne yapılacağı anlatılıyor? Terazi neye yarar?", "iz": [["“Adalet terazileri” ve “hardal tanesi ağırlığınca”", 1], ["“Kıyamet günü” kelimesinin geçmesi", 0], ["Ateşin tutuşturulması", 0]], "a": "Terazi tartmak içindir: İyilikler ve kötülükler hardal tanesi kadar küçük olsa bile tartılır. Bu, mizandır."}, {"m": "Onlar için altın tepsiler ve kadehler dolaştırılır. Canlarının istediği ve gözlerinin hoşlandığı her şey oradadır. Siz orada ebedî olarak kalacaksınız.", "k": "Zuhruf suresi, 71. ayet", "d": "cennet", "h": "İstenen her şeyin bulunduğu ve sonsuza dek kalınacak bir yer anlatılıyor. Bu, yolun sonundaki hangi yurt?", "iz": [["İstenen her şeyin bulunduğu, ebedî kalınacak yer", 1], ["Tutuşturulmuş ateş", 0], ["Kabirdeki bekleyiş", 0]], "a": "Canın istediği her şeyin bulunduğu, sonsuza dek kalınacak mutluluk yurdu cennettir."}, {"m": "O, Allah’ın, yüreklere işleyen tutuşturulmuş ateşidir.", "k": "Hümeze suresi, 6-7. ayetler", "d": "cehennem", "h": "Ayet bir ateşten söz ediyor. Yolun sonundaki iki yurttan hangisi bir ceza yeridir?", "iz": [["“Yüreklere işleyen tutuşturulmuş ateş”", 1], ["Altın tepsiler ve kadehler", 0], ["İnsanların toplanması", 0]], "a": "Tutuşturulmuş ve yüreklere işleyen ateş, kötülükte ısrar edenlerin ceza yeri olan cehennemi anlatır."}], DURAKLAR = [["olum", "🕯️ Ölüm"], ["berzah", "🪦 Berzah"], ["kiyamet", "🌪️ Kıyamet"], ["dirilis", "🌅 Diriliş"], ["hasir", "👥 Haşir"], ["hesap", "⚖️ Hesap · Mizan"], ["cennet", "🌳 Cennet"], ["cehennem", "🔥 Cehennem"]];
+  var METINLER = [{"m": "Can boğaza geldiğinde, onu geri döndürsenize! Oysa siz o zaman bakıp durursunuz.", "k": "Vâkıa suresi, 83-84. ayetler", "d": "olum", "h": "Ayet bir insanın son anlarını anlatıyor. Ömrün bittiği an hangi durak?", "iz": [["“Can boğaza geldiğinde”: insanın son anları", 1], ["Evrenin düzeninin bozulması", 0], ["İnsanların bir yerde toplanması", 0]], "a": "Canın boğaza gelmesi, ömrün sona erdiği anı, yani ölümü anlatır.", "t": "ayet"}, {"m": "(…) Onların arkasında, tekrar dirilecekleri güne kadar (devam edecek, dönmelerine engel) bir perde (…) vardır.", "k": "Mü'minûn suresi, 100. ayet (kısaltılarak)", "d": "berzah", "h": "Ayet ölümden SONRA ama tekrar dirilecekleri günden ÖNCE süren bir dönemi anlatıyor.", "iz": [["“Tekrar dirilecekleri güne kadar” süren bir perde", 1], ["Amellerin bir kitapta yazılı olması", 0], ["Güneşin dürülmesi", 0]], "a": "Ölümle diriliş arasında, dünyaya dönmeye engel olan bir perde: Bu, berzah yani kabir hayatıdır.", "t": "ayet"}, {"m": "Güneş, dürüldüğü zaman, / Yıldızlar, bulanıp söndüğü zaman, / Dağlar, yürütüldüğü zaman, …", "k": "Tekvîr suresi, 1-3. ayetler", "d": "kiyamet", "h": "Ayet insanlardan değil; Güneş'ten, yıldızlardan ve dağlardan söz ediyor. Evrenin düzeni bozulunca hangi aşama başlar?", "iz": [["Güneşin, yıldızların ve dağların düzeninin bozulması", 1], ["İnsanların kabirlerden çıkması", 0], ["İyiliklerin tartılması", 0]], "a": "Güneşin dürülmesi, yıldızların sönmesi, dağların yürütülmesi: Evrenin düzeni bozuluyor. Bu, kıyamettir.", "t": "ayet"}, {"m": "Sûra üfürülür. Bir de bakarsın, kabirlerden çıkmış, Rablerine doğru akın akın gitmektedirler.", "k": "Yâsîn suresi, 51. ayet", "d": "dirilis", "h": "Sûra hem kıyamette hem dirilişte üflenir. Bu ayette insanlara ne oluyor?", "iz": [["“Kabirlerden çıkmış” insanlar", 1], ["Can boğaza gelmesi", 0], ["Ateşin yüreklere işlemesi", 0]], "a": "Sûra üfürülmesi tek başına yetmez; asıl ipucu insanların kabirlerden çıkmasıdır. Bu, diriliştir (ba's).", "t": "ayet"}, {"m": "Dağları yürüteceğimiz ve senin yeryüzünü çırılçıplak göreceğin günü bir hatırla. Biz onları mahşerde toplarız da içlerinden hiçbirini bırakmayız.", "k": "Kehf suresi, 47. ayet", "d": "hasir", "h": "Ayetin başı kıyameti hatırlatıyor. Ama ayetin asıl anlattığı ne: İnsanlara ne yapılıyor?", "iz": [["“Toplarız da içlerinden hiçbirini bırakmayız”", 1], ["“Dağları yürüteceğimiz” ifadesi", 0], ["Altın tepsiler ve kadehler", 0]], "a": "Dağların yürütülmesi kıyameti hatırlatır; ama ayetin vurgusu insanların hiç kimse eksik kalmadan toplanmasıdır. Bu, haşirdir.", "t": "ayet"}, {"m": "Kitap ortaya konur. Suçluları, kitabın içindekilerden korkuya kapılmış görürsün. “Eyvah bize! Bu nasıl bir kitaptır ki küçük, büyük hiçbir şey bırakmadan hepsini sayıp dökmüş!” derler. Onlar bütün yaptıklarını karşılarında bulurlar. Senin Rabbin hiç kimseye zulmetmez.", "k": "Kehf suresi, 49. ayet", "d": "hesap", "h": "Ayetteki “kitap” ne yazıyor? Küçük büyük her şeyin yazılı olduğu bu kitap hangi aşamada ortaya konur?", "iz": [["Küçük büyük her şeyi sayan ve ortaya konan kitap", 1], ["Kabirlerden çıkış", 0], ["Güneşin dürülmesi", 0]], "a": "Her şeyin yazılı olduğu kitap amel defteridir. İnsan yaptıklarının hesabını bu defterle verir.", "t": "ayet"}, {"m": "Kıyamet günü için adalet terazileri kuracağız. Öyle ki hiçbir kimseye zerre kadar zulmedilmeyecek. (Yapılan iş) bir hardal tanesi ağırlığınca da olsa, onu getirip ortaya koyacağız. Hesap görücü olarak biz yeteriz.", "k": "Enbiyâ suresi, 47. ayet", "d": "hesap", "h": "Ayette “kıyamet günü” kelimesi geçiyor; ama o gün ne yapılacağı anlatılıyor? Terazi neye yarar?", "iz": [["“Adalet terazileri” ve “hardal tanesi ağırlığınca”", 1], ["“Kıyamet günü” kelimesinin geçmesi", 0], ["Ateşin tutuşturulması", 0]], "a": "Terazi tartmak içindir: İyilikler ve kötülükler hardal tanesi kadar küçük olsa bile tartılır. Bu, mizandır.", "t": "ayet"}, {"m": "Onlar için altın tepsiler ve kadehler dolaştırılır. Canlarının istediği ve gözlerinin hoşlandığı her şey oradadır. Siz orada ebedî olarak kalacaksınız.", "k": "Zuhruf suresi, 71. ayet", "d": "cennet", "h": "İstenen her şeyin bulunduğu ve sonsuza dek kalınacak bir yer anlatılıyor. Bu, yolun sonundaki hangi yurt?", "iz": [["İstenen her şeyin bulunduğu, ebedî kalınacak yer", 1], ["Tutuşturulmuş ateş", 0], ["Kabirdeki bekleyiş", 0]], "a": "Canın istediği her şeyin bulunduğu, sonsuza dek kalınacak mutluluk yurdu cennettir.", "t": "ayet"}, {"m": "O, Allah’ın, yüreklere işleyen tutuşturulmuş ateşidir.", "k": "Hümeze suresi, 6-7. ayetler", "d": "cehennem", "h": "Ayet bir ateşten söz ediyor. Yolun sonundaki iki yurttan hangisi bir ceza yeridir?", "iz": [["“Yüreklere işleyen tutuşturulmuş ateş”", 1], ["Altın tepsiler ve kadehler", 0], ["İnsanların toplanması", 0]], "a": "Tutuşturulmuş ve yüreklere işleyen ateş, kötülükte ısrar edenlerin ceza yeri olan cehennemi anlatır.", "t": "ayet"}, {"t": "hadis", "m": "Müminler (…) kimi göz kırpacak kadar az bir zamanda, kimi şimşek gibi, kimi rüzgâr gibi, kimi kuş gibi, kimi de iyi cins at ve deve gibi hızla geçer.", "k": "Müslim, Îmân, 302 — Diyanet, Hadislerle İslâm (kısaltılarak)", "d": "sirat", "h": "Hadis, herkesin bir yerden “geçtiğini” anlatıyor; kimi şimşek gibi, kimi rüzgâr gibi. Haritada üzerinden geçilen durak hangisiydi?", "iz": [["Kiminin şimşek gibi, kiminin rüzgâr gibi “geçmesi”", 1], ["İyiliklerin teraziyle tartılması", 0], ["Kabirlerden çıkış", 0]], "a": "Herkesin üzerinden geçeceği, kiminin çok hızlı geçtiği yer sırattır. Not: Sırat bilgisi Kur'an'dan değil, Peygamberimizin hadislerinden gelir; bu yüzden burada ayet değil hadis var."}], DURAKLAR = [["olum", "🕯️ Ölüm"], ["berzah", "🪦 Berzah"], ["kiyamet", "🌪️ Kıyamet"], ["dirilis", "🌅 Diriliş"], ["hasir", "👥 Haşir"], ["hesap", "⚖️ Hesap · Mizan"], ["sirat", "🌉 Sırat"], ["cennet", "🌳 Cennet"], ["cehennem", "🔥 Cehennem"]];
   var AD = {}; DURAKLAR.forEach(function(d){ AD[d[0]] = d[1]; });
   var kap = document.getElementById('atKartlar'), skorEl = document.getElementById('atSkor'), izEl = document.getElementById('atIz'),
-      son = document.getElementById('atSon'), sonMetin = document.getElementById('atSonMetin');
-  var es, iz, bitti, dd;
+      cubuk = document.getElementById('atCubuk'), git = document.getElementById('atGit'),
+      son = document.getElementById('atSon'), sonMetin = document.getElementById('atSonMetin'), zorEl = document.getElementById('atZor');
+  var es, iz, bitti, dd, zor;
+  var azHareket = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function kacis(x){ return String(x).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function karistir(d){ d = d.slice(); for(var i=d.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=d[i]; d[i]=d[j]; d[j]=t; } return d; }
-  function skor(){ skorEl.textContent = '✅ ' + dd + ' / ' + AYETLER.length + ' ayet eşleşti · ⭐ ' + es + ' ilk denemede'; izEl.textContent = '🔎 ' + iz + ' ipucu ilk seferde'; }
+  function kaydir(el){ try { el.scrollIntoView({behavior: azHareket ? 'auto' : 'smooth', block:'start'}); } catch(e){ el.scrollIntoView(); } }
+  function skor(){
+    skorEl.textContent = '✅ ' + bitti + ' / ' + METINLER.length;
+    izEl.textContent = '⭐ ' + es + ' ilk denemede · 🔎 ' + iz + ' ipucu';
+    cubuk.style.width = (bitti / METINLER.length * 100) + '%';
+    git.hidden = bitti === METINLER.length;
+  }
   function gb(el, metin, tur){ el.className = 'at-gb' + (tur ? ' ' + tur : ''); el.innerHTML = metin; el.hidden = false; }
+  function siradaki(){ return kap.querySelector('.at-kart:not(.at-tamam)'); }
+  function siradakineGit(){
+    var k = siradaki(); if(!k){ kaydir(son); return; }
+    kaydir(k);
+    var b = k.querySelector('.at-iz-alan:not([hidden]) .at-sec:not(:disabled)') || k.querySelector('.at-duraklar .at-sec:not(:disabled)');
+    if(b) try { b.focus({preventScroll:true}); } catch(e){}
+  }
+  git.addEventListener('click', siradakineGit);
+  function haritadaGoster(anahtar){
+    var li = document.getElementById('as-d-' + anahtar); if(!li) return;
+    var det = li.querySelector('details'); if(det) det.open = true;
+    li.classList.add('as-isaret'); setTimeout(function(){ li.classList.remove('as-isaret'); }, 2600);
+    kaydir(li);
+    var sm = li.querySelector('summary'); if(sm) try { sm.focus({preventScroll:true}); } catch(e){}
+  }
+  function bitir(){
+    var yanlislar = Object.keys(zor);
+    sonMetin.textContent = METINLER.length + ' metnin ' + es + ' tanesinde doğru durağı ilk denemede buldun; ' + iz +
+      ' tanesinde ipucunu ilk seferde gösterdin. ' + (yanlislar.length ? 'Zorlandığın durakları haritada bir daha incele:' : 'Hiç zorlanmadın; aşamaları metinlerden tanıyabiliyorsun!');
+    zorEl.innerHTML = '';
+    yanlislar.forEach(function(k){
+      var a = document.createElement('a'); a.href = '#as-d-' + k; a.textContent = AD[k] + ' → haritada gör';
+      a.addEventListener('click', function(e){ e.preventDefault(); haritadaGoster(k); });
+      zorEl.appendChild(a);
+    });
+    son.hidden = false;
+    kaydir(son);
+  }
   function kur(){
-    es = 0; iz = 0; bitti = 0; dd = 0; kap.innerHTML = ''; son.hidden = true; skor();
-    karistir(AYETLER).forEach(function(a, n){
-      var kart = document.createElement('div'); kart.className = 'at-kart';
-      kart.innerHTML = '<span class="at-no">AYET ' + (n+1) + '</span><p class="at-metin">“' + kacis(a.m) + '”</p><p class="at-kaynak">(' + kacis(a.k) + ')</p>' +
-        '<p class="at-soru">Bu ayet ahiretin hangi aşamasını anlatıyor?</p><div class="at-duraklar" role="group" aria-label="Aşamalar"></div><p class="at-gb" aria-live="polite" hidden></p>' +
+    es = 0; iz = 0; bitti = 0; dd = 0; zor = {}; kap.innerHTML = ''; son.hidden = true; skor();
+    var sayac = {ayet:0, hadis:0};
+    karistir(METINLER).forEach(function(a, n){
+      var hadis = a.t === 'hadis';
+      var kart = document.createElement('div'); kart.className = 'at-kart' + (hadis ? ' at-hadis' : '');
+      kart.innerHTML = '<span class="at-no">' + (hadis ? '📜 HADİS' : '📖 METİN ' + (n+1)) + '</span><p class="at-metin">“' + kacis(a.m) + '”</p><p class="at-kaynak">(' + kacis(a.k) + ')</p>' +
+        '<p class="at-soru">Bu ' + (hadis ? 'hadis' : 'ayet') + ' ahiretin hangi aşamasını anlatıyor?</p><div class="at-duraklar" role="group" aria-label="Aşamalar"></div><p class="at-gb" aria-live="polite" hidden></p>' +
         '<div class="at-iz-alan" hidden><p class="at-soru">🔎 Bunu hangi ipucundan çıkardın?</p><div class="at-izler" role="group" aria-label="İpuçları"></div><p class="at-gb" aria-live="polite" hidden></p></div>';
       kap.appendChild(kart);
       var dk = kart.querySelector('.at-duraklar'), g1 = dk.nextElementSibling, izAlan = kart.querySelector('.at-iz-alan'),
-          izK = izAlan.querySelector('.at-izler'), g2 = izAlan.querySelector('.at-gb'), ilk = true;
+          izK = izAlan.querySelector('.at-izler'), g2 = izAlan.querySelector('.at-gb'), ilk = true, izIlk = true;
       DURAKLAR.forEach(function(d){
         var b = document.createElement('button'); b.type = 'button'; b.className = 'at-sec'; b.textContent = d[1];
         b.addEventListener('click', function(){
@@ -5020,15 +5085,15 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
             b.classList.add('at-dogru');
             gb(g1, '✔ Doğru durak: <b>' + kacis(d[1]) + '</b>. Şimdi kanıtla.', 'at-guclu');
             izAlan.hidden = false; skor();
-            var f = izK.querySelector('button'); if(f) f.focus();
+            var f = izK.querySelector('button'); if(f) try { f.focus({preventScroll:true}); } catch(e){}
           } else {
+            if(ilk) zor[a.d] = true;
             ilk = false; b.disabled = true; b.classList.add('at-yanlis');
             gb(g1, '💡 ' + kacis(a.h) + ' Bir daha dene.', 'at-ipucu');
           }
         });
         dk.appendChild(b);
       });
-      var izIlk = true;
       karistir(a.iz).forEach(function(o){
         var b = document.createElement('button'); b.type = 'button'; b.className = 'at-sec'; b.textContent = o[0];
         b.addEventListener('click', function(){
@@ -5036,23 +5101,24 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
             if(izIlk) iz++;
             Array.prototype.forEach.call(izK.children, function(x){ x.disabled = true; });
             b.classList.add('at-dogru'); kart.classList.add('at-tamam');
-            gb(g2, '✔ ' + kacis(a.a), 'at-guclu'); skor();
-            bitti++;
-            if(bitti === AYETLER.length){
-              sonMetin.textContent = AYETLER.length + ' ayetin ' + es + ' tanesini ilk denemede doğru aşamayla eşleştirdin; ' + iz +
-                ' tanesinde ipucunu ilk seferde buldun. ' + (es + iz >= AYETLER.length * 2 - 2 ? 'Aşamaları ayetlerden tanıyabiliyorsun!' : 'Yolculuk haritasına bir daha bakıp testi yeniden çözebilirsin.');
-              son.hidden = false;
-            }
+            gb(g2, '✔ ' + kacis(a.a), 'at-guclu');
+            bitti++; skor();
+            if(bitti === METINLER.length){ bitir(); return; }
+            /* Açıklama okunsun diye otomatik kaydırma yok; tek dokunuşla sıradakine geçilir. */
+            var s = document.createElement('button'); s.type = 'button'; s.className = 'at-sonraki'; s.textContent = 'Sıradaki metne geç ↓';
+            s.addEventListener('click', function(){ s.remove(); siradakineGit(); });
+            izAlan.appendChild(s);
+            try { s.focus({preventScroll:true}); } catch(e){}
           } else {
             izIlk = false; b.disabled = true; b.classList.add('at-yanlis');
-            gb(g2, '💡 Bu ifade bu ayetin asıl ipucu değil. Ayeti bir daha oku: Hangi söz seni bu aşamaya götürdü?', 'at-ipucu');
+            gb(g2, '💡 Bu ifade bu metnin asıl ipucu değil. Metni bir daha oku: Hangi söz seni bu aşamaya götürdü?', 'at-ipucu');
           }
         });
         izK.appendChild(b);
       });
     });
   }
-  document.getElementById('atTekrar').addEventListener('click', function(){ kur(); kok.scrollIntoView({behavior:'smooth', block:'start'}); });
+  document.getElementById('atTekrar').addEventListener('click', function(){ kur(); kaydir(kok); });
   kur();
 })();
 </script>
