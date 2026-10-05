@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayetten Kavrama — Kader ve Kaza</title>
+<meta name="description" content="11. Sınıf Din Kültürü 1. Ünite: 50 ayet ve hadis; her birinde öğrenci ünitedeki 20 kavramdan metnin anlattığını seçer. Gerekçeli geri bildirim, öğretmen listesi ve yazdırma.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --vurgu:#0f766e; --vurgu-koyu:#115e59; --vurgu-acik:#ccfbf1; --vurgu-cok-acik:#f0fdfa;
+    --altin:#b45309; --altin-acik:#fef3c7;
+    --bg:#f6f7f4; --yuzey:#ffffff; --yuzey2:#f1f5f4; --metin:#1f2933; --soluk:#52606d; --cizgi:#dde3e1;
+    --dogru:#15803d; --dogru-bg:#dcfce7; --yanlis:#b91c1c; --yanlis-bg:#fee2e2;
+    --golge:0 2px 10px rgba(15,40,35,.07); --vurgu-uzeri:#ffffff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --vurgu:#2dd4bf; --vurgu-koyu:#5eead4; --vurgu-acik:#134e4a; --vurgu-cok-acik:#0f2a28;
+      --altin:#fbbf24; --altin-acik:#3a2a0a;
+      --bg:#0e1514; --yuzey:#152120; --yuzey2:#1b2a28; --metin:#e6eeec; --soluk:#9fb3af; --cizgi:#2a3b39;
+      --dogru:#4ade80; --dogru-bg:#123321; --yanlis:#f87171; --yanlis-bg:#3a1515;
+      --golge:0 2px 10px rgba(0,0,0,.35); --vurgu-uzeri:#062b27;
+    }
+  }
+  :root[data-theme="dark"]{
+    --vurgu:#2dd4bf; --vurgu-koyu:#5eead4; --vurgu-acik:#134e4a; --vurgu-cok-acik:#0f2a28;
+    --altin:#fbbf24; --altin-acik:#3a2a0a;
+    --bg:#0e1514; --yuzey:#152120; --yuzey2:#1b2a28; --metin:#e6eeec; --soluk:#9fb3af; --cizgi:#2a3b39;
+    --dogru:#4ade80; --dogru-bg:#123321; --yanlis:#f87171; --yanlis-bg:#3a1515;
+    --golge:0 2px 10px rgba(0,0,0,.35); --vurgu-uzeri:#062b27;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:80px;}
+  body{margin:0; font-family:"Nunito","Segoe UI",Tahoma,sans-serif; background:var(--bg); color:var(--metin); line-height:1.6; font-size:16.5px;}
+  a{color:var(--vurgu);}
+  h1,h2,h3{font-family:"Merriweather",Georgia,serif; line-height:1.3;}
+  .kap{max-width:920px; margin:0 auto; padding:0 16px;}
+  .ust{position:sticky; top:0; z-index:50; background:var(--yuzey); border-bottom:1px solid var(--cizgi); box-shadow:var(--golge);}
+  .ust .kap{display:flex; align-items:center; gap:10px; min-height:54px; padding-top:6px; padding-bottom:6px;}
+  .geri{font-weight:800; text-decoration:none; white-space:nowrap; font-size:.92em;}
+  .skor{flex:1; min-width:0;}
+  .skor-yazi{display:flex; justify-content:space-between; gap:8px; font-size:.84em; font-weight:800; color:var(--soluk);}
+  .cubuk{height:8px; border-radius:999px; background:var(--yuzey2); overflow:hidden; border:1px solid var(--cizgi); margin-top:3px; display:flex;}
+  .cubuk .d{background:var(--dogru);} .cubuk .y{background:var(--yanlis);}
+  .tema{border:1px solid var(--cizgi); background:var(--yuzey2); color:var(--metin); border-radius:999px; padding:6px 10px; cursor:pointer; font:inherit; font-size:.85em;}
+  .hero{background:linear-gradient(135deg,#0f766e 0%,#134e4a 60%,#1e3a8a 100%); color:#fff; padding:32px 0 28px;}
+  .hero h1{margin:6px 0 8px; font-size:clamp(1.5em,4vw,2.1em);}
+  .hero p{margin:0; max-width:680px; opacity:.95;}
+  .rozet{display:inline-block; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3); padding:3px 11px; border-radius:999px; font-size:.8em; font-weight:700; margin:0 6px 6px 0;}
+  .kontrol{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between; margin:20px 0 10px;}
+  .turlar{display:flex; gap:5px; flex-wrap:wrap;}
+  .tur{min-width:58px; border:1px solid var(--cizgi); background:var(--yuzey); color:var(--metin); border-radius:10px; padding:5px 9px; font:inherit; font-weight:800; font-size:.86em; cursor:pointer; line-height:1.15; text-align:center;}
+  .tur small{display:block; font-size:.74em; color:var(--soluk);}
+  .tur.sec{background:var(--vurgu); border-color:var(--vurgu); color:var(--vurgu-uzeri);} .tur.sec small{color:inherit; opacity:.85;}
+  .mod{display:flex; border:1px solid var(--cizgi); border-radius:999px; overflow:hidden;}
+  .mod button{border:none; background:var(--yuzey); color:var(--soluk); font:inherit; font-weight:800; font-size:.84em; padding:7px 13px; cursor:pointer;}
+  .mod button.sec{background:var(--vurgu-acik); color:var(--vurgu-koyu);}
+  .noktalar{display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin:6px 0 14px;}
+  .nokta{width:30px; height:30px; border-radius:50%; border:2px solid var(--cizgi); background:var(--yuzey); color:var(--soluk); font:800 .78em "Nunito",sans-serif; cursor:pointer; padding:0;}
+  .nokta.d{background:var(--dogru); border-color:var(--dogru); color:#fff;} .nokta.y{background:var(--yanlis); border-color:var(--yanlis); color:#fff;}
+  .nokta.aktif{outline:3px solid var(--altin); outline-offset:2px;}
+  .kart{position:relative; border-radius:18px; padding:22px 24px 18px; background:linear-gradient(160deg,var(--yuzey),var(--yuzey2)); border:1px solid var(--cizgi); box-shadow:0 10px 28px -16px rgba(15,40,35,.4); overflow:hidden;}
+  .kart::before{content:""; position:absolute; inset:0 auto 0 0; width:6px; background:var(--renk,var(--altin));}
+  .kart-ust{display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px;}
+  .tur-rozet{font-size:.76em; font-weight:800; letter-spacing:.06em; text-transform:uppercase; border:1px solid var(--cizgi); background:var(--yuzey); border-radius:999px; padding:3px 11px; color:var(--renk);}
+  .sayac{font-size:.82em; font-weight:800; color:var(--soluk);}
+  .metin{font-family:"Merriweather",Georgia,serif; font-style:italic; font-weight:700; font-size:1.13em; line-height:1.6; margin:0 0 8px;}
+  .kaynak{font-weight:800; font-size:.86em; color:var(--soluk); margin:0;}
+  .soru-yazi{text-align:center; font-weight:800; margin:16px 0 8px; color:var(--vurgu-koyu);}
+  .kavramlar{display:grid; gap:7px; grid-template-columns:repeat(auto-fill,minmax(min(118px,100%),1fr));}
+  .kv{border:1px solid var(--cizgi); background:var(--yuzey); color:var(--metin); border-radius:12px; padding:8px 6px; font:inherit; font-weight:800; font-size:.9em; line-height:1.2; cursor:pointer; transition:transform .1s, border-color .1s;}
+  .kv:hover:not(:disabled){transform:translateY(-2px); border-color:var(--vurgu); background:var(--vurgu-cok-acik);}
+  .kv:focus-visible{outline:3px solid var(--altin); outline-offset:2px;}
+  .kv:disabled{cursor:default; opacity:.45;}
+  .kv.dogru{opacity:1; background:var(--dogru-bg); border-color:var(--dogru);} .kv.kabul{opacity:1; background:var(--dogru-bg); border-color:var(--dogru); border-style:dashed;} .kv.yanlis{opacity:1; background:var(--yanlis-bg); border-color:var(--yanlis);}
+  .gb{margin-top:12px; border-radius:14px; padding:12px 16px; border:1px solid var(--cizgi); background:var(--yuzey2);}
+  .gb.d{border-color:var(--dogru); background:var(--dogru-bg);} .gb.y{border-color:var(--yanlis); background:var(--yanlis-bg);}
+  .gb p{margin:0 0 6px;} .gb .ek{font-size:.9em; color:var(--soluk);}
+  .btn{border:none; border-radius:999px; padding:9px 18px; font:inherit; font-weight:800; cursor:pointer; background:var(--vurgu); color:var(--vurgu-uzeri); font-size:.92em;}
+  .btn.ikincil{background:var(--yuzey2); color:var(--metin); border:1px solid var(--cizgi);}
+  .alt{display:flex; gap:8px; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-top:14px;}
+  .ozet{text-align:center;}
+  .halka{width:130px; height:130px; display:block; margin:0 auto 6px;}
+  .halka .z{stroke:var(--yuzey2);} .halka .d{stroke:var(--dogru);} .halka text{fill:var(--metin); font:900 28px "Merriweather",serif;}
+  .ozet ol{text-align:left; max-width:640px; margin:10px auto 0; font-size:.92em;}
+  .liste-tur{margin:20px 0 6px; color:var(--vurgu-koyu); font-size:1em;}
+  .lo{display:grid; grid-template-columns:34px 1fr auto; gap:10px; border-top:1px solid var(--cizgi); padding:9px 0; font-size:.92em; break-inside:avoid;}
+  .lo .no{font-weight:900; color:var(--soluk);} .lo p{margin:0;} .lo .m{font-style:italic;} .lo .k{font-size:.84em; color:var(--soluk); font-weight:700;}
+  .lo .cev{font-size:.8em; font-weight:800; border-radius:999px; padding:3px 10px; background:var(--vurgu); color:var(--vurgu-uzeri); white-space:nowrap; align-self:start;}
+  .sozluk{margin:26px 0 0; background:var(--yuzey); border:1px solid var(--cizgi); border-radius:14px; padding:14px 16px;}
+  .sozluk summary{cursor:pointer; font-weight:800; color:var(--vurgu-koyu);}
+  .sozluk dl{display:grid; grid-template-columns:150px 1fr; gap:6px 12px; margin:10px 0 0; font-size:.92em;}
+  .sozluk dt{font-weight:800;} .sozluk dd{margin:0;}
+  .gizli{display:none !important;}
+  footer{margin:30px 0 0; padding:20px 0 34px; border-top:1px solid var(--cizgi); color:var(--soluk); font-size:.86em;}
+  @media (max-width:600px){ .kavramlar{grid-template-columns:repeat(2,minmax(0,1fr));} .kart{padding:18px 16px 14px;} .metin{font-size:1.02em;} .lo{grid-template-columns:28px 1fr;} .lo .cev{grid-column:2; justify-self:start;} .sozluk dl{grid-template-columns:1fr;} .sozluk dd{margin-bottom:6px;} }
+  @media print{
+    .ust,.kontrol,#oyun,.tema,.alt{display:none !important;}
+    #liste{display:block !important;}
+    body{background:#fff; color:#000; font-size:12.5px;}
+    .hero{background:none; color:#000; padding:0 0 8px;} .rozet{border-color:#999;}
+  }
+</style>
+</head>
+<body>
+
+<header class="ust">
+  <div class="kap">
+    <a class="geri" href="index.html">← Ünite</a>
+    <div class="skor" aria-live="polite">
+      <div class="skor-yazi"><span id="skorYazi">0 / 50</span><span id="skorDogru">0 doğru</span></div>
+      <div class="cubuk" aria-hidden="true"><span class="d" id="cubukD"></span><span class="y" id="cubukY"></span></div>
+    </div>
+    <button class="tema" id="temaBtn" type="button" aria-label="Tema değiştir">◐</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="kap">
+    <span class="rozet">11. Sınıf</span><span class="rozet">1. Ünite · Kader, İrade ve Sorumluluk</span><span class="rozet">50 ayet ve hadis · 20 kavram</span>
+    <h1>Ayetten Kavrama: Kader ve Kaza</h1>
+    <p>Her kartta bir ayet ya da hadis var. Metni oku ve ünitedeki <b>20 kavramın arasından</b> metnin en çok anlattığını seç. Bazı metinlerde birden fazla kavram doğru kabul edilir; seçiminden sonra gerekçesi ve kavramın tanımı açılır.</p>
+  </div>
+</section>
+
+<main class="kap">
+  <div class="kontrol">
+    <div class="turlar" id="turlar" role="group" aria-label="Turlar"></div>
+    <div class="mod" role="group" aria-label="Görünüm"><button type="button" class="sec" data-mod="oyun" aria-pressed="true">🎴 Kartlar</button><button type="button" data-mod="liste" aria-pressed="false">📋 Öğretmen listesi</button></div>
+  </div>
+  <div id="oyun">
+    <div class="noktalar" id="noktalar" role="group" aria-label="Turdaki kartlar"></div>
+    <div id="sahne" aria-live="polite"></div>
+    <div class="alt">
+      <span class="sayac" id="turSonuc"></span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ikincil" type="button" id="turSifirla">Bu turu baştan başla</button><button class="btn ikincil" type="button" id="hepsiSifirla">Tümünü sıfırla</button></div>
+    </div>
+  </div>
+  <div id="liste" class="gizli"></div>
+
+  <details class="sozluk">
+    <summary>📖 20 kavramın kısa tanımları</summary>
+    <dl id="sozluk"></dl>
+  </details>
+</main>
+
+<footer>
+  <div class="kap">
+    <p>Ayet mealleri Diyanet İşleri Başkanlığı mealinden (Açık Kuran) alınmış; hadis künyeleri kontrol edilmiştir. Kavram tanımları MEB 11. Sınıf Din Kültürü ve Ahlak Bilgisi ders kitabının 1. Ünitesine dayanır. Cevapların yalnızca bu cihazda saklanır.</p>
+    <p><a href="index.html">← Ünite sayfasına dön</a> · <a href="index.html#test">Ünite testi</a> · <a href="dusun-karar-ver.html">Düşün, Karar Ver</a></p>
+  </div>
+</footer>
+
+<script>
+function $(s,r){ return (r||document).querySelector(s); }
+function $$(s,r){ return [].slice.call((r||document).querySelectorAll(s)); }
+function oku(k){ try{ return localStorage.getItem('dk11-akv-'+k)||''; }catch(e){ return ''; } }
+function yaz(k,v){ try{ localStorage.setItem('dk11-akv-'+k,v); }catch(e){} }
+(function(){
+  var kok=document.documentElement;
+  try{ var t=localStorage.getItem('dk11-tema'); if(t) kok.setAttribute('data-theme',t); }catch(e){}
+  $('#temaBtn').addEventListener('click',function(){
+    var s=kok.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var y=s==='dark'?'light':'dark'; kok.setAttribute('data-theme',y); try{ localStorage.setItem('dk11-tema',y); }catch(e){}
+  });
+})();
+
+/* ---------- 20 kavram (ders kitabındaki tanımlardan) ---------- */
+var KAVRAM = {
+  'Kader':'Allah’ın ezelî ilmiyle olacak her şeyi bilmesi, ölçü ve plan dâhilinde takdir etmesi.',
+  'Kaza':'Takdir edilen şeyin zamanı gelince gerçekleşmesi; hüküm, karar.',
+  'Sünnetullah':'Allah’ın evrene koyduğu değişmez fiziksel, biyolojik ve toplumsal yasalar.',
+  'Afet':'İnsan müdahalesi olmadan meydana gelen zararlar; kader kapsamındadır ama insanın tedbir sorumluluğunu kaldırmaz.',
+  'Rızık':'Allah’ın canlılara verdiği maddi ve manevi tüm nimetler; veren Allah’tır (Rezzak).',
+  'Helal kazanç':'Rızkı emekle ve meşru yollardan aramak; çalışmak insanın görevidir.',
+  'Sabır':'Zorluklar karşısında Allah’a sığınarak direnç göstermek, acele etmemek.',
+  'Ömür':'Doğumla ölüm arasındaki süre; değerlendirilmesi gereken bir emanet.',
+  'Ecel':'Belirlenen sürenin sonu, ölüm anı; öne alınamaz, geri bırakılamaz.',
+  'Hastalık–sağlık':'Sağlık bir nimet, hastalık bir imtihandır; insan sağlığını korur, hastalıkta tedavi arar.',
+  'Hidayet':'Allah’ın doğru yolu göstermesi ve bu yola yöneleni doğruya ulaştırması.',
+  'Hayır–şer':'Allah’ın rızasına uygun, faydalı olan (hayır) ve O’nun yasakladığı, zararlı olan (şer).',
+  'Dua':'Kulun acizliğini kabul ederek Allah’tan yardım dilemesi; ibadetin özü.',
+  'Tevekkül':'Tedbiri alıp çalıştıktan sonra sonucu Allah’a bırakmak ve O’na güvenmek.',
+  'Teslimiyet':'Sonuç ortaya çıktıktan sonra Allah’ın takdirine gönülden boyun eğmek; pasiflik değildir.',
+  'Rıza':'Allah’tan gelen her şeyi gönül hoşnutluğuyla karşılamak, isyan etmemek.',
+  'İmtihan':'İnsanın nimetler ve zorluklar karşısında sınanması.',
+  'İrade':'İnsanın seçenekler arasında tercih yapabilme gücü (cüz’î irade).',
+  'Sorumluluk':'İnsanın özgür iradesiyle yaptığı tercihlerin sonuçlarını üstlenmesi; güç ölçüsündedir.',
+  'Tedbir':'Olası zararlara karşı önlem almak, sebeplere uymak; tevekkülün ön şartı.'
+};
+var KAVRAM_SIRA = Object.keys(KAVRAM);
+
+/* ---------- 50 metin: [tür, metin, kaynak, ana kavram, kabul edilenler, gerekçe] ----------
+   Ayet mealleri Diyanet İşleri Başkanlığı meali (acikkuran.com) ile karşılaştırılmıştır. */
+var M = [
+  ['Ayet','Gerçekten biz, her şeyi bir ölçü ve dengede yarattık.','Kamer suresi, 49. ayet','Kader',[],'Her şeyin bir ölçü ve dengeyle yaratılması, Allah’ın her şeyi takdir etmesidir.'],
+  ['Ayet','…O, her şeyi yaratmış ve yarattığı o şeyleri bir ölçüye göre takdir etmiştir.','Furkan suresi, 2. ayet','Kader',[],'“Ölçüye göre takdir etmek” kaderin tanımının ta kendisidir.'],
+  ['Ayet','Hiçbir şey yoktur ki hazineleri yanımızda olmasın. Biz onu ancak belli bir ölçüyle indiririz.','Hicr suresi, 21. ayet','Kader',['Rızık'],'Her şey Allah katında belli bir ölçüyle takdir edilir ve öyle gönderilir.'],
+  ['Ayet','Yeryüzünde ve kendi nefislerinizde uğradığınız hiçbir musibet yoktur ki, biz onu yaratmadan önce, bir kitapta (Levh-i Mahfuz’da) yazılmış olmasın. Şüphesiz bu, Allah’a göre kolaydır.','Hadîd suresi, 22. ayet','Kader',['İmtihan','Afet'],'Olacakların önceden bilinip yazılmış olması kaderdir.'],
+  ['Ayet','De ki: “Bizim başımıza ancak, Allah’ın bizim için yazdığı şeyler gelir. O, bizim yardımcımızdır. Öyleyse mü’minler, yalnız Allah’a güvensinler.”','Tevbe suresi, 51. ayet','Kader',['Tevekkül'],'Başa gelenlerin Allah’ın yazdığı olması kaderi; O’na güvenmek tevekkülü anlatır.'],
+  ['Hadis','Kuvvetli mümin, zayıf müminden daha hayırlı ve sevimlidir… Sana fayda verecek şeye sarıl, Allah’tan yardım dile ve acze düşme. Başına bir şey gelirse “Şöyle yapsaydım böyle olurdu.” deme; “Allah takdir etti, dilediğini yaptı.” de.','Hz. Muhammed (sav) — Müslim, Kader, 34','Teslimiyet',['Kader','Tedbir','Tevekkül'],'Hadis önce çabayı ve tedbiri, sonuç ortaya çıktıktan sonra ise hayıflanmadan takdire boyun eğmeyi (teslimiyet) öğütler.'],
+  ['Ayet','O, gökleri ve yeri örneksiz yaratandır. Bir işe hükmetti mi ona sadece “ol” der, o da hemen oluverir.','Bakara suresi, 117. ayet','Kaza',['Kader'],'Allah’ın bir işe hükmetmesi ve onun hemen gerçekleşmesi, kazanın (hüküm ve gerçekleşme) anlamıdır.'],
+  ['Ayet','…Daha önce gelip geçen peygamberler hakkında da Allah’ın kanunu böyledir. Allah’ın emri, kesinleşmiş bir hükümdür.','Ahzâb suresi, 38. ayet','Kaza',['Kader','Sünnetullah'],'“Kesinleşmiş hüküm” ifadesi, takdirin hükme bağlanıp gerçekleşmesini, yani kazayı anlatır.'],
+  ['Ayet','Güneş ve ay bir hesaba göre hareket etmektedir.','Rahmân suresi, 5. ayet','Sünnetullah',['Kader'],'Gök cisimlerinin hesaplı hareketi evrendeki değişmez fiziksel yasaları gösterir.'],
+  ['Ayet','Daha önce gelip geçenler hakkında da Allah’ın kanunu böyledir. Allah’ın kanununda asla değişme bulamazsın.','Ahzâb suresi, 62. ayet','Sünnetullah',[],'“Allah’ın kanunu” sünnetullahın kelime anlamıdır; ayet onun değişmezliğini vurgular.'],
+  ['Ayet','Başınıza her ne musibet gelirse, kendi yaptıklarınız yüzündendir. O, yine de çoğunu affeder.','Şûrâ suresi, 30. ayet','Afet',['Sorumluluk'],'Musibetlerde insanın tercih ve ihmallerinin payı vardır; afet kader kapsamındadır ama sorumluluğu kaldırmaz.'],
+  ['Ayet','İnsanların kendi işledikleri (kötülükler) sebebiyle karada ve denizde bozulma ortaya çıkmıştır…','Rûm suresi, 41. ayet','Afet',['Sorumluluk'],'Doğadaki bozulmanın insanların yaptıkları yüzünden ortaya çıktığı bildirilir; insan çevreye verdiği zarardan sorumludur.'],
+  ['Ayet','Peki, Allah rızkını keserse, kimdir size rızık verecek olan?…','Mülk suresi, 21. ayet','Rızık',[],'Rızkı veren yalnızca Allah’tır.'],
+  ['Ayet','Yeryüzünde hiçbir canlı yoktur ki, rızkı Allah’a ait olmasın…','Hûd suresi, 6. ayet','Rızık',['Kader'],'Bütün canlıların rızkını Allah verir.'],
+  ['Ayet','Şüphesiz Allah rızık verendir, güçlüdür, çok kuvvetlidir.','Zâriyât suresi, 58. ayet','Rızık',[],'Allah’ın “Rezzak” (rızık veren) sıfatı anlatılır.'],
+  ['Ayet','İnsan için ancak çalıştığı vardır. Şüphesiz onun çalışması ileride görülecektir.','Necm suresi, 39-40. ayetler','Helal kazanç',['Sorumluluk','İrade'],'İnsanın sahip olduğu ve karşılığını göreceği şey emeğidir; ayet çalışmayı öne çıkarır.'],
+  ['Ayet','Namaz kılınınca artık yeryüzüne dağılın ve Allah’ın lütfundan nasibinizi arayın…','Cuma suresi, 10. ayet','Helal kazanç',['Rızık'],'İbadetten sonra rızkı çalışarak aramak emredilir.'],
+  ['Hadis','Hiç kimse elinin emeğinden daha hayırlı bir yemek yememiştir. Allah’ın peygamberi Dâvûd (as) da kendi elinin emeğini yerdi.','Hz. Muhammed (sav) — Buhârî, Büyû‘, 15','Helal kazanç',['Rızık'],'Kendi emeğiyle kazanmak en hayırlı kazançtır.'],
+  ['Ayet','Ey iman edenler! Sabrederek ve namaz kılarak Allah’tan yardım dileyin. Şüphe yok ki, Allah sabredenlerle beraberdir.','Bakara suresi, 153. ayet','Sabır',['Dua'],'Sabır, zorluklarda Allah’tan yardım dilemenin yollarından biridir.'],
+  ['Ayet','…Sabredenlere mükâfatları elbette hesapsız olarak verilir.','Zümer suresi, 10. ayet','Sabır',[],'Sabredenlerin ödülünün hesapsız olduğu bildirilir.'],
+  ['Ayet','Andolsun ki sizi biraz korku ve açlıkla, bir de mallar, canlar ve ürünlerden eksilterek deneriz. Sabredenleri müjdele.','Bakara suresi, 155. ayet','Sabır',['İmtihan'],'Zorluklarla sınanan insana sabır öğütlenir.'],
+  ['Hadis','Beş şey gelmeden önce beş şeyin değerini iyi bil: ihtiyarlığından önce gençliğinin, hastalığından önce sağlığının, yokluğundan önce varlığının, meşguliyetinden önce boş vaktinin ve ölümünden önce hayatının.','Hz. Muhammed (sav) — Hâkim, Müstedrek, IV, 341','Ömür',['Hastalık–sağlık','Ecel'],'Gençlik, sağlık ve hayat ömrün nimetleridir; kaybetmeden değerlendirilmeleri öğütlenir.'],
+  ['Ayet','Her milletin belli bir eceli vardır. Onların eceli geldi mi, ne bir an geri kalabilirler, ne de öne geçebilirler.','A’râf suresi, 34. ayet','Ecel',['Kader'],'Ecel belirlenmiştir; öne alınamaz, geri bırakılamaz.'],
+  ['Ayet','Hiçbir kimse Allah’ın izni olmadan ölmez. Ölüm belirli bir süreye göre yazılmıştır…','Âl-i İmrân suresi, 145. ayet','Ecel',['Kader'],'Ölümün belli bir süreye göre yazılmış olması eceli anlatır.'],
+  ['Ayet','“Hastalandığımda da O bana şifa verir.”','Şuarâ suresi, 80. ayet','Hastalık–sağlık',['Tevekkül'],'Hz. İbrahim’in sözü: Şifayı veren Allah’tır.'],
+  ['Hadis','Ey Allah’ın kulları! Tedavi olunuz. Çünkü Allah, bir hastalık hariç her hastalığın şifasını yaratmıştır.','Hz. Muhammed (sav) — Ebû Dâvûd, Tıb, 1; Tirmizî, Tıb, 2','Hastalık–sağlık',['Tedbir'],'Şifanın Allah’tan olması tedaviyi gereksiz kılmaz; tedavi olmak sebeplere uymaktır.'],
+  ['Ayet','Şüphesiz biz onu (ömür boyu yürüyeceği) yola koyduk. O bu yolu ya şükrederek ya da nankörlük ederek kat eder.','İnsan suresi, 3. ayet','Hidayet',['İrade'],'Allah yolu göstermiştir (hidayet); şükür ya da nankörlük yolunu seçmek insana bırakılmıştır.'],
+  ['Ayet','Şüphesiz sen sevdiğin kimseyi doğru yola iletemezsin. Fakat Allah, dilediği kimseyi doğru yola eriştirir…','Kasas suresi, 56. ayet','Hidayet',[],'Doğru yola eriştirmenin (hidayet) Allah’a ait olduğu bildirilir.'],
+  ['Ayet','Bizi doğru yola, kendilerine nimet verdiklerinin yoluna ilet; gazaba uğrayanlarınkine ve sapıklarınkine değil.','Fâtiha suresi, 6-7. ayetler','Hidayet',['Dua'],'Her namazda okunan bu dua, Allah’tan hidayet istemektir.'],
+  ['Ayet','Biz ona iki göz, bir dil, iki dudak vermedik mi; iki apaçık yolu (hayır ve şer yollarını) göstermedik mi?','Beled suresi, 8-10. ayetler','Hidayet',['Hayır–şer','İrade'],'Allah insana hayır ve şer yollarını göstermiştir; seçim insana bırakılmıştır.'],
+  ['Ayet','…Olur ki, bir şey sizin için hayırlı iken, siz onu hoş görmezsiniz. Yine olur ki, bir şey sizin için kötü iken, siz onu seversiniz. Allah bilir, siz bilmezsiniz.','Bakara suresi, 216. ayet','Hayır–şer',['Teslimiyet','Rıza'],'Görünüşte kötü olan hayırlı, hoşa giden ise kötü olabilir; hayrı ve şerri gerçek anlamda bilen Allah’tır.'],
+  ['Ayet','Artık kim zerre ağırlığınca bir hayır işlerse, onun mükâfatını görecektir. Kim de zerre ağırlığınca bir kötülük işlerse, onun cezasını görecektir.','Zilzâl suresi, 7-8. ayetler','Hayır–şer',['Sorumluluk'],'En küçük hayrın da şerrin de karşılığı görülecektir.'],
+  ['Ayet','(Ey Muhammed!) De ki: “Duanız olmasa, Rabbim size ne diye değer versin!…”','Furkan suresi, 77. ayet','Dua',[],'Kulun değeri, Allah’a yönelip dua etmesiyle ilişkilendirilir.'],
+  ['Ayet','Rabbiniz şöyle dedi: “Bana dua edin, duanıza cevap vereyim…”','Mü’min suresi, 60. ayet','Dua',[],'Allah duayı emreder ve ona cevap vereceğini bildirir.'],
+  ['Hadis','Dua ibadetin ta kendisidir.','Hz. Muhammed (sav) — Tirmizî, Daavât, 1','Dua',[],'Dua, kulun acizliğini kabul edip Allah’a yönelmesidir; ibadetin özüdür.'],
+  ['Ayet','Allah’a tevekkül et, vekil olarak Allah yeter.','Ahzâb suresi, 3. ayet','Tevekkül',[],'Allah’a güvenip dayanmak, yani tevekkül emredilir.'],
+  ['Ayet','…Kim Allah’a tevekkül ederse, O kendisine yeter. Şüphesiz Allah, emrini yerine getirendir. Allah, her şeye bir ölçü koymuştur.','Talâk suresi, 3. ayet','Tevekkül',['Kader'],'Allah’a tevekkül edene O’nun yeteceği bildirilir; ayetin sonu kadere (ölçü) işaret eder.'],
+  ['Ayet','…İş konusunda onlarla müşavere et. Bir kere de karar verip azmettin mi, artık Allah’a tevekkül et, (ona dayanıp güven). Şüphesiz Allah, tevekkül edenleri sever.','Âl-i İmrân suresi, 159. ayet','Tevekkül',['İrade','Tedbir'],'Sıra açıktır: danışmak, karar vermek, sonra Allah’a güvenmek. Tevekkül akıl ve iradenin kullanıldığı adımlardan sonra gelir.'],
+  ['Ayet','Onlar; başlarına bir musibet gelince, “Biz şüphesiz (her şeyimizle) Allah’a aidiz ve şüphesiz O’na döneceğiz” derler.','Bakara suresi, 156. ayet','Teslimiyet',['Sabır','Rıza'],'Musibet geldikten sonra her şeyin Allah’a ait olduğunu kabul etmek teslimiyettir.'],
+  ['Ayet','…Allah onlardan razı olmuştur, onlar da Allah’tan razı olmuşlardır…','Beyyine suresi, 8. ayet','Rıza',[],'Kulun Allah’tan, Allah’ın da kulundan hoşnut olması rızadır.'],
+  ['Ayet','Her nefis ölümü tadacaktır. Sizi bir imtihan olarak hayır ile de şer ile de deniyoruz. Ancak bize döndürüleceksiniz.','Enbiyâ suresi, 35. ayet','İmtihan',['Hayır–şer','Ecel'],'İnsan hem nimetlerle hem de zorluklarla sınanır.'],
+  ['Ayet','O, hanginizin daha güzel amel yapacağını sınamak için ölümü ve hayatı yaratandır…','Mülk suresi, 2. ayet','İmtihan',['Ömür'],'Hayatın ve ölümün yaratılış amacı insanın sınanmasıdır.'],
+  ['Ayet','De ki: “Hak, Rabbinizdendir. Artık dileyen iman etsin, dileyen inkâr etsin.”…','Kehf suresi, 29. ayet','İrade',['Sorumluluk'],'İman ya da inkâr insanın kendi seçimine bırakılmıştır.'],
+  ['Ayet','…Şüphesiz ki, bir kavim kendi durumunu değiştirmedikçe Allah onların durumunu değiştirmez…','Ra‘d suresi, 11. ayet','İrade',['Sünnetullah','Sorumluluk'],'Değişim insanın kendi iradesiyle başlar.'],
+  ['Ayet','Allah, bir kimseyi ancak gücünün yettiği şeyle yükümlü kılar. Onun kazandığı iyilik kendi yararına, kötülük de kendi zararınadır…','Bakara suresi, 286. ayet','Sorumluluk',['İrade'],'Sorumluluk güç ölçüsündedir ve herkes kendi kazandığının karşılığını görür.'],
+  ['Ayet','Herkes kazandığına karşılık bir rehindir.','Müddessir suresi, 38. ayet','Sorumluluk',[],'İnsan kendi yaptıklarından sorumludur.'],
+  ['Hadis','Akıllı kişi, nefsini hesaba çeken ve ölümden sonrası için çalışandır…','Hz. Muhammed (sav) — Tirmizî, Sıfatü’l-kıyâme, 25','Sorumluluk',['Ömür'],'Kendini hesaba çekmek, yaptıklarının sorumluluğunu üstlenmektir.'],
+  ['Ayet','…Kendi kendinizi tehlikeye atmayın. İyilik edin. Şüphesiz Allah iyilik edenleri sever.','Bakara suresi, 195. ayet','Tedbir',['Sorumluluk'],'Kendini tehlikeye atmamak, tedbirli olmayı gerektirir.'],
+  ['Hadis','Bir adam, “Ey Allah’ın Resulü! Devemi bağlayıp mı tevekkül edeyim, yoksa salıverip mi tevekkül edeyim?” diye sordu. Hz. Peygamber, “Onu bağla ve tevekkül et.” buyurdu.','Hz. Muhammed (sav) — Tirmizî, Sıfatü’l-kıyâme, 60','Tedbir',['Tevekkül'],'Önce tedbir (deveyi bağlamak), sonra tevekkül. Tedbirsiz güven tevekkül değildir.'],
+  ['Hadis','Veba salgını olan bir bölgeye girmekten vazgeçen Hz. Ömer’e “Allah’ın kaderinden mi kaçıyorsun?” denildi. O, “Evet, Allah’ın kaderinden yine Allah’ın kaderine kaçıyoruz.” cevabını verdi.','Hz. Ömer — Buhârî, Tıb, 30; Müslim, Selâm, 98','Tedbir',['Kader'],'Tehlikeden korunmak kadere karşı gelmek değildir; tedbir de kaderin içindedir.']
+];
+
+(function(){
+  var N=M.length, BOYUT=10, TUR=Math.ceil(N/BOYUT);
+  /* Aynı kavramlar art arda gelmesin: 0..49 sırası 7 adımla karıştırılır (7 ile 50 aralarında asal). */
+  var SIRA=[]; for(var i=0;i<N;i++) SIRA.push((i*7)%N);
+  var cevap={}; try{ cevap=JSON.parse(oku('cevap')||'{}')||{}; }catch(e){ cevap={}; }
+  var aktif=+(oku('tur')||0); if(!(aktif>=0&&aktif<TUR)) aktif=0;
+  var goster=null, mod='oyun';
+  function kaydet(){ yaz('cevap',JSON.stringify(cevap)); }
+  function turIdx(t){ return SIRA.slice(t*BOYUT,(t+1)*BOYUT); }
+  function dogruMu(i,c){ return c===M[i][3] || M[i][4].indexOf(c)>=0; }
+  function turSkor(t){ var d=0,c=0; turIdx(t).forEach(function(i){ if(cevap[i]){ c++; if(dogruMu(i,cevap[i])) d++; } }); return {d:d,c:c}; }
+  function ilkBos(){ var l=turIdx(aktif); for(var p=0;p<l.length;p++) if(!cevap[l[p]]) return p; return -1; }
+
+  function turlarCiz(){
+    $('#turlar').innerHTML=Array.apply(null,{length:TUR}).map(function(_,t){ var s=turSkor(t);
+      return '<button type="button" class="tur'+(t===aktif?' sec':'')+'" data-t="'+t+'" aria-pressed="'+(t===aktif)+'">'+(t+1)+'. tur<small>'+(s.c===BOYUT?'✓ ':'')+s.d+'/'+BOYUT+'</small></button>'; }).join('');
+  }
+  function noktalarCiz(){
+    $('#noktalar').innerHTML=turIdx(aktif).map(function(i,p){ var c=cevap[i], cl=c?(dogruMu(i,c)?' d':' y'):'';
+      return '<button type="button" class="nokta'+cl+(p===goster?' aktif':'')+'" data-p="'+p+'" aria-label="'+(aktif*BOYUT+p+1)+'. metin">'+(p+1)+'</button>'; }).join('');
+  }
+  function skorCiz(){
+    var c=0,d=0; Object.keys(cevap).forEach(function(i){ c++; if(dogruMu(+i,cevap[i])) d++; });
+    $('#skorYazi').textContent=c+' / '+N+' metin'; $('#skorDogru').textContent=d+' doğru';
+    $('#cubukD').style.width=(d*100/N)+'%'; $('#cubukY').style.width=((c-d)*100/N)+'%';
+    var s=turSkor(aktif); $('#turSonuc').textContent=(aktif+1)+'. tur: '+s.d+' / '+BOYUT+' doğru';
+  }
+  function kartCiz(){
+    var i=turIdx(aktif)[goster], m=M[i], sec=cevap[i], renk=m[0]==='Hadis'?'var(--vurgu)':'var(--altin)';
+    var h='<div class="kart" style="--renk:'+renk+'"><div class="kart-ust"><span class="tur-rozet">'+(m[0]==='Hadis'?'💬 Hadis':'📖 Ayet')+'</span><span class="sayac">'+(aktif*BOYUT+goster+1)+' / '+N+'</span></div>'+
+      '<p class="metin">“'+m[1]+'”</p><p class="kaynak">— '+m[2]+'</p></div>'+
+      '<p class="soru-yazi">Bu metin en çok hangi kavramı anlatıyor?</p><div class="kavramlar" role="group" aria-label="Kavramlar">'+
+      KAVRAM_SIRA.map(function(k){ var cl='kv';
+        if(sec){ if(k===m[3]) cl+=' dogru'; else if(m[4].indexOf(k)>=0) cl+=' kabul'; else if(k===sec) cl+=' yanlis'; }
+        return '<button type="button" class="'+cl+'" data-k="'+k+'"'+(sec?' disabled':'')+'>'+k+'</button>'; }).join('')+'</div>';
+    if(sec){
+      var d=sec===m[3], k=m[4].indexOf(sec)>=0, son=ilkBos()<0;
+      h+='<div class="gb '+(d||k?'d':'y')+'"><p><b>'+(d?'✓ Doğru: ':k?'✓ Kabul edilir. Ana kavram: ':'✗ Ana kavram: ')+m[3]+'.</b> '+m[5]+'</p>'+
+        '<p class="ek"><b>'+m[3]+':</b> '+KAVRAM[m[3]]+'</p>'+
+        (m[4].length?'<p class="ek">Bu metinle ilişkilendirilebilecek diğer kavramlar: '+m[4].join(', ')+'.</p>':'')+
+        (!d&&!k?'<p class="ek"><b>Senin seçtiğin '+sec+':</b> '+KAVRAM[sec]+'</p>':'')+
+        '<button class="btn" type="button" id="ileri">'+(son?'Tur sonucunu gör →':'Sonraki metin →')+'</button></div>';
+    }
+    $('#sahne').innerHTML=h; noktalarCiz();
+  }
+  function ozetCiz(){
+    goster=null; noktalarCiz();
+    var s=turSkor(aktif), yanlis=turIdx(aktif).filter(function(i){ return !dogruMu(i,cevap[i]); });
+    var r=50, ce=2*Math.PI*r;
+    $('#sahne').innerHTML='<div class="kart ozet"><svg class="halka" viewBox="0 0 130 130" role="img" aria-label="'+s.d+' / 10"><circle class="z" cx="65" cy="65" r="'+r+'" fill="none" stroke-width="13"/><circle class="d" cx="65" cy="65" r="'+r+'" fill="none" stroke-width="13" stroke-linecap="round" stroke-dasharray="'+(ce*s.d/BOYUT)+' '+ce+'" transform="rotate(-90 65 65)"/><text x="65" y="75" text-anchor="middle">'+s.d+'/10</text></svg>'+
+      '<h3 style="margin:0 0 4px">'+(aktif+1)+'. tur tamamlandı</h3>'+
+      (yanlis.length?'<ol>'+yanlis.map(function(i){ return '<li>'+M[i][2].replace(/^Hz\. Muhammed \(sav\) — /,'')+' → <b>'+M[i][3]+'</b> (senin seçtiğin: '+cevap[i]+')</li>'; }).join('')+'</ol>':'<p style="margin:0">Bütün metinleri doğru kavramla eşleştirdin.</p>')+
+      '<div class="alt" style="justify-content:center">'+(yanlis.length?'<button class="btn ikincil" type="button" id="yanlisTekrar">Yanlışları yeniden dene</button>':'')+'<button class="btn" type="button" id="sonrakiTur">'+(aktif<TUR-1?'Sonraki tur →':'1. tura dön')+'</button></div></div>';
+  }
+  function sahne(){ if(goster===null){ var p=ilkBos(); if(p<0){ ozetCiz(); return; } goster=p; } kartCiz(); }
+  function hepsi(){ turlarCiz(); skorCiz(); if(mod==='oyun') sahne(); else listeCiz(); }
+  function listeCiz(){
+    $('#liste').innerHTML=Array.apply(null,{length:TUR}).map(function(_,t){
+      return '<h3 class="liste-tur">'+(t+1)+'. tur</h3>'+turIdx(t).map(function(i,p){ var m=M[i];
+        return '<div class="lo"><span class="no">'+(t*BOYUT+p+1)+'.</span><div><p class="m">“'+m[1]+'”</p><p class="k">'+m[2]+'</p><p class="k" style="font-weight:600">'+m[5]+(m[4].length?' Kabul edilenler: '+m[4].join(', ')+'.':'')+'</p></div><span class="cev">'+m[3]+'</span></div>'; }).join('');
+    }).join('');
+  }
+  function sec(k){ if(goster===null) return; var i=turIdx(aktif)[goster]; if(cevap[i]) return; cevap[i]=k; kaydet(); kartCiz(); turlarCiz(); skorCiz(); var b=$('#ileri'); if(b) b.focus(); }
+  function ileri(){ var p=ilkBos(); goster=null; if(p<0) ozetCiz(); else { goster=p; kartCiz(); } var f=$('#sahne .kv:not(:disabled)'); if(f) f.focus({preventScroll:true}); }
+
+  $('#sahne').addEventListener('click',function(e){
+    var b=e.target.closest('.kv'); if(b && !b.disabled){ sec(b.getAttribute('data-k')); return; }
+    if(e.target.closest('#ileri')) ileri();
+    if(e.target.closest('#sonrakiTur')){ aktif=(aktif+1)%TUR; yaz('tur',aktif); goster=null; hepsi(); }
+    if(e.target.closest('#yanlisTekrar')){ turIdx(aktif).forEach(function(i){ if(!dogruMu(i,cevap[i])) delete cevap[i]; }); kaydet(); goster=null; hepsi(); }
+  });
+  $('#noktalar').addEventListener('click',function(e){ var b=e.target.closest('[data-p]'); if(!b) return; goster=+b.getAttribute('data-p'); kartCiz(); });
+  $('#turlar').addEventListener('click',function(e){ var b=e.target.closest('[data-t]'); if(!b) return; aktif=+b.getAttribute('data-t'); yaz('tur',aktif); goster=null; hepsi(); });
+  $('#turSifirla').addEventListener('click',function(){ turIdx(aktif).forEach(function(i){ delete cevap[i]; }); kaydet(); goster=null; hepsi(); });
+  $('#hepsiSifirla').addEventListener('click',function(){ if(!window.confirm('50 metindeki bütün seçimlerin bu cihazdan silinsin mi?')) return; cevap={}; kaydet(); aktif=0; yaz('tur',0); goster=null; hepsi(); });
+  $$('.mod button').forEach(function(b){ b.addEventListener('click',function(){
+    mod=b.getAttribute('data-mod'); $$('.mod button').forEach(function(x){ x.classList.toggle('sec',x===b); x.setAttribute('aria-pressed',String(x===b)); });
+    $('#oyun').classList.toggle('gizli',mod!=='oyun'); $('#liste').classList.toggle('gizli',mod==='oyun'); hepsi();
+  }); });
+  $('#sozluk').innerHTML=KAVRAM_SIRA.map(function(k){ return '<dt>'+k+'</dt><dd>'+KAVRAM[k]+'</dd>'; }).join('');
+  listeCiz(); hepsi();
+})();
+</script>
+</body>
+</html>
