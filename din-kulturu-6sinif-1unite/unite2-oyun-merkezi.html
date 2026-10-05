@@ -1737,11 +1737,13 @@ function ka62KelimeYerlestir(izgara, kelime){
 }
 
 function kelimeAvi62Olustur(){
+  /* Her yeni bulmacada ünite havuzundan farklı 10 kelime (tekrarsız, ortak/oyun-merkezi.js) */
+  const kelimeAvi62Aktif = omKelimeSetiSec('kelimeavi', kelimeAvi62Listesi.concat(kelimeHavuzu62), 10, Math.min(ka62SatirSayisi, ka62SutunSayisi));
   let izgara, basarili=false;
   for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
     izgara = Array.from({length:ka62SatirSayisi}, ()=>Array(ka62SutunSayisi).fill(null));
     basarili = true;
-    const siraliKelimeler = kelimeAvi62Listesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    const siraliKelimeler = kelimeAvi62Aktif.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
     for(const item of siraliKelimeler){
       const hucreler = ka62KelimeYerlestir(izgara, item.kelime);
       if(!hucreler){ basarili=false; break; }
@@ -1771,14 +1773,14 @@ function kelimeAvi62Olustur(){
 
   const liste = document.getElementById('ka62Liste');
   liste.innerHTML = '';
-  kelimeAvi62Listesi.forEach(item=>{
+  kelimeAvi62Aktif.forEach(item=>{
     const li = document.createElement('li');
     li.id = 'ka62-kelime-' + item.kelime;
     li.textContent = `${item.kelime} — ${item.anlam}`;
     liste.appendChild(li);
   });
   document.getElementById('ka62Bulunan').textContent = 0;
-  document.getElementById('ka62Toplam').textContent = kelimeAvi62Listesi.length;
+  document.getElementById('ka62Toplam').textContent = kelimeAvi62Aktif.length;
   document.getElementById('ka62Sonuc').textContent = '';
 
   let ilkHucre = null;
@@ -1804,7 +1806,7 @@ function kelimeAvi62Olustur(){
       }
       const secilenKelime = yol.map(p=>izgara[p.r][p.c]).join('');
       const tersKelime = secilenKelime.split('').reverse().join('');
-      const eslesen = kelimeAvi62Listesi.find(item =>
+      const eslesen = kelimeAvi62Aktif.find(item =>
         (item.kelime===secilenKelime || item.kelime===tersKelime) &&
         !document.getElementById('ka62-kelime-'+item.kelime).classList.contains('bulundu-satir')
       );
@@ -1816,7 +1818,7 @@ function kelimeAvi62Olustur(){
         document.getElementById('ka62-kelime-'+eslesen.kelime).classList.add('bulundu-satir');
         const bulunanSayisi = document.querySelectorAll('#ka62Liste .bulundu-satir').length;
         document.getElementById('ka62Bulunan').textContent = bulunanSayisi;
-        if(bulunanSayisi === kelimeAvi62Listesi.length){
+        if(bulunanSayisi === kelimeAvi62Aktif.length){
           document.getElementById('ka62Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri buldun!';
         }
       } else {

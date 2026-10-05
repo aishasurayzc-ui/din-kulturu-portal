@@ -91,6 +91,39 @@ function omAyarTekrarsiz(ayar){
   OM_TUR_LISTELERI.forEach(ad => { if(Array.isArray(ayar[ad])) yeni[ad] = omTurSirasi(ayar.onek + '.' + ad, ayar[ad]); });
   return yeni;
 }
+/* Kelime oyunları için tekrarsız kelime seti: her yeni oyunda havuzdan farklı
+   kelimeler gelir; havuzdaki bütün kelimeler kullanılmadan hiçbir kelime tekrar
+   etmez. Yeni döngüde bir önceki oyunun kelimeleri en sona konur. */
+function omKelimeSetiSec(anahtar, havuz, adet, maxUzunluk){
+  const gorulen = {}, temiz = [];
+  (havuz || []).forEach(o => {
+    if(!o || !o.kelime) return;
+    const k = String(o.kelime).toLocaleUpperCase('tr');
+    if(gorulen[k] || (maxUzunluk && k.length > maxUzunluk)) return;
+    gorulen[k] = true; temiz.push(o);
+  });
+  if(temiz.length <= adet) return karistir(temiz);
+  const k = 'omKelime:' + location.pathname + ':' + anahtar;
+  const imza = temiz.map(o => o.kelime).join('|');
+  let kayit = OM_TUR_BELLEK[k] || null;
+  try{ const v = localStorage.getItem(k); if(v) kayit = JSON.parse(v); }catch(e){}
+  if(!kayit || kayit.imza !== imza || !Array.isArray(kayit.deste)) kayit = { imza: imza, deste: [], son: [] };
+  const son = Array.isArray(kayit.son) ? kayit.son : [];
+  let deste = kayit.deste.filter(i => Number.isInteger(i) && i >= 0 && i < temiz.length);
+  const set = [];
+  while(set.length < adet){
+    if(!deste.length){
+      const tum = temiz.map((_, i) => i);
+      deste = karistir(tum.filter(i => set.indexOf(i) < 0 && son.indexOf(i) < 0))
+        .concat(karistir(tum.filter(i => set.indexOf(i) < 0 && son.indexOf(i) >= 0)));
+    }
+    const i = deste.shift();
+    if(set.indexOf(i) < 0) set.push(i);
+  }
+  kayit.deste = deste; kayit.son = set; OM_TUR_BELLEK[k] = kayit;
+  try{ localStorage.setItem(k, JSON.stringify(kayit)); }catch(e){}
+  return set.map(i => temiz[i]);
+}
 /* Oyun kartına (yeniden) tıklanınca oyun baştan, yeni bir turla başlar. */
 const OM_OYUN_BOLUMLERI = new Set();
 function omBaslaticiBul(bolum){
