@@ -41,6 +41,7 @@ function goster(id, ev){
   document.getElementById(id).classList.add('aktif');
   document.querySelectorAll('.oyun-grubu button').forEach(b=>b.classList.remove('aktif'));
   if(ev && ev.target) ev.target.classList.add('aktif');
+  omOyunuYenidenBaslat(id);
 }
 function kategoriGoster(id, ev){
   document.querySelectorAll('.oyun-grubu').forEach(g=>g.classList.remove('aktif'));
@@ -58,6 +59,57 @@ function kategoriGosterVeKaydir(kategoriId){
 }
 
 function karistir(a){ return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]); }
+
+/* ——— Tekrarsız oyun turları ———
+   Aynı oyun yeniden açıldığında sorular farklı sırayla gelir: geçen turda
+   baştaki yarıda olan sorular bu turda sona kalır, sondakiler öne geçer
+   (her yarı kendi içinde de karışır). Böylece ilk soru asla geçen turun ilk
+   sorusu olmaz. Sıra bu cihazda sayfa bazında hatırlanır. */
+const OM_TUR_BELLEK = {};
+const OM_TUR_LISTELERI = ['sorular', 'turlar', 'kategoriler', 'ciftler'];
+function omTurSirasi(anahtar, dizi){
+  if(!Array.isArray(dizi) || dizi.length < 2) return Array.isArray(dizi) ? dizi.slice() : dizi;
+  const k = 'omTur:' + location.pathname + ':' + anahtar;
+  let onceki = OM_TUR_BELLEK[k] || null;
+  try{ const v = localStorage.getItem(k); if(v) onceki = JSON.parse(v); }catch(e){}
+  let sira;
+  if(Array.isArray(onceki) && onceki.length === dizi.length &&
+     onceki.every(i => Number.isInteger(i) && i >= 0 && i < dizi.length) && new Set(onceki).size === dizi.length){
+    const yari = Math.ceil(onceki.length / 2);
+    sira = karistir(onceki.slice(yari)).concat(karistir(onceki.slice(0, yari)));
+  } else {
+    sira = karistir(dizi.map((_, i) => i));
+  }
+  OM_TUR_BELLEK[k] = sira;
+  try{ localStorage.setItem(k, JSON.stringify(sira)); }catch(e){}
+  return sira.map(i => dizi[i]);
+}
+/* Oyun ayarındaki listelerin kopyasını yeni tur sırasıyla döndürür (sayfadaki veri değişmez). */
+function omAyarTekrarsiz(ayar){
+  if(!ayar || !ayar.onek) return ayar;
+  const yeni = Object.assign({}, ayar);
+  OM_TUR_LISTELERI.forEach(ad => { if(Array.isArray(ayar[ad])) yeni[ad] = omTurSirasi(ayar.onek + '.' + ad, ayar[ad]); });
+  return yeni;
+}
+/* Oyun kartına (yeniden) tıklanınca oyun baştan, yeni bir turla başlar. */
+const OM_OYUN_BOLUMLERI = new Set();
+function omBaslaticiBul(bolum){
+  const adlar = Array.from(bolum.querySelectorAll('[onclick]')).map(el => {
+    const m = (el.getAttribute('onclick') || '').match(/^\s*([A-Za-z0-9_]+)\(\)\s*;?\s*$/);
+    return m ? m[1] : null;
+  }).filter(Boolean);
+  for(const kalip of [/Baslat$/, /Olustur$/]){
+    const ad = adlar.find(a => kalip.test(a) && typeof window[a] === 'function');
+    if(ad) return ad;
+  }
+  return null;
+}
+function omOyunuYenidenBaslat(id){
+  if(!OM_OYUN_BOLUMLERI.has(id)) return;
+  const bolum = document.getElementById(id); if(!bolum) return;
+  const ad = omBaslaticiBul(bolum);
+  if(ad){ try{ window[ad](); }catch(e){ /* oyun kendi hatasını göstermesin diye sessiz */ } }
+}
 
 let puanDurumu;
 try{ puanDurumu = JSON.parse(localStorage.getItem(LS_PUAN_ANAHTARI)) || {}; }catch(e){ puanDurumu = {}; }
@@ -398,7 +450,7 @@ function oyunMerkeziOlustur(oyunListesi, suffix, anaSayfaHref){
   if(!konteyner) return;
   const gruplar = {};
   OM_KATEGORILER.forEach(k => gruplar[k.anahtar] = []);
-  oyunListesi.forEach(o => { if(gruplar[o.kategori]) gruplar[o.kategori].push(o); });
+  oyunListesi.forEach(o => { if(gruplar[o.kategori]) gruplar[o.kategori].push(o); OM_OYUN_BOLUMLERI.add(o.id + suffix); });
 
   const html = OM_KATEGORILER.map((kat, i) => {
     const oyunlar = gruplar[kat.anahtar];
@@ -544,6 +596,7 @@ document.addEventListener('keydown', function(e){
 });
 
 function ikiliOyunBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   Object.assign(d, {ayar, index:0, puan1:0, puan2:0, sira:1, zamanlayici:null});
   ikiliMetinAyarla(ayar.onek+'Puan1', 0);
@@ -644,6 +697,7 @@ function ikiliBitir(onek){
    ikiliHafizaBaslat({onek, ciftler:[{metin1,metin2}, ...]})
    DOM: <onek>Puan1, <onek>Puan2, <onek>SiraKimde, <onek>Izgara, <onek>Sonuc, <onek>YenidenBaslat */
 function ikiliHafizaBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   const kartlar = [];
   ayar.ciftler.forEach((c,i)=>{ kartlar.push({ciftId:i, metin:c.metin1}); kartlar.push({ciftId:i, metin:c.metin2}); });
@@ -714,6 +768,7 @@ function ikiliHafizaBitir(onek){
    DOM: <onek>Puan1, <onek>Puan2, <onek>TurNo, <onek>TurToplam, <onek>SiraKimde,
         <onek>ElDegistir, <onek>Baslik, <onek>Banka, <onek>Cevap, <onek>Sonuc, <onek>YenidenBaslat */
 function ikiliSiralaBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   Object.assign(d, {ayar, turIndex:0, puan1:0, puan2:0, sira:1});
   ikiliMetinAyarla(ayar.onek+'Puan1', 0);
@@ -795,6 +850,7 @@ function ikiliSiralaBitir(onek){
    DOM: <onek>Puan1, <onek>Puan2, <onek>SiraKimde, <onek>SoruNo, <onek>Toplam,
         <onek>ElDegistir, <onek>Ipucu, <onek>Girdi, <onek>Sonuc, <onek>YenidenBaslat */
 function ikiliIpucuBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   Object.assign(d, {ayar, index:0, puan1:0, puan2:0, sira:1, ipucuNo:0});
   ikiliMetinAyarla(ayar.onek+'Puan1', 0);
@@ -867,6 +923,7 @@ function ikiliIpucuBitir(onek){
    DOM: <onek>Can1, <onek>Can2, <onek>SiraKimde, <onek>ElDegistir, <onek>SoruNo,
         <onek>SoruMetin, <onek>Secenekler, <onek>Sonuc, <onek>YenidenBaslat */
 function ikiliHayattaBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   const canBas = ayar.can || 3;
   Object.assign(d, {ayar, index:0, can1:canBas, can2:canBas, sira:1});
@@ -943,6 +1000,7 @@ function ikiliHayattaBitir(onek){
    DOM: <onek>SoruNo, <onek>Toplam, <onek>Puan1, <onek>Puan2, <onek>Sure,
         <onek>SoruMetin, <onek>BuzzerAlan, <onek>Secenekler, <onek>Sonuc, <onek>YenidenBaslat */
 function ikiliBuzzerBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   Object.assign(d, {ayar, index:0, puan1:0, puan2:0, kilitli:false, buzzanOyuncu:null, zamanlayici:null});
   ikiliMetinAyarla(ayar.onek+'Puan1', 0);
@@ -1016,6 +1074,7 @@ function ikiliBuzzerBitir(onek){
    DOM: aynen ikiliOyunBaslat ile ayni ( <onek>SoruNo, Toplam, Puan1, Puan2, Sure,
         ElDegistir, SiraKimde, SoruMetin, Secenekler, Sonuc, YenidenBaslat ) */
 function ikiliCalmaBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   Object.assign(d, {ayar, index:0, puan1:0, puan2:0, sira:1, zamanlayici:null});
   ikiliMetinAyarla(ayar.onek+'Puan1', 0);
@@ -1085,6 +1144,7 @@ function ikiliCalmaBitir(onek){
    DOM: <onek>SoruNo, <onek>Toplam, <onek>Puan1, <onek>Puan2, <onek>Sure,
         <onek>ElDegistir, <onek>SiraKimde, <onek>SoruMetin, <onek>Secenekler, <onek>Sonuc, <onek>YenidenBaslat */
 function ikiliCarkBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   const toplamTur = ayar.turSayisi || 8;
   Object.assign(d, {ayar, tur:0, toplamTur, puan1:0, puan2:0, sira:1, zamanlayici:null});
@@ -1160,6 +1220,7 @@ function ikiliCarkBitir(onek){
    DOM: <onek>SoruNo, <onek>Toplam, <onek>Puan1, <onek>Puan2, <onek>Sure, <onek>Parkur,
         <onek>ElDegistir, <onek>SiraKimde, <onek>SoruMetin, <onek>Secenekler, <onek>Sonuc, <onek>YenidenBaslat */
 function ikiliTahtaBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   Object.assign(d, {ayar, index:0, pos1:0, pos2:0, sira:1, zamanlayici:null});
   ikiliMetinAyarla(ayar.onek+'Puan1', 0);
@@ -1254,6 +1315,7 @@ function ikiliTahtaBitir(onek){
      onclick="ikiliAnlatSonucVer('onek', true)"  -> ✅ Doğru Bildi
      onclick="ikiliAnlatSonucVer('onek', false)" -> ⏭️ Pas */
 function ikiliAnlatBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   Object.assign(d, {ayar, kartSirasi: karistir(ayar.kartlar.map((k,i)=>i)), kartIndex:0, puan1:0, puan2:0, sira:1, zamanlayici:null});
   ikiliMetinAyarla(ayar.onek+'Puan1', 0);
@@ -1334,6 +1396,7 @@ function ikiliAnlatBitir(onek){
    DOM: <onek>SoruNo, <onek>Toplam, <onek>Sure, <onek>Izgara1, <onek>Izgara2,
         <onek>ElDegistir, <onek>SiraKimde, <onek>SoruMetin, <onek>Secenekler, <onek>Sonuc, <onek>YenidenBaslat */
 function ikiliBingoBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   const izgara1 = karistir(ayar.kavramlar.slice()).slice(0,9).map(k=>({kavram:k, isaretli:false}));
   const izgara2 = karistir(ayar.kavramlar.slice()).slice(0,9).map(k=>({kavram:k, isaretli:false}));
@@ -1431,6 +1494,7 @@ function ikiliBingoBitir(onek, bingoOldu){
    DOM: <onek>SoruNo, <onek>Toplam, <onek>Puan1, <onek>Puan2, <onek>Sure, <onek>SansKutu,
         <onek>ElDegistir, <onek>SiraKimde, <onek>SoruMetin, <onek>Secenekler, <onek>Sonuc, <onek>YenidenBaslat */
 function ikiliSansBaslat(ayar){
+  ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
   Object.assign(d, {ayar, index:0, puan1:0, puan2:0, sira:1, zamanlayici:null});
   ikiliMetinAyarla(ayar.onek+'Puan1', 0);
