@@ -1540,25 +1540,28 @@ const turnuvaEslesmeler65 = [
   {tur:"FİNAL", a:"EZAN", b:"SALAVAT", soru:"Hangisi namaza çağrı sözleridir?", dogruCevap:"EZAN"},
 ];
 let kt65Index = 0, kt65DogruHakemlik = 0;
+let kt65Maclar = turnuvaEslesmeler65;
 
 function kt65Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt65Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel65Zinciri, kelimeHavuzu65, kelimeAvi65Listesi, lab65IfadeHavuzu), turnuvaEslesmeler65);
   kt65Index = 0; kt65DogruHakemlik = 0;
   document.getElementById('kt65Puan').textContent = 0;
-  document.getElementById('kt65Toplam').textContent = turnuvaEslesmeler65.length;
+  document.getElementById('kt65Toplam').textContent = kt65Maclar.length;
   document.getElementById('kt65Sonuc').textContent = '';
   kt65Tur();
 }
 
 function kt65Tur(){
-  if(kt65Index >= turnuvaEslesmeler65.length){
+  if(kt65Index >= kt65Maclar.length){
     document.getElementById('kt65Asama').textContent = '';
     document.getElementById('kt65Eslesme').textContent = '';
     document.getElementById('kt65Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler65[turnuvaEslesmeler65.length-1].dogruCevap;
-    document.getElementById('kt65Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt65DogruHakemlik}/${turnuvaEslesmeler65.length}`;
+    const sampiyon = kt65Maclar[kt65Maclar.length-1].dogruCevap;
+    document.getElementById('kt65Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt65DogruHakemlik}/${kt65Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler65[kt65Index];
+  const mac = kt65Maclar[kt65Index];
   document.getElementById('kt65Tur').textContent = kt65Index+1;
   document.getElementById('kt65Asama').textContent = mac.tur;
   document.getElementById('kt65Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1848,7 +1851,7 @@ let cengel65HucreHarita = {}, cengel65InputMap = {};
 function cengel65Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel65Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel65Zinciri, kelimeHavuzu65, kelimeAvi65Listesi, lab65IfadeHavuzu), cengel65Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

@@ -1850,25 +1850,28 @@ const turnuvaEslesmeler6 = [
 ];
 
 let kt6Index = 0, kt6DogruHakemlik = 0;
+let kt6Maclar = turnuvaEslesmeler6;
 
 function kt6Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt6Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel6Zinciri, kelimeHavuzu6, kelimeAvi6Listesi, lab6IfadeHavuzu), turnuvaEslesmeler6);
   kt6Index = 0; kt6DogruHakemlik = 0;
   document.getElementById('kt6Puan').textContent = 0;
-  document.getElementById('kt6Toplam').textContent = turnuvaEslesmeler6.length;
+  document.getElementById('kt6Toplam').textContent = kt6Maclar.length;
   document.getElementById('kt6Sonuc').textContent = '';
   kt6Tur();
 }
 
 function kt6Tur(){
-  if(kt6Index >= turnuvaEslesmeler6.length){
+  if(kt6Index >= kt6Maclar.length){
     document.getElementById('kt6Asama').textContent = '';
     document.getElementById('kt6Eslesme').textContent = '';
     document.getElementById('kt6Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler6[turnuvaEslesmeler6.length-1].dogruCevap;
-    document.getElementById('kt6Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt6DogruHakemlik}/${turnuvaEslesmeler6.length}`;
+    const sampiyon = kt6Maclar[kt6Maclar.length-1].dogruCevap;
+    document.getElementById('kt6Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt6DogruHakemlik}/${kt6Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler6[kt6Index];
+  const mac = kt6Maclar[kt6Index];
   document.getElementById('kt6Tur').textContent = kt6Index+1;
   document.getElementById('kt6Asama').textContent = mac.tur;
   document.getElementById('kt6Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -2156,7 +2159,7 @@ let cengel6HucreHarita = {}, cengel6InputMap = {};
 function cengel6Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel6Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel6Zinciri, kelimeHavuzu6, kelimeAvi6Listesi, lab6IfadeHavuzu), cengel6Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

@@ -2622,7 +2622,7 @@ let cengelHucreHarita = {}, cengelInputMap = {};
 function cengelOlustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengelZinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengelZinciri, kelimeAviListesi, labirentIfadeHavuzu), cengelZinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){
@@ -4214,25 +4214,28 @@ const turnuvaEslesmeler = [
   {tur:"FİNAL", a:"HAMD", b:"DUA", soru:"Hangisi bir şeyi övme değil, Allah'a bir şey isteme anlamına gelir?", dogruCevap:"DUA"},
 ];
 let ktIndex = 0, ktDogruHakemlik = 0;
+let ktMaclar = turnuvaEslesmeler;
 
 function ktBaslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  ktMaclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengelZinciri, kelimeAviListesi, labirentIfadeHavuzu), turnuvaEslesmeler);
   ktIndex = 0; ktDogruHakemlik = 0;
   document.getElementById('ktPuan').textContent = 0;
-  document.getElementById('ktToplam').textContent = turnuvaEslesmeler.length;
+  document.getElementById('ktToplam').textContent = ktMaclar.length;
   document.getElementById('ktSonuc').textContent = '';
   ktTur();
 }
 
 function ktTur(){
-  if(ktIndex >= turnuvaEslesmeler.length){
+  if(ktIndex >= ktMaclar.length){
     document.getElementById('ktAsama').textContent = '';
     document.getElementById('ktEslesme').textContent = '';
     document.getElementById('ktSecenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler[turnuvaEslesmeler.length-1].dogruCevap;
-    document.getElementById('ktSonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${ktDogruHakemlik}/${turnuvaEslesmeler.length}`;
+    const sampiyon = ktMaclar[ktMaclar.length-1].dogruCevap;
+    document.getElementById('ktSonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${ktDogruHakemlik}/${ktMaclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler[ktIndex];
+  const mac = ktMaclar[ktIndex];
   document.getElementById('ktTur').textContent = ktIndex+1;
   document.getElementById('ktAsama').textContent = mac.tur;
   document.getElementById('ktEslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;

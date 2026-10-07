@@ -1540,25 +1540,28 @@ const turnuvaEslesmeler8 = [
   {tur:"FİNAL", a:"MELEK", b:"KIYAMET", soru:"Hangisi görülemeyen bir varlık türüdür, bir olay değildir?", dogruCevap:"MELEK"},
 ];
 let kt8Index = 0, kt8DogruHakemlik = 0;
+let kt8Maclar = turnuvaEslesmeler8;
 
 function kt8Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt8Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel8Zinciri, kelimeHavuzu8, kelimeAvi8Listesi, lab8IfadeHavuzu), turnuvaEslesmeler8);
   kt8Index = 0; kt8DogruHakemlik = 0;
   document.getElementById('kt8Puan').textContent = 0;
-  document.getElementById('kt8Toplam').textContent = turnuvaEslesmeler8.length;
+  document.getElementById('kt8Toplam').textContent = kt8Maclar.length;
   document.getElementById('kt8Sonuc').textContent = '';
   kt8Tur();
 }
 
 function kt8Tur(){
-  if(kt8Index >= turnuvaEslesmeler8.length){
+  if(kt8Index >= kt8Maclar.length){
     document.getElementById('kt8Asama').textContent = '';
     document.getElementById('kt8Eslesme').textContent = '';
     document.getElementById('kt8Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler8[turnuvaEslesmeler8.length-1].dogruCevap;
-    document.getElementById('kt8Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt8DogruHakemlik}/${turnuvaEslesmeler8.length}`;
+    const sampiyon = kt8Maclar[kt8Maclar.length-1].dogruCevap;
+    document.getElementById('kt8Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt8DogruHakemlik}/${kt8Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler8[kt8Index];
+  const mac = kt8Maclar[kt8Index];
   document.getElementById('kt8Tur').textContent = kt8Index+1;
   document.getElementById('kt8Asama').textContent = mac.tur;
   document.getElementById('kt8Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1846,7 +1849,7 @@ let cengel8HucreHarita = {}, cengel8InputMap = {};
 function cengel8Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel8Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel8Zinciri, kelimeHavuzu8, kelimeAvi8Listesi, lab8IfadeHavuzu), cengel8Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

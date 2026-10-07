@@ -1540,25 +1540,28 @@ const turnuvaEslesmeler64 = [
   {tur:"FİNAL", a:"KÂBE", b:"HİLFÜLFUDUL", soru:"Hangisi Mekke'deki kutsal mabettir?", dogruCevap:"KÂBE"},
 ];
 let kt64Index = 0, kt64DogruHakemlik = 0;
+let kt64Maclar = turnuvaEslesmeler64;
 
 function kt64Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt64Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel64Zinciri, kelimeHavuzu64, kelimeAvi64Listesi, lab64IfadeHavuzu), turnuvaEslesmeler64);
   kt64Index = 0; kt64DogruHakemlik = 0;
   document.getElementById('kt64Puan').textContent = 0;
-  document.getElementById('kt64Toplam').textContent = turnuvaEslesmeler64.length;
+  document.getElementById('kt64Toplam').textContent = kt64Maclar.length;
   document.getElementById('kt64Sonuc').textContent = '';
   kt64Tur();
 }
 
 function kt64Tur(){
-  if(kt64Index >= turnuvaEslesmeler64.length){
+  if(kt64Index >= kt64Maclar.length){
     document.getElementById('kt64Asama').textContent = '';
     document.getElementById('kt64Eslesme').textContent = '';
     document.getElementById('kt64Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler64[turnuvaEslesmeler64.length-1].dogruCevap;
-    document.getElementById('kt64Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt64DogruHakemlik}/${turnuvaEslesmeler64.length}`;
+    const sampiyon = kt64Maclar[kt64Maclar.length-1].dogruCevap;
+    document.getElementById('kt64Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt64DogruHakemlik}/${kt64Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler64[kt64Index];
+  const mac = kt64Maclar[kt64Index];
   document.getElementById('kt64Tur').textContent = kt64Index+1;
   document.getElementById('kt64Asama').textContent = mac.tur;
   document.getElementById('kt64Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1848,7 +1851,7 @@ let cengel64HucreHarita = {}, cengel64InputMap = {};
 function cengel64Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel64Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel64Zinciri, kelimeHavuzu64, kelimeAvi64Listesi, lab64IfadeHavuzu), cengel64Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

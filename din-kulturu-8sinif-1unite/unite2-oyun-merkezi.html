@@ -1543,25 +1543,28 @@ const turnuvaEslesmeler82 = [
   {tur:"FİNAL", a:"ZEKAT", b:"İSAR", soru:"Hangisi farz bir ibadettir?", dogruCevap:"ZEKAT"},
 ];
 let kt82Index = 0, kt82DogruHakemlik = 0;
+let kt82Maclar = turnuvaEslesmeler82;
 
 function kt82Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt82Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel82Zinciri, kelimeHavuzu82, kelimeAvi82Listesi, lab82IfadeHavuzu), turnuvaEslesmeler82);
   kt82Index = 0; kt82DogruHakemlik = 0;
   document.getElementById('kt82Puan').textContent = 0;
-  document.getElementById('kt82Toplam').textContent = turnuvaEslesmeler82.length;
+  document.getElementById('kt82Toplam').textContent = kt82Maclar.length;
   document.getElementById('kt82Sonuc').textContent = '';
   kt82Tur();
 }
 
 function kt82Tur(){
-  if(kt82Index >= turnuvaEslesmeler82.length){
+  if(kt82Index >= kt82Maclar.length){
     document.getElementById('kt82Asama').textContent = '';
     document.getElementById('kt82Eslesme').textContent = '';
     document.getElementById('kt82Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler82[turnuvaEslesmeler82.length-1].dogruCevap;
-    document.getElementById('kt82Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt82DogruHakemlik}/${turnuvaEslesmeler82.length}`;
+    const sampiyon = kt82Maclar[kt82Maclar.length-1].dogruCevap;
+    document.getElementById('kt82Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt82DogruHakemlik}/${kt82Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler82[kt82Index];
+  const mac = kt82Maclar[kt82Index];
   document.getElementById('kt82Tur').textContent = kt82Index+1;
   document.getElementById('kt82Asama').textContent = mac.tur;
   document.getElementById('kt82Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1849,7 +1852,7 @@ let cengel82HucreHarita = {}, cengel82InputMap = {};
 function cengel82Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel82Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel82Zinciri, kelimeHavuzu82, kelimeAvi82Listesi, lab82IfadeHavuzu), cengel82Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

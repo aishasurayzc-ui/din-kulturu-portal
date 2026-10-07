@@ -124,6 +124,113 @@ function omKelimeSetiSec(anahtar, havuz, adet, maxUzunluk){
   try{ localStorage.setItem(k, JSON.stringify(kayit)); }catch(e){}
   return set.map(i => temiz[i]);
 }
+/* ——— Her oynayışta yeni içerik (Çengel Bulmaca, Kavram Turnuvası, Bilgi Çarkı) ———
+   İçerik ünitenin kendi kelime/anlam listelerinden kurulur; yeni bilgi uydurulmaz. */
+function omBellekOku(k){
+  let v = OM_TUR_BELLEK[k];
+  try{ const s = localStorage.getItem(k); if(s) v = JSON.parse(s); }catch(e){}
+  return v;
+}
+function omBellekYaz(k, v){
+  OM_TUR_BELLEK[k] = v;
+  try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){}
+}
+/* 0..adet-1 arasından sıradaki öğe; bütün öğeler gelmeden hiçbiri tekrar etmez. */
+function omDestedenCek(anahtar, adet){
+  const k = 'omDeste:' + location.pathname + ':' + anahtar;
+  let kayit = omBellekOku(k);
+  if(!kayit || kayit.adet !== adet || !Array.isArray(kayit.deste)) kayit = { adet: adet, deste: [], son: -1 };
+  let deste = kayit.deste.filter(i => Number.isInteger(i) && i >= 0 && i < adet);
+  if(!deste.length){
+    deste = karistir(Array.from({length: adet}, (_, i) => i));
+    if(deste.length > 1 && deste[0] === kayit.son) deste.push(deste.shift());
+  }
+  const i = deste.shift();
+  kayit.deste = deste; kayit.son = i; omBellekYaz(k, kayit);
+  return i;
+}
+/* Sayfadaki {kelime, anlam} listelerini birleştirir: her kavram bir kez, bütün anlamlarıyla.
+   Anlamı kelimenin kendisini ele veren tanımlar alınmaz. */
+function omKavramHavuzu(){
+  const harita = new Map();
+  Array.prototype.forEach.call(arguments, liste => (Array.isArray(liste) ? liste : []).forEach(o => {
+    if(!o || !o.kelime || !o.anlam) return;
+    const kelime = String(o.kelime).trim().toLocaleUpperCase('tr');
+    const anlam = String(o.anlam).trim();
+    if(anlam.toLocaleUpperCase('tr').indexOf(kelime) >= 0) return;
+    if(!harita.has(kelime)) harita.set(kelime, { kelime: kelime, anlamlar: [] });
+    const a = harita.get(kelime).anlamlar;
+    if(a.indexOf(anlam) < 0) a.push(anlam);
+  }));
+  return Array.from(harita.values());
+}
+/* Çengel Bulmaca: her kelimenin son harfiyle başlayan yeni bir kelime zinciri.
+   Son oyunlarda çıkan kelimeler sona bırakılır; aynı zincir art arda gelmez.
+   Uygun zincir kurulamazsa sayfanın özgün zinciri kullanılır. */
+function omCengelZinciri(anahtar, havuz, ozgun){
+  const k = 'omCengel:' + location.pathname + ':' + anahtar;
+  const kayit = omBellekOku(k) || {};
+  const yakin = Array.isArray(kayit.yakin) ? kayit.yakin : [];
+  const buyuk = s => String(s).toLocaleUpperCase('tr');
+  const hedef = Math.max(3, ozgun.length);
+  const olc = z => { let w = 1, h = 1; z.forEach((o, i) => { if(i % 2 === 0) w += o.kelime.length - 1; else h += o.kelime.length - 1; }); return {w: w, h: h}; };
+  const oz = olc(ozgun.map(o => ({kelime: buyuk(o.kelime)})));
+  const maxW = Math.max(oz.w, 12), maxH = Math.max(oz.h, 12);
+  const sonImza = kayit.imza || ozgun.map(o => buyuk(o.kelime)).join('|');
+  const adaylar = havuz.filter(o => /^[A-ZÇĞİÖŞÜÂÎÛ]{3,9}$/.test(o.kelime) && o.anlamlar.length);
+  const sirala = l => karistir(l).sort((a, b) => (yakin.indexOf(a.kelime) >= 0) - (yakin.indexOf(b.kelime) >= 0));
+  let enIyi = null, adim = 0;
+  const ara = (zincir, w, h) => {
+    if(++adim > 20000) return false;
+    const imza = zincir.map(o => o.kelime).join('|');
+    if(zincir.length >= 3 && imza !== sonImza && (!enIyi || zincir.length > enIyi.length)) enIyi = zincir.slice();
+    if(zincir.length >= hedef) return imza !== sonImza;
+    const son = zincir[zincir.length - 1].kelime, harf = son[son.length - 1], yatay = zincir.length % 2 === 0;
+    for(const o of sirala(adaylar.filter(o => o.kelime[0] === harf && zincir.indexOf(o) < 0))){
+      const w2 = yatay ? w + o.kelime.length - 1 : w, h2 = yatay ? h : h + o.kelime.length - 1;
+      if(w2 > maxW || h2 > maxH) continue;
+      zincir.push(o);
+      if(ara(zincir, w2, h2)) return true;
+      zincir.pop();
+    }
+    return false;
+  };
+  for(const bas of sirala(adaylar)){
+    if(bas.kelime.length > maxW) continue;
+    if(ara([bas], bas.kelime.length, 1) || adim > 20000) break;
+  }
+  if(!enIyi || enIyi.length < Math.min(4, hedef)) return ozgun;
+  const sonuc = enIyi.map(o => ({ kelime: o.kelime, anlam: o.anlamlar[Math.floor(Math.random() * o.anlamlar.length)] }));
+  const kelimeler = sonuc.map(o => o.kelime);
+  omBellekYaz(k, { imza: kelimeler.join('|'), yakin: kelimeler.concat(yakin.filter(x => kelimeler.indexOf(x) < 0)).slice(0, hedef * 2) });
+  return sonuc;
+}
+/* Kavram Turnuvası: ilk oyunda sayfanın özgün eşleşmeleri, sonraki her oyunda
+   tekrarsız seçilen 8 kavramla yeni bir turnuva (çeyrek final → yarı final → final). */
+function omTurnuvaKur(anahtar, havuz, ozgun){
+  const k = 'omTurnuva:' + location.pathname + ':' + anahtar;
+  const kayit = omBellekOku(k) || {};
+  const sayac = Number.isInteger(kayit.sayac) ? kayit.sayac : 0;
+  omBellekYaz(k, { sayac: sayac + 1 });
+  if(sayac === 0 || havuz.length < 8) return ozgun;
+  const secilen = omKelimeSetiSec(anahtar, havuz, 8);
+  const kullanim = new Map();
+  const anlamVer = o => { const n = kullanim.get(o) || 0; kullanim.set(o, n + 1); return o.anlamlar[n % o.anlamlar.length]; };
+  const kalan = o => o.anlamlar.length - (kullanim.get(o) || 0);
+  const maclar = [];
+  const mac = (tur, x, y) => {
+    /* Kazanan, henüz sorulmamış anlamı olan kavramdan seçilir; ikisi de eşitse rastgele. */
+    const dogru = kalan(x) === kalan(y) ? (Math.random() < 0.5 ? x : y) : (kalan(x) > kalan(y) ? x : y);
+    const ikili = Math.random() < 0.5 ? [x, y] : [y, x];
+    maclar.push({ tur: tur, a: ikili[0].kelime, b: ikili[1].kelime,
+      soru: 'Hangisi şu anlama gelir? “' + anlamVer(dogru) + '”', dogruCevap: dogru.kelime });
+    return dogru;
+  };
+  const ceyrek = [0, 1, 2, 3].map(i => mac('Çeyrek Final ' + (i + 1), secilen[2 * i], secilen[2 * i + 1]));
+  const yari = [mac('Yarı Final 1', ceyrek[0], ceyrek[1]), mac('Yarı Final 2', ceyrek[2], ceyrek[3])];
+  mac('FİNAL', yari[0], yari[1]);
+  return maclar;
+}
 /* Oyun kartına (yeniden) tıklanınca oyun baştan, yeni bir turla başlar. */
 const OM_OYUN_BOLUMLERI = new Set();
 function omBaslaticiBul(bolum){
@@ -1206,8 +1313,12 @@ function ikiliCarkCevir(onek){
 function ikiliCarkSoruGoster(onek){
   const d = ikiliOyunDurum(onek);
   ikiliHtmlAyarla(onek+'ElDegistir', '');
-  const kategori = d.ayar.kategoriler[Math.floor(Math.random()*d.ayar.kategoriler.length)];
-  const soru = kategori.sorular[Math.floor(Math.random()*kategori.sorular.length)];
+  /* Bilgi Çarkı: bütün sorular sorulmadan hiçbir soru tekrar gelmez (oyunlar arasında da). */
+  const tumSorular = [];
+  d.ayar.kategoriler.forEach(kat => (kat.sorular || []).forEach(s => tumSorular.push({kategori: kat, soru: s})));
+  tumSorular.sort((x, y) => (x.kategori.ad + '|' + x.soru.soru).localeCompare(y.kategori.ad + '|' + y.soru.soru));
+  const secim = tumSorular[omDestedenCek(onek + '.cark', tumSorular.length)];
+  const kategori = secim.kategori, soru = secim.soru;
   ikiliMetinAyarla(onek+'SoruNo', d.tur+1);
   ikiliMetinAyarla(onek+'SiraKimde', 'Sıra: ' + ikiliOyuncuEtiket(onek, d.sira));
   ikiliHtmlAyarla(onek+'SoruMetin', '<span class="omg-cark-kategori">' + kategori.ikon + ' ' + kategori.ad + '</span><br>❓ ' + soru.soru);

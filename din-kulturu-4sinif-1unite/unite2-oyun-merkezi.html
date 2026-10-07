@@ -1663,25 +1663,28 @@ const turnuvaEslesmeler2 = [
   {tur:"FİNAL", a:"NAMAZ", b:"ZEKAT", soru:"Hangisi günde beş vakit tekrarlanan bir ibadettir?", dogruCevap:"NAMAZ"},
 ];
 let kt2Index = 0, kt2DogruHakemlik = 0;
+let kt2Maclar = turnuvaEslesmeler2;
 
 function kt2Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt2Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel2Zinciri, kelimeHavuzu2, kelimeAvi2Listesi, lab2IfadeHavuzu), turnuvaEslesmeler2);
   kt2Index = 0; kt2DogruHakemlik = 0;
   document.getElementById('kt2Puan').textContent = 0;
-  document.getElementById('kt2Toplam').textContent = turnuvaEslesmeler2.length;
+  document.getElementById('kt2Toplam').textContent = kt2Maclar.length;
   document.getElementById('kt2Sonuc').textContent = '';
   kt2Tur();
 }
 
 function kt2Tur(){
-  if(kt2Index >= turnuvaEslesmeler2.length){
+  if(kt2Index >= kt2Maclar.length){
     document.getElementById('kt2Asama').textContent = '';
     document.getElementById('kt2Eslesme').textContent = '';
     document.getElementById('kt2Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler2[turnuvaEslesmeler2.length-1].dogruCevap;
-    document.getElementById('kt2Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt2DogruHakemlik}/${turnuvaEslesmeler2.length}`;
+    const sampiyon = kt2Maclar[kt2Maclar.length-1].dogruCevap;
+    document.getElementById('kt2Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt2DogruHakemlik}/${kt2Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler2[kt2Index];
+  const mac = kt2Maclar[kt2Index];
   document.getElementById('kt2Tur').textContent = kt2Index+1;
   document.getElementById('kt2Asama').textContent = mac.tur;
   document.getElementById('kt2Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1970,7 +1973,7 @@ let cengel2HucreHarita = {}, cengel2InputMap = {};
 function cengel2Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel2Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel2Zinciri, kelimeHavuzu2, kelimeAvi2Listesi, lab2IfadeHavuzu), cengel2Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

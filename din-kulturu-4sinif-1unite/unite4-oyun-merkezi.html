@@ -1606,25 +1606,28 @@ const turnuvaEslesmeler4 = [
   {tur:"FİNAL", a:"HADARİ", b:"ENSAR", soru:"Hangisi Medine'de göç edenlere yardım eden Müslümanlara verilen isimdir?", dogruCevap:"ENSAR"},
 ];
 let kt4Index = 0, kt4DogruHakemlik = 0;
+let kt4Maclar = turnuvaEslesmeler4;
 
 function kt4Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt4Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel4Zinciri, kelimeHavuzu4, kelimeAvi4Listesi, lab4IfadeHavuzu), turnuvaEslesmeler4);
   kt4Index = 0; kt4DogruHakemlik = 0;
   document.getElementById('kt4Puan').textContent = 0;
-  document.getElementById('kt4Toplam').textContent = turnuvaEslesmeler4.length;
+  document.getElementById('kt4Toplam').textContent = kt4Maclar.length;
   document.getElementById('kt4Sonuc').textContent = '';
   kt4Tur();
 }
 
 function kt4Tur(){
-  if(kt4Index >= turnuvaEslesmeler4.length){
+  if(kt4Index >= kt4Maclar.length){
     document.getElementById('kt4Asama').textContent = '';
     document.getElementById('kt4Eslesme').textContent = '';
     document.getElementById('kt4Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler4[turnuvaEslesmeler4.length-1].dogruCevap;
-    document.getElementById('kt4Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt4DogruHakemlik}/${turnuvaEslesmeler4.length}`;
+    const sampiyon = kt4Maclar[kt4Maclar.length-1].dogruCevap;
+    document.getElementById('kt4Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt4DogruHakemlik}/${kt4Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler4[kt4Index];
+  const mac = kt4Maclar[kt4Index];
   document.getElementById('kt4Tur').textContent = kt4Index+1;
   document.getElementById('kt4Asama').textContent = mac.tur;
   document.getElementById('kt4Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1912,7 +1915,7 @@ let cengel4HucreHarita = {}, cengel4InputMap = {};
 function cengel4Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel4Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel4Zinciri, kelimeHavuzu4, kelimeAvi4Listesi, lab4IfadeHavuzu), cengel4Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

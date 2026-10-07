@@ -1606,25 +1606,28 @@ const turnuvaEslesmeler5 = [
   {tur:"FİNAL", a:"ABDEST", b:"SADAKA", soru:"Hangisi namaz kılmadan önce yapılması gereken bir ibadettir?", dogruCevap:"ABDEST"},
 ];
 let kt5Index = 0, kt5DogruHakemlik = 0;
+let kt5Maclar = turnuvaEslesmeler5;
 
 function kt5Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt5Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel5Zinciri, kelimeHavuzu5, kelimeAvi5Listesi, lab5IfadeHavuzu), turnuvaEslesmeler5);
   kt5Index = 0; kt5DogruHakemlik = 0;
   document.getElementById('kt5Puan').textContent = 0;
-  document.getElementById('kt5Toplam').textContent = turnuvaEslesmeler5.length;
+  document.getElementById('kt5Toplam').textContent = kt5Maclar.length;
   document.getElementById('kt5Sonuc').textContent = '';
   kt5Tur();
 }
 
 function kt5Tur(){
-  if(kt5Index >= turnuvaEslesmeler5.length){
+  if(kt5Index >= kt5Maclar.length){
     document.getElementById('kt5Asama').textContent = '';
     document.getElementById('kt5Eslesme').textContent = '';
     document.getElementById('kt5Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler5[turnuvaEslesmeler5.length-1].dogruCevap;
-    document.getElementById('kt5Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt5DogruHakemlik}/${turnuvaEslesmeler5.length}`;
+    const sampiyon = kt5Maclar[kt5Maclar.length-1].dogruCevap;
+    document.getElementById('kt5Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt5DogruHakemlik}/${kt5Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler5[kt5Index];
+  const mac = kt5Maclar[kt5Index];
   document.getElementById('kt5Tur').textContent = kt5Index+1;
   document.getElementById('kt5Asama').textContent = mac.tur;
   document.getElementById('kt5Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1912,7 +1915,7 @@ let cengel5HucreHarita = {}, cengel5InputMap = {};
 function cengel5Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel5Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel5Zinciri, kelimeHavuzu5, kelimeAvi5Listesi, lab5IfadeHavuzu), cengel5Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

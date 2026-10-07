@@ -1540,25 +1540,28 @@ const turnuvaEslesmeler62 = [
   {tur:"FİNAL", a:"SAHUR", b:"TERAVİH", soru:"Hangisi ramazan ayının bir vaktidir, namaz değildir?", dogruCevap:"SAHUR"},
 ];
 let kt62Index = 0, kt62DogruHakemlik = 0;
+let kt62Maclar = turnuvaEslesmeler62;
 
 function kt62Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt62Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel62Zinciri, kelimeHavuzu62, kelimeAvi62Listesi, lab62IfadeHavuzu), turnuvaEslesmeler62);
   kt62Index = 0; kt62DogruHakemlik = 0;
   document.getElementById('kt62Puan').textContent = 0;
-  document.getElementById('kt62Toplam').textContent = turnuvaEslesmeler62.length;
+  document.getElementById('kt62Toplam').textContent = kt62Maclar.length;
   document.getElementById('kt62Sonuc').textContent = '';
   kt62Tur();
 }
 
 function kt62Tur(){
-  if(kt62Index >= turnuvaEslesmeler62.length){
+  if(kt62Index >= kt62Maclar.length){
     document.getElementById('kt62Asama').textContent = '';
     document.getElementById('kt62Eslesme').textContent = '';
     document.getElementById('kt62Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler62[turnuvaEslesmeler62.length-1].dogruCevap;
-    document.getElementById('kt62Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt62DogruHakemlik}/${turnuvaEslesmeler62.length}`;
+    const sampiyon = kt62Maclar[kt62Maclar.length-1].dogruCevap;
+    document.getElementById('kt62Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt62DogruHakemlik}/${kt62Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler62[kt62Index];
+  const mac = kt62Maclar[kt62Index];
   document.getElementById('kt62Tur').textContent = kt62Index+1;
   document.getElementById('kt62Asama').textContent = mac.tur;
   document.getElementById('kt62Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1848,7 +1851,7 @@ let cengel62HucreHarita = {}, cengel62InputMap = {};
 function cengel62Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel62Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel62Zinciri, kelimeHavuzu62, kelimeAvi62Listesi, lab62IfadeHavuzu), cengel62Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

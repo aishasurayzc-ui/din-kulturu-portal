@@ -2033,25 +2033,28 @@ const SKUP1_SORULAR = [
 function skup1Baslat(){ ikiliOyunBaslat({onek:'skup1', sorular:SKUP1_SORULAR, sureSN:10}); }
 
 let kt1Index = 0, kt1DogruHakemlik = 0;
+let kt1Maclar = turnuvaEslesmeler1;
 
 function kt1Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt1Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel1Zinciri, kelimeHavuzu1, kelimeAvi1Listesi, lab1IfadeHavuzu), turnuvaEslesmeler1);
   kt1Index = 0; kt1DogruHakemlik = 0;
   document.getElementById('kt1Puan').textContent = 0;
-  document.getElementById('kt1Toplam').textContent = turnuvaEslesmeler1.length;
+  document.getElementById('kt1Toplam').textContent = kt1Maclar.length;
   document.getElementById('kt1Sonuc').textContent = '';
   kt1Tur();
 }
 
 function kt1Tur(){
-  if(kt1Index >= turnuvaEslesmeler1.length){
+  if(kt1Index >= kt1Maclar.length){
     document.getElementById('kt1Asama').textContent = '';
     document.getElementById('kt1Eslesme').textContent = '';
     document.getElementById('kt1Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler1[turnuvaEslesmeler1.length-1].dogruCevap;
-    document.getElementById('kt1Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt1DogruHakemlik}/${turnuvaEslesmeler1.length}`;
+    const sampiyon = kt1Maclar[kt1Maclar.length-1].dogruCevap;
+    document.getElementById('kt1Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt1DogruHakemlik}/${kt1Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler1[kt1Index];
+  const mac = kt1Maclar[kt1Index];
   document.getElementById('kt1Tur').textContent = kt1Index+1;
   document.getElementById('kt1Asama').textContent = mac.tur;
   document.getElementById('kt1Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -2341,7 +2344,7 @@ let cengel1HucreHarita = {}, cengel1InputMap = {};
 function cengel1Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel1Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel1Zinciri, kelimeHavuzu1, kelimeAvi1Listesi, lab1IfadeHavuzu), cengel1Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

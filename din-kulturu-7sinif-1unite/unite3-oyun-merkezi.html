@@ -1540,25 +1540,28 @@ const turnuvaEslesmeler83 = [
   {tur:"FİNAL", a:"ZARURAT", b:"RÜŞVET", soru:"Hangisi canın, aklın, neslin, malın ve dinin korunmasını birlikte ifade eder?", dogruCevap:"ZARURAT"},
 ];
 let kt83Index = 0, kt83DogruHakemlik = 0;
+let kt83Maclar = turnuvaEslesmeler83;
 
 function kt83Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt83Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel83Zinciri, kelimeHavuzu83, kelimeAvi83Listesi, lab83IfadeHavuzu), turnuvaEslesmeler83);
   kt83Index = 0; kt83DogruHakemlik = 0;
   document.getElementById('kt83Puan').textContent = 0;
-  document.getElementById('kt83Toplam').textContent = turnuvaEslesmeler83.length;
+  document.getElementById('kt83Toplam').textContent = kt83Maclar.length;
   document.getElementById('kt83Sonuc').textContent = '';
   kt83Tur();
 }
 
 function kt83Tur(){
-  if(kt83Index >= turnuvaEslesmeler83.length){
+  if(kt83Index >= kt83Maclar.length){
     document.getElementById('kt83Asama').textContent = '';
     document.getElementById('kt83Eslesme').textContent = '';
     document.getElementById('kt83Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler83[turnuvaEslesmeler83.length-1].dogruCevap;
-    document.getElementById('kt83Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt83DogruHakemlik}/${turnuvaEslesmeler83.length}`;
+    const sampiyon = kt83Maclar[kt83Maclar.length-1].dogruCevap;
+    document.getElementById('kt83Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt83DogruHakemlik}/${kt83Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler83[kt83Index];
+  const mac = kt83Maclar[kt83Index];
   document.getElementById('kt83Tur').textContent = kt83Index+1;
   document.getElementById('kt83Asama').textContent = mac.tur;
   document.getElementById('kt83Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1846,7 +1849,7 @@ let cengel83HucreHarita = {}, cengel83InputMap = {};
 function cengel83Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel83Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel83Zinciri, kelimeHavuzu83, kelimeAvi83Listesi, lab83IfadeHavuzu), cengel83Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

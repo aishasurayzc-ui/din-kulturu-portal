@@ -1540,25 +1540,28 @@ const turnuvaEslesmeler63 = [
   {tur:"FİNAL", a:"MERHAMET", b:"DOĞRULUK", soru:"Hangisi 'şefkat, acıma ve bağışlama' anlamına gelen değerdir?", dogruCevap:"MERHAMET"},
 ];
 let kt63Index = 0, kt63DogruHakemlik = 0;
+let kt63Maclar = turnuvaEslesmeler63;
 
 function kt63Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt63Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel63Zinciri, kelimeHavuzu63, kelimeAvi63Listesi, lab63IfadeHavuzu), turnuvaEslesmeler63);
   kt63Index = 0; kt63DogruHakemlik = 0;
   document.getElementById('kt63Puan').textContent = 0;
-  document.getElementById('kt63Toplam').textContent = turnuvaEslesmeler63.length;
+  document.getElementById('kt63Toplam').textContent = kt63Maclar.length;
   document.getElementById('kt63Sonuc').textContent = '';
   kt63Tur();
 }
 
 function kt63Tur(){
-  if(kt63Index >= turnuvaEslesmeler63.length){
+  if(kt63Index >= kt63Maclar.length){
     document.getElementById('kt63Asama').textContent = '';
     document.getElementById('kt63Eslesme').textContent = '';
     document.getElementById('kt63Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler63[turnuvaEslesmeler63.length-1].dogruCevap;
-    document.getElementById('kt63Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt63DogruHakemlik}/${turnuvaEslesmeler63.length}`;
+    const sampiyon = kt63Maclar[kt63Maclar.length-1].dogruCevap;
+    document.getElementById('kt63Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt63DogruHakemlik}/${kt63Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler63[kt63Index];
+  const mac = kt63Maclar[kt63Index];
   document.getElementById('kt63Tur').textContent = kt63Index+1;
   document.getElementById('kt63Asama').textContent = mac.tur;
   document.getElementById('kt63Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1847,7 +1850,7 @@ let cengel63HucreHarita = {}, cengel63InputMap = {};
 function cengel63Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel63Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel63Zinciri, kelimeHavuzu63, kelimeAvi63Listesi, lab63IfadeHavuzu), cengel63Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

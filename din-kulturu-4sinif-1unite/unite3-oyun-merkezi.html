@@ -1606,25 +1606,28 @@ const turnuvaEslesmeler3 = [
   {tur:"FİNAL", a:"SEVGİ", b:"MERHAMET", soru:"Hangisi insanları birbirine bağlayan temel duygudur?", dogruCevap:"SEVGİ"},
 ];
 let kt3Index = 0, kt3DogruHakemlik = 0;
+let kt3Maclar = turnuvaEslesmeler3;
 
 function kt3Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt3Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel3Zinciri, kelimeHavuzu3, kelimeAvi3Listesi, lab3IfadeHavuzu), turnuvaEslesmeler3);
   kt3Index = 0; kt3DogruHakemlik = 0;
   document.getElementById('kt3Puan').textContent = 0;
-  document.getElementById('kt3Toplam').textContent = turnuvaEslesmeler3.length;
+  document.getElementById('kt3Toplam').textContent = kt3Maclar.length;
   document.getElementById('kt3Sonuc').textContent = '';
   kt3Tur();
 }
 
 function kt3Tur(){
-  if(kt3Index >= turnuvaEslesmeler3.length){
+  if(kt3Index >= kt3Maclar.length){
     document.getElementById('kt3Asama').textContent = '';
     document.getElementById('kt3Eslesme').textContent = '';
     document.getElementById('kt3Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler3[turnuvaEslesmeler3.length-1].dogruCevap;
-    document.getElementById('kt3Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt3DogruHakemlik}/${turnuvaEslesmeler3.length}`;
+    const sampiyon = kt3Maclar[kt3Maclar.length-1].dogruCevap;
+    document.getElementById('kt3Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt3DogruHakemlik}/${kt3Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler3[kt3Index];
+  const mac = kt3Maclar[kt3Index];
   document.getElementById('kt3Tur').textContent = kt3Index+1;
   document.getElementById('kt3Asama').textContent = mac.tur;
   document.getElementById('kt3Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1912,7 +1915,7 @@ let cengel3HucreHarita = {}, cengel3InputMap = {};
 function cengel3Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel3Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel3Zinciri, kelimeHavuzu3, kelimeAvi3Listesi, lab3IfadeHavuzu), cengel3Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){

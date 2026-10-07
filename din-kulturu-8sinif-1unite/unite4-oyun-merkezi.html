@@ -1543,25 +1543,28 @@ const turnuvaEslesmeler84 = [
   {tur:"FİNAL", a:"EMANET", b:"İSTİŞARE", soru:"Hangisi peygamberlerin ortak sıfatlarından biridir?", dogruCevap:"EMANET"},
 ];
 let kt84Index = 0, kt84DogruHakemlik = 0;
+let kt84Maclar = turnuvaEslesmeler84;
 
 function kt84Baslat(){
+  /* Her yeni turnuvada farklı kavramlar (ortak/oyun-merkezi.js) */
+  kt84Maclar = omTurnuvaKur('turnuva', omKavramHavuzu(cengel84Zinciri, kelimeHavuzu84, kelimeAvi84Listesi, lab84IfadeHavuzu), turnuvaEslesmeler84);
   kt84Index = 0; kt84DogruHakemlik = 0;
   document.getElementById('kt84Puan').textContent = 0;
-  document.getElementById('kt84Toplam').textContent = turnuvaEslesmeler84.length;
+  document.getElementById('kt84Toplam').textContent = kt84Maclar.length;
   document.getElementById('kt84Sonuc').textContent = '';
   kt84Tur();
 }
 
 function kt84Tur(){
-  if(kt84Index >= turnuvaEslesmeler84.length){
+  if(kt84Index >= kt84Maclar.length){
     document.getElementById('kt84Asama').textContent = '';
     document.getElementById('kt84Eslesme').textContent = '';
     document.getElementById('kt84Secenekler').innerHTML = '';
-    const sampiyon = turnuvaEslesmeler84[turnuvaEslesmeler84.length-1].dogruCevap;
-    document.getElementById('kt84Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt84DogruHakemlik}/${turnuvaEslesmeler84.length}`;
+    const sampiyon = kt84Maclar[kt84Maclar.length-1].dogruCevap;
+    document.getElementById('kt84Sonuc').textContent = `🏆 Turnuva Şampiyonu: ${sampiyon}! Hakemlik doğruluğun: ${kt84DogruHakemlik}/${kt84Maclar.length}`;
     return;
   }
-  const mac = turnuvaEslesmeler84[kt84Index];
+  const mac = kt84Maclar[kt84Index];
   document.getElementById('kt84Tur').textContent = kt84Index+1;
   document.getElementById('kt84Asama').textContent = mac.tur;
   document.getElementById('kt84Eslesme').innerHTML = `🥊 <b>${mac.a}</b> vs <b>${mac.b}</b><br>❓ ${mac.soru}`;
@@ -1849,7 +1852,7 @@ let cengel84HucreHarita = {}, cengel84InputMap = {};
 function cengel84Olustur(){
   let r=0, c=0, dir='right';
   const yerlesimler = [];
-  cengel84Zinciri.forEach(item=>{
+  omCengelZinciri('cengel', omKavramHavuzu(cengel84Zinciri, kelimeHavuzu84, kelimeAvi84Listesi, lab84IfadeHavuzu), cengel84Zinciri).forEach(item=>{
     const kelime = item.kelime;
     const hucreler = [];
     for(let j=0;j<kelime.length;j++){
