@@ -38,7 +38,7 @@
 <section id="kelimeavi2">
   <h2>🔎 Kelime Avı Bulmacası</h2>
   <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
-  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay ya da dikey, düz veya ters yönde olabilir).</div>
+  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay, dikey ya da çapraz; düz veya ters yönde olabilir).</div>
   <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka2Bulunan">0</b>/<b id="ka2Toplam">14</b></span></div>
   <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
     <div class="ka-izgara" id="ka2Izgara"></div>
@@ -1834,7 +1834,7 @@ const ka2SatirSayisi = 14, ka2SutunSayisi = 14;
 const ka2AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
 
 function ka2KelimeYerlestir(izgara, kelime){
-  const yonler = karistir([{dr:0,dc:1},{dr:0,dc:-1},{dr:1,dc:0},{dr:-1,dc:0}]);
+  const yonler = karistir([{dr:0,dc:1},{dr:0,dc:-1},{dr:1,dc:0},{dr:-1,dc:0},{dr:1,dc:1},{dr:-1,dc:-1},{dr:1,dc:-1},{dr:-1,dc:1}]);
   for(let deneme=0; deneme<200; deneme++){
     const yon = yonler[deneme % yonler.length];
     const satir = Math.floor(Math.random()*ka2SatirSayisi);
@@ -1919,6 +1919,10 @@ function kelimeAvi2Olustur(){
       } else if(c1===c2){
         const adim = r2>r1?1:-1;
         for(let r=r1;;r+=adim){ yol.push({r,c:c1}); if(r===r2) break; }
+      } else if(Math.abs(r2-r1)===Math.abs(c2-c1)){
+        /* Çapraz seçim: iki hücre aynı köşegen üzerindeyse aradaki hücreler */
+        const dr = r2>r1?1:-1, dc = c2>c1?1:-1;
+        for(let i=0;i<=Math.abs(r2-r1);i++){ yol.push({r:r1+dr*i, c:c1+dc*i}); }
       } else {
         ilkHucre.classList.remove('ka-secili');
         h.classList.add('ka-secili');
