@@ -1,0 +1,117 @@
+/* ======================================================================
+   HAFIZA KARTLARI (additive) — bütün seçiciler "hk-" önekli.
+   Sayfaların kendi değişkenleri varsa (--navy, --yesil, --sari) onları
+   kullanır; yoksa yedek renklere düşer. Dokunmatik hedefler ≥ 44px.
+====================================================================== */
+.hk-bolum{ clear:both; border-top:5px solid #0f766e; }
+.hk-bolum [hidden]{ display:none !important; }
+.hk-bas{ display:flex; gap:14px; align-items:center; margin:0 0 6px; }
+.hk-bas-ikon{ flex:0 0 56px; width:56px; height:56px; border-radius:18px; display:flex; align-items:center; justify-content:center; font-size:1.8em;
+  background:linear-gradient(135deg,#e6fffa,#b2f5ea); box-shadow:0 4px 12px rgba(15,118,110,.18); }
+.hk-bas h3{ margin:0; font-size:1.35em; color:var(--navy,#1E3A8A); line-height:1.25; }
+.hk-bas h3 small{ display:block; font-size:.52em; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#0f766e; margin-bottom:3px; }
+.hk-giris{ line-height:1.6; margin:8px 0 6px; }
+.hk-not{ font-size:.92em; line-height:1.5; color:#5b6570; background:#f8fafc; border-radius:12px; padding:8px 12px; margin:0 0 8px; }
+.hk-baglanti{ margin:0 0 10px; font-weight:700; }
+.hk-baglanti a{ color:#0f766e; font-weight:900; }
+
+.hk-nav{ display:grid; grid-template-columns:repeat(6, 1fr); gap:6px; margin:10px 0 12px; }
+.hk-sekme{ font:inherit; cursor:pointer; min-height:56px; padding:6px 4px; border-radius:14px; border:2px solid #c7ece6; background:#fff; color:#134e4a;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; text-align:center; line-height:1.15; }
+.hk-sekme b{ font-size:1.05em; }
+.hk-sekme span{ font-size:.78em; font-weight:800; }
+.hk-sekme.hk-tamam:not(.hk-aktif){ border-color:var(--yesil,#40916c); background:#f3fbf5; }
+.hk-sekme.hk-tamam b::after{ content:" ✓"; color:var(--yesil,#40916c); }
+.hk-sekme.hk-aktif{ background:#0f766e; border-color:#0f766e; color:#fff; }
+.hk-sekme-tekrar{ border-style:dashed; }
+.hk-sekme:focus-visible, .hk-sec:focus-visible, .hk-btn:focus-visible, .hk-fis:focus-visible, .hk-kova:focus-visible, .hk-cip:focus-visible, .hk-bolum select:focus-visible{ outline:3px solid var(--navy,#1E3A8A); outline-offset:2px; }
+.hk-asama-alt{ font-weight:800; color:#134e4a; background:#e6fffa; border-radius:12px; padding:8px 12px; margin:0 0 12px; }
+
+/* öğrenme kartları */
+.hk-kartlar{ display:grid; gap:12px; grid-template-columns:1fr; }
+@media(min-width:760px){ .hk-kartlar{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+.hk-kart{ min-width:0; overflow-wrap:anywhere; border:2px solid #c7ece6; border-radius:18px; background:#fff; padding:14px; }
+.hk-kart-ust{ display:flex; gap:12px; align-items:center; margin:0 0 6px; }
+.hk-simge{ flex:0 0 64px; width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2.1em; background:#f0fdfa; border:2px solid #99e2d6; }
+.hk-kart-ad b{ display:block; font-size:1.08em; color:var(--navy,#1E3A8A); line-height:1.25; }
+.hk-kelime{ display:inline-block; margin-top:4px; font-weight:900; letter-spacing:.06em; font-size:.86em; color:#fff; background:#0f766e; border-radius:999px; padding:3px 11px; }
+.hk-satir{ margin:7px 0 0; line-height:1.5; font-size:.95em; }
+.hk-satir b{ display:block; font-size:.74em; letter-spacing:.06em; text-transform:uppercase; color:#0f766e; }
+.hk-sinir{ background:#fffaf0; border-radius:10px; padding:6px 10px; }
+.hk-sinir b{ color:#a8640a; }
+.hk-uyari{ background:#f1f5f9; border-radius:10px; padding:6px 10px; }
+.hk-uyari b{ color:#2f4a8f; }
+.hk-ayet{ margin:8px 0 0; padding:8px 12px; border-left:5px solid var(--yesil,#40916c); background:#f6fbf8; border-radius:10px; }
+.hk-ayet-etiket{ font-size:.66em; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:var(--yesil,#40916c); border-radius:999px; padding:2px 8px; }
+.hk-ayet blockquote{ margin:5px 0 3px; font-weight:700; line-height:1.55; }
+.hk-ayet figcaption{ font-size:.8em; color:#5b6570; }
+.hk-kart-soru{ margin:10px 0 0; border-top:2px dashed #c7ece6; padding-top:8px; }
+.hk-kart-soru > b{ font-size:.9em; color:#134e4a; }
+.hk-kart-soru .hk-secenekler{ grid-template-columns:1fr; }
+.hk-kart-soru .hk-soru{ border:0; padding:6px 0 0; background:none; margin:0; }
+
+/* sorular */
+.hk-soru{ border:2px solid #c7ece6; background:#fbfffe; border-radius:18px; padding:13px 14px; margin:0 0 10px; }
+.hk-etiket{ display:inline-block; font-size:.7em; font-weight:900; letter-spacing:.06em; color:#fff; background:#0f766e; border-radius:999px; padding:3px 10px; }
+.hk-soru-simge{ font-size:2.6em; line-height:1; margin:4px 0; }
+.hk-soru-metin{ font-weight:800; line-height:1.55; margin:6px 0 10px; font-size:clamp(1em, 2vw, 1.08em); }
+.hk-secenekler{ display:grid; gap:8px; grid-template-columns:1fr; }
+@media(min-width:700px){ .hk-secenekler{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+.hk-secenekler.hk-iki{ grid-template-columns:1fr 1fr; }
+.hk-sec{ font:inherit; font-weight:700; text-align:left; cursor:pointer; min-height:50px; padding:9px 13px; border-radius:14px; background:#fff; color:#22333b;
+  border:2px solid #cfd8e3; display:flex; gap:10px; align-items:center; line-height:1.4; }
+.hk-iki .hk-sec{ justify-content:center; text-align:center; font-weight:900; }
+.hk-harf{ flex:0 0 28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#e6fffa; color:#0f766e; font-weight:900; }
+.hk-sec:hover:not(:disabled){ border-color:#0f766e; }
+.hk-sec:disabled{ cursor:default; }
+.hk-sec.hk-dogru{ background:#d8f3dc; border-color:var(--yesil,#40916c); }
+.hk-sec.hk-tekrar-sec{ background:#fff4e5; border-color:var(--sari,#f4a261); }
+.hk-gb{ margin:10px 0 0; padding:10px 13px; border-radius:14px; line-height:1.55; border-left:6px solid #12869a; background:#fff; }
+.hk-gb p{ margin:0 0 5px; } .hk-gb p:last-child{ margin:0; }
+.hk-gb-iyi{ border-left-color:var(--yesil,#40916c); background:#f3fbf5; }
+.hk-gb-dene{ border-left-color:var(--sari,#f4a261); background:#fffaf0; }
+.hk-gb-kart{ font-weight:700; color:#134e4a; }
+.hk-gb-kucuk{ font-size:.84em; color:#5b6570; }
+.hk-set-ozet{ text-align:center; font-weight:800; border-radius:16px; padding:12px; background:linear-gradient(135deg,#e6fffa,#fff6e8); }
+.hk-set-ozet p{ margin:0 0 8px; }
+.hk-dugmeler{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 0; justify-content:center; }
+.hk-btn{ font:inherit; font-weight:900; cursor:pointer; min-height:48px; padding:9px 18px; border-radius:999px; border:0; background:#0f766e; color:#fff; }
+.hk-btn-ikincil{ background:#fff; color:#0f766e; border:2px solid #99e2d6; }
+.hk-bos{ text-align:center; font-weight:800; padding:16px; background:#f3fbf5; border-radius:16px; }
+
+/* etkinlikler */
+.hk-etkinlik{ border:2px solid #fde3b5; background:#fffdf6; border-radius:18px; padding:13px 14px; margin:0 0 12px; }
+.hk-etkinlik h4{ margin:0 0 6px; color:#8a4b00; font-size:1.02em; }
+.hk-ipucu{ margin:0 0 8px; font-size:.92em; color:#5b6570; }
+.hk-havuz{ display:flex; flex-wrap:wrap; gap:7px; min-height:54px; padding:9px; border-radius:14px; border:2px dashed #e7c98f; background:#fff; margin:0 0 10px; }
+.hk-fis{ font:inherit; font-weight:800; font-size:.92em; cursor:pointer; min-height:46px; padding:8px 12px; border-radius:12px; border:2px solid #e7c98f; background:#fffaf0; color:#5a3d00; text-align:left; touch-action:manipulation; }
+.hk-fis.hk-secili{ background:#c9740b; color:#fff; border-color:#c9740b; box-shadow:0 0 0 4px rgba(201,116,11,.25); }
+.hk-fis.hk-dogru-yer, .hk-esles-satir.hk-dogru-yer{ border-color:var(--yesil,#40916c); background:#f3fbf5; }
+.hk-fis.hk-yanlis-yer, .hk-esles-satir.hk-yanlis-yer{ border-color:var(--sari,#f4a261); background:#fff4e5; }
+.hk-kovalar{ display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); }
+.hk-kova{ border:2px solid #cfd8e3; border-radius:14px; padding:8px; background:#fff; min-height:90px; cursor:pointer; }
+.hk-kova > b{ display:block; font-size:.9em; color:#134e4a; margin:0 0 6px; }
+.hk-kova-ic{ display:flex; flex-direction:column; gap:6px; }
+.hk-kova-ic .hk-fis{ width:100%; }
+.hk-sira-hedef{ list-style:none; counter-reset:hksira; margin:0 0 10px; padding:9px; min-height:56px; border-radius:14px; border:2px dashed #99e2d6; background:#fff; display:flex; flex-direction:column; gap:6px; }
+.hk-sira-hedef:empty::before{ content:"Kartlara sırayla dokun: ilk dokunduğun 1. sıraya yerleşir."; color:#8a94a3; font-size:.9em; padding:6px; }
+.hk-sira-hedef li{ counter-increment:hksira; }
+.hk-sira-hedef .hk-fis{ width:100%; display:flex; align-items:center; background:#fff; }
+.hk-sira-hedef .hk-fis::before{ content:counter(hksira); flex:0 0 26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#0f766e; color:#fff; margin-right:8px; }
+.hk-esles{ display:flex; flex-direction:column; gap:8px; }
+.hk-esles-satir{ display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:center; border:2px solid #efe3c2; border-radius:14px; padding:8px 10px; background:#fff; }
+.hk-esles-sol{ font-weight:800; line-height:1.4; }
+.hk-esles select{ font:inherit; min-height:48px; width:100%; border-radius:12px; border:2px solid #cfd8e3; padding:6px 8px; background:#fff; color:#22333b; }
+.hk-gorsel{ margin:0 0 10px; }
+.hk-gorsel svg{ display:block; width:100%; max-width:560px; height:auto; margin:0 auto; }
+.hk-lgs-not{ font-weight:700; line-height:1.55; background:#eef2ff; border-radius:12px; padding:9px 12px; color:#1e3a8a; }
+.hk-cipler{ display:flex; flex-wrap:wrap; gap:7px; margin:0 0 12px; }
+.hk-cip{ font:inherit; font-weight:800; cursor:pointer; min-height:44px; padding:6px 13px; border-radius:999px; border:2px solid #c7ece6; background:#fff; color:#134e4a; }
+.hk-cip.hk-aktif{ background:#0f766e; color:#fff; border-color:#0f766e; }
+
+@media(max-width:620px){
+  .hk-nav{ grid-template-columns:repeat(3, 1fr); }
+  .hk-esles-satir{ grid-template-columns:1fr; }
+  .hk-simge{ flex-basis:54px; width:54px; height:54px; font-size:1.8em; }
+}
+@media(min-width:1500px){ .hk-bolum{ font-size:1.06em; } }
