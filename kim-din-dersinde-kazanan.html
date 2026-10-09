@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kim Din Dersinde Kazanan Olmak İster?</title>
+<meta name="description" content="4-8. sınıf Din Kültürü ve Ahlak Bilgisi dijital bilgi yarışması. Adres: ?kazanan=s4-u1 (u0 = karışık).">
+<style>body{margin:0;background:#0a0a26}
+/* ======================================================================
+   KİM DİN DERSİNDE KAZANAN OLMAK İSTER? — dijital bilgi yarışması (additive)
+   Bütün seçiciler "kdk-" önekli; portalın başka hiçbir stiline dokunmaz.
+====================================================================== */
+#kdkSahne{ position:fixed; inset:0; z-index:9999; display:none; overflow:auto;
+  font-family:"Nunito","Segoe UI",Tahoma,sans-serif; color:#eef2ff;
+  background:radial-gradient(ellipse at 50% -10%, #3b2a8f 0%, #1a1450 45%, #0a0a26 100%); }
+#kdkSahne.acik{ display:block; }
+body.kdk-acik{ overflow:hidden; }
+.kdk-kap{ max-width:1180px; margin:0 auto; padding:16px 16px 40px; min-height:100%; box-sizing:border-box; }
+.kdk-ust{ display:flex; align-items:center; gap:10px; justify-content:space-between; flex-wrap:wrap; }
+.kdk-logo{ display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.02em; font-size:15px; color:#ffd76a; }
+.kdk-logo .kdk-amblem{ width:38px; height:38px; border-radius:50%; display:grid; place-items:center; font-size:20px;
+  background:radial-gradient(circle at 35% 30%, #ffe9a8, #e0a400 70%); box-shadow:0 0 18px rgba(255,200,60,.55); }
+.kdk-ustbtn{ display:flex; gap:8px; }
+.kdk-ikbtn{ border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); color:#fff; border-radius:999px;
+  padding:8px 14px; font:inherit; font-weight:800; font-size:13px; cursor:pointer; }
+.kdk-ikbtn:hover{ background:rgba(255,255,255,.16); }
+.kdk-ikbtn:focus-visible, .kdk-sec:focus-visible, .kdk-joker:focus-visible, .kdk-ana:focus-visible, .kdk-cip:focus-visible{ outline:3px solid #ffd76a; outline-offset:2px; }
+
+/* Giriş ekranı */
+.kdk-giris{ text-align:center; padding:26px 0 10px; }
+.kdk-baslik{ font-size:clamp(26px, 4.6vw, 46px); line-height:1.12; font-weight:900; margin:14px 0 6px;
+  background:linear-gradient(180deg,#fff6d6 0%, #ffd76a 55%, #e2a300 100%); -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow:0 0 30px rgba(255,200,60,.25); }
+.kdk-alt{ color:#c7cdf5; font-size:15px; margin:0 0 22px; }
+.kdk-amblem-buyuk{ width:110px; height:110px; margin:0 auto; border-radius:50%; display:grid; place-items:center; font-size:52px;
+  background:radial-gradient(circle at 35% 30%, #ffe9a8, #e0a400 70%); box-shadow:0 0 0 8px rgba(255,215,106,.18), 0 0 50px rgba(255,200,60,.6);
+  animation:kdkNabiz 2.6s ease-in-out infinite; }
+@keyframes kdkNabiz{ 50%{ box-shadow:0 0 0 14px rgba(255,215,106,.10), 0 0 70px rgba(255,200,60,.75); } }
+.kdk-form{ max-width:720px; margin:0 auto; text-align:left; display:grid; gap:16px;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:20px; padding:18px; }
+.kdk-form label, .kdk-etiket{ display:block; font-size:12.5px; font-weight:900; letter-spacing:.06em; text-transform:uppercase; color:#ffd76a; margin-bottom:8px; }
+.kdk-cipler{ display:flex; flex-wrap:wrap; gap:8px; }
+.kdk-cip{ border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.06); color:#fff; border-radius:12px;
+  padding:9px 13px; font:inherit; font-weight:800; font-size:14px; cursor:pointer; text-align:left; }
+.kdk-cip[aria-pressed="true"]{ background:linear-gradient(180deg,#ffd76a,#e0a400); color:#1a1450; border-color:#ffd76a; }
+.kdk-girdi{ width:100%; box-sizing:border-box; border-radius:12px; border:1px solid rgba(255,255,255,.3); background:rgba(0,0,0,.25);
+  color:#fff; font:inherit; font-size:15px; padding:10px 12px; }
+.kdk-ana{ border:0; border-radius:999px; padding:14px 28px; font:inherit; font-weight:900; font-size:17px; cursor:pointer;
+  color:#1a1450; background:linear-gradient(180deg,#fff0b3,#ffcf3f 50%,#e0a400); box-shadow:0 6px 24px rgba(255,190,40,.4); }
+.kdk-ana:hover{ filter:brightness(1.06); transform:translateY(-1px); }
+.kdk-ana:disabled{ opacity:.45; cursor:not-allowed; transform:none; }
+.kdk-kurallar{ font-size:13.5px; color:#c7cdf5; line-height:1.6; margin:0; padding-left:18px; }
+
+/* Yarışma ekranı */
+.kdk-oyun{ display:grid; grid-template-columns:1fr 250px; gap:18px; margin-top:14px; }
+@media (max-width:860px){ .kdk-oyun{ grid-template-columns:1fr; } .kdk-merdiven{ order:-1; } }
+.kdk-jokerler{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.kdk-joker{ min-width:64px; height:44px; border-radius:22px; border:2px solid #8ea2ff; background:radial-gradient(circle at 50% 30%, #3c4cc4, #1c2272);
+  color:#fff; font:inherit; font-weight:900; font-size:14px; cursor:pointer; padding:0 14px; }
+.kdk-joker:disabled{ opacity:.35; cursor:not-allowed; text-decoration:line-through; }
+.kdk-sure{ margin-left:auto; width:58px; height:58px; border-radius:50%; display:grid; place-items:center; font-weight:900; font-size:22px;
+  background:conic-gradient(#ffd76a var(--kdk-yuzde,100%), rgba(255,255,255,.12) 0); position:relative; }
+.kdk-sure::before{ content:""; position:absolute; inset:5px; border-radius:50%; background:#1a1450; }
+.kdk-sure span{ position:relative; }
+.kdk-sure.az{ background:conic-gradient(#ff5d5d var(--kdk-yuzde,100%), rgba(255,255,255,.12) 0); }
+.kdk-soru-no{ margin:16px 0 8px; font-size:13px; font-weight:900; letter-spacing:.08em; color:#ffd76a; text-transform:uppercase; }
+.kdk-soru{ position:relative; border:2px solid #8ea2ff; border-radius:18px; padding:22px 26px; font-size:clamp(18px,2.4vw,24px); font-weight:800;
+  line-height:1.4; text-align:center; background:linear-gradient(180deg,#232a8a,#121555); box-shadow:0 0 24px rgba(120,140,255,.35); }
+.kdk-secenekler{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+@media (max-width:620px){ .kdk-secenekler{ grid-template-columns:1fr; } }
+.kdk-sec{ display:flex; align-items:center; gap:10px; text-align:left; border:2px solid #8ea2ff; border-radius:999px; padding:13px 20px;
+  background:linear-gradient(180deg,#232a8a,#121555); color:#fff; font:inherit; font-size:clamp(15px,1.9vw,18px); font-weight:700; cursor:pointer;
+  transition:transform .12s, background .2s; min-height:56px; }
+.kdk-sec:hover:not(:disabled){ transform:translateY(-1px); border-color:#ffd76a; }
+.kdk-sec b{ color:#ffd76a; font-weight:900; min-width:22px; }
+.kdk-sec.gizli{ visibility:hidden; }
+.kdk-sec.secili{ background:linear-gradient(180deg,#ffb347,#e07b00); border-color:#ffd76a; color:#1a1450; }
+.kdk-sec.secili b{ color:#1a1450; }
+.kdk-sec.dogru{ background:linear-gradient(180deg,#47d57a,#16924a); border-color:#b6ffd0; color:#fff; animation:kdkYanSon .5s 3; }
+.kdk-sec.dogru b{ color:#fff; }
+.kdk-sec.yanlis{ background:linear-gradient(180deg,#ff6b6b,#b81d1d); border-color:#ffc2c2; color:#fff; }
+.kdk-sec.yanlis b{ color:#fff; }
+@keyframes kdkYanSon{ 50%{ filter:brightness(1.35); } }
+.kdk-sec:disabled{ cursor:default; }
+.kdk-alt-satir{ display:flex; gap:10px; justify-content:space-between; align-items:center; margin-top:16px; flex-wrap:wrap; }
+.kdk-panel{ margin-top:14px; border-radius:16px; padding:14px 16px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18); }
+.kdk-panel h4{ margin:0 0 8px; font-size:15px; color:#ffd76a; }
+.kdk-panel p{ margin:0 0 8px; font-size:15px; line-height:1.55; }
+.kdk-onay{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.kdk-cubuklar{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:end; height:150px; margin:8px 0 6px; }
+.kdk-cubuk{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:4px; font-weight:900; }
+.kdk-cubuk i{ display:block; width:70%; border-radius:8px 8px 0 0; background:linear-gradient(180deg,#ffd76a,#e0a400); min-height:3px; transition:height .6s; }
+.kdk-oyla{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.kdk-oyla button{ border-radius:10px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); color:#fff; font:inherit; font-weight:900; padding:8px; cursor:pointer; }
+
+/* Puan merdiveni */
+.kdk-merdiven{ list-style:none; margin:0; padding:10px; border-radius:18px; background:rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.14);
+  display:flex; flex-direction:column-reverse; gap:3px; align-self:start; }
+@media (max-width:860px){ .kdk-merdiven{ flex-direction:row; overflow-x:auto; } .kdk-merdiven li{ flex:0 0 auto; } }
+.kdk-merdiven li{ display:flex; justify-content:space-between; gap:12px; padding:6px 12px; border-radius:10px; font-weight:800; font-size:14px; color:#c7cdf5; }
+.kdk-merdiven li .n{ color:#8ea2ff; min-width:22px; }
+.kdk-merdiven li.baraj{ color:#fff; }
+.kdk-merdiven li.baraj .p::after{ content:" 🛡️"; }
+.kdk-merdiven li.gecti{ color:#7fe3a5; }
+.kdk-merdiven li.simdi{ background:linear-gradient(90deg,#ffd76a,#e0a400); color:#1a1450; }
+.kdk-merdiven li.simdi .n{ color:#1a1450; }
+
+/* Sonuç */
+.kdk-sonuc{ text-align:center; padding:20px 0; }
+.kdk-skor{ font-size:clamp(34px,6vw,60px); font-weight:900; color:#ffd76a; margin:6px 0; }
+.kdk-gozden{ text-align:left; max-width:820px; margin:18px auto 0; display:grid; gap:8px; }
+.kdk-gozden div{ border-radius:12px; padding:10px 14px; background:rgba(255,255,255,.06); border-left:4px solid #7fe3a5; font-size:14.5px; line-height:1.5; }
+.kdk-gozden div.yanlis{ border-left-color:#ff6b6b; }
+.kdk-gozden small{ display:block; color:#c7cdf5; margin-top:3px; }
+.kdk-konfeti{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:10000; }
+.kdk-konfeti i{ position:absolute; top:-12px; width:9px; height:14px; border-radius:2px; animation:kdkDus 2.8s linear forwards; }
+@keyframes kdkDus{ to{ transform:translateY(105vh) rotate(720deg); opacity:.7; } }
+@media (prefers-reduced-motion: reduce){ .kdk-amblem-buyuk, .kdk-sec.dogru, .kdk-konfeti i{ animation:none; } }
+
+/* Portal içi giriş kartları */
+.kdk-giris-kart{ display:flex; align-items:center; gap:16px; margin:16px 0; padding:16px 18px; border-radius:20px; cursor:pointer; text-align:left; width:100%;
+  border:0; font:inherit; color:#fff; background:radial-gradient(ellipse at 20% 0%, #4a37b5 0%, #1a1450 60%, #0a0a26 100%);
+  box-shadow:0 10px 26px -8px rgba(26,20,80,.6); }
+.kdk-giris-kart:hover{ transform:translateY(-2px); }
+.kdk-giris-kart .kdk-amblem{ flex:0 0 auto; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; font-size:28px;
+  background:radial-gradient(circle at 35% 30%, #ffe9a8, #e0a400 70%); }
+.kdk-giris-kart b{ display:block; font-size:17px; font-weight:900; color:#ffd76a; }
+.kdk-giris-kart span.ac{ display:block; font-size:13.5px; color:#d6dbff; margin-top:3px; }
+.kdk-giris-kart .kdk-git{ margin-left:auto; flex:0 0 auto; background:#ffd76a; color:#1a1450; border-radius:999px; padding:8px 14px; font-weight:900; font-size:13.5px; }
+.oy-dijital-baslik{ margin:22px 0 4px; font-size:18px; font-weight:900; color:var(--baslik,#1E3A8A); }
+</style></head><body>
+<script>
+/* ======================================================================
+   KİM DİN DERSİNDE KAZANAN OLMAK İSTER? — dijital bilgi yarışması
+   4-8. sınıflar · her ünite için 10 soru (1-3 kolay, 4-7 orta, 8-10 zor).
+   Bağımsız modüldür: portalın mevcut veri ve fonksiyonlarına dokunmaz.
+   Giriş: window.kdkAc(sinifId, uniteNo)  — uniteNo 0 = karışık (tüm üniteler)
+          [data-kdk-ac] düğmeleri, ?kazanan=s4-u1 adres parametresi.
+====================================================================== */
+(function(){
+"use strict";
+var KDK = {"siniflar": {"s4": {"ad": "4. Sınıf", "uniteler": {"1": "Günlük Hayattaki Dinî İfadeler", "2": "İslam’ı Tanıyalım", "3": "Güzel Ahlak", "4": "Hz. Muhammed’i Tanıyalım", "5": "Din ve Temizlik", "6": "Allah Sevgisi"}}, "s5": {"ad": "5. Sınıf", "uniteler": {"1": "Allah İnancı", "2": "Allah’ın Huzurunda Olmak: Namaz İbadeti", "3": "Kur’an-ı Kerim", "4": "Peygamber Kıssaları", "5": "Mimarimizde Dinî Motifler"}}, "s6": {"ad": "6. Sınıf", "uniteler": {"1": "Peygamber ve İlahi Kitap İnancı", "2": "Ramazan ve Oruç", "3": "Ahlaki Davranışlar", "4": "Peygamberliğinden Önce Hz. Muhammed", "5": "Kültürümüzdeki Dinî Motifler"}}, "s7": {"ad": "7. Sınıf", "uniteler": {"1": "Melek ve Ahiret İnancı", "2": "Hac ve Kurban", "3": "Ahlaki Davranışlar", "4": "Allah’ın Kulu ve Elçisi: Hz. Muhammed", "5": "İslam Düşüncesinde Yorumlar"}}, "s8": {"ad": "8. Sınıf", "uniteler": {"1": "Kader İnancı", "2": "Zekât ve Sadaka", "3": "Din ve Hayat", "4": "Hz. Muhammed’in Örnekliği", "5": "Kur’an-ı Kerim ve Özellikleri"}}}, "sorular": {"s4-u1": [["Yemeğe başlarken ne söyleriz?", "Bismillah", "Maşallah", "Âmin", "Aleykümselam", "Bir işe başlarken “Bismillahirrahmanirrahim” yani besmele çekeriz."], ["Duanın sonunda hep birlikte ne deriz?", "Âmin", "Bismillah", "Maşallah", "Hoş geldin", "“Âmin”, “Allah’ım kabul et” anlamına gelir."], ["“Selâmünaleyküm” diyen birine nasıl karşılık veririz?", "Aleykümselam", "Âmin", "İnşallah", "Elhamdülillah", "Selam alan kişi “Aleykümselam” diyerek karşılık verir."], ["Bir nimete kavuştuğumuzda şükretmek için hangi ifadeyi kullanırız?", "Elhamdülillah", "İnşallah", "Bismillah", "Aleykümselam", "“Elhamdülillah”, “Hamd Allah’a mahsustur” anlamına gelir; şükrümüzü gösterir."], ["Yarın yapmayı planladığımız bir iş için hangi ifadeyi söyleriz?", "İnşallah", "Maşallah", "Âmin", "Elhamdülillah", "“İnşallah”, “Allah dilerse” anlamına gelir; ileride yapılacak işler için söylenir."], ["Arkadaşımızın güzel resmini görünce hangi ifadeyi söyleyebiliriz?", "Maşallah", "İnşallah", "Âmin", "Bismillah", "“Maşallah”, güzel bir şey karşısında beğenimizi ve “Allah korusun” dileğimizi anlatır."], ["“Selâmünaleyküm” ne anlama gelir?", "Allah’ın selamı, esenliği üzerinize olsun", "Allah dilerse", "Allah’ım kabul et", "Her şeyi Allah yarattı", "Selam, karşımızdakine esenlik ve huzur dilemektir."], ["“Âmin” kelimesinin anlamı nedir?", "Allah’ım kabul et", "Allah dilerse", "Allah’a şükürler olsun", "Allah korusun", "Dua bitince “Âmin” diyerek duamızın kabul edilmesini dileriz."], ["Besmele çekmek bize neyi hatırlatır?", "İşlerimize Allah’ın adıyla başladığımızı", "İşin bittiğini", "Birine teşekkür ettiğimizi", "Yolculuğa çıktığımızı", "Besmele, her güzel işe Allah’ın adını anarak başlamaktır."], ["Hangi durumda “İnşallah” demek uygun DEĞİLDİR?", "Dün olmuş bir olay anlatılırken", "Yarın yapılacak bir ödev için", "Gelecek hafta yapılacak gezi için", "Yaz tatilindeki planlar için", "İnşallah geleceğe yönelik işler için söylenir; olup bitmiş olaylar için söylenmez."]], "s4-u2": [["Müslümanların ibadet etmek için toplandığı yer neresidir?", "Cami", "Kütüphane", "Okul", "Hastane", "Cami, Müslümanların özellikle namaz kılmak için toplandığı ibadet yeridir."], ["Peygamberimizin adı nedir?", "Hz. Muhammed", "Hz. Nuh", "Hz. Musa", "Hz. Âdem", "Son peygamber Hz. Muhammed’dir."], ["Müslümanların kutsal kitabı hangisidir?", "Kur’an-ı Kerim", "Tevrat", "Zebur", "İncil", "Kur’an-ı Kerim, Hz. Muhammed’e indirilen son ilahi kitaptır."], ["“İslam” kelimesinin anlamlarından biri hangisidir?", "Barış ve esenlik", "Savaş", "Yorgunluk", "Yolculuk", "İslam; barış, esenlik ve Allah’a teslim olma anlamlarına gelir."], ["Günde beş vakit kılınan ibadet hangisidir?", "Namaz", "Oruç", "Hac", "Zekât", "Namaz günde beş vakit kılınan bir ibadettir."], ["Ramazan ayında tutulan ibadet hangisidir?", "Oruç", "Hac", "Kurban", "Zekât", "Ramazan ayında oruç tutulur."], ["Kâbe hangi şehirdedir?", "Mekke", "Medine", "İstanbul", "Kudüs", "Kâbe, Mekke şehrindedir; Müslümanlar namazda Kâbe’ye yönelir."], ["Aşağıdakilerden hangisi İslam’ın şartlarından biri DEĞİLDİR?", "Bayramda yeni elbise giymek", "Namaz kılmak", "Oruç tutmak", "Zekât vermek", "İslam’ın şartları: kelime-i şehadet, namaz, oruç, zekât ve hacdır."], ["Zengin Müslümanların malının bir kısmını ihtiyaç sahiplerine vermesine ne denir?", "Zekât", "Hac", "Oruç", "Ezan", "Zekât, şartlarını taşıyan Müslümanların yerine getirdiği mal ile yapılan ibadettir."], ["İslam’ın kaç şartı vardır?", "5", "3", "6", "7", "İslam’ın beş şartı vardır: kelime-i şehadet, namaz, oruç, zekât, hac."]], "s4-u3": [["Doğru sözlü olan kişiye ne deriz?", "Dürüst", "Tembel", "Kaba", "Bencil", "Dürüst kişi doğruyu söyler ve yalan söylemez."], ["Arkadaşımızla yiyeceğimizi bölüşmek hangi davranıştır?", "Paylaşma", "Kıskançlık", "İsraf", "Kabalık", "Paylaşmak, sahip olduklarımızı başkalarıyla bölüşmektir."], ["Büyüklerimize nasıl davranmalıyız?", "Saygılı", "Kaba", "İlgisiz", "Alaycı", "Büyüklere saygı göstermek güzel ahlakın gereğidir."], ["Bize bırakılan bir eşyayı korumak ve geri vermek hangi değerle ilgilidir?", "Emanete sahip çıkmak", "İsraf", "Kıskançlık", "Acelecilik", "Emanet, korunması için bize bırakılan şeydir; zarar vermeden geri veririz."], ["Sırasını sakince beklemek hangi değeri gösterir?", "Sabır", "Öfke", "Bencillik", "Tembellik", "Sabır, zorluklar karşısında sakin kalabilmektir."], ["Farklı düşünen bir arkadaşımıza anlayışla yaklaşmak neyi gösterir?", "Hoşgörü", "Kıskançlık", "Kibir", "İnatçılık", "Hoşgörü, farklılıklara saygı ve anlayış göstermektir."], ["Yardıma ihtiyacı olan bir arkadaşına ders çalışmasında destek olmak hangi değerdir?", "Yardımlaşma", "Bencillik", "Gösteriş", "Tembellik", "Yardımlaşma, birbirimize destek olmaktır."], ["Kırılan vazoyu “Ben kırdım.” diyerek söyleyen çocuk hangi değeri göstermiştir?", "Dürüstlük", "Sabır", "Cömertlik", "Temizlik", "Hatasını saklamadan doğruyu söylemek dürüstlüktür."], ["Aşağıdakilerden hangisi güzel ahlaka uygun DEĞİLDİR?", "Arkadaşıyla alay etmek", "Selam vermek", "Teşekkür etmek", "Özür dilemek", "Alay etmek kırıcıdır; güzel ahlaklı kişi başkalarını incitmez."], ["Görevini zamanında ve eksiksiz yapan öğrenci hangi değeri göstermiştir?", "Sorumluluk", "İsraf", "Kıskançlık", "Kibir", "Sorumluluk, üstlendiğimiz görevi yerine getirmektir."]], "s4-u4": [["Peygamberimiz hangi şehirde doğmuştur?", "Mekke", "Medine", "Kudüs", "Taif", "Hz. Muhammed 571 yılında Mekke’de doğmuştur."], ["Peygamberimizin annesinin adı nedir?", "Hz. Âmine", "Hz. Hatice", "Hz. Fatıma", "Hz. Halime", "Peygamberimizin annesi Hz. Âmine’dir."], ["Peygamberimizin babasının adı nedir?", "Hz. Abdullah", "Hz. Ebu Talip", "Hz. Abdülmuttalib", "Hz. Hamza", "Babası Hz. Abdullah, Peygamberimiz doğmadan vefat etmiştir."], ["Peygamberimize “güvenilir kişi” anlamında hangi lakap verilmiştir?", "el-Emîn", "Halil", "Kelim", "Sıddık", "Dürüstlüğü ve güvenilirliği nedeniyle Mekkeliler ona “el-Emîn” derdi."], ["Peygamberimizin ilk eşi kimdir?", "Hz. Hatice", "Hz. Âmine", "Hz. Halime", "Hz. Fatıma", "Hz. Hatice, Peygamberimizin ilk eşidir ve ilk Müslümanlardandır."], ["Peygamberimiz çocukken onu bir süre süt annesi büyütmüştür. Süt annesinin adı nedir?", "Hz. Halime", "Hz. Hatice", "Hz. Âmine", "Hz. Fatıma", "Peygamberimiz çocukluğunun bir bölümünü süt annesi Hz. Halime’nin yanında geçirmiştir."], ["Annesi vefat ettikten sonra Peygamberimizi kim yanına almıştır?", "Dedesi Abdülmuttalib", "Hz. Hamza", "Hz. Ebu Bekir", "Hz. Ali", "Annesinin vefatından sonra dedesi Abdülmuttalib ona bakmıştır."], ["Allah’ın peygamberlere ilettiği mesaja ne denir?", "Vahiy", "Ezan", "Hutbe", "Kıble", "Vahiy, Allah’ın peygamberlerine ilettiği ilahi mesajdır."], ["Peygamberimizin hayvanlara ve çocuklara şefkatle davranması hangi özelliğini gösterir?", "Merhamet", "Öfke", "Cimrilik", "Acelecilik", "Peygamberimiz merhametiyle tüm insanlara örnektir."], ["Peygamberimiz kaç yaşında peygamber olmuştur?", "40", "20", "30", "60", "Peygamberimize ilk vahiy 40 yaşındayken gelmiştir."]], "s4-u5": [["Yemekten önce ve sonra ne yapmalıyız?", "Ellerimizi yıkamalıyız", "Uyumalıyız", "Koşmalıyız", "Televizyon izlemeliyiz", "El yıkamak sağlığımızı korur; temizlik dinimizin önem verdiği bir konudur."], ["Dişlerimizi günde en az kaç kez fırçalamalıyız?", "2", "0", "Haftada 1", "Ayda 1", "Diş sağlığı için dişlerimizi günde en az iki kez fırçalarız."], ["Çöpümüzü nereye atmalıyız?", "Çöp kutusuna", "Yere", "Denize", "Bahçeye", "Çevreyi temiz tutmak hepimizin görevidir."], ["Namazdan önce yapılan temizliğe ne denir?", "Abdest", "Oruç", "Hac", "Ezan", "Abdest, namazdan önce belirli organları yıkayarak yapılan temizliktir."], ["Abdest alırken ilk olarak hangi organımızı yıkarız?", "Ellerimizi", "Ayaklarımızı", "Yüzümüzü", "Kollarımızı", "Abdeste besmele çekip elleri yıkayarak başlarız."], ["Abdestin sonunda hangi organımızı yıkarız?", "Ayaklarımızı", "Ellerimizi", "Yüzümüzü", "Ağzımızı", "Abdest, ayakların yıkanmasıyla tamamlanır."], ["Kıskançlık ve kötü düşüncelerden uzak durmak hangi temizlikle ilgilidir?", "Kalp temizliği", "Elbise temizliği", "Çevre temizliği", "Diş temizliği", "Kalp temizliği; kin, kıskançlık gibi kötü duygulardan arınmaktır."], ["Peygamberimiz temizlik için ne buyurmuştur?", "“Temizlik imanın yarısıdır.”", "“Temizlik önemsizdir.”", "“Sadece bayramda temizlenin.”", "“Temizlik yalnızca evde yapılır.”", "Bu hadis temizliğin dinimizde ne kadar önemli olduğunu gösterir."], ["Aşağıdakilerden hangisi çevre temizliğine örnektir?", "Okul bahçesindeki çöpleri toplamak", "Diş fırçalamak", "Banyo yapmak", "Tırnak kesmek", "Çevre temizliği; yaşadığımız yerleri temiz tutmaktır."], ["Namaz kılarken elbisemizin ve namaz kılınan yerin nasıl olması gerekir?", "Temiz", "Islak", "Yırtık", "Yeni alınmış", "Namazda beden, elbise ve namaz kılınan yerin temiz olması gerekir."]], "s4-u6": [["Bizi ve tüm evreni kim yaratmıştır?", "Allah", "İnsanlar", "Melekler", "Hayvanlar", "Her şeyi yaratan Allah’tır."], ["Allah’a yönelerek istekte bulunmaya ne denir?", "Dua", "Oyun", "Uyku", "Şarkı", "Dua, Allah’a yönelip dilekte bulunmaktır; her yerde edilebilir."], ["Allah kaç tanedir?", "Bir", "İki", "Üç", "Sayısız", "Allah birdir, eşi ve benzeri yoktur."], ["Allah’ın verdiği nimetler için teşekkür etmeye ne denir?", "Şükür", "Şikâyet", "İsraf", "Kıskançlık", "Şükür, nimetlerin farkına varıp Allah’a teşekkür etmektir."], ["Dua etmek için nerede olmamız gerekir?", "Her yerde dua edebiliriz", "Sadece camide", "Sadece evde", "Sadece okulda", "Allah her yerde duamızı işitir; dua her yerde yapılabilir."], ["“Lâ ilâhe illallah Muhammedün Resûlullah” sözüne ne denir?", "Kelime-i tevhit", "Âmentü", "Besmele", "Kelime-i şehadet", "Kelime-i tevhit; “Allah’tan başka ilah yoktur, Muhammed O’nun elçisidir” anlamına gelir."], ["Allah’ın birliğine ve Hz. Muhammed’in peygamberliğine şahitlik etmeyi bildiren söz hangisidir?", "Kelime-i şehadet", "Besmele", "Âmin", "Maşallah", "Kelime-i şehadet “Eşhedü en lâ ilâhe illallah…” diye başlar."], ["İmanın esaslarını kısaca anlatan dua hangisidir?", "Âmentü duası", "Sübhaneke duası", "Besmele", "Ezan", "Âmentü duası, imanın esaslarını sayar."], ["Allah’ın bizi sevdiğini gösteren örneklerden biri hangisidir?", "Bize sayısız nimet vermesi", "Bizi yalnız bırakması", "Kimseyi duymaması", "Sadece büyükleri sevmesi", "Allah bize hayat, aile, yiyecek gibi sayısız nimet vermiştir."], ["Âmentü duasında kaç iman esası sayılır?", "6", "5", "4", "10", "İmanın şartları altıdır: Allah’a, meleklere, kitaplara, peygamberlere, ahiret gününe, kadere inanmak."]], "s5-u1": [["Allah’ın bir olduğuna inanmaya ne denir?", "Tevhit", "Şirk", "İsraf", "Kıssa", "Tevhit, Allah’ın tek olduğuna, eşi ve ortağı olmadığına inanmaktır."], ["Allah’ın güzel isimlerine ne denir?", "Esmâ-i hüsnâ", "Suhuf", "Kıble", "Hadis", "Esmâ-i hüsnâ, “en güzel isimler” demektir."], ["“Her şeyi bilen” anlamına gelen isim hangisidir?", "el-Alîm", "er-Rezzâk", "el-Gafûr", "el-Basîr", "el-Alîm, Allah’ın her şeyi bilen olduğunu anlatır."], ["“Rızık veren” anlamına gelen isim hangisidir?", "er-Rezzâk", "el-Alîm", "es-Semî", "el-Hâlık", "er-Rezzâk; bütün canlıların rızkını veren demektir."], ["Allah’a ortak koşmaya ne denir?", "Şirk", "Tevhit", "Şükür", "Tevekkül", "Şirk, tevhidin zıttıdır ve İslam’da en büyük günahtır."], ["“Bağışlayan, affeden” anlamına gelen isim hangisidir?", "el-Gafûr", "er-Rezzâk", "el-Hâlık", "el-Alîm", "el-Gafûr; günahları çokça bağışlayan demektir."], ["“Yaratan” anlamına gelen isim hangisidir?", "el-Hâlık", "el-Gafûr", "es-Semî", "er-Rahîm", "el-Hâlık; her şeyi yoktan var eden demektir."], ["Mevsimlerin düzenli olarak birbirini izlemesi neyi gösterir?", "Evrende bir düzen olduğunu", "Her şeyin rastgele olduğunu", "Dünyanın durduğunu", "Güneşin kaybolduğunu", "Evrendeki düzen, her şeyi bir düzen içinde yaratan Allah’ın varlığına işaret eder."], ["Allah’ın birliğini anlatan ve “De ki: O Allah birdir” diye başlayan sure hangisidir?", "İhlas Suresi", "Fil Suresi", "Kevser Suresi", "Nas Suresi", "İhlas Suresi, Allah’ın birliğini ve eşsizliğini anlatır."], ["“Duyan, işiten” anlamına gelen isim hangisidir?", "es-Semî", "el-Basîr", "el-Alîm", "el-Vedûd", "es-Semî her şeyi işiten; el-Basîr ise her şeyi gören demektir."]], "s5-u2": [["Namaz vaktini duyuran çağrıya ne denir?", "Ezan", "Hutbe", "Kamet", "Tesbih", "Ezan, namaz vaktinin girdiğini Müslümanlara duyurur."], ["Namazda yöneldiğimiz yöne ne denir?", "Kıble", "Mihrap", "Minare", "Kubbe", "Kıble, Mekke’deki Kâbe’nin yönüdür."], ["Namazdan önce alınan temizliğe ne denir?", "Abdest", "Sahur", "İftar", "Tavaf", "Abdest olmadan namaz kılınmaz."], ["Günde kaç vakit namaz kılınır?", "5", "3", "7", "2", "Sabah, öğle, ikindi, akşam ve yatsı olmak üzere beş vakittir."], ["Namazın bölümlerinin her birine ne denir?", "Rekât", "Ezan", "Hutbe", "Cüz", "Her rekâtta kıyam, rükû ve secde bulunur."], ["Namazda alnın ve burnun yere konduğu harekete ne denir?", "Secde", "Rükû", "Kıyam", "Teşehhüd", "Secde, kulun Allah’a en yakın olduğu andır."], ["Cuma namazından önce okunan konuşmaya ne denir?", "Hutbe", "Ezan", "Kamet", "Mevlit", "Cuma namazında hutbe okunması namazın şartlarındandır."], ["Namaza başlarken söylenen “Allahu ekber” sözüne ne denir?", "İftitah tekbiri", "Selam", "Kamet", "Tesbih", "İftitah tekbiri ile namaza başlanır."], ["Namaz kılan kişinin kalbinden hangi namazı kılacağını geçirmesine ne denir?", "Niyet", "Kıraat", "Kıyam", "Rükû", "Niyet, namazın şartlarındandır."], ["Sabah namazının farzı kaç rekâttır?", "2", "4", "3", "1", "Sabah namazının farzı 2, akşam namazının farzı 3 rekâttır."]], "s5-u3": [["Kur’an-ı Kerim’in bölümlerine ne denir?", "Sure", "Ayet", "Hadis", "Rekât", "Kur’an’da 114 sure vardır."], ["Surelerin içindeki cümlelere ne denir?", "Ayet", "Cüz", "Hutbe", "Kıssa", "Ayet, Kur’an’daki her bir cümle ya da bölümdür."], ["Kur’an’ı Peygamberimize getiren melek kimdir?", "Cebrâil", "Mikâil", "İsrâfil", "Azrâil", "Vahiy meleği Cebrâil’dir."], ["Kur’an’ı ezberleyen kişiye ne denir?", "Hafız", "Müezzin", "İmam", "Kâtip", "Kur’an’ın tamamını ezberleyen kişiye hafız denir."], ["İlk vahiy hangi kelimeyle başlar?", "Oku", "Yaz", "Koş", "Dinle", "İlk vahiy Alak Suresi’nin “Oku!” emriyle başlayan ayetleridir."], ["İlk vahiy nerede gelmiştir?", "Hira Mağarası", "Sevr Mağarası", "Kâbe", "Medine", "Peygamberimiz Hira Mağarası’ndayken ilk vahiy gelmiştir."], ["Kur’an-ı Kerim’de kaç sure vardır?", "114", "100", "30", "604", "Kur’an’da 114 sure vardır; ilk sure Fatiha, son sure Nas’tır."], ["Kur’an’ın 20 sayfalık bölümlerine ne denir?", "Cüz", "Sure", "Ayet", "Mushaf", "Kur’an 30 cüzden oluşur."], ["Kur’an ayetlerinin bir araya getirilerek kitap hâline getirilmiş şekline ne denir?", "Mushaf", "Suhuf", "Cüz", "Meal", "Kur’an, Hz. Ebu Bekir döneminde mushaf hâlinde bir araya getirilmiştir."], ["Kur’an-ı Kerim’in ilk suresi hangisidir?", "Fatiha Suresi", "Bakara Suresi", "İhlas Suresi", "Nas Suresi", "Fatiha, Kur’an’ın ilk suresidir ve her namazda okunur."]], "s5-u4": [["İlk insan ve ilk peygamber kimdir?", "Hz. Âdem", "Hz. Nûh", "Hz. İbrahim", "Hz. Mûsâ", "Hz. Âdem ilk insan ve ilk peygamberdir."], ["Allah’ın emriyle büyük bir gemi yapan peygamber kimdir?", "Hz. Nûh", "Hz. Mûsâ", "Hz. Îsâ", "Hz. Yûsuf", "Hz. Nûh, tufandan önce gemiyi yapmıştır."], ["Peygamberlerin hayatlarından anlatılan ibretli olaylara ne denir?", "Kıssa", "Hutbe", "Ezan", "Dua", "Kıssalar, ders ve ibret almamız için anlatılır."], ["Tevrat hangi peygambere indirilmiştir?", "Hz. Mûsâ", "Hz. Îsâ", "Hz. Dâvûd", "Hz. Nûh", "Tevrat, Hz. Mûsâ’ya indirilmiş ilahi kitaptır."], ["İncil hangi peygambere indirilmiştir?", "Hz. Îsâ", "Hz. Mûsâ", "Hz. İbrahim", "Hz. Âdem", "İncil, Hz. Îsâ’ya indirilmiştir."], ["Ateşe atıldığında Allah’ın izniyle ateş kendisini yakmayan peygamber kimdir?", "Hz. İbrahim", "Hz. Nûh", "Hz. Mûsâ", "Hz. Yûnus", "Allah ateşe “İbrahim’e serin ve esenlikli ol” buyurmuştur."], ["Kâbe’yi oğlu Hz. İsmail ile birlikte inşa eden peygamber kimdir?", "Hz. İbrahim", "Hz. Âdem", "Hz. Mûsâ", "Hz. Nûh", "Hz. İbrahim ve Hz. İsmail Kâbe’nin duvarlarını yükseltmiştir."], ["Hz. Mûsâ’nın mücadele ettiği zalim hükümdar kimdir?", "Firavun", "Nemrut", "Ebu Cehil", "Câlût", "Hz. Mûsâ, Mısır’daki Firavun’un zulmüne karşı mücadele etmiştir."], ["Hz. Nûh kıssasından çıkarılabilecek en önemli ders hangisidir?", "Zorluklar karşısında sabırlı ve kararlı olmak", "Hiç çalışmamak", "İnsanlardan uzak durmak", "Hemen vazgeçmek", "Hz. Nûh yıllarca sabırla insanları doğruya çağırmıştır."], ["Hz. Âdem ve Hz. Havva hata yaptıklarında ne yapmışlardır?", "Pişman olup Allah’tan af dilemişlerdir", "Hatayı başkasına yüklemişlerdir", "Hiçbir şey yapmamışlardır", "Saklanmışlardır", "Hatadan sonra tövbe etmek ve af dilemek Hz. Âdem kıssasının dersidir."]], "s5-u5": [["Ezanın okunduğu yüksek kuleye ne denir?", "Minare", "Mihrap", "Minber", "Kürsü", "Ezan eskiden minarenin şerefesinden okunurdu."], ["Caminin iç kısmında kıble yönünü gösteren bölüm hangisidir?", "Mihrap", "Minber", "Minare", "Şadırvan", "Mihrap, imamın namaz kıldırdığı yerdir ve kıbleyi gösterir."], ["Cuma günü hutbenin okunduğu merdivenli yüksek yer neresidir?", "Minber", "Mihrap", "Kürsü", "Mahfil", "Hutbe minberde okunur."], ["Caminin yuvarlak çatısına ne denir?", "Kubbe", "Minare", "Avlu", "Revak", "Kubbe cami mimarisinin önemli bir öğesidir."], ["Arapça harflerle yapılan güzel yazı sanatına ne denir?", "Hat", "Ebru", "Çini", "Minyatür", "Hat sanatında Kur’an ayetleri ve dualar güzel yazıyla yazılır."], ["Su üzerine boya serpilerek yapılan geleneksel sanata ne denir?", "Ebru", "Hat", "Tezhip", "Kakma", "Ebru, kitreli su üzerine boya serpilerek yapılır."], ["Kitap sayfalarının altınla süslenmesine ne denir?", "Tezhip", "Ebru", "Hat", "Oyma", "Tezhip, özellikle Kur’an sayfalarını süslemek için kullanılmıştır."], ["Cami, medrese, aşevi, hamam gibi yapılardan oluşan yapı topluluğuna ne denir?", "Külliye", "Türbe", "Han", "Saray", "Süleymaniye Külliyesi bunun en güzel örneklerindendir."], ["Caminin avlusunda abdest almak için yapılan çeşmeye ne denir?", "Şadırvan", "Mihrap", "Minber", "Kubbe", "Şadırvan genellikle avlunun ortasında bulunur."], ["Selimiye Camii’nin mimarı kimdir?", "Mimar Sinan", "Mimar Kemaleddin", "Sedefkâr Mehmed Ağa", "Mimar Hayreddin", "Mimar Sinan, Selimiye’yi “ustalık eserim” olarak tanımlamıştır."]], "s6-u1": [["Allah’ın peygamberlere bildirdiği mesaja ne denir?", "Vahiy", "Mucize", "Kıssa", "Hutbe", "Vahiy, Allah’ın mesajını peygamberlere iletmesidir."], ["Son ilahi kitap hangisidir?", "Kur’an-ı Kerim", "Tevrat", "Zebur", "İncil", "Kur’an-ı Kerim son peygamber Hz. Muhammed’e indirilmiştir."], ["Zebur hangi peygambere verilmiştir?", "Hz. Dâvûd", "Hz. Mûsâ", "Hz. Îsâ", "Hz. Süleyman", "Zebur Hz. Dâvûd’a indirilmiştir."], ["Bazı peygamberlere gönderilen küçük kitapçık ya da sayfalara ne denir?", "Suhuf", "Mushaf", "Meal", "Tefsir", "Suhuf; Hz. Âdem, Hz. İbrahim gibi peygamberlere verilmiştir."], ["Peygamberlerin Allah’ın izniyle gösterdiği olağanüstü olaylara ne denir?", "Mucize", "Kıssa", "Tebliğ", "Kehanet", "Mucize, peygamberliği doğrulayan ve Allah’ın izniyle gerçekleşen olaydır."], ["Peygamberlerin doğru sözlü olması hangi kavramla ifade edilir?", "Sıdk", "Fetanet", "İsmet", "Tebliğ", "Sıdk; peygamberlerin her zaman doğru söylemesidir."], ["Peygamberlerin güvenilir olmasına ne denir?", "Emanet", "Fetanet", "İsmet", "Sıdk", "Emanet sıfatı peygamberlerin güvenilirliğini anlatır."], ["Peygamberlerin üstün akıl ve anlayışa sahip olmasına ne denir?", "Fetanet", "Sıdk", "İsmet", "Emanet", "Fetanet, zekâ ve anlayış demektir."], ["Peygamberlerin Allah’ın koruması altında günahlardan uzak olmasına ne denir?", "İsmet", "Tebliğ", "Fetanet", "Sıdk", "İsmet, günahsızlık ve korunmuşluk anlamına gelir."], ["Peygamberlerin aldıkları vahyi insanlara eksiksiz ulaştırmasına ne denir?", "Tebliğ", "Emanet", "Mucize", "Fetanet", "Tebliğ; ilahi mesajı insanlara iletmektir."]], "s6-u2": [["Oruç hangi ayda tutulur?", "Ramazan", "Muharrem", "Zilhicce", "Recep", "Ramazan orucu farzdır."], ["Oruç tutmak için imsaktan önce yenen yemeğe ne denir?", "Sahur", "İftar", "Teravih", "Fitre", "Sahur yemeği bereketli kabul edilir."], ["Akşam ezanıyla orucun açılmasına ne denir?", "İftar", "Sahur", "İmsak", "Hatim", "İftar, güneş batınca orucun açılmasıdır."], ["Orucun başladığı vakte ne denir?", "İmsak", "İftar", "Kuşluk", "Teravih", "İmsak vakti tan yerinin ağarmasıyla başlar."], ["Ramazan gecelerinde yatsıdan sonra kılınan namaz hangisidir?", "Teravih", "Bayram namazı", "Cuma namazı", "Cenaze namazı", "Teravih namazı Ramazan’a özgüdür."], ["Ramazan Bayramı’ndan önce verilmesi gereken sadakaya ne denir?", "Fitre", "Zekât", "Kurban", "Nisap", "Fitre (fıtır sadakası) bayram namazından önce verilir."], ["Kur’an-ı Kerim’in indirilmeye başlandığı gece hangisidir?", "Kadir Gecesi", "Mevlit Kandili", "Regaip Kandili", "Berat Kandili", "Kadir Gecesi bin aydan hayırlıdır."], ["Aşağıdakilerden hangisi orucu bozar?", "Bilerek bir şey yemek", "Unutarak su içmek", "Diş fırçalarken su yutmamaya özen göstermek", "Banyo yapmak", "Unutarak yiyip içmek orucu bozmaz; bilerek yemek bozar."], ["Hastalık gibi bir sebeple tutulamayan Ramazan orucunun sonradan tutulmasına ne denir?", "Kaza orucu", "Nafile oruç", "Nezir orucu", "Keffaret", "Tutulamayan oruç daha sonra kaza edilir."], ["Oruç tutan kişinin açları anlaması ve paylaşmaya yönelmesi orucun hangi yönünü gösterir?", "Toplumsal dayanışma", "Sadece beden sağlığı", "Gösteriş", "Rekabet", "Oruç, yardımlaşma ve dayanışma bilincini güçlendirir."]], "s6-u3": [["Her zaman doğruyu söyleyen kişi hangi değere sahiptir?", "Doğruluk", "Kibir", "Cimrilik", "Kıskançlık", "Doğruluk güzel ahlakın temelidir."], ["Herkese hakkını vermeye ne denir?", "Adalet", "Gıybet", "İsraf", "Kibir", "Adalet, hakkı hak sahibine vermektir."], ["Canlılara şefkat ve acıma duygusuyla yaklaşmaya ne denir?", "Merhamet", "Öfke", "Haset", "Bencillik", "Merhamet, Peygamberimizin en belirgin özelliklerindendir."], ["Başkasının hakkını çiğnemek hangi kavramla ilgilidir?", "Kul hakkı", "Emanet", "Merhamet", "Tevazu", "Kul hakkı, insanın başkalarına karşı sorumluluğudur; ancak hak sahibi helal ederse affedilir."], ["Bir kişinin arkasından, duysa hoşlanmayacağı şeyleri konuşmaya ne denir?", "Gıybet", "Merhamet", "İnfak", "Tevazu", "Gıybet Kur’an’da yasaklanmıştır."], ["Allah rızası için malından ihtiyaç sahiplerine harcamaya ne denir?", "İnfak", "İsraf", "Gıybet", "Haset", "İnfak, paylaşmanın ve yardımlaşmanın adıdır."], ["Bize bırakılan bir şeyi koruyup sahibine geri vermeye ne denir?", "Emanete riayet", "Gıybet", "Kul hakkı", "Haset", "Emanete sahip çıkmak güvenilirliğin göstergesidir."], ["Sınıftaki sıra arkadaşının kalemini izinsiz almak öncelikle hangi kavramla ilgilidir?", "Kul hakkı", "Tevazu", "Merhamet", "İnfak", "İzinsiz almak başkasının hakkına girmektir."], ["Başkasında olan bir nimetin ondan gitmesini istemeye ne denir?", "Haset", "Gıpta", "Cömertlik", "Hoşgörü", "Haset (kıskançlık) kötü bir huydur; gıpta ise başkasının iyiliğine zarar dilemeden özenmektir."], ["Aşağıdakilerden hangisi adaletli bir davranıştır?", "Hakemlik yaparken arkadaşını kayırmamak", "Sadece sevdiğine iyi not vermek", "Sırayı bozmak", "Payı eşit dağıtmamak", "Adalet, kişiye göre değil hakka göre davranmaktır."]], "s6-u4": [["Hz. Muhammed’e peygamberliğinden önce verilen “güvenilir” lakabı nedir?", "el-Emîn", "Halilullah", "Kelimullah", "Sıddık", "Mekkeliler ona dürüstlüğü nedeniyle el-Emîn derdi."], ["Hz. Muhammed peygamberliğinden önce hangi işle uğraşmıştır?", "Ticaret", "Gemicilik", "Demircilik", "Çiftçilik", "Gençliğinde ticaretle uğraşmış, dürüst bir tüccar olarak tanınmıştır."], ["Hz. Muhammed’in ticaret ortağı ve eşi kimdir?", "Hz. Hatice", "Hz. Aişe", "Hz. Fatıma", "Hz. Âmine", "Hz. Hatice, onun dürüstlüğünü görüp evlilik teklif etmiştir."], ["Haksızlığa uğrayanları korumak için Mekke’de kurulan birliğe ne denir?", "Hilfü’l-fudûl", "Darü’l-Erkam", "Ensar", "Muhacir", "Hz. Muhammed gençliğinde bu birliğe katılmıştır."], ["Kâbe onarılırken Hz. Muhammed hangi konuda hakemlik yapmıştır?", "Hacerülesved’in yerine konması", "Zemzem kuyusunun açılması", "Ezan okunması", "Hicret yolunun seçilmesi", "Taşı bir örtüye koyup her kabilenin tutmasını sağlayarak anlaşmazlığı çözmüştür."], ["Hz. Muhammed doğduğunda Mekke’de yaygın olan inanç hangisidir?", "Putperestlik", "Tevhit", "Hristiyanlık", "Budizm", "Mekke’de çoğu insan putlara tapıyordu; ancak Hz. İbrahim’in dinine bağlı hanifler de vardı."], ["Hz. Muhammed’in amcası ve onu koruyan kişi kimdir?", "Ebu Talip", "Ebu Cehil", "Ebu Leheb", "Ebu Bekir", "Dedesinin vefatından sonra amcası Ebu Talip ona bakmıştır."], ["Hz. Muhammed’in hakemlik olayında gösterdiği en belirgin özellik hangisidir?", "Adalet ve barışı sağlama", "Öfke", "Acelecilik", "Taraf tutma", "Herkesin onurunu koruyan bir çözüm bularak barışı sağlamıştır."], ["Hz. Muhammed peygamberliğinden önce hangi mağarada tefekküre çekilirdi?", "Hira", "Sevr", "Uhud", "Arafat", "Hira Mağarası’nda düşünür, ibadet ederdi."], ["Hz. Muhammed’in dedesinin adı nedir?", "Abdülmuttalib", "Ebu Talip", "Hamza", "Abbas", "Dedesi Abdülmuttalib Kureyş’in ileri gelenlerindendi."]], "s6-u5": [["İki dinî bayramımız hangileridir?", "Ramazan Bayramı ve Kurban Bayramı", "Nevruz ve Hıdırellez", "Kandil ve Aşure", "Cuma ve Pazar", "Ramazan ve Kurban bayramları dinî bayramlarımızdır."], ["Dinî açıdan önem taşıyan ve özel olarak ihya edilen gecelere ne denir?", "Kandil", "Bayram", "Hatim", "Mevlit", "Mevlit, Regaip, Miraç, Berat ve Kadir kandilleri vardır."], ["Bayramlarda büyükleri ziyaret edip elini öpmek hangi değeri gösterir?", "Saygı", "İsraf", "Kıskançlık", "Bencillik", "Bayramlaşma, saygı ve sevgi bağlarını güçlendirir."], ["Peygamberimizin doğumunun anıldığı gece hangisidir?", "Mevlit Kandili", "Miraç Kandili", "Berat Kandili", "Kadir Gecesi", "Mevlit Kandili Rebiülevvel ayının 12. gecesidir."], ["“Komşu komşunun külüne muhtaçtır.” atasözü hangi değeri anlatır?", "Komşuluk ve dayanışma", "İsraf", "Rekabet", "Yalnızlık", "Komşular birbirine her zaman ihtiyaç duyabilir."], ["Aşure geleneğinde aşurenin komşulara dağıtılması hangi değeri gösterir?", "Paylaşma", "Gösteriş", "Cimrilik", "İsraf", "Aşure paylaşımı dayanışmanın güzel bir örneğidir."], ["Kandil gecelerinde birbirine kandil simidi ve tebrik göndermek neyi gösterir?", "Dinî değerlerin kültürümüze yansımasını", "Ticaret yapmayı", "Yarışmayı", "Dinle ilgisi olmadığını", "Dinî günler kültürümüzde paylaşma geleneklerini oluşturmuştur."], ["Yunus Emre’nin “Yaratılanı severiz Yaradan’dan ötürü” sözü hangi değeri öne çıkarır?", "Sevgi ve hoşgörü", "Öfke", "Kibir", "Cimrilik", "Yunus Emre, tüm yaratılanları Allah’tan dolayı sevmeyi öğütler."], ["Allah rızası için yapılan, faydası sürekli devam eden hayırlara örnek hangisidir?", "Çeşme ve kütüphane yaptırmak", "Gösteriş için harcamak", "Yemek israf etmek", "Eşyaları kırmak", "Vakıf eserleri sadaka-i câriyenin örnekleridir."], ["Mevlid-i Şerif’i (Vesîletü’n-Necât) yazan şair kimdir?", "Süleyman Çelebi", "Yunus Emre", "Mehmet Âkif Ersoy", "Fuzûlî", "Süleyman Çelebi bu eseri 15. yüzyılın başında yazmıştır."]], "s7-u1": [["Allah’ın nurdan yarattığı, görevlerini eksiksiz yapan varlıklara ne denir?", "Melek", "Cin", "İnsan", "Şeytan", "Melekler Allah’a isyan etmez, verilen görevi yerine getirir."], ["Vahiy getirmekle görevli melek kimdir?", "Cebrâil", "Mikâil", "İsrâfil", "Azrâil", "Cebrâil peygamberlere vahiy getirmiştir."], ["Sûra üflemekle görevli melek kimdir?", "İsrâfil", "Cebrâil", "Mikâil", "Azrâil", "İsrâfil’in sûra üflemesiyle kıyamet kopacaktır."], ["Canlıların canını almakla görevli melek kimdir?", "Azrâil", "Mikâil", "Cebrâil", "İsrâfil", "Azrâil ölüm meleğidir."], ["Tabiat olaylarının düzenini sağlamakla görevli melek kimdir?", "Mikâil", "İsrâfil", "Cebrâil", "Azrâil", "Mikâil; yağmur, rüzgâr gibi olaylarla görevlidir."], ["İnsanların iyi ve kötü amellerini yazan meleklere ne denir?", "Kirâmen Kâtibîn", "Hafaza", "Münker-Nekir", "Hamele-i Arş", "Kirâmen Kâtibîn “değerli yazıcılar” demektir."], ["İnsanların yeniden diriltildikten sonra bir araya toplanmasına ne denir?", "Haşir", "Mizan", "Kıyamet", "Berzah", "Haşir, mahşer yerinde toplanmadır."], ["Amellerin tartılmasına ne denir?", "Mizan", "Sırat", "Haşir", "Ba’s", "Mizan, amellerin adaletle tartılmasıdır."], ["Ölümden sonra yeniden dirilmeye ne denir?", "Ba’s", "Mizan", "Kıyamet", "Hesap", "Ba’s, ölülerin yeniden diriltilmesidir."], ["İnsanları kötülüğe çağıran ve Allah’a isyan eden varlık hangisidir?", "Şeytan", "Melek", "Peygamber", "Sahabe", "Şeytan, insanı kötülüğe yönlendirmeye çalışır; melekler ise asla isyan etmez."]], "s7-u2": [["Kâbe’nin etrafında yedi kez dönmeye ne denir?", "Tavaf", "Sa’y", "Vakfe", "İhram", "Tavaf haccın ve umrenin önemli bir parçasıdır."], ["Hacda giyilen dikişsiz örtülere ne denir?", "İhram", "Cübbe", "Sarık", "Seccade", "İhram, hacıların eşitliğini de simgeler."], ["Safâ ile Merve tepeleri arasında yedi kez gidip gelmeye ne denir?", "Sa’y", "Tavaf", "Vakfe", "Telbiye", "Sa’y, Hz. Hâcer’in su arayışını hatırlatır."], ["Arefe günü Arafat’ta bir süre durmaya ne denir?", "Vakfe", "Tavaf", "Sa’y", "Umre", "Arafat vakfesi haccın farzlarındandır."], ["Hac dışındaki zamanlarda da yapılabilen ve Kâbe ziyaretini içeren ibadete ne denir?", "Umre", "Kurban", "Fitre", "İtikâf", "Umre yılın her zamanı yapılabilir (Arefe ve bayram günleri hariç)."], ["Kurban hangi peygamberin teslimiyetini hatırlatır?", "Hz. İbrahim", "Hz. Nûh", "Hz. Mûsâ", "Hz. Îsâ", "Kurban, Hz. İbrahim ve Hz. İsmail’in teslimiyetini hatırlatır."], ["Hac ibadeti hangi ayda yapılır?", "Zilhicce", "Ramazan", "Muharrem", "Şaban", "Hac, Zilhicce ayının belirli günlerinde yapılır."], ["Hacıların “Lebbeyk Allahümme lebbeyk” diye başlayan sözüne ne denir?", "Telbiye", "Tekbir", "Tesbih", "Tehlil", "Telbiye, “Buyur Allah’ım, emrindeyim” anlamına gelir."], ["Haccın farzlarından biri hangisidir?", "Arafat’ta vakfe", "Kurban kesmek", "Medine’yi ziyaret etmek", "Zemzem içmek", "Haccın farzları: ihram, Arafat vakfesi ve ziyaret tavafıdır."], ["Kurban etinin bir kısmının ihtiyaç sahipleriyle paylaşılması kurbanın hangi yönünü gösterir?", "Toplumsal dayanışma", "Gösteriş", "İsraf", "Rekabet", "Kurban, paylaşma ve yardımlaşma bilincini güçlendirir."]], "s7-u3": [["Utanma ve edep duygusuna ne denir?", "Hayâ", "Kibir", "Haset", "Gıybet", "Hayâ kişiyi kötü söz ve davranışlardan alıkoyar."], ["Karşılık beklemeden vermeye ne denir?", "Cömertlik", "Cimrilik", "İsraf", "Kibir", "Cömertlik paylaşmayı sevmektir."], ["Farklı görüşlere anlayışla yaklaşmaya ne denir?", "Hoşgörü", "Öfke", "Kin", "Haset", "Hoşgörü birlikte yaşamanın temelidir."], ["Herkese hakkını vermeye ne denir?", "Adalet", "Zulüm", "Haset", "Kibir", "Adalet, hakkı hak sahibine vermektir."], ["Zorluklar karşısında dayanmak ve vazgeçmemeye ne denir?", "Sabır", "Acelecilik", "Öfke", "Tembellik", "Sabır, Kur’an’da çokça övülen bir erdemdir."], ["Kişinin namus ve onurunu korumasına, kendini kötülüklerden uzak tutmasına ne denir?", "İffet", "Riya", "Haset", "Kibir", "İffet, kişinin kendini haramlardan korumasıdır."], ["Bir hedefe ulaşmak için azimle çalışmaya ne denir?", "Kararlılık", "Tembellik", "Kararsızlık", "Umursamazlık", "Kararlılık, başarı için gerekli bir erdemdir."], ["Gösteriş için iyilik yapmaya ne denir?", "Riya", "İhlas", "Hayâ", "Tevazu", "Riya, iyiliğin değerini ortadan kaldırır; iyilik Allah rızası için yapılmalıdır."], ["Cömertlik ile israfı ayıran ölçü hangisidir?", "Yerinde ve ihtiyaca göre harcamak", "Hiç harcamamak", "Her şeyi harcamak", "Gösteriş için harcamak", "İslam, ne cimriliği ne de israfı onaylar; ölçülü olmayı öğütler."], ["“Kim Allah’a ve ahiret gününe inanıyorsa ya hayır söylesin ya da sussun.” hadisi hangi değeri öğütler?", "Dilini korumak", "Çok konuşmak", "Öfkelenmek", "Gösteriş yapmak", "Bu hadis sözlerimizin sorumluluğunu hatırlatır."]], "s7-u4": [["“Güzel örnek” anlamına gelen kavram hangisidir?", "Üsve-i hasene", "Hilm", "Sünnet", "Tebliğ", "Kur’an, Hz. Muhammed’i müminler için güzel örnek olarak tanıtır (Ahzâb, 21)."], ["Peygamberimizin söz, davranış ve onaylarına ne denir?", "Sünnet", "Kıssa", "Hutbe", "Suhuf", "Sünnet, Kur’an’dan sonra İslam’ın ikinci kaynağıdır."], ["Bir işi yapmadan önce danışarak karar vermeye ne denir?", "İstişare", "Tebliğ", "Tevazu", "İhlas", "Peygamberimiz önemli işlerde ashabıyla istişare ederdi."], ["Öfkeye hâkim olup yumuşak davranmaya ne denir?", "Hilm", "Kibir", "Gazap", "Haset", "Hilm, Peygamberimizin öne çıkan özelliklerindendir."], ["Peygamberimizin aldığı vahyi insanlara ulaştırma görevine ne denir?", "Tebliğ", "İstişare", "Mucize", "Hicret", "Tebliğ, peygamberlerin temel görevidir."], ["Dostluğa ve verilen söze bağlı kalmaya ne denir?", "Vefa", "Riya", "Haset", "Kibir", "Peygamberimiz Hz. Hatice’nin dostlarını bile vefa ile anardı."], ["Peygamberimizin ev işlerinde ailesine yardım etmesi neyi gösterir?", "Aile içi sorumluluk ve tevazu", "Kibir", "Tembellik", "Öfke", "Peygamberimiz evde ailesine yardım eder, kendi işini kendisi görürdü."], ["Peygamberimizin “Ben de sizin gibi bir insanım.” sözü neyi vurgular?", "Onun da bir insan olduğunu", "Melek olduğunu", "Hiç yorulmadığını", "Yemek yemediğini", "Hz. Muhammed hem insan hem de Allah’ın elçisidir (Kehf, 110)."], ["Peygamberimizin Medine’ye göçüne ne denir?", "Hicret", "Fetih", "Miraç", "Veda", "Hicret 622 yılında gerçekleşmiş ve Hicri takvimin başlangıcı olmuştur."], ["Peygamberimizin vefatından kısa süre önce yaptığı hacda okuduğu hutbeye ne denir?", "Veda Hutbesi", "Cuma Hutbesi", "Bayram Hutbesi", "Uhud Hutbesi", "Veda Hutbesi insan hakları açısından önemli ilkeler içerir."]], "s7-u5": [["İslam düşüncesinde farklı yorumların oluşmasının sebeplerinden biri hangisidir?", "Ayetlerin farklı anlaşılabilmesi", "Kur’an’ın değişmesi", "Peygamberin farklı olması", "Allah’ın farklı olması", "Dilin yapısı, kültür ve coğrafya da yorum farklılıklarına yol açmıştır."], ["İnanç esaslarıyla ilgili yorumlara ne denir?", "İtikadi yorumlar", "Fıkhi yorumlar", "Tasavvufi yorumlar", "Siyasi yorumlar", "Maturidilik ve Eş’arilik itikadi mezheplerdendir."], ["İbadet ve günlük hayat uygulamalarıyla ilgili yorumlara ne denir?", "Fıkhi yorumlar", "İtikadi yorumlar", "Tasavvufi yorumlar", "Edebî yorumlar", "Hanefilik ve Şafiilik fıkhi mezheplerdendir."], ["Ahlak ve gönül eğitimini öne çıkaran yorum hangisidir?", "Tasavvuf", "Fıkıh", "Kelam", "Tefsir", "Tasavvuf, kalbi arındırmayı ve güzel ahlakı amaçlar."], ["Türkiye’deki Müslümanların çoğunun bağlı olduğu itikadi mezhep hangisidir?", "Maturidilik", "Eş’arilik", "Şiilik", "Hariciler", "Maturidilik, İmam Maturidi’nin görüşlerine dayanır."], ["Türkiye’de en yaygın fıkhi mezhep hangisidir?", "Hanefilik", "Malikilik", "Hanbelilik", "Caferilik", "Hanefilik, İmam Ebu Hanife’nin görüşlerine dayanır."], ["Alevilik-Bektaşilik geleneğinde yapılan topluluk ibadetine ne denir?", "Cem", "Hutbe", "Teravih", "Mevlit", "Cem, Alevilik-Bektaşilik geleneğinde önemli bir ritüeldir."], ["Cemde yapılan ritmik ve sembolik hareketlere ne denir?", "Semah", "Tavaf", "Sa’y", "Secde", "Semah, cemin on iki hizmetinden biridir."], ["Yorum farklılıklarına karşı en doğru tutum hangisidir?", "Saygı ve hoşgörü", "Düşmanlık", "Alay etmek", "Görmezden gelmek", "Yorum farklılıkları bir zenginliktir; saygıyla karşılanmalıdır."], ["Hacı Bektaş-ı Velî’nin “Eline, beline, diline sahip ol.” sözü neyi öğütler?", "Ahlaklı ve dürüst olmayı", "Çok konuşmayı", "Zengin olmayı", "Yolculuk yapmayı", "Bu söz kişinin davranışlarına hâkim olmasını öğütler."]], "s8-u1": [["Allah’ın her şeyi önceden bilip belirlemesine ne denir?", "Kader", "Kaza", "Tevekkül", "Rızık", "Kader, Allah’ın olacakları ezelden bilip planlamasıdır."], ["Belirlenen şeylerin zamanı gelince gerçekleşmesine ne denir?", "Kaza", "Kader", "Ecel", "İrade", "Kaza, kaderin gerçekleşmesidir."], ["İnsanın seçim yapma gücüne ne denir?", "Cüz’î irade", "Ecel", "Tevekkül", "Rızık", "İnsan cüz’î iradesiyle tercih yapar ve tercihlerinden sorumludur."], ["Gereken çabayı gösterip sonucu Allah’a bırakmaya ne denir?", "Tevekkül", "Tembellik", "Kader", "Kaza", "Tevekkül, çalışmadan beklemek değil; çalıştıktan sonra Allah’a güvenmektir."], ["Her canlının ömrünün sona erdiği vakte ne denir?", "Ecel", "Rızık", "Kader", "Kaza", "Ecel, hayatın sona erme zamanıdır."], ["Allah’ın canlılara verdiği her türlü nimete ne denir?", "Rızık", "Ecel", "Kaza", "İrade", "Rızık sadece yiyecek değil; sağlık, bilgi gibi nimetleri de kapsar."], ["Suyun 100 derecede kaynaması hangi yasaya örnektir?", "Fiziksel yasa", "Toplumsal yasa", "Biyolojik yasa", "Psikolojik yasa", "Fiziksel yasalar evrendeki değişmez düzeni gösterir."], ["“Bir milletin birlik içinde olması onu güçlü kılar.” ifadesi hangi yasaya örnektir?", "Toplumsal yasa", "Fiziksel yasa", "Biyolojik yasa", "Kimyasal yasa", "Toplumsal yasalar toplumların yükseliş ve çöküşüyle ilgilidir."], ["Sınava hiç çalışmayıp “Kaderimde ne varsa o olur.” diyen öğrenci hangi hatayı yapmaktadır?", "Kaderi yanlış anlayıp sorumluluktan kaçmak", "Tevekkül etmek", "Çok çalışmak", "Plan yapmak", "İslam’a göre insan, iradesiyle yaptıklarından sorumludur."], ["“İnsan için ancak çalıştığının karşılığı vardır.” ayeti hangi sureye aittir?", "Necm Suresi", "Fatiha Suresi", "Kevser Suresi", "Fil Suresi", "Necm Suresi 39. ayet, emeğin ve çalışmanın önemini vurgular."]], "s8-u2": [["Şartlarını taşıyan Müslümanların yerine getirdiği farz mal ibadeti hangisidir?", "Zekât", "Sadaka", "Fitre", "Kurban", "Zekât, İslam’ın beş şartından biridir."], ["Zekât verebilmek için sahip olunması gereken en az mal miktarına ne denir?", "Nisap", "Fitre", "İnfak", "Kefaret", "Nisap, zekât için gereken asgari ölçüdür."], ["Ramazan Bayramı’ndan önce verilen sadakaya ne denir?", "Fitre", "Zekât", "Nisap", "Kurban", "Fitre, bayram sevincinin paylaşılmasını sağlar."], ["Faydası insanlara sürekli ulaşan hayırlara ne denir?", "Sadaka-i câriye", "Fitre", "Kefaret", "Nisap", "Okul, çeşme, kütüphane yaptırmak sadaka-i câriyedir."], ["Allah rızası için malını ve imkânlarını paylaşmaya ne denir?", "İnfak", "İsraf", "Cimrilik", "Kibir", "İnfak, zekât ve sadakayı da kapsayan geniş bir kavramdır."], ["Gülümsemek de sadakadır anlayışı neyi gösterir?", "Sadakanın sadece maddi olmadığını", "Sadakanın sadece para olduğunu", "Gülmenin yasak olduğunu", "Yardımın önemsiz olduğunu", "Peygamberimiz güler yüzü ve güzel sözü de sadaka saymıştır."], ["Zekât genellikle malın ne kadarı olarak verilir?", "Kırkta biri", "Yarısı", "Onda biri", "Tamamı", "Para ve ticaret mallarında zekât kırkta bir (%2,5) oranındadır."], ["Zekâtın verilebileceği kişilerden biri hangisidir?", "Fakirler", "Anne ve baba", "Çocuklar", "Eş", "Kişi; anne-babasına, çocuklarına ve eşine zekât veremez."], ["Zekâtın verileceği yerler hangi surede sayılmıştır?", "Tevbe Suresi", "İhlas Suresi", "Fatiha Suresi", "Nas Suresi", "Tevbe Suresi 60. ayette zekâtın verileceği sekiz grup sayılır."], ["Zekât ve sadakanın toplum açısından en önemli faydası hangisidir?", "Zengin ile yoksul arasında sevgi bağı kurması", "Kıskançlığı artırması", "Herkesi fakir yapması", "Ticareti durdurması", "Zekât ve sadaka toplumsal dayanışmayı güçlendirir."]], "s8-u3": [["Toplumun temel birimi nedir?", "Aile", "Okul", "Şehir", "Devlet", "Aile, toplumun en küçük ve temel birimidir."], ["Üstlendiği görevin hesabını verebilmeye ne denir?", "Sorumluluk", "Kibir", "Gösteriş", "İsraf", "Sorumluluk bilinci kişiyi güvenilir yapar."], ["Yaşadığımız topraklara sahip çıkmak hangi değerdir?", "Vatan sevgisi", "Bencillik", "İsraf", "Haset", "Vatan sevgisi, ülkemize ve milletimize karşı sorumluluğumuzu gösterir."], ["Ailenin kurulmasını sağlayan sözleşmeye ne denir?", "Nikâh", "Vakıf", "Emanet", "Biat", "Nikâh, aileyi kuran sözleşmedir."], ["“Dinde zorlama yoktur.” ayeti hangi surede geçer?", "Bakara Suresi", "İhlas Suresi", "Fil Suresi", "Kevser Suresi", "Bakara Suresi 256. ayettir."], ["Dinin korumayı amaçladığı temel değerlerden biri hangisidir?", "Can", "Kibir", "İsraf", "Haset", "Din; canı, aklı, nesli, malı ve inancı korumayı amaçlar."], ["Cami, türbe, külliye gibi eserler dinin hangi alana etkisini gösterir?", "Kültür ve sanat", "Spor", "Ulaşım", "Tarım", "Din, kültür ve sanatı derinden etkilemiştir."], ["Anne babaya iyilik etmekle ilgili “Onlara öf bile deme.” öğüdü hangi surede geçer?", "İsrâ Suresi", "Fatiha Suresi", "İhlas Suresi", "Nas Suresi", "İsrâ Suresi 23. ayet anne babaya saygıyı öğütler."], ["Aşağıdakilerden hangisi doğaya karşı sorumluluğumuza örnektir?", "Suyu israf etmemek", "Ağaç kesmek", "Çöpü doğaya atmak", "Hayvanlara eziyet etmek", "İnsan doğayı korumakla sorumludur."], ["Bir öğrencinin ödevini zamanında yapması hangi değerle doğrudan ilgilidir?", "Sorumluluk", "Vatan sevgisi", "Cömertlik", "Hoşgörü", "Kendi görevini yerine getirmek sorumluluktur."]], "s8-u4": [["Danışarak karar vermeye ne denir?", "İstişare", "Tebliğ", "Vefa", "Tevazu", "Peygamberimiz Uhud öncesi gibi birçok konuda istişare etmiştir."], ["Alçakgönüllülüğe ne denir?", "Tevazu", "Kibir", "Riya", "Haset", "Tevazu, kendini başkalarından üstün görmemektir."], ["Sözünde durmaya ve dostluğa bağlı kalmaya ne denir?", "Vefa", "Riya", "Kibir", "Gıybet", "Vefa güvenilir insanın özelliğidir."], ["Mekke’nin fethinde Peygamberimiz ne ilan etmiştir?", "Genel af", "Savaş", "Sürgün", "Vergi", "Peygamberimiz kendisine eziyet edenleri bile affetmiştir."], ["Peygamberimizin Taif’te taşlandığında beddua etmemesi hangi özelliğini gösterir?", "Merhamet ve sabır", "Öfke", "İntikam", "Korku", "Peygamberimiz onların hidayeti için dua etmiştir."], ["Peygamberimizin “güzel örnek” olduğunu bildiren kavram hangisidir?", "Üsve-i hasene", "Hilm", "Sünnet", "Tebliğ", "Ahzâb Suresi 21. ayet bunu bildirir."], ["Hendek Savaşı’nda hendek kazılmasına Peygamberimizin de katılması neyi gösterir?", "Tevazu ve birlikte çalışma", "Kibir", "Gösteriş", "Tembellik", "Peygamberimiz ashabıyla birlikte çalışmıştır."], ["Hendek kazma fikrini veren sahabi kimdir?", "Selman-ı Farisi", "Hz. Ömer", "Hz. Ali", "Hz. Hamza", "Peygamberimiz bu fikri istişare sonunda kabul etmiştir."], ["Peygamberimizin “Kolaylaştırınız, zorlaştırmayınız.” sözü hangi tutumu öğütler?", "Anlayışlı ve kolaylaştırıcı olmayı", "Sert olmayı", "İşleri ertelemeyi", "Kural koymamayı", "Bu hadis insanlara anlayışla yaklaşmayı öğütler."], ["Peygamberimizin hırsızlık yapan soylu bir kadın için “Kızım Fatıma bile olsa…” demesi hangi ilkeyi gösterir?", "Adalet", "İsraf", "Kayırmacılık", "Öfke", "Peygamberimiz hukuk önünde herkesin eşit olduğunu vurgulamıştır."]], "s8-u5": [["Kur’an’ın anlamının başka bir dile aktarılmasına ne denir?", "Meal", "Tefsir", "Hatim", "Mushaf", "Meal, Kur’an’ın anlamını yaklaşık olarak aktarır."], ["Kur’an ayetlerinin açıklanıp yorumlanmasına ne denir?", "Tefsir", "Meal", "Hadis", "Fıkıh", "Tefsir ilmiyle uğraşan kişiye müfessir denir."], ["Kur’an’da ibret için anlatılan geçmiş olaylara ne denir?", "Kıssa", "Hutbe", "Meal", "Cüz", "Kıssalar ders almamız için anlatılır."], ["Kur’an’ın ana konularından biri hangisidir?", "Tevhit", "Spor", "Ticaret hesapları", "Coğrafya haritaları", "Kur’an’ın ana konuları: inanç, ibadet, ahlak ve kıssalardır."], ["Kur’an-ı Kerim kaç yılda indirilmiştir?", "Yaklaşık 23 yılda", "1 yılda", "1 günde", "40 yılda", "Kur’an, olaylara bağlı olarak yaklaşık 23 yılda indirilmiştir."], ["Kur’an’ın baştan sona okunmasına ne denir?", "Hatim", "Tefsir", "Meal", "Mukabele", "Kur’an’ı baştan sona okumaya hatim denir."], ["Kur’an’ın akıl ve düşünmeye önem verdiğini gösteren ifade hangisidir?", "“Hiç düşünmez misiniz?”", "“Hiç uyumaz mısınız?”", "“Hiç yemez misiniz?”", "“Hiç koşmaz mısınız?”", "Kur’an pek çok ayette insanları düşünmeye ve akıl yürütmeye çağırır."], ["Kur’an-ı Kerim’in son suresi hangisidir?", "Nas Suresi", "Fatiha Suresi", "Bakara Suresi", "İhlas Suresi", "Kur’an Fatiha ile başlar, Nas Suresi ile biter."], ["Kur’an-ı Kerim’in en uzun suresi hangisidir?", "Bakara Suresi", "Kevser Suresi", "Yasin Suresi", "Fatiha Suresi", "Bakara Suresi 286 ayettir; en kısa sure ise Kevser’dir."], ["Ayetlerin hangi olay üzerine indiğini anlatan bilgiye ne denir?", "Esbab-ı nüzul", "Meal", "Hatim", "Cüz", "Esbab-ı nüzul, ayetlerin iniş sebepleridir ve doğru anlamaya yardımcı olur."]]}};
+var MERDIVEN = [100, 250, 500, 1000, 2500, 5000, 10000, 25000, 50000, 100000];
+var BARAJ = [3, 6];            /* 0 tabanlı: 4. soru (1.000) ve 7. soru (10.000) baraj */
+var HARF = ['A','B','C','D'];
+var S = null;                  /* yarışma durumu */
+var secim = { sinif:'s4', unite:1, ad:'', sure:true, ses:true };
+var sayac = null, danisSayac = null, sesBaglam = null;
+
+function $(id){ return document.getElementById(id); }
+function k(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function karistir(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function puanYaz(n){ return n.toLocaleString('tr-TR'); }
+function sinifSureSn(sid){ return sid==='s4' ? 45 : 30; }
+
+/* ————— ses (isteğe bağlı, WebAudio; dosya yok) ————— */
+function ses(tur){
+  if(!secim.ses) return;
+  try{
+    sesBaglam = sesBaglam || new (window.AudioContext||window.webkitAudioContext)();
+    var notalar = tur==='dogru' ? [523,659,784,1047] : tur==='yanlis' ? [330,262,196] : tur==='kilit' ? [440,440] : [880];
+    notalar.forEach(function(f,i){
+      var o=sesBaglam.createOscillator(), g=sesBaglam.createGain(), t=sesBaglam.currentTime+i*0.13;
+      o.frequency.value=f; o.type= tur==='yanlis' ? 'sawtooth' : 'triangle';
+      g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.12,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+0.22);
+      o.connect(g); g.connect(sesBaglam.destination); o.start(t); o.stop(t+0.25);
+    });
+  }catch(e){}
+}
+
+/* ————— soru seti: zorluk basamaklarına göre ————— */
+function soruSeti(sid, uniteNo){
+  var bantlar = [[0,1,2],[3,4,5,6],[7,8,9]], set = [];
+  var anahtarlar = uniteNo ? [sid+'-u'+uniteNo] : Object.keys(KDK.sorular).filter(function(a){ return a.indexOf(sid+'-u')===0; });
+  bantlar.forEach(function(bant){
+    var havuz = [];
+    anahtarlar.forEach(function(a){ bant.forEach(function(i){ var q=KDK.sorular[a][i]; if(q) havuz.push({q:q, a:a}); }); });
+    set = set.concat(karistir(havuz).slice(0, bant.length));
+  });
+  return set.map(function(x){
+    var q = x.q, siklar = karistir([q[1],q[2],q[3],q[4]]);
+    return { metin:q[0], siklar:siklar, dogru:siklar.indexOf(q[1]), aciklama:q[5], unite:x.a };
+  });
+}
+
+/* ————— sahne kabuğu ————— */
+function sahneKur(){
+  if($('kdkSahne')) return;
+  var el = document.createElement('div');
+  el.id='kdkSahne'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); el.setAttribute('aria-label','Kim Din Dersinde Kazanan Olmak İster? yarışması');
+  el.innerHTML = '<div class="kdk-kap"><div class="kdk-ust">'+
+      '<div class="kdk-logo"><span class="kdk-amblem" aria-hidden="true">🏆</span>Kim Din Dersinde Kazanan Olmak İster?</div>'+
+      '<div class="kdk-ustbtn"><button type="button" class="kdk-ikbtn" data-kdk="ses" aria-pressed="true">🔊 Ses</button>'+
+      '<button type="button" class="kdk-ikbtn" data-kdk="kapat">✕ Kapat</button></div></div>'+
+    '<div id="kdkIcerik" aria-live="polite"></div></div>';
+  document.body.appendChild(el);
+}
+function ac(){ sahneKur(); $('kdkSahne').classList.add('acik'); document.body.classList.add('kdk-acik'); }
+function kapat(){ sureDur(); danisDur(); var e=$('kdkSahne'); if(e) e.classList.remove('acik'); document.body.classList.remove('kdk-acik'); S=null; }
+
+/* ————— 1. giriş ekranı ————— */
+function girisEkrani(){
+  ac(); sureDur(); S=null;
+  var siniflar = Object.keys(KDK.siniflar);
+  var sn = KDK.siniflar[secim.sinif];
+  var uniteNolar = Object.keys(sn.uniteler).map(Number).sort(function(a,b){ return a-b; });
+  $('kdkIcerik').innerHTML =
+    '<div class="kdk-giris"><div class="kdk-amblem-buyuk" aria-hidden="true">🏆</div>'+
+    '<h2 class="kdk-baslik">Kim Din Dersinde<br>Kazanan Olmak İster?</h2>'+
+    '<p class="kdk-alt">10 soru · 3 joker · 2 baraj · büyük ödül: <b style="color:#ffd76a">100.000 puan</b> ve “Din Dersi Şampiyonu” unvanı</p>'+
+    '<div class="kdk-form">'+
+      '<div><span class="kdk-etiket">Sınıf</span><div class="kdk-cipler">'+
+        siniflar.map(function(s){ return '<button type="button" class="kdk-cip" data-kdk="sinif" data-v="'+s+'" aria-pressed="'+(s===secim.sinif)+'">'+k(KDK.siniflar[s].ad)+'</button>'; }).join('')+
+      '</div></div>'+
+      '<div><span class="kdk-etiket">Ünite</span><div class="kdk-cipler">'+
+        uniteNolar.map(function(n){ return '<button type="button" class="kdk-cip" data-kdk="unite" data-v="'+n+'" aria-pressed="'+(n===secim.unite)+'">'+n+'. '+k(sn.uniteler[n])+'</button>'; }).join('')+
+        '<button type="button" class="kdk-cip" data-kdk="unite" data-v="0" aria-pressed="'+(secim.unite===0)+'">🎲 Karışık (tüm üniteler)</button>'+
+      '</div></div>'+
+      '<div><label for="kdkAd">Yarışmacının adı (isteğe bağlı)</label><input id="kdkAd" class="kdk-girdi" maxlength="40" placeholder="ör. Zeynep ya da 4-A Yıldızlar Takımı" value="'+k(secim.ad)+'"></div>'+
+      '<div><span class="kdk-etiket">Süre</span><div class="kdk-cipler">'+
+        '<button type="button" class="kdk-cip" data-kdk="sure" data-v="1" aria-pressed="'+secim.sure+'">⏱️ Süreli ('+sinifSureSn(secim.sinif)+' sn)</button>'+
+        '<button type="button" class="kdk-cip" data-kdk="sure" data-v="0" aria-pressed="'+(!secim.sure)+'">♾️ Süresiz</button>'+
+      '</div></div>'+
+      '<ul class="kdk-kurallar">'+
+        '<li>Sorular kolaydan zora gider. 4. soru (1.000) ve 7. soru (10.000) <b>baraj</b>dır: yanlış cevapta son geçilen baraj puanı kazanılır.</li>'+
+        '<li>Jokerler: <b>✂️ %50</b> iki yanlış şıkkı siler · <b>🙋 Sınıfa Sor</b> sınıf oylar · <b>📞 Arkadaşına Danış</b> 30 saniye danışma süresi.</li>'+
+        '<li>Emin değilsen <b>🏳️ Çekil</b> ve kazandığın puanla yarışmayı bitir. Her sorudan sonra kısa bir açıklama gelir.</li>'+
+      '</ul>'+
+      '<div style="text-align:center"><button type="button" class="kdk-ana" data-kdk="basla">▶ Yarışmaya Başla</button></div>'+
+    '</div></div>';
+  setTimeout(function(){ var b=document.querySelector('[data-kdk="basla"]'); if(b) try{ b.focus({preventScroll:true}); }catch(e){} }, 50);
+}
+
+/* ————— 2. yarışma ————— */
+function basla(){
+  var adEl = $('kdkAd'); secim.ad = adEl ? adEl.value.trim() : '';
+  S = { sorular:soruSeti(secim.sinif, secim.unite), i:0, jokerler:{yari:true, sinif:true, danis:true}, gizli:[], kilitli:false, gecmis:[], bitti:false };
+  if(S.sorular.length < 10){ alertYok(); return; }
+  soruCiz();
+}
+function alertYok(){ $('kdkIcerik').innerHTML='<div class="kdk-panel"><p>Bu ünite için soru bulunamadı.</p><button type="button" class="kdk-ana" data-kdk="giris">Geri dön</button></div>'; }
+function merdivenHtml(){
+  return '<ol class="kdk-merdiven" aria-label="Puan basamakları">'+ MERDIVEN.map(function(p,i){
+    var cls = (BARAJ.indexOf(i)>=0?'baraj ':'') + (i<S.i?'gecti ':'') + (i===S.i && !S.bitti?'simdi':'');
+    return '<li class="'+cls+'"'+(i===S.i?' aria-current="step"':'')+'><span class="n">'+(i+1)+'</span><span class="p">'+(i===9?'🏆 ':'')+puanYaz(p)+'</span></li>';
+  }).join('') +'</ol>';
+}
+function soruCiz(){
+  var q = S.sorular[S.i], sid = secim.sinif;
+  S.gizli=[]; S.kilitli=false; S.secilen=null;
+  var uAd = KDK.siniflar[sid].uniteler[parseInt(q.unite.split('-u')[1],10)] || '';
+  $('kdkIcerik').innerHTML =
+   '<div class="kdk-oyun"><div>'+
+    '<div class="kdk-jokerler">'+
+      '<button type="button" class="kdk-joker" data-kdk="j-yari" '+(S.jokerler.yari?'':'disabled')+' aria-label="Yüzde elli jokeri">✂️ %50</button>'+
+      '<button type="button" class="kdk-joker" data-kdk="j-sinif" '+(S.jokerler.sinif?'':'disabled')+' aria-label="Sınıfa sor jokeri">🙋 Sınıfa Sor</button>'+
+      '<button type="button" class="kdk-joker" data-kdk="j-danis" '+(S.jokerler.danis?'':'disabled')+' aria-label="Arkadaşına danış jokeri">📞 Danış</button>'+
+      (secim.sure ? '<div class="kdk-sure" id="kdkSure" aria-label="Kalan süre"><span>'+sinifSureSn(sid)+'</span></div>' : '')+
+    '</div>'+
+    '<p class="kdk-soru-no">'+(secim.ad?k(secim.ad)+' · ':'')+'Soru '+(S.i+1)+' / 10 · '+puanYaz(MERDIVEN[S.i])+' puan'+(BARAJ.indexOf(S.i)>=0?' · 🛡️ BARAJ':'')+' · '+k(KDK.siniflar[sid].ad)+' — '+k(uAd)+'</p>'+
+    '<div class="kdk-soru">'+k(q.metin)+'</div>'+
+    '<div class="kdk-secenekler">'+ q.siklar.map(function(s,i){
+      return '<button type="button" class="kdk-sec" data-kdk="sec" data-i="'+i+'"><b>'+HARF[i]+':</b><span>'+k(s)+'</span></button>'; }).join('') +'</div>'+
+    '<div id="kdkPanel"></div>'+
+    '<div class="kdk-alt-satir"><span style="color:#c7cdf5;font-size:13px">Klavye: A-B-C-D ile seç, Enter ile onayla</span>'+
+      '<button type="button" class="kdk-ikbtn" data-kdk="cekil">🏳️ Çekil ('+puanYaz(S.i?MERDIVEN[S.i-1]:0)+' puanla bitir)</button></div>'+
+   '</div>'+ merdivenHtml() +'</div>';
+  if(secim.sure) sureBaslat(sinifSureSn(sid));
+  var su=document.querySelector('.kdk-merdiven .simdi'); if(su && window.innerWidth<=860){ try{ su.parentNode.scrollLeft = su.offsetLeft - 40; }catch(e){} }
+}
+function sureBaslat(sn){
+  sureDur(); var kalan=sn, el=$('kdkSure');
+  function ciz(){ if(!el) return; el.querySelector('span').textContent=kalan; el.style.setProperty('--kdk-yuzde', (kalan/sn*100)+'%'); el.classList.toggle('az', kalan<=10); }
+  ciz();
+  sayac = setInterval(function(){
+    if(S && (S.kilitli || S.duraklat)) return;
+    kalan--; ciz();
+    if(kalan<=0){ sureDur(); if(S && !S.kilitli){ S.secilen=-1; sonuclandir(); } }
+  }, 1000);
+}
+function sureDur(){ if(sayac){ clearInterval(sayac); sayac=null; } }
+function danisDur(){ if(danisSayac){ clearInterval(danisSayac); danisSayac=null; } if(S) S.duraklat=false; }
+
+function secenekSec(i){
+  if(!S || S.kilitli || S.gizli.indexOf(i)>=0) return;
+  danisDur();
+  S.secilen=i;
+  Array.prototype.forEach.call(document.querySelectorAll('.kdk-sec'), function(b,j){ b.classList.toggle('secili', j===i); });
+  $('kdkPanel').innerHTML = '<div class="kdk-panel kdk-onay"><b style="font-size:16px">Son kararınız mı? “'+HARF[i]+'”</b>'+
+    '<button type="button" class="kdk-ana" data-kdk="onayla" style="padding:10px 20px;font-size:15px">✔ Evet, son kararım</button>'+
+    '<button type="button" class="kdk-ikbtn" data-kdk="vazgec">↺ Değiştireyim</button></div>';
+  var b=document.querySelector('[data-kdk="onayla"]'); if(b) try{ b.focus({preventScroll:true}); }catch(e){}
+}
+function vazgec(){
+  if(!S || S.kilitli) return; S.secilen=null; $('kdkPanel').innerHTML='';
+  Array.prototype.forEach.call(document.querySelectorAll('.kdk-sec'), function(b){ b.classList.remove('secili'); });
+}
+function onayla(){
+  if(!S || S.kilitli || S.secilen==null) return;
+  S.kilitli=true; sureDur(); danisDur(); ses('kilit');
+  $('kdkPanel').innerHTML='<div class="kdk-panel"><p>⏳ Cevap kilitlendi…</p></div>';
+  Array.prototype.forEach.call(document.querySelectorAll('.kdk-sec, .kdk-joker, [data-kdk="cekil"]'), function(b){ b.disabled=true; });
+  setTimeout(sonuclandir, 1400);
+}
+function sonuclandir(){
+  var q=S.sorular[S.i], dogru = S.secilen===q.dogru;
+  S.kilitli=true;
+  Array.prototype.forEach.call(document.querySelectorAll('.kdk-sec'), function(b,j){
+    b.disabled=true; b.classList.remove('secili');
+    if(j===q.dogru) b.classList.add('dogru'); else if(j===S.secilen) b.classList.add('yanlis');
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.kdk-joker, [data-kdk="cekil"]'), function(b){ b.disabled=true; });
+  S.gecmis.push({metin:q.metin, cevap:q.siklar[q.dogru], verilen:S.secilen>=0?q.siklar[S.secilen]:'(süre doldu)', dogru:dogru, aciklama:q.aciklama});
+  ses(dogru?'dogru':'yanlis');
+  var son = S.i===9;
+  $('kdkPanel').innerHTML = '<div class="kdk-panel"><h4>'+(dogru ? '✅ Doğru cevap! '+puanYaz(MERDIVEN[S.i])+' puan' : (S.secilen<0?'⏰ Süre doldu!':'❌ Maalesef yanlış.')+' Doğru cevap: '+HARF[q.dogru]+') '+k(q.siklar[q.dogru]))+'</h4>'+
+    '<p>💡 '+k(q.aciklama)+'</p>'+
+    (dogru && !son ? '<button type="button" class="kdk-ana" data-kdk="sonraki">Sonraki soru ▶</button>'
+                   : '<button type="button" class="kdk-ana" data-kdk="bitir">Sonucu gör ▶</button>')+'</div>';
+  S.dogruMu = dogru;
+  var b=document.querySelector('[data-kdk="sonraki"],[data-kdk="bitir"]'); if(b) try{ b.focus({preventScroll:true}); }catch(e){}
+}
+function sonraki(){ if(!S) return; S.i++; soruCiz(); }
+
+/* ————— jokerler ————— */
+function jokerYari(){
+  if(!S || S.kilitli || !S.jokerler.yari) return;
+  S.jokerler.yari=false;
+  var q=S.sorular[S.i], yanlislar=karistir([0,1,2,3].filter(function(i){ return i!==q.dogru; })).slice(0,2);
+  S.gizli=yanlislar;
+  Array.prototype.forEach.call(document.querySelectorAll('.kdk-sec'), function(b,j){ if(yanlislar.indexOf(j)>=0){ b.classList.add('gizli'); b.disabled=true; } });
+  document.querySelector('[data-kdk="j-yari"]').disabled=true;
+}
+function jokerSinif(){
+  if(!S || S.kilitli || !S.jokerler.sinif) return;
+  S.jokerler.sinif=false; document.querySelector('[data-kdk="j-sinif"]').disabled=true;
+  S.duraklat=true; S.oy=[0,0,0,0];
+  $('kdkPanel').innerHTML = '<div class="kdk-panel"><h4>🙋 Sınıfa Sor — süre durdu</h4>'+
+    '<p>Öğretmen her şıkkı okusun, sınıf parmak kaldırsın; oyları aşağıdan girin. Evde ya da tek başına oynuyorsanız “Sanal seyirci” kullanın.</p>'+
+    '<div class="kdk-oyla">'+HARF.map(function(h,i){ return S.gizli.indexOf(i)>=0 ? '<span></span>' : '<button type="button" data-kdk="oy" data-i="'+i+'">'+h+' +1</button>'; }).join('')+'</div>'+
+    '<div class="kdk-cubuklar" id="kdkCubuk"></div>'+
+    '<div class="kdk-onay"><button type="button" class="kdk-ikbtn" data-kdk="sanal">🤖 Sanal seyirci</button>'+
+    '<button type="button" class="kdk-ikbtn" data-kdk="oybitti">✔ Oylama bitti, yarışmaya dön</button></div></div>';
+  cubukCiz();
+}
+function cubukCiz(){
+  var el=$('kdkCubuk'); if(!el) return;
+  var top=S.oy.reduce(function(a,b){ return a+b; },0)||1;
+  el.innerHTML = HARF.map(function(h,i){ var y=Math.round(S.oy[i]/top*100);
+    return '<div class="kdk-cubuk"><span>%'+y+'</span><i style="height:'+Math.max(2,y)+'%"></i><span>'+h+'</span></div>'; }).join('');
+}
+function sanalSeyirci(){
+  var q=S.sorular[S.i], isabet = {s4:.72,s5:.66,s6:.6,s7:.56,s8:.52}[secim.sinif] - S.i*0.03;
+  var acik=[0,1,2,3].filter(function(i){ return S.gizli.indexOf(i)<0; });
+  S.oy=[0,0,0,0];
+  for(var n=0;n<30;n++){
+    var r=Math.random();
+    if(r<isabet) S.oy[q.dogru]++; else S.oy[acik[Math.floor(Math.random()*acik.length)]]++;
+  }
+  cubukCiz();
+}
+function jokerDanis(){
+  if(!S || S.kilitli || !S.jokerler.danis) return;
+  S.jokerler.danis=false; document.querySelector('[data-kdk="j-danis"]').disabled=true;
+  S.duraklat=true; var kalan=30;
+  $('kdkPanel').innerHTML = '<div class="kdk-panel"><h4>📞 Arkadaşına Danış</h4>'+
+    '<p>Sınıftan bir arkadaşını seç ve 30 saniye danış. Ana yarışma süresi bu sırada durur.</p>'+
+    '<p style="font-size:28px;font-weight:900;color:#ffd76a" id="kdkDanisSn">30</p>'+
+    '<div class="kdk-onay"><button type="button" class="kdk-ikbtn" data-kdk="sanalarkadas">🤖 Sanal arkadaş ne diyor?</button>'+
+    '<button type="button" class="kdk-ikbtn" data-kdk="danisbitti">✔ Danışma bitti</button></div><p id="kdkArkadas"></p></div>';
+  danisSayac=setInterval(function(){ kalan--; var e=$('kdkDanisSn'); if(e) e.textContent=kalan; if(kalan<=0){ danisDur(); var p=$('kdkPanel'); if(p) p.innerHTML='<div class="kdk-panel"><p>📞 Danışma süresi bitti. Kararını ver!</p></div>'; } },1000);
+}
+function sanalArkadas(){
+  var q=S.sorular[S.i], acik=[0,1,2,3].filter(function(i){ return S.gizli.indexOf(i)<0; });
+  var emin = Math.random() < (0.85 - S.i*0.04), oneri = emin ? q.dogru : acik[Math.floor(Math.random()*acik.length)];
+  var e=$('kdkArkadas'); if(e) e.innerHTML='🗣️ “'+(emin?'Bence':'Tam emin değilim ama galiba')+' <b>'+HARF[oneri]+') '+k(q.siklar[oneri])+'</b>.”';
+}
+function cekil(){
+  if(!S || S.kilitli) return;
+  S.cekildi=true; sonucEkrani();
+}
+
+/* ————— 3. sonuç ————— */
+function kazanilan(){
+  if(S.cekildi) return S.i ? MERDIVEN[S.i-1] : 0;
+  if(S.dogruMu && S.i===9) return MERDIVEN[9];
+  var b=0; BARAJ.forEach(function(x){ if(S.i>x) b=MERDIVEN[x]; }); return b;
+}
+function sonucEkrani(){
+  sureDur(); danisDur();
+  S.bitti=true;
+  var p=kazanilan(), sampiyon = S.dogruMu && S.i===9 && !S.cekildi;
+  var dogruSay=S.gecmis.filter(function(g){ return g.dogru; }).length;
+  $('kdkIcerik').innerHTML = '<div class="kdk-sonuc">'+
+    '<div class="kdk-amblem-buyuk" aria-hidden="true">'+(sampiyon?'👑':p>=10000?'🥇':p>=1000?'🥈':'🌱')+'</div>'+
+    '<h2 class="kdk-baslik" style="font-size:clamp(24px,4vw,38px)">'+(sampiyon?'DİN DERSİ ŞAMPİYONU!':S.cekildi?'Akıllıca bir çekiliş!':'Yarışma sona erdi')+'</h2>'+
+    '<p class="kdk-alt">'+(secim.ad?k(secim.ad)+' · ':'')+k(KDK.siniflar[secim.sinif].ad)+' · '+dogruSay+' doğru cevap</p>'+
+    '<div class="kdk-skor">'+puanYaz(p)+' puan</div>'+
+    '<p class="kdk-alt">'+(sampiyon?'10 sorunun hepsini bildin, tebrikler!': p>0?'Barajın ya da kazandığın puan seninle. Bir dahaki sefere daha yükseğe!':'Her yarışma bir öğrenmedir — açıklamaları okuyup tekrar dene!')+'</p>'+
+    '<div class="kdk-onay" style="justify-content:center"><button type="button" class="kdk-ana" data-kdk="tekrar">🔁 Tekrar Yarış</button>'+
+    '<button type="button" class="kdk-ikbtn" data-kdk="giris">⚙️ Sınıf / ünite değiştir</button></div>'+
+    '<div class="kdk-gozden"><h3 style="margin:8px 0 2px;color:#ffd76a">📝 Sorular ve açıklamalar</h3>'+
+      S.gecmis.map(function(g,i){ return '<div class="'+(g.dogru?'':'yanlis')+'">'+(g.dogru?'✅':'❌')+' <b>'+(i+1)+'. '+k(g.metin)+'</b><br>Doğru cevap: <b>'+k(g.cevap)+'</b>'+(g.dogru?'':' · Senin cevabın: '+k(g.verilen))+'<small>💡 '+k(g.aciklama)+'</small></div>'; }).join('')+
+    '</div></div>';
+  if(sampiyon || p>=10000) konfeti();
+}
+function konfeti(){
+  var c=document.createElement('div'); c.className='kdk-konfeti'; var renk=['#ffd76a','#7fe3a5','#8ea2ff','#ff9f6b','#fff'];
+  for(var i=0;i<70;i++){ var e=document.createElement('i'); e.style.left=Math.random()*100+'%'; e.style.background=renk[i%5]; e.style.animationDelay=(Math.random()*1.2)+'s'; c.appendChild(e); }
+  document.body.appendChild(c); setTimeout(function(){ c.remove(); }, 4500);
+}
+
+/* ————— olaylar ————— */
+document.addEventListener('click', function(e){
+  var giris = e.target.closest('[data-kdk-ac]');
+  if(giris){ e.preventDefault(); window.kdkAc(giris.dataset.sinif, parseInt(giris.dataset.no||'0',10)); return; }
+  var t = e.target.closest('[data-kdk]'); if(!t || !t.closest('#kdkSahne')) return;
+  var ne=t.dataset.kdk;
+  if(ne==='kapat') return kapat();
+  if(ne==='ses'){ secim.ses=!secim.ses; t.setAttribute('aria-pressed', secim.ses); t.textContent = secim.ses?'🔊 Ses':'🔇 Ses'; return; }
+  if(ne==='sinif'){ secim.ad = ($('kdkAd')||{}).value || secim.ad; secim.sinif=t.dataset.v; secim.unite=1; return girisEkrani(); }
+  if(ne==='unite'){ secim.ad = ($('kdkAd')||{}).value || secim.ad; secim.unite=parseInt(t.dataset.v,10); return girisEkrani(); }
+  if(ne==='sure'){ secim.ad = ($('kdkAd')||{}).value || secim.ad; secim.sure = t.dataset.v==='1'; return girisEkrani(); }
+  if(ne==='basla' || ne==='tekrar') return basla();
+  if(ne==='giris') return girisEkrani();
+  if(ne==='sec') return secenekSec(parseInt(t.dataset.i,10));
+  if(ne==='onayla') return onayla();
+  if(ne==='vazgec') return vazgec();
+  if(ne==='sonraki') return sonraki();
+  if(ne==='bitir') return sonucEkrani();
+  if(ne==='cekil') return cekil();
+  if(ne==='j-yari') return jokerYari();
+  if(ne==='j-sinif') return jokerSinif();
+  if(ne==='j-danis') return jokerDanis();
+  if(ne==='oy'){ S.oy[parseInt(t.dataset.i,10)]++; return cubukCiz(); }
+  if(ne==='sanal') return sanalSeyirci();
+  if(ne==='oybitti' || ne==='danisbitti'){ danisDur(); S.duraklat=false; $('kdkPanel').innerHTML=''; return; }
+  if(ne==='sanalarkadas') return sanalArkadas();
+});
+document.addEventListener('keydown', function(e){
+  var el=$('kdkSahne'); if(!el || !el.classList.contains('acik')) return;
+  if(e.key==='Escape'){ kapat(); return; }
+  if(!S || S.bitti || e.target.tagName==='INPUT') return;
+  var h=e.key.toUpperCase(), i=HARF.indexOf(h);
+  if(i>=0 && !S.kilitli){ secenekSec(i); return; }
+  if(e.key==='Enter' && S.secilen!=null && !S.kilitli && document.activeElement && !document.activeElement.closest('.kdk-panel')){ e.preventDefault(); onayla(); }
+});
+
+window.kdkAc = function(sid, uniteNo){
+  if(sid && KDK.siniflar[sid]) secim.sinif = sid;
+  secim.unite = (uniteNo===0 || (uniteNo && KDK.siniflar[secim.sinif].uniteler[uniteNo])) ? uniteNo : 1;
+  girisEkrani();
+};
+window.KDK_VERI = KDK;
+
+/* ?kazanan=s4-u1  (u0 = karışık) adres parametresiyle doğrudan açılış */
+try{
+  var p = new URLSearchParams(location.search).get('kazanan');
+  if(p){ var m=/^(s[4-8])(?:-u(\d+))?$/.exec(p); if(m){
+    var git=function(){ window.kdkAc(m[1], m[2]!=null?parseInt(m[2],10):1); };
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', git); else git();
+  } }
+}catch(e){}
+})();
+
+</script>
+<script>
+/* Tek başına sayfa: "Kapat" yarışmayı kapatmak yerine giriş ekranına döner. */
+document.addEventListener('click',function(e){ var t=e.target.closest('[data-kdk="kapat"]'); if(t){ e.stopImmediatePropagation(); window.kdkAc(); } },true);
+if(!/[?&]kazanan=/.test(location.search)) window.kdkAc('s4',1);
+</script>
+</body></html>
