@@ -231,6 +231,339 @@ function omTurnuvaKur(anahtar, havuz, ozgun){
   mac('FİNAL', yari[0], yari[1]);
   return maclar;
 }
+/* ——— Çengel Bulmaca (bütün sınıflar): kesişen kelimeli, her oyunda yeni bulmaca ———
+   Kelimeler önce ızgaraya gerçekten yerleştirilir; yalnızca yerleşenler soru listesine
+   girer. Soru ↔ kutu bağlantısı iki yönlüdür. 💡 Harf İpucu ve 🔤 İlk Harfler vardır.
+   Sayfa: <section id="ONEK" class="om-cengel"> içinde ONEKIzgara, ONEKListe, ONEKSonuc,
+   ONEKDogruKelime, ONEKKelimeSayisi, ONEKIpucuSayisi kimlikleri bulunur. */
+const OM_CENGEL = {};
+const OM_CENGEL_HEDEF = 22, OM_CENGEL_EN_AZ = 18, OM_CENGEL_BOYUTLAR = [15, 17, 19, 21];
+
+/* Türkçe harfleri tek tek ayırır (Ç, Ğ, İ, Ö, Ş, Ü birer harf); şapkalı harfler düz yazılır. */
+function omCengelHarfler(metin){
+  return Array.from(String(metin).toLocaleUpperCase('tr-TR')
+    .replace(/Â/g,'A').replace(/Î/g,'İ').replace(/Û/g,'U').replace(/[^A-ZÇĞİÖŞÜ]/g,''));
+}
+/* Sayfanın {kelime, anlam} listelerinden bulmacaya uygun tek kelimelik kavramlar. */
+function omCengelHavuzu(){
+  /* Cevabı (şapkalı yazılışı dahil) içeren tanımlar ipucu olarak kullanılmaz */
+  const duz = m => String(m).toLocaleUpperCase('tr-TR').replace(/Â/g,'A').replace(/Î/g,'İ').replace(/Û/g,'U');
+  return omKavramHavuzu.apply(null, arguments)
+    .filter(o => /^[A-ZÇĞİÖŞÜÂÎÛ]{3,12}$/.test(o.kelime))
+    .map(o => ({ cevap: o.kelime, sorular: o.anlamlar.filter(a => duz(a).indexOf(duz(o.kelime)) < 0) }))
+    .filter(o => o.sorular.length);
+}
+/* Kelimeleri sırayla gerçekten ızgaraya yerleştirir; yalnızca yerleşenleri döndürür. */
+function omCengelYerlestir(sira, boyut){
+  const hucre = new Map(), yonHucre = new Set(), yerlesen = [];
+  let minR = 0, maxR = 0, minC = 0, maxC = 0;
+  const al = (r, c) => hucre.get(r + ',' + c);
+  const dene = (h, r, c, yatay) => {
+    const dr = yatay ? 0 : 1, dc = yatay ? 1 : 0, n = h.length;
+    const sonR = r + dr*(n-1), sonC = c + dc*(n-1);
+    if(Math.max(maxR, sonR) - Math.min(minR, r) + 1 > boyut) return -1;
+    if(Math.max(maxC, sonC) - Math.min(minC, c) + 1 > boyut) return -1;
+    if(al(r - dr, c - dc) !== undefined || al(sonR + dr, sonC + dc) !== undefined) return -1;
+    let kesisme = 0;
+    for(let i = 0; i < n; i++){
+      const rr = r + dr*i, cc = c + dc*i, v = al(rr, cc);
+      if(v !== undefined){
+        if(v !== h[i] || yonHucre.has(rr + ',' + cc + (yatay ? 'y' : 'd'))) return -1;
+        kesisme++;
+      } else if(al(rr + dc, cc + dr) !== undefined || al(rr - dc, cc - dr) !== undefined){
+        return -1;
+      }
+    }
+    return kesisme > 0 && kesisme < n ? kesisme : -1;
+  };
+  const koy = (o, r, c, yatay) => {
+    const dr = yatay ? 0 : 1, dc = yatay ? 1 : 0;
+    const hucreler = o.harfler.map((harf, i) => {
+      const rr = r + dr*i, cc = c + dc*i;
+      hucre.set(rr + ',' + cc, harf); yonHucre.add(rr + ',' + cc + (yatay ? 'y' : 'd'));
+      minR = Math.min(minR, rr); maxR = Math.max(maxR, rr); minC = Math.min(minC, cc); maxC = Math.max(maxC, cc);
+      return {r: rr, c: cc};
+    });
+    yerlesen.push({o: o, yatay: yatay, hucreler: hucreler});
+  };
+  if(!sira.length || sira[0].harfler.length > boyut) return yerlesen;
+  koy(sira[0], 0, 0, Math.random() < 0.5);
+  const kalan = sira.slice(1);
+  let ilerledi = true;
+  while(ilerledi && yerlesen.length < OM_CENGEL_HEDEF){
+    ilerledi = false;
+    for(const o of kalan.slice()){
+      if(yerlesen.length >= OM_CENGEL_HEDEF) break;
+      let enIyi = null;
+      yerlesen.forEach(y => y.hucreler.forEach(p => {
+        const harf = al(p.r, p.c);
+        o.harfler.forEach((h, i) => {
+          if(h !== harf) return;
+          const yatay = !y.yatay;
+          const r = yatay ? p.r : p.r - i, c = yatay ? p.c - i : p.c;
+          const k = dene(o.harfler, r, c, yatay);
+          if(k < 0) return;
+          const puan = k * 10 + Math.random() * 6;
+          if(!enIyi || puan > enIyi.puan) enIyi = {puan: puan, r: r, c: c, yatay: yatay};
+        });
+      }));
+      if(enIyi){ koy(o, enIyi.r, enIyi.c, enIyi.yatay); kalan.splice(kalan.indexOf(o), 1); ilerledi = true; }
+    }
+  }
+  return yerlesen;
+}
+/* Yeni bulmaca: son bulmacadaki kelimeler sona bırakılır, aynı kelime seti art arda gelmez.
+   Küçük ızgaradan başlanır; 18 kelime sığmazsa ızgara büyütülür. */
+function omCengelUret(onek, havuzGiris){
+  const anahtar = 'omCengel:' + location.pathname + ':' + onek + '-kesisen';
+  const kayit = omBellekOku(anahtar) || {};
+  const son = Array.isArray(kayit.son) ? kayit.son : [], onceki = Array.isArray(kayit.onceki) ? kayit.onceki : [];
+  const gorulen = {};
+  const havuz = havuzGiris.map(o => {
+    const sorular = (o.sorular || [o.soru]).filter(Boolean);
+    return { cevap: String(o.cevap).toLocaleUpperCase('tr-TR'), temel: !!o.temel, harfler: omCengelHarfler(o.cevap),
+      soru: sorular[Math.floor(Math.random() * sorular.length)] };
+  }).filter(o => o.soru && o.harfler.length >= 2 && o.harfler.length <= 15 && !gorulen[o.harfler.join('')] && (gorulen[o.harfler.join('')] = true));
+  let enIyi = null;
+  for(const boyut of OM_CENGEL_BOYUTLAR){
+    for(let deneme = 0; deneme < 50; deneme++){
+      const agirlik = o => Math.random() + (son.indexOf(o.cevap) >= 0 ? 0.9 : 0) + (onceki.indexOf(o.cevap) >= 0 ? 0.4 : 0) - (o.temel ? 0.3 : 0);
+      const sira = havuz.map(o => [agirlik(o), o]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+      if(!sira.length) break;
+      /* Başlangıç kelimesi: ilk sıralardaki en uzun kelime (daha çok kesişme imkânı) */
+      const bas = sira.slice(0, 6).reduce((a, b) => b.harfler.length > a.harfler.length ? b : a);
+      sira.splice(sira.indexOf(bas), 1); sira.unshift(bas);
+      const sonuc = omCengelYerlestir(sira, boyut);
+      const imza = sonuc.map(y => y.o.cevap).sort().join('|');
+      if(imza === kayit.imza && havuz.length > sonuc.length) continue;
+      if(!enIyi || sonuc.length > enIyi.sonuc.length) enIyi = {sonuc: sonuc, imza: imza};
+      if(enIyi.sonuc.length >= Math.min(OM_CENGEL_HEDEF - 1, havuz.length)) break;
+    }
+    if(enIyi && enIyi.sonuc.length >= Math.min(OM_CENGEL_EN_AZ, havuz.length)) break;
+  }
+  if(!enIyi) enIyi = {sonuc: omCengelYerlestir(havuz.slice().sort((a, b) => b.harfler.length - a.harfler.length), 21), imza: ''};
+  const yerlesen = enIyi.sonuc;
+  /* Koordinatları sıfırla, numaraları soldan sağa / yukarıdan aşağı ver */
+  let minR = Infinity, minC = Infinity, maxR = -Infinity, maxC = -Infinity;
+  yerlesen.forEach(y => y.hucreler.forEach(p => { minR = Math.min(minR, p.r); minC = Math.min(minC, p.c); maxR = Math.max(maxR, p.r); maxC = Math.max(maxC, p.c); }));
+  const baslar = [];
+  yerlesen.forEach(y => { const p = y.hucreler[0]; const k = (p.r - minR) + ',' + (p.c - minC); if(baslar.indexOf(k) < 0) baslar.push(k); });
+  baslar.sort((a, b) => { const x = a.split(',').map(Number), y = b.split(',').map(Number); return x[0] - y[0] || x[1] - y[1]; });
+  const kelimeler = yerlesen.map(y => {
+    const hucreler = y.hucreler.map(p => (p.r - minR) + ',' + (p.c - minC));
+    const no = baslar.indexOf(hucreler[0]) + 1, yon = y.yatay ? 'yatay' : 'dikey';
+    return { id: no + '-' + yon, no: no, soru: y.o.soru, cevap: y.o.cevap, harfler: y.o.harfler, yon: yon,
+      baslangicSatir: y.hucreler[0].r - minR, baslangicSutun: y.hucreler[0].c - minC, uzunluk: y.o.harfler.length, hucreler: hucreler };
+  }).sort((a, b) => (a.yon === b.yon ? 0 : a.yon === 'yatay' ? -1 : 1) || a.no - b.no);
+  const tur = (Number.isInteger(kayit.tur) ? kayit.tur : 0) + 1;
+  omBellekYaz(anahtar, { imza: enIyi.imza, son: kelimeler.map(k => k.cevap), onceki: son, tur: tur });
+  return { kelimeler: kelimeler, satir: Math.max(1, maxR - minR + 1), sutun: Math.max(1, maxC - minC + 1) };
+}
+function omCengelMetin(id, metin){ const el = document.getElementById(id); if(el) el.textContent = metin; }
+
+function omCengelOlustur(onek, havuz){
+  const b = omCengelUret(onek, havuz);
+  const st = OM_CENGEL[onek] = { havuz: havuz, kelimeler: b.kelimeler, aktif: null, hatali: new Set(), ipuculu: new Set(),
+    ipucuSayisi: 0, bitti: false, harita: {}, girdiler: {}, sonHucre: null };
+  st.kelimeler.forEach(k => k.hucreler.forEach((key, i) => {
+    if(st.harita[key] !== undefined && st.harita[key] !== k.harfler[i]) throw new Error('Çengel: kesişen harf uyuşmuyor ' + key);
+    st.harita[key] = k.harfler[i];
+  }));
+  const numaralar = {};
+  st.kelimeler.forEach(k => { numaralar[k.hucreler[0]] = k.no; });
+
+  const izgara = document.getElementById(onek + 'Izgara');
+  izgara.innerHTML = '';
+  izgara.style.setProperty('--omc', `min(34px, calc((100vw - 64px) / ${b.sutun}))`);
+  izgara.style.gridTemplateColumns = `repeat(${b.sutun}, var(--omc))`;
+  izgara.style.gridTemplateRows = `repeat(${b.satir}, var(--omc))`;
+  for(let rr = 0; rr < b.satir; rr++){
+    for(let cc = 0; cc < b.sutun; cc++){
+      const key = rr + ',' + cc;
+      const hucreDiv = document.createElement('div');
+      hucreDiv.style.gridColumn = (cc + 1);
+      hucreDiv.style.gridRow = (rr + 1);
+      if(st.harita[key] !== undefined){
+        hucreDiv.className = 'cengel-hucre';
+        if(numaralar[key]){
+          const no = document.createElement('span');
+          no.className = 'omc-no'; no.textContent = numaralar[key];
+          hucreDiv.appendChild(no);
+        }
+        const girdi = document.createElement('input');
+        girdi.maxLength = 2;
+        girdi.className = 'cengel-girdi';
+        girdi.dataset.key = key;
+        girdi.setAttribute('autocomplete', 'off');
+        girdi.setAttribute('aria-label', 'Bulmaca kutusu');
+        girdi.onfocus = () => omCengelHucreSec(onek, key, false);
+        girdi.onclick = () => omCengelHucreSec(onek, key, true);
+        girdi.oninput = (e) => {
+          const h = omCengelHarfler(e.target.value);
+          e.target.value = h.length ? h[h.length - 1] : '';
+          e.target.classList.remove('dogru', 'yanlis');
+          if(e.target.value) omCengelIlerle(onek, key, 1);
+        };
+        girdi.onkeydown = (e) => {
+          if(e.key === 'Backspace' && !e.target.value){ e.preventDefault(); omCengelIlerle(onek, key, -1, true); }
+          else if(/^Arrow(Right|Left|Up|Down)$/.test(e.key)){
+            e.preventDefault();
+            const p = key.split(',').map(Number);
+            const hedef = e.key === 'ArrowRight' ? [p[0], p[1]+1] : e.key === 'ArrowLeft' ? [p[0], p[1]-1] : e.key === 'ArrowUp' ? [p[0]-1, p[1]] : [p[0]+1, p[1]];
+            const g = st.girdiler[hedef.join(',')]; if(g) g.focus();
+          }
+        };
+        hucreDiv.appendChild(girdi);
+        st.girdiler[key] = girdi;
+      } else {
+        hucreDiv.className = 'cengel-bos';
+      }
+      izgara.appendChild(hucreDiv);
+    }
+  }
+
+  const liste = document.getElementById(onek + 'Liste');
+  liste.innerHTML = '';
+  ['yatay', 'dikey'].forEach(yon => {
+    const grup = st.kelimeler.filter(k => k.yon === yon);
+    if(!grup.length) return;
+    const bas = document.createElement('li');
+    bas.className = 'omc-baslik';
+    bas.textContent = yon === 'yatay' ? '➡️ Soldan sağa' : '⬇️ Yukarıdan aşağı';
+    liste.appendChild(bas);
+    grup.forEach(k => {
+      const li = document.createElement('li');
+      li.id = onek + '-ipucu-' + k.id;
+      li.className = 'omc-ipucu';
+      li.tabIndex = 0;
+      li.textContent = `${k.no}. (${k.uzunluk} harf) ${k.soru}`;
+      li.onclick = () => omCengelKelimeSec(onek, k, true);
+      li.onkeydown = (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); omCengelKelimeSec(onek, k, true); } };
+      liste.appendChild(li);
+    });
+  });
+
+  omCengelMetin(onek + 'KelimeSayisi', st.kelimeler.length);
+  omCengelMetin(onek + 'DogruKelime', 0);
+  omCengelMetin(onek + 'IpucuSayisi', 0);
+  document.getElementById(onek + 'Sonuc').innerHTML = '';
+}
+/* Soru ↔ kutu bağlantısı: seçilen kelimenin kutuları ve ipucu birlikte vurgulanır. */
+function omCengelKelimeSec(onek, k, odakla){
+  const st = OM_CENGEL[onek];
+  st.aktif = k;
+  Object.values(st.girdiler).forEach(g => g.classList.remove('omc-aktif'));
+  k.hucreler.forEach(key => st.girdiler[key].classList.add('omc-aktif'));
+  document.querySelectorAll('#' + onek + 'Liste .omc-ipucu').forEach(li => li.classList.toggle('omc-secili', li.id === onek + '-ipucu-' + k.id));
+  if(odakla){
+    const bos = k.hucreler.find(key => !st.girdiler[key].value) || k.hucreler.find(key => !st.girdiler[key].readOnly) || k.hucreler[0];
+    st.girdiler[bos].focus({preventScroll: true});
+  }
+}
+function omCengelHucreSec(onek, key, tiklama){
+  const st = OM_CENGEL[onek];
+  const adaylar = st.kelimeler.filter(k => k.hucreler.indexOf(key) >= 0);
+  if(!adaylar.length) return;
+  let k = adaylar[0];
+  if(st.aktif && adaylar.indexOf(st.aktif) >= 0){
+    k = st.aktif;
+    /* Kesişme kutusuna yeniden tıklanınca diğer yöndeki kelimeye geçilir */
+    if(tiklama && adaylar.length > 1 && document.activeElement === st.girdiler[key] && st.sonHucre === key) k = adaylar.find(a => a !== st.aktif);
+  }
+  st.sonHucre = key;
+  omCengelKelimeSec(onek, k, false);
+}
+function omCengelIlerle(onek, key, adim, sil){
+  const st = OM_CENGEL[onek];
+  if(!st.aktif) return;
+  const i = st.aktif.hucreler.indexOf(key);
+  if(i < 0) return;
+  /* İpucuyla açılmış (kilitli) kutular atlanır */
+  let j = i + adim;
+  while(j >= 0 && j < st.aktif.hucreler.length && st.girdiler[st.aktif.hucreler[j]].readOnly) j += adim;
+  if(j < 0 || j >= st.aktif.hucreler.length) return;
+  const g = st.girdiler[st.aktif.hucreler[j]];
+  if(sil){ g.value = ''; g.classList.remove('dogru', 'yanlis'); }
+  g.focus({preventScroll: true});
+}
+/* ——— İpuçları ——— */
+function omCengelHarfAc(st, key){
+  const g = st.girdiler[key];
+  g.value = st.harita[key];
+  g.readOnly = true;
+  g.classList.remove('yanlis'); g.classList.add('omc-acik');
+}
+function omCengelEksik(st, k){
+  return k.hucreler.filter(key => (omCengelHarfler(st.girdiler[key].value)[0] || '') !== st.harita[key]);
+}
+/* Seçili kelimenin (seçili değilse ilk eksik kelimenin) bir harfini açar. */
+function omCengelHarfIpucu(onek){
+  const st = OM_CENGEL[onek];
+  if(!st || st.bitti) return;
+  let k = st.aktif;
+  if(!k || !omCengelEksik(st, k).length) k = st.kelimeler.find(x => omCengelEksik(st, x).length);
+  const sonuc = document.getElementById(onek + 'Sonuc');
+  if(!k){ sonuc.textContent = 'Bütün harfler yerinde görünüyor. “✅ Kontrol Et”e bas!'; return; }
+  omCengelHarfAc(st, omCengelEksik(st, k)[0]);
+  st.ipuculu.add(k.cevap);
+  st.ipucuSayisi++;
+  omCengelMetin(onek + 'IpucuSayisi', st.ipucuSayisi);
+  omCengelKelimeSec(onek, k, false);
+  const bos = omCengelEksik(st, k)[0];
+  if(bos) st.girdiler[bos].focus({preventScroll: true});
+  sonuc.textContent = `💡 ${k.no}. ${k.yon === 'yatay' ? 'soldan sağa' : 'yukarıdan aşağı'} kelimenin bir harfini açtım.`;
+}
+/* Bütün kelimelerin ilk harfini açar (bir ipucu sayılır). */
+function omCengelIlkHarfler(onek){
+  const st = OM_CENGEL[onek];
+  if(!st || st.bitti) return;
+  let acilan = 0;
+  st.kelimeler.forEach(k => { const key = k.hucreler[0]; if(!st.girdiler[key].readOnly){ omCengelHarfAc(st, key); acilan++; } });
+  if(acilan){ st.ipucuSayisi++; omCengelMetin(onek + 'IpucuSayisi', st.ipucuSayisi); }
+  document.getElementById(onek + 'Sonuc').textContent = acilan ? '🔤 Bütün kelimelerin ilk harfleri açıldı.' : 'İlk harfler zaten açık.';
+}
+function omCengelKontrolEt(onek){
+  const st = OM_CENGEL[onek];
+  if(!st) return;
+  let dogruSayisi = 0, toplam = 0;
+  Object.keys(st.harita).forEach(key => {
+    toplam++;
+    const girdi = st.girdiler[key];
+    const yazilan = omCengelHarfler(girdi.value)[0] || '';
+    if(yazilan && yazilan === st.harita[key]){
+      girdi.classList.add('dogru'); girdi.classList.remove('yanlis');
+      dogruSayisi++;
+    } else {
+      girdi.classList.add('yanlis'); girdi.classList.remove('dogru');
+    }
+  });
+  let dogruKelime = 0;
+  st.kelimeler.forEach(k => {
+    const tamam = !omCengelEksik(st, k).length;
+    const denendi = k.hucreler.some(key => st.girdiler[key].value && !st.girdiler[key].readOnly);
+    if(tamam) dogruKelime++;
+    else if(denendi && !st.bitti) st.hatali.add(k.cevap);
+    const li = document.getElementById(onek + '-ipucu-' + k.id);
+    if(li) li.classList.toggle('omc-tamam', tamam);
+  });
+  omCengelMetin(onek + 'DogruKelime', dogruKelime);
+  const sonuc = document.getElementById(onek + 'Sonuc');
+  if(dogruSayisi !== toplam){
+    sonuc.textContent = `Sonuç: ${dogruKelime}/${st.kelimeler.length} kelime, ${dogruSayisi}/${toplam} harf doğru. Kırmızı kutuları düzelt, devam et!`;
+    return;
+  }
+  st.bitti = true;
+  const ad = c => { const k = c.toLocaleLowerCase('tr-TR'); return k.charAt(0).toLocaleUpperCase('tr-TR') + k.slice(1); };
+  const tekrarMi = k => st.hatali.has(k.cevap) || st.ipuculu.has(k.cevap);
+  const ogrenilen = st.kelimeler.filter(k => !tekrarMi(k));
+  const tekrar = st.kelimeler.filter(tekrarMi);
+  sonuc.innerHTML =
+    `<div class="omc-tebrik">🎉 TEBRİKLER! ${st.kelimeler.length} kelimelik bulmacayı tamamen doğru çözdün!</div>` +
+    `<div class="omc-analiz"><b>✅ Bu turda öğrendiğin kavramlar</b><div>${ogrenilen.map(k => '✓ ' + ad(k.cevap)).join(' · ') || '—'}</div></div>` +
+    (tekrar.length ? `<div class="omc-analiz omc-tekrar"><b>🔁 Tekrar etmen gereken kavramlar</b><ul>${tekrar.map(k => `<li><b>${ad(k.cevap)}</b>${st.ipuculu.has(k.cevap) ? ' (💡 ipucuyla)' : ''}: ${k.soru}</li>`).join('')}</ul></div>` : '') +
+    `<button class="eylem" onclick="omCengelYeniden('${onek}')">🆕 YENİ BULMACA</button>`;
+}
+function omCengelYeniden(onek){ const st = OM_CENGEL[onek]; if(st) omCengelOlustur(onek, st.havuz); }
 /* Oyun kartına (yeniden) tıklanınca oyun baştan, yeni bir turla başlar. */
 const OM_OYUN_BOLUMLERI = new Set();
 function omBaslaticiBul(bolum){

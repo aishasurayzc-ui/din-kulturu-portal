@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../ortak/oyun-merkezi.css">
+<link rel="stylesheet" href="../ortak/lingo.css">
 
 <body>
 <div id="portalNav" data-sinif="8" data-unite="3" data-asama="oyun"></div>
@@ -50,16 +51,19 @@
   <button class="eylem" onclick="kelimeAvi83Olustur()">🔄 Yeni Bulmaca</button>
 </section>
 
-<section id="cengel83">
+<section id="cengel83" class="om-cengel">
   <h2>🧩 Çengel Bulmaca</h2>
   <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
-  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
+  <div class="aciklama">Kelimeler bulmacada birbirini keser: ➡️ soldan sağa ve ⬇️ yukarıdan aşağı. Bir ipucuna tıklarsan o kelimenin kutuları renklenir; bir kutuya tıklarsan ait olduğu ipucu vurgulanır. Kesişen bir kutuya ikinci kez tıklarsan diğer yöndeki kelimeye geçersin. Zorlanırsan <b>💡 Harf İpucu</b>’na bas: seçtiğin kelimenin bir harfi açılır. <b>🔤 İlk Harfler</b> bütün kelimelerin ilk harfini gösterir. Her “Yeni Bulmaca”da kelimeler ve yerleşim değişir.</div>
+  <div class="oyun-bilgi"><span>✅ Doğru kelime: <b id="cengel83DogruKelime">0</b>/<b id="cengel83KelimeSayisi">0</b></span> <span>💡 Kullanılan ipucu: <b id="cengel83IpucuSayisi">0</b></span></div>
   <div class="cengel-izgara" id="cengel83Izgara"></div>
   <ul class="cengel-liste" id="cengel83Liste"></ul>
   <div class="sonuc-kutusu" id="cengel83Sonuc"></div>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
     <button class="eylem" onclick="cengel83KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="cengel83Olustur()">🔄 Baştan Başla</button>
+    <button class="eylem" style="background:var(--yesil)" onclick="omCengelHarfIpucu('cengel83')">💡 Harf İpucu</button>
+    <button class="eylem" style="background:var(--mavi)" onclick="omCengelIlkHarfler('cengel83')">🔤 İlk Harfler</button>
+    <button class="eylem" style="background:var(--sari)" onclick="cengel83Olustur()">🆕 Yeni Bulmaca</button>
   </div>
 </section>
 
@@ -763,6 +767,14 @@
   <div id="bc83YenidenBaslat" style="text-align:center;"></div>
   <button class="eylem" onclick="bc83Baslat()">🎡 Çarkı Başlat</button>
 </section>
+<section id="lingo83">
+  <h2>🟥 Lingo</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitenin kavramlarını harf ipuçlarından çıkarıp doğru yazabilmek.</div>
+  <div class="aciklama">TV'deki Lingo gibi: kelimenin <b>ilk harfi</b> verilir, <b>5 tahmin</b> hakkın var. <span class="lingo-ornek">A</span> kırmızı kare = harf doğru yerde, <span class="lingo-ornek lingo-ornek-v">A</span> sarı daire = harf kelimede var ama yeri yanlış, gri = harf kelimede yok. Turlar 4, 5 ve 6 harfli kelimelerle ilerler. <b>İki takım</b> modunda bilemeyen takımın hakkı rakibe geçer: bir harf daha açılır ve rakip tek tahminle 10 puanı çalabilir.</div>
+  <div class="lingo" id="lingo83Alan"></div>
+  <div class="sonuc-kutusu" id="lingo83Sonuc"></div>
+  <div style="text-align:center;"><button class="eylem" onclick="lingo83Baslat()">🔄 Baştan Başlat</button></div>
+</section>
 </main>
 
 <script src="../ortak/oyun-merkezi.js"></script>
@@ -818,7 +830,8 @@ const OYUN_LISTESI = [
   {id:'decisionmaker', kategori:'ikikisilik', ikon:'🤔', baslik:'Decision Maker', aciklama:'Senaryoda en doğru davranışı seç.'},
   {id:'championarena', kategori:'ikikisilik', ikon:'🏆', baslik:'Champion Arena', aciklama:'20 soruluk final turnuvasında şampiyon ol.'},
   {id:'tabuduellosu', kategori:'ikikisilik', ikon:'🙊', baslik:'Tabu Düellosu', aciklama:'Yasaklı kelimeleri kullanmadan kavramı arkadaşına anlat.'},
-  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'}
+  {id:'bilgicarki', kategori:'ikikisilik', ikon:'🎡', baslik:'Bilgi Çarkı', aciklama:'Çarkı çevir, hangi kategoriden soru geleceğini şansına bırak.'},
+  {id:'lingo', kategori:'yarisma', ikon:'🟥', baslik:'Lingo', aciklama:'TV’deki gibi: ilk harf verilir, 5 hakta ünite kavramını bul. Tek kişi ya da iki takım.'}
 ];
 oyunMerkeziOlustur(OYUN_LISTESI, '83', 'unite3.html');
 
@@ -1845,112 +1858,12 @@ const cengel83Zinciri = [
   {kelime:"FAİZ", anlam:"Paranın emeksiz ve karşılıksız olarak çoğaltılması; riba"},
   {kelime:"ZARURAT", anlam:"Dinin korumayı amaçladığı beş temel değeri ifade eden tamlamanın ilk kelimesi"},
 ];
-let cengel83HucreHarita = {}, cengel83InputMap = {};
 
-function cengel83Olustur(){
-  let r=0, c=0, dir='right';
-  const yerlesimler = [];
-  omCengelZinciri('cengel', omKavramHavuzu(cengel83Zinciri, kelimeHavuzu83, kelimeAvi83Listesi, lab83IfadeHavuzu), cengel83Zinciri).forEach(item=>{
-    const kelime = item.kelime;
-    const hucreler = [];
-    for(let j=0;j<kelime.length;j++){
-      hucreler.push(dir==='right' ? {r, c:c+j} : {r:r+j, c});
-    }
-    yerlesimler.push({...item, hucreler, dir});
-    const son = hucreler[hucreler.length-1];
-    r = son.r; c = son.c;
-    dir = dir==='right' ? 'down' : 'right';
-  });
+/* Çengel Bulmaca: kesişen kelimeli, her oyunda yeni bulmaca (ortak/oyun-merkezi.js omCengel*) */
+function cengel83Olustur(){ omCengelOlustur('cengel83', omCengelHavuzu(cengel83Zinciri, kelimeHavuzu83, kelimeAvi83Listesi, lab83IfadeHavuzu)); }
+function cengel83KontrolEt(){ omCengelKontrolEt('cengel83'); }
 
-  let minR=Infinity,maxR=-Infinity,minC=Infinity,maxC=-Infinity;
-  yerlesimler.forEach(p=>p.hucreler.forEach(h=>{
-    minR=Math.min(minR,h.r); maxR=Math.max(maxR,h.r);
-    minC=Math.min(minC,h.c); maxC=Math.max(maxC,h.c);
-  }));
-  const satirSayisi = maxR-minR+1, sutunSayisi = maxC-minC+1;
 
-  cengel83HucreHarita = {};
-  yerlesimler.forEach(p=>{
-    p.hucreler.forEach((h,i)=>{
-      const key = (h.r-minR)+','+(h.c-minC);
-      cengel83HucreHarita[key] = p.kelime[i];
-    });
-  });
-
-  const siraliHucreler = [];
-  const gorulen = new Set();
-  yerlesimler.forEach((p, idx)=>{
-    const baslangic = idx===0 ? 0 : 1;
-    for(let i=baslangic;i<p.hucreler.length;i++){
-      const h = p.hucreler[i];
-      const key = (h.r-minR)+','+(h.c-minC);
-      if(!gorulen.has(key)){ gorulen.add(key); siraliHucreler.push(key); }
-    }
-  });
-
-  const izgara = document.getElementById('cengel83Izgara');
-  izgara.innerHTML = '';
-  izgara.style.gridTemplateColumns = `repeat(${sutunSayisi}, 34px)`;
-  izgara.style.gridTemplateRows = `repeat(${satirSayisi}, 34px)`;
-  cengel83InputMap = {};
-  for(let rr=0; rr<satirSayisi; rr++){
-    for(let cc=0; cc<sutunSayisi; cc++){
-      const key = rr+','+cc;
-      const hucreDiv = document.createElement('div');
-      hucreDiv.style.gridColumn = (cc+1);
-      hucreDiv.style.gridRow = (rr+1);
-      if(cengel83HucreHarita[key] !== undefined){
-        hucreDiv.className = 'cengel-hucre';
-        const girdi = document.createElement('input');
-        girdi.maxLength = 1;
-        girdi.className = 'cengel-girdi';
-        girdi.dataset.key = key;
-        girdi.oninput = (e)=>{
-          e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
-          e.target.classList.remove('dogru','yanlis');
-          const idx = siraliHucreler.indexOf(key);
-          if(idx>=0 && idx<siraliHucreler.length-1){
-            const sonrakiKey = siraliHucreler[idx+1];
-            if(cengel83InputMap[sonrakiKey]) cengel83InputMap[sonrakiKey].focus();
-          }
-        };
-        hucreDiv.appendChild(girdi);
-        cengel83InputMap[key] = girdi;
-      } else {
-        hucreDiv.className = 'cengel-bos';
-      }
-      izgara.appendChild(hucreDiv);
-    }
-  }
-
-  const liste = document.getElementById('cengel83Liste');
-  liste.innerHTML = '';
-  yerlesimler.forEach((p, idx)=>{
-    const li = document.createElement('li');
-    li.textContent = `${idx+1}. ${p.dir==='right'?'➡️':'⬇️'} (${p.kelime.length} harf) ${p.anlam}`;
-    liste.appendChild(li);
-  });
-
-  document.getElementById('cengel83Sonuc').textContent = '';
-}
-
-function cengel83KontrolEt(){
-  let dogruSayisi=0, toplam=0;
-  Object.keys(cengel83HucreHarita).forEach(key=>{
-    toplam++;
-    const girdi = cengel83InputMap[key];
-    const beklenen = cengel83HucreHarita[key];
-    if(girdi.value && girdi.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
-      girdi.classList.add('dogru'); girdi.classList.remove('yanlis');
-      dogruSayisi++;
-    } else {
-      girdi.classList.add('yanlis'); girdi.classList.remove('dogru');
-    }
-  });
-  document.getElementById('cengel83Sonuc').textContent = dogruSayisi===toplam
-    ? `🎉 Tebrikler! Çengel bulmacayı tamamen doğru çözdün! (${dogruSayisi}/${toplam})`
-    : `Sonuç: ${dogruSayisi}/${toplam} doğru harf. Devam et!`;
-}
 
 // =====================================================================
 // SÖZCÜK MERDİVENİ
@@ -3533,5 +3446,7 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
 
 </script>
 
+<script src="../ortak/lingo.js"></script>
+<script>omLingoKur('lingo83', kelimeHavuzu83.concat(kelimeAvi83Listesi));</script>
 </body>
 </html>

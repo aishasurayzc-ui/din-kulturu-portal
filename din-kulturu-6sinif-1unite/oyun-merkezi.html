@@ -152,16 +152,19 @@
 </section>
 
 <!-- ÇENGEL BULMACA -->
-<section id="cengel6">
+<section id="cengel6" class="om-cengel">
   <h2>🧩 Çengel Bulmaca</h2>
   <div class="oyun-amaci">🎯 Bu oyunun amacı: Verilen tanımlardan yola çıkarak doğru kavramı hatırlayıp yazabilmek.</div>
-  <div class="aciklama">Kelimeler zincir gibi birbirine bağlı: her kelimenin son harfi, bir sonraki kelimenin ilk harfidir! İpuçlarına bakarak kutucukları doldur.</div>
+  <div class="aciklama">Kelimeler bulmacada birbirini keser: ➡️ soldan sağa ve ⬇️ yukarıdan aşağı. Bir ipucuna tıklarsan o kelimenin kutuları renklenir; bir kutuya tıklarsan ait olduğu ipucu vurgulanır. Kesişen bir kutuya ikinci kez tıklarsan diğer yöndeki kelimeye geçersin. Zorlanırsan <b>💡 Harf İpucu</b>’na bas: seçtiğin kelimenin bir harfi açılır. <b>🔤 İlk Harfler</b> bütün kelimelerin ilk harfini gösterir. Her “Yeni Bulmaca”da kelimeler ve yerleşim değişir.</div>
+  <div class="oyun-bilgi"><span>✅ Doğru kelime: <b id="cengel6DogruKelime">0</b>/<b id="cengel6KelimeSayisi">0</b></span> <span>💡 Kullanılan ipucu: <b id="cengel6IpucuSayisi">0</b></span></div>
   <div class="cengel-izgara" id="cengel6Izgara"></div>
   <ul class="cengel-liste" id="cengel6Liste"></ul>
   <div class="sonuc-kutusu" id="cengel6Sonuc"></div>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
     <button class="eylem" onclick="cengel6KontrolEt()">✅ Kontrol Et</button>
-    <button class="eylem" style="background:var(--sari)" onclick="cengel6Olustur()">🔄 Baştan Başla</button>
+    <button class="eylem" style="background:var(--yesil)" onclick="omCengelHarfIpucu('cengel6')">💡 Harf İpucu</button>
+    <button class="eylem" style="background:var(--mavi)" onclick="omCengelIlkHarfler('cengel6')">🔤 İlk Harfler</button>
+    <button class="eylem" style="background:var(--sari)" onclick="cengel6Olustur()">🆕 Yeni Bulmaca</button>
   </div>
 </section>
 
@@ -1846,112 +1849,12 @@ const cengel6Zinciri = [
   {kelime:"İNZAR", anlam:"Peygamberlerin Allah'ın emirlerine uymayanları uyarması"},
   {kelime:"RESUL", anlam:"Peygamber anlamında kullanılan, \"elçi\" anlamına gelen kavram"},
 ];
-let cengel6HucreHarita = {}, cengel6InputMap = {};
 
-function cengel6Olustur(){
-  let r=0, c=0, dir='right';
-  const yerlesimler = [];
-  omCengelZinciri('cengel', omKavramHavuzu(cengel6Zinciri, kelimeHavuzu6, kelimeAvi6Listesi, lab6IfadeHavuzu), cengel6Zinciri).forEach(item=>{
-    const kelime = item.kelime;
-    const hucreler = [];
-    for(let j=0;j<kelime.length;j++){
-      hucreler.push(dir==='right' ? {r, c:c+j} : {r:r+j, c});
-    }
-    yerlesimler.push({...item, hucreler, dir});
-    const son = hucreler[hucreler.length-1];
-    r = son.r; c = son.c;
-    dir = dir==='right' ? 'down' : 'right';
-  });
+/* Çengel Bulmaca: kesişen kelimeli, her oyunda yeni bulmaca (ortak/oyun-merkezi.js omCengel*) */
+function cengel6Olustur(){ omCengelOlustur('cengel6', omCengelHavuzu(cengel6Zinciri, kelimeHavuzu6, kelimeAvi6Listesi, lab6IfadeHavuzu)); }
+function cengel6KontrolEt(){ omCengelKontrolEt('cengel6'); }
 
-  let minR=Infinity,maxR=-Infinity,minC=Infinity,maxC=-Infinity;
-  yerlesimler.forEach(p=>p.hucreler.forEach(h=>{
-    minR=Math.min(minR,h.r); maxR=Math.max(maxR,h.r);
-    minC=Math.min(minC,h.c); maxC=Math.max(maxC,h.c);
-  }));
-  const satirSayisi = maxR-minR+1, sutunSayisi = maxC-minC+1;
 
-  cengel6HucreHarita = {};
-  yerlesimler.forEach(p=>{
-    p.hucreler.forEach((h,i)=>{
-      const key = (h.r-minR)+','+(h.c-minC);
-      cengel6HucreHarita[key] = p.kelime[i];
-    });
-  });
-
-  const siraliHucreler = [];
-  const gorulen = new Set();
-  yerlesimler.forEach((p, idx)=>{
-    const baslangic = idx===0 ? 0 : 1;
-    for(let i=baslangic;i<p.hucreler.length;i++){
-      const h = p.hucreler[i];
-      const key = (h.r-minR)+','+(h.c-minC);
-      if(!gorulen.has(key)){ gorulen.add(key); siraliHucreler.push(key); }
-    }
-  });
-
-  const izgara = document.getElementById('cengel6Izgara');
-  izgara.innerHTML = '';
-  izgara.style.gridTemplateColumns = `repeat(${sutunSayisi}, 34px)`;
-  izgara.style.gridTemplateRows = `repeat(${satirSayisi}, 34px)`;
-  cengel6InputMap = {};
-  for(let rr=0; rr<satirSayisi; rr++){
-    for(let cc=0; cc<sutunSayisi; cc++){
-      const key = rr+','+cc;
-      const hucreDiv = document.createElement('div');
-      hucreDiv.style.gridColumn = (cc+1);
-      hucreDiv.style.gridRow = (rr+1);
-      if(cengel6HucreHarita[key] !== undefined){
-        hucreDiv.className = 'cengel-hucre';
-        const girdi = document.createElement('input');
-        girdi.maxLength = 1;
-        girdi.className = 'cengel-girdi';
-        girdi.dataset.key = key;
-        girdi.oninput = (e)=>{
-          e.target.value = e.target.value.toLocaleUpperCase('tr-TR').slice(-1);
-          e.target.classList.remove('dogru','yanlis');
-          const idx = siraliHucreler.indexOf(key);
-          if(idx>=0 && idx<siraliHucreler.length-1){
-            const sonrakiKey = siraliHucreler[idx+1];
-            if(cengel6InputMap[sonrakiKey]) cengel6InputMap[sonrakiKey].focus();
-          }
-        };
-        hucreDiv.appendChild(girdi);
-        cengel6InputMap[key] = girdi;
-      } else {
-        hucreDiv.className = 'cengel-bos';
-      }
-      izgara.appendChild(hucreDiv);
-    }
-  }
-
-  const liste = document.getElementById('cengel6Liste');
-  liste.innerHTML = '';
-  yerlesimler.forEach((p, idx)=>{
-    const li = document.createElement('li');
-    li.textContent = `${idx+1}. ${p.dir==='right'?'➡️':'⬇️'} (${p.kelime.length} harf) ${p.anlam}`;
-    liste.appendChild(li);
-  });
-
-  document.getElementById('cengel6Sonuc').textContent = '';
-}
-
-function cengel6KontrolEt(){
-  let dogruSayisi=0, toplam=0;
-  Object.keys(cengel6HucreHarita).forEach(key=>{
-    toplam++;
-    const girdi = cengel6InputMap[key];
-    const beklenen = cengel6HucreHarita[key];
-    if(girdi.value && girdi.value.toLocaleUpperCase('tr-TR') === beklenen.toLocaleUpperCase('tr-TR')){
-      girdi.classList.add('dogru'); girdi.classList.remove('yanlis');
-      dogruSayisi++;
-    } else {
-      girdi.classList.add('yanlis'); girdi.classList.remove('dogru');
-    }
-  });
-  document.getElementById('cengel6Sonuc').textContent = dogruSayisi===toplam
-    ? `🎉 Tebrikler! Çengel bulmacayı tamamen doğru çözdün! (${dogruSayisi}/${toplam})`
-    : `Sonuç: ${dogruSayisi}/${toplam} doğru harf. Devam et!`;
-}
 
 // =====================================================================
 // SÖZCÜK MERDİVENİ
