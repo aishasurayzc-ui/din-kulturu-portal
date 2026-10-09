@@ -995,6 +995,13 @@
   .es-rozet{ font-size:.78em; font-weight:800; padding:4px 10px; border-radius:999px; background:#f1f5f9; color:#8a94a3; border:1px dashed #cfd8e3; }
   .es-rozet.es-kazanildi{ background:#fff4d6; color:#8a5a00; border:1px solid #f4c95d; animation:esParla .6s ease; }
   @keyframes esParla{ 0%{ transform:scale(.8); } 60%{ transform:scale(1.12); } 100%{ transform:scale(1); } }
+  .es-ses-ayar{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin-top:8px; }
+  .es-ses-dugme{ font:inherit; font-weight:800; font-size:.86em; cursor:pointer; min-height:40px; padding:5px 12px; border-radius:999px; border:2px solid #cdb9ef; background:#fff; color:#4d3079; }
+  .es-ses-dugme[aria-pressed="true"]{ background:#7b5cd6; border-color:#7b5cd6; color:#fff; }
+  .es-ses-not{ font-size:.8em; color:#8a94a3; }
+  .es-dinle{ font:inherit; font-weight:800; font-size:.86em; cursor:pointer; min-height:40px; padding:5px 12px; border-radius:999px; border:2px solid #cdb9ef; background:#f3eefb; color:#4d3079; margin:0 0 8px; }
+  .es-dinle:hover{ background:#e9e0fa; }
+  .es-dinle:focus-visible, .es-ses-dugme:focus-visible{ outline:3px solid var(--navy,#1E3A8A); outline-offset:2px; }
   .es-not{ background:#fffaf0; border-left:5px solid var(--sari,#f4a261); border-radius:10px; padding:9px 13px; line-height:1.55; font-size:.95em; }
   .es-bolum{ background:#fff; border-radius:20px; padding:18px; margin:18px 0; box-shadow:0 2px 10px rgba(0,0,0,.07); scroll-margin-top:120px; }
   .es-bas{ display:flex; align-items:center; gap:10px; margin:0 0 6px; color:var(--navy,#1E3A8A); font-size:1.3em; }
@@ -1136,9 +1143,10 @@
   <div class="es-ilerleme-ust"><b>🏅 İlerlemen</b><span id="esIlerlemeMetin">0 / 6 etkinlik tamamlandı</span></div>
   <div class="es-cubuk" aria-hidden="true"><i id="esCubuk"></i></div>
   <div class="es-rozetler" id="esRozetler"></div>
+  <div class="es-ses-ayar" id="esSesAyar"></div>
 </div>
 
-<p class="es-not">💡 Bu etkinliklerdeki resimler insanları, doğayı ve nimetleri gösterir; <b>Allah’ı temsil etmez</b>. Allah hiçbir şeye benzemez. İsimleri, günlük hayatta gördüğümüz örnekler üzerinden düşünüyoruz.</p>
+<p class="es-not">💡 Bu etkinliklerdeki resimler insanları, doğayı ve nimetleri gösterir; <b>Allah’ı temsil etmez</b>. Allah hiçbir şeye benzemez. İsimleri, günlük hayatta gördüğümüz örnekler üzerinden düşünüyoruz.<br>🔊 <b>Dinle</b> düğmeleriyle metinleri sesli dinleyebilirsin. Sesli okuma cihazının kendi Türkçe sesini kullanır.</p>
 
 <!-- 1 · ANLAM ÇİÇEĞİ -->
 <div class="es-bolum" id="es-cicek">
@@ -1304,6 +1312,53 @@
   }
   function bitir(ad){ if(!D.bitti[ad]){ D.bitti[ad] = 1; kaydet(); } ilerlemeGuncelle(); }
 
+  /* ── seslendirme: tarayıcının Türkçe sesi (Web Speech API); internet gerekmez ── */
+  var SES = { var: !!(window.speechSynthesis && window.SpeechSynthesisUtterance), ses:null, oto:false };
+  try { SES.oto = localStorage.getItem('esma5Ses') === '1'; } catch(e){}
+  function okunus(t){
+    return String(t).replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF\uFE0F\u200D]/gu, '')
+      .replace(/(^|[\s(“"'])(el|er|es)-/g, '$1$2 ').replace(/\s—\s/g, ', ').replace(/[“”"]/g, '').replace(/\s+/g, ' ').trim();
+  }
+  function sesSec(){
+    if(!SES.var) return;
+    var v = []; try { v = window.speechSynthesis.getVoices() || []; } catch(e){}
+    SES.ses = v.filter(function(x){ return /^tr/i.test(x.lang); })[0] || null;
+    sesNotGuncelle(v.length);
+  }
+  function seslendir(t){
+    if(!SES.var) return;
+    try {
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(okunus(t)); u.lang = 'tr-TR'; u.rate = 0.92; if(SES.ses) u.voice = SES.ses;
+      window.speechSynthesis.speak(u);
+    } catch(e){}
+  }
+  function sustur(){ if(SES.var) try { window.speechSynthesis.cancel(); } catch(e){} }
+  function otoOku(t){ if(SES.oto) seslendir(t); }
+  function dinleBtn(metinFn, etiket){
+    var d = btn('es-dinle', '🔊 ' + (etiket || 'Dinle')); d.setAttribute('aria-label', 'Sesli oku' + (etiket ? ': ' + etiket : ''));
+    if(!SES.var) d.hidden = true;
+    d.addEventListener('click', function(ev){ ev.stopPropagation(); seslendir(metinFn()); });
+    return d;
+  }
+  function seceneklerMetni(kap){ return Array.prototype.map.call(kap.querySelectorAll('.es-sec'), function(x){ return x.textContent; }).join(', '); }
+  var sesAyar = document.getElementById('esSesAyar'), sesNot = el('span', 'es-ses-not');
+  function sesNotGuncelle(sayi){
+    if(!SES.var) sesNot.textContent = 'Bu tarayıcı sesli okumayı desteklemiyor.';
+    else if(sayi && !SES.ses) sesNot.textContent = 'Cihazında Türkçe ses bulunamadı; okunuş farklı olabilir.';
+    else sesNot.textContent = '';
+  }
+  (function(){
+    var t = btn('es-ses-dugme');
+    function etiket(){ t.textContent = SES.oto ? '🔊 Sesli geri bildirim: Açık' : '🔇 Sesli geri bildirim: Kapalı'; t.setAttribute('aria-pressed', SES.oto ? 'true' : 'false'); }
+    t.addEventListener('click', function(){ SES.oto = !SES.oto; try { localStorage.setItem('esma5Ses', SES.oto ? '1' : '0'); } catch(e){} etiket(); if(SES.oto) seslendir('Sesli geri bildirim açıldı.'); else sustur(); });
+    etiket(); if(!SES.var) t.hidden = true;
+    sesAyar.appendChild(t); sesAyar.appendChild(sesNot);
+    if(SES.var){ sesSec(); try { window.speechSynthesis.addEventListener('voiceschanged', sesSec); } catch(e){ window.speechSynthesis.onvoiceschanged = sesSec; } }
+    else sesNotGuncelle(0);
+    window.addEventListener('pagehide', sustur);
+  })();
+
   /* üç seçenekli soru (dedektif, çiçek, görsel ortak) */
   function soruKur(kap, q, sonra){
     var kutu = el('div', 'es-secenekler'), dogru = q.o[q.d];
@@ -1316,6 +1371,7 @@
         if(!ok) b.classList.add('es-tekrar');
         var g = el('p', 'es-gb ' + (ok ? 'es-gb-iyi' : 'es-gb-dene'), ok ? '✅ Doğru! ' + (q.a || '') : '🔎 Bu sefer olmadı. Doğru cevap: “' + dogru + '”. ' + (q.a || ''));
         kap.appendChild(g);
+        otoOku(g.textContent);
         if(sonra) sonra(ok, g);
       });
       kutu.appendChild(b);
@@ -1344,6 +1400,7 @@
   function yaprakAc(x){
     panel.hidden = false; panel.innerHTML = ''; panel.style.setProperty('--renk', x.renk);
     panel.appendChild(el('h4', null, x.ad + ' — ' + x.kisa));
+    panel.appendChild(dinleBtn(function(){ return x.ad + '. ' + x.kisa + '. Anlamı: ' + x.anlam + ' Günlük hayattan: ' + x.ornek + ' Soru: ' + x.soru.s + ' Seçenekler: ' + seceneklerMetni(panel) + '.'; }, 'Dinle'));
     var p1 = el('p'); p1.appendChild(el('b', null, '📘 Anlamı: ')); p1.appendChild(document.createTextNode(x.anlam)); panel.appendChild(p1);
     var p2 = el('p'); p2.appendChild(el('b', null, '🏠 Günlük hayattan: ')); p2.appendChild(document.createTextNode(x.ornek)); panel.appendChild(p2);
     var sq = el('div', 'es-yaprak-soru'); sq.appendChild(el('p', 'es-soru', '🤔 ' + x.soru.s)); panel.appendChild(sq);
@@ -1373,6 +1430,7 @@
     var kart = el('div', 'es-kart');
     kart.appendChild(el('span', 'es-etiket', '🕵️ Olay ' + (dedI + 1) + ' / ' + dedSira.length + ' · ⭐ ' + dedPuan));
     kart.appendChild(el('p', 'es-soru', q.s));
+    kart.appendChild(dinleBtn(function(){ return q.s + ' Seçenekler: ' + seceneklerMetni(kart) + '.'; }, 'Olayı dinle'));
     soruKur(kart, q, function(ok, g){
       if(ok) dedPuan++;
       var ileri = btn('es-btn', dedI + 1 < dedSira.length ? 'Sonraki olay ▶' : 'Sonucu gör ▶');
@@ -1402,7 +1460,7 @@
       b.addEventListener('click', function(){
         if(b.disabled) return;
         if(esSecili) esSecili.classList.remove('es-secili');
-        esSecili = esSecili === b ? null : b; if(esSecili) b.classList.add('es-secili');
+        esSecili = esSecili === b ? null : b; if(esSecili){ b.classList.add('es-secili'); otoOku(x.ad); }
       });
       sol.appendChild(b);
     });
@@ -1424,7 +1482,7 @@
       esDogru++;
       isim.disabled = true; h.disabled = true; isim.classList.remove('es-secili'); isim.classList.add('es-eslesti'); h.classList.add('es-eslesti');
       h.textContent = '✓ ' + x.ad + ': ' + x.kisa;
-      esGb.className = 'es-gb es-gb-iyi'; esGb.textContent = '✅ Harika! ' + x.ad + ' — ' + x.kisa + '.';
+      esGb.className = 'es-gb es-gb-iyi'; esGb.textContent = '✅ Harika! ' + x.ad + ' — ' + x.kisa + '.'; otoOku(esGb.textContent);
       esSecili = null;
       if(esDogru === ISIMLER.length){
         esSonuc.hidden = false; esSonuc.innerHTML = '';
@@ -1435,7 +1493,7 @@
     } else {
       esYanlis++;
       h.classList.add('es-sallan'); setTimeout(function(){ h.classList.remove('es-sallan'); }, 450);
-      esGb.className = 'es-gb es-gb-dene'; esGb.textContent = '🤔 Bu anlam “' + x.ad + '” için uygun değil. İpucu: ' + IPUCU[x.id];
+      esGb.className = 'es-gb es-gb-dene'; esGb.textContent = '🤔 Bu anlam “' + x.ad + '” için uygun değil. İpucu: ' + IPUCU[x.id]; otoOku(esGb.textContent);
     }
   }
   eslesBasla();
@@ -1483,6 +1541,7 @@
     sahnePanel.hidden = false; sahnePanel.innerHTML = '';
     sahnePanel.appendChild(el('h4', null, '🖼️ ' + sh.baslik));
     sahnePanel.appendChild(el('p', 'es-soru', 'Bu resim sana hangi ismi hatırlatıyor?'));
+    sahnePanel.appendChild(dinleBtn(function(){ return 'Resim: ' + sh.baslik + '. Bu resim sana hangi ismi hatırlatıyor? Seçenekler: ' + seceneklerMetni(sahnePanel) + '.'; }, 'Dinle'));
     var q = { o: sh.secenek.map(function(id){ return BUL[id].ad + ' (' + BUL[id].kisa + ')'; }), d:0, a: sh.gb };
     soruKur(sahnePanel, q, function(ok){
       if(ok){ sahneBitti[sh.id] = 1; b.classList.add('es-tamam'); if(Object.keys(sahneBitti).length === SAHNELER.length){ sahnePanel.appendChild(el('p', 'es-sonuc', '🎉 Bütün resimleri doğru isimle ilişkilendirdin!')); bitir('gorsel'); } }
@@ -1514,7 +1573,7 @@
   }
   function kartAc(k, c){
     if(hKilit || k.classList.contains('es-acik') || k.classList.contains('es-bulundu')) return;
-    k.classList.add('es-acik'); k.setAttribute('aria-label', c.metin);
+    k.classList.add('es-acik'); k.setAttribute('aria-label', c.metin); otoOku(c.metin);
     hAcik.push([k, c]);
     if(hAcik.length < 2) return;
     hHamle++;
@@ -1539,6 +1598,7 @@
   DUSUN.forEach(function(q, i){
     var kart = el('div', 'es-kart');
     var lb = el('label', 'es-soru', (i + 1) + '. ' + q.s); lb.htmlFor = 'esDusun' + i; kart.appendChild(lb);
+    kart.appendChild(dinleBtn(function(){ return q.s + ' Düşünme ipucu: ' + q.ipucu; }, 'Soruyu dinle'));
     kart.appendChild(el('p', 'es-ipucu', '💡 Düşünme ipucu: ' + q.ipucu));
     var ta = el('textarea'); ta.id = 'esDusun' + i; ta.rows = 3; ta.placeholder = 'Kendi cümlelerinle yaz…'; ta.value = D.dusun[i] || '';
     kart.appendChild(ta);
@@ -1554,13 +1614,14 @@
     orn.addEventListener('click', function(){
       gb.hidden = false;
       if((ta.value || '').trim().length < 15){ gb.className = 'es-gb es-gb-dene'; gb.textContent = '✏️ Önce kendi düşünceni yaz; sonra örneği görebilirsin.'; return; }
-      gb.className = 'es-gb'; gb.textContent = '💬 Örnek bir düşünce: “' + q.ornek + '” Senin cevabın farklı olabilir; önemli olan isimle davranış arasında bağlantı kurman.';
+      gb.className = 'es-gb'; gb.textContent = '💬 Örnek bir düşünce: “' + q.ornek + '” Senin cevabın farklı olabilir; önemli olan isimle davranış arasında bağlantı kurman.'; otoOku(gb.textContent);
     });
     dug.appendChild(kay); dug.appendChild(orn); kart.appendChild(dug); kart.appendChild(gb);
     dKap.appendChild(kart);
   });
 
   ilerlemeGuncelle();
+  window.esmaSesTest = { okunus: okunus, durum: function(){ return { destek: SES.var, oto: SES.oto, turkce: !!SES.ses }; } };
   window.esmaDurum = function(){ return { bitti: Object.keys(D.bitti), cicek: Object.keys(D.cicek).length }; };
 })();
 </script>
