@@ -1133,6 +1133,254 @@
   }
   @media (prefers-reduced-motion: reduce){ .as-durak{ animation:none !important; } }
 </style>
+<style id="camiKodStil">
+/* ======================================================================
+   7/1 EKLENTİLERİ (additive): CAMİ kodlaması ("cm-"), Ahiret Kavram
+   Kartları ("ak-"), Kendini Dene ("kd-"). Sayfanın mevcut kurallarına
+   dokunmaz; renkler sayfanın değişkenlerinden (--navy, --yesil, --sari…).
+   Dil sakin ve yapıcı: kırmızı "hata" rengi yerine sarı "tekrar bak".
+====================================================================== */
+  .cm-bolum [hidden], .kd-bolum [hidden], .ak-bolum [hidden]{ display:none !important; }
+
+  /* ── ortak alıntı kutusu (ayet/hadis ile açıklama ayrı) ── */
+  .ak-alinti{ margin:10px 0; padding:10px 14px 10px 16px; border-radius:14px; background:#f6fbf8; border-left:5px solid var(--yesil,#40916c); }
+  .ak-alinti.ak-hadis{ background:#fbf9ff; border-left-color:#6f4aa8; }
+  .ak-alinti-etiket{ display:inline-block; font-size:.68em; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:var(--yesil,#40916c); border-radius:999px; padding:2px 9px; }
+  .ak-hadis .ak-alinti-etiket{ background:#6f4aa8; }
+  .ak-alinti blockquote{ margin:6px 0 4px; font-weight:700; line-height:1.6; color:#1f3b2c; }
+  .ak-hadis blockquote{ color:#3b2a6b; }
+  .ak-alinti figcaption{ font-size:.8em; color:#5b6570; }
+
+  /* ═════════ CAMİ ═════════ */
+  .cm-bolum{ border-top:5px solid #6f4aa8; }
+  .cm-bas{ display:flex; gap:14px; align-items:center; margin:0 0 8px; }
+  .cm-bas-ikon{ flex:0 0 58px; width:58px; height:58px; border-radius:18px; display:flex; align-items:center; justify-content:center;
+    font-size:1.9em; background:linear-gradient(135deg,#f3eefb,#e0d3f5); box-shadow:0 4px 12px rgba(111,74,168,.18); }
+  .cm-bas h3{ margin:0; font-size:1.4em; color:var(--navy,#1E3A8A); line-height:1.2; }
+  .cm-bas h3 small{ display:block; font-size:.5em; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#6f4aa8; margin-bottom:3px; }
+  .cm-alt{ font-size:1.04em; line-height:1.6; margin:8px 0 10px; }
+  .cm-uyari{ background:#fffaf0; border:2px dashed #f4c98a; border-radius:14px; padding:10px 14px; line-height:1.55; margin:0 0 6px; }
+  .cm-adim-bas{ display:flex; align-items:center; gap:10px; margin:22px 0 4px; font-size:1.08em; color:var(--navy,#1E3A8A); }
+  .cm-adim-bas span{ flex:0 0 32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#6f4aa8; color:#fff; font-weight:900; }
+  .cm-ipucu{ margin:0 0 10px; color:#5b6570; font-size:.95em; line-height:1.5; }
+
+  .cm-kartlar{ display:grid; gap:12px; grid-template-columns:1fr; }
+  @media(min-width:620px){ .cm-kartlar{ grid-template-columns:1fr 1fr; } }
+  @media(min-width:1000px){ .cm-kartlar{ grid-template-columns:repeat(4,1fr); } }
+  .cm-kart-sar{ display:flex; flex-direction:column; gap:8px; }
+  .cm-kart{ position:relative; width:100%; min-height:150px; border:3px solid var(--cm); border-radius:20px; cursor:pointer; font:inherit;
+    background:var(--cma); color:#22333b; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:14px 10px;
+    transition:transform .2s, box-shadow .2s; }
+  .cm-kart:hover{ transform:translateY(-3px); box-shadow:0 10px 22px rgba(16,24,40,.12); }
+  .cm-kart:focus-visible, .cm-btn:focus-visible, .cm-fis:focus-visible, .cm-yuva:focus-visible, .cm-secenek:focus-visible{ outline:3px solid var(--navy,#1E3A8A); outline-offset:2px; }
+  .cm-harf{ font-size:3.2em; font-weight:900; line-height:1; color:var(--cm); }
+  .cm-kart-ad, .cm-kart-gorev{ opacity:0; max-height:0; transition:opacity .25s; font-weight:900; text-align:center; }
+  .cm-kart-gorev{ font-weight:700; font-size:.92em; color:#3d4a55; }
+  .cm-kart-ac{ font-size:.78em; font-weight:800; color:#5b6570; }
+  .cm-kart[aria-expanded="true"] .cm-kart-ad, .cm-kart[aria-expanded="true"] .cm-kart-gorev{ opacity:1; max-height:4em; }
+  .cm-kart[aria-expanded="true"] .cm-kart-ac{ display:none; }
+  .cm-kart[aria-expanded="true"] .cm-harf{ font-size:2.4em; }
+  @media(min-width:620px){ .cm-kart-sar{ display:contents; } .cm-detay{ grid-column:1 / -1; order:1; } }
+  .cm-detay-bas{ font-weight:900; color:var(--cm); font-size:1.08em; }
+  .cm-detay{ border-radius:16px; background:#fff; border:2px solid var(--cm); padding:10px 13px; line-height:1.55; font-size:.95em; }
+  .cm-detay p{ margin:0 0 7px; }
+  .cm-not{ font-size:.88em; color:#5b6570; }
+  .cm-disari{ margin:14px 0 0; padding:12px 14px; border-radius:16px; background:#f8fafc; border:2px solid #e4e9ef; line-height:1.55; }
+  .cm-disari p{ margin:0 0 6px; }
+
+  .cm-banka{ display:flex; flex-wrap:wrap; gap:8px; min-height:56px; padding:10px; border-radius:16px; background:#f3eefb; border:2px dashed #b498e2; margin:0 0 12px; }
+  .cm-fis{ font:inherit; font-weight:800; font-size:.95em; min-height:46px; padding:8px 14px; border-radius:12px; cursor:grab; user-select:none;
+    background:#fff; color:#22333b; border:2px solid #b498e2; touch-action:manipulation; }
+  .cm-fis[data-tur="gorev"]{ border-style:dashed; }
+  .cm-fis.cm-secili{ background:#6f4aa8; color:#fff; border-color:#6f4aa8; box-shadow:0 0 0 4px rgba(111,74,168,.25); }
+  .cm-tablo{ display:flex; flex-direction:column; gap:8px; }
+  .cm-satir{ display:grid; grid-template-columns:52px 1fr 1.4fr; gap:8px; align-items:stretch; }
+  .cm-satir-bas{ font-size:.78em; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#5b6570; }
+  .cm-satir-harf{ display:flex; align-items:center; justify-content:center; font-size:1.8em; font-weight:900; color:#fff; background:var(--cm); border-radius:14px; }
+  .cm-yuva{ min-height:54px; border-radius:14px; border:2px dashed #cfd8e3; background:#fff; display:flex; align-items:center; padding:4px; cursor:pointer; }
+  .cm-yuva.cm-uzerinde{ border-color:#6f4aa8; background:#f3eefb; }
+  .cm-yuva .cm-fis{ width:100%; text-align:left; }
+  .cm-yuva.cm-dogru{ border:2px solid var(--yesil,#40916c); background:#eef7f1; }
+  .cm-yuva.cm-tekrar{ border:2px solid var(--sari,#f4a261); background:#fffaf0; }
+  .cm-dugmeler{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 0; }
+  .cm-btn{ font:inherit; font-weight:900; cursor:pointer; min-height:48px; padding:9px 18px; border-radius:999px; border:0; background:#6f4aa8; color:#fff; }
+  .cm-btn-ikincil{ background:#fff; color:#4d3079; border:2px solid #b498e2; }
+  .cm-gb{ margin:10px 0 0; padding:10px 13px; border-radius:12px; background:#fff; border-left:5px solid #12869a; line-height:1.55; }
+  .cm-gb.cm-gb-iyi{ border-left-color:var(--yesil,#40916c); background:#f3fbf5; }
+  .cm-gb.cm-gb-dene{ border-left-color:var(--sari,#f4a261); background:#fffaf0; }
+  .cm-gb ul{ margin:6px 0 0; padding-left:20px; }
+
+  /* soru kartları (CAMİ senaryo + mini test) */
+  .cm-soru{ border:2px solid #e0d3f5; background:#fbf9ff; border-radius:18px; padding:12px 14px; margin:0 0 10px; }
+  .cm-soru.cm-bitti{ border-color:#cfe6da; background:#f6fbf8; }
+  .cm-soru-no{ display:inline-block; font-size:.7em; font-weight:900; letter-spacing:.08em; color:#fff; background:#6f4aa8; border-radius:999px; padding:2px 9px; }
+  .cm-soru-metin{ font-weight:800; line-height:1.55; margin:6px 0 8px; }
+  .cm-secenekler{ display:grid; gap:7px; grid-template-columns:1fr; }
+  @media(min-width:620px){ .cm-secenekler{ grid-template-columns:1fr 1fr; } }
+  .cm-secenek{ font:inherit; font-weight:700; text-align:left; cursor:pointer; min-height:48px; padding:9px 13px; border-radius:14px; background:#fff; color:#22333b; border:2px solid #cfd8e3; }
+  .cm-secenek:hover:not(:disabled){ border-color:#6f4aa8; }
+  .cm-secenek:disabled{ cursor:default; }
+  .cm-secenek.cm-dogru{ background:#d8f3dc; border-color:var(--yesil,#40916c); }
+  .cm-secenek.cm-tekrar{ background:#fff4e5; border-color:var(--sari,#f4a261); }
+  .cm-set-sonuc{ text-align:center; font-weight:900; padding:12px; border-radius:16px; background:linear-gradient(135deg,#f3eefb,#e6f7f8); }
+  .cm-set-sonuc p{ margin:0 0 8px; }
+
+  /* ═════════ AHİRET KAVRAM KARTLARI ═════════ */
+  .ak-bolum{ clear:both; border-top:4px solid #12869a; }
+  .ak-akis{ list-style:none; margin:0 0 12px; padding:0; display:flex; flex-wrap:wrap; gap:6px; counter-reset:none; }
+  .ak-akis li{ display:flex; align-items:center; }
+  .ak-akis li + li::before{ content:"→"; color:#9aa7b4; margin:0 4px 0 0; font-weight:900; }
+  .ak-akis a{ display:inline-flex; align-items:center; gap:6px; min-height:40px; padding:5px 11px; border-radius:999px; background:#e6f7f8; color:#0b6272; font-weight:800; font-size:.86em; text-decoration:none; border:2px solid transparent; }
+  .ak-akis a:hover, .ak-akis a:focus-visible{ border-color:#12869a; outline:none; }
+  .ak-akis b{ display:inline-flex; width:22px; height:22px; border-radius:50%; align-items:center; justify-content:center; background:#12869a; color:#fff; font-size:.85em; }
+  .ak-izgara{ display:grid; gap:10px; grid-template-columns:1fr; align-items:start; }
+  @media(min-width:760px){ .ak-izgara{ grid-template-columns:1fr 1fr; } }
+  .ak-kart{ border:2px solid #c6ecef; border-radius:16px; background:#fff; scroll-margin-top:140px; }
+  .ak-kart[open]{ border-color:#12869a; box-shadow:0 6px 18px rgba(18,134,154,.12); }
+  .ak-kart.ak-isaret{ box-shadow:0 0 0 5px rgba(244,162,97,.45); }
+  .ak-kart summary{ list-style:none; display:flex; align-items:center; gap:10px; min-height:56px; padding:8px 12px; cursor:pointer; font-weight:900; color:#0b4f5c; }
+  .ak-kart summary::-webkit-details-marker{ display:none; }
+  .ak-kart summary:focus-visible{ outline:3px solid var(--navy,#1E3A8A); outline-offset:2px; border-radius:14px; }
+  .ak-no{ flex:0 0 28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#12869a; color:#fff; font-size:.85em; }
+  .ak-ikon{ font-size:1.4em; }
+  .ak-ad{ flex:1; }
+  .ak-ac::after{ content:"＋"; font-size:1.1em; color:#12869a; }
+  .ak-kart[open] .ak-ac::after{ content:"－"; }
+  .ak-govde{ padding:0 14px 12px; }
+  .ak-satir{ margin:8px 0 0; line-height:1.55; }
+  .ak-satir b{ display:block; font-size:.78em; letter-spacing:.06em; text-transform:uppercase; color:#12869a; margin-bottom:1px; }
+  .ak-fark{ background:#f1f5f9; border-radius:12px; padding:8px 11px; }
+  .ak-fark b{ color:#2f4a8f; }
+  .ak-dusun{ background:#fff8e1; border-radius:12px; padding:8px 11px; }
+  .ak-dusun b{ color:#a8640a; }
+  .ak-fark-kutu{ margin:14px 0 0; padding:12px 14px; border-radius:16px; background:#f8fafc; border:2px solid #e4e9ef; }
+  .ak-fark-kutu h5{ margin:0 0 10px; font-size:1em; color:var(--navy,#1E3A8A); }
+  .ak-tablo-sar{ overflow-x:auto; }
+  .ak-tablo{ width:100%; border-collapse:separate; border-spacing:0 6px; font-size:.94em; }
+  .ak-tablo th, .ak-tablo td{ text-align:left; padding:9px 10px; background:#fff; vertical-align:top; line-height:1.45; }
+  .ak-tablo thead th{ background:transparent; font-size:.76em; letter-spacing:.06em; text-transform:uppercase; color:#5b6570; padding:2px 10px; }
+  .ak-tablo tbody th{ color:#0b6272; font-weight:900; border-radius:12px 0 0 12px; }
+  .ak-tablo tbody td:last-child{ border-radius:0 12px 12px 0; font-weight:800; color:#a8640a; }
+  .ak-tablo-alt{ margin:8px 0 0; line-height:1.55; }
+  @media(max-width:640px){
+    .ak-tablo thead{ display:none; }
+    .ak-tablo, .ak-tablo tbody, .ak-tablo tr, .ak-tablo th, .ak-tablo td{ display:block; width:100%; box-sizing:border-box; }
+    .ak-tablo tr{ background:#fff; border-radius:14px; margin:0 0 8px; padding:6px 0; }
+    .ak-tablo th, .ak-tablo td{ border-radius:0 !important; padding:4px 12px; }
+    .ak-tablo td::before{ content:attr(data-et) ": "; font-weight:900; color:#5b6570; font-size:.85em; }
+  }
+
+  /* ═════════ KENDİNİ DENE ═════════ */
+  .kd-bolum{ border-top:5px solid #c9740b; }
+  .kd-bas{ display:flex; gap:14px; align-items:center; margin:0 0 6px; }
+  .kd-bas-ikon{ flex:0 0 58px; width:58px; height:58px; border-radius:18px; display:flex; align-items:center; justify-content:center;
+    font-size:1.8em; background:linear-gradient(135deg,#fff6e8,#ffe2bd); box-shadow:0 4px 12px rgba(201,116,11,.18); }
+  .kd-bas h3{ margin:0; font-size:1.35em; color:var(--navy,#1E3A8A); line-height:1.25; }
+  .kd-bas h3 small{ display:block; font-size:.52em; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#c9740b; margin-bottom:3px; }
+  .kd-giris{ line-height:1.6; margin:8px 0 12px; }
+  .kd-gruplar{ display:grid; gap:6px; grid-template-columns:repeat(5,1fr); margin:0 0 12px; }
+  .kd-grup{ font:inherit; cursor:pointer; min-height:54px; padding:6px 4px; border-radius:14px; border:2px solid #efe3c2; background:#fff; color:#5a3d00;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; }
+  .kd-grup b{ font-size:1.15em; }
+  .kd-grup small{ font-size:.72em; font-weight:800; color:#5b6570; }
+  .kd-grup .kd-grup-ad{ font-size:.72em; font-weight:800; line-height:1.15; text-align:center; }
+  .kd-grup.kd-aktif{ background:#c9740b; border-color:#c9740b; color:#fff; }
+  .kd-grup.kd-aktif small{ color:#fff; }
+  .kd-grup.kd-tamam:not(.kd-aktif){ border-color:var(--yesil,#40916c); }
+  .kd-grup:focus-visible, .kd-git:focus-visible, .kd-sec:focus-visible, .kd-btn:focus-visible, .kd-fis:focus-visible, .kd-alan select:focus-visible{ outline:3px solid var(--navy,#1E3A8A); outline-offset:2px; }
+  .kd-tekrar-bant{ background:#e6f7f8; border-radius:14px; padding:10px 14px; font-weight:800; color:#0b6272; margin:0 0 10px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; }
+  .kd-kart{ border:2px solid #efe3c2; background:#fffdf6; border-radius:20px; padding:16px; scroll-margin-top:140px; }
+  .kd-kart-ust{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:0 0 8px; }
+  .kd-etiket{ font-size:.72em; font-weight:900; letter-spacing:.06em; color:#fff; background:#c9740b; border-radius:999px; padding:3px 10px; }
+  .kd-etiket.kd-tur{ background:#fff; color:#8a4b00; border:2px solid #efe3c2; }
+  .kd-soru{ font-size:clamp(1.02em, 2.2vw, 1.16em); font-weight:800; line-height:1.55; margin:6px 0 12px; color:#22333b; }
+  .kd-secenekler{ display:grid; gap:8px; grid-template-columns:1fr; }
+  @media(min-width:700px){ .kd-secenekler{ grid-template-columns:1fr 1fr; } }
+  .kd-sec{ font:inherit; font-weight:700; text-align:left; cursor:pointer; min-height:52px; padding:10px 14px; border-radius:14px; background:#fff; color:#22333b;
+    border:2px solid #cfd8e3; display:flex; gap:10px; align-items:center; line-height:1.4; }
+  .kd-sec .kd-harf{ flex:0 0 30px; height:30px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#f1e6cf; color:#8a4b00; font-weight:900; }
+  .kd-sec:hover:not(:disabled){ border-color:#c9740b; }
+  .kd-sec:disabled{ cursor:default; }
+  .kd-sec.kd-dogru{ background:#d8f3dc; border-color:var(--yesil,#40916c); }
+  .kd-sec.kd-dogru .kd-harf{ background:var(--yesil,#40916c); color:#fff; }
+  .kd-sec.kd-tekrar{ background:#fff4e5; border-color:var(--sari,#f4a261); }
+  .kd-dy{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .kd-dy .kd-sec{ justify-content:center; font-size:1.08em; font-weight:900; min-height:60px; }
+  .kd-es{ display:flex; flex-direction:column; gap:8px; }
+  .kd-es-satir{ display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:center; background:#fff; border:2px solid #efe3c2; border-radius:14px; padding:8px 10px; }
+  .kd-es-satir.kd-dogru{ border-color:var(--yesil,#40916c); background:#f3fbf5; }
+  .kd-es-satir.kd-tekrar{ border-color:var(--sari,#f4a261); background:#fffaf0; }
+  .kd-es-sol{ font-weight:800; line-height:1.4; }
+  .kd-es select{ font:inherit; min-height:48px; width:100%; border-radius:12px; border:2px solid #cfd8e3; padding:6px 8px; background:#fff; color:#22333b; }
+  .kd-es-dogru{ grid-column:1 / -1; font-size:.88em; color:#5b6570; }
+  @media(max-width:560px){ .kd-es-satir{ grid-template-columns:1fr; } }
+  .kd-sira-hedef{ list-style:none; counter-reset:kdsira; margin:0 0 10px; padding:10px; min-height:60px; border-radius:16px; border:2px dashed #e7c98f; background:#fff; display:flex; flex-direction:column; gap:6px; }
+  .kd-sira-hedef:empty::before{ content:"Aşağıdaki kartlara sırayla dokun: ilk dokunduğun 1. sıraya yerleşir."; color:#8a94a3; font-size:.92em; padding:6px; }
+  .kd-sira-hedef li{ counter-increment:kdsira; }
+  .kd-sira-hedef .kd-fis::before{ content:counter(kdsira); display:inline-flex; width:26px; height:26px; border-radius:50%; align-items:center; justify-content:center; background:#c9740b; color:#fff; font-weight:900; margin-right:8px; flex:0 0 26px; }
+  .kd-sira-havuz{ display:flex; flex-wrap:wrap; gap:8px; }
+  .kd-fis{ font:inherit; font-weight:800; cursor:pointer; min-height:48px; padding:8px 13px; border-radius:12px; border:2px solid #e7c98f; background:#fffaf0; color:#5a3d00; text-align:left; display:flex; align-items:center; width:auto; }
+  .kd-sira-hedef .kd-fis{ width:100%; background:#fff; }
+  .kd-sira-hedef .kd-fis.kd-dogru{ border-color:var(--yesil,#40916c); background:#f3fbf5; }
+  .kd-sira-hedef .kd-fis.kd-tekrar{ border-color:var(--sari,#f4a261); background:#fffaf0; }
+  .kd-fis:disabled{ cursor:default; opacity:1; }
+  .kd-dugmeler{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 0; }
+  .kd-btn{ font:inherit; font-weight:900; cursor:pointer; min-height:48px; padding:9px 18px; border-radius:999px; border:0; background:#c9740b; color:#fff; }
+  .kd-btn:disabled{ opacity:.45; cursor:default; }
+  .kd-btn-ikincil{ background:#fff; color:#8a4b00; border:2px solid #e7c98f; }
+  .kd-gb{ margin:12px 0 0; padding:11px 14px; border-radius:14px; line-height:1.6; background:#fff; border-left:6px solid #12869a; }
+  .kd-gb.kd-gb-iyi{ border-left-color:var(--yesil,#40916c); background:#f3fbf5; }
+  .kd-gb.kd-gb-dene{ border-left-color:var(--sari,#f4a261); background:#fffaf0; }
+  .kd-gb p{ margin:0 0 6px; } .kd-gb p:last-child{ margin:0; }
+  .kd-alt{ position:sticky; bottom:8px; z-index:6; margin:12px 0 0; display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px;
+    background:#fff; border:2px solid #efe3c2; border-radius:18px; padding:8px 10px 8px 14px; box-shadow:0 8px 22px rgba(16,24,40,.14); }
+  .kd-alt-bilgi{ flex:1 1 180px; min-width:0; }
+  .kd-alt-ust{ display:flex; flex-wrap:wrap; gap:4px 12px; font-weight:900; font-size:.86em; color:#8a4b00; }
+  .kd-alt-ust span:last-child{ color:#2d6a4f; }
+  .kd-cubuk{ height:8px; border-radius:999px; background:#f1e6cf; overflow:hidden; margin-top:5px; }
+  .kd-cubuk i{ display:block; height:100%; width:0; background:linear-gradient(90deg,#c9740b,var(--yesil,#40916c)); transition:width .35s ease; }
+  .kd-git{ font:inherit; font-weight:900; cursor:pointer; min-height:48px; padding:8px 18px; border-radius:999px; border:0; background:#c9740b; color:#fff; white-space:nowrap; }
+  .kd-git-ikincil{ background:#fff; color:#8a4b00; border:2px solid #e7c98f; padding:8px 14px; }
+  .kd-git:disabled{ opacity:.4; cursor:default; }
+  .kd-not{ font-size:.82em; color:#5b6570; margin:8px 0 0; }
+  /* sonuç */
+  .kd-sonuc{ border-radius:20px; padding:16px; background:linear-gradient(135deg,#fff6e8,#e6f7f8); outline:none; }
+  .kd-sonuc h4{ margin:0 0 6px; font-size:1.2em; color:var(--navy,#1E3A8A); }
+  .kd-mesaj{ font-size:1.06em; font-weight:800; line-height:1.55; margin:0 0 10px; }
+  .kd-puan{ display:flex; flex-wrap:wrap; gap:10px; margin:0 0 14px; }
+  .kd-puan div{ background:#fff; border-radius:16px; padding:10px 14px; min-width:120px; }
+  .kd-puan b{ display:block; font-size:1.6em; color:#8a4b00; }
+  .kd-puan small{ font-weight:800; color:#5b6570; }
+  .kd-analiz{ display:grid; gap:12px; grid-template-columns:1fr; }
+  @media(min-width:760px){ .kd-analiz{ grid-template-columns:1fr 1fr; } }
+  .kd-analiz section, .kd-analiz > div{ background:#fff; border-radius:16px; padding:12px 14px; }
+  .kd-analiz h5{ margin:0 0 8px; font-size:.95em; color:var(--navy,#1E3A8A); }
+  .kd-g-satir{ display:grid; grid-template-columns:1fr 70px; gap:4px 10px; align-items:center; margin:0 0 8px; font-size:.92em; font-weight:700; }
+  .kd-g-cubuk{ grid-column:1 / -1; height:9px; border-radius:999px; background:#f1e6cf; overflow:hidden; }
+  .kd-g-cubuk i{ display:block; height:100%; background:linear-gradient(90deg,#c9740b,var(--yesil,#40916c)); }
+  .kd-g-satir span:nth-child(2){ text-align:right; color:#5b6570; }
+  .kd-tekrar-liste{ display:flex; flex-wrap:wrap; gap:7px; }
+  .kd-tekrar-liste a{ display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:6px 12px; border-radius:999px; background:#fffaf0; border:2px solid #f4c98a; color:#8a4b00; font-weight:800; text-decoration:none; font-size:.9em; }
+  .kd-tekrar-liste a small{ color:#5b6570; }
+  @media(max-width:560px){
+    .kd-bolum{ padding:13px 10px; }
+    .kd-kart{ padding:12px; }
+    .kd-gruplar{ grid-template-columns:repeat(5,1fr); gap:4px; }
+    .kd-grup .kd-grup-ad{ display:none; }
+    .kd-alt{ bottom:6px; padding:6px 8px; flex-wrap:nowrap; gap:6px; }
+    .kd-alt-bilgi{ flex:1 1 0; }
+    .kd-alt-ust{ font-size:.78em; gap:2px 8px; }
+    .kd-git{ padding:8px 12px; min-height:46px; }
+    .cm-satir{ grid-template-columns:40px 1fr; }
+    .cm-satir .cm-yuva[data-tur="gorev"]{ grid-column:2; }
+    .cm-satir-bas{ display:none; }
+    .cm-satir-harf{ grid-row:span 2; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cm-kart, .cm-kart-ad, .cm-kart-gorev, .kd-cubuk i{ transition:none !important; }
+  }
+
+</style>
 <style id="ayetAsamaTestStil">
 /* ======================================================================
    TEKRAR TESTİ: METİN → AHİRET AŞAMASI (additive, "at-" önekli)
@@ -1229,7 +1477,7 @@
 <path d="M20 20 L31 31"/><path d="M69 69 L80 80"/><path d="M80 20 L69 31"/><path d="M31 69 L20 80"/></g></g></g></g><g transform="translate(1042,108) scale(1.000)"><g class="kai-g" style="animation-delay:0.36s"><g class="kai-t"><rect x="12" y="70" width="24" height="18" rx="4" fill="#b498e2"/>
 <rect x="38" y="52" width="24" height="36" rx="4" fill="#6f4aa8"/>
 <rect x="64" y="32" width="24" height="56" rx="4" fill="#4d3079"/>
-<circle cx="76" cy="20" r="7" fill="#b498e2"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">7. Sınıf · 1. Ünite</span><h2>👼 Melek ve Ahiret İnancı</h2><p>Melek, cin, şeytan ve ahiret inancı</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 4 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Görülen ve Görülemeyen Varlıklar</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Melekler ve Özellikleri</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Dünya ve Ahiret Hayatı, Ahiretin Aşamaları</a><a class="ka-ic-link" href="#ah-neden"><b>★</b>Ahiret Neden Önemli?</a><a class="ka-ic-link" href="#ka-konu-4"><b>4</b>Ahiret İnancının Etkisi ve Hz. İsa (as)</a></div></div></div></section>
+<circle cx="76" cy="20" r="7" fill="#b498e2"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">7. Sınıf · 1. Ünite</span><h2>👼 Melek ve Ahiret İnancı</h2><p>Melek, cin, şeytan ve ahiret inancı</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 4 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Görülen ve Görülemeyen Varlıklar</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Melekler ve Özellikleri</a><a class="ka-ic-link" href="#cm-cami"><b>★</b>CAMİ Kodlaması</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Dünya ve Ahiret Hayatı, Ahiretin Aşamaları</a><a class="ka-ic-link" href="#ah-neden"><b>★</b>Ahiret Neden Önemli?</a><a class="ka-ic-link" href="#kd-ahiret"><b>✓</b>Kendini Dene (50 soru)</a><a class="ka-ic-link" href="#ka-konu-4"><b>4</b>Ahiret İnancının Etkisi ve Hz. İsa (as)</a></div></div></div></section>
 <main>
 <section id="ozet7" class="aktif">
   <h2>📖 1. Ünite Konu Özeti: Melek ve Ahiret İnancı</h2>
@@ -1314,6 +1562,125 @@
 <circle cx="44" cy="66" r="2.8" fill="#6f4aa8"/><circle cx="56" cy="66" r="2.8" fill="#6f4aa8"/></g></g></svg></span><span class="ka-alt-govde"><b>Azrail</b><span>Ruhları alır</span></span></div><div class="ka-alt-kart" style="--gecikme:0.24s"><span class="ka-alt-gorsel"><svg class="ka-svg" viewBox="0 0 160 120" aria-hidden="true"><rect width="160" height="120" rx="14" fill="#f3eefb"/><ellipse cx="52" cy="46" rx="46" ry="38" fill="#e0d3f5" class="kai-bl"/><ellipse cx="118" cy="84" rx="42" ry="32" fill="#e0d3f5" opacity=".7"/><g transform="translate(30,10) scale(1.0)"><g class="kai-p"><rect x="16" y="20" width="52" height="66" rx="6" fill="#fff" stroke="#6f4aa8" stroke-width="3" transform="rotate(-8 42 53)"/>
 <rect x="30" y="16" width="52" height="66" rx="6" fill="#fff" stroke="#4d3079" stroke-width="3"/>
 <path d="M40 32 H72 M40 44 H72 M40 56 H64" stroke="#b498e2" stroke-width="3.4" stroke-linecap="round"/></g></g></svg></span><span class="ka-alt-govde"><b>Kirâmen Kâtibîn</b><span>Amelleri yazar</span></span></div></div></div><div class="ka-blok ka-dusun-cevapla ka-dusun"><h4 class="ka-blok-bas">🤔 Sıra Sende<span class="ka-rozet">Düşün ve cevapla</span></h4><p>Meleklerin görevlerinden biri insana hangi sorumluluğu hatırlatır?</p></div><div class="ka-blok ka-aklinda-kalsin ka-aklinda"><h4 class="ka-blok-bas">📌 Aklında Kalsın</h4><ul><li>Melekler nurdan yaratılmıştır, günah işlemezler.</li><li>Dört büyük meleğin ayrı görevleri vardır.</li></ul></div></div>
+<!-- ============ CAMİ KODLAMASI (Konu 2 · camiKodStil / camiKodScript · "cm-" önekli) ============ -->
+<div class="kutu-panel cm-bolum" id="cm-cami">
+  <div class="cm-bas">
+    <span class="cm-bas-ikon" aria-hidden="true">🕌</span>
+    <h3><small>Konu 2 · Hatırlama yöntemi</small>CAMİ Kodlaması: Dört Meleği Görevleriyle Hatırla</h3>
+  </div>
+  <p class="cm-alt">Dört büyük meleğin adlarının ilk harflerini yan yana koyunca <b>C · A · M · İ</b> yani <b>CAMİ</b> kelimesi oluşur. Ama yalnızca kelimeyi ezberlemek yetmez: Her harfin <b>hangi meleği</b> ve <b>hangi görevi</b> anlattığını bilmelisin.</p>
+  <div class="cm-uyari" role="note">💡 <b>Bilmen gereken:</b> CAMİ bir <b>hatırlama yöntemidir</b>, dinî bir terim değildir. Harflerin sırası meleklerin derecesini göstermez. Bu kodlama <b>yalnızca dört meleği</b> hatırlatır; Kirâmen Kâtibîn, Hafaza, Münker ve Nekir gibi başka melekler de vardır ve yukarıdaki konu anlatımında yer alır.</div>
+
+  <h4 class="cm-adim-bas"><span>1</span> Harfleri tanı</h4>
+  <p class="cm-ipucu">Bir karta dokun: Meleğin görevi, bu görevin neden önemli olduğu ve Kur’an’daki dayanağı açılır.</p>
+  <div class="cm-kartlar">
+    <div class="cm-kart-sar" style="--cm:#2f4a8f;--cma:#ecf0fa">
+      <button type="button" class="cm-kart" aria-expanded="false" aria-controls="cm-k-C">
+        <span class="cm-harf">C</span>
+        <span class="cm-kart-ad">Cebrâil</span>
+        <span class="cm-kart-gorev">Vahiy getirir</span>
+        <span class="cm-kart-ac" aria-hidden="true">Dokun ve aç</span>
+      </button>
+      <div class="cm-detay" id="cm-k-C" hidden>
+        <p class="cm-detay-bas">C — Cebrâil</p>
+        <p><b>Görevi:</b> Allah'ın vahyini (mesajını) peygamberlere iletmekle görevli melektir.</p>
+        <p><b>Neden önemli?</b> Vahiy olmasaydı insanlar Allah'ın emir ve yasaklarını nasıl öğrenecekti? Cebrâil, Allah'tan gelen mesajı peygambere ulaştıran elçi melektir.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“(…) bilsin ki o, Allah’ın izni ile Kur’an’ı; önceki kitapları doğrulayıcı, mü’minler için de bir hidayet rehberi ve müjde verici olarak senin kalbine indirmiştir.”</blockquote><figcaption>Bakara suresi, 97. ayet (kısaltılarak)</figcaption></figure>
+        <p class="cm-not">ℹ️ Ayette “o” diye anılan Cebrâil’dir; ayetin başında adı geçer. Şuarâ suresi 193. ayette de “güvenilir Ruh (Cebrail)” diye anılır.</p>
+      </div>
+    </div>
+    <div class="cm-kart-sar" style="--cm:#5b6570;--cma:#f1f5f9">
+      <button type="button" class="cm-kart" aria-expanded="false" aria-controls="cm-k-A">
+        <span class="cm-harf">A</span>
+        <span class="cm-kart-ad">Azrâil</span>
+        <span class="cm-kart-gorev">Can alır</span>
+        <span class="cm-kart-ac" aria-hidden="true">Dokun ve aç</span>
+      </button>
+      <div class="cm-detay" id="cm-k-A" hidden>
+        <p class="cm-detay-bas">A — Azrâil</p>
+        <p><b>Görevi:</b> Eceli gelen insanın canını Allah'ın izniyle almakla görevli melektir.</p>
+        <p><b>Neden önemli?</b> Ölümün zamanını melek belirlemez; eceli takdir eden Allah'tır. Ölüm meleği yalnızca kendisine verilen görevi yerine getirir.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“De ki: “Sizin için görevlendirilen ölüm meleği canınızı alacak, sonra Rabbinize döndürüleceksiniz.””</blockquote><figcaption>Secde suresi, 11. ayet</figcaption></figure>
+        <p class="cm-not">ℹ️ Kur’an’da “Azrâil” adı geçmez; bu melek “ölüm meleği” (meleku’l-mevt) diye anılır. Azrâil adı, İslam geleneğinde bu melek için kullanılır.</p>
+      </div>
+    </div>
+    <div class="cm-kart-sar" style="--cm:#40916c;--cma:#eef7f1">
+      <button type="button" class="cm-kart" aria-expanded="false" aria-controls="cm-k-M">
+        <span class="cm-harf">M</span>
+        <span class="cm-kart-ad">Mikâil</span>
+        <span class="cm-kart-gorev">Tabiat olayları ve rızık</span>
+        <span class="cm-kart-ac" aria-hidden="true">Dokun ve aç</span>
+      </button>
+      <div class="cm-detay" id="cm-k-M" hidden>
+        <p class="cm-detay-bas">M — Mikâil</p>
+        <p><b>Görevi:</b> Yağmur, rüzgâr gibi tabiat olayları ve rızıkla ilgili görevleri olan melektir.</p>
+        <p><b>Neden önemli?</b> Yağmuru yağdıran ve rızkı veren Allah'tır. Mikâil, bu işlerde Allah'ın emrini yerine getiren melektir; tabiattaki düzen bize Allah'ın nimetlerini hatırlatır.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Her kim Allah’a, meleklerine, peygamberlerine, Cebrail’e ve Mîkâil’e düşman olursa bilsin ki, Allah da inkâr edenlerin düşmanıdır.”</blockquote><figcaption>Bakara suresi, 98. ayet</figcaption></figure>
+        <p class="cm-not">ℹ️ Ayette Mikâil’in adı geçer. Görevleri ise İslam âlimlerinin açıklamalarından öğrenilir.</p>
+      </div>
+    </div>
+    <div class="cm-kart-sar" style="--cm:#c9740b;--cma:#fff6e8">
+      <button type="button" class="cm-kart" aria-expanded="false" aria-controls="cm-k-I">
+        <span class="cm-harf">İ</span>
+        <span class="cm-kart-ad">İsrâfil</span>
+        <span class="cm-kart-gorev">Sûra üfler</span>
+        <span class="cm-kart-ac" aria-hidden="true">Dokun ve aç</span>
+      </button>
+      <div class="cm-detay" id="cm-k-I" hidden>
+        <p class="cm-detay-bas">İ — İsrâfil</p>
+        <p><b>Görevi:</b> Sûra üflemekle görevli melektir. Sûra ilk üflenişte kıyamet kopar, ikinci üflenişte bütün insanlar diriltilir.</p>
+        <p><b>Neden önemli?</b> İsrâfil'in görevi bizi doğrudan ahiret konusuna bağlar: Kıyamet ve yeniden diriliş (ba's) sûrun üflenmesiyle başlar.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Sûr’a üflenir ve Allah’ın dilediği kimseler dışında göklerdeki herkes ve yerdeki herkes ölür. Sonra ona bir daha üflenir, bir de bakarsın onlar kalkmış bekliyorlar.”</blockquote><figcaption>Zümer suresi, 68. ayet</figcaption></figure>
+        <p class="cm-not">ℹ️ Kur’an’da sûra üflenmesi anlatılır ama “İsrâfil” adı geçmez. Bu görevin İsrâfil’e ait olduğu, hadislerden ve İslam âlimlerinin açıklamalarından öğrenilir.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cm-disari">
+    <p><b>📝 CAMİ’nin dışında kalan bir örnek: Kirâmen Kâtibîn</b> — İnsanların yaptıklarını yazan değerli melekler. Bu melekler kodlamada yok ama imanımızın parçasıdır.</p>
+    <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Hâlbuki üzerinizde muhakkak bekçiler, değerli yazıcılar vardır. Onlar yapmakta olduklarınızı bilirler.”</blockquote><figcaption>İnfitâr suresi, 10-12. ayetler</figcaption></figure>
+  </div>
+
+  <h4 class="cm-adim-bas"><span>2</span> Eşleştir: Harf → Melek → Görev</h4>
+  <p class="cm-ipucu">Kartları sürükleyip doğru kutuya bırak. Dokunmatik ekranda ya da akıllı tahtada: önce karta, sonra kutuya dokun. <b>Dikkat:</b> Bankada CAMİ’ye ait olmayan kartlar da var!</p>
+  <div class="cm-banka" id="cmBanka" aria-label="Kart bankası"></div>
+  <div class="cm-tablo">
+    <div class="cm-satir cm-satir-bas" aria-hidden="true"><span></span><span>Melek</span><span>Görevi</span></div>
+      <div class="cm-satir" style="--cm:#2f4a8f;--cma:#ecf0fa">
+        <span class="cm-satir-harf" aria-hidden="true">C</span>
+        <div class="cm-yuva" data-beklenen="Cebrâil" data-harf="C" data-tur="ad" tabindex="0" role="button" aria-label="C harfinin meleği: boş"></div>
+        <div class="cm-yuva" data-beklenen="Vahiy getirir" data-harf="C" data-tur="gorev" tabindex="0" role="button" aria-label="C harfinin görevi: boş"></div>
+      </div>
+      <div class="cm-satir" style="--cm:#5b6570;--cma:#f1f5f9">
+        <span class="cm-satir-harf" aria-hidden="true">A</span>
+        <div class="cm-yuva" data-beklenen="Azrâil" data-harf="A" data-tur="ad" tabindex="0" role="button" aria-label="A harfinin meleği: boş"></div>
+        <div class="cm-yuva" data-beklenen="Can alır" data-harf="A" data-tur="gorev" tabindex="0" role="button" aria-label="A harfinin görevi: boş"></div>
+      </div>
+      <div class="cm-satir" style="--cm:#40916c;--cma:#eef7f1">
+        <span class="cm-satir-harf" aria-hidden="true">M</span>
+        <div class="cm-yuva" data-beklenen="Mikâil" data-harf="M" data-tur="ad" tabindex="0" role="button" aria-label="M harfinin meleği: boş"></div>
+        <div class="cm-yuva" data-beklenen="Tabiat olayları ve rızık" data-harf="M" data-tur="gorev" tabindex="0" role="button" aria-label="M harfinin görevi: boş"></div>
+      </div>
+      <div class="cm-satir" style="--cm:#c9740b;--cma:#fff6e8">
+        <span class="cm-satir-harf" aria-hidden="true">İ</span>
+        <div class="cm-yuva" data-beklenen="İsrâfil" data-harf="İ" data-tur="ad" tabindex="0" role="button" aria-label="İ harfinin meleği: boş"></div>
+        <div class="cm-yuva" data-beklenen="Sûra üfler" data-harf="İ" data-tur="gorev" tabindex="0" role="button" aria-label="İ harfinin görevi: boş"></div>
+      </div>
+  </div>
+  <div class="cm-dugmeler">
+    <button type="button" class="cm-btn" id="cmKontrol">✅ Kontrol et</button>
+    <button type="button" class="cm-btn cm-btn-ikincil" id="cmSifirla">↺ Kartları geri al</button>
+  </div>
+  <p class="cm-gb" id="cmEsGb" role="status" aria-live="polite" hidden></p>
+
+  <h4 class="cm-adim-bas"><span>3</span> Kısa senaryolar: Hangi melek?</h4>
+  <p class="cm-ipucu">Her durumu oku ve ilgili meleği seç. Bazı sorularda doğru cevap CAMİ’nin dışında!</p>
+  <div class="cm-set" data-cm-set="senaryo"></div>
+
+  <h4 class="cm-adim-bas"><span>4</span> Mini test</h4>
+  <p class="cm-ipucu">Seçeneklerde görevleri birbirine karıştıran çeldiriciler var. Dikkatli oku.</p>
+  <div class="cm-set" data-cm-set="test"></div>
+</div>
+
 <div class="kutu-panel">
     <div class="ka-konu" id="ka-konu-3"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#e6f7f8"/><g class="kai-bl" opacity=".85"><ellipse cx="213" cy="87" rx="180" ry="82" fill="#c6ecef"/><ellipse cx="682" cy="147" rx="216" ry="72" fill="#c6ecef" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#6fd3de" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(56,34) scale(1.720)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-f"><path d="M26 88 V40 A24 24 0 0 1 74 40 V88 Z" fill="#12869a"/>
 <path d="M34 88 V44 A16 16 0 0 1 66 44 V88 Z" fill="#6fd3de"/>
@@ -1349,6 +1716,154 @@
       </div></li>
   </ol>
   <p class="as-alt">🔗 Bu yolculuk bugünkü davranışlarımızı neden etkiler? <a href="#ah-neden">Ahiret Neden Önemli? bölümüne git →</a></p>
+</div>
+<!-- ============ AHİRET KAVRAM KARTLARI (ahiretKavramStil / ahiretKavramScript · "ak-" önekli) ============ -->
+<div class="ka-blok ak-bolum" id="ak-kartlar">
+  <h4 class="ka-blok-bas">🧩 Ahiret Kavram Kartları<span class="ka-rozet">12 kavram</span></h4>
+  <p class="ka-blok-alt">Kavramlar birbirine bağlı bir yolculuk gibi sıralandı; zaman sırası için yukarıdaki <a href="#as-harita">Yolculuk Haritası</a>’na bakabilirsin. Her kartta <b>tanım</b>, <b>günlük hayattan bir bağlantı</b>, <b>diğer aşamalardan farkı</b>, bir <b>ayet ya da hadis</b> ve bir <b>düşünme sorusu</b> var.</p>
+  <ol class="ak-akis" aria-label="Öğrenme akışı"><li><a href="#ak-k-ahiret"><b>1</b>Ahiret inancı</a></li><li><a href="#ak-k-sorumluluk"><b>2</b>İnsan neden sorumludur?</a></li><li><a href="#ak-k-olum"><b>3</b>Ölüm ve yeniden diriliş inancı</a></li><li><a href="#ak-k-kiyamet"><b>4</b>Kıyamet</a></li><li><a href="#ak-k-bas"><b>5</b>Ba’s (yeniden diriliş)</a></li><li><a href="#ak-k-hasir"><b>6</b>Haşir</a></li><li><a href="#ak-k-mahser"><b>7</b>Mahşer</a></li><li><a href="#ak-k-hesap"><b>8</b>Hesap</a></li><li><a href="#ak-k-amel"><b>9</b>Amel defteri</a></li><li><a href="#ak-k-mizan"><b>10</b>Mizan</a></li><li><a href="#ak-k-sirat"><b>11</b>Sırat</a></li><li><a href="#ak-k-cennet"><b>12</b>Cennet ve cehennem</a></li></ol>
+  <div class="ak-izgara">
+    <details class="ak-kart" id="ak-k-ahiret">
+      <summary><span class="ak-no">1</span><span class="ak-ikon" aria-hidden="true">🌟</span><span class="ak-ad">Ahiret inancı</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>Dünya hayatından sonra başlayacak sonsuz hayata inanmaktır. Ahirete iman, imanın altı şartından biridir.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Bir ders yılının sonunda karne alırız; yıl boyunca gösterdiğimiz emek karnede karşımıza çıkar. Ahiret inancı da yaptıklarımızın boşa gitmediğini, bir sonucu olduğunu hatırlatır.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Ahiret tek bir an değildir; kıyametle başlayıp cennet ya da cehennemle süren bütün bir hayattır. Aşağıdaki kavramlar bu hayatın aşamalarıdır.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>““Sizi boşuna yarattığımızı ve bize tekrar döndürülmeyeceğinizi mi sandınız?””</blockquote><figcaption>Mü'minûn suresi, 115. ayet</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>Ayet, insanın boşuna yaratılmadığını ve sonunda Allah’a döneceğini hatırlatır.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Hayatın bir amacı olduğunu bilmek, bugün yaptığın seçimleri nasıl etkiler?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-sorumluluk">
+      <summary><span class="ak-no">2</span><span class="ak-ikon" aria-hidden="true">🧭</span><span class="ak-ad">İnsan neden sorumludur?</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>İnsan akıl ve irade sahibi olduğu için iyiyi kötüden ayırabilir ve seçim yapabilir. Bu yüzden yaptıklarından sorumludur. Allah kimseye gücünün yetmediği bir şeyi yüklemez.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Takım kaptanı seçilen öğrenci, görevini nasıl yaptığından sorumludur; seçme hakkı olan herkes seçiminin sonucunu da üstlenir.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Sorumluluk bir aşama değildir; bütün aşamaların neden var olduğunu açıklar. Hesap ve mizan, insan sorumlu bir varlık olduğu için vardır.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Allah, bir kimseyi ancak gücünün yettiği şeyle yükümlü kılar. Onun kazandığı iyilik kendi yararına, kötülük de kendi zararınadır.”</blockquote><figcaption>Bakara suresi, 286. ayet (kısaltılarak)</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>Allah, insana gücünün yettiği kadar sorumluluk verir. İyilik de kötülük de önce insanın kendisini etkiler.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Bir bebek yaptıklarından sorumlu tutulmaz. Sence büyüdükçe sorumluluğumuz neden artar?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-olum">
+      <summary><span class="ak-no">3</span><span class="ak-ikon" aria-hidden="true">🕯️</span><span class="ak-ad">Ölüm ve yeniden diriliş inancı</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>Ölüm, ömrün sona ermesi ve ruhun bedenden ayrılmasıdır. Ölüm bir yok oluş değil, yeni bir hayata geçiştir. Ömrün bittiği ana ecel denir.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>İlkokulu bitirip ortaokula geçmek gibi düşünebilirsin: Bir dönem kapanır, yenisi başlar. Ölümden sonra da hayat başka bir şekilde devam eder.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Ölüm, her insanın kendi ecelinde yaşadığı kişisel bir olaydır. Kıyamet ise bütün evrenin sonudur.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Her canlı ölümü tadacaktır. Ancak kıyamet günü yaptıklarınızın karşılığı size tastamam verilecektir.”</blockquote><figcaption>Âl-i İmrân suresi, 185. ayet (kısaltılarak)</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>Ölüm her canlı için kesindir; ama ölümle her şey bitmez. Yapılanların karşılığı ahirette eksiksiz verilir.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Ölümün bir “son” değil bir “geçiş” olduğunu bilmek insana nasıl bir umut verir?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-kiyamet">
+      <summary><span class="ak-no">4</span><span class="ak-ikon" aria-hidden="true">🌪️</span><span class="ak-ad">Kıyamet</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>Allah’ın dilediği bir zamanda evrendeki düzenin bozulması ve dünya hayatının sona ermesidir. Sûra ilk kez üflenmesiyle başlar.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Bir maçın ne zaman biteceğini oyuncular değil hakem bilir; oyuncu her dakikayı iyi değerlendirir. Kıyametin zamanını da yalnızca Allah bilir.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Kıyamet evrenin sonudur. Ba’s ise kıyametten sonra insanların yeniden diriltilmesidir.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Kıyametin ne zaman kopacağı bilgisi şüphesiz yalnızca Allah katındadır.”</blockquote><figcaption>Lokmân suresi, 34. ayet (kısaltılarak)</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>Kıyametin zamanını hiçbir insan, hiçbir falcı ya da kâhin bilemez. Bu bilgi yalnızca Allah’a aittir.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Kıyametin zamanını kimsenin bilmemesi, her günümüzü değerli kılar mı? Neden?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-bas">
+      <summary><span class="ak-no">5</span><span class="ak-ikon" aria-hidden="true">🌅</span><span class="ak-ad">Ba’s (yeniden diriliş)</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>Sûra ikinci kez üflenmesiyle bütün insanların yeniden diriltilmesidir.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Kışın kuru görünen ağaçlar baharda yeniden yeşerir. Kur’an da kurumuş toprağın yağmurla canlanmasını, dirilişin bir örneği olarak anlatır.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Ba’s dirilmektir. Haşir ise dirilen insanların bir araya toplanmasıdır.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Bir de kendi yaratılışını unutarak bize bir örnek getirdi. Dedi ki: “Çürümüşlerken kemikleri kim diriltecek?” De ki: “Onları ilk defa var eden diriltecektir. O, her yaratılmışı hakkıyla bilendir.””</blockquote><figcaption>Yâsîn suresi, 78-79. ayetler</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>İnsanı yoktan ilk kez yaratan Allah, onu yeniden diriltmeye de elbette güç yetirir.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Seni ilk kez yaratan Allah’ın seni yeniden diriltmesi neden zor değildir?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-hasir">
+      <summary><span class="ak-no">6</span><span class="ak-ikon" aria-hidden="true">👥</span><span class="ak-ad">Haşir</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>Diriltilen insanların hesap için bir araya toplanmasıdır. Haşir bir OLAYdır: toplanmak.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Zil çalınca bütün öğrencilerin tören için bahçede toplanması gibi: Toplanma işinin kendisi haşire benzer.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Haşir “Ne oluyor?” sorusunun cevabıdır: İnsanlar toplanıyor. Toplandıkları YER ise mahşerdir.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Biz onları mahşerde toplarız da içlerinden hiçbirini bırakmayız.”</blockquote><figcaption>Kehf suresi, 47. ayet (kısaltılarak)</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>Hiç kimse unutulmaz, hiç kimse dışarıda bırakılmaz. Herkes yaptıklarının hesabını vermek üzere toplanır.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>“İçlerinden hiçbirini bırakmayız” ifadesi adaletle ilgili sana ne anlatıyor?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-mahser">
+      <summary><span class="ak-no">7</span><span class="ak-ikon" aria-hidden="true">🏟️</span><span class="ak-ad">Mahşer</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>İnsanların hesap için toplandığı büyük meydandır. Mahşer bir YERdir.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Tören için toplandığınız okul bahçesini düşün: Toplanılan yer, mahşere benzer.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Mahşer “Nerede?” sorusunun cevabıdır. Haşir toplanma olayı, mahşer toplanılan meydandır.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“O gün yer, başka bir yere, gökler de başka göklere dönüştürülür ve insanlar bir ve kahhar (her şeyin üzerinde yegâne hâkim) olan Allah’ın huzuruna çıkarlar.”</blockquote><figcaption>İbrâhîm suresi, 48. ayet</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>O gün bütün insanlar Allah’ın huzurunda bulunur. Zengin, fakir, ünlü ya da sıradan; herkes aynı meydandadır.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Herkesin aynı meydanda bulunması eşitlik hakkında sana ne düşündürüyor?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-hesap">
+      <summary><span class="ak-no">8</span><span class="ak-ikon" aria-hidden="true">❓</span><span class="ak-ad">Hesap</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>İnsanın dünyada yaptıklarının Allah huzurunda ortaya konması ve sorulmasıdır.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Proje ödevini teslim ettiğinde öğretmenin “Bunu nasıl hazırladın?” diye sorması gibi: Yapılanlar tek tek sorulur.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Hesapta “Ne yaptın?” diye sorulur. Mizanda ise yapılanlar tartılıp değerlendirilir.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>““Oku kitabını! Bugün hesap sorucu olarak sana nefsin yeter” denilecektir.”</blockquote><figcaption>İsrâ suresi, 14. ayet</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>İnsan kendi yaptıklarını kendi kitabında okur; başkasına bakmaya gerek kalmaz, çünkü her şey ortadadır.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Kendi kitabını okuyan biri neden “bana haksızlık yapıldı” diyemez?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-amel">
+      <summary><span class="ak-no">9</span><span class="ak-ikon" aria-hidden="true">📖</span><span class="ak-ad">Amel defteri</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>İnsanın dünyada yaptığı bütün iyi ve kötü işlerin yazıldığı kitaptır. Bu kayıtları Kirâmen Kâtibîn melekleri tutar.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Bir öğrencinin yıl boyunca yaptığı çalışmaların biriktiği dosya gibi düşünebilirsin; ama amel defteri hiçbir şeyi atlamaz.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Amel defteri yapılanların KAYDIdır. Hesap ise bu kayda göre yapılan sorgulamadır.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“İşte o vakit, kitabı kendisine sağından verilen kimse der ki: “Gelin, kitabımı okuyun!””</blockquote><figcaption>Hâkka suresi, 19. ayet</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>Güzel işler yapan kişi, kitabını sevinçle başkalarına gösterir. Amel defteri, iyiliklerimizin de kaybolmadığını gösterir.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Bugün defterine yazılmasını istediğin bir iyilik ne olurdu?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-mizan">
+      <summary><span class="ak-no">10</span><span class="ak-ikon" aria-hidden="true">⚖️</span><span class="ak-ad">Mizan</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>Amellerin, yani yapılan iyi ve kötü işlerin adaletle tartılmasıdır. Hardal tanesi kadar küçük bir iş bile kaybolmaz.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Manavdaki terazi hileli olursa haksızlık olur. Mizanda ise kimseye zerre kadar haksızlık yapılmaz.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Hesapta yapılanlar sorulur; mizanda bunların ağırlığı tartılır.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Kıyamet günü için adalet terazileri kuracağız. Öyle ki hiçbir kimseye zerre kadar zulmedilmeyecek. (Yapılan iş) bir hardal tanesi ağırlığınca da olsa, onu getirip ortaya koyacağız. Hesap görücü olarak biz yeteriz.”</blockquote><figcaption>Enbiyâ suresi, 47. ayet</figcaption></figure><figure class="ak-alinti ak-hadis"><span class="ak-alinti-etiket">Hadis</span><blockquote>“Kıyamet gününde müminin terazisinde güzel ahlaktan daha ağır bir şey olmayacaktır.”</blockquote><figcaption>Hadis · Tirmizî, Birr, 62 — Diyanet, 4 Eylül 2026 Cuma hutbesi</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>Ayet mizanın adaletini, hadis ise mizanda en ağır gelen şeyin güzel ahlak olduğunu anlatır.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Hadise göre terazide en ağır gelen şey güzel ahlaksa, bugün teraziyi ağırlaştırmak için ne yapabilirsin?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-sirat">
+      <summary><span class="ak-no">11</span><span class="ak-ikon" aria-hidden="true">🌉</span><span class="ak-ad">Sırat</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>Cennete ulaşmak için herkesin üzerinden geçeceği köprüdür. Sırat bilgisi Peygamberimizin hadislerinden gelir.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Aynı köprüden geçen insanlardan kimi hızlı, kimi yavaş yürür. Hadiste de müminlerin sırattan farklı hızlarda geçeceği anlatılır.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Mizan bir değerlendirmedir; sırat ise bu değerlendirmeden sonra üzerinden geçilen yoldur.</p>
+        <figure class="ak-alinti ak-hadis"><span class="ak-alinti-etiket">Hadis</span><blockquote>“Müminler (…) kimi göz kırpacak kadar az bir zamanda, kimi şimşek gibi, kimi rüzgâr gibi, kimi kuş gibi, kimi de iyi cins at ve deve gibi hızla geçer.”</blockquote><figcaption>Hadis · Müslim, Îmân, 302 — Diyanet, Hadislerle İslâm (kısaltılarak)</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>Müminlerin geçişi birbirinden farklı olacaktır; kimi göz açıp kapayıncaya kadar hızlı geçer.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Hadiste herkesin farklı hızda geçmesi sana ne düşündürüyor?</p>
+      </div>
+    </details>
+    <details class="ak-kart" id="ak-k-cennet">
+      <summary><span class="ak-no">12</span><span class="ak-ikon" aria-hidden="true">🌳</span><span class="ak-ad">Cennet ve cehennem</span><span class="ak-ac" aria-hidden="true"></span></summary>
+      <div class="ak-govde">
+        <p class="ak-satir ak-tanim"><b>📘 Tanım</b>Cennet, iman edip iyi işler yapanların sonsuz mutluluk yurdudur. Cehennem, inkâr eden ve kötülükte ısrar edenlerin ceza yeridir. İkisi de Allah’ın adaletinin sonucudur.</p>
+        <p class="ak-satir"><b>🏫 Günlük hayattan</b>Emeğin karşılığını görmek insanı sevindirir; haksızlığın cezasız kalmaması da adalet duygumuzu rahatlatır. Allah’ın merhameti ise hata yapan herkese yeniden başlama umudu verir.</p>
+        <p class="ak-satir ak-fark"><b>🔀 Diğer aşamalardan farkı</b>Cennet ve cehennem geçici bir aşama değil, ahiretin sonsuz yurtlarıdır.</p>
+        <figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Kim de inanmış olarak salih ameller işlerse, o, ne zulme uğramaktan korkar, ne yoksun bırakılmaktan.”</blockquote><figcaption>Tâ-Hâ suresi, 112. ayet</figcaption></figure><figure class="ak-alinti"><span class="ak-alinti-etiket">Ayet meali</span><blockquote>“Allah’ın rahmetinden ümidinizi kesmeyin. Şüphesiz Allah, bütün günahları affeder. Çünkü O, çok bağışlayandır, çok merhamet edendir.”</blockquote><figcaption>Zümer suresi, 53. ayet (kısaltılarak)</figcaption></figure>
+        <p class="ak-satir ak-aciklama"><b>💬 Açıklama</b>İman edip güzel işler yapan kişi haksızlığa uğramaz. Hata yapan kişi de Allah’ın rahmetinden ümidini kesmemelidir.</p>
+        <p class="ak-satir ak-dusun"><b>🤔 Düşün</b>Allah’ın rahmetinden ümit kesilmemesi gerektiğini bilmek, hata yapan birine ne kazandırır?</p>
+      </div>
+    </details>
+  </div>
+  <div class="ak-fark-kutu">
+    <h5>⚖️ En çok karıştırılan dört kavram: Haşir · Mahşer · Hesap · Mizan</h5>
+    <div class="ak-tablo-sar"><table class="ak-tablo">
+      <thead><tr><th scope="col">Kavram</th><th scope="col">Ne?</th><th scope="col">Hangi soruya cevap?</th><th scope="col">Okuldan benzetme</th><th scope="col">Hatırlama ipucu</th></tr></thead>
+      <tbody><tr><th scope="row">Haşir</th><td data-et="Ne?">Toplanma (bir olay)</td><td data-et="Hangi soruya cevap?">“Ne oluyor?”</td><td data-et="Okuldan benzetme">Zil çalınca herkesin bahçede toplanması</td><td data-et="Hatırlama ipucu">H → Hareket (toplanmak)</td></tr><tr><th scope="row">Mahşer</th><td data-et="Ne?">Toplanılan meydan (bir yer)</td><td data-et="Hangi soruya cevap?">“Nerede?”</td><td data-et="Okuldan benzetme">Toplanılan okul bahçesi</td><td data-et="Hatırlama ipucu">M → Meydan</td></tr><tr><th scope="row">Hesap</th><td data-et="Ne?">Yapılanların sorulması</td><td data-et="Hangi soruya cevap?">“Ne yaptın?”</td><td data-et="Okuldan benzetme">Öğretmenin projeyi sorması</td><td data-et="Hatırlama ipucu">Soru sorulur</td></tr><tr><th scope="row">Mizan</th><td data-et="Ne?">Yapılanların tartılması</td><td data-et="Hangi soruya cevap?">“Ne kadar ağır?”</td><td data-et="Okuldan benzetme">Adil tartan bir terazi</td><td data-et="Hatırlama ipucu">Terazi tartar</td></tr></tbody>
+    </table></div>
+    <p class="ak-tablo-alt">Kısaca: Önce <b>toplanırız</b> (haşir) büyük bir <b>meydanda</b> (mahşer); sonra yaptıklarımız <b>sorulur</b> (hesap) ve adaletle <b>tartılır</b> (mizan).</p>
+  </div>
 </div>
 <div class="ka-blok at-test" id="at-test">
   <h4 class="ka-blok-bas">🔁 Tekrar Testi: Bu Metin Hangi Aşamayı Anlatıyor?<span class="ka-rozet">9 ayet · 1 hadis</span></h4>
@@ -1602,6 +2117,28 @@
   </div>
 </div>
 
+<!-- ============ KENDİNİ DENE — 50 SORU (kendiniDeneStil / kendiniDeneScript · "kd-" önekli) ============ -->
+<div class="kutu-panel kd-bolum" id="kd-ahiret">
+  <div class="kd-bas">
+    <span class="kd-bas-ikon" aria-hidden="true">✅</span>
+    <h3><small>Konu 3 · Ara bölüm</small>KENDİNİ DENE — Ahiret İnancını Ne Kadar Öğrendin?</h3>
+  </div>
+  <p class="kd-giris">50 soru, 5 grupta. Her sorunun cevabını hemen kontrol edersin. Yanlış yaparsan üzülme: İpucu ve açıklama seni doğru bilgiye götürür. Sonunda hangi kavramları tekrar etmenin iyi olacağını görürsün.</p>
+  <div class="kd-gruplar" id="kdGruplar" aria-label="Soru grupları"></div>
+  <div class="kd-tekrar-bant" id="kdTekrarBant" hidden></div>
+  <div class="kd-alan" id="kdAlan"><noscript><p>Bu bölüm için tarayıcında JavaScript açık olmalı.</p></noscript></div>
+  <div class="kd-sonuc" id="kdSonuc" hidden tabindex="-1"></div>
+  <div class="kd-alt" id="kdAlt">
+    <div class="kd-alt-bilgi" role="status" aria-live="polite">
+      <div class="kd-alt-ust"><span id="kdSayac">Cevaplanan 0 / 50</span><span id="kdDogru">✅ 0 doğru</span></div>
+      <div class="kd-cubuk" aria-hidden="true"><i id="kdCubuk"></i></div>
+    </div>
+    <button type="button" class="kd-git kd-git-ikincil" id="kdOnceki" aria-label="Önceki soru">◀</button>
+    <button type="button" class="kd-git" id="kdSonraki">Sonraki ▶</button>
+  </div>
+  <p class="kd-not">💾 Cevapların yalnızca bu cihazda saklanır.</p>
+</div>
+
 <div class="kutu-panel">
     <div class="ka-konu" id="ka-konu-4"><div class="ka-konu-gorsel"><svg class="ka-svg" viewBox="0 0 900 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="900" height="240" rx="24" fill="#eaf4fd"/><g class="kai-bl" opacity=".85"><ellipse cx="211" cy="94" rx="180" ry="82" fill="#cfe6fb"/><ellipse cx="662" cy="145" rx="216" ry="72" fill="#cfe6fb" opacity=".75"/></g><path d="M0 202 Q 450 168 900 206" stroke="#7cc4f0" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="2 12" stroke-linecap="round"/><g transform="translate(66,26) scale(1.800)"><g class="kai-g" style="animation-delay:0.00s"><g class="kai-p"><path d="M50 16 V80" stroke="#1b4f6e" stroke-width="5" stroke-linecap="round"/>
 <path d="M20 30 H80" stroke="#1b4f6e" stroke-width="5" stroke-linecap="round"/>
@@ -1617,7 +2154,7 @@
 <div class="konu-illustrasyon"><svg class="ka-svg" viewBox="0 0 140 140" aria-hidden="true"><rect width="140" height="140" fill="#eaf4fd"/><circle cx="70" cy="70" r="58" fill="#cfe6fb" class="kai-bl"/><g transform="translate(22,22) scale(0.96)"><g class="kai-p"><rect x="12" y="28" width="76" height="50" rx="7" fill="#fff" stroke="#2a6f97" stroke-width="3.4"/>
 <path d="M12 34 L50 58 L88 34" stroke="#2a6f97" stroke-width="3.4" fill="none" stroke-linejoin="round"/>
 <circle cx="76" cy="24" r="10" fill="#7cc4f0" stroke="#1b4f6e" stroke-width="2.6"/></g></g></svg></div>
-    <p>Ahiret inancı olan insan iyilik yapmaya gayret eder, hesap vereceğinin bilinciyle hareket eder, sabreder ve Allah'ın affediciliğine güvenir. <b>Hz. İsa</b>, Nasıra'da babasız doğdu; annesi Hz. Meryem'dir (Kur'an'da adı geçen tek kadın). İsrailoğullarına gönderildi, kendisine <b>İncil</b> verildi. Ona inanan 12 kişiye <b>havari</b> denir. Yahudiler onu öldürmek istedi ama Allah onu kurtardı, benzeri öldürüldü. Sonradan Hristiyanlar <b>teslis</b> inancını ortaya attı.</p>
+    <p>Ahiret inancı olan insan iyilik yapmaya gayret eder, hesap vereceğinin bilinciyle hareket eder, sabreder ve Allah'ın affediciliğine güvenir. <b>Hz. İsa</b>, Allah'ın izniyle babasız olarak dünyaya geldi; annesi Hz. Meryem'dir (Kur'an'da adı geçen tek kadın). İsrailoğullarına gönderildi, kendisine <b>İncil</b> verildi. Ona inanan 12 kişiye <b>havari</b> denir. Yahudiler onu öldürmek istedi; Kur'an'a göre onu öldürmediler ve asmadılar, fakat onlara öyle gibi gösterildi (Nisâ suresi, 157. ayet). Sonradan Hristiyanlar <b>teslis</b> inancını ortaya attı.</p>
     <p><b>Nâs suresi</b>, Kur'an'ın 114. ve son suresidir, Mekke'de inmiştir, 6 ayettir. Felak suresiyle birlikte "Muavvizeteyn" denir. Şeytanın ve insanların kalbine <b>vesvese</b> veren varlıkların şerrinden Allah'a sığınmayı öğütler. Surede Allah'a sırasıyla "Rab" (yetiştirip terbiye eden), "Melik" (mutlak hükümdar) ve "İlâh" (kendisine ibadet edilen tek varlık) isimleriyle seslenilir; bu üçlü sıralama, kötü düşüncelerden korunmak isteyen bir kişinin Allah'a duyduğu güvenin giderek derinleştiğini gösterir.</p>
   </div>
   <div class="zb-kutu zb-derin">
@@ -1771,7 +2308,7 @@
   <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
     <h3>📌 Ahiret İnancının Etkisi ve Hz. İsa (as) (1/2)</h3>
     <ul class="si-liste">
-      <li>Ahiret inancı olan insan iyilik yapmaya gayret eder, hesap vereceğinin bilinciyle hareket eder, sabreder ve Allah'ın affediciliğine güvenir.</li><li>Hz. İsa, Nasıra'da babasız doğdu; annesi Hz. Meryem'dir (Kur'an'da adı geçen tek kadın).</li><li>İsrailoğullarına gönderildi, kendisine İncil verildi. Ona inanan 12 kişiye havari denir.</li>
+      <li>Ahiret inancı olan insan iyilik yapmaya gayret eder, hesap vereceğinin bilinciyle hareket eder, sabreder ve Allah'ın affediciliğine güvenir.</li><li>Hz. İsa, Allah'ın izniyle babasız olarak dünyaya geldi; annesi Hz. Meryem'dir (Kur'an'da adı geçen tek kadın).</li><li>İsrailoğullarına gönderildi, kendisine İncil verildi. Ona inanan 12 kişiye havari denir.</li>
     </ul>
   </div>
   <div class="sunum-slayt s-zb s-zb-aile" data-tip="zb">
@@ -1784,7 +2321,7 @@
   <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--turkuaz)">
     <h3>📌 Ahiret İnancının Etkisi ve Hz. İsa (as) (2/2)</h3>
     <ul class="si-liste">
-      <li>Yahudiler onu öldürmek istedi ama Allah onu kurtardı, benzeri öldürüldü. Sonradan Hristiyanlar teslis inancını ortaya attı.</li><li>Nâs suresi, Kur'an'ın 114. ve son suresidir, Mekke'de inmiştir, 6 ayettir. Felak suresiyle birlikte "Muavvizeteyn" denir.</li><li>Şeytanın ve insanların kalbine vesvese veren varlıkların şerrinden Allah'a sığınmayı öğütler.</li>
+      <li>Yahudiler onu öldürmek istedi; Kur'an'a göre onu öldürmediler ve asmadılar, fakat onlara öyle gibi gösterildi (Nisâ suresi, 157. ayet). Sonradan Hristiyanlar teslis inancını ortaya attı.</li><li>Nâs suresi, Kur'an'ın 114. ve son suresidir, Mekke'de inmiştir, 6 ayettir. Felak suresiyle birlikte "Muavvizeteyn" denir.</li><li>Şeytanın ve insanların kalbine vesvese veren varlıkların şerrinden Allah'a sığınmayı öğütler.</li>
     </ul>
   </div>
   <div class="sunum-slayt s-zb s-zb-degerlendir" data-tip="zb">
@@ -2006,26 +2543,26 @@ const konuTekrariSorulari7 = [
   {zorluk:"orta", soru:"Hz. İsa'ya hangi kutsal kitap indirilmiştir?", secenekler:["İncil","Tevrat","Zebur","Kur'an"], dogru:0, aciklama:"Hz. İsa'ya İncil indirilmiştir."},
   {zorluk:"orta", soru:"Baba, oğul ve Ruhulkudüs'ün birleşmesinden meydana geldiğine inanılan tanrı anlayışına ne denir?", secenekler:["Teslis","Tevhit","Şirk","İman"], dogru:0, aciklama:"Bu anlayışa teslis denir."},
   {zorluk:"orta", soru:"Nâs suresi Kur'an-ı Kerim'in kaçıncı suresidir?", secenekler:["114.","1.","112.","113."], dogru:0, aciklama:"Nâs suresi 114. suredir."},
-  {zorluk:"orta", soru:"Nâs suresi nerede indirilmiştir?", secenekler:["Mekke","Medine","Kudüs","Taif"], dogru:0, aciklama:"Nâs suresi Mekke'de indirilmiştir."},
+  {zorluk:"orta", soru:"Nâs suresi hangi kötülükten Allah'a sığınmayı öğütler?", secenekler:["İnsanların kalplerine vesvese veren sinsi vesvesecinin kötülüğünden", "Doğal afetlerin zararından", "Hastalıkların verdiği acıdan", "Yalnızca vahşi hayvanların zararından"], dogru:0, aciklama:"Nâs suresi, cinlerden ve insanlardan olan, kalplere vesvese veren sinsi vesvesecinin kötülüğünden Allah'a sığınmayı öğütler."},
   {zorluk:"orta", soru:"Felak suresi ile birlikte Nâs suresine ne ad verilir?", secenekler:["Muavvizeteyn","Tevhit sureleri","Kısa sureler","Mekki sureler"], dogru:0, aciklama:"Bu ikisine birlikte Muavvizeteyn denir."},
-  {zorluk:"orta", soru:"Nâs suresi kaç ayettir?", secenekler:["Altı","Üç","Beş","Yedi"], dogru:0, aciklama:"Nâs suresi altı ayettir."},
+  {zorluk:"orta", soru:"Aklına kötü bir düşünce geldiğini fark eden bir öğrenci, Nâs suresinin öğüdüne göre ne yapar?", secenekler:["Allah'a sığınır ve o düşünceden uzaklaşmaya çalışır", "O düşünceyi hemen uygular", "Düşünceyi arkadaşlarına yayar", "Kötü düşüncelerin önemsiz olduğunu düşünür"], dogru:0, aciklama:"Nâs suresi vesveselere karşı Allah'a sığınmayı öğütler. Kötü düşünceyi fark edip ondan uzaklaşmak bu öğüde uygun davranıştır."},
 
   {zorluk:"zor", soru:"Meşhur Cibril hadisinde iman kaç şart olarak sayılmıştır?", secenekler:["Altı","Beş","Dört","Yedi"], dogru:0, aciklama:"İman, Cibril hadisinde altı şart olarak sayılmıştır."},
   {zorluk:"zor", soru:"Kıyametin ne zaman kopacağını kim bilir?", secenekler:["Sadece Allah","Peygamberler","Melekler","Bilginler"], dogru:0, aciklama:"Kıyametin ne zaman kopacağını sadece Allah bilir."},
-  {zorluk:"zor", soru:"Hz. İsa'nın doğduğu şehir neresidir?", secenekler:["Nasıra","Kudüs","Beytüllahim","Şam"], dogru:0, aciklama:"Hz. İsa Nasıra'da doğmuştur."},
-  {zorluk:"zor", soru:"Hz. Meryem'in yakın akrabası olan ve onu himayesine alan peygamber kimdir?", secenekler:["Hz. Zekeriya","Hz. Yahya","Hz. Musa","Hz. Davut"], dogru:0, aciklama:"Hz. Meryem'i himayesine alan Hz. Zekeriya'dır."},
+  {zorluk:"zor", soru:"Hz. İsa'nın dünyaya gelişiyle ilgili hangisi doğrudur?", secenekler:["Allah'ın izniyle babasız olarak dünyaya gelmiştir", "Bir kral ailesinde dünyaya gelmiştir", "Hz. Musa'nın oğlu olarak dünyaya gelmiştir", "Mekke'de dünyaya gelmiştir"], dogru:0, aciklama:"Hz. İsa, Allah'ın izniyle babasız olarak dünyaya gelmiştir; annesi Hz. Meryem'dir."},
+  {zorluk:"zor", soru:"Nâs suresinde Allah'a sırasıyla \"Rab, Melik, İlâh\" isimleriyle seslenilmesi neyi gösterir?", secenekler:["Kötü düşüncelerden korunmak isteyen kişinin Allah'a güveninin giderek derinleştiğini", "Allah'ın üç ayrı varlık olduğunu", "Bu isimlerin yalnızca meleklere ait olduğunu", "Surenin yalnızca hükümdarlara seslendiğini"], dogru:0, aciklama:"Surede Allah'a \"Rab\" (terbiye eden), \"Melik\" (mutlak hükümdar) ve \"İlâh\" (ibadet edilen tek varlık) isimleriyle seslenilir. Bu sıralama Allah'a duyulan güvenin derinleştiğini gösterir."},
   {zorluk:"zor", soru:"Kur'an-ı Kerim'de ismiyle anılan tek kadın kimdir?", secenekler:["Hz. Meryem","Hz. Hatice","Hz. Fatıma","Hz. Asiye"], dogru:0, aciklama:"Kur'an'da ismiyle anılan tek kadın Hz. Meryem'dir."},
-  {zorluk:"zor", soru:"Kur'an-ı Kerim'e göre Hz. İsa'nın yerine kim öldürülmüştür?", secenekler:["Ona benzer kılınan biri","Hz. Yahya","Bir havari","Kimse öldürülmemiştir"], dogru:0, aciklama:"Kur'an'a göre ona benzer kılınan biri öldürülmüştür."},
-  {zorluk:"zor", soru:"Kur'an-ı Kerim'de Hz. İsa'ya verilen adlardan biri hangisidir?", secenekler:["Mesih","Halil","Kelim","Necî"], dogru:0, aciklama:"Hz. İsa'ya verilen adlardan biri Mesih'tir."},
-  {zorluk:"zor", soru:"Hz. İsa'nın peygamberliğinin kaçıncı yılında öldürülmek istenmiştir?", secenekler:["Üçüncü","Birinci","Beşinci","Onuncu"], dogru:0, aciklama:"Hz. İsa peygamberliğinin üçüncü yılında öldürülmek istenmiştir."},
-  {zorluk:"zor", soru:"Kudüs Valisi olarak Hz. İsa'yı idam etmek isteyen kişi kimdir?", secenekler:["Pontius Pilatus","Herodes","Neron","Sezar"], dogru:0, aciklama:"Bu kişi Pontius Pilatus'tur."},
+  {zorluk:"zor", soru:"Kur'an-ı Kerim'e göre (Nisâ suresi, 157. ayet) Hz. İsa hakkında hangisi doğrudur?", secenekler:["Onu öldürmediler ve asmadılar; onlara öyle gibi gösterildi", "Çarmıha gerilerek öldürülmüştür", "Havarileri tarafından öldürülmüştür", "Hiç peygamber olarak gönderilmemiştir"], dogru:0, aciklama:"Ayette \"Oysa onu öldürmediler ve asmadılar. Fakat onlara öyle gibi gösterildi.\" buyrulur."},
+  {zorluk:"zor", soru:"Ahiret inancı olan bir öğrencinin, kimse görmediğinde de dürüst davranması neyin sonucudur?", secenekler:["Yaptıklarından hesap vereceğinin bilincinde olmasının", "Ceza almaktan korkmasının", "Ödül beklemesinin", "Başkalarının onu övmesini istemesinin"], dogru:0, aciklama:"Ahirete inanan insan, yaptıklarının karşılığını göreceğini ve hesap vereceğini bilir; bu yüzden kimse görmese de doğru davranır."},
+  {zorluk:"zor", soru:"Bir arkadaşın \"Kimse ahiretten geri gelip anlatmadı.\" diyerek ahiret inancının önemsiz olduğunu söylüyor. Ahiret inancının davranışlara etkisi açısından ona hangi cevap verilebilir?", secenekler:["Ahiret inancı insanı sorumlu davranmaya, iyilik yapmaya ve haksızlıktan kaçınmaya yöneltir", "Ahiret inancının insan davranışlarına hiçbir etkisi yoktur", "Ahiret inancı yalnızca yaşlılar için önemlidir", "Ahirete inanan kişi dünya işlerini bırakmalıdır"], dogru:0, aciklama:"Hesap verme düşüncesi ortadan kalkınca doğru davranmanın tek sebebi \"yakalanmamak\" olurdu. Ahiret inancı bu sebebi sorumluluğa dönüştürür."},
+  {zorluk:"zor", soru:"Ahiret inancı olan bir insan karşılaştığı zorluklar ve hataları karşısında nasıl bir tutum gösterir?", secenekler:["Sabreder ve Allah'ın affediciliğine güvenir", "Umutsuzluğa kapılır", "Hatalarını başkalarına yükler", "Zorluk karşısında iyilik yapmayı bırakır"], dogru:0, aciklama:"Ahiret inancı olan insan iyilik yapmaya gayret eder, hesap vereceğinin bilinciyle hareket eder, sabreder ve Allah'ın affediciliğine güvenir."},
   {zorluk:"zor", soru:"Amel defterlerini yazan meleklere verilen diğer ad nedir?", secenekler:["Kiramen Kâtibin","Hafaza","Rahmet melekleri","Sorgu melekleri"], dogru:0, aciklama:"Bu meleklere Kiramen Kâtibin denir."},
-  {zorluk:"zor", soru:"Ahiret inancı olan insanın özelliklerinden biri hangisidir?", secenekler:["Yaptıklarından hesaba çekileceğinin farkında olması","Dünya hayatını tek gerçek kabul etmesi","Ölümü yok oluş sayması","Kötülükten çekinmemesi"], dogru:0, aciklama:"Ahiret inancı olan insan yaptıklarından hesaba çekileceğinin farkındadır."},
+  {zorluk:"zor", soru:"Ahiret inancı olan insanın özelliklerinden biri hangisidir?", secenekler:["Yaptıklarından hesaba çekileceğinin farkında olması", "Dünya hayatını tek gerçek kabul etmesi", "Ölümü bir yok oluş olarak görmesi", "Sorumluluklarını ertelemesi"], dogru:0, aciklama:"Ahirete inanan insan yaptıklarından hesaba çekileceğini bilir ve buna göre davranır."},
   {zorluk:"zor", soru:"Hz. Peygamber'e göre cennete girmenin şartlarından biri hangisidir?", secenekler:["Doğru sözlü olmak","Zengin olmak","Uzun yaşamak","Çok seyahat etmek"], dogru:0, aciklama:"Hz. Peygamber, cennet için doğru sözlü olmayı şart koşmuştur."},
-  {zorluk:"zor", soru:"\"Nasıl yaşarsanız öyle ölürsünüz, nasıl ölürseniz öyle dirilirsiniz.\" sözü kime aittir?", secenekler:["Hz. Muhammed","Hz. İsa","Hz. Musa","Hz. İbrahim"], dogru:0, aciklama:"Bu söz Hz. Muhammed'e aittir."},
-  {zorluk:"zor", soru:"Berzah âlemi kimler için geçerlidir?", secenekler:["Sadece insanlar","Bütün canlılar","Sadece bitkiler","Sadece hayvanlar"], dogru:0, aciklama:"Berzah âlemi sadece insanlar için geçerlidir."},
+  {zorluk:"zor", soru:"Kiramen Kâtibin meleklerinin varlığına inanan bir öğrenci söz ve davranışlarında nasıl olur?", secenekler:["Her davranışının kaydedildiği bilinciyle dikkatli olur", "Yalnızca öğretmeni varken dikkatli olur", "Davranışlarına hiç dikkat etmez", "Yalnızca büyük hatalarına dikkat eder"], dogru:0, aciklama:"Kiramen Kâtibin, insanların iyilik ve kötülüklerini kaydeden meleklerdir. Bu inanç insanı söz ve davranışlarında dikkatli olmaya yöneltir."},
+  {zorluk:"zor", soru:"Ahiret hayatının aşamaları hangi seçenekte doğru sırayla verilmiştir?", secenekler:["Berzah – kıyamet – ba's (diriliş) – haşir – mizan – cennet/cehennem", "Kıyamet – berzah – mizan – haşir – ba's – cennet/cehennem", "Ba's – berzah – kıyamet – mizan – haşir – cennet/cehennem", "Haşir – kıyamet – berzah – ba's – mizan – cennet/cehennem"], dogru:0, aciklama:"Ölümle berzah başlar; kıyamet kopar; sûra ikinci kez üflenince diriliş (ba's) olur; insanlar mahşerde toplanır (haşir); amaller tartılır (mizan) ve cennet ya da cehennem başlar."},
   {zorluk:"zor", soru:"Nâs suresinin adını aldığı \"nâs\" kelimesi ne anlama gelir?", secenekler:["İnsanlar","Cinler","Melekler","Şeytanlar"], dogru:0, aciklama:"\"Nâs\" kelimesi insanlar anlamına gelir."},
-  {zorluk:"zor", soru:"Nâs suresinde sığınılan kötülüğün kaynağı olarak hangi ifade geçer?", secenekler:["Vesvese veren sinsi vesvesecinin şerri","Yalnızca cinlerin şerri","Yalnızca hayvanların şerri","Yalnızca doğa olaylarının şerri"], dogru:0, aciklama:"Nâs suresinde vesvese veren sinsi vesvesecinin şerrinden Allah'a sığınılır."},
+  {zorluk:"zor", soru:"Nâs suresinde sığınılan kötülüğün kaynağı olarak hangi ifade geçer?", secenekler:["Kalplere vesvese veren sinsi vesvesecinin şerri", "Karanlığı çöktüğü zaman gecenin şerri", "Kıskandığı vakit kıskanç kişinin şerri", "Düğümlere üfürenlerin şerri"], dogru:0, aciklama:"Nâs suresinde vesvesecinin şerrinden; Felak suresinde ise gecenin, düğümlere üfürenlerin ve kıskancın şerrinden Allah'a sığınılır."},
 ];
 let kt7rIndex = 0, kt7rPuan = 0, kt7rSiraliSorular = [], kt7rKilit = false;
 
@@ -2084,7 +2621,8 @@ function kt7rSoruGoster(){
   document.getElementById('kt7rSonuc').textContent = '';
   const kutu = document.getElementById('kt7rSecenekler');
   kutu.innerHTML = '';
-  oge.secenekler.forEach((sec,i)=>{
+  const kKarisik = oge.secenekler.map((sec,i)=>({sec,i})).map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+  kKarisik.forEach(({sec,i})=>{
     const btn = document.createElement('div');
     btn.className = 'merdiven-secenek';
     btn.textContent = sec;
@@ -2098,7 +2636,7 @@ function kt7rSoruGoster(){
         document.getElementById('kt7rPuan').textContent = kt7rPuan;
       } else {
         btn.classList.add('yanlis');
-        tumBtn[oge.dogru].classList.add('dogru');
+        tumBtn[kKarisik.findIndex(s=>s.i===oge.dogru)].classList.add('dogru');
         kt7rZayifKaydet(oge.soru);
       }
       const aciklamaKutu = document.getElementById('kt7rAciklama');
@@ -5121,6 +5659,488 @@ document.addEventListener('DOMContentLoaded', zbTekrarHatirlatmaKontrol);
   document.getElementById('atTekrar').addEventListener('click', function(){ kur(); kaydir(kok); });
   kur();
 })();
+</script>
+<script id="camiKodScript">
+var CM_VERI = {"senaryo":[{"s":"Hira mağarasında Peygamberimize ilk ayetler geldi. Bu ayetleri Peygamberimize ileten melek kimdir?","o":["Cebrâil","İsrâfil","Mikâil","Azrâil"],"d":0,"h":"Vahyi, yani Allah’ın mesajını ileten melek CAMİ’nin hangi harfiydi?","a":"C — Cebrâil, vahiy meleğidir. Kur’an ayetlerini Peygamberimize o getirmiştir."},{"s":"Kuraklık yaşayan bir köyde yağmur yağınca köylüler Allah’a şükretti. Yağmur gibi tabiat olaylarıyla görevlendirilmiş melek kimdir?","o":["Mikâil","Cebrâil","Kirâmen Kâtibîn","İsrâfil"],"d":0,"h":"M harfini düşün: Tabiat olayları ve rızık…","a":"M — Mikâil, tabiat olayları ve rızıkla ilgili görevleri olan melektir. Yağmuru yağdıran Allah’tır; Mikâil bu işte görevlidir. Bu yüzden şükür Allah’a yapılır."},{"s":"Öğretmen “Kıyamet, sûra ilk kez üflenmesiyle başlayacak” dedi. Sûra üflemekle görevli melek kimdir?","o":["İsrâfil","Azrâil","Mikâil","Münker"],"d":0,"h":"CAMİ’nin son harfi: İ…","a":"İ — İsrâfil sûra üfler. İlk üflenişte kıyamet kopar, ikincisinde insanlar diriltilir. Can almak ise Azrâil’in görevidir; ikisini karıştırmamak gerekir."},{"s":"Secde suresi 11. ayette “Sizin için görevlendirilen ölüm meleği canınızı alacak” buyruluyor. Bu melek CAMİ’nin hangi harfiyle hatırlanır?","o":["A — Azrâil","İ — İsrâfil","C — Cebrâil","M — Mikâil"],"d":0,"h":"Ayette geçen görev “can almak”tır.","a":"A — Azrâil. Kur’an’da adı geçmez, “ölüm meleği” diye anılır. Azrâil adı İslam geleneğinde bu melek için kullanılır."},{"s":"Zeynep kimse görmese bile ödevini dürüstçe yaptı ve “Yaptıklarım kaydediliyor” diye düşündü. Amelleri yazan melekler CAMİ kodlamasının içinde var mı?","o":["Hayır; bunlar Kirâmen Kâtibîn melekleridir ve CAMİ’nin dışındadır","Evet; C harfi yazıcı melekleri gösterir","Evet; M harfi yazıcı melekleri gösterir","Evet; İ harfi yazıcı melekleri gösterir"],"d":0,"h":"CAMİ yalnızca dört meleği hatırlatır. Yazıcı melekler bunlardan biri miydi?","a":"CAMİ bütün melekleri kapsamaz. Amelleri yazan melekler Kirâmen Kâtibîn’dir (İnfitâr suresi, 10-12. ayetler). Bu melekler de imanımızın parçasıdır ama bu kodlamada yer almaz."},{"s":"Kabirde insana sorular soracağı bildirilen melekler hangileridir?","o":["Münker ve Nekir","Cebrâil ve Mikâil","İsrâfil ve Azrâil","Mikâil ve İsrâfil"],"d":0,"h":"Bu melekler CAMİ’nin dışında kalanlardan. Konu anlatımında “sorgu melekleri” diye geçiyordu.","a":"Münker ve Nekir, kabirde sorgulayan melekler olarak bilinir. Adları M ve N ile başlasa da CAMİ’deki M, Mikâil’dir."}],"test":[{"s":"Aşağıdaki eşleştirmelerden hangisi doğrudur?","o":["Mikâil — Tabiat olayları ve rızık","Cebrâil — Sûra üflemek","Azrâil — Vahiy getirmek","İsrâfil — Can almak"],"d":0,"h":"Her meleği CAMİ’deki harfiyle düşün: C vahiy, A can, M tabiat, İ sûr.","a":"Doğru eşleştirme Mikâil — tabiat olayları ve rızıktır. Diğer seçeneklerde görevler yer değiştirmiş: Sûr İsrâfil’in, vahiy Cebrâil’in, can almak Azrâil’in görevidir."},{"s":"CAMİ kodlamasındaki “M” harfi hangi meleği hatırlatır?","o":["Mikâil","Münker","Ölüm meleği","Kirâmen Kâtibîn"],"d":0,"h":"Münker de M ile başlar; ama CAMİ dört büyük meleği hatırlatıyordu.","a":"M — Mikâil. Münker de M ile başlar ama kabirde sorgulayan meleklerdendir ve CAMİ’nin içinde değildir."},{"s":"CAMİ kodlaması için hangisi doğrudur?","o":["Dört büyük meleğin adını ve görevini hatırlamaya yardım eden bir yöntemdir","Bütün meleklerin adlarını içerir","Meleklerin derecesini büyükten küçüğe sıralar","Kur’an’da geçen dinî bir terimdir"],"d":0,"h":"Kodlama bir “hatırlama yöntemi”dir; dinî bir bilgi ya da sıralama değildir.","a":"CAMİ, dört meleğin adını ve görevini akılda tutmak için kullanılan bir hatırlama yöntemidir. Harflerin sırası meleklerin derecesini göstermez; yalnızca kolay hatırlanan bir kelime oluşturur."},{"s":"“İlk üflenişte kıyamet kopar, ikinci üflenişte insanlar diriltilir.” Bu görev hangi meleğe aittir?","o":["İsrâfil","Azrâil","Cebrâil","Mikâil"],"d":0,"h":"“Üfleniş” kelimesine dikkat et: Neye üflenir?","a":"İsrâfil sûra üfler. Azrâil’in görevi ise tek tek insanların canını almaktır. Biri bütün evrenin sonu ve dirilişle, diğeri bir insanın ölümüyle ilgilidir."},{"s":"Aşağıdakilerin hangisinde Kur’an’da adı geçen iki melek birlikte verilmiştir?","o":["Cebrâil ve Mikâil","Azrâil ve İsrâfil","Münker ve Nekir","Azrâil ve Mikâil"],"d":0,"h":"Bakara suresi 98. ayeti hatırla.","a":"Bakara suresi 98. ayette Cebrâil ve Mikâil’in adı birlikte geçer. Azrâil ve İsrâfil adları Kur’an’da geçmez; görevleri (ölüm meleği, sûr) anlatılır."},{"s":"Doğru mu, yanlış mı? “Azrâil, bir insanın ne zaman öleceğine kendisi karar verir.”","o":["Yanlış","Doğru"],"d":0,"h":"Eceli kim belirler?","a":"Yanlış. Eceli belirleyen Allah’tır. Ölüm meleği yalnızca Allah’ın verdiği görevi yerine getirir."}],"banka":[{"m":"Cebrâil","tur":"ad"},{"m":"Azrâil","tur":"ad"},{"m":"Mikâil","tur":"ad"},{"m":"İsrâfil","tur":"ad"},{"m":"Münker","tur":"ad"},{"m":"Vahiy getirir","tur":"gorev"},{"m":"Can alır","tur":"gorev"},{"m":"Tabiat olayları ve rızık","tur":"gorev"},{"m":"Sûra üfler","tur":"gorev"},{"m":"Amelleri yazar","tur":"gorev"},{"m":"Kabirde sorgular","tur":"gorev"}],"ipucu":{"C":"C harfi vahiy meleğini hatırlatır: Allah’ın mesajını peygamberlere ileten melek.","A":"A harfi ölüm meleğini hatırlatır: Eceli gelenin canını alan melek.","M":"M harfi Mikâil’i hatırlatır: Tabiat olayları ve rızık. (Münker de M ile başlar ama CAMİ’de değildir!)","İ":"İ harfi sûra üfleyecek meleği hatırlatır."}};
+/* CAMİ kodlaması: hafıza kartları, harf→melek→görev eşleştirme (sürükle-bırak + dokun),
+   kısa senaryolar ve mini test. Yanlışta utandırmaz; ipucu ve doğru bilgiyi gösterir. */
+(function(){
+  'use strict';
+  var kok = document.getElementById('cm-cami'); if(!kok || typeof CM_VERI === 'undefined') return;
+  function karistir(d){ d = d.slice(); for(var i=d.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=d[i]; d[i]=d[j]; d[j]=t; } return d; }
+  function el(etiket, sinif, metin){ var x = document.createElement(etiket); if(sinif) x.className = sinif; if(metin != null) x.textContent = metin; return x; }
+
+  /* ── 1) hafıza kartları ── */
+  kok.querySelectorAll('.cm-kart').forEach(function(k){
+    k.addEventListener('click', function(){
+      var acik = k.getAttribute('aria-expanded') === 'true';
+      k.setAttribute('aria-expanded', acik ? 'false' : 'true');
+      var d = document.getElementById(k.getAttribute('aria-controls'));
+      if(d) d.hidden = acik;
+    });
+  });
+
+  /* ── 2) eşleştirme ── */
+  var banka = document.getElementById('cmBanka'), gb = document.getElementById('cmEsGb');
+  var secili = null;
+  function fisYap(v){
+    var f = el('button', 'cm-fis', v.m); f.type = 'button'; f.draggable = true; f.dataset.tur = v.tur; f.dataset.m = v.m;
+    f.addEventListener('dragstart', function(ev){ secili = f; try { ev.dataTransfer.setData('text/plain', v.m); ev.dataTransfer.effectAllowed = 'move'; } catch(e){} });
+    f.addEventListener('click', function(ev){
+      ev.stopPropagation();
+      if(f.parentNode !== banka){ geriKoy(f); return; }      /* kutudaki fişe dokununca bankaya döner */
+      if(secili === f){ f.classList.remove('cm-secili'); secili = null; return; }
+      if(secili) secili.classList.remove('cm-secili');
+      secili = f; f.classList.add('cm-secili');
+    });
+    return f;
+  }
+  function yuvaEtiket(y){
+    var f = y.querySelector('.cm-fis');
+    y.setAttribute('aria-label', y.dataset.harf + ' harfinin ' + (y.dataset.tur === 'ad' ? 'meleği' : 'görevi') + ': ' + (f ? f.dataset.m : 'boş'));
+  }
+  function geriKoy(f){ var y = f.parentNode; banka.appendChild(f); f.classList.remove('cm-secili'); if(y && y.classList.contains('cm-yuva')){ y.classList.remove('cm-dogru','cm-tekrar'); yuvaEtiket(y); } }
+  function yerlestir(y, f){
+    if(!f) return;
+    var eski = y.querySelector('.cm-fis'); if(eski && eski !== f) banka.appendChild(eski);
+    var kaynakYuva = f.parentNode;
+    y.appendChild(f); f.classList.remove('cm-secili'); secili = null;
+    y.classList.remove('cm-dogru','cm-tekrar'); yuvaEtiket(y);
+    if(kaynakYuva && kaynakYuva !== y && kaynakYuva.classList && kaynakYuva.classList.contains('cm-yuva')){ kaynakYuva.classList.remove('cm-dogru','cm-tekrar'); yuvaEtiket(kaynakYuva); }
+    gb.hidden = true;
+  }
+  var yuvalar = kok.querySelectorAll('.cm-yuva');
+  yuvalar.forEach(function(y){
+    y.addEventListener('click', function(){ if(secili) yerlestir(y, secili); });
+    y.addEventListener('keydown', function(ev){ if((ev.key === 'Enter' || ev.key === ' ') && secili){ ev.preventDefault(); yerlestir(y, secili); } });
+    y.addEventListener('dragover', function(ev){ ev.preventDefault(); y.classList.add('cm-uzerinde'); });
+    y.addEventListener('dragleave', function(){ y.classList.remove('cm-uzerinde'); });
+    y.addEventListener('drop', function(ev){ ev.preventDefault(); y.classList.remove('cm-uzerinde'); if(secili) yerlestir(y, secili); });
+  });
+  banka.addEventListener('dragover', function(ev){ ev.preventDefault(); });
+  banka.addEventListener('drop', function(ev){ ev.preventDefault(); if(secili && secili.parentNode !== banka) geriKoy(secili); secili = null; });
+  function bankaKur(){
+    banka.innerHTML = ''; secili = null;
+    yuvalar.forEach(function(y){ y.innerHTML = ''; y.classList.remove('cm-dogru','cm-tekrar'); yuvaEtiket(y); });
+    karistir(CM_VERI.banka).forEach(function(v){ banka.appendChild(fisYap(v)); });
+    gb.hidden = true;
+  }
+  document.getElementById('cmSifirla').addEventListener('click', bankaKur);
+  document.getElementById('cmKontrol').addEventListener('click', function(){
+    var dogru = 0, bos = 0, ipuclari = {};
+    yuvalar.forEach(function(y){
+      var f = y.querySelector('.cm-fis');
+      y.classList.remove('cm-dogru','cm-tekrar');
+      if(!f){ bos++; return; }
+      if(f.dataset.m === y.dataset.beklenen){ dogru++; y.classList.add('cm-dogru'); }
+      else { y.classList.add('cm-tekrar'); ipuclari[y.dataset.harf] = CM_VERI.ipucu[y.dataset.harf]; }
+    });
+    gb.hidden = false;
+    if(dogru === yuvalar.length){
+      gb.className = 'cm-gb cm-gb-iyi';
+      gb.textContent = '🎉 Harika! C — Cebrâil (vahiy), A — Azrâil (can alır), M — Mikâil (tabiat olayları ve rızık), İ — İsrâfil (sûra üfler). Bankada kalan “Münker”, “Amelleri yazar” ve “Kabirde sorgular” kartları CAMİ’nin dışındaki meleklerle ilgilidir.';
+      return;
+    }
+    gb.className = 'cm-gb cm-gb-dene';
+    gb.innerHTML = '';
+    gb.appendChild(el('span', null, '🔎 ' + dogru + ' kutu doğru' + (bos ? ', ' + bos + ' kutu boş' : '') + '. Sarı kutulara bir daha bak; kutudaki karta dokunursan bankaya döner.'));
+    var ul = el('ul');
+    Object.keys(ipuclari).forEach(function(h){ ul.appendChild(el('li', null, ipuclari[h])); });
+    if(ul.children.length) gb.appendChild(ul);
+  });
+  bankaKur();
+
+  /* ── 3-4) soru setleri ── */
+  function setKur(kap, sorular){
+    kap.innerHTML = '';
+    var cozulen = 0, ilk = 0;
+    var sonuc = el('div', 'cm-set-sonuc'); sonuc.hidden = true;
+    sorular.forEach(function(q, i){
+      var kart = el('div', 'cm-soru');
+      kart.appendChild(el('span', 'cm-soru-no', 'SORU ' + (i + 1)));
+      kart.appendChild(el('p', 'cm-soru-metin', q.s));
+      var kutu = el('div', 'cm-secenekler');
+      var dogruMetin = q.o[q.d];
+      var secenekler = q.o.length === 2 ? ['Doğru', 'Yanlış'] : karistir(q.o);
+      var g = el('p', 'cm-gb'); g.hidden = true;
+      secenekler.forEach(function(se){
+        var b = el('button', 'cm-secenek', se); b.type = 'button';
+        b.addEventListener('click', function(){
+          if(kart.classList.contains('cm-bitti')) return;
+          kart.classList.add('cm-bitti'); cozulen++;
+          kutu.querySelectorAll('.cm-secenek').forEach(function(x){ x.disabled = true; if(x.textContent === dogruMetin) x.classList.add('cm-dogru'); });
+          g.hidden = false;
+          if(se === dogruMetin){ ilk++; g.className = 'cm-gb cm-gb-iyi'; g.textContent = '✅ Doğru! ' + q.a; }
+          else {
+            b.classList.add('cm-tekrar');
+            g.className = 'cm-gb cm-gb-dene';
+            g.textContent = '🔎 Bu sefer olmadı, birlikte bakalım. İpucu: ' + q.h + ' Doğru cevap: “' + dogruMetin + '”. ' + q.a;
+          }
+          if(cozulen === sorular.length){
+            sonuc.hidden = false; sonuc.innerHTML = '';
+            var oran = ilk / sorular.length;
+            sonuc.appendChild(el('p', null, sorular.length + ' sorudan ' + ilk + ' tanesini ilk denemede doğru cevapladın. ' +
+              (oran >= .8 ? 'Harika! Meleklerin görevlerini birbirinden ayırabiliyorsun.' : 'Kartlara bir kez daha göz atarak daha da güçlenebilirsin.')));
+            var t = el('button', 'cm-btn', '↺ Soruları yeniden çöz'); t.type = 'button';
+            t.addEventListener('click', function(){ setKur(kap, sorular); try { kap.scrollIntoView({block:'start'}); } catch(e){} });
+            sonuc.appendChild(t);
+          }
+        });
+        kutu.appendChild(b);
+      });
+      kart.appendChild(kutu); kart.appendChild(g);
+      kap.appendChild(kart);
+    });
+    kap.appendChild(sonuc);
+  }
+  kok.querySelectorAll('[data-cm-set]').forEach(function(kap){ setKur(kap, CM_VERI[kap.getAttribute('data-cm-set')] || []); });
+})();
+
+</script>
+<script id="ahiretKavramScript">
+/* Ahiret kavram kartları: "#ak-k-…" bağlantısı (akış çipleri, Kendini Dene sonuç ekranı)
+   ilgili kartı açar, görünür alana getirir ve kısa süre vurgular. */
+(function(){
+  'use strict';
+  var azHareket = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function kartAc(id){
+    var k = document.getElementById(id); if(!k || !k.classList.contains('ak-kart')) return false;
+    /* sayfanın modül katmanı kartı gizli bir modülde tutuyorsa önce o modülü göster */
+    var gizli = k.closest('[hidden]'); if(gizli) gizli.hidden = false;
+    k.open = true;
+    k.classList.add('ak-isaret'); setTimeout(function(){ k.classList.remove('ak-isaret'); }, 2400);
+    try { k.scrollIntoView({behavior: azHareket ? 'auto' : 'smooth', block:'start'}); } catch(e){ k.scrollIntoView(); }
+    var s = k.querySelector('summary'); if(s) try { s.focus({preventScroll:true}); } catch(e){}
+    return true;
+  }
+  window.akKartAc = kartAc;
+  document.addEventListener('click', function(ev){
+    var a = ev.target.closest && ev.target.closest('a[href^="#ak-k-"]'); if(!a) return;
+    if(kartAc(a.getAttribute('href').slice(1))){ ev.preventDefault(); try { history.replaceState(null, '', a.getAttribute('href')); } catch(e){} }
+  });
+  if(/^#ak-k-/.test(location.hash)) setTimeout(function(){ kartAc(location.hash.slice(1)); }, 300);
+})();
+
+</script>
+<script id="kendiniDeneScript">
+var KD_VERI = {"sorular":[{"g":"A","t":"mc","k":["ahiret"],"s":"Ahiret inancı en doğru şekilde hangisiyle açıklanır?","o":["Dünya hayatından sonra başlayacak sonsuz hayata inanmak","Yalnızca kıyametin kopacağına inanmak","İnsanın öldükten sonra dünyaya tekrar geleceğine inanmak","Sadece cennetin var olduğuna inanmak"],"d":0,"h":"Ahiret tek bir olay değil, bütün bir hayattır.","a":"Ahiret; kıyametle başlayıp cennet veya cehennemle süren sonsuz hayattır. Ahirete iman, imanın altı şartından biridir."},{"g":"A","t":"dy","k":["olum"],"s":"Ölüm, insanın tamamen yok olması demektir.","d":false,"h":"Haritada ölümden sonra hangi durak geliyordu?","a":"Ölüm yok oluş değildir; ruhun bedenden ayrılarak yeni bir hayata geçişidir."},{"g":"A","t":"mc","k":["kiyamet"],"s":"Kıyamet nedir?","o":["Evrendeki düzenin bozulup dünya hayatının sona ermesi","İnsanların büyük bir meydanda toplanması","İyiliklerin ve kötülüklerin tartılması","Bir insanın ecelinin gelmesi"],"d":0,"h":"Kıyamet tek bir kişiyi değil, bütün evreni ilgilendirir.","a":"Kıyamet, sûra ilk kez üflenmesiyle evrenin düzeninin bozulması ve dünya hayatının sona ermesidir."},{"g":"A","t":"mc","k":["bas"],"s":"“Ba’s” kavramının anlamı hangisidir?","o":["Ölümden sonra yeniden diriliş","Amel defterinin verilmesi","Kabir hayatı","Köprüden geçiş"],"d":0,"h":"Ba’s, sûra ikinci kez üflenince olur.","a":"Ba’s, sûra ikinci kez üflenmesiyle bütün insanların yeniden diriltilmesidir."},{"g":"A","t":"dy","k":["hasir","mahser"],"s":"Haşir, insanların toplandığı yerin adıdır.","d":false,"h":"Biri olay, biri yer: H → Hareket, M → Meydan.","a":"Haşir toplanma olayıdır. İnsanların toplandığı yer ise mahşerdir."},{"g":"A","t":"mc","k":["mahser"],"s":"“Diriltilen insanların hesap için toplandığı büyük meydan” hangi kavramla ifade edilir?","o":["Mahşer","Haşir","Mizan","Berzah"],"d":0,"h":"Soru bir YER soruyor.","a":"Toplanılan meydan mahşerdir. Haşir ise toplanmanın kendisidir."},{"g":"A","t":"mc","k":["hesap"],"s":"Hesap kavramını en iyi açıklayan ifade hangisidir?","o":["İnsanın dünyada yaptıklarının Allah huzurunda ortaya konup sorulması","Amellerin teraziyle tartılması","Sûra ikinci kez üflenmesi","İnsanların meydanda toplanması"],"d":0,"h":"Hesapta “Ne yaptın?” diye sorulur.","a":"Hesap, yapılanların ortaya konup sorulmasıdır. Tartılması ise mizandır."},{"g":"A","t":"es","k":["bas","hasir","mahser","hesap"],"s":"Kavramları anlamlarıyla eşleştir.","es":[["Ba’s","Yeniden diriliş"],["Haşir","Toplanma"],["Mahşer","Toplanılan meydan"],["Hesap","Yapılanların sorulması"]],"h":"Önce olayları (diriliş, toplanma, sorulma), sonra yeri (meydan) bul.","a":"Ba’s diriliş, haşir toplanma, mahşer toplanılan yer, hesap yapılanların sorulmasıdır."},{"g":"A","t":"dy","k":["kiyamet"],"s":"Kıyametin ne zaman kopacağını yalnızca Allah bilir.","d":true,"h":"Lokmân suresi 34. ayeti hatırla.","a":"Doğru. “Kıyametin ne zaman kopacağı bilgisi şüphesiz yalnızca Allah katındadır.” (Lokmân suresi, 34. ayet)"},{"g":"A","t":"mc","k":["olum"],"s":"Ömrün sona erdiği ana ne ad verilir?","o":["Ecel","Ba’s","Haşir","Mizan"],"d":0,"h":"“Eceli geldi” sözünü duymuşsundur.","a":"Ömrün sona erdiği ana ecel denir. Eceli Allah takdir eder."},{"g":"B","t":"sira","k":["olum","kiyamet","bas","hasir"],"s":"Aşağıdaki aşamaları gerçekleşme sırasına göre diz.","sira":["Ölüm","Kıyamet","Ba’s (diriliş)","Haşir (toplanma)"],"h":"Önce insanın kendi ölümü, sonra evrenin sonu, sonra diriliş ve toplanma gelir.","a":"Sıra: Ölüm → Kıyamet → Ba’s → Haşir. İnsan önce kendi ecelinde ölür; kıyamette evren sona erer, sonra herkes diriltilip toplanır."},{"g":"B","t":"sira","k":["hasir","hesap","mizan","sirat"],"s":"Dirilişten sonraki aşamaları sırala.","sira":["Haşir (mahşerde toplanma)","Hesap (amel defterinin verilmesi)","Mizan (amellerin tartılması)","Sırat (köprüden geçiş)"],"h":"Önce toplanılır, sonra sorulur, sonra tartılır; en son köprüden geçilir.","a":"Sıra: Haşir → Hesap → Mizan → Sırat."},{"g":"B","t":"sira","k":["olum","kiyamet","hasir","cennet"],"s":"Ahiret yolculuğunu baştan sona sırala.","sira":["Ölüm","Berzah (kabir hayatı)","Kıyamet","Mahşerde toplanma","Cennet veya cehennem"],"h":"Berzah, ölüm ile kıyamet arasındaki bekleme dönemidir.","a":"Sıra: Ölüm → Berzah → Kıyamet → Mahşerde toplanma → Cennet veya cehennem."},{"g":"B","t":"olay","k":["bas"],"s":"“Herkes kabirlerinden kalkıyor.” Bu cümle hangi aşamayı anlatır?","o":["Ba’s (diriliş)","Kıyamet","Mizan","Berzah"],"d":0,"h":"Kabirden kalkmak, ölmüş olanın yeniden dirilmesidir.","a":"Kabirlerden kalkmak, ba’s yani yeniden diriliştir."},{"g":"B","t":"olay","k":["amel","hesap"],"s":"“Herkese, yaptıklarının yazılı olduğu bir kitap veriliyor.” Bu cümle hangi aşamayla ilgilidir?","o":["Hesap (amel defteri)","Haşir","Kıyamet","Sırat"],"d":0,"h":"Yaptıkların yazılı olduğu kitabın adı neydi?","a":"Amel defterinin verilmesi hesap aşamasındadır. İnsan hesabını bu kitaba göre verir."},{"g":"B","t":"olay","k":["kiyamet"],"s":"“Dağlar yerinden oynuyor, yıldızlar sönüyor.” Bu cümle hangi aşamayı anlatır?","o":["Kıyamet","Ba’s","Mahşer","Mizan"],"d":0,"h":"Burada insanlar değil, evren anlatılıyor.","a":"Evrenin düzeninin bozulması kıyamettir."},{"g":"B","t":"es","k":["mizan","sirat","amel","kiyamet"],"s":"Her kavramı onu hatırlatan işaretle eşleştir.","es":[["Mizan","Terazi"],["Sırat","Köprü"],["Amel defteri","Kitap"],["Sûrun ilk üflenişi","Kıyametin başlaması"]],"h":"Kavramların sözlük anlamlarını düşün: Mizan terazi demektir.","a":"Mizan terazi, sırat köprü, amel defteri kitap ile hatırlanır; sûrun ilk üflenişi kıyameti başlatır."},{"g":"B","t":"mc","k":["hasir","hesap"],"s":"Hangisi hesaptan HEMEN ÖNCE gerçekleşir?","o":["Haşir (toplanma)","Sırat","Cennet","Ölüm"],"d":0,"h":"Hesap verebilmek için önce herkesin bir araya gelmesi gerekir.","a":"Hesaptan hemen önce haşir gelir: İnsanlar diriltilir, mahşerde toplanır ve hesap başlar. Ölüm de hesaptan öncedir ama “hemen önce” değildir."},{"g":"B","t":"dy","k":["mizan","sirat"],"s":"Sırattan geçiş, amellerin mizanda tartılmasından önce gerçekleşir.","d":false,"h":"Yolculuk haritasında “Hesap · Mizan” durağından sonra hangi durak vardı?","a":"Yanlış. Önce hesap ve mizan, sonra sırat gelir."},{"g":"B","t":"olay","k":["hesap","mizan"],"s":"Aylin defterine “Toplanma → ? → Köprü” yazdı. Soru işaretinin yerine ne gelmeli?","o":["Hesap ve mizan","Kıyamet","Ölüm","Berzah"],"d":0,"h":"Toplanmadan sonra, köprüden önce ne yapılır?","a":"Toplanmanın (haşir) ardından hesap ve mizan, sonra köprü (sırat) gelir."},{"g":"C","t":"metin","k":["mizan","amel"],"q":{"m":"Artık kim zerre ağırlığınca bir hayır işlerse, onun mükâfatını görecektir. Kim de zerre ağırlığınca bir kötülük işlerse, onun cezasını görecektir.","k":"Zilzâl suresi, 7-8. ayetler"},"s":"Bu ayetlerin ana mesajı hangisidir?","o":["En küçük iyilik ve kötülük bile karşılıksız kalmaz","Yalnızca büyük iyiliklerin karşılığı vardır","Kötülüklerin karşılığı yalnızca dünyada verilir","İyilik ancak insanlar görürse değerlidir"],"d":0,"h":"“Zerre” en küçük parça demektir.","a":"“Zerre ağırlığınca” ifadesi, en küçük davranışın bile kaybolmadığını anlatır. Bu, küçük iyilikleri de önemsememiz gerektiğini gösterir."},{"g":"C","t":"metin","k":["mizan"],"q":{"m":"Kim bir iyilik yaparsa, ona on katı vardır. Kim de bir kötülük yaparsa, o da sadece o kötülüğün misliyle cezalandırılır ve onlara zulmedilmez.","k":"En'âm suresi, 160. ayet"},"s":"Bu ayetten hangi sonuç çıkarılabilir?","o":["İyiliğin karşılığı kat kat verilir; kötülüğün karşılığı ise yalnızca kendisi kadardır","İyilik ve kötülüğün karşılığı her zaman eşittir","Kötülüğün karşılığı iyilikten fazladır","Karşılık yalnızca dünyada verilir"],"d":0,"h":"Ayette “on katı” ve “misliyle” ifadelerini karşılaştır.","a":"Ayet Allah’ın cömertliğini ve adaletini birlikte gösterir: İyiliğe on kat karşılık verilir, kötülük ise yalnızca misliyle karşılık görür; kimseye zulmedilmez."},{"g":"C","t":"metin","k":["sorumluluk"],"q":{"m":"İnsan için ancak çalıştığı vardır. Şüphesiz onun çalışması ileride görülecektir. Sonra çalışmasının karşılığı kendisine tastamam verilecektir.","k":"Necm suresi, 39-41. ayetler"},"s":"Bu ayetlerden hangisi çıkarılabilir?","o":["İnsan kendi emeğinin ve çabasının karşılığını görür","İnsan başkasının emeğiyle kurtulur","Çalışmanın ahirette bir önemi yoktur","Karşılık yalnızca dünyada verilir"],"d":0,"h":"“Çalıştığı”, “çalışması” kelimelerinin kime ait olduğuna bak.","a":"Her insan kendi çabasının sonucunu görür. Bu, sorumluluğun kişisel olduğunu gösterir."},{"g":"C","t":"es","k":["olum","kiyamet","amel","mizan"],"s":"Ayetlerden alınan bölümleri anlattıkları kavramla eşleştir.","es":[["“Sizin için görevlendirilen ölüm meleği canınızı alacak…” (Secde, 11)","Ölüm"],["“Sûr’a üflenir ve … göklerdeki herkes ve yerdeki herkes ölür…” (Zümer, 68)","Kıyamet"],["“İnsan hiçbir söz söylemez ki onun yanında … gözetleyen … hazır bir melek bulunmasın.” (Kâf, 18)","Amel defteri"],["“Kıyamet günü için adalet terazileri kuracağız…” (Enbiyâ, 47)","Mizan"]],"h":"Her bölümde bir ipucu kelime var: ölüm meleği, sûr, gözetleyen melek, terazi.","a":"Ölüm meleği → ölüm; sûrun üflenip herkesin ölmesi → kıyamet; sözleri gözetleyip kaydeden melek → amel defteri; adalet terazileri → mizan."},{"g":"C","t":"metin","k":["ahiret"],"q":{"m":"“Sizi boşuna yarattığımızı ve bize tekrar döndürülmeyeceğinizi mi sandınız?”","k":"Mü'minûn suresi, 115. ayet"},"s":"Ayet, insana hangi düşünceyi kazandırmak ister?","o":["Hayatın bir amacı olduğunu ve Allah’a döneceğimizi","Dünya hayatının sonsuz olduğunu","İnsanın yaptıklarından sorumlu olmadığını","Ahiretin yalnızca bir benzetme olduğunu"],"d":0,"h":"Ayet bir soru soruyor: “Boşuna mı yaratıldınız?”","a":"İnsan boşuna yaratılmamıştır; hayatının bir amacı vardır ve sonunda Allah’a dönecektir."},{"g":"C","t":"metin","k":["bas"],"q":{"m":"Bir de kendi yaratılışını unutarak bize bir örnek getirdi. Dedi ki: “Çürümüşlerken kemikleri kim diriltecek?” De ki: “Onları ilk defa var eden diriltecektir. O, her yaratılmışı hakkıyla bilendir.”","k":"Yâsîn suresi, 78-79. ayetler"},"s":"Ayette dirilişi uzak gören kişiye nasıl bir cevap verilmiştir?","o":["Onları ilk kez var eden, yeniden de diriltecektir","Kemikler çürüdüğü için diriliş olmayacaktır","Diriliş yalnızca ruh için olacaktır","Dirilişin zamanını insanlar bilebilir"],"d":0,"h":"“De ki:” ile başlayan cevaba bak.","a":"İlk kez yaratmaya gücü yeten Allah, yeniden diriltmeye de güç yetirir. Ayet dirilişin mantığını bu örnekle açıklar."},{"g":"C","t":"metin","k":["mizan"],"q":{"m":"Kıyamet gününde müminin terazisinde güzel ahlaktan daha ağır bir şey olmayacaktır.","k":"Hadis · Tirmizî, Birr, 62 — Diyanet, 4 Eylül 2026 Cuma hutbesi","t":"hadis"},"s":"Bu hadise göre mizanda iyilikleri en çok ağırlaştıran şey nedir?","o":["Güzel ahlak","Çok mal sahibi olmak","Ünlü olmak","Herkesten güçlü olmak"],"d":0,"h":"Hadiste “daha ağır bir şey olmayacak” denilen şey nedir?","a":"Güzel ahlak; dürüstlük, merhamet, saygı ve yardımseverlik gibi davranışlardır. Hadis, bunların mizanda en ağır geleceğini bildirir."},{"g":"C","t":"metin","k":["sirat"],"q":{"m":"Müminler (…) kimi göz kırpacak kadar az bir zamanda, kimi şimşek gibi, kimi rüzgâr gibi, kimi kuş gibi, kimi de iyi cins at ve deve gibi hızla geçer.","k":"Hadis · Müslim, Îmân, 302 — Diyanet, Hadislerle İslâm (kısaltılarak)","t":"hadis"},"s":"Bu hadisten hangi sonuç çıkarılabilir?","o":["Müminler sırattan farklı hızlarda geçecektir","Herkes sırattan aynı hızla geçecektir","Sırat, amellerin tartıldığı bir terazidir","Sırattan yalnızca melekler geçecektir"],"d":0,"h":"Hadisteki benzetmelere bak: göz kırpma, şimşek, rüzgâr, kuş…","a":"Hadis, müminlerin sırattan farklı hızlarda geçeceğini anlatır. Sırat bir köprüdür; tartma işi mizandadır."},{"g":"C","t":"metin","k":["cennet"],"q":{"m":"Allah’ın rahmetinden ümidinizi kesmeyin. Şüphesiz Allah, bütün günahları affeder. Çünkü O, çok bağışlayandır, çok merhamet edendir.","k":"Zümer suresi, 53. ayet (kısaltılarak)"},"s":"Ayetin, hata yapan bir insana verdiği en önemli mesaj hangisidir?","o":["Allah’ın rahmetinden ümit kesilmemelidir; O çok bağışlayan ve çok merhamet edendir","Hata yapan biri için artık umut yoktur","Hataların hiçbir önemi yoktur","Hata yapan kişi Allah’tan uzak durmalıdır"],"d":0,"h":"Ayetteki “ümidinizi kesmeyin” ifadesine dikkat et.","a":"Ahiret inancı umutsuzluk değil umut verir: Hata yapan kişi pişman olup Allah’a yönelir ve O’nun rahmetine güvenir."},{"g":"C","t":"metin","k":["sorumluluk"],"q":{"m":"Kim iyi bir iş yaparsa kendi lehinedir. Kim de kötülük yaparsa kendi aleyhinedir. Rabbin, kullara (zerre kadar) zulmedici değildir.","k":"Fussilet suresi, 46. ayet"},"s":"Ayete göre aşağıdakilerden hangisi doğrudur?","o":["İyilik de kötülük de önce insanın kendisini etkiler","İyilik başkalarına yarar, yapan kişiye bir faydası yoktur","Allah bazı kullarına haksızlık eder","Kötülük yapan kişinin sorumluluğu başkasına geçer"],"d":0,"h":"“Kendi lehinedir”, “kendi aleyhinedir” ifadelerini düşün.","a":"Yaptığımız iyilik bize yarar, kötülük bize zarar verir. Ayet ayrıca Allah’ın kimseye zulmetmediğini vurgular."},{"g":"D","t":"olay","k":["amel"],"s":"Sınav sırasında öğretmen sınıftan kısa süreliğine çıktı. Elif kopya çekmedi ve “Kimse görmese de yaptıklarım kaydediliyor” diye düşündü. Elif’in davranışında hangi inanç etkili olmuştur?","o":["Amellerin kaydedildiğine ve hesaba inanmak","Kıyametin zamanını bildiğini düşünmek","Ödülün yalnızca dünyada verildiğine inanmak","Meleklerin gözle görülebildiğine inanmak"],"d":0,"h":"“Kaydediliyor” kelimesi hangi kavramı hatırlatıyor?","a":"Elif, yaptıklarının amel defterine yazıldığını ve hesabının sorulacağını bildiği için kimse görmese de dürüst davrandı."},{"g":"D","t":"sira","k":["sorumluluk"],"s":"Kerem arkadaşına kırıcı bir söz söyledi. Hatasını düzeltmek için yapması gerekenleri en uygun sıraya diz.","sira":["Hatasını fark eder","Pişman olur ve arkadaşından özür diler","Bir daha aynı hatayı yapmamaya özen gösterir"],"h":"Bir hatayı düzeltmek, önce onu fark etmekle başlar.","a":"Hatayı fark etmek → pişman olup özür dilemek → tekrarlamamaya özen göstermek. Allah’tan bağışlanma dilemek de bu sürecin parçasıdır. Ahiret inancı, hatayı saklamayı değil düzeltmeyi öğretir."},{"g":"D","t":"dy","k":["sorumluluk"],"s":"Ahiret inancına sahip biri, yalnızca başkaları görürken iyilik yapar.","d":false,"h":"Amelleri kimler kaydeder? Onlar yalnızca insanlar görürken mi yazar?","a":"Yanlış. Ahirete inanan kişi, Allah’ın her şeyi bildiğine inandığı için kimse görmese de iyilik yapar."},{"g":"D","t":"olay","k":["mizan"],"s":"Mert kantinde para üstünü fazla aldığını fark etti ama “Az bir para, kimse anlamaz” diye düşündü. Zilzâl suresindeki “zerre ağırlığınca” ifadesi Mert’e ne hatırlatır?","o":["Küçük görünen bir hakkın bile karşılığı olduğunu; parayı geri vermesi gerektiğini","Az paranın hiçbir önemi olmadığını","Hata satıcıda olduğu için sorumluluğun ona ait olduğunu","Yalnızca büyük paraların sorulacağını"],"d":0,"h":"Zerre ne kadar küçüktür? Fazla para kimin hakkıdır?","a":"Zerre kadar iş bile karşılıksız kalmaz. Fazla parayı geri vermek, başkasının hakkını korumaktır."},{"g":"D","t":"olay","k":["amel"],"s":"Zeynep annesine ev işlerinde yardım ederken “Bunu kimse görmüyor, boşuna mı yapıyorum?” diye düşündü. Ona verilebilecek en güzel cevap hangisidir?","o":["Hiçbir iyilik kaybolmaz; Allah her iyiliği bilir ve karşılığını verir","İyilik ancak teşekkür edilirse değerlidir","Görülmeyen iyiliğin karşılığı yoktur","Yardım etmek yalnızca büyüklerin görevidir"],"d":0,"h":"Amel defterine yalnızca görülen işler mi yazılır?","a":"Görülmeyen iyilik de kayda geçer ve karşılığı verilir. Gizli yapılan iyilik, iyiliğin içten geldiğini gösterir."},{"g":"D","t":"olay","k":["hesap"],"s":"Okulda bir öğrenci, sürekli alay edilen sınıf arkadaşını savundu. Bu davranış ahiret inancıyla nasıl ilişkilendirilebilir?","o":["Adaletin ahirette tam gerçekleşeceğine inanan kişi, dünyada da haksızlığa karşı durur","Ahiret inancının bu davranışla hiçbir ilgisi yoktur","Öğrenci yalnızca öğretmenden ödül almak için böyle yapmıştır","Haksızlığa karşı durmak yalnızca büyüklerin görevidir"],"d":0,"h":"Ahirette kimseye haksızlık yapılmayacaksa, dünyada haksızlığa nasıl bakmalıyız?","a":"Ahirette her haksızlığın hesabı sorulacaktır. Bu inanç, insanı dünyada da adaletli olmaya ve mazlumu korumaya yönlendirir."},{"g":"D","t":"dy","k":["olum"],"s":"Ahiret inancı, insanın zamanını değerli kullanmasına yardım eder.","d":true,"h":"Mülk suresi 2. ayette ölüm ve hayatın neden yaratıldığı anlatılır.","a":"Doğru. “O, hanginizin daha güzel amel yapacağını sınamak için ölümü ve hayatı yaratandır.” (Mülk suresi, 2. ayet) Ömrün sınırlı olduğunu bilen kişi zamanını güzel işlerde kullanır."},{"g":"D","t":"olay","k":["olum"],"s":"Ali ödevlerini sürekli erteliyor ve “Daha çok vaktim var” diyor. Ahiret inancı Ali’ye hangi bilinci kazandırabilir?","o":["Ömrün sınırlı bir emanet olduğunu ve vaktini güzel işlerde kullanması gerektiğini","Ödevin ahiretle hiçbir ilgisi olmadığını","Her işi son ana bırakmanın en iyisi olduğunu","Dinlenmenin ve oyun oynamanın her zaman yanlış olduğunu"],"d":0,"h":"Ömür, Allah’ın verdiği bir süredir. Bu süreyi nasıl kullandığımız önemlidir.","a":"Ömür bir emanettir. Dinlenmek ve oyun da gereklidir; önemli olan zamanı dengeli ve faydalı kullanmaktır."},{"g":"D","t":"dy","k":["cennet"],"s":"Ahiret inancı, insan hata yaptığında onu umutsuzluğa sürüklemelidir.","d":false,"h":"Zümer suresi 53. ayette ne denmişti?","a":"Yanlış. Allah’ın rahmetinden ümit kesilmez. Ahiret inancı hata yapan kişiye pişman olup yeniden başlama umudu verir."},{"g":"D","t":"olay","k":["sorumluluk"],"s":"Grup ödevinde Efe hiç katkı vermedi ama ödevde onun da adı yazıldı. Necm suresindeki “İnsan için ancak çalıştığı vardır.” ayeti bu durumda ne hatırlatır?","o":["Herkesin kendi emeğinin karşılığını göreceğini; Efe’nin de payına düşeni yapması gerektiğini","Başkasının emeğiyle kazanmanın doğru olduğunu","Grup ödevlerinde kimsenin sorumluluğu olmadığını","Emeğin yalnızca not için önemli olduğunu"],"d":0,"h":"Ayetteki “çalıştığı” kelimesi kimin çalışmasını anlatıyor?","a":"Her insan kendi emeğinden sorumludur. Efe’nin grubuna katkı vermesi hem arkadaşlarının hakkı hem kendi sorumluluğudur."},{"g":"E","t":"mc","k":["hasir","mahser"],"s":"Bir öğrenci “Haşir ile mahşer aynı şeydir” dedi. Bu yanlışı en iyi düzelten cümle hangisidir?","o":["Haşir toplanma olayıdır, mahşer toplanılan yerdir","Haşir terazidir, mahşer köprüdür","İkisi de kıyametin başka adıdır","Haşir dünyada, mahşer ahirette olur"],"d":0,"h":"H → Hareket, M → Meydan.","a":"İki kavram birbirine bağlıdır ama aynı değildir: Haşir olaydır (toplanma), mahşer yerdir (meydan)."},{"g":"E","t":"mc","k":["hesap","mizan"],"s":"Hesap ile mizan arasındaki fark hangisinde doğru verilmiştir?","o":["Hesapta yapılanlar sorulur, mizanda tartılır","Hesap dünyada, mizan ahirette olur","Hesap yalnızca iyilikler, mizan yalnızca kötülükler içindir","Aralarında hiçbir fark yoktur"],"d":0,"h":"Hesap → “Ne yaptın?”, Mizan → “Ne kadar ağır?”","a":"Hesapta insanın yaptıkları ortaya konup sorulur; mizanda ise bu ameller adaletle tartılır."},{"g":"E","t":"es","k":["hasir","mahser","hesap","mizan"],"s":"Her kavramı cevap verdiği soruyla eşleştir.","es":[["Haşir","Ne oluyor? — İnsanlar toplanıyor"],["Mahşer","Nerede? — Büyük meydanda"],["Hesap","Ne yaptın? — Yapılanlar soruluyor"],["Mizan","Ne kadar ağır? — Ameller tartılıyor"]],"h":"Fark tablosundaki “Hangi soruya cevap?” sütununu hatırla.","a":"Haşir olayı, mahşer yeri, hesap soruyu, mizan tartıyı anlatır. Bu dört soru kavramları ayırmanın en kolay yoludur."},{"g":"E","t":"dy","k":["olum","kiyamet"],"s":"Ölüm ile kıyamet aynı şeydir; ikisi de bütün insanlar için aynı anda gerçekleşir.","d":false,"h":"Herkes aynı gün mü ölür?","a":"Yanlış. Ölüm, her insanın kendi ecelinde yaşadığı kişisel bir olaydır. Kıyamet ise bütün evrenin sonudur."},{"g":"E","t":"metin","k":["olum","ahiret"],"q":{"m":"Her canlı ölümü tadacaktır. Ancak kıyamet günü yaptıklarınızın karşılığı size tastamam verilecektir.","k":"Âl-i İmrân suresi, 185. ayet (kısaltılarak)"},"s":"Ayetteki iki cümle birlikte düşünüldüğünde hangi sonuca ulaşılır?","o":["Ölüm son değildir; yapılanların karşılığı ahirette eksiksiz verilir","Ölümle birlikte her şey biter","Karşılık yalnızca dünyada verilir","Ölüm yalnızca bazı canlılar içindir"],"d":0,"h":"İlk cümle ölümü, ikinci cümle ölümden sonrasını anlatıyor.","a":"Ölüm kesindir ama son değildir. Yapılanların tam karşılığı kıyametten sonra, ahirette verilir."},{"g":"E","t":"mc","k":["amel","mizan"],"s":"Hangisi ahiret inancıyla ilgili YANLIŞ bir düşüncedir?","o":["“Küçük hatalarım nasılsa sayılmaz.”","“Yaptığım her iyilik kayda geçer.”","“Allah kimseye haksızlık etmez.”","“Hata yaparsam pişman olup düzelebilirim.”"],"d":0,"h":"Zilzâl suresindeki “zerre ağırlığınca” ifadesini hatırla.","a":"Zerre kadar iyilik de kötülük de görülür; küçük hatalar da önemlidir. Ama bu korku değil, dikkat ve düzeltme sebebidir."},{"g":"E","t":"mc","k":["amel","hesap"],"s":"Kirâmen Kâtibîn meleklerinin görevi, ahiretin hangi aşamasıyla doğrudan bağlantılıdır?","o":["Hesap (amel defterinin verilmesi)","Kıyamet","Ba’s","Sırat"],"d":0,"h":"Bu melekler ne yapıyordu? Yazdıkları ne zaman karşımıza çıkar?","a":"Kirâmen Kâtibîn amelleri yazar. Yazdıkları amel defteri, hesap aşamasında insana verilir."},{"g":"E","t":"mc","k":["kiyamet","bas"],"s":"İsrâfil’in görevi ahiretin hangi iki aşamasıyla ilgilidir?","o":["Kıyamet ve ba’s","Hesap ve mizan","Sırat ve cennet","Ölüm ve berzah"],"d":0,"h":"İsrâfil sûra iki kez üfler. Her üfleyişte ne olur?","a":"Sûrun ilk üflenişiyle kıyamet kopar, ikinci üflenişiyle insanlar diriltilir (ba’s). Ölüm ise Azrâil’in görevidir."},{"g":"E","t":"sira","k":["amel","hesap","mizan"],"s":"Bir davranışın ahirete uzanan yolculuğunu sırala.","sira":["Davranış dünyada yapılır","Amel defterine yazılır","Hesapta ortaya konur ve sorulur","Mizanda tartılır"],"h":"Önce yapılır, sonra yazılır; sonra sorulur ve tartılır.","a":"Davranış → kayıt (amel defteri) → hesap → mizan. Bu yüzden bugünkü davranışlarımız ahirete uzanır."},{"g":"E","t":"olay","k":["cennet"],"s":"Bir arkadaşın “Cennet ve cehennem sadece insanları korkutmak için anlatılan hikâyelerdir” dedi. En doğru cevap hangisidir?","o":["Cennet ve cehennem gerçektir; Allah’ın adaletinin sonucudur ve insanı iyiliğe yönlendirir","Haklısın, bunlar yalnızca hikâyedir","Cehennem vardır ama cennet yoktur","Bunlar hakkında düşünmek gereksizdir"],"d":0,"h":"Ahirete iman imanın şartlarından biridir. Cennet ve cehennem bu inancın parçasıdır.","a":"Cennet ve cehennem, Kur’an’ın bildirdiği gerçeklerdir. Amaç korkutmak değil; iyiliğin karşılıksız, haksızlığın cezasız kalmayacağını öğretmektir."}],"gruplar":[{"g":"A","ad":"Temel Kavramlar","ikon":"🔤"},{"g":"B","ad":"Ahiret Aşamaları","ikon":"🗺️"},{"g":"C","ad":"Ayet ve Hadislerden Mesajlar","ikon":"📜"},{"g":"D","ad":"Günlük Hayat ve Değerler","ikon":"🏫"},{"g":"E","ad":"Düşünme ve Yorumlama","ikon":"💭"}],"kavramlar":[{"k":"ahiret","ad":"Ahiret inancı"},{"k":"sorumluluk","ad":"İnsan neden sorumludur?"},{"k":"olum","ad":"Ölüm ve yeniden diriliş inancı"},{"k":"kiyamet","ad":"Kıyamet"},{"k":"bas","ad":"Ba’s (yeniden diriliş)"},{"k":"hasir","ad":"Haşir"},{"k":"mahser","ad":"Mahşer"},{"k":"hesap","ad":"Hesap"},{"k":"amel","ad":"Amel defteri"},{"k":"mizan","ad":"Mizan"},{"k":"sirat","ad":"Sırat"},{"k":"cennet","ad":"Cennet ve cehennem"}]};
+/* KENDİNİ DENE — Ahiret inancı (50 soru, A–E grupları)
+   Türler: mc · dy · es (eşleştirme) · sira (sıralama) · olay · metin (ayet/hadis).
+   İlk cevap puanlanır; yanlışta ipucu + doğru cevap + açıklama gösterilir.
+   Sonuç ekranı: toplam puan, grup bazında başarı, tekrar edilecek kavramlar,
+   yanlışları yeniden çözme ve baştan başlama. Kayıt yalnızca bu cihazda. */
+(function(){
+  'use strict';
+  var kok = document.getElementById('kd-ahiret'); if(!kok || typeof KD_VERI === 'undefined') return;
+  var Q = KD_VERI.sorular, N = Q.length, ANAHTAR = 'kd7AhiretV1';
+  var GRUP = {}; KD_VERI.gruplar.forEach(function(g){ GRUP[g.g] = g; });
+  var KAVRAM = {}; KD_VERI.kavramlar.forEach(function(k){ KAVRAM[k.k] = k.ad; });
+  var TUR_AD = { mc:'Çoktan seçmeli', dy:'Doğru mu, yanlış mı?', es:'Eşleştirme', sira:'Sıralama', olay:'Olay yorumu', metin:'Ayet / hadis yorumu' };
+  var HARF = ['A','B','C','D'];
+  var alan = document.getElementById('kdAlan'), sonucEl = document.getElementById('kdSonuc'), gruplarEl = document.getElementById('kdGruplar'),
+      bant = document.getElementById('kdTekrarBant'), altEl = document.getElementById('kdAlt'),
+      sayac = document.getElementById('kdSayac'), dogruEl = document.getElementById('kdDogru'), cubuk = document.getElementById('kdCubuk'),
+      onceki = document.getElementById('kdOnceki'), sonraki = document.getElementById('kdSonraki');
+  var azHareket = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function karistir(d){ d = d.slice(); for(var i=d.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=d[i]; d[i]=d[j]; d[j]=t; } return d; }
+  function el(etiket, sinif, metin){ var x = document.createElement(etiket); if(sinif) x.className = sinif; if(metin != null) x.textContent = metin; return x; }
+  function kaydir(x){ try { x.scrollIntoView({behavior: azHareket ? 'auto' : 'smooth', block:'start'}); } catch(e){ try { x.scrollIntoView(); } catch(e2){} } }
+
+  /* ── durum ── */
+  var D = { c:{}, aktif:0 };            /* c[i] = { ok:ilk deneme doğru mu, duz:sonradan düzeltildi mi } */
+  try { var k = JSON.parse(localStorage.getItem(ANAHTAR) || 'null'); if(k && k.c) D = { c:k.c, aktif: +k.aktif || 0 }; } catch(e){}
+  function kaydet(){ try { localStorage.setItem(ANAHTAR, JSON.stringify(D)); } catch(e){} }
+  var mod = 'tum', liste = [], tekrarCevap = {};   /* tekrar modunda bu oturumdaki yeni cevaplar */
+  var SIRA = {};                                   /* seçenek sırası her soru için oturum boyunca sabit */
+  function sira(i){
+    if(SIRA[i]) return SIRA[i];
+    var q = Q[i];
+    if(q.t === 'es') SIRA[i] = karistir(q.es.map(function(p){ return p[1]; }));
+    else if(q.t === 'sira'){ var s = karistir(q.sira); if(s.join('|') === q.sira.join('|')) s.reverse(); SIRA[i] = s; }
+    else if(q.o) SIRA[i] = karistir(q.o);
+    return SIRA[i];
+  }
+  function tumListe(){ var l = []; for(var i=0;i<N;i++) l.push(i); return l; }
+  function cevaplanan(){ return Object.keys(D.c).length; }
+  function ilkDogru(){ var n = 0; Object.keys(D.c).forEach(function(i){ if(D.c[i].ok) n++; }); return n; }
+  function durumMu(i){ return mod === 'tekrar' ? tekrarCevap[i] : D.c[i]; }
+
+  /* ── üst gruplar ve alt çubuk ── */
+  function gruplariCiz(){
+    gruplarEl.innerHTML = '';
+    gruplarEl.hidden = mod !== 'tum';
+    KD_VERI.gruplar.forEach(function(g){
+      var ilk = -1, cev = 0, top = 0;
+      Q.forEach(function(q, i){ if(q.g !== g.g) return; top++; if(ilk < 0) ilk = i; if(D.c[i]) cev++; });
+      var b = el('button', 'kd-grup'); b.type = 'button';
+      b.appendChild(el('b', null, g.g));
+      b.appendChild(el('span', 'kd-grup-ad', g.ad));
+      b.appendChild(el('small', null, cev + '/' + top));
+      b.setAttribute('aria-label', g.g + ' grubu, ' + g.ad + ', ' + cev + ' / ' + top + ' cevaplandı');
+      if(Q[liste[D.aktif]] && Q[liste[D.aktif]].g === g.g) b.classList.add('kd-aktif');
+      if(cev === top) b.classList.add('kd-tamam');
+      b.addEventListener('click', function(){ goster(liste.indexOf(ilk)); });
+      gruplarEl.appendChild(b);
+    });
+  }
+  function altGuncelle(){
+    var c = cevaplanan();
+    sayac.textContent = 'Cevaplanan ' + c + ' / ' + N;
+    dogruEl.textContent = '✅ ' + ilkDogru() + ' doğru';
+    cubuk.style.width = (c / N * 100) + '%';
+    onceki.disabled = D.aktif <= 0;
+    var sonda = D.aktif >= liste.length - 1;
+    sonraki.textContent = !sonda ? 'Sonraki ▶' : (mod === 'tekrar' ? 'Sonuçlara dön ▶' : 'Sonuçları gör ▶');
+  }
+
+  /* ── geri bildirim ── */
+  function geriBildirim(kart, q, ok, dogruMetni){
+    var g = el('div', 'kd-gb ' + (ok ? 'kd-gb-iyi' : 'kd-gb-dene'));
+    if(ok){
+      g.appendChild(el('p', null, '✅ Doğru! ' + q.a));
+    } else {
+      g.appendChild(el('p', null, '🔎 Bu sefer olmadı, birlikte bakalım.'));
+      g.appendChild(el('p', null, '💡 İpucu: ' + q.h));
+      if(dogruMetni) g.appendChild(el('p', null, '✔️ Doğru cevap: ' + dogruMetni));
+      g.appendChild(el('p', null, '📘 Açıklama: ' + q.a));
+    }
+    var dev = el('div', 'kd-dugmeler');
+    var ileri = el('button', 'kd-btn', liste.length - 1 > D.aktif ? 'Sonraki soru ▶' : (mod === 'tekrar' ? 'Sonuçlara dön ▶' : 'Sonuçları gör ▶')); ileri.type = 'button';
+    ileri.addEventListener('click', ileriGit);
+    dev.appendChild(ileri); g.appendChild(dev);
+    kart.appendChild(g);
+    return g;
+  }
+  function cevapla(i, ok){
+    if(mod === 'tekrar'){
+      tekrarCevap[i] = { ok: ok };
+      if(ok && D.c[i] && !D.c[i].ok){ D.c[i].duz = true; kaydet(); }
+    } else if(!D.c[i]){
+      D.c[i] = { ok: ok }; kaydet();
+    }
+    gruplariCiz(); altGuncelle();
+  }
+
+  /* ── soru çizimi ── */
+  function goster(n){
+    if(n < 0 || n >= liste.length) return;
+    D.aktif = n; if(mod === 'tum') kaydet();
+    sonucEl.hidden = true; alan.hidden = false; altEl.hidden = false;
+    var i = liste[n], q = Q[i], g = GRUP[q.g], durum = durumMu(i);
+    alan.innerHTML = '';
+    var kart = el('div', 'kd-kart'); kart.id = 'kd-s-' + (i + 1);
+    var ust = el('div', 'kd-kart-ust');
+    ust.appendChild(el('span', 'kd-etiket', g.ikon + ' ' + g.g + ' · ' + g.ad));
+    ust.appendChild(el('span', 'kd-etiket kd-tur', 'Soru ' + (i + 1) + ' / ' + N + ' · ' + TUR_AD[q.t]));
+    kart.appendChild(ust);
+    if(q.q){
+      var fig = el('figure', 'ak-alinti' + (q.q.t === 'hadis' ? ' ak-hadis' : ''));
+      fig.appendChild(el('span', 'ak-alinti-etiket', q.q.t === 'hadis' ? 'Hadis' : 'Ayet meali'));
+      fig.appendChild(el('blockquote', null, '“' + q.q.m + '”'));
+      fig.appendChild(el('figcaption', null, q.q.k));
+      kart.appendChild(fig);
+    }
+    kart.appendChild(el('p', 'kd-soru', q.s));
+    ({ mc:secenekli, olay:secenekli, metin:secenekli, dy:dogruYanlis, es:eslestirme, sira:siralama })[q.t](kart, i, q, durum);
+    alan.appendChild(kart);
+    gruplariCiz(); altGuncelle();
+  }
+
+  function secenekli(kart, i, q, durum){
+    var kutu = el('div', 'kd-secenekler'), dogru = q.o[q.d];
+    sira(i).forEach(function(se, j){
+      var b = el('button', 'kd-sec'); b.type = 'button';
+      b.appendChild(el('span', 'kd-harf', HARF[j])); b.appendChild(el('span', null, se));
+      b.dataset.m = se;
+      b.addEventListener('click', function(){
+        if(kutu.dataset.kilit) return; kutu.dataset.kilit = '1';
+        var ok = se === dogru;
+        isaretle(); if(!ok) b.classList.add('kd-tekrar');
+        cevapla(i, ok); geriBildirim(kart, q, ok, ok ? null : '“' + dogru + '”');
+      });
+      kutu.appendChild(b);
+    });
+    function isaretle(){ kutu.querySelectorAll('.kd-sec').forEach(function(x){ x.disabled = true; if(x.dataset.m === dogru) x.classList.add('kd-dogru'); }); }
+    kart.appendChild(kutu);
+    if(durum){ kutu.dataset.kilit = '1'; isaretle(); geriBildirim(kart, q, durum.ok, durum.ok ? null : '“' + dogru + '”'); }
+  }
+
+  function dogruYanlis(kart, i, q, durum){
+    var kutu = el('div', 'kd-dy');
+    [[true, '✔ Doğru'], [false, '✘ Yanlış']].forEach(function(s){
+      var b = el('button', 'kd-sec', s[1]); b.type = 'button'; b.dataset.v = String(s[0]);
+      b.addEventListener('click', function(){
+        if(kutu.dataset.kilit) return; kutu.dataset.kilit = '1';
+        var ok = s[0] === q.d;
+        isaretle(); if(!ok) b.classList.add('kd-tekrar');
+        cevapla(i, ok); geriBildirim(kart, q, ok, ok ? null : (q.d ? 'Doğru' : 'Yanlış'));
+      });
+      kutu.appendChild(b);
+    });
+    function isaretle(){ kutu.querySelectorAll('.kd-sec').forEach(function(x){ x.disabled = true; if(x.dataset.v === String(q.d)) x.classList.add('kd-dogru'); }); }
+    kart.appendChild(kutu);
+    if(durum){ kutu.dataset.kilit = '1'; isaretle(); geriBildirim(kart, q, durum.ok, durum.ok ? null : (q.d ? 'Doğru' : 'Yanlış')); }
+  }
+
+  function eslestirme(kart, i, q, durum){
+    var kutu = el('div', 'kd-es'), secimler = [];
+    q.es.forEach(function(p, j){
+      var satir = el('div', 'kd-es-satir');
+      var sol = el('label', 'kd-es-sol', p[0]); var id = 'kd-es-' + i + '-' + j; sol.htmlFor = id;
+      var sec = el('select'); sec.id = id;
+      sec.appendChild(new Option('Seç…', ''));
+      sira(i).forEach(function(r){ sec.appendChild(new Option(r, r)); });
+      sec.addEventListener('change', function(){ kontrol.disabled = secimler.some(function(s){ return !s.value; }); });
+      satir.appendChild(sol); satir.appendChild(sec);
+      kutu.appendChild(satir); secimler.push(sec);
+    });
+    kart.appendChild(kutu);
+    var dug = el('div', 'kd-dugmeler'), kontrol = el('button', 'kd-btn', '✅ Kontrol et'); kontrol.type = 'button'; kontrol.disabled = true;
+    dug.appendChild(kontrol); kart.appendChild(dug);
+    function bitir(ok){
+      secimler.forEach(function(s, j){
+        s.disabled = true;
+        var satir = s.parentNode, dogru = s.value === q.es[j][1];
+        satir.classList.add(dogru ? 'kd-dogru' : 'kd-tekrar');
+        if(!dogru) satir.appendChild(el('span', 'kd-es-dogru', '✔️ Doğrusu: ' + q.es[j][1]));
+      });
+      dug.remove();
+      geriBildirim(kart, q, ok, null);
+    }
+    kontrol.addEventListener('click', function(){
+      var ok = secimler.every(function(s, j){ return s.value === q.es[j][1]; });
+      cevapla(i, ok); bitir(ok);
+    });
+    if(durum){ secimler.forEach(function(s, j){ s.value = q.es[j][1]; }); bitir(durum.ok); kutu.querySelectorAll('.kd-tekrar').forEach(function(x){ x.classList.remove('kd-tekrar'); x.classList.add('kd-dogru'); }); kutu.querySelectorAll('.kd-es-dogru').forEach(function(x){ x.remove(); }); }
+  }
+
+  function siralama(kart, i, q, durum){
+    var hedef = el('ol', 'kd-sira-hedef'), havuz = el('div', 'kd-sira-havuz');
+    hedef.setAttribute('aria-label', 'Senin sıralaman');
+    var dug = el('div', 'kd-dugmeler'),
+        kontrol = el('button', 'kd-btn', '✅ Kontrol et'), sifir = el('button', 'kd-btn kd-btn-ikincil', '↺ Temizle');
+    kontrol.type = sifir.type = 'button'; kontrol.disabled = true;
+    function fis(m){
+      var f = el('button', 'kd-fis', m); f.type = 'button'; f.dataset.m = m;
+      f.addEventListener('click', function(){
+        if(hedef.dataset.kilit) return;
+        if(f.parentNode === havuz){ var li = el('li'); li.appendChild(f); hedef.appendChild(li); }
+        else { var li2 = f.parentNode; havuz.appendChild(f); li2.remove(); }
+        kontrol.disabled = havuz.children.length > 0;
+      });
+      return f;
+    }
+    sira(i).forEach(function(m){ havuz.appendChild(fis(m)); });
+    sifir.addEventListener('click', function(){ if(hedef.dataset.kilit) return; hedef.innerHTML = ''; havuz.innerHTML = ''; sira(i).forEach(function(m){ havuz.appendChild(fis(m)); }); kontrol.disabled = true; });
+    dug.appendChild(kontrol); dug.appendChild(sifir);
+    kart.appendChild(hedef); kart.appendChild(havuz); kart.appendChild(dug);
+    function bitir(ok){
+      hedef.dataset.kilit = '1';
+      hedef.querySelectorAll('.kd-fis').forEach(function(f, j){ f.disabled = true; f.classList.add(f.dataset.m === q.sira[j] ? 'kd-dogru' : 'kd-tekrar'); });
+      havuz.remove(); dug.remove();
+      geriBildirim(kart, q, ok, ok ? null : q.sira.join(' → '));
+    }
+    kontrol.addEventListener('click', function(){
+      var dizilen = Array.prototype.map.call(hedef.querySelectorAll('.kd-fis'), function(f){ return f.dataset.m; });
+      var ok = dizilen.join('|') === q.sira.join('|');
+      cevapla(i, ok); bitir(ok);
+    });
+    if(durum){ havuz.innerHTML = ''; q.sira.forEach(function(m){ var li = el('li'); li.appendChild(fis(m)); hedef.appendChild(li); }); bitir(durum.ok); }
+  }
+
+  /* ── gezinme ── */
+  function ileriGit(){
+    if(D.aktif < liste.length - 1){ goster(D.aktif + 1); kaydir(kok.querySelector('.kd-kart') || kok); return; }
+    if(mod === 'tekrar'){ sonucGoster(); return; }
+    var bos = -1; for(var i=0;i<N;i++){ if(!D.c[i]){ bos = i; break; } }
+    if(bos >= 0){ goster(liste.indexOf(bos)); kaydir(kok.querySelector('.kd-kart')); bantUyari('Önce cevaplanmamış soruları bitirelim: Soru ' + (bos + 1) + '’e geldin.'); return; }
+    sonucGoster();
+  }
+  function bantUyari(m){ bant.hidden = false; bant.textContent = m; setTimeout(function(){ if(mod === 'tum') bant.hidden = true; }, 4000); }
+  onceki.addEventListener('click', function(){ goster(D.aktif - 1); });
+  sonraki.addEventListener('click', ileriGit);
+
+  /* ── sonuç ── */
+  function sonucGoster(sessiz){
+    mod = 'tum'; liste = tumListe(); bant.hidden = true; gruplarEl.hidden = false;
+    alan.hidden = true; altEl.hidden = true; sonucEl.hidden = false; sonucEl.innerHTML = '';
+    var cev = cevaplanan(), dogru = ilkDogru(), oran = N ? dogru / N : 0, duz = 0, kalanYanlis = [];
+    Object.keys(D.c).forEach(function(i){ if(D.c[i].duz) duz++; if(!D.c[i].ok && !D.c[i].duz) kalanYanlis.push(+i); });
+    sonucEl.appendChild(el('h4', null, '🏁 Sonuç Ekranı'));
+    var mesaj = oran >= .8 ? 'Harika! Ahiret aşamalarını ve temel kavramları birbirinden ayırabiliyorsun.'
+              : oran >= .5 ? 'Güzel ilerliyorsun! Aşağıdaki kavramları bir kez daha gözden geçirirsen daha da güçleneceksin.'
+              : 'Bu konuyu yeniden gözden geçirerek daha da güçlenebilirsin. Aşağıdaki kartlar sana yol gösterecek.';
+    sonucEl.appendChild(el('p', 'kd-mesaj', mesaj));
+    var p = el('div', 'kd-puan');
+    [[Math.round(oran * 100) + ' / 100', 'Puan (ilk denemeler)'], [dogru + ' / ' + N, 'İlk denemede doğru'], [cev + ' / ' + N, 'Cevaplanan']].concat(duz ? [[String(duz), 'Yeniden çözerek düzelttiğin']] : [])
+      .forEach(function(x){ var d = el('div'); d.appendChild(el('b', null, x[0])); d.appendChild(el('small', null, x[1])); p.appendChild(d); });
+    sonucEl.appendChild(p);
+
+    var analiz = el('div', 'kd-analiz');
+    var gk = el('div'); gk.appendChild(el('h5', null, '📊 Grup bazında başarı'));
+    KD_VERI.gruplar.forEach(function(g){
+      var t = 0, o = 0; Q.forEach(function(q, i){ if(q.g === g.g){ t++; if(D.c[i] && D.c[i].ok) o++; } });
+      var s = el('div', 'kd-g-satir');
+      s.appendChild(el('span', null, g.ikon + ' ' + g.g + ' · ' + g.ad)); s.appendChild(el('span', null, o + '/' + t));
+      var c = el('span', 'kd-g-cubuk'), i2 = el('i'); i2.style.width = (o / t * 100) + '%'; c.appendChild(i2); s.appendChild(c);
+      gk.appendChild(s);
+    });
+    analiz.appendChild(gk);
+    var kk = el('div'); kk.appendChild(el('h5', null, '🔁 Tekrar etmen önerilen kavramlar'));
+    var say = {};
+    Q.forEach(function(q, i){ (q.k || []).forEach(function(k){ say[k] = say[k] || { t:0, o:0 }; say[k].t++; if(D.c[i] && D.c[i].ok) say[k].o++; }); });
+    var zayif = Object.keys(say).filter(function(k){ return say[k].o < say[k].t; }).sort(function(a, b){ return say[a].o / say[a].t - say[b].o / say[b].t; });
+    if(!zayif.length) kk.appendChild(el('p', null, '🌟 Bütün kavramlarda başarılısın. İstersen kartlara yine de göz atabilirsin.'));
+    else {
+      kk.appendChild(el('p', null, 'Bu kavramların kartını açıp tanımına, farkına ve ayetine bir kez daha bak:'));
+      var l = el('div', 'kd-tekrar-liste');
+      zayif.forEach(function(k){ var a = el('a'); a.href = '#ak-k-' + k; a.appendChild(document.createTextNode(KAVRAM[k] + ' ')); a.appendChild(el('small', null, say[k].o + '/' + say[k].t)); l.appendChild(a); });
+      kk.appendChild(l);
+    }
+    analiz.appendChild(kk);
+    sonucEl.appendChild(analiz);
+
+    var dug = el('div', 'kd-dugmeler');
+    if(kalanYanlis.length){
+      var t = el('button', 'kd-btn', '🔁 Yanlışları yeniden çöz (' + kalanYanlis.length + ')'); t.type = 'button';
+      t.addEventListener('click', function(){ tekrarBaslat(kalanYanlis); });
+      dug.appendChild(t);
+    }
+    if(cev < N){
+      var dv = el('button', 'kd-btn kd-btn-ikincil', '▶ Kalan soruları çöz'); dv.type = 'button';
+      dv.addEventListener('click', function(){ var b = 0; while(D.c[b]) b++; goster(b); kaydir(kok); });
+      dug.appendChild(dv);
+    }
+    var bas = el('button', 'kd-btn kd-btn-ikincil', '↺ Baştan başla'); bas.type = 'button';
+    var onay = false;
+    bas.addEventListener('click', function(){
+      if(!onay){ onay = true; bas.textContent = '↺ Bütün cevaplar silinecek. Emin misin? Tekrar dokun'; setTimeout(function(){ onay = false; bas.textContent = '↺ Baştan başla'; }, 5000); return; }
+      D = { c:{}, aktif:0 }; SIRA = {}; kaydet(); mod = 'tum'; liste = tumListe(); goster(0); kaydir(kok);
+    });
+    dug.appendChild(bas);
+    sonucEl.appendChild(dug);
+    gruplariCiz();
+    if(!sessiz){ kaydir(sonucEl); } try { if(!sessiz) sonucEl.focus({preventScroll:true}); } catch(e){}
+  }
+
+  function tekrarBaslat(yanlislar){
+    mod = 'tekrar'; liste = yanlislar.slice(); tekrarCevap = {};
+    yanlislar.forEach(function(i){ delete SIRA[i]; });
+    bant.hidden = false; bant.innerHTML = '';
+    bant.appendChild(el('span', null, '🔁 Yanlış cevapladığın ' + liste.length + ' soruyu yeniden çözüyorsun. İlk puanın değişmez; düzelttiklerin sonuçta ayrıca gösterilir.'));
+    var don = el('button', 'kd-btn kd-btn-ikincil', 'Sonuçlara dön'); don.type = 'button'; don.addEventListener('click', function(){ sonucGoster(); });
+    bant.appendChild(don);
+    goster(0); kaydir(kok);
+  }
+
+  /* ── başlangıç ── */
+  liste = tumListe();
+  if(cevaplanan() === N) sonucGoster(true);
+  else goster(Math.min(Math.max(D.aktif, 0), N - 1));
+  window.kdAhiretDurum = function(){ return { cevaplanan: cevaplanan(), ilkDogru: ilkDogru(), mod: mod }; };
+})();
+
 </script>
 </body>
 </html>
