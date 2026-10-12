@@ -940,7 +940,7 @@
 
 <header>
   <p style="margin:0 0 6px;font-size:1.1em;font-weight:bold;letter-spacing:.5px;opacity:.95;">7. SINIF — 3. ÜNİTE</p>
-  <h1>🕊️ İslam Düşüncesinde Yorumlar</h1>
+  <h1>💎 Ahlaki Davranışlar</h1>
   <p>Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
   <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
 </header>
@@ -969,7 +969,7 @@
 <path d="M50 26 L54 18 M78 26 L74 18" stroke="#3f8f5f" stroke-width="3" stroke-linecap="round" opacity=".6"/></g></g></g><g transform="translate(1042,108) scale(1.000)"><g class="kai-g" style="animation-delay:0.36s"><g class="kai-f"><path d="M26 14 H74 L52 50 L74 86 H26 L48 50 Z" fill="#fff" stroke="#3f8f5f" stroke-width="3.6" stroke-linejoin="round"/>
 <path d="M32 20 H68 L52 46 Z" fill="#8fd6a6"/>
 <path d="M36 80 H64 L50 62 Z" fill="#3f8f5f"/>
-<rect x="20" y="8" width="60" height="8" rx="4" fill="#2a6b43"/><rect x="20" y="84" width="60" height="8" rx="4" fill="#2a6b43"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">7. Sınıf · 3. Ünite</span><h2>🕊️ İslam Düşüncesinde Yorumlar</h2><p>Doğruluk, iffet, cömertlik, sabır, saygı ve adalet</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 4 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Güzel Ahlaki Tutum ve Davranışlar</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Kaçınmamız Gereken Kötü Tutum ve Davranışlar</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Bir Peygamber Tanıyorum: Hz. Salih (as)</a><a class="ka-ic-link" href="#ka-konu-4"><b>4</b>Bir Sure Tanıyorum: Felak Suresi ve Anlamı</a></div></div></div></section>
+<rect x="20" y="8" width="60" height="8" rx="4" fill="#2a6b43"/><rect x="20" y="84" width="60" height="8" rx="4" fill="#2a6b43"/></g></g></g></svg></div><div class="ka-hero-metin"><span class="ka-ust-etiket">7. Sınıf · 3. Ünite</span><h2>💎 Ahlaki Davranışlar</h2><p>Doğruluk, iffet, cömertlik, sabır, saygı ve adalet</p><div class="ka-icindekiler"><span class="ka-ic-baslik">Bu ünitede 4 konu var</span><a class="ka-ic-link" href="#ka-konu-1"><b>1</b>Güzel Ahlaki Tutum ve Davranışlar</a><a class="ka-ic-link" href="#ka-konu-2"><b>2</b>Kaçınmamız Gereken Kötü Tutum ve Davranışlar</a><a class="ka-ic-link" href="#ka-konu-3"><b>3</b>Bir Peygamber Tanıyorum: Hz. Salih (as)</a><a class="ka-ic-link" href="#ka-konu-4"><b>4</b>Bir Sure Tanıyorum: Felak Suresi ve Anlamı</a></div></div></div></section>
 <main>
 <section id="ozet73" class="aktif">
   <h2>📖 3. Ünite Konu Özeti: Ahlaki Davranışlar</h2>
@@ -1586,7 +1586,8 @@ function kt73rSoruGoster(){
   document.getElementById('kt73rSonuc').textContent = '';
   const kutu = document.getElementById('kt73rSecenekler');
   kutu.innerHTML = '';
-  oge.secenekler.forEach((sec,i)=>{
+  const kKarisik = oge.secenekler.map((sec,i)=>({sec,i})).map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+  kKarisik.forEach(({sec,i})=>{
     const btn = document.createElement('div');
     btn.className = 'merdiven-secenek';
     btn.textContent = sec;
@@ -1600,7 +1601,7 @@ function kt73rSoruGoster(){
         document.getElementById('kt73rPuan').textContent = kt73rPuan;
       } else {
         btn.classList.add('yanlis');
-        tumBtn[oge.dogru].classList.add('dogru');
+        tumBtn[kKarisik.findIndex(s=>s.i===oge.dogru)].classList.add('dogru');
         kt73rZayifKaydet(oge.soru);
       }
       const aciklamaKutu = document.getElementById('kt73rAciklama');
@@ -1618,7 +1619,7 @@ function kt73rSonrakiSoru(){
 }
 
 // =====================================================================
-// 3. ÜNİTE KELİME HAVUZU (28 kavram) — 7. Sınıf / İslam Düşüncesinde Yorumlar
+// 3. ÜNİTE KELİME HAVUZU (28 kavram) — 7. Sınıf / Ahlaki Davranışlar
 // =====================================================================
 const kelimeHavuzu73 = [
   {kelime:"İTİKAT", anlam:"İnanç; inanç esaslarıyla ilgili konuları ifade eden kavram"},

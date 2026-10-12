@@ -66,15 +66,17 @@ function kur(o){
       '</div></div>';
   }
   function soruCiz(){
-    var k=d.i, s=d.sorular[k], sec=d.secenek[k], ver=d.cevap[k], cevaplanan=Object.keys(d.cevap).length;
+    var k=d.i, s=d.sorular[k], sec=d.secenek[k], ver=d.cevap[k], cevaplanan=Object.keys(d.cevap).length, dg=puan(), cvp=ver!==undefined;
     kap.innerHTML = '<div class="ud-kart">'+
-      '<div class="ud-ilerleme"><div class="ud-ilerleme-yazi"><span>Soru <b>'+(k+1)+'</b> / '+N+'</span><span>'+cevaplanan+' cevaplandı</span></div>'+
+      '<div class="ud-ilerleme"><div class="ud-ilerleme-yazi"><span>Soru <b>'+(k+1)+'</b> / '+N+'</span><span>'+cevaplanan+' cevaplandı · <span class="ud-d">✓ '+dg+'</span> · <span class="ud-y">✗ '+(cevaplanan-dg)+'</span></span></div>'+
         '<div class="ud-cubuk" aria-hidden="true"><span style="width:'+(cevaplanan*100/N)+'%"></span></div></div>'+
       '<div class="ud-metin '+(s.tur==='Hadis'?'hadis':'')+'"><div class="ud-metin-ust"><span class="ud-rozet">'+(s.tur==='Hadis'?'💬 HADİS':'📜 AYET')+'</span><span class="ud-kay">'+e(s.kaynak)+'</span></div>'+
         '<p class="ud-m">“'+e(s.metin)+'”</p></div>'+
       '<p class="ud-soru">'+(k+1)+'. Bu '+(s.tur==='Hadis'?'hadis':'ayet')+' hangi kavrama aittir?</p>'+
       '<div class="ud-secenekler" role="radiogroup" aria-label="Seçenekler">'+sec.map(function(x,i){
-        return '<button type="button" class="ud-sec'+(ver===x?' sec':'')+'" role="radio" aria-checked="'+(ver===x)+'" data-sec="'+i+'"><b>'+HARF[i]+')</b> '+e(x)+'</button>'; }).join('')+'</div>'+
+        var c = !cvp ? '' : x===s.dogru ? ' dogru' : ver===x ? ' yanlis' : ' soluk';
+        return '<button type="button" class="ud-sec'+c+'" role="radio" aria-checked="'+(ver===x)+'" data-sec="'+i+'"'+(cvp?' disabled':'')+'><b>'+HARF[i]+')</b> '+e(x)+(cvp&&x===s.dogru?' <span class="ud-isaret">✓</span>':cvp&&ver===x?' <span class="ud-isaret">✗</span>':'')+'</button>'; }).join('')+'</div>'+
+      (cvp ? '<div class="ud-geri '+(ver===s.dogru?'d':'y')+'" role="status"><p class="ud-geri-bas">'+(ver===s.dogru?'✅ Doğru!':'❌ Yanlış. Doğru cevap: <b>'+e(s.dogru)+'</b>')+'</p>'+(s.aciklama?'<p>'+e(s.aciklama)+'</p>':'')+'</div>' : '')+
       '<div class="ud-gezinti"><button class="btn ikincil" type="button" data-ud="geri"'+(k===0?' disabled':'')+'>← Önceki</button>'+
         (k<N-1 ? '<button class="btn" type="button" data-ud="ileri">Sonraki →</button>' : '<button class="btn" type="button" data-ud="bitir">Denemeyi bitir</button>')+'</div>'+
       (cevaplanan===N && k<N-1 ? '<p class="ud-not">Bütün soruları cevapladın. <button class="ud-link" type="button" data-ud="bitir">Denemeyi bitir →</button></p>' : '')+
@@ -105,8 +107,9 @@ function kur(o){
 
   kap.addEventListener('click',function(ev){
     var b=ev.target.closest('[data-sec]');
-    if(b){ var k=d.i; d.cevap[k]=d.secenek[k][+b.getAttribute('data-sec')]; yaz('durum',d);
-      if(d.i<N-1){ soruCiz(); setTimeout(function(){ if(d && d.i===k && durum==='soru'){ d.i++; yaz('durum',d); soruCiz(); odak(); } },350); } else soruCiz();
+    if(b){ var k=d.i; if(d.cevap[k]!==undefined) return;
+      d.cevap[k]=d.secenek[k][+b.getAttribute('data-sec')]; yaz('durum',d); soruCiz();
+      var n=kap.querySelector('[data-ud="ileri"],[data-ud="bitir"]'); if(n) n.focus({preventScroll:true});
       return; }
     var a=ev.target.closest('[data-ud]'); if(!a) return;
     var x=a.getAttribute('data-ud');

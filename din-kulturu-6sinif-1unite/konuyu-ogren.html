@@ -1148,7 +1148,7 @@
     <p><b>İlahi kitaplar</b>, insanların dünya ve ahirette mutlu olabilmesi için Allah'ın peygamberleri aracılığıyla gönderdiği kitaplardır. Peygamberlere vahiy meleği <b>Cebrail</b> aracılığıyla ulaşmıştır. Dört büyük ilahi kitap: <b>Tevrat</b> (Hz. Musa'ya, dili İbranice), <b>Zebur</b> (Hz. Davud'a, dili İbranice), <b>İncil</b> (Hz. İsa'ya, dili Aramice) ve <b>Kur'an-ı Kerim</b> (Hz. Muhammed'e sav, dili Arapça).</p>
     <p>Bu dört kitap tarih sırasına göre gönderilmiştir: önce Tevrat, ardından Zebur, sonra İncil ve en son olarak Kur'an-ı Kerim. Her yeni kitap, kendisinden önce gönderilenin temel mesajı olan <b>tevhidi</b> (Allah'ın birliği inancını) doğrular; Kur'an-ı Kerim ise bu kitapların sonuncusu ve tamamlayıcısı olarak gelmiştir. Bu yüzden ilahi kitaplar birbirinden kopuk değil, aynı hedefe götüren bir zincirin halkaları gibi düşünülmelidir.</p>
     <p>Kur'an-ı Kerim'den önceki ilahi kitaplar zamanla <b>tahrif</b> edildiği (değiştirildiği) için ilk hâliyle günümüze ulaşamamıştır. Kur'an-ı Kerim ise değişmeden günümüze kadar gelmiştir ve kıyamete kadar da değişmeyecektir.</p>
-    <div class="aciklama">Yüce Allah bazı peygamberlere kitap dışında sayfalar da göndermiştir; bunlara <b>suhuf</b> denir: Hz. Âdem'e 10, Hz. Şit'e 50, Hz. İdris'e 30, Hz. İbrahim'e 10 sayfa suhuf gönderilmiştir.</div>
+    <div class="aciklama">Yüce Allah bazı peygamberlere kitap dışında sayfalar da göndermiştir; bunlara <b>suhuf</b> denir: Rivayetlere göre Hz. Âdem'e 10, Hz. Şit'e 50, Hz. İdris'e 30, Hz. İbrahim'e 10 sayfa suhuf gönderilmiştir.</div>
     <p>Hz. Muhammed'e (sav) verilen, "peygamberlerin sonuncusu" anlamına gelen unvana <b>Hatemülenbiya</b> denir. Kendisine ilk vahiy <b>Nur Dağı'ndaki Hira Mağarası</b>'nda gelmiştir. Hz. Peygamber, kendi konumunu anlatırken kendisini, önceki peygamberlerin ördüğü bir duvarın tamamlanmasını sağlayan son eksik kerpice benzetmiştir; yani nübüvvet binası kendisiyle tamamlanmış, ondan sonra başka bir peygamber gelmeyecektir.</p>
     <div class="ka-blok ka-dusun">
       <h4 class="ka-blok-bas"><span aria-hidden="true">📚</span> Kitapları Zincire Bağla<span class="ka-rozet">İlahi kitaplar</span></h4>
@@ -1342,7 +1342,7 @@
   <div class="sunum-slayt s-icerik" data-tip="icerik" style="--vurgu:var(--kirmizi)">
     <h3>📌 İlahi Kitaplar (1/3)</h3>
     <ul class="si-liste">
-      <li>İlahi kitaplar, insanların dünya ve ahirette mutlu olabilmesi için Allah'ın peygamberleri aracılığıyla gönderdiği kitaplardır.</li><li>Peygamberlere vahiy meleği Cebrail aracılığıyla ulaşmıştır. Dört büyük ilahi kitap: Tevrat (Hz.</li><li>Musa'ya, dili İbranice), Zebur (Hz. Davud'a, dili İbranice), İncil (Hz. İsa'ya, dili Aramice) ve Kur'an-ı Kerim (Hz.</li>
+      <li>İlahi kitaplar, insanların dünya ve ahirette mutlu olabilmesi için Allah'ın peygamberleri aracılığıyla gönderdiği kitaplardır.</li><li>Peygamberlere vahiy meleği Cebrail aracılığıyla ulaşmıştır. Dört büyük ilahi kitap: Tevrat (Hz.</li><li>Musa'ya, dili İbranice), Zebur (Hz. Davud'a, dili İbranice), İncil (Hz. İsa'ya; Hz. İsa'nın konuştuğu dil Aramice idi) ve Kur'an-ı Kerim (Hz.</li>
     </ul>
   </div>
   <div class="sunum-slayt s-zb s-zb-dusun" data-tip="zb">
@@ -1682,7 +1682,8 @@ function kt8rSoruGoster(){
   document.getElementById('kt8rSonuc').textContent = '';
   const kutu = document.getElementById('kt8rSecenekler');
   kutu.innerHTML = '';
-  oge.secenekler.forEach((sec,i)=>{
+  const kKarisik = oge.secenekler.map((sec,i)=>({sec,i})).map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+  kKarisik.forEach(({sec,i})=>{
     const btn = document.createElement('div');
     btn.className = 'merdiven-secenek';
     btn.textContent = sec;
@@ -1696,7 +1697,7 @@ function kt8rSoruGoster(){
         document.getElementById('kt8rPuan').textContent = kt8rPuan;
       } else {
         btn.classList.add('yanlis');
-        tumBtn[oge.dogru].classList.add('dogru');
+        tumBtn[kKarisik.findIndex(s=>s.i===oge.dogru)].classList.add('dogru');
         kt8rZayifKaydet(oge.soru);
       }
       const aciklamaKutu = document.getElementById('kt8rAciklama');

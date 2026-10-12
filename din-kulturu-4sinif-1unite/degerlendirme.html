@@ -1689,6 +1689,8 @@ function tekrarEkle(){
 // ENGINE G — Zamanlı Çoktan Seçmeli Test (Can + Puan + Süre)
 // =====================================================================
 function zamanliQuizOlustur(cfg){
+  /* secenekleri karıştır (her soru, doğru cevap yeni yerine taşınır) */
+  cfg = Object.assign({}, cfg, { sorular: cfg.sorular.map(s=>{ const k=s.secenekler.map((sec,i)=>({sec,i})).map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]); return Object.assign({}, s, { secenekler:k.map(x=>x.sec), dogru:k.findIndex(x=>x.i===s.dogru) }); }) });
   let index=0, can=cfg.canBaslangic||3, puan=0, kilit=false, kalanSure=cfg.sureSn||10, zamanlayici=null;
 
   function canGoster(){
@@ -1789,16 +1791,16 @@ const sorularDeg = [
   {soru:"Bir dua bittiğinde hep birlikte ne deriz?", secenekler:["İnşallah","Maşallah","Amin","Elhamdülillah"], dogru:2},
   {soru:"Sübhâneke duası ne zaman okunur?", secenekler:["Namaza başlarken","Yemekten sonra","Uyumadan önce","Okula giderken"], dogru:0},
   {soru:"\"Senden başka ilah yoktur\" cümlesi hangi duada geçer?", secenekler:["Ezan","Sübhâneke duası","Selam","Tekbir"], dogru:1},
-  {soru:"Bir nimete/başarıya kavuştuğumuzda hangi ifadeyi söyleriz? (Hamd)", secenekler:["Elhamdülillah","Estağfirullah","Sübhanallah","Allahu Ekber"], dogru:0},
-  {soru:"Peygamberimizin adı anıldığında ne söyleriz? (Salavat)", secenekler:["Amin","Allahümme salli alâ Muhammed","İnşallah","Maşallah"], dogru:1},
+  {soru:"Bir nimete/başarıya kavuştuğumuzda hangi ifadeyi söyleriz?", secenekler:["Elhamdülillah","Estağfirullah","Sübhanallah","Allahu Ekber"], dogru:0},
+  {soru:"Peygamberimizin adı anıldığında ne söyleriz?", secenekler:["Amin","Allahümme salli alâ Muhammed","İnşallah","Maşallah"], dogru:1},
   {soru:"Biri yolculuğa çıkarken ne deriz?", secenekler:["Allah'a emanet ol","Allah razı olsun","Hayırlı olsun","Amin"], dogru:0},
   {soru:"Kur'an okumaya başlarken ne deriz?", secenekler:["Bismillâhirrahmânirrahîm","Eûzü billâhi mine'ş-şeytâni'r-racîm","Elhamdülillah","Sübhanallah"], dogru:1},
-  {soru:"Zengin Müslümanların fakirlere verdiği mal yardımına ne denir?", secenekler:["Sadaka","Zekat","Kurban","Nimet"], dogru:1},
+  {soru:"Elif tabağına yemeği ihtiyacı kadar alıyor, artan ekmeği de çöpe atmıyor. Elif'in bu davranışı neyin örneğidir?", secenekler:["Şükrü yalnızca sözle göstermenin", "Manevi temizliğin", "Nimete şükrü davranışla göstermenin", "Helal ile haramı ayırt etmenin"], dogru:2, aciklama:"Nimeti israf etmemek, şükrün davranışa dönüşmüş hâlidir. Şükür yalnızca \"Elhamdülillah\" demekten ibaret değildir."},
   {soru:"\"Allah'ı eksik sıfatlardan uzak tutmak\" hangi kavramın anlamıdır?", secenekler:["Tesbih","Tekbir","Şükür","Hamd"], dogru:0},
-  {soru:"Allah rızası için kesilen hayvana ne denir?", secenekler:["Sadaka","Kurban","Zekat","Nimet"], dogru:1},
-  {soru:"Müslümanların Mekke'ye yaptığı ibadet yolculuğuna ne denir?", secenekler:["Hac","Oruç","Ramazan","Namaz"], dogru:0},
+  {soru:"Maddi temizlik ile manevi temizlik arasındaki fark hangisinde doğru verilmiştir?", secenekler:["Maddi temizlik kalple, manevi temizlik bedenle ilgilidir", "Maddi temizlik beden, elbise ve çevreyle; manevi temizlik kalple ilgilidir", "İkisi de yalnızca beden ve elbiseyle ilgilidir", "Manevi temizlik yalnızca abdest almaktır"], dogru:1, aciklama:"Maddi temizlik beden, elbise ve çevrenin temiz tutulmasıdır. Manevi temizlik ise kalbin kötü düşünce ve duygulardan arınmasıdır."},
+  {soru:"Can kantinden bir yiyecek alırken paketin üzerindeki içindekiler kısmını okuyor. Can bu davranışıyla neye dikkat etmektedir?", secenekler:["Yiyeceğin pahalı olup olmadığına", "Yiyeceğin helal ve sağlıklı olup olmadığına", "Ambalajın renkli olup olmadığına", "Yiyeceği arkadaşlarının sevip sevmediğine"], dogru:1, aciklama:"Dinimiz yediklerimizin hem helal hem de temiz ve sağlıklı olmasını ister. İçindekilere bakmak buna dikkat etmenin bir yoludur."},
 ];
-const degOyunu = zamanliQuizOlustur({sorular:sorularDeg, konteynerId:'degSoruAlani', canId:'degCan', puanId:'degPuan', sonucId:'degSonuc', sureSn:12, canBaslangic:3});
+const degOyunu = zamanliQuizOlustur({sorular:sorularDeg, konteynerId:'degSoruAlani', canId:'degCan', puanId:'degPuan', sonucId:'degSonuc', sureSn:20, canBaslangic:3});
 function degBaslat(){ degOyunu.baslat(); }
 
 // =====================================================================
@@ -1989,7 +1991,7 @@ const konuTekrariSorulari = [
   {zorluk:"kolay", soru:"Biri bize yardım ettiğinde ne denir?", secenekler:["Allah razı olsun","Allah şifa versin","Hayırlı olsun","Sübhanallah"], dogru:0, aciklama:"\"Allah razı olsun\", bize iyilik yapan birine teşekkür etmek için söylenir."},
   {zorluk:"kolay", soru:"Bir dua bittiğinde hep birlikte ne denir?", secenekler:["İnşallah","Amin","Maşallah","Elhamdülillah"], dogru:1, aciklama:"\"Amin\", duanın kabul olması dileğiyle hep birlikte söylenir."},
   {zorluk:"kolay", soru:"Sübhâneke duası ne zaman okunur?", secenekler:["Yemekten önce","Namaza başlarken","Uyumadan önce","Okula giderken"], dogru:1, aciklama:"Sübhâneke duası, namaza durup iftitah tekbiri aldıktan hemen sonra okunur."},
-  {zorluk:"kolay", soru:"Günde beş vakit kılınan ibadete ne denir?", secenekler:["Oruç","Namaz","Zekât","Hac"], dogru:1, aciklama:"Namaz, Müslümanların günde beş vakit kıldığı temel ibadettir."},
+  {zorluk:"kolay", soru:"Sahip olduklarımızın farkında olup bunun için Allah'a teşekkür etmeye ne denir?", secenekler:["Tesbih", "Şükür", "Tövbe", "Tekbir"], dogru:1, aciklama:"Şükür, sahip olduklarımızın farkında olmak ve bunun için Allah'a teşekkür etmektir. Şükür yalnız dille değil davranışla da yapılır."},
   {zorluk:"kolay", soru:"İyi insanların gideceği güzel yere ne denir?", secenekler:["Cehennem","Cennet","Dünya","Ahiret"], dogru:1, aciklama:"Cennet, iyi insanların öldükten sonra gideceği güzel yerdir."},
   {zorluk:"kolay", soru:"Allah'ın nurdan yarattığı, hep O'na itaat eden varlığa ne denir?", secenekler:["Peygamber","Melek","Cin","İnsan"], dogru:1, aciklama:"Melek, Allah'ın nurdan yarattığı, hiç günah işlemeyen varlıktır."},
   {zorluk:"kolay", soru:"Allah'ın insanlara gönderdiği elçiye ne denir?", secenekler:["Melek","Peygamber","Halife","İmam"], dogru:1, aciklama:"Peygamber, Allah'ın insanlara doğru yolu göstermek için gönderdiği elçidir."},
@@ -2004,10 +2006,10 @@ const konuTekrariSorulari = [
   {zorluk:"orta", soru:"Kaybettiğimiz bir yakınımız için ne denir?", secenekler:["Allah rahmet eylesin","Allah şifa versin","Hayırlı olsun","Amin"], dogru:0, aciklama:"\"Allah rahmet eylesin\", vefat etmiş bir kimse anıldığında söylenir."},
   {zorluk:"orta", soru:"Sübhâneke duasının \"ve tebârekesmük\" bölümü ne anlama gelir?", secenekler:["Senden başka ilah yoktur","Senin adın mübarektir","Varlığın her şeyden üstündür","Seni överim"], dogru:1, aciklama:"\"Ve tebârekesmük\", \"Senin adın mübarektir\" anlamına gelir."},
   {zorluk:"orta", soru:"Sübhâneke duasının \"ve lâ ilâhe ğayrük\" bölümü ne anlama gelir?", secenekler:["Senin adın mübarektir","Senden başka ilah yoktur","Varlığın üstündür","Seni överim"], dogru:1, aciklama:"\"Ve lâ ilâhe ğayrük\", \"Senden başka ilah yoktur\" anlamına gelir."},
-  {zorluk:"orta", soru:"Zengin Müslümanların fakirlere verdiği mal yardımına ne denir?", secenekler:["Sadaka","Zekât","Fidye","Kurban"], dogru:1, aciklama:"Zekât, dinen zengin sayılan Müslümanların malının belli bir kısmını ihtiyaç sahiplerine vermesidir."},
-  {zorluk:"orta", soru:"Sabahtan akşama yeme-içmeden uzak durma ibadetine ne denir?", secenekler:["Namaz","Oruç","Zekât","Hac"], dogru:1, aciklama:"Oruç, imsak vaktinden iftara kadar yeme-içmeden uzak durma ibadetidir."},
-  {zorluk:"orta", soru:"Allah rızası için kesilen hayvana ne denir?", secenekler:["Sadaka","Kurban","Zekât","Fidye"], dogru:1, aciklama:"Kurban, Allah'ın rızasını kazanmak amacıyla belirli şartlarda kesilen hayvandır."},
-  {zorluk:"orta", soru:"Müslümanların Mekke'ye yaptığı ibadet yolculuğuna ne denir?", secenekler:["Namaz","Oruç","Hac","Umre"], dogru:2, aciklama:"Hac, imkânı olan Müslümanların ömürlerinde bir kez Mekke'yi ziyaret etmesidir."},
+  {zorluk:"orta", soru:"Elif tabağına yemeği ihtiyacı kadar alıyor, artan ekmeği de çöpe atmıyor. Elif'in bu davranışı neyin örneğidir?", secenekler:["Şükrü yalnızca sözle göstermenin", "Manevi temizliğin", "Nimete şükrü davranışla göstermenin", "Helal ile haramı ayırt etmenin"], dogru:2, aciklama:"Nimeti israf etmemek, şükrün davranışa dönüşmüş hâlidir. Şükür yalnızca \"Elhamdülillah\" demekten ibaret değildir."},
+  {zorluk:"orta", soru:"\"Andolsun, eğer şükrederseniz elbette size nimetimi artırırım...\" (İbrahim suresi, 7. ayet) Bu ayet bize ne anlatır?", secenekler:["Şükrün karşılıksız kalmayacağını", "Nimetlerin hiç azalmayacağını", "Şükrün yalnızca dille yapılacağını", "Nimetlerin herkese eşit verildiğini"], dogru:0, aciklama:"Ayet, şükredenlere nimetin artırılacağını bildirir. Şükreden kişi elindekinin kıymetini bilir ve onu korur."},
+  {zorluk:"orta", soru:"Maddi temizlik ile manevi temizlik arasındaki fark hangisinde doğru verilmiştir?", secenekler:["Maddi temizlik kalple, manevi temizlik bedenle ilgilidir", "Maddi temizlik beden, elbise ve çevreyle; manevi temizlik kalple ilgilidir", "İkisi de yalnızca beden ve elbiseyle ilgilidir", "Manevi temizlik yalnızca abdest almaktır"], dogru:1, aciklama:"Maddi temizlik beden, elbise ve çevrenin temiz tutulmasıdır. Manevi temizlik ise kalbin kötü düşünce ve duygulardan arınmasıdır."},
+  {zorluk:"orta", soru:"Can kantinden bir yiyecek alırken paketin üzerindeki içindekiler kısmını okuyor. Can bu davranışıyla neye dikkat etmektedir?", secenekler:["Yiyeceğin pahalı olup olmadığına", "Yiyeceğin helal ve sağlıklı olup olmadığına", "Ambalajın renkli olup olmadığına", "Yiyeceği arkadaşlarının sevip sevmediğine"], dogru:1, aciklama:"Dinimiz yediklerimizin hem helal hem de temiz ve sağlıklı olmasını ister. İçindekilere bakmak buna dikkat etmenin bir yoludur."},
   {zorluk:"orta", soru:"Namaz vaktini bildiren çağrıya ne denir?", secenekler:["Kamet","Ezan","Hutbe","Tekbir"], dogru:1, aciklama:"Ezan, namaz vaktinin geldiğini bildiren çağrıdır."},
   {zorluk:"orta", soru:"Allah'a kulluk etmek için yapılan davranışlara ne denir?", secenekler:["Sevap","İbadet","Nimet","Şükür"], dogru:1, aciklama:"İbadet, Allah'a olan sevgi ve bağlılığımızı göstermek için yaptığımız davranışların tümüdür."},
   {zorluk:"orta", soru:"Allah'ın peygamberlere gönderdiği bilgiye ne denir?", secenekler:["İlham","Vahiy","Rüya","Keramet"], dogru:1, aciklama:"Vahiy, Allah'ın peygamberlerine gönderdiği bilgi ve mesajdır."},
@@ -2015,8 +2017,8 @@ const konuTekrariSorulari = [
 
   {zorluk:"zor", soru:"\"Dinî ifadeler\" kavramı ne anlama gelir?", secenekler:["Sadece Arapça sözler","Dinimizin etkisiyle dilimize yerleşen söz ve kavramlar","Sadece dua cümleleri","Kur'an ayetleri"], dogru:1, aciklama:"Dinî ifadeler, dinimizin etkisiyle günlük dilimize yerleşen söz ve kavramlardır."},
   {zorluk:"zor", soru:"Aşağıdakilerden hangisi \"hamd\" ile \"şükür\" arasındaki farkı en iyi açıklar?", secenekler:["İkisi aynı anlama gelir","Hamd övmek, şükür teşekkür etmektir","Hamd yalnızca yemekte söylenir","Şükür yalnızca duada söylenir"], dogru:1, aciklama:"Hamd, Allah'ı övmek; şükür ise nimetlere karşı teşekkür etmektir. Yakın ama farklı kavramlardır."},
-  {zorluk:"zor", soru:"Sübhâneke duası namazın hangi bölümünde okunur?", secenekler:["Secdede","İftitah tekbirinden hemen sonra","Rükûda","Selam verirken"], dogru:1, aciklama:"Sübhâneke duası, namaza durup iftitah tekbiri aldıktan hemen sonra okunur."},
-  {zorluk:"zor", soru:"\"İnnâ lillâhi ve innâ ileyhi râciûn\" ifadesi hangi durumda söylenir?", secenekler:["Sevinçli bir haberde","Bir kayıp/musibet karşısında","Yemeğe başlarken","Selamlaşırken"], dogru:1, aciklama:"Bu ifade, bir kayıp veya musibet karşısında sabırla söylenen bir dinî ifadedir."},
+  {zorluk:"zor", soru:"\"...Allah da tertemiz olanları sever.\" (Tevbe suresi, 108. ayet) Bu ayete göre temizlik hakkında hangisi söylenebilir?", secenekler:["Temizlik yalnızca bir sağlık kuralıdır", "Temizlik Allah'ın sevgisine vesile olan bir davranıştır", "Temizlik yalnızca namazdan önce gereklidir", "Temizlik sadece büyüklerin sorumluluğudur"], dogru:1, aciklama:"Ayet temizliği bir sevgi sebebi olarak anlatır. Temizlik hem sağlığımızı korur hem de ibadete hazırlıktır."},
+  {zorluk:"zor", soru:"Bedeninin kendisine Allah'ın bir emaneti olduğunu bilen bir kişi beslenirken nasıl davranır?", secenekler:["Canı ne isterse sınırsızca yer", "Helal ve sağlığına uygun yiyecekleri ölçülü yer", "Sadece pahalı yiyecekleri seçer", "Öğün atlamayı alışkanlık hâline getirir"], dogru:1, aciklama:"Bedenimiz bize emanettir; onu korumak bir sorumluluktur. Bu yüzden helal, temiz ve sağlıklı yiyecekleri ölçülü yemeliyiz."},
   {zorluk:"zor", soru:"Allah'ın verdiği güzellik ve iyiliğe ne denir?", secenekler:["Sevap","Nimet","Rahmet","Lütuf"], dogru:1, aciklama:"Nimet, Allah'ın kullarına verdiği güzellik ve iyiliktir."},
   {zorluk:"zor", soru:"Allah'ın merhameti ve acımasına ne denir?", secenekler:["Nimet","Rahmet","Lütuf","Sevap"], dogru:1, aciklama:"Rahmet, Allah'ın kullarına olan sonsuz merhameti ve acımasıdır."},
   {zorluk:"zor", soru:"Allah'ın hak etmediğimiz hâlde bize bahşettiği iyiliğe ne denir?", secenekler:["Nimet","Rahmet","Lütuf","Sevap"], dogru:2, aciklama:"Lütuf, Allah'ın bize bahşettiği bir iyilik ve ihsandır."},
@@ -2027,8 +2029,8 @@ const konuTekrariSorulari = [
   {zorluk:"zor", soru:"\"Selamünaleyküm\" ifadesinin karşılığı olarak ne söylenir?", secenekler:["Amin","Ve aleykümselam","Elhamdülillah","Hoş geldiniz"], dogru:1, aciklama:"Selama karşılık \"Ve aleykümselam\" (Senin üzerine de selam olsun) denir."},
   {zorluk:"zor", soru:"\"Tesbih\" kavramı hangi anlama en yakındır?", secenekler:["Allah'ı övmek","Allah'ı eksik sıfatlardan uzak tutmak","Allah'tan af dilemek","Allah'a şükretmek"], dogru:1, aciklama:"Tesbih, Allah'ı eksik sıfatlardan uzak tutmak, O'nun yüceliğini dile getirmektir."},
   {zorluk:"zor", soru:"Peygamberimize dua ve saygı sunmaya ne denir?", secenekler:["Tekbir","Tesbih","Salavat","İstiğfar"], dogru:2, aciklama:"Salavat, Peygamberimize dua ve saygı sunmaktır."},
-  {zorluk:"zor", soru:"Sübhâneke duasının kelime kelime anlamı kaç bölümden oluşur?", secenekler:["2","3","4","5"], dogru:2, aciklama:"Sübhâneke duası; \"Sübhânekellâhümme ve bi hamdik\", \"ve tebârekesmük\", \"ve teâlâ ceddük\", \"ve lâ ilâhe ğayrük\" olmak üzere 4 bölümden oluşur."},
-  {zorluk:"zor", soru:"Aşağıdakilerden hangisi bir \"dilek/dua ifadesi\" değil, bir \"günlük konuşma ifadesi\"dir?", secenekler:["Amin","İnşallah","Bismillah","Allah'a emanet ol"], dogru:2, aciklama:"Bismillah (Besmele), bir işe başlarken söylenen günlük konuşma ifadesidir; diğerleri dilek/dua ifadeleridir."},
+  {zorluk:"zor", soru:"Sübhâneke duasını anlamını bilerek okuyan bir öğrenci namaza başlarken neyi hatırlar?", secenekler:["Namazın kaç rekât olduğunu ve hangi vakitte kılındığını", "Allah'ın her türlü eksiklikten uzak olduğunu ve O'ndan başka ilah olmadığını", "Kıbleye nasıl dönüleceğini ve secdenin nasıl yapılacağını", "Hangi surenin hangi rekâtta okunacağını"], dogru:1, aciklama:"Sübhâneke duasında Allah her türlü eksiklikten uzak tutulur, övülür ve O'ndan başka ilah olmadığı söylenir. Bu dua, namaza başlarken kime yöneldiğimizi hatırlatır."},
+  {zorluk:"zor", soru:"Zeynep yemeğe başlıyor, Ali hapşırıyor, sınıfta bir dua bitiyor. Sırasıyla hangi ifadeler söylenmelidir?", secenekler:["Bismillah – Elhamdülillah – Âmin", "Âmin – Maşallah – Bismillah", "Elhamdülillah – Bismillah – İnşallah", "İnşallah – Âmin – Elhamdülillah"], dogru:0, aciklama:"Yemeğe başlarken \"Bismillah\", hapşırınca \"Elhamdülillah\" denir. Dua bitince söylenen \"Âmin\" ise \"Duamızı kabul et\" anlamına gelir."},
 ];
 let ktrIndex = 0, ktrPuan = 0, ktrSiraliSorular = [], ktrKilit = false;
 
@@ -2087,7 +2089,8 @@ function ktrSoruGoster(){
   document.getElementById('ktrSonuc').textContent = '';
   const kutu = document.getElementById('ktrSecenekler');
   kutu.innerHTML = '';
-  oge.secenekler.forEach((sec,i)=>{
+  const kKarisik = oge.secenekler.map((sec,i)=>({sec,i})).map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+  kKarisik.forEach(({sec,i})=>{
     const btn = document.createElement('div');
     btn.className = 'merdiven-secenek';
     btn.textContent = sec;
@@ -2101,7 +2104,7 @@ function ktrSoruGoster(){
         document.getElementById('ktrPuan').textContent = ktrPuan;
       } else {
         btn.classList.add('yanlis');
-        tumBtn[oge.dogru].classList.add('dogru');
+        tumBtn[kKarisik.findIndex(s=>s.i===oge.dogru)].classList.add('dogru');
         ktrZayifKaydet(oge.soru);
       }
       const aciklamaKutu = document.getElementById('ktrAciklama');

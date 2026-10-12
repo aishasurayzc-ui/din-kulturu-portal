@@ -997,7 +997,8 @@ function kt73rSoruGoster(){
   document.getElementById('kt73rSonuc').textContent = '';
   const kutu = document.getElementById('kt73rSecenekler');
   kutu.innerHTML = '';
-  oge.secenekler.forEach((sec,i)=>{
+  const kKarisik = oge.secenekler.map((sec,i)=>({sec,i})).map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+  kKarisik.forEach(({sec,i})=>{
     const btn = document.createElement('div');
     btn.className = 'merdiven-secenek';
     btn.textContent = sec;
@@ -1011,7 +1012,7 @@ function kt73rSoruGoster(){
         document.getElementById('kt73rPuan').textContent = kt73rPuan;
       } else {
         btn.classList.add('yanlis');
-        tumBtn[oge.dogru].classList.add('dogru');
+        tumBtn[kKarisik.findIndex(s=>s.i===oge.dogru)].classList.add('dogru');
         kt73rZayifKaydet(oge.soru);
       }
       const aciklamaKutu = document.getElementById('kt73rAciklama');
@@ -1029,7 +1030,7 @@ function kt73rSonrakiSoru(){
 }
 
 // =====================================================================
-// 3. ÜNİTE KELİME HAVUZU (28 kavram) — 7. Sınıf / İslam Düşüncesinde Yorumlar
+// 3. ÜNİTE KELİME HAVUZU (28 kavram) — 7. Sınıf / Ahlaki Davranışlar
 // =====================================================================
 const kelimeHavuzu73 = [
   {kelime:"İTİKAT", anlam:"İnanç; inanç esaslarıyla ilgili konuları ifade eden kavram"},

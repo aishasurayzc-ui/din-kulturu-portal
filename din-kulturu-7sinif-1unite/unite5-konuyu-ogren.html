@@ -1606,8 +1606,8 @@ const konuTekrariSorulari75 = [
   {zorluk:"zor", soru:"Şafiilik ülkemizde özellikle hangi bölgelerde yaygındır?", secenekler:["İç Anadolu ve Marmara","Ege ve Akdeniz","Doğu ve Güneydoğu Anadolu","Karadeniz'in tamamı"], dogru:2, aciklama:"Şafiilik ülkemizin doğu ve güneydoğusunda yaygındır."},
   {zorluk:"zor", soru:"Hacı Bektaş Veli'nin öğütlerini içeren, kendisine nispet edilen eser hangisidir?", secenekler:["Mesnevi","Divan-ı Hikmet","Risale","Makalat"], dogru:3, aciklama:"Hacı Bektaş Veli'ye nispet edilen eser Makalat'tır."},
   {zorluk:"zor", soru:"Hoca Ahmed Yesevi'nin Türkçe hikmetlerini topladığı eser hangisidir?", secenekler:["Divan-ı Hikmet","Makalat","Mesnevi","Fütüvvetname"], dogru:0, aciklama:"Yesevi'nin hikmetleri Divan-ı Hikmet'te toplanmıştır."},
-  {zorluk:"zor", soru:"\"Ey insanlar! ...birbirinizi tanıyasınız diye sizi boylara ve kabilelere ayırdık.\" ayeti hangi surededir?", secenekler:["Bakara suresi","Hucurat suresi","Kalem suresi","Asr suresi"], dogru:1, aciklama:"Bu ayet Hucurat suresinin 13. ayetidir."},
-  {zorluk:"zor", soru:"\"Hep birlikte Allah'ın ipine sımsıkı sarılın, parçalanıp bölünmeyin.\" ayeti hangi surededir?", secenekler:["Nas suresi","Fatiha suresi","Âl-i İmrân suresi","Felak suresi"], dogru:2, aciklama:"Bu ayet Âl-i İmrân suresinin 103. ayetidir."},
+  {zorluk:"zor", soru:"\"...birbirinizi tanımanız için sizi boylara ve kabilelere ayırdık. Allah katında en değerli olanınız, O'na karşı gelmekten en çok sakınanınızdır...\" (Hucurat suresi, 13. ayet) Bu ayet farklı yorum ve topluluklara bakışımız için ne öğütler?", secenekler:["Farklılıklar tanışma sebebidir; üstünlük takvadadır", "Farklı olan topluluklardan uzak durulmalıdır", "Bir topluluk diğerinden doğuştan üstündür", "Farklılıklar mutlaka ortadan kaldırılmalıdır"], dogru:0, aciklama:"Ayet, insanların tanışmaları için farklı topluluklar hâlinde yaratıldığını ve Allah katında üstünlüğün takvada olduğunu bildirir."},
+  {zorluk:"zor", soru:"\"Hep birlikte Allah'ın ipine (Kur'an'a) sımsıkı sarılın. Parçalanıp bölünmeyin...\" (Âl-i İmrân suresi, 103. ayet) Bu ayete göre farklı mezhep ve yorumlara sahip Müslümanlar nasıl davranmalıdır?", secenekler:["Ortak payda olan Kur'an etrafında birlik içinde olmalıdır", "Kendi yorumlarını diğerlerine zorla kabul ettirmelidir", "Birbirleriyle hiç iletişim kurmamalıdır", "Yorum farklılıklarını düşmanlık sebebi saymalıdır"], dogru:0, aciklama:"Ayet, Müslümanların Kur'an'a sımsıkı sarılarak birlik içinde olmalarını ve bölünmemelerini öğütler."},
   {zorluk:"zor", soru:"İslam düşüncesindeki yorum farklılıkları hangi alanda görülür?", secenekler:["İnanç esaslarının kendisinde","Kur'an'ın metninde","Peygamber sayısında","Ayrıntılarda ve uygulamada"], dogru:3, aciklama:"Farklılıklar dinin özünde değil, ayrıntı ve uygulamadadır."},
   {zorluk:"zor", soru:"Aşağıdakilerden hangisi bütün İslam yorumlarının ortak paydasıdır?", secenekler:["Tevhit inancı ve Kur'an","Aynı fıkhi görüş","Aynı tarikat","Aynı coğrafya"], dogru:0, aciklama:"Bütün yorumlar tevhit inancı, Kur'an ve Hz. Muhammed'in peygamberliğinde birleşir."},
   {zorluk:"zor", soru:"Yorum farklılıklarının ortaya çıkmasında aşağıdakilerden hangisi etkili DEĞİLDİR?", secenekler:["Kültür ve coğrafya farkı","Bilgi düzeyi ve tecrübe farkı","Allah'ın gönderdiği dinin değişmesi","Yeni karşılaşılan meseleler"], dogru:2, aciklama:"Din değişmez; değişen ve çeşitlenen, insanların din anlayışıdır."},
@@ -1670,7 +1670,8 @@ function kt75rSoruGoster(){
   document.getElementById('kt75rSonuc').textContent = '';
   const kutu = document.getElementById('kt75rSecenekler');
   kutu.innerHTML = '';
-  oge.secenekler.forEach((sec,i)=>{
+  const kKarisik = oge.secenekler.map((sec,i)=>({sec,i})).map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+  kKarisik.forEach(({sec,i})=>{
     const btn = document.createElement('div');
     btn.className = 'merdiven-secenek';
     btn.textContent = sec;
@@ -1684,7 +1685,7 @@ function kt75rSoruGoster(){
         document.getElementById('kt75rPuan').textContent = kt75rPuan;
       } else {
         btn.classList.add('yanlis');
-        tumBtn[oge.dogru].classList.add('dogru');
+        tumBtn[kKarisik.findIndex(s=>s.i===oge.dogru)].classList.add('dogru');
         kt75rZayifKaydet(oge.soru);
       }
       const aciklamaKutu = document.getElementById('kt75rAciklama');

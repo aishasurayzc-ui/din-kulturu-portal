@@ -1559,7 +1559,8 @@ function kt65rSoruGoster(){
   document.getElementById('kt65rSonuc').textContent = '';
   const kutu = document.getElementById('kt65rSecenekler');
   kutu.innerHTML = '';
-  oge.secenekler.forEach((sec,i)=>{
+  const kKarisik = oge.secenekler.map((sec,i)=>({sec,i})).map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+  kKarisik.forEach(({sec,i})=>{
     const btn = document.createElement('div');
     btn.className = 'merdiven-secenek';
     btn.textContent = sec;
@@ -1573,7 +1574,7 @@ function kt65rSoruGoster(){
         document.getElementById('kt65rPuan').textContent = kt65rPuan;
       } else {
         btn.classList.add('yanlis');
-        tumBtn[oge.dogru].classList.add('dogru');
+        tumBtn[kKarisik.findIndex(s=>s.i===oge.dogru)].classList.add('dogru');
         kt65rZayifKaydet(oge.soru);
       }
       const aciklamaKutu = document.getElementById('kt65rAciklama');
