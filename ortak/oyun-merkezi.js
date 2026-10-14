@@ -322,7 +322,7 @@ function omCengelUret(onek, havuzGiris){
   const havuz = havuzGiris.map(o => {
     const sorular = (o.sorular || [o.soru]).filter(Boolean);
     return { cevap: String(o.cevap).toLocaleUpperCase('tr-TR'), temel: !!o.temel, harfler: omCengelHarfler(o.cevap),
-      soru: sorular[Math.floor(Math.random() * sorular.length)] };
+      soru: sorular[Math.floor(Math.random() * sorular.length)], sorular: sorular };
   }).filter(o => o.soru && o.harfler.length >= 2 && o.harfler.length <= 15 && !gorulen[o.harfler.join('')] && (gorulen[o.harfler.join('')] = true));
   let enIyi = null;
   for(const boyut of OM_CENGEL_BOYUTLAR){
@@ -352,7 +352,7 @@ function omCengelUret(onek, havuzGiris){
   const kelimeler = yerlesen.map(y => {
     const hucreler = y.hucreler.map(p => (p.r - minR) + ',' + (p.c - minC));
     const no = baslar.indexOf(hucreler[0]) + 1, yon = y.yatay ? 'yatay' : 'dikey';
-    return { id: no + '-' + yon, no: no, soru: y.o.soru, cevap: y.o.cevap, harfler: y.o.harfler, yon: yon,
+    return { id: no + '-' + yon, no: no, soru: y.o.soru, sorular: y.o.sorular, cevap: y.o.cevap, harfler: y.o.harfler, yon: yon,
       baslangicSatir: y.hucreler[0].r - minR, baslangicSutun: y.hucreler[0].c - minC, uzunluk: y.o.harfler.length, hucreler: hucreler };
   }).sort((a, b) => (a.yon === b.yon ? 0 : a.yon === 'yatay' ? -1 : 1) || a.no - b.no);
   const tur = (Number.isInteger(kayit.tur) ? kayit.tur : 0) + 1;
@@ -447,6 +447,28 @@ function omCengelOlustur(onek, havuz){
   omCengelMetin(onek + 'DogruKelime', 0);
   omCengelMetin(onek + 'IpucuSayisi', 0);
   document.getElementById(onek + 'Sonuc').innerHTML = '';
+  omCengelIpucuBagla(onek);
+}
+/* 🔤 Baştan / 💡 Ortadan / 🎯 Sondan / 🧠 Anlam ipuçları: ortak/cengel-ipucu.js */
+function omCengelIpucuBagla(onek){
+  const st = OM_CENGEL[onek];
+  if(!window.CengelIpucu || !st) return;
+  const esle = new Map();
+  const kelimeler = st.kelimeler.map(k => {
+    const w = { kaynak: k, etiket: `${k.no}. ${k.yon === 'yatay' ? 'Soldan sağa' : 'Yukarıdan aşağı'}`, metin: k.cevap,
+      soru: k.soru, sorular: k.sorular, harfler: k.harfler, hucreler: k.hucreler.map(key => st.girdiler[key]) };
+    esle.set(k, w);
+    return w;
+  });
+  st.ipucu = CengelIpucu.kur(onek, {
+    kok: document.getElementById(onek + 'Liste'), kelimeler: kelimeler,
+    aktif: () => st.aktif ? esle.get(st.aktif) : null,
+    harfAc: (w, i) => omCengelHarfAc(st, w.kaynak.hucreler[i]),
+    ipucuSayildi: w => { st.ipuculu.add(w.metin); st.ipucuSayisi++; omCengelMetin(onek + 'IpucuSayisi', st.ipucuSayisi); },
+    kelimeDurumu: (w, tamam) => { const li = document.getElementById(onek + '-ipucu-' + w.kaynak.id); if(li) li.classList.toggle('omc-tamam', tamam); },
+    bitti: () => st.bitti,
+    tamamlandi: () => omCengelKontrolEt(onek)
+  });
 }
 /* Soru ↔ kutu bağlantısı: seçilen kelimenin kutuları ve ipucu birlikte vurgulanır. */
 function omCengelKelimeSec(onek, k, odakla){
@@ -459,6 +481,7 @@ function omCengelKelimeSec(onek, k, odakla){
     const bos = k.hucreler.find(key => !st.girdiler[key].value) || k.hucreler.find(key => !st.girdiler[key].readOnly) || k.hucreler[0];
     st.girdiler[bos].focus({preventScroll: true});
   }
+  if(st.ipucu) st.ipucu.guncelle();
 }
 function omCengelHucreSec(onek, key, tiklama){
   const st = OM_CENGEL[onek];
@@ -492,6 +515,7 @@ function omCengelHarfAc(st, key){
   g.value = st.harita[key];
   g.readOnly = true;
   g.classList.remove('yanlis'); g.classList.add('omc-acik');
+  if(st.ipucu) st.ipucu.guncelle();
 }
 function omCengelEksik(st, k){
   return k.hucreler.filter(key => (omCengelHarfler(st.girdiler[key].value)[0] || '') !== st.harita[key]);
