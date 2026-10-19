@@ -1213,13 +1213,21 @@ var KB = [
   KB.forEach(function(k,i){ gruplar[k[3]].push(i); });
   var TUR=Math.floor(gruplar.V.length/2), turlar=[];
   for(var t=0;t<TUR;t++){ var l=[]; KB_SIRA.forEach(function(c){ l.push(gruplar[c][2*t], gruplar[c][2*t+1]); }); turlar.push(l); }
+  /* Kartların tur içindeki sabit sırası (KB dizinleri). Art arda gelen iki kartın doğru kaynağı
+     hiçbir zaman aynı değildir (bir turun son kartı ile sonraki turun ilk kartı dahil); kaynakların
+     sıradaki yeri turdan tura değişir. Her tur yine yukarıdaki aynı 10 karttan oluşur. */
+  var KB_TUR_SIRASI=[[1,10,31,20,0,40,30,21,11,41],[3,42,13,32,22,43,12,33,23,2],[44,35,15,5,25,34,14,45,24,4],
+    [36,46,27,6,16,37,7,26,47,17],[48,28,8,38,19,29,49,39,9,18],[51,61,81,90,70,50,91,80,60,71],
+    [62,82,92,53,72,63,83,52,93,73],[54,74,95,84,64,94,55,85,65,75],[66,86,77,56,96,67,76,97,87,57],
+    [68,79,98,58,88,69,99,78,89,59]];
+  function sabitSira(t){ var l=KB_TUR_SIRASI[t]; return l && l.length===turlar[t].length && l.slice().sort(function(x,y){ return x-y; }).join()===turlar[t].slice().sort(function(x,y){ return x-y; }).join() ? l.slice() : karistir(turlar[t]); }
 
   var cevap={}; try{ cevap=JSON.parse(oku('kb')||'{}')||{}; }catch(e){ cevap={}; }
   var aktif=+(oku('kb-tur')||0); if(!(aktif>=0 && aktif<TUR)) aktif=0;
   var sira={}, goster=null, mod='oyun';
 
   function kaydet(){ yaz('kb',JSON.stringify(cevap)); }
-  function turSira(t){ if(!sira[t]) sira[t]=karistir(turlar[t]); return sira[t]; }
+  function turSira(t){ if(!sira[t]) sira[t]=sabitSira(t); return sira[t]; }
   function turSkor(t){ var d=0,c=0; turlar[t].forEach(function(i){ if(cevap[i]){ c++; if(cevap[i]===KB[i][3]) d++; } }); return {d:d,c:c}; }
   function ilkBos(t){ var s=turSira(t); for(var p=0;p<s.length;p++) if(!cevap[s[p]]) return p; return -1; }
   function renk(c){ return 'var('+KB_KAT[c].renk+')'; }
@@ -1278,7 +1286,7 @@ var KB = [
     $('#kbSonuc').textContent=(aktif+1)+'. tur: '+s.d+'/'+BOYUT+' · Genel: '+dog+' doğru / '+top+' cevaplanan ('+KB.length+' madde)';
   }
   function listeCiz(){
-    $('#kbListe').innerHTML='<p class="ornek" style="margin:0 0 6px">Tahtaya yansıtmak ya da yazdırmak için bütün maddeler cevaplarıyla. Oyun görünümüne dönünce öğrencinin ilerlemesi korunur.</p>'+turlar.map(function(l,t){
+    $('#kbListe').innerHTML='<p class="ornek" style="margin:0 0 6px">Tahtaya yansıtmak ya da yazdırmak için bütün maddeler cevaplarıyla. Oyun görünümüne dönünce öğrencinin ilerlemesi korunur.</p>'+turlar.map(function(_,t){ var l=turSira(t);
       return '<h3 class="kb-liste-tur">'+(t+1)+'. tur</h3>'+l.map(function(i,p){ var k=KB[i];
         return '<div class="kb-liste-oge" style="--renk:'+renk(k[3])+'"><span class="no">'+(t*BOYUT+p+1)+'.</span><div><p'+(k[0]==='paragraf'?'':' style="font-style:italic"')+'>'+KB_TUR_AD[k[0]][0]+' '+k[1]+'</p>'+(k[0]==='paragraf'?'':'<p class="ref">'+k[2]+'</p>')+'<p class="ref" style="font-weight:600">'+k[4]+'</p></div><span class="cev">'+KB_KAT[k[3]].ikon+' '+KB_KAT[k[3]].ad+'</span></div>'; }).join('');
     }).join('');
