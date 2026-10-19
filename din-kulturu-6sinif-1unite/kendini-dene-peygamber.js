@@ -10,10 +10,12 @@
    her hadisin altında verilmiştir. Özellik tanımları bu sayfadaki konu anlatımına dayanır.
    Madde alanları: [tür, metin, kaynak, doğru kavram, anahtar ifade, gerekçe, kabul edilen diğer kavramlar]
    Sıra sabittir: art arda gelen iki maddenin doğru kavramı aynı değildir.
+   Cevabı doğrudan ele veren kelimeler (tebliğ, güvenilir, doğru sözlü…) cevap
+   verilene kadar ‘……’ ile gizlenir; cevaptan sonra metin aslıyla gösterilir.
    ===================================================================== */
 (function(){
 'use strict';
-var VERI = {"61":{"baslik":"Kendini Dene — Peygamberlerin Özellikleri","alt":"Sıdk, emanet, fetanet, ismet, tebliğ","kavram":{"Sıdk":"Doğru sözlü olmak, dürüstlük. Peygamberler asla yalan söylemez; sözleri ve davranışları doğrudur.","Emanet":"Güvenilir olmak. Peygamberler kendilerine emanet edilen vahyi ve insanların haklarını korur, sözlerinde dururlar.","Fetanet":"Akıllı, zeki ve anlayışlı olmak. Peygamberler doğru karar verir, olayları kavrar ve en uygun yolla açıklar.","İsmet":"Günahtan korunmuşluk. Peygamberler Allah’ın koruması altında günah ve kötülüklerden uzak durur; bu yüzden örnek alınırlar.","Tebliğ":"Allah’tan aldıkları vahyi hiçbir eksiklik ve değişiklik yapmadan insanlara bildirmek."},"maddeler":[["Ayet","Peygamberin üzerine düşen ancak tebliğdir. Allah, sizin açıkladığınızı da, gizlediğinizi de bilir.","Mâide suresi, 99. ayet","Tebliğ","Peygamberin üzerine düşen ancak tebliğdir","Peygambere düşen vahyi bildirmektir.",[]],
+var VERI = {"61":{"baslik":"Kendini Dene — Peygamberlerin Özellikleri","alt":"Sıdk, emanet, fetanet, ismet, tebliğ","gizle":["tebliğ[\\p{L}]*","güvenilir","emanet[\\p{L}]*","doğru sözlü","son derece dürüst","dosdoğru","doğru söyle[\\p{L}]*"],"kavram":{"Sıdk":"Doğru sözlü olmak, dürüstlük. Peygamberler asla yalan söylemez; sözleri ve davranışları doğrudur.","Emanet":"Güvenilir olmak. Peygamberler kendilerine emanet edilen vahyi ve insanların haklarını korur, sözlerinde dururlar.","Fetanet":"Akıllı, zeki ve anlayışlı olmak. Peygamberler doğru karar verir, olayları kavrar ve en uygun yolla açıklar.","İsmet":"Günahtan korunmuşluk. Peygamberler Allah’ın koruması altında günah ve kötülüklerden uzak durur; bu yüzden örnek alınırlar.","Tebliğ":"Allah’tan aldıkları vahyi hiçbir eksiklik ve değişiklik yapmadan insanlara bildirmek."},"maddeler":[["Ayet","Peygamberin üzerine düşen ancak tebliğdir. Allah, sizin açıkladığınızı da, gizlediğinizi de bilir.","Mâide suresi, 99. ayet","Tebliğ","Peygamberin üzerine düşen ancak tebliğdir","Peygambere düşen vahyi bildirmektir.",[]],
   ["Ayet","Sen elbette yüce bir ahlak üzeresin.","Kalem suresi, 4. ayet","İsmet","yüce bir ahlak üzeresin","Hz. Peygamber’in yüce ahlakı, onun kötülüklerden korunmuş olmasının sonucudur.",[]],
   ["Hadis","(Resûlullah Safâ tepesine çıktı…) “Ne dersiniz, size şu dağın arkasından (sizinle savaşmak üzere düşman) atlılar geliyor diye haber versem bana inanır mıydınız?” diye sorunca onlar, “Biz senin hiç yalan söylediğini görmedik.” demişlerdi.","Buhârî, Tefsîr, (Leheb) 1 — Hadislerle İslam, c. 6, s. 253","Sıdk","Biz senin hiç yalan söylediğini görmedik","Mekkeliler, Hz. Peygamber’in hayatı boyunca hiç yalan söylemediğine şahitlik eder.",[]],
   ["Ayet","Yusuf, \"Ey Rabbim! Zindan bana, bunların beni davet ettiği şeyden daha sevimlidir. Onların tuzaklarını benden uzaklaştırmazsan, onlara meyleder ve cahillerden olurum\" dedi.","Yûsuf suresi, 33. ayet","İsmet","Zindan bana, bunların beni davet ettiği şeyden daha sevimlidir","Hz. Yusuf günaha girmektense zindanı tercih eder ve Allah’tan kendisini korumasını ister.",[]],
@@ -68,6 +70,8 @@ var BOYUT = 10;
 function e(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 function oku(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(x){ return null; } }
 function yaz(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(x){} }
+/* Cevabı ele veren kelimeler (‘gizle’ listesi) cevap verilene kadar boşlukla gösterilir; metnin aslı değişmez. */
+function gizle(m, liste){ var h=e(m), sayi=0; (liste||[]).forEach(function(d){ h=h.replace(new RegExp(d,'giu'),function(){ sayi++; return '<span class="akd-bos" aria-label="gizli kelime">……</span>'; }); }); return {h:h, sayi:sayi}; }
 function isaretle(m, ifade){ var i=m.indexOf(ifade); return i<0 ? e(m) : e(m.slice(0,i))+'<mark>'+e(ifade)+'</mark>'+e(m.slice(i+ifade.length)); }
 
 function kur(kok){
@@ -103,9 +107,9 @@ function kur(kok){
     }).join('');
   }
   function kartCiz(){
-    var i=turMaddeleri(aktif)[goster], m=M[i], sec=cevap[i], had=m[0]==='Hadis';
+    var i=turMaddeleri(aktif)[goster], m=M[i], sec=cevap[i], had=m[0]==='Hadis', gz=gizle(m[1],B.gizle);
     var h='<div class="akd-kart'+(had?' hadis':'')+'"><div class="akd-kart-ust"><span class="akd-rozet">'+(had?'💬 HADİS':'📜 AYET')+'</span><span class="akd-sayac">Soru '+(i+1)+' / '+M.length+'</span></div>'+
-      '<p class="akd-metin">'+(sec?isaretle(m[1],m[4]):e(m[1]))+'</p><p class="akd-kay">— '+e(m[2])+'</p></div>'+
+      '<p class="akd-metin">'+(sec?isaretle(m[1],m[4]):gz.h)+'</p>'+(!sec&&gz.sayi?'<p class="akd-gizli-not">🔒 Cevabı ele veren kelime gizlendi. Boşluğa ne gelir, metin ne anlatıyor? Düşün; cevaptan sonra metnin tamamı görünecek.</p>':'')+'<p class="akd-kay">— '+e(m[2])+'</p></div>'+
       '<p class="akd-soru">Bu '+(had?'hadis':'ayet')+' peygamberlerin hangi özelliğini anlatıyor?</p><div class="akd-kavramlar" role="group" aria-label="Özellikler">'+
       KAV.map(function(k,n){
         var cls='akd-kavram'; if(sec){ if(k===m[3]) cls+=' dogru'; else if(k===sec) cls+=(dogruMu(i,k)?' kabul':' yanlis'); }
