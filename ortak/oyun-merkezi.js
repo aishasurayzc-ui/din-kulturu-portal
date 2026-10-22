@@ -2066,3 +2066,46 @@ function ikiliSansBitir(onek){
   ikiliKazananVurgula(onek);
   ikiliHtmlAyarla(onek+'YenidenBaslat', '<button class="eylem" onclick="ikiliSansBaslat(ikiliOyunDurum(\'' + onek + '\').ayar)">🔄 Yeniden Başlat</button>');
 }
+
+/* ===================== KELİME AVI — ZOR MOD (5-8. sınıf) =====================
+   kaSureEkle  : ünitenin ezber suresinden/duasından anahtar kelimeleri listeye ekler
+   kaYonSirasi : her kelimeye zor ağırlıklı bir yön verir (çapraz, ters çapraz, ters, aşağıdan yukarı, yukarıdan aşağı);
+                 düz soldan sağa en fazla 2 kelime
+   kaDolguHarfi: boş hücreleri çoğunlukla aranan kelimelerin harfleriyle doldurur (yanıltıcı harfler) */
+function kaSureEkle(liste, ezberGetir, yenidenKur, enFazla){
+  enFazla = enFazla || 6;
+  /* Sayfa ilk yüklenirken tablo, ezber verisi tanımlanmadan önce kurulur; o anda veriye erişilemezse
+     tablo sure kelimeleri olmadan kurulur ve sayfa yüklenince bir kez sure kelimeleriyle yeniden kurulur. */
+  let ezber = [];
+  try { ezber = ezberGetir() || []; }
+  catch(e){
+    if(yenidenKur && !yenidenKur._kaBekliyor){ yenidenKur._kaBekliyor = true; setTimeout(yenidenKur, 0); }
+  }
+  const harita = {'â':'a','î':'i','û':'u','ê':'e','ô':'o','Â':'A','Î':'İ','Û':'U','ḥ':'h','ḳ':'k','ẕ':'z','ṣ':'s','ṭ':'t','ḍ':'d','ẓ':'z','ġ':'ğ'};
+  const mevcut = new Set(liste.map(x=>x.kelime));
+  const ek = [];
+  (ezber || []).forEach(p=>{
+    if(ek.length >= enFazla || !p || !p.gizli) return;
+    const k = String(p.gizli).replace(/[âîûêôÂÎÛḥḳẕṣṭḍẓġ]/g, ch=>harita[ch])
+      .replace(/['’ʿʾ\-.,;:!?"]/g, '').trim().toLocaleUpperCase('tr');
+    if(!/^[A-ZÇĞİIÖŞÜ]{3,11}$/.test(k) || mevcut.has(k)) return;
+    mevcut.add(k);
+    ek.push({kelime:k, anlam:'📖 ' + String(p.anlam || '').trim()});
+  });
+  return liste.concat(ek);
+}
+function kaYonSirasi(adet){
+  const zor = [{dr:1,dc:1},{dr:-1,dc:-1},{dr:1,dc:-1},{dr:-1,dc:1},{dr:0,dc:-1},{dr:-1,dc:0},{dr:1,dc:0}];
+  const karis = a=>{ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+  let dizi = [];
+  while(dizi.length < adet) dizi = dizi.concat(karis(zor.slice()));
+  dizi = dizi.slice(0, adet);
+  if(adet > 8){ dizi[Math.floor(Math.random()*adet)] = {dr:0,dc:1}; }
+  return dizi;
+}
+function kaDolguHarfi(liste, ascii){
+  const harfler = liste.map(x=>x.kelime).join('');
+  return (harfler && Math.random() < 0.65)
+    ? harfler[Math.floor(Math.random()*harfler.length)]
+    : ascii[Math.floor(Math.random()*ascii.length)];
+}

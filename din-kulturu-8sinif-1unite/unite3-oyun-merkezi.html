@@ -41,7 +41,7 @@
 <section id="kelimeavi83">
   <h2>🔎 Kelime Avı Bulmacası</h2>
   <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitedeki temel kavramları harf tablosunda bularak tanımayı pekiştirmek.</div>
-  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla (yatay, dikey ya da çapraz; düz veya ters yönde olabilir).</div>
+  <div class="aciklama">Ünitede geçen kavramları harf tablosunda bul! Bir harfe tıkla, sonra kelimenin son harfine tıkla. ⚠️ Zor mod: Kelimelerin çoğu çapraz, ters çapraz, sağdan sola, aşağıdan yukarı ya da yukarıdan aşağı gizlendi; boş kareler de kelimelerin kendi harfleriyle dolduruldu. 📖 işaretli kelimeler ünitenin suresinden/duasından.</div>
   <div class="oyun-bilgi"><span>✅ Bulunan: <b id="ka83Bulunan">0</b>/<b id="ka83Toplam">14</b></span></div>
   <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
     <div class="ka-izgara" id="ka83Izgara"></div>
@@ -1725,13 +1725,13 @@ const kelimeAvi83Listesi = [
   {kelime:"SABIR", anlam:"Asr suresinde birbirimize tavsiye etmemiz istenen erdem"},
   {kelime:"EMANET", anlam:"Kendisine güvenilen şeyi koruyup sahibine teslim etme"},
 ];
-const ka83SatirSayisi = 14, ka83SutunSayisi = 14;
+const ka83SatirSayisi = 15, ka83SutunSayisi = 15;
 const ka83AsciiHarfler = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
 
-function ka83KelimeYerlestir(izgara, kelime){
+function ka83KelimeYerlestir(izgara, kelime, oncelikli){
   const yonler = karistir([{dr:0,dc:1},{dr:0,dc:-1},{dr:1,dc:0},{dr:-1,dc:0},{dr:1,dc:1},{dr:-1,dc:-1},{dr:1,dc:-1},{dr:-1,dc:1}]);
   for(let deneme=0; deneme<200; deneme++){
-    const yon = yonler[deneme % yonler.length];
+    const yon = (oncelikli && deneme < 150) ? oncelikli : yonler[deneme % yonler.length];
     const satir = Math.floor(Math.random()*ka83SatirSayisi);
     const sutun = Math.floor(Math.random()*ka83SutunSayisi);
     const bitSatir = satir + yon.dr*(kelime.length-1);
@@ -1755,19 +1755,21 @@ function ka83KelimeYerlestir(izgara, kelime){
 }
 
 function kelimeAvi83Olustur(){
+  const kaListe = kaSureEkle(kelimeAvi83Listesi, ()=>ezberVeri83, kelimeAvi83Olustur);
   let izgara, basarili=false;
   for(let genelDeneme=0; genelDeneme<40 && !basarili; genelDeneme++){
     izgara = Array.from({length:ka83SatirSayisi}, ()=>Array(ka83SutunSayisi).fill(null));
     basarili = true;
-    const siraliKelimeler = kelimeAvi83Listesi.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
-    for(const item of siraliKelimeler){
-      const hucreler = ka83KelimeYerlestir(izgara, item.kelime);
+    const siraliKelimeler = kaListe.slice().sort((a,b)=>b.kelime.length-a.kelime.length);
+    const kaYonler = kaYonSirasi(siraliKelimeler.length);
+    for(const [kaI, item] of siraliKelimeler.entries()){
+      const hucreler = ka83KelimeYerlestir(izgara, item.kelime, kaYonler[kaI]);
       if(!hucreler){ basarili=false; break; }
     }
   }
   for(let r=0;r<ka83SatirSayisi;r++){
     for(let c=0;c<ka83SutunSayisi;c++){
-      if(izgara[r][c]===null) izgara[r][c] = ka83AsciiHarfler[Math.floor(Math.random()*ka83AsciiHarfler.length)];
+      if(izgara[r][c]===null) izgara[r][c] = kaDolguHarfi(kaListe, ka83AsciiHarfler);
     }
   }
 
@@ -1789,14 +1791,14 @@ function kelimeAvi83Olustur(){
 
   const liste = document.getElementById('ka83Liste');
   liste.innerHTML = '';
-  kelimeAvi83Listesi.forEach(item=>{
+  kaListe.forEach(item=>{
     const li = document.createElement('li');
     li.id = 'ka83-kelime-' + item.kelime;
     li.textContent = `${item.kelime} — ${item.anlam}`;
     liste.appendChild(li);
   });
   document.getElementById('ka83Bulunan').textContent = 0;
-  document.getElementById('ka83Toplam').textContent = kelimeAvi83Listesi.length;
+  document.getElementById('ka83Toplam').textContent = kaListe.length;
   document.getElementById('ka83Sonuc').textContent = '';
 
   let ilkHucre = null;
@@ -1826,7 +1828,7 @@ function kelimeAvi83Olustur(){
       }
       const secilenKelime = yol.map(p=>izgara[p.r][p.c]).join('');
       const tersKelime = secilenKelime.split('').reverse().join('');
-      const eslesen = kelimeAvi83Listesi.find(item =>
+      const eslesen = kaListe.find(item =>
         (item.kelime===secilenKelime || item.kelime===tersKelime) &&
         !document.getElementById('ka83-kelime-'+item.kelime).classList.contains('bulundu-satir')
       );
@@ -1838,7 +1840,7 @@ function kelimeAvi83Olustur(){
         document.getElementById('ka83-kelime-'+eslesen.kelime).classList.add('bulundu-satir');
         const bulunanSayisi = document.querySelectorAll('#ka83Liste .bulundu-satir').length;
         document.getElementById('ka83Bulunan').textContent = bulunanSayisi;
-        if(bulunanSayisi === kelimeAvi83Listesi.length){
+        if(bulunanSayisi === kaListe.length){
           document.getElementById('ka83Sonuc').textContent = '🎉 Tebrikler! Tüm kelimeleri buldun!';
         }
       } else {
