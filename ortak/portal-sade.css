@@ -1,0 +1,104 @@
+/* =====================================================================
+   PORTAL — SADE GÖRÜNÜM KATMANI (lacivert · beyaz · turkuaz)
+   ---------------------------------------------------------------------
+   din-kulturu-tum-siniflar.html'in EN SONUNDA yüklenir; sayfadaki hiçbir
+   stil bloğu silinmedi veya değiştirilmedi. Bu katman yalnızca:
+     1) varsayılan (mavi) renk temasının değerlerini ortak kimliğe bağlar,
+     2) gölge ve köşe ölçeğini küçültür,
+     3) 4-8. sınıf vurgularını tek renk ailesinde toplar,
+     4) yarışan efektleri (renkli parlama, kayan ışık, sarı nokta) sakinleştirir.
+   Kullanıcının seçtiği yeşil / mor / bordo temalarına dokunulmaz.
+   Değişkenler: ortak/kimlik.css
+   ===================================================================== */
+
+/* 1) Varsayılan tema renkleri */
+:root:not([data-renk]), :root[data-renk="mavi"]{
+  --navy:var(--k-lacivert);
+  --mavi:var(--k-lacivert-2);
+  --turkuaz:var(--k-turkuaz);
+  --acik:#bfe3ea;
+}
+:root:not([data-tema="dark"]){
+  --bg:var(--k-zemin);
+  --kenar:var(--k-kenar);
+  --metin:var(--k-metin);
+  --metin-ikincil:var(--k-metin-2);
+}
+
+/* 2) Ölçülü köşe ve hafif gölge (ışık ve koyu tema) */
+:root{
+  --r-sm:var(--k-r-kucuk); --r-md:8px; --r-lg:var(--k-r-buyuk); --r-xl:14px;
+  --golge-sm:var(--k-golge-1);
+  --golge:var(--k-golge-2);
+  --golge-lg:var(--k-golge-3);
+  --golge-xl:0 10px 26px rgba(19,41,75,.12);
+}
+:root[data-tema="dark"]{
+  --golge:0 2px 8px rgba(0,0,0,.35);
+  --golge-lg:0 6px 18px rgba(0,0,0,.40);
+  --golge-xl:0 10px 26px rgba(0,0,0,.45);
+}
+
+/* Sabit (değişkensiz) büyük köşeli kartlar ölçeğe çekilir */
+.ust-panel, .hero-arama-kart, .ilerleme-kutu, .arama-sonuclar, .yazili-kart,
+.oy-ust, .oy-form, .oy-detay, .oy-ornek, .oy-oyun-yeni, .oy-oyun-s4, .oy-s4-ilke, .oy-s4-uyarlama,
+.kdk-form, .kdk-joker, .kdk-soru, .kdk-panel, .kdk-merdiven, .kdk-giris-kart,
+.kk-ust, .kk-kart, .kk-buyuk, .kk-bolum, .kk-sema{
+  border-radius:var(--r-lg);
+}
+.uk-ikon-rozet, .yol-secim-ikon, .tanitim-ikon-daire{ border-radius:var(--r-md); }
+
+/* 3) 4-8. sınıf vurguları — sekme, sınıf paneli ve ünite kartları aynı renk ailesinde.
+   Vurgu satır içi style ile verildiği için !important gerekir (yalnızca bu değişkende). */
+#btn-s4, #s4, #s4 .unite-kart{ --vurgu:var(--k-sinif4) !important; }
+#btn-s5, #s5, #s5 .unite-kart{ --vurgu:var(--k-sinif5) !important; }
+#btn-s6, #s6, #s6 .unite-kart{ --vurgu:var(--k-sinif6) !important; }
+#btn-s7, #s7, #s7 .unite-kart{ --vurgu:var(--k-sinif7) !important; }
+#btn-s8, #s8, #s8 .unite-kart{ --vurgu:var(--k-sinif8) !important; }
+
+/* "Üç Güçlü Hazırlık Yolu" kartları: turuncu-kırmızı ve yeşil yerine aynı renk ailesi */
+.yol-secim-kart--sinif{ --vurgu-1:var(--k-lacivert); --vurgu-2:var(--k-turkuaz); }
+.yol-secim-kart--sinav{ --vurgu-1:var(--k-lacivert-2); --vurgu-2:var(--k-sinif6); }
+.yol-secim-kart--etkinlik{ --vurgu-1:var(--k-turkuaz-koyu); --vurgu-2:var(--k-turkuaz); }
+
+/* Koyu tema: vurgu hem koyu zeminde yazı/kenar rengi hem beyaz yazılı düğme zemini olarak kullanılır;
+   bu ara tonlar her iki durumda da en az 3:1 kontrast verir (kalın arayüz metni eşiği). */
+:root[data-tema="dark"] #btn-s4, :root[data-tema="dark"] #s4, :root[data-tema="dark"] #s4 .unite-kart{ --vurgu:#4a86d0 !important; }
+:root[data-tema="dark"] #btn-s5, :root[data-tema="dark"] #s5, :root[data-tema="dark"] #s5 .unite-kart{ --vurgu:#1d93a5 !important; }
+:root[data-tema="dark"] #btn-s6, :root[data-tema="dark"] #s6, :root[data-tema="dark"] #s6 .unite-kart{ --vurgu:#5f7fc0 !important; }
+:root[data-tema="dark"] #btn-s7, :root[data-tema="dark"] #s7, :root[data-tema="dark"] #s7 .unite-kart{ --vurgu:#1f8f98 !important; }
+:root[data-tema="dark"] #btn-s8, :root[data-tema="dark"] #s8, :root[data-tema="dark"] #s8 .unite-kart{ --vurgu:#6a85c2 !important; }
+:root[data-tema="dark"] .yol-secim-kart--sinif{ --vurgu-1:#2a9fb0; --vurgu-2:#1d93a5; }
+:root[data-tema="dark"] .yol-secim-kart--sinav{ --vurgu-1:#5f7fc0; --vurgu-2:#4a86d0; }
+:root[data-tema="dark"] .yol-secim-kart--etkinlik{ --vurgu-1:#1f8f98; --vurgu-2:#2a9fb0; }
+
+/* 4) Yarışan efektleri sakinleştir */
+.hero{ animation:none; background-size:26px 26px, 100% 100%; }
+.unite-kart:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--golge-lg);
+  border-color:color-mix(in srgb, var(--vurgu) 35%, var(--kenar));
+}
+.unite-kart::after{ display:none; }
+.ib-kart:hover{ transform:translateY(-2px); box-shadow:var(--golge-lg); }
+.bolum-on-etiket{ color:var(--k-turkuaz-koyu); }
+:root[data-tema="dark"] .bolum-on-etiket{ color:#5fc7d4; }
+.bolum-on-etiket::before{ background:var(--k-turkuaz); }
+
+/* Başlık hiyerarşisi: başlık (lacivert, kalın) › alt başlık › açıklama (ikincil gri) */
+.bolum-baslik-orta h2{ color:var(--baslik); font-weight:900; letter-spacing:-.02em; }
+.bolum-baslik-orta p, .yol-secim-imza{ color:var(--metin-ikincil); line-height:1.6; }
+.kucuk-panel h2{ color:var(--baslik); }
+
+/* Hareket azaltma tercihi */
+@media (prefers-reduced-motion: reduce){
+  .unite-kart:hover, .ib-kart:hover{ transform:none; }
+}
+
+/* Konu anlatım sayfasından "?sinif=sN&unite=M" ile dönülünce, öğrencinin
+   çalıştığı ünite kartı kısa bir süre turkuaz halkayla vurgulanır. */
+.unite-kart--donus{
+  outline:3px solid var(--k-turkuaz); outline-offset:3px;
+  box-shadow:0 0 0 8px color-mix(in srgb, var(--k-turkuaz) 18%, transparent);
+  transition:outline-color .6s ease, box-shadow .6s ease;
+}
