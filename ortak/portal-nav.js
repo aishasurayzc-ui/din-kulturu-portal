@@ -12,6 +12,12 @@
    data-asama değerleri: 'sinif' (sınıf ana sayfası) | 'hub' (ünite sayfası)
      | 'ogren' (konuyu-ogren.html) | 'oyun' (oyun-merkezi.html) | 'olcme' (degerlendirme.html)
 
+   'ogren' sayfalarında (2026-10-26) ana portalla aynı tasarım dili kullanılır:
+   üst şerit + konum + ünite başlığı + yapışkan bölüm menüsü + sayfa sonu.
+   Ayrıntı: aşağıdaki "KONU ANLATIM SAYFASI DÜZENİ" bölümü ve portal-nav.css.
+   "N. Sınıf" bağlantıları artık ../din-kulturu-tum-siniflar.html?sinif=sN
+   adresine gider (index.html bir sınıf sayfası değil, 1. ünite sayfasıdır).
+
    localStorage 'dkab_tamamlanan' anahtarı din-kulturu-tum-siniflar.html'in
    KENDİ tamamlanma/rozet sistemiyle (LS_TAMAMLANAN) aynı biçimi kullanır
    ("sN-uM"); böylece burada işaretlenen bir tamamlama, ana portaldaki
@@ -89,6 +95,15 @@ function sureOku(sinif,unite){ return guvenliOku(LS_SURE+'_'+id(sinif,unite)); }
 /* ————— saf yardımcılar ————— */
 function uniteAdi(sinif, unite){ return UNITE_ADLARI['s'+sinif+'-'+unite] || (unite+'. Ünite'); }
 
+/* Ana portal ve sınıf adresleri. Sınıf klasöründeki index.html bir "sınıf
+   sayfası" DEĞİL, 1. ünitenin sayfasıdır; bu yüzden "N. Sınıf" bağlantıları
+   ana portala, ilgili sınıf sekmesi (ve varsa ünite kartı) açık olarak gider.
+   Ana portal ?sinif=sN&unite=M parametresini okuyup o kartı gösterir. */
+var ANA_SAYFA = '../din-kulturu-tum-siniflar.html';
+function sinifSayfasi(sinif, unite){
+  return ANA_SAYFA+'?sinif=s'+sinif+(unite ? '&unite='+unite : '');
+}
+
 function dosyaAdi(unite, tur){
   var onEk = (unite===1) ? '' : ('unite'+unite+'-');
   if(tur==='hub')   return (unite===1) ? 'index.html' : ('unite'+unite+'.html');
@@ -146,7 +161,7 @@ function kirintiHtml(sinif, unite, asama){
       '<li><span class="pn-ok" aria-hidden="true">›</span>'+
         (asama==='sinif'
           ? '<span class="pn-simdi" aria-current="page">📚 '+sinif+'. Sınıf</span>'
-          : '<a href="index.html">📚 '+sinif+'. Sınıf</a>')+'</li>';
+          : '<a href="'+sinifSayfasi(sinif)+'">📚 '+sinif+'. Sınıf</a>')+'</li>';
 
   if(asama!=='sinif'){
     h += '<li><span class="pn-ok" aria-hidden="true">›</span>'+
@@ -254,7 +269,7 @@ function altBarHtml(sinif, unite, asama){
       ic = '<a class="pn-buyuk" href="'+dosyaAdi(sonrakiUnite,'hub')+'">➡️ Sonraki Ünite: '+kacis(uniteAdi(sinif,sonrakiUnite))+
         (kilitli?' <span class="pn-kilit-rozet">🔒</span>':'')+'</a>';
     } else {
-      ic = '<a class="pn-buyuk" href="index.html">🏆 Bu sınıfın tüm üniteleri tamam — Sınıf Sayfasına Dön</a>';
+      ic = '<a class="pn-buyuk" href="'+sinifSayfasi(sinif)+'">🏆 Bu sınıfın tüm üniteleri tamam — Sınıf Sayfasına Dön</a>';
     }
   }
   if(!ic && !ustEk) return '';
@@ -274,7 +289,512 @@ function raporHtml(sinif, unite, tamamMi){
 function geriBarHtml(sinif, unite, asama){
   if(asama==='sinif' || asama==='hub') return '';
   return '<div class="pn-geri"><a href="'+dosyaAdi(unite,'hub')+'">← Üniteye Dön</a>'+
-    '<a href="index.html">← Sınıfa Dön</a></div>';
+    '<a href="'+sinifSayfasi(sinif, unite)+'">← Sınıfa Dön</a></div>';
+}
+
+/* ======================================================================
+   KONU ANLATIM SAYFASI DÜZENİ (yalnızca data-asama="ogren")
+   ----------------------------------------------------------------------
+   Konuyu Öğren sayfalarını ana portalın (din-kulturu-tum-siniflar.html)
+   tasarım diliyle bütünleştirir. Sayfaların kendi içeriğine DOKUNMAZ:
+     • Eski üst başlık (header), "Konuyu Öğren" bandı ve dikey menü
+       (#oyun-gruplari) DOM'da kalır, yalnızca CSS ile gizlenir; menü
+       düğmeleri yeni bölüm menüsü tarafından tıklanarak kullanılmaya devam
+       eder (sayfanın kendi goster() mantığı aynen çalışır).
+     • Ünite adı, konu listesi, okuma süresi gibi bilgiler sayfanın KENDİ
+       verisinden (.ka-hero, .ka-icindekiler, Öğrenme Yolu) okunur.
+     • Bölüm menüsünde yalnızca sayfada gerçekten bulunan bölümler yer alır.
+   Tema: ana portalla aynı 'dkab_tema' anahtarı (light/dark) kullanılır.
+====================================================================== */
+var LS_TEMA = 'dkab_tema';
+function temaOku(){
+  var t = guvenliOku(LS_TEMA);
+  if(t==='dark' || t==='light') return t;
+  try{ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+  catch(e){ return 'light'; }
+}
+function temaUygula(t){ document.documentElement.setAttribute('data-tema', t); }
+
+/* ortak/ klasörünün adresi (konu-dinle.js'i bu betiğin yanından yüklemek için) */
+var ORTAK_KLASOR = (document.currentScript && document.currentScript.src)
+  ? document.currentScript.src.replace(/[^\/]*$/, '') : '../ortak/';
+
+/* Sayfa çizilmeden önce (betik <body> başında, eşzamanlı çalışır) kök
+   sınıfı ve temayı ayarla: eski başlık bir an bile görünüp kaybolmasın. */
+(function(){
+  var m = document.getElementById('portalNav');
+  if(!m || m.dataset.asama!=='ogren') return;
+  var kok = document.documentElement;
+  kok.classList.add('ks-kok');
+  kok.setAttribute('data-ks-sinif', m.dataset.sinif || '');
+  temaUygula(temaOku());
+})();
+
+function emojiTemizle(t){
+  return String(t||'')
+    .replace(/^\s*\d+️?⃣\s*/,'')
+    .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{20E3}]/gu,'')
+    .replace(/\s+/g,' ').trim();
+}
+
+var IKON_KEP = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zm-6.82 9.68L5 13v3.5C5 18.43 8.13 20 12 20s7-1.57 7-3.5V13l-.18-.32L12 16.4l-6.82-3.72z"/></svg>';
+var IKON_AY = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.3 2a9.9 9.9 0 0 0 0 19.8 10 10 0 0 0 8.7-5.1A8 8 0 0 1 12.3 2z"/></svg>';
+var IKON_GUNES = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg>';
+
+/* Sayfadaki gerçek ünite adı (.ka-hero başlığı); yoksa ortak ünite listesi. */
+function sayfaUniteAdi(sinif, unite){
+  var h = document.querySelector('.ka-hero .ka-hero-metin h2');
+  var ad = h ? emojiTemizle(h.textContent) : '';
+  return ad || uniteAdi(sinif, unite);
+}
+
+function ksUstHtml(sinif, unite){
+  var tema = document.documentElement.getAttribute('data-tema')==='dark' ? 'dark' : 'light';
+  var mod = modOku();
+  var modDugme = '<button type="button" class="ks-pill" data-pn="mod" title="Öğrenci / Öğretmen modunu değiştir">'+
+    (mod==='ogretmen' ? '👩‍🏫 Öğretmen' : '👨‍🎓 Öğrenci')+'</button>';
+  if(mod==='ogretmen'){
+    modDugme += '<button type="button" class="ks-pill ks-pill-ikincil" data-pn="kilit" title="Sıralı ilerleme kilidini değiştir">'+
+      (kilitAcikMi() ? '🔓 Tüm üniteler açık' : '🔒 Sıralı ilerleme')+'</button>';
+  }
+  return '<div class="ks-ust" role="banner">'+
+    '<div class="ks-ust-ic">'+
+      '<a class="ks-marka" href="'+ANA_SAYFA+'" title="Ana sayfaya git">'+IKON_KEP+
+        '<span class="ks-marka-ad">Ayşe Yazıcı</span><span class="ks-marka-ayrac" aria-hidden="true">·</span>'+
+        '<span class="ks-marka-ders">Din Kültürü ve Ahlak Bilgisi</span></a>'+
+      '<nav class="ks-ust-linkler" aria-label="Portal gezinmesi">'+
+        '<a class="ks-ust-link" href="'+ANA_SAYFA+'">Ana Sayfa</a>'+
+        '<a class="ks-ust-link" href="'+sinifSayfasi(sinif, unite)+'">'+sinif+'. Sınıf</a>'+
+        '<a class="ks-ust-link" href="'+dosyaAdi(unite,'hub')+'">Üniteye Dön</a>'+
+      '</nav>'+
+      '<div class="ks-ust-arac">'+modDugme+
+        '<button type="button" class="ks-tema" data-pn="tema" aria-pressed="'+(tema==='dark')+'" '+
+          'aria-label="'+(tema==='dark' ? 'Açık temaya geç' : 'Koyu temaya geç')+'" title="'+(tema==='dark' ? 'Açık Tema' : 'Koyu Tema')+'">'+
+          (tema==='dark' ? IKON_GUNES : IKON_AY)+'</button>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+
+function ksKonumHtml(sinif, unite){
+  var uAd = kacis(sayfaUniteAdi(sinif, unite));
+  return '<div class="ks-konum">'+
+    '<nav class="ks-kirinti" aria-label="Bulunduğun yer">'+
+      '<ol>'+
+        '<li><a href="'+ANA_SAYFA+'">Ana Sayfa</a></li>'+
+        '<li><a href="'+sinifSayfasi(sinif)+'">'+sinif+'. Sınıf</a></li>'+
+        '<li><a href="'+dosyaAdi(unite,'hub')+'">'+unite+'. Ünite</a></li>'+
+        '<li><span aria-current="page">'+uAd+'</span></li>'+
+      '</ol>'+
+    '</nav>'+
+    cubukHtml(sinif, unite, 'ogren')+
+  '</div>';
+}
+
+/* Sayfa sonu: değerlendirme/etkinlik yönlendirmesi + önceki/sonraki ünite
+   + dönüş bağlantıları. Etkinlik/oyun/değerlendirme/LGS hedefleri eski
+   konuAksiyonlariHtml() ile birebir aynıdır. */
+function ksAltHtml(sinif, unite){
+  var onceki = unite>1 ? unite-1 : null;
+  var sonraki = unite<UNITE_SAYISI[sinif] ? unite+1 : null;
+  var lgs = sinif===8
+    ? '<a class="ks-aksiyon" href="../sinav-merkezi/lgs-hazirlik/index.html?kart=konular&sekme=kazanim-testleri&unite=unite'+unite+'"><span aria-hidden="true">🎯</span> LGS ile Pekiştir</a>'
+    : '';
+  var uniteKarti = function(no, yon){
+    return '<a class="ks-unite-kart ks-unite-kart--'+yon+'" href="'+dosyaAdi(no,'ogren')+'">'+
+      '<span class="ks-uk-yon">'+(yon==='onceki' ? '← Önceki ünite' : 'Sonraki ünite →')+'</span>'+
+      '<span class="ks-uk-ad">'+no+'. Ünite · '+kacis(uniteAdi(sinif,no))+'</span></a>';
+  };
+  return '<div class="ks-alt" role="region" aria-label="Konu sonu">'+
+    '<div class="ks-alt-ic">'+
+      '<div class="ks-alt-kart">'+
+        '<p class="ks-on-etiket">Konuyu tamamladın mı?</p>'+
+        '<p class="ks-alt-baslik">Öğrendiklerini pekiştir</p>'+
+        '<p class="ks-alt-aciklama">Önce kendini değerlendir, ardından oyun ve etkinliklerle tekrar et.</p>'+
+        '<div class="ks-aksiyonlar">'+
+          '<a class="ks-aksiyon ks-aksiyon--birincil" href="'+dosyaAdi(unite,'olcme')+'"><span aria-hidden="true">📝</span> Öğrenmeni Değerlendir</a>'+
+          '<a class="ks-aksiyon" href="'+dosyaAdi(unite,'oyun')+'#oyun-gruplari"><span aria-hidden="true">🎮</span> Dijital Oyunlar</a>'+
+          '<a class="ks-aksiyon" href="'+oyunHedefi(sinif,unite,'etkinlik')+'"><span aria-hidden="true">🎨</span> Sınıf İçi Etkinlik</a>'+
+          lgs+
+        '</div>'+
+      '</div>'+
+      '<div class="ks-uniteler">'+
+        (onceki ? uniteKarti(onceki,'onceki') : '<span class="ks-unite-bos"></span>')+
+        (sonraki ? uniteKarti(sonraki,'sonraki')
+          : '<a class="ks-unite-kart ks-unite-kart--sonraki" href="'+sinifSayfasi(sinif)+'"><span class="ks-uk-yon">Sınıfın son ünitesi</span><span class="ks-uk-ad">'+sinif+'. Sınıf ünitelerine dön →</span></a>')+
+      '</div>'+
+      '<div class="ks-donus">'+
+        '<a class="ks-donus-link" href="'+sinifSayfasi(sinif, unite)+'">⌂ Ana Sayfaya Dön</a>'+
+        '<a class="ks-donus-link" href="'+dosyaAdi(unite,'hub')+'">↩ Üniteye Dön</a>'+
+        '<a class="ks-donus-link" href="#" data-ks="basa">↑ Sayfanın başına</a>'+
+      '</div>'+
+      '<p class="ks-imza">Ayşe Yazıcı · Din Kültürü ve Ahlak Bilgisi</p>'+
+    '</div>'+
+  '</div>';
+}
+
+/* ————— Bölüm menüsü: sayfada GERÇEKTEN bulunan bölümler ————— */
+var KS_KATEGORILER = [
+  {k:'kesfet',   ad:'Konuyu Keşfet',            ikon:'🧭'},
+  {k:'anlatim',  ad:'Konu Anlatımı',            ikon:'📖'},
+  {k:'ornek',    ad:'Örneklerle Öğren',         ikon:'💡'},
+  {k:'gorsel',   ad:'Görseller ve Şemalar',     ikon:'🗺️'},
+  {k:'etkinlik', ad:'Etkileşimli Etkinlikler',  ikon:'🧩'},
+  {k:'deger',    ad:'Kendini Değerlendir',      ikon:'✅'}
+];
+var ks = { ogeler:[], aktif:null, aktifKat:null, kurulu:false };
+
+function menuDugmesi(bolumId){
+  var dugmeler = document.querySelectorAll('#oyun-gruplari button[onclick]');
+  for(var i=0;i<dugmeler.length;i++){
+    var oc = dugmeler[i].getAttribute('onclick') || '';
+    if(oc.indexOf("goster('"+bolumId+"'")>=0) return dugmeler[i];
+  }
+  return null;
+}
+function idVer(el, onEk){
+  if(el.id) return el.id;
+  var n=1, aday=onEk;
+  while(document.getElementById(aday)){ n++; aday=onEk+'-'+n; }
+  el.id = aday; return aday;
+}
+function baslikBul(el, secici){
+  var h = el.querySelector(secici || 'h2, h3, h4');
+  return h ? emojiTemizle(h.textContent) : '';
+}
+
+function ksOgeleriTopla(){
+  var ogeler = [];
+  function ekle(kat, el, etiket, no){
+    if(!el || !etiket) return;
+    for(var i=0;i<ogeler.length;i++) if(ogeler[i].el===el) return;
+    ogeler.push({kat:kat, el:el, id:idVer(el,'ks-bolum'), etiket:etiket, no:no||''});
+  }
+  /* 1) Eski menüdeki bölümler */
+  var dugmeler = document.querySelectorAll('#oyun-gruplari button[onclick]');
+  Array.prototype.forEach.call(dugmeler, function(b){
+    var m = /goster\('([^']+)'/.exec(b.getAttribute('onclick')||'');
+    if(!m) return;
+    var sec = document.getElementById(m[1]);
+    if(!sec) return;
+    var id = m[1];
+    var etiketEl = b.querySelector('b');
+    var etiket = emojiTemizle(etiketEl ? etiketEl.textContent : b.textContent);
+    if(/^ozet/.test(id)) return;                 /* konu anlatımı aşağıda, konu konu eklenir */
+    if(id==='ayet-kavram') ekle('kesfet', sec, etiket || 'Ayetten Kavrama');
+    else if(/^kilcik/.test(id)) ekle('gorsel', sec, 'Balık Kılçığı Şeması');
+    else if(id==='slayt') ekle('gorsel', sec, 'Ünite Sunumu');
+    else ekle('etkinlik', sec, etiket);
+  });
+  /* 2) Konu Anlatımı: konu özeti + sayfanın kendi konu listesi */
+  var ozet = document.querySelector('main section[id^="ozet"]');
+  var keMotor = ozet && ozet.querySelector('.ke-motor');
+  if(keMotor) ekle('kesfet', keMotor, baslikBul(keMotor,'h3') || 'Keşif Modu');
+  var konuLinkleri = document.querySelectorAll('.ka-hero .ka-icindekiler a.ka-ic-link[href^="#"]');
+  if(konuLinkleri.length){
+    Array.prototype.forEach.call(konuLinkleri, function(a, i){
+      var hedef = document.getElementById(a.getAttribute('href').slice(1));
+      var b = a.querySelector('b');
+      var no = b ? b.textContent.trim() : String(i+1);
+      var ad = emojiTemizle(a.textContent.replace(b ? b.textContent : '', ''));
+      if(!hedef) return;
+      /* Numarasız (★) içindekiler girdileri konu değil, ek çalışmadır */
+      if(/^\d+$/.test(no)) ekle('anlatim', hedef, ad, no);
+      else if(hedef.matches('.kd-bolum, .kt-bolum, .akd-kutu')) ekle('deger', hedef, ad);
+      else ekle('etkinlik', hedef, ad);
+    });
+  } else if(ozet){
+    ekle('anlatim', ozet, 'Konu Özeti');
+  }
+  if(ozet){
+    /* 3) Etkileşimli etkinlikler ve değerlendirme blokları (yalnızca var olanlar) */
+    Array.prototype.forEach.call(ozet.querySelectorAll('.yg-panel, .ys-panel'), function(p){
+      ekle('etkinlik', p, baslikBul(p,'h3, h4').replace(/^Uygula\s*[—-]\s*/,'') || 'Uygulama');
+    });
+    var hk = ozet.querySelector('.hk-bolum');
+    if(hk) ekle('etkinlik', hk, 'Hafıza Kartları');
+    Array.prototype.forEach.call(ozet.querySelectorAll('.kt-bolum'), function(p, i){
+      var ad = baslikBul(p,'h3, h4, .kt-baslik').replace(/^Konu Testleri\s*[—-]\s*/,'');
+      ekle('deger', p, ad ? 'Test: '+ad : 'Konu Testi '+(i+1));
+    });
+    Array.prototype.forEach.call(ozet.querySelectorAll('.kd-bolum, .akd-kutu'), function(p){
+      ekle('deger', p, 'Kendini Dene');
+    });
+  }
+  /* Kategori sırasına göre diz, kategori içinde sayfa sırasını koru */
+  var sira = {}; KS_KATEGORILER.forEach(function(k,i){ sira[k.k]=i; });
+  ogeler.sort(function(a,b){
+    if(a.kat!==b.kat) return sira[a.kat]-sira[b.kat];
+    return (a.el.compareDocumentPosition(b.el) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
+  });
+  return ogeler;
+}
+
+function ksBolumNavHtml(){
+  var katlar = KS_KATEGORILER.filter(function(k){
+    return ks.ogeler.some(function(o){ return o.kat===k.k; });
+  });
+  return '<div class="ks-bn" role="navigation" aria-label="Konu içi bölümler">'+
+    '<div class="ks-bn-ic">'+
+      '<div class="ks-bn-katlar">'+katlar.map(function(k){
+        var say = ks.ogeler.filter(function(o){ return o.kat===k.k; }).length;
+        return '<button type="button" class="ks-bn-kat" data-ks-kat="'+k.k+'" aria-pressed="false">'+
+          '<span aria-hidden="true">'+k.ikon+'</span><span class="ks-bn-kat-ad">'+k.ad+'</span>'+
+          '<span class="ks-bn-say">'+say+'</span></button>';
+      }).join('')+'</div>'+
+      '<div class="ks-bn-satir">'+
+        '<button type="button" class="ks-bn-ok" data-ks-yon="-1" aria-label="Önceki bölüm" title="Önceki bölüm">‹</button>'+
+        '<div class="ks-bn-liste"></div>'+
+        '<button type="button" class="ks-bn-ok" data-ks-yon="1" aria-label="Sonraki bölüm" title="Sonraki bölüm">›</button>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+
+function ksListeCiz(kat){
+  var liste = document.querySelector('.ks-bn-liste');
+  if(!liste) return;
+  ks.aktifKat = kat;
+  liste.innerHTML = ks.ogeler.filter(function(o){ return o.kat===kat; }).map(function(o){
+    return '<a class="ks-bn-oge" href="#'+o.id+'" data-ks-hedef="'+o.id+'" title="'+kacis(o.etiket)+'">'+
+      (o.no ? '<b>'+kacis(o.no)+'</b>' : '')+'<span>'+kacis(o.etiket)+'</span></a>';
+  }).join('');
+  var katlar = document.querySelector('.ks-bn-katlar');
+  document.querySelectorAll('.ks-bn-kat').forEach(function(b){
+    var secili = b.dataset.ksKat===kat;
+    b.classList.toggle('aktif', secili);
+    b.setAttribute('aria-pressed', secili ? 'true' : 'false');
+    if(secili && katlar){
+      var sol = b.offsetLeft - katlar.offsetLeft, sag = sol + b.offsetWidth;
+      if(sol < katlar.scrollLeft) katlar.scrollLeft = sol - 8;
+      else if(sag > katlar.scrollLeft + katlar.clientWidth) katlar.scrollLeft = sag - katlar.clientWidth + 8;
+    }
+  });
+}
+
+function gorunurMu(el){
+  if(!el || !el.isConnected) return false;
+  return el.getClientRects().length > 0;
+}
+function sabitYukseklik(){
+  var ust = document.querySelector('.ks-ust');
+  var bn = document.querySelector('.ks-bn');
+  var h = 0;
+  if(ust && getComputedStyle(ust).position==='sticky') h += ust.offsetHeight;
+  if(bn) h += bn.offsetHeight;
+  return h;
+}
+function olcuGuncelle(){
+  var ust = document.querySelector('.ks-ust');
+  var kok = document.documentElement.style;
+  var ustH = (ust && getComputedStyle(ust).position==='sticky') ? ust.offsetHeight : 0;
+  kok.setProperty('--ks-ust-h', ustH+'px');
+  kok.setProperty('--ks-sabit-h', sabitYukseklik()+'px');
+}
+
+function ksAktifIsaretle(o){
+  if(!o) return;
+  if(ks.aktifKat!==o.kat) ksListeCiz(o.kat);
+  ks.aktif = o;
+  var liste = document.querySelector('.ks-bn-liste');
+  if(!liste) return;
+  var aktifA = null;
+  liste.querySelectorAll('.ks-bn-oge').forEach(function(a){
+    var bu = a.dataset.ksHedef===o.id;
+    a.classList.toggle('aktif', bu);
+    if(bu){ a.setAttribute('aria-current','location'); aktifA = a; } else a.removeAttribute('aria-current');
+  });
+  if(aktifA){
+    var sol = aktifA.offsetLeft - liste.offsetLeft, sag = sol + aktifA.offsetWidth;
+    if(sol < liste.scrollLeft) liste.scrollLeft = sol - 8;
+    else if(sag > liste.scrollLeft + liste.clientWidth) liste.scrollLeft = sag - liste.clientWidth + 8;
+  }
+  var idx = ks.ogeler.indexOf(o);
+  var oklar = document.querySelectorAll('.ks-bn-ok');
+  if(oklar.length===2){
+    oklar[0].disabled = idx<=0;
+    oklar[1].disabled = idx>=ks.ogeler.length-1;
+  }
+}
+
+/* Görünür bölümler arasında, sabit menünün hemen altına gelmiş son bölüm aktiftir. */
+function ksKaydirmaIzle(){
+  if(ks.kilitliKaydirma) return;
+  var esik = sabitYukseklik() + Math.min(160, Math.round(window.innerHeight*0.2));
+  var gorunur = ks.ogeler.filter(function(o){ return gorunurMu(o.el); });
+  if(!gorunur.length) return;
+  gorunur.sort(function(a,b){
+    return (a.el.compareDocumentPosition(b.el) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
+  });
+  var aktif = gorunur[0];
+  gorunur.forEach(function(o){ if(o.el.getBoundingClientRect().top <= esik) aktif = o; });
+  if(aktif!==ks.aktif) ksAktifIsaretle(aktif);
+}
+
+function hareketAzMi(){
+  try{ return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; }
+}
+/* Bir hedefe git: gizli bir bölümdeyse önce sayfanın kendi menü düğmesiyle
+   o bölümü aç (goster()), sonra sabit menünün altına hizalayarak kaydır. */
+function ksHedefeGit(el, adresGuncelle){
+  if(!el) return;
+  var bolum = el.closest('main section');
+  if(bolum && !bolum.classList.contains('aktif')){
+    var dugme = menuDugmesi(bolum.id);
+    if(dugme) dugme.click();
+    else { bolum.classList.add('aktif'); }
+  }
+  var o = null;
+  ks.ogeler.forEach(function(x){ if(x.el===el) o = x; });
+  if(o) ksAktifIsaretle(o);
+  ks.kilitliKaydirma = true;
+  clearTimeout(ks.kilitZaman);
+  function hedefY(){ return Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - sabitYukseklik() - 12); }
+  /* Kaydırma bitince (görseller yüklenip düzen kaydıysa) hedefe tam hizala;
+     tıklanan bölüm aktif kalsın. */
+  function bitir(){
+    window.removeEventListener('scrollend', bitir);
+    clearTimeout(ks.kilitZaman);
+    var y = hedefY();
+    if(Math.abs(window.pageYOffset - y) > 4) window.scrollTo({top:y, behavior:'auto'});
+    setTimeout(function(){ ks.kilitliKaydirma = false; if(o) ksAktifIsaretle(o); }, 80);
+  }
+  requestAnimationFrame(function(){
+    var y = hedefY();
+    if(Math.abs(window.pageYOffset - y) < 2){ bitir(); return; }
+    window.addEventListener('scrollend', bitir);
+    window.scrollTo({top:y, behavior: hareketAzMi() ? 'auto' : 'smooth'});
+    ks.kilitZaman = setTimeout(bitir, hareketAzMi() ? 80 : 1400);
+  });
+  if(adresGuncelle && el.id){ try{ history.replaceState(null, '', '#'+el.id); }catch(e){} }
+}
+
+function ksHeroGelistir(sinif, unite){
+  var metin = document.querySelector('.ka-hero .ka-hero-metin');
+  if(!metin || metin.querySelector('.ks-hero-meta')) return;
+  var h2 = metin.querySelector('h2');
+  if(h2){ h2.setAttribute('role','heading'); h2.setAttribute('aria-level','1'); }
+  var parcalar = [];
+  var konuSay = metin.querySelectorAll('.ka-ic-link').length;
+  if(konuSay) parcalar.push('<span class="ks-meta-cip">📚 '+konuSay+' konu</span>');
+  /* Okuma süresi: sayfanın kendi "Öğrenme Yolu" katmanının hesapladığı değer */
+  var meta = document.querySelector('.ogr-ozet-meta');
+  if(meta){
+    var sure = Array.prototype.filter.call(meta.querySelectorAll('span'), function(s){ return /dk/.test(s.textContent); })[0];
+    if(sure) parcalar.push('<span class="ks-meta-cip">'+kacis(sure.textContent.trim())+'</span>');
+  }
+  /* Öğretmenin ünite sayfasında seçtiği ders süresi (varsa) */
+  var ders = sureOku(sinif, unite);
+  if(ders) parcalar.push('<span class="ks-meta-cip">🕒 Ders süresi: '+kacis(ders)+' dk</span>');
+  var ilk = ks.ogeler.filter(function(o){ return o.kat==='anlatim'; })[0] || ks.ogeler[0];
+  var kutu = document.createElement('div');
+  kutu.className = 'ks-hero-meta';
+  kutu.innerHTML = parcalar.join('') +
+    (ilk ? '<a class="ks-hero-basla" href="#'+ilk.id+'" data-ks-hedef="'+ilk.id+'">Konuya Başla <span aria-hidden="true">→</span></a>' : '');
+  var p = metin.querySelector(':scope > p');
+  if(p && p.nextSibling) metin.insertBefore(kutu, p.nextSibling);
+  else metin.appendChild(kutu);
+}
+
+function ksKur(sinif, unite){
+  if(ks.kurulu) return;
+  ks.kurulu = true;
+  /* Konuyu Dinle: her konuya sesli okuma alanı (ortak/konu-dinle.js) */
+  if(!document.querySelector('script[src*="konu-dinle.js"]')){
+    var dinle = document.createElement('script');
+    dinle.src = ORTAK_KLASOR + 'konu-dinle.js';
+    document.body.appendChild(dinle);
+  }
+  ks.ogeler = ksOgeleriTopla();
+  ksHeroGelistir(sinif, unite);
+
+  var main = document.querySelector('main');
+  if(main && ks.ogeler.length){
+    var kap = document.createElement('div');
+    kap.innerHTML = ksBolumNavHtml();
+    main.parentNode.insertBefore(kap.firstChild, main);
+    ksListeCiz(ks.ogeler[0].kat);
+  }
+
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented) return;
+    var kat = e.target.closest('.ks-bn-kat');
+    if(kat){
+      var ilk = ks.ogeler.filter(function(o){ return o.kat===kat.dataset.ksKat; })[0];
+      if(ilk) ksHedefeGit(ilk.el, true);
+      return;
+    }
+    var ok = e.target.closest('.ks-bn-ok');
+    if(ok){
+      var i = ks.ogeler.indexOf(ks.aktif) + parseInt(ok.dataset.ksYon,10);
+      if(i>=0 && i<ks.ogeler.length) ksHedefeGit(ks.ogeler[i].el, true);
+      return;
+    }
+    if(e.target.closest('[data-ks="basa"]')){
+      e.preventDefault();
+      window.scrollTo({top:0, behavior: hareketAzMi() ? 'auto' : 'smooth'});
+      return;
+    }
+    /* Sayfa içi bütün #bağlantılar: hedef gizli bir bölümdeyse önce aç */
+    var a = e.target.closest('a[href^="#"]');
+    if(!a || e.button || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    var hedefId = decodeURIComponent(a.getAttribute('href').slice(1));
+    var hedef = hedefId && document.getElementById(hedefId);
+    if(!hedef || !hedef.closest('main')) return;
+    e.preventDefault();
+    ksHedefeGit(hedef, true);
+  });
+
+  var bekliyor = false;
+  window.addEventListener('scroll', function(){
+    if(bekliyor) return; bekliyor = true;
+    requestAnimationFrame(function(){ bekliyor = false; ksKaydirmaIzle(); });
+  }, {passive:true});
+  window.addEventListener('resize', function(){ olcuGuncelle(); ksKaydirmaIzle(); });
+  /* Eski menü düğmeleri başka bir yoldan tıklanırsa (sayfanın kendi
+     bağlantıları) menü durumunu güncel tut */
+  document.addEventListener('click', function(e){
+    if(e.target.closest('#oyun-gruplari button')) setTimeout(ksKaydirmaIzle, 50);
+  });
+
+  olcuGuncelle();
+  ksKaydirmaIzle();
+
+  /* Adresle gelinen bölüm (#slayt, #ozet8, #ka-konu-2, #ktz1 …): gizli bir
+     bölümdeyse aç ve oraya git. Ana portaldaki derin bağlantılar bunu kullanır. */
+  function adrestekiHedef(){
+    var id = '';
+    try{ id = decodeURIComponent((location.hash||'').slice(1)); }catch(e){}
+    var el = id && document.getElementById(id);
+    if(el && el.closest('main')) ksHedefeGit(el, false);
+  }
+  adrestekiHedef();
+  window.addEventListener('hashchange', adrestekiHedef);
+  /* Sayfa ilk açılırken görseller ve sayfanın kendi betikleri düzeni bir
+     süre değiştirebilir; öğrenci kendisi kaydırana kadar adresteki bölümü
+     birkaç kez yeniden hizala. */
+  var kullaniciKaydirdi = false;
+  ['wheel','touchstart','keydown','mousedown'].forEach(function(t){
+    window.addEventListener(t, function(){ kullaniciKaydirdi = true; }, {passive:true, once:true});
+  });
+  function yenidenHizala(){
+    if(kullaniciKaydirdi || !location.hash) return;
+    var id = ''; try{ id = decodeURIComponent(location.hash.slice(1)); }catch(e){}
+    var el = id && document.getElementById(id);
+    if(!el || !el.closest('main') || !gorunurMu(el)) return;
+    var y = Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - sabitYukseklik() - 12);
+    if(Math.abs(window.pageYOffset - y) > 4) window.scrollTo({top:y, behavior:'auto'});
+  }
+  window.addEventListener('load', function(){
+    olcuGuncelle();
+    if(location.hash){ adrestekiHedef(); [600, 1500, 3000].forEach(function(t){ setTimeout(yenidenHizala, t); }); }
+  });
+}
+
+function temaDegistir(){
+  var yeni = document.documentElement.getAttribute('data-tema')==='dark' ? 'light' : 'dark';
+  temaUygula(yeni);
+  guvenliYaz(LS_TEMA, yeni);
 }
 
 /* ————— olay yönetimi ————— */
@@ -284,6 +804,7 @@ function tiklamaYonet(e){
   var ne = t.dataset.pn;
   if(ne==='mod'){ modYaz(modOku()==='ogretmen' ? 'ogrenci' : 'ogretmen'); yenidenCiz(); return; }
   if(ne==='kilit'){ kilitDegistir(); yenidenCiz(); return; }
+  if(ne==='tema'){ temaDegistir(); yenidenCiz(); return; }
   if(ne==='sure'){ yenidenCizSayfaBaglami(function(sinif,unite){ sureYaz(sinif,unite,t.dataset.dk); }); yenidenCiz(); return; }
   if(ne==='tamamla'){
     tamamlandiIsaretle(parseInt(t.dataset.sinif,10), parseInt(t.dataset.unite,10));
@@ -306,10 +827,13 @@ function yenidenCiz(){
   var asama = mount.dataset.asama || 'sinif';
   if(!sinif) return;
 
-  mount.innerHTML = modSatiriHtml() + kirintiHtml(sinif,unite,asama) + cubukHtml(sinif,unite,asama) + geriBarHtml(sinif,unite,asama);
+  var ogrenDuzeni = asama==='ogren' && document.documentElement.classList.contains('ks-kok');
+  mount.innerHTML = ogrenDuzeni
+    ? ksUstHtml(sinif,unite) + ksKonumHtml(sinif,unite)
+    : modSatiriHtml() + kirintiHtml(sinif,unite,asama) + cubukHtml(sinif,unite,asama) + geriBarHtml(sinif,unite,asama);
   mount.classList.add('pn-hazir');
 
-  var altBar = altBarHtml(sinif,unite,asama);
+  var altBar = ogrenDuzeni ? ksAltHtml(sinif,unite) : altBarHtml(sinif,unite,asama);
   if(altKutu && altKutu.parentNode) altKutu.parentNode.removeChild(altKutu);
   altKutu = null;
   if(altBar){
@@ -332,6 +856,12 @@ function olustur(){
   yenidenCiz();
 
   document.addEventListener('click', tiklamaYonet);
+  /* Konu anlatım sayfası: bölüm menüsü, ünite başlığı ve kaydırma takibi.
+     Sayfanın kendi DOMContentLoaded betikleri (Öğrenme Yolu vb.) önce
+     çalışsın diye bir tur sonra kurulur. */
+  if(asama==='ogren' && document.documentElement.classList.contains('ks-kok')){
+    setTimeout(function(){ ksKur(sinif, unite); }, 0);
+  }
 }
 
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', olustur);

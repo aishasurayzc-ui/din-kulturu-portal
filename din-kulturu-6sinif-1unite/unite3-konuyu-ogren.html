@@ -3415,15 +3415,20 @@ document.addEventListener('keydown', (e)=>{
 // =====================================================================
 // BAŞLANGIÇ
 // =====================================================================
-bz83IzgaraOlustur();
-kelimeAvi83Olustur();
-cengel83Olustur();
-merdiven83Baslat();
-sifre83Olustur();
-ks83Olustur();
-nonogram83Olustur();
-istatistikleriGuncelleGoster();
-sonucIzlemeBaslat();
+/* Bu kurulumlar oyun merkezinden gelen ortak koddur. Bu sayfada oyunların
+   HTML kapları bulunmadığı için ilki hata veriyor ve betiğin geri kalanını
+   (aşağıdaki const UNITE_KIMLIK dâhil) durduruyordu. Çağrılar aynen korundu,
+   yalnızca her biri ayrı ayrı güvenceye alındı (4. sınıf sayfalarındaki
+   düzeltmenin aynısı). */
+[bz83IzgaraOlustur,
+ kelimeAvi83Olustur,
+ cengel83Olustur,
+ merdiven83Baslat,
+ sifre83Olustur,
+ ks83Olustur,
+ nonogram83Olustur,
+ istatistikleriGuncelleGoster,
+ sonucIzlemeBaslat].forEach(function(kur){ try{ kur(); }catch(e){} });
 
 // =====================================================================
 // EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — ASR SURESİ

@@ -3386,15 +3386,20 @@ document.addEventListener('keydown', (e)=>{
 // =====================================================================
 // BAŞLANGIÇ
 // =====================================================================
-bz84IzgaraOlustur();
-kelimeAvi84Olustur();
-cengel84Olustur();
-merdiven84Baslat();
-sifre84Olustur();
-ks84Olustur();
-nonogram84Olustur();
-istatistikleriGuncelleGoster();
-sonucIzlemeBaslat();
+/* Bu kurulumlar oyun merkezinden gelen ortak koddur. Bu sayfada oyunların
+   HTML kapları bulunmadığı için ilki hata veriyor ve betiğin geri kalanını
+   (aşağıdaki const UNITE_KIMLIK dâhil) durduruyordu. Çağrılar aynen korundu,
+   yalnızca her biri ayrı ayrı güvenceye alındı (4. sınıf sayfalarındaki
+   düzeltmenin aynısı). */
+[bz84IzgaraOlustur,
+ kelimeAvi84Olustur,
+ cengel84Olustur,
+ merdiven84Baslat,
+ sifre84Olustur,
+ ks84Olustur,
+ nonogram84Olustur,
+ istatistikleriGuncelleGoster,
+ sonucIzlemeBaslat].forEach(function(kur){ try{ kur(); }catch(e){} });
 
 // =====================================================================
 // EZBER ETKİNLİKLERİ (8 farklı ezber oyunu) — MAUN SURESİ

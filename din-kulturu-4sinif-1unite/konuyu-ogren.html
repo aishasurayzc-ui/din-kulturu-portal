@@ -6555,7 +6555,9 @@ document.addEventListener('DOMContentLoaded', function(){
     var f = V[m[1]];
     if(!f || !f.uzak) return;
     img.removeAttribute('onerror');          /* yarışı bitir: kutu artık silinmiyor */
-    img.onerror = function(){ kfHata(img); };
+    /* window. öneki: bu sayfadaki Kelime Fabrikası oyununun 'let kfHata' sayacı
+       aynı adı gölgelediği için fotoğraf yedeği çalışmıyordu. */
+    img.onerror = function(){ window.kfHata(img); };
     if(f.alt) img.alt = f.alt;
     img.src = f.uzak;                        /* hata beklemeden doğrudan fotoğraf */
     var sar = img.closest('.ka-foto-sar');
