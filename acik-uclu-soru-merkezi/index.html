@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Açık Uçlu Soru Merkezi</title>
+<meta name="description" content="9, 10 ve 11. sınıf Din Kültürü ve Ahlak Bilgisi 1. ünite için Maarif Modeli’ne uygun 150 açık uçlu soru: öğrenci cevap ekranı, cevap anahtarı, dereceli puanlama, öğretmen paneli ve yazılı sınav oluşturucu.">
+<meta name="author" content="Ayşe Yazıcı">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%8D%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block">
+<link rel="stylesheet" href="../ortak/kimlik.css">
+<link rel="stylesheet" href="acik-uclu.css">
+</head>
+<body class="s9">
+
+<header class="au-ust">
+  <div class="au-ust-ic">
+    <a class="au-geri" href="../din-kulturu-tum-siniflar.html"><span class="msi" aria-hidden="true">arrow_back</span> Ana sayfa</a>
+    <span class="au-marka">✍️ Açık Uçlu Soru Merkezi</span>
+    <div class="au-mod" role="group" aria-label="Ekran seçimi">
+      <button type="button" id="modOgrenci" aria-pressed="true"><span class="msi" aria-hidden="true">edit_note</span> Öğrenci</button>
+      <button type="button" id="modOgretmen" aria-pressed="false"><span class="msi" aria-hidden="true">co_present</span> Öğretmen</button>
+    </div>
+    <button type="button" class="au-tema" id="temaDugme" aria-label="Koyu / açık tema" aria-pressed="false"><span class="msi" aria-hidden="true">dark_mode</span></button>
+  </div>
+</header>
+
+<main id="ana">
+  <p class="on-etiket">Türkiye Yüzyılı Maarif Modeli</p>
+  <h1>Açık Uçlu Soru Merkezi</h1>
+  <p class="aciklama">Her sınıf için 50 soru (kolay, orta, zor): düşün, yorumla, kendi cümlelerinle yaz. <span id="uniteAdi"></span></p>
+
+  <div class="sinif-izgara" role="group" aria-label="Sınıf seçimi">
+    <button type="button" class="sinif-kart s9" id="kart-s9" aria-pressed="true"><span class="no">9</span><strong>9. Sınıf</strong><span class="alt">Allah-İnsan İlişkisi · 50 soru</span></button>
+    <button type="button" class="sinif-kart s10" id="kart-s10" aria-pressed="false"><span class="no">10</span><strong>10. Sınıf</strong><span class="alt">İslam’da Varlık ve Bilgi · 50 soru</span></button>
+    <button type="button" class="sinif-kart s11" id="kart-s11" aria-pressed="false"><span class="no">11</span><strong>11. Sınıf</strong><span class="alt">Kader, İrade ve Sorumluluk · 50 soru</span></button>
+  </div>
+
+  <!-- ÖĞRENCİ EKRANI -->
+  <section id="ogrenciAlan" aria-label="Öğrenci ekranı"></section>
+
+  <!-- ÖĞRETMEN PANELİ -->
+  <section id="ogretmenAlan" class="gizli" aria-label="Öğretmen paneli">
+    <div class="sekmeler" role="tablist" aria-label="Öğretmen paneli bölümleri">
+      <button type="button" role="tab" data-sekme="havuz" aria-selected="true"><span class="msi" aria-hidden="true">list_alt</span> Soru Havuzu</button>
+      <button type="button" role="tab" data-sekme="sinav" aria-selected="false"><span class="msi" aria-hidden="true">assignment</span> Sınav Oluştur</button>
+    </div>
+
+    <div id="havuzSekme" role="tabpanel">
+      <div class="kutu">
+        <div class="filtre">
+          <label class="alan">Ünite<select id="fUnite"></select></label>
+          <label class="alan">Kategori<select id="fKat"></select></label>
+          <label class="alan">Konu<select id="fKonu"></select></label>
+          <label class="alan">Zorluk<select id="fZor"></select></label>
+          <label class="alan">Ara<input type="search" id="fAra" placeholder="Soru, beceri, değer…"></label>
+        </div>
+        <div class="arac">
+          <button type="button" class="btn btn-ana" id="yeniSoru"><span class="msi" aria-hidden="true">add</span> Soru ekle</button>
+          <button type="button" class="btn" id="varsayilan"><span class="msi" aria-hidden="true">restart_alt</span> Varsayılan havuza dön</button>
+        </div>
+        <p class="not">Düzenlemeler bu tarayıcıda saklanır. Başka bir bilgisayarda hazır 50 soruluk havuz görünür.</p>
+      </div>
+
+      <div class="secim-serit arac" style="margin-top:12px">
+        <strong id="seciliSayi" style="margin-right:auto"></strong>
+        <button type="button" class="btn" id="tumunuSec">Listelenenleri seç</button>
+        <button type="button" class="btn" id="secimTemizle">Seçimi temizle</button>
+        <button type="button" class="btn btn-ana" id="sinavaEkle"><span class="msi" aria-hidden="true">playlist_add</span> Sınava ekle</button>
+      </div>
+      <div class="arac" style="margin-top:8px">
+        <button type="button" class="btn" id="yazSoru"><span class="msi" aria-hidden="true">print</span> Soruları yazdır</button>
+        <button type="button" class="btn" id="yazAnahtar"><span class="msi" aria-hidden="true">print</span> Cevap anahtarlı yazdır</button>
+        <button type="button" class="btn" id="pdfAl"><span class="msi" aria-hidden="true">picture_as_pdf</span> PDF</button>
+        <button type="button" class="btn" id="wordAl"><span class="msi" aria-hidden="true">description</span> Word</button>
+        <label style="display:inline-flex;gap:6px;align-items:center;font-size:.9em"><input type="checkbox" id="ciktiAnahtar" checked> PDF/Word’e cevap anahtarı ekle</label>
+      </div>
+      <div class="op-liste" id="opListe"></div>
+    </div>
+
+    <div id="sinavSekme" role="tabpanel" class="gizli">
+      <div class="kutu">
+        <h2 style="margin-top:0;font-size:1.2em">Yazılı sınav bilgileri</h2>
+        <div class="sinav-baslik-form">
+          <label class="alan">Okul adı<input type="text" id="sOkul" placeholder="… Anadolu Lisesi"></label>
+          <label class="alan">Sınav adı<input type="text" id="sAd" placeholder="1. Dönem 1. Yazılı"></label>
+          <label class="alan">Tarih<input type="text" id="sTarih" placeholder="…/…/2026"></label>
+        </div>
+        <div class="arac">
+          <label class="alan zor-adet z-kolay">Kolay<input type="number" id="sKolay" min="0" max="50" value="3"></label>
+          <label class="alan zor-adet z-orta">Orta<input type="number" id="sOrta" min="0" max="50" value="4"></label>
+          <label class="alan zor-adet z-zor">Zor<input type="number" id="sZor" min="0" max="50" value="3"></label>
+          <strong id="sSayi"></strong>
+          <button type="button" class="btn" id="sOtomatik"><span class="msi" aria-hidden="true">shuffle</span> Havuzdan seç</button>
+          <button type="button" class="btn" id="sEsit"><span class="msi" aria-hidden="true">balance</span> Puanları eşit dağıt (100)</button>
+          <button type="button" class="btn btn-tehlike" id="sTemizle"><span class="msi" aria-hidden="true">delete_sweep</span> Sınavı temizle</button>
+        </div>
+        <p style="margin:12px 0 6px"><span class="toplam" id="sToplam"></span> <small id="sToplamNot"></small><br><small id="sDagilim"></small></p>
+        <div id="sListe"></div>
+        <p class="not">Bir sorunun puanını değiştirdiğinizde cevap anahtarındaki ölçüt puanları o soruya göre orantılı yeniden dağıtılır.</p>
+        <div class="arac">
+          <button type="button" class="btn" id="sOnizle"><span class="msi" aria-hidden="true">visibility</span> Öğrenci kâğıdı önizle</button>
+          <button type="button" class="btn" id="sOnizleAnahtar"><span class="msi" aria-hidden="true">key</span> Cevap anahtarı önizle</button>
+          <button type="button" class="btn btn-ana" id="sYazOgr"><span class="msi" aria-hidden="true">print</span> Öğrenci kâğıdını yazdır</button>
+          <button type="button" class="btn btn-ana" id="sYazAnahtar"><span class="msi" aria-hidden="true">print</span> Cevap anahtarını yazdır</button>
+          <button type="button" class="btn" id="sPdf"><span class="msi" aria-hidden="true">picture_as_pdf</span> PDF (kâğıt + anahtar)</button>
+          <button type="button" class="btn" id="sWordOgr"><span class="msi" aria-hidden="true">description</span> Word: öğrenci kâğıdı</button>
+          <button type="button" class="btn" id="sWordAnahtar"><span class="msi" aria-hidden="true">description</span> Word: cevap anahtarı</button>
+        </div>
+      </div>
+      <div class="onizleme" id="sOnizleme" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlgBaslik">
+  <form id="dForm" class="dlg-ic" method="dialog">
+    <h2 id="dlgBaslik" style="margin:0;font-size:1.2em">Soru</h2>
+    <label class="alan">Soru metni<textarea id="dSoru" required></textarea></label>
+    <div class="form-iki">
+      <label class="alan">Kategori<select id="dKat"></select></label>
+      <label class="alan">Zorluk<select id="dZor"></select></label>
+      <label class="alan">Konu<select id="dKonu"></select></label>
+      <label class="alan">Ölçülen beceri<select id="dBeceri"></select></label>
+      <label class="alan">İlgili değer<select id="dDeger"></select></label>
+    </div>
+    <label class="alan">Öğrenme çıktısı<select id="dCikti"></select></label>
+    <label class="alan">Beklenen cevap (her satır bir kabul edilebilir unsur)<textarea id="dCevap"></textarea></label>
+    <fieldset style="border:1px solid var(--kenar);border-radius:var(--r);padding:10px">
+      <legend style="font-weight:800;font-size:.9em">Puanlama ölçütleri</legend>
+      <div id="dOlcut"></div>
+      <div class="arac"><button type="button" class="btn" id="dOlcutEkle"><span class="msi" aria-hidden="true">add</span> Ölçüt ekle</button><strong id="dToplam"></strong></div>
+    </fieldset>
+    <div class="arac" style="justify-content:flex-end">
+      <button type="button" class="btn" id="dIptal">Vazgeç</button>
+      <button type="submit" class="btn btn-ana">Kaydet</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="baski" aria-hidden="true"></div>
+
+<script src="sorular-9.js"></script>
+<script src="sorular-10.js"></script>
+<script src="sorular-11.js"></script>
+<script src="acik-uclu.js"></script>
+</body>
+</html>
