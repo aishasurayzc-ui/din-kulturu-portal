@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>8. Sınıf DKAB - 1. Dönem 2. Yazılı Yoklaması</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Times New Roman', Georgia, serif; font-size: 14px; color:#111; margin:0; padding:0; background:#e9e9e9; }
+  .sayfa { max-width: 900px; margin: 20px auto; background:#fff; padding: 30px 40px; box-shadow: 0 0 8px rgba(0,0,0,0.2); }
+  .ust-tablo { width:100%; border-collapse: collapse; margin-bottom: 14px; }
+  .ust-tablo td { border: 1.5px solid #000; padding: 6px 10px; font-size: 13px; }
+  .baslik-hucre { text-align:center; font-weight:bold; font-size: 16px; }
+  h1 { text-align:center; font-size: 18px; margin: 6px 0 14px; text-transform: uppercase; }
+  .ogrenci-tablo { width:100%; border-collapse: collapse; margin-bottom: 18px; }
+  .ogrenci-tablo td { border: 1.5px solid #000; padding: 6px 10px; font-size: 13px; }
+  .soru-baslik { font-weight:bold; margin: 16px 0 6px; font-size: 14px; }
+  .soru-blok { margin-bottom: 10px; }
+  .puan { float:right; font-weight:normal; font-style: italic; font-size: 12px; }
+  ol.bosluk-liste { padding-left: 22px; margin: 4px 0 4px; }
+  ol.bosluk-liste li { margin-bottom: 8px; line-height: 1.7; }
+  .bosluk { border-bottom: 1px solid #000; padding: 0 4px; font-weight:bold; }
+  table.dy-tablo, table.es-tablo { width:100%; border-collapse: collapse; margin-bottom: 6px; }
+  table.dy-tablo td { padding: 4px 6px; vertical-align: top; font-size: 13.5px; }
+  .dy-kutu { width: 30px; text-align:center; font-weight:bold; }
+  .es-tablo-wrap { display:flex; gap: 20px; }
+  .es-sol, .es-sag { flex:1; }
+  table.es-tablo td { padding: 4px 6px; vertical-align: top; font-size: 13.5px; }
+  .es-no { width: 22px; font-weight:bold; }
+  .es-cevap { width: 30px; text-align:center; font-weight:bold; }
+  .es-harf { width: 26px; font-weight:bold; }
+  .cevap-satiri { border-bottom: 1px dotted #555; height: 20px; margin: 2px 0; }
+  .cevap-anahtari { page-break-before: always; }
+  .ca-baslik { text-align:center; font-weight:bold; font-size:16px; margin-bottom: 14px; border-bottom: 2px solid #000; padding-bottom: 8px; }
+  .ca-blok p { margin: 6px 0; font-size: 13.5px; }
+  .yazdir-btn { display:block; margin: 16px auto; padding: 10px 24px; font-size:14px; cursor:pointer; }
+  .basari { text-align:center; margin-top: 22px; font-style: italic; font-size: 13px; }
+
+  .cerceve { border: 3px double #000; padding: 14px 22px 22px; }
+  .resmi-baslik { text-align:center; margin-bottom: 10px; line-height:1.5; }
+  .resmi-baslik .tc { font-weight:bold; font-size: 14px; }
+  .resmi-baslik .kurum { font-weight:bold; font-size: 13.5px; text-transform:uppercase; }
+  .resmi-baslik .egitim-yili { font-size: 13px; }
+  .resmi-baslik .ders-baslik { font-weight:bold; font-size: 14.5px; margin-top: 4px; text-transform:uppercase; }
+  table.ogrenci-tablo2 { width:100%; border-collapse: collapse; margin: 12px 0 10px; }
+  table.ogrenci-tablo2 td { border: 1px solid #000; padding: 5px 8px; font-size: 12.5px; vertical-align: top; }
+  table.ogrenci-tablo2 .alan-adi { font-weight:bold; display:block; font-size: 11px; margin-bottom: 10px; }
+  table.puan-cizelgesi { width:100%; border-collapse: collapse; margin-bottom: 14px; }
+  table.puan-cizelgesi td { border: 1px solid #000; text-align:center; padding: 4px 2px; font-size: 12px; }
+  table.puan-cizelgesi .pc-baslik { font-weight:bold; text-align:left; padding-left:6px; width: 110px; }
+  table.puan-cizelgesi .pc-toplam { font-weight:bold; background:#f2f2f2; }
+  .sinav-notu { font-size: 11.5px; font-style: italic; margin: 4px 0 14px; }
+  .imza-alani { margin-top: 26px; text-align:right; padding-right: 10px; }
+  .imza-alani .basari-notu { font-weight:bold; font-size: 13px; margin-bottom: 26px; }
+  .imza-alani .ogretmen-ad { font-weight:bold; font-size: 13px; margin: 0; }
+  .imza-alani .ogretmen-unvan { font-size: 12px; margin: 0; }
+
+  @media print {
+    body { background:#fff; }
+    .sayfa { box-shadow:none; margin:0; padding: 10mm 12mm; max-width:100%; }
+    .yazdir-btn { display:none; }
+  }
+</style>
+</head>
+<body>
+<button class="yazdir-btn" onclick="window.print()">🖨️ Yazdır</button>
+
+<div class="sayfa">
+<div class="cerceve">
+
+  <div class="resmi-baslik">
+    <p class="tc">T.C.</p>
+    <p class="kurum">.................................. KAYMAKAMLIĞI</p>
+    <p class="kurum">.................................. ORTAOKULU MÜDÜRLÜĞÜ</p>
+    <p class="egitim-yili">20..... – 20..... EĞİTİM ÖĞRETİM YILI</p>
+    <p class="ders-baslik">8. SINIFLAR DİN KÜLTÜRÜ VE AHLAK BİLGİSİ DERSİ<br>1. DÖNEM 2. YAZILI YOKLAMA SINAVI SORULARIDIR</p>
+  </div>
+  <table class="ogrenci-tablo2">
+    <tr>
+      <td style="width:32%"><span class="alan-adi">Adı Soyadı</span>..............................................</td>
+      <td style="width:18%"><span class="alan-adi">Sınıfı / No</span>8/...... - ......</td>
+      <td style="width:24%"><span class="alan-adi">Tarih</span>....... / ....... / ...........</td>
+      <td style="width:26%"><span class="alan-adi">Aldığı Puan</span></td>
+    </tr>
+  </table>
+
+  <table class="puan-cizelgesi">
+    <tr><td class="pc-baslik">SORU NO</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td class="pc-toplam">TOPLAM</td></tr>
+    <tr><td class="pc-baslik">PUAN DEĞERİ</td><td>15</td><td>15</td><td>20</td><td>12</td><td>13</td><td>12</td><td>13</td><td class="pc-toplam">100</td></tr>
+    <tr><td class="pc-baslik">ALINAN PUAN</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="pc-toplam"></td></tr>
+  </table>
+  <p class="sinav-notu">NOT: Sınav süresi 40 dakikadır. Her sorunun puan değeri karşısında belirtilmiştir. Süreyi ve dikkatinizi iyi kullanınız.</p>
+  <p style="text-align:center; font-weight:bold; margin-bottom:14px;">2. ÜNİTE: ZEKÂT VE SADAKA</p>
+
+  <div class="soru-blok">
+    <p class="soru-baslik">1. Aşağıdaki cümlelerde boş bırakılan yerleri, verilen kelime havuzundan uygun kelimelerle doldurunuz. <span class="puan">(15 puan)</span></p>
+    <p><em>Kelime Havuzu:</em> Zekât • Sadaka • İnfak • Nisap • Fitre</p>
+    <ol class="bosluk-liste">
+      <li>İslam'ın beş şartından biri olan, zengin Müslümanların mallarından belirli bir oranı vermesi ibadetine <span class="bosluk">…………………</span> denir.</li>
+<li>Sırf Allah (cc) rızası için yapılan gönüllü harcama ve bağışa <span class="bosluk">…………………</span> denir.</li>
+<li>Hem maddi hem manevi yardımları ifade eden geniş kapsamlı kavrama <span class="bosluk">…………………</span> denir.</li>
+<li>Zekât gibi ibadetler için gereken mali yeterlilik ölçüsüne <span class="bosluk">…………………</span> denir.</li>
+<li>Ramazan ayında verilmesi vacip olan sadakaya <span class="bosluk">…………………</span> denir.</li>
+    </ol>
+  </div>
+
+  <div class="soru-blok">
+    <p class="soru-baslik">2. Aşağıdaki ifadelerden doğru olanların başındaki parantezin içine "D", yanlış olanların başındaki parantezin içine "Y" yazınız. <span class="puan">(15 puan)</span></p>
+    <table class="dy-tablo">
+      <tr><td class="dy-kutu">( &nbsp; )</td><td>Yoksul, nisap miktarından fazla malı olan zengin kimsedir.</td></tr>
+<tr><td class="dy-kutu">( &nbsp; )</td><td>Öşür, toprak ürünlerinden verilen zekâta verilen isimdir.</td></tr>
+<tr><td class="dy-kutu">( &nbsp; )</td><td>Hz. Şuayb, Medyen halkına gönderilen bir peygamberdir.</td></tr>
+<tr><td class="dy-kutu">( &nbsp; )</td><td>Maun suresi Kur'an-ı Kerim'in ilk suresidir.</td></tr>
+<tr><td class="dy-kutu">( &nbsp; )</td><td>Riya, ibadetleri gösteriş için yapmaktır.</td></tr>
+    </table>
+  </div>
+
+  <div class="soru-blok">
+    <p class="soru-baslik">3. Aşağıdaki kavramları karşılarındaki doğru tanımlar ile eşleştiriniz. <span class="puan">(20 puan)</span></p>
+    <div class="es-tablo-wrap">
+      <table class="es-tablo"><tr><td class="es-no">1.</td><td>İsar</td><td class="es-cevap">( &nbsp; )</td></tr>
+<tr><td class="es-no">2.</td><td>Vakıf</td><td class="es-cevap">( &nbsp; )</td></tr>
+<tr><td class="es-no">3.</td><td>Medyen</td><td class="es-cevap">( &nbsp; )</td></tr>
+<tr><td class="es-no">4.</td><td>Sadakayıcariye</td><td class="es-cevap">( &nbsp; )</td></tr>
+<tr><td class="es-no">5.</td><td>Miskin</td><td class="es-cevap">( &nbsp; )</td></tr></table>
+      <table class="es-tablo"><tr><td class="es-harf">A)</td><td>Hiçbir geliri ya da mal varlığı olmayan, muhtaç kimse</td></tr>
+<tr><td class="es-harf">B)</td><td>Kişinin öldükten sonra da sevap kazandırmaya devam eden sadaka</td></tr>
+<tr><td class="es-harf">C)</td><td>Kişilerin mallarını bağışlaması sonucu oluşan hayır kurumu</td></tr>
+<tr><td class="es-harf">D)</td><td>Hz. Şuayb'ın peygamber olarak gönderildiği bölge</td></tr>
+<tr><td class="es-harf">E)</td><td>Başkalarını kendine tercih etme, diğerkâmlık</td></tr></table>
+    </div>
+  </div>
+
+  <div class="soru-baslik" style="margin-top:18px;">4-7. Aşağıdaki soruları kısaca cevaplayınız.</div>
+
+    <div class="soru-blok">
+      <p><strong>4.</strong> Nisap kavramını açıklayınız. <span class="puan">(12 puan)</span></p>
+      <div class="cevap-satiri"></div>
+      <div class="cevap-satiri"></div>
+    </div>
+
+    <div class="soru-blok">
+      <p><strong>5.</strong> Hz. Şuayb, Medyen halkını hangi konuda uyarmıştır? <span class="puan">(13 puan)</span></p>
+      <div class="cevap-satiri"></div>
+      <div class="cevap-satiri"></div>
+    </div>
+
+    <div class="soru-blok">
+      <p><strong>6.</strong> Maun suresinde eleştirilen davranışlar nelerdir? <span class="puan">(12 puan)</span></p>
+      <div class="cevap-satiri"></div>
+      <div class="cevap-satiri"></div>
+    </div>
+
+    <div class="soru-blok">
+      <p><strong>7.</strong> "Sağ elin verdiğini sol el görmemelidir." hadisiyle anlatılmak istenen nedir? <span class="puan">(13 puan)</span></p>
+      <div class="cevap-satiri"></div>
+      <div class="cevap-satiri"></div>
+    </div>
+
+
+  <div class="imza-alani">
+    <p class="basari-notu">Başarılar dilerim.</p>
+    <p class="ogretmen-ad">Ayşe YAZICI</p>
+    <p class="ogretmen-unvan">Din Kültürü ve Ahlak Bilgisi Öğretmeni</p>
+  </div>
+</div>
+</div>
+
+<div class="sayfa cevap-anahtari">
+  <div class="ca-baslik">8. SINIF 1. DÖNEM 2. YAZILI YOKLAMASI — CEVAP ANAHTARI<br><span style="font-weight:normal; font-size:13px;">2. ÜNİTE: ZEKÂT VE SADAKA</span></div>
+
+    <div class="ca-blok">
+      <p><strong>1. Boşluk Doldurma:</strong> Zekât • İnfak • Sadaka • Nisap • Fitre</p>
+      <p><strong>2. Doğru-Yanlış:</strong> Y - D - D - Y - D</p>
+      <p><strong>3. Eşleştirme:</strong> 1-E, 2-C, 3-D, 4-B, 5-A</p>
+      <p><strong>4.</strong> Nisap, zekât, hac ve kurban gibi ibadetler için Allah (cc) ve Resulü tarafından belirlenen mali yeterlilik ve zenginlik ölçüsüdür.</p>
+<p><strong>5.</strong> Hz. Şuayb, Medyen halkını ölçü ve tartıda dürüst olmaya, hile yapmamaya çağırmıştır.</p>
+<p><strong>6.</strong> Yetimi itip kakmak, yoksula yardım etmemek ve namazda gösteriş (riya) yapmak eleştirilir.</p>
+<p><strong>7.</strong> Yardımın gizlice, gösterişsiz ve başa kakmadan yapılması gerektiği vurgulanır.</p>
+    </div>
+</div>
+
+</body>
+</html>

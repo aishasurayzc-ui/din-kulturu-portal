@@ -1092,6 +1092,14 @@ document.addEventListener('keydown', function(e){
   }
 });
 
+/* 2026-10-31: Bazı ünitelerin verisinde doğru cevap metin yerine sıra numarasıyla
+   (dogru:0) yazılmış; motor yalnızca metin karşılaştırdığı için bu oyunlarda doğru
+   cevap yanlış sayılıyordu. İki biçim de desteklenir. */
+function ikiliDogruMu(soru, secenek){
+  var d = soru && soru.dogru;
+  if(typeof d === 'number' && soru.secenekler && soru.secenekler[d] !== undefined) return secenek === soru.secenekler[d];
+  return secenek === d;
+}
 function ikiliOyunBaslat(ayar){
   ayar = omAyarTekrarsiz(ayar);
   const d = ikiliOyunDurum(ayar.onek);
@@ -1134,7 +1142,7 @@ function ikiliSoruGoster(onek){
     const btn = document.createElement('button');
     btn.className = 'eylem';
     btn.textContent = secenek;
-    btn.onclick = () => ikiliCevapVer(onek, secenek === soru.dogru);
+    btn.onclick = () => ikiliCevapVer(onek, ikiliDogruMu(soru, secenek));
     kutu.appendChild(btn);
   });
   if(d.ayar.sureSN) ikiliZamanlayiciBaslat(onek);
@@ -1453,7 +1461,7 @@ function ikiliHayattaSoruGoster(onek){
     const btn = document.createElement('button');
     btn.className='eylem';
     btn.textContent=secenek;
-    btn.onclick = ()=> ikiliHayattaCevapVer(onek, secenek===soru.dogru);
+    btn.onclick = ()=> ikiliHayattaCevapVer(onek, ikiliDogruMu(soru, secenek));
     kutu.appendChild(btn);
   });
 }
@@ -1535,7 +1543,7 @@ function ikiliBuzzerBas(onek, no){
     const btn = document.createElement('button');
     btn.className = 'eylem';
     btn.textContent = secenek;
-    btn.onclick = ()=> ikiliBuzzerCevapVer(onek, secenek===soru.dogru);
+    btn.onclick = ()=> ikiliBuzzerCevapVer(onek, ikiliDogruMu(soru, secenek));
     kutu.appendChild(btn);
   });
   if(d.ayar.sureSN) ikiliZamanlayiciBaslat(onek, ikiliBuzzerCevapVer);
@@ -1602,7 +1610,7 @@ function ikiliCalmaSoruGoster(onek){
     const btn = document.createElement('button');
     btn.className = 'eylem';
     btn.textContent = secenek;
-    btn.onclick = ()=> ikiliCalmaCevapVer(onek, secenek===soru.dogru);
+    btn.onclick = ()=> ikiliCalmaCevapVer(onek, ikiliDogruMu(soru, secenek));
     kutu.appendChild(btn);
   });
   if(d.ayar.sureSN) ikiliZamanlayiciBaslat(onek, ikiliCalmaCevapVer);
@@ -1685,7 +1693,7 @@ function ikiliCarkSoruGoster(onek){
     const btn = document.createElement('button');
     btn.className = 'eylem';
     btn.textContent = secenek;
-    btn.onclick = ()=> ikiliCarkCevapVer(onek, secenek===soru.dogru);
+    btn.onclick = ()=> ikiliCarkCevapVer(onek, ikiliDogruMu(soru, secenek));
     kutu.appendChild(btn);
   });
   if(d.ayar.sureSN) ikiliZamanlayiciBaslat(onek, ikiliCarkCevapVer);
@@ -1770,7 +1778,7 @@ function ikiliTahtaSoruGoster(onek){
     const btn = document.createElement('button');
     btn.className = 'eylem';
     btn.textContent = secenek;
-    btn.onclick = ()=> ikiliTahtaCevapVer(onek, secenek===soru.dogru);
+    btn.onclick = ()=> ikiliTahtaCevapVer(onek, ikiliDogruMu(soru, secenek));
     kutu.appendChild(btn);
   });
   if(d.ayar.sureSN) ikiliZamanlayiciBaslat(onek, ikiliTahtaCevapVer);
@@ -1938,7 +1946,7 @@ function ikiliBingoSoruGoster(onek){
     const btn = document.createElement('button');
     btn.className = 'eylem';
     btn.textContent = secenek;
-    btn.onclick = ()=> ikiliBingoCevapVer(onek, secenek===soru.dogru);
+    btn.onclick = ()=> ikiliBingoCevapVer(onek, ikiliDogruMu(soru, secenek));
     kutu.appendChild(btn);
   });
   if(d.ayar.sureSN) ikiliZamanlayiciBaslat(onek, ikiliBingoCevapVer);
@@ -2027,7 +2035,7 @@ function ikiliSansSoruGoster(onek){
     const btn = document.createElement('button');
     btn.className = 'eylem';
     btn.textContent = secenek;
-    btn.onclick = ()=> ikiliSansCevapVer(onek, secenek===soru.dogru);
+    btn.onclick = ()=> ikiliSansCevapVer(onek, ikiliDogruMu(soru, secenek));
     kutu.appendChild(btn);
   });
   if(d.ayar.sureSN) ikiliZamanlayiciBaslat(onek, ikiliSansCevapVer);

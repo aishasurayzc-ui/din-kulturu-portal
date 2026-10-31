@@ -854,6 +854,16 @@ function olustur(){
 
   ziyaretIsaretle(sinif, unite, asama);
   yenidenCiz();
+  /* Öğrenme Döngüsü (2026-10-31): konu sonu öz değerlendirme + "Eksiklerim
+     ve Tekrar Planım" kutusu. Yalnızca konu ve ölçme sayfalarında. */
+  if((asama==='ogren' || asama==='olcme') && !document.querySelector('script[src*="ogrenme-dongusu.js"]')){
+    var odCss = document.createElement('link');
+    odCss.rel = 'stylesheet'; odCss.href = ORTAK_KLASOR + 'ogrenme-dongusu.css';
+    document.head.appendChild(odCss);
+    var odJs = document.createElement('script');
+    odJs.src = ORTAK_KLASOR + 'ogrenme-dongusu.js';
+    document.body.appendChild(odJs);
+  }
 
   document.addEventListener('click', tiklamaYonet);
   /* Konu anlatım sayfası: bölüm menüsü, ünite başlığı ve kaydırma takibi.

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Öğretmen Raporu — Din Kültürü Portalı</title>
+<!-- 2026-10-31: Öğretmen Paneli'ne eklenen cihaz raporu. Yalnızca portal sayfalarının
+     bu tarayıcıda zaten kaydettiği verileri OKUR; hiçbir kaydı değiştirmez veya silmez. -->
+<style>
+:root{ --zemin:#f4f7fa; --yuzey:#fff; --metin:#1e2f3d; --ikincil:#55697a; --kenar:#d6e0e8; --vurgu:#2a6f97; --iyi:#2f7a4d; --orta:#a36a07; --zayif:#b23b3b; }
+@media (prefers-color-scheme:dark){ :root{ --zemin:#0f1a22; --yuzey:#162530; --metin:#e3edf4; --ikincil:#9fb4c4; --kenar:#2c4252; --vurgu:#7fbde3; --iyi:#6fcf97; --orta:#f2c14e; --zayif:#f08a8a; } }
+*{ box-sizing:border-box; }
+body{ margin:0; font:15px/1.55 'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif; background:var(--zemin); color:var(--metin); }
+.sar{ max-width:1100px; margin:0 auto; padding:20px 16px 60px; }
+.ust{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px; }
+.ust a{ color:var(--vurgu); font-weight:800; text-decoration:none; }
+.marka{ font-size:13px; font-weight:900; letter-spacing:.06em; text-transform:uppercase; color:var(--ikincil); }
+h1{ font-size:26px; margin:6px 0 4px; }
+h2{ font-size:19px; margin:30px 0 8px; }
+.not{ color:var(--ikincil); margin:0 0 14px; }
+.kutu{ background:var(--yuzey); border:1px solid var(--kenar); border-radius:14px; padding:14px 16px; }
+.aksiyon{ display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 4px; }
+button{ font:inherit; font-weight:800; padding:9px 16px; border-radius:999px; border:2px solid var(--vurgu); background:var(--yuzey); color:var(--vurgu); cursor:pointer; min-height:42px; }
+button.ana{ background:var(--vurgu); color:var(--yuzey); }
+button:focus-visible, select:focus-visible{ outline:3px solid #f0a202; outline-offset:2px; }
+select{ font:inherit; padding:8px 10px; border-radius:10px; border:1px solid var(--kenar); background:var(--yuzey); color:var(--metin); min-height:42px; }
+.ozet-kartlar{ display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin:12px 0; }
+.ozet-kart{ background:var(--yuzey); border:1px solid var(--kenar); border-radius:12px; padding:12px 14px; }
+.ozet-kart b{ display:block; font-size:24px; }
+.ozet-kart span{ color:var(--ikincil); font-size:13px; }
+.tablo-kap{ overflow-x:auto; background:var(--yuzey); border:1px solid var(--kenar); border-radius:12px; }
+table{ border-collapse:collapse; width:100%; min-width:760px; font-size:14px; }
+th, td{ border-bottom:1px solid var(--kenar); padding:8px 10px; text-align:left; vertical-align:top; }
+th{ background:color-mix(in srgb, var(--vurgu) 10%, var(--yuzey)); font-size:12.5px; text-transform:uppercase; letter-spacing:.03em; position:sticky; top:0; }
+td.sayi{ text-align:center; font-variant-numeric:tabular-nums; }
+.r-iyi{ color:var(--iyi); font-weight:800; } .r-orta{ color:var(--orta); font-weight:800; } .r-zayif{ color:var(--zayif); font-weight:800; } .r-yok{ color:var(--ikincil); }
+.asama{ display:inline-block; min-width:22px; text-align:center; border-radius:6px; padding:0 4px; margin:1px; font-size:12px; font-weight:900; }
+.asama.ok{ background:color-mix(in srgb, var(--iyi) 20%, transparent); color:var(--iyi); }
+.asama.yok{ background:color-mix(in srgb, var(--ikincil) 14%, transparent); color:var(--ikincil); }
+.bos{ padding:16px; color:var(--ikincil); }
+.kilit{ max-width:420px; margin:60px auto; text-align:center; }
+.kilit input{ font:inherit; padding:10px 12px; border-radius:10px; border:1px solid var(--kenar); width:100%; margin:10px 0; background:var(--yuzey); color:var(--metin); }
+.hata{ color:var(--zayif); min-height:1.4em; }
+@media print{ .aksiyon, .ust a, .yazdirma-gizle{ display:none !important; } body{ background:#fff; color:#000; } .tablo-kap{ overflow:visible; border:0; } table{ min-width:0; font-size:11px; } th{ position:static; } }
+</style>
+</head>
+<body>
+<div class="sar">
+  <div class="ust"><a href="din-kulturu-tum-siniflar.html#ogretmenPaneli">← Öğretmen Paneli</a><span class="marka">Ayşe Yazıcı · Din Kültürü ve Ahlak Bilgisi</span></div>
+
+  <section id="kilit" class="kilit kutu" hidden>
+    <h1>Öğretmen Raporu</h1>
+    <p class="not">Bu sayfa öğretmen içindir. Ünite sayfalarındaki Öğretmen Paneli şifresiyle girebilirsin.</p>
+    <form id="kilitForm"><label for="sifre">Öğretmen şifresi</label><input id="sifre" type="password" autocomplete="off"><button class="ana" type="submit">Raporu aç</button></form>
+    <p class="hata" id="kilitHata" aria-live="polite"></p>
+  </section>
+
+  <main id="rapor" hidden>
+    <h1>Öğretmen Raporu</h1>
+    <p class="not">Bu rapor, portal sayfalarının <b>bu tarayıcıda</b> kaydettiği verilerden oluşturulur (ünite ziyaretleri, konu sonu öz değerlendirmeleri, Konu Tekrarı testinde yanlış yapılan sorular, “Kendimi Değerlendiriyorum” işaretleri ve ünite oyun kayıtları). Veri hiçbir yere gönderilmez. Sınıftaki akıllı tahtada ya da öğrencinin kullandığı cihazda açıldığında o cihazın kayıtlarını gösterir.</p>
+    <div class="aksiyon">
+      <label class="yazdirma-gizle" for="sinifSec" style="align-self:center;font-weight:800">Sınıf:</label>
+      <select id="sinifSec" class="yazdirma-gizle"><option value="">Tüm sınıflar</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
+      <button type="button" class="ana" id="yazdirBtn">🖨️ Yazdır / PDF</button>
+      <button type="button" id="csvBtn">⬇️ CSV indir</button>
+      <button type="button" id="yenileBtn">↻ Yenile</button>
+    </div>
+    <div class="ozet-kartlar" id="ozetKartlar"></div>
+
+    <h2>1. Ünite ilerlemesi</h2>
+    <p class="not">Aşamalar: Ü = ünite sayfası, Ö = konu anlatımı, O = oyun merkezi, D = değerlendirme. “Öz değ.” sütunu konu sonundaki “Kendini değerlendir” seçimlerini gösterir (✅ anladım / 🤔 kısmen / 🔁 tekrar).</p>
+    <div class="tablo-kap"><table id="uniteTablo"><thead><tr><th>Ünite</th><th>Aşamalar</th><th>Tamamlandı</th><th>Öz değ. ✅/🤔/🔁</th><th>Tekrar istenen konular</th><th>Zorlanılan soru</th><th>Kendimi Değ. işaretli</th><th>Hayatta Dene</th></tr></thead><tbody></tbody></table></div>
+
+    <h2>2. En çok yanlış yapılan sorular</h2>
+    <p class="not">Konu Tekrarı testlerinde birden çok kez yanlış cevaplanan sorular; yeniden öğretim için başlangıç noktası olabilir. Soru doğru cevaplandıkça sayaç azalır.</p>
+    <div class="tablo-kap"><table id="soruTablo"><thead><tr><th>Ünite</th><th>Soru</th><th>Yanlış</th></tr></thead><tbody></tbody></table></div>
+
+    <h2>3. Öğrenci oyun kayıtları</h2>
+    <p class="not">Ünite sayfalarındaki Öğretmen Paneli’nin kaydettiği öğrenci adları ve tamamlanan oyunlar.</p>
+    <div class="tablo-kap"><table id="ogrenciTablo"><thead><tr><th>Ünite</th><th>Öğrenci</th><th>Tamamlanan oyun</th><th>Son puan</th><th>İlk kayıt</th><th>Son oyun</th></tr></thead><tbody></tbody></table></div>
+  </main>
+</div>
+<script>
+(function(){
+"use strict";
+var SIFRE = 'ogretmen2026';   /* ünite sayfalarındaki Öğretmen Paneli ile aynı */
+var UNITE_ADLARI = {
+  "s4-1":"Günlük Hayattaki Dinî İfadeler","s4-2":"İslam’ı Tanıyalım","s4-3":"Güzel Ahlak",
+  "s4-4":"Hz. Muhammed’i Tanıyalım","s4-5":"Din ve Temizlik","s4-6":"Allah Sevgisi",
+  "s5-1":"Allah İnancı","s5-2":"Allah’ın Huzurunda Olmak: Namaz İbadeti","s5-3":"Kur’an-ı Kerim",
+  "s5-4":"Peygamber Kıssaları","s5-5":"Mimarimizde Dinî Motifler",
+  "s6-1":"Peygamber ve İlahi Kitap İnancı","s6-2":"Ramazan ve Oruç","s6-3":"Ahlaki Davranışlar",
+  "s6-4":"Peygamberliğinden Önce Hz. Muhammed","s6-5":"Kültürümüzdeki Dinî Motifler",
+  "s7-1":"Melek ve Ahiret İnancı","s7-2":"Hac ve Kurban","s7-3":"Ahlaki Davranışlar",
+  "s7-4":"Allah’ın Kulu ve Elçisi: Hz. Muhammed","s7-5":"İslam Düşüncesinde Yorumlar",
+  "s8-1":"Kader İnancı","s8-2":"Zekât ve Sadaka","s8-3":"Din ve Hayat",
+  "s8-4":"Hz. Muhammed’in Örnekliği","s8-5":"Kur’an-ı Kerim ve Özellikleri"
+};
+var UNITE_SAYISI = {4:6, 5:5, 6:5, 7:5, 8:5};
+function oku(k, v){ try{ var x = JSON.parse(localStorage.getItem(k)); return x==null ? v : x; }catch(e){ return v; } }
+function hamOku(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function kac(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function veriTopla(){
+  var ziyaret = oku('dkab_ziyaret', {}), tamam = oku('dkab_tamamlanan', []);
+  var uniteler = [], sorular = [], ogrenciler = [];
+  [4,5,6,7,8].forEach(function(s){
+    for(var u=1; u<=UNITE_SAYISI[s]; u++){
+      var gid = 's'+s+'-u'+u, uk = s+'-'+u, ad = s+'.'+u+' '+(UNITE_ADLARI['s'+s+'-'+u]||'');
+      var z = ziyaret[gid] || {};
+      var oz = oku('dkabKonuOzDeg_'+gid, {}), ozS = {tamam:0, kismen:0, tekrar:0}, tekrarKonu = [];
+      Object.keys(oz).forEach(function(no){ if(no.charAt(0)==='_') return; if(ozS[oz[no]]!=null){ ozS[oz[no]]++; if(oz[no]!=='tamam') tekrarKonu.push(no+'. '+(oz['_ad'+no]||'konu')); } });
+      var zayif = oku('dkabZayifSorular_'+uk, {}), zSay = 0;
+      Object.keys(zayif).forEach(function(q){ if(zayif[q]>0){ zSay++; sorular.push({s:s, ad:ad, soru:q, n:zayif[q]}); } });
+      var deg = oku('dkabDegerlendirme_'+uk, {}), dT = 0, dI = 0;
+      Object.keys(deg).forEach(function(k){ dT++; if(deg[k]) dI++; });
+      var hd = hamOku('dkabHayattaDene_'+uk)==='1';
+      var op = oku('dkabOgretmenPaneli_'+uk, {});
+      Object.keys(op).forEach(function(isim){
+        var r = op[isim] || {}, oy = r.oyunlar || [];
+        ogrenciler.push({s:s, ad:ad, isim:isim, oyun:oy.length, puan:r.sonPuan||0, ilk:r.ilkTarih||'', son:oy.length ? oy[oy.length-1].tarih : ''});
+      });
+      uniteler.push({s:s, gid:gid, ad:ad, z:z, tamam:tamam.indexOf(gid)>=0, ozS:ozS, tekrarKonu:tekrarKonu, zSay:zSay, dT:dT, dI:dI, hd:hd,
+        aktif: !!(z.hub||z.ogren||z.oyun||z.olcme||Object.keys(oz).length||zSay||dT||Object.keys(op).length)});
+    }
+  });
+  sorular.sort(function(a,b){ return b.n-a.n; });
+  return {uniteler:uniteler, sorular:sorular, ogrenciler:ogrenciler};
+}
+
+var SON = null;
+function ciz(){
+  var V = SON = veriTopla(), sec = document.getElementById('sinifSec').value;
+  var f = function(x){ return !sec || String(x.s)===sec; };
+  var U = V.uniteler.filter(f), Q = V.sorular.filter(f), O = V.ogrenciler.filter(f);
+  var aktif = U.filter(function(x){ return x.aktif; }).length, tam = U.filter(function(x){ return x.tamam; }).length;
+  var tekrar = U.reduce(function(t,x){ return t + x.ozS.kismen + x.ozS.tekrar; }, 0);
+  document.getElementById('ozetKartlar').innerHTML =
+    '<div class="ozet-kart"><b>'+aktif+' / '+U.length+'</b><span>Çalışılan ünite</span></div>'+
+    '<div class="ozet-kart"><b>'+tam+'</b><span>Tamamlandı olarak işaretlenen ünite</span></div>'+
+    '<div class="ozet-kart"><b>'+tekrar+'</b><span>Tekrar istenen konu (öz değerlendirme)</span></div>'+
+    '<div class="ozet-kart"><b>'+Q.length+'</b><span>Hâlâ zorlanılan test sorusu</span></div>'+
+    '<div class="ozet-kart"><b>'+O.length+'</b><span>Öğrenci–ünite oyun kaydı</span></div>';
+  var asama = function(z, k, e){ return '<span class="asama '+(z[k]?'ok':'yok')+'" title="'+e+'">'+(z[k]?'✓':'·')+e.charAt(0)+'</span>'; };
+  var satir = U.map(function(x){
+    var oz = x.ozS, ozToplam = oz.tamam+oz.kismen+oz.tekrar;
+    return '<tr><td><b>'+kac(x.ad)+'</b></td><td>'+asama(x.z,'hub','Ünite')+asama(x.z,'ogren','Öğren')+asama(x.z,'oyun','Oyun')+asama(x.z,'olcme','Değerlendirme')+'</td>'+
+      '<td class="sayi">'+(x.tamam?'<span class="r-iyi">✓</span>':'<span class="r-yok">—</span>')+'</td>'+
+      '<td class="sayi">'+(ozToplam ? '<span class="r-iyi">'+oz.tamam+'</span> / <span class="r-orta">'+oz.kismen+'</span> / <span class="r-zayif">'+oz.tekrar+'</span>' : '<span class="r-yok">—</span>')+'</td>'+
+      '<td>'+(x.tekrarKonu.length ? kac(x.tekrarKonu.join(', ')) : '<span class="r-yok">—</span>')+'</td>'+
+      '<td class="sayi">'+(x.zSay ? '<span class="r-zayif">'+x.zSay+'</span>' : '<span class="r-yok">0</span>')+'</td>'+
+      '<td class="sayi">'+(x.dT ? x.dI+' / '+x.dT : '<span class="r-yok">—</span>')+'</td>'+
+      '<td class="sayi">'+(x.hd?'<span class="r-iyi">✓</span>':'<span class="r-yok">—</span>')+'</td></tr>';
+  }).join('');
+  document.querySelector('#uniteTablo tbody').innerHTML = satir;
+  document.querySelector('#soruTablo tbody').innerHTML = Q.length ? Q.slice(0,30).map(function(q){
+    return '<tr><td>'+kac(q.ad)+'</td><td>'+kac(q.soru)+'</td><td class="sayi r-zayif">'+q.n+'</td></tr>'; }).join('')
+    : '<tr><td colspan="3" class="bos">Bu cihazda kayıtlı yanlış soru yok.</td></tr>';
+  document.querySelector('#ogrenciTablo tbody').innerHTML = O.length ? O.map(function(o){
+    return '<tr><td>'+kac(o.ad)+'</td><td><b>'+kac(o.isim)+'</b></td><td class="sayi">'+o.oyun+'</td><td class="sayi">'+o.puan+'</td><td>'+kac(o.ilk)+'</td><td>'+kac(o.son)+'</td></tr>'; }).join('')
+    : '<tr><td colspan="6" class="bos">Bu cihazda öğrenci oyun kaydı yok. Kayıtlar, öğrenci ünite sayfasındaki bir oyunu bitirip adını yazdığında oluşur.</td></tr>';
+}
+
+function csv(){
+  var V = SON || veriTopla(), sec = document.getElementById('sinifSec').value;
+  var f = function(x){ return !sec || String(x.s)===sec; };
+  var h = function(v){ v = String(v==null?'':v); return /[";\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; };
+  var L = [['Bölüm','Ünite','Alan 1','Alan 2','Alan 3','Alan 4','Alan 5','Alan 6'].join(';')];
+  V.uniteler.filter(f).forEach(function(x){
+    L.push(['Ünite ilerlemesi', x.ad, 'Aşamalar: '+['hub','ogren','oyun','olcme'].filter(function(k){ return x.z[k]; }).join('+'), 'Tamamlandı: '+(x.tamam?'evet':'hayır'),
+      'Öz değ. anladım/kısmen/tekrar: '+x.ozS.tamam+'/'+x.ozS.kismen+'/'+x.ozS.tekrar, 'Tekrar istenen: '+x.tekrarKonu.join(', '), 'Zorlanılan soru: '+x.zSay, 'Kendimi Değ.: '+x.dI+'/'+x.dT].map(h).join(';'));
+  });
+  V.sorular.filter(f).forEach(function(q){ L.push(['Yanlış soru', q.ad, q.soru, q.n, '', '', '', ''].map(h).join(';')); });
+  V.ogrenciler.filter(f).forEach(function(o){ L.push(['Öğrenci', o.ad, o.isim, 'Oyun: '+o.oyun, 'Son puan: '+o.puan, o.ilk, o.son, ''].map(h).join(';')); });
+  var blob = new Blob(['﻿'+L.join('\r\n')], {type:'text/csv;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ogretmen-raporu-'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+function ac(){
+  document.getElementById('kilit').hidden = true;
+  document.getElementById('rapor').hidden = false;
+  ciz();
+}
+var girildi = false;
+try{ girildi = sessionStorage.getItem('dkabOgretmenRaporuAcik')==='1'; }catch(e){}
+if(girildi) ac(); else { document.getElementById('kilit').hidden = false; document.getElementById('sifre').focus(); }
+document.getElementById('kilitForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  if(document.getElementById('sifre').value===SIFRE){
+    try{ sessionStorage.setItem('dkabOgretmenRaporuAcik','1'); }catch(err){}
+    ac();
+  } else document.getElementById('kilitHata').textContent = 'Şifre doğru değil.';
+});
+document.getElementById('sinifSec').addEventListener('change', ciz);
+document.getElementById('yazdirBtn').addEventListener('click', function(){ window.print(); });
+document.getElementById('csvBtn').addEventListener('click', csv);
+document.getElementById('yenileBtn').addEventListener('click', ciz);
+})();
+</script>
+</body>
+</html>
