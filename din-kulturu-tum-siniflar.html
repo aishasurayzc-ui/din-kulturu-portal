@@ -1913,12 +1913,13 @@ const SINIFLAR = [
     {dosya:'unite4.html', ikon:'🕌', msi:'history_edu', baslik:"Allah’ın Kulu ve Elçisi: Hz. Muhammed"},
     {dosya:'unite5.html', ikon:'💭', msi:'psychology', baslik:"İslam Düşüncesinde Yorumlar"}
   ]},
-  { id:'s8', ad:'8. Sınıf', ikon:'⚖️', msi:'balance', vurgu:'--navy', slogan:'Kader ve Sorumluluk', klasor:'din-kulturu-8sinif-1unite', yaziliSiniri:2, sonekler:['8','82','83','84','85'], uniteler:[
+  { id:'s8', ad:'8. Sınıf', ikon:'⚖️', msi:'balance', vurgu:'--navy', slogan:'Kader ve Sorumluluk', klasor:'din-kulturu-8sinif-1unite', yaziliSiniri:2, sonekler:['8','82','83','84','85','86'], uniteler:[
     {dosya:'index.html', ikon:'⚖️', msi:'balance', baslik:"Kader İnancı"},
     {dosya:'unite2.html', ikon:'🤲', msi:'volunteer_activism', baslik:"Zekât ve Sadaka"},
     {dosya:'unite3.html', ikon:'⏳', msi:'diversity_3', baslik:"Din ve Hayat"},
     {dosya:'unite4.html', ikon:'🌙', msi:'star', baslik:"Hz. Muhammed'in Örnekliği"},
-    {dosya:'unite5.html', ikon:'📖', msi:'auto_stories', baslik:"Kur’an-ı Kerim ve Özellikleri"}
+    {dosya:'unite5.html', ikon:'📖', msi:'auto_stories', baslik:"Kur’an-ı Kerim ve Özellikleri"},
+    {dosya:'unite6.html', ikon:'🔭', msi:'science', baslik:"Müslümanların Bilim ve Kültüre Katkısı"} /* 2026-11-01: MEB 8.5 */
   ]},
   /* Lise (9-12. sınıf): içerikler hazırlanana kadar uniteler:[] olarak kalır —
      TOPLAM_UNITE/istatistiklere sahte bir sayı eklenmez, sinifPaneliHtml() bu
@@ -4280,6 +4281,7 @@ const ALT_KONULAR = {
   's8-u2':['Zekâtın anlamı ve önemi','Zekâta tabi mallar ve oranlar','Zekât kimlere verilir?','Sadaka ve türleri','İnfak ve paylaşma','Zekâtın toplumsal faydaları'],
   's8-u3':['Din ve aile','Din, kültür ve sanat','Dinin temel gayesi','Din ve temizlik','Din ve sorumluluk','Vatan sevgisi'],
   's8-u4':['Davranışlarıyla örnekliği','İnsanlara değer vermesi','Danışarak iş yapması','Sabrı ve kararlılığı','Merhameti ve affediciliği','Hakkı gözetmesi'],
+  's8-u6':['İslam kültür ve medeniyetinin esasları','İslam’da bilimin önemi','Müslüman bilim insanları'],
   's8-u5':['Kur’an’ın temel özellikleri','Kur’an’ın ana konuları','Kur’an’da akıl ve bilgi','Kur’an’da insan ve ahlak','Kur’an’ın anlaşılması','Kur’an ve hayat'],
   /* Denetimde eksik bulunanlar — sayfalarındaki gerçek bölüm başlıkları. */
   's4-u6':['Allah’ı tanıyorum','Allah bizi seviyor','Allah’a dua ediyorum','Kelime-i tevhit ve kelime-i şehadet','Âmentü duası'],
@@ -4459,7 +4461,7 @@ function uniteDerinBaglantilarHtml(sinif, href, index){
      sinav-merkezi/lgs-hazirlik/index.html'e gider (bkz. o dosyadaki yeni
      URLSearchParams okuma bloğu). Ünite sırası SINIFLAR'daki s8 dizisiyle
      birebir aynı olduğundan index+1 = uniteN eşleşmesi güvenlidir. */
-  const lgsGirisi = (sinif.id==='s8')
+  const lgsGirisi = (sinif.id==='s8' && index < 5) /* LGS soru havuzu unite1-5; 6. sayfa (MEB 8.5) için henüz soru yok */
     ? '<a class="uk-derin-link" href="sinav-merkezi/lgs-hazirlik/index.html?kart=konular&sekme=kazanim-testleri&unite=unite'+(index+1)+'"><span class="msi" aria-hidden="true">target</span>🎯 LGS Soruları</a>'
     : '';
   return '<div class="uk-derin-baglantilar">'+baglantilar.map(function(b){

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8. Sınıf Din Kültürü - 5. Ünite: Müslümanların Bilim ve Kültüre Katkısı — Oyun Merkezi</title>
+<meta name="description" content="8. Sınıf Din Kültürü - 5. Ünite: Müslümanların Bilim ve Kültüre Katkısı — hafıza kartları, zaman şeridi, esas avı ve iki kişilik bilgi yarışması.">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../ortak/oyun-merkezi.css">
+<style id="u86-oyun-stil">
+.u86-esas-secenek{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+.u86-esas-secenek button{font:inherit;cursor:pointer;border:2px solid #c8d6ee;background:#fff;border-radius:10px;padding:10px 16px;min-height:44px}
+.u86-esas-secenek button.dogru{background:#e6f6ec;border-color:#1d7a3a}.u86-esas-secenek button.yanlis{background:#fdecec;border-color:#c92a2a}
+.u86-sira-liste{list-style:none;padding:0;margin:12px auto;max-width:560px;display:grid;gap:8px}
+.u86-sira-liste li{background:#e6f6ec;border:1px solid #9fd5b3;border-radius:10px;padding:8px 12px}
+.u86-sira-liste li small{color:#475569;margin-left:6px}
+</style>
+</head>
+<body>
+<div id="portalNav" data-sinif="8" data-unite="6" data-asama="oyun"></div>
+<link rel="stylesheet" href="../ortak/portal-nav.css">
+<script src="../ortak/portal-nav.js"></script>
+
+<header>
+  <p style="margin:0 0 6px;font-size:1.1em;font-weight:bold;letter-spacing:.5px;opacity:.95;">8. SINIF — 5. ÜNİTE</p>
+  <h1>🔭 Müslümanların Bilim ve Kültüre Katkısı</h1>
+  <p>Din Kültürü ve Ahlak Bilgisi — İnteraktif Oyunlar</p>
+  <p style="margin-top:10px;font-size:.95em;opacity:.95;">👩‍🏫 Hazırlayan: DKAB Öğretmeni Ayşe Yazıcı</p>
+  <div class="gb-kontrol-satiri" style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;">
+    <button type="button" id="temaDegistirBtn" class="tema-degistir-btn" onclick="temaDegistir()" aria-label="Koyu/açık tema değiştir">🌙 Koyu Tema</button>
+  </div>
+</header>
+<section class="hero">
+  <h2 class="hero-baslik">🎮 Oyun Merkezi</h2>
+  <p class="hero-alt">Bu ünitedeki oyunlarla konuyu pekiştir.</p>
+  <div class="hero-butonlar"><button class="hero-btn hero-btn-birincil" onclick="window.location.href='unite6.html'">◀ Ünite Sayfasına Dön</button></div>
+</section>
+
+<div id="oyun-gruplari" role="navigation" aria-label="Oyun merkezi menüsü"></div>
+
+<main>
+<section id="ezhafiza86">
+  <h2>🧠 Hafıza Kartları: Bilim İnsanları</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Müslüman bilim insanlarını katkılarıyla eşleştirebileceksin.</div>
+  <div class="aciklama">İki kart çevir. Bilim insanı ile onun katkısı eşleşirse kartlar açık kalır.</div>
+  <div class="oyun-bilgi"><span>✅ Bulunan: <b id="hf86Bulunan">0</b>/<b>8</b></span><span>🔁 Hamle: <b id="hf86Hamle">0</b></span></div>
+  <div class="ez-hafiza-izgara" id="hf86Izgara" style="grid-template-columns:repeat(4,1fr);"></div>
+  <div class="sonuc-kutusu" id="hf86Sonuc" role="status"></div>
+  <button class="eylem" onclick="hf86Baslat()">🔄 Yeni Oyun</button>
+</section>
+
+<section id="ezsira86">
+  <h2>📜 Zaman Şeridi</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Bilim insanlarını yaşadıkları döneme göre sıralayabileceksin.</div>
+  <div class="aciklama">En eski dönemden başlayarak bilim insanlarına sırayla tıkla. Yanlış seçimde ipucu verilir.</div>
+  <div class="oyun-bilgi"><span>✅ Dizilen: <b id="zs86Dizilen">0</b>/<b>10</b></span><span>❌ Hata: <b id="zs86Hata">0</b></span></div>
+  <ol class="u86-sira-liste" id="zs86Liste"></ol>
+  <div class="kelime-banka" id="zs86Banka"></div>
+  <div class="sonuc-kutusu" id="zs86Sonuc" role="status"></div>
+  <button class="eylem" onclick="zs86Baslat()">🔀 Karıştır ve Başla</button>
+</section>
+
+<section id="ezeslestir86">
+  <h2>🏛️ Esas Avı</h2>
+  <div class="oyun-amaci">🎯 Bu oyun sonunda: Örnekleri İslam kültür ve medeniyetinin esaslarıyla ilişkilendirebileceksin.</div>
+  <div class="aciklama">Verilen örnek hangi esası yansıtıyor? Doğru esası seç.</div>
+  <div class="oyun-bilgi"><span>🔁 Tur: <b id="ea86Tur">1</b>/<b>8</b></span><span>✅ Doğru: <b id="ea86Dogru">0</b></span></div>
+  <div class="balon-durum" id="ea86Ornek"></div>
+  <div class="u86-esas-secenek" id="ea86Secenekler"></div>
+  <div class="sonuc-kutusu" id="ea86Sonuc" role="status"></div>
+  <button class="eylem" id="ea86Sonraki" style="display:none" onclick="ea86Sonraki()">➡️ Sonraki</button>
+  <button class="eylem" onclick="ea86Baslat()">▶️ Başla</button>
+</section>
+
+<section id="quizbattle86">
+  <h2>⚔️ Quiz Battle</h2>
+  <div class="oyun-amaci">🎯 Bu oyunun amacı: Ünitenin temel bilgilerini arkadaşınla yarışarak pekiştirmek.</div>
+  <div class="aciklama">Aynı cihazdan sırayla oynayın! Sorular sırayla gelir, doğru cevaplayan puan alır.</div>
+  <div class="oyun-bilgi"><span>❓ Soru: <b id="qb86SoruNo">1</b>/<b id="qb86Toplam">10</b></span><span>🔵 1. Oyuncu: <b id="qb86Puan1">0</b></span><span>🔴 2. Oyuncu: <b id="qb86Puan2">0</b></span></div>
+  <div id="qb86ElDegistir" style="text-align:center;"></div>
+  <div id="qb86SiraKimde" style="text-align:center;font-weight:bold;"></div>
+  <div id="qb86SoruMetin" class="balon-durum"></div>
+  <div id="qb86Secenekler" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;"></div>
+  <div class="sonuc-kutusu" id="qb86Sonuc"></div>
+  <div id="qb86YenidenBaslat"></div>
+  <button class="eylem" onclick="qb86Baslat()">🎮 Oyuna Başla</button>
+</section>
+</main>
+
+<script src="../ortak/oyun-merkezi.js"></script>
+<script>
+const LS_PUAN_ANAHTARI = 'dkabPuanDurumu8sinif';
+const UNITE_KIMLIK = '8-6';
+const OYUN_LISTESI = [
+  {id:'ezhafiza', kategori:'ezber', ikon:'🧠', baslik:'Hafıza Kartları', aciklama:'Bilim insanlarını katkılarıyla eşleştir.'},
+  {id:'ezsira', kategori:'ezber', ikon:'📜', baslik:'Zaman Şeridi', aciklama:'Bilim insanlarını dönemlerine göre sırala.'},
+  {id:'ezeslestir', kategori:'ezber', ikon:'🏛️', baslik:'Esas Avı', aciklama:'Örnekleri medeniyetin esaslarıyla eşleştir.'},
+  {id:'quizbattle', kategori:'ikikisilik', ikon:'⚔️', baslik:'Quiz Battle', aciklama:'İki oyuncu sırayla yarışır, doğru cevaplayan puan alır.'}
+];
+/* Bu sayfada yalnızca oyunu olan kategoriler gösterilir (boş sekme kalmasın). */
+for(let i = OM_KATEGORILER.length - 1; i >= 0; i--){
+  if(!OYUN_LISTESI.some(o => o.kategori === OM_KATEGORILER[i].anahtar)) OM_KATEGORILER.splice(i, 1);
+}
+oyunMerkeziOlustur(OYUN_LISTESI, '86', 'unite6.html');
+
+const HF86 = [{"a": "Câbir bin Hayyân", "b": "Kimyada deney"}, {"a": "Hârizmî", "b": "Cebir ve algoritma"}, {"a": "İbn Sînâ", "b": "El-Kânûn fi't-Tıb"}, {"a": "İbnü'l-Heysem", "b": "Işık ve görme (optik)"}, {"a": "Cezerî", "b": "Otomatik makineler"}, {"a": "İbn Haldûn", "b": "Mukaddime"}, {"a": "Mimar Sinan", "b": "Selimiye Camii"}, {"a": "Fâtıma el-Fihrî", "b": "Karaviyyîn"}];
+let hf86Acik = [], hf86Bulunan = 0, hf86Hamle = 0, hf86Kilit = false;
+function hf86Baslat(){
+  hf86Acik = []; hf86Bulunan = 0; hf86Hamle = 0; hf86Kilit = false;
+  document.getElementById('hf86Bulunan').textContent = '0'; document.getElementById('hf86Hamle').textContent = '0';
+  document.getElementById('hf86Sonuc').textContent = '';
+  const kartlar = []; HF86.forEach((x, i) => { kartlar.push({i, tip:'a', metin:x.a}); kartlar.push({i, tip:'b', metin:x.b}); });
+  const iz = document.getElementById('hf86Izgara'); iz.innerHTML = '';
+  karistir(kartlar).forEach(k => {
+    const kart = document.createElement('button'); kart.type = 'button'; kart.className = 'hafiza-kart';
+    kart.dataset.i = k.i; kart.dataset.tip = k.tip; kart.setAttribute('aria-label', 'Kapalı kart');
+    kart.innerHTML = '<div class="hafiza-on">🔭</div><div class="hafiza-arka">' + k.metin + '</div>';
+    kart.onclick = () => hf86Tikla(kart, k.metin); iz.appendChild(kart);
+  });
+}
+function hf86Tikla(kart, metin){
+  if(hf86Kilit || kart.classList.contains('acik') || kart.classList.contains('bulundu')) return;
+  kart.classList.add('acik'); kart.setAttribute('aria-label', metin); hf86Acik.push(kart);
+  if(hf86Acik.length < 2) return;
+  hf86Hamle++; document.getElementById('hf86Hamle').textContent = hf86Hamle; hf86Kilit = true;
+  const [a, b] = hf86Acik;
+  if(a.dataset.i === b.dataset.i && a.dataset.tip !== b.dataset.tip){
+    a.classList.add('bulundu'); b.classList.add('bulundu'); hf86Bulunan++;
+    document.getElementById('hf86Bulunan').textContent = hf86Bulunan; hf86Acik = []; hf86Kilit = false;
+    if(hf86Bulunan === HF86.length) document.getElementById('hf86Sonuc').textContent = '🎉 Tebrikler! ' + hf86Hamle + ' hamlede tüm çiftleri buldun!';
+  } else setTimeout(() => { a.classList.remove('acik'); b.classList.remove('acik'); a.setAttribute('aria-label','Kapalı kart'); b.setAttribute('aria-label','Kapalı kart'); hf86Acik = []; hf86Kilit = false; }, 900);
+}
+
+const ZS86 = [{"ad": "Câbir bin Hayyân", "donem": "8. yüzyıl"}, {"ad": "Hârizmî", "donem": "9. yüzyıl"}, {"ad": "Fâtıma el-Fihrî", "donem": "9. yüzyıl"}, {"ad": "İbn Sînâ", "donem": "10-11. yüzyıl"}, {"ad": "İbnü'l-Heysem", "donem": "10-11. yüzyıl"}, {"ad": "Cezerî", "donem": "12-13. yüzyıl"}, {"ad": "İbn Haldûn", "donem": "14. yüzyıl"}, {"ad": "Ali Kuşçu", "donem": "15. yüzyıl"}, {"ad": "Mimar Sinan", "donem": "16. yüzyıl"}, {"ad": "Fuat Sezgin", "donem": "20-21. yüzyıl"}];
+let zs86Sira = 0, zs86Hata = 0;
+function zs86Baslat(){
+  zs86Sira = 0; zs86Hata = 0;
+  document.getElementById('zs86Dizilen').textContent = '0'; document.getElementById('zs86Hata').textContent = '0';
+  document.getElementById('zs86Liste').innerHTML = ''; document.getElementById('zs86Sonuc').textContent = '';
+  const banka = document.getElementById('zs86Banka'); banka.innerHTML = '';
+  karistir(ZS86.map((x, i) => i)).forEach(i => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'kelime-tas'; b.textContent = ZS86[i].ad;
+    b.onclick = () => zs86Sec(i, b); banka.appendChild(b);
+  });
+}
+function zs86Sec(i, b){
+  const s = document.getElementById('zs86Sonuc');
+  if(i === zs86Sira){
+    const li = document.createElement('li'); li.innerHTML = ZS86[i].ad + '<small>' + ZS86[i].donem + '</small>';
+    document.getElementById('zs86Liste').appendChild(li); b.remove(); zs86Sira++;
+    document.getElementById('zs86Dizilen').textContent = zs86Sira; s.textContent = '';
+    if(zs86Sira === ZS86.length) s.textContent = '🎉 Zaman şeridini tamamladın! Hata sayın: ' + zs86Hata;
+  } else {
+    zs86Hata++; document.getElementById('zs86Hata').textContent = zs86Hata;
+    s.textContent = '✗ ' + ZS86[i].ad + ' ' + ZS86[i].donem + ' yaşadı. Sırada daha eski bir dönem var; tekrar dene.';
+  }
+}
+
+const EA86 = [{"ornek": "Külliyede cami, medrese, şifahane ve aşevinin bir arada olması", "esas": "Bütünsellik"}, {"ornek": "Tercüme edilen bilgilerin yorumlanıp yeni eserlere dönüştürülmesi", "esas": "Özgünlük"}, {"ornek": "Farklı millet ve dillerden insanların medeniyete katkı vermesi", "esas": "Evrensellik"}, {"ornek": "Medrese, kütüphane ve rasathanelerin kurulması", "esas": "Bilimsellik"}, {"ornek": "Dünya ve ahiret hayatının birlikte gözetilmesi", "esas": "Bütünsellik"}, {"ornek": "Vahye dayanan, kendine has bir kimlik taşıması", "esas": "Özgünlük"}, {"ornek": "Bütün insanlığa hitap etmesi", "esas": "Evrensellik"}, {"ornek": "Gözlem ve deneye önem verilmesi", "esas": "Bilimsellik"}];
+const EA86_ESASLAR = ['Bütünsellik', 'Özgünlük', 'Evrensellik', 'Bilimsellik'];
+let ea86Sira = [], ea86I = 0, ea86Dogru = 0;
+function ea86Baslat(){ ea86Sira = karistir(EA86.slice()); ea86I = 0; ea86Dogru = 0; document.getElementById('ea86Dogru').textContent = '0'; ea86Goster(); }
+function ea86Goster(){
+  const s = ea86Sira[ea86I];
+  document.getElementById('ea86Tur').textContent = ea86I + 1; document.getElementById('ea86Ornek').textContent = s.ornek;
+  document.getElementById('ea86Sonuc').textContent = ''; document.getElementById('ea86Sonraki').style.display = 'none';
+  const k = document.getElementById('ea86Secenekler'); k.innerHTML = '';
+  EA86_ESASLAR.forEach(x => { const b = document.createElement('button'); b.type = 'button'; b.textContent = x; b.onclick = () => ea86Cevap(x, b); k.appendChild(b); });
+}
+function ea86Cevap(x, b){
+  const s = ea86Sira[ea86I], k = document.getElementById('ea86Secenekler');
+  if(k.dataset.kilit === '1') return; k.dataset.kilit = '1';
+  k.querySelectorAll('button').forEach(y => { if(y.textContent === s.esas) y.classList.add('dogru'); });
+  const r = document.getElementById('ea86Sonuc');
+  if(x === s.esas){ ea86Dogru++; document.getElementById('ea86Dogru').textContent = ea86Dogru; r.textContent = '✓ Doğru!'; }
+  else { b.classList.add('yanlis'); r.textContent = '✗ Bu örnek ' + s.esas + ' esasını yansıtır.'; }
+  if(ea86I < ea86Sira.length - 1) document.getElementById('ea86Sonraki').style.display = '';
+  else r.textContent += ' — Oyun bitti: ' + ea86Dogru + ' / ' + ea86Sira.length + ' doğru.';
+}
+function ea86Sonraki(){ document.getElementById('ea86Secenekler').dataset.kilit = ''; ea86I++; ea86Goster(); }
+
+const QB86_SORULAR = [{"soru": "Bir toplumun inançlarından, dilinden, sanatından ve geleneklerinden oluşan maddi ve manevi değerlerin bütününe ne ad verilir?", "secenekler": ["Medeniyet", "Kültür", "Bilim", "Teknoloji"], "dogru": 1}, {"soru": "Aşağıdakilerden hangisi İslam kültür ve medeniyetinin esaslarından biri değildir?", "secenekler": ["Bütünsellik", "Evrensellik", "Bilimsellik", "Yerellik"], "dogru": 3}, {"soru": "Selimiye Camii'nin çevresinde medrese, kütüphane ve çarşının birlikte planlanması İslam medeniyetinin hangi esasını en iyi örnekler?", "secenekler": ["Bütünsellik", "Evrensellik", "Özgünlük", "Bilimsellik"], "dogru": 0}, {"soru": "Kur'an-ı Kerim'in ilk inen ayetleri hangi emirle başlar?", "secenekler": ["Düşün!", "Oku!", "Yaz!", "Dinle!"], "dogru": 1}, {"soru": "Gözlem, deney ve akıl yürütme yoluyla elde edilen sistemli ve doğrulanabilir bilgiler bütününe ne denir?", "secenekler": ["Kültür", "Gelenek", "Bilim", "Medeniyet"], "dogru": 2}, {"soru": "\"Bilenlerle bilmeyenler bir olur mu?\" (Zümer suresi, 9. ayet) Bu ayetten aşağıdaki sonuçlardan hangisine ulaşılabilir?", "secenekler": ["Bilgi, insana değer ve sorumluluk kazandırır.", "Bilgi yalnızca âlimlere özgüdür.", "Dünya bilgisi önemsizdir.", "Bilgi sahibi olmak ibadetin yerini tutar."], "dogru": 0}, {"soru": "Abbasiler döneminde Bağdat'ta kurulan; tercümelerin yapıldığı ve yeni araştırmaların yürütüldüğü bilim merkezi aşağıdakilerden hangisidir?", "secenekler": ["Karaviyyîn", "Beytü'l-Hikme", "Süleymaniye Külliyesi", "Uluğ Bey Rasathanesi"], "dogru": 1}, {"soru": "\"Algoritma\" kelimesi hangi bilim insanının adından türemiştir?", "secenekler": ["İbn Sînâ", "Cezerî", "Hârizmî", "İbn Haldûn"], "dogru": 2}, {"soru": "\"El-Kânûn fi't-Tıb\" adlı eseri yüzyıllarca tıp eğitiminde ders kitabı olarak okutulan bilim insanı kimdir?", "secenekler": ["İbn Sînâ", "Ali Kuşçu", "Câbir bin Hayyân", "İbnü'l-Heysem"], "dogru": 0}, {"soru": "Su ile çalışan saatler ve otomatik makineler tasarlayan, bu yüzden sibernetik ve robot biliminin öncülerinden sayılan bilim insanı kimdir?", "secenekler": ["Hârizmî", "Cezerî", "Fuat Sezgin", "İbn Haldûn"], "dogru": 1}];
+function qb86Baslat(){ ikiliOyunBaslat({onek:'qb86', sorular:QB86_SORULAR}); }
+
+document.addEventListener('DOMContentLoaded', function(){ hf86Baslat(); zs86Baslat(); ea86Baslat(); });
+</script>
+</body>
+</html>

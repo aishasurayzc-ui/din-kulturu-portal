@@ -240,14 +240,17 @@ window.MEB_ESLESTIRME = {
    },
    {
     "meb": 5,
-    "portal": []
+    "portal": [
+     6
+    ]
    }
   ],
   "ek": [],
   "notlar": {
    "s8-u3": "MEB 8.3 “Din ve Sosyal Hayat” ünitesine karşılık gelir.",
    "s8-u4": "MEB 8.4 ünitesinin Hz. Muhammed’in örnekliği bölümüne (DKAB.8.4.3) karşılık gelir.",
-   "s8-u5": "MEB 8.4 ünitesinin Kur’an-ı Kerim’in rehberliği bölümüne karşılık gelir."
+   "s8-u5": "MEB 8.4 ünitesinin Kur’an-ı Kerim’in rehberliği bölümüne karşılık gelir.",
+   "s8-u6": "MEB 8.5 “Müslümanların Bilim ve Kültüre Katkısı” ünitesine karşılık gelir (2026-11-01)."
   }
  },
  "s9": {

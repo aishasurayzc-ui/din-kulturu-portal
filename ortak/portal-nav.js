@@ -37,9 +37,10 @@ var UNITE_ADLARI = {
   "s7-1":"Melek ve Ahiret İnancı","s7-2":"Hac ve Kurban","s7-3":"Ahlaki Davranışlar",
   "s7-4":"Allah’ın Kulu ve Elçisi: Hz. Muhammed","s7-5":"İslam Düşüncesinde Yorumlar",
   "s8-1":"Kader İnancı","s8-2":"Zekât ve Sadaka","s8-3":"Din ve Hayat",
-  "s8-4":"Hz. Muhammed’in Örnekliği","s8-5":"Kur’an-ı Kerim ve Özellikleri"
+  "s8-4":"Hz. Muhammed’in Örnekliği","s8-5":"Kur’an-ı Kerim ve Özellikleri",
+  "s8-6":"Müslümanların Bilim ve Kültüre Katkısı"
 };
-var UNITE_SAYISI = {4:6, 5:5, 6:5, 7:5, 8:5};
+var UNITE_SAYISI = {4:6, 5:5, 6:5, 7:5, 8:6};
 var YENI_MOTOR_DESTEKLI = {
   4:[1,2,3,4,5], 5:[1,2,3,4,5], 6:[1,2,3,4,5], 7:[1,2,3,4,5], 8:[1,2,3,4,5]
 };
