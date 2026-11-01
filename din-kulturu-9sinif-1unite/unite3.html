@@ -1844,19 +1844,19 @@ nav.sekmeler{position:sticky;top:0;z-index:50;background:rgba(246,244,239,.96);
 
 <script>
 /* ---------- SEKME GEZİNMESİ ---------- */
-function sekmeAc(ad){
+function sekmeAc(ad, kaydirma){
   document.querySelectorAll('[data-tab]').forEach(function(el){
     el.classList.toggle('panel-aktif', el.getAttribute('data-tab') === ad);
   });
   document.querySelectorAll('.sekme-btn').forEach(function(b){
     b.classList.toggle('aktif', b.getAttribute('data-git') === ad);
   });
-  document.querySelector('.wrap').scrollIntoView({behavior:'smooth', block:'start'});
+  if(kaydirma !== false) document.querySelector('.wrap').scrollIntoView({behavior:'smooth', block:'start'});
 }
 document.querySelectorAll('.sekme-btn').forEach(function(b){
   b.addEventListener('click', function(){ sekmeAc(b.getAttribute('data-git')); });
 });
-sekmeAc('hedef');
+sekmeAc('hedef', false); /* 2026-11-01: sayfa açılırken kaydırma yok; başlık ve video görünür kalsın */
 
 /* ---------- ÖZ DEĞERLENDİRME (tarayıcıda hatırlanır) ---------- */
 (function(){
