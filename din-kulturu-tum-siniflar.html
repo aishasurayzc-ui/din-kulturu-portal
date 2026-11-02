@@ -1445,6 +1445,445 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
 </style>
 <!-- 2026-11-02 ana sayfa dönüşümü (ek stiller) -->
 <link rel="stylesheet" href="assets/anasayfa/anasayfa.css">
+<style id="phYeniStil">
+/* ======================================================================
+   2026-11-02 — ANA SAYFA YENİLEMESİ (ek katman, anasayfa.css'ten sonra)
+   Hero başlığı · Dijital Öğrenme Dünyası · Dijital Oyun Merkezi ·
+   Sınıf kartı renk kimliği · yatay Öğrenme Yolculuğu. Mevcut kimlikler
+   ve JavaScript bağlantıları korunur; renkler portal değişkenlerinden.
+====================================================================== */
+
+/* ---------- HERO başlığı ---------- */
+.ph-baslik{ margin:0; display:flex; flex-direction:column; align-items:flex-start; gap:clamp(14px, 2vw, 22px); }
+.ph-baslik-marka{
+  display:inline-flex; align-items:center; gap:12px; font-size:clamp(.74rem, 1.05vw, .86rem); font-weight:800;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--h-ikincil); line-height:1.3;
+}
+.ph-baslik-marka > span{ width:28px; height:2px; border-radius:2px; background:#5eead4; flex-shrink:0; }
+.ph-baslik-ana{
+  display:block; font-size:clamp(2.6rem, 6.2vw, 5rem); line-height:1.02; font-weight:800; letter-spacing:-.035em; color:#fff;
+  text-wrap:balance; filter:drop-shadow(0 10px 30px rgba(2,8,23,.35));
+}
+.ph-baslik-vurgu{
+  background:linear-gradient(100deg, #ffffff 0%, color-mix(in srgb, #5eead4 80%, #fff) 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.ph-baslik-ana em{
+  font-family:"PH Playfair", Georgia, serif; font-style:italic; font-weight:600; letter-spacing:0; color:var(--h-vurgu); white-space:nowrap;
+}
+.ph-karsilama--genis{ max-width:34em; font-size:clamp(1.02rem, 1.4vw, 1.18rem); line-height:1.6; margin-top:clamp(16px, 2.2vw, 24px); }
+.ph-ikinci-dugme .msi{ font-size:20px; }
+.ph-ikinci-dugme--oyun{ background:linear-gradient(135deg, rgba(251,191,119,.24), rgba(249,115,22,.18)); border-color:rgba(251,191,119,.5); cursor:pointer; font:inherit; font-weight:800; }
+.ph-ikinci-dugme--oyun:hover{ background:linear-gradient(135deg, rgba(251,191,119,.36), rgba(249,115,22,.28)); border-color:#fbbf77; }
+.ph-metin-dugme--alt{ margin-top:14px; font-size:.88rem; }
+@media (max-width:1023px){
+  .ph-baslik{ align-items:center; }
+  .ph-baslik-marka{ justify-content:center; }
+  .ph-karsilama--genis{ margin-inline:auto; }
+}
+@media (max-width:640px){
+  .ph-baslik-ana{ font-size:clamp(2.2rem, 10.5vw, 3rem); }
+  .ph-baslik-marka{ letter-spacing:.14em; font-size:.68rem; }
+  .ph-baslik-marka > span{ width:16px; }
+  .ph-ikinci-dugme{ flex:1 1 100%; justify-content:center; }
+}
+
+/* ---------- HERO sahnesi: derinlik (3B) ---------- */
+.ph-sahne{ perspective:1400px; }
+.ph-sahne::before{ /* zemin ışığı */
+  content:""; position:absolute; left:12%; right:12%; bottom:-2%; height:16%; border-radius:50%;
+  background:radial-gradient(closest-side, rgba(94,234,212,.45), rgba(94,234,212,0)); filter:blur(6px); pointer-events:none;
+}
+.ph-sahne-amblem{ filter:drop-shadow(0 28px 36px rgba(2,8,23,.45)); }
+@media (min-width:1024px){
+  .ph-sahne{ transform:rotateY(-9deg) rotateX(5deg); transform-style:preserve-3d; transition:transform .8s cubic-bezier(.2,.7,.2,1); }
+  .ph-acilis:hover .ph-sahne{ transform:rotateY(-3deg) rotateX(2deg); }
+}
+.ph-kart{ box-shadow:0 28px 50px -20px rgba(2,8,23,.75), inset 0 1px 0 rgba(255,255,255,.25); }
+
+/* ---------- DİJİTAL ÖĞRENME DÜNYASI ---------- */
+.ph-alan--etkilesim{ --renk:#0891b2; }
+[data-tema="dark"] .ph-alan--etkilesim{ --renk:#22d3ee; }
+.ph-dunya-gorsel{
+  position:relative; z-index:1; margin:-4px -4px 2px; border-radius:18px; overflow:hidden; aspect-ratio:320/150;
+  background:
+    radial-gradient(60% 80% at 50% 110%, color-mix(in srgb, var(--renk) 30%, transparent), transparent 70%),
+    linear-gradient(160deg, color-mix(in srgb, var(--renk) 16%, var(--yuzey)), color-mix(in srgb, var(--renk) 6%, var(--yuzey)));
+  border:1px solid color-mix(in srgb, var(--renk) 18%, var(--kenar));
+}
+.ph-dunya-gorsel svg{ position:absolute; inset:6% 4% 2%; width:92%; height:92%; transition:transform .5s cubic-bezier(.2,.7,.2,1); }
+.ph-dunya-gorsel .ph-alan-harf{ display:none; }
+.ph-alan:hover .ph-dunya-gorsel svg{ transform:translateY(-4px) scale(1.035); }
+.ph-alan{ transition:transform .3s ease, box-shadow .3s ease; }
+.ph-alan:hover{ transform:translateY(-4px); box-shadow:var(--golge-lg); }
+.ph-baglanti--dugme{ background:none; border:0; padding:0; cursor:pointer; font-family:inherit; }
+
+
+/* ---------- DİJİTAL OYUN MERKEZİ ---------- */
+.ph-oyunlar{
+  color:#fff; overflow:hidden; isolation:isolate;
+  background:
+    radial-gradient(40% 60% at 90% 0%, rgba(249,115,22,.28), transparent 70%),
+    radial-gradient(45% 60% at 0% 100%, color-mix(in srgb, var(--turkuaz) 35%, transparent), transparent 70%),
+    linear-gradient(160deg, color-mix(in srgb, var(--navy) 85%, #000), var(--navy) 60%, color-mix(in srgb, var(--navy) 70%, var(--mavi)));
+}
+.ph-oyunlar::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.6;
+  background-image:radial-gradient(rgba(255,255,255,.12) 1.2px, transparent 1.4px); background-size:26px 26px;
+  -webkit-mask-image:linear-gradient(180deg, #000, transparent 80%); mask-image:linear-gradient(180deg, #000, transparent 80%);
+}
+.ph-oyunlar .ph-h2{ color:#fff; }
+.ph-oyunlar .ph-h2 span{ background:linear-gradient(90deg, #fbbf77, #f97316); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.ph-oyunlar .ph-giris{ color:rgba(255,255,255,.78); }
+.ph-oyun-ust{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px 40px; margin-bottom:clamp(28px, 4vw, 48px); }
+.ph-oyun-ust > div{ max-width:640px; }
+.ph-oyun-sayac{ display:flex; align-items:center; gap:14px; padding:14px 22px 14px 18px; border-radius:22px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+.ph-oyun-sayac b{ font-size:clamp(3rem, 6vw, 4.4rem); line-height:1; font-weight:900; letter-spacing:-.04em; background:linear-gradient(160deg, #fff, #fbbf77); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.ph-oyun-sayac span{ font-size:.82rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.8); line-height:1.35; }
+.ph-oyun-izgara{ list-style:none; margin:0; padding:0; display:grid; gap:16px; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); }
+.ph-oyun-kart{
+  position:relative; width:100%; height:100%; text-align:left; cursor:pointer; overflow:hidden; isolation:isolate;
+  display:flex; flex-direction:column; gap:8px; padding:20px 20px 18px; border-radius:22px; color:#fff; font:inherit;
+  background:linear-gradient(155deg, color-mix(in srgb, var(--o1) 30%, rgba(255,255,255,.06)), rgba(255,255,255,.04));
+  border:1px solid color-mix(in srgb, var(--o1) 40%, rgba(255,255,255,.12));
+  box-shadow:0 18px 36px -22px rgba(0,0,0,.7);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease;
+}
+.ph-oyun-kart::before{ content:""; position:absolute; z-index:-1; width:180px; height:180px; right:-60px; top:-70px; border-radius:50%; background:radial-gradient(closest-side, color-mix(in srgb, var(--o1) 55%, transparent), transparent); transition:transform .5s ease; }
+.ph-oyun-kart:hover, .ph-oyun-kart:focus-visible{ transform:translateY(-6px) rotate(-.4deg); border-color:var(--o1); box-shadow:0 28px 50px -22px color-mix(in srgb, var(--o1) 80%, #000); }
+.ph-oyun-kart:hover::before{ transform:scale(1.35); }
+.ph-oyun-kart:focus-visible{ outline:3px solid #fbbf77; outline-offset:3px; }
+.ph-oyun-ikon{
+  width:58px; height:58px; display:grid; place-items:center; font-size:30px; border-radius:18px; margin-bottom:6px;
+  background:linear-gradient(145deg, var(--o1), var(--o2)); box-shadow:0 12px 22px -10px var(--o1), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .4s cubic-bezier(.3,1.6,.5,1);
+}
+.ph-oyun-kart:hover .ph-oyun-ikon{ transform:translateY(-3px) rotate(-8deg) scale(1.08); }
+.ph-oyun-tur{ font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:color-mix(in srgb, var(--o1) 45%, #fff); }
+.ph-oyun-kart b{ font-size:1.25rem; font-weight:900; letter-spacing:-.01em; }
+.ph-oyun-ozet{ font-size:.9rem; line-height:1.5; color:rgba(255,255,255,.78); }
+.ph-oyun-ac{ margin-top:auto; padding-top:8px; display:inline-flex; align-items:center; gap:6px; font-size:.86rem; font-weight:800; color:#fff; opacity:.75; transition:opacity .3s ease, gap .3s ease; }
+.ph-oyun-ac .msi{ font-size:18px; }
+.ph-oyun-kart:hover .ph-oyun-ac{ opacity:1; gap:10px; }
+.ph-oyun-alt{ margin-top:clamp(24px, 3.5vw, 40px); display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; }
+.ph-oyun-alt > span{ color:rgba(255,255,255,.7); font-size:.92rem; font-weight:600; }
+.ph-btn--oyun{ background:linear-gradient(135deg, #fbbf77, #f97316); color:#3b1d06; border:0; cursor:pointer; font-family:inherit; font-weight:900; }
+.ph-btn--oyun .msi{ font-size:22px; }
+@media (max-width:640px){
+  .ph-oyun-izgara{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory; margin-inline:calc(var(--gutter) * -1); padding:4px var(--gutter) 14px; gap:12px; scrollbar-width:none; }
+  .ph-oyun-izgara::-webkit-scrollbar{ display:none; }
+  .ph-oyun-izgara li{ flex:0 0 76%; scroll-snap-align:start; }
+  .ph-oyun-sayac{ width:100%; }
+}
+
+/* ---------- SINIFINI SEÇ: sınıf renk kimliği ---------- */
+.ph-sk{ position:relative; border-color:color-mix(in srgb, var(--sk) 22%, var(--kenar)); }
+.ph-sk::after{ content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; box-shadow:inset 0 0 0 2px var(--sk); opacity:0; transition:opacity .3s ease; }
+.ph-sk:hover::after{ opacity:1; }
+.ph-sk:hover{ box-shadow:0 26px 48px -22px color-mix(in srgb, var(--sk) 70%, transparent); }
+.ph-sk-gorsel img{ transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+.ph-sk:hover .ph-sk-gorsel img{ transform:scale(1.05); }
+.ph-sk-govde{ background:linear-gradient(180deg, color-mix(in srgb, var(--sk) 7%, var(--yuzey)), var(--yuzey) 60%); }
+.ph-sk h3{ color:color-mix(in srgb, var(--sk) 55%, var(--baslik)); }
+.ph-sk .ph-btn{ background:var(--sk); }
+
+/* ---------- ÖĞRENME YOLCULUĞU: yatay akış ---------- */
+.ph-akis{ list-style:none; margin:0; padding:0; display:grid; gap:14px; position:relative; }
+.ph-akis-adim{
+  position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px;
+  padding:26px 16px 20px; border-radius:var(--r-xl); background:var(--yuzey); border:1px solid var(--kenar); box-shadow:var(--golge-sm);
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.ph-akis-adim:hover{ transform:translateY(-5px); border-color:var(--a); box-shadow:0 24px 44px -22px var(--a); }
+.ph-akis-ikon{
+  width:72px; height:72px; border-radius:24px; display:grid; place-items:center; color:#fff;
+  background:linear-gradient(145deg, color-mix(in srgb, var(--a) 70%, #fff), var(--a));
+  box-shadow:0 16px 28px -14px var(--a), inset 0 1px 0 rgba(255,255,255,.4);
+}
+.ph-akis-ikon .msi{ font-size:36px; }
+.ph-akis-adim h3{ margin:6px 0 0; font-size:1.05rem; font-weight:900; letter-spacing:.16em; text-transform:uppercase; color:var(--baslik); }
+.ph-akis-adim p{ margin:0; font-size:.92rem; line-height:1.5; color:var(--metin-ikincil); }
+.ph-akis-adim q{ margin-top:auto; padding-top:8px; font-size:.82rem; font-style:italic; line-height:1.45; color:color-mix(in srgb, var(--a) 60%, var(--metin)); quotes:"“" "”"; }
+@media (min-width:1020px){
+  .ph-akis{ grid-template-columns:repeat(5, minmax(0,1fr)); gap:34px; }
+  .ph-akis-adim:not(:last-child)::after{ /* akış oku */
+    content:"→"; position:absolute; right:-31px; top:50px; width:28px; height:28px; border-radius:50%; display:grid; place-items:center;
+    font-size:16px; font-weight:900; line-height:1; color:#fff; background:var(--a); box-shadow:0 6px 14px -6px var(--a); z-index:1;
+  }
+}
+@media (min-width:600px) and (max-width:1019px){ .ph-akis{ grid-template-columns:repeat(2, minmax(0,1fr)); } .ph-akis-adim:last-child{ grid-column:1 / -1; } }
+
+@media (prefers-reduced-motion:reduce){
+  .ph-sahne, .ph-alan, .ph-dunya-gorsel svg, .ph-oyun-kart, .ph-oyun-ikon, .ph-oyun-kart::before, .ph-sk-gorsel img, .ph-akis-adim{ transition:none; }
+  .ph-acilis:hover .ph-sahne, .ph-alan:hover, .ph-alan:hover .ph-dunya-gorsel svg, .ph-oyun-kart:hover, .ph-oyun-kart:hover .ph-oyun-ikon, .ph-sk:hover .ph-sk-gorsel img, .ph-akis-adim:hover{ transform:none; }
+}
+</style>
+<style id="phYeniStil2">
+/* ======================================================================
+   2026-11-02 (2. tur) — 3B hero sahnesi · 41 oyun galerisi · etkileşimli
+   yolculuk · Sınav Merkezi · kompakt Öğretmen Araçları
+====================================================================== */
+
+/* ---------- HERO: izometrik sahne ---------- */
+@media (min-width:1024px){ .ph-sahne{ transform:none; } .ph-acilis:hover .ph-sahne{ transform:none; } }
+.ph-sahne::before{ display:none; }
+.ph-sahne-3b{ filter:drop-shadow(0 30px 40px rgba(2,8,23,.35)); }
+.ph-sahne-3b .ph-kup{ animation:phKupSuz 6s ease-in-out infinite; }
+.ph-sahne-3b .ph-golge-kup{ transform-box:fill-box; transform-origin:center; animation:phGolgeNefes 6s ease-in-out infinite; }
+.ph-sahne-3b .ph-rozet3d{ animation:phKupSuz 7s ease-in-out infinite -2s; }
+@keyframes phKupSuz{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+@keyframes phGolgeNefes{ 0%,100%{ transform:scale(1); opacity:.35; } 50%{ transform:scale(.82); opacity:.22; } }
+/* kartlar yeni sahneye göre yerleşir */
+.ph-kart--ders{ top:2%; left:-6%; }
+.ph-kart--soru{ top:8%; right:-8%; left:auto; }
+.ph-kart--oyun{ bottom:10%; left:-4%; }
+.ph-kart--lgs{ bottom:6%; right:2%; }
+@media (max-width:640px){
+  .ph-kart--ders{ left:0; top:0; }
+  .ph-kart--soru{ right:0; top:auto; bottom:30%; }
+  .ph-kart--oyun{ left:0; bottom:2%; }
+}
+
+/* ---------- 41 OYUN GALERİSİ ---------- */
+.ph-oyun-filtre{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px; }
+.ph-oyun-cip{
+  display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border-radius:999px; cursor:pointer;
+  font:inherit; font-size:.86rem; font-weight:800; color:rgba(255,255,255,.86);
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); transition:background .2s ease, border-color .2s ease, color .2s ease;
+}
+.ph-oyun-cip small{ font-size:.74rem; font-weight:800; opacity:.65; }
+.ph-oyun-cip:hover{ background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.3); }
+.ph-oyun-cip[aria-pressed="true"]{ background:#fff; color:var(--navy); border-color:#fff; }
+.ph-oyun-cip:focus-visible{ outline:3px solid #fbbf77; outline-offset:2px; }
+.ph-oyun-izgara li{ animation:phKartGir .45s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(var(--sira, 0) * 35ms); }
+@keyframes phKartGir{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+.ph-oyun-ozet{ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.ph-oyun-meta{ display:flex; flex-wrap:wrap; gap:6px; margin-top:2px; }
+.ph-oyun-meta span{ font-size:.72rem; font-weight:800; padding:3px 9px; border-radius:999px; background:rgba(255,255,255,.1); color:rgba(255,255,255,.85); }
+.ph-oyun-meta .zor-kolay{ background:rgba(34,197,94,.22); color:#bbf7d0; }
+.ph-oyun-meta .zor-orta{ background:rgba(251,191,36,.2); color:#fde68a; }
+.ph-oyun-meta .zor-zor{ background:rgba(239,68,68,.22); color:#fecaca; }
+.ph-oyun-daha{
+  display:inline-flex; align-items:center; gap:8px; min-height:54px; padding:14px 22px; border-radius:var(--r-pill, 999px); cursor:pointer;
+  font:inherit; font-weight:900; color:#fff; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.28);
+}
+.ph-oyun-daha:hover{ background:rgba(255,255,255,.16); }
+.ph-oyun-daha:focus-visible{ outline:3px solid #fbbf77; outline-offset:3px; }
+@media (max-width:640px){
+  .ph-oyun-filtre{ flex-wrap:nowrap; overflow-x:auto; margin-inline:calc(var(--gutter) * -1); padding:2px var(--gutter) 6px; scrollbar-width:none; }
+  .ph-oyun-filtre::-webkit-scrollbar{ display:none; }
+  .ph-oyun-cip{ flex-shrink:0; }
+  /* galeride telefon: yatay şerit yerine 2 sütun, kısa kart */
+  .ph-oyun-izgara{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); overflow:visible; margin:0; padding:0; gap:10px; }
+  .ph-oyun-izgara li{ flex:none; }
+  .ph-oyun-kart{ padding:14px 12px; gap:5px; border-radius:18px; }
+  .ph-oyun-ikon{ width:44px; height:44px; font-size:22px; border-radius:14px; }
+  .ph-oyun-kart b{ font-size:1rem; }
+  .ph-oyun-ozet, .ph-oyun-ac{ display:none; }
+  .ph-oyun-daha{ flex:1 1 100%; justify-content:center; }
+}
+
+/* ---------- ETKİLEŞİMLİ YOLCULUK ---------- */
+.ph-akis{ margin-bottom:22px; }
+button.ph-akis-adim{ font:inherit; cursor:pointer; width:100%; padding:20px 12px 16px; gap:6px; }
+button.ph-akis-adim b{ font-size:.98rem; font-weight:900; letter-spacing:.14em; text-transform:uppercase; color:var(--baslik); }
+.ph-akis-kisa{ font-size:.82rem; color:var(--metin-ikincil); font-weight:600; line-height:1.35; }
+.ph-akis-no{ position:absolute; top:10px; left:12px; font-size:.72rem; font-weight:900; color:var(--metin-ikincil); }
+.ph-akis-ikon{ width:60px; height:60px; border-radius:20px; }
+.ph-akis-ikon .msi{ font-size:30px; }
+button.ph-akis-adim[aria-selected="true"]{
+  border-color:var(--a); background:color-mix(in srgb, var(--a) 9%, var(--yuzey));
+  box-shadow:0 0 0 2px var(--a), 0 22px 40px -22px var(--a); transform:translateY(-4px);
+}
+button.ph-akis-adim[aria-selected="false"] .ph-akis-ikon{ filter:saturate(.75); }
+button.ph-akis-adim:focus-visible{ outline:3px solid #f0a202; outline-offset:3px; }
+@media (min-width:1020px){ .ph-akis-adim:not(:last-child)::after{ top:42px; } }
+@media (max-width:1019px){
+  .ph-akis{ display:flex; overflow-x:auto; gap:10px; scroll-snap-type:x mandatory; margin-inline:calc(var(--gutter) * -1); padding:6px var(--gutter) 10px; scrollbar-width:none; }
+  .ph-akis::-webkit-scrollbar{ display:none; }
+  button.ph-akis-adim{ flex:0 0 136px; scroll-snap-align:start; padding:16px 8px 12px; }
+  .ph-akis-adim:last-child{ grid-column:auto; }
+  .ph-akis-kisa{ display:none; }
+  .ph-akis-ikon{ width:48px; height:48px; border-radius:16px; }
+  .ph-akis-ikon .msi{ font-size:24px; }
+  button.ph-akis-adim b{ font-size:.8rem; letter-spacing:.1em; }
+}
+.ph-akis-panel{
+  display:grid; gap:20px; align-items:start; padding:clamp(18px, 3vw, 28px); border-radius:var(--r-xl);
+  background:linear-gradient(160deg, color-mix(in srgb, var(--a) 10%, var(--yuzey)), var(--yuzey) 55%);
+  border:1px solid color-mix(in srgb, var(--a) 30%, var(--kenar)); box-shadow:var(--golge-sm);
+  animation:phPanelGir .4s cubic-bezier(.2,.7,.2,1);
+}
+.ph-akis-panel[hidden]{ display:none; }
+@keyframes phPanelGir{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+@media (min-width:900px){ .ph-akis-panel{ grid-template-columns:minmax(0,.62fr) minmax(0,1.6fr); } }
+.ph-akis-giris{ display:flex; flex-direction:column; gap:10px; }
+.ph-akis-etiket{ margin:0; display:flex; align-items:center; gap:8px; font-size:.78rem; font-weight:900; letter-spacing:.14em; text-transform:uppercase; color:color-mix(in srgb, var(--a) 70%, var(--baslik)); }
+.ph-akis-etiket .msi{ font-size:20px; }
+.ph-akis-giris p:not(.ph-akis-etiket){ margin:0; color:var(--metin); line-height:1.6; }
+.ph-akis-giris q{ padding:12px 14px; border-left:3px solid var(--a); background:color-mix(in srgb, var(--a) 8%, var(--yuzey)); border-radius:0 12px 12px 0; font-style:italic; font-size:.92rem; color:var(--metin); quotes:"“" "”"; }
+.ph-akis-ornek{ display:grid; gap:16px; min-width:0; }
+@media (min-width:700px){ .ph-akis-ornek--2{ grid-template-columns:1.2fr 1fr; } }
+.ph-akis-ornek .ph-kutu{ grid-column:auto !important; }
+.ph-akis-ornek .ph-kutu--harita .ph-harita{ max-width:520px; }
+
+/* ---------- SINAV MERKEZİ ---------- */
+.ph-sinav{ background:linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--mavi) 6%, var(--bg))); }
+.ph-sinav-izgara{ display:grid; gap:20px; }
+@media (min-width:1000px){ .ph-sinav-izgara{ grid-template-columns:minmax(0,1.75fr) minmax(0,1fr); align-items:stretch; } }
+.ph-sinav-lgs{ margin:0; }
+@media (min-width:1000px){ .ph-sinav-lgs{ grid-template-columns:1fr; } }
+@media (min-width:1180px){ .ph-sinav-lgs{ grid-template-columns:1.05fr 1fr; } }
+.ph-yks{
+  position:relative; overflow:hidden; display:flex; flex-direction:column; gap:10px; padding:clamp(22px, 3vw, 32px);
+  border-radius:var(--r-xl); background:var(--yuzey); border:1px solid var(--kenar); box-shadow:var(--golge-sm);
+}
+.ph-yks::before{ content:""; position:absolute; inset:0 0 auto; height:5px; background:linear-gradient(90deg, #7c3aed, #06b6d4); }
+.ph-yks-ust{ display:flex; justify-content:space-between; align-items:flex-start; }
+.ph-yks-ikon{ width:58px; height:58px; border-radius:18px; display:grid; place-items:center; color:#fff; background:linear-gradient(145deg, #8b5cf6, #06b6d4); box-shadow:0 12px 24px -12px #7c3aed; }
+.ph-yks-ikon .msi{ font-size:30px; }
+.ph-yks .ph-on{ margin:6px 0 0; }
+.ph-yks h3{ margin:0; font-size:clamp(1.5rem, 2.6vw, 1.9rem); font-weight:900; color:var(--baslik); }
+.ph-yks > p{ margin:0; color:var(--metin); line-height:1.55; }
+.ph-yks-liste{ list-style:none; margin:4px 0 0; padding:0; display:grid; gap:8px; }
+.ph-yks-liste li{ display:flex; align-items:center; gap:10px; font-weight:700; color:var(--metin); font-size:.95rem; }
+.ph-yks-liste .msi{ color:#7c3aed; font-size:20px; }
+[data-tema="dark"] .ph-yks-liste .msi{ color:#a78bfa; }
+.ph-yks-cta{ margin-top:auto; padding-top:10px; display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; }
+.ph-yks .ph-btn{ background:#6d28d9; }
+.ph-sinav-alt{ display:grid; gap:12px; margin-top:20px; }
+@media (min-width:720px){ .ph-sinav-alt{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+.ph-sinav-hizli{
+  display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto; column-gap:14px; align-items:center;
+  padding:16px 18px; border-radius:var(--r-lg); text-decoration:none; background:var(--yuzey); border:1px solid var(--kenar);
+  box-shadow:var(--golge-sm); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.ph-sinav-hizli > .msi{ grid-row:1 / 3; width:44px; height:44px; border-radius:14px; display:grid; place-items:center; font-size:24px; color:var(--vurgu-metin); background:var(--acikgri); }
+.ph-sinav-hizli b{ color:var(--baslik); font-size:1rem; }
+.ph-sinav-hizli > span:last-child{ color:var(--metin-ikincil); font-size:.86rem; font-weight:600; }
+.ph-sinav-hizli:hover{ transform:translateY(-3px); box-shadow:var(--golge-lg); border-color:color-mix(in srgb, var(--mavi) 40%, var(--kenar)); }
+.ph-sinav-hizli:focus-visible{ outline:3px solid #f0a202; outline-offset:3px; }
+
+/* ---------- ÖĞRETMEN ARAÇLARI (kompakt) ---------- */
+.ph-ogretmen--kompakt{ padding:clamp(48px, 6vw, 80px) 0; }
+.ph-ogretmen--kompakt .ph-ogretmen-ust{ margin-bottom:24px; }
+.ph-nedenler--cip{ display:flex; flex-wrap:wrap; gap:8px; }
+.ph-nedenler--cip li{ padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); font-size:.85rem; align-items:center; gap:8px; }
+.ph-nedenler--cip .msi{ font-size:18px; }
+.ph-ogretmen--kompakt .ph-araclar{ gap:10px; }
+.ph-ogretmen--kompakt .ph-arac{ display:grid; grid-template-columns:auto 1fr; column-gap:14px; row-gap:2px; padding:14px 16px; align-items:start; }
+.ph-ogretmen--kompakt .ph-arac > .msi{ grid-row:1 / 3; font-size:26px; margin:2px 0 0; width:44px; height:44px; display:grid; place-items:center; border-radius:14px; background:rgba(94,234,212,.12); }
+.ph-ogretmen--kompakt .ph-arac > b{ font-size:1rem; }
+.ph-ogretmen--kompakt .ph-arac > span:last-child{ font-size:.84rem; line-height:1.45; }
+.ph-op{ background:none; border:0; margin-top:20px; }
+.ph-op .icerik-rehberi-bolum{ max-width:none; margin:0; }
+.ph-op .icerik-rehberi{ box-shadow:none; }
+
+@media (prefers-reduced-motion:reduce){
+  .ph-sahne-3b .ph-kup, .ph-sahne-3b .ph-golge-kup, .ph-sahne-3b .ph-rozet3d, .ph-oyun-izgara li, .ph-akis-panel{ animation:none; }
+  button.ph-akis-adim[aria-selected="true"], .ph-sinav-hizli:hover{ transform:none; }
+}
+
+</style>
+<style id="phToparla">
+/* ======================================================================
+   2026-11-02 — TOPARLAMA. Hiçbir içerik silinmedi: bölümler yeniden
+   sıralandı, kişisel bölümler tek panelde toplandı, uzun listeler
+   "Neler var?" açılır kutusuna alındı, aralıklar ve kartlar sadeleşti.
+====================================================================== */
+
+/* ---------- ortak ritim: daha ferah ama daha kısa ---------- */
+.ph-bolum{ padding:clamp(56px, 7vw, 96px) 0; }
+.ph-bolum-ust{ margin-bottom:clamp(26px, 3.6vw, 44px); }
+.ph-giris{ font-size:clamp(1rem, 1.3vw, 1.1rem); }
+.ph-sahne{ max-width:560px; }
+
+/* ---------- DİJİTAL ÖĞRENME: 4 sade kutucuk ---------- */
+.ph-dunya{ padding-top:clamp(48px, 6vw, 80px); }
+@media (min-width:1100px){ .ph-dunya-kartlar{ grid-template-columns:repeat(4, minmax(0,1fr)); gap:18px; } }
+.ph-dunya .ph-alan{ padding:16px 16px 18px; gap:10px; }
+.ph-dunya .ph-alan h3{ font-size:clamp(1.2rem, 1.6vw, 1.35rem); }
+.ph-dunya .ph-alan-ozet{ font-size:.92rem; line-height:1.55; }
+.ph-dunya .ph-alan-cta{ gap:8px 14px; }
+.ph-dunya .ph-alan-cta .ph-baglanti{ font-size:.86rem; }
+.ph-alan-detay{ position:relative; z-index:1; border-top:1px solid var(--kenar); padding-top:8px; }
+.ph-alan-detay summary{
+  list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+  font-size:.86rem; font-weight:800; color:var(--renk); padding:4px 0;
+}
+.ph-alan-detay summary::-webkit-details-marker{ display:none; }
+.ph-alan-detay summary::after{ content:"+"; font-size:1.2rem; line-height:1; transition:transform .2s ease; }
+.ph-alan-detay[open] summary::after{ transform:rotate(45deg); }
+.ph-alan-detay summary:focus-visible{ outline:3px solid #f0a202; outline-offset:2px; border-radius:6px; }
+.ph-alan-detay .ph-liste{ margin-top:8px; }
+.ph-dunya .ph-liste li{ font-size:.88rem; }
+
+/* ---------- SINIFINI SEÇ: ortalanmış, modern kartlar ---------- */
+.sinif-odak-bolum .sinif-sekme-sarmal{ max-width:1240px; }
+.sinif-odak-bolum--giris{ margin-top:0; padding-top:clamp(56px, 7vw, 96px); }
+.sinif-odak-baslik{ font-size:clamp(2rem, 4.4vw, 3.1rem); }
+.ph-sinif-kartlari{ gap:18px; }
+.ph-sk{ border-radius:22px; }
+.ph-sk-gorsel{ aspect-ratio:16/8; }
+.ph-sk-gorsel{ background:#0b1d4d; }
+.ph-sk-gorsel::after{ background:linear-gradient(200deg, transparent 50%, color-mix(in srgb, var(--sk) 55%, rgba(2,8,23,.6)) 100%); }
+.ph-sk .ph-sk-gorsel{ aspect-ratio:2 / 1; }
+.ph-sk-gorsel img{ object-fit:cover; object-position:50% 100%; }
+.ph-sk-no{ font-size:3rem; left:18px; bottom:6px; }
+.ph-sk-govde{ padding:16px 18px 18px; gap:10px; border-top-width:3px; }
+.ph-sk h3{ font-size:1.18rem; }
+.ph-sk-slogan{ margin:-6px 0 0; font-size:.9rem; }
+.ph-sk-sayilar{ gap:6px; }
+.ph-sk-sayilar > div{ padding:6px 10px; }
+.ph-sk-araclar{ gap:6px; }
+.ph-sk-araclar li{ font-size:.74rem; padding:3px 8px; }
+
+/* ---------- KALDIĞIN YER (kişisel panel) ---------- */
+.ph-kisisel{ background:linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--turkuaz) 5%, var(--bg))); }
+.ph-kisisel-izgara{ display:grid; gap:18px; align-items:start; }
+@media (min-width:980px){ .ph-kisisel-izgara{ grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); } }
+.ph-kisisel-ana, .ph-kisisel-yan{ display:flex; flex-direction:column; gap:16px; min-width:0; }
+.ph-kisisel .hizli-erisim, .ph-kisisel .ilerleme-panel, .ph-kisisel .istatistik-bolum,
+.ph-kisisel .kucuk-panel-alani, .ph-kisisel .onerilen-bolum{ max-width:none; margin:0; padding:0; }
+.ph-kisisel .onerilen-bolum{ margin-top:22px; }
+.ph-kisisel .hizli-baslik{ color:var(--baslik); text-shadow:none; font-size:1rem; margin:0 0 10px; }
+.ph-kisisel .hizli-izgara{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+.ph-kisisel .hizli-devam-btn{ grid-column:1 / -1; }
+@media (max-width:640px){ .ph-kisisel .hizli-izgara{ grid-template-columns:1fr; } }
+.ph-kisisel .istatistik-bolum .bolum-baslik-orta{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.ph-kisisel .istatistik-bolum-izgara{ max-width:none; gap:10px; }
+.ph-kisisel .ib-kart{ padding:12px; }
+.ph-kisisel .ib-sparkline{ display:none; }
+.ph-kisisel .kucuk-panel-alani{ grid-template-columns:1fr; gap:16px; }
+@media (min-width:640px) and (max-width:979px){ .ph-kisisel .kucuk-panel-alani{ grid-template-columns:1fr 1fr; } }
+
+/* ---------- ÖĞRETMEN ve YAKLAŞIM: kompakt ---------- */
+.ph-ilkeler{ gap:14px; }
+.ph-ilke{ padding:18px 18px 16px; gap:8px; }
+.ph-ilke h3{ font-size:1.02rem; }
+.ph-ilke p{ font-size:.9rem; }
+.ph-ornek-detay{ margin-top:auto; }
+.ph-ornek-detay summary{
+  list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+  font-size:.7rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; color:var(--vurgu-metin); padding:6px 0 2px;
+}
+.ph-ornek-detay summary::-webkit-details-marker{ display:none; }
+.ph-ornek-detay summary::after{ content:"+"; font-size:1.1rem; letter-spacing:0; transition:transform .2s ease; }
+.ph-ornek-detay[open] summary::after{ transform:rotate(45deg); }
+.ph-ornek-detay summary:focus-visible{ outline:3px solid #f0a202; outline-offset:2px; border-radius:6px; }
+.ph-ornek-detay .ph-ornek{ margin-top:6px !important; }
+
+@media (prefers-reduced-motion:reduce){ .ph-alan-detay summary::after, .ph-ornek-detay summary::after{ transition:none; } }
+@media (max-width:820px){ .ph-kisisel .istatistik-bolum-izgara{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width:619px){
+  /* telefonda sınıf kartları yana kaydırılan şerit */
+  .ph-sinif-kartlari{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin-inline:calc(var(--gutter) * -1); padding:4px var(--gutter) 12px; scrollbar-width:none; }
+  .ph-sinif-kartlari::-webkit-scrollbar{ display:none; }
+  .ph-sinif-kartlari > .ph-sk{ flex:0 0 82%; scroll-snap-align:start; }
+}
+.ph-ornek-detay .ph-ornek span:first-child{ display:inline; font-size:inherit; font-weight:inherit; letter-spacing:normal; text-transform:none; color:inherit; margin:0; }
+
+</style>
 </head>
 <body>
 
@@ -1459,8 +1898,8 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
 
 <nav class="ust-serit" id="ustSerit" aria-label="Üst gezinme">
   <div class="ust-serit-ic">
-    <span class="ust-serit-marka"><span class="msi" aria-hidden="true">school</span><span class="usm-ad">Ayşe Yazıcı</span><span class="usm-ayrac" aria-hidden="true">·</span><span class="usm-ders">Din Kültürü ve Ahlak Bilgisi</span></span>
-    <nav class="ust-serit-gezinme" aria-label="Bölümler"><a class="usg-link" href="#ust">Ana Sayfa</a><a class="usg-link" href="#platform">Platform</a><a class="usg-link" href="#siniflar">Sınıflar</a><a class="usg-link" href="sinav-merkezi/index.html">Sınav Merkezi</a><a class="usg-link" href="#emGirisKart">Etkinlik &amp; Oyun</a><a class="usg-link" href="#ogretmenler">Öğretmenler</a></nav><div class="ust-serit-baglantilar">
+    <span class="ust-serit-marka usm-kilit"><span class="usm-amblem" aria-hidden="true"><svg viewBox="0 0 40 40" width="38" height="38" focusable="false"><defs><linearGradient id="usmZemin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13294b"/><stop offset=".55" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0e9aa7"/></linearGradient></defs><rect x="1" y="1" width="38" height="38" rx="11" fill="url(#usmZemin)"/><g fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 15.5c-2.6-2-6.3-2.4-9.5-1.4v12.6c3.2-1 6.9-.6 9.5 1.4 2.6-2 6.3-2.4 9.5-1.4V14.1c-3.2-1-6.9-.6-9.5 1.4z"/><path d="M20 15.5v12.6"/></g><path d="M20 6.2l1.3 3 3 1.3-3 1.3-1.3 3-1.3-3-3-1.3 3-1.3z" fill="#5eead4"/></svg></span><span class="usm-metin"><span class="usm-ad">Ayşe Yazıcı</span><span class="usm-ayrac" aria-hidden="true">·</span><span class="usm-ders">Din Kültürü ve Ahlak Bilgisi</span></span></span>
+    <nav class="ust-serit-gezinme" aria-label="Bölümler"><a class="usg-link" href="#ust">Ana Sayfa</a><a class="usg-link" href="#platform">Platform</a><a class="usg-link" href="#siniflar">Sınıflar</a><a class="usg-link" href="sinav-merkezi/index.html">Sınav Merkezi</a><a class="usg-link" href="#emGirisKart" data-ph-em="1">Etkinlik &amp; Oyun</a><a class="usg-link" href="#ogretmenler">Öğretmenler</a></nav><div class="ust-serit-baglantilar">
       <button type="button" class="ust-serit-btn" data-panel="hakkimizda" aria-expanded="false" aria-controls="ustPanel">Hakkımızda</button>
       <button type="button" class="ust-serit-btn" data-panel="iletisim" aria-expanded="false" aria-controls="ustPanel">İletişim</button>
       <button type="button" class="ust-serit-btn" data-panel="yorum" aria-expanded="false" aria-controls="ustPanel">Yorum</button>
@@ -1496,53 +1935,67 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
     <div class="ph-acilis">
       <div class="ph-acilis-metin">
         <p class="ph-rozet"><span class="ph-rozet-nokta" aria-hidden="true"></span>Dijital Öğrenme Platformu · 4–12. Sınıf</p>
-        <h1 class="ph-marka" id="phMarka">
-          <span class="ph-ad-isim">Ayşe</span>
-          <span class="ph-ad-soyad">Yazıcı</span>
-          <span class="ph-marka-alt">Din Kültürü ve Ahlak Bilgisi</span>
+        <h1 class="ph-baslik" id="phMarka">
+          <span class="ph-baslik-marka">Ayşe Yazıcı<span aria-hidden="true"></span>Din Kültürü ve Ahlak Bilgisi</span>
+          <span class="ph-baslik-ana">Din Kültürünü <span class="ph-baslik-vurgu">Keşfet,</span> Öğren, <em>Deneyimle!</em></span>
         </h1>
-        <p class="ph-slogan">Ezberden Öğrenmeye, <em>Bilgiden Değere.</em></p>
-        <p class="ph-karsilama">Bilgiyi keşfet, düşün, sorgula ve öğrendiklerini hayatla ilişkilendir.</p>
+        <p class="ph-karsilama ph-karsilama--genis">Dijital öğrenme, interaktif oyunlar, görsel anlatımlar ve sınav hazırlık araçlarıyla öğrenmenin yeni dünyasına adım at.</p>
         <div class="ph-eylem">
           <button type="button" class="ph-ana-dugme" id="heroSiniflarBtn">Öğrenmeye Başla <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <a class="ph-ikinci-dugme" href="sinav-merkezi/index.html">Sınav Merkezi</a>
-          <button type="button" class="ph-metin-dugme" id="heroCalismaBtn">Platformu Tanı</button>
+          <button type="button" class="ph-ikinci-dugme ph-ikinci-dugme--oyun" data-ph-em="1"><span class="msi" aria-hidden="true">sports_esports</span> Dijital Oyunları Keşfet</button>
         </div>
+        <!-- 2026-11-02 sadeleştirme: tek ana düğme + tek ikincil düğme; diğer iki yol küçük bağlantı -->
+        <p class="ph-eylem-alt">
+          <a href="sinav-merkezi/index.html">Sınav Merkezine Git</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" class="ph-metin-dugme ph-metin-dugme--alt" id="heroCalismaBtn">Platformu tanı ↓</button>
+        </p>
       </div>
 
       <div class="ph-sahne" aria-hidden="true">
-        <svg class="ph-sahne-amblem" viewBox="0 0 480 480" focusable="false">
+        <svg class="ph-sahne-amblem ph-sahne-3b" viewBox="0 0 480 480" focusable="false">
           <defs>
-            <radialGradient id="phIsik" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset=".45" stop-color="#7dd3fc" stop-opacity=".18"/><stop offset="1" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient>
+            <radialGradient id="phIsik" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffffff" stop-opacity=".45"/><stop offset=".45" stop-color="#7dd3fc" stop-opacity=".16"/><stop offset="1" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient>
             <linearGradient id="phCizgi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#5eead4" stop-opacity=".25"/></linearGradient>
-            <linearGradient id="phCekirdek" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+<filter id="phBulanik" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+<linearGradient id="phZeminUst" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset=".55" stop-color="#1e40af"/><stop offset="1" stop-color="#0e7490"/></linearGradient>
+<linearGradient id="phCerceve" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2e8f0"/><stop offset="1" stop-color="#94a3b8"/></linearGradient>
+<linearGradient id="phEkran" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+<linearGradient id="phKupSol" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdba74"/><stop offset="1" stop-color="#f97316"/></linearGradient>
+<radialGradient id="phRozet" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#6ee7b7"/><stop offset="1" stop-color="#059669"/></radialGradient>
           </defs>
-          <circle cx="240" cy="240" r="236" fill="url(#phIsik)"/>
+          <!-- 2026-11-02: izometrik dijital sınıf sahnesi — platform (üstünde hatem yıldızı), ders ekranlı tablet, kitaplar ve kep, oyun küpü -->
+          <circle cx="240" cy="230" r="230" fill="url(#phIsik)"/>
           <g class="ph-yorunge ph-yorunge--dis" fill="none" stroke="url(#phCizgi)">
-            <circle cx="240" cy="240" r="214" stroke-width="1" stroke-dasharray="2 9"/>
-            <circle cx="240" cy="26" r="5" fill="#5eead4" stroke="none"/>
-            <circle cx="454" cy="240" r="3.5" fill="#fff" stroke="none"/>
-            <circle cx="88" cy="391" r="4" fill="#fbbf77" stroke="none"/>
+            <circle cx="240" cy="240" r="226" stroke-width="1" stroke-dasharray="2 9"/>
+            <circle cx="240" cy="14" r="5" fill="#5eead4" stroke="none"/>
+            <circle cx="466" cy="240" r="3.5" fill="#fff" stroke="none"/>
+            <circle cx="80" cy="400" r="4" fill="#fbbf77" stroke="none"/>
           </g>
-          <g class="ph-yorunge ph-yorunge--ic" fill="none" stroke="url(#phCizgi)">
-            <circle cx="240" cy="240" r="164" stroke-width="1.2"/>
-            <circle cx="356" cy="124" r="4" fill="#fff" stroke="none"/>
-            <circle cx="124" cy="356" r="3" fill="#5eead4" stroke="none"/>
-          </g>
-          <!-- sekiz köşeli yıldız: İslam sanatındaki geometrik düzenin sade yorumu -->
-          <g class="ph-yildiz" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.4" stroke-linejoin="round">
-            <rect x="152" y="152" width="176" height="176" rx="6"/>
-            <rect x="152" y="152" width="176" height="176" rx="6" transform="rotate(45 240 240)"/>
-            <circle cx="240" cy="240" r="88" stroke="rgba(255,255,255,.28)"/>
-          </g>
-          <circle cx="240" cy="240" r="62" fill="url(#phCekirdek)" opacity=".95"/>
-          <circle cx="240" cy="240" r="62" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/>
-          <!-- açık kitap ve ışık: bilgi -->
-          <g transform="translate(240 246)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M0 -6 C-9 -14 -24 -16 -34 -12 V18 C-24 14 -9 16 0 24 C9 16 24 14 34 18 V-12 C24 -16 9 -14 0 -6 Z"/>
-            <path d="M0 -6 V24"/>
-            <path d="M0 -26 V-36 M-15 -22 L-21 -30 M15 -22 L21 -30" stroke-width="2.2"/>
-          </g>
+<ellipse cx="240" cy="328" rx="190" ry="62" fill="#020817" opacity=".35" filter="url(#phBulanik)"/>
+<polygon points="49.5,314.0 240.0,424.0 240.0,402.0 49.5,292.0" fill="#0b2559"/><polygon points="430.5,314.0 240.0,424.0 240.0,402.0 430.5,292.0" fill="#123a7a"/><polygon points="240.0,182.0 430.5,292.0 240.0,402.0 49.5,292.0" fill="url(#phZeminUst)"/>
+<polygon points="240.0,182.0 430.5,292.0 240.0,402.0 49.5,292.0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+<g transform="matrix(0.8660 0.5000 -0.8660 0.5000 240.0 182.0)" opacity=".35" fill="none" stroke="#5eead4" stroke-width="1"><path d="M20 0V220M0 20H220"/><path d="M40 0V220M0 40H220"/><path d="M60 0V220M0 60H220"/><path d="M80 0V220M0 80H220"/><path d="M100 0V220M0 100H220"/><path d="M120 0V220M0 120H220"/><path d="M140 0V220M0 140H220"/><path d="M160 0V220M0 160H220"/><path d="M180 0V220M0 180H220"/><path d="M200 0V220M0 200H220"/></g>
+<g transform="matrix(0.8660 0.5000 -0.8660 0.5000 240.0 182.0)"><g transform="translate(110 110) scale(.78) translate(-240 -240)" fill="rgba(94,234,212,.10)" stroke="#5eead4" stroke-width="2.2" stroke-linejoin="miter"><path d="M240.0 115.5 L276.5 152.0 L328.0 152.0 L328.0 203.5 L364.5 240.0 L328.0 276.5 L328.0 328.0 L276.5 328.0 L240.0 364.5 L203.5 328.0 L152.0 328.0 L152.0 276.5 L115.5 240.0 L152.0 203.5 L152.0 152.0 L203.5 152.0 Z"/><path d="M275.2 154.9 L289.8 190.2 L325.1 204.8 L310.5 240.0 L325.1 275.2 L289.8 289.8 L275.2 325.1 L240.0 310.5 L204.8 325.1 L190.2 289.8 L154.9 275.2 L169.5 240.0 L154.9 204.8 L190.2 190.2 L204.8 154.9 L240.0 169.5 Z" stroke-opacity=".6" fill="none"/></g></g>
+<polygon points="49.5,295.0 240.0,405.0 240.0,408.0 49.5,298.0" fill="#5eead4" opacity=".85"/>
+<polygon points="430.5,295.0 240.0,405.0 240.0,408.0 430.5,298.0" fill="#38bdf8" opacity=".6"/>
+<polygon points="290.2,283.0 347.4,316.0 347.4,303.0 290.2,270.0" fill="#f97316"/><polygon points="394.2,289.0 347.4,316.0 347.4,303.0 394.2,276.0" fill="#c2410c"/><polygon points="337.0,243.0 394.2,276.0 347.4,303.0 290.2,270.0" fill="#fdba74"/>
+<polygon points="392.4,287.0 349.1,312.0 349.1,305.0 392.4,280.0" fill="#f8fafc"/>
+<polygon points="291.1,272.5 348.3,305.5 348.3,292.5 291.1,259.5" fill="#06b6d4"/><polygon points="395.0,278.5 348.3,305.5 348.3,292.5 395.0,265.5" fill="#0e7490"/><polygon points="337.9,232.5 395.0,265.5 348.3,292.5 291.1,259.5" fill="#67e8f9"/>
+<polygon points="393.3,276.5 350.0,301.5 350.0,294.5 393.3,269.5" fill="#f8fafc"/>
+<polygon points="292.0,262.0 349.1,295.0 349.1,282.0 292.0,249.0" fill="#6366f1"/><polygon points="395.9,268.0 349.1,295.0 349.1,282.0 395.9,255.0" fill="#4338ca"/><polygon points="338.7,222.0 395.9,255.0 349.1,282.0 292.0,249.0" fill="#a5b4fc"/>
+<polygon points="394.2,266.0 350.9,291.0 350.9,284.0 394.2,259.0" fill="#f8fafc"/>
+<polygon points="309.3,249.0 340.5,267.0 340.5,259.0 309.3,241.0" fill="#0f172a"/><polygon points="371.6,249.0 340.5,267.0 340.5,259.0 371.6,241.0" fill="#111827"/><polygon points="340.5,223.0 371.6,241.0 340.5,259.0 309.3,241.0" fill="#1e293b"/>
+<polygon points="340.5,207.0 395.9,239.0 340.5,271.0 285.0,239.0" fill="#0f172a"/>
+<polygon points="340.5,207.0 395.9,239.0 340.5,271.0 285.0,239.0" fill="none" stroke="#334155" stroke-width="1"/>
+<path d="M340.5 239.0 L340.5 271.0 L340.5 289.0" stroke="#fbbf24" stroke-width="2" fill="none"/><circle cx="340.5" cy="291.0" r="4" fill="#fbbf24"/>
+<polygon points="170.7,292.0 198.4,308.0 198.4,302.0 170.7,286.0" fill="#1e293b"/><polygon points="222.7,294.0 198.4,308.0 198.4,302.0 222.7,288.0" fill="#273449"/><polygon points="195.0,272.0 222.7,288.0 198.4,302.0 170.7,286.0" fill="#334155"/>
+<polygon points="189.8,287.0 196.7,291.0 196.7,257.0 189.8,253.0" fill="#334155"/><polygon points="200.2,289.0 196.7,291.0 196.7,257.0 200.2,255.0" fill="#3b4a5f"/><polygon points="193.2,251.0 200.2,255.0 196.7,257.0 189.8,253.0" fill="#475569"/>
+<polygon points="117.0,253.0 238.3,323.0 238.3,225.0 117.0,155.0" fill="url(#phCerceve)"/><polygon points="245.2,319.0 238.3,323.0 238.3,225.0 245.2,221.0" fill="#94a3b8"/><polygon points="124.0,151.0 245.2,221.0 238.3,225.0 117.0,155.0" fill="#cbd5e1"/>
+<g transform="matrix(0.8660 0.5000 0 1 117.0 155.0)"><rect x="5" y="5" width="130" height="88" rx="5" fill="url(#phEkran)"/><rect x="5" y="5" width="130" height="13" rx="5" fill="#1e3a8a"/><rect x="5" y="12" width="130" height="6" fill="#1e3a8a"/><circle cx="12" cy="11.5" r="2" fill="#f87171"/><circle cx="18" cy="11.5" r="2" fill="#fbbf24"/><circle cx="24" cy="11.5" r="2" fill="#34d399"/><rect x="34" y="9" width="44" height="5" rx="2.5" fill="rgba(255,255,255,.35)"/><g transform="translate(12 26)"><rect width="30" height="26" rx="6" fill="#5eead4"/><path d="M15 8c-3-2-7-2.4-10-1.6v12c3-.8 7-.4 10 1.6 3-2 7-2.4 10-1.6v-12c-3-.8-7-.4-10 1.6Zm0 0v12" fill="#fff" stroke="#0f766e" stroke-width="1.2"/></g><rect x="48" y="27" width="70" height="6" rx="3" fill="#1e3a8a"/><rect x="48" y="38" width="86" height="4" rx="2" fill="#93c5fd"/><rect x="48" y="46" width="60" height="4" rx="2" fill="#93c5fd"/><rect x="12" y="58" width="116" height="5" rx="2.5" fill="#bfdbfe"/><rect x="12" y="58" width="71" height="5" rx="2.5" fill="#06b6d4"/><rect x="12" y="69" width="58" height="12" rx="6" fill="#dcfce7" stroke="#22c55e"/><path d="M18 75l3 3 5-6" stroke="#16a34a" stroke-width="1.8" fill="none" stroke-linecap="round"/><rect x="30" y="73.5" width="32" height="3" rx="1.5" fill="#16a34a"/><rect x="76" y="69" width="56" height="12" rx="6" fill="#fff" stroke="#cbd5e1"/><rect x="84" y="73.5" width="34" height="3" rx="1.5" fill="#94a3b8"/><path d="M5 5H77 L77 5 L40 93 H5Z" fill="#fff" opacity=".10"/></g>
+<ellipse cx="243.5" cy="375.0" rx="30" ry="12" fill="#020817" opacity=".35" class="ph-golge-kup"/>
+<g class="ph-kup"><polygon points="214.0,357.0 243.5,374.0 243.5,340.0 214.0,323.0" fill="url(#phKupSol)"/><polygon points="272.9,357.0 243.5,374.0 243.5,340.0 272.9,323.0" fill="#ea580c"/><polygon points="243.5,306.0 272.9,323.0 243.5,340.0 214.0,323.0" fill="#fed7aa"/><g transform="matrix(0.8660 0.5000 0 1 214.0 323.0)"><g transform="translate(8 12)" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5h10a6 6 0 0 1 5.7 7.9l-1 3a3.5 3.5 0 0 1-6 1.3L13.5 15h-3l-2.2 2.2a3.5 3.5 0 0 1-6-1.3l-1-3A6 6 0 0 1 7 5Z"/><path d="M7 9v4M5 11h4"/></g><circle cx="24" cy="21" r="1.6" fill="#fff"/><circle cx="27" cy="24" r="1.6" fill="#fff"/></g><g transform="matrix(0.8660 -0.5000 0 1 243.5 340.0)"><path d="M20 9l3 6 6.5 1-4.7 4.6 1.1 6.4L20 24l-5.9 3 1.1-6.4-4.7-4.6 6.5-1Z" fill="#fde68a"/></g></g>
+<g class="ph-rozet3d"><circle cx="240.5" cy="112.0" r="26" fill="url(#phRozet)"/><circle cx="240.5" cy="112.0" r="26" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><path d="M229.5 113.0 l7 7 13-15" stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
         </svg>
 
         <div class="ph-kart ph-kart--ders">
@@ -1610,220 +2063,110 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
      bağlantılar (sınıflar, Sınav Merkezi, Etkinlik ve Oyun Merkezi
      #emGirisKart, Açık Uçlu Soru Merkezi) dört alanda toplandı.
      Sayılar sayfa yüklenince gerçek verilerden güncellenir. -->
-<section class="ph-bolum ph-platform" id="platform" aria-labelledby="phPlatformBaslik">
+<section class="ph-bolum ph-platform ph-dunya" id="platform" aria-labelledby="phPlatformBaslik">
   <div class="ph-sar">
     <header class="ph-bolum-ust">
-      <p class="ph-on">Platformu Tanı</p>
-      <h2 class="ph-h2" id="phPlatformBaslik">Bu platformda neler yapabilirim?</h2>
-      <p class="ph-giris">Dört çalışma alanı, bir konunun tamamını kapsar: öğren, keşfet, kendini dene ve hedefine ulaş.</p>
+      <p class="ph-on">Dijital Öğrenme Dünyası</p>
+      <h2 class="ph-h2" id="phPlatformBaslik">Dijital öğrenme, tek platformda</h2>
+      <p class="ph-giris">Dört alan, bir konunun tamamını kapsar: dersi öğren, etkileşimle keşfet, oyunla pekiştir, kendini ölç.</p>
     </header>
 
-    <div class="ph-alanlar">
+    <div class="ph-alanlar ph-dunya-kartlar">
       <article class="ph-alan ph-alan--ogren">
-        <div class="ph-alan-ust"><span class="ph-alan-ikon"><span class="msi" aria-hidden="true">auto_stories</span></span><span class="ph-alan-harf" aria-hidden="true">01</span></div>
-        <h3>Öğren</h3>
-        <p class="ph-alan-ozet">Her ünite, adım adım ilerleyen bir dijital ders olarak hazırlandı: önce görür, merak eder, sonra öğrenirsin.</p>
+        <div class="ph-dunya-gorsel"><svg viewBox="0 0 320 150" aria-hidden="true" focusable="false"><defs><linearGradient id="dgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+<ellipse cx="160" cy="132" rx="104" ry="10" fill="#020817" opacity=".22"/>
+<rect x="64" y="18" width="192" height="108" rx="12" fill="#0f2a5f"/><rect x="72" y="26" width="176" height="88" rx="6" fill="url(#dgA)"/>
+<path d="M160 52c-12-9-30-10-44-7v44c14-3 32-2 44 7 12-9 30-10 44-7V45c-14-3-32-2-44 7Z" fill="#fff" opacity=".95"/><path d="M160 52v44" stroke="#3b82f6" stroke-width="2"/>
+<path d="M126 60h22M126 68h22M126 76h16M172 60h22M172 68h22M172 76h16" stroke="#93c5fd" stroke-width="3" stroke-linecap="round"/>
+<rect x="140" y="126" width="40" height="6" rx="3" fill="#0f2a5f"/>
+<circle cx="268" cy="34" r="14" fill="#fbbf77"/><path d="M263 34l4 4 7-8" stroke="#3b1d06" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ph-alan-harf" aria-hidden="true">01</span></div>
+        <h3>Dijital Dersler</h3>
+        <p class="ph-alan-ozet">Her ünite, adım adım ilerleyen bir dijital ders: önce görür, merak eder, sonra öğrenirsin.</p>
+        <details class="ph-alan-detay"><summary>Neler var?</summary>
         <ul class="ph-liste">
           <li><span class="msi" aria-hidden="true">menu_book</span>Konu anlatımları <small>4–8. sınıfların tüm ünitelerinde</small></li>
-          <li><span class="msi" aria-hidden="true">image</span>Görsel konu özetleri</li>
-          <li><span class="msi" aria-hidden="true">hub</span>Kavram haritaları</li>
+          <li><span class="msi" aria-hidden="true">image</span>Görsel konu özetleri ve kavram haritaları</li>
           <li><span class="msi" aria-hidden="true">slideshow</span>Sunumlar ve anlatım videoları <small>4–11. sınıf</small></li>
           <li><span class="msi" aria-hidden="true">headphones</span>Konuyu sesli dinleme</li>
         </ul>
-        <p class="ph-fayda"><b>Öğrenci:</b> Konuyu kendi hızında, görsel ve sesle destekli öğrenir. <b>Öğretmen:</b> Sunum ve özetleri derste doğrudan açar.</p>
+        </details>
         <div class="ph-alan-cta">
           <a class="ph-btn" href="#siniflar">Sınıfını seç <span class="msi" aria-hidden="true">arrow_forward</span></a>
           <a class="ph-baglanti" href="din-kulturu-8sinif-1unite/konuyu-ogren.html">Örnek ders: Kader ve Kaza İnancı</a>
         </div>
       </article>
 
+      <article class="ph-alan ph-alan--etkilesim">
+        <div class="ph-dunya-gorsel"><svg viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+<ellipse cx="160" cy="134" rx="96" ry="9" fill="#020817" opacity=".22"/>
+<rect x="104" y="14" width="112" height="120" rx="16" fill="#0f2a5f"/><rect x="112" y="24" width="96" height="100" rx="8" fill="#e0f2fe"/>
+<rect x="120" y="34" width="60" height="16" rx="8" fill="#06b6d4"/><rect x="140" y="56" width="60" height="16" rx="8" fill="#1e3a8a"/><rect x="120" y="78" width="70" height="16" rx="8" fill="#06b6d4"/>
+<rect x="120" y="100" width="34" height="14" rx="7" fill="#22c55e"/><rect x="160" y="100" width="34" height="14" rx="7" fill="#f97316"/>
+<circle cx="66" cy="54" r="22" fill="#5eead4"/><path d="M58 54h16M66 46v16" stroke="#0f2a5f" stroke-width="4" stroke-linecap="round"/>
+<path d="M236 40h40a10 10 0 0 1 10 10v18a10 10 0 0 1-10 10h-22l-12 10v-10h-6a10 10 0 0 1-10-10V50a10 10 0 0 1 10-10Z" fill="#fff"/><circle cx="246" cy="59" r="3" fill="#1e3a8a"/><circle cx="256" cy="59" r="3" fill="#1e3a8a"/><circle cx="266" cy="59" r="3" fill="#1e3a8a"/></svg><span class="ph-alan-harf" aria-hidden="true">02</span></div>
+        <h3>Etkileşimli Öğrenme</h3>
+        <p class="ph-alan-ozet">Sadece okumazsın: tıklar, eşleştirir, cevaplar, sorar. Her adımda öğrendiğini hemen denersin.</p>
+        <details class="ph-alan-detay"><summary>Neler var?</summary>
+        <ul class="ph-liste">
+          <li><span class="msi" aria-hidden="true">touch_app</span>Gör · Keşfet · Öğren · Düşün adımlı dersler <small>mini kontrollerle</small></li>
+          <li><span class="msi" aria-hidden="true">psychology</span>Kavram Kodlama kartları</li>
+          <li><span class="msi" aria-hidden="true">emoji_events</span>“Kim Din Dersinde Kazanan Olmak İster?” yarışması</li>
+          <li><span class="msi" aria-hidden="true">forum</span>Bana Sor öğrenme asistanı <small>sınıf düzeyine göre</small></li>
+        </ul>
+        </details>
+        <div class="ph-alan-cta">
+          <a class="ph-btn" href="kim-din-dersinde-kazanan.html">Yarışmayı aç <span class="msi" aria-hidden="true">arrow_forward</span></a>
+          <button type="button" class="ph-baglanti ph-baglanti--dugme" data-ph-asistan="1">Bana Sor’u aç</button>
+        </div>
+      </article>
+
       <article class="ph-alan ph-alan--kesfet">
-        <div class="ph-alan-ust"><span class="ph-alan-ikon"><span class="msi" aria-hidden="true">sports_esports</span></span><span class="ph-alan-harf" aria-hidden="true">02</span></div>
-        <h3>Keşfet</h3>
+        <div class="ph-dunya-gorsel"><svg viewBox="0 0 320 150" aria-hidden="true" focusable="false"><defs><linearGradient id="dgO" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdba74"/><stop offset="1" stop-color="#ea580c"/></linearGradient></defs>
+<ellipse cx="160" cy="132" rx="110" ry="10" fill="#020817" opacity=".22"/>
+<path d="M112 46h96a36 36 0 0 1 34 46l-6 20a20 20 0 0 1-34 6l-14-16h-52l-14 16a20 20 0 0 1-34-6l-6-20a36 36 0 0 1 34-46Z" fill="url(#dgO)"/>
+<path d="M118 70v24M106 82h24" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="196" cy="74" r="7" fill="#fff"/><circle cx="212" cy="90" r="7" fill="#fff"/>
+<g transform="rotate(-14 56 40)"><rect x="36" y="20" width="40" height="40" rx="9" fill="#fff"/><circle cx="48" cy="32" r="4" fill="#1e3a8a"/><circle cx="64" cy="48" r="4" fill="#1e3a8a"/><circle cx="56" cy="40" r="4" fill="#1e3a8a"/></g>
+<path d="M266 18l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2Z" fill="#fbbf24"/></svg><span class="ph-alan-harf" aria-hidden="true">03</span></div>
+        <h3>Oyunla Öğrenme</h3>
         <p class="ph-alan-ozet"><b data-ph-sayi="mekanik">41</b> etkinlik ve oyun türü, 4–8. sınıfların <b data-ph-sayi="oyunUnite">26</b> ünitesiyle eşleştirildi. Öğrenmek, oynayarak pekişir.</p>
+        <details class="ph-alan-detay"><summary>Neler var?</summary>
         <ul class="ph-liste">
           <li><span class="msi" aria-hidden="true">stadia_controller</span>İnteraktif oyunlar <small>ünite oyun merkezleri</small></li>
           <li><span class="msi" aria-hidden="true">groups</span>Sınıf içi etkinlikler <small>malzeme, adımlar, sınıf düzeni</small></li>
-          <li><span class="msi" aria-hidden="true">psychology</span>Kavram Kodlama</li>
-          <li><span class="msi" aria-hidden="true">emoji_events</span>“Kim Din Dersinde Kazanan Olmak İster?” yarışması</li>
+          <li><span class="msi" aria-hidden="true">smart_display</span>Akıllı tahtada tek tıkla başlatma</li>
         </ul>
-        <p class="ph-fayda"><b>Öğrenci:</b> Kavramları oyunla tekrar eder. <b>Öğretmen:</b> Hazır etkinliği akıllı tahtada başlatır.</p>
+        </details>
         <div class="ph-alan-cta">
           <a class="ph-btn" href="#sinifOdakBaslik" id="emGirisKart">Etkinlik ve Oyun Merkezi <span class="msi" aria-hidden="true">arrow_forward</span></a>
-          <a class="ph-baglanti" href="kim-din-dersinde-kazanan.html">Yarışmayı aç</a>
+          <a class="ph-baglanti" href="#oyunlar">41 oyunluk galeri</a>
         </div>
       </article>
 
       <article class="ph-alan ph-alan--dene">
-        <div class="ph-alan-ust"><span class="ph-alan-ikon"><span class="msi" aria-hidden="true">fact_check</span></span><span class="ph-alan-harf" aria-hidden="true">03</span></div>
-        <h3>Kendini Dene</h3>
-        <p class="ph-alan-ozet">Her konunun sonunda ne öğrendiğini görürsün; açık uçlu sorularda cevabını ölçütlere göre puanlarsın.</p>
+        <div class="ph-dunya-gorsel"><svg viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+<ellipse cx="160" cy="134" rx="104" ry="9" fill="#020817" opacity=".22"/>
+<rect x="74" y="14" width="104" height="120" rx="10" fill="#fff"/><rect x="104" y="8" width="44" height="14" rx="6" fill="#1e3a8a"/>
+<g stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M88 42l6 6 10-11M88 72l6 6 10-11" stroke="#16a34a" stroke-width="4"/><path d="M90 100l12 12M102 100l-12 12" stroke="#dc2626" stroke-width="4"/></g>
+<path d="M116 44h48M116 74h40M116 106h44" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+<circle cx="236" cy="74" r="50" fill="#0f2a5f"/><circle cx="236" cy="74" r="36" fill="#06b6d4"/><circle cx="236" cy="74" r="22" fill="#fff"/><circle cx="236" cy="74" r="9" fill="#dc2626"/>
+<path d="M236 74l42-42" stroke="#fbbf77" stroke-width="5" stroke-linecap="round"/><path d="M270 28l14-2-2 14" fill="#fbbf77"/></svg><span class="ph-alan-harf" aria-hidden="true">04</span></div>
+        <h3>Ölçme ve Değerlendirme</h3>
+        <p class="ph-alan-ozet">Her konunun sonunda ne öğrendiğini görürsün; sınava hazırlanırken denemeler ve analizler seninle.</p>
+        <details class="ph-alan-detay"><summary>Neler var?</summary>
         <ul class="ph-liste">
           <li><span class="msi" aria-hidden="true">quiz</span>Konu testleri ve ünite değerlendirmeleri</li>
           <li><span class="msi" aria-hidden="true">edit_document</span><b data-ph-sayi="yazili">42</b>&nbsp;yazılı sınav <small>test ve klasik</small></li>
-          <li><span class="msi" aria-hidden="true">edit_note</span><b data-ph-sayi="acikUclu">2.250</b>&nbsp;açık uçlu soru <small>4–12. sınıf</small></li>
-          <li><span class="msi" aria-hidden="true">key</span>Cevap anahtarları</li>
-          <li><span class="msi" aria-hidden="true">rule</span>Puanlama ölçütleri ve öz değerlendirme</li>
+          <li><span class="msi" aria-hidden="true">edit_note</span><b data-ph-sayi="acikUclu">2.250</b>&nbsp;açık uçlu soru <small>cevap anahtarı ve puanlama ölçütü</small></li>
+          <li><span class="msi" aria-hidden="true">target</span>LGS Hazırlık Merkezi <span class="ph-durum ph-durum--hazir">Hazır</span> <small>1.500 deneme sorusu, 2021–2026 çıkmış sorular</small></li>
+          <li><span class="msi" aria-hidden="true">menu_book</span>YKS · TYT · AYT hazırlık alanı <span class="ph-durum ph-durum--gelisiyor">Gelişiyor</span></li>
         </ul>
-        <p class="ph-fayda"><b>Öğrenci:</b> Eksiğini hemen görür. <b>Öğretmen:</b> Hazır, puanlanmış soru ve yazılıları kullanır.</p>
+        </details>
         <div class="ph-alan-cta">
-          <a class="ph-btn" href="acik-uclu-soru-merkezi/tum-siniflar.html">Açık Uçlu Soru Merkezi <span class="msi" aria-hidden="true">arrow_forward</span></a>
+          <a class="ph-btn" href="sinav-merkezi/index.html">Sınav Merkezi <span class="msi" aria-hidden="true">arrow_forward</span></a>
+          <a class="ph-baglanti" href="acik-uclu-soru-merkezi/tum-siniflar.html">Açık Uçlu Soru Merkezi</a>
+          <a class="ph-baglanti" href="sinav-merkezi/lgs-hazirlik/index.html">LGS Hazırlık</a>
           <a class="ph-baglanti" href="din-kulturu-8sinif-1unite/yazili1_klasik.html">Örnek yazılı</a>
         </div>
-      </article>
-
-      <article class="ph-alan ph-alan--hedef">
-        <div class="ph-alan-ust"><span class="ph-alan-ikon"><span class="msi" aria-hidden="true">flag</span></span><span class="ph-alan-harf" aria-hidden="true">04</span></div>
-        <h3>Hedefine Ulaş</h3>
-        <p class="ph-alan-ozet">Sınava hazırlanan öğrenci için konu özetleri, kazanım testleri, denemeler ve performans takibi tek merkezde.</p>
-        <ul class="ph-liste">
-          <li><span class="msi" aria-hidden="true">target</span>LGS Hazırlık Merkezi <span class="ph-durum ph-durum--hazir">Hazır</span></li>
-          <li><span class="msi" aria-hidden="true">timer</span>1.500 soruluk ünite ve zor seviye denemeleri</li>
-          <li><span class="msi" aria-hidden="true">history</span>2021–2026 LGS çıkmış soruları</li>
-          <li><span class="msi" aria-hidden="true">menu_book</span>YKS · TYT · AYT hazırlık alanı <span class="ph-durum ph-durum--gelisiyor">Gelişiyor</span></li>
-          <li><span class="msi" aria-hidden="true">smart_toy</span>Çalışma koçu, geri sayım ve rozetler</li>
-        </ul>
-        <p class="ph-fayda"><b>Öğrenci:</b> Sınav gününe kadar planlı çalışır. <b>Öğretmen:</b> Deneme ve analizleri sınıfla paylaşır.</p>
-        <div class="ph-alan-cta">
-          <a class="ph-btn" href="sinav-merkezi/lgs-hazirlik/index.html">LGS Hazırlık <span class="msi" aria-hidden="true">arrow_forward</span></a>
-          <a class="ph-baglanti" href="sinav-merkezi/index.html">Sınav Merkezi</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     "BİR KONUYU ÖĞRENMENİN ÖTESİNDE..." — öğrenme yolculuğu.
-     Adımlardaki örnekler 8. sınıf "Kader ve Kaza İnancı" dijital
-     dersinden (din-kulturu-8sinif-1unite/konuyu-ogren.html) alındı. -->
-<section class="ph-bolum ph-yolculuk" id="yolculuk" aria-labelledby="phYolculukBaslik">
-  <div class="ph-sar">
-    <header class="ph-bolum-ust">
-      <p class="ph-on">Öğrenme Yolculuğu</p>
-      <h2 class="ph-h2" id="phYolculukBaslik">Bir Konuyu Öğrenmenin Ötesinde…</h2>
-      <p class="ph-giris">Her ünite aynı yolculuğu izler. Aşağıdaki örnekler 8. sınıf <b>Kader ve Kaza İnancı</b> dersinden alındı.</p>
-    </header>
-    <ol class="ph-adimlar">
-      <li class="ph-adim">
-        <span class="ph-adim-no" aria-hidden="true">1</span>
-        <span class="ph-adim-ikon"><span class="msi" aria-hidden="true">travel_explore</span></span>
-        <h3>Konuyu keşfet</h3>
-        <p>Bir fotoğrafla başlar, bir merak sorusuyla düşünürsün.</p>
-        <blockquote>“Bu tohumlar hangi sırayla, ne kadar sürede büyüyeceğini nereden ‘biliyor’?”</blockquote>
-        <span class="ph-adim-etiket">Gör · Keşfet</span>
-      </li>
-      <li class="ph-adim">
-        <span class="ph-adim-no" aria-hidden="true">2</span>
-        <span class="ph-adim-ikon"><span class="msi" aria-hidden="true">auto_stories</span></span>
-        <h3>Görseller ve anlatımlarla öğren</h3>
-        <p>Kavramlar, ayet ve delillerle; kavram haritası, video ve sesli anlatımla desteklenir.</p>
-        <blockquote>Kader, Allah’ın her şeyi bir ölçü, düzen ve plana göre takdir etmesidir.</blockquote>
-        <span class="ph-adim-etiket">Öğren · Ayet / Delil</span>
-      </li>
-      <li class="ph-adim">
-        <span class="ph-adim-no" aria-hidden="true">3</span>
-        <span class="ph-adim-ikon"><span class="msi" aria-hidden="true">extension</span></span>
-        <h3>Etkinliklerle pekiştir</h3>
-        <p>Öğrendiğini günlük hayatla ilişkilendirir, sınıfta oyun ve etkinliklerle tekrar edersin.</p>
-        <blockquote>“Bir tohumun ne zaman çimleneceğini bilebiliyoruz; çünkü her şey bir ölçüye göre işliyor.”</blockquote>
-        <span class="ph-adim-etiket">Günlük Hayat · Oyunlar</span>
-      </li>
-      <li class="ph-adim">
-        <span class="ph-adim-no" aria-hidden="true">4</span>
-        <span class="ph-adim-ikon"><span class="msi" aria-hidden="true">fact_check</span></span>
-        <h3>Sorularla kendini değerlendir</h3>
-        <p>Mini kontrol, konu testleri ve açık uçlu sorularla anladığını sınarsın.</p>
-        <blockquote>“Kader ile kaza arasındaki fark nedir?”</blockquote>
-        <span class="ph-adim-etiket">Düşün · Mini Kontrol</span>
-      </li>
-      <li class="ph-adim">
-        <span class="ph-adim-no" aria-hidden="true">5</span>
-        <span class="ph-adim-ikon"><span class="msi" aria-hidden="true">replay</span></span>
-        <h3>Eksiklerini gör, yeniden çalış</h3>
-        <p>İlerleme halkaları, önerilen konular ve “Bana Sor” asistanı eksik kalan yere geri götürür.</p>
-        <blockquote>“Yanlışımı açıkla.” — Bana Sor, yanlış yaptığın soruyu birlikte ele alır.</blockquote>
-        <span class="ph-adim-etiket">İlerleme · Tekrar</span>
-      </li>
-    </ol>
-    <div class="ph-yolculuk-cta">
-      <a class="ph-btn ph-btn--buyuk" href="din-kulturu-8sinif-1unite/konuyu-ogren.html">Bu yolculuğu gerçek bir derste dene <span class="msi" aria-hidden="true">arrow_forward</span></a>
-      <span>8. sınıf · Kader ve Kaza İnancı · 7 adımlı dijital ders</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     "PLATFORMU ÇALIŞIRKEN GÖR" — gerçek içerik vitrini. Metinler
-     portal dosyalarından alındı; açık uçlu soru ve yazılı ölçütü
-     sayfa yüklenince gerçek veri dosyalarından getirilir. -->
-<section class="ph-bolum ph-vitrin" id="vitrin" aria-labelledby="phVitrinBaslik">
-  <div class="ph-sar">
-    <header class="ph-bolum-ust">
-      <p class="ph-on">Gerçek İçerikler</p>
-      <h2 class="ph-h2" id="phVitrinBaslik">Platformu çalışırken gör</h2>
-      <p class="ph-giris">Buradaki her örnek portalın kendi sayfalarından geliyor. Dene, sonra derse geç.</p>
-    </header>
-    <div class="ph-bento">
-      <article class="ph-kutu ph-kutu--ozet">
-        <a class="ph-kutu-gorsel" href="din-kulturu-8sinif-1unite/index.html" aria-label="8. sınıf Kader İnancı ünitesini ve anlatım videosunu aç">
-          <img src="anlatim-videolari/kapak/8-sinif-1-unite-anlatim.jpg" alt="8. sınıf Kader İnancı konu anlatım videosunun kapağı" loading="lazy" width="1280" height="720">
-          <span class="ph-oynat"><span class="msi" aria-hidden="true">play_arrow</span></span>
-        </a>
-        <div class="ph-kutu-govde">
-          <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">description</span> Konu özeti · 8. sınıf</p>
-          <h3>Kader ve Kaza İnancı</h3>
-          <p><b>Kader</b>, Allah’ın sonsuz ilmi ve kudretiyle, başlangıçtan sona evrende gerçekleşecek olan her şeyi takdir etmesidir. <b>Kaza</b> ise bu takdir edilen şeyin, zamanı ve yeri geldiğinde Allah tarafından yaratılmasıdır.</p>
-          <div class="ph-kutu-cta"><a class="ph-baglanti" href="din-kulturu-8sinif-1unite/konuyu-ogren.html">Konu anlatımını aç</a><a class="ph-baglanti" href="din-kulturu-8sinif-1unite/index.html">Anlatım videosu</a></div>
-        </div>
-      </article>
-
-      <article class="ph-kutu ph-kutu--harita">
-        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">hub</span> Kavram haritası</p>
-        <div class="ph-harita" role="img" aria-label="Kavram haritası: Evrendeki yasalar; fiziksel yasalar (yer çekimi, hareket), biyolojik yasalar (büyüme, üreme), toplumsal yasalar (adalet, çalışma, dayanışma)">
-          <span class="ph-harita-merkez">Evrendeki yasalar</span>
-          <span class="ph-harita-dal"><b>Fiziksel</b>Yer çekimi, hareket</span>
-          <span class="ph-harita-dal"><b>Biyolojik</b>Büyüme, üreme</span>
-          <span class="ph-harita-dal"><b>Toplumsal</b>Adalet, çalışma, dayanışma</span>
-        </div>
-        <a class="ph-baglanti" href="din-kulturu-8sinif-1unite/konuyu-ogren.html">Haritayı derste gör</a>
-      </article>
-
-      <article class="ph-kutu ph-kutu--kontrol">
-        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">task_alt</span> Mini kontrol · dene</p>
-        <h3 id="phMiniSoru">Kader ile kaza arasındaki fark nedir?</h3>
-        <div class="ph-secenekler" role="group" aria-labelledby="phMiniSoru">
-          <button type="button" data-dogru="1">Kader takdir edilmesi, kaza gerçekleşmesidir</button>
-          <button type="button">İkisi de aynı anlama gelir</button>
-          <button type="button">Kader insana, kaza doğaya aittir</button>
-          <button type="button">Kader gerçekleşmesi, kaza takdir edilmesidir</button>
-        </div>
-        <p class="ph-geri-bildirim" aria-live="polite"></p>
-      </article>
-
-      <article class="ph-kutu ph-kutu--acik" id="phAcikKutu">
-        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">edit_note</span> Açık uçlu soru · <span id="phAcikEtiket">8. sınıf · 1. ünite</span></p>
-        <h3 id="phAcikSoru">Soru yükleniyor…</h3>
-        <details class="ph-anahtar" id="phAcikAnahtar" hidden>
-          <summary>Cevap anahtarını göster</summary>
-          <p id="phAcikBeklenen"></p>
-          <ul id="phAcikUnsur"></ul>
-        </details>
-        <div class="ph-kutu-cta"><button type="button" class="ph-baglanti ph-dugme-baglanti" id="phAcikBaska" hidden>Başka bir soru</button><a class="ph-baglanti" href="acik-uclu-soru-merkezi/tum-siniflar.html#s8-u1">Tüm 50 soru</a></div>
-      </article>
-
-      <article class="ph-kutu ph-kutu--olcut" id="phOlcutKutu">
-        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">rule</span> Yazılı değerlendirme ölçütü</p>
-        <h3 id="phOlcutSoru">Ölçüt yükleniyor…</h3>
-        <table class="ph-olcut" id="phOlcutTablo"><caption class="ph-gizli">Puanlama ölçütleri</caption><thead><tr><th scope="col">Ölçüt</th><th scope="col">Puan</th></tr></thead><tbody></tbody></table>
-        <a class="ph-baglanti" href="#siniflar" data-ph-sinif="s8" data-ph-sekme="acik">8. sınıf açık uçlu yazılı soruları</a>
-      </article>
-
-      <article class="ph-kutu ph-kutu--oyun">
-        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">sports_esports</span> Etkinlik ve oyun</p>
-        <h3><b data-ph-sayi="mekanik">41</b> etkinlik türü, <b data-ph-sayi="oyunAtama">246</b> ünite eşleşmesi</h3>
-        <ul class="ph-cipler" id="phOyunCipler"><li>Hazine Avı</li><li>Kaçış Odası</li><li>Sessiz Sinema</li><li>Eşini Bul</li><li>Bayrak Yarışı</li><li>Gizemli Kutu</li></ul>
-        <a class="ph-btn" href="din-kulturu-tum-siniflar.html?oyun=s8-u1">Kader İnancı etkinliklerini aç <span class="msi" aria-hidden="true">arrow_forward</span></a>
       </article>
     </div>
   </div>
@@ -1835,30 +2178,22 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
      daha aşağıda, seçimden sonra geliyor). -->
 <section class="sinif-odak-bolum sinif-odak-bolum--giris" id="siniflar" aria-labelledby="sinifOdakBaslik">
   <div class="sinif-sekme-sarmal">
+    <!-- 2026-11-02 — HIZLI ERİŞİM: "Sınıfını Seç" bölümünün başında. Gizli bölümler silinmedi;
+         bu kartlar ve üst menüyle açılır. -->
+    <div class="ph-kisa-yollar" id="kisaYollar" role="navigation" aria-label="Hızlı erişim">
+      <ul class="ph-ky-liste">
+        <li class="ph-ky-devam" hidden><a class="ph-ky" id="phKyDevam" href="#"><span class="ph-ky-ikon" aria-hidden="true">↻</span><span><b>Kaldığın yerden devam et</b><small id="phKyDevamAd">Son açtığın konu</small></span></a></li>
+        <li><button type="button" class="ph-ky" data-ph-em="1"><span class="ph-ky-ikon" aria-hidden="true">🎮</span><span><b>Etkinlik ve Oyunlar</b><small><span data-ph-sayi="mekanik">41</span> oyun türü</small></span></button></li>
+        <li><a class="ph-ky" href="sinav-merkezi/index.html"><span class="ph-ky-ikon" aria-hidden="true">🎯</span><span><b>Sınav Merkezi</b><small>LGS · TYT · AYT</small></span></a></li>
+        <li><a class="ph-ky" href="acik-uclu-soru-merkezi/tum-siniflar.html"><span class="ph-ky-ikon" aria-hidden="true">✍️</span><span><b>Açık Uçlu Sorular</b><small>4–12. sınıflar</small></span></a></li>
+        <li><a class="ph-ky" href="#ogretmenler"><span class="ph-ky-ikon" aria-hidden="true">🧑‍🏫</span><span><b>Öğretmenler İçin</b><small>Araçlar ve rapor</small></span></a></li>
+      </ul>
+    </div>
+
     <p class="bolum-on-etiket">4–12. Sınıflar</p>
     <h2 class="sinif-odak-baslik" id="sinifOdakBaslik">Sınıfını Seç</h2>
     <p class="sinif-sekme-onsoz">Her kartta o sınıfın gerçek içerik durumu yazar. Sınıfını seç; ünitelere, yazılı sınavlara ve etkinliklere aşağıdaki sınıf alanından ulaş.</p>
     <div class="ph-sinif-kartlari" id="phSinifKartlari" role="list" aria-label="Sınıflar"></div>
-    <!-- 8. sınıf LGS altyapısı — sayılar LGS Hazırlık Merkezi'nin kendi içeriğinden. -->
-    <aside class="ph-lgs" aria-labelledby="phLgsBaslik">
-      <div class="ph-lgs-metin">
-        <p class="ph-on ph-on--acik">8. Sınıf</p>
-        <h3 id="phLgsBaslik">LGS’ye hazırlık, sınıf dersinin içinde</h3>
-        <p>8. sınıf öğrencisi konu anlatımından denemeye, çıkmış sorulardan sınav analizine kadar her şeyi aynı yerde bulur. 8. sınıf sayfasındaki <b>LGS Hazırlık</b> sekmesi, LGS Hazırlık Merkezi’ne doğrudan bağlanır.</p>
-        <div class="ph-lgs-cta">
-          <a class="hero-cta hero-cta-birincil" href="sinav-merkezi/lgs-hazirlik/index.html"><span class="msi" aria-hidden="true">target</span> LGS Hazırlık Merkezi</a>
-          <button type="button" class="hero-cta hero-cta-ikincil" data-ph-sinif="s8" data-ph-sekme="lgs">8. sınıf LGS sekmesi</button>
-          <a class="ph-baglanti ph-baglanti--acik" href="cikmis-sorular.html">Çıkmış sorular</a>
-        </div>
-      </div>
-      <ul class="ph-lgs-sayilar">
-        <li><b>5</b><span>ünite özeti ve oyun merkezi</span></li>
-        <li><b>500</b><span>ünite deneme sorusu <small>5 ünite × 5 test</small></span></li>
-        <li><b>1.000</b><span>zor seviye deneme sorusu <small>5 ünite × 10 test</small></span></li>
-        <li><b>60</b><span>çıkmış soru <small>2021–2026</small></span></li>
-        <li><b><span class="msi" aria-hidden="true">monitoring</span></b><span>sınav analizi, çalışma koçu, geri sayım</span></li>
-      </ul>
-    </aside>
 
     <h3 class="ph-sekme-baslik"><span class="msi" aria-hidden="true">tab</span> Sınıf içerikleri</h3>
 
@@ -1880,17 +2215,21 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
   </div>
 </section>
 
-<section class="onerilen-bolum" id="onerilenBolum" aria-labelledby="onerilenBaslik" hidden>
-  <div class="onerilen-baslik-satir">
-    <div>
-      <p class="bolum-on-etiket">Kişiye Özel</p>
-      <h2 id="onerilenBaslik"><span class="msi" aria-hidden="true">auto_awesome</span> Senin İçin Önerilen Konular</h2>
-      <p class="onerilen-alt">Henüz tamamlamadığın konulardan seçtiklerimiz</p>
-    </div>
-  </div>
-  <div class="onerilen-izgara" id="onerilenIzgara"></div>
-</section>
-
+<!-- ============================================================
+     2026-11-02 — KALDIĞIN YER. Kişisel bölümler (Devam Et, İlerleme,
+     Platforma Bir Bakış, Bugün Düşün, Favorilerim, Önerilen Konular)
+     tek panelde toplandı; hiçbiri silinmedi, kimlikleri aynı. -->
+<section class="ph-bolum ph-kisisel" id="kaldiginYer" aria-labelledby="phKisiselBaslik">
+  <div class="ph-sar">
+    <header class="ph-bolum-ust ph-bolum-ust--yan">
+      <div>
+        <p class="ph-on">Kişisel Alan</p>
+        <h2 class="ph-h2" id="phKisiselBaslik">Kaldığın yer</h2>
+      </div>
+      <p class="ph-giris">İlerlemen, favorilerin ve bugünün sorusu bir arada.</p>
+    </header>
+    <div class="ph-kisisel-izgara">
+      <div class="ph-kisisel-ana">
 <section class="hizli-erisim" aria-labelledby="hizliBaslik">
   <h2 id="hizliBaslik" class="hizli-baslik"><span class="msi" aria-hidden="true">bolt</span> Bugün Çalışmaya Devam Et</h2>
   <div class="hizli-izgara">
@@ -1907,6 +2246,26 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
       <div class="hizli-metin"><b>Favorilerim</b><span id="favoriSayisiMetin">0 konu favoride</span></div>
     </div>
     <button type="button" class="hizli-devam-btn" id="devamEtBtn"><span class="msi" aria-hidden="true">play_arrow</span> Devam Et</button>
+  </div>
+</section>
+
+<section class="ilerleme-panel" aria-labelledby="ilerlemeBaslik">
+  <div class="ilerleme-kutu belirir">
+    <div class="ilerleme-govde">
+      <div class="ilerleme-bar-dis" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Tamamlanan ünite yüzdesi" id="ilerlemeBar">
+        <svg class="daire-ilerleme" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="daire-arka" cx="60" cy="60" r="52"></circle>
+          <circle class="daire-on" id="daireOn" cx="60" cy="60" r="52"></circle>
+        </svg>
+        <span class="daire-yuzde-metin" id="daireYuzdeMetin">%0</span>
+      </div>
+      <div class="ilerleme-detay">
+        <div class="ilerleme-ust-satir"><span class="msi" aria-hidden="true">insights</span><h2 id="ilerlemeBaslik">İlerleme Durumun</h2></div>
+        <p class="ilerleme-metin" id="ilerlemeMetin">0 / 0 ünite tamamlandı</p>
+        <p class="motivasyon-mesaji" id="motivasyonMesaji" aria-live="polite"></p>
+        <div class="rozet-satir" id="rozetSatiri"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1939,26 +2298,8 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
   </div>
 </section>
 
-<section class="ilerleme-panel" aria-labelledby="ilerlemeBaslik">
-  <div class="ilerleme-kutu belirir">
-    <div class="ilerleme-govde">
-      <div class="ilerleme-bar-dis" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Tamamlanan ünite yüzdesi" id="ilerlemeBar">
-        <svg class="daire-ilerleme" viewBox="0 0 120 120" aria-hidden="true">
-          <circle class="daire-arka" cx="60" cy="60" r="52"></circle>
-          <circle class="daire-on" id="daireOn" cx="60" cy="60" r="52"></circle>
-        </svg>
-        <span class="daire-yuzde-metin" id="daireYuzdeMetin">%0</span>
       </div>
-      <div class="ilerleme-detay">
-        <div class="ilerleme-ust-satir"><span class="msi" aria-hidden="true">insights</span><h2 id="ilerlemeBaslik">İlerleme Durumun</h2></div>
-        <p class="ilerleme-metin" id="ilerlemeMetin">0 / 0 ünite tamamlandı</p>
-        <p class="motivasyon-mesaji" id="motivasyonMesaji" aria-live="polite"></p>
-        <div class="rozet-satir" id="rozetSatiri"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
+      <div class="ph-kisisel-yan">
 <div class="kucuk-panel-alani">
   <section class="kucuk-panel soru-panel belirir" aria-labelledby="soruBaslik">
     <p class="soru-ust-etiket" id="soruUstEtiket">Öne Çıkan</p>
@@ -1985,119 +2326,361 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
   </section>
 </div>
 
-<!-- ============================================================
-     2026-11-02 — "PLATFORMDA NELER YENİ?" Liste assets/anasayfa/
-     anasayfa.js içindeki YENILIKLER dizisinden tarih sırasıyla
-     otomatik oluşur; son 21 gün içindekiler "YENİ" etiketi alır. -->
-<section class="ph-bolum ph-yeni" id="yenilikler" aria-labelledby="phYeniBaslik">
-  <div class="ph-sar">
-    <header class="ph-bolum-ust ph-bolum-ust--yan">
-      <div>
-        <p class="ph-on">Güncellemeler</p>
-        <h2 class="ph-h2" id="phYeniBaslik">Platformda neler yeni?</h2>
       </div>
-      <p class="ph-giris">Son eklenen içerikler; her biri doğrudan açılır.</p>
-    </header>
-    <ol class="ph-yeni-liste" id="phYeniListe"></ol>
+    </div>
+<section class="onerilen-bolum" id="onerilenBolum" aria-labelledby="onerilenBaslik" hidden>
+  <div class="onerilen-baslik-satir">
+    <div>
+      <p class="bolum-on-etiket">Kişiye Özel</p>
+      <h2 id="onerilenBaslik"><span class="msi" aria-hidden="true">auto_awesome</span> Senin İçin Önerilen Konular</h2>
+      <p class="onerilen-alt">Henüz tamamlamadığın konulardan seçtiklerimiz</p>
+    </div>
+  </div>
+  <div class="onerilen-izgara" id="onerilenIzgara"></div>
+</section>
+
   </div>
 </section>
 
 <!-- ============================================================
-     "NASIL BİR ÖĞRENME YAKLAŞIMI SUNUYORUZ?" — her ilke portaldaki
-     gerçek bir örnekle desteklenir. -->
-<section class="ph-bolum ph-yaklasim" id="yaklasim" aria-labelledby="phYaklasimBaslik">
+     2026-11-02 — DİJİTAL OYUN MERKEZİ vitrini. Kartlar OYUN_VERI.mekanikler
+     içindeki gerçek oyunlardır; tıklanınca mevcut Etkinlik ve Oyun Merkezi
+     penceresi o oyunun adıyla filtrelenmiş olarak açılır (yeni oyun yok). -->
+<section class="ph-bolum ph-oyunlar" id="oyunlar" aria-labelledby="phOyunBaslik">
   <div class="ph-sar">
-    <header class="ph-bolum-ust">
-      <p class="ph-on">Eğitim Yaklaşımı</p>
-      <h2 class="ph-h2" id="phYaklasimBaslik">Nasıl bir öğrenme yaklaşımı sunuyoruz?</h2>
-      <p class="ph-giris">İlkelerimizi slogan olarak değil, derslerdeki örnekleriyle gösteriyoruz.</p>
+    <header class="ph-oyun-ust">
+      <div>
+        <p class="ph-on ph-on--acik">Dijital Oyun Merkezi</p>
+        <h2 class="ph-h2" id="phOyunBaslik">Oynayarak Öğren, <span>Öğrendikçe Geliş!</span></h2>
+        <p class="ph-giris">41 oyunun hepsi burada. Türe göre süz, bir oyuna dokun: o oyunun geçtiği üniteler malzeme ve adımlarıyla açılır.</p>
+      </div>
+      <div class="ph-oyun-sayac" aria-label="41 etkinlik ve oyun türü">
+        <b data-ph-sayi="mekanik">41</b>
+        <span>etkinlik ve<br>oyun türü</span>
+      </div>
     </header>
-    <div class="ph-ilkeler">
-      <article class="ph-ilke">
-        <span class="msi" aria-hidden="true">verified</span>
-        <h3>Türkiye Yüzyılı Maarif Modeli ile uyum</h3>
-        <p>Ünite kartlarında resmî öğrenme çıktıları yer alır; içerikler MEB programındaki ünite sırasına göre dizilir.</p>
-        <p class="ph-ornek"><span>Portaldaki örneği</span><span id="phMaarifOrnek">DKAB.8.1.1 · Kader ve kaza kavramlarını …</span></p>
-      </article>
-      <article class="ph-ilke">
-        <span class="msi" aria-hidden="true">person_pin</span>
-        <h3>Öğrenci merkezli öğrenme</h3>
-        <p>Öğrenci dijital derste kendi hızında ilerler; “Bana Sor” asistanı onun sınıf düzeyine göre konuşur.</p>
-        <p class="ph-ornek"><span>Portaldaki örneği</span>Dijital ders ilerleme sayacı: “0/7 adım” · 4. sınıfa sade dille, 12. sınıfa sınav odaklı açıklama.</p>
-      </article>
-      <article class="ph-ilke">
-        <span class="msi" aria-hidden="true">diversity_1</span>
-        <h3>Bilgi, beceri ve değer bütünlüğü</h3>
-        <p>Kavram öğretilir, düşünme becerisi çalıştırılır, değerle ilişkilendirilir.</p>
-        <p class="ph-ornek"><span>Portaldaki örneği</span>“Kaderi bilmek ile kaderi belirlemek arasında nasıl bir fark vardır? Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.”</p>
-      </article>
-      <article class="ph-ilke">
-        <span class="msi" aria-hidden="true">directions_run</span>
-        <h3>Aktif katılım</h3>
-        <p>Öğrenci dinleyici değil, katılımcıdır: koşar, eşleştirir, tartışır, üretir.</p>
-        <p class="ph-ornek"><span>Portaldaki örneği</span>Hazine Avı, Kaçış Odası, Sessiz Sinema, İstasyon Turu ve diğer sınıf içi etkinlikler.</p>
-      </article>
-      <article class="ph-ilke">
-        <span class="msi" aria-hidden="true">timeline</span>
-        <h3>Süreç odaklı değerlendirme</h3>
-        <p>Değerlendirme yalnızca sınavda değil, öğrenmenin her adımında yapılır.</p>
-        <p class="ph-ornek"><span>Portaldaki örneği</span>Konu sonu öz değerlendirme, kısmi puanlı açık uçlu ölçütler ve yanlış yapılan soruları gösteren öğretmen raporu.</p>
-      </article>
-      <article class="ph-ilke">
-        <span class="msi" aria-hidden="true">home_work</span>
-        <h3>Günlük hayatla ilişkilendirme</h3>
-        <p>Her dersin bir “Günlük Hayat” adımı vardır; bilgi, öğrencinin yaşadığı dünyaya bağlanır.</p>
-        <p class="ph-ornek"><span>Portaldaki örneği</span>“Ailen uzun bir yolculuğa çıkıyor. Baban lastikleri kontrol ediyor, herkes emniyet kemerini takıyor. Sonra ‘Rabbim yolumuzu açık etsin’ diyor. Bu davranış nedir?”</p>
-      </article>
+    <div class="ph-oyun-filtre" id="phOyunFiltre" role="group" aria-label="Oyun türüne göre süz" hidden></div>
+    <p class="ph-gizli" id="phOyunBilgi" aria-live="polite"></p>
+    <ul class="ph-oyun-izgara" id="phOyunIzgara">
+      <li><button type="button" class="ph-oyun-kart" data-ph-oyun="Hazine Avı" style="--o1:#f59e0b;--o2:#b45309">
+        <span class="ph-oyun-ikon" aria-hidden="true">🔎</span>
+        <span class="ph-oyun-tur">Hazine Avı · 20–30 dk</span>
+        <b>Hazine Avı</b>
+        <span class="ph-oyun-ozet">Sınıfa saklanan ipuçları sırayla bulunur; her ipucu bir sonrakine götürür.</span>
+        <span class="ph-oyun-ac">Oyunu aç <span class="msi" aria-hidden="true">arrow_forward</span></span>
+      </button></li>
+      <li><button type="button" class="ph-oyun-kart" data-ph-oyun="Kaçış Odası" style="--o1:#6366f1;--o2:#312e81">
+        <span class="ph-oyun-ikon" aria-hidden="true">🔐</span>
+        <span class="ph-oyun-tur">Kaçış Oyunu · 20–30 dk</span>
+        <b>Kaçış Odası</b>
+        <span class="ph-oyun-ozet">Dört bulmaca çözülür, çıkan rakamlar kilidi açar.</span>
+        <span class="ph-oyun-ac">Oyunu aç <span class="msi" aria-hidden="true">arrow_forward</span></span>
+      </button></li>
+      <li><button type="button" class="ph-oyun-kart" data-ph-oyun="Eşini Bul" style="--o1:#14b8a6;--o2:#0f766e">
+        <span class="ph-oyun-ikon" aria-hidden="true">🤝</span>
+        <span class="ph-oyun-tur">Eşleştirme · 5–15 dk</span>
+        <b>Eşini Bul</b>
+        <span class="ph-oyun-ozet">Her öğrencide bir kart var; sınıfta dolaşıp eşini bulur.</span>
+        <span class="ph-oyun-ac">Oyunu aç <span class="msi" aria-hidden="true">arrow_forward</span></span>
+      </button></li>
+      <li><button type="button" class="ph-oyun-kart" data-ph-oyun="Sessiz Sinema" style="--o1:#ec4899;--o2:#9d174d">
+        <span class="ph-oyun-ikon" aria-hidden="true">🎭</span>
+        <span class="ph-oyun-tur">Sessiz Sinema · 10–20 dk</span>
+        <b>Sessiz Sinema</b>
+        <span class="ph-oyun-ozet">Öğrenci konuşmadan canlandırır, sınıf tahmin eder.</span>
+        <span class="ph-oyun-ac">Oyunu aç <span class="msi" aria-hidden="true">arrow_forward</span></span>
+      </button></li>
+      <li><button type="button" class="ph-oyun-kart" data-ph-oyun="Çiz ve Tahmin Et" style="--o1:#0ea5e9;--o2:#1e3a8a">
+        <span class="ph-oyun-ikon" aria-hidden="true">✏️</span>
+        <span class="ph-oyun-tur">Çizim Oyunu · 20–30 dk</span>
+        <b>Çiz ve Tahmin Et</b>
+        <span class="ph-oyun-ozet">Öğrenci kavramı konuşmadan, sadece çizerek anlatır; takım süre içinde tahmin eder.</span>
+        <span class="ph-oyun-ac">Oyunu aç <span class="msi" aria-hidden="true">arrow_forward</span></span>
+      </button></li>
+      <li><button type="button" class="ph-oyun-kart" data-ph-oyun="Değer Çarkı" style="--o1:#22c55e;--o2:#15803d">
+        <span class="ph-oyun-ikon" aria-hidden="true">🎡</span>
+        <span class="ph-oyun-tur">Çark Oyunu · 20–30 dk</span>
+        <b>Değer Çarkı</b>
+        <span class="ph-oyun-ozet">Çarkta çıkan kavramla ilgili görevi takım süre içinde tamamlar.</span>
+        <span class="ph-oyun-ac">Oyunu aç <span class="msi" aria-hidden="true">arrow_forward</span></span>
+      </button></li>
+      <li><button type="button" class="ph-oyun-kart" data-ph-oyun="Hafıza Oyunu" style="--o1:#a855f7;--o2:#6b21a8">
+        <span class="ph-oyun-ikon" aria-hidden="true">🎴</span>
+        <span class="ph-oyun-tur">Eşleştirme · 15–25 dk</span>
+        <b>Hafıza Oyunu</b>
+        <span class="ph-oyun-ozet">Kavram ve anlam kartları kapalı; iki kart açılır, eşleşirse çift kazanılır.</span>
+        <span class="ph-oyun-ac">Oyunu aç <span class="msi" aria-hidden="true">arrow_forward</span></span>
+      </button></li>
+      <li><button type="button" class="ph-oyun-kart" data-ph-oyun="Sıcak Sandalye" style="--o1:#ef4444;--o2:#991b1b">
+        <span class="ph-oyun-ikon" aria-hidden="true">🪑</span>
+        <span class="ph-oyun-tur">Takım Yarışması · 10–20 dk</span>
+        <b>Sıcak Sandalye</b>
+        <span class="ph-oyun-ozet">Sırtı tahtaya dönük öğrenci, takımının anlatımından kavramı bulur.</span>
+        <span class="ph-oyun-ac">Oyunu aç <span class="msi" aria-hidden="true">arrow_forward</span></span>
+      </button></li>
+    </ul>
+    <div class="ph-oyun-alt">
+      <button type="button" class="ph-oyun-daha" id="phOyunDaha" hidden aria-controls="phOyunIzgara">Tüm oyunları göster</button>
+      <button type="button" class="ph-btn ph-btn--buyuk ph-btn--oyun" data-ph-em="1"><span class="msi" aria-hidden="true">sports_esports</span> Tüm <span data-ph-sayi="mekanik">41</span> etkinliği gör</button>
+      <span>Sınıfa ve üniteye göre filtrele</span>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     "ÖĞRETMENLER İÇİN DİJİTAL DERS ASİSTANI" — mevcut öğretmen
-     araçlarının tanıtımı. Ayrıntılı araçlar hemen aşağıdaki mevcut
-     Öğretmen Paneli bölümündedir (#ogretmenPaneli). -->
-<section class="ph-bolum ph-ogretmen" id="ogretmenler" aria-labelledby="phOgretmenBaslik">
+     "BİR KONUYU ÖĞRENMENİN ÖTESİNDE..." — öğrenme yolculuğu.
+     Adımlardaki örnekler 8. sınıf "Kader ve Kaza İnancı" dijital
+     dersinden (din-kulturu-8sinif-1unite/konuyu-ogren.html) alındı. -->
+<section class="ph-bolum ph-yolculuk" id="yolculuk" aria-labelledby="phYolculukBaslik">
+  <div class="ph-sar">
+    <header class="ph-bolum-ust">
+      <p class="ph-on">Öğrenme Yolculuğu</p>
+      <h2 class="ph-h2" id="phYolculukBaslik">Beş adımda bir konu</h2>
+      <p class="ph-giris">Bir adıma dokun, o adımın gerçek ders örneğini dene. Örnekler 8. sınıf <b>Kader ve Kaza İnancı</b> dersinden.</p>
+    </header>
+    <div class="ph-akis" role="tablist" aria-label="Öğrenme yolculuğu adımları">
+      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-kesfet" aria-controls="phPanel-kesfet" aria-selected="true" tabindex="0" style="--a:#06b6d4">
+        <span class="ph-akis-no" aria-hidden="true">1</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">travel_explore</span></span>
+        <b>Keşfet</b>
+        <span class="ph-akis-kisa">Fotoğraf ve merak sorusu</span>
+      </button>
+      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-ogren" aria-controls="phPanel-ogren" aria-selected="false" tabindex="-1" style="--a:#3b82f6">
+        <span class="ph-akis-no" aria-hidden="true">2</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">auto_stories</span></span>
+        <b>Öğren</b>
+        <span class="ph-akis-kisa">Kavram, ayet, harita</span>
+      </button>
+      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-deneyimle" aria-controls="phPanel-deneyimle" aria-selected="false" tabindex="-1" style="--a:#14b8a6">
+        <span class="ph-akis-no" aria-hidden="true">3</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">diversity_3</span></span>
+        <b>Deneyimle</b>
+        <span class="ph-akis-kisa">Günlük hayat, mini kontrol</span>
+      </button>
+      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-oyna" aria-controls="phPanel-oyna" aria-selected="false" tabindex="-1" style="--a:#f97316">
+        <span class="ph-akis-no" aria-hidden="true">4</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">sports_esports</span></span>
+        <b>Oyna</b>
+        <span class="ph-akis-kisa">Sınıf içi oyunlar</span>
+      </button>
+      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-degerlendir" aria-controls="phPanel-degerlendir" aria-selected="false" tabindex="-1" style="--a:#22c55e">
+        <span class="ph-akis-no" aria-hidden="true">5</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">fact_check</span></span>
+        <b>Değerlendir</b>
+        <span class="ph-akis-kisa">Test, açık uçlu, ölçüt</span>
+      </button>
+    </div>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-kesfet" aria-labelledby="phAdim-kesfet" style="--a:#06b6d4">
+      <div class="ph-akis-giris">
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">travel_explore</span> 1. adım · Keşfet</p>
+        <p>Her ders bir fotoğraf ve bir merak sorusuyla açılır; video ve özet konuya ilk adımı attırır.</p>
+        <q>Bu tohumlar ne zaman büyüyeceğini nereden ‘biliyor’?</q>
+      </div>
+      <div class="ph-akis-ornek ph-akis-ornek--1">
+      <article class="ph-kutu ph-kutu--ozet">
+        <a class="ph-kutu-gorsel" href="din-kulturu-8sinif-1unite/index.html" aria-label="8. sınıf Kader İnancı ünitesini ve anlatım videosunu aç">
+          <img src="anlatim-videolari/kapak/8-sinif-1-unite-anlatim.jpg" alt="8. sınıf Kader İnancı konu anlatım videosunun kapağı" loading="lazy" width="1280" height="720">
+          <span class="ph-oynat"><span class="msi" aria-hidden="true">play_arrow</span></span>
+        </a>
+        <div class="ph-kutu-govde">
+          <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">description</span> Konu özeti · 8. sınıf</p>
+          <h3>Kader ve Kaza İnancı</h3>
+          <p><b>Kader</b>, Allah’ın sonsuz ilmi ve kudretiyle, başlangıçtan sona evrende gerçekleşecek olan her şeyi takdir etmesidir. <b>Kaza</b> ise bu takdir edilen şeyin, zamanı ve yeri geldiğinde Allah tarafından yaratılmasıdır.</p>
+          <div class="ph-kutu-cta"><a class="ph-baglanti" href="din-kulturu-8sinif-1unite/konuyu-ogren.html">Konu anlatımını aç</a><a class="ph-baglanti" href="din-kulturu-8sinif-1unite/index.html">Anlatım videosu</a></div>
+        </div>
+      </article>
+      </div>
+    </div>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-ogren" aria-labelledby="phAdim-ogren" style="--a:#3b82f6" hidden>
+      <div class="ph-akis-giris">
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">auto_stories</span> 2. adım · Öğren</p>
+        <p>Kavramlar ayet ve delillerle; kavram haritası, video ve sesli anlatımla öğrenilir.</p>
+        <q>Kader, Allah’ın her şeyi bir ölçüye göre takdir etmesidir.</q>
+      </div>
+      <div class="ph-akis-ornek ph-akis-ornek--1">
+      <article class="ph-kutu ph-kutu--harita">
+        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">hub</span> Kavram haritası</p>
+        <div class="ph-harita" role="img" aria-label="Kavram haritası: Evrendeki yasalar; fiziksel yasalar (yer çekimi, hareket), biyolojik yasalar (büyüme, üreme), toplumsal yasalar (adalet, çalışma, dayanışma)">
+          <span class="ph-harita-merkez">Evrendeki yasalar</span>
+          <span class="ph-harita-dal"><b>Fiziksel</b>Yer çekimi, hareket</span>
+          <span class="ph-harita-dal"><b>Biyolojik</b>Büyüme, üreme</span>
+          <span class="ph-harita-dal"><b>Toplumsal</b>Adalet, çalışma, dayanışma</span>
+        </div>
+        <a class="ph-baglanti" href="din-kulturu-8sinif-1unite/konuyu-ogren.html">Haritayı derste gör</a>
+      </article>
+      </div>
+    </div>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-deneyimle" aria-labelledby="phAdim-deneyimle" style="--a:#14b8a6" hidden>
+      <div class="ph-akis-giris">
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">diversity_3</span> 3. adım · Deneyimle</p>
+        <p>Öğrendiğini günlük hayatla ilişkilendirir, hemen bir mini kontrolle denersin. Şimdi sen dene:</p>
+        <q>Her şey bir ölçüye göre işliyor; tohum da öyle.</q>
+      </div>
+      <div class="ph-akis-ornek ph-akis-ornek--1">
+      <article class="ph-kutu ph-kutu--kontrol">
+        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">task_alt</span> Mini kontrol · dene</p>
+        <h3 id="phMiniSoru">Kader ile kaza arasındaki fark nedir?</h3>
+        <div class="ph-secenekler" role="group" aria-labelledby="phMiniSoru">
+          <button type="button" data-dogru="1">Kader takdir edilmesi, kaza gerçekleşmesidir</button>
+          <button type="button">İkisi de aynı anlama gelir</button>
+          <button type="button">Kader insana, kaza doğaya aittir</button>
+          <button type="button">Kader gerçekleşmesi, kaza takdir edilmesidir</button>
+        </div>
+        <p class="ph-geri-bildirim" aria-live="polite"></p>
+      </article>
+      </div>
+    </div>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-oyna" aria-labelledby="phAdim-oyna" style="--a:#f97316" hidden>
+      <div class="ph-akis-giris">
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">sports_esports</span> 4. adım · Oyna</p>
+        <p>Ünitenin oyunları malzeme, adım ve sınıf düzeniyle hazır; akıllı tahtada tek tıkla başlar.</p>
+        <q>Hazine Avı, Eşini Bul, Kavram Kodlama…</q>
+      </div>
+      <div class="ph-akis-ornek ph-akis-ornek--1">
+      <article class="ph-kutu ph-kutu--oyun">
+        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">sports_esports</span> Etkinlik ve oyun</p>
+        <h3><b data-ph-sayi="mekanik">41</b> etkinlik türü, <b data-ph-sayi="oyunAtama">246</b> ünite eşleşmesi</h3>
+        <ul class="ph-cipler" id="phOyunCipler"><li>Hazine Avı</li><li>Kaçış Odası</li><li>Sessiz Sinema</li><li>Eşini Bul</li><li>Bayrak Yarışı</li><li>Gizemli Kutu</li></ul>
+        <a class="ph-btn" href="din-kulturu-tum-siniflar.html?oyun=s8-u1">Kader İnancı etkinliklerini aç <span class="msi" aria-hidden="true">arrow_forward</span></a>
+      </article>
+      </div>
+    </div>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-degerlendir" aria-labelledby="phAdim-degerlendir" style="--a:#22c55e" hidden>
+      <div class="ph-akis-giris">
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">fact_check</span> 5. adım · Değerlendir</p>
+        <p>Testler, açık uçlu sorular ve puanlama ölçütleriyle kendini ölç; eksik kalan yere geri dön.</p>
+        <q>Kader ile kaza arasındaki fark nedir?</q>
+      </div>
+      <div class="ph-akis-ornek ph-akis-ornek--2">
+      <article class="ph-kutu ph-kutu--acik" id="phAcikKutu">
+        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">edit_note</span> Açık uçlu soru · <span id="phAcikEtiket">8. sınıf · 1. ünite</span></p>
+        <h3 id="phAcikSoru">Soru yükleniyor…</h3>
+        <details class="ph-anahtar" id="phAcikAnahtar" hidden>
+          <summary>Cevap anahtarını göster</summary>
+          <p id="phAcikBeklenen"></p>
+          <ul id="phAcikUnsur"></ul>
+        </details>
+        <div class="ph-kutu-cta"><button type="button" class="ph-baglanti ph-dugme-baglanti" id="phAcikBaska" hidden>Başka bir soru</button><a class="ph-baglanti" href="acik-uclu-soru-merkezi/tum-siniflar.html#s8-u1">Tüm 50 soru</a></div>
+      </article>
+      <article class="ph-kutu ph-kutu--olcut" id="phOlcutKutu">
+        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">rule</span> Yazılı değerlendirme ölçütü</p>
+        <h3 id="phOlcutSoru">Ölçüt yükleniyor…</h3>
+        <table class="ph-olcut" id="phOlcutTablo"><caption class="ph-gizli">Puanlama ölçütleri</caption><thead><tr><th scope="col">Ölçüt</th><th scope="col">Puan</th></tr></thead><tbody></tbody></table>
+        <a class="ph-baglanti" href="#siniflar" data-ph-sinif="s8" data-ph-sekme="acik">8. sınıf açık uçlu yazılı soruları</a>
+      </article>
+      </div>
+    </div>
+    <div class="ph-yolculuk-cta">
+      <a class="ph-btn ph-btn--buyuk" href="din-kulturu-8sinif-1unite/konuyu-ogren.html">Bu yolculuğu gerçek bir derste dene <span class="msi" aria-hidden="true">arrow_forward</span></a>
+      <span>8. sınıf · Kader ve Kaza İnancı · 7 adımlı dijital ders</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2026-11-02 — SINAV MERKEZİ. LGS kutusu sınıf bölümünden buraya
+     taşındı (içerik aynı). YKS · TYT · AYT kartı mevcut yks-hazirlik
+     sayfasının gerçek sekmelerini listeler; veri uydurulmaz. -->
+<section class="ph-bolum ph-sinav" id="sinavMerkezi" aria-labelledby="phSinavBaslik">
+  <div class="ph-sar">
+    <header class="ph-bolum-ust">
+      <p class="ph-on">Sınav Merkezi</p>
+      <h2 class="ph-h2" id="phSinavBaslik">Hedefine hazırlan: LGS, TYT, AYT</h2>
+      <p class="ph-giris">Deneme, çıkmış soru ve analiz; tek merkezde.</p>
+    </header>
+    <div class="ph-sinav-izgara">
+    <!-- 8. sınıf LGS altyapısı — sayılar LGS Hazırlık Merkezi'nin kendi içeriğinden. -->
+    <aside class="ph-lgs ph-sinav-lgs" aria-labelledby="phLgsBaslik">
+      <div class="ph-lgs-metin">
+        <p class="ph-on ph-on--acik">8. Sınıf</p>
+        <h3 id="phLgsBaslik">LGS’ye hazırlık, sınıf dersinin içinde</h3>
+        <p>8. sınıf öğrencisi konu anlatımından denemeye, çıkmış sorulardan sınav analizine kadar her şeyi aynı yerde bulur. 8. sınıf sayfasındaki <b>LGS Hazırlık</b> sekmesi, LGS Hazırlık Merkezi’ne doğrudan bağlanır.</p>
+        <div class="ph-lgs-cta">
+          <a class="hero-cta hero-cta-birincil" href="sinav-merkezi/lgs-hazirlik/index.html"><span class="msi" aria-hidden="true">target</span> LGS Hazırlık Merkezi</a>
+          <button type="button" class="hero-cta hero-cta-ikincil" data-ph-sinif="s8" data-ph-sekme="lgs">8. sınıf LGS sekmesi</button>
+          <a class="ph-baglanti ph-baglanti--acik" href="cikmis-sorular.html">Çıkmış sorular</a>
+        </div>
+      </div>
+      <ul class="ph-lgs-sayilar">
+        <li><b>5</b><span>ünite özeti ve oyun merkezi</span></li>
+        <li><b>500</b><span>ünite deneme sorusu <small>5 ünite × 5 test</small></span></li>
+        <li><b>1.000</b><span>zor seviye deneme sorusu <small>5 ünite × 10 test</small></span></li>
+        <li><b>60</b><span>çıkmış soru <small>2021–2026</small></span></li>
+        <li><b><span class="msi" aria-hidden="true">monitoring</span></b><span>sınav analizi, çalışma koçu, geri sayım</span></li>
+      </ul>
+    </aside>
+
+      <article class="ph-yks">
+        <div class="ph-yks-ust">
+          <span class="ph-yks-ikon"><span class="msi" aria-hidden="true">school</span></span>
+          <span class="ph-durum ph-durum--gelisiyor">Gelişiyor</span>
+        </div>
+        <p class="ph-on">9–12. Sınıf</p>
+        <h3>YKS · TYT · AYT</h3>
+        <p>TYT ve AYT tek sayfada, sekmeler arasında geçişle.</p>
+        <ul class="ph-yks-liste">
+          <li><span class="msi" aria-hidden="true">menu_book</span>Konu anlatımları ve özetler</li>
+          <li><span class="msi" aria-hidden="true">hub</span>Kavram haritaları</li>
+          <li><span class="msi" aria-hidden="true">history</span>Çıkmış sorular</li>
+          <li><span class="msi" aria-hidden="true">quiz</span>Konu testleri ve denemeler</li>
+          <li><span class="msi" aria-hidden="true">monitoring</span>Performans takibi</li>
+        </ul>
+        <div class="ph-yks-cta">
+          <a class="ph-btn" href="sinav-merkezi/yks-hazirlik/index.html">YKS Hazırlık <span class="msi" aria-hidden="true">arrow_forward</span></a>
+          <a class="ph-baglanti" href="sinav-merkezi/tyt-hazirlik/index.html">TYT</a>
+          <a class="ph-baglanti" href="sinav-merkezi/ayt-hazirlik/index.html">AYT</a>
+        </div>
+      </article>
+    </div>
+    <div class="ph-sinav-alt">
+      <a class="ph-sinav-hizli" href="sinav-merkezi/index.html"><span class="msi" aria-hidden="true">apartment</span><b>Sınav Merkezi</b><span>Tüm sınav alanları</span></a>
+      <a class="ph-sinav-hizli" href="acik-uclu-soru-merkezi/tum-siniflar.html"><span class="msi" aria-hidden="true">edit_note</span><b>Açık Uçlu Soru Merkezi</b><span><span data-ph-sayi="acikUclu">2.250</span> soru, 4–12. sınıf</span></a>
+      <a class="ph-sinav-hizli" href="cikmis-sorular.html"><span class="msi" aria-hidden="true">history</span><b>Çıkmış Sorular</b><span>LGS 2021–2026</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2026-11-02 — ÖĞRETMEN ARAÇLARI. Eski iki bölüm (#ogretmenler tanıtımı
+     ve #ogretmenPaneli) tek kompakt alanda birleşti; iki kimlik de korunur,
+     İçerik Üretim Rehberi (şablonlar + kopyala düğmeleri) aynen içeride. -->
+<section class="ph-bolum ph-ogretmen ph-ogretmen--kompakt" id="ogretmenler" aria-labelledby="phOgretmenBaslik">
   <div class="ph-sar">
     <div class="ph-ogretmen-ust">
       <header class="ph-bolum-ust ph-bolum-ust--sol">
         <p class="ph-on ph-on--acik">Öğretmenler İçin</p>
-        <h2 class="ph-h2" id="phOgretmenBaslik">Öğretmenler İçin Dijital Ders Asistanı</h2>
-        <p class="ph-giris">Ders hazırlığına harcanan zamanı derse ayırın: etkinlik, soru, yazılı ve rapor araçları hazır.</p>
+        <h2 class="ph-h2" id="phOgretmenBaslik">Öğretmen Araçları</h2>
+        <p class="ph-giris">Hazırlığa değil derse zaman ayırın. Öğrenci akışından ayrı, ders hazırlığı için.</p>
       </header>
-      <ul class="ph-nedenler">
-        <li><span class="msi" aria-hidden="true">schedule</span><span><b>Hazırlık süresi kısalır.</b> Etkinlikler malzeme ve adımlarıyla, yazılılar cevap anahtarıyla gelir.</span></li>
-        <li><span class="msi" aria-hidden="true">verified</span><span><b>Programla uyumludur.</b> Üniteler MEB öğrenme çıktılarıyla eşleştirilmiştir.</span></li>
-        <li><span class="msi" aria-hidden="true">insights</span><span><b>Sınıfı tanırsınız.</b> Öğretmen raporu, öğrencinin zorlandığı soruları gösterir.</span></li>
+      <ul class="ph-nedenler ph-nedenler--cip">
+        <li><span class="msi" aria-hidden="true">schedule</span><span><b>Hazırlık kısalır:</b> malzeme, adım, cevap anahtarı hazır</span></li>
+        <li><span class="msi" aria-hidden="true">verified</span><span><b>Programla uyumlu:</b> MEB öğrenme çıktılarıyla eşleşir</span></li>
+        <li><span class="msi" aria-hidden="true">insights</span><span><b>Sınıfı tanırsınız:</b> zorlanılan sorular raporda</span></li>
       </ul>
     </div>
     <div class="ph-araclar">
       <button type="button" class="ph-arac" data-ph-em="1">
-        <span class="msi" aria-hidden="true">co_present</span><b>Sınıf içi etkinlikler</b><span>Öğretmen Modu ile akıllı tahtada başlatma ve kart yazdırma</span>
+        <span class="msi" aria-hidden="true">co_present</span><b>Sınıf içi etkinlikler</b><span>Öğretmen Modu: akıllı tahtada başlat, kart yazdır</span>
       </button>
       <a class="ph-arac" href="acik-uclu-soru-merkezi/tum-siniflar.html">
         <span class="msi" aria-hidden="true">library_books</span><b>Hazır soru içerikleri</b><span><b data-ph-sayi="acikUclu">2.250</b> puanlamalı açık uçlu soru, konu ve kazanım testleri</span>
       </a>
       <a class="ph-arac" href="#siniflar">
-        <span class="msi" aria-hidden="true">edit_document</span><b>Yazılı sınavlar</b><span><b data-ph-sayi="yazili">42</b> yazdırılabilir yazılı ve çalışma kâğıtları</span>
+        <span class="msi" aria-hidden="true">edit_document</span><b>Yazılı sınavlar</b><span><b data-ph-sayi="yazili">42</b> yazdırılabilir yazılı ve çalışma kâğıdı</span>
       </a>
       <a class="ph-arac" href="ogretmen-raporu.html">
-        <span class="msi" aria-hidden="true">assessment</span><b>Öğretmen raporu</b><span>Ünite ziyaretleri, öz değerlendirmeler ve yanlış yapılan sorular (öğretmen şifresiyle)</span>
+        <span class="msi" aria-hidden="true">assessment</span><b>Öğretmen raporu</b><span>İlerleme, öz değerlendirme, en çok yanlış yapılan sorular ve oyun kayıtları; yazdır veya CSV indir (öğretmen şifresiyle)</span>
       </a>
       <a class="ph-arac" href="test-karekodlari.html">
-        <span class="msi" aria-hidden="true">qr_code_2</span><b>Test karekodları</b><span>Ünite testleri, LGS denemeleri ve yazılı yoklamaları için karekod</span>
+        <span class="msi" aria-hidden="true">qr_code_2</span><b>Test karekodları</b><span>Ünite testi, LGS denemesi ve yazılı yoklaması için; sınıfa as veya dağıt</span>
       </a>
       <a class="ph-arac" href="#ogretmenPaneli">
         <span class="msi" aria-hidden="true">auto_fix_high</span><b>İçerik üretim rehberi</b><span>Özet, soru ve çalışma kâğıdı için hazır yapay zekâ şablonları</span>
       </a>
     </div>
-  </div>
-</section>
-
-
-
-
-<section class="ogretmen-paneli-bolum" id="ogretmenPaneli" aria-labelledby="ogretmenPaneliBaslik"><div class="op-ic"><p class="bolum-on-etiket">Öğretmen Paneli</p><h2 id="ogretmenPaneliBaslik">Öğretmene Yönelik Araçlar</h2><p class="op-aciklama">Bu bölüm ders hazırlığı içindir; öğrenci akışının dışındadır. Sınıf içi etkinlik üretimi, akıllı tahta ve kart yazdırma araçları Etkinlik ve Oyun Merkezi’ndeki Öğretmen Modu’nda yer alır.</p><p class="op-aciklama">📱 <a href="test-karekodlari.html">Test Karekodları</a>: Ünite testleri, LGS denemeleri ve yazılı yoklamalarının karekodları; sınıfa asmak veya dağıtmak için yazdırılabilir.</p><p class="op-aciklama">📊 <a href="ogretmen-raporu.html">Öğretmen Raporu</a>: Bu cihazdaki ünite ilerlemesi, konu sonu öz değerlendirmeleri, en çok yanlış yapılan test soruları ve öğrenci oyun kayıtları; yazdırılabilir ve CSV olarak indirilebilir.</p><section class="icerik-rehberi-bolum" aria-labelledby="icerikRehberiBaslik">
+    <div class="ogretmen-paneli-bolum ph-op" id="ogretmenPaneli">
+      <h3 class="ph-gizli" id="ogretmenPaneliBaslik">Öğretmen Paneli</h3>
+<section class="icerik-rehberi-bolum" aria-labelledby="icerikRehberiBaslik">
   <details class="icerik-rehberi">
     <summary>
       <span class="msi" aria-hidden="true">auto_fix_high</span>
@@ -2172,7 +2755,79 @@ function kfFotoHtml(g, imgSinif, sarSinif, yedekHtml, etiket){
       </div>
     </div>
   </details>
-</section></div></section>
+</section>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2026-11-02 — "PLATFORMDA NELER YENİ?" Liste assets/anasayfa/
+     anasayfa.js içindeki YENILIKLER dizisinden tarih sırasıyla
+     otomatik oluşur; son 21 gün içindekiler "YENİ" etiketi alır. -->
+<section class="ph-bolum ph-yeni" id="yenilikler" aria-labelledby="phYeniBaslik">
+  <div class="ph-sar">
+    <header class="ph-bolum-ust ph-bolum-ust--yan">
+      <div>
+        <p class="ph-on">Güncellemeler</p>
+        <h2 class="ph-h2" id="phYeniBaslik">Platformda neler yeni?</h2>
+      </div>
+      <p class="ph-giris">Son eklenen içerikler; her biri doğrudan açılır.</p>
+    </header>
+    <ol class="ph-yeni-liste" id="phYeniListe"></ol>
+  </div>
+</section>
+
+<!-- ============================================================
+     "NASIL BİR ÖĞRENME YAKLAŞIMI SUNUYORUZ?" — her ilke portaldaki
+     gerçek bir örnekle desteklenir. -->
+<section class="ph-bolum ph-yaklasim" id="yaklasim" aria-labelledby="phYaklasimBaslik">
+  <div class="ph-sar">
+    <header class="ph-bolum-ust">
+      <p class="ph-on">Eğitim Yaklaşımı</p>
+      <h2 class="ph-h2" id="phYaklasimBaslik">Nasıl bir öğrenme yaklaşımı sunuyoruz?</h2>
+      <p class="ph-giris">İlkelerimizi slogan olarak değil, derslerdeki örnekleriyle gösteriyoruz.</p>
+    </header>
+    <div class="ph-ilkeler">
+      <article class="ph-ilke">
+        <span class="msi" aria-hidden="true">verified</span>
+        <h3>Türkiye Yüzyılı Maarif Modeli ile uyum</h3>
+        <p>Ünite kartlarında resmî öğrenme çıktıları yer alır; içerikler MEB programındaki ünite sırasına göre dizilir.</p>
+        <details class="ph-ornek-detay"><summary>Portaldaki örneği</summary><p class="ph-ornek"><span id="phMaarifOrnek">DKAB.8.1.1 · Kader ve kaza kavramlarını …</span></p></details>
+      </article>
+      <article class="ph-ilke">
+        <span class="msi" aria-hidden="true">person_pin</span>
+        <h3>Öğrenci merkezli öğrenme</h3>
+        <p>Öğrenci dijital derste kendi hızında ilerler; “Bana Sor” asistanı onun sınıf düzeyine göre konuşur.</p>
+        <details class="ph-ornek-detay"><summary>Portaldaki örneği</summary><p class="ph-ornek">Dijital ders ilerleme sayacı: “0/7 adım” · 4. sınıfa sade dille, 12. sınıfa sınav odaklı açıklama.</p></details>
+      </article>
+      <article class="ph-ilke">
+        <span class="msi" aria-hidden="true">diversity_1</span>
+        <h3>Bilgi, beceri ve değer bütünlüğü</h3>
+        <p>Kavram öğretilir, düşünme becerisi çalıştırılır, değerle ilişkilendirilir.</p>
+        <details class="ph-ornek-detay"><summary>Portaldaki örneği</summary><p class="ph-ornek">“Kaderi bilmek ile kaderi belirlemek arasında nasıl bir fark vardır? Bu sorunun tek bir doğru cevabı yok — kendi cümlelerinle düşün.”</p></details>
+      </article>
+      <article class="ph-ilke">
+        <span class="msi" aria-hidden="true">directions_run</span>
+        <h3>Aktif katılım</h3>
+        <p>Öğrenci dinleyici değil, katılımcıdır: koşar, eşleştirir, tartışır, üretir.</p>
+        <details class="ph-ornek-detay"><summary>Portaldaki örneği</summary><p class="ph-ornek">Hazine Avı, Kaçış Odası, Sessiz Sinema, İstasyon Turu ve diğer sınıf içi etkinlikler.</p></details>
+      </article>
+      <article class="ph-ilke">
+        <span class="msi" aria-hidden="true">timeline</span>
+        <h3>Süreç odaklı değerlendirme</h3>
+        <p>Değerlendirme yalnızca sınavda değil, öğrenmenin her adımında yapılır.</p>
+        <details class="ph-ornek-detay"><summary>Portaldaki örneği</summary><p class="ph-ornek">Konu sonu öz değerlendirme, kısmi puanlı açık uçlu ölçütler ve yanlış yapılan soruları gösteren öğretmen raporu.</p></details>
+      </article>
+      <article class="ph-ilke">
+        <span class="msi" aria-hidden="true">home_work</span>
+        <h3>Günlük hayatla ilişkilendirme</h3>
+        <p>Her dersin bir “Günlük Hayat” adımı vardır; bilgi, öğrencinin yaşadığı dünyaya bağlanır.</p>
+        <details class="ph-ornek-detay"><summary>Portaldaki örneği</summary><p class="ph-ornek">“Ailen uzun bir yolculuğa çıkıyor. Baban lastikleri kontrol ediyor, herkes emniyet kemerini takıyor. Sonra ‘Rabbim yolumuzu açık etsin’ diyor. Bu davranış nedir?”</p></details>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="tanitim-karti-bolum" id="hakkimizda" aria-labelledby="tanitimBaslik">
   <div class="tanitim-karti belirir">
     <span class="tanitim-ikon-daire" aria-hidden="true"><span class="msi">school</span></span>
@@ -2362,7 +3017,8 @@ const ACIK_UCLU = {
       beceri:'Farklı ünitelerden bilgiyi bir arada kullanarak görüş oluşturma', puan:10,
       soru:'“Din yalnızca camide yaşanır.” diyen bir arkadaşına bu yıl öğrendiklerinden yararlanarak nasıl cevap verirsin? En az üç farklı üniteden örnek vererek yazınız.',
       cevap:['Temel görüş: Din, hayatın her alanında karşılığı olan bir yaşayıştır.','<b>1. Ünite:</b> Günlük konuşmada kullandığımız besmele, elhamdülillah gibi ifadeler.','<b>3. Ünite:</b> Arkadaş ilişkilerinde doğruluk, paylaşma ve saygı.','<b>5. Ünite:</b> Evde ve okulda temizliğe dikkat etmek.','<b>4. Ünite:</b> Hz. Muhammed’in güvenilirliğini örnek almak.'],
-      olcut:[['Temel görüşün açıkça ifade edilmesi',2],['Üç farklı üniteden örnek verilmesi (3 × 2 puan)',6],['Anlatımın bütünlüğü',2]] },
+      olcut:[['Temel görüşün açıkça ifade edilmesi',2],['Üç farklı üniteden örnek verilmesi (3 × 2 puan)',6],['Anlatımın bütünlüğü',2]] }
+,
     /* Eklenen sorular (2026-10-30) */
     { tur:'Bilgi', unite:'1. Ünite · Günlük Hayattaki Dinî İfadeler',
       beceri:'Duanın anlamını ve okunduğu yeri belirleme', puan:10,
@@ -2474,7 +3130,8 @@ const ACIK_UCLU = {
       beceri:'İnancın hayattaki görünümlerini bütüncül açıklama', puan:10,
       soru:'“Allah’a inanan bir insanın hayatında bu inanç nerelerde görünür?” sorusunu; ibadet, Kur’an ve peygamber kıssaları ünitelerinden birer örnek vererek cevaplayınız.',
       cevap:['<b>İbadet:</b> Namazın belirli vakitlerde kılınması, hayatı bir düzene bağlar.','<b>Kur’an:</b> Okunan ayetlerin davranışa yön vermesi.','<b>Peygamber kıssaları:</b> Zorluk karşısında sabır ve dürüstlük örneklerinin izlenmesi.','Sonuç: İman yalnızca kalpte kalan bir kabul değil, davranışa yansıyan bir yöneliştir.'],
-      olcut:[['Üç alandan uygun örnek verilmesi (3 × 3 puan)',9],['Bütünlüklü bir sonuç cümlesi',1]] },
+      olcut:[['Üç alandan uygun örnek verilmesi (3 × 3 puan)',9],['Bütünlüklü bir sonuç cümlesi',1]] }
+,
     /* Eklenen sorular (2026-10-30) */
     { tur:'Bilgi', unite:'1. Ünite · Allah İnancı',
       beceri:'Surede Allah’ın özelliklerini belirleme', puan:10,
@@ -2821,7 +3478,8 @@ const ACIK_UCLU = {
       beceri:'İbadet–ahlak ilişkisini örneklerle temellendirme', puan:10,
       soru:'“İbadet eden bir insanın ahlakının da güzel olması beklenir.” Bu cümleyi, oruç ibadetinden ve Hz. Muhammed’in hayatından birer örnek vererek değerlendiriniz.',
       cevap:['Temel görüş: İbadet, kişiyi ahlaken olgunlaştırmayı amaçlar; ikisi birbirinden ayrı düşünülemez.','<b>Oruç örneği:</b> Aç kalmakla birlikte dilin ve davranışın da korunması istenir.','<b>Hz. Muhammed örneği:</b> Peygamberliğinden önce de doğruluğu ve güvenilirliğiyle tanınmıştı; ibadet hayatı bu ahlakla bir bütündü.','Sonuç: İbadet, ahlakı beslemediğinde biçimsel bir tekrara dönüşür.'],
-      olcut:[['Temel görüşün açıklanması',2],['Oruçtan uygun örnek',4],['Hz. Muhammed’in hayatından uygun örnek',4]] },
+      olcut:[['Temel görüşün açıklanması',2],['Oruçtan uygun örnek',4],['Hz. Muhammed’in hayatından uygun örnek',4]] }
+,
     /* Eklenen sorular (2026-10-30) */
     { tur:'Yorum', unite:'1. Ünite · Peygamber ve İlahi Kitap İnancı',
       beceri:'Peygambere duyulan ihtiyacı açıklama', puan:10,
@@ -3168,7 +3826,8 @@ const ACIK_UCLU = {
       beceri:'İnancın dünya hayatına etkisini örneklerle temellendirme', puan:10,
       soru:'“Ahirete inanan bir insanın dünyaya bakışı nasıl değişir?” sorusunu; hac–kurban ve ahlaki davranışlar ünitelerinden birer örnek vererek açıklayınız.',
       cevap:['Temel görüş: Ahiret inancı dünyayı değersizleştirmez; davranışları belirleyici kılar.','<b>Hac–kurban örneği:</b> İhramla dünyevi üstünlüklerin geride bırakılması; kurbanla paylaşmanın öğrenilmesi.','<b>Ahlaki davranışlar örneği:</b> Kimsenin görmediği yerde de dürüst davranmak, çünkü karşılığının olacağına inanılır.','Sonuç: İnanç, denetim yokken bile sorumlu davranmayı sağlar.'],
-      olcut:[['Temel görüşün doğru kurulması',2],['Hac–kurban ünitesinden uygun örnek',4],['Ahlaki davranışlar ünitesinden uygun örnek',4]] },
+      olcut:[['Temel görüşün doğru kurulması',2],['Hac–kurban ünitesinden uygun örnek',4],['Ahlaki davranışlar ünitesinden uygun örnek',4]] }
+,
     /* Eklenen sorular (2026-10-30) */
     { tur:'Bilgi', unite:'1. Ünite · Melek ve Ahiret İnancı',
       beceri:'Meleklerin görevlerini tanıma', puan:10,
@@ -3525,7 +4184,8 @@ const ACIK_UCLU = {
       beceri:'Kur’an’ın konularını sıralama ve hayatla ilişkilendirme', puan:10,
       soru:'Kur’an-ı Kerim’in ana konularından üçünü yazarak, her birinin insanın hayatındaki karşılığını birer örnekle açıklayınız.',
       cevap:['<b>İnanç (tevhid):</b> Allah’ın birliğine iman; karşılığı, hayatı tek bir ölçüye göre düzenlemek.','<b>İbadet:</b> Namaz, oruç, zekât; karşılığı, düzenli ve sorumluluk bilinciyle yaşamak.','<b>Ahlak:</b> Doğruluk, adalet, merhamet; karşılığı, insan ilişkilerinde ölçülü davranmak.','<b>Kıssalar:</b> Geçmiş toplumlardan ibret alma. <b>Sosyal ilkeler:</b> Yardımlaşma, hakların korunması.'],
-      olcut:[['Üç ana konunun doğru yazılması (3 × 2 puan)',6],['Her konu için hayattan bir örnek verilmesi',3],['Anlatım',1]] },
+      olcut:[['Üç ana konunun doğru yazılması (3 × 2 puan)',6],['Her konu için hayattan bir örnek verilmesi',3],['Anlatım',1]] }
+,
     /* Eklenen sorular (2026-10-30) */
     { tur:'Bilgi', unite:'1. Ünite · Kader İnancı',
       beceri:'Ayetin anlattığı sıfatları belirleme', puan:10,
@@ -8583,5 +9243,140 @@ window.KONU_GORSELLERI = {"s4-u1-hero":{"yol":"assets/konu-gorselleri/4sinif/u1/
 <link rel="stylesheet" href="ortak/portal-sade.css">
 <script src="ortak/asistan.js" defer></script>
 <script src="assets/anasayfa/anasayfa.js" defer></script>
+<script>
+/* 2026-11-02 (2. tur) — 41 oyun galerisi ve etkileşimli öğrenme yolculuğu.
+   Veri: window.OYUN_VERI (mekanikler + kutuphane); kendi kopya veri tutmaz.
+   Oyun kartları mevcut [data-ph-oyun] dinleyicisiyle Etkinlik ve Oyun
+   Merkezi penceresini açar. */
+(function(){
+  "use strict";
+  function kac(t){ return String(t == null ? '' : t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  var RENK = [['#f59e0b','#b45309'],['#6366f1','#312e81'],['#14b8a6','#0f766e'],['#ec4899','#9d174d'],['#0ea5e9','#1e3a8a'],
+              ['#22c55e','#15803d'],['#a855f7','#6b21a8'],['#ef4444','#991b1b'],['#06b6d4','#155e75']];
+  var ILK = 8;   /* 2026-11-02 sadeleştirme: ilk görünümde 8 oyun; tamamı "Tüm oyunları göster" ile */
+  /* 4. sınıfta bazı oyunların yaşa uygun adı farklıdır (ör. Sıcak Sandalye → Tahmin Sandalyesi);
+     modalda oyunu tüm sınıflarda bulmak için iki ad da taşınır. */
+  function adlar(m){
+    var a = [m.ad];
+    try{ var v = window.oyunMekanikSinif && window.oyunMekanikSinif(m.id, 's4'); if(v && v.ad && a.indexOf(v.ad) < 0) a.push(v.ad); }catch(e){}
+    return a.join('|');
+  }
+
+  function galeri(){
+    var V = window.OYUN_VERI, ul = document.getElementById('phOyunIzgara');
+    var filtre = document.getElementById('phOyunFiltre'), daha = document.getElementById('phOyunDaha'), bilgi = document.getElementById('phOyunBilgi');
+    if(!V || !V.mekanikler || !ul || !filtre || !daha) return;
+    var atama = {};
+    Object.keys(V.kutuphane || {}).forEach(function(k){ (V.kutuphane[k] || []).forEach(function(id){ atama[id] = (atama[id] || 0) + 1; }); });
+    var turSay = {};
+    V.mekanikler.forEach(function(m){ turSay[m.tur] = (turSay[m.tur] || 0) + 1; });
+    var turler = Object.keys(turSay).sort(function(a,b){ return turSay[b] - turSay[a] || a.localeCompare(b, 'tr'); });
+    var turRenk = {}; turler.forEach(function(t, i){ turRenk[t] = RENK[i % RENK.length]; });
+    var durum = { tur:'tumu', acik:false };
+
+    filtre.innerHTML = '<button type="button" class="ph-oyun-cip" data-tur="tumu" aria-pressed="true">Tümü <small>' + V.mekanikler.length + '</small></button>' +
+      turler.map(function(t){ return '<button type="button" class="ph-oyun-cip" data-tur="' + kac(t) + '" aria-pressed="false">' + kac(t) + ' <small>' + turSay[t] + '</small></button>'; }).join('');
+    filtre.hidden = false;
+
+    function ciz(){
+      var liste = V.mekanikler.filter(function(m){ return durum.tur === 'tumu' || m.tur === durum.tur; });
+      var gorunen = (durum.tur === 'tumu' && !durum.acik) ? liste.slice(0, ILK) : liste;
+      ul.innerHTML = gorunen.map(function(m, i){
+        var r = turRenk[m.tur] || RENK[0];
+        var sure = Array.isArray(m.sure) ? m.sure[0] + '–' + m.sure[1] + ' dk' : '';
+        var zor = m.zorluk || '';
+        return '<li style="--sira:' + i + '"><button type="button" class="ph-oyun-kart" data-ph-oyun="' + kac(m.ad) + '" data-ph-oyun-adlar="' + kac(adlar(m)) + '" data-ph-oyun-tur="' + kac(m.tur) + '" style="--o1:' + r[0] + ';--o2:' + r[1] + '">' +
+          '<span class="ph-oyun-ikon" aria-hidden="true">' + kac(m.ikon || '🎮') + '</span>' +
+          '<span class="ph-oyun-tur">' + kac(m.tur) + (sure ? ' · ' + sure : '') + '</span>' +
+          '<b>' + kac(m.ad) + '</b>' +
+          '<span class="ph-oyun-ozet">' + kac(m.ozet) + '</span>' +
+          '<span class="ph-oyun-meta">' + (zor ? '<span class="zor-' + kac(zor) + '">' + kac(zor.charAt(0).toLocaleUpperCase('tr') + zor.slice(1)) + '</span>' : '') +
+            (atama[m.id] ? '<span>' + atama[m.id] + ' ünitede</span>' : '') + '</span>' +
+          '<span class="ph-oyun-ac">Oyunu aç <span class="msi" aria-hidden="true">arrow_forward</span></span>' +
+        '</button></li>';
+      }).join('');
+      var kalan = liste.length - gorunen.length;
+      daha.hidden = durum.tur !== 'tumu';
+      daha.textContent = durum.acik ? 'Daha az göster' : 'Tüm ' + liste.length + ' oyunu göster';
+      daha.setAttribute('aria-expanded', durum.acik ? 'true' : 'false');
+      if(bilgi) bilgi.textContent = gorunen.length + ' oyun gösteriliyor' + (kalan > 0 ? ', ' + kalan + ' oyun daha var.' : '.');
+    }
+    filtre.addEventListener('click', function(e){
+      var b = e.target.closest('.ph-oyun-cip'); if(!b) return;
+      durum.tur = b.getAttribute('data-tur'); durum.acik = false;
+      Array.prototype.forEach.call(filtre.children, function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      ciz();
+    });
+    daha.addEventListener('click', function(){
+      durum.acik = !durum.acik; ciz();
+      if(!durum.acik){ var h = document.getElementById('oyunlar'); if(h && h.scrollIntoView) h.scrollIntoView({block:'start'}); }
+    });
+    ciz();
+  }
+
+  function yolculuk(){
+    var liste = document.querySelector('#yolculuk .ph-akis[role="tablist"]'); if(!liste) return;
+    var sekmeler = Array.prototype.slice.call(liste.querySelectorAll('[role="tab"]'));
+    function sec(b, odak){
+      sekmeler.forEach(function(x){
+        var aktif = x === b;
+        x.setAttribute('aria-selected', aktif ? 'true' : 'false');
+        x.tabIndex = aktif ? 0 : -1;
+        var p = document.getElementById(x.getAttribute('aria-controls'));
+        if(p) p.hidden = !aktif;
+      });
+      if(odak) b.focus();
+      if(b.scrollIntoView && window.innerWidth < 1020) b.scrollIntoView({block:'nearest', inline:'center'});
+    }
+    liste.addEventListener('click', function(e){ var b = e.target.closest('[role="tab"]'); if(b) sec(b, false); });
+    liste.addEventListener('keydown', function(e){
+      var i = sekmeler.indexOf(document.activeElement); if(i < 0) return;
+      var y = null;
+      if(e.key === 'ArrowRight') y = sekmeler[(i + 1) % sekmeler.length];
+      else if(e.key === 'ArrowLeft') y = sekmeler[(i - 1 + sekmeler.length) % sekmeler.length];
+      else if(e.key === 'Home') y = sekmeler[0];
+      else if(e.key === 'End') y = sekmeler[sekmeler.length - 1];
+      if(y){ e.preventDefault(); sec(y, true); }
+    });
+  }
+
+  function kur(){ try{ galeri(); }catch(e){ if(window.console) console.warn('Oyun galerisi:', e); }
+                  try{ yolculuk(); }catch(e){ if(window.console) console.warn('Yolculuk:', e); } }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', kur); else kur();
+})();
+
+</script>
+<script>
+/* 2026-11-02 — Dijital Oyun Merkezi kartları: mevcut Etkinlik ve Oyun Merkezi
+   penceresini (#emGirisKart) açar ve aramasını oyunun adıyla doldurur. */
+document.addEventListener('click', function(e){
+  /* "tüm etkinlikler" düğmeleri: önceki oyun aramasını temizle (modal sonra açılır) */
+  if(e.target.closest && e.target.closest('[data-ph-em], #emGirisKart')){
+    var a = document.getElementById('emAramaGirdi'), t = document.getElementById('emTurSelect');
+    if(a && a.value){ a.value = ''; a.dispatchEvent(new Event('input', {bubbles:true})); }
+    if(t && t.value !== 'tumu'){ t.value = 'tumu'; t.dispatchEvent(new Event('change', {bubbles:true})); }
+    return;
+  }
+  var k = e.target.closest && e.target.closest('[data-ph-oyun]');
+  if(!k) return;
+  var giris = document.getElementById('emGirisKart'), ara = document.getElementById('emAramaGirdi');
+  if(!giris) return;
+  giris.click();
+  var adlar = k.getAttribute('data-ph-oyun-adlar'), tur = k.getAttribute('data-ph-oyun-tur'), ts = document.getElementById('emTurSelect');
+  if(adlar && tur && ts){
+    /* oyunu kimliğiyle süz: türü seç, sonra yalnızca bu oyunun (ve 4. sınıf adının) kartlarını bırak */
+    ts.value = tur; ts.dispatchEvent(new Event('change', {bubbles:true}));
+    var izin = adlar.split('|'), n = 0;
+    Array.prototype.forEach.call(document.querySelectorAll('#emListe .em-kart'), function(c){
+      var h = c.querySelector('h3'), uy = !!h && izin.indexOf(h.textContent) >= 0;
+      c.style.display = uy ? '' : 'none'; if(uy) n++;
+    });
+    var bilgi = document.getElementById('emSonucBilgi');
+    if(bilgi) bilgi.textContent = n + ' etkinlik bulundu · ' + izin.join(' / ');
+    return;
+  }
+  if(ara){ ara.value = k.getAttribute('data-ph-oyun'); ara.dispatchEvent(new Event('input', {bubbles:true})); }
+});
+</script>
 </body>
 </html>

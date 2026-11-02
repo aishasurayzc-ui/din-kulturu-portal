@@ -456,3 +456,131 @@
 .ph-sekme-baslik{ margin:6px 0 10px; font-size:1.1rem; font-weight:900; color:var(--baslik); display:flex; align-items:center; gap:8px; }
 @media (prefers-reduced-motion:reduce){ .ph-sk, .ph-btn, .ph-yeni-oge, .ph-arac{ transition:none; } .ph-sk:hover, .ph-btn:hover, .ph-yeni-oge:hover, .ph-arac:hover{ transform:none; } }
 @media print{ .ph-lgs-cta, .ph-alan-cta{ display:none; } }
+
+/* 2026-11-02 — Üst menü marka kilidi: amblem + AYŞE YAZICI + unvan (iki satır).
+   Menülerin ve düğmelerin yeri değişmez; yalnızca marka alanı güçlendirildi. */
+.ust-serit-marka.usm-kilit{ gap:10px; font-size:1rem; color:var(--baslik); line-height:1; }
+.usm-amblem{ display:inline-grid; place-items:center; flex-shrink:0; width:38px; height:38px; border-radius:11px;
+  box-shadow:0 6px 14px -8px rgba(19,41,75,.55), inset 0 0 0 1px rgba(255,255,255,.12); transition:transform .3s ease, width .3s ease, height .3s ease; }
+.usm-amblem svg{ display:block; width:100%; height:100%; }
+.usm-metin{ display:flex; flex-direction:column; gap:4px; min-width:0; }
+.usm-kilit .usm-ad{
+  font-family:"PH Manrope", "Segoe UI", system-ui, sans-serif; font-weight:800; text-transform:uppercase;
+  letter-spacing:.14em; font-size:1.02rem; line-height:1; color:var(--baslik); white-space:nowrap;
+}
+.usm-kilit .usm-ayrac{ display:none; }
+.usm-kilit .usm-ders{
+  display:flex; align-items:center; gap:6px; font-family:"PH Manrope", "Segoe UI", system-ui, sans-serif;
+  font-weight:700; font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; line-height:1;
+  color:var(--vurgu-metin, #0e7c86); opacity:1; white-space:nowrap;
+}
+.usm-kilit .usm-ders::before{ content:""; width:14px; height:2px; border-radius:2px; background:linear-gradient(90deg, #1e3a8a, #0e9aa7); }
+.ust-serit.kucultulmus .usm-kilit{ transform:none; }
+.ust-serit.kucultulmus .usm-amblem{ width:32px; height:32px; }
+@media (max-width:520px){
+  .usm-kilit .usm-ders{ display:flex; font-size:.56rem; letter-spacing:.16em; }
+  .usm-kilit .usm-ad{ font-size:.98rem; letter-spacing:.12em; }
+}
+[data-tema="dark"] .usm-kilit .usm-ad{ color:#eef3ff; }
+[data-tema="dark"] .usm-kilit .usm-ders{ color:#5eead4; }
+@media (max-width:520px){ .usm-amblem{ width:34px; height:34px; } }
+@media (prefers-reduced-motion:reduce){ .usm-amblem{ transition:none; } }
+
+/* =====================================================================
+   2026-11-02 — SADELEŞTİRME (tasarım değerlendirmesi 1–4. maddeler)
+   Hiçbir içerik silinmedi; yalnızca görünürlük ve vurgu düzenlendi.
+   ===================================================================== */
+/* 1) Marka satırı üst menüde zaten var: başlığın üstünde görsel olarak gizlenir
+      (ekran okuyucular için h1 içinde kalır). Üstte yalnızca rozet görünür. */
+.ph-baslik-marka{ position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; margin:0; padding:0; border:0; }
+/* 2) Tek ana düğme + tek ikincil düğme; Sınav Merkezi ve Platformu tanı küçük bağlantı */
+.ph-eylem-alt{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; margin:18px 0 0; font-size:.95rem; font-weight:700; color:rgba(255,255,255,.45); }
+.ph-eylem-alt a, .ph-eylem-alt .ph-metin-dugme{
+  color:rgba(255,255,255,.82); text-decoration:none; background:none; border:0; padding:4px 0; margin:0;
+  font:700 .95rem/1.2 "PH Manrope", "Segoe UI", sans-serif; cursor:pointer; border-bottom:1px solid rgba(255,255,255,.25);
+}
+.ph-eylem-alt a:hover, .ph-eylem-alt .ph-metin-dugme:hover{ color:#fff; border-bottom-color:#5eead4; text-decoration:none; }
+.ph-eylem-alt a:focus-visible, .ph-eylem-alt .ph-metin-dugme:focus-visible{ outline:3px solid #fbbf77; outline-offset:3px; }
+@media (max-width:1023px){ .ph-eylem-alt{ justify-content:center; } }
+/* 3) Sahne sadeleşir: iki bilgi kartı kalır (dijital ders + açık uçlu soru) */
+.ph-sahne .ph-kart--oyun, .ph-sahne .ph-kart--lgs, .ph-sahne .ph-rozet3d{ display:none !important; }
+/* 4) "Sınıf içerikleri" alanı, bir sınıf seçilene kadar boş kutu olarak görünmez;
+      kartlardan (ya da bağlantıdan) sınıf seçilince açılır. */
+.sinif-odak-bolum--giris:has(#sinifBosDurum:not([hidden])) .ph-sekme-baslik,
+.sinif-odak-bolum--giris:has(#sinifBosDurum:not([hidden])) .sinif-layout{ display:none; }
+
+/* =====================================================================
+   2026-11-02 — SADELEŞTİRME (2. adım): ana sayfada daha az bölüm.
+   Hiçbir bölüm silinmedi; yalnızca ana sayfada gizlendi ya da kısaltıldı.
+   Geri açmak için ilgili satırı silmek yeterli.
+   ===================================================================== */
+/* Açılış ekranındaki 5 küçük kart: aynı bilgiler hemen alttaki "Dijital öğrenme"
+   ve "Sınıfını Seç" bölümlerinde var */
+.ph-hero .ph-ozellikler{ display:none; }
+/* "Beş adımda bir konu" ve "Nasıl bir öğrenme yaklaşımı" — platform bölümüyle aynı mesaj */
+#yolculuk, #yaklasim{ display:none !important; }
+/* Kişisel bölümler yalnızca siteyi daha önce kullanmış öğrenciye görünür
+   (ilk kez gelen biri boş sayaçlar yerine doğrudan içeriğe ulaşır) */
+html.ph-ilk-ziyaret #kaldiginYer,
+html.ph-ilk-ziyaret #favorilerimPanel,
+html.ph-ilk-ziyaret #onerilenBolum{ display:none !important; }
+/* "Platformda neler yeni?" — en yeni 4 gelişme */
+#phYeniListe > li:nth-child(n+5){ display:none; }
+
+/* =====================================================================
+   2026-11-02 — ÇOK SADE ANA SAYFA (3. adım)
+   Ana sayfada yalnızca: açılış ekranı + Sınıfını Seç + tek satır hızlı erişim
+   + alt bilgi. Diğer bölümler SİLİNMEDİ: ana sayfada gizli durur; üst menüden
+   ya da hızlı erişimden tıklanınca (veya adres #bolum ile açılınca) görünür.
+   Eski hâle dönmek için <html> etiketindeki "ph-cok-sade" sınıfını kaldıran
+   anasayfa.js satırını silmek yeterli.
+   ===================================================================== */
+html.ph-cok-sade #platform:not(.ph-acik),
+html.ph-cok-sade #kaldiginYer:not(.ph-acik),
+html.ph-cok-sade #favorilerimPanel:not(.ph-acik),
+html.ph-cok-sade #onerilenBolum:not(.ph-acik),
+html.ph-cok-sade #oyunlar:not(.ph-acik),
+html.ph-cok-sade #sinavMerkezi:not(.ph-acik),
+html.ph-cok-sade #ogretmenler:not(.ph-acik),
+html.ph-cok-sade #ogretmenPaneli:not(.ph-acik),
+html.ph-cok-sade #yenilikler:not(.ph-acik),
+html.ph-cok-sade #hakkimizda:not(.ph-acik){ display:none !important; }
+/* Açılış ekranında arama ve filtre satırı kalır; ekran daha ferah */
+html.ph-cok-sade .ph-hero{ padding-bottom:clamp(28px, 4vw, 48px); }
+
+/* Hızlı erişim — "Sınıfını Seç" bölümünün başında, belirgin kartlar */
+.ph-kisa-yollar{ margin:0 0 clamp(40px, 6vw, 72px); }
+.ph-ky-liste{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
+.ph-ky-liste > li[hidden]{ display:none; }
+.ph-ky{
+  --ky:var(--mavi);
+  position:relative; overflow:hidden; width:100%; height:100%; display:flex; align-items:center; gap:14px; padding:18px 18px 18px 16px; text-align:left;
+  background:var(--yuzey); color:var(--metin); border:1px solid var(--kenar); border-radius:18px;
+  font:inherit; text-decoration:none; cursor:pointer; box-shadow:0 14px 30px -22px rgba(19,41,75,.55);
+  transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.ph-ky::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--ky); }
+.ph-ky::after{ content:"→"; margin-left:auto; font-weight:900; color:var(--ky); opacity:.55; transition:transform .2s ease, opacity .2s ease; }
+.ph-ky:hover{ transform:translateY(-3px); border-color:color-mix(in srgb, var(--ky) 50%, var(--kenar)); box-shadow:0 20px 36px -22px rgba(19,41,75,.6); }
+.ph-ky:hover::after{ transform:translateX(3px); opacity:1; }
+.ph-ky:focus-visible{ outline:3px solid #f0a202; outline-offset:3px; }
+.ph-ky-ikon{ display:grid; place-items:center; flex-shrink:0; width:52px; height:52px; border-radius:15px; font-size:1.5rem;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--ky) 22%, #fff), color-mix(in srgb, var(--ky) 8%, #fff)); }
+.ph-ky b{ display:block; font-weight:900; font-size:1.05rem; color:var(--baslik); line-height:1.25; }
+.ph-ky small{ display:block; font-size:.82rem; font-weight:700; color:var(--metin-ikincil); margin-top:3px; }
+.ph-ky-liste > li:nth-child(2) .ph-ky{ --ky:#ea580c; }
+.ph-ky-liste > li:nth-child(3) .ph-ky{ --ky:#1e3a8a; }
+.ph-ky-liste > li:nth-child(4) .ph-ky{ --ky:#7c3aed; }
+.ph-ky-liste > li:nth-child(5) .ph-ky{ --ky:#0e9aa7; }
+.ph-ky-devam .ph-ky{ --ky:#0e9aa7; background:color-mix(in srgb, #0e9aa7 7%, var(--yuzey)); }
+[data-tema="dark"] .ph-ky-ikon{ background:color-mix(in srgb, var(--ky) 28%, var(--yuzey)); }
+[data-tema="dark"] .ph-ky-liste > li:nth-child(3) .ph-ky{ --ky:#93b4ff; }
+@media (max-width:640px){
+  .ph-ky-liste{ grid-template-columns:1fr 1fr; gap:10px; }
+  .ph-ky{ flex-direction:column; align-items:flex-start; gap:10px; padding:14px 14px 14px 16px; }
+  .ph-ky::after{ display:none; }
+  .ph-ky-ikon{ width:44px; height:44px; font-size:1.3rem; }
+  .ph-ky b{ font-size:.98rem; }
+  .ph-ky-devam{ grid-column:1 / -1; }
+}
+@media (prefers-reduced-motion:reduce){ .ph-ky, .ph-ky::after{ transition:none; } .ph-ky:hover{ transform:none; } }

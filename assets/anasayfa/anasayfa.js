@@ -24,7 +24,9 @@ var YENI_GUN = 21;
 
 /* Sınıf kartı görselleri: yalnızca kamu malı / CC0 fotoğraflar
    (kaynakları din-kulturu-slayt-gorseller/ altındaki notlarda). */
-var GORSEL = {s4:'sinif-s4.webp', s5:'sinif-s5.webp', s6:'sinif-s6.webp', s7:'sinif-s7.webp', s8:'sinif-s8.webp', s9:'sinif-s9.webp', s10:'sinif-s10.webp', s11:'sinif-s11.webp', s12:'sinif-s12.webp'};
+/* 2026-11-02: kart görselleri tek tasarım ailesi — izometrik SVG (sinif-3b/). Eski fotoğraflar
+   (sinif-sN.webp) diskte duruyor; geri dönmek için bu satırı eski hâline almak yeterli. */
+var GORSEL = {s4:'sinif-3b/s4.svg', s5:'sinif-3b/s5.svg', s6:'sinif-3b/s6.svg', s7:'sinif-3b/s7.svg', s8:'sinif-3b/s8.svg', s9:'sinif-3b/s9.svg', s10:'sinif-3b/s10.svg', s11:'sinif-3b/s11.svg', s12:'sinif-3b/s12.svg'};
 var BETIK = document.currentScript;
 var KLASOR = BETIK ? BETIK.getAttribute('src').replace(/anasayfa\.js.*$/, '') : 'assets/anasayfa/';
 
@@ -253,4 +255,79 @@ function kur(){
 }
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ guvenli(kur); });
 else guvenli(kur);
+})();
+
+/* 2026-11-02 — İlk kez gelen ziyaretçi: henüz konu açmamış, tamamlamamış ve favori
+   eklememişse kişisel bölümler (Kaldığın yer, Favorilerim, Önerilen) gizlenir. */
+(function(){
+  function dolu(k){
+    var v = null;
+    try{ v = localStorage.getItem(k); }catch(e){ return false; }
+    if(!v) return false;
+    try{
+      var x = JSON.parse(v);
+      if(Array.isArray(x)) return x.length > 0;
+      if(x && typeof x === 'object') return Object.keys(x).length > 0;
+      return !!x;
+    }catch(e){ return true; }   /* JSON değilse: düz metin kayıt var */
+  }
+  var kullanmis = dolu('dkab_son_konu') || dolu('dkab_tamamlanan') || dolu('dkab_favoriler') || dolu('dkab_son_yazili');
+  if(!kullanmis) document.documentElement.classList.add('ph-ilk-ziyaret');
+})();
+
+/* 2026-11-02 — ÇOK SADE ANA SAYFA: gizli bölümler istenince açılır */
+(function(){
+  var kok = document.documentElement;
+  kok.classList.add('ph-cok-sade');
+  var GIZLI = ['platform','kaldiginYer','favorilerimPanel','onerilenBolum','oyunlar','sinavMerkezi','ogretmenler','ogretmenPaneli','yenilikler','hakkimizda'];
+  var BIRLIKTE = { ogretmenler:['ogretmenPaneli'], kaldiginYer:['favorilerimPanel','onerilenBolum'] };
+  function ac(id){
+    var el = document.getElementById(id);
+    if(!el) return null;
+    var bolum = null;
+    for(var i = 0; i < GIZLI.length; i++){
+      var b = document.getElementById(GIZLI[i]);
+      if(b && (b === el || b.contains(el))){ bolum = b; break; }
+    }
+    if(bolum){
+      bolum.classList.add('ph-acik');
+      (BIRLIKTE[bolum.id] || []).forEach(function(x){ var e = document.getElementById(x); if(e) e.classList.add('ph-acik'); });
+    }
+    return el;
+  }
+  /* bağlantı tıklanınca: hedef gizli bölümdeyse önce aç, sonra oraya git */
+  document.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('#heroCalismaBtn')) ac('platform');   /* "Platformu tanı" */
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if(!a || a.hasAttribute('data-ph-em')) return;
+    var id = decodeURIComponent(a.getAttribute('href').slice(1));
+    if(!id) return;
+    var el = document.getElementById(id);
+    if(!el || el.offsetParent !== null) return;
+    var hedef = ac(id);
+    if(hedef){ e.preventDefault(); setTimeout(function(){ hedef.scrollIntoView({ behavior:'smooth', block:'start' }); }, 30); }
+  }, true);
+  /* adres #bolum ile açıldıysa */
+  function hashAc(){
+    var id = decodeURIComponent((location.hash || '').slice(1));
+    if(!id) return;
+    var el = ac(id);
+    if(el) setTimeout(function(){ el.scrollIntoView({ block:'start' }); }, 60);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hashAc); else hashAc();
+  window.addEventListener('hashchange', hashAc);
+  /* Kaldığın yerden devam: son açılan konu varsa hızlı erişimin başında görünür */
+  function devamKur(){
+    var li = document.querySelector('.ph-ky-devam'), a = document.getElementById('phKyDevam');
+    if(!li || !a) return;
+    var son = null;
+    try{ son = JSON.parse(localStorage.getItem('dkab_son_konu') || 'null'); }catch(x){ son = null; }
+    if(son && son.href){
+      a.href = son.href;
+      var ad = document.getElementById('phKyDevamAd');
+      if(ad && (son.baslik || son.ad)) ad.textContent = son.baslik || son.ad;
+      li.hidden = false;
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', devamKur); else devamKur();
 })();
