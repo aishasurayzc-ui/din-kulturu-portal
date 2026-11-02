@@ -281,6 +281,12 @@ window.MEB_ESLESTIRME = {
     "portal": [
      4
     ]
+   },
+   {
+    "meb": 5,
+    "portal": [
+     5
+    ]
    }
   ],
   "ek": [],
