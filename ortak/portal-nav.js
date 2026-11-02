@@ -29,7 +29,7 @@
 
 var UNITE_ADLARI = {
   "s4-1":"Günlük Hayattaki Dinî İfadeler","s4-2":"İslam’ı Tanıyalım","s4-3":"Güzel Ahlak",
-  "s4-4":"Hz. Muhammed’i Tanıyalım","s4-5":"Din ve Temizlik","s4-6":"Allah Sevgisi",
+  "s4-4":"Hz. Muhammed’i Tanıyalım","s4-5":"Din ve Temizlik","s4-6":"Allah Sevgisi","s4-7":"Haklar ve Sorumluluklar",
   "s5-1":"Allah İnancı","s5-2":"Allah’ın Huzurunda Olmak: Namaz İbadeti","s5-3":"Kur’an-ı Kerim",
   "s5-4":"Peygamber Kıssaları","s5-5":"Mimarimizde Dinî Motifler",
   "s6-1":"Peygamber ve İlahi Kitap İnancı","s6-2":"Ramazan ve Oruç","s6-3":"Ahlaki Davranışlar",
@@ -40,7 +40,7 @@ var UNITE_ADLARI = {
   "s8-4":"Hz. Muhammed’in Örnekliği","s8-5":"Kur’an-ı Kerim ve Özellikleri",
   "s8-6":"Müslümanların Bilim ve Kültüre Katkısı"
 };
-var UNITE_SAYISI = {4:6, 5:5, 6:5, 7:6, 8:6};
+var UNITE_SAYISI = {4:7, 5:5, 6:5, 7:6, 8:6};
 var YENI_MOTOR_DESTEKLI = {
   4:[1,2,3,4,5], 5:[1,2,3,4,5], 6:[1,2,3,4,5], 7:[1,2,3,4,5], 8:[1,2,3,4,5]
 };

@@ -87,7 +87,9 @@ window.MEB_ESLESTIRME = {
    },
    {
     "meb": 5,
-    "portal": []
+    "portal": [
+     7
+    ]
    }
   ],
   "ek": [],
@@ -97,7 +99,8 @@ window.MEB_ESLESTIRME = {
    "s4-u6": "MEB 4.2 ünitesine karşılık gelir.",
    "s4-u2": "Önceki programdan gelen bu sayfanın Âmentü duası bölümü MEB 4.2 ünitesiyle (DKAB.4.2.5) örtüşür.",
    "s4-u4": "Hz. Muhammed’in hayatını anlatır; MEB 4.3 ünitesi peygamberlerin sevgisini ele alır, içerik kısmen örtüşür.",
-   "s4-u3": "MEB 4.4 ünitesine karşılık gelir."
+   "s4-u3": "MEB 4.4 ünitesine karşılık gelir.",
+   "s4-u7": "MEB 4.5 “Haklar ve Sorumluluklar” ünitesine karşılık gelir (2026-11-02)."
   }
  },
  "s5": {
