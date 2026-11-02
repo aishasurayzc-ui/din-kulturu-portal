@@ -857,6 +857,12 @@ function olustur(){
   yenidenCiz();
   /* Öğrenme Döngüsü (2026-10-31): konu sonu öz değerlendirme + "Eksiklerim
      ve Tekrar Planım" kutusu. Yalnızca konu ve ölçme sayfalarında. */
+  /* Öğrenme Asistanı (2026-10-31): sağ alttaki "Bana Sor" balonu (ortak/asistan.js) */
+  if(!document.querySelector('script[src*="asistan.js"]')){
+    var asJs = document.createElement('script');
+    asJs.src = ORTAK_KLASOR + 'asistan.js';
+    document.body.appendChild(asJs);
+  }
   if((asama==='ogren' || asama==='olcme') && !document.querySelector('script[src*="ogrenme-dongusu.js"]')){
     var odCss = document.createElement('link');
     odCss.rel = 'stylesheet'; odCss.href = ORTAK_KLASOR + 'ogrenme-dongusu.css';

@@ -1,0 +1,80 @@
+ÖĞRENME ASİSTANI — ÜCRETSİZ BULUT KURULUMU (Cloudflare Workers AI)
+=====================================================================
+
+Ne elde edeceksiniz?
+  * "Bana Sor" asistanı hem internetteki portalda
+    (aishasurayzc-ui.github.io/din-kulturu-portal) hem de bu bilgisayarda
+    baslat.vbs ile açılan portalda çalışır.
+  * ÜCRETSİZDİR: API anahtarı, banka kartı veya ödeme gerekmez.
+  * SINIRLIDIR: Cloudflare her gün 10.000 "neuron" ücretsiz kullanım verir.
+    Bu, günde yaklaşık 150-200 soru eder (soruların uzunluğuna göre değişir).
+    Hak dolunca asistan o gün "Bugünkü ücretsiz soru hakkı doldu" der;
+    hiçbir ücret çıkmaz. Hak her gün saat 03.00'te (Türkiye) yenilenir.
+  * Kod istenmez; portalı açan herkes yazabilir.
+  * Kullanılan model: Google Gemma 4 (Cloudflare üzerinde çalışır, Türkçe bilir).
+    Claude kadar güçlü değildir; cevapları ilk günlerde gözden geçirmeniz önerilir.
+
+Gereken süre: yaklaşık 10 dakika. Gerekenler: yalnızca bir e-posta adresi.
+
+---------------------------------------------------------------------
+ADIM 1 — Cloudflare hesabı ve Worker
+---------------------------------------------------------------------
+  1. https://dash.cloudflare.com adresinde ücretsiz hesap açın
+     (Free plan; kart bilgisi istenirse "Free" planda kalın).
+  2. Soldaki menüden "Workers & Pages" (Compute) → "Create" →
+     "Create Worker" (Hello World şablonu) seçin.
+  3. Ad olarak  dkab-asistan  yazın → "Deploy".
+  4. "Edit code" düğmesine basın. Açılan editördeki BÜTÜN kodu silin.
+  5. Bu klasördeki  worker.js  dosyasını Not Defteri ile açın, tamamını
+     kopyalayıp editöre yapıştırın → sağ üstten "Deploy".
+
+---------------------------------------------------------------------
+ADIM 2 — Yapay zekâ bağlantısı (Workers AI)
+---------------------------------------------------------------------
+  1. Worker sayfasında "Settings" (Ayarlar) → "Bindings" → "Add binding".
+  2. "Workers AI" seçin.
+  3. Variable name (değişken adı) olarak tam olarak  AI  yazın → "Add binding"
+     → gerekiyorsa "Deploy".
+  Başka hiçbir ayar gerekmez. ANTHROPIC_API_KEY ve ERISIM_KODU EKLEMEYİN.
+
+---------------------------------------------------------------------
+ADIM 3 — Kontrol
+---------------------------------------------------------------------
+  Worker sayfasında görünen adresi kopyalayın, ör.:
+      https://dkab-asistan.KULLANICIADI.workers.dev
+  Tarayıcıda şu adresi açın:
+      https://dkab-asistan.KULLANICIADI.workers.dev/api/asistan/durum
+  {"yapilandirildi":true,"ucretsiz":true,"kodGerekli":false} görmelisiniz.
+
+---------------------------------------------------------------------
+ADIM 4 — Portala adresi yazın ve yayınlayın
+---------------------------------------------------------------------
+  1. Portal klasöründe  ortak\asistan-ayar.js  dosyasını Not Defteri ile açın.
+  2. Şu satırı bulun:      window.DKAB_ASISTAN_ADRES = '';
+     Tırnakların içine Worker adresinizi yazın:
+         window.DKAB_ASISTAN_ADRES = 'https://dkab-asistan.KULLANICIADI.workers.dev';
+     (Sonuna /api/asistan EKLEMEYİN.)
+  3. Kaydedin ve  YAYINA-GONDER.bat  ile yayınlayın.
+  4. Birkaç dakika sonra çevrim içi portalda "Bana Sor" → soru.
+     Bu bilgisayarda baslat.vbs ile açılan portal da aynı ücretsiz
+     bağlantıyı kendiliğinden kullanır.
+
+---------------------------------------------------------------------
+İSTERSENİZ (ileride)
+---------------------------------------------------------------------
+  * Daha güçlü cevaplar ve sınırsız kullanım için ücretli Claude:
+    Worker → Settings → Variables and Secrets → "Secret" olarak
+    ANTHROPIC_API_KEY = sk-ant-...  eklenirse asistan otomatik olarak Claude'a
+    geçer (platform.claude.com'da aylık harcama sınırı koymayı unutmayın).
+  * Başka bir ücretsiz model denemek için "Text" olarak
+    UCRETSIZ_MODEL = @cf/zai-org/glm-4.7-flash  gibi bir değer girilebilir.
+  * Kötüye kullanım görürseniz "Secret" olarak ERISIM_KODU = birkod eklenir;
+    portal öğrenciden bu kodu bir kez ister.
+
+GÜVENLİK ÖZETİ
+  - Hiçbir anahtar GitHub'a, sayfalara veya öğrencinin tarayıcısına gitmez.
+  - Worker yalnızca sizin GitHub Pages sitenizden ve bu bilgisayardaki
+    portaldan (localhost:8844) gelen tarayıcı isteklerini kabul eder.
+  - Aynı internet bağlantısından dakikada en fazla 20 soru kabul edilir.
+  - Ücretsiz planda kota aşılınca Cloudflare ücret almaz; yalnızca o gün durur.
+  - Sohbetler hiçbir yerde saklanmaz.

@@ -1,0 +1,58 @@
+ÖĞRENME ASİSTANI ("Bana Sor") — KURULUM
+==========================================
+
+>>> ÜCRETSİZ KULLANIM İÇİN: asistan-bulut\BULUT-KURULUM.txt dosyasını izleyin.
+    O kurulum yapılınca asistan hem internetteki portalda hem bu bilgisayarda
+    ücretsiz (günlük sınırlı) çalışır; aşağıdaki adımlar GEREKMEZ.
+    Aşağıdaki adımlar yalnızca bu bilgisayarda ÜCRETLİ Claude kullanmak içindir.
+
+Asistan, gerçek bir yapay zekâ (Anthropic Claude) ile çalışır. Güvenlik için
+API anahtarı portal sayfalarına YAZILMAZ; yalnızca bu bilgisayardaki yerel
+sunucu (asistan-sunucu.py) tarafından okunur.
+
+1) API ANAHTARI ALIN
+   - https://platform.claude.com adresinde hesap açın, "API Keys" bölümünden
+     yeni bir anahtar oluşturun (sk-ant-... ile başlar).
+   - Kullanım ücretlidir; hesapta bir harcama sınırı belirlemeniz önerilir.
+
+2) ANAHTARI BİLGİSAYARA KAYDEDİN (portal klasörüne DEĞİL)
+   - Not Defteri'ni açın ve şu satırları yazın:
+
+        ANTHROPIC_API_KEY=sk-ant-buraya-kendi-anahtariniz
+        MODEL=claude-sonnet-5-5
+
+   - Dosyayı kullanıcı klasörünüze  .dkab-asistan.env  adıyla kaydedin:
+        C:\Users\<kullanıcı-adınız>\.dkab-asistan.env
+     (Kaydet penceresinde "Kayıt türü: Tüm dosyalar" seçin; adın başındaki
+      nokta önemlidir. .txt uzantısı EKLENMEMELİDİR.)
+   - MODEL satırı isteğe bağlıdır. Daha hızlı/ucuz cevap için
+     claude-haiku-5-5, daha derin cevap için claude-opus-5-5 yazılabilir.
+
+3) PORTALI baslat.vbs İLE AÇIN
+   - baslat.vbs, Python kuruluysa asistan sunucusunu başlatır ve portalı
+     http://localhost:8844 adresinde açar.
+   - Python yoksa portal eskisi gibi dosyadan açılır; bu durumda asistan
+     "bağlı değil" uyarısı gösterir (diğer her şey normal çalışır).
+   - Anahtarı ekledikten sonra sunucunun yeniden okuması için bilgisayarı
+     yeniden başlatın ya da Görev Yöneticisi'nden "python" işlemini kapatıp
+     baslat.vbs'yi yeniden çalıştırın.
+
+4) KONTROL
+   - Tarayıcıda http://localhost:8844/api/asistan/durum adresini açın.
+     {"yapilandirildi": true, ...} görüyorsanız asistan hazırdır.
+
+GÜVENLİK NOTLARI
+   - Sunucu yalnızca bu bilgisayardan erişilebilir (127.0.0.1).
+   - .env, .py, .vbs, .bat dosyaları ve noktayla başlayan dosyalar tarayıcıdan
+     okunamaz.
+   - Dakikada en fazla 20 soru kabul edilir (kazara döngülere karşı).
+   - Sohbet geçmişi yalnızca tarayıcı sekmesinde tutulur; sekme kapanınca silinir.
+
+ASİSTANIN KURALLARI (asistan-sunucu.py içindeki talimat)
+   - Önce öğrencinin açık sayfasındaki ders metnini ve ünitenin resmî Maarif
+     öğrenme çıktılarını esas alır.
+   - Ayet ve hadis uydurmaz; emin olmadığı bilgiyi kesin gibi sunmaz.
+   - Portal içeriğinde olmayan konuyu açıkça söyler.
+   - Sınıf düzeyine göre konuşur (4 / 5-7 / 8 LGS / 9-12 lise); önce ipucu verir,
+     yanlışı yargılamadan açıklar.
+   - Basılı yazılı kâğıtlarında (yazili*.html) gösterilmez.

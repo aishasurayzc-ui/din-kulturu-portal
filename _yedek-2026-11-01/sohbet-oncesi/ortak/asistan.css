@@ -1,0 +1,73 @@
+/* Öğrenme Asistanı — "Bana Sor" (ortak/asistan.js). Portalın renk dili: #2a6f97 */
+#dkabAsistan{ --dka-ana:#2a6f97; --dka-ana-koyu:#1f5676; --dka-zemin:#ffffff; --dka-yuzey:#f3f7fb; --dka-metin:#1c2f3e;
+  --dka-ikincil:#5b7286; --dka-kenar:#d6e2ec; --dka-ogr:#2a6f97; --dka-ogr-metin:#fff;
+  position:fixed; right:16px; bottom:16px; z-index:2147483000; font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif; }
+[data-tema="dark"] #dkabAsistan{ --dka-ana:#5fa8d8; --dka-ana-koyu:#8cc6ea; --dka-zemin:#13202b; --dka-yuzey:#1b2b38;
+  --dka-metin:#e4eef5; --dka-ikincil:#a3b8c8; --dka-kenar:#2d4354; --dka-ogr:#2f6f98; --dka-ogr-metin:#fff; }
+#dkabAsistan *{ box-sizing:border-box; }
+/* Sayfaların kendi h2/p/button/ul stilleri pencereye sızmasın */
+#dkabAsistan h2, #dkabAsistan p, #dkabAsistan ul, #dkabAsistan ol, #dkabAsistan li{ border:0; background:none; box-shadow:none; text-indent:0;
+  text-align:left; text-transform:none; letter-spacing:normal; width:auto; max-width:none; float:none; position:static; }
+#dkabAsistan h2::before, #dkabAsistan h2::after, #dkabAsistan p::before{ content:none; display:none; }
+#dkabAsistan h2{ padding:0; margin:0; font-family:inherit; line-height:1.25; }
+#dkabAsistan p{ padding:0; font-family:inherit; color:inherit; }
+#dkabAsistan button{ margin:0; text-transform:none; letter-spacing:normal; font-family:inherit; line-height:1.2; box-shadow:none; transform:none; }
+#dkabAsistan .dka-balon{ box-shadow:0 10px 24px -8px rgba(15,50,80,.55); }
+#dkabAsistan textarea{ margin:0; box-shadow:none; }
+.dka-balon{ display:flex; align-items:center; gap:8px; border:0; cursor:pointer; font:inherit; font-weight:900; font-size:15px;
+  color:#fff; background:var(--dka-ana); padding:12px 18px; border-radius:999px; min-height:48px;
+  box-shadow:0 10px 24px -8px rgba(15,50,80,.55); margin-left:auto; }
+.dka-balon:hover{ background:var(--dka-ana-koyu); }
+[data-tema="dark"] .dka-balon{ color:#08141c; }
+.dka-balon:focus-visible, #dkabAsistan button:focus-visible, #dkabAsistan textarea:focus-visible{ outline:3px solid #f0a202; outline-offset:2px; }
+.dka-balon-simge{ font-size:18px; line-height:1; }
+#dkabAsistan.dka-acik .dka-balon{ display:none; }
+.dka-pencere{ width:min(400px, calc(100vw - 32px)); height:min(620px, calc(100vh - 32px)); display:flex; flex-direction:column;
+  background:var(--dka-zemin); color:var(--dka-metin); border:1px solid var(--dka-kenar); border-radius:18px; overflow:hidden;
+  box-shadow:0 24px 60px -18px rgba(10,40,70,.45); }
+.dka-pencere[hidden]{ display:none; }
+.dka-ust{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; padding:12px 12px 10px 16px;
+  background:var(--dka-ana); color:#fff; }
+[data-tema="dark"] .dka-ust{ background:#1d4562; }
+#dkabAsistan .dka-ust h2{ margin:0; font-size:16px; font-weight:900; color:#fff; letter-spacing:0; }
+#dkabAsistan .dka-baglam{ margin:2px 0 0; font-size:12.5px; opacity:.92; line-height:1.35; color:#fff; }
+.dka-ust-dugmeler{ display:flex; gap:4px; }
+.dka-ust-dugmeler button{ background:rgba(255,255,255,.16); color:#fff; border:0; border-radius:10px; width:36px; height:36px; font-size:15px; cursor:pointer; }
+.dka-ust-dugmeler button:hover{ background:rgba(255,255,255,.3); }
+.dka-durum{ margin:10px 12px 0; padding:10px 12px; border-radius:12px; background:#fff4d9; color:#5a4210; font-size:13.5px; line-height:1.45; border:1px solid #efd18f; }
+[data-tema="dark"] .dka-durum{ background:#2e2512; color:#f2dfae; border-color:#5a4720; }
+.dka-mesajlar{ flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:10px; background:var(--dka-yuzey); }
+.dka-mesaj{ max-width:88%; padding:9px 12px; border-radius:14px; font-size:14.5px; line-height:1.5; overflow-wrap:anywhere; }
+#dkabAsistan .dka-mesaj p{ margin:0 0 6px; } #dkabAsistan .dka-mesaj p:last-child{ margin-bottom:0; }
+.dka-mesaj ul, .dka-mesaj ol{ margin:4px 0 6px; padding-left:20px; }
+.dka-asistan{ align-self:flex-start; background:var(--dka-zemin); border:1px solid var(--dka-kenar); border-bottom-left-radius:4px; }
+.dka-ogrenci{ align-self:flex-end; background:var(--dka-ogr); color:var(--dka-ogr-metin); border-bottom-right-radius:4px; }
+.dka-sistem{ align-self:center; background:transparent; color:var(--dka-ikincil); font-size:13px; text-align:center; max-width:95%; }
+.dka-bekle p::after{ content:''; display:inline-block; width:1em; text-align:left; animation:dkaNokta 1.2s steps(4) infinite; }
+@keyframes dkaNokta{ 0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'} }
+@media (prefers-reduced-motion:reduce){ .dka-bekle p::after{ animation:none; } }
+.dka-oneriler{ display:flex; gap:6px; overflow-x:auto; padding:8px 12px 2px; background:var(--dka-zemin); scrollbar-width:thin; }
+.dka-oneri{ flex:0 0 auto; font:inherit; font-size:13px; font-weight:800; color:var(--dka-ana-koyu); background:var(--dka-zemin);
+  border:1.5px solid var(--dka-kenar); border-radius:999px; padding:6px 11px; min-height:34px; cursor:pointer; white-space:nowrap; }
+[data-tema="dark"] .dka-oneri{ color:var(--dka-ana-koyu); }
+.dka-oneri:hover:not(:disabled){ border-color:var(--dka-ana); }
+.dka-oneri:disabled, .dka-gonder:disabled{ opacity:.45; cursor:not-allowed; }
+.dka-form{ display:flex; gap:8px; align-items:flex-end; padding:8px 12px 4px; background:var(--dka-zemin); }
+.dka-form textarea{ flex:1; resize:none; font:inherit; font-size:15px; line-height:1.4; padding:9px 12px; border-radius:14px;
+  border:1.5px solid var(--dka-kenar); background:var(--dka-yuzey); color:var(--dka-metin); min-height:42px; max-height:120px; }
+.dka-form textarea:disabled{ opacity:.6; }
+.dka-gonder{ width:44px; height:44px; flex:0 0 44px; border:0; border-radius:50%; background:var(--dka-ana); color:#fff; font-size:17px; cursor:pointer; }
+[data-tema="dark"] .dka-gonder{ color:#08141c; }
+#dkabAsistan .dka-not{ margin:0; padding:2px 12px 10px; font-size:11.5px; color:var(--dka-ikincil); background:var(--dka-zemin); }
+.dka-gizli{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+@media (max-width:480px){
+  #dkabAsistan{ right:12px; bottom:12px; }
+  #dkabAsistan.dka-acik{ left:0; right:0; bottom:0; top:0; }
+  #dkabAsistan.dka-acik .dka-pencere{ width:100vw; height:100%; height:100dvh; border-radius:0; border:0; }
+  .dka-balon{ padding:10px 14px; font-size:14px; }
+}
+@media print{ #dkabAsistan{ display:none !important; } }
+.dka-kod-form{ display:flex; gap:6px; margin-top:8px; }
+#dkabAsistan .dka-kod-form input{ flex:1; min-width:0; font:inherit; font-size:15px; padding:7px 10px; border-radius:10px; border:1.5px solid #e0c27a; background:#fff; color:#222; margin:0; }
+#dkabAsistan .dka-kod-form button{ font:inherit; font-weight:800; padding:7px 14px; border-radius:10px; border:0; background:var(--dka-ana); color:#fff; cursor:pointer; }
+.dka-kod-uyari{ color:#a12a2a; font-weight:700; }

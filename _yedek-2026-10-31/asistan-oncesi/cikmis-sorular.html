@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Çıkmış Sorular — Din Kültürü ve Ahlak Bilgisi (LGS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+:root{
+  --navy:#1E3A8A; --turkuaz:#06B6D4; --sari:#f4a261; --yesil:#40916c;
+  --bg:#f7f4ec; --acikgri:#f1f5f9; --metin:#22333b; --metin-ikincil:#5d6b7a;
+  --yuzey:#ffffff; --kenar:#e2e8f0;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px;
+  --radius-s:8px; --radius-m:14px; --radius-l:20px;
+  --shadow-1:0 1px 3px rgba(30,58,138,.08); --shadow-2:0 8px 24px rgba(30,58,138,.10);
+  --motion:.2s ease;
+}
+:root[data-tema="dark"]{
+  --bg:#111826; --acikgri:#1a2333; --metin:#e7ecf3; --metin-ikincil:#9aa7b8;
+  --yuzey:#1c2536; --kenar:#2b3750;
+  --shadow-1:0 1px 3px rgba(0,0,0,.3); --shadow-2:0 8px 24px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--metin);transition:background var(--motion),color var(--motion);}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;z-index:100;}
+.skip-link:focus{left:0;}
+.ust-serit{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:var(--yuzey);border-bottom:1px solid var(--kenar);position:sticky;top:0;z-index:20;}
+.marka{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--navy);font-weight:800;font-size:1.05rem;}
+.marka .material-symbols-outlined{font-size:22px;}
+#temaDugme{border:1px solid var(--kenar);background:var(--acikgri);color:var(--metin);border-radius:999px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.cs-hero{padding:var(--sp-7) var(--sp-5) var(--sp-5);text-align:center;max-width:760px;margin:0 auto;}
+.cs-hero h1{margin:0 0 8px;font-size:1.9rem;font-weight:800;color:var(--navy);}
+.cs-hero p{margin:0;color:var(--metin-ikincil);font-size:1rem;line-height:1.55;}
+main{max-width:920px;margin:0 auto;padding:0 var(--sp-5) var(--sp-7);}
+.yil-secici{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:var(--sp-6);}
+.yil-pil{border:1px solid var(--kenar);background:var(--yuzey);color:var(--metin);padding:8px 16px;border-radius:999px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all var(--motion);}
+.yil-pil:hover{border-color:var(--navy);}
+.yil-pil.aktif{background:var(--navy);color:#fff;border-color:var(--navy);}
+.yil-blok{margin-bottom:var(--sp-6);}
+.yil-baslik{display:flex;align-items:center;justify-content:space-between;background:var(--yuzey);border:1px solid var(--kenar);border-radius:var(--radius-m);padding:16px 20px;cursor:pointer;box-shadow:var(--shadow-1);}
+.yil-baslik:hover{box-shadow:var(--shadow-2);}
+.yil-baslik h2{margin:0;font-size:1.15rem;color:var(--navy);display:flex;align-items:center;gap:10px;}
+.yil-etiket{font-size:.75rem;font-weight:700;background:var(--acikgri);color:var(--metin-ikincil);padding:3px 10px;border-radius:999px;}
+.yil-baslik .ok{transition:transform var(--motion);color:var(--metin-ikincil);}
+.yil-blok.acik .yil-baslik .ok{transform:rotate(180deg);}
+.yil-icerik{display:none;padding-top:var(--sp-4);}
+.yil-blok.acik .yil-icerik{display:block;}
+.soru-karti{background:var(--yuzey);border:1px solid var(--kenar);border-radius:var(--radius-m);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-1);}
+.soru-ust{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.soru-no{background:var(--navy);color:#fff;font-weight:800;font-size:.85rem;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.soru-tema{font-size:.75rem;font-weight:700;color:var(--turkuaz);background:rgba(6,182,212,.1);padding:3px 10px;border-radius:999px;}
+.soru-metin{font-size:.95rem;line-height:1.6;margin:0 0 10px;white-space:pre-line;}
+.soru-kaynak{font-size:.82rem;color:var(--metin-ikincil);font-style:italic;margin:6px 0 12px;}
+.secenekler{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.secenek{font-size:.88rem;line-height:1.45;padding:8px 12px;background:var(--acikgri);border-radius:var(--radius-s);cursor:pointer;border:2px solid transparent;transition:all var(--motion);}
+.secenek:hover{border-color:var(--turkuaz);}
+.secenek b{color:var(--navy);margin-right:4px;}
+.soru-karti.cevaplandi .secenek{cursor:default;}
+.soru-karti.cevaplandi .secenek:hover{border-color:transparent;}
+.secenek.dogru-cevap{background:rgba(64,145,108,.15);border-color:var(--yesil);}
+.secenek.dogru-cevap b{color:var(--yesil);}
+.secenek.yanlis-secim{background:rgba(220,38,38,.1);border-color:#dc2626;}
+.secenek.yanlis-secim b{color:#dc2626;}
+.cevap-etiketi{display:none;margin-top:10px;font-size:.82rem;font-weight:700;padding:6px 10px;border-radius:var(--radius-s);}
+.cevap-etiketi.gorunur{display:inline-block;}
+.cevap-etiketi.dogru-mesaj{background:rgba(64,145,108,.15);color:var(--yesil);}
+.cevap-etiketi.yanlis-mesaj{background:rgba(220,38,38,.1);color:#dc2626;}
+@media (max-width:600px){.secenekler{grid-template-columns:1fr;}}
+.analiz-blok{margin-top:var(--sp-7);background:linear-gradient(135deg,rgba(30,58,138,.05),rgba(6,182,212,.05));border:1px solid var(--kenar);border-radius:var(--radius-l);padding:var(--sp-6);}
+.analiz-blok h2{margin:0 0 var(--sp-4);color:var(--navy);font-size:1.3rem;}
+.analiz-madde{margin-bottom:var(--sp-4);}
+.analiz-madde h3{margin:0 0 6px;font-size:1rem;color:var(--metin);}
+.analiz-madde p{margin:0;color:var(--metin-ikincil);font-size:.92rem;line-height:1.6;}
+footer{text-align:center;padding:var(--sp-6) var(--sp-5);color:var(--metin-ikincil);font-size:.82rem;border-top:1px solid var(--kenar);margin-top:var(--sp-6);}
+footer a{color:var(--navy);text-decoration:none;font-weight:700;}
+.kaynak-not{max-width:760px;margin:var(--sp-5) auto 0;font-size:.8rem;color:var(--metin-ikincil);text-align:center;line-height:1.6;}
+.tablo-blok{margin-top:var(--sp-7);}
+.tablo-blok h2{margin:0 0 var(--sp-2);color:var(--navy);font-size:1.3rem;}
+.tablo-blok p.aciklama{margin:0 0 var(--sp-4);color:var(--metin-ikincil);font-size:.88rem;line-height:1.55;}
+.tablo-sarici{overflow-x:auto;background:var(--yuzey);border:1px solid var(--kenar);border-radius:var(--radius-m);box-shadow:var(--shadow-1);margin-bottom:var(--sp-6);}
+table.veri-tablo{width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px;}
+table.veri-tablo th,table.veri-tablo td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--kenar);}
+table.veri-tablo thead th{background:var(--navy);color:#fff;font-weight:700;white-space:nowrap;}
+table.veri-tablo tbody tr:last-child td{border-bottom:none;}
+table.veri-tablo tbody tr:hover{background:var(--acikgri);}
+table.veri-tablo td.sayi{text-align:center;font-weight:700;color:var(--navy);}
+table.veri-tablo td.toplam,table.veri-tablo th.toplam{background:rgba(6,182,212,.08);font-weight:800;}
+table.veri-tablo td.etiket{white-space:nowrap;font-weight:700;}
+</style>
+</head>
+<body>
+<a href="#ana-icerik" class="skip-link">İçeriğe geç</a>
+<nav class="ust-serit">
+  <a class="marka" href="din-kulturu-tum-siniflar.html"><span class="material-symbols-outlined">mosque</span> DKAB Portal</a>
+  <button id="temaDugme" aria-label="Tema değiştir"><span class="material-symbols-outlined">dark_mode</span></button>
+</nav>
+
+<header class="cs-hero">
+  <h1>📚 Çıkmış Sorular</h1>
+  <p>2021–2026 yılları arasında LGS'de sorulan gerçek Din Kültürü ve Ahlak Bilgisi sorularının tam metni. Kaynak: resmî MEB LGS soru kitapçıkları (Ölçme, Değerlendirme ve Sınav Hizmetleri Genel Müdürlüğü). Bir şıkka tıklayarak cevabını görebilirsin.</p>
+  <p style="margin-top:10px;font-size:.82rem;color:var(--metin-ikincil);"><strong>Not:</strong> Kitapçıklarda resmî cevap anahtarı yer almıyordu; şıklardaki doğru cevaplar soru metinlerinin dikkatle okunmasıyla tarafımca belirlenmiştir, MEB'in resmî cevap anahtarından alınmamıştır. Yayınlamadan önce resmî kaynaklarla karşılaştırmanı öneririm.</p>
+</header>
+
+<main id="ana-icerik">
+  <div class="yil-secici" id="yilSecici"></div>
+  <div id="yilBloklari"></div>
+
+  <div class="tablo-blok">
+    <h2>📐 Ünite Dağılım Tablosu (2021–2026)</h2>
+    <p class="aciklama">Bu sayfadaki 60 sorunun her biri okunarak beş üniteden hangisine ait olduğu değerlendirildi. Bu, MEB'in resmî kazanım-soru eşleştirmesi değil, soru metinlerinin doğrudan okunmasına dayanan kendi sınıflandırmamdır.</p>
+    <div class="tablo-sarici">
+      <table class="veri-tablo">
+        <thead>
+          <tr><th>Ünite</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th><th class="toplam">Toplam</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="etiket">Kader İnancı</td><td class="sayi">2</td><td class="sayi">2</td><td class="sayi">3</td><td class="sayi">1</td><td class="sayi">2</td><td class="sayi">1</td><td class="sayi toplam">11</td></tr>
+          <tr><td class="etiket">Zekât ve Sadaka</td><td class="sayi">2</td><td class="sayi">1</td><td class="sayi">3</td><td class="sayi">1</td><td class="sayi">2</td><td class="sayi">2</td><td class="sayi toplam">11</td></tr>
+          <tr><td class="etiket">Din ve Hayat</td><td class="sayi">2</td><td class="sayi">6</td><td class="sayi">4</td><td class="sayi">4</td><td class="sayi">1</td><td class="sayi">2</td><td class="sayi toplam">19</td></tr>
+          <tr><td class="etiket">Hz. Muhammed'in Örnekliği</td><td class="sayi">3</td><td class="sayi">1</td><td class="sayi">0</td><td class="sayi">2</td><td class="sayi">3</td><td class="sayi">4</td><td class="sayi toplam">13</td></tr>
+          <tr><td class="etiket">Kur'an-ı Kerim ve Özellikleri</td><td class="sayi">1</td><td class="sayi">0</td><td class="sayi">0</td><td class="sayi">2</td><td class="sayi">2</td><td class="sayi">1</td><td class="sayi toplam">6</td></tr>
+          <tr><td class="etiket toplam">Toplam</td><td class="sayi toplam">10</td><td class="sayi toplam">10</td><td class="sayi toplam">10</td><td class="sayi toplam">10</td><td class="sayi toplam">10</td><td class="sayi toplam">10</td><td class="sayi toplam">60</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>📋 Tam Soru Listesi</h2>
+    <p class="aciklama">Yukarıdaki 6 yılın tamamındaki 60 sorunun tek satırlık özeti. Tam metin ve şıklar için yukarıdaki yıl sekmelerine bakınız.</p>
+    <div class="tablo-sarici">
+      <table class="veri-tablo" id="soruListesiTablo">
+        <thead><tr><th>Yıl</th><th>No</th><th>Ünite</th><th>Soru Özeti</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="analiz-blok">
+    <h2>📊 Analiz: 2021–2026 Arasında Neler Değişti?</h2>
+    <div class="analiz-madde">
+      <h3>1. Metin uzunluğu ve senaryo ağırlığı arttı</h3>
+      <p>2021 ve 2022 sorularının önemli bir kısmı doğrudan ayet/hadis alıntısı ve kısa bir soru kökünden oluşurken, 2023'ten itibaren günlük hayattan kurgulanmış, isimlendirilmiş kişiler içeren (öğretmen, çiftçi, sporcu, aile içi diyalog gibi) daha uzun senaryo metinleri belirgin şekilde çoğaldı. 2024 ve 2025 kitapçıklarında hemen her soru bir olay/diyalog etrafında kurgulanmış durumda.</p>
+    </div>
+    <div class="analiz-madde">
+      <h3>2. Ayet ve hadis kullanımı azalmadı, ama işlev değişti</h3>
+      <p>Ayet ve hadisler tüm yıllarda yer almaya devam etti, fakat düz "ayeti oku, doğru yorumu seç" formatından çok, ayetin bir senaryo veya güncel bir örnekle (ör. bir sporcunun hareketi, bir doğal afet haberi, bir öğrencinin ödül kurası) ilişkilendirildiği soru tipine kaydı. Bu, ezber bilgiyi değil çıkarım/ilişkilendirme becerisini ölçmeye yönelik bir eğilimi gösteriyor.</p>
+    </div>
+    <div class="analiz-madde">
+      <h3>3. Hz. Muhammed'in örnekliği her yıl güçlü şekilde işlendi</h3>
+      <p>İncelenen altı yılın tamamında Hz. Muhammed'in (sav) hayatından bir olay, hadis veya davranış örneği en az bir, çoğu zaman iki-üç soruda karşımıza çıkıyor (Mekke'nin fethi, hicret, Hz. Ayşe ile ilgili olay, selamlaşma, namazı uzatmama uyarısı gibi). Bu ünite LGS'de en istikrarlı şekilde soru alan konu başlığı olarak öne çıkıyor.</p>
+    </div>
+    <div class="analiz-madde">
+      <h3>4. Kader/kaza ve sorumluluk teması sürekli işleniyor</h3>
+      <p>Her yılda kader-irade ilişkisini, çaba ile sonuç arasındaki dengeyi veya tevekkül kavramını sorgulayan en az bir soru bulunuyor (2021: öğretmenlik hayali; 2022: İbn-i Sina'nın matematik tecrübesi; 2023: çiftçinin fidan hikâyesi; 2025: yardımsever/kepçe metaforu ve tevekkül tanımı gibi). Sorular yıllar içinde "kaderi bahane etmek" ile "gerçek tevekkül" arasındaki farkı ayırt ettirmeye daha çok odaklanır hâle geldi.</p>
+    </div>
+    <div class="analiz-madde">
+      <h3>5. Zekât ve sadaka soruları büyük ölçüde "uygulama" odaklı</h3>
+      <p>Zekât/sadaka ile ilgili sorular neredeyse hiç tanım sormuyor; bunun yerine kime, nasıl, ne zaman verileceği ve niyetin (gösterişten uzak olma, gönül hoşluğu) önemi üzerinden işleniyor. Bu örüntü 2021'den 2025'e kadar değişmeden korunmuş.</p>
+    </div>
+    <div class="analiz-madde">
+      <h3>6. Kur'an-ı Kerim'in kendine özgü sorusu azaldı, ama ayet kullanımı çoğaldı</h3>
+      <p>"Kur'an'ın özellikleri nedir" tarzında doğrudan bir soru tipi 2021'den sonra neredeyse hiç görülmüyor; bunun yerine neredeyse her sorunun kök metni zaten bir ayetle destekleniyor. Yani konu, ayrı bir soru olmaktan çıkıp tüm ünitelere yayılan bir kaynak/destekleyici unsura dönüşmüş durumda.</p>
+    </div>
+    <p style="margin-top:20px;font-size:.85rem;color:var(--metin-ikincil);"><strong>Not:</strong> Yukarıdaki gözlemler, yalnızca bu sayfada yer alan 60 sorunun doğrudan okunmasına dayanan niteliksel bir değerlendirmedir; MEB'in resmî kazanım-soru eşleştirme tablosu değildir. Sayısal ünite dağılımı (yıllara/konulara göre kaç soru geldiği) için "Sınav Analizi" bölümündeki ayrı, MEB kaynaklı tabloya bakınız.</p>
+  </div>
+</main>
+
+<footer>
+  <a href="din-kulturu-tum-siniflar.html">← DKAB Portal'a dön</a>
+  <p style="margin-top:10px;">Kaynak: 2021-2022, 2022-2023, 2023-2024, 2024-2025 ve 2025-2026 Eğitim-Öğretim Yılı "Sınavla Öğrenci Alacak Ortaöğretim Kurumlarına İlişkin Merkezî Sınav" (LGS) Din Kültürü ve Ahlak Bilgisi soru kitapçıkları, T.C. Millî Eğitim Bakanlığı Ölçme, Değerlendirme ve Sınav Hizmetleri Genel Müdürlüğü.</p>
+</footer>
+
+<script>
+const guvenliOku=(k,v)=>{try{return localStorage.getItem(k)??v;}catch(e){return v;}};
+const guvenliYaz=(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}};
+(function(){
+  const tema=guvenliOku('dkab_tema','light');
+  document.documentElement.setAttribute('data-tema',tema);
+})();
+document.getElementById('temaDugme').addEventListener('click',()=>{
+  const su=document.documentElement.getAttribute('data-tema')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-tema',su);
+  guvenliYaz('dkab_tema',su);
+});
+
+const YILLAR = [
+{
+  yil:"2020-2021 Eğitim-Öğretim Yılı", etiket:"LGS 2021", kisa:"2021",
+  sorular:[
+    {tema:"Sadaka", metin:'"Mallarını Allah\'ın rızasını dileyerek ve içlerinden gelerek harcayanların durumu tatlı bir yamaçta bulunan, üzerine bolca yağmur yağan, bu sebeple ürünü iki misli veren bir bahçe gibidir..." (Bakara suresi, 265. ayet)\n\n"Kim gönül hoşluğu ile helalinden bir sadaka verirse bu sadaka bir hurma bile olsa Allah katında büyüyüp çoğalır, sonunda dağ gibi olur." (Hadis-i şerif)\n\nBu ayet ve hadisten ulaşılacak ortak sonuç aşağıdakilerden hangisidir?',
+    secenekler:["Sadaka verilecek malın Allah'ın rızasına uygun şekilde kazanılması gerekir.","Allah, samimiyetle verilen sadakanın karşılığını fazlasıyla verir.","Sadaka ibadeti farklı şekillerde yerine getirilebilir.","Kişinin, sadakasını kendi imkânları ölçüsünde vermesi beklenir."]},
+    {tema:"Kader ve İrade", metin:"İnsanın cinsiyeti, fiziki şekli ve ten rengi Allah'ın iradesinin bir sonucu olup insanın iradesine bağlı değildir. Ancak söz ve davranışlar insanın iradesinin bir sonucudur ve insan bunlardan hesaba çekilecektir.\n\nBu metinde aşağıdakilerden hangisi vurgulanmaktadır?",
+    secenekler:["İnsanı diğer varlıklardan ayıran özellik, akıl ve iradedir.","İnsan, evrensel yasalara uyarak kâinatın düzenini koruyabilir.","İnsanın özgürlüğü ile sorumluluğu arasında doğrudan bir ilişki vardır.","İnsan hem maddi hem de manevi yönü olan bir varlıktır."]},
+    {tema:"Sadaka", metin:"Bir aile ihtiyaç sahiplerine dağıtmak amacıyla erzak kolileri hazırladı. Kolilerin dağıtımı esnasında çekilen videoları da sosyal medyada paylaştı. Yardım alan ihtiyaç sahibi kişilerden biri kendi görüntüsünün paylaşılmış olmasından dolayı mahcubiyet hissedip üzüldü.\n\nBu mahcubiyetin oluşması, aşağıdaki ayetlerden hangisinin dikkate alınmadığını göstermektedir?",
+    secenekler:['"Ey iman edenler! Kazandıklarınızın iyilerinden ve yerden sizin için çıkardıklarımızdan Allah yolunda harcayın. İçinize sinerek almayacağınız şeyleri hayır olarak vermeye kalkışmayın..." (Bakara suresi, 267. ayet)','"...Sadakaları gizleyerek fakirlere verirseniz bu, sizin için daha hayırlıdır ve günahlarınızın bir kısmına da kefaret olur..." (Bakara suresi, 271. ayet)','"Sadakalar, kendilerini Allah yoluna adayan, yeryüzünde dolaşmaya güç yetiremeyen fakirler içindir..." (Bakara suresi, 273. ayet)','"Eğer borçlu darlık içindeyse, ona eli genişleyinceye kadar mühlet verin. Eğer bilirseniz, borcu sadaka olarak bağışlamanız sizin için daha hayırlıdır." (Bakara suresi, 280. ayet)']},
+    {tema:"Din ve Hayat (Batıl İnanç)", metin:'"İslam Dinine Göre Türbelere: Kurban adanmaz! Bez, çaput bağlanmaz! Taş, para yapıştırılmaz! El, yüz sürülmez! Eğilerek girilmez!"\n\nBu uyarıların asıl amacı aşağıdakilerden hangisidir?',
+    secenekler:["Dine zarar verecek davranışlardan insanları uzak tutmak","Ziyaret mekânlarının bakım ve düzenini sağlamak","Dinin, maddi menfaat aracı olarak kullanılmasına engel olmak","Sağlık ve temizlik kurallarına dikkat çekmek"]},
+    {tema:"Hz. Muhammed'in Örnekliği", metin:'Hz. Ayşe bir kadının kendisine gönderdiği hediyeyi kabul etmemişti. Bu durumu öğrenen Hz. Muhammed (sav) bunun sebebini sordu. Hz. Ayşe "Gönderen ihtiyaç sahibi biriydi." diye cevap verdi. Hz. Muhammed (sav) "Sen hediyeyi kabul et ama sonra daha değerli bir hediye ile karşılık vererek ona yardımda bulun." buyurdu.\n\nBu metinden Hz. Muhammed (sav) ile ilgili aşağıdakilerden hangisine ulaşılamaz?',
+    secenekler:["İnce düşünceli davranmıştır.","İnsanların sıkıntılarını önemsemiştir.","İyiye ve güzele yönlendirmiştir.","Rızkın, emek harcanarak kazanılmasını istemiştir."]},
+    {tema:"Kader ve İrade", metin:'Ben işimi çok seven bir öğretmenim. Çocukken ileride öğretmen olamayacağımı merak eder ve "Keşke bunu bilebilsem." derdim. Böylece çalışıp çabalamama gerek kalmayacağını düşünürdüm. Fakat gözden kaçırdığım nokta şuydu: Ben çabalamasaydım, emek vermeseydim, Allah\'ın bana verdiği yetenekleri keşfedip kullanmasaydım bugün nasıl öğretmen olabilirdim? Anladım ki - - - -\n\nBu metindeki anlam akışına göre boş bırakılan yere aşağıdakilerden hangisi getirilmelidir?',
+    secenekler:["Allah'tan gelen her şeye sabretmek gerekir.","rızık belirlidir, insana düşense onu helal şekilde kazanmaktır.","geleceğini, insanın kendi tercih ve çabaları belirler.","insan, geçmişinden ders çıkararak geleceğini yönlendirir."]},
+    {tema:"Hz. Muhammed'in Örnekliği", metin:'Bir sahabe Hz. Muhammed\'e (sav) "Kalbim katılaştı; üzülemiyorum, ağlayamıyorum." der. Bunun üzerine Hz. Muhammed (sav) de "Yetimin sofrasına otur, muhtaçların yanında ol, onların ihtiyaçlarını gider. Kalbinde yumuşama göreceksin." buyurur.\n\nBu metinden aşağıdakilerden hangisine ulaşılabilir?',
+    secenekler:["İyilik, yapana da fayda sağlar.","İnsanın en güzel özelliklerinden biri sabırdır.","Kişinin, ailesine karşı sorumlulukları vardır.","İyiliğe daha güzeli ile karşılık verilmelidir."]},
+    {tema:"Hz. Muhammed'in Örnekliği", metin:'Bir kişi Hz. Muhammed\'e (sav) gelerek kendilerine namaz kıldıran kişinin namazı çok uzun tutması sebebiyle cemaatle namaz kılmaktan uzaklaştığını belirtti. Bunun üzerine Hz. Muhammed (sav), "Biriniz namaz kıldırdığında gereğinden fazla uzatmasın. Çünkü cemaatin içinde zayıf, yaşlı, acil işi olanlar bulunabilir. Kendi başınıza namaz kıldığınızda ise dilediğiniz kadar uzatabilirsiniz." diyerek Müslümanları uyardı.\n\nBu metinden Hz. Muhammed (sav) ile ilgili aşağıdakilerden hangisine ulaşılamaz?',
+    secenekler:["Toplumun sorunları ile yakından ilgilenmiştir.","Kişisel tercihlerin topluma dayatılmasını engellemek istemiştir.","Yanlış tutumları, kişileri hedef göstermeden düzeltmeye çalışmıştır.","Hasta ve yaşlıların namazlarını evde kılmalarına izin vermiştir."]},
+    {tema:"Din ve Hayat (Zarûrât-ı Hamse)", metin:'İslam dininde "zarûrât-ı hamse" denilen beş temel ilke vardır. Bunlar can, mal, akıl, nesil ve dinin korunmasıdır. İslam\'da bütün dinî hükümler bu ilkeleri korumaya yöneliktir. Eğer bu ilkeler yitirilirse hayatın düzeni yok olur, kötülükler topluma yayılır. Bu huzursuzluk ve kargaşa hem dünya hem de ahiret mutluluğunun kaybedilmesi ile sonuçlanır.\n\nBuna göre zarûrât-ı hamsenin genel amacı aşağıdakilerden hangisidir?',
+    secenekler:["Yaşam hakkını garanti altına almak","İnsanın huzur ve güvenliğini temin etmek","Haksız kazanç elde edilmesinin önüne geçmek","İnsanı batıl inanç ve düşüncelerden korumak"]},
+    {tema:"Kur'an-ı Kerim", metin:"Hz. Yusuf'un kıssasının yer aldığı Yûsuf suresi, Kureyşlilerin Hz. Muhammed'i (sav) öldürmeyi, sürgün etmeyi veya hapsetmeyi planladığı bir dönemde indirilmiştir. Buna dikkat çeken bazı âlimler bu surenin, Hz. Muhammed (sav) ve ona inananlar için bir müjde ve teselli barındırdığını ifade etmiştir.\n\nBu metinde Hz. Yusuf ile ilgili aşağıdakilerden hangisi vurgulanmaktadır?",
+    secenekler:["Yaşadıkları, kendinden sonrakiler için umut olmuştur.","Aldığı tedbirlerle halkını refaha kavuşturmuştur.","Hoşgörü ve merhametiyle ailesinin birliğini sağlamıştır.","Olayları doğru yorumlamasıyla ayrıcalıklı bir konuma sahip olmuştur."]}
+  ]
+},
+{
+  yil:"2021-2022 Eğitim-Öğretim Yılı", etiket:"LGS 2022", kisa:"2022",
+  sorular:[
+    {tema:"Hz. Muhammed'in Örnekliği", metin:'Sahabeden Ebu\'l-Yeser, kendisine borcu olan kişiden borcunu talep eder. Bu kişi çok zor durumda olduğunu, bundan dolayı da borcunu ödeyemeyeceğini ifade eder. Karşısındakinin durumunu anlayan Ebu\'l-Yeser, Hz. Muhammed\'in (sav): "Bir kimse sıkıntı içinde olan borçluya süre verir veya borcunu bağışlarsa Allah, kıyamet gününde o kişiyi kendi gölgesinde gölgelendirir." dediğini hatırlar. Bunun üzerine de borçlu kişiye imkân bulduğunda borcunu ödeyebileceğini, bulamadığında ise kendisine hakkını helal edeceğini söyler.\n\nBu metinden aşağıdakilerin hangisine ulaşılabilir?',
+    secenekler:["Hz. Muhammed (sav), sözleri ve davranışlarıyla insanlara örnek oluşturur.","İslam, kazancın emek sarf edilerek sağlanmasını öğütler.","İslam, borcun kayıt altına alınmasını ister.","Hz. Muhammed (sav) yardımların gizli yapılmasını tavsiye eder."]},
+    {tema:"Kader ve İrade", metin:'İbn-i Sina, öğrenciliğinin bir döneminde matematiğin üstesinden gelemeyeceğini düşünür. Ancak yaşadığı bir olay, bu konudaki fikrinin değişmesine yol açar. Bir gün kuyudan su çekerken kovanın bağlı olduğu ipin, kuyunun ağzındaki taşın üzerinde derin bir iz bıraktığını görür. Bunun üzerine kendi kendine: "İp bile üstünden gide gele taşı aşındırıyorsa ben neden matematiğin üstesinden gelemeyeyim ki?" diye düşünür. Bu tecrübe, onun kendine olan güvenini artırır ve onu matematiğe daha çok yöneltir.\n\nBu metinde aşağıdakilerden hangisi vurgulanmaktadır?',
+    secenekler:["İnsan, seçiminin ve eylemlerinin sonuçlarından sorumludur.","Fizik kanunları, yeni keşiflere öncülük eder.","Başarının yolu, sürekli ve azimli çalışmaktan geçer.","Her insan, ilgi ve yeteneğine göre kendini geliştirir."]},
+    {tema:"Din ve Hayat (Hurafeler)", metin:"Mantıksal temeli bulunmayan, gerçekliği zayıf inanış ve uygulamalar olarak bilinen hurafelere hemen her toplumda rastlamak mümkündür. Bu türden inanışların temel nedeni bilgi eksikliğidir. Ayrıca karşılaşılan sorunların akla uygun usullerle çözülmesi yerine bir takım hayalî yollara başvurulması hurafeler için uygun bir ortam hazırlamaktadır.\n\nBu metinden hurafelerle ilgili aşağıdakilerin hangisine ulaşılamaz?",
+    secenekler:["Tek bir grup veya millete özgü değildir.","Sözlü kültür aracılığıyla aktarılır.","Araştırma ve sorgulama ile engellenebilir.","Ortaya çıkmasında farklı etkenler söz konusudur."]},
+    {tema:"Zekât", metin:"Zekât, hayatın pek çok alanını ilgilendiren bir ibadettir; insanlar arasında yardımlaşma ve dayanışmayı geliştirir, farklı kesimler arasındaki eşitsizlikleri azaltır. Böylece zekât, barış ve huzurun tesisine katkıda bulunur.\n\nBu metinden zekâtla ilgili aşağıdaki yargılardan hangisine ulaşılabilir?",
+    secenekler:["Toplumsal birlik ve beraberliği güçlendirir.","Miktarı, kişinin zenginlik ölçüsüne göre değişir.","Kimlere verileceği ayetlerle belirlenmiştir.","Malı temizler ve bereketlendirir."]},
+    {tema:"Din ve Hayat (İbadet)", metin:'"...Fecirde beyaz iplik siyah iplikten ayırt edilinceye kadar yiyin, için. Sonra orucunuzu geceye kadar sürdürün..." (Bakara suresi, 187. ayet) ayeti indirildikten sonra yeni Müslüman olmuş bir sahabe eline biri siyah, diğeri beyaz iki ip alır. Bunları birbirinden ayırt edebileceği zaman gelince oruca başlar. Daha sonra bu durumu Hz. Muhammed\'e (sav) anlattığında o, tebessüm ederek ayette kastedilenin gündüzün beyazlığı ve gecenin siyahlığı olduğunu açıklar.\n\nBu metinden aşağıdakilerin hangisine ulaşılamaz?',
+    secenekler:["Oruç ibadetinin belirli bir zamanı vardır.","Hz. Muhammed'in (sav) açıklaması ayetin anlaşılmasını kolaylaştırmıştır.","Ayette mecazi bir anlatıma yer verilmiştir.","Hz. Muhammed (sav) ibadetlerde aşırılıktan kaçınılmasını öğütlemiştir."]},
+    {tema:"Din ve Hayat (Toplumsal Sorumluluk)", metin:"Din, insanın kendisini aşarak özünü aramasını ve o öze ulaşmak için çabalamasını ister. Dinin ilke ve yönlendirmeleri kişinin hem bireysel farkındalığını artırır hem de sosyal sorumluluklarını yerine getirmesine yardımcı olur. Bu bakımdan din, insanın, hayatını anlamlandırmasına ve çevresiyle güzel ilişkiler kurmasına katkıda bulunur.\n\nBu metinde din ile ilgili asıl anlatılmak istenen aşağıdakilerden hangisidir?",
+    secenekler:["Her toplumda varlık gösteren bir olgudur.","İnsana bir takım sorumluluklar yükler.","Duygu ve davranış yönünden insanı geliştirir.","Yardımlaşmayı ve toplum bilincini güçlendirir."]},
+    {tema:"Kader ve İrade (Ayetel Kürsi)", metin:'"Allah\'tan başka ilah yoktur. O, sonsuz hayat sahibidir; her şeyi koruyup gözetendir. Kendisine ne uyku gelir ne de uyuklama. Göklerdeki ve yerdekilerin hepsi O\'nundur. İzni olmadan O\'nun katında kim şefaat edebilir? O, kullarının yaptıklarını ve yapacaklarını bilir. O\'nun bildirdiklerinin dışında, insanlar O\'nun ilminden hiçbir şeyi tam olarak bilemezler. O\'nun kürsüsü gökleri ve yeri içine alır. Onları koruyup gözetmek kendisine zor gelmez. O yücedir, büyüktür." (Bakara suresi, 255. ayet)\n\nBu ayetten,\nI. Allah, yeryüzünün sorumluluğunu insana yüklemiştir.\nII. Allah, iradesi ile evreni kuşatmıştır.\nIII. Allah, yarattıklarını himaye etmektedir.\nIV. Allah, her varlığı bir amaç doğrultusunda yaratmıştır.\nyargılarından hangileri çıkarılabilir?',
+    secenekler:["I ve II","II ve III","I ve IV","III ve IV"]},
+    {tema:"Din ve Hayat", metin:'"Kim, güzel bir işe öncülük eder, öncülük ettiği bu iş de kendisinden sonra sürdürülürse o işi yapanlar gibi sevap alır. Üstelik onların sevaplarından da bir şey eksilmez. Kim de kötü bir davranışı başlatır ve bu davranış kendisinden sonra devam ettirilirse onu yapanlar gibi günah alır. Onların günahlarından da bir şey eksilmez."\n\nBu hadisten aşağıdaki yargıların hangisine ulaşılamaz?',
+    secenekler:["Kişinin davranışlarının sonuçları hayatıyla sınırlı değildir.","Her davranışın Allah katında bir karşılığı vardır.","İyilik ve kötülük, başladığı dönemle sınırlı kalmaz.","Yapılan iyilikler, günahların bağışlanmasına vesile olur."]},
+    {tema:"Din ve Hayat", metin:"Din, toplumların barış ve huzur içinde yaşamalarını temin etmek üzere çeşitli ilke ve düzenlemeler getirmiştir. Bu doğrultuda adaletli davranma, yardımlaşma, dayanışma, akraba ve komşularla iyi ilişkiler içinde olma gibi tavsiyelerde bulunmuştur.\n\nBu metinde aşağıdakilerden hangisi vurgulanmaktadır?",
+    secenekler:["İnsanlar arası ilişkiler","Temel hak ve özgürlükler","Dünya ve ahiret dengesi","İnanç ve ibadet ilişkisi"]},
+    {tema:"Din ve Hayat (Evrensel Yasalar)", metin:'Araştırmalara göre doğal afetlerin nedenlerinden biri de insan kaynaklı ihmallerdir. Doksanlı yıllarda Bangladeş\'te yaşanan ve ülkenin büyük bir kısmını sular altında bırakan yıkıcı seller bunun örneklerindendir. Yağmur sularının akıp gitmesini sağlayan kanalizasyon sisteminin plastik poşetlerle tıkanmasının bu olaya sebep olduğu anlaşılmıştır.\n\nAşağıdaki ayetlerden hangisi bu metinde anlatılanlarla ilişkilendirilemez?',
+    secenekler:['"Başınıza gelen herhangi bir musibet, kendi ellerinizle işlediklerinizin yüzündendir..." (Şûrâ suresi, 30. ayet)','"Allah göğü yükseltti ve dengeyi koydu. Sakın dengeyi bozmayın." (Rahmân suresi, 7-8. ayetler)','"Elbette göklerin ve yerin yaratılması, insanların yaratılmasından daha büyük bir şeydir. Fakat insanların çoğu bilmezler." (Mü\'min suresi, 57. ayet)','"İnsanların kendi yaptıklarından dolayı karada ve denizde düzen bozuldu..." (Rûm suresi, 41. ayet)']}
+  ]
+},
+{
+  yil:"2022-2023 Eğitim-Öğretim Yılı", etiket:"LGS 2023", kisa:"2023",
+  sorular:[
+    {tema:"Kader ve İrade", metin:'Anne ve babamın tek çocuğu olarak dünyaya geldim. Küçüklüğüm hastalıklarla mücadele ederek geçti. O günlerde etraftakiler "Yürüyemez bu çocuk!" derken bugün koşuyorum. Durmadan koşuyorum. Antrenmanlarda koşuyorum. Yarışlarda koşuyorum. Çünkü durursam tüm çabalar boşa gidecek sanıyorum.\n\nBu metinde asıl anlatılmak istenen aşağıdakilerden hangisidir?',
+    secenekler:["İnsan sınırlı bir iradeye sahiptir.","Emek, insanın geleceğini belirlemede etkilidir.","İnsan, sağlığını korumakla yükümlüdür.","Aile bağlarını güçlendiren sevgi ve saygıdır."]},
+    {tema:"Zekât", metin:'Bir şahıs Hz. Muhammed\'e (sav) gelerek ondan bir şeyler istedi. Hz. Muhammed (sav) de ona: "Kim muhtaç olmadığı hâlde insanlardan bir şey isterse aldığı şey ona hayır getirmez." dedi. Bunun üzerine o kişi "Öyleyse bana zekât malından versen!" deyince Hz. Muhammed (sav), "Allah, zekâtların kimlere verileceği hususunda ne peygambere ne de bir başkasına yetki verdi ve bizzat kendisi, onları sekiz kısma ayırdı. Eğer sen onlardan biriysen vereyim." dedi.\n\nBu metinden aşağıdakilerin hangisine ulaşılamaz?',
+    secenekler:["İslam, ihtiyaç sahiplerinin hakkının korunmasını tavsiye eder.","Hz. Muhammed (sav) zor durumda kalanların gözetilmesini ister.","Hz. Muhammed (sav) yardımlaşmanın yakın çevreden başlanarak yapılmasını uygun görür.","İslam, zekâtın Allah'ın belirlediği kişilere verilmesini emreder."]},
+    {tema:"Zekât ve Sadaka", metin:'Aşağıdaki ayetlerden hangisi "Sadaka nasıl verilmelidir?" sorusuna cevap oluşturmaz?',
+    secenekler:['"Mallarını Allah yolunda harcayan, sonra da bunları başa kakmayan ve gönül incitmeyenlerin Allah katında mükâfatları vardır..." (Bakara suresi, 262. ayet)','"Ey iman edenler! Allah\'a ve ahiret gününe inanmadığı hâlde insanlara gösteriş olsun diye malını harcayan kimse gibi sadakalarınızı başa kakmak ve gönül kırmak suretiyle boşa çıkarmayın..." (Bakara suresi, 264. ayet)','"Sadakaları açıktan verirseniz ne güzel! Fakat onları gizleyerek fakirlere verirseniz bu sizin için daha hayırlıdır..." (Bakara suresi, 271. ayet)','"Sadakalar; kendilerini Allah yoluna adayan, yeryüzünde kazanç elde etmeye güç yetiremeyen yoksullar içindir..." (Bakara suresi, 273. ayet)']},
+    {tema:"Din ve Hayat (Peygamberler)", metin:"Allah, Hz. Âdem'den Hz. Muhammed'e (sav) kadar birçok peygamber göndererek insanlara dinin emir ve yasaklarını bildirmiştir. Peygamberler bu hükümleri açıklamışlar ve yaşayışlarıyla insanlara örnek olmuşlardır. Ayrıca dine sokulan batıl inanç ve yanlış uygulamalarla da mücadele etmişlerdir. Böylece hak dini, insanlara doğru bir şekilde aktarmışlardır.\n\nBu metinde asıl anlatılmak istenen aşağıdakilerden hangisidir?",
+    secenekler:["Her toplumda dinin izlerine rastlamanın mümkün olduğu","Hurafelerin dinin özüne zarar verdiği","Allah'ın peygamberler aracılığıyla dini koruduğu","Din anlayışının toplumlara göre farklılık gösterdiği"]},
+    {tema:"Kader ve İrade", metin:'Bir çiftçi, uzmanların toprak analizi yaptırma tavsiyelerini dikkate almayıp tarlasına ceviz fidanları dikti. Fakat bir süre sonra fidanlar kurudu. Kendisine yöneltilen "Başta analiz yaptırmış olsaydın bu kadar emek ve masraf boşa gitmezdi!" eleştirilerine "Allah, böyle takdir etmişse ben ne yapabilirim?" diyerek cevap verdi.\n\nBu metinden hareketle çiftçi hakkında,\nI. Doğru bir tevekkül örneği göstermiştir.\nII. Rızkı için çaba harcamamıştır.\nIII. Oluşan sonucun sorumluluğunu üstlenmemiştir.\nIV. Biyolojik yasaları göz ardı etmiştir.\nyargılarından hangileri söylenemez?',
+    secenekler:["I ve III","I ve IV","II ve III","II ve IV"]},
+    {tema:"Din ve Hayat (Sorumluluk)", metin:'"...Verdiğiniz sözü yerine getirin. Çünkü verilen söz, kişiye sorumluluk yükler. Ölçtüğünüz zaman tam ölçün ve doğru terazi ile tartın. Bu, hem daha iyidir hem de neticesi bakımından daha güzeldir. Hakkında kesin bilgi sahibi olmadığınız şeyin peşine düşmeyin. Çünkü kulak, göz ve kalp ondan sorumludur." (İsrâ suresi, 34-36. ayetler)\n\nBu ayetlerden ulaşılabilecek en kapsamlı yargı aşağıdakilerden hangisidir?',
+    secenekler:["Allah, zandan sakınılmasını ister.","Doğru davranışlar, güzel sonuçlar doğurur.","Ticarette hukuki ve ahlaki esaslara dikkat etmek gerekir.","İslam, güvenilir bir toplum oluşturmayı amaçlar."]},
+    {tema:"Din ve Hayat (Adalet)", metin:"Selma Öğretmen, öğrencilerine bir hikâye yazmalarını ve en güzel hikâye yazanı da bir çift çizmeyle ödüllendireceğini söyler. Yazılan hikâyelerin hepsi birbirinden güzeldir. Öğretmen hangisine ödül vereceğine karar veremez ve kazananı kurayla belirlemek ister. Bu sebeple ertesi günkü derste öğrencilerinden kendi isimlerini bir kâğıda yazmalarını ve çizmenin içine atmalarını ister. Çekilen kurada, bu ödüle en çok ihtiyacı olan, o gün okula gelemeyen öğrencinin ismi çıkar. Daha sonra Selma Öğretmen, kâğıtların hepsinde aynı ismin yazılı olduğunu fark eder ve duygulanır.\n\nBu olayda öğrencilerin tutum ve davranışlarıyla ilgili,\nI. Duyarlı bir davranış göstermişlerdir.\nII. Başarıyı ödüllendirmek istemişlerdir.\nIII. Hak ve hukuku gözetmişlerdir.\nIV. Özveri ve fedakârlıkta bulunmuşlardır.\nyargılarından hangileri kesinlikle söylenebilir?",
+    secenekler:["I ve II","I ve IV","II ve III","III ve IV"]},
+    {tema:"Din ve Hayat (Evrensel Düzen)", metin:"Evrende hiçbir varlık, insanın rakibi ve düşmanı değildir. Onlara zarar vermek, aslında insanın kendisine zarar vermesi anlamına gelir. Öyle ki düzenin bozulması sadece buna sebebiyet verenleri değil, tüm insanlığı tehlikeye atan sonuçlar doğurur. Bundan dolayı Allah da evrendeki düzenin korunması hususunda insanları uyarır.\n\nBu metinde asıl anlatılmak istenen aşağıdakilerden hangisidir?",
+    secenekler:["İnsanın çevresine karşı duyarlı ve sorumlu davranması gerekir.","Evren, insanın yaşayabileceği şekilde yaratılmıştır.","Evrendeki düzen, tevhit anlayışını destekler.","Her varlığın bir yaratılış amacı vardır."]},
+    {tema:"Kader ve İrade (Mümin-Ekin Benzetmesi)", metin:'"Mümin, yeşil bir ekine benzer. Ekin, rüzgâr estiğinde yatar fakat yıkılmaz; rüzgâr sakinleştiğindeyse doğrulur. İşte mümin de böyledir. O, sıkıntılar karşısında eğilir fakat yıkılmaz."\n\nBu hadiste aşağıdakilerden hangisi vurgulanmaktadır?',
+    secenekler:["Hatalardan ders almak, insanı başarıya yöneltir.","Tedbirsizlik, istenmeyen durumlarla karşılaşılmasına neden olur.","İrade, insanın sorumlu tutulmasının sebebidir.","Zorlukları aşmak, kararlı olmayı gerektirir."]},
+    {tema:"Zekât (Uygulama)", metin:'Mesut Bey her yıl, zekât ve fitresini aynı zamanda verirdi. Vermesi gereken miktarı, ihtiyaç sahiplerine ulaştırması için oğluna teslim ederdi. Bir defasında oğlunun, "Babacığım! Zekât ve fitreni kendin versen bu insanlar da seni bilseler daha iyi olmaz mı?" sorusuna Mesut Bey, "Allah\'ın bilmesi bana yeter." diyerek cevap vermişti.\n\nBu metinden Mesut Bey ile ilgili aşağıdakilerin hangisine ulaşılamaz?',
+    secenekler:["Nisap miktarı mala sahip olduğuna","Zekâtını ramazan ayında verdiğine","Sadaka-i cariyeyi önemsediğine","Yardım ederken gizliliği tercih ettiğine"]}
+  ]
+},
+{
+  yil:"2023-2024 Eğitim-Öğretim Yılı", etiket:"LGS 2024", kisa:"2024",
+  sorular:[
+    {tema:"Kader ve İrade (Sebat)", metin:'Sebat; kararlılık, devamlılık ve çaba sarf etmektir. Kur\'an-ı Kerim\'de "Rabb\'imiz! Bize zorluklara tahammül gücü ver, adımlarımızı sağlam kıl..." (Bakara/250) ayetiyle bu konuya dikkat çekilmektedir. Her kazanım bir sebatın sonucudur. Sebat, bir ideal uğruna dağları delmek, deryaları geçmektir. Sebat, gemileri karadan yürütüp İstanbul\'u fethetmek, birkaç kişinin birlikte kaldırabileceği mermiyi tek başına namluya yerleştirip hedefini vurmaktır. Dahası olmazları oldurmak, imkânsızı başarmaktır. Nitekim Hz. Muhammed (sav); "Bil ki zafer, sabra bağlıdır. Sıkıntının sonu ferahlık, zorluğun sonu kolaylıktır." diyerek insanları sebatkâr olmaya teşvik etmektedir.\n\nBu metinde aşağıdakilerden hangisi vurgulanmaktadır?',
+    secenekler:["Sorumlulukların paylaşılması hayatı kolaylaştırır.","Başarı ve başarısızlığın sorumluluğu insana aittir.","İnanç, gayret ve istikrar, insanı başarıya ulaştırır.","Hedefe ulaşmada dua etmek önemlidir."]},
+    {tema:"Din ve Hayat (Yetim Hakları)", metin:'"Gördün mü, hesap ve ceza gününü yalanlayanı? İşte o, yetimi itip kakar. Yoksulu doyurmaya teşvik etmez. Öyleyse yazıklar olsun böyle namaz kılanlara! Onlar namazlarını ciddiye almazlar. Onlar gösteriş yaparlar. En küçük yardıma bile engel olurlar." (Mâûn suresi)\n\nBu sure aşağıdaki hadislerle hangisiyle ilişkilendirilemez?',
+    secenekler:['"Kim, görsünler ve duysunlar diye iş yaparsa Allah kıyamet günü onun amacının ne olduğunu ortaya çıkarır."','"Öksüzlere iyi davranan kişiler cennette benimle beraber olacaklardır."','"Yarım hurma bile olsa sadaka vererek Allah\'ın hesabına karşı hazırlıklı olun."','"Kişi başkalarının kusurlarını affettikçe Allah da onun şerefini artırır."']},
+    {tema:"Zekât", metin:"Zekât ile ilgili,\nI. Varlıklı Müslümanların yapması gereken bir görevdir.\nII. Aile bireylerinden her biri için -küçük çocuklar dâhil- yerine getirilmesi gereken bir yükümlülüktür.\nIII. Manevi yardımları kapsayan bir ibadettir.\n\nyargılarından hangileri doğrudur?",
+    secenekler:["Yalnız I","I ve II","II ve III","I, II ve III"]},
+    {tema:"Kur'an-ı Kerim (Peygamber Kıssaları)", metin:'I. "...Medyenlilere gönderilen peygamber şöyle dedi: Size Rabb\'inizden açık bir delil gelmiştir. Artık ölçü ve tartıyı tam yapın, insanların mallarını eksik vermeyin..."\nII. "Rabb\'im! Gönlüme ferahlık ver. İşimi kolaylaştır. Dilimin düğümünü çöz ki sözümü iyi anlasınlar. Ailemden kardeşim Harun\'u bana yardımcı ver."\nIII. "Rabb\'im! Bana makam, mevki ve iktidar verdin. Rüyaların yorumunu öğrettin..."\n\nNumaralanmış ayetlerin ilgili olduğu peygamberler aşağıdakilerin hangisinde doğru sıralanmıştır?',
+    secenekler:["Hz. Musa, Hz. Yusuf, Hz. Şuayp","Hz. Şuayp, Hz. Musa, Hz. Yusuf","Hz. Musa, Hz. Şuayp, Hz. Yusuf","Hz. Şuayp, Hz. Yusuf, Hz. Musa"]},
+    {tema:"Din ve Hayat (Camiler)", metin:"Camiler sadece ibadet yeri değil aynı zamanda insanların farklı ihtiyaçlarını karşılandığı çok işlevli yapılardır. Örneğin eski ve yeni mimari tarzının birleşimini yansıtan Taksim Camii ve Külliyesi; dinî sohbetlerin, konferansların, Türkçe ve farklı dillerde tefsir derslerinin yapıldığı bir eğitim yuvasıdır. Ayrıca içerisinde sanat atölyeleri, oyun alanları, dil kursları, kütüphane, tiyatro salonu ve aşevi bulunan bir kurumdur.\n\nBu metinde 'camiler' ile ilgili aşağıdakilerden hangisi vurgulanmaktadır?",
+    secenekler:["Şehirlerin merkezinde yer alan yapılardır.","İslam mimarisinin gelişimine öncülük eden eserlerdir.","İbadet, kültür ve sosyalleşme mekânlarıdır.","Müslümanların varlığını simgeleyen kurumlardır."]},
+    {tema:"Din ve Hayat (Evrenin Yasaları)", metin:"Evrenin yasaları ile ilgili,\nI. Zaman ve mekâna göre değişiklik gösterir.\nII. Gözlenebilir olgu ve olaylara dayanır.\nIII. İnsanlar tarafından konulan temel ilkelerdir.\nIV. Aynı türden olayların tümü için geçerlidir.\n\nyargılarından hangileri doğrudur?",
+    secenekler:["I ve II","I ve III","II ve IV","III ve IV"]},
+    {tema:"Din ve Hayat (Çocuk Hakları)", metin:'İslam\'a göre her çocuk günahsızdır. Diğer bir deyişle çocuklar masumdur. Dolayısıyla hangi ırka ve millete mensup olursa olsun hiçbir çocuk en ufak bir kötülüğü, incitilmeyi ve horlanmayı hak etmez. Bu sebeple Kur\'an-ı Kerim, "...Masum bir canı öldürmek tüm insanlığı öldürmek gibidir..." (Mâide/32) ayetiyle haksız yere bir kişinin öldürülmesini yasaklamıştır. Hz. Peygamber savaş dâhil hiçbir durumda çocuklara kötü davranılmaması konusunda Müslümanları uyarmıştır.\n\nBuna göre İslam ile ilgili,\nI. İnsana zarar veren davranışları yasaklamıştır.\nII. Bireyin zorluklar karşısında güçlü olmasını hedeflemiştir.\nIII. Yaşama hakkının güvence altına alınmasını istemiştir.\n\nyargılarından hangilerine ulaşılabilir?',
+    secenekler:["I ve II","I ve III","II ve III","I, II ve III"]},
+    {tema:"Hz. Muhammed'in Örnekliği (Hicret)", metin:"Müşriklerin, kendisi hakkında öldürme kararı aldıklarını öğrenen Hz. Muhammed (sav), tebliğ görevini yapabilmek amacıyla Hz. Ebu Bekir ile Medine'ye hicret etmek üzere şehirden ayrılma kararı aldı. Fakat doğruca Medine'ye gitmek yerine ters istikamette bulunan Mekke'deki Sevr Mağarası'na giderek burada arkadaşıyla üç gün kaldı. Ardından daha önce anlaştığı ve yol bilgisine güvendiği Abdullah bin Ureykıt ile buluşup onun kılavuzluğunda Medine'ye hicret etti.\n\nBu olaydan Hz. Muhammed'in (sav) aşağıdaki özelliklerinden hangisine ulaşılamaz?",
+    secenekler:["Davasında cesaret ve kararlılık göstermesi","Olaylar karşısında tedbirli davranması","İnsanların birikiminden faydalanması","Şefkatli ve merhametli olması"]},
+    {tema:"Hz. Muhammed'in Örnekliği (Güneş Tutulması)", metin:"Hz. Muhammed'in (sav) oğlu İbrahim vefat ettiğinde Güneş tutulmuştu. Bazı insanlar bu olayı İbrahim'in vefatıyla ilişkilendirdi. Bunun üzerine Hz. Muhammed (sav) \"Güneş ve Ay, Allah'ın kudretinin göstergesidir. Belli bir hesaba göre hareket etmektedir. Hiç kimsenin doğumundan veya ölümünden dolayı tutulmaz.\" diyerek onları uyardı.\n\nBu metinde asıl anlatılmak istenen aşağıdakilerden hangisidir?",
+    secenekler:["Evrenin yasalarına uygun davranmak hayatı kolaylaştırır.","Varlıklar, işlevlerini evrendeki yasalara göre sürdürür.","Evrendeki düzen, Allah'ın tek olduğunu gösterir.","Canlıların gelişimi biyolojik yasalara göredir."]},
+    {tema:"Kur'an-ı Kerim", metin:'"Kendilerine ayetlerimiz açıkça okunup anlatılınca ahirette bizimle karşılaşacaklarına inanmayanlar, \'Bize başka bir Kur\'an getir veya bunu değiştir.\' dediler. Sen onlara; \'Ben Kur\'an\'ı değiştirecek yetkiye sahip değilim. Ancak bana vahyedilene uyarım. Eğer Rabb\'ime karşı gelecek olursam dehşetli bir günün azabından korkarım.\' diye söyle." (Yûnus suresi, 15. ayet)\n\nBu ayette "Kur\'an-ı Kerim" ile ilgili asıl anlatılmak istenen aşağıdakilerden hangisidir?',
+    secenekler:["Küllî iradenin bir sonucudur.","Hesap günü hakkında bilgi verir.","Evrensel mesajlar içerir.","İnanç ve ibadet esaslarını belirler."]}
+  ]
+},
+{
+  yil:"2024-2025 Eğitim-Öğretim Yılı", etiket:"LGS 2025", kisa:"2025",
+  sorular:[
+    {tema:"Zekât ve Sadaka (Niyet)", metin:'Bir yardımsevere sordular: "Muhtaçlara verdiğin, yoksullara dağıttığın şeylerden dolayı gönlünde bir minnet beklentisi ve kibir hissi oluşuyor mu?" O, şöyle cevap verdi: "Ben, bana verilen nimetler karşısında kendimi aşçının elindeki kepçe gibi kabul ediyorum. Yemeği veren aşçıdır fakat kepçeden geçiyor. Kepçenin \'Yemeği veren benim.\' gibi bir düşüncesi olabilir mi?"\n\nBu metinde verilen asıl mesaj aşağıdakilerden hangisidir?',
+    secenekler:["Hayır yolunda yarışılmalıdır.","Yardım edilenlerin onuru korunmalıdır.","İyilik, her şeyin sahibinin Allah olduğu bilinciyle yapılmalıdır.","Kazancın bir kısmı ihtiyaç sahiplerine verilmelidir."]},
+    {tema:"Kader ve İrade", metin:"Kader ve kaza ile ilgili,\nI. Allah'ın bir işi planlamasına kaza, bu işi gerçekleştirmesine ise kader denir.\nII. Kader ve kaza; Allah'ın ilim, irade, kudret ve yaratma sıfatlarıyla ilgili kavramlardır.\nIII. İnsanın tercihleri, kaderini belirlemede etkilidir.\n\nifadelerinden hangileri doğrudur?",
+    secenekler:["Yalnız I","Yalnız III","I ve II","II ve III"]},
+    {tema:"Kur'an-ı Kerim (Yeryüzü Düzeni)", metin:"Kur'an-ı Kerim'de yeryüzünün insanın hizmetine sunulduğu ve insanın da yeryüzündeki düzene uygun bir yaşam sürmesinin gerektiği hatırlatılmaktadır. Çünkü insan, bu bilinçle hareket etmezse yeryüzü artık ona hizmet edemez ve zarar vermeye başlar. Bununla ilgili Kur'an-ı Kerim'de şöyle buyurulur: - - - -\n\nBu metinde boş bırakılan yere düşüncenin akışına göre aşağıdaki ayetlerden hangisi getirilmelidir?",
+    secenekler:['"Kim Allah yolunda karşılaştığı sıkıntılara katlanır ve gayret gösterirse bunu kendisi için yapmış olur..." (Ankebût suresi, 6. ayet)','"İnsanların yaptıkları kötü işler yüzünden karada ve denizde denge bozuldu. Allah, doğru yolu bulmaları için yaptıklarının sonucunu onlara tattırır." (Rûm suresi, 41. ayet)','"Başına gelen bir sıkıntıdan sonra insana nimet verdiğimizde o, \'Sıkıntı ve dertlerim gitti.\' diyerek sevinmeye ve şımarmaya başlar." (Hûd suresi, 10. ayet)','"...Allah\'ın kudret ve egemenliği gökleri ve yeri kuşatmıştır. Bunları koruyup gözetmek, O\'na güç gelmez. O yücedir, büyüktür." (Bakara suresi, 255. ayet)']},
+    {tema:"Kader ve İrade (Tevekkül)", metin:'Millî futbolcu Arda Güler, attığı gollerden sonra bir elini kalbinin üzerine koyup diğer elinin işaret parmağını göğe doğru kaldırarak sevincini kutluyor. Bunun ne anlama geldiği kendisine sorulduğunda "Bu tevekkül inancımın göstergesidir. Çünkü hayatta insanın başına iyi şeyler gibi kötü şeyler de gelebiliyor: başarıların yanında başarısızlıklar, sağlıklı olmanın yanında hastalıklar... Ben elimden geleni yapıyorum, çalışıp çabalıyorum; sonucunu Allah\'a bırakıyorum." dedi.\n\nBu metinde "tevekkül inancı" ile ilgili asıl anlatılmak istenen aşağıdakilerden hangisidir?',
+    secenekler:["Zorlukların aşılmasında etkilidir.","Gayret göstermekle birlikte Allah'a güvenmektir.","Kişinin huzurlu olmasına katkı sağlar.","Tercihlerinin sorumluluğunu üstlenmektir."]},
+    {tema:"Zekât", metin:"Zekât ile ilgili,\nI. Toprak ürünlerinin zekâtı verilirken malın üzerinden bir yıl geçme şartı aranmaz.\nII. Bir malın zekâtının verilebilmesi için o malın gelir getiren cinsten olması gerekir.\nIII. Temel ihtiyaç olarak kabul edilen malın zekâtının verilmesi gerekir.\nIV. Zekât verilirken bakmakla yükümlü olunan kişilere öncelik verilmelidir.\n\nnumaralanmış bilgilerden hangileri doğrudur?",
+    secenekler:["I ve II","I ve IV","II ve III","III ve IV"]},
+    {tema:"Hz. Muhammed'in Örnekliği (Üsve-i Hasene)", metin:'Aşağıdaki ayetlerin hangisinde Hz. Muhammed\'in (sav) "üsve-i hasene" oluşu vurgulanmaktadır?',
+    secenekler:['"Biz senden önce de birçok peygamber gönderdik. Onlardan bazılarının hikâyelerini sana anlattık, bazılarını anlatmadık..." (Mü\'min suresi, 78. ayet)','"Ey Peygamber! Sen sevdiklerini hidayete erdiremezsin. Allah, hidayet yolunu tercih edeni hidayete erdirir ve hidayete erecek olanı en iyi O bilir." (Kasas suresi, 56. ayet)','"Bu Kur\'an\'ı, insanlara hak ve hakikatleri göstermek amacıyla sana indirdik. Artık kim doğru yolu seçerse kendi lehinedir, kim de saparsa ancak kendi aleyhinedir..." (Zümer suresi, 41. ayet)','"Ant olsun, Allah\'ın Resulü\'nde sizin için; Allah\'a ve ahiret gününe kavuşmayı uman, Allah\'ı çok zikreden kimseler için güzel bir örnek vardır." (Ahzâb suresi, 21. ayet)']},
+    {tema:"Hz. Muhammed'in Örnekliği (İstişare)", metin:"Taifliler, Hz. Muhammed'e (sav) gelerek putlarına dokunulmaması, zekâttan sorumlu tutulmamaları şartıyla Müslüman olabileceklerini söylediler. Bunun üzerine Hz. Muhammed (sav) bir müddet için zekâttan muaf tutulabileceklerini, ancak putlara karşı sevgi besledikleri sürece 'Müslüman olduk.' demelerinin bir anlamı olmayacağını belirtti.\n\nBu olayda Hz. Muhammed (sav) aşağıdakilerden hangisini vurgulamaktadır?",
+    secenekler:["İman, özgür iradenin bir sonucudur.","Tevhit inancı İslam'ın temelidir.","İbadetlerde devamlılık esastır.","Din, ahlaki değerlerin oluşmasında etkilidir."]},
+    {tema:"Hz. Muhammed'in Örnekliği (İstişare)", metin:"I. Kureyşlileri Safa Tepesi'ne davet edip kendisinin Allah tarafından peygamber olarak gönderildiğini bildirmesi ve onları İslam'a çağırması\nII. Yaşadığı ilk vahiy tecrübesini Varaka bin Nevfel'e anlatıp onun birikiminden faydalanması\nIII. Peygamberlikten vazgeçmesi için müşriklerin sundukları teklifleri 'Güneş'i sağ elime, Ay'ı sol elime verseniz yine de davamdan dönmem.' diyerek reddetmesi\nIV. Müslümanların namaza nasıl davet edileceği konusunda sahabelerin görüşlerini alması\n\nNumaralanmış olaylardan hangileri Hz. Muhammed'in (sav) istişareye verdiği öneme örnektir?",
+    secenekler:["I ve II","I ve III","II ve IV","III ve IV"]},
+    {tema:"Kur'an-ı Kerim (Evrenin Yaratılışı)", metin:'"Sabahı aydınlatan Allah\'tır. O, geceyi dinlenme zamanı, Güneş\'i ve Ay\'ı birer hesap ölçüsü yapmıştır. İşte bu, aziz ve alim olan Allah\'ın takdiridir. O, kara ve denizin karanlıklarında yolunuzu bulmanız için yıldızları yaratmıştır..." (En\'âm suresi, 96-97. ayetler)\n\nBu ayetlerde asıl anlatılmak istenen aşağıdakilerden hangisidir?',
+    secenekler:["Evrendeki düzen Allah'ın koyduğu ilkelerle gerçekleşir.","Evrensel yasaları anlamak, Allah'a olan inancı kuvvetlendirir.","Ezelî ve ebedî olan tek varlık Allah'tır.","Allah, insanın evrensel yasalara uygun hareket etmesini ister."]},
+    {tema:"Din ve Hayat (Selamlaşma)", metin:'Hz. Peygamber "İnsanların en hayırlısı kimdir?" diye soran birine "İkramda bulunan, tanıdığına ve tanımadığına selam verendir." cevabını vererek selamlaşmanın önemine dikkat çekmektedir. Tanıdığa verilen selam, aradaki bağı ve muhabbeti kuvvetlendirirken tanımadık birine verilen selam, toplumda güven ortamının oluşmasına vesile olur. Büyüğe verilen selam saygıyı pekiştirirken küçüklere verilen selam merhameti ve sevgiyi artırır. Ayrıca "İman etmedikçe cennete giremezsiniz. Birbirinizi sevmedikçe de iman etmiş olmazsınız. Size birbirinizi seveceğiniz bir şey söyleyeyim mi? Aranızda selamı yayınız!" hadisi selamlaşmanın ahirette de bir karşılığı olduğunu hatırlatmaktadır.\n\nBu metne göre "selamlaşma" ile ilgili aşağıdakilerden hangisi söylenemez?',
+    secenekler:["Cömertliğe teşvik ettiği","Dinî bir değer olduğu","İnsanlar arası iletişimi güçlendirdiği","Birlik ve beraberliğe katkı sağladığı"]}
+  ]
+},
+{
+  yil:"2025-2026 Eğitim-Öğretim Yılı", etiket:"LGS 2026", kisa:"2026",
+  sorular:[
+    {tema:"Hz. Muhammed'in Örnekliği (Sünnet)", metin:'İmam Gazali, Hz. Muhammed\'i (sav) örnek almak ile onun davranışlarını taklit etmeyi birbirinden ayırmış ve bunu şöyle açıklamıştır: "Bir peygambere duyulan saygı, onun getirdiği ilkeleri benimseyip uygulamaktır yoksa o bağdaş kurarak oturduğu için bağdaş kurmak, o sedirde oturduğu için sedirde oturmak değildir."\n\nBu metinden "sünnet" ile ilgili aşağıdakilerden hangisi vurgulanmaktadır?',
+    secenekler:["Kur'an-ı Kerim'in anlaşılmasında önemli bir role sahiptir.","Müslümanları birleştiren bir unsurdur.","İslam dininin temel kaynakları arasında yer alır.","Hz. Peygamber'in ahlakının özümsenmesidir."]},
+    {tema:"Kader ve İrade (Ayetel Kürsi)", metin:"I. İnsanların birbirine karşı görev ve sorumluluklarını hatırlatmaktadır.\nII. Allah'ın birliğini ve varlıklar üzerindeki mutlak hâkimiyetini konu edinmektedir.\nIII. Yûsuf suresinde yer almaktadır.\nIV. Vakit namazlarından sonra genellikle okunmaktadır.\n\nNumaralanmış bilgilerden hangileri Ayetelkürsi ile ilgilidir?",
+    secenekler:["I ve II","I ve III","II ve IV","III ve IV"]},
+    {tema:"Din ve Hayat (Evlilik)", metin:"İslam, evliliği kadın ve erkeğin sevgi ve dayanışma içinde hayatlarını birleştirdiği özel bir kurum olarak görür. Kur'an'da eşlerin birbirleri için huzur kaynağı olduğu ifade edilerek evliliğin iki insanı koruyan, tamamlayan ve güçlendiren bir birliktelik olduğu anlatılır. Eşler, evliliğin içinde birbirlerinin eksikliklerini tamamlar, sorumlulukları paylaşır ve yaşamın zorluklarını beraber çözerler. Bu nedenle evlilik sadece iki kişinin birlikteliğinden ibaret olmayıp, güçlü bir aile kurarak yaşamı daha anlamlı ve düzenli hâle getirme adımı olarak kabul edilir.\n\nBu metinden \"evlilik\" ile ilgili aşağıdakilerin hangisine ulaşılamaz?",
+    secenekler:["Kültürel değerleri gelecek nesillere aktaran bir kurumdur.","Ortak sorumluluk bilinciyle hareket etmektir.","Saygı ve güvene dayalı bir birlikteliktir.","Hayatı güzelleştirme çabasıdır."]},
+    {tema:"Zekât (Kimlere Verilir)", metin:"Kişinin zekât verebileceği yakınları aşağıdakilerin hangisinde doğru verilmiştir?",
+    secenekler:["Amcası - Halası - Kardeşi - Teyzesi","Çocuğu - Dedesi - Halası - Kardeşi","Annesi - Çocuğu - Dayısı - Teyzesi","Babası - Amcası - Dayısı - Ninesi"]},
+    {tema:"Hz. Muhammed'in Örnekliği (Mekke'nin Fethi)", metin:'Hz. Muhammed (sav) Mekke\'yi fethettiğinde endişeyle kendisini bekleyen Kureyşlilere "Şimdi size ne yapacağımı düşünüyorsunuz?" diye sordu. Onlar "Bize iyi davranacağını umuyoruz." dediler. Bunun üzerine Hz. Peygamber "Ben de size Yusuf Peygamber\'in kardeşlerine dediğini diyorum, \'Bugün artık yaptıklarınızdan dolayı sizi kınayacak değilim. Allah sizi bağışlasın. Şüphesiz O, merhametlilerin en merhametlisidir.\' Haydi gidin!" diyerek onları serbest bıraktı.\n\nBu olaydan Hz. Muhammed (sav) ile ilgili,\nI. Söz ve davranışları birbiriyle tutarlıdır.\nII. Kanaatkâr bir yaşamı benimsemiştir.\nIII. Affedici bir kişiliğe sahiptir.\n\nyargılarından hangilerine ulaşılır?',
+    secenekler:["Yalnız I","Yalnız II","I ve III","II ve III"]},
+    {tema:"Kur'an-ı Kerim (Evrensel Yasalar)", metin:'I. "İçinizden sadece zulmedenlere erişmekle kalmayacak olan bir fitneden sakının..." (Enfâl suresi, 25. ayet)\nII. "Bilin ki Allah, ölmüş toprağa yeniden hayat verir. Şüphesiz biz, düşünesiniz diye delilleri bir bir açıklamışızdır." (Hadîd suresi, 17. ayet)\nIII. "Denizde yelkenlerini bayraklar gibi açarak süzülüp giden gemiler de Allah\'ın kudretinin delillerindendir. O dilerse rüzgârı dindirir de gemiler denizin üzerinde hareketsiz kalır..." (Şûrâ suresi, 32-33. ayetler)\nIV. "Sizi topraktan yaratması Allah\'ın varlığının delillerindendir. Sonra bir de baktınız ki çoğalarak yeryüzüne dağılmış insan topluluğusunuz." (Rûm suresi, 20. ayet)\n\nNumaralanmış ayetler aşağıdakilerin hangisinde, ilgili olduğu evrenin yasalarıyla doğru eşleştirilmiştir?\n(Fiziksel Yasalar / Biyolojik Yasalar / Toplumsal Yasalar)',
+    secenekler:["I ve II / III / IV","III / II ve IV / I","I ve III / II / IV","II / III / I ve IV"]},
+    {tema:"Din ve Hayat (Abdest)", metin:'Abdest, arınmanın bir adımıdır. Çünkü insan bilir temizlenmek için suyun yeterli olmadığını. Ellerini yıkar, akıttığını düşünerek günahlarını. Ağzını temizler âdeta kötü sözden, dedikodudan ve yalandan uzaklaştığını ifade edercesine. Yüzünü yıkar, başını mesh eder tüm benliğiyle kötülüklerden ve yanlış düşüncelerden temizlendiğini göstermek için. Ayaklarını yıkar bir daha yanlış yollara sapmayacağına söz verircesine.\n\nBu metinde "abdest" ile ilgili asıl anlatılmak istenen aşağıdakilerden hangisidir?',
+    secenekler:["Belirli bir düzene göre alınması gerekir.","Namaz ibadetini yerine getirebilmek için şarttır.","Beden temizliğine ve sağlıklı bir hayata yönlendirir.","Hatalardan uzaklaştırıp erdemli davranışlarda bulunma bilinci kazandırır."]},
+    {tema:"Hz. Muhammed'in Örnekliği (Takrirî Sünnet)", metin:'Hz. Muhammed\'in (sav) aşağıdaki davranışlarından hangisi "takrirî sünnet"e örnektir?',
+    secenekler:['"Bizi yedirip içiren, ihtiyaçlarımızı gideren, bize barınacak yuva veren Allah\'a hamdolsun." diyerek dua etmesi','Ağız ve diş temizliğine önem vermesi, insanlara bunu tavsiye etmesi','Kendisinin tercih etmediği bazı yiyecekleri yiyen sahabeleri gördüğünde müdahale etmeyip onların davranışını onaylaması','Bir topluluğun yanından geçerken eliyle onları selamlaması']},
+    {tema:"Zekât (Nisap)", metin:'Hz. Peygamber, temel ihtiyaçlar dışında kalan ve belirli bir miktara ulaşan altın, gümüş, küçükbaş ve büyükbaş hayvanlar, toprak ürünleri gibi mallardan zekât verilmesini istedi. Uzun zaman Müslümanlar bu mallar üzerinden zekâtlarını verdiler. Daha sonraları ortaya çıkan nakit para ve değerli taşlar gibi uygulama ve gelişmeler karşısında İslam âlimleri bu mallardan da zekât verilmesi gerektiği görüşünü benimsediler. Bunların nisabının belirlenmesinde ise altının nisabına denk gelen değerin esas alınmasını uygun gördüler.\n\nBu metinden aşağıdakilerin hangisine ulaşılamaz?',
+    secenekler:["Zekât verilebilmesi için malın edinilmesi üzerinden bir yıl geçmesi gerekir.","Âlimler, zekâtın işlevselliğine katkıda bulunmuşlardır.","Hangi mallardan zekât verileceği sünnet ile belirlenmiştir.","Zekât verilecek mallarda belirli şartlar aranır."]},
+    {tema:"Hz. Muhammed'in Örnekliği (Medine Sözleşmesi)", metin:'Hz. Peygamber, Müslümanların yanı sıra Medine\'de yaşayan Yahudiler ve müşriklerle toplumu yeniden düzenleyen bir sistem oluşturmaya karar verdi. Bu amaçla grupların birbirleriyle ilişkilerini, adli ve idari yapılarını, fertlerin sahip olduğu din ve vicdan hürriyetlerini, hak ve sorumluluklarını belirleyen "Medine Sözleşmesi" olarak anılan metni hazırlattı. Böylece Medine\'de bir şehir devleti kurmanın adımını atmış oldu.\n\nBu metne göre, Hz. Muhammed\'in (sav) öncelikle aşağıdakilerden hangisini amaçladığı söylenebilir?',
+    secenekler:["Ekonomik dengeyi sağlamayı","Sosyal birliği ve adaleti tesis etmeyi","Medine'yi dinin merkezi olarak öne çıkarmayı","Şehri dış tehditlere karşı korumayı"]}
+  ]
+}
+];
+
+function olusturSecici(){
+  const kap=document.getElementById('yilSecici');
+  kap.innerHTML = YILLAR.map((y,i)=>`<button class="yil-pil" data-i="${i}">${y.kisa}</button>`).join('');
+  kap.querySelectorAll('.yil-pil').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.yil-blok').forEach((blok,i)=>{
+        if(String(i)===b.dataset.i){ blok.classList.add('acik'); blok.scrollIntoView({behavior:'smooth',block:'start'}); }
+      });
+    });
+  });
+}
+
+const DOGRU_CEVAPLAR = {
+  "2021":[1,2,1,0,3,2,0,3,1,0],
+  "2022":[0,2,1,0,3,2,1,3,0,2],
+  "2023":[1,2,3,2,0,3,1,0,3,2],
+  "2024":[2,3,0,1,2,2,1,3,1,0],
+  "2025":[2,3,1,1,0,3,1,2,0,0],
+  "2026":[3,2,0,0,2,1,3,2,2,1]
+};
+
+function olusturBloklar(){
+  const kap=document.getElementById('yilBloklari');
+  kap.innerHTML = YILLAR.map((y,i)=>`
+    <div class="yil-blok" id="yilBlok${i}">
+      <div class="yil-baslik" data-i="${i}">
+        <h2>🗓️ ${y.yil} <span class="yil-etiket">${y.etiket}</span></h2>
+        <span class="material-symbols-outlined ok">expand_more</span>
+      </div>
+      <div class="yil-icerik">
+        ${y.sorular.map((s,qi)=>`
+          <div class="soru-karti" data-yil="${y.kisa}" data-soru="${qi}">
+            <div class="soru-ust">
+              <span class="soru-no">${qi+1}</span>
+              ${s.tema?`<span class="soru-tema">${s.tema}</span>`:''}
+            </div>
+            <p class="soru-metin">${s.metin}</p>
+            <div class="secenekler">
+              ${s.secenekler.map((sec,si)=>`<div class="secenek" data-secenek="${si}"><b>${String.fromCharCode(65+si)})</b> ${sec}</div>`).join('')}
+            </div>
+            <div class="cevap-etiketi"></div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  kap.querySelectorAll('.yil-baslik').forEach(b=>{
+    b.addEventListener('click',()=>{
+      b.closest('.yil-blok').classList.toggle('acik');
+    });
+  });
+  // İlk yılı açık başlat
+  document.getElementById('yilBlok0')?.classList.add('acik');
+
+  // Şıklara tıklayınca cevabı göster
+  kap.addEventListener('click',(e)=>{
+    const secenek = e.target.closest('.secenek');
+    if(!secenek) return;
+    const karti = secenek.closest('.soru-karti');
+    if(!karti || karti.classList.contains('cevaplandi')) return;
+    const yil = karti.dataset.yil;
+    const soruNo = parseInt(karti.dataset.soru,10);
+    const dogruIndex = (DOGRU_CEVAPLAR[yil]||[])[soruNo];
+    if(dogruIndex===undefined) return;
+    const secilenIndex = parseInt(secenek.dataset.secenek,10);
+    karti.classList.add('cevaplandi');
+    karti.querySelectorAll('.secenek').forEach(el=>{
+      const idx = parseInt(el.dataset.secenek,10);
+      if(idx===dogruIndex) el.classList.add('dogru-cevap');
+      else if(idx===secilenIndex) el.classList.add('yanlis-secim');
+    });
+    const etiket = karti.querySelector('.cevap-etiketi');
+    const dogruHarf = String.fromCharCode(65+dogruIndex);
+    if(secilenIndex===dogruIndex){
+      etiket.textContent = `✓ Doğru! Cevap: ${dogruHarf}`;
+      etiket.classList.add('gorunur','dogru-mesaj');
+    } else {
+      etiket.textContent = `✗ Yanlış seçim. Doğru cevap: ${dogruHarf}`;
+      etiket.classList.add('gorunur','yanlis-mesaj');
+    }
+  });
+}
+
+const SORU_LISTESI = [
+  ["2021","1","Zekât ve Sadaka","Sadaka - Bakara 265. ayeti ve sadaka hadisi"],
+  ["2021","2","Kader İnancı","İnsan iradesi ve cinsiyet/fiziksel özellikler"],
+  ["2021","3","Zekât ve Sadaka","Yardım videosu paylaşımı ve mahcubiyet"],
+  ["2021","4","Din ve Hayat","Türbe ziyaretiyle ilgili batıl inanç uyarıları"],
+  ["2021","5","Hz. Muhammed'in Örnekliği","Hz. Ayşe'nin hediyeyi reddetmesi"],
+  ["2021","6","Kader İnancı","Öğretmenlik hayali ve çaba/kader ilişkisi"],
+  ["2021","7","Hz. Muhammed'in Örnekliği","Sahabenin kalp katılığı şikâyeti"],
+  ["2021","8","Hz. Muhammed'in Örnekliği","Namazı uzatmama uyarısı"],
+  ["2021","9","Din ve Hayat","Zarûrât-ı hamse (beş temel ilke)"],
+  ["2021","10","Kur'an-ı Kerim","Yûsuf suresi ve Hz. Yusuf kıssası"],
+  ["2022","1","Hz. Muhammed'in Örnekliği","Ebu'l-Yeser'in borçluya tanıdığı süre"],
+  ["2022","2","Kader İnancı","İbn-i Sina'nın matematik tecrübesi"],
+  ["2022","3","Din ve Hayat","Hurafelerin nedeni ve yaygınlığı"],
+  ["2022","4","Zekât ve Sadaka","Zekâtın toplumsal yardımlaşma işlevi"],
+  ["2022","5","Din ve Hayat","Fecirde iplik ayeti ve oruç zamanı"],
+  ["2022","6","Din ve Hayat","Dinin insana katkısı (özünü arama)"],
+  ["2022","7","Kader İnancı","Ayetel Kürsi"],
+  ["2022","8","Din ve Hayat","İyilik/kötülüğün devamlılığı hadisi"],
+  ["2022","9","Din ve Hayat","Toplumların barış ve adalet ilkeleri"],
+  ["2022","10","Din ve Hayat","Doğal afetler ve insan kaynaklı ihmal (Bangladeş)"],
+  ["2023","1","Kader İnancı","Koşucunun hastalık sonrası azmi"],
+  ["2023","2","Zekât ve Sadaka","Dilenciye zekât malından verme"],
+  ["2023","3","Zekât ve Sadaka",'"Sadaka nasıl verilmelidir" ayet analizi'],
+  ["2023","4","Din ve Hayat","Hz. Âdem'den Hz. Muhammed'e peygamberler zinciri"],
+  ["2023","5","Kader İnancı","Çiftçinin fidan/tevekkül hikâyesi"],
+  ["2023","6","Din ve Hayat","İsrâ suresi, söz ve ölçü-tartı sorumluluğu"],
+  ["2023","7","Din ve Hayat","Selma Öğretmen'in kura ile ödül vermesi"],
+  ["2023","8","Din ve Hayat","Evrende insanın rakibi olmadığı"],
+  ["2023","9","Kader İnancı","Mümin-ekin benzetmesi hadisi"],
+  ["2023","10","Zekât ve Sadaka","Mesut Bey'in gizli zekât/fitre vermesi"],
+  ["2024","1","Kader İnancı","Sebat kavramı ve İstanbul'un fethi örneği"],
+  ["2024","2","Din ve Hayat","Mâûn suresi ve yetim hakları"],
+  ["2024","3","Zekât ve Sadaka","Zekâtın kapsamı (aile bireyleri dâhil)"],
+  ["2024","4","Kur'an-ı Kerim","Hz. Musa/Yusuf/Şuayp ayetleri eşleştirme"],
+  ["2024","5","Din ve Hayat","Camilerin çok işlevli yapısı"],
+  ["2024","6","Din ve Hayat","Evrenin yasalarının özellikleri"],
+  ["2024","7","Din ve Hayat","Mâide 32 ve çocuk hakları"],
+  ["2024","8","Hz. Muhammed'in Örnekliği","Hicret ve Sevr Mağarası"],
+  ["2024","9","Hz. Muhammed'in Örnekliği","İbrahim'in vefatı ve güneş tutulması"],
+  ["2024","10","Kur'an-ı Kerim","Yûnus suresi, Kur'an'ın değiştirilemezliği"],
+  ["2025","1","Zekât ve Sadaka","Yardımsever ve kepçe metaforu"],
+  ["2025","2","Kader İnancı","Kader-kaza tanımları"],
+  ["2025","3","Kur'an-ı Kerim","Yeryüzü düzeni ile ilgili ayet tamamlama"],
+  ["2025","4","Kader İnancı","Arda Güler ve tevekkül açıklaması"],
+  ["2025","5","Zekât ve Sadaka","Nisap ve zekât şartları"],
+  ["2025","6","Hz. Muhammed'in Örnekliği","Üsve-i hasene ayeti"],
+  ["2025","7","Hz. Muhammed'in Örnekliği","Taifliler ve zekâttan muafiyet"],
+  ["2025","8","Hz. Muhammed'in Örnekliği","İstişareye verdiği önem örnekleri"],
+  ["2025","9","Kur'an-ı Kerim","En'âm suresi, evrenin yaratılışı"],
+  ["2025","10","Din ve Hayat","Selamlaşmanın önemi"],
+  ["2026","1","Hz. Muhammed'in Örnekliği","İmam Gazali'nin sünnet tanımı"],
+  ["2026","2","Kader İnancı","Ayetelkürsi ile ilgili bilgiler"],
+  ["2026","3","Din ve Hayat","Evliliğin İslam'daki yeri"],
+  ["2026","4","Zekât ve Sadaka","Zekât verilebilecek yakınlar"],
+  ["2026","5","Hz. Muhammed'in Örnekliği","Mekke'nin fethi ve affı"],
+  ["2026","6","Kur'an-ı Kerim","Evrensel yasalar (fiziksel/biyolojik/toplumsal)"],
+  ["2026","7","Din ve Hayat","Abdestin anlamı"],
+  ["2026","8","Hz. Muhammed'in Örnekliği","Takrirî sünnet örneği"],
+  ["2026","9","Zekât ve Sadaka","Zekât verilecek mallar ve nisap"],
+  ["2026","10","Hz. Muhammed'in Örnekliği","Medine Sözleşmesi"]
+];
+
+function olusturSoruListesiTablosu(){
+  const govde = document.querySelector('#soruListesiTablo tbody');
+  if(!govde) return;
+  govde.innerHTML = SORU_LISTESI.map(r=>`<tr><td>${r[0]}</td><td class="sayi">${r[1]}</td><td class="etiket">${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+}
+
+olusturSecici();
+olusturBloklar();
+olusturSoruListesiTablosu();
+</script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<title>DKAB Portalında Ne Değişti</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --kagit:#fbfaf7;
+  --yuzey:#ffffff;
+  --murekkep:#182430;
+  --soluk:#6b7480;
+  --cizgi:#dfe4ea;
+  --cizgi-ince:#eceff3;
+  --mavi:#1e5aa8;      /* 8. sınıf */
+  --kiremit:#b3541e;   /* 4. sınıf */
+  --yesil:#137a4a;     /* doğrulandı */
+  --uyari:#8a6d1f;
+  --golge:0 1px 2px rgba(24,36,48,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --kagit:#11161c;
+    --yuzey:#171e26;
+    --murekkep:#e7ecf2;
+    --soluk:#95a1af;
+    --cizgi:#2a333e;
+    --cizgi-ince:#212932;
+    --mavi:#7fb0e8;
+    --kiremit:#e08a52;
+    --yesil:#4dbb87;
+    --uyari:#d8b45e;
+    --golge:0 1px 2px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --kagit:#11161c;
+  --yuzey:#171e26;
+  --murekkep:#e7ecf2;
+  --soluk:#95a1af;
+  --cizgi:#2a333e;
+  --cizgi-ince:#212932;
+  --mavi:#7fb0e8;
+  --kiremit:#e08a52;
+  --yesil:#4dbb87;
+  --uyari:#d8b45e;
+  --golge:0 1px 2px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--kagit); color:var(--murekkep);
+  font:16px/1.65 "Source Sans 3","Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.sar{max-width:940px;margin:0 auto;padding:34px 22px 80px}
+
+/* ——— başlık ——— */
+.ust{border-bottom:2px solid var(--murekkep);padding-bottom:18px;margin-bottom:26px}
+.gozluk{
+  font:600 12px/1 "IBM Plex Mono",ui-monospace,monospace;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--soluk);
+}
+h1{
+  font:700 clamp(28px,5vw,40px)/1.15 Bitter,Georgia,serif;
+  margin:10px 0 8px;text-wrap:balance;letter-spacing:-.01em;
+}
+.ust p{margin:0;max-width:62ch;color:var(--soluk);font-size:17px}
+
+/* ——— sayı şeridi ——— */
+.sayilar{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:1px;background:var(--cizgi);border:1px solid var(--cizgi);
+  border-radius:10px;overflow:hidden;margin:26px 0 40px;
+}
+.sayi{background:var(--yuzey);padding:14px 16px}
+.sayi b{
+  display:block;font:700 27px/1.1 Bitter,Georgia,serif;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+}
+.sayi span{display:block;margin-top:4px;font-size:13.5px;color:var(--soluk)}
+
+/* ——— bölümler ——— */
+section{margin:0 0 44px}
+h2{
+  font:700 21px/1.3 Bitter,Georgia,serif;margin:0 0 4px;
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+h2 em{
+  font:600 11px/1 "IBM Plex Mono",monospace;font-style:normal;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--soluk);
+}
+h2 + .alt{margin:0 0 18px;color:var(--soluk);max-width:64ch}
+
+/* ——— sistem listesi ——— */
+.sistemler{display:grid;gap:14px}
+.sistem{
+  background:var(--yuzey);border:1px solid var(--cizgi);border-radius:10px;
+  padding:16px 18px 16px 20px;box-shadow:var(--golge);
+  border-left:3px solid var(--cizgi);
+}
+.sistem.s8{border-left-color:var(--mavi)}
+.sistem.s4{border-left-color:var(--kiremit)}
+.sistem.ortak{border-left-color:var(--soluk)}
+.sistem h3{font:700 16.5px/1.35 "Source Sans 3",sans-serif;margin:0 0 6px}
+.sistem p{margin:0 0 8px;font-size:15px}
+.sistem p:last-child{margin-bottom:0}
+.rozetler{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.rozet{
+  font:600 11.5px/1 "IBM Plex Mono",monospace;letter-spacing:.03em;
+  border:1px solid var(--cizgi);border-radius:20px;padding:5px 10px;color:var(--soluk);
+}
+.rozet.iyi{color:var(--yesil);border-color:color-mix(in srgb,var(--yesil) 35%,transparent)}
+
+/* ——— tablo ——— */
+.tablo-sar{overflow-x:auto;border:1px solid var(--cizgi);border-radius:10px;background:var(--yuzey)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--cizgi-ince)}
+thead th{
+  font:600 11.5px/1.3 "IBM Plex Mono",monospace;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--soluk);
+  background:var(--yuzey);position:sticky;top:0;border-bottom:1px solid var(--cizgi);
+}
+tbody tr:last-child td{border-bottom:0}
+td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:"IBM Plex Mono",monospace;font-size:13.5px}
+td.yol{font-family:"IBM Plex Mono",monospace;font-size:12.5px;white-space:nowrap}
+.tag{display:inline-block;width:1.6em;font-weight:700;font-size:13px}
+.tag.s4{color:var(--kiremit)}
+.tag.s8{color:var(--mavi)}
+tfoot td{font-weight:700;border-top:1px solid var(--cizgi);background:var(--yuzey)}
+
+/* ——— lisans çubuğu ——— */
+.lisans{display:grid;gap:7px;margin-top:4px}
+.lis{display:grid;grid-template-columns:126px 1fr 34px;align-items:center;gap:10px;font-size:14px}
+.lis span:first-child{color:var(--soluk)}
+.cubuk{height:9px;border-radius:99px;background:var(--cizgi-ince);overflow:hidden}
+.cubuk i{display:block;height:100%;background:var(--mavi);border-radius:99px}
+.lis .n{text-align:right;font-variant-numeric:tabular-nums;font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--soluk)}
+
+/* ——— korunanlar / açık işler ——— */
+.iki{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.kutu{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:10px;padding:16px 18px}
+.kutu h3{font:700 15px/1.35 "Source Sans 3",sans-serif;margin:0 0 10px}
+.kutu ul{margin:0;padding-left:18px}
+.kutu li{margin:5px 0;font-size:14.5px}
+.kutu.acik{border-color:color-mix(in srgb,var(--uyari) 40%,var(--cizgi))}
+.kutu.acik h3{color:var(--uyari)}
+
+.akis{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  font:600 12.5px/1 "IBM Plex Mono",monospace;color:var(--soluk);margin:12px 0 0;
+}
+.akis b{
+  background:var(--yuzey);border:1px solid var(--cizgi);border-radius:6px;
+  padding:6px 9px;font-weight:600;color:var(--murekkep);
+}
+.akis i{font-style:normal;opacity:.5}
+
+footer{
+  margin-top:52px;padding-top:18px;border-top:1px solid var(--cizgi);
+  color:var(--soluk);font-size:13.5px;
+}
+a{color:var(--mavi)}
+@media (max-width:560px){
+  .sar{padding:26px 16px 60px}
+  .lis{grid-template-columns:100px 1fr 30px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="sar">
+
+<header class="ust">
+  <div class="gozluk">Değişiklik kaydı · 2 Eylül 2026</div>
+  <h1>DKAB Portalında Ne Değişti</h1>
+  <p>Ayşe Yazıcı’nın Din Kültürü ve Ahlak Bilgisi portalında bu oturumda yapılan
+  bütün değişiklikler. Kapsam <strong>yalnızca 4 ve 8. sınıf</strong> ile ana portaldır;
+  5, 6 ve 7. sınıf dosyalarına dokunulmamıştır.</p>
+</header>
+
+<div class="sayilar">
+  <div class="sayi"><b>55</b><span>7 adımlı dijital ders</span></div>
+  <div class="sayi"><b>56</b><span>doğrulanmış fotoğraf</span></div>
+  <div class="sayi"><b>200</b><span>test sorusu (8/1)</span></div>
+  <div class="sayi"><b>0</b><span>kırık görsel</span></div>
+</div>
+
+<section>
+  <h2>Eklenen sistemler <em>ne yapıldı</em></h2>
+  <p class="alt">Hepsi mevcut sayfaların üzerine eklendi; hiçbir mevcut metin, SVG,
+  bağlantı veya davranış silinmedi.</p>
+
+  <div class="sistemler">
+
+    <div class="sistem ortak">
+      <h3>Dijital Ders — 55 alt konu</h3>
+      <p>4 ve 8. sınıfın 11 ünitesindeki her alt konu başlığının altına, aynı yedi adımlı
+      öğrenme akışı eklendi. Üstte adım sayacı ve dolan ilerleme çubuğu var.</p>
+      <p class="akis">
+        <b>01 Gör</b><i>→</i><b>02 Keşfet</b><i>→</i><b>03 Öğren</b><i>→</i><b>04 Ayet/Delil</b><i>→</i><b>05 Günlük Hayat</b><i>→</i><b>06 Düşün</b><i>→</i><b>07 Mini Kontrol</b>
+      </p>
+      <div class="rozetler">
+        <span class="rozet">4. sınıf: 27 konu</span>
+        <span class="rozet">8. sınıf: 28 konu</span>
+        <span class="rozet iyi">54/55 gerçek fotoğraflı</span>
+        <span class="rozet iyi">mini sorular çalışıyor</span>
+      </div>
+    </div>
+
+    <div class="sistem ortak">
+      <h3>Gerçek fotoğraf katmanı</h3>
+      <p>Ana görsel artık fotoğraf, SVG ise yedek. Fotoğraf gerçek
+      <code>&lt;img&gt;</code> olarak basılır — SVG içine gömülmez, gradient ile taklit
+      edilmez. Yüklenemezse mevcut illüstrasyon devreye girer; hiçbir durumda kırık
+      görsel simgesi çıkmaz.</p>
+      <p>Mevcut <code>KONU_GORSELLERI</code> tablosu silinmedi; kayıtlara
+      <code>foto</code>, <code>fotoAlt</code>, <code>fotoKunye</code> alanları eklendi.
+      Portaldaki 202 SVG yolu olduğu gibi duruyor.</p>
+      <div class="rozetler">
+        <span class="rozet">portal: 24 fotoğraf</span>
+        <span class="rozet">konu sayfaları: 78 fotoğraf yuvası</span>
+        <span class="rozet iyi">her fotoğrafta alt metin + künye</span>
+      </div>
+    </div>
+
+    <div class="sistem s8">
+      <h3>200 soruluk test bankası — 8. sınıf 1. ünite</h3>
+      <p>Kader İnancı ünitesi için, çalışma kitabınızdaki TEST 1 / TEST 2 yapısına göre
+      beş bölüm hâlinde hazırlandı: kaza-kader, insanın iradesi, kaderle ilgili kavramlar
+      (külli/cüz’i irade, tevekkül, özgür irade dâhil), Hz. Musa, Ayetelkürsi.</p>
+      <div class="rozetler">
+        <span class="rozet">konu başlıkları altında</span>
+        <span class="rozet">doğru cevaplar A/B/C/D’ye dağıtıldı</span>
+        <span class="rozet iyi">öğretmen cevap anahtarı 200/200 doğrulandı</span>
+      </div>
+    </div>
+
+    <div class="sistem s8">
+      <h3>Keşif Modu — 8. sınıf 1. ünite</h3>
+      <p>Okumak yerine tahmin edip seçerek ilerlenen etkileşimli modül: 6 konu,
+      48 mikro bölüm, 420 XP. Ünite giriş sayfasına da kart olarak eklendi.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Dosya dosya <em>nereye ne eklendi</em></h2>
+  <p class="alt">Hepsi <code>Masaüstü / ayşe yazıcı</code> klasörünüzün altında.
+  “Ders” sütunu o sayfadaki dijital ders sayısını, “Ders fotoğrafı” bu derslerin
+  01 Gör adımındaki fotoğrafları, “Kart fotoğrafı” konu ve alt başlık kartlarına
+  eklenen fotoğrafları gösterir.</p>
+
+  <div class="tablo-sar">
+    <table>
+      <thead>
+        <tr>
+          <th>Dosya</th><th>Ünite</th>
+          <th style="text-align:right">Ders</th>
+          <th style="text-align:right">Ders fotoğrafı</th>
+          <th style="text-align:right">Kart fotoğrafı</th>
+          <th style="text-align:right">Boyut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="yol"><span class="tag s4">4</span>konuyu-ogren.html</td><td>1 · Dinî ifadeler</td><td class="n">6</td><td class="n">6</td><td class="n">5</td><td class="n">395 KB</td></tr>
+        <tr><td class="yol"><span class="tag s4">4</span>unite2-konuyu-ogren.html</td><td>2 · İslam’ı tanıyalım</td><td class="n">4</td><td class="n">4</td><td class="n">3</td><td class="n">268 KB</td></tr>
+        <tr><td class="yol"><span class="tag s4">4</span>unite3-konuyu-ogren.html</td><td>3 · Güzel ahlak</td><td class="n">3</td><td class="n">3</td><td class="n">1</td><td class="n">259 KB</td></tr>
+        <tr><td class="yol"><span class="tag s4">4</span>unite4-konuyu-ogren.html</td><td>4 · Hz. Muhammed</td><td class="n">5</td><td class="n">4</td><td class="n">1</td><td class="n">274 KB</td></tr>
+        <tr><td class="yol"><span class="tag s4">4</span>unite5-konuyu-ogren.html</td><td>5 · Din ve temizlik</td><td class="n">4</td><td class="n">4</td><td class="n">7</td><td class="n">264 KB</td></tr>
+        <tr><td class="yol"><span class="tag s4">4</span>unite6-konuyu-ogren.html</td><td>6 · Allah sevgisi</td><td class="n">5</td><td class="n">5</td><td class="n">0</td><td class="n">196 KB</td></tr>
+        <tr><td class="yol"><span class="tag s8">8</span>konuyu-ogren.html</td><td>1 · Kader inancı</td><td class="n">5</td><td class="n">5</td><td class="n">17</td><td class="n">765 KB</td></tr>
+        <tr><td class="yol"><span class="tag s8">8</span>unite2-konuyu-ogren.html</td><td>2 · Zekât ve sadaka</td><td class="n">5</td><td class="n">5</td><td class="n">2</td><td class="n">292 KB</td></tr>
+        <tr><td class="yol"><span class="tag s8">8</span>unite3-konuyu-ogren.html</td><td>3 · Din, kültür, medeniyet</td><td class="n">6</td><td class="n">6</td><td class="n">3</td><td class="n">312 KB</td></tr>
+        <tr><td class="yol"><span class="tag s8">8</span>unite4-konuyu-ogren.html</td><td>4 · Hz. Muhammed’in örnekliği</td><td class="n">6</td><td class="n">6</td><td class="n">0</td><td class="n">301 KB</td></tr>
+        <tr><td class="yol"><span class="tag s8">8</span>unite5-konuyu-ogren.html</td><td>5 · Kur’an ve yorumu</td><td class="n">6</td><td class="n">6</td><td class="n">2</td><td class="n">319 KB</td></tr>
+        <tr><td class="yol">din-kulturu-tum-siniflar.html</td><td>Ana portal — ünite kapakları ve konu kartları</td><td class="n">—</td><td class="n">—</td><td class="n">24</td><td class="n">889 KB</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="2">Toplam</td><td class="n">55</td><td class="n">54</td><td class="n">65</td><td class="n"></td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <p class="alt" style="margin-top:14px">Ayrıca eklenen dosyalar:
+  <code>kader-testleri-cevap-anahtari.html</code> (öğretmen cevap anahtarı),
+  <code>8sinif-1unite-fotograf-listesi.html</code> ve <code>.csv</code> (fotoğraf listesi),
+  <code>din-kulturu-tum-siniflar.backup-2026-09-01-fotograf-oncesi.html</code> (portal yedeği).</p>
+</section>
+
+<section>
+  <h2>Fotoğraf kaynakçası <em>56 fotoğraf</em></h2>
+  <p class="alt">Hepsi Wikimedia Commons’tan; her biri dosya sayfası açılarak
+  <strong>lisans, fotoğrafçı ve çözünürlük</strong> tek tek okunarak doğrulandı.
+  Lisansı doğrulanamayan hiçbir fotoğraf kullanılmadı.</p>
+
+  <div class="lisans">
+    <div class="lis"><span>CC BY-SA 4.0</span><span class="cubuk"><i style="width:100%"></i></span><span class="n">26</span></div>
+    <div class="lis"><span>CC BY 2.0</span><span class="cubuk"><i style="width:35%"></i></span><span class="n">9</span></div>
+    <div class="lis"><span>Kamu malı</span><span class="cubuk"><i style="width:31%"></i></span><span class="n">8</span></div>
+    <div class="lis"><span>CC0</span><span class="cubuk"><i style="width:16%"></i></span><span class="n">4</span></div>
+    <div class="lis"><span>CC BY-SA 3.0</span><span class="cubuk"><i style="width:12%"></i></span><span class="n">3</span></div>
+    <div class="lis"><span>CC BY 4.0</span><span class="cubuk"><i style="width:8%"></i></span><span class="n">2</span></div>
+    <div class="lis"><span>CC BY-SA 2.0</span><span class="cubuk"><i style="width:8%"></i></span><span class="n">2</span></div>
+    <div class="lis"><span>CC BY 2.5</span><span class="cubuk"><i style="width:4%"></i></span><span class="n">1</span></div>
+    <div class="lis"><span>OGL</span><span class="cubuk"><i style="width:4%"></i></span><span class="n">1</span></div>
+  </div>
+
+  <div class="iki" style="margin-top:18px">
+    <div class="kutu">
+      <h3>Dinî hassasiyet kuralları uygulandı</h3>
+      <ul>
+        <li>Peygamber, sahabe veya kutsal kişi tasviri kullanılmadı.</li>
+        <li>Hz. Muhammed üniteleri için gerçek mekânlar seçildi: Mescid-i Haram,
+        Mescid-i Nebevî, Hira Mağarası.</li>
+        <li>Kaynağı belirsiz hiçbir hadis kesin hadis gibi sunulmadı.</li>
+        <li>2023 depremi fotoğrafları, sınıfta yakınını kaybetmiş öğrenci olabileceği
+        için bilerek kullanılmadı.</li>
+      </ul>
+    </div>
+    <div class="kutu">
+      <h3>Deliller uydurulmadı</h3>
+      <ul>
+        <li>Sayfalarınızdaki 45 ayet/hadis bloğu programla çıkarıldı; her dersin
+        04 Ayet/Delil adımı bu havuzdan geliyor.</li>
+        <li>“Bir Sure / Dua Tanıyorum” bölümlerinde delil, adı geçen surenin ya da
+        duanın kendi metnidir — 10/10 eşleşme otomatik testle denetleniyor.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Dokunulmayanlar <em>korunanlar</em></h2>
+  <div class="iki">
+    <div class="kutu">
+      <h3>Sınıflar</h3>
+      <ul>
+        <li><strong>5, 6 ve 7. sınıf</strong> dosyaları hiç açılmadı — kurulum
+        listesinde yoklar; kontrol edildi, o dosyalarda yeni katmandan tek satır yok.</li>
+        <li>9–12. sınıf içerikleri değişmedi.</li>
+      </ul>
+    </div>
+    <div class="kutu">
+      <h3>Sistemler</h3>
+      <ul>
+        <li>Oyunlar, yazılı sınavlar, deneme sınavları, arama, favori, ilerleme takibi,
+        öğretmen paneli, menüler ve mevcut bağlantılar.</li>
+        <li>Mevcut konu anlatım metinleri ve 202 SVG illüstrasyon yolu — SVG’ler
+        silinmedi, fotoğrafın arkasına yedek olarak alındı.</li>
+        <li><code>uniteTemaSvg()</code>, <code>TEMA_SAHNE</code> ve
+        <code>konuIcerik()</code> veri sistemleri.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Nasıl doğrulandı <em>test</em></h2>
+  <p class="alt">Her değişiklik, tarayıcıda gerçekten açılarak ölçüldü — kodu okuyarak değil.</p>
+  <div class="iki">
+    <div class="kutu">
+      <h3>Ölçülenler</h3>
+      <ul>
+        <li>390 / 430 / 768 / 1024 / 1440 piksel genişliklerde açıldı.</li>
+        <li>Kırık görsel: <strong>0</strong>. Yeni JS hatası: <strong>0</strong>.</li>
+        <li>Fotoğraf erişimi kesildiğinde SVG yedeğinin geri geldiği ayrıca test edildi.</li>
+        <li>Mini kontrol soruları tıklanarak denendi: doğru şık işaretleniyor,
+        seçenekler kilitleniyor, açıklama açılıyor.</li>
+        <li>Yatay taşma değişiklik öncesiyle birebir aynı ölçüldü — yeni taşma eklenmedi.</li>
+      </ul>
+    </div>
+    <div class="kutu acik">
+      <h3>Açık kalan işler</h3>
+      <ul>
+        <li><strong>4/4 “Hz. Muhammed’in Ailesi”</strong> konusuna dürüst bir fotoğraf
+        bulunamadı (konu doğrudan kişilerle ilgili). Mevcut illüstrasyonuyla duruyor;
+        diğer 6 adımı tam çalışıyor.</li>
+        <li>Sayfada <strong>önceden var olan</strong> yatay taşma (dekoratif
+        <code>hero-blob</code> öğeleri) ve iki eski JS uyarısı
+        (<code>UNITE_KIMLIK</code>, <code>innerHTML</code>) duruyor — bunlar bu
+        oturumdan önce de vardı, isterseniz ayrıca bakılabilir.</li>
+        <li>Soyut başlıklara (İnşallah, Âmin, Nisap, Oran, “1. bölüm”) bilerek fotoğraf
+        konmadı; zorlama görsel yerine çizim bırakıldı.</li>
+        <li>Değişiklikler henüz GitHub’a gönderilmedi; yayındaki site eski hâlinde.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Din Kültürü ve Ahlak Bilgisi Portalı · Ayşe Yazıcı ·
+  Fotoğraflar Wikimedia Commons, künyeler her görselin üzerinde.
+</footer>
+
+</div>

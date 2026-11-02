@@ -23,7 +23,7 @@ End If
 
 ' Sunucu zaten calisiyorsa yeniden baslatma
 If Not SunucuHazir(url) Then
-  shell.Run "cmd /c cd /d """ & siteRoot & """ && (py -3 -m http.server 8844 || python -m http.server 8844)", 0, False
+  shell.Run "cmd /c cd /d """ & siteRoot & """ && (py -3 asistan-sunucu.py 8844 || python asistan-sunucu.py 8844 || py -3 -m http.server 8844 || python -m http.server 8844)", 0, False
   For i = 1 To 12            ' en fazla ~6 saniye bekle
     WScript.Sleep 500
     If SunucuHazir(url) Then Exit For
