@@ -200,7 +200,9 @@ window.MEB_ESLESTIRME = {
    },
    {
     "meb": 5,
-    "portal": []
+    "portal": [
+     6
+    ]
    }
   ],
   "ek": [
@@ -208,6 +210,7 @@ window.MEB_ESLESTIRME = {
   ],
   "notlar": {
    "s7-u5": "MEB programında 7. sınıfın 3. ünitesidir.",
+   "s7-u6": "MEB 7.5 “Yaşayan Dünya Dinleri” ünitesine karşılık gelir (2026-11-02).",
    "s7-u3": "Önceki programdan gelen içeriktir. Güncel programda “Ahlaki Davranışlar” 6. sınıfın 3. ünitesidir."
   }
  },
