@@ -146,7 +146,7 @@ function acikUcluVitrin(){
 function yeniSoru(){
   if(!aucSorular) return;
   var q = aucSorular[Math.floor(Math.random() * aucSorular.length)];
-  $('phAcikSoru').textContent = q[2];
+  $('phAcikSoru').textContent = String(q[2]).split('\n').map(function(l){ l = l.trim(); if (l.charAt(0) === '|') return ''; return l.replace(/^(\? |> |- )/, '').replace(/:: /, ': '); }).filter(Boolean).join(' ');
   $('phAcikBeklenen').textContent = q[3];
   $('phAcikUnsur').innerHTML = (q[4] || []).map(function(u){ return '<li>'+kac(u)+'</li>'; }).join('');
   $('phAcikAnahtar').open = false;
