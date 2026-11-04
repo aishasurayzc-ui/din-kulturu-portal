@@ -51,6 +51,37 @@
     s.onload = function () { bitti(true); }; s.onerror = function () { bitti(false); };
     document.head.appendChild(s);
   }
+  /* Yazılıya Hazırlanıyorum biçimi (2026-11-04): satır sonu içeren sorular için.
+     "? " soru kökü (kalın) · "- " madde · "> " ayet/alıntı · "Ad:: metin" diyalog · "| a | b |" tablo · "…" boş hücre.
+     Tek satırlık eski sorular eskisi gibi başlık olarak gösterilir. */
+  function soruMetni(s) {
+    s = String(s == null ? '' : s);
+    if (s.indexOf('\n') < 0) return '<h2 class="mz-soru-metin">' + kac(s) + '</h2>';
+    var out = [], tablo = [], liste = [];
+    function bosalt() {
+      if (liste.length) { out.push('<ul class="mz-y-liste">' + liste.join('') + '</ul>'); liste = []; }
+      if (tablo.length) {
+        out.push('<div class="mz-y-tablo-sar"><table class="mz-y-tablo">' + tablo.map(function (r) {
+          return '<tr>' + r.map(function (c, j) { c = c.trim(); var b = (c === '…' || c === ''); return (j === 0 ? '<th scope="row">' : '<td' + (b ? ' class="bos"' : '') + '>') + (b ? '<span aria-label="boş">……</span>' : kac(c)) + (j === 0 ? '</th>' : '</td>'); }).join('') + '</tr>';
+        }).join('') + '</table></div>');
+        tablo = [];
+      }
+    }
+    s.split('\n').forEach(function (l) {
+      var t = l.trim(); if (!t) { bosalt(); return; }
+      if (t.charAt(0) === '|') { if (liste.length) bosalt(); tablo.push(t.replace(/^\||\|$/g, '').split('|')); return; }
+      if (tablo.length) bosalt();
+      if (t.indexOf('- ') === 0) { var li = t.slice(2); liste.push('<li' + (/^([IVX]+\.|\d+\.|[a-zçğ]\))\s/.test(li) ? ' class="no"' : '') + '>' + kac(li) + '</li>'); return; }
+      bosalt();
+      if (t.indexOf('? ') === 0) { out.push('<p class="mz-y-kok">' + kac(t.slice(2)) + '</p>'); return; }
+      if (t.indexOf('> ') === 0) { out.push('<p class="mz-y-alinti">' + kac(t.slice(2)) + '</p>'); return; }
+      var d = t.indexOf(':: ');
+      if (d > 0 && d < 30) { out.push('<p class="mz-y-diyalog"><b>' + kac(t.slice(0, d)) + ':</b> <span>' + kac(t.slice(d + 3)) + '</span></p>'); return; }
+      out.push('<p class="mz-y-p">' + kac(t) + '</p>');
+    });
+    bosalt();
+    return '<div class="mz-soru-metin mz-yazili" role="heading" aria-level="2">' + out.join('') + '</div>';
+  }
   function rubrik(unsur, agirlik) {
     var n = unsur.length;
     var w = agirlik && agirlik.length === n ? agirlik : (n === 2 ? [4, 4] : n === 3 ? [3, 3, 2] : [2, 2, 2, 2]);
@@ -196,7 +227,7 @@
     var p = k.p[i];
     $('soruKart').innerHTML =
       '<div class="mz-soru-ust"><span class="mz-rozet">' + kac(TUR_AD[q.tur] || q.tur) + '</span>' + (q.konu ? '<span class="mz-konu">' + kac(q.konu) + '</span>' : '') + '<span class="mz-sira">Soru ' + (i + 1) + ' / ' + D.havuz.sorular.length + '</span></div>' +
-      '<h2 class="mz-soru-metin">' + kac(q.soru) + '</h2>' +
+      soruMetni(q.soru) +
       '<p class="mz-puan-bilgi">' + toplam + ' puan</p>' +
       '<label class="mz-etiket" for="cevapAlan">Cevabın</label>' +
       '<textarea id="cevapAlan" rows="5" placeholder="Cevabını kendi cümlelerinle buraya yaz…">' + kac(k.c[i] || '') + '</textarea>' +
