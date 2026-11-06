@@ -279,7 +279,7 @@ else guvenli(kur);
 (function(){
   var kok = document.documentElement;
   kok.classList.add('ph-cok-sade');
-  var GIZLI = ['platform','kaldiginYer','favorilerimPanel','onerilenBolum','oyunlar','sinavMerkezi','ogretmenler','ogretmenPaneli','yenilikler','hakkimizda'];
+  var GIZLI = ['platform','kaldiginYer','favorilerimPanel','onerilenBolum','oyunlar','yolculuk','sinavMerkezi','ogretmenler','ogretmenPaneli','yenilikler','hakkimizda'];
   var BIRLIKTE = { ogretmenler:['ogretmenPaneli'], kaldiginYer:['favorilerimPanel','onerilenBolum'] };
   function ac(id){
     var el = document.getElementById(id);
