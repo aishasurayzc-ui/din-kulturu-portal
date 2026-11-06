@@ -7,7 +7,7 @@
   var V = window.DIM_VERI, SH = window.DIM_SAHNE, Q = V.sorular, BOL = V.bolumler;
   var ANAHTAR = 'dim4_macera_v1', HARF = ['A', 'B', 'C', 'D'];
   var DOGRU_MESAJ = ['Harika! Bir yıldız daha kazandın!', 'Süpersin, tam isabet!', 'Bravo dedektif, çok iyi düşündün!', 'Muhteşem! Yıldızın parlıyor!', 'Aferin! Doğru ifadeyi buldun!', 'Çok güzel! Böyle devam!'];
-  var DENE_MESAJ = ['Az kaldı! Doğrusunu birlikte keşfedelim.', 'Güzel bir denemeydi! Şimdi doğrusunu öğrenelim.', 'Sorun değil, macerada keşfederek öğreniyoruz!', 'Bir dahaki sefere sen bulacaksın! Bak, doğrusu şu:'];
+  var DENE_MESAJ = ['Az kaldı! Doğrusunu birlikte keşfedelim.', 'Güzel bir denemeydi! Şimdi doğrusunu öğrenelim.', 'Sorun değil, her soruda yeni bir şey öğreniyoruz!', 'Bir dahaki sefere sen bulacaksın! Bak, doğrusu şu:'];
 
   function $(id) { return document.getElementById(id); }
   function k(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -71,7 +71,7 @@
         (acik ? '<button type="button" class="dim-btn dim-btn-kucuk" data-bolum="' + no + '">' + (bitti ? 'Tekrar bak' : cev ? 'Devam et' : 'Başla') + '</button>' : '<span class="dim-kilit" aria-label="Önceki bölümü bitirince açılır">🔒</span>') +
         '</li>';
     }).join('');
-    $('baslaDugme').textContent = cs === 0 ? 'Maceraya Başla!' : cs === Q.length ? 'Sonuçlarımı Gör' : 'Maceraya Devam Et (' + cs + ' / 50)';
+    $('baslaDugme').textContent = cs === 0 ? 'Başla' : cs === Q.length ? 'Sonuçlarımı Gör' : 'Devam Et (' + cs + ' / 50)';
     $('sifirlaAlan').hidden = cs === 0;
     ustCiz();
   }
@@ -185,7 +185,7 @@
     kap.innerHTML = h;
   }
   function yildizSira(n) { var h = ''; for (var i = 0; i < 10; i++) h += '<span class="dim-y' + (i < n ? ' dolu' : '') + '" style="animation-delay:' + (0.15 + i * 0.09).toFixed(2) + 's">★</span>'; return h; }
-  function bolumMesaj(d) { return d >= 9 ? 'Muhteşem bir bölüm çıkardın!' : d >= 7 ? 'Çok başarılısın, harika gidiyorsun!' : d >= 5 ? 'Güzel ilerliyorsun, her soruda yeni bir şey öğrendin!' : 'Her macera öğrenerek büyür. Açıklamalar sayesinde artık daha çok şey biliyorsun!'; }
+  function bolumMesaj(d) { return d >= 9 ? 'Muhteşem bir bölüm çıkardın!' : d >= 7 ? 'Çok başarılısın, harika gidiyorsun!' : d >= 5 ? 'Güzel ilerliyorsun, her soruda yeni bir şey öğrendin!' : 'Her soru yeni bir şey öğretir. Açıklamalar sayesinde artık daha çok şey biliyorsun!'; }
   function bolumEkrani(no) {
     var b = BOL[no - 1], d = bolumDogru(no);
     $('bolumEkran').hidden = false;
@@ -212,13 +212,13 @@
   function sonuc(kutla) {
     goster('ekranSonuc');
     var ds = dogruSay(), cs = cevapSay(), ys = cs - ds, yuzde = Math.round(ds / Q.length * 100);
-    var mesaj = yuzde >= 90 ? 'Sen gerçek bir Büyük Keşif Şampiyonusun! Dinî ifadeleri hem biliyor hem de yerinde kullanıyorsun.' :
-      yuzde >= 70 ? 'Harika bir yolculuktu! Dinî ifadelerin çoğunu doğru yerde kullanmayı öğrendin.' :
-      yuzde >= 50 ? 'Çok güzel bir macera çıkardın! Aşağıdaki açıklamalara göz atarsan bir sonraki maceran daha da parlak olacak.' :
-      'Bu macerada pek çok yeni ifade keşfettin. Açıklamaları okuyup tekrar oynarsan yıldızların çoğalacak. Seninle gurur duyuyoruz!';
+    var mesaj = yuzde >= 90 ? 'Harikasın! Dinî ifadeleri hem biliyor hem de yerinde kullanıyorsun.' :
+      yuzde >= 70 ? 'Çok başarılısın! Dinî ifadelerin çoğunu doğru yerde kullanmayı öğrendin.' :
+      yuzde >= 50 ? 'Güzel bir sonuç! Aşağıdaki açıklamalara göz atarsan bir sonraki denemende daha da başarılı olacaksın.' :
+      'Bu çalışmada pek çok yeni ifade öğrendin. Açıklamaları okuyup tekrar çözersen yıldızların çoğalacak. Seninle gurur duyuyoruz!';
     var tekrar = Q.map(function (q, i) { return i; }).filter(function (i) { return D.c[i] != null && !dogruMu(i); });
     $('sonucIc').innerHTML = '<div class="dim-konfeti" id="konfeti2" aria-hidden="true"></div>' +
-      '<div class="dim-sonuc-ust"><div class="dim-sonuc-baykus">' + SH.baykus('sevinc') + '</div><div><p class="dim-ust-etiket">Macera tamamlandı!</p><h1 id="sonucBaslik">' + k(V.ad) + '</h1><p class="dim-sonuc-mesaj">' + mesaj + '</p></div></div>' +
+      '<div class="dim-sonuc-ust"><div class="dim-sonuc-baykus">' + SH.baykus('sevinc') + '</div><div><p class="dim-ust-etiket">50 soru tamamlandı!</p><h1 id="sonucBaslik">' + k(V.ad) + '</h1><p class="dim-sonuc-mesaj">' + mesaj + '</p></div></div>' +
       '<div class="dim-istatistik">' +
       '<div class="dim-ist yesil"><b>' + ds + '</b><span>Doğru</span></div>' +
       '<div class="dim-ist turuncu"><b>' + ys + '</b><span>Tekrar bakılacak</span></div>' +
@@ -229,7 +229,7 @@
       (tekrar.length ? '<h2>Birlikte tekrar bakalım (' + tekrar.length + ' soru)</h2><ol class="dim-tekrar">' + tekrar.map(function (i) {
         var q = Q[i]; return '<li><p class="dim-t-soru"><b>' + (i + 1) + '.</b> ' + k(q.s) + '</p><p class="dim-t-senin">Senin seçimin: ' + k(D.c[i]) + '</p><p class="dim-t-dogru">Doğru cevap: <b>' + k(q.d) + '</b></p><p class="dim-t-aciklama">' + k(q.a) + '</p><button type="button" class="dim-btn dim-btn-kucuk dim-btn-acik" data-git="' + i + '">Soruya git</button></li>';
       }).join('') + '</ol>' : '<p class="dim-tam">Bütün soruları doğru cevapladın. Tebrikler, harikasın! 🎉</p>') +
-      '<div class="dim-sonuc-btn"><button type="button" class="dim-btn" id="yenidenOyna">Maceraya yeniden başla</button><button type="button" class="dim-btn dim-btn-acik" id="haritayaDon">Macera haritası</button></div>';
+      '<div class="dim-sonuc-btn"><button type="button" class="dim-btn" id="yenidenOyna">Baştan başla</button><button type="button" class="dim-btn dim-btn-acik" id="haritayaDon">Başlangıç ekranı</button></div>';
     if (kutla !== false) { konfeti($('konfeti2')); sesCal('rozet'); }
     $('yenidenOyna').addEventListener('click', sifirlaSor);
     $('haritayaDon').addEventListener('click', giris);

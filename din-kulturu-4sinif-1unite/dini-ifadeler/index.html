@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dinî İfadeler Macerası · 4. Sınıf</title>
-<meta name="description" content="4. sınıf Din Kültürü ve Ahlak Bilgisi: Dinî İfadelerle Eğlenceli Yolculuk. 50 görselli soru, yıldızlar ve rozetlerle oyun gibi bir deneme.">
+<title>Günlük Hayatta Dinî İfadeler · 50 Soru</title>
+<meta name="description" content="4. sınıf Din Kültürü ve Ahlak Bilgisi: Günlük Hayatta Dinî İfadeler. Görselli 50 soru, açıklamalar ve sonuç ekranı.">
 <meta name="theme-color" content="#7048e8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%AD%90%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -17,8 +17,8 @@
   <div class="dim-ust-ic">
     <a class="dim-geri" href="../index.html" aria-label="Ünite sayfasına dön">⬅</a>
     <div class="dim-baslik-blok">
-      <p class="dim-baslik">⭐ Dinî İfadeler Macerası</p>
-      <div class="dim-ilerleme" id="ilerleme" role="progressbar" aria-label="Macera ilerlemesi" aria-valuemin="0" aria-valuemax="50" aria-valuenow="0"><span id="ilerlemeDolu"></span></div>
+      <p class="dim-baslik">⭐ Günlük Hayatta Dinî İfadeler · 50 Soru</p>
+      <div class="dim-ilerleme" id="ilerleme" role="progressbar" aria-label="İlerleme" aria-valuemin="0" aria-valuemax="50" aria-valuenow="0"><span id="ilerlemeDolu"></span></div>
     </div>
     <span class="dim-soru-no" id="soruNo" aria-live="polite">0 / 50</span>
     <span class="dim-yildiz-kutu" id="yildizKutu" title="Kazanılan yıldızlar"><span aria-hidden="true">⭐</span> <b id="yildizSay">0</b><span class="dim-gizli"> yıldız,</span> <small><b id="puanSay">0</b> puan</small></span>
@@ -27,21 +27,20 @@
 </header>
 
 <main class="dim-ana">
-  <!-- GİRİŞ: MACERA HARİTASI -->
+  <!-- GİRİŞ -->
   <section id="ekranGiris" aria-labelledby="girisBaslik">
     <div class="dim-giris-kart">
       <div class="dim-giris-baykus" id="girisBaykus"></div>
       <div>
         <p class="dim-ust-etiket">4. Sınıf · Günlük Hayat ve Din</p>
-        <h1 id="girisBaslik">Dinî İfadelerle Eğlenceli Yolculuk</h1>
-        <p class="dim-giris-metin">Merhaba! Ben <b>Bilge Baykuş</b>. Seninle beş duraklı bir maceraya çıkacağız. Her durakta 10 soru var. Doğru cevaplarla yıldız topla, durakları bitirerek rozetleri kazan!</p>
-        <button type="button" class="dim-btn dim-btn-buyuk" id="baslaDugme">Maceraya Başla!</button>
+        <h1 id="girisBaslik">Günlük Hayatta Dinî İfadeler</h1>
+        <p class="dim-giris-metin">Günlük hayatta kullandığımız dinî ifadelerle ilgili <b>50 soru</b> seni bekliyor. Her soruyu cevapladıktan sonra doğru cevabı ve kısa açıklamasını göreceksin.</p>
+        <button type="button" class="dim-btn dim-btn-buyuk" id="baslaDugme">Başla</button>
       </div>
     </div>
-    <h2 class="dim-harita-baslik">Macera haritası</h2>
-    <ol class="dim-harita" id="haritaListe"></ol>
+    <ol class="dim-harita" id="haritaListe" hidden></ol>
     <p class="dim-ipucu">İpucu: Seçenekleri klavyeden <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd> tuşlarıyla da seçebilirsin. İlerlemen bu cihazda kaydedilir.</p>
-    <div id="sifirlaAlan" hidden><button type="button" class="dim-btn dim-btn-acik dim-btn-kucuk" id="sifirlaDugme">Maceraya baştan başla</button></div>
+    <div id="sifirlaAlan" hidden><button type="button" class="dim-btn dim-btn-acik dim-btn-kucuk" id="sifirlaDugme">Baştan başla</button></div>
   </section>
 
   <!-- SORU -->
@@ -58,7 +57,7 @@
       <div class="dim-noktalar" id="bolumNoktalar" role="img"></div>
       <button type="button" class="dim-nav dim-nav-ana" id="sonraki" disabled>Sonraki <span aria-hidden="true">➜</span></button>
     </nav>
-    <p class="dim-harita-link"><button type="button" class="dim-link" id="haritaDugme">🗺️ Macera haritasına dön</button></p>
+    <p class="dim-harita-link"><button type="button" class="dim-link" id="haritaDugme">↩ Başlangıç ekranına dön</button></p>
   </section>
 
   <!-- SONUÇ -->
@@ -70,7 +69,7 @@
 
 <!-- sıfırlama onayı -->
 <div class="dim-perde" id="onayKutu" hidden role="dialog" aria-modal="true" aria-labelledby="onayBaslik">
-  <div class="dim-perde-ic dim-onay"><h2 id="onayBaslik">Maceraya baştan başlansın mı?</h2><p>Cevapların, yıldızların ve rozetlerin silinecek.</p>
+  <div class="dim-perde-ic dim-onay"><h2 id="onayBaslik">Baştan başlansın mı?</h2><p>Cevapların, yıldızların ve rozetlerin silinecek.</p>
   <div class="dim-sonuc-btn"><button type="button" class="dim-btn" id="onayEvet">Evet, baştan başla</button><button type="button" class="dim-btn dim-btn-acik" id="onayHayir">Vazgeç</button></div></div>
 </div>
 

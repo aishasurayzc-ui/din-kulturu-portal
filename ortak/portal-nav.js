@@ -186,22 +186,41 @@ function cubukHedefi(sinif, unite, a){
   if(a==='oyun') return dosyaAdi(unite,'oyun')+'#oyun-gruplari';
   return dosyaAdi(unite,a);
 }
+/* 2026-11-06 — ORTAK ÖĞRENME MİMARİSİ: çubuk 7 aşamalı yola dönüştü.
+   Keşfet · Öğren · Anla · Uygula · Düşün · Ölç · Değerlendir. Eski duraklar
+   korunur: "📖 Ünite" başta, "🎨 Sınıf içi" Uygula'nın yanında. Her adım
+   ünitenin zaten var olan sayfasına/çapasına gider (çapalar dosyalarda
+   doğrulandı, bkz. OZET_CAPA). Eski çubuk: portal-nav.yedi-asama-oncesi-2026-11-06.js */
+var OZET_CAPA = {'4-1':'ozet','4-2':'ozet2','4-3':'ozet3','4-4':'ozet4','4-5':'ozet5','4-6':'ozet6','4-7':'ozet47',
+  '5-1':'ozet1','5-2':'ozet2','5-3':'ozet3','5-4':'ozet4','5-5':'ozet5',
+  '6-1':'ozet6','6-2':'ozet62','6-3':'ozet63','6-4':'ozet64','6-5':'ozet65',
+  '7-1':'ozet7','7-2':'ozet72','7-3':'ozet73','7-4':'ozet74','7-5':'ozet75','7-6':'ozet76',
+  '8-1':'ozet8','8-2':'ozet82','8-3':'ozet83','8-4':'ozet84','8-5':'ozet85','8-6':'ozet86'};
 function cubukHtml(sinif, unite, asama){
   if(asama==='sinif') return '';
-  /* eski sayfalarda tek 'oyun' asaması vardı; yeni çubukta 'etkinlik' de
-     ayrı bir durak olduğu için eşdeğer kabul edilir (ikisi de aynı adımı
-     temsil eder). */
-  var esdegerAsama = asama==='oyun' ? 'etkinlik' : asama;
-  var suankiIndex = ASAMA_SIRASI.indexOf(asama);
-  if(suankiIndex<0) suankiIndex = ASAMA_SIRASI.indexOf(esdegerAsama);
-  var parcalar = ASAMA_SIRASI.map(function(a, i){
-    var hedef = cubukHedefi(sinif,unite,a);
-    var buradaMi = (a===asama) || (a==='etkinlik' && asama==='oyun');
-    var durum = buradaMi ? 'aktif' : (i<suankiIndex ? 'tamam' : '');
-    return '<a class="pn-adim '+durum+'" href="'+hedef+'">'+
-      (durum==='tamam'?'✓ ':'')+ASAMA_ETIKET[a]+'</a>';
+  var og = dosyaAdi(unite,'ogren'), ol = dosyaAdi(unite,'olcme');
+  var ozet = OZET_CAPA[sinif+'-'+unite];
+  /* [kimlik, simge, ad, hedef, bu adımın bulunduğu sayfa] */
+  var adim = [
+    ['kesfet','🔍','Keşfet', og, 'ogren'],
+    ['ogren','📖','Öğren', og+(ozet ? '#'+ozet : ''), 'ogren'],
+    ['anla','🧩','Anla', og+'#slayt', 'ogren'],
+    ['uygula','🎮','Uygula', dosyaAdi(unite,'oyun')+'#oyun-gruplari', 'oyun'],
+    ['dusun','💭','Düşün', '../acik-uclu-soru-merkezi/tum-siniflar.html#s'+sinif, ''],
+    ['olc','📝','Ölç', ol+'#yazili', 'olcme'],
+    ['deger','📊','Değerlendir', ol, 'olcme']
+  ];
+  var ilk = -1;
+  for(var k=0;k<adim.length;k++){ if(adim[k][4]===asama){ ilk=k; break; } }
+  var parcalar = adim.map(function(a, i){
+    var durum = (a[4]===asama) ? 'aktif' : (ilk>=0 && i<ilk ? 'tamam' : '');
+    var html = '<a class="pn-adim pn-yedi '+durum+'" href="'+a[3]+'"'+(durum==='aktif'?' aria-current="step"':'')+' title="'+(i+1)+'. adım: '+a[2]+'">'+
+      (durum==='tamam'?'✓ ':'')+'<b>'+(i+1)+'</b> '+a[1]+' '+a[2]+'</a>';
+    if(a[0]==='uygula') html += '<a class="pn-adim pn-ek" href="'+cubukHedefi(sinif,unite,'etkinlik')+'" title="Sınıf içi etkinlik">'+ASAMA_ETIKET.etkinlik+'</a>';
+    return html;
   });
-  return '<div class="pn-cubuk">'+parcalar.join('<span class="pn-ok pn-ok-cubuk">→</span>')+'</div>';
+  var hub = '<a class="pn-adim'+(asama==='hub'?' aktif':'')+'" href="'+dosyaAdi(unite,'hub')+'">'+ASAMA_ETIKET.hub+'</a>';
+  return '<div class="pn-cubuk pn-cubuk--yedi" role="navigation" aria-label="Öğrenme yolu: 7 adım">'+hub+'<span class="pn-ok pn-ok-cubuk">→</span>'+parcalar.join('')+'</div>';
 }
 
 function kilitliMi(sinif, unite){

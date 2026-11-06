@@ -7,13 +7,13 @@
    Seçeneklerin sırası oyun.js içinde sabit bir düzenle karıştırılır.
    ===================================================================== */
 window.DIM_VERI = {
-  ad: 'Dinî İfadelerle Eğlenceli Yolculuk',
+  ad: 'Günlük Hayatta Dinî İfadeler',
   bolumler: [
     { ad: 'Günlük Hayat Dedektifleri', rozet: 'Dinî İfadeler Kaşifi', renk: '#4dabf7', mesaj: 'Günlük hayattaki dinî ifadeleri bir dedektif gibi buldun!' },
     { ad: 'Doğru İfadeyi Bul', rozet: 'Besmele Ustası', renk: '#20c997', mesaj: 'İfadelerin anlamlarını keşfettin. Artık neden söylediğimizi de biliyorsun!' },
     { ad: 'Görselden Anla', rozet: 'Şükür Yıldızı', renk: '#fab005', mesaj: 'Resimlere dikkatle bakıp doğru sonuçlara ulaştın!' },
     { ad: 'Hangi Durumda Ne Söylenir?', rozet: 'Nezaket Elçisi', renk: '#f06595', mesaj: 'Her güzel sözü yerinde kullanmayı öğrendin. Tam bir nezaket elçisisin!' },
-    { ad: 'Büyük Dinî İfadeler Macerası', rozet: 'Büyük Keşif Şampiyonu', renk: '#845ef7', mesaj: 'Büyük macerayı tamamladın. Sen bir keşif şampiyonusun!' }
+    { ad: 'Genel Tekrar', rozet: 'Büyük Keşif Şampiyonu', renk: '#845ef7', mesaj: '50 sorunun hepsini tamamladın!' }
   ],
   sorular: [
     /* ---------- 1. BÖLÜM: GÜNLÜK HAYAT DEDEKTİFLERİ ---------- */
@@ -64,7 +64,7 @@ window.DIM_VERI = {
     { b: 4, g: '', s: '“Bismillah” ifadesi aşağıdaki durumların hangisinde söylenmez?', d: 'Bir işi bitirdikten sonra şükrederken', y: ['Yemeğe başlarken', 'Ders çalışmaya başlarken', 'Yola çıkarken'], a: '“Bismillah” bir işin başında söylenir. Bir işi bitirince şükretmek için “Elhamdülillah” deriz.' },
     { b: 4, g: 'misafir_ayrilis', s: '“Allah’a emanet ol” ifadesi hangi durumda söylenir?', d: 'Misafirliğe gelen teyzesi evden ayrılırken', y: ['Teyzesi eve ilk geldiğinde', 'Teyzesi yemeğe başlarken', 'Teyzesi hastalandığında'], a: 'Birinden ayrılırken ya da biri yanımızdan giderken “Allah’a emanet ol” deriz.' },
 
-    /* ---------- 5. BÖLÜM: BÜYÜK DİNÎ İFADELER MACERASI ---------- */
+    /* ---------- 5. BÖLÜM: GENEL TEKRAR ---------- */
     { b: 5, g: 'uc_panel_zeynep', s: 'Resimler Zeynep’in gününden üç anı gösteriyor: 1. Okulda arkadaşıyla karşılaşıyor. 2. Yemeğini bitiriyor. 3. Akşam arkadaşından ayrılıyor. Zeynep sırasıyla hangi ifadeleri kullanmalıdır?', d: 'Esselamü aleyküm – Elhamdülillah – Allah’a emanet ol', y: ['Allah’a emanet ol – Bismillah – Esselamü aleyküm', 'Esselamü aleyküm – Bismillah – Elhamdülillah', 'Elhamdülillah – Esselamü aleyküm – Allah’a emanet ol'], a: 'Karşılaşınca selam veririz, yemeği bitirince şükrederiz, ayrılırken de “Allah’a emanet ol” deriz.' },
     { b: 5, g: 'hapsirma', s: 'Can hapşırdı ve “Elhamdülillah” dedi. Yanındaki Ece’nin ona “Allah sana merhamet etsin” anlamında söyleyeceği ifade hangisidir?', d: 'Yerhamükellah', y: ['İnşallah', 'Hayırlı olsun', 'Allah’a emanet ol'], a: 'Hapşıran kişi “Elhamdülillah” der. Onu duyan kişi de “Yerhamükellah” yani “Allah sana merhamet etsin” diyerek dua eder.' },
     { b: 5, g: 'bisiklet', s: 'Mert yeni aldığı bisikleti arkadaşlarına gösterdi. Arkadaşlarından biri bu durumda en uygun iki ifadeyi birlikte söyledi. Bu ifadeler hangileri olabilir?', d: 'Maşallah, hayırlı olsun!', y: ['Estağfirullah, Allah şifa versin!', 'İnşallah, Allahu ekber!', 'Allah kabul etsin, Bismillah!'], a: 'Güzel bir şeyi beğendiğimiz için “Maşallah”, yeni bir eşya olduğu için de “Hayırlı olsun” deriz.' },
@@ -74,6 +74,6 @@ window.DIM_VERI = {
     { b: 5, g: '', s: 'Bir öğrenci “Yarın erkenden kalkıp ders çalışacağım, inşallah.” diyor. Bu öğrenci “inşallah” diyerek ne anlatmak istemektedir?', d: 'Planını yapıp çalışacağını, bunun da Allah’ın izniyle gerçekleşeceğini', y: ['Ders çalışmayı hiç istemediğini', 'Ders çalışmayı çoktan bitirdiğini', 'Arkadaşından özür dilediğini'], a: '“İnşallah” bir işi yapmamak için söylenen bir söz değildir. Kişi planını yapar, çaba gösterir ve işinin Allah’ın izniyle gerçekleşeceğini bilir.' },
     { b: 5, g: 'ayakkabi', s: 'Ali, arkadaşının yeni ayakkabısını görünce “Maşallah!” dedi. Ali bu sözle ne yapmıştır?', d: 'Ayakkabıyı beğendiğini güzel bir sözle ifade etmiştir.', y: ['Arkadaşından bir şey istemiştir.', 'Arkadaşı için şifa dilemiştir.', 'Arkadaşından özür dilemiştir.'], a: '“Maşallah” bir güzelliği beğendiğimizi gösterir ve o güzelliğin Allah’ın dilemesiyle var olduğunu hatırlatır.' },
     { b: 5, g: 'kapi_tutma', s: 'Elif, elleri dolu olan komşu amca için apartman kapısını tuttu. Amca “Allah razı olsun, kızım!” dedi. Elif’in vereceği en uygun cevap hangisidir?', d: 'Allah sizden de razı olsun.', y: ['Hayırlı olsun.', 'Allah kabul etsin.', 'İnşallah.'], a: '“Allah razı olsun” diyen birine “Allah sizden de razı olsun.” diyerek biz de onun için dua ederiz.' },
-    { b: 5, g: 'uc_panel_ayse', s: 'Resimler Elif’in gününden üç anı gösteriyor: 1. Kahvaltıya başlıyor. 2. Kahvaltısını bitiriyor. 3. Akşam gün batımını izleyip Allah’ın yarattıklarına hayran kalıyor. Elif sırasıyla hangi ifadeleri söylemelidir?', d: 'Bismillah – Elhamdülillah – Sübhanallah', y: ['Elhamdülillah – Bismillah – Sübhanallah', 'Bismillah – İnşallah – Estağfirullah', 'İnşallah – Elhamdülillah – Allahu ekber'], a: 'Başlarken “Bismillah”, bitirince “Elhamdülillah”, Allah’ın yarattıklarına hayran kalınca “Sübhanallah” deriz. Tebrikler, büyük macerayı tamamladın!' }
+    { b: 5, g: 'uc_panel_ayse', s: 'Resimler Elif’in gününden üç anı gösteriyor: 1. Kahvaltıya başlıyor. 2. Kahvaltısını bitiriyor. 3. Akşam gün batımını izleyip Allah’ın yarattıklarına hayran kalıyor. Elif sırasıyla hangi ifadeleri söylemelidir?', d: 'Bismillah – Elhamdülillah – Sübhanallah', y: ['Elhamdülillah – Bismillah – Sübhanallah', 'Bismillah – İnşallah – Estağfirullah', 'İnşallah – Elhamdülillah – Allahu ekber'], a: 'Başlarken “Bismillah”, bitirince “Elhamdülillah”, Allah’ın yarattıklarına hayran kalınca “Sübhanallah” deriz. Tebrikler, 50 soruyu tamamladın!' }
   ]
 };
