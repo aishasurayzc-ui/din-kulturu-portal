@@ -1884,6 +1884,75 @@ button.ph-akis-adim:focus-visible{ outline:3px solid #f0a202; outline-offset:3px
 .ph-ornek-detay .ph-ornek span:first-child{ display:inline; font-size:inherit; font-weight:inherit; letter-spacing:normal; text-transform:none; color:inherit; margin:0; }
 
 </style>
+<style id="phYediAsama">
+/* ======================================================================
+   2026-11-06 — ORTAK ÖĞRENME MİMARİSİ (7 aşama)
+   Ana sayfa yolculuğu 7 adım; her ünite kartında 7 adımlı yol şeridi.
+====================================================================== */
+
+/* ---------- ana sayfa: 7 sekme ---------- */
+@media (min-width:1020px){
+  .ph-akis--7{ grid-template-columns:repeat(7, minmax(0,1fr)); gap:16px; }
+  .ph-akis--7 button.ph-akis-adim{ padding:18px 8px 14px; }
+  .ph-akis--7 button.ph-akis-adim b{ font-size:.82rem; letter-spacing:.1em; }
+  .ph-akis--7 .ph-akis-kisa{ font-size:.74rem; }
+  .ph-akis--7 .ph-akis-ikon{ width:52px; height:52px; border-radius:17px; }
+  .ph-akis--7 .ph-akis-ikon .msi{ font-size:26px; }
+  .ph-akis--7 .ph-akis-adim:not(:last-child)::after{ right:-17px; top:40px; width:18px; height:18px; font-size:11px; }
+}
+.ph-kutu--kesif h3{ font-size:1.25rem; }
+.ph-kesif-adim{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px; counter-reset:k; }
+.ph-kesif-adim li{ counter-increment:k; display:inline-flex; align-items:center; gap:8px; padding:6px 12px 6px 6px; border-radius:999px; background:var(--acikgri); font-weight:800; font-size:.86rem; color:var(--baslik); }
+.ph-kesif-adim li::before{ content:counter(k); display:grid; place-items:center; width:22px; height:22px; border-radius:50%; background:#06b6d4; color:#fff; font-size:.75rem; }
+.ph-rapor-liste{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.ph-rapor-liste li{ display:flex; gap:10px; align-items:flex-start; line-height:1.5; color:var(--metin); font-size:.93rem; }
+.ph-rapor-liste .msi{ color:#16a34a; font-size:22px; flex-shrink:0; }
+.ph-rapor-liste b{ color:var(--baslik); }
+.ph-rapor-not{ font-size:.82rem !important; color:var(--metin-ikincil) !important; }
+
+/* ---------- ünite kartı: 7 adımlı yol ---------- */
+.uk-yol{ margin:2px 16px 10px; padding:10px 8px 8px; border-radius:14px; background:color-mix(in srgb, var(--vurgu) 6%, var(--yuzey)); border:1px solid color-mix(in srgb, var(--vurgu) 18%, var(--kenar)); }
+.uk-yol-baslik{ margin:0 0 8px; display:flex; align-items:center; gap:6px; font-size:.7rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:var(--vurgu); }
+.uk-yol-baslik .msi{ font-size:16px; width:1em; overflow:hidden; }
+.uk-yol ol{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:2px; position:relative; }
+.uk-yol ol::before{ content:""; position:absolute; left:7%; right:7%; top:15px; height:2px; background:color-mix(in srgb, var(--vurgu) 30%, transparent); }
+.uk-yol-adim a, .uk-yol-yok{ position:relative; display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; padding:0 1px; border-radius:10px; }
+.uk-yol-no{ width:32px; height:32px; border-radius:50%; display:grid; place-items:center; background:var(--yuzey); color:var(--vurgu); border:2px solid var(--vurgu); transition:transform .2s ease, background .2s ease, color .2s ease; }
+.uk-yol-no .msi{ font-size:17px; line-height:1; width:1em; overflow:hidden; }
+.uk-yol-ad{ font-size:.62rem; font-weight:800; color:var(--baslik); text-align:center; line-height:1.15; letter-spacing:.01em; white-space:nowrap; }
+/* Dar kartta (sınıf paneli 3 sütun) yol, numaralı hap düğmelere dönüşür; kelimeler bölünmez. */
+.uk-yol{ container-type:inline-size; container-name:ukyol; }
+@container ukyol (max-width:430px){
+  .uk-yol ol{ display:flex; flex-wrap:wrap; gap:5px; counter-reset:yol; }
+  .uk-yol ol::before{ display:none; }
+  .uk-yol-adim{ counter-increment:yol; }
+  .uk-yol-adim a, .uk-yol-yok{ flex-direction:row; gap:5px; padding:3px 9px 3px 3px; border-radius:999px; background:var(--yuzey); border:1px solid color-mix(in srgb, var(--vurgu) 30%, var(--kenar)); }
+  .uk-yol-no{ width:20px; height:20px; border-width:0; background:var(--vurgu); color:#fff; font-size:.66rem; font-weight:900; }
+  .uk-yol-no .msi{ display:none; }
+  .uk-yol-no::before{ content:counter(yol); }
+  .uk-yol-ad{ font-size:.72rem; }
+  .uk-yol-adim a:hover{ background:color-mix(in srgb, var(--vurgu) 10%, var(--yuzey)); }
+  .uk-yol-adim a:hover .uk-yol-no{ transform:none; }
+  .uk-yol-yok .uk-yol-no{ background:var(--metin-ikincil); }
+}
+.uk-yol-adim a:hover .uk-yol-no, .uk-yol-adim a:focus-visible .uk-yol-no{ background:var(--vurgu); color:#fff; transform:translateY(-2px); }
+.uk-yol-adim a:focus-visible{ outline:3px solid #f0a202; outline-offset:2px; }
+.uk-yol-yok{ opacity:.38; cursor:default; }
+.uk-yol-yok .uk-yol-no{ border-style:dashed; }
+.uk-yol-ekler{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; padding-top:8px; border-top:1px dashed color-mix(in srgb, var(--vurgu) 25%, var(--kenar)); }
+.uk-yol-ek{ display:inline-flex; align-items:center; gap:5px; padding:5px 10px; border-radius:999px; font:inherit; font-size:.74rem; font-weight:800; cursor:pointer; text-decoration:none;
+  color:var(--vurgu); background:var(--yuzey); border:1px solid color-mix(in srgb, var(--vurgu) 35%, var(--kenar)); }
+.uk-yol-ek .msi{ font-size:16px; width:1em; overflow:hidden; }
+.uk-yol-ek:hover{ background:var(--vurgu); color:#fff; }
+.uk-tum-baglanti{ margin:0 16px 10px; }
+.uk-tum-baglanti summary{ cursor:pointer; list-style:none; font-size:.76rem; font-weight:800; color:var(--metin-ikincil); padding:4px 0; display:flex; align-items:center; gap:6px; }
+.uk-tum-baglanti summary::-webkit-details-marker{ display:none; }
+.uk-tum-baglanti summary::before{ content:"+"; font-size:1rem; line-height:1; color:var(--vurgu); }
+.uk-tum-baglanti[open] summary::before{ content:"–"; }
+.uk-tum-baglanti .uk-derin-baglantilar{ padding:4px 0 0; margin:0; }
+@media (prefers-reduced-motion:reduce){ .uk-yol-no{ transition:none; } .uk-yol-adim a:hover .uk-yol-no{ transform:none; } }
+
+</style>
 </head>
 <body>
 
@@ -2435,46 +2504,74 @@ button.ph-akis-adim:focus-visible{ outline:3px solid #f0a202; outline-offset:3px
   <div class="ph-sar">
     <header class="ph-bolum-ust">
       <p class="ph-on">Öğrenme Yolculuğu</p>
-      <h2 class="ph-h2" id="phYolculukBaslik">Beş adımda bir konu</h2>
-      <p class="ph-giris">Bir adıma dokun, o adımın gerçek ders örneğini dene. Örnekler 8. sınıf <b>Kader ve Kaza İnancı</b> dersinden.</p>
+      <h2 class="ph-h2" id="phYolculukBaslik">Yedi adımda bir ünite</h2>
+      <p class="ph-giris">Bütün sınıflarda aynı yol: keşfet, öğren, anla, uygula, düşün, ölç, değerlendir. Bir adıma dokun; örnekler 8. sınıf <b>Kader ve Kaza İnancı</b> dersinden.</p>
     </header>
-    <div class="ph-akis" role="tablist" aria-label="Öğrenme yolculuğu adımları">
+    <div class="ph-akis ph-akis--7" role="tablist" aria-label="Öğrenme yolculuğu: 7 adım">
       <button type="button" class="ph-akis-adim" role="tab" id="phAdim-kesfet" aria-controls="phPanel-kesfet" aria-selected="true" tabindex="0" style="--a:#06b6d4">
         <span class="ph-akis-no" aria-hidden="true">1</span>
         <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">travel_explore</span></span>
         <b>Keşfet</b>
-        <span class="ph-akis-kisa">Fotoğraf ve merak sorusu</span>
+        <span class="ph-akis-kisa">Görsel, hikâye, problem</span>
       </button>
       <button type="button" class="ph-akis-adim" role="tab" id="phAdim-ogren" aria-controls="phPanel-ogren" aria-selected="false" tabindex="-1" style="--a:#3b82f6">
         <span class="ph-akis-no" aria-hidden="true">2</span>
         <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">auto_stories</span></span>
         <b>Öğren</b>
-        <span class="ph-akis-kisa">Kavram, ayet, harita</span>
+        <span class="ph-akis-kisa">Konu anlatımı, video, ses</span>
       </button>
-      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-deneyimle" aria-controls="phPanel-deneyimle" aria-selected="false" tabindex="-1" style="--a:#14b8a6">
+      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-anla" aria-controls="phPanel-anla" aria-selected="false" tabindex="-1" style="--a:#6366f1">
         <span class="ph-akis-no" aria-hidden="true">3</span>
-        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">diversity_3</span></span>
-        <b>Deneyimle</b>
-        <span class="ph-akis-kisa">Günlük hayat, mini kontrol</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">hub</span></span>
+        <b>Anla</b>
+        <span class="ph-akis-kisa">Kavram haritası, şema</span>
       </button>
-      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-oyna" aria-controls="phPanel-oyna" aria-selected="false" tabindex="-1" style="--a:#f97316">
+      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-uygula" aria-controls="phPanel-uygula" aria-selected="false" tabindex="-1" style="--a:#14b8a6">
         <span class="ph-akis-no" aria-hidden="true">4</span>
-        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">sports_esports</span></span>
-        <b>Oyna</b>
-        <span class="ph-akis-kisa">Sınıf içi oyunlar</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">extension</span></span>
+        <b>Uygula</b>
+        <span class="ph-akis-kisa">Etkileşimli etkinlik</span>
+      </button>
+      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-dusun" aria-controls="phPanel-dusun" aria-selected="false" tabindex="-1" style="--a:#f59e0b">
+        <span class="ph-akis-no" aria-hidden="true">5</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">psychology</span></span>
+        <b>Düşün</b>
+        <span class="ph-akis-kisa">Günlük hayat, yorum</span>
+      </button>
+      <button type="button" class="ph-akis-adim" role="tab" id="phAdim-olc" aria-controls="phPanel-olc" aria-selected="false" tabindex="-1" style="--a:#f97316">
+        <span class="ph-akis-no" aria-hidden="true">6</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">fact_check</span></span>
+        <b>Ölç</b>
+        <span class="ph-akis-kisa">Test, açık uçlu, yeni nesil</span>
       </button>
       <button type="button" class="ph-akis-adim" role="tab" id="phAdim-degerlendir" aria-controls="phPanel-degerlendir" aria-selected="false" tabindex="-1" style="--a:#22c55e">
-        <span class="ph-akis-no" aria-hidden="true">5</span>
-        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">fact_check</span></span>
+        <span class="ph-akis-no" aria-hidden="true">7</span>
+        <span class="ph-akis-ikon"><span class="msi" aria-hidden="true">insights</span></span>
         <b>Değerlendir</b>
-        <span class="ph-akis-kisa">Test, açık uçlu, ölçüt</span>
+        <span class="ph-akis-kisa">Rapor, eksik kazanımlar</span>
       </button>
     </div>
     <div class="ph-akis-panel" role="tabpanel" id="phPanel-kesfet" aria-labelledby="phAdim-kesfet" style="--a:#06b6d4">
       <div class="ph-akis-giris">
         <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">travel_explore</span> 1. adım · Keşfet</p>
-        <p>Her ders bir fotoğraf ve bir merak sorusuyla açılır; video ve özet konuya ilk adımı attırır.</p>
+        <p>Her ünite bir görsel, kısa bir hikâye ya da günlük hayattan bir problemle açılır.</p>
         <q>Bu tohumlar ne zaman büyüyeceğini nereden ‘biliyor’?</q>
+      </div>
+      <div class="ph-akis-ornek ph-akis-ornek--1">
+      <article class="ph-kutu ph-kutu--kesif">
+        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">travel_explore</span> Keşif modu · 8. sınıf</p>
+        <h3>“Bu tohumlar ne zaman büyüyeceğini nereden ‘biliyor’?”</h3>
+        <p>Ders bir fotoğrafla açılır. Öğrenci önce gözlem yapar, tahminini yazar, sonra konuya geçer.</p>
+        <ol class="ph-kesif-adim"><li>Gözlemle</li><li>Tahmin et</li><li>Konuyla karşılaştır</li></ol>
+        <div class="ph-kutu-cta"><a class="ph-btn" href="din-kulturu-8sinif-1unite/konuyu-ogren.html#kesif-motor">Keşif modunu aç <span class="msi" aria-hidden="true">arrow_forward</span></a></div>
+      </article>
+      </div>
+    </div>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-ogren" aria-labelledby="phAdim-ogren" style="--a:#3b82f6" hidden>
+      <div class="ph-akis-giris">
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">auto_stories</span> 2. adım · Öğren</p>
+        <p>Pedagojik sırayla düzenlenmiş konu anlatımı; video ve sesli dinlemeyle desteklenir.</p>
+        <q>Kader, Allah’ın her şeyi bir ölçüye göre takdir etmesidir.</q>
       </div>
       <div class="ph-akis-ornek ph-akis-ornek--1">
       <article class="ph-kutu ph-kutu--ozet">
@@ -2491,11 +2588,11 @@ button.ph-akis-adim:focus-visible{ outline:3px solid #f0a202; outline-offset:3px
       </article>
       </div>
     </div>
-    <div class="ph-akis-panel" role="tabpanel" id="phPanel-ogren" aria-labelledby="phAdim-ogren" style="--a:#3b82f6" hidden>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-anla" aria-labelledby="phAdim-anla" style="--a:#6366f1" hidden>
       <div class="ph-akis-giris">
-        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">auto_stories</span> 2. adım · Öğren</p>
-        <p>Kavramlar ayet ve delillerle; kavram haritası, video ve sesli anlatımla öğrenilir.</p>
-        <q>Kader, Allah’ın her şeyi bir ölçüye göre takdir etmesidir.</q>
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">hub</span> 3. adım · Anla</p>
+        <p>Kavramlar arasındaki ilişki harita ve şemalarla görünür olur.</p>
+        <q>Evrendeki yasalar: fiziksel, biyolojik, toplumsal.</q>
       </div>
       <div class="ph-akis-ornek ph-akis-ornek--1">
       <article class="ph-kutu ph-kutu--harita">
@@ -2510,30 +2607,10 @@ button.ph-akis-adim:focus-visible{ outline:3px solid #f0a202; outline-offset:3px
       </article>
       </div>
     </div>
-    <div class="ph-akis-panel" role="tabpanel" id="phPanel-deneyimle" aria-labelledby="phAdim-deneyimle" style="--a:#14b8a6" hidden>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-uygula" aria-labelledby="phAdim-uygula" style="--a:#14b8a6" hidden>
       <div class="ph-akis-giris">
-        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">diversity_3</span> 3. adım · Deneyimle</p>
-        <p>Öğrendiğini günlük hayatla ilişkilendirir, hemen bir mini kontrolle denersin. Şimdi sen dene:</p>
-        <q>Her şey bir ölçüye göre işliyor; tohum da öyle.</q>
-      </div>
-      <div class="ph-akis-ornek ph-akis-ornek--1">
-      <article class="ph-kutu ph-kutu--kontrol">
-        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">task_alt</span> Mini kontrol · dene</p>
-        <h3 id="phMiniSoru">Kader ile kaza arasındaki fark nedir?</h3>
-        <div class="ph-secenekler" role="group" aria-labelledby="phMiniSoru">
-          <button type="button" data-dogru="1">Kader takdir edilmesi, kaza gerçekleşmesidir</button>
-          <button type="button">İkisi de aynı anlama gelir</button>
-          <button type="button">Kader insana, kaza doğaya aittir</button>
-          <button type="button">Kader gerçekleşmesi, kaza takdir edilmesidir</button>
-        </div>
-        <p class="ph-geri-bildirim" aria-live="polite"></p>
-      </article>
-      </div>
-    </div>
-    <div class="ph-akis-panel" role="tabpanel" id="phPanel-oyna" aria-labelledby="phAdim-oyna" style="--a:#f97316" hidden>
-      <div class="ph-akis-giris">
-        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">sports_esports</span> 4. adım · Oyna</p>
-        <p>Ünitenin oyunları malzeme, adım ve sınıf düzeniyle hazır; akıllı tahtada tek tıkla başlar.</p>
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">extension</span> 4. adım · Uygula</p>
+        <p>Öğrendiğini oyun ve sınıf içi etkinliklerle uygularsın; öğretmen akıllı tahtada başlatır.</p>
         <q>Hazine Avı, Eşini Bul, Kavram Kodlama…</q>
       </div>
       <div class="ph-akis-ornek ph-akis-ornek--1">
@@ -2545,13 +2622,13 @@ button.ph-akis-adim:focus-visible{ outline:3px solid #f0a202; outline-offset:3px
       </article>
       </div>
     </div>
-    <div class="ph-akis-panel" role="tabpanel" id="phPanel-degerlendir" aria-labelledby="phAdim-degerlendir" style="--a:#22c55e" hidden>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-dusun" aria-labelledby="phAdim-dusun" style="--a:#f59e0b" hidden>
       <div class="ph-akis-giris">
-        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">fact_check</span> 5. adım · Değerlendir</p>
-        <p>Testler, açık uçlu sorular ve puanlama ölçütleriyle kendini ölç; eksik kalan yere geri dön.</p>
-        <q>Kader ile kaza arasındaki fark nedir?</q>
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">psychology</span> 5. adım · Düşün</p>
+        <p>Konuyu günlük hayatla ilişkilendirir, kendi cümlelerinle yorumlarsın.</p>
+        <q>Her şey bir ölçüye göre işliyor; tohum da öyle.</q>
       </div>
-      <div class="ph-akis-ornek ph-akis-ornek--2">
+      <div class="ph-akis-ornek ph-akis-ornek--1">
       <article class="ph-kutu ph-kutu--acik" id="phAcikKutu">
         <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">edit_note</span> Açık uçlu soru · <span id="phAcikEtiket">8. sınıf · 1. ünite</span></p>
         <h3 id="phAcikSoru">Soru yükleniyor…</h3>
@@ -2562,11 +2639,51 @@ button.ph-akis-adim:focus-visible{ outline:3px solid #f0a202; outline-offset:3px
         </details>
         <div class="ph-kutu-cta"><button type="button" class="ph-baglanti ph-dugme-baglanti" id="phAcikBaska" hidden>Başka bir soru</button><a class="ph-baglanti" href="acik-uclu-soru-merkezi/tum-siniflar.html#s8-u1">Tüm 50 soru</a></div>
       </article>
+      </div>
+    </div>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-olc" aria-labelledby="phAdim-olc" style="--a:#f97316" hidden>
+      <div class="ph-akis-giris">
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">fact_check</span> 6. adım · Ölç</p>
+        <p>Mini kontrol, konu testleri ve puanlama ölçütlü sorularla öğrendiğini ölçersin.</p>
+        <q>Kader ile kaza arasındaki fark nedir?</q>
+      </div>
+      <div class="ph-akis-ornek ph-akis-ornek--2">
+      <article class="ph-kutu ph-kutu--kontrol">
+        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">task_alt</span> Mini kontrol · dene</p>
+        <h3 id="phMiniSoru">Kader ile kaza arasındaki fark nedir?</h3>
+        <div class="ph-secenekler" role="group" aria-labelledby="phMiniSoru">
+          <button type="button" data-dogru="1">Kader takdir edilmesi, kaza gerçekleşmesidir</button>
+          <button type="button">İkisi de aynı anlama gelir</button>
+          <button type="button">Kader insana, kaza doğaya aittir</button>
+          <button type="button">Kader gerçekleşmesi, kaza takdir edilmesidir</button>
+        </div>
+        <p class="ph-geri-bildirim" aria-live="polite"></p>
+      </article>
       <article class="ph-kutu ph-kutu--olcut" id="phOlcutKutu">
         <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">rule</span> Yazılı değerlendirme ölçütü</p>
         <h3 id="phOlcutSoru">Ölçüt yükleniyor…</h3>
         <table class="ph-olcut" id="phOlcutTablo"><caption class="ph-gizli">Puanlama ölçütleri</caption><thead><tr><th scope="col">Ölçüt</th><th scope="col">Puan</th></tr></thead><tbody></tbody></table>
         <a class="ph-baglanti" href="#siniflar" data-ph-sinif="s8" data-ph-sekme="acik">8. sınıf açık uçlu yazılı soruları</a>
+      </article>
+      </div>
+    </div>
+    <div class="ph-akis-panel" role="tabpanel" id="phPanel-degerlendir" aria-labelledby="phAdim-degerlendir" style="--a:#22c55e" hidden>
+      <div class="ph-akis-giris">
+        <p class="ph-akis-etiket"><span class="msi" aria-hidden="true">insights</span> 7. adım · Değerlendir</p>
+        <p>Öğrenme raporu eksik kalan konuları gösterir; tekrar etmen gereken yere seni geri götürür.</p>
+        <q>Eksiklerim listesi, doğru cevapladıkça kısalır.</q>
+      </div>
+      <div class="ph-akis-ornek ph-akis-ornek--1">
+      <article class="ph-kutu ph-kutu--rapor">
+        <p class="ph-kutu-tur"><span class="msi" aria-hidden="true">insights</span> Öğrenme raporu</p>
+        <h3>Eksiğini gör, doğru yere dön</h3>
+        <ul class="ph-rapor-liste">
+          <li><span class="msi" aria-hidden="true">assignment_late</span><span><b>Eksiklerim:</b> ünite değerlendirmesinde yanlış yaptığın sorular ve “tekrar” dediğin konular listelenir; doğru cevapladıkça liste kısalır.</span></li>
+          <li><span class="msi" aria-hidden="true">donut_large</span><span><b>İlerleme:</b> tamamlanan üniteler ve rozetler “Kaldığın yer” panelinde.</span></li>
+          <li><span class="msi" aria-hidden="true">assessment</span><span><b>Öğretmen raporu:</b> zorlanılan sorular ve öz değerlendirmeler, öğretmen şifresiyle.</span></li>
+        </ul>
+        <p class="ph-rapor-not">Rapordaki her bilgi bu cihazdaki gerçek kayıtlardan gelir; tahmini başarı oranı gösterilmez.</p>
+        <div class="ph-kutu-cta"><a class="ph-btn" href="din-kulturu-8sinif-1unite/degerlendirme.html">Ünite değerlendirmesi <span class="msi" aria-hidden="true">arrow_forward</span></a><a class="ph-baglanti" href="#kaldiginYer">İlerlemem</a><a class="ph-baglanti" href="ogretmen-raporu.html">Öğretmen raporu</a></div>
       </article>
       </div>
     </div>
@@ -4700,6 +4817,58 @@ function nesneOku(anahtar){
    bağlantıları üretir (Konu Özeti/Sunum/Oyunlar/Yazılı). "ozet" bölümünün
    id'si sınıfa göre değişen bir sonek taşıdığı için sinif.sonekler'den
    okunur; slayt/oyun-gruplari/yazili id'leri tüm ünite sayfalarında sabittir. */
+/* 2026-11-06 — ORTAK ÖĞRENME MİMARİSİ: her ünite kartında 7 adımlı yol
+   (Keşfet · Öğren · Anla · Uygula · Düşün · Ölç · Değerlendir). Yeni sayfa
+   üretmez; her adım, ünitenin ZATEN var olan sayfasına/çapasına gider
+   (uniteDerinBaglantilarHtml ile aynı hedefler). Karşılığı olmayan adım
+   bağlantısız ve soluk gösterilir — uydurma hedef yok. */
+function uniteYoluHtml(sinif, href, index){
+  const no = parseInt(sinif.id.slice(1), 10);
+  const aucVar = typeof ACIK_UCLU_KAPALI === 'undefined' || ACIK_UCLU_KAPALI.indexOf(sinif.id) < 0;
+  const dusunHedef = 'acik-uclu-soru-merkezi/tum-siniflar.html#s' + no;
+  let adim;
+  if(OGREN_SAYFALI.indexOf(sinif.id) >= 0){
+    const sonek = (sinif.sonekler && sinif.sonekler[index] != null) ? sinif.sonekler[index] : '';
+    const ogren = ogrenSayfasi(sinif.id, href), olcme = uniteSayfasi(sinif.id, href, 'degerlendirme');
+    adim = [
+      ['kesfet', 'travel_explore', 'Keşfet',      ogren],
+      ['ogren',  'auto_stories',   'Öğren',       ogren + '#ozet' + sonek],
+      ['anla',   'hub',            'Anla',        ogren + '#slayt'],
+      ['uygula', 'extension',      'Uygula',      uniteSayfasi(sinif.id, href, 'oyun-merkezi') + '#oyun-gruplari'],
+      ['dusun',  'psychology',     'Düşün',       aucVar ? dusunHedef : ''],
+      ['olc',    'fact_check',     'Ölç',         olcme + '#yazili'],
+      ['deger',  'insights',       'Değerlendir', olcme]
+    ];
+  } else {
+    const c = (sinif.capalar || []).map(function(b){ return b.anchor; });
+    const capa = function(a){ return c.indexOf(a) >= 0 ? href + '#' + a : ''; };
+    adim = [
+      ['kesfet', 'travel_explore', 'Keşfet',      href],
+      ['ogren',  'auto_stories',   'Öğren',       capa('harita') || href],
+      ['anla',   'hub',            'Anla',        capa('kavramlar')],
+      ['uygula', 'extension',      'Uygula',      capa('kaynak-bul')],
+      ['dusun',  'psychology',     'Düşün',       aucVar ? dusunHedef : ''],
+      ['olc',    'fact_check',     'Ölç',         capa('test')],
+      ['deger',  'insights',       'Değerlendir', '']
+    ];
+  }
+  const ekler = [];
+  if(OYUN_SINIFLARI.indexOf(sinif.id) >= 0)
+    ekler.push('<button type="button" class="uk-yol-ek oy-giris" data-oy="uniteac" data-sinif="'+sinif.id+'" data-no="'+(index+1)+'"><span class="msi" aria-hidden="true">groups</span>Sınıf içi etkinlik</button>');
+  if(sinif.id === 's8' && index < 5)
+    ekler.push('<a class="uk-yol-ek" href="sinav-merkezi/lgs-hazirlik/index.html?kart=konular&sekme=kazanim-testleri&unite=unite'+(index+1)+'"><span class="msi" aria-hidden="true">target</span>LGS soruları</a>');
+  return '<nav class="uk-yol" aria-label="'+(index+1)+'. ünite öğrenme yolu">'+
+    '<p class="uk-yol-baslik"><span class="msi" aria-hidden="true">route</span>Öğrenme yolu · 7 adım</p>'+
+    '<ol>'+adim.map(function(a, i){
+      const ic = '<span class="uk-yol-no" aria-hidden="true"><span class="msi">'+a[1]+'</span></span><span class="uk-yol-ad">'+a[2]+'</span>';
+      return '<li class="uk-yol-adim uk-yol--'+a[0]+'">'+(a[3]
+        ? '<a href="'+a[3]+'" title="'+(i+1)+'. adım: '+a[2]+'">'+ic+'</a>'
+        : '<span class="uk-yol-yok" title="'+a[2]+': bu ünitede henüz ayrı bir bölüm yok">'+ic+'</span>')+'</li>';
+    }).join('')+'</ol>'+
+    (ekler.length ? '<div class="uk-yol-ekler">'+ekler.join('')+'</div>' : '')+
+  '</nav>';
+}
+
 function uniteDerinBaglantilarHtml(sinif, href, index){
   const sonek = (sinif.sonekler && sinif.sonekler[index] != null) ? sinif.sonekler[index] : '';
   /* Sınıfın kendi çapa seti varsa o kullanılır (bkz. 9. sınıf); yoksa
@@ -5071,7 +5240,8 @@ function uniteKartHtml(sinif, unite, index, mebBilgi){
       ) : '')+
       uniteKonuListesiHtml(sinif, href, index)+
       ogrenmeCercevesiHtml(sinif, index, unite)+
-      uniteDerinBaglantilarHtml(sinif, href, index)+
+      uniteYoluHtml(sinif, href, index)+
+      '<details class="uk-tum-baglanti"><summary>Tüm bağlantılar</summary>'+uniteDerinBaglantilarHtml(sinif, href, index)+'</details>'+
       '<div class="uk-aksiyon">'+
         '<button type="button" class="uk-fav" data-id="'+id+'" aria-pressed="false" aria-label="'+unite.baslik+' konusunu favorilere ekle">☆ Favori</button>'+
         '<button type="button" class="uk-tamam" data-id="'+id+'" aria-pressed="false" aria-label="'+unite.baslik+' konusunu tamamlandı işaretle">✓ Tamamlandı</button>'+

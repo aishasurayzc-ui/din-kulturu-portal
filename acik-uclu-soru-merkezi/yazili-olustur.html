@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yazılı Kâğıdı Oluşturucu · Açık Uçlu Soru Merkezi</title>
+<meta name="description" content="Din Kültürü ve Ahlak Bilgisi 4–12. sınıflar: Açık Uçlu Soru Merkezi sorularından yazdırılabilir yazılı kâğıdı ve cevap anahtarı oluşturun.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%9D%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block">
+<link rel="stylesheet" href="../ortak/kimlik.css">
+<link rel="stylesheet" href="merkez.css">
+<link rel="stylesheet" href="yazili-olustur.css">
+</head>
+<body>
+<header class="mz-ust">
+  <div class="mz-ust-ic">
+    <a class="mz-geri" href="tum-siniflar.html"><span class="msi" aria-hidden="true">arrow_back</span> Soru Merkezi</a>
+    <span class="mz-marka">📝 Yazılı Kâğıdı Oluşturucu</span>
+    <button type="button" class="mz-tema" id="temaDugme" aria-label="Koyu / açık tema" aria-pressed="false"><span class="msi" aria-hidden="true">dark_mode</span></button>
+  </div>
+</header>
+
+<main id="ana" class="yo-ana">
+  <section class="yo-panel" aria-labelledby="bAyar">
+    <h1 id="bAyar">Yazılı kâğıdı oluştur</h1>
+    <p class="mz-aciklama">Sınıfı ve üniteleri seç, soru sayısını belirle. Sorular soru merkezindeki havuzdan seçilir; istediğin soruyu değiştirebilir, çıkarabilir ya da listeden ekleyebilirsin.</p>
+
+    <fieldset class="yo-grup">
+      <legend>1. Sınıf</legend>
+      <div class="yo-sinif" id="sinifSec" role="radiogroup" aria-label="Sınıf"></div>
+    </fieldset>
+
+    <fieldset class="yo-grup">
+      <legend>2. Üniteler</legend>
+      <div class="yo-uniteler" id="uniteSec"><p class="yo-ipucu">Önce sınıf seç.</p></div>
+    </fieldset>
+
+    <fieldset class="yo-grup yo-satir">
+      <legend>3. Soru sayısı ve cevap alanı</legend>
+      <label>Soru sayısı
+        <select id="adet"><option>4</option><option>5</option><option>6</option><option>8</option><option selected>10</option><option>12</option><option>15</option><option>20</option></select>
+      </label>
+      <label>Her soru için cevap satırı
+        <select id="satir"><option>3</option><option>4</option><option>5</option><option selected>6</option><option>8</option><option>10</option></select>
+      </label>
+      <button type="button" class="mz-btn mz-btn-ana" id="olusturDugme" disabled><span class="msi" aria-hidden="true">auto_awesome</span> Soruları seç</button>
+    </fieldset>
+
+    <details class="yo-grup yo-bilgi">
+      <summary>Kâğıt üst bilgileri (okul, dönem, öğretmen)</summary>
+      <div class="yo-form">
+        <label>Okul adı<input id="bOkul" type="text" placeholder="… Ortaokulu / Lisesi" maxlength="90"></label>
+        <label>Eğitim-öğretim yılı<input id="bYil" type="text" maxlength="20"></label>
+        <label>Dönem<select id="bDonem"><option>1.</option><option>2.</option></select></label>
+        <label>Yazılı<select id="bYazili"><option>1.</option><option>2.</option><option>3.</option></select></label>
+        <label>Öğretmen adı<input id="bOgretmen" type="text" maxlength="60"></label>
+        <label>Süre<input id="bSure" type="text" value="40 dakika" maxlength="20"></label>
+      </div>
+      <p class="yo-ipucu">Bu bilgiler yalnızca bu tarayıcıda saklanır.</p>
+    </details>
+  </section>
+
+  <section class="yo-onizleme gizli" id="onizleme" aria-labelledby="bOniz">
+    <div class="yo-arac">
+      <h2 id="bOniz">Önizleme</h2>
+      <span class="yo-toplam" id="toplamPuan" aria-live="polite"></span>
+      <button type="button" class="mz-btn" id="karistirDugme"><span class="msi" aria-hidden="true">shuffle</span> Hepsini yeniden seç</button>
+      <button type="button" class="mz-btn" id="anahtarGoster" aria-pressed="false"><span class="msi" aria-hidden="true">key</span> Cevap anahtarını göster</button>
+      <button type="button" class="mz-btn mz-btn-ana" data-yazdir="kagit"><span class="msi" aria-hidden="true">print</span> Yazılı kâğıdını yazdır</button>
+      <button type="button" class="mz-btn" data-yazdir="anahtar"><span class="msi" aria-hidden="true">print</span> Cevap anahtarını yazdır</button>
+    </div>
+
+    <details class="yo-ekle" id="ekleKutu">
+      <summary><span class="msi" aria-hidden="true">add</span> Havuzdan soru ekle</summary>
+      <div class="yo-ekle-ic">
+        <label>Ünite<select id="ekleUnite"></select></label>
+        <label>Tür<select id="ekleTur"><option value="">Hepsi</option></select></label>
+        <ol class="yo-ekle-liste" id="ekleListe"></ol>
+      </div>
+    </details>
+
+    <article class="yo-kagit" id="kagit" aria-label="Yazılı kâğıdı"></article>
+    <article class="yo-kagit yo-anahtar gizli" id="anahtar" aria-label="Cevap anahtarı"></article>
+  </section>
+</main>
+
+<script src="../ortak/meb-program.js"></script>
+<script src="havuz/liste.js"></script>
+<script src="yazili-olustur.js"></script>
+</body>
+</html>
