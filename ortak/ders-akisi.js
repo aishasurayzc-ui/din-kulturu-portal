@@ -23,7 +23,7 @@ if(window.__dersAkisi) return;
 window.__dersAkisi = true;
 
 /* Önce örnek sayfada; onaydan sonra HEPSI = true yapılarak tüm sayfalara açılır. */
-var HEPSI = false;
+var HEPSI = true;   /* 2026-11-07 (studeo): tüm 4–8 "ogren" sayfalarına açıldı */
 var ORNEK = ['din-kulturu-4sinif-1unite/unite2-konuyu-ogren.html'];
 var yol = decodeURIComponent(location.pathname);
 if(!HEPSI && !ORNEK.some(function(s){ return yol.slice(-s.length) === s; })) return;
@@ -185,6 +185,39 @@ function serit(){
   else hedef.parentNode.insertBefore(d, hedef);
 }
 
+/* ---------------- sayfa başı sırası (2026-11-07, studeo) ----------------
+   A. Konuya Giriş (ünite afişi) → C. Video ve Dinleme (tek bölüm) → ders akışı şeridi.
+   Yalnızca sayfa başındaki üç öğenin YERİ değişir; video, oynatıcı ve sesli
+   dinleme paneli aynı öğelerdir (kopya yok, metin eklenmez — başlık CSS ile). */
+function medyaDuzenle(){
+  var hero = document.querySelector('body > section.ka-hero');
+  var video = document.querySelector('body > details.anlatim-video');
+  var s = document.querySelector('body > .dak-serit');
+  if(!hero) return;
+  var m = null;
+  if(video){
+    m = document.createElement('div');
+    m.className = 'dak-medya';
+    m.setAttribute('role', 'region');
+    m.setAttribute('aria-label', 'Video ve dinleme');
+    m.innerHTML = '<div class="dak-medya-bas" aria-hidden="true">' + yazi('dak-medya-ad', '🎬 Video ve Dinleme') +
+      yazi('dak-medya-ac', 'Önce konu videosunu izle; istersen konuyu baştan sona ya da yalnızca ezber bölümünü dinle.') + '</div>';
+    hero.parentNode.insertBefore(m, hero.nextSibling);
+    m.appendChild(video);
+  }
+  var son = m || hero;
+  if(s) son.parentNode.insertBefore(s, son.nextSibling);
+  if(!m) return;
+  /* Sesli dinleme paneli (ortak/konu-dinle.js) afişin hemen altına sonradan eklenir */
+  var deneme = 0;
+  (function tasi(){
+    var p = document.querySelector('body > section.sok-panel');
+    if(p){ m.appendChild(p); return; }
+    if(m.querySelector('section.sok-panel') || ++deneme > 40) return;
+    setTimeout(tasi, 250);
+  })();
+}
+
 /* ---------------- gezinme ve etkin adım ---------------- */
 function bolumAc(el){
   /* gizli sekmedeyse sayfanın kendi menü düğmesiyle aç */
@@ -244,6 +277,7 @@ function kur(){
   if(!TUM.length) return;
   document.documentElement.classList.add('dak-kok');
   serit();
+  try{ medyaDuzenle(); }catch(e){ if(window.console) console.warn('Ders akışı (medya):', e); }
   document.addEventListener('click', function(e){
     var b = e.target.closest('[data-dak-git]');
     if(b){

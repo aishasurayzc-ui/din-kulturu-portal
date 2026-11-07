@@ -349,11 +349,14 @@ var ORTAK_KLASOR = (document.currentScript && document.currentScript.src)
    sınıfı ve temayı ayarla: eski başlık bir an bile görünüp kaybolmasın. */
 (function(){
   var m = document.getElementById('portalNav');
-  if(!m || (m.dataset.asama!=='ogren' && m.dataset.asama!=='oyun')) return;
+  if(!m || (m.dataset.asama!=='ogren' && m.dataset.asama!=='oyun' && m.dataset.asama!=='olcme')) return;
   var kok = document.documentElement;
   kok.classList.add('ks-kok');
   /* 2026-11-07 — Uygula (Oyun Merkezi) sayfası da aynı ortak düzeni kullanır */
   if(m.dataset.asama==='oyun') kok.classList.add('ks-uygula');
+  /* 2026-11-07 (studeo) — Ölç (Değerlendirme) sayfası: Oyun Merkezi ile aynı
+     sayfa yapısı (menü + bölümler) olduğu için aynı ortak düzen + sınav alanı */
+  if(m.dataset.asama==='olcme') kok.classList.add('ks-uygula', 'ks-olc');
   kok.setAttribute('data-ks-sinif', m.dataset.sinif || '');
   temaUygula(temaOku());
 })();
@@ -492,6 +495,96 @@ function ksUygulaAltHtml(sinif, unite){
       '<p class="ks-imza">Ayşe Yazıcı · Din Kültürü ve Ahlak Bilgisi</p>'+
     '</div>'+
   '</div>';
+}
+
+/* ————— ÖLÇ (Değerlendirme) sayfası — 2026-11-07 (studeo) —————
+   Başlık kartı + sayfa sonu. Sayı ve metinler sayfanın KENDİ içeriğinden
+   okunur (test başlığı, yazılı kartları, "Kendini Değerlendir" bandı). */
+function ksOlcBasHtml(sinif, unite){
+  var h1 = document.querySelector('body > header h1');
+  var ad = (h1 ? emojiTemizle(h1.textContent) : '') || uniteAdi(sinif, unite);
+  var altP = document.querySelector('body > section.hero .hero-alt');
+  var alt = altP ? altP.textContent.trim() : '';
+  var cip = [];
+  Array.prototype.forEach.call(document.querySelectorAll('main > section > h2'), function(h){
+    var m = /\((\d+)\s*Soru\)/i.exec(h.textContent);
+    if(m) cip.push('<span class="ks-meta-cip">📝 '+m[1]+' soruluk tekrar testi</span>');
+  });
+  var yaziliSay = document.querySelectorAll('main .yazili-kart').length;
+  if(yaziliSay) cip.push('<span class="ks-meta-cip">📄 '+yaziliSay+' yazılı sınav</span>');
+  return '<section class="ks-sayfa-bas" aria-labelledby="ksSayfaBaslik">'+
+    '<div class="ks-sayfa-bas-ic">'+
+      '<p class="ks-sayfa-ust"><span class="ks-sayfa-etiket">'+sinif+'. Sınıf · '+unite+'. Ünite</span>'+
+        '<span class="ks-sayfa-adim">6. adım · Ölç</span></p>'+
+      '<h1 class="ks-sayfa-baslik" id="ksSayfaBaslik">Ölçme ve Değerlendirme <span class="ks-sayfa-ayrac" aria-hidden="true">·</span> <span class="ks-sayfa-unite">'+kacis(ad)+'</span></h1>'+
+      (alt ? '<p class="ks-sayfa-aciklama">'+kacis(alt)+'</p>' : '')+
+      (cip.length ? '<div class="ks-hero-meta">'+cip.join('')+'</div>' : '')+
+    '</div>'+
+  '</section>';
+}
+/* Ölç sayfasının sonu: eski "Ünite Raporu + Bu Üniteyi Tamamladım" alanının
+   AYNI işlevi (data-pn="tamamla", raporHtml) ortak kart diliyle. */
+function ksOlcAltHtml(sinif, unite){
+  var onceki = unite>1 ? unite-1 : null;
+  var sonraki = unite<UNITE_SAYISI[sinif] ? unite+1 : null;
+  var tamamMi = tamamlandiMi(sinif,unite);
+  var ana;
+  if(!tamamMi){
+    ana = '<button type="button" class="ks-aksiyon ks-aksiyon--birincil" data-pn="tamamla" data-sinif="'+sinif+'" data-unite="'+unite+'"><span aria-hidden="true">✅</span> Bu Üniteyi Tamamladım</button>';
+  } else if(sonraki){
+    ana = '<a class="ks-aksiyon ks-aksiyon--birincil" href="'+dosyaAdi(sonraki,'hub')+'"><span aria-hidden="true">➡️</span> Sonraki Ünite: '+kacis(uniteAdi(sinif,sonraki))+
+      (kilitliMi(sinif, sonraki)?' <span class="pn-kilit-rozet">🔒</span>':'')+'</a>';
+  } else {
+    ana = '<a class="ks-aksiyon ks-aksiyon--birincil" href="'+sinifSayfasi(sinif)+'"><span aria-hidden="true">🏆</span> Tüm üniteler tamam — Sınıf Sayfasına Dön</a>';
+  }
+  var lgs = sinif===8
+    ? '<a class="ks-aksiyon" href="../sinav-merkezi/lgs-hazirlik/index.html?kart=konular&sekme=kazanim-testleri&unite=unite'+unite+'"><span aria-hidden="true">🎯</span> LGS ile Pekiştir</a>'
+    : '';
+  var uniteKarti = function(no, yon){
+    return '<a class="ks-unite-kart ks-unite-kart--'+yon+'" href="'+dosyaAdi(no,'olcme')+'">'+
+      '<span class="ks-uk-yon">'+(yon==='onceki' ? '← Önceki ünitenin değerlendirmesi' : 'Sonraki ünitenin değerlendirmesi →')+'</span>'+
+      '<span class="ks-uk-ad">'+no+'. Ünite · '+kacis(uniteAdi(sinif,no))+'</span></a>';
+  };
+  return '<div class="ks-alt" role="region" aria-label="Sayfa sonu">'+
+    '<div class="ks-alt-ic">'+
+      '<div class="ks-alt-kart">'+
+        '<p class="ks-on-etiket">Sıradaki adım · 7. Değerlendir</p>'+
+        '<p class="ks-alt-baslik">Üniteyi tamamladın mı?</p>'+
+        raporHtml(sinif,unite,tamamMi).replace('class="pn-rapor"','class="pn-rapor ks-rapor"')+
+        '<div class="ks-aksiyonlar">'+ana+
+          '<a class="ks-aksiyon" href="'+dosyaAdi(unite,'ogren')+'"><span aria-hidden="true">📖</span> Konuyu Tekrar Et</a>'+
+          '<a class="ks-aksiyon" href="'+dosyaAdi(unite,'oyun')+'#oyun-gruplari"><span aria-hidden="true">🎮</span> Dijital Oyunlar</a>'+
+          lgs+
+        '</div>'+
+      '</div>'+
+      '<div class="ks-uniteler">'+
+        (onceki ? uniteKarti(onceki,'onceki') : '<span class="ks-unite-bos"></span>')+
+        (sonraki ? uniteKarti(sonraki,'sonraki')
+          : '<a class="ks-unite-kart ks-unite-kart--sonraki" href="'+sinifSayfasi(sinif)+'"><span class="ks-uk-yon">Sınıfın son ünitesi</span><span class="ks-uk-ad">'+sinif+'. Sınıf ünitelerine dön →</span></a>')+
+      '</div>'+
+      '<div class="ks-donus">'+
+        '<a class="ks-donus-link" href="'+sinifSayfasi(sinif, unite)+'">⌂ Ana Sayfaya Dön</a>'+
+        '<a class="ks-donus-link" href="'+dosyaAdi(unite,'hub')+'">↩ Üniteye Dön</a>'+
+        '<a class="ks-donus-link" href="#" data-ks="basa">↑ Sayfanın başına</a>'+
+      '</div>'+
+      '<p class="ks-imza">Ayşe Yazıcı · Din Kültürü ve Ahlak Bilgisi</p>'+
+    '</div>'+
+  '</div>';
+}
+/* Ölç sayfası açılınca boş menü yerine bir sınav alanı görünsün: adresteki
+   bölüm (#yazili …) varsa o, yoksa menünün ilk bölümü — sayfanın KENDİ menü
+   düğmesine tıklanarak (goster() aynen çalışır). */
+function ksOlcBolumAc(){
+  if(document.querySelector('main > section.aktif')) return;
+  var id = ''; try{ id = decodeURIComponent((location.hash||'').slice(1)); }catch(e){}
+  var hedef = id && document.getElementById(id);
+  var bolum = hedef && hedef.closest('main > section');
+  var d = bolum ? menuDugmesi(bolum.id) : null;
+  if(!d){
+    var tum = document.querySelectorAll('#oyun-gruplari .oyun-grubu.aktif button[onclick]');
+    for(var i=0;i<tum.length;i++){ if(/goster\('/.test(tum[i].getAttribute('onclick')||'')){ d = tum[i]; break; } }
+  }
+  if(d) d.click();
 }
 
 /* Sayfa sonu: değerlendirme/etkinlik yönlendirmesi + önceki/sonraki ünite
@@ -964,14 +1057,18 @@ function yenidenCiz(){
   var ksDuzeni = document.documentElement.classList.contains('ks-kok');
   var ogrenDuzeni = asama==='ogren' && ksDuzeni;
   var uygulaDuzeni = asama==='oyun' && ksDuzeni;
+  var olcDuzeni = asama==='olcme' && ksDuzeni;
   mount.innerHTML = ogrenDuzeni
     ? ksUstHtml(sinif,unite) + ksKonumHtml(sinif,unite,'ogren')
     : uygulaDuzeni
       ? ksUstHtml(sinif,unite) + ksKonumHtml(sinif,unite,'oyun') + ksUygulaBasHtml(sinif,unite)
-      : modSatiriHtml() + kirintiHtml(sinif,unite,asama) + cubukHtml(sinif,unite,asama) + geriBarHtml(sinif,unite,asama);
+      : olcDuzeni
+        ? ksUstHtml(sinif,unite) + ksKonumHtml(sinif,unite,'olcme') + ksOlcBasHtml(sinif,unite)
+        : modSatiriHtml() + kirintiHtml(sinif,unite,asama) + cubukHtml(sinif,unite,asama) + geriBarHtml(sinif,unite,asama);
   mount.classList.add('pn-hazir');
 
-  var altBar = ogrenDuzeni ? ksAltHtml(sinif,unite) : uygulaDuzeni ? ksUygulaAltHtml(sinif,unite) : altBarHtml(sinif,unite,asama);
+  var altBar = ogrenDuzeni ? ksAltHtml(sinif,unite) : uygulaDuzeni ? ksUygulaAltHtml(sinif,unite)
+    : olcDuzeni ? ksOlcAltHtml(sinif,unite) : altBarHtml(sinif,unite,asama);
   if(altKutu && altKutu.parentNode) altKutu.parentNode.removeChild(altKutu);
   altKutu = null;
   if(altBar){
@@ -1009,12 +1106,35 @@ function olustur(){
     document.body.appendChild(odJs);
   }
 
+  /* 2026-11-07 — Anlatım videosu 3 boyutlu görünüm (ortak/video-3d.js + .css):
+     yalnızca sayfada "Anlatım Videosu" varsa yüklenir; video öğesi değişmez. */
+  if(document.querySelector('details.anlatim-video video') && !document.querySelector('script[src*="video-3d.js"]')){
+    var v3Css = document.createElement('link');
+    v3Css.rel = 'stylesheet'; v3Css.href = ORTAK_KLASOR + 'video-3d.css';
+    document.head.appendChild(v3Css);
+    var v3Js = document.createElement('script');
+    v3Js.src = ORTAK_KLASOR + 'video-3d.js';
+    document.body.appendChild(v3Js);
+  }
   document.addEventListener('click', tiklamaYonet);
-  if(asama==='oyun' && document.documentElement.classList.contains('ks-kok')){
+  if((asama==='oyun' || asama==='olcme') && document.documentElement.classList.contains('ks-kok')){
     temaUygula(document.documentElement.getAttribute('data-tema')==='dark' ? 'dark' : 'light');
     document.addEventListener('click', function(e){
       if(e.target.closest('[data-ks="basa"]')){ e.preventDefault(); window.scrollTo({top:0, behavior: hareketAzMi() ? 'auto' : 'smooth'}); }
     });
+    if(asama==='olcme') setTimeout(ksOlcBolumAc, 0);
+    /* Oyun kartlarındaki zorluk etiketi (kartın KENDİ metni: Kolay/Orta/Zor)
+       → data-zorluk; renk ayrımı portal-nav.css'te. Metin değişmez. */
+    if(asama==='oyun'){
+      var zorlukIsaretle = function(){
+        Array.prototype.forEach.call(document.querySelectorAll('.omg-zorluk:not([data-zorluk])'), function(z){
+          var t = (z.textContent || '').trim().toLocaleLowerCase('tr');
+          if(t==='kolay' || t==='orta' || t==='zor') z.setAttribute('data-zorluk', t);
+        });
+      };
+      setTimeout(zorlukIsaretle, 0);
+      window.addEventListener('load', zorlukIsaretle);
+    }
   }
   /* Konu anlatım sayfası: bölüm menüsü, ünite başlığı ve kaydırma takibi.
      Sayfanın kendi DOMContentLoaded betikleri (Öğrenme Yolu vb.) önce

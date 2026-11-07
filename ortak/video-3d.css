@@ -1,0 +1,87 @@
+/* ======================================================================
+   ANLATIM VİDEOSU — 3 boyutlu görünüm (2026-11-07) · ortak/video-3d.js ile
+   Renkler ortak kimlikten (ortak/kimlik.css): lacivert · turkuaz.
+   Video öğesinin satır içi stilleri (genişlik, oran, köşe) yalnızca çerçeve
+   içinde uyum için ezilir; video kaynağı ve denetimleri değişmez.
+====================================================================== */
+.v3d-kok{
+  --v3d-lacivert:var(--k-lacivert, #13294b); --v3d-lacivert-2:var(--k-lacivert-2, #1f4f8f);
+  --v3d-turkuaz:var(--k-turkuaz, #0b8fa3);
+  --v3d-golge:rgba(19,41,75,.38);
+}
+.v3d-kok[data-tema="dark"], .v3d-kok[data-theme="dark"]{ --v3d-golge:rgba(0,0,0,.65); }
+
+.v3d-sahne{
+  --v3d-rx:7deg; --v3d-ry:-5deg; --v3d-px:30%;
+  position:relative; margin:18px 0 34px; perspective:1400px; perspective-origin:50% 30%;
+}
+/* koyu temada çerçeve kenarı ve video başlığı okunur kalsın */
+.v3d-kok[data-tema="dark"] .v3d-cerceve, .v3d-kok[data-theme="dark"] .v3d-cerceve{
+  outline:1px solid rgba(95,199,212,.28); outline-offset:-1px;
+}
+.v3d-kok[data-tema="dark"] details.anlatim-video > summary,
+.v3d-kok[data-theme="dark"] details.anlatim-video > summary{ color:#e6edf5 !important; }
+
+/* zemindeki yumuşak gölge: ekran havada duruyormuş gibi */
+.v3d-sahne::after{
+  content:""; position:absolute; left:8%; right:8%; bottom:-26px; height:34px; z-index:0; pointer-events:none;
+  background:radial-gradient(50% 50% at 50% 50%, var(--v3d-golge), transparent 72%);
+  filter:blur(6px); transition:opacity .5s ease, transform .5s ease;
+}
+.v3d-cerceve{
+  position:relative; z-index:1; transform-style:preserve-3d;
+  transform:rotateX(var(--v3d-rx)) rotateY(var(--v3d-ry));
+  transition:transform .55s cubic-bezier(.2,.7,.2,1), box-shadow .55s ease;
+  padding:10px; border-radius:22px;
+  background:linear-gradient(150deg, color-mix(in srgb, var(--v3d-lacivert) 70%, #6b8cc4) 0%, var(--v3d-lacivert) 45%, color-mix(in srgb, var(--v3d-lacivert) 80%, #000) 100%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.25) inset,
+    0 -2px 0 rgba(0,0,0,.25) inset,
+    0 2px 0 color-mix(in srgb, var(--v3d-lacivert) 60%, #000),
+    0 4px 0 color-mix(in srgb, var(--v3d-lacivert) 55%, #000),
+    0 6px 0 color-mix(in srgb, var(--v3d-lacivert) 50%, #000),
+    0 30px 50px -18px var(--v3d-golge),
+    0 18px 30px -22px var(--v3d-golge);
+}
+/* çerçevenin üst kenarında ince turkuaz ışık çizgisi */
+.v3d-cerceve::before{
+  content:""; position:absolute; left:22px; right:22px; top:4px; height:2px; border-radius:2px; pointer-events:none;
+  background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--v3d-turkuaz) 85%, #fff), transparent); opacity:.8;
+}
+.v3d-cerceve > video{
+  display:block; position:relative; width:100% !important; margin:0 !important;
+  border-radius:13px !important; transform:translateZ(14px);
+  box-shadow:0 0 0 1px rgba(255,255,255,.08), 0 6px 18px rgba(0,0,0,.35);
+}
+/* cam yansıması: imleçle birlikte kayar, oynatırken söner */
+.v3d-parlama{
+  position:absolute; inset:10px; border-radius:13px; pointer-events:none; transform:translateZ(15px);
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.14) calc(var(--v3d-px) - 12%), rgba(255,255,255,.04) var(--v3d-px), transparent calc(var(--v3d-px) + 14%));
+  transition:opacity .5s ease;
+}
+.v3d-sahne:hover .v3d-cerceve{ transition:transform .18s ease-out, box-shadow .55s ease; }
+
+/* oynatılırken: düz ve okunaklı */
+.v3d-sahne.v3d-oynuyor .v3d-cerceve{ transform:none; }
+.v3d-sahne.v3d-oynuyor .v3d-parlama{ opacity:0; }
+.v3d-sahne.v3d-oynuyor::after{ opacity:.55; transform:scaleX(.96); }
+
+/* tam ekranda hiçbir dönüşüm uygulanmaz */
+.v3d-cerceve > video:fullscreen{ transform:none; border-radius:0 !important; }
+
+/* dokunmatik ekran / telefon: eğim yok, derinlik gölgesi kalır */
+@media (hover: none), (max-width:719px){
+  .v3d-sahne{ --v3d-rx:0deg; --v3d-ry:0deg; margin:14px 0 26px; }
+  .v3d-cerceve{ padding:7px; border-radius:18px; }
+  .v3d-cerceve > video{ border-radius:11px !important; transform:none; }
+  .v3d-parlama{ inset:7px; border-radius:11px; }
+  .v3d-sahne::after{ bottom:-20px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .v3d-sahne{ --v3d-rx:0deg !important; --v3d-ry:0deg !important; }
+  .v3d-cerceve, .v3d-parlama, .v3d-sahne::after{ transition:none; }
+}
+@media print{
+  .v3d-cerceve{ transform:none; box-shadow:none; background:none; padding:0; }
+  .v3d-parlama, .v3d-sahne::after{ display:none; }
+}

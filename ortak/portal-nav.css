@@ -524,3 +524,131 @@ html.ks-kok.ks-uygula .u41o-btn-ikincil{ background:var(--ks-yuzey); color:var(-
   html.ks-kok.ks-uygula .omg-yan-oge .gb-kart-ikon{ font-size:1.2em; }
 }
 @media print{ html.ks-kok .ks-sayfa-bas{ display:none !important; } }
+
+/* ======================================================================
+   ÖLÇ (Değerlendirme) SAYFASI — sınav alanı (2026-11-07, studeo)
+   ----------------------------------------------------------------------
+   data-asama="olcme" sayfalarında kök: .ks-kok.ks-uygula.ks-olc
+   Oyun Merkezi ile aynı başlık kartı/sayfa sonu; burada yalnızca sınav
+   alanının görünümü: bölüm sekmeleri, soru kartı, okunaklı seçenekler,
+   anlaşılır sonuç kutusu, yazılı kartları. Sorular, cevaplar ve puanlama
+   sayfanın kendi betiğindedir, değişmez.
+====================================================================== */
+/* 1) Bölüm menüsü → yatay sekmeler (Konu Tekrarı Testi | Yazılı Sınavlar …) */
+html.ks-kok.ks-olc #oyun-gruplari .oyun-grubu.omg-tekli-menu.aktif{
+  display:flex; flex-direction:row; flex-wrap:wrap; align-items:stretch; gap:8px; max-width:none; padding:10px;
+}
+html.ks-kok.ks-olc .omg-tekli-menu > .geri-btn{ display:none; }   /* "Üniteye Dön" üst şeritte ve sayfa sonunda var */
+html.ks-kok.ks-olc .omg-tekli-menu > button:not(.geri-btn){
+  flex:1 1 200px; width:auto; min-height:48px; justify-content:center; text-align:center;
+  padding:10px 16px; border:1px solid var(--ks-kenar); border-left-width:1px; border-radius:var(--ks-r);
+  background:var(--ks-yuzey); color:var(--ks-baslik); box-shadow:none; transform:none;
+  font-family:var(--ks-font); font-size:15px; font-weight:800; cursor:pointer;
+}
+html.ks-kok.ks-olc .omg-tekli-menu > button:not(.geri-btn):hover{
+  border-color:var(--ks-lacivert2); background:var(--ks-yuzey2); box-shadow:none; transform:none;
+}
+html.ks-kok.ks-olc .omg-tekli-menu > button.aktif{
+  background:var(--ks-baslik) !important; border-color:var(--ks-baslik) !important; color:#fff !important; box-shadow:none !important;
+}
+html.ks-kok.ks-olc[data-tema="dark"] .omg-tekli-menu > button.aktif{
+  background:var(--ks-turkuaz) !important; border-color:var(--ks-turkuaz) !important; color:#04141a !important;
+}
+html.ks-kok.ks-olc .omg-tekli-menu > button:focus-visible{ outline:3px solid var(--ks-turkuaz); outline-offset:2px; }
+
+/* 2) Test durumu: soru sayacı · puan · zorluk tek satırda */
+html.ks-kok.ks-olc main .oyun-bilgi{
+  justify-content:flex-start; align-items:center; gap:10px 22px; margin:14px 0 10px; padding:10px 14px;
+  font-size:15px; background:var(--ks-yuzey2); border:1px solid var(--ks-kenar); border-radius:var(--ks-r);
+}
+html.ks-kok.ks-olc main .oyun-bilgi > span[id$="Zorluk"]:not(:empty){
+  margin-left:auto; padding:3px 10px; border-radius:999px; font-size:13px;
+  background:var(--ks-yuzey); border:1px solid var(--ks-kenar); color:var(--ks-metin);
+}
+/* 3) Soru kartı */
+html.ks-kok.ks-olc main section > .balon-durum:not(:empty){
+  text-align:left; font-size:1.12em; line-height:1.55; font-weight:800; color:var(--ks-baslik);
+  background:var(--ks-yuzey); border:1px solid var(--ks-kenar); border-left:4px solid var(--ks-vurgu);
+  border-radius:var(--ks-r); padding:14px 16px; margin:10px 0 12px;
+}
+/* 4) Seçenekler: geniş, sola hizalı, rahat okunur */
+html.ks-kok.ks-olc main [id$="Secenekler"]{ max-width:none !important; gap:8px !important; }
+html.ks-kok.ks-olc main [id$="Secenekler"] > .merdiven-secenek{
+  text-align:left; padding:13px 16px; min-height:50px; font-size:1.02em; line-height:1.45; font-weight:700;
+  border-width:1px; border-radius:var(--ks-r); font-family:var(--ks-font); display:flex; align-items:center;
+}
+html.ks-kok.ks-olc main [id$="Secenekler"] > .merdiven-secenek:not(.dogru):not(.yanlis){
+  background:var(--ks-yuzey); border-color:var(--ks-kenar); color:var(--ks-metin);
+}
+html.ks-kok.ks-olc main [id$="Secenekler"] > .merdiven-secenek:not(.dogru):not(.yanlis):hover{
+  border-color:var(--ks-lacivert2); background:var(--ks-yuzey2);
+}
+html.ks-kok.ks-olc main [id$="Secenekler"] > .merdiven-secenek.dogru{ background:#e7f6ed; border-color:#2f9e5b; color:#14532d; }
+html.ks-kok.ks-olc main [id$="Secenekler"] > .merdiven-secenek.yanlis{ background:#fdecee; border-color:#d64550; color:#7f1d1d; }
+html.ks-kok.ks-olc main [id$="Secenekler"] > .merdiven-secenek.dogru::after{ content:"✓"; margin-left:auto; padding-left:10px; font-weight:900; }
+html.ks-kok.ks-olc main [id$="Secenekler"] > .merdiven-secenek.yanlis::after{ content:"✗"; margin-left:auto; padding-left:10px; font-weight:900; }
+html.ks-kok.ks-olc[data-tema="dark"] main [id$="Secenekler"] > .merdiven-secenek.dogru{ background:#123a26; border-color:#3fbf7f; color:#c9f2da; }
+html.ks-kok.ks-olc[data-tema="dark"] main [id$="Secenekler"] > .merdiven-secenek.yanlis{ background:#3d161b; border-color:#e86b75; color:#ffd5d9; }
+/* 5) Sonuç ekranı */
+html.ks-kok.ks-olc main [id$="Sonuc"]:not(:empty){
+  font-size:1.1em; line-height:1.7; color:var(--ks-baslik); text-align:center;
+  background:var(--ks-turkuaz-acik); border:1px solid var(--ks-kenar); border-top:4px solid var(--ks-turkuaz);
+  border-radius:var(--ks-r-b); padding:18px 20px; margin:16px 0 4px;
+}
+/* 6) Yazılı sınav kartları */
+html.ks-kok.ks-olc main .yazili-izgara{ grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:10px; }
+html.ks-kok.ks-olc main .yazili-kart{
+  background:var(--ks-yuzey); border:1px solid var(--ks-kenar); border-radius:var(--ks-r-b);
+  box-shadow:none; transform:none; padding:14px; color:var(--ks-metin);
+}
+html.ks-kok.ks-olc main .yazili-kart.yk-klasik{ border-style:dashed; }
+html.ks-kok.ks-olc main .yazili-kart:hover{ border-color:var(--ks-turkuaz); box-shadow:var(--ks-golge-2); transform:none; }
+html.ks-kok.ks-olc main .yazili-kart h3{ color:var(--ks-baslik); font-weight:800; }
+html.ks-kok.ks-olc main .yazili-kart p{ color:var(--ks-metin2); }
+html.ks-kok.ks-olc main .yazili-kart:focus-visible{ outline:3px solid var(--ks-turkuaz); outline-offset:2px; }
+/* 7) Sayfa sonu: ünite raporu kartın içinde, sade */
+html.ks-kok .ks-rapor{ background:transparent; border:0; padding:0; margin:8px 0 14px; box-shadow:none; }
+html.ks-kok .ks-rapor .pn-alt-baslik{ display:none; }
+html.ks-kok .ks-rapor .pn-rapor-satir{ gap:6px; }
+html.ks-kok .ks-rapor .pn-rapor-oge{
+  padding:4px 10px; border-radius:999px; background:var(--ks-yuzey2); border:1px solid var(--ks-kenar); color:var(--ks-metin2); font-size:13px;
+}
+html.ks-kok .ks-rapor .pn-rapor-oge-ok{ color:var(--ks-turkuaz-koyu); border-color:var(--ks-turkuaz); background:var(--ks-turkuaz-acik); }
+html.ks-kok .ks-rapor .pn-rapor-durum{ color:var(--ks-metin); font-size:14px; margin-top:4px; }
+html.ks-kok button.ks-aksiyon{ font-family:var(--ks-font); cursor:pointer; }
+/* 8) "Eksiklerim ve Tekrar Planım" kutusu: ortak kart dili (konu + ölç sayfaları) */
+html.ks-kok .od-ozet{
+  max-width:860px; background:var(--ks-yuzey); border:1px solid var(--ks-kenar); border-top:3px solid var(--ks-vurgu);
+  border-radius:var(--ks-r-b); box-shadow:var(--ks-golge-1); color:var(--ks-metin); font-family:var(--ks-font);
+}
+html.ks-kok .od-ozet .od-baslik{ color:var(--ks-baslik); }
+html.ks-kok .od-ozet .od-yol, html.ks-kok .od-ozet .od-kucuk{ color:var(--ks-metin2); }
+@media (max-width:640px){
+  html.ks-kok.ks-olc .omg-tekli-menu > button:not(.geri-btn){ flex:1 1 140px; font-size:14px; padding:8px 10px; }
+  html.ks-kok.ks-olc main .oyun-bilgi > span[id$="Zorluk"]:not(:empty){ margin-left:0; }
+  html.ks-kok.ks-olc main .yazili-izgara{ grid-template-columns:1fr 1fr; }
+  html.ks-kok .od-ozet{ margin-left:12px; margin-right:12px; }
+}
+/* 9) Boş sonuç/soru alanı yer kaplamasın; testi başlatan düğme ortak birincil renkte */
+html.ks-kok.ks-olc main [id$="Sonuc"]:empty{ min-height:0; margin:0; }
+html.ks-kok.ks-olc main section > .balon-durum:empty{ min-height:0; margin:0; }
+html.ks-kok.ks-olc main button.eylem[onclick$="Baslat()"]{ background:var(--ks-baslik) !important; border-color:var(--ks-baslik) !important; color:#fff !important; }
+html.ks-kok.ks-olc[data-tema="dark"] main button.eylem[onclick$="Baslat()"]{ background:var(--ks-turkuaz) !important; border-color:var(--ks-turkuaz) !important; color:#04141a !important; }
+/* 10) Oyun kartları: zorluk etiketi renkle ayrılır (Kolay yeşil · Orta sarı · Zor kırmızı) */
+html.ks-kok.ks-uygula .omg-zorluk[data-zorluk]{ display:inline-flex; align-items:center; gap:6px; border:1px solid transparent; }
+html.ks-kok.ks-uygula .omg-zorluk[data-zorluk]::before{ content:""; width:8px; height:8px; border-radius:50%; background:currentColor; }
+html.ks-kok.ks-uygula .omg-zorluk[data-zorluk="kolay"]{ background:#e7f6ed; color:#1e7a46; border-color:#bfe5cd; }
+html.ks-kok.ks-uygula .omg-zorluk[data-zorluk="orta"]{ background:#fdf3dc; color:#8a5a00; border-color:#f1d9a0; }
+html.ks-kok.ks-uygula .omg-zorluk[data-zorluk="zor"]{ background:#fdecee; color:#a12a35; border-color:#f3c2c7; }
+html.ks-kok.ks-uygula[data-tema="dark"] .omg-zorluk[data-zorluk="kolay"]{ background:#123a26; color:#8fe0b2; border-color:#1f5a3a; }
+html.ks-kok.ks-uygula[data-tema="dark"] .omg-zorluk[data-zorluk="orta"]{ background:#3a2e10; color:#f3cf7a; border-color:#5a4718; }
+html.ks-kok.ks-uygula[data-tema="dark"] .omg-zorluk[data-zorluk="zor"]{ background:#3d161b; color:#ffb3ba; border-color:#62262e; }
+/* 11) Koyu tema — Ölç sayfası: sınav alanı koyu kartlarla çizildiği için açık "sayfa" zemini kullanılmaz */
+html.ks-kok.ks-olc[data-tema="dark"] main{ color-scheme:dark; background:transparent; color:var(--ks-metin); box-shadow:none; }
+html.ks-kok.ks-olc[data-tema="dark"] main > section > h2:first-child{ border-bottom-color:var(--ks-kenar); }
+html.ks-kok.ks-uygula .ogr-giris-karti{ background:var(--ks-yuzey2); border-color:var(--ks-kenar); }
+html.ks-kok.ks-uygula .ogr-giris-metin b{ color:var(--ks-baslik); }
+html.ks-kok.ks-uygula .ogr-giris-metin span{ color:var(--ks-metin2); }
+html.ks-kok.ks-uygula .ogr-giris-ikon{ background:var(--ks-lacivert2); }
+/* sayfanın kendi açık zeminli bilgi kutuları (Öğrenme Çıktıları, Kavram Haritası …) koyu temada da koyu yazıyla okunur */
+html.ks-kok.ks-olc[data-tema="dark"] main .kutu-panel{ color:#22333b; color-scheme:light; }
