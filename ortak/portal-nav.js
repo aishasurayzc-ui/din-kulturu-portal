@@ -333,7 +333,13 @@ function temaOku(){
   try{ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
   catch(e){ return 'light'; }
 }
-function temaUygula(t){ document.documentElement.setAttribute('data-tema', t); }
+function temaUygula(t){
+  var kok = document.documentElement;
+  kok.setAttribute('data-tema', t);
+  /* Uygula sayfasındaki oyunlar koyu temayı data-theme ile okur (ortak/oyun-merkezi.css):
+     portalın teması onlara da aynen yansısın. */
+  if(kok.classList.contains('ks-uygula')) kok.setAttribute('data-theme', t);
+}
 
 /* ortak/ klasörünün adresi (konu-dinle.js'i bu betiğin yanından yüklemek için) */
 var ORTAK_KLASOR = (document.currentScript && document.currentScript.src)
@@ -343,9 +349,11 @@ var ORTAK_KLASOR = (document.currentScript && document.currentScript.src)
    sınıfı ve temayı ayarla: eski başlık bir an bile görünüp kaybolmasın. */
 (function(){
   var m = document.getElementById('portalNav');
-  if(!m || m.dataset.asama!=='ogren') return;
+  if(!m || (m.dataset.asama!=='ogren' && m.dataset.asama!=='oyun')) return;
   var kok = document.documentElement;
   kok.classList.add('ks-kok');
+  /* 2026-11-07 — Uygula (Oyun Merkezi) sayfası da aynı ortak düzeni kullanır */
+  if(m.dataset.asama==='oyun') kok.classList.add('ks-uygula');
   kok.setAttribute('data-ks-sinif', m.dataset.sinif || '');
   temaUygula(temaOku());
 })();
@@ -386,6 +394,7 @@ function ksUstHtml(sinif, unite){
         '<a class="ks-ust-link" href="'+ANA_SAYFA+'">Ana Sayfa</a>'+
         '<a class="ks-ust-link" href="'+sinifSayfasi(sinif, unite)+'">'+sinif+'. Sınıf</a>'+
         '<a class="ks-ust-link" href="'+dosyaAdi(unite,'hub')+'">Üniteye Dön</a>'+
+        ksIngilizceLink()+
       '</nav>'+
       '<div class="ks-ust-arac">'+modDugme+
         '<button type="button" class="ks-tema" data-pn="tema" aria-pressed="'+(tema==='dark')+'" '+
@@ -396,7 +405,7 @@ function ksUstHtml(sinif, unite){
   '</div>';
 }
 
-function ksKonumHtml(sinif, unite){
+function ksKonumHtml(sinif, unite, asama){
   var uAd = kacis(sayfaUniteAdi(sinif, unite));
   return '<div class="ks-konum">'+
     '<nav class="ks-kirinti" aria-label="Bulunduğun yer">'+
@@ -407,7 +416,81 @@ function ksKonumHtml(sinif, unite){
         '<li><span aria-current="page">'+uAd+'</span></li>'+
       '</ol>'+
     '</nav>'+
-    cubukHtml(sinif, unite, 'ogren')+
+    cubukHtml(sinif, unite, asama || 'ogren')+
+  '</div>';
+}
+
+/* ————— UYGULA (Oyun Merkezi) sayfası — 2026-11-07 —————
+   Konuyu Öğren sayfasıyla aynı bileşenler: üst şerit + konum/7 adım çubuğu +
+   başlık kartı + sayfa sonu. Başlık ve açıklama sayfanın KENDİ metninden
+   (eski başlık ve "Oyun Merkezi" bandı) okunur; bu alanlar DOM'da kalır. */
+function ksIngilizceLink(){
+  if(!document.documentElement.classList.contains('ks-uygula')) return '';
+  var en = document.querySelector('body > header a[lang="en"][href]');
+  return en ? '<a class="ks-ust-link" lang="en" href="'+kacis(en.getAttribute('href'))+'">English</a>' : '';
+}
+function ksUygulaBasHtml(sinif, unite){
+  var h1 = document.querySelector('body > header h1');
+  var ad = (h1 ? emojiTemizle(h1.textContent) : '') || uniteAdi(sinif, unite);
+  var altP = document.querySelector('body > section.hero .hero-alt');
+  var alt = altP ? altP.textContent.trim() : '';
+  var oyunlar = {};
+  Array.prototype.forEach.call(document.querySelectorAll('#oyun-gruplari .omg-oyun-kart'), function(k){
+    var m = /goster\('([^']+)'/.exec(k.getAttribute('onclick') || '');
+    oyunlar[m ? m[1] : k.textContent.trim()] = true;
+  });
+  var oyunSay = Object.keys(oyunlar).length;
+  var katSay = document.querySelectorAll('#oyun-gruplari .omg-yan-menu')[0]
+    ? document.querySelectorAll('#oyun-gruplari .omg-yan-menu')[0].querySelectorAll('.omg-yan-oge').length : 0;
+  return '<section class="ks-sayfa-bas" aria-labelledby="ksSayfaBaslik">'+
+    '<div class="ks-sayfa-bas-ic">'+
+      '<p class="ks-sayfa-ust"><span class="ks-sayfa-etiket">'+sinif+'. Sınıf · '+unite+'. Ünite</span>'+
+        '<span class="ks-sayfa-adim">4. adım · Uygula</span></p>'+
+      '<h1 class="ks-sayfa-baslik" id="ksSayfaBaslik">Dijital Oyunlar <span class="ks-sayfa-ayrac" aria-hidden="true">·</span> <span class="ks-sayfa-unite">'+kacis(ad)+'</span></h1>'+
+      (alt ? '<p class="ks-sayfa-aciklama">'+kacis(alt)+'</p>' : '')+
+      ((oyunSay || katSay) ? '<div class="ks-hero-meta">'+
+        (oyunSay ? '<span class="ks-meta-cip">🎮 '+oyunSay+' oyun</span>' : '')+
+        (katSay ? '<span class="ks-meta-cip">🗂️ '+katSay+' kategori</span>' : '')+
+      '</div>' : '')+
+    '</div>'+
+  '</section>';
+}
+function ksUygulaAltHtml(sinif, unite){
+  var onceki = unite>1 ? unite-1 : null;
+  var sonraki = unite<UNITE_SAYISI[sinif] ? unite+1 : null;
+  var lgs = sinif===8
+    ? '<a class="ks-aksiyon" href="../sinav-merkezi/lgs-hazirlik/index.html?kart=konular&sekme=kazanim-testleri&unite=unite'+unite+'"><span aria-hidden="true">🎯</span> LGS ile Pekiştir</a>'
+    : '';
+  var uniteKarti = function(no, yon){
+    return '<a class="ks-unite-kart ks-unite-kart--'+yon+'" href="'+dosyaAdi(no,'oyun')+'#oyun-gruplari">'+
+      '<span class="ks-uk-yon">'+(yon==='onceki' ? '← Önceki ünitenin oyunları' : 'Sonraki ünitenin oyunları →')+'</span>'+
+      '<span class="ks-uk-ad">'+no+'. Ünite · '+kacis(uniteAdi(sinif,no))+'</span></a>';
+  };
+  return '<div class="ks-alt" role="region" aria-label="Sayfa sonu">'+
+    '<div class="ks-alt-ic">'+
+      '<div class="ks-alt-kart">'+
+        '<p class="ks-on-etiket">Sıradaki adım · 6. Ölç</p>'+
+        '<p class="ks-alt-baslik">Oyunlarla pekiştirdin mi?</p>'+
+        '<p class="ks-alt-aciklama">Şimdi öğrendiklerini değerlendir. Eksik kaldığın yer olursa konuya dönüp tekrar edebilirsin.</p>'+
+        '<div class="ks-aksiyonlar">'+
+          '<a class="ks-aksiyon ks-aksiyon--birincil" href="'+dosyaAdi(unite,'olcme')+'"><span aria-hidden="true">📝</span> Öğrenmeni Değerlendir</a>'+
+          '<a class="ks-aksiyon" href="'+dosyaAdi(unite,'ogren')+'"><span aria-hidden="true">📖</span> Konuyu Tekrar Et</a>'+
+          '<a class="ks-aksiyon" href="'+oyunHedefi(sinif,unite,'etkinlik')+'"><span aria-hidden="true">🎨</span> Sınıf İçi Etkinlik</a>'+
+          lgs+
+        '</div>'+
+      '</div>'+
+      '<div class="ks-uniteler">'+
+        (onceki ? uniteKarti(onceki,'onceki') : '<span class="ks-unite-bos"></span>')+
+        (sonraki ? uniteKarti(sonraki,'sonraki')
+          : '<a class="ks-unite-kart ks-unite-kart--sonraki" href="'+sinifSayfasi(sinif)+'"><span class="ks-uk-yon">Sınıfın son ünitesi</span><span class="ks-uk-ad">'+sinif+'. Sınıf ünitelerine dön →</span></a>')+
+      '</div>'+
+      '<div class="ks-donus">'+
+        '<a class="ks-donus-link" href="'+sinifSayfasi(sinif, unite)+'">⌂ Ana Sayfaya Dön</a>'+
+        '<a class="ks-donus-link" href="'+dosyaAdi(unite,'hub')+'">↩ Üniteye Dön</a>'+
+        '<a class="ks-donus-link" href="#" data-ks="basa">↑ Sayfanın başına</a>'+
+      '</div>'+
+      '<p class="ks-imza">Ayşe Yazıcı · Din Kültürü ve Ahlak Bilgisi</p>'+
+    '</div>'+
   '</div>';
 }
 
@@ -630,6 +713,7 @@ function ksAktifIsaretle(o){
     else if(sag > liste.scrollLeft + liste.clientWidth) liste.scrollLeft = sag - liste.clientWidth + 8;
   }
   var idx = ks.ogeler.indexOf(o);
+  try{ document.dispatchEvent(new CustomEvent('ks:aktif', {detail:{id:o.id, sira:idx}})); }catch(e){}
   var oklar = document.querySelectorAll('.ks-bn-ok');
   if(oklar.length===2){
     oklar[0].disabled = idx<=0;
@@ -780,6 +864,36 @@ function ksKur(sinif, unite){
   olcuGuncelle();
   ksKaydirmaIzle();
 
+  /* 2026-11-07 — Ortak konu sayfası katmanı (ortak/konu-sayfa.js): masaüstünde
+     soldaki dikey konu menüsü, okuma ilerlemesi ve bölüm sonu gezinmesi.
+     İçeriğe dokunmaz; yalnızca bu arayüz üzerinden bölümlere gider. */
+  window.KS_API = {
+    ogeler: function(){ return ks.ogeler.slice(); },
+    kategoriler: KS_KATEGORILER,
+    aktif: function(){ return ks.aktif; },
+    git: function(el){ ksHedefeGit(el, true); },
+    olcu: function(){ olcuGuncelle(); ksKaydirmaIzle(); }
+  };
+  if(!document.querySelector('script[src*="konu-sayfa.js"]')){
+    var ksCss = document.createElement('link');
+    ksCss.rel = 'stylesheet'; ksCss.href = ORTAK_KLASOR + 'konu-sayfa.css';
+    document.head.appendChild(ksCss);
+    var ksJs = document.createElement('script');
+    ksJs.src = ORTAK_KLASOR + 'konu-sayfa.js';
+    document.body.appendChild(ksJs);
+  }
+  /* 2026-11-07 — Ders akışı (ortak/ders-akisi.js): video altındaki her konuyu
+     6 öğrenme aşamasına göre (Öğren → Kavram → Görsel → Ayet/Hadis → Etkinlik →
+     Kontrol) düzenler. Parçalar kendi konusunda kalır; metin değişmez. */
+  if(!document.querySelector('script[src*="ders-akisi.js"]')){
+    var dakCss = document.createElement('link');
+    dakCss.rel = 'stylesheet'; dakCss.href = ORTAK_KLASOR + 'ders-akisi.css';
+    document.head.appendChild(dakCss);
+    var dakJs = document.createElement('script');
+    dakJs.src = ORTAK_KLASOR + 'ders-akisi.js';
+    document.body.appendChild(dakJs);
+  }
+
   /* Adresle gelinen bölüm (#slayt, #ozet8, #ka-konu-2, #ktz1 …): gizli bir
      bölümdeyse aç ve oraya git. Ana portaldaki derin bağlantılar bunu kullanır. */
   function adrestekiHedef(){
@@ -847,13 +961,17 @@ function yenidenCiz(){
   var asama = mount.dataset.asama || 'sinif';
   if(!sinif) return;
 
-  var ogrenDuzeni = asama==='ogren' && document.documentElement.classList.contains('ks-kok');
+  var ksDuzeni = document.documentElement.classList.contains('ks-kok');
+  var ogrenDuzeni = asama==='ogren' && ksDuzeni;
+  var uygulaDuzeni = asama==='oyun' && ksDuzeni;
   mount.innerHTML = ogrenDuzeni
-    ? ksUstHtml(sinif,unite) + ksKonumHtml(sinif,unite)
-    : modSatiriHtml() + kirintiHtml(sinif,unite,asama) + cubukHtml(sinif,unite,asama) + geriBarHtml(sinif,unite,asama);
+    ? ksUstHtml(sinif,unite) + ksKonumHtml(sinif,unite,'ogren')
+    : uygulaDuzeni
+      ? ksUstHtml(sinif,unite) + ksKonumHtml(sinif,unite,'oyun') + ksUygulaBasHtml(sinif,unite)
+      : modSatiriHtml() + kirintiHtml(sinif,unite,asama) + cubukHtml(sinif,unite,asama) + geriBarHtml(sinif,unite,asama);
   mount.classList.add('pn-hazir');
 
-  var altBar = ogrenDuzeni ? ksAltHtml(sinif,unite) : altBarHtml(sinif,unite,asama);
+  var altBar = ogrenDuzeni ? ksAltHtml(sinif,unite) : uygulaDuzeni ? ksUygulaAltHtml(sinif,unite) : altBarHtml(sinif,unite,asama);
   if(altKutu && altKutu.parentNode) altKutu.parentNode.removeChild(altKutu);
   altKutu = null;
   if(altBar){
@@ -892,6 +1010,12 @@ function olustur(){
   }
 
   document.addEventListener('click', tiklamaYonet);
+  if(asama==='oyun' && document.documentElement.classList.contains('ks-kok')){
+    temaUygula(document.documentElement.getAttribute('data-tema')==='dark' ? 'dark' : 'light');
+    document.addEventListener('click', function(e){
+      if(e.target.closest('[data-ks="basa"]')){ e.preventDefault(); window.scrollTo({top:0, behavior: hareketAzMi() ? 'auto' : 'smooth'}); }
+    });
+  }
   /* Konu anlatım sayfası: bölüm menüsü, ünite başlığı ve kaydırma takibi.
      Sayfanın kendi DOMContentLoaded betikleri (Öğrenme Yolu vb.) önce
      çalışsın diye bir tur sonra kurulur. */

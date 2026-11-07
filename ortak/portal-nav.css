@@ -141,7 +141,7 @@ html.ks-kok, html.ks-kok body{ overflow-x:clip; }
 /* Eski, birbirini tekrar eden başlık alanları (DOM'da kalır) */
 html.ks-kok body > header,
 html.ks-kok body > section.hero,
-html.ks-kok body > #oyun-gruplari{ display:none !important; }
+html.ks-kok:not(.ks-uygula) body > #oyun-gruplari{ display:none !important; }
 
 /* ——— 1) Üst gezinme şeridi (ana sayfadaki .ust-serit ile aynı dil) ——— */
 html.ks-kok .ks-ust{
@@ -378,3 +378,149 @@ html.ks-kok .ks-imza{ margin:4px 0 0; text-align:center; font-size:12.5px; color
 @media print{
   html.ks-kok .ks-ust, html.ks-kok .ks-bn, html.ks-kok .ks-konum, html.ks-kok .ks-alt{ display:none !important; }
 }
+
+
+/* ======================================================================
+   UYGULA (Oyun Merkezi) SAYFASI — ortak tasarım dili (2026-11-07)
+   ----------------------------------------------------------------------
+   data-asama="oyun" sayfalarında portal-nav.js kök öğeye .ks-kok.ks-uygula
+   ekler. Konuyu Öğren sayfasıyla aynı üst şerit, konum çubuğu, başlık kartı
+   ve sayfa sonu kullanılır. Oyunların kendi stilleri (ortak/oyun-merkezi.css)
+   silinmez; yalnızca oyun motorunun renk/ölçü değişkenleri ortak kimliğe
+   (ortak/kimlik.css → --ks-*) bağlanır ve kart/düğme aileleri hizalanır.
+   Oyun mantığı, sorular, cevaplar ve puanlama değişmez.
+====================================================================== */
+/* 1) Oyun motorunun değişkenleri → ortak kimlik */
+html.ks-kok.ks-uygula{
+  --navy:var(--ks-baslik); --mavi:var(--ks-lacivert2); --turkuaz:var(--ks-turkuaz); --acik:var(--ks-turkuaz-acik);
+  --bg:var(--ks-zemin); --acikgri:var(--ks-yuzey2);
+  --color-surface:var(--ks-yuzey); --color-surface-alt:var(--ks-yuzey2);
+  --color-text:var(--ks-metin); --color-text-muted:var(--ks-metin2); --color-border:var(--ks-kenar);
+  --color-selected:var(--ks-lacivert2); --color-progress:var(--ks-turkuaz);
+  --radius-sm:var(--ks-r); --radius-md:var(--ks-r-b); --radius-lg:14px;
+  --shadow-sm:var(--ks-golge-1); --shadow-md:var(--ks-golge-2); --shadow-lg:0 6px 18px rgba(19,41,75,.10);
+  --gb-font:var(--ks-font); --gb-primary:var(--ks-lacivert2); --gb-primary-koyu:var(--ks-baslik); --gb-secondary:var(--ks-turkuaz);
+  --gb-bg:var(--ks-zemin); --gb-text:var(--ks-metin); --gb-text-mute:var(--ks-metin2); --gb-border:var(--ks-kenar);
+  --gb-radius-card:var(--ks-r-b); --gb-radius-btn:var(--ks-r);
+  --gb-shadow:var(--ks-golge-1); --gb-shadow-hover:var(--ks-golge-2);
+}
+html.ks-kok.ks-uygula[data-tema="dark"]{ --shadow-lg:0 6px 18px rgba(0,0,0,.40); }
+html.ks-kok.ks-uygula body{
+  font-family:var(--ks-font); color:var(--ks-metin); background:var(--ks-zemin);
+}
+html.ks-kok.ks-uygula{ scroll-padding-top:68px; }
+@media (max-width:860px){ html.ks-kok.ks-uygula{ scroll-padding-top:12px; } }
+/* eski başlık, "Oyun Merkezi" bandı ve "Sıradaki Aşama" kutusu DOM'da kalır */
+html.ks-kok.ks-uygula body > .pn-alt{ display:none !important; }
+
+/* 2) Sayfa başlık kartı (Konuyu Öğren'deki ünite başlık kartıyla aynı aile) */
+html.ks-kok .ks-sayfa-bas{ max-width:1100px; margin:14px auto 0; padding:0 20px; font-family:var(--ks-font); }
+html.ks-kok .ks-sayfa-bas-ic{
+  background:var(--ks-yuzey); border:1px solid var(--ks-kenar); border-radius:var(--ks-r-b);
+  box-shadow:var(--ks-golge-2); padding:18px 22px 18px; border-top:4px solid var(--ks-vurgu);
+}
+html.ks-kok .ks-sayfa-ust{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0 0 8px; }
+html.ks-kok .ks-sayfa-etiket{
+  color:#fff; background:var(--ks-vurgu); font-size:11.5px; font-weight:900; letter-spacing:.08em;
+  text-transform:uppercase; padding:4px 10px; border-radius:999px;
+}
+html.ks-kok .ks-sayfa-adim{
+  color:var(--ks-turkuaz-koyu); background:var(--ks-turkuaz-acik); font-size:11.5px; font-weight:900;
+  letter-spacing:.06em; text-transform:uppercase; padding:4px 10px; border-radius:999px;
+}
+html.ks-kok h1.ks-sayfa-baslik{
+  margin:0; color:var(--ks-baslik); font-weight:800; letter-spacing:-.01em; line-height:1.25;
+  font-size:clamp(1.35em,3.2vw,1.75em); font-family:var(--ks-font);
+}
+html.ks-kok .ks-sayfa-ayrac{ color:var(--ks-metin2); font-weight:400; }
+html.ks-kok .ks-sayfa-unite{ color:var(--ks-lacivert2); }
+html.ks-kok .ks-sayfa-aciklama{ margin:6px 0 12px; color:var(--ks-metin2); font-size:15px; }
+html.ks-kok .ks-sayfa-bas .ks-hero-meta{ margin:0; }
+
+/* 3) Oyun menüsü ve kart ızgarası — tek kart ailesi */
+html.ks-kok.ks-uygula #oyun-gruplari{ max-width:1100px; margin:16px auto 0; padding:0 20px; }
+html.ks-kok.ks-uygula #oyun-gruplari .oyun-grubu{
+  background:var(--ks-yuzey); border:1px solid var(--ks-kenar); border-radius:var(--ks-r-b);
+  box-shadow:var(--ks-golge-1); padding:16px; margin:0;
+}
+html.ks-kok.ks-uygula .omg-yan-menu{ background:transparent; border:0; box-shadow:none; }
+html.ks-kok.ks-uygula .omg-yan-baslik{ color:var(--ks-baslik); font-family:var(--ks-font); }
+html.ks-kok.ks-uygula .geri-btn{ color:var(--ks-lacivert2); font-family:var(--ks-font); }
+html.ks-kok.ks-uygula .omg-ses-btn,
+html.ks-kok.ks-uygula .omg-yan-oge{
+  font-family:var(--ks-font); background:var(--ks-yuzey); color:var(--ks-metin);
+  border:1px solid var(--ks-kenar); border-radius:var(--ks-r); box-shadow:none;
+}
+html.ks-kok.ks-uygula .omg-yan-oge:hover,
+html.ks-kok.ks-uygula .omg-ses-btn:hover{ border-color:var(--ks-lacivert2); background:var(--ks-yuzey2); }
+html.ks-kok.ks-uygula .omg-yan-oge.kat-aktif{
+  background:var(--ks-turkuaz-acik) !important; border-color:var(--ks-turkuaz) !important;
+  border-left-color:var(--ks-turkuaz) !important; box-shadow:inset 3px 0 0 var(--ks-turkuaz);
+}
+html.ks-kok.ks-uygula .omg-yan-oge .gb-kart-metin small{ color:var(--ks-metin2); }
+html.ks-kok.ks-uygula .omg-yan-oge b, html.ks-kok.ks-uygula .omg-yan-oge strong{ color:var(--ks-baslik); }
+html.ks-kok.ks-uygula .omg-oyun-kart{
+  font-family:var(--ks-font); background:var(--ks-yuzey); border:1px solid var(--ks-kenar);
+  border-radius:var(--ks-r-b); box-shadow:var(--ks-golge-1);
+}
+html.ks-kok.ks-uygula .omg-oyun-kart:hover{ transform:translateY(-2px); border-color:var(--ks-turkuaz); box-shadow:var(--ks-golge-2); }
+html.ks-kok.ks-uygula .omg-oyun-kart h4{ color:var(--ks-baslik); font-weight:800; }
+html.ks-kok.ks-uygula .omg-oyun-kart p{ color:var(--ks-metin2); }
+html.ks-kok.ks-uygula .omg-zorluk{ background:var(--ks-yuzey2); color:var(--ks-metin2); }
+html.ks-kok.ks-uygula .omg-oyna-ok{ color:var(--ks-lacivert2); }
+html.ks-kok.ks-uygula .omg-oyun-kart:focus-visible,
+html.ks-kok.ks-uygula .omg-yan-oge:focus-visible{ outline:3px solid var(--ks-turkuaz); outline-offset:2px; }
+
+/* 4) Açılan oyun alanı — aynı kart, başlık ve düğme dili */
+html.ks-kok.ks-uygula main{ max-width:1100px; margin:16px auto 0; padding:0 20px; font-family:var(--ks-font); }
+html.ks-kok.ks-uygula main > section.aktif{
+  background:var(--ks-yuzey); border:1px solid var(--ks-kenar); border-radius:var(--ks-r-b);
+  box-shadow:var(--ks-golge-1); padding:20px 22px 24px;
+}
+html.ks-kok.ks-uygula main > section > h2:first-child{
+  color:var(--ks-baslik); font-weight:800; font-size:clamp(1.25em,2.6vw,1.5em); margin:0 0 12px;
+  padding:0 0 10px; border-bottom:1px solid var(--ks-kenar); text-align:left;
+}
+html.ks-kok.ks-uygula .oyun-amaci{
+  background:var(--ks-turkuaz-acik); color:var(--ks-turkuaz-koyu); border-left:4px solid var(--ks-turkuaz);
+  border-radius:var(--ks-r); font-weight:800;
+}
+html.ks-kok.ks-uygula main .aciklama{
+  background:var(--ks-yuzey2); color:var(--ks-metin); border-left:4px solid var(--ks-lacivert2); border-radius:var(--ks-r);
+}
+html.ks-kok.ks-uygula .oyun-bilgi{ color:var(--ks-baslik); }
+html.ks-kok.ks-uygula .sonuc-kutusu{ color:var(--ks-lacivert2); }
+html.ks-kok.ks-uygula button.eylem,
+html.ks-kok.ks-uygula .lg-btn,
+html.ks-kok.ks-uygula .u41o-btn{
+  font-family:var(--ks-font); font-weight:800; border-radius:var(--ks-r);
+  background:var(--ks-baslik); color:#fff; border:1px solid var(--ks-baslik); box-shadow:none;
+}
+html.ks-kok.ks-uygula button.eylem:hover,
+html.ks-kok.ks-uygula .lg-btn:hover,
+html.ks-kok.ks-uygula .u41o-btn:hover{ background:var(--ks-lacivert2); border-color:var(--ks-lacivert2); transform:none; }
+html.ks-kok.ks-uygula[data-tema="dark"] button.eylem,
+html.ks-kok.ks-uygula[data-tema="dark"] .lg-btn,
+html.ks-kok.ks-uygula[data-tema="dark"] .u41o-btn{ background:var(--ks-turkuaz); border-color:var(--ks-turkuaz); color:#04141a; }
+html.ks-kok.ks-uygula button.eylem:focus-visible{ outline:3px solid var(--ks-turkuaz); outline-offset:2px; }
+html.ks-kok.ks-uygula .u41o-btn-ikincil{ background:var(--ks-yuzey); color:var(--ks-baslik); border-color:var(--ks-kenar); }
+
+/* 5) Telefon */
+@media (max-width:719px){
+  html.ks-kok .ks-sayfa-bas, html.ks-kok.ks-uygula #oyun-gruplari, html.ks-kok.ks-uygula main{ padding-left:12px; padding-right:12px; }
+  html.ks-kok .ks-sayfa-bas-ic{ padding:14px 16px; }
+  html.ks-kok.ks-uygula #oyun-gruplari .oyun-grubu{ padding:12px; }
+  html.ks-kok.ks-uygula main > section.aktif{ padding:14px 14px 18px; }
+}
+/* telefonda kategori menüsü: tek satırlık, kaydırılabilir yonga dizisi (açıklamalar gizlenir, DOM'da kalır) */
+@media (max-width:640px){
+  html.ks-kok.ks-uygula .omg-yan-menu{ flex:0 0 auto; height:auto; align-items:center; gap:6px; padding-bottom:6px; scrollbar-width:thin; }
+  /* oyun alanları telefonda ekran genişliğini kullanır: kart çerçevesi kaldırılır */
+  html.ks-kok.ks-uygula main > section.aktif{ background:transparent; border:0; box-shadow:none; padding:4px 0 12px; }
+  html.ks-kok.ks-uygula .omg-yan-menu .geri-btn,
+  html.ks-kok.ks-uygula .omg-ses-btn{ flex:0 0 auto; width:auto; white-space:nowrap; min-height:40px; padding:8px 12px; margin:0; }
+  html.ks-kok.ks-uygula .omg-yan-oge{ min-height:40px; padding:8px 12px; gap:8px; border-left-width:1px; }
+  html.ks-kok.ks-uygula .omg-yan-oge .gb-kart-metin small{ display:none; }
+  html.ks-kok.ks-uygula .omg-yan-oge .gb-kart-ikon{ font-size:1.2em; }
+}
+@media print{ html.ks-kok .ks-sayfa-bas{ display:none !important; } }

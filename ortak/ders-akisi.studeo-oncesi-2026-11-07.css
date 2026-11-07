@@ -1,0 +1,85 @@
+/* ======================================================================
+   DERS AKIŞI (2026-11-07) — ortak/ders-akisi.js ile birlikte yüklenir.
+   Yalnızca html.dak-kok altında; içerik kutularının kendi stillerine dokunmaz.
+   Yazılar [data-t]::before ile çizilir (sayfa metnine yazı eklenmez).
+====================================================================== */
+html.dak-kok{
+  --dak-metin:#1c2a3a; --dak-metin-2:#5a6779; --dak-kenar:#dde4ee; --dak-yuzey:#ffffff; --dak-zemin:#f5f7fb;
+  --dak-ogren:#2563eb; --dak-kavram:#7c3aed; --dak-gorsel:#0f8a7e; --dak-ayet:#15803d; --dak-etkinlik:#c2410c; --dak-kontrol:#be123c;
+}
+html.dak-kok[data-tema="dark"]{
+  --dak-metin:#e6ecf3; --dak-metin-2:#a9b6c6; --dak-kenar:#2c3b52; --dak-yuzey:#172233; --dak-zemin:#0f1724;
+  --dak-ogren:#7aa7ff; --dak-kavram:#b69cff; --dak-gorsel:#4fd1c5; --dak-ayet:#5fd38a; --dak-etkinlik:#ff9b6b; --dak-kontrol:#ff7a9a;
+}
+.dak-kok [data-t]::before{ content:attr(data-t); }
+.dak-ogren{ --dak-r:var(--dak-ogren); } .dak-kavram{ --dak-r:var(--dak-kavram); } .dak-gorsel{ --dak-r:var(--dak-gorsel); }
+.dak-ayet{ --dak-r:var(--dak-ayet); } .dak-etkinlik{ --dak-r:var(--dak-etkinlik); } .dak-kontrol{ --dak-r:var(--dak-kontrol); }
+
+/* ---------- videonun altındaki ders akışı şeridi ---------- */
+.dak-serit{ max-width:1100px; margin:18px auto 8px; padding:0 16px; }
+.dak-serit-ic{ background:var(--dak-yuzey); border:1px solid var(--dak-kenar); border-radius:16px; padding:16px 18px; }
+.dak-serit-bas{ display:block; font-weight:800; font-size:1.02rem; color:var(--dak-metin); }
+.dak-serit-alt{ display:block; margin:2px 0 12px; font-size:.86rem; color:var(--dak-metin-2); }
+.dak-serit ol{ list-style:none; margin:0; padding:0; display:flex; gap:6px; flex-wrap:wrap; counter-reset:none; }
+.dak-serit li{ display:flex; align-items:center; }
+.dak-serit li + li::before{ content:"→"; color:var(--dak-metin-2); margin-right:6px; font-weight:700; }
+.dak-serit-adim{
+  display:inline-flex; align-items:center; gap:7px; padding:7px 12px 7px 7px; border-radius:999px; cursor:pointer;
+  background:var(--dak-zemin); border:1px solid var(--dak-kenar); color:var(--dak-metin); font:inherit; font-size:.86rem; font-weight:700;
+}
+.dak-serit-adim:hover{ border-color:var(--dak-r); }
+.dak-serit-adim .dak-adim-no{ background:var(--dak-r); color:#fff; }
+.dak-serit-ikon{ font-size:1rem; line-height:1; }
+.dak-basla{
+  margin-top:12px; padding:9px 16px; border-radius:10px; border:0; cursor:pointer; font:inherit; font-weight:800; font-size:.9rem;
+  background:var(--dak-ogren); color:#fff;
+}
+.dak-serit-adim:focus-visible, .dak-basla:focus-visible, .dak-adim:focus-visible{ outline:3px solid var(--dak-r, var(--dak-ogren)); outline-offset:2px; }
+
+/* ---------- konu başı: adım göstergesi ---------- */
+.dak-adimlar{ margin:14px 0 2px; }
+.dak-adimlar ol{ list-style:none; margin:0; padding:0; display:flex; gap:6px; flex-wrap:wrap; }
+.dak-adim{
+  display:inline-flex; align-items:center; gap:7px; padding:6px 11px 6px 6px; border-radius:999px; cursor:pointer;
+  background:var(--dak-yuzey); border:1px solid var(--dak-kenar); color:var(--dak-metin); font:inherit; font-size:.82rem; font-weight:700;
+}
+.dak-adim:hover{ border-color:var(--dak-r); }
+.dak-adim-no{
+  display:inline-flex; align-items:center; justify-content:center; min-width:22px; height:22px; border-radius:999px;
+  font-size:.72rem; font-weight:900; background:var(--dak-zemin); color:var(--dak-metin-2); border:1px solid var(--dak-kenar);
+}
+.dak-adim .dak-adim-no{ border-color:var(--dak-r); color:var(--dak-r); }
+.dak-adim.dak-simdi{ background:var(--dak-r); border-color:var(--dak-r); color:#fff; }
+.dak-adim.dak-simdi .dak-adim-no{ background:#fff; color:var(--dak-r); border-color:#fff; }
+.dak-adim.dak-gecti .dak-adim-no{ background:var(--dak-r); color:#fff; }
+
+/* ---------- aşama bölümleri ---------- */
+.dak-akis{ display:flex; flex-direction:column; gap:34px; margin:26px 0 8px; }
+.dak-asama{ position:relative; padding-left:18px; border-left:3px solid var(--dak-r); scroll-margin-top:90px; }
+.dak-bas{ display:grid; grid-template-columns:auto 1fr; column-gap:10px; align-items:baseline; margin:0 0 14px; }
+.dak-bas-no{ grid-row:1; grid-column:1; font-size:.72rem; font-weight:900; letter-spacing:.06em; color:var(--dak-r); }
+.dak-bas-ad{ grid-row:1; grid-column:2; font-size:1.18rem; font-weight:800; color:var(--dak-metin); line-height:1.3; }
+.dak-bas-ac{ grid-row:2; grid-column:2; font-size:.85rem; color:var(--dak-metin-2); margin-top:2px; }
+.dak-ic{ display:flex; flex-direction:column; gap:16px; }
+.dak-ic > *{ margin-top:0 !important; margin-bottom:0 !important; }
+.dak-ic > p{ margin:0 !important; }
+.dak-ic > p + p, .dak-ic > p + ul, .dak-ic > ul + p{ margin-top:-6px !important; }
+.dak-bos{ display:none !important; }
+
+/* konu kartı artık yalnızca konu başlığını ve adım göstergesini taşır */
+.dak-konu-kart{ margin-bottom:0 !important; }
+
+@media (max-width:640px){
+  .dak-serit{ padding:0 12px; }
+  .dak-serit-ic{ padding:14px; border-radius:14px; }
+  .dak-serit ol{ flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; scrollbar-width:thin; }
+  .dak-serit li{ flex:none; }
+  .dak-adimlar ol{ flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; scrollbar-width:thin; }
+  .dak-adimlar li{ flex:none; }
+  .dak-asama{ padding-left:12px; }
+  .dak-bas{ grid-template-columns:1fr; }
+  .dak-bas-no, .dak-bas-ad, .dak-bas-ac{ grid-column:1; grid-row:auto; }
+  .dak-bas-ad{ font-size:1.06rem; }
+  .dak-akis{ gap:28px; }
+}
+@media print{ .dak-serit, .dak-adimlar{ display:none !important; } }

@@ -529,12 +529,18 @@
     var liste = m && m.konular && m.konular[konu.no];
     var k = liste && liste[bi];
     var b = parcalar.bolumler[bi];
-    if(!k || !b || k.bozuk) return null;
-    if(k.uyar === undefined){
-      var metinler = parcalar.slice(b.ilk, b.son + 1).map(function(p){ return p.t; });
-      k.uyar = (k.h === ozet(metinler) && k.t.length === metinler.length);
+    if(!liste || !b) return null;
+    var metinler = parcalar.slice(b.ilk, b.son + 1).map(function(p){ return p.t; });
+    var h = ozet(metinler);
+    if(k && !k.bozuk && k.h === h && k.t.length === metinler.length) return k;
+    /* 2026-11-07 — Ders akışı konu içindeki bölümlerin SIRASINI değiştirebilir;
+       metni aynı kalan bölümün kaydı sıra numarasıyla değil, metin özetiyle bulunur
+       (her bölümün kayıttaki başlangıç saniyesi "o" ayrıdır). */
+    for(var j = 0; j < liste.length; j++){
+      var x = liste[j];
+      if(x && !x.bozuk && x.h === h && x.t.length === metinler.length) return x;
     }
-    return k.uyar ? k : null;
+    return null;
   }
   var cal = null;   /* tek <audio> öğesi */
   function calici(){
