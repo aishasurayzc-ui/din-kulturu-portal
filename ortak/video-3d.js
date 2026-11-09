@@ -30,6 +30,14 @@ function kur(video){
   sahne.appendChild(cerceve);
   cerceve.appendChild(video);          /* aynı video öğesi taşınır: oynatma durumu ve olaylar korunur */
   cerceve.appendChild(parlama);
+  /* büyük, kolay fark edilen oynat düğmesi (video dururken görünür) */
+  var oynat = document.createElement('button');
+  oynat.type = 'button';
+  oynat.className = 'v3d-oynat';
+  oynat.setAttribute('aria-label', 'Anlatım videosunu oynat');
+  oynat.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
+  oynat.addEventListener('click', function(){ try{ var p = video.play(); if(p && p.catch) p.catch(function(){}); }catch(e){} });
+  cerceve.appendChild(oynat);
 
   function durum(){
     var oynuyor = !video.paused && !video.ended;

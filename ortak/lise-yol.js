@@ -143,6 +143,12 @@ function konuSayfasiKur(){
   var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '../ortak/konu-sayfa.css'; document.head.appendChild(css);
   var js = document.createElement('script'); js.src = '../ortak/konu-sayfa.js'; document.body.appendChild(js);
 }
-function hepsi(){ kur(); try{ konuSayfasiKur(); }catch(e){ if(window.console) console.warn('Konu sayfası:', e); } }
+/* 2026-11-07 — Anlatım videosu 3 boyutlu görünüm (ortak/video-3d.js + .css) */
+function video3dYukle(){
+  if(!document.querySelector('details.anlatim-video video') || document.querySelector('script[src*="video-3d.js"]')) return;
+  var c = document.createElement('link'); c.rel = 'stylesheet'; c.href = '../ortak/video-3d.css'; document.head.appendChild(c);
+  var j = document.createElement('script'); j.src = '../ortak/video-3d.js'; document.body.appendChild(j);
+}
+function hepsi(){ kur(); try{ konuSayfasiKur(); }catch(e){ if(window.console) console.warn('Konu sayfası:', e); } try{ video3dYukle(); }catch(e){} }
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hepsi); else hepsi();
 })();

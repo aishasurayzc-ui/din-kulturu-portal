@@ -218,6 +218,55 @@ function medyaDuzenle(){
   })();
 }
 
+/* ---------------- Öğrenme Laboratuvarı bağlantıları (2026-11-08) ----------------
+   Laboratuvarı olan konunun "Etkinlik Yap" adımına (yoksa konunun son adımına)
+   tek bir giriş kartı eklenir. Sayfa metnine dokunulmaz. */
+var LAB_BAGLANTI = [
+  { sinif:'5', unite:'1', konu:/evrendeki\s+m[üu]kemmel\s+d[üu]zen/i, id:'s5-u1-arilar',
+    baslik:'Öğrenme Laboratuvarı: Arılar Yok Olursa?', ac:'Problemle karşılaş, araştır, farklı görüşleri incele ve kendi çözümünü geliştir. 7 adım · 3 seviye · Fen, Matematik, Türkçe' }
+];
+function labKartlari(){
+  var m = document.getElementById('portalNav'); if(!m) return;
+  LAB_BAGLANTI.forEach(function(b){
+    if(m.dataset.sinif !== b.sinif || (m.dataset.unite || '1') !== b.unite) return;
+    TUM.forEach(function(t){
+      if(!b.konu.test(t.konu.ad || '')) return;
+      var hedef = t.bolumler.filter(function(x){ return x.k === 'etkinlik'; })[0] || t.bolumler[t.bolumler.length - 1];
+      var ic = hedef && hedef.el.querySelector('.dak-ic'); if(!ic || ic.querySelector('.dak-lab')) return;
+      var a = document.createElement('a');
+      a.className = 'dak-lab';
+      a.href = '../ogrenme-laboratuvari/index.html?id=' + encodeURIComponent(b.id);
+      a.innerHTML = '<span class="dak-lab-ikon" aria-hidden="true">🧪</span><span class="dak-lab-metin"><b>' + kac(b.baslik) + '</b><span>' + kac(b.ac) + '</span></span><span class="dak-lab-ok" aria-hidden="true">→</span>';
+      ic.appendChild(a);
+    });
+  });
+}
+
+/* ---------------- fotoğraf destekli konu sahneleri (2026-11-08) ----------------
+   Ortak bileşen ortak/konu-sahne.js + .css + -veri.js. Bileşen, sayfa için
+   fotoğraf eşlemesi yoksa hiçbir şey yapmaz. Sıra: veri → bileşen. */
+var DAK_KLASOR = (document.currentScript && document.currentScript.src || '').replace(/[^\/]*$/, '');
+function sahneYukle(){
+  if(!DAK_KLASOR || document.querySelector('script[src*="konu-sahne.js"]')) return;
+  var css = document.createElement('link');
+  css.rel = 'stylesheet'; css.href = DAK_KLASOR + 'konu-sahne.css';
+  document.head.appendChild(css);
+  /* 2026-11-09: AKIS_SAYFALAR'daki ünitelerde fotoğraflı dikey akış (ortak/konu-akis.*)
+     sahne penceresinin yerini alır; diğerlerinde sahne penceresi sürer. */
+  var akis = AKIS_SAYFALAR.indexOf(dakSayfaAnahtari()) >= 0;
+  if(akis){ css.href = DAK_KLASOR + 'konu-akis.css'; }
+  var veri = document.createElement('script');
+  veri.src = DAK_KLASOR + 'konu-sahne-veri.js';
+  veri.onload = function(){
+    var js = document.createElement('script');
+    js.src = DAK_KLASOR + (akis ? 'konu-akis.js' : 'konu-sahne.js');
+    document.body.appendChild(js);
+  };
+  document.body.appendChild(veri);
+}
+var AKIS_SAYFALAR = ['s5-u1'];
+function dakSayfaAnahtari(){ var m = document.getElementById('portalNav'); return m ? 's' + m.dataset.sinif + '-u' + (m.dataset.unite || '1') : ''; }
+
 /* ---------------- gezinme ve etkin adım ---------------- */
 function bolumAc(el){
   /* gizli sekmedeyse sayfanın kendi menü düğmesiyle aç */
@@ -278,6 +327,7 @@ function kur(){
   document.documentElement.classList.add('dak-kok');
   serit();
   try{ medyaDuzenle(); }catch(e){ if(window.console) console.warn('Ders akışı (medya):', e); }
+  try{ labKartlari(); }catch(e){ if(window.console) console.warn('Ders akışı (laboratuvar):', e); }
   document.addEventListener('click', function(e){
     var b = e.target.closest('[data-dak-git]');
     if(b){
@@ -301,8 +351,11 @@ function kur(){
   document.addEventListener('click', function(e){ if(e.target.closest('#oyun-gruplari button, .ksx-toc, .ksx-sn')) setTimeout(izle, 150); });
   izle();
   window.DERS_AKISI = {
-    durum:function(){ return TUM.map(function(t){ return { konu:t.konu.no, asamalar:t.bolumler.map(function(b){ return b.k + ':' + b.el.querySelector('.dak-ic').children.length; }), aktif:t.aktif }; }); }
+    durum:function(){ return TUM.map(function(t){ return { konu:t.konu.no, asamalar:t.bolumler.map(function(b){ return b.k + ':' + b.el.querySelector('.dak-ic').children.length; }), aktif:t.aktif }; }); },
+    /* 2026-11-08: konu sahneleri bileşeni (ortak/konu-sahne.js) için salt-okunur yapı */
+    yapi:function(){ return TUM.map(function(t){ return { konu:{ no:t.konu.no, ad:t.konu.ad }, nav:t.nav, bolumler:t.bolumler.slice() }; }); }
   };
+  sahneYukle();
 }
 
 /* Öğrenme Yolu modülleri (sayfanın kendi betiği, DOMContentLoaded) ve

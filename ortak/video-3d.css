@@ -61,6 +61,23 @@
 }
 .v3d-sahne:hover .v3d-cerceve{ transition:transform .18s ease-out, box-shadow .55s ease; }
 
+/* büyük oynat düğmesi */
+.v3d-oynat{
+  position:absolute; left:50%; top:50%; z-index:3; width:96px; height:96px; margin:-48px 0 0 -48px; padding:0;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; border:0; border-radius:50%;
+  color:#fff; background:linear-gradient(145deg, var(--v3d-turkuaz), var(--v3d-lacivert-2));
+  box-shadow:0 0 0 8px rgba(255,255,255,.55), 0 14px 30px rgba(19,41,75,.35);
+  transform:translateZ(30px); transition:transform .2s ease, opacity .25s ease, box-shadow .2s ease;
+}
+.v3d-oynat svg{ width:46px; height:46px; margin-left:6px; filter:drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
+.v3d-oynat:hover{ transform:translateZ(30px) scale(1.07); box-shadow:0 0 0 10px rgba(255,255,255,.7), 0 18px 36px rgba(19,41,75,.4); }
+.v3d-oynat:focus-visible{ outline:4px solid #ffd166; outline-offset:6px; }
+.v3d-oynat::after{ content:""; position:absolute; inset:-8px; border-radius:50%; border:3px solid rgba(255,255,255,.7); animation:v3dNabiz 2.2s ease-out infinite; }
+@keyframes v3dNabiz{ from{ transform:scale(1); opacity:.9; } to{ transform:scale(1.35); opacity:0; } }
+.v3d-sahne.v3d-oynuyor .v3d-oynat{ opacity:0; pointer-events:none; transform:translateZ(30px) scale(.8); }
+@media (max-width:719px){ .v3d-oynat{ width:72px; height:72px; margin:-36px 0 0 -36px; } .v3d-oynat svg{ width:34px; height:34px; } }
+@media (prefers-reduced-motion: reduce){ .v3d-oynat::after{ animation:none; } }
+
 /* oynatılırken: düz ve okunaklı */
 .v3d-sahne.v3d-oynuyor .v3d-cerceve{ transform:none; }
 .v3d-sahne.v3d-oynuyor .v3d-parlama{ opacity:0; }

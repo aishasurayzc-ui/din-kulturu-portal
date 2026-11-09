@@ -1,0 +1,110 @@
+/* ======================================================================
+   KONU SAHNELERİ — fotoğraf destekli kayan konu anlatımı (2026-11-08)
+   ortak/konu-sahne.js ile. Önek: ksh-  · Renkler ders akışı (dak-) ve
+   portal (ks-) değişkenlerinden; yoksa yedek değerler.
+====================================================================== */
+.ksh-baslat{
+  display:flex; align-items:center; gap:12px; width:100%; margin:12px 0 0; padding:12px 16px; cursor:pointer; text-align:left;
+  font:inherit; color:#fff; background:linear-gradient(135deg, var(--ks-baslik,#13294b), var(--ks-lacivert2,#1f4f8f));
+  border:0; border-radius:12px; box-shadow:0 2px 8px rgba(19,41,75,.18);
+}
+.ksh-baslat:hover{ filter:brightness(1.08); }
+.ksh-baslat:focus-visible{ outline:3px solid var(--ks-turkuaz,#0b8fa3); outline-offset:3px; }
+.ksh-baslat-ikon{ width:38px; height:38px; flex:0 0 38px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(255,255,255,.18); font-size:15px; }
+.ksh-baslat b{ display:block; font-size:1.02rem; }
+.ksh-baslat small{ display:block; font-size:.84rem; opacity:.85; }
+
+/* ---------- pencere ---------- */
+html.ksh-acik, html.ksh-acik body{ overflow:hidden !important; }
+.ksh-kok{
+  --ksh-zemin:#0e1726; --ksh-yuzey:#ffffff; --ksh-metin:#1c2a3a; --ksh-metin2:#556274; --ksh-vurgu:var(--ks-turkuaz,#0b8fa3); --ksh-baslik:#13294b;
+  position:fixed; inset:0; z-index:2147483000; display:grid; grid-template-rows:auto 1fr auto; background:var(--ksh-zemin);
+  font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif; color:var(--ksh-metin);
+}
+[data-tema="dark"] .ksh-kok, [data-theme="dark"] .ksh-kok{ --ksh-yuzey:#131f34; --ksh-metin:#e6edf5; --ksh-metin2:#a9b6c6; --ksh-baslik:#e6edf5; --ksh-zemin:#070d18; }
+.ksh-ust{ position:relative; display:flex; align-items:center; gap:14px; padding:12px 18px 10px; color:#e6edf5; }
+.ksh-ilerleme{ position:absolute; left:0; right:0; top:0; height:4px; background:rgba(255,255,255,.12); }
+.ksh-ilerleme span{ display:block; height:100%; width:0; background:var(--ksh-vurgu); transition:width .35s ease; }
+.ksh-sayac{ font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
+.ksh-konu{ flex:1; min-width:0; font-size:14px; opacity:.8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ksh-kapat{ font:inherit; font-weight:800; font-size:14px; color:#e6edf5; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); border-radius:999px; padding:7px 14px; cursor:pointer; min-height:40px; }
+.ksh-kapat:hover{ background:rgba(255,255,255,.18); }
+
+.ksh-sahne-yer{ position:relative; min-height:0; overflow:hidden; }
+.ksh-sahne{ position:absolute; inset:0; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); }
+.ksh-foto{ position:relative; margin:0; overflow:hidden; background:linear-gradient(135deg,#1f4f8f,#0b8fa3); }
+.ksh-foto img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.ksh-foto::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(7,13,24,.55), rgba(7,13,24,0) 45%); pointer-events:none; }
+.ksh-yedek::before{ content:"✦"; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-size:72px; color:rgba(255,255,255,.35); }
+.ksh-kunye{ position:absolute; z-index:1; right:10px; bottom:8px; max-width:80%; font-size:11px; color:rgba(255,255,255,.85); text-align:right; text-shadow:0 1px 2px rgba(0,0,0,.6); }
+.ksh-metin{ display:flex; flex-direction:column; min-height:0; background:var(--ksh-yuzey); padding:34px 36px 24px; overflow:hidden; }
+.ksh-etiket{ margin:0 0 4px; font-size:12.5px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; color:var(--ksh-vurgu); }
+.ksh-baslik{ margin:0 0 14px; font-size:clamp(1.4rem,2.6vw,2rem); line-height:1.2; color:var(--ksh-baslik); font-weight:800; }
+.ksh-govde{ flex:1; min-height:0; overflow-y:auto; font-size:1.08rem; line-height:1.7; padding-right:6px; scrollbar-width:thin; }
+.ksh-govde > *{ margin-top:0; }
+.ksh-govde img, .ksh-govde svg{ max-width:100%; height:auto; }
+.ksh-govde .konu-illustrasyon{ display:none; }
+
+/* kapak sahnesi: başlık fotoğrafın üzerinde */
+.ksh-kapak .ksh-foto::after{ background:linear-gradient(to top, rgba(7,13,24,.82), rgba(7,13,24,.1) 60%); }
+.ksh-kapak .ksh-metin{ justify-content:flex-start; }
+@media (min-width:861px){
+  .ksh-kapak{ grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); }
+}
+
+/* "sıra sende" sahnesi */
+.ksh-git{ display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+.ksh-git small{ opacity:.8; font-weight:700; }
+
+/* alt çubuk */
+.ksh-alt{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 18px calc(12px + env(safe-area-inset-bottom)); }
+.ksh-ipucu{ font-size:12.5px; color:rgba(230,237,245,.6); }
+.ksh-btn{ font:inherit; font-weight:800; font-size:15px; min-height:46px; padding:10px 20px; border-radius:12px; cursor:pointer;
+  color:#e6edf5; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.25); }
+.ksh-metin .ksh-btn{ color:var(--ksh-baslik); background:transparent; border-color:rgba(19,41,75,.25); text-align:left; }
+.ksh-btn-ana, .ksh-metin .ksh-btn-ana{ color:#fff; background:var(--ks-lacivert2,#1f4f8f); border-color:var(--ks-lacivert2,#1f4f8f); }
+.ksh-alt .ksh-btn-ana{ background:var(--ksh-vurgu); border-color:var(--ksh-vurgu); color:#04141a; }
+.ksh-btn:disabled{ opacity:.35; cursor:default; }
+.ksh-btn:focus-visible, .ksh-kapat:focus-visible{ outline:3px solid #ffd166; outline-offset:2px; }
+.ksh-durum{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); margin:0; }
+
+/* geçiş: fotoğraf hafifçe büyüyerek, metin yukarı doğru belirir */
+.ksh-sahne .ksh-foto img{ transition:transform .7s ease, opacity .45s ease; }
+.ksh-sahne .ksh-metin > *{ transition:transform .45s ease, opacity .45s ease; }
+.ksh-gir .ksh-foto img{ opacity:0; transform:scale(1.04); }
+.ksh-gir .ksh-metin > *{ opacity:0; transform:translateY(14px); }
+.ksh-gir-geri .ksh-metin > *{ transform:translateY(-14px); }
+@media (prefers-reduced-motion: reduce){
+  .ksh-sahne .ksh-foto img, .ksh-sahne .ksh-metin > *, .ksh-ilerleme span{ transition:none !important; }
+}
+
+/* telefon ve dar ekran: fotoğraf üstte, metin altta */
+@media (max-width:860px){
+  .ksh-sahne, .ksh-kapak{ grid-template-columns:1fr; grid-template-rows:minmax(150px,38%) 1fr; }
+  .ksh-metin{ padding:18px 18px 12px; }
+  .ksh-baslik{ margin-bottom:10px; }
+  .ksh-govde{ font-size:1rem; line-height:1.65; }
+  .ksh-ust{ padding:12px 12px 8px; gap:10px; }
+  .ksh-konu, .ksh-ipucu, .ksh-kapat span{ display:none; }
+  .ksh-alt{ padding:10px 12px calc(10px + env(safe-area-inset-bottom)); }
+  .ksh-alt .ksh-btn{ flex:1; }
+}
+
+/* kapak: başlık fotoğrafla bütünleşik */
+.ksh-kapak-yazi{ position:absolute; z-index:1; left:0; right:0; bottom:0; padding:28px 32px 34px; }
+.ksh-kapak-yazi .ksh-etiket{ color:#7fe0ec; }
+.ksh-kapak-yazi .ksh-baslik{ margin:0; color:#fff; font-size:clamp(1.7rem,3.6vw,2.8rem); text-shadow:0 2px 12px rgba(0,0,0,.45); }
+.ksh-kapak .ksh-kunye{ top:8px; bottom:auto; }
+.ksh-sahne .ksh-kapak-yazi > *{ transition:transform .55s ease .1s, opacity .55s ease .1s; }
+.ksh-gir .ksh-kapak-yazi > *{ opacity:0; transform:translateY(18px); }
+@media (max-width:860px){ .ksh-kapak-yazi{ padding:16px 18px 18px; } }
+
+/* sayfanın kendi h2 süslerini (alt çizgi vb.) sahnede etkisizleştir */
+.ksh-kok h2.ksh-baslik{ border:0 !important; padding:0 !important; background:none !important; text-align:left; }
+.ksh-kok h2.ksh-baslik::before, .ksh-kok h2.ksh-baslik::after{ content:none !important; display:none !important; }
+/* künye her fotoğrafta okunur */
+.ksh-kunye{ background:rgba(7,13,24,.55); padding:2px 8px; border-radius:6px; text-shadow:none; }
+/* sayfanın kart ızgaraları dar sahne panelinde taşmasın (şema, kavram kartları) */
+.ksh-govde [class*="izgara"]{ grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)) !important; }
+.ksh-govde [class*="izgara"] > *{ min-width:0; }
+.ksh-govde{ overflow-x:auto; }
