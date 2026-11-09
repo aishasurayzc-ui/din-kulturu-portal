@@ -253,7 +253,7 @@ function sahneYukle(){
   document.head.appendChild(css);
   /* 2026-11-09: AKIS_SAYFALAR'daki ünitelerde fotoğraflı dikey akış (ortak/konu-akis.*)
      sahne penceresinin yerini alır; diğerlerinde sahne penceresi sürer. */
-  var akis = AKIS_SAYFALAR.indexOf(dakSayfaAnahtari()) >= 0;
+  var akis = AKIS_HEPSI || AKIS_SAYFALAR.indexOf(dakSayfaAnahtari()) >= 0;
   if(akis){ css.href = DAK_KLASOR + 'konu-akis.css'; }
   var veri = document.createElement('script');
   veri.src = DAK_KLASOR + 'konu-sahne-veri.js';
@@ -265,6 +265,7 @@ function sahneYukle(){
   document.body.appendChild(veri);
 }
 var AKIS_SAYFALAR = ['s5-u1'];
+var AKIS_HEPSI = true;   /* 2026-11-09: kullanıcı onayıyla bütün 4–8 konu sayfalarında akış varsayılan */
 function dakSayfaAnahtari(){ var m = document.getElementById('portalNav'); return m ? 's' + m.dataset.sinif + '-u' + (m.dataset.unite || '1') : ''; }
 
 /* ---------------- gezinme ve etkin adım ---------------- */
