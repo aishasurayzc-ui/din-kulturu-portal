@@ -484,6 +484,10 @@ function kur(){
     });
   });
   sohbetCiz();
+  /* 2026-11-14: "Öğretmene Sor" sekmesi (ortak/ogretmene-sor.js) — öğrencinin sorusu öğretmenin Mesajlar paneline gider */
+  if(!document.querySelector('script[src*="ogretmene-sor.js"]')){
+    var os = document.createElement('script'); os.src = KLASOR + 'ogretmene-sor.js?v=20261114'; document.head.appendChild(os);
+  }
 }
 function sesDugmesi(b){ b.textContent = sesAcik ? '🔊' : '🔈'; b.setAttribute('aria-pressed', String(sesAcik)); var t = sesAcik ? 'Sesli okuma açık (kapatmak için tıkla)' : 'Sesli okuma kapalı (açmak için tıkla)'; b.title = t; b.setAttribute('aria-label', t); }
 function ac(){

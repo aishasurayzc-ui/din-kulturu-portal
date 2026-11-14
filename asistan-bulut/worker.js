@@ -17,6 +17,7 @@
                          varsayılan: GitHub Pages siteniz + bu bilgisayardaki portal (localhost:8844)
      MODEL               (Text, isteğe bağlı) varsayılan: claude-sonnet-5-5
    Uç noktalar:  GET /api/asistan/durum   ·   POST /api/asistan
+   2026-11-14: "Öğretmene Sor" mesaj kutusu eklendi (D1 bağlaması DB + OGRETMEN_SIFRESI); ayrıntı aşağıda.
    Bu dosya yerel sunucudaki (asistan-sunucu.py) kurallarla aynıdır.
    2026-11-01: sınıfa (4-12) göre dil, 10 çalışma biçimi (mod), pedagojik akış ve
    ayet/hadis doğruluk kuralları eklendi (TALIMAT).
@@ -98,7 +99,7 @@ function corsBasliklari(koken, env){
   if(koken && izinliKokenler(env).includes(koken)){
     h['Access-Control-Allow-Origin'] = koken;
     h['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
-    h['Access-Control-Allow-Headers'] = 'Content-Type, X-Erisim-Kodu';
+    h['Access-Control-Allow-Headers'] = 'Content-Type, X-Erisim-Kodu, X-Ogretmen-Sifresi';
     h['Access-Control-Max-Age'] = '86400';
   }
   return h;
@@ -167,12 +168,232 @@ async function ucretsizSor(b, gecmis, env){
   return [200, {cevap: metin, model: env.UCRETSIZ_MODEL || UCRETSIZ_MODEL}];
 }
 
+
+/* =====================================================================
+   ÖĞRETMENE SOR — mesaj kutusu (2026-11-14)
+   Öğrenci "Bana Sor" penceresindeki "Öğretmene Sor" sekmesinden soru gönderir;
+   soru Cloudflare D1 veritabanında saklanır. Öğretmen, şifreyle girdiği
+   "Mesajlar" panelinden (ogretmen-mesajlar.html) okur ve cevaplar; öğrenci
+   cevabı aynı cihazda "Sorularım" bölümünde görür (cihazdaki gizli anahtarla).
+   Gerekenler (Cloudflare → Worker → Settings):
+     Bindings → D1 database, değişken adı: DB   (veritabanı: dkab-mesajlar)
+     Variables and Secrets → Secret: OGRETMEN_SIFRESI (en az 8 karakter)
+   Tablolar ilk istekte kendiliğinden oluşturulur.
+   Uç noktalar:
+     GET  /api/mesaj/durum                 → mesaj kutusu açık mı?
+     POST /api/mesaj                       → yeni soru  {ad, sinif, sube, metin, konu, unite, sayfa}
+     POST /api/mesaj/benim                 → öğrencinin sorularının durumu  {liste:[{id, anahtar}], gordu:[id]}
+     POST /api/mesaj/ek                    → öğrencinin aynı soruya ek mesajı  {id, anahtar, metin}
+     (öğretmen; başlık: X-Ogretmen-Sifresi)
+     GET  /api/ogretmen/ozet               → sayılar ve son değişiklik zamanı (?hafif=1: yalnızca son zaman)
+     GET  /api/ogretmen/mesajlar           → liste  ?kutu=yeni|okundu|cevaplandi|arsiv|onemli|tumu &sinif= &ara= &once=
+     GET  /api/ogretmen/mesaj?id=          → tek soru ve bütün yazışma (okundu olarak işaretler)
+     POST /api/ogretmen/cevap              → {id, metin}
+     POST /api/ogretmen/isaret             → {id, durum?, onemli?}
+     POST /api/ogretmen/sil                → {id}
+===================================================================== */
+const MESAJ_AZAMI = 1200, AD_AZAMI = 40, GUNLUK_TOPLAM = 600, SAATLIK_CIHAZ = 10, SAATLIK_IP = 150;   /* okulda bütün sınıf aynı IP'den çıkar */
+const DURUMLAR = ['yeni', 'okundu', 'cevaplandi', 'arsiv'];
+let tablolarHazir = false;
+async function tablolar(env){
+  if(tablolarHazir) return;
+  await env.DB.batch([
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS mesajlar (
+      id TEXT PRIMARY KEY, anahtar TEXT NOT NULL, ad TEXT NOT NULL, sinif INTEGER, sube TEXT,
+      konu TEXT, unite TEXT, sayfa TEXT, durum TEXT NOT NULL DEFAULT 'yeni', onemli INTEGER NOT NULL DEFAULT 0,
+      olusturma INTEGER NOT NULL, guncelleme INTEGER NOT NULL, son_ogrenci INTEGER NOT NULL, son_ogretmen INTEGER,
+      ogrenci_gordu INTEGER, ip TEXT, cihaz TEXT)`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS iletiler (
+      no INTEGER PRIMARY KEY AUTOINCREMENT, mesaj_id TEXT NOT NULL, kimden TEXT NOT NULL, metin TEXT NOT NULL, zaman INTEGER NOT NULL)`),
+    env.DB.prepare('CREATE INDEX IF NOT EXISTS i_mesaj_guncel ON mesajlar(guncelleme DESC)'),
+    env.DB.prepare('CREATE INDEX IF NOT EXISTS i_ileti_mesaj ON iletiler(mesaj_id, no)')
+  ]);
+  tablolarHazir = true;
+}
+function rastgele(n){ const a = new Uint8Array(n); crypto.getRandomValues(a); return Array.from(a, x => x.toString(16).padStart(2, '0')).join(''); }
+async function ozet(s){ const h = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(s))); return Array.from(new Uint8Array(h), x => x.toString(16).padStart(2, '0')).join(''); }
+function esitMi(a, b){ a = String(a); b = String(b); if(a.length !== b.length) return false; let f = 0; for(let i = 0; i < a.length; i++) f |= a.charCodeAt(i) ^ b.charCodeAt(i); return f === 0; }
+function metinTemizle(s, n){ return String(s == null ? '' : s).replace(/\r/g, '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim().slice(0, n); }
+function tekSatir(s, n){ return metinTemizle(s, n).replace(/\s+/g, ' '); }
+async function govdeOku(request, sinir){
+  const t = await request.text();
+  if(!t || t.length > sinir) return null;
+  try{ return JSON.parse(t); }catch(e){ return null; }
+}
+const ogretmenDenemeleri = new Map();
+function ogretmenKilitli(ip){
+  const simdi = Date.now(), d = (ogretmenDenemeleri.get(ip) || []).filter(t => simdi - t < 10 * 60000);
+  ogretmenDenemeleri.set(ip, d);
+  return d.length >= 8;
+}
+async function ogretmenMi(request, env, ip){
+  const s = request.headers.get('X-Ogretmen-Sifresi') || '';
+  if(!env.OGRETMEN_SIFRESI || String(env.OGRETMEN_SIFRESI).length < 8) return 'sifre_tanimsiz';
+  if(ogretmenKilitli(ip)) return 'cok_deneme';
+  if(s && esitMi(await ozet(s), await ozet(env.OGRETMEN_SIFRESI))) return 'tamam';
+  ogretmenDenemeleri.get(ip).push(Date.now());
+  return 'sifre_hatali';
+}
+function mesajSatiri(r){
+  return { id:r.id, ad:r.ad, sinif:r.sinif, sube:r.sube || '', konu:r.konu || '', unite:r.unite || '', sayfa:r.sayfa || '',
+    durum:r.durum, onemli:!!r.onemli, olusturma:r.olusturma, guncelleme:r.guncelleme, sonOgrenci:r.son_ogrenci,
+    sonOgretmen:r.son_ogretmen || null, ogrenciGordu:r.ogrenci_gordu || null };
+}
+
+async function mesajIstegi(request, env, url, cors){
+  const yol = url.pathname, ip = request.headers.get('CF-Connecting-IP') || 'bilinmiyor';
+  if(yol === '/api/mesaj/durum' && request.method === 'GET') return json(200, {etkin: !!env.DB, ogretmenHazir: !!(env.OGRETMEN_SIFRESI && String(env.OGRETMEN_SIFRESI).length >= 8)}, cors);
+  const koken = request.headers.get('Origin');
+  if(!koken || !izinliKokenler(env).includes(koken)) return json(403, {hata: 'izin_yok'}, cors);
+  if(!env.DB) return json(503, {hata: 'mesaj_kapali'}, cors);
+  await tablolar(env);
+  const simdi = Date.now();
+
+  /* ---------- öğrenci ---------- */
+  if(yol === '/api/mesaj' && request.method === 'POST'){
+    if(hizSiniri('m:' + ip)) return json(429, {hata: 'cok_hizli'}, cors);
+    const b = await govdeOku(request, 8000); if(!b) return json(400, {hata: 'gecersiz_istek'}, cors);
+    const ad = tekSatir(b.ad, AD_AZAMI), metin = metinTemizle(b.metin, MESAJ_AZAMI);
+    const sinif = parseInt(b.sinif, 10), sube = tekSatir(b.sube, 4).toLocaleUpperCase('tr');
+    if(ad.length < 2) return json(400, {hata: 'ad_gerekli'}, cors);
+    if(!(sinif >= 4 && sinif <= 12)) return json(400, {hata: 'sinif_gerekli'}, cors);
+    if(metin.length < 5) return json(400, {hata: 'soru_kisa'}, cors);
+    const ipOzet = (await ozet('dkab:' + ip)).slice(0, 24), cihaz = (await ozet('dkab-c:' + tekSatir(b.cihaz, 64))).slice(0, 24);
+    const say = await env.DB.prepare('SELECT (SELECT COUNT(*) FROM mesajlar WHERE ip = ?1 AND olusturma > ?2) AS ipde, (SELECT COUNT(*) FROM mesajlar WHERE cihaz = ?4 AND olusturma > ?2) AS cihazda, (SELECT COUNT(*) FROM mesajlar WHERE olusturma > ?3) AS gun')
+      .bind(ipOzet, simdi - 3600000, simdi - 86400000, cihaz).first();
+    if(say && (say.cihazda >= SAATLIK_CIHAZ || say.ipde >= SAATLIK_IP)) return json(429, {hata: 'saatlik_sinir'}, cors);
+    if(say && say.gun >= GUNLUK_TOPLAM) return json(429, {hata: 'gunluk_sinir_mesaj'}, cors);
+    const id = simdi.toString(36) + rastgele(4), anahtar = rastgele(16);
+    await env.DB.batch([
+      env.DB.prepare('INSERT INTO mesajlar (id, anahtar, ad, sinif, sube, konu, unite, sayfa, durum, olusturma, guncelleme, son_ogrenci, ip, cihaz) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,\'yeni\',?9,?9,?9,?10,?11)')
+        .bind(id, await ozet(anahtar), ad, sinif, sube, tekSatir(b.konu, 160), tekSatir(b.unite, 160), tekSatir(b.sayfa, 300), simdi, ipOzet, cihaz),
+      env.DB.prepare('INSERT INTO iletiler (mesaj_id, kimden, metin, zaman) VALUES (?1, \'ogrenci\', ?2, ?3)').bind(id, metin, simdi)
+    ]);
+    return json(200, {id, anahtar, zaman: simdi}, cors);
+  }
+  if(yol === '/api/mesaj/benim' && request.method === 'POST'){
+    const b = await govdeOku(request, 20000); if(!b || !Array.isArray(b.liste)) return json(400, {hata: 'gecersiz_istek'}, cors);
+    const liste = b.liste.slice(0, 40).filter(x => x && typeof x.id === 'string' && typeof x.anahtar === 'string');
+    if(!liste.length) return json(200, {mesajlar: []}, cors);
+    const yer = liste.map((_, i) => '?' + (i + 1)).join(',');
+    const sat = await env.DB.prepare('SELECT * FROM mesajlar WHERE id IN (' + yer + ')').bind(...liste.map(x => x.id)).all();
+    const gecerli = [];
+    for(const r of sat.results || []){
+      const k = liste.find(x => x.id === r.id);
+      if(k && esitMi(await ozet(k.anahtar), r.anahtar)) gecerli.push(r);
+    }
+    const gordu = Array.isArray(b.gordu) ? b.gordu.filter(id => gecerli.some(r => r.id === id && r.son_ogretmen && (!r.ogrenci_gordu || r.ogrenci_gordu < r.son_ogretmen))) : [];
+    if(gordu.length) await env.DB.batch(gordu.map(id => env.DB.prepare('UPDATE mesajlar SET ogrenci_gordu = ?1 WHERE id = ?2').bind(simdi, id)));
+    const cikti = [];
+    if(gecerli.length){
+      const y2 = gecerli.map((_, i) => '?' + (i + 1)).join(',');
+      const il = await env.DB.prepare('SELECT mesaj_id, kimden, metin, zaman FROM iletiler WHERE mesaj_id IN (' + y2 + ') ORDER BY no').bind(...gecerli.map(r => r.id)).all();
+      for(const r of gecerli){
+        cikti.push({ id:r.id, durum: r.durum === 'arsiv' ? (r.son_ogretmen ? 'cevaplandi' : 'okundu') : r.durum, konu:r.konu || '', olusturma:r.olusturma,
+          sonOgretmen:r.son_ogretmen || null, gordu: gordu.includes(r.id) ? simdi : (r.ogrenci_gordu || null),
+          iletiler: (il.results || []).filter(x => x.mesaj_id === r.id).map(x => ({kimden:x.kimden, metin:x.metin, zaman:x.zaman})) });
+      }
+    }
+    return json(200, {mesajlar: cikti}, cors);
+  }
+  if(yol === '/api/mesaj/ek' && request.method === 'POST'){
+    if(hizSiniri('m:' + ip)) return json(429, {hata: 'cok_hizli'}, cors);
+    const b = await govdeOku(request, 8000); if(!b) return json(400, {hata: 'gecersiz_istek'}, cors);
+    const metin = metinTemizle(b.metin, MESAJ_AZAMI);
+    if(metin.length < 2) return json(400, {hata: 'soru_kisa'}, cors);
+    const r = await env.DB.prepare('SELECT id, anahtar FROM mesajlar WHERE id = ?1').bind(String(b.id || '')).first();
+    if(!r || !esitMi(await ozet(String(b.anahtar || '')), r.anahtar)) return json(404, {hata: 'bulunamadi'}, cors);
+    const adet = await env.DB.prepare('SELECT COUNT(*) AS n FROM iletiler WHERE mesaj_id = ?1').bind(r.id).first();
+    if(adet && adet.n >= 30) return json(429, {hata: 'yazisma_dolu'}, cors);
+    await env.DB.batch([
+      env.DB.prepare('INSERT INTO iletiler (mesaj_id, kimden, metin, zaman) VALUES (?1, \'ogrenci\', ?2, ?3)').bind(r.id, metin, simdi),
+      env.DB.prepare('UPDATE mesajlar SET durum = \'yeni\', guncelleme = ?1, son_ogrenci = ?1 WHERE id = ?2').bind(simdi, r.id)
+    ]);
+    return json(200, {tamam: true, zaman: simdi}, cors);
+  }
+
+  /* ---------- öğretmen ---------- */
+  if(yol.startsWith('/api/ogretmen/')){
+    const yetki = await ogretmenMi(request, env, ip);
+    if(yetki !== 'tamam') return json(yetki === 'sifre_tanimsiz' ? 503 : (yetki === 'cok_deneme' ? 429 : 401), {hata: yetki}, cors);
+    if(yol === '/api/ogretmen/ozet' && request.method === 'GET'){
+      if(url.searchParams.get('hafif')){   /* sık yoklama: yalnızca son değişiklik zamanı (dizinden tek satır okur) */
+        const h = await env.DB.prepare('SELECT guncelleme AS son FROM mesajlar ORDER BY guncelleme DESC LIMIT 1').first();
+        return json(200, {son: (h && h.son) || 0, zaman: simdi}, cors);
+      }
+      const r = await env.DB.prepare(`SELECT
+        SUM(CASE WHEN durum='yeni' THEN 1 ELSE 0 END) AS yeni, SUM(CASE WHEN durum='okundu' THEN 1 ELSE 0 END) AS okundu,
+        SUM(CASE WHEN durum='cevaplandi' THEN 1 ELSE 0 END) AS cevaplandi, SUM(CASE WHEN durum='arsiv' THEN 1 ELSE 0 END) AS arsiv,
+        SUM(CASE WHEN onemli=1 AND durum!='arsiv' THEN 1 ELSE 0 END) AS onemli, COUNT(*) AS tumu,
+        SUM(CASE WHEN olusturma > ?1 THEN 1 ELSE 0 END) AS bugun, MAX(guncelleme) AS son FROM mesajlar`).bind(simdi - 86400000).first();
+      const ort = await env.DB.prepare('SELECT AVG(son_ogretmen - olusturma) AS ms FROM mesajlar WHERE son_ogretmen IS NOT NULL AND olusturma > ?1').bind(simdi - 30 * 86400000).first();
+      const o = {}; for(const k of ['yeni','okundu','cevaplandi','arsiv','onemli','tumu','bugun']) o[k] = (r && r[k]) || 0;
+      o.son = (r && r.son) || 0; o.ortalamaCevapMs = ort && ort.ms ? Math.round(ort.ms) : null; o.zaman = simdi;
+      return json(200, o, cors);
+    }
+    if(yol === '/api/ogretmen/mesajlar' && request.method === 'GET'){
+      const kutu = url.searchParams.get('kutu') || 'gelen', kosul = [], deg = [];
+      if(kutu === 'gelen') kosul.push("durum != 'arsiv'");
+      else if(kutu === 'onemli') kosul.push("onemli = 1 AND durum != 'arsiv'");
+      else if(DURUMLAR.includes(kutu)) { kosul.push('durum = ?'); deg.push(kutu); }
+      const s = parseInt(url.searchParams.get('sinif'), 10); if(s >= 4 && s <= 12){ kosul.push('sinif = ?'); deg.push(s); }
+      const ara = tekSatir(url.searchParams.get('ara'), 60).toLocaleLowerCase('tr');
+      if(ara){ kosul.push("(lower(ad) LIKE ? OR lower(konu) LIKE ? OR id IN (SELECT mesaj_id FROM iletiler WHERE lower(metin) LIKE ?))"); const a = '%' + ara.replace(/[%_]/g, '') + '%'; deg.push(a, a, a); }
+      const once = parseInt(url.searchParams.get('once'), 10); if(once > 0){ kosul.push('guncelleme < ?'); deg.push(once); }
+      const sql = 'SELECT m.*, (SELECT metin FROM iletiler WHERE mesaj_id = m.id ORDER BY no DESC LIMIT 1) AS son_metin, (SELECT kimden FROM iletiler WHERE mesaj_id = m.id ORDER BY no DESC LIMIT 1) AS son_kimden, (SELECT COUNT(*) FROM iletiler WHERE mesaj_id = m.id) AS ileti_sayisi FROM mesajlar m' +
+        (kosul.length ? ' WHERE ' + kosul.join(' AND ') : '') + ' ORDER BY guncelleme DESC LIMIT 60';
+      const r = await env.DB.prepare(sql).bind(...deg).all();
+      return json(200, {mesajlar: (r.results || []).map(x => Object.assign(mesajSatiri(x), {onizleme: String(x.son_metin || '').slice(0, 160), sonKimden: x.son_kimden, iletiSayisi: x.ileti_sayisi})), devam: (r.results || []).length === 60}, cors);
+    }
+    if(yol === '/api/ogretmen/mesaj' && request.method === 'GET'){
+      const id = String(url.searchParams.get('id') || '');
+      const r = await env.DB.prepare('SELECT * FROM mesajlar WHERE id = ?1').bind(id).first();
+      if(!r) return json(404, {hata: 'bulunamadi'}, cors);
+      if(r.durum === 'yeni'){ await env.DB.prepare("UPDATE mesajlar SET durum = 'okundu' WHERE id = ?1").bind(id).run(); r.durum = 'okundu'; }
+      const il = await env.DB.prepare('SELECT no, kimden, metin, zaman FROM iletiler WHERE mesaj_id = ?1 ORDER BY no').bind(id).all();
+      const gecmis = await env.DB.prepare('SELECT COUNT(*) AS n FROM mesajlar WHERE ad = ?1 AND sinif = ?2 AND id != ?3').bind(r.ad, r.sinif, id).first();
+      return json(200, Object.assign(mesajSatiri(r), {iletiler: il.results || [], ayniOgrenciDiger: (gecmis && gecmis.n) || 0}), cors);
+    }
+    if(yol === '/api/ogretmen/cevap' && request.method === 'POST'){
+      const b = await govdeOku(request, 12000); if(!b) return json(400, {hata: 'gecersiz_istek'}, cors);
+      const metin = metinTemizle(b.metin, 4000); if(metin.length < 1) return json(400, {hata: 'cevap_bos'}, cors);
+      const r = await env.DB.prepare('SELECT id FROM mesajlar WHERE id = ?1').bind(String(b.id || '')).first();
+      if(!r) return json(404, {hata: 'bulunamadi'}, cors);
+      await env.DB.batch([
+        env.DB.prepare("INSERT INTO iletiler (mesaj_id, kimden, metin, zaman) VALUES (?1, 'ogretmen', ?2, ?3)").bind(r.id, metin, simdi),
+        env.DB.prepare("UPDATE mesajlar SET durum = 'cevaplandi', guncelleme = ?1, son_ogretmen = ?1 WHERE id = ?2").bind(simdi, r.id)
+      ]);
+      return json(200, {tamam: true, zaman: simdi}, cors);
+    }
+    if(yol === '/api/ogretmen/isaret' && request.method === 'POST'){
+      const b = await govdeOku(request, 2000); if(!b) return json(400, {hata: 'gecersiz_istek'}, cors);
+      const id = String(b.id || ''), parca = [], deg = [];
+      if(b.durum !== undefined){ if(!DURUMLAR.includes(b.durum)) return json(400, {hata: 'gecersiz_durum'}, cors); parca.push('durum = ?'); deg.push(b.durum); }
+      if(b.onemli !== undefined){ parca.push('onemli = ?'); deg.push(b.onemli ? 1 : 0); }
+      if(!parca.length) return json(400, {hata: 'gecersiz_istek'}, cors);
+      const r = await env.DB.prepare('UPDATE mesajlar SET ' + parca.join(', ') + ' WHERE id = ?').bind(...deg, id).run();
+      return json(r.meta && r.meta.changes ? 200 : 404, r.meta && r.meta.changes ? {tamam: true} : {hata: 'bulunamadi'}, cors);
+    }
+    if(yol === '/api/ogretmen/sil' && request.method === 'POST'){
+      const b = await govdeOku(request, 2000); if(!b) return json(400, {hata: 'gecersiz_istek'}, cors);
+      const id = String(b.id || '');
+      await env.DB.batch([ env.DB.prepare('DELETE FROM iletiler WHERE mesaj_id = ?1').bind(id), env.DB.prepare('DELETE FROM mesajlar WHERE id = ?1').bind(id) ]);
+      return json(200, {tamam: true}, cors);
+    }
+  }
+  return json(404, {hata: 'bulunamadi'}, cors);
+}
+
 export default {
   async fetch(request, env){
     const url = new URL(request.url);
     const koken = request.headers.get('Origin');
     const cors = corsBasliklari(koken, env);
     if(request.method === 'OPTIONS') return new Response(null, {status: 204, headers: cors});
+    if(url.pathname.startsWith('/api/mesaj') || url.pathname.startsWith('/api/ogretmen/')){
+      try{ return await mesajIstegi(request, env, url, cors); }
+      catch(e){ return json(500, {hata: 'sunucu_hatasi'}, cors); }
+    }
     if(url.pathname === '/api/asistan/durum' && request.method === 'GET'){
       return json(200, {yapilandirildi: !!(env.ANTHROPIC_API_KEY || env.AI), ucretsiz: !env.ANTHROPIC_API_KEY && !!env.AI, kodGerekli: !!env.ERISIM_KODU}, cors);
     }

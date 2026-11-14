@@ -1,0 +1,107 @@
+﻿ÖĞRETMENE SOR — MESAJLAR MERKEZİ KURULUMU (2026-11-14)
+=========================================================
+
+NE YAPAR?
+  * Öğrenciler portalda "Bana Sor" penceresini açınca iki sekme görür:
+      🤖 Yapay Zekâ      → (eskisi gibi) anında cevap
+      👩‍🏫 Öğretmene Sor  → sorusu SİZİN mesaj kutunuza gelir
+  * Öğrenci adını (ad + soyadının baş harfi), sınıfını, şubesini ve
+    sorusunu yazar. Hangi konudayken sorduğu da kendiliğinden eklenir.
+  * Siz bu bilgisayarda MESAJLAR.vbs ile "Mesajlar Merkezi"ni açar,
+    soruları okur ve cevaplarsınız.
+  * Öğrenci cevabınızı aynı cihazda "Bana Sor → Öğretmene Sor →
+    Sorularım" bölümünde görür; yeni cevap gelince "Bana Sor"
+    düğmesinde kırmızı bir işaret çıkar. Öğrenci teşekkür edebilir ya
+    da ek soru yazabilir.
+  * Mesajlar ücretsiz Cloudflare D1 veritabanında saklanır. Bilgisayarınız
+    kapalıyken gelen sorular da kaybolmaz; açınca hepsini görürsünüz.
+  * Kurulum bitene kadar öğrenciler "Öğretmene Sor" sekmesini GÖRMEZ;
+    yapay zekâ eskisi gibi çalışmaya devam eder.
+
+Gereken süre: yaklaşık 10 dakika. "Bana Sor" için açtığınız Cloudflare
+hesabıyla yapılır (dkab-asistan Worker'ı).
+
+---------------------------------------------------------------------
+ADIM 1 — Veritabanını oluşturun
+---------------------------------------------------------------------
+  1. https://dash.cloudflare.com adresine girin.
+  2. Soldaki menüden "Storage & Databases" → "D1 SQL Database" →
+     "Create" (Oluştur).
+  3. Ad olarak  dkab-mesajlar  yazın → "Create".
+     (Tabloları siz oluşturmazsınız; ilk soru geldiğinde kendiliğinden
+      oluşur.)
+
+---------------------------------------------------------------------
+ADIM 2 — Veritabanını Worker'a bağlayın
+---------------------------------------------------------------------
+  1. "Workers & Pages" → dkab-asistan → "Settings" (Ayarlar) → "Bindings"
+     → "Add binding".
+  2. "D1 database" seçin.
+  3. Variable name (değişken adı): tam olarak  DB
+     D1 database: dkab-mesajlar  → "Add binding".
+
+---------------------------------------------------------------------
+ADIM 3 — Öğretmen şifrenizi belirleyin
+---------------------------------------------------------------------
+  1. Aynı Worker'da "Settings" → "Variables and Secrets" → "Add".
+  2. Type: "Secret"   Variable name:  OGRETMEN_SIFRESI
+     Value: kendi belirleyeceğiniz, EN AZ 8 karakterli bir şifre
+     (öğrencilerin tahmin edemeyeceği bir şifre seçin) → "Deploy".
+  Bu şifre yalnızca Cloudflare'de saklanır; portal dosyalarına, GitHub'a
+  ya da öğrencilerin tarayıcısına GİTMEZ.
+
+---------------------------------------------------------------------
+ADIM 4 — Worker kodunu güncelleyin
+---------------------------------------------------------------------
+  1. dkab-asistan → "Edit code".
+  2. Editördeki BÜTÜN kodu silin.
+  3. Bu klasördeki  asistan-bulut\worker.js  dosyasını Not Defteri ile
+     açın, tamamını kopyalayıp editöre yapıştırın → "Deploy".
+
+---------------------------------------------------------------------
+ADIM 5 — Kontrol ve yayın
+---------------------------------------------------------------------
+  1. Tarayıcıda şu adresi açın:
+       https://dkab-asistan.aishasurayzc.workers.dev/api/mesaj/durum
+     {"etkin":true,"ogretmenHazir":true} görmelisiniz.
+  2. Portal klasöründeki  MESAJLAR.vbs  dosyasına çift tıklayın →
+     şifrenizle giriş yapın.
+  3. Portalı yayına gönderin (YAYINA-GONDER.bat). Birkaç dakika sonra
+     öğrenciler "Öğretmene Sor" sekmesini görür.
+
+---------------------------------------------------------------------
+MESAJLAR MERKEZİ — KULLANIM
+---------------------------------------------------------------------
+  * MESAJLAR.vbs: Paneli bu bilgisayarda açar. Masaüstüne kısayol
+    isterseniz dosyaya sağ tıklayıp "Kısayol oluştur" deyin ve kısayolu
+    masaüstüne sürükleyin.
+  * Kutular: Gelen kutusu · Okunmamış · Cevap bekleyen · Cevaplandı ·
+    Önemli (⭐) · Arşiv. Sınıfa göre süzme ve arama vardır.
+  * Panel açıkken yeni sorular kendiliğinden gelir (20 sn'de bir
+    kontrol). Yeni soru gelince ses çalar; 🔔 düğmesiyle masaüstü
+    bildirimi açılabilir. Sekme başlığında okunmamış sayısı görünür.
+  * Hazır cevaplar: Sık yazdığınız cevapları "＋ Hazır cevap kaydet" ile
+    saklayın; tek tıkla kutuya eklenir.
+  * "✓✓ görüldü": Öğrenci cevabınızı açıp okuduğunda görünür.
+  * Arşivle: Soru silinmeden gelen kutusundan kalkar. Sil: kalıcıdır.
+  * "Listeyi Excel'e aktar": Görünen listeyi Excel'de açılan bir
+    dosyaya indirir.
+  * Kısayollar: J/K sonraki/önceki · R yenile · / ara · E arşiv ·
+    S önemli · U okunmadı · Ctrl+Enter gönder.
+  * Telefonda da açılabilir: Aynı panel internetteki portal adresinde
+    de vardır (…/din-kulturu-portal/ogretmen-mesajlar.html); şifre olmadan
+    hiçbir mesaj görünmez.
+
+GÜVENLİK VE GİZLİLİK
+  - Öğrenciden yalnızca ad + soyadının baş harfi, sınıf ve şube istenir;
+    telefon, adres gibi bilgi yazmaması pencerede hatırlatılır.
+  - Öğrencinin kendi sorularını görebilmesi için cihazına, yalnızca o
+    soruya ait rastgele bir anahtar kaydedilir; başka öğrencilerin
+    sorularını göremez.
+  - Kötüye kullanıma karşı: aynı cihazdan saatte en fazla 10 soru, günde
+    toplam en fazla 600 soru kabul edilir. Okulda bütün sınıf aynı
+    internet bağlantısını kullansa da sınıf engellenmez.
+  - Yanlış şifre 10 dakikada 8 kez denenirse giriş 10 dakika kapanır.
+  - Ücretsiz D1 sınırları (günde 5 milyon okuma, 100 bin yazma) bir okul
+    için fazlasıyla yeterlidir; aşılırsa ücret çıkmaz, o gün durur.
+  - Eski mesajları arşivleyebilir ya da silebilirsiniz.
